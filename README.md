@@ -27,9 +27,28 @@ function fancyAlert(arg) {
 
 3. **Alex-SecureReqNet (deep)** was based on the proposed architecture by Krizhevsky et al., where 5 convolutional layers extract the abstract features and 3 fully connected reduce the dimensionality. This is the classical convolutional ImageNet network with a small adaptation in the final layer to induce binary classification. 
 
-4. **α-SecureReqNet (deep)** was a modification of the **Alex-SecureReqNet (deep)** in the convolutional layers. The modification consisted in implementing the n-gram kernel strategy for text-based datasets [(Han, et al., 2017)](https://ieeexplore.ieee.org/abstract/document/8094415). The input layer is a document embedding in the shape of a matrix. The first convolutional layer has a kernel of 7-gram size to reduce the input matrix into 32 vector feature maps. Later, it is applied a max pooling and a flatten function to obtain a column matrix. The second convolutional layer has a 5-gram filter followed by a max pooling and flatten function that merged 64 features. The third, fourth, and fifth convolutional layers are very similar to the original distribution in ImageNet but using 3-gram filters and 128/64 features respectively. Three fully connected layers went after the fifth conv layer to reduce the dimensionality and control the overfitting with the dropout units. The final layer is again a binary softmax layer (security vs non-security related). 
+4. **α-SecureReqNet (deep)** was a modification of the **Alex-SecureReqNet (deep)** in the convolutional layers. The modification consisted in implementing the n-gram kernel strategy for text-based datasets [(Han, et al., 2017)](https://ieeexplore.ieee.org/abstract/document/8094415). The input layer is a document embedding in the shape of a matrix. The first convolutional layer has a kernel of 7-gram size to reduce the input matrix into 32 vector feature maps. Later, it is applied a max pooling and a flatten function to obtain a column matrix. The second convolutional layer has a 5-gram filter followed by a max pooling and flatten function that merged 64 features. The third, fourth, and fifth convolutional layers are very similar to the original distribution in ImageNet but using 3-gram filters and 128/64 features respectively. Three fully connected layers went after the fifth conv layer to reduce the dimensionality and control the overfitting with the dropout units. The final layer is again a binary softmax layer (security vs non-security related).
+
+> If you are using **α-SecureReqNet**, please consider citing [(N. Palacio, et al., 2019)](https://arxiv.org/abs/1908.00614)
 
 ## Datasets
+
+The context of our empirical study includes the four datasets (*Embedding*, *Training*, *Validation8, & *Test*) illustrated in the following table. These datasets are comprised of textual documents from different sources.
+
+Dataset Source | Embedding | Training | Validation | Testing |
+--- | --- | --- | --- | --- |
+CVE Database | 52908 | 37036 | 10582 | - |
+GitLab Issues (SR) | 578 | 405 | 116 | 58 |
+GitLab Issues (Non-SR) | 578 | 405 | 116 | 58 |
+GitHub Issues (SR) | 4575 | 3203 | 915 | 458 |
+GitHub Issues (Non-SR) | 47483 | 33238 | 9497 | 458 |
+Wikipedia | 10000 | - | - | - |
+
+- *CVE Database*: Our CVE Dataset was derived by crawling the National Vulnerability Database (NVD) and extracting the vulnerability description for each CVE entry. In total, we extracted over 100,000 CVE descriptions, however, in order to construct a dataset balanced equally between SR and non-SR text, we randomly sampled 52,908 CVE descriptions. 
+- *GitLab Issues*: To obtain a large set of diverse issues extracted from the issue trackers of a high-quality open source project we crawled the issue tracker of the GitLab Community Edition (CE) [project](https://gitlab.com/gitlab-org/gitlab-ce/issues). This project contains open source components of the GitLab suite of developer tools (used by millions) with an issue tracker that includes a sophisticated labeling system. To extract SR issues, we crawled this issue tracker and extracted issue descriptions containing "security" label. To extract non-SR issues we extracted entries without the "security" label and manually verified the non-SR nature of the descriptions by randomly sampling of 10% of the issues.
+- *GitHub Issues*: Given the limited number of SR GitLab issues that we were able to extract, we also crawled the issue trackers of the most popular projects on GitHub (according to number of stars) and extracted issues with the "security" tag in order to derive a larger and more diverse dataset. Again, we randomly crawled non-SR issues and performed a random sampling to ensure the validity of the non-SR issues. 
+- *Wikipedia Articles*: If we trained our neural embeddings on *only* highly specialized software text extracted from issues, we risk our model not learning more generalized word contexts that could help differentiate between SR and non-SR issues. Thus, we randomly crawled and extracted the text from 10,000 Wikipedia articles in order to bolster the generalizablility of our learned neural word embeddings.
+
 
 ## Research and Components Roadmap
 - [x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) 

@@ -33,7 +33,7 @@ function fancyAlert(arg) {
 
 ## Datasets
 
-The context of our empirical study includes the four datasets (*Embedding*, *Training*, *Validation8, & *Test*) illustrated in the following table. These datasets are comprised of textual documents from different sources.
+The context of our empirical study includes the four datasets (*Embedding*, *Training*, *Validation*, & *Test*) illustrated in the following table. These datasets are comprised of textual documents from different sources.
 
 Dataset Source | Embedding | Training | Validation | Testing |
 --- | --- | --- | --- | --- |

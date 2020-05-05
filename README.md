@@ -19,6 +19,8 @@ We present a machine learning approach, named *SecureReqNet*, to automatically i
 <object data="https://github.com/danaderp/SecureReqNet/blob/master/data/plots/architecture.pdf" type="application/pdf" width="100%"> 
 </object>
 
+![α-SecureReqNet](https://github.com/danaderp/SecureReqNet/blob/master/data/plots/architecture-1.png)
+
 
 *SecureReqNet* has four versions that vary in terms of the size of the tensors and the parameters of the convolutional layers.
 

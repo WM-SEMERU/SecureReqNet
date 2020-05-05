@@ -13,21 +13,102 @@ We present a machine learning approach, named *SecureReqNet*, to automatically i
 
 *SecureReqNet* has four versions that vary in terms of the size of the tensors and the parameters of the convolutional layers.
 
-1. **SecureReqNet (shallow)** was based on the best architecture achived by Han, et al. Such architecture implemented one convolution layer with 3 kernes of different sizes. The authors set up the size of each kernel as 1-gram, 3-gram, and 5-gram to reduce an input matrix. This matrix was built by means of an unsupervised word2vec where the rows represents the words in a given document (or issue) and the columns the size of the embedding. Details of how we trained our word2vec can be found in the notebook [*03_Clustering*](https://github.com/danaderp/SecureReqNet/blob/master/nbs/03_Clustering.ipynb).  **SecureReqNet (shallow)** has a max pooling layer followed by a flatten function. The final tensor is a merged vector from the 3 initial kernels. Unlike Han, et al.' SVM multi-class output layer, we utilized a binary classification throughout a softmax layer. 
+1. **SecureReqNet (shallow)** was based on the best architecture achived by Han, et al. Such architecture implemented one convolution layer with 3 kernes of different sizes. The authors set up the size of each kernel as 1-gram, 3-gram, and 5-gram to reduce an input matrix. This matrix was built by means of an unsupervised word2vec where the rows represents the words in a given document (or issue) and the columns the size of the embedding. Details of how we trained our word2vec can be found in the notebook [*03_Clustering*](https://github.com/danaderp/SecureReqNet/blob/master/nbs/03_Clustering.ipynb).  **SecureReqNet (shallow)** has a max pooling layer followed by a flatten function. The final tensor is a merged vector from the 3 initial kernels. Unlike Han, et al.' SVM multi-class output layer, we utilized a binary classification throughout a softmax layer.
+
+```python
+# 1st Convolutional Layer (1-gram)
+conv_filter_1_gram = Conv2D(filters= N_filters, input_shape=input_sh, activation='relu', 
+                       kernel_size=(1,embeddigs_cols), padding='valid',data_format="channels_last")(gram_input)
+# 2sd Convolutional Layer (3-gram)
+conv_filter_3_gram = Conv2D(filters= N_filters, input_shape=input_sh, activation='relu', 
+                       kernel_size=(3,embeddigs_cols), padding='valid')(gram_input)
+# 3rd Convolutional Layer (5-gram)
+conv_filter_5_gram = Conv2D(filters= N_filters, input_shape=input_sh, activation='relu', 
+                       kernel_size=(5,embeddigs_cols), padding='valid')(gram_input)
+
+# Max Pooling Layer
+max_pool_1_gram = MaxPooling2D(pool_size=((max_len_sentences-1+1), 1), strides=None, padding='valid')(conv_filter_1_gram)
+max_pool_3_gram = MaxPooling2D(pool_size=((max_len_sentences-3+1), 1), strides=None, padding='valid')(conv_filter_3_gram)
+max_pool_5_gram = MaxPooling2D(pool_size=((max_len_sentences-5+1), 1), strides=None, padding='valid')(conv_filter_5_gram)     
+
+# Fully Connected layer
+fully_connected_1_gram = Flatten()(max_pool_1_gram)
+fully_connected_3_gram = Flatten()(max_pool_3_gram)
+fully_connected_5_gram = Flatten()(max_pool_5_gram)
+
+merged_vector = layers.concatenate([fully_connected_1_gram, fully_connected_3_gram, 
+                                    fully_connected_5_gram], axis=-1)
+
+integration_layer = Dropout(0.2)(merged_vector) # <-------- [HyperParameter]
+
+predictions = Dense(K, activation='softmax')(integration_layer)
+
+#Criticality Model
+criticality_network = Model(inputs=[gram_input],outputs=[predictions])
+```
 
 2. **SecureReqNet (deep)** was an expansion of **SecureReqNet (shallow)**. We included an extra convolutional layer, a max pooling, and a flatten function. The final tensor is a merged vector from the 3 initial kernels. A fully connected sigmoid layers was added just before the binary softmax layer. 
-
-```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
-```
 
 3. **Alex-SecureReqNet (deep)** was based on the proposed architecture by Krizhevsky et al., where 5 convolutional layers extract the abstract features and 3 fully connected reduce the dimensionality. This is the classical convolutional ImageNet network with a small adaptation in the final layer to induce binary classification. 
 
 4. **α-SecureReqNet (deep)** was a modification of the **Alex-SecureReqNet (deep)** in the convolutional layers. The modification consisted in implementing the n-gram kernel strategy for text-based datasets [(Han, et al., 2017)](https://ieeexplore.ieee.org/abstract/document/8094415). The input layer is a document embedding in the shape of a matrix. The first convolutional layer has a kernel of 7-gram size to reduce the input matrix into 32 vector feature maps. Later, it is applied a max pooling and a flatten function to obtain a column matrix. The second convolutional layer has a 5-gram filter followed by a max pooling and flatten function that merged 64 features. The third, fourth, and fifth convolutional layers are very similar to the original distribution in ImageNet but using 3-gram filters and 128/64 features respectively. Three fully connected layers went after the fifth conv layer to reduce the dimensionality and control the overfitting with the dropout units. The final layer is again a binary softmax layer (security vs non-security related).
+
+```python
+# 1st Convolutional Layer Convolutional Layer (7-gram)
+conv_1_layer = Conv2D(filters=32, input_shape=input_sh, activation='relu', 
+                      kernel_size=(7,embeddigs_cols), padding='valid')(gram_input)
+# Max Pooling 
+max_1_pooling = MaxPooling2D(pool_size=((max_len_sentences-7+1),1), strides=None, padding='valid')(conv_1_layer)
+
+# Fully Connected layer
+fully_connected_1_gram = Flatten()(max_1_pooling)
+fully_connected_1_gram = Reshape((32, 1, 1))(fully_connected_1_gram)
+
+# 2nd Convolutional Layer (5-gram)
+conv_2_layer = Conv2D(filters=64, kernel_size=(5,1), activation='relu', 
+                      padding='valid')(fully_connected_1_gram)
+                      
+max_2_pooling = MaxPooling2D(pool_size=((32-5+1),1), strides=None, padding='valid')(conv_2_layer)  
+
+# Fully Connected layer
+fully_connected_2_gram = Flatten()(max_2_pooling)
+fully_connected_2_gram = Reshape((64, 1, 1))(fully_connected_2_gram)
+
+# 3rd Convolutional Layer (3-gram)
+conv_3_layer =  Conv2D(filters=128, kernel_size=(3,1), activation='relu', 
+                      padding='valid')(fully_connected_2_gram)
+                      
+# 4th Convolutional Layer (3-gram)
+conv_4_layer = Conv2D(filters=128, kernel_size=(3,1), activation='relu', 
+                     padding='valid')(conv_3_layer)
+                     
+# 5th Convolutional Layer (3-gram)
+conv_5_layer = Conv2D(filters=64, kernel_size=(3,1), activation='relu', 
+                     padding='valid')(conv_4_layer)
+                     
+# Max Pooling
+max_5_pooling = MaxPooling2D(pool_size=(58,1), strides=None, padding='valid')(conv_5_layer)  
+
+# Fully Connected layer
+fully_connected = Flatten()(max_5_pooling)
+
+# 1st Fully Connected Layer
+deep_dense_1_layer = Dense(32, activation='relu')(fully_connected)
+deep_dense_1_layer = Dropout(0.2)(deep_dense_1_layer) # <-------- [HyperParameter]
+
+# 2nd Fully Connected Layer
+deep_dense_2_layer = Dense(32, activation='relu')(deep_dense_1_layer)
+deep_dense_2_layer = Dropout(0.2)(deep_dense_2_layer) # <-------- [HyperParameter]
+
+# 3rd Fully Connected Layer
+deep_dense_3_layer = Dense(16, activation='relu')(deep_dense_2_layer)
+deep_dense_3_layer = Dropout(0.2)(deep_dense_3_layer) # <-------- [HyperParameter]
+
+predictions = Dense(K, activation='softmax')(deep_dense_3_layer)
+
+#Criticality Model
+criticality_network = Model(inputs=[gram_input],outputs=[predictions])
+```
 
 > If you are using **α-SecureReqNet**, please consider citing [(N. Palacio, et al., 2019)](https://arxiv.org/abs/1908.00614)
 

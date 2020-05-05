@@ -6,6 +6,13 @@
 
 We present a machine learning approach, named *SecureReqNet*, to automatically identify whether issues describe security related content. *SecureReqNet* hinges on the idea of predicting severity on software using vulnerability desciptions [(Han, et al., 2017)](https://ieeexplore.ieee.org/abstract/document/8094415) by incorporating desing principles from AlexNet (Krizhevsky, et al., 2013). 
 
+### Research and Components Roadmap
+- [x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) 
+- [x] Using Deep Neural Network to predict security relatedness on issues (or requirements)
+- [ ] Using a Neural Network to predict quantitatively (regression) how critical is an issue (or requirement)
+- [ ] Implementing a Transformer Architecture to predict security criticality on issues (or requirements)
+- [ ] Recovering security related relationships among software artifacts by employing traceability theory
+
 (place image here)
 
 *SecureReqNet* consists of a two-phase deep learning architecture that operates *(for now)* purely on the natural language descriptions of issues. The first phase of our approach learns high dimensional sentence embeddings from hundreds of thousands of descriptions extracted from software vulnerabilities listed in the CVE database and issue descriptions extracted from open source projects using an unsupervised learning process. The second phase then utilizes this semantic ontology of embeddings to train a deep convolutional neural network capable of predicting whether a given issue contains security-related information.
@@ -129,11 +136,3 @@ Wikipedia | 10000 | - | - | - |
 - *GitLab Issues*: To obtain a large set of diverse issues extracted from the issue trackers of a high-quality open source project we crawled the issue tracker of the GitLab Community Edition (CE) [project](https://gitlab.com/gitlab-org/gitlab-ce/issues). This project contains open source components of the GitLab suite of developer tools (used by millions) with an issue tracker that includes a sophisticated labeling system. To extract SR issues, we crawled this issue tracker and extracted issue descriptions containing "security" label. To extract non-SR issues we extracted entries without the "security" label and manually verified the non-SR nature of the descriptions by randomly sampling of 10% of the issues.
 - *GitHub Issues*: Given the limited number of SR GitLab issues that we were able to extract, we also crawled the issue trackers of the most popular projects on GitHub (according to number of stars) and extracted issues with the "security" tag in order to derive a larger and more diverse dataset. Again, we randomly crawled non-SR issues and performed a random sampling to ensure the validity of the non-SR issues. 
 - *Wikipedia Articles*: If we trained our neural embeddings on *only* highly specialized software text extracted from issues, we risk our model not learning more generalized word contexts that could help differentiate between SR and non-SR issues. Thus, we randomly crawled and extracted the text from 10,000 Wikipedia articles in order to bolster the generalizablility of our learned neural word embeddings.
-
-
-## Research and Components Roadmap
-- [x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) 
-- [x] Using Deep Neural Network to predict security relatedness on issues (or requirements)
-- [ ] Using a Neural Network to predict quantitatively (regression) how critical is an issue (or requirement)
-- [ ] Implementing a Transformer Architecture to predict security criticality on issues (or requirements)
-- [ ] Recovering security related relationships among software artifacts by employing traceability theory

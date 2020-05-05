@@ -13,9 +13,11 @@ We present a machine learning approach, named *SecureReqNet*, to automatically i
 - [ ] Implementing a Transformer Architecture to predict security criticality on issues (or requirements)
 - [ ] Recovering security related relationships among software artifacts by employing traceability theory
 
-(place image here)
-
 *SecureReqNet* consists of a two-phase deep learning architecture that operates *(for now)* purely on the natural language descriptions of issues. The first phase of our approach learns high dimensional sentence embeddings from hundreds of thousands of descriptions extracted from software vulnerabilities listed in the CVE database and issue descriptions extracted from open source projects using an unsupervised learning process. The second phase then utilizes this semantic ontology of embeddings to train a deep convolutional neural network capable of predicting whether a given issue contains security-related information.
+
+
+<object data="https://github.com/danaderp/SecureReqNet/blob/master/data/plots/architecture.pdf" type="application/pdf" width="100%"> 
+</object>
 
 
 *SecureReqNet* has four versions that vary in terms of the size of the tensors and the parameters of the convolutional layers.

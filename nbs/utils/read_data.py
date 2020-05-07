@@ -1,6 +1,11 @@
 import random
 import sys
 import os.path
+import zipfile
+from pathlib import Path
+import pandas as pd
+
+"@danaderp May'20 Refactoring for enhancing time complexity with pandas vectorization"
 
 class Dynamic_Dataset:
 	"""
@@ -33,17 +38,24 @@ class Dynamic_Dataset:
 
 	"""
 
-	def __init__(self, ground_truth, path):
+	def __init__(self, ground_truth, path, isZip):
 		'''
 		@param ground_truth (dict): A dictionary mapping filenames to ground truth values
 		'''
 		self.__keys = list(ground_truth.keys())
 		self.__ground_truth = ground_truth
 		self.__path = path
+		self.__isZip = isZip
 
 	def __get_issue(self, filename):
-		with open(self.__path+'issues/' + filename, 'r') as file:
-			contents = file.read()
+		if self.__isZip:
+			paths = [str(x) for x in Path(self.__path).glob("**/*.zip")]
+			for onezipath in paths:
+				archive = zipfile.ZipFile( onezipath, 'r')
+				contents = archive.read('issues/' + filename)
+		else:
+			with open(self.__path+'issues/' + filename, 'r') as file:
+				contents = file.read()
 		return contents.strip()
 
 	def get_id(self, index):
@@ -106,7 +118,7 @@ class Processing_Dataset:
                 gt[filename] = security_status
         return gt
 
-    def get_test_and_training(self, ground_truth, test_ratio=0.1):
+    def get_test_and_training(self, ground_truth, test_ratio=0.1, isZip = False):
         ids = list(ground_truth.keys())
         sr = []
         nsr = []
@@ -136,8 +148,8 @@ class Processing_Dataset:
             test_gt[nsr_test[i]] = '(0,1)'
             del train_gt[nsr_test[i]]
 
-        test = Dynamic_Dataset(test_gt,self.__path)
-        train = Dynamic_Dataset(train_gt,self.__path)
+        test = Dynamic_Dataset(test_gt,self.__path, isZip)
+        train = Dynamic_Dataset(train_gt,self.__path, isZip)
 
         return (test, train)
 

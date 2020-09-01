@@ -140,3 +140,26 @@ Wikipedia | 10000 | - | - | - |
 - *GitLab Issues*: To obtain a large set of diverse issues extracted from the issue trackers of a high-quality open source project we crawled the issue tracker of the GitLab Community Edition (CE) [project](https://gitlab.com/gitlab-org/gitlab-ce/issues). This project contains open source components of the GitLab suite of developer tools (used by millions) with an issue tracker that includes a sophisticated labeling system. To extract SR issues, we crawled this issue tracker and extracted issue descriptions containing "security" label. To extract non-SR issues we extracted entries without the "security" label and manually verified the non-SR nature of the descriptions by randomly sampling of 10% of the issues.
 - *GitHub Issues*: Given the limited number of SR GitLab issues that we were able to extract, we also crawled the issue trackers of the most popular projects on GitHub (according to number of stars) and extracted issues with the "security" tag in order to derive a larger and more diverse dataset. Again, we randomly crawled non-SR issues and performed a random sampling to ensure the validity of the non-SR issues. 
 - *Wikipedia Articles*: If we trained our neural embeddings on *only* highly specialized software text extracted from issues, we risk our model not learning more generalized word contexts that could help differentiate between SR and non-SR issues. Thus, we randomly crawled and extracted the text from 10,000 Wikipedia articles in order to bolster the generalizablility of our learned neural word embeddings.
+
+## Project Description for CSCI 435/535
+>
+> Project Leads: @danaderp
+>
+
+The goal of the project is to migrate the components into nbdev architecture, implement interpretability components to test the neural net, leverage security datasets, and document. 
+
+### The goals of this project:
+- [ ] Migrate SecureReqNet into nbdev
+- [ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)
+- [ ] Implement some interpretability techniques to test SecureReqNet
+- [ ] Leverage Security Datasets
+
+### Project Requirements:
+
+- Required Knowledge: Python, Git, Linear Algebra, and Statistics
+- Preferred Knowledge: Machine Learning, TensorFlow, and Probabilistic Computation
+
+### Recommended Readings:
+
+- Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
+- Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)

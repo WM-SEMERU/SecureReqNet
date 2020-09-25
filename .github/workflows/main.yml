@@ -9,10 +9,11 @@ jobs:
       with:
         python-version: '3.7'
         architecture: 'x64'
-    - name: Install the library
+    - name: Install dependencies
       run: |
-        pip install nbdev jupyter
-        pip install -e .
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Read all notebooks
       run: |
         nbdev_read_nbs

@@ -65,6 +65,7 @@ pyxdg==0.26
 PyYAML==5.2
 pyzmq==18.1.0
 qtconsole==4.5.4
+scipy==1.4.1
 SecretStorage==2.3.1
 Send2Trash==1.5.0
 six==1.14.0

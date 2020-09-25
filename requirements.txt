@@ -45,6 +45,7 @@ notebook==6.0.1
 numpy==1.17.1
 opt-einsum==3.0.1
 packaging==19.2
+pandas==1.1.2
 pandocfilters==1.4.2
 parso==0.5.1
 pexpect==4.7.0

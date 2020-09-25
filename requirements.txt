@@ -28,6 +28,7 @@ jupyter-client==5.3.1
 jupyter-console==6.0.0
 jupyter-core==4.5.0
 jupyter-http-over-ws==0.0.6
+keras==2.4.3
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 keyring==10.6.0
@@ -67,6 +68,7 @@ qtconsole==4.5.4
 SecretStorage==2.3.1
 Send2Trash==1.5.0
 six==1.14.0
+sklearn==0.0
 tb-nightly==1.15.0a20190806
 tensorflow==2.3.0
 tensorflow-gpu==2.0.0rc0

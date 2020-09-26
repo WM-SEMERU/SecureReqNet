@@ -4,10 +4,41 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"say_hello": "00_core.ipynb",
          "Dynamic_Dataset": "09_utils.ipynb",
-         "Processing_Dataset": "09_utils.ipynb"}
+         "Processing_Dataset": "09_utils.ipynb",
+         "englishStemmer": "10_preprocessing.ipynb",
+         "path": "10_preprocessing.ipynb",
+         "process_unit": "10_preprocessing.ipynb",
+         "ground_truth": "10_preprocessing.ipynb",
+         "dataset": "10_preprocessing.ipynb",
+         "embeddings": "10_preprocessing.ipynb",
+         "max_words": "10_preprocessing.ipynb",
+         "pre_corpora_train": "10_preprocessing.ipynb",
+         "pre_corpora_test": "10_preprocessing.ipynb",
+         "embed_path": "10_preprocessing.ipynb",
+         "embeddings_dict": "10_preprocessing.ipynb",
+         "corpora_train": "10_preprocessing.ipynb",
+         "corpora_test": "10_preprocessing.ipynb",
+         "target_train": "10_preprocessing.ipynb",
+         "target_test": "10_preprocessing.ipynb",
+         "max_len_sentences_train": "10_preprocessing.ipynb",
+         "max_len_sentences_test": "10_preprocessing.ipynb",
+         "max_len_sentences": "10_preprocessing.ipynb",
+         "min_len_sentences_train": "10_preprocessing.ipynb",
+         "min_len_sentences_test": "10_preprocessing.ipynb",
+         "min_len_sentences": "10_preprocessing.ipynb",
+         "embed_size": "10_preprocessing.ipynb",
+         "file_corpora_train_x": "10_preprocessing.ipynb",
+         "file_corpora_test_x": "10_preprocessing.ipynb",
+         "shape_train_x": "10_preprocessing.ipynb",
+         "shape_test_x": "10_preprocessing.ipynb",
+         "corpora_train_x": "10_preprocessing.ipynb",
+         "corpora_test_x": "10_preprocessing.ipynb",
+         "target_train_y": "10_preprocessing.ipynb",
+         "target_test_y": "10_preprocessing.ipynb"}
 
 modules = ["core.py",
-           "utils.py"]
+           "utils.py",
+           "preprocessing.py"]
 
 doc_url = "https://rmclanton.github.io/securereqnet/"
 

@@ -1,7 +1,7 @@
 {
-  "SecureReqNet": {
+  "securereqnet": {
     "Overview": "/",
-    "SecureReqNet": "core.html"
+    "securereqnet": "core.html",
     "Utils": "utils.html"
   }
 }

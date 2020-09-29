@@ -3,6 +3,8 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"say_hello": "00_core.ipynb",
+         "unexported": "00_core.ipynb",
+         "use_unexported": "00_core.ipynb",
          "Dynamic_Dataset": "09_utils.ipynb",
          "Processing_Dataset": "09_utils.ipynb",
          "englishStemmer": "10_preprocessing.ipynb",

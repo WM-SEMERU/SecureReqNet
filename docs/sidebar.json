@@ -2,6 +2,6 @@
   "securereqnet": {
     "Overview": "/",
     "securereqnet": "core.html",
-    "Utils": "utils.html"
+    "Utils": "docs/utils.html"
   }
 }

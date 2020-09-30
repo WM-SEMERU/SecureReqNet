@@ -11,11 +11,17 @@ entries:
       url: /
     - output: web,pdf
       title: securereqnet
-      url: core.html
+      url: docs/core.html
     - output: web,pdf
       title: Utils
       url: utils.html
+    - output: web,pdf
+      title: models
+      url: models.html
+    - output: web,pdf
+      title: core
+      url: core.html
     output: web
-    title: securereqnet
+    title: SecureReqNet
   output: web
   title: Sidebar

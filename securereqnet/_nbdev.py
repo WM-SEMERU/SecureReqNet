@@ -26,6 +26,6 @@ modules = ["core.py",
 
 doc_url = "https://rmclanton.github.io/securereqnet/"
 
-git_url = "https://github.com/rmclanton/securereqnet/tree/master/"
+git_url = "https://github.com/rmclanton/SecureReqNet"
 
 def custom_doc_links(name): return None

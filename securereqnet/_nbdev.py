@@ -24,7 +24,7 @@ modules = ["core.py",
            "model_evaluation.py",
            "models.py"]
 
-doc_url = "https://rmclanton.github.io/securereqnet/"
+doc_url = "https://rmclanton.github.io/SecureReqNet/"
 
 git_url = "https://github.com/rmclanton/SecureReqNet"
 

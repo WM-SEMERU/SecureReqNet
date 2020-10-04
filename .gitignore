@@ -3,3 +3,4 @@ tfx_pipeline_output  # Default pipeline output directory
 tfx_metadata  # Default tfx metadata SQLite DB directory
 
 .ipynb_checkpoints/
+nbs/.ipynb_checkpoints/

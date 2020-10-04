@@ -17,7 +17,7 @@ Run the following command if you get a module error from securereqnet saying it 
 
 Fill me in please! Don't forget code examples:
 
-```
+```python
 1+1
 ```
 
@@ -28,7 +28,7 @@ Fill me in please! Don't forget code examples:
 
 
 
-```
+```python
 from nbdev.export import *
 notebook2script()
 

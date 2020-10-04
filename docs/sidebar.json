@@ -1,10 +1,12 @@
 {
   "SecureReqNet": {
     "Overview": "/",
-    "securereqnet": "docs/core.html",
-    "Utils": "utils.html",
-    "models": "models.html",
-    "core": "/core.html",
-    "core": "core.html"
+    "Utils": "utils.html",  
+    "Testing": "testing.html",
+    "Preprocessing": "preprocessing.html",
+    "Model Evaluation": "model_evaluation.html",
+    "Models": "models.html",
+    "Alpha SecureReqNet": "alpha_securereqnet.html",
+    "securereqnet": "core.html"        
   }
 }

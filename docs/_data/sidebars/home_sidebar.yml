@@ -10,16 +10,25 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: securereqnet
-      url: docs/core.html
-    - output: web,pdf
       title: Utils
       url: utils.html
     - output: web,pdf
-      title: models
+      title: Testing
+      url: testing.html
+    - output: web,pdf
+      title: Preprocessing
+      url: preprocessing.html
+    - output: web,pdf
+      title: Model Evaluation
+      url: model_evaluation.html
+    - output: web,pdf
+      title: Models
       url: models.html
     - output: web,pdf
-      title: core
+      title: Alpha SecureReqNet
+      url: alpha_securereqnet.html
+    - output: web,pdf
+      title: securereqnet
       url: core.html
     output: web
     title: SecureReqNet

@@ -6,9 +6,8 @@ index = {"say_hello": "00_core.ipynb",
          "Dynamic_Dataset": "09_utils.ipynb",
          "Processing_Dataset": "09_utils.ipynb",
          "Embeddings": "09_utils.ipynb",
-         "englishStemmer": "10_preprocessing.ipynb",
+         "englishStemmer": "09_utils.ipynb",
          "__read_dataset": "10_preprocessing.ipynb",
-         "path": "10_preprocessing.ipynb",
          "__train_test_split": "10_preprocessing.ipynb",
          "__create_corpora": "10_preprocessing.ipynb",
          "get_training_corpora": "10_preprocessing.ipynb",
@@ -25,7 +24,7 @@ modules = ["core.py",
            "model_evaluation.py",
            "models.py"]
 
-doc_url = "https://rmclanton.github.io/securereqnet/"
+doc_url = "https://rmclanton.github.io/SecureReqNet/"
 
 git_url = "https://github.com/rmclanton/SecureReqNet"
 

@@ -13,87 +13,99 @@ import pandas as pd
 "@danaderp May'20 Refactoring for enhancing time complexity with pandas vectorization"
 
 class Dynamic_Dataset:
-	"""
-	This class efficiently 'stores' a dataset. Only a list of filenames and
-	mappings to their ground truth values are stored in memory. The file
-	contents are only brought into memory when requested.
+    """
+    This class efficiently 'stores' a dataset. Only a list of filenames and
+    mappings to their ground truth values are stored in memory. The file
+    contents are only brought into memory when requested.
 
-	This class supports indexing, slicing, and iteration.
+    This class supports indexing, slicing, and iteration.
 
-	A user can treat an instance of this class exactly as they would a list.
-	Indexing an instance of this class will return a tuple consisting of
-	the ground truth value and the file content of the filename at that index.
+    A user can treat an instance of this class exactly as they would a list.
+    Indexing an instance of this class will return a tuple consisting of
+    the ground truth value and the file content of the filename at that index.
 
-	A user can request the filename at an index with get_id(index)
+    A user can request the filename at an index with get_id(index)
 
-	Example:
+    Example:
 
-		dataset = Dynamic_Dataset(ground_truth)
+        dataset = Dynamic_Dataset(ground_truth)
 
-		print(dataset.get_id(0))
-			-> gitlab_79.txt
+        print(dataset.get_id(0))
+            -> gitlab_79.txt
 
-		print(dataset[0])
-			-> ('(1,0)', 'The currently used Rails version, in the stable ...
+        print(dataset[0])
+            -> ('(1,0)', 'The currently used Rails version, in the stable ...
 
-		for x in dataset[2:4]:
-			print(x)
-				-> ('(1,0)', "'In my attempt to add 2 factor authentication ...
-				-> ('(1,0)', 'We just had an admin accidentally push to a ...
+        for x in dataset[2:4]:
+            print(x)
+                -> ('(1,0)', "'In my attempt to add 2 factor authentication ...
+                -> ('(1,0)', 'We just had an admin accidentally push to a ...
 
-	"""
+    """
 
-	def __init__(self, ground_truth, path, isZip):
-		'''
-		@param ground_truth (dict): A dictionary mapping filenames to ground truth values
-		'''
-		self.__keys = list(ground_truth.keys())
-		self.__ground_truth = ground_truth
-		self.__path = path
-		self.__isZip = isZip
+    def __init__(self, ground_truth, path, isZip):
+        '''
+        @param ground_truth (dict): A dictionary mapping filenames to ground truth values
+        @param path (list): The path to the directory containing the dataset
+        @param isZip (bool): Whether or not the data is contained in a zip
+        '''
+        self.__keys = list(ground_truth.keys())
+        self.__ground_truth = ground_truth
+        self.__path = path
+        self.__isZip = isZip
 
-	def __get_issue(self, filename):
-		if self.__isZip:
-			paths = [str(x) for x in Path(self.__path).glob("**/*.zip")]
-			for onezipath in paths:
-				archive = zipfile.ZipFile( onezipath, 'r')
-				contents = archive.read('issues/' + filename)
-		else:
-			with open(self.__path+'issues/' + filename, 'r') as file:
-				contents = file.read()
-		return contents.strip()
+    # Retrieve the contents of the specified file
+    def __get_issue(self, filename):
+        '''
+        @param filename (str): The name of the file whose contents should be read
+        '''
+        # If the data is stored in a zip file, find that file and get the specified file from it
+        if self.__isZip:
+            paths = [str(x) for x in Path(self.__path).glob("**/*.zip")]
+            for onezipath in paths:
+                archive = zipfile.ZipFile( onezipath, 'r')
+                contents = archive.read('issues/' + filename)
+        # Otherwise, open the file and read it right away
+        else:
+            with open(self.__path+'issues/' + filename, 'r') as file:
+                contents = file.read()
+        return contents.strip()
 
-	def get_id(self, index):
-		return self.__keys[index]
+    # Get the name of the file at the specified index
+    def get_id(self, index):
+        return self.__keys[index]
 
-	def __len__(self):
-		return len(self.__keys)
+    # The number of files contained in the dataset
+    def __len__(self):
+        return len(self.__keys)
 
-	def __setitem__(self, key, item):
-		raise ValueError
+    def __setitem__(self, key, item):
+        raise ValueError
 
-	def __getitem__(self, key):
-		if type(key) == slice:
-			new_keys = self.__keys[key.start:key.stop:key.step]
-			new_gt = dict()
-			for key in new_keys:
-				new_gt[key] = self.__ground_truth[key]
-			return Dynamic_Dataset(new_gt)
-		else:
-			id = self.__keys[key]
-			return (self.__ground_truth[id], self.__get_issue(id))
+    # Return a tuple with the ground truth and file content at the specified index
+    # If key is a slice, returns a dataset containing only the items at the specified indices
+    def __getitem__(self, key):
+        if type(key) == slice:
+            new_keys = self.__keys[key.start:key.stop:key.step]
+            new_gt = dict()
+            for key in new_keys:
+                new_gt[key] = self.__ground_truth[key]
+            return Dynamic_Dataset(new_gt)
+        else:
+            id = self.__keys[key]
+            return (self.__ground_truth[id], self.__get_issue(id))
 
-	def __iter__(self):
-		self.__index = 0
-		return self
+    def __iter__(self):
+        self.__index = 0
+        return self
 
-	def __next__(self):
-		if self.__index < len(self.__keys):
-			to_return = self[self.__index]
-			self.__index += 1
-			return to_return
-		else:
-			raise StopIteration
+    def __next__(self):
+        if self.__index < len(self.__keys):
+            to_return = self[self.__index]
+            self.__index += 1
+            return to_return
+        else:
+            raise StopIteration
 
 # Cell
 class Processing_Dataset:
@@ -104,6 +116,7 @@ class Processing_Dataset:
     def __init__(self, path):
         self.__path = path
 
+    # Give the contents of the specified file
     def get_issue(self, filename):
         with open('combined_dataset/issues/' + filename, 'r') as file:
             contents = file.read()
@@ -175,9 +188,11 @@ class Embeddings:
         self.__stop_words = nltk.corpus.stopwords.words('english')
         self.__remove_terms = punctuation + '0123456789'
 
+    # Splits a camel case token into a list of words
     def __split_camel_case_token(self, token):
         return re.sub('([a-z])([A-Z])', r'\1 \2', token).split()
 
+    # Splits token into a list of substrings delimited by punctuation
     def __clean_punctuation(self, token):
         remove_terms = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~0123456789'
         cleaned = token
@@ -185,10 +200,11 @@ class Embeddings:
             cleaned = cleaned.replace(p, ' ')
         return cleaned.split()
 
+    # Combines clean_punctuation and split_camel_case_token
     def __clean(self, token):
-        to_return = self.__clean_punctuation(token)
+        cleaned_tokens = self.__clean_punctuation(token)
         new_tokens = []
-        for t in to_return:
+        for t in cleaned_tokens:
             new_tokens += self.__split_camel_case_token(t)
         to_return = new_tokens
         return to_return

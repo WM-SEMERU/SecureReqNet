@@ -47,7 +47,7 @@ def __read_dataset(path):
     return process_unit, ground_truth, dataset
 
 # Cell
-def __train_test_split(processing_unit, ground_truth,isZipFile):
+def __train_test_split(process_unit, ground_truth,isZipFile):
     test, train = process_unit.get_test_and_training(ground_truth,isZip = isZipFile)
     return test,train
 #As the data is stored in a zip file isZip = True
@@ -96,7 +96,7 @@ def __create_corpora(test,train):
 # Cell
 def get_training_corpora(path,isZip):
     process_unit, ground_truth = __read_dataset(path)
-    test, train = __train_test_split(processing_unit, ground_truth,isZip)
+    test, train = __train_test_split(process_unit, ground_truth,isZip)
     return __create_corpora(test,train)
 
 # Cell

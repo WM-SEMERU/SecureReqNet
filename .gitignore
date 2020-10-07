@@ -4,3 +4,5 @@ tfx_metadata  # Default tfx metadata SQLite DB directory
 
 .ipynb_checkpoints/
 nbs/.ipynb_checkpoints/
+
+__pycache__/

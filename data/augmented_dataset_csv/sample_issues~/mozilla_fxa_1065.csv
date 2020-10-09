@@ -1,0 +1,6 @@
+issue
+"`npm run test-remote` not run on Circle
+
+
+I noticed this while trying to figure out #1064. The local tests are run the e2e tests (which only  test push) are run and the scripts tests are run but not the ""remote"" tests.
+Blocked by #1064"

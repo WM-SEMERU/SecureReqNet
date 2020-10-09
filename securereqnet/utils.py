@@ -90,7 +90,7 @@ class Dynamic_Dataset:
             new_gt = dict()
             for key in new_keys:
                 new_gt[key] = self.__ground_truth[key]
-            return Dynamic_Dataset(new_gt)
+            return Dynamic_Dataset(new_gt,self.__path,self.__isZip)
         else:
             id = self.__keys[key]
             return (self.__ground_truth[id], self.__get_issue(id))
@@ -118,7 +118,7 @@ class Processing_Dataset:
 
     # Give the contents of the specified file
     def get_issue(self, filename):
-        with open('combined_dataset/issues/' + filename, 'r') as file:
+        with open(self.__path + filename, 'r') as file:
             contents = file.read()
         return contents.strip()
 

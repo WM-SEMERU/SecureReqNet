@@ -1,0 +1,10 @@
+issue
+"Fix pagination when over 25k add-ons
+
+
+Fix #3887
+
+This PR fixes the Paginate component to not display more pages than allowed by the API. Currently the API can return up to 25k add-ons. If we go over this limit we get a 404 (for example with 25 add-ons per page we can navigate up to page 1000 and page 1001 will 404).
+The diff is larger than expected because I updated the test file.
+Screenshot
+"

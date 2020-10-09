@@ -40,12 +40,14 @@ from tfx.extensions.google_cloud_ai_platform.pusher import executor as ai_platfo
 from tfx.extensions.google_cloud_ai_platform.trainer import executor as ai_platform_trainer_executor
 from tfx.extensions.google_cloud_big_query.example_gen import component as big_query_example_gen_component  # pylint: disable=unused-import
 from tfx.orchestration import pipeline
+from tfx.proto import example_gen_pb2
 from tfx.proto import pusher_pb2
 from tfx.proto import trainer_pb2
 from tfx.types import Channel
 from tfx.types.standard_artifacts import Model
 from tfx.types.standard_artifacts import ModelBlessing
-from tfx.utils.dsl_utils import external_input
+#from tfx.utils.dsl_utils import external_input
+#from tfx.utils.dsl_utils import csv_input
 
 from ml_metadata.proto import metadata_store_pb2
 
@@ -74,7 +76,14 @@ def create_pipeline(
   components = []
 
   # Brings data into the pipeline or otherwise joins/converts training data.
-  example_gen = CsvExampleGen(input=external_input(data_path))
+  output = example_gen_pb2.Output(
+                split_config=example_gen_pb2.SplitConfig(splits=[
+                    example_gen_pb2.SplitConfig.Split(name='train', hash_buckets=9),
+                    example_gen_pb2.SplitConfig.Split(name='eval', hash_buckets=1)
+                ]))
+  example_gen = CsvExampleGen(input_base=data_path)#, output_config=output)
+
+
   # TODO(step 7): (Optional) Uncomment here to use BigQuery as a data source.
   # example_gen = big_query_example_gen_component.BigQueryExampleGen(
   #     query=query)
@@ -200,7 +209,7 @@ def create_pipeline(
       components=components,
       # Change this value to control caching of execution results. Default value
       # is `False`.
-      enable_cache=True,
+      #enable_cache=True,
       metadata_connection_config=metadata_connection_config,
       beam_pipeline_args=beam_pipeline_args,
   )

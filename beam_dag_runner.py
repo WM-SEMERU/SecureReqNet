@@ -30,9 +30,6 @@ from tfx.proto import trainer_pb2
 
 # TFX pipeline produces many output files and metadata. All output data will be
 # stored under this OUTPUT_DIR.
-# NOTE: It is recommended to have a separated OUTPUT_DIR which is *outside* of
-#       the source code structure. Please change OUTPUT_DIR to other location
-#       where we can store outputs of the pipeline.
 OUTPUT_DIR = 'pipeline_output'
 
 # TFX produces two types of outputs, files and metadata.
@@ -54,7 +51,7 @@ SERVING_MODEL_DIR = os.path.join(PIPELINE_ROOT, 'serving_model')
 #       Kubeflow), you can use a path starting "gs://YOUR_BUCKET_NAME/path" for
 #       DATA_PATH. For example,
 #       DATA_PATH = 'gs://bucket/chicago_taxi_trips/csv/'.
-DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/augmented_dataset_csv/sample_issues')
 
 
 def run():

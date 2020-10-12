@@ -22,6 +22,7 @@ from __future__ import division
 from __future__ import print_function
 
 from typing import Any, Dict, List, Optional, Text
+import os
 
 import tensorflow_model_analysis as tfma
 from tfx.components import CsvExampleGen
@@ -59,8 +60,8 @@ def create_pipeline(
     data_path: Text,
     # TODO(step 7): (Optional) Uncomment here to use BigQuery as a data source.
     # query: Text,
+    module_file: Text,
     preprocessing_fn: Text,
-    run_fn: Text,
     train_args: trainer_pb2.TrainArgs,
     eval_args: trainer_pb2.EvalArgs,
     eval_accuracy_threshold: float,
@@ -118,10 +119,11 @@ def create_pipeline(
 
   # Uses user-provided Python function that implements a model using TF-Learn.
   trainer_args = {
-      'run_fn': run_fn,
-      'transformed_examples': transform.outputs['transformed_examples'],
+      'module_file' : module_file,
+      'examples' : example_gen.outputs['examples'],
+      #'transformed_examples': transform.outputs['transformed_examples'],
       'schema': schema_gen.outputs['schema'],
-      'transform_graph': transform.outputs['transform_graph'],
+      #'transform_graph': transform.outputs['transform_graph'],
       'train_args': train_args,
       'eval_args': eval_args,
       'custom_executor_spec':
@@ -140,7 +142,7 @@ def create_pipeline(
     })
   trainer = Trainer(**trainer_args)
   # TODO(step 6): Uncomment here to add Trainer to the pipeline.
-  # components.append(trainer)
+  #components.append(trainer)
 
   # Get the latest blessed model for model validation.
   model_resolver = ResolverNode(

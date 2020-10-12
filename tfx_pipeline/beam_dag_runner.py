@@ -53,6 +53,8 @@ SERVING_MODEL_DIR = os.path.join(PIPELINE_ROOT, 'serving_model')
 #       DATA_PATH = 'gs://bucket/chicago_taxi_trips/csv/'.
 DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data/augmented_dataset_csv/sample_issues~')
 
+MODULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../tfx_pipeline/pipeline/module_file.py')
+
 
 def run():
   """Define a beam pipeline."""
@@ -65,7 +67,7 @@ def run():
           # TODO(step 7): (Optional) Uncomment here to use BigQueryExampleGen.
           # query=configs.BIG_QUERY_QUERY,
           preprocessing_fn=configs.PREPROCESSING_FN,
-          run_fn=configs.RUN_FN,
+          module_file = MODULE_PATH,
           train_args=trainer_pb2.TrainArgs(num_steps=configs.TRAIN_NUM_STEPS),
           eval_args=trainer_pb2.EvalArgs(num_steps=configs.EVAL_NUM_STEPS),
           eval_accuracy_threshold=configs.EVAL_ACCURACY_THRESHOLD,

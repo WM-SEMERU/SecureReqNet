@@ -59,18 +59,18 @@ the ground truth value and the file content of the filename at that index.</p>
 <p>A user can request the filename at an index with get_id(index)</p>
 <p>Example:</p>
 
-<pre><code>    dataset = Dynamic_Dataset(ground_truth)
+<pre><code>dataset = Dynamic_Dataset(ground_truth)
 
-    print(dataset.get_id(0))
-            -&gt; gitlab_79.txt
+print(dataset.get_id(0))
+    -&gt; gitlab_79.txt
 
-    print(dataset[0])
-            -&gt; ('(1,0)', 'The currently used Rails version, in the stable ...
+print(dataset[0])
+    -&gt; ('(1,0)', 'The currently used Rails version, in the stable ...
 
-    for x in dataset[2:4]:
-            print(x)
-                    -&gt; ('(1,0)', "'In my attempt to add 2 factor authentication ...
-                    -&gt; ('(1,0)', 'We just had an admin accidentally push to a ...</code></pre>
+for x in dataset[2:4]:
+    print(x)
+        -&gt; ('(1,0)', "'In my attempt to add 2 factor authentication ...
+        -&gt; ('(1,0)', 'We just had an admin accidentally push to a ...</code></pre>
 
 </div>
 
@@ -100,7 +100,7 @@ the ground truth value and the file content of the filename at that index.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Processing_Dataset" class="doc_header"><code>class</code> <code>Processing_Dataset</code><a href="https://github.com/rmclanton/SecureReqNetsecurereqnet/utils.py#L99" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Processing_Dataset</code>(<strong><code>path</code></strong>)</p>
+<h2 id="Processing_Dataset" class="doc_header"><code>class</code> <code>Processing_Dataset</code><a href="https://github.com/rmclanton/SecureReqNetsecurereqnet/utils.py#L111" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Processing_Dataset</code>(<strong><code>path</code></strong>)</p>
 </blockquote>
 <p>A class to wrap up processing functions</p>
 

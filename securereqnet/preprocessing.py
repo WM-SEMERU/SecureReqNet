@@ -95,7 +95,7 @@ def __create_corpora(test,train):
 
 # Cell
 def get_training_corpora(path,isZip):
-    process_unit, ground_truth = __read_dataset(path)
+    process_unit, ground_truth, dataset = __read_dataset(path)
     test, train = __train_test_split(process_unit, ground_truth,isZip)
     return __create_corpora(test,train)
 

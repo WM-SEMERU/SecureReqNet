@@ -51,7 +51,7 @@ SERVING_MODEL_DIR = os.path.join(PIPELINE_ROOT, 'serving_model')
 #       Kubeflow), you can use a path starting "gs://YOUR_BUCKET_NAME/path" for
 #       DATA_PATH. For example,
 #       DATA_PATH = 'gs://bucket/chicago_taxi_trips/csv/'.
-DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data/augmented_dataset_csv/sample_issues~')
+DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data/augmented_dataset_csv/sample_issues2')
 
 MODULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../tfx_pipeline/pipeline/module_file.py')
 

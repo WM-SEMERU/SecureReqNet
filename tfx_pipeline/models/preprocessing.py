@@ -26,6 +26,12 @@ import tensorflow_transform as tft
 from models import features
 
 from securereqnet.utils import Embeddings
+import numpy
+import pandas
+import re
+from string import punctuation
+import nltk
+from nltk.stem.snowball import SnowballStemmer
 
 SEQUENCE_LENGTH = 100
 VOCAB_SIZE = 10000
@@ -62,6 +68,41 @@ def tokenize_issues(issues, sequence_length=SEQUENCE_LENGTH):
   tokens = tf.pad(tokens, [[0, 0], [0, pad]], constant_values="<PAD>")
   return tf.reshape(tokens, [-1, sequence_length])
 
+def __normalize_document(self, doc):
+   # lower case and remove special characters\whitespaces
+   doc = doc.lower()
+   doc = doc.strip()
+   # tokenize document
+   tokens = self.__wpt.tokenize(doc)
+   #Filter stopwords out of document
+   filtered_tokens = [token for token in tokens if token not in self.__stop_words]
+   #Filtering Stemmings
+   filtered_tokens = [englishStemmer.stem(token) for token in filtered_tokens]
+   #Filtering remove-terms
+   filtered_tokens = [token for token in filtered_tokens if token not in self.__remove_terms and len(token)>2]
+   # re-create document from filtered tokens
+   return filtered_tokens    
+    
+def preprocess(issues, vocab_set=None):
+  #tokens = tf.strings.split(issues)[:, :sequence_length]
+  tokens = tf.strings.split(issues)[:, :100]
+  remove_terms = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~0123456789'  
+  for p in remove_terms:
+        tf.strings.regex_replace(tokens,'p', " ")
+  tokens = tf.strings.split(tokens," ")
+  tokens = tf.strings.regex_replace(tokens,'([a-z])([A-Z])', r'\1 \2')
+  tokens = tf.strings.split(tokens," ")
+  print("make doc")
+  return
+  doc = tf.strings.join(tokens," ")
+  tf.strings.regex_replace('[^a-zA-Z\s]','')
+  tf.strings.lower(doc)
+  print("Doc made")
+  print(doc)
+  print()
+    
+
+
 def preprocessing_fn(inputs):
   """tf.transform's callback function for preprocessing inputs.
 
@@ -75,11 +116,19 @@ def preprocessing_fn(inputs):
 
   for key in features.VOCAB_FEATURE_KEYS:
     print(key)
-    print(type(inputs))
     print(inputs[key])
-    embeddings = Embeddings()
-    embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
-    embeddings_dict = embeddings.get_embeddings_dict(embed_path)
+    print(type(inputs[key]))
+    print(tf.sparse.to_dense(inputs[key].values))
+    print("^")
+    preprocess(_fill_in_missing(inputs["issue"], ''))
+    #for string in _fill_in_missing(inputs["issue"], ''):
+        #print(string)
+    wpt = nltk.WordPunctTokenizer()
+    #stop_words = nltk.corpus.stopwords.words('english')
+    #remove_terms = punctuation + '0123456789'
+    #print(type(inputs))
+    #print(inputs[key])
+
     # Preserve this feature as a dense float, setting nan's to the mean.
     # outputs[features.transformed_name(key)] = tft.scale_to_z_score(
         # _fill_in_missing(inputs[key]))

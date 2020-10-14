@@ -9,6 +9,7 @@ from vectorize_sentence import Embeddings
 import nltk
 nltk.download('stopwords')
 import numpy as np
+from waitress import serve
 
 app = flask.Flask(__name__)
 
@@ -72,4 +73,6 @@ def preprocess_placeholder(sentence):
     print(inp)
     return inp
 
-app.run()
+if __name__ == "__main__":
+    # app.run()
+    serve(app, host = '0.0.0.0', port = 9000)

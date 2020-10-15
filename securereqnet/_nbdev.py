@@ -13,7 +13,7 @@ index = {"say_hello": "00_core.ipynb",
          "get_training_corpora": "10_preprocessing.ipynb",
          "process_corpora": "10_preprocessing.ipynb",
          "show_loss_accurracy_plots": "model_evaluation.ipynb",
-         "evaluate_model": "model_evaluation.ipynb",
+         "evaluate_model": "model_evaluation_shap.ipynb",
          "load_securereqnet_model": "models.ipynb",
          "create_alpha": "models.ipynb",
          "fit_model": "models.ipynb"}
@@ -22,6 +22,7 @@ modules = ["core.py",
            "utils.py",
            "preprocessing.py",
            "model_evaluation.py",
+           "shap_evals.py",
            "models.py"]
 
 doc_url = "https://rmclanton.github.io/SecureReqNet/"

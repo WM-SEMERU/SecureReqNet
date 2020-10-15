@@ -1,41 +1,11 @@
 import tensorflow_transform as tft
+import tensorflow as tf
 from tfx.components.trainer import executor
-
-def run_fn(fn_args: executor.TrainerFnArgs):
-  """Train the model based on given args.
-
-  Args:
-    fn_args: Holds args used to train the model as name/value pairs.
-  """
-  tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
-
-  # Train and eval files contains transformed examples.
-  # _input_fn read dataset based on transformed feature_spec from tft.
-  train_dataset = _input_fn(fn_args.train_files, tf_transform_output, 40)
-  eval_dataset = _input_fn(fn_args.eval_files, tf_transform_output, 40)
-
-  model = _build_keras_model()
-
-  model.fit(
-      train_dataset,
-      steps_per_epoch=fn_args.train_steps,
-      validation_data=eval_dataset,
-      validation_steps=fn_args.eval_steps)
-
-  signatures = {
-      'serving_default':
-          _get_serve_tf_examples_fn(model,
-                                    tf_transform_output).get_concrete_function(
-                                        tf.TensorSpec(
-                                            shape=[None],
-                                            dtype=tf.string,
-                                            name='examples')),
-  }
-  model.save(fn_args.serving_model_dir, save_format='tf', signatures=signatures)
-
+import os
 
 # TFX will call this function
 def trainer_fn(trainer_fn_args, schema):
+  print(trainer_fn_args)
   """Build the estimator using the high level API.
 
   Args:
@@ -88,10 +58,10 @@ def trainer_fn(trainer_fn_args, schema):
       save_checkpoints_steps=999, keep_checkpoint_max=1)
 
   run_config = run_config.replace(model_dir=trainer_fn_args.serving_model_dir)
-  warm_start_from = trainer_fn_args.base_models[
-      0] if trainer_fn_args.base_models else None
+  #warm_start_from = trainer_fn_args.base_models[
+  #    0] if trainer_fn_args.base_models else None
 
-  model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../pretrained_models/alpha.hdf5')
+  model_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../pretrained_models/alpha.hdf5')
 
   estimator = tf.keras.estimator.model_to_estimator(
     keras_model_path=model_path, custom_objects=None, model_dir=None,
@@ -109,3 +79,7 @@ def trainer_fn(trainer_fn_args, schema):
       'eval_spec': eval_spec,
       'eval_input_receiver_fn': receiver_fn
   }
+
+# Provides input data for training as minibatches. 
+def input_fn():
+  print("placeholder")

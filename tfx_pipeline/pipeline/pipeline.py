@@ -115,7 +115,7 @@ def create_pipeline(
       schema=schema_gen.outputs['schema'],
       preprocessing_fn=preprocessing_fn)
   # TODO(step 6): Uncomment here to add Transform to the pipeline.
-  components.append(transform)
+  #components.append(transform)
 
   # Uses user-provided Python function that implements a model using TF-Learn.
   trainer_args = {
@@ -127,7 +127,7 @@ def create_pipeline(
       'train_args': train_args,
       'eval_args': eval_args,
       'custom_executor_spec':
-          executor_spec.ExecutorClassSpec(trainer_executor.GenericExecutor),
+          executor_spec.ExecutorClassSpec(trainer_executor.Executor),
   }
   if ai_platform_training_args is not None:
     trainer_args.update({
@@ -142,7 +142,7 @@ def create_pipeline(
     })
   trainer = Trainer(**trainer_args)
   # TODO(step 6): Uncomment here to add Trainer to the pipeline.
-  #components.append(trainer)
+  components.append(trainer)
 
   # Get the latest blessed model for model validation.
   model_resolver = ResolverNode(

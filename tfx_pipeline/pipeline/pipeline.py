@@ -25,7 +25,7 @@ from typing import Any, Dict, List, Optional, Text
 import os
 
 import tensorflow_model_analysis as tfma
-from tfx.components import CsvExampleGen
+#from tfx.components import CsvExampleGen
 from tfx.components import Evaluator
 from tfx.components import ExampleValidator
 from tfx.components import Pusher
@@ -36,6 +36,7 @@ from tfx.components import Trainer
 from tfx.components import Transform
 from tfx.components import InfraValidator
 from tfx.components.base import executor_spec
+from tfx.components.example_gen.import_example_gen.component import ImportExampleGen
 from tfx.components.trainer import executor as trainer_executor
 from tfx.dsl.experimental import latest_blessed_model_resolver
 from tfx.extensions.google_cloud_ai_platform.pusher import executor as ai_platform_pusher_executor
@@ -79,17 +80,28 @@ def create_pipeline(
   components = []
 
   # Brings data into the pipeline or otherwise joins/converts training data.
+
+  # Ingests pre-split data based on specified file pattern
+  tf_input = example_gen_pb2.Input(splits=[
+                    example_gen_pb2.Input.Split(name='train', pattern='tfrecords_train/*'),
+                    example_gen_pb2.Input.Split(name='eval', pattern='tfrecords_eval/*')
+                ])
+
+  '''
+  # Splits input data with a 90:10 train:eval ratio
   output = example_gen_pb2.Output(
                 split_config=example_gen_pb2.SplitConfig(splits=[
                     example_gen_pb2.SplitConfig.Split(name='train', hash_buckets=9),
                     example_gen_pb2.SplitConfig.Split(name='eval', hash_buckets=1)
                 ]))
-  example_gen = CsvExampleGen(input_base=data_path, output_config=output)
+  '''
 
-
+  example_gen = ImportExampleGen(input_base=data_path, input_config=tf_input)
+  
   # TODO(step 7): (Optional) Uncomment here to use BigQuery as a data source.
   # example_gen = big_query_example_gen_component.BigQueryExampleGen(
   #     query=query)
+  
   components.append(example_gen)
 
   # Computes statistics over data for visualization and example validation.

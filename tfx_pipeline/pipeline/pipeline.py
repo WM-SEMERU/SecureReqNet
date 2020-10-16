@@ -34,6 +34,7 @@ from tfx.components import SchemaGen
 from tfx.components import StatisticsGen
 from tfx.components import Trainer
 from tfx.components import Transform
+from tfx.components import InfraValidator
 from tfx.components.base import executor_spec
 from tfx.components.trainer import executor as trainer_executor
 from tfx.dsl.experimental import latest_blessed_model_resolver
@@ -44,6 +45,7 @@ from tfx.orchestration import pipeline
 from tfx.proto import example_gen_pb2
 from tfx.proto import pusher_pb2
 from tfx.proto import trainer_pb2
+from tfx.proto import infra_validator_pb2
 from tfx.types import Channel
 from tfx.types.standard_artifacts import Model
 from tfx.types.standard_artifacts import ModelBlessing
@@ -142,7 +144,7 @@ def create_pipeline(
     })
   trainer = Trainer(**trainer_args)
   # TODO(step 6): Uncomment here to add Trainer to the pipeline.
-  components.append(trainer)
+  # components.append(trainer)
 
   # Get the latest blessed model for model validation.
   model_resolver = ResolverNode(
@@ -178,6 +180,26 @@ def create_pipeline(
       eval_config=eval_config)
   # TODO(step 6): Uncomment here to add Evaluator to the pipeline.
   # components.append(evaluator)
+
+  infra_validator = InfraValidator(
+      model=trainer.outputs['model'],
+      examples=example_gen.outputs['examples'],
+      serving_spec=infra_validator_pb2.ServingSpec(
+          tensorflow_serving=infra_validator_pb2.TensorFlowServing(  # Using TF Serving.
+              tags=['latest']
+          ),
+          local_docker=infra_validator_pb2.LocalDockerConfig(),  # Running on local docker.
+      ),
+      validation_spec=infra_validator_pb2.ValidationSpec(
+          max_loading_time_seconds=60,
+          num_tries=5,
+      ),
+      request_spec=infra_validator_pb2.RequestSpec(
+          tensorflow_serving=infra_validator_pb2.TensorFlowServingRequestSpec(),
+          num_examples=1,
+      )
+  )
+  # components.append(infra_validator)
 
   # Checks whether the model passed the validation steps and pushes the model
   # to a file destination if check passed.

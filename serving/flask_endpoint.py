@@ -26,7 +26,7 @@ def alpha():
     sentences = content['instances']
     
     #processed = []
-    #for sentence in sentences:
+    #for sentence in sentences:4
     #    processed.append(preprocess(sentence))
     
     payload = {
@@ -70,9 +70,9 @@ def preprocess_placeholder(sentence):
         embed_flatten = np.array(vectorized[words_rows]).flatten()
         for embedding_cols in range(embed_flatten.shape[0]):
             inp[0,words_rows,embedding_cols,0] = embed_flatten[embedding_cols]
-    print(inp)
+    # print(inp)
     return inp
 
 if __name__ == "__main__":
     # app.run()
-    serve(app, host = '0.0.0.0', port = 9000)
+    serve(app, host = '0.0.0.0', port = 8055)

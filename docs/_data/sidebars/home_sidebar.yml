@@ -7,24 +7,30 @@ entries:
 - folders:
   - folderitems:
     - output: web,pdf
-      title: Export to modules
-      url: /export.html
+      title: Overview
+      url: /
     - output: web,pdf
-      title: Convert to html
-      url: /export2html.html
+      title: Utils
+      url: utils.html
     - output: web,pdf
-      title: Show doc
-      url: /showdoc.html
+      title: Testing
+      url: testing.html
     - output: web,pdf
-      title: Test functions
-      url: /test.html
+      title: Preprocessing
+      url: preprocessing.html
     - output: web,pdf
-      title: Core functions
-      url: /core.html
+      title: Model Evaluation
+      url: model_evaluation.html
     - output: web,pdf
-      title: Command line functions
-      url: /cli.html
+      title: Models
+      url: models.html
+    - output: web,pdf
+      title: Alpha SecureReqNet
+      url: alpha_securereqnet.html
+    - output: web,pdf
+      title: securereqnet
+      url: core.html
     output: web
-    title: Notebook
+    title: SecureReqNet
   output: web
   title: Sidebar

@@ -1,10 +1,12 @@
 {
-  "Notebook": {
-    "Export to modules": "/export",
-    "Convert to html": "/export2html",
-    "Show doc": "/showdoc",
-    "Test functions": "/test",
-    "Core functions": "/core",
-    "Command line functions": "/cli"
+  "SecureReqNet": {
+    "Overview": "/",
+    "Utils": "utils.html",  
+    "Testing": "testing.html",
+    "Preprocessing": "preprocessing.html",
+    "Model Evaluation": "model_evaluation.html",
+    "Models": "models.html",
+    "Alpha SecureReqNet": "alpha_securereqnet.html",
+    "securereqnet": "core.html"        
   }
 }

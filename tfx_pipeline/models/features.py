@@ -45,10 +45,11 @@ from typing import Text, List
 #CATEGORICAL_FEATURE_MAX_VALUES = [24]
 
 # Name of features which have string values and are mapped to integers.
-VOCAB_FEATURE_KEYS = ["issue"]
+#VOCAB_FEATURE_KEYS = ["issue"]
 
 # Uncomment below to add more features to the model
-# DENSE_FLOAT_FEATURE_KEYS = ['trip_miles', 'fare', 'trip_seconds']
+DENSE_FLOAT_FEATURE_KEYS = ['x']
+DENSE_INT_FEATURE_KEYS = ['y']
 #
 # BUCKET_FEATURE_KEYS = [
 #     'pickup_latitude', 'pickup_longitude', 'dropoff_latitude',

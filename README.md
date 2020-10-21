@@ -1,10 +1,8 @@
 # SecureReqNet
+> Maintained by @danaderp. Last update: October 2020
 
->
-> Maintained by @danaderp. Last update: April 2020
->
 
-We present a machine learning approach, named *SecureReqNet*, to automatically identify whether issues describe security related content. *SecureReqNet* hinges on the idea of predicting severity on software using vulnerability desciptions [(Han, et al., 2017)](https://ieeexplore.ieee.org/abstract/document/8094415) by incorporating desing principles from AlexNet (Krizhevsky, et al., 2013). 
+We present a machine learning approach, named SecureReqNet, to automatically identify whether issues describe security related content. SecureReqNet hinges on the idea of predicting severity on software using vulnerability desciptions (Han, et al., 2017) by incorporating desing principles from AlexNet (Krizhevsky, et al., 2013).
 
 ### Research and Components Roadmap
 - [x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) 
@@ -13,18 +11,29 @@ We present a machine learning approach, named *SecureReqNet*, to automatically i
 - [ ] Implementing a Transformer Architecture to predict security criticality on issues (or requirements)
 - [ ] Recovering security related relationships among software artifacts by employing traceability theory
 
-*SecureReqNet* consists of a two-phase deep learning architecture that operates *(for now)* purely on the natural language descriptions of issues. The first phase of our approach learns high dimensional sentence embeddings from hundreds of thousands of descriptions extracted from software vulnerabilities listed in the CVE database and issue descriptions extracted from open source projects using an unsupervised learning process. The second phase then utilizes this semantic ontology of embeddings to train a deep convolutional neural network capable of predicting whether a given issue contains security-related information.
 
+*SecureReqNet* consists of a two-phase deep learning architecture that operates *(for now)* purely on the natural language descriptions of issues. The first phase of our approach learns high dimensional sentence embeddings from hundreds of thousands of descriptions extracted from software vulnerabilities listed in the CVE database and issue descriptions extracted from open source projects using an unsupervised learning process. The second phase then utilizes this semantic ontology of embeddings to train a deep convolutional neural network capable of predicting whether a given issue contains security-related information.
 
 <object data="https://github.com/danaderp/SecureReqNet/blob/master/data/plots/architecture.pdf" type="application/pdf" width="100%"> 
 </object>
+
 
 ![α-SecureReqNet](https://github.com/danaderp/SecureReqNet/blob/master/data/plots/architecture-1.png)
 
 
 *SecureReqNet* has four versions that vary in terms of the size of the tensors and the parameters of the convolutional layers.
 
+
 1. **SecureReqNet (shallow)** was based on the best architecture achived by Han, et al. Such architecture implemented one convolution layer with 3 kernes of different sizes. The authors set up the size of each kernel as 1-gram, 3-gram, and 5-gram to reduce an input matrix. This matrix was built by means of an unsupervised word2vec where the rows represents the words in a given document (or issue) and the columns the size of the embedding. Details of how we trained our word2vec can be found in the notebook [*03_Clustering*](https://github.com/danaderp/SecureReqNet/blob/master/nbs/03_Clustering.ipynb).  **SecureReqNet (shallow)** has a max pooling layer followed by a flatten function. The final tensor is a merged vector from the 3 initial kernels. Unlike Han, et al.' SVM multi-class output layer, we utilized a binary classification throughout a softmax layer.
+
+
+Building instructions
+Run the following command if you get a module error from securereqnet saying it can't be found
+`pip install -e .`
+
+`pip install securereqnet`
+#deployment team will update this
+
 
 ```python
 # 1st Convolutional Layer (1-gram)
@@ -58,11 +67,16 @@ predictions = Dense(K, activation='softmax')(integration_layer)
 criticality_network = Model(inputs=[gram_input],outputs=[predictions])
 ```
 
+
 2. **SecureReqNet (deep)** was an expansion of **SecureReqNet (shallow)**. We included an extra convolutional layer, a max pooling, and a flatten function. The final tensor is a merged vector from the 3 initial kernels. A fully connected sigmoid layers was added just before the binary softmax layer. 
+
+
 
 3. **Alex-SecureReqNet (deep)** was based on the proposed architecture by Krizhevsky et al., where 5 convolutional layers extract the abstract features and 3 fully connected reduce the dimensionality. This is the classical convolutional ImageNet network with a small adaptation in the final layer to induce binary classification. 
 
+
 4. **α-SecureReqNet (deep)** was a modification of the **Alex-SecureReqNet (deep)** in the convolutional layers. The modification consisted in implementing the n-gram kernel strategy for text-based datasets [(Han, et al., 2017)](https://ieeexplore.ieee.org/abstract/document/8094415). The input layer is a document embedding in the shape of a matrix. The first convolutional layer has a kernel of 7-gram size to reduce the input matrix into 32 vector feature maps. Later, it is applied a max pooling and a flatten function to obtain a column matrix. The second convolutional layer has a 5-gram filter followed by a max pooling and flatten function that merged 64 features. The third, fourth, and fifth convolutional layers are very similar to the original distribution in ImageNet but using 3-gram filters and 128/64 features respectively. Three fully connected layers went after the fifth conv layer to reduce the dimensionality and control the overfitting with the dropout units. The final layer is again a binary softmax layer (security vs non-security related).
+
 
 ```python
 # 1st Convolutional Layer Convolutional Layer (7-gram)
@@ -121,7 +135,9 @@ predictions = Dense(K, activation='softmax')(deep_dense_3_layer)
 criticality_network = Model(inputs=[gram_input],outputs=[predictions])
 ```
 
+
 > If you are using **α-SecureReqNet**, please consider citing [(N. Palacio, et al., 2019)](https://arxiv.org/abs/1908.00614)
+
 
 ## Datasets
 
@@ -141,16 +157,11 @@ Wikipedia | 10000 | - | - | - |
 - *GitHub Issues*: Given the limited number of SR GitLab issues that we were able to extract, we also crawled the issue trackers of the most popular projects on GitHub (according to number of stars) and extracted issues with the "security" tag in order to derive a larger and more diverse dataset. Again, we randomly crawled non-SR issues and performed a random sampling to ensure the validity of the non-SR issues. 
 - *Wikipedia Articles*: If we trained our neural embeddings on *only* highly specialized software text extracted from issues, we risk our model not learning more generalized word contexts that could help differentiate between SR and non-SR issues. Thus, we randomly crawled and extracted the text from 10,000 Wikipedia articles in order to bolster the generalizablility of our learned neural word embeddings.
 
+
 ## Project Description for CSCI 435/535
->
-> Project Leads: @danaderp
->
+> > Project Leads:@danaderp> The goal of the project is to migrate the components into nbdev architecture, implement interpretability components to test the neural net, leverage security datasets, and document. 
 
-The goal of the project is to migrate the components into nbdev architecture, implement interpretability components to test the neural net, leverage security datasets, and document. 
-
-### The goals of this project:
-- [ ] Migrate SecureReqNet into nbdev
-- [ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)
+### The goals of this project:- [ ] Migrate SecureReqNet into nbdev- [ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)
 - [ ] Implement some interpretability techniques to test SecureReqNet
 - [ ] Leverage Security Datasets
 
@@ -163,3 +174,11 @@ The goal of the project is to migrate the components into nbdev architecture, im
 
 - Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
 - Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)
+
+
+```python
+from nbdev.export import *
+notebook2script()
+
+
+```

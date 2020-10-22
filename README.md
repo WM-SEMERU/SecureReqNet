@@ -161,7 +161,10 @@ Wikipedia | 10000 | - | - | - |
 ## Project Description for CSCI 435/535
 > > Project Leads:@danaderp> The goal of the project is to migrate the components into nbdev architecture, implement interpretability components to test the neural net, leverage security datasets, and document. 
 
-### The goals of this project:- [ ] Migrate SecureReqNet into nbdev- [ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)
+### The goals of this project:
+
+- [ ] Migrate SecureReqNet into nbdev
+- [ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)
 - [ ] Implement some interpretability techniques to test SecureReqNet
 - [ ] Leverage Security Datasets
 
@@ -174,7 +177,6 @@ Wikipedia | 10000 | - | - | - |
 
 - Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
 - Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)
-
 
 ```python
 from nbdev.export import *

@@ -2,28 +2,29 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"say_hello": "00_core.ipynb",
-         "Dynamic_Dataset": "09_utils.ipynb",
-         "Processing_Dataset": "09_utils.ipynb",
-         "Embeddings": "09_utils.ipynb",
-         "englishStemmer": "09_utils.ipynb",
-         "__read_dataset": "10_preprocessing.ipynb",
-         "__train_test_split": "10_preprocessing.ipynb",
-         "__create_corpora": "10_preprocessing.ipynb",
-         "get_training_corpora": "10_preprocessing.ipynb",
-         "process_corpora": "10_preprocessing.ipynb",
-         "show_loss_accurracy_plots": "model_evaluation.ipynb",
-         "evaluate_model": "model_evaluation_shap.ipynb",
-         "load_securereqnet_model": "models.ipynb",
-         "create_alpha": "models.ipynb",
-         "fit_model": "models.ipynb"}
+index = {"Dynamic_Dataset": "03_utils.ipynb",
+         "Processing_Dataset": "03_utils.ipynb",
+         "Embeddings": "03_utils.ipynb",
+         "englishStemmer": "03_utils.ipynb",
+         "__read_dataset": "04_preprocessing.ipynb",
+         "__train_test_split": "04_preprocessing.ipynb",
+         "__create_corpora": "04_preprocessing.ipynb",
+         "get_training_corpora": "04_preprocessing.ipynb",
+         "process_corpora": "04_preprocessing.ipynb",
+         "vectorize_sentences": "04_preprocessing.ipynb",
+         "show_loss_accurracy_plots": "06_model_evaluation.ipynb",
+         "evaluate_model": "07_model_evaluation_shap.ipynb",
+         "load_securereqnet_model": "08_models.ipynb",
+         "create_alpha": "08_models.ipynb",
+         "fit_model": "08_models.ipynb",
+         "Record_Generator": "09_record_generator.ipynb"}
 
-modules = ["core.py",
-           "utils.py",
+modules = ["utils.py",
            "preprocessing.py",
            "model_evaluation.py",
            "shap_evals.py",
-           "models.py"]
+           "models.py",
+           "record_generator.py"]
 
 doc_url = "https://rmclanton.github.io/SecureReqNet/"
 

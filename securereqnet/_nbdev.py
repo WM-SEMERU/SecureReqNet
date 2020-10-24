@@ -17,14 +17,19 @@ index = {"Dynamic_Dataset": "03_utils.ipynb",
          "load_securereqnet_model": "08_models.ipynb",
          "create_alpha": "08_models.ipynb",
          "fit_model": "08_models.ipynb",
-         "Record_Generator": "09_record_generator.ipynb"}
+         "Record_Generator": "09_record_generator.ipynb",
+         "__get_predictions": "10_deployment.ipynb",
+         "__decode": "10_deployment.ipynb",
+         "create_app": "10_deployment.ipynb",
+         "serve": "10_deployment.ipynb"}
 
 modules = ["utils.py",
            "preprocessing.py",
            "model_evaluation.py",
            "shap_evals.py",
            "models.py",
-           "record_generator.py"]
+           "record_generator.py",
+           "deployment.py"]
 
 doc_url = "https://rmclanton.github.io/SecureReqNet/"
 

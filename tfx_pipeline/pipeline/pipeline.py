@@ -12,9 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""TFX taxi template pipeline definition.
-
-This file defines TFX pipeline and various components in the pipeline.
+"""
+This file defines the TFX pipeline and various components in the pipeline.
 """
 
 from __future__ import absolute_import
@@ -75,7 +74,6 @@ def create_pipeline(
     ai_platform_training_args: Optional[Dict[Text, Text]] = None,
     ai_platform_serving_args: Optional[Dict[Text, Any]] = None,
 ) -> pipeline.Pipeline:
-  """Implements the chicago taxi pipeline with TFX."""
 
   components = []
 
@@ -105,11 +103,15 @@ def create_pipeline(
   components.append(example_gen)
 
   # Computes statistics over data for visualization and example validation.
+  # Input: Examples from the ExampleGen component
+  # Output: Dataset statistics to be used by the SchemaGen component
   statistics_gen = StatisticsGen(examples=example_gen.outputs['examples'])
   # TODO(step 5): Uncomment here to add StatisticsGen to the pipeline.
   components.append(statistics_gen)
 
   # Generates schema based on statistics files.
+  # Input: Statistics from the StatisticsGen component\
+  # Output: A schema of the model for use in the ExampleValidator, Transform, and Trainer components.
   schema_gen = SchemaGen(
       statistics=statistics_gen.outputs['statistics'],
       infer_feature_shape=True)
@@ -193,6 +195,12 @@ def create_pipeline(
   # TODO(step 6): Uncomment here to add Evaluator to the pipeline.
   # components.append(evaluator)
 
+
+  # Launches sandboxed server with the model
+  # Validates that model can be loaded and queried
+  # Input: A model from the Trainer component, examples from the ExampleGen component
+  # Output: A blessed model that is sent to the Pusher component
+
   infra_validator = InfraValidator(
       model=trainer.outputs['model'],
       examples=example_gen.outputs['examples'],
@@ -220,6 +228,9 @@ def create_pipeline(
           trainer.outputs['model'],
       'model_blessing':
           evaluator.outputs['blessing'],
+      # Uncomment these when deploying InfraValidator
+      #'infra_blessing':
+      #    infra_validator.outputs['blessing'],
       'push_destination':
           pusher_pb2.PushDestination(
               filesystem=pusher_pb2.PushDestination.Filesystem(

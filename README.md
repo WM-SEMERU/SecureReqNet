@@ -178,7 +178,7 @@ Wikipedia | 10000 | - | - | - |
 - Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
 - Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)
 
-```python
+```
 from nbdev.export import *
 notebook2script()
 

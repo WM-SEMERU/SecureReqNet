@@ -44,3 +44,4 @@ setuptools.setup(
     entry_points = { 'console_scripts': cfg.get('console_scripts','').split() },
     **setup_cfg)
 
+package_data={'': ['data/*.csv']},

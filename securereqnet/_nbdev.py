@@ -33,6 +33,6 @@ modules = ["utils.py",
 
 doc_url = "https://rmclanton.github.io/SecureReqNet/"
 
-git_url = "https://github.com/rmclanton/SecureReqNet"
+git_url = "https://github.com/rmclanton/SecureReqNet/blob/master/"
 
 def custom_doc_links(name): return None

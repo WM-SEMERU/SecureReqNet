@@ -67,6 +67,8 @@ def create_pipeline(
     train_args: trainer_pb2.TrainArgs,
     eval_args: trainer_pb2.EvalArgs,
     eval_accuracy_threshold: float,
+    loss_threshold: float,
+    auc_threshold: float,
     serving_model_dir: Text,
     metadata_connection_config: Optional[
         metadata_store_pb2.ConnectionConfig] = None,
@@ -172,9 +174,22 @@ def create_pipeline(
   # Uses TFMA to compute a evaluation statistics over features of a model and
   # perform quality validation of a candidate model (compared to a baseline).
   eval_config = tfma.EvalConfig(
-      model_specs=[tfma.ModelSpec(label_key='big_tipper')],
+      model_specs=[tfma.ModelSpec(signature_name='eval')],
       slicing_specs=[tfma.SlicingSpec()],
       metrics_specs=[
+          # binary cross-entropy loss
+          tfma.MetricsSpec(metrics=[
+              tfma.MetricConfig(
+                  class_name='BinaryCrossentropy',
+                  threshold=tfma.MetricThreshold(
+                      value_threshold=tfma.GenericValueThreshold(
+                          upper_bound={'value': loss_threshold}),
+                      change_threshold=tfma.GenericChangeThreshold(
+                          direction=tfma.MetricDirection.LOWER_IS_BETTER,
+                          absolute={'value': -1e-10})))
+          ]),
+
+          # binary accuracy
           tfma.MetricsSpec(metrics=[
               tfma.MetricConfig(
                   class_name='BinaryAccuracy',
@@ -184,8 +199,22 @@ def create_pipeline(
                       change_threshold=tfma.GenericChangeThreshold(
                           direction=tfma.MetricDirection.HIGHER_IS_BETTER,
                           absolute={'value': -1e-10})))
+          ]),
+
+          # AUC
+          tfma.MetricsSpec(metrics=[
+              tfma.MetricConfig(
+                  class_name='AUC',
+                  threshold=tfma.MetricThreshold(
+                      value_threshold=tfma.GenericValueThreshold(
+                          lower_bound={'value': auc_threshold}),
+                      change_threshold=tfma.GenericChangeThreshold(
+                          direction=tfma.MetricDirection.HIGHER_IS_BETTER,
+                          absolute={'value': -1e-10})))
           ])
+          
       ])
+
   evaluator = Evaluator(
       examples=example_gen.outputs['examples'],
       model=trainer.outputs['model'],

@@ -56,7 +56,9 @@ TRAIN_NUM_STEPS = 1000
 EVAL_NUM_STEPS = 150
 
 # Change this value according to your use cases.
-EVAL_ACCURACY_THRESHOLD = 0.6
+EVAL_ACCURACY_THRESHOLD = 0.7
+LOSS_THRESHOLD = 2.5
+AUC_THRESHOLD = 0.7
 
 # Beam args to use BigQueryExampleGen with Beam DirectRunner.
 # TODO(step 7): (Optional) Uncomment here to provide GCP related configs for

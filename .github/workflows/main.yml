@@ -16,8 +16,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        echo "Downloading NLTK stopwords!"
-        python -m ntlk.downloader stopwords
     - name: Read all notebooks
       run: |
         nbdev_read_nbs
@@ -35,6 +33,8 @@ jobs:
         if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
     - name: Install securereqnet package
       run: |
+        echo "Downloading NLTK stopwords!"
+        python -m nltk.downloader stopwords
         echo "Installing..."
         pip install -e .
     - name: Run tests

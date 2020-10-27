@@ -48,6 +48,10 @@ def __decode(input):
 # Cell
 
 def create_app(test_config=None):
+    """
+    Returns a Flask web application with the default configuration pinging a TFX serving instance
+    on http://localhost:8503/v1/models/alpha:predict
+    """
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         TFX_ENDPOINT='http://localhost:8503/v1/models/alpha:predict'
@@ -76,4 +80,7 @@ def create_app(test_config=None):
 # Cell
 
 def serve(host, port):
+    """
+    Serves a waitress production server on the given host and post
+    """
     serve(create_app(), host = host, port = port)

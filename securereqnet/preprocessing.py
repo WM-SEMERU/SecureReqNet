@@ -157,7 +157,7 @@ def process_corpora(corpora_train,corpora_test,save_file=False,path="",name=""):
         np.save(name + '/corpora_test_x.npy',corpora_test_x)
         np.save(name + '/target_test_y.npy',target_test_y)
 
-    return corpora_train_x, corpora_test_x, target_train_y, target_test_y
+
 
 # Cell
 from .utils import Embeddings
@@ -169,7 +169,7 @@ def vectorize_sentences(sentences):
     nltk.download('stopwords')
 
     embeddings = Embeddings()
-    embed_path = 'word_embeddings-embed_size_100-epochs_100.csv'
+    embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
     embeddings_dict = embeddings.get_embeddings_dict(embed_path)
     inp_shape = (len(sentences), 618, 100, 1)
 

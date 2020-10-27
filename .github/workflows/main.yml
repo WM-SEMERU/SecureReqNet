@@ -33,5 +33,6 @@ jobs:
         if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
     - name: Run tests
       run: |
+        pip install .
         nbdev_test_nbs --fname "nbs/05_testing.ipynb" --flags "util"
         nbdev_test_nbs --fname "nbs/10_deployment.ipynb" --flags "deployment"

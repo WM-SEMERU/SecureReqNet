@@ -83,8 +83,8 @@ def create_pipeline(
 
   # Ingests pre-split data based on specified file pattern
   tf_input = example_gen_pb2.Input(splits=[
-                    example_gen_pb2.Input.Split(name='train', pattern='tfrecords_train/*'),
-                    example_gen_pb2.Input.Split(name='eval', pattern='tfrecords_eval/*')
+                    example_gen_pb2.Input.Split(name='train', pattern='tfrecords_train\\*'),
+                    example_gen_pb2.Input.Split(name='eval', pattern='tfrecords_eval\\*')
                 ])
 
   '''
@@ -133,7 +133,7 @@ def create_pipeline(
       schema=schema_gen.outputs['schema'],
       preprocessing_fn=preprocessing_fn)
   # TODO(step 6): Uncomment here to add Transform to the pipeline.
-  components.append(transform)
+  # components.append(transform)
 
   # Uses user-provided Python function that implements a model using TF-Learn.
   trainer_args = {
@@ -265,16 +265,6 @@ def create_pipeline(
               filesystem=pusher_pb2.PushDestination.Filesystem(
                   base_directory=serving_model_dir)),
   }
-  if ai_platform_serving_args is not None:
-    pusher_args.update({
-        'custom_executor_spec':
-            executor_spec.ExecutorClassSpec(ai_platform_pusher_executor.Executor
-                                           ),
-        'custom_config': {
-            ai_platform_pusher_executor.SERVING_ARGS_KEY:
-                ai_platform_serving_args
-        },
-    })
   pusher = Pusher(**pusher_args)  # pylint: disable=unused-variable
   # TODO(step 6): Uncomment here to add Pusher to the pipeline.
   # components.append(pusher)

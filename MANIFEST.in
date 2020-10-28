@@ -1,1 +1,1 @@
-recursive-include securereqnet/data/*.csv
+include securereqnet/securereqnet_data/*.csv

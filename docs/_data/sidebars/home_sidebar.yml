@@ -25,11 +25,14 @@ entries:
       title: Models
       url: models.html
     - output: web,pdf
+      title: RecordGenerator
+      url: RecordGenerator.html
+    - output: web,pdf
+      title: Deployment
+      url: deployment.html
+    - output: web,pdf
       title: Alpha SecureReqNet
       url: alpha_securereqnet.html
-    - output: web,pdf
-      title: securereqnet
-      url: core.html
     output: web
     title: SecureReqNet
   output: web

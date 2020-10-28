@@ -5,7 +5,7 @@ __all__ = ['Record_Generator']
 # Cell
 import tensorflow as tf
 import numpy as np
-#TODO import preprocessing method
+from .preprocessing import vectorize_sentences
 
 class Record_Generator:
     """Formats data for securereqnet models. Returns TFRecords.
@@ -40,29 +40,28 @@ class Record_Generator:
         self.__count+=1
 
         output_filename = path + "/" +  name + "_" + str(self.__count) + ".tfrecord"
+        print("Generating record at: " + output_filename)
 
-        writer = tf.io.TFRecordWriter(output_filename)
+        if processed == False:
+            x = vectorize_sentences([x])
+        # Reshape data into 1d array
+        x = np.reshape(x, [1*618*100*1,])
 
-        if(processed):
-            # Reshape data into 1d array
-            x = np.reshape(x, [1*618*100*1,])
+        if(y is not None):
+            y = np.reshape(y, [1*2,])
 
-            if(y is not None):
-                y = np.reshape(y, [1*2,])
-
-        if not processed:
-            pass
-            #code to process
 
         # Define dictionary for the record
         feature_dict = {
-        'x': float_feature(x),
-        'numberOfSamples': int64_feature([1])
+        'x': self.__float_feature(x),
+        'numberOfSamples': self.__int64_feature([1])
         }
 
         # If it is used for training or testing include a y value in the dictionary
         if(y is not None):
-            feature_dict["y"] = int64_feature(y)
+            feature_dict["y"] = self.__int64_feature(y)
+
+        writer = tf.io.TFRecordWriter(output_filename)
 
         example = tf.train.Example(features=tf.train.Features(feature=feature_dict))
 

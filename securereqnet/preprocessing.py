@@ -165,18 +165,19 @@ import nltk
 import numpy as np
 
 def vectorize_sentences(sentences):
-    """"""
-    nltk.download('stopwords')
+    """
+    Input: List of strings to be vectorized
+    Output: List of vectorized strings in same order as input"""
 
     embeddings = Embeddings()
-    embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
+    embed_path = 'data/word_embeddings-embed_size_100-epochs_100.csv'
     embeddings_dict = embeddings.get_embeddings_dict(embed_path)
     inp_shape = (len(sentences), 618, 100, 1)
+    inp = np.zeros(shape=inp_shape, dtype='float32')
 
     for i, sentence in enumerate(sentences):
         vectorized = embeddings.vectorize(sentence, embeddings_dict)
 
-        inp = np.zeros(shape=inp_shape, dtype='float32')
         for words_rows in range(vectorized.shape[0]):
             embed_flatten = np.array(vectorized[words_rows]).flatten()
             for embedding_cols in range(embed_flatten.shape[0]):

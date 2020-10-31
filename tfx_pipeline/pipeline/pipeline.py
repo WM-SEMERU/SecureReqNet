@@ -145,7 +145,7 @@ def create_pipeline(
       'train_args': train_args,
       'eval_args': eval_args,
       'custom_executor_spec':
-          executor_spec.ExecutorClassSpec(trainer_executor.Executor),
+          executor_spec.ExecutorClassSpec(trainer_executor.GenericExecutor),
   }
   if ai_platform_training_args is not None:
     trainer_args.update({
@@ -160,7 +160,7 @@ def create_pipeline(
     })
   trainer = Trainer(**trainer_args)
   # TODO(step 6): Uncomment here to add Trainer to the pipeline.
-  # components.append(trainer)
+  #components.append(trainer)
 
   # Get the latest blessed model for model validation.
   model_resolver = ResolverNode(

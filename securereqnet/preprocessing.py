@@ -170,7 +170,7 @@ def vectorize_sentences(sentences):
     Output: List of vectorized strings in same order as input"""
 
     embeddings = Embeddings()
-    embed_path = 'securereqnet_data/word_embeddings-embed_size_100-epochs_100.csv'
+    embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
     embeddings_dict = embeddings.get_embeddings_dict(embed_path)
     inp_shape = (len(sentences), 618, 100, 1)
     inp = np.zeros(shape=inp_shape, dtype='float32')

@@ -21,7 +21,17 @@ index = {"Dynamic_Dataset": "03_utils.ipynb",
          "__get_predictions": "10_deployment.ipynb",
          "__decode": "10_deployment.ipynb",
          "create_app": "10_deployment.ipynb",
-         "serve": "10_deployment.ipynb"}
+         "serve": "10_deployment.ipynb",
+         "__create_example_gen": "pipeline.ipynb",
+         "__create_statistics_gen": "pipeline.ipynb",
+         "__create_schema_gen": "pipeline.ipynb",
+         "__create_transform": "pipeline.ipynb",
+         "__create_evaluator": "pipeline.ipynb",
+         "__create_trainer": "pipeline.ipynb",
+         "__create_model_resolver": "pipeline.ipynb",
+         "__create_infra": "pipeline.ipynb",
+         "__create_pusher": "pipeline.ipynb",
+         "create_pipeline": "pipeline.ipynb"}
 
 modules = ["utils.py",
            "preprocessing.py",
@@ -29,7 +39,8 @@ modules = ["utils.py",
            "shap_evals.py",
            "models.py",
            "record_generator.py",
-           "deployment.py"]
+           "deployment.py",
+           "pipeline.py"]
 
 doc_url = "https://rmclanton.github.io/SecureReqNet/"
 

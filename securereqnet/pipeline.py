@@ -76,8 +76,8 @@ from ml_metadata.proto import metadata_store_pb2
 # Output: tf.Example records
 def __create_example_gen(data_path):
     tf_input = example_gen_pb2.Input(splits=[
-                    example_gen_pb2.Input.Split(name='train', pattern='tfrecords_train/*'),
-                    example_gen_pb2.Input.Split(name='eval', pattern='tfrecords_eval/*')
+                    example_gen_pb2.Input.Split(name='train', pattern=os.path.join('tfrecords_train','*')),
+                    example_gen_pb2.Input.Split(name='eval', pattern=os.path.join('tfrecords_eval','*'))
                 ])
     return ImportExampleGen(input_base=data_path, input_config=tf_input)
 
@@ -106,6 +106,7 @@ def __create_transform(examples, schema, preprocessing_fn):
 # Input: An eval split from ExampleGen, a model from Trainer, and an EvalSavedModel
 # Output: Analysis and validation results
 def __create_evaluator(examples, model, baseline_model):
+    # Defines the configuration to be used for evaluation. Includes metrics.
     eval_config = tfma.EvalConfig(
         model_specs=[tfma.ModelSpec(signature_name='eval')],
         slicing_specs=[tfma.SlicingSpec()],
@@ -154,6 +155,10 @@ def __create_trainer(trainer_args):
     return Trainer(**trainer_args)
 
 # Cell
+# Specifies the latest blessed model to be used as a
+# baseline for model validation.
+# Input: A name and class for the resolver, and the model and blessing.
+# Output: The latest blessed mode
 def __create_model_resolver():
     return ResolverNode(
       instance_name='latest_blessed_model_resolver',

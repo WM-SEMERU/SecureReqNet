@@ -83,18 +83,9 @@ def create_pipeline(
 
   # Ingests pre-split data based on specified file pattern
   tf_input = example_gen_pb2.Input(splits=[
-                    example_gen_pb2.Input.Split(name='train', pattern='tfrecords_train\\*'),
-                    example_gen_pb2.Input.Split(name='eval', pattern='tfrecords_eval\\*')
+                    example_gen_pb2.Input.Split(name='train', pattern=os.path.join('tfrecords_train','*')),
+                    example_gen_pb2.Input.Split(name='eval', pattern=os.path.join('tfrecords_eval','*'))
                 ])
-
-  '''
-  # Splits input data with a 90:10 train:eval ratio
-  output = example_gen_pb2.Output(
-                split_config=example_gen_pb2.SplitConfig(splits=[
-                    example_gen_pb2.SplitConfig.Split(name='train', hash_buckets=9),
-                    example_gen_pb2.SplitConfig.Split(name='eval', hash_buckets=1)
-                ]))
-  '''
 
   example_gen = ImportExampleGen(input_base=data_path, input_config=tf_input)
   

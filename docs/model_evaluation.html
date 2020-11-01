@@ -1,6 +1,6 @@
 ---
 
-title: Title
+title: Model Evaluation
 
 
 keywords: fastai
@@ -40,8 +40,9 @@ nb_path: "nbs/06_model_evaluation.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="show_loss_accurracy_plots" class="doc_header"><code>show_loss_accurracy_plots</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/model_evaluation.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_loss_accurracy_plots</code>(<strong><code>history</code></strong>)</p>
+<h4 id="show_loss_accurracy_plots" class="doc_header"><code>show_loss_accurracy_plots</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/model_evaluation.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_loss_accurracy_plots</code>(<strong><code>history</code></strong>)</p>
 </blockquote>
+<p>Displays loss and accuracy plots for the input model history</p>
 
 </div>
 
@@ -498,8 +499,9 @@ tf.Tensor(
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="evaluate_model" class="doc_header"><code>evaluate_model</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/model_evaluation.py#L45" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate_model</code>(<strong><code>criticality_network_load</code></strong>, <strong><code>corpora_test_x</code></strong>, <strong><code>target_test_y</code></strong>)</p>
+<h4 id="evaluate_model" class="doc_header"><code>evaluate_model</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/model_evaluation.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate_model</code>(<strong><code>criticality_network_load</code></strong>, <strong><code>corpora_test_x</code></strong>, <strong><code>target_test_y</code></strong>)</p>
 </blockquote>
+<p>Displays the given model's: loss, accuracy, Average prcision-recall and AUC for the given data.</p>
 
 </div>
 

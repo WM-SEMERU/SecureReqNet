@@ -6,7 +6,7 @@
     "Preprocessing": "preprocessing.html",
     "Model Evaluation": "model_evaluation.html",
     "Models": "models.html",
-    "RecordGenerator": "RecordGenerator.html",
+    "RecordGenerator": "record_generator.html",
     "Deployment": "deployment.html",
     "Alpha SecureReqNet": "alpha_securereqnet.html"     
   }

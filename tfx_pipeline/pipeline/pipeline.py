@@ -79,22 +79,14 @@ def create_pipeline(
 
   components = []
 
-  # Brings data into the pipeline or otherwise joins/converts training data.
-
-  # Ingests pre-split data based on specified file pattern
+  # Provides tf.Example records to the pipeline's downstream components.
+  # Assumes the TFRecord dataset is pre-split into training and evaluation directories.
+  # Input: A base path to the pre-split dataset
+  # Output: tf.Example records
   tf_input = example_gen_pb2.Input(splits=[
-                    example_gen_pb2.Input.Split(name='train', pattern='tfrecords_train\\*'),
-                    example_gen_pb2.Input.Split(name='eval', pattern='tfrecords_eval\\*')
+                    example_gen_pb2.Input.Split(name='train', pattern=os.path.join('tfrecords_train','*')),
+                    example_gen_pb2.Input.Split(name='eval', pattern=os.path.join('tfrecords_eval','*'))
                 ])
-
-  '''
-  # Splits input data with a 90:10 train:eval ratio
-  output = example_gen_pb2.Output(
-                split_config=example_gen_pb2.SplitConfig(splits=[
-                    example_gen_pb2.SplitConfig.Split(name='train', hash_buckets=9),
-                    example_gen_pb2.SplitConfig.Split(name='eval', hash_buckets=1)
-                ]))
-  '''
 
   example_gen = ImportExampleGen(input_base=data_path, input_config=tf_input)
   
@@ -160,9 +152,12 @@ def create_pipeline(
     })
   trainer = Trainer(**trainer_args)
   # TODO(step 6): Uncomment here to add Trainer to the pipeline.
-  #components.append(trainer)
+  components.append(trainer)
 
-  # Get the latest blessed model for model validation.
+  # Specifies the latest blessed model to be used as a
+  # baseline for model validation.
+  # Input: A name and class for the resolver, and the model and blessing.
+  # Output: The latest blessed model
   model_resolver = ResolverNode(
       instance_name='latest_blessed_model_resolver',
       resolver_class=latest_blessed_model_resolver.LatestBlessedModelResolver,
@@ -171,8 +166,7 @@ def create_pipeline(
   # TODO(step 6): Uncomment here to add ResolverNode to the pipeline.
   # components.append(model_resolver)
 
-  # Uses TFMA to compute a evaluation statistics over features of a model and
-  # perform quality validation of a candidate model (compared to a baseline).
+  # Defines the configuration to be used for evaluation. Includes metrics.
   eval_config = tfma.EvalConfig(
       model_specs=[tfma.ModelSpec(signature_name='eval')],
       slicing_specs=[tfma.SlicingSpec()],
@@ -215,6 +209,12 @@ def create_pipeline(
           
       ])
 
+  # Evaluates an input model based on the binary cross-entropy loss,
+  # binary accuracy, and AUC metrics. Compares the input model
+  # to one previously blessed by the Evaluator component.
+  # Input: An eval split from ExampleGen, a model from Trainer,
+  #        an EvalSavedModel, and eval configurations
+  # Output: Analysis and validation results
   evaluator = Evaluator(
       examples=example_gen.outputs['examples'],
       model=trainer.outputs['model'],

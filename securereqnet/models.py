@@ -9,7 +9,7 @@ def load_securereqnet_model(model):
 
     Users can select: alpha
     '''
-    path = '../pretrained_models/' + model + '.hdf5'
+    path = 'pretrained_models/' + model + '.hdf5'
     criticality_network_load = load_model(path) #<----- The Model'
     return criticality_network_load
 

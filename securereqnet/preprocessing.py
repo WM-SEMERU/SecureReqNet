@@ -67,7 +67,7 @@ def __create_corpora(test,train):
     pre_corpora_train = [doc for doc in train if len(doc[1])< max_words]
     pre_corpora_test = [doc for doc in test if len(doc[1])< max_words]
 
-    embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
+    embed_path = 'securereqnet_data/word_embeddings-embed_size_100-epochs_100.csv'
     embeddings_dict = embeddings.get_embeddings_dict(embed_path)
 
     # .decode("utf-8") takes the doc's which are saved as byte files and converts them into strings for tokenization
@@ -170,7 +170,7 @@ def vectorize_sentences(sentences):
     Output: List of vectorized strings in same order as input"""
 
     embeddings = Embeddings()
-    embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
+    embed_path = 'securereqnet_data/word_embeddings-embed_size_100-epochs_100.csv'
     embeddings_dict = embeddings.get_embeddings_dict(embed_path)
     inp_shape = (len(sentences), 618, 100, 1)
     inp = np.zeros(shape=inp_shape, dtype='float32')

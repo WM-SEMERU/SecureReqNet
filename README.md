@@ -28,11 +28,8 @@ We present a machine learning approach, named SecureReqNet, to automatically ide
 
 
 Building instructions
-Run the following command if you get a module error from securereqnet saying it can't be found
-`pip install -e .`
 
 `pip install securereqnet`
-#deployment team will update this
 
 
 ```python
@@ -178,7 +175,7 @@ Wikipedia | 10000 | - | - | - |
 - Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
 - Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)
 
-```
+```python
 from nbdev.export import *
 notebook2script()
 

@@ -70,11 +70,14 @@ from ml_metadata.proto import metadata_store_pb2
 
 
 # Cell
-# Provides tf.Example records to the pipeline's downstream components.
-# Assumes the TFRecord dataset is pre-split into training and evaluation directories.
-# Input: A base path to the pre-split dataset
-# Output: tf.Example records
+
 def __create_example_gen(data_path):
+    """
+    Provides tf.Example records to the pipeline's downstream components.
+    Assumes the TFRecord dataset is pre-split into training and evaluation directories.
+    Input: A base path to the pre-split dataset
+    # Output: tf.Example records
+    """
     tf_input = example_gen_pb2.Input(splits=[
                     example_gen_pb2.Input.Split(name='train', pattern=os.path.join('tfrecords_train','*')),
                     example_gen_pb2.Input.Split(name='eval', pattern=os.path.join('tfrecords_eval','*'))
@@ -82,17 +85,23 @@ def __create_example_gen(data_path):
     return ImportExampleGen(input_base=data_path, input_config=tf_input)
 
 # Cell
-# Computes statistics over data for visualization and example validation.
-# Input: Examples from the ExampleGen component
-# Output: Dataset statistics to be used by the SchemaGen component
+
 def __create_statistics_gen(examples):
+    """
+    Computes statistics over data for visualization and example validation.
+    Input: Examples from the ExampleGen component
+    Output: Dataset statistics to be used by the SchemaGen component
+    """
     return StatisticsGen(examples=examples)
 
 # Cell
-# Generates schema based on statistics files.
-# Input: Statistics from the StatisticsGen component\
-# Output: A schema of the model for use in the Transform and Trainer components.
+
 def __create_schema_gen(statistics):
+    """
+    Generates schema based on statistics files.
+    Input: Statistics from the StatisticsGen component\
+    Output: A schema of the model for use in the Transform and Trainer components.
+    """
     return SchemaGen(statistics=statistics, infer_feature_shape=True)
 
 # Cell
@@ -100,13 +109,16 @@ def __create_transform(examples, schema, preprocessing_fn):
     return Transform(examples=examples, schema=schema, preprocessing_fn=preprocessing_fn)
 
 # Cell
-# Evaluates an input model based on the binary cross-entropy loss,
-# binary accuracy, and AUC metrics. Compares the input model
-# to one previously blessed by the Evaluator component.
-# Input: An eval split from ExampleGen, a model from Trainer, and an EvalSavedModel
-# Output: Analysis and validation results
+
 def __create_evaluator(examples, model, baseline_model):
-    # Defines the configuration to be used for evaluation. Includes metrics.
+    """
+    Evaluates an input model based on the binary cross-entropy loss,
+    binary accuracy, and AUC metrics. Compares the input model
+    to one previously blessed by the Evaluator component.
+    Input: An eval split from ExampleGen, a model from Trainer, and an EvalSavedModel
+    Output: Analysis and validation results
+    Defines the configuration to be used for evaluation. Includes metrics.
+    """
     eval_config = tfma.EvalConfig(
         model_specs=[tfma.ModelSpec(signature_name='eval')],
         slicing_specs=[tfma.SlicingSpec()],
@@ -155,11 +167,14 @@ def __create_trainer(trainer_args):
     return Trainer(**trainer_args)
 
 # Cell
-# Specifies the latest blessed model to be used as a
-# baseline for model validation.
-# Input: A name and class for the resolver, and the model and blessing.
-# Output: The latest blessed mode
+
 def __create_model_resolver():
+    """
+    Specifies the latest blessed model to be used as a
+    baseline for model validation.
+    Input: A name and class for the resolver, and the model and blessing.
+    Output: The latest blessed mode
+    """
     return ResolverNode(
       instance_name='latest_blessed_model_resolver',
       resolver_class=latest_blessed_model_resolver.LatestBlessedModelResolver,
@@ -167,11 +182,14 @@ def __create_model_resolver():
       model_blessing=Channel(type=ModelBlessing))
 
 # Cell
-# Launches sandboxed server with the model
-# Validates that model can be loaded and queried
-# Input: A model from the Trainer component, examples from the ExampleGen component
-# Output: A blessed model that is sent to the Pusher component
+
 def __create_infra(model, examples):
+    """
+    Launches sandboxed server with the model
+    Validates that model can be loaded and queried
+    Input: A model from the Trainer component, examples from the ExampleGen component
+    Output: A blessed model that is sent to the Pusher component
+    """
     InfraValidator(
       model=model,
       examples=examples,
@@ -192,16 +210,17 @@ def __create_infra(model, examples):
   )
 
 # Cell
-# Takes infravalidated model and deploys it to a serving location
-# Input: A blessed model from the InfraValidator component
-# Output: The same model
+
 def __create_pusher(pusher_args):
+    """
+    Takes infravalidated model and deploys it to a serving location
+    Input: A blessed model from the InfraValidator component
+    Output: The same model
+    """
     return Pusher(**pusher_args)
 
 # Cell
-# Uses factory methods to create the pipeline
-# Input: Various parameters from configs
-# Output: A TFX pipeline
+
 def create_pipeline(
     pipeline_name: Text,
     pipeline_root: Text,
@@ -221,6 +240,11 @@ def create_pipeline(
     ai_platform_serving_args: Optional[Dict[Text, Any]] = None,
 ) -> pipeline.Pipeline:
 
+  """
+  Uses factory methods to create the pipeline
+  Input: Various parameters from configs
+  Output: A TFX pipeline
+  """
   components = []
 
   example_gen = __create_example_gen(data_path)

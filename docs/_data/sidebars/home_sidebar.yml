@@ -31,6 +31,9 @@ entries:
       title: Deployment
       url: deployment.html
     - output: web,pdf
+      title: Pipeline
+      url: pipeline.html
+    - output: web,pdf
       title: Alpha SecureReqNet
       url: alpha_securereqnet.html
     output: web

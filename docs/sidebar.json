@@ -8,6 +8,7 @@
     "Models": "models.html",
     "RecordGenerator": "record_generator.html",
     "Deployment": "deployment.html",
+    "Pipeline": "pipeline.html",
     "Alpha SecureReqNet": "alpha_securereqnet.html"     
   }
 }

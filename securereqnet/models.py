@@ -3,6 +3,7 @@
 __all__ = ['load_securereqnet_model', 'create_alpha', 'fit_model']
 
 # Cell
+from tensorflow.keras.models import load_model
 def load_securereqnet_model(model):
     '''
     Returns a pretrained version of the selected model

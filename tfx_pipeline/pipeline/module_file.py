@@ -1,3 +1,15 @@
+import csv
+from tensorflow.keras.preprocessing import text
+from nltk.corpus import gutenberg
+from string import punctuation
+from tensorflow.keras.preprocessing.sequence import skipgrams
+import pandas as pd
+import numpy as np
+import re
+import nltk
+from nltk.stem.snowball import SnowballStemmer
+englishStemmer=SnowballStemmer("english")
+from securereqnet import utils
 import tensorflow_transform as tft
 import tensorflow as tf
 import numpy as np
@@ -15,8 +27,8 @@ from tensorflow.keras.models import Sequential, Model
 def run_fn(fn_args: TrainerFnArgs):
   tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
 
-  train_batch_size = 40
-  eval_batch_size = 40
+  train_batch_size = 1
+  eval_batch_size = 1
 
   # Collects a list of the paths to tfrecord files in the eval directory in train_records_list
   train_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '..\\data\\records\\tfrecords_train')
@@ -32,15 +44,15 @@ def run_fn(fn_args: TrainerFnArgs):
   
   train_eval_records = [train_records_list, eval_records_list]
     
-  train_dataset = _input_fn(  # pylint: disable=g-long-lambda
-      train_records_list,
-      tf_transform_output,
-      batch_size=train_batch_size)
+  #train_dataset = _input_fn(  # pylint: disable=g-long-lambda
+  #    train_records_list,
+  #    tf_transform_output,
+  #    batch_size=train_batch_size)
 
-  eval_dataset = _input_fn(  # pylint: disable=g-long-lambda
-      eval_records_list,
-      tf_transform_output,
-      batch_size=eval_batch_size)
+  #eval_dataset = _input_fn(  # pylint: disable=g-long-lambda
+  #    eval_records_list,
+  #    tf_transform_output,
+  #    batch_size=eval_batch_size)
 
   model_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../pretrained_models/alpha')
   model = tf.keras.models.load_model(model_path)
@@ -54,95 +66,116 @@ def run_fn(fn_args: TrainerFnArgs):
   mc = ModelCheckpoint(filepath, monitor='val_accuracy', mode='max', verbose=1, save_best_only=True)
   callbacks_list = [es,mc]
 
+  dataset_list = generate_dataset()
+
+  print(fn_args.serving_model_dir)
+  
   model.fit(
-            train_dataset,
-            #batch_size=64,
-            epochs=2000, #5 <------ Hyperparameter
-            validation_data=eval_dataset,
+            x = dataset_list[0],
+            y = dataset_list[1],
+            batch_size=1,
+            epochs=20, #5 <------ Hyperparameter
+            validation_split=0.2,
             callbacks=callbacks_list
   )
 
-  signatures = {
-      'serving_default':
-          _get_serve_tf_examples_fn(model,
-                                    tf_transform_output).get_concrete_function(
-                                        tf.TensorSpec(
-                                            shape=[None],
-                                            dtype=tf.string,
-                                            name='examples')),
-  }
-  model.save(fn_args.serving_model_dir, save_format='tf', signatures=signatures)
-  #warm_start_from = trainer_fn_args.base_models[
-  #    0] if trainer_fn_args.base_models else None
+  model.save(fn_args.serving_model_dir, save_format='tf')
 
-  #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
-# This iterates through both the list of train or eval tfrecord paths, and uses the resulting 
-# x and y tensors from each record to make combined tensors for x and y where the first dimension
-# is split by record, as per the dataset requirements. 
-def _input_fn(record_list, transform_output, batch_size):
-  record_x = []
-  record_y = []
 
-  records = tf.data.TFRecordDataset(record_list)
-  for raw_record in records.take(10):
-    example = tf.train.Example()
-    example.ParseFromString(raw_record.numpy())
-    record_values = parse_tfrecord_string(str(example))
-    record_x.append(record_values[0])
-    record_y.append(record_values[1])
+def generate_dataset():
+  #../data replaces datasets for the to access data
+  path = "../data/combined_dataset/"
+  process_unit = utils.Processing_Dataset(path)
+  ground_truth = process_unit.get_ground_truth()
 
-  full_x = record_x[0]
-  for i in range(1, len(record_x)):
-    full_x = tf.concat([full_x, record_x[i]], 0)
+  dataset = utils.Dynamic_Dataset(ground_truth, path,False)
 
-  full_x = tf.reshape(full_x, [len(record_x), 618,100,1])
+  #As the data is stored in a zip file isZip = True
+  test, train = process_unit.get_test_and_training(ground_truth,isZip = True)
 
-  full_y = record_y[0]
-  for i in range(1, len(record_y)-1):
-    full_y = tf.stack(record_y)
-    #full_y = tf.reshape(full_y, [len(record_y), ])
-  print(full_x.get_shape())
-  print(full_y.get_shape())
-  dataset = (full_x, full_y)
+  nltk.download('stopwords')
+
+  embeddings = utils.Embeddings()
+  max_words = 5000 #<------- [Parameter]
+  pre_corpora_train = [doc for doc in train if len(doc[1])< max_words]
+  pre_corpora_test = [doc for doc in test if len(doc[1])< max_words]
+
+  embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
+  embeddings_dict = embeddings.get_embeddings_dict(embed_path)
   
-  return dataset
+  # .decode("utf-8") takes the doc's which are saved as byte files and converts them into strings for tokenization
+  corpora_train = [embeddings.vectorize(doc[1].decode("utf-8"), embeddings_dict) for doc in pre_corpora_train]#vectorization Inputs
+  corpora_test = [embeddings.vectorize(doc[1].decode("utf-8"), embeddings_dict) for doc in pre_corpora_test]#vectorization
 
+  target_train = [[int(list(doc[0])[1]),int(list(doc[0])[3])] for doc in pre_corpora_train]#vectorization Output
+  target_test = [[int(list(doc[0])[1]),int(list(doc[0])[3])]for doc in pre_corpora_test]#vectorization Output
+  #target_train
 
-# Parses the string output of a tfrecord and returns the x values and y values in a list
-def parse_tfrecord_string(record_string):
-  #print(record_string.splitlines(False))
-  lines = record_string.splitlines(False)
-  print(lines[2], lines[5])
-  x_index = 0
-  y_index = 0
-  y_end_index = 0
-  scanningX = False
-  scanningY = False
-  for i in range(0, len(lines)):
-    if('key: "x"' in lines[i]):
-      scanningX = True
-      scanningY = False
-      x_index = i+3
-    elif('key: "y"' in lines[i]):
-      scanningX = False
-      scanningY = True
-      y_index = i+3
-    #if(scanningY):
-    #  print(lines[i])
-    # Since the length of the y values is variable, we need to record the index of
-    # the final value so we know how much to slice.
-    if(scanningY and "}" in lines[i]):
-      y_end_index = i
-      scanningY = False
-    if("value: " in lines[i] and scanningX):
-      lines[i] =  float(lines[i].replace("value: ", "").strip())
-    elif("value: " in lines[i]):
-      lines[i] =  int(lines[i].replace("value: ", "").strip())
-  x_slice = lines[x_index:x_index+61800]
-  y_slice = lines[y_index:y_end_index]
-  x_tensor = tf.convert_to_tensor(x_slice, dtype=tf.float32)
-  y_tensor = tf.convert_to_tensor(y_slice)
-  y_tensor = tf.reshape(y_tensor, [1,len(y_tensor)])
+  max_len_sentences_train = max([len(doc) for doc in corpora_train]) #<------- [Parameter]
+  max_len_sentences_test = max([len(doc) for doc in corpora_test]) #<------- [Parameter]
 
-  return [x_tensor, y_tensor]
+  max_len_sentences = max(max_len_sentences_train,max_len_sentences_test)
+
+  min_len_sentences_train = min([len(doc) for doc in corpora_train]) #<------- [Parameter]
+  min_len_sentences_test = min([len(doc) for doc in corpora_test]) #<------- [Parameter]
+
+  min_len_sentences = max(min_len_sentences_train,min_len_sentences_test)
+
+  embed_size = np.size(corpora_train[0][0])
+
+  #BaseLine Architecture <-------
+  embeddigs_cols = 100
+  input_sh = (618,100,1)
+  max_len_sentences = 618
+  #Selecting filters? 
+  #https://stackoverflow.com/questions/48243360/how-to-determine-the-filter-parameter-in-the-keras-conv2d-function
+  #https://stats.stackexchange.com/questions/196646/what-is-the-significance-of-the-number-of-convolution-filters-in-a-convolutional
+
+  N_filters = 128 # <-------- [HyperParameter] Powers of 2 Numer of Features
+  K = 2 # <-------- [HyperParameter] Number of Classess
+  
+  #Data set organization
+  from tempfile import mkdtemp
+  import os.path as path
+
+  #Memoization 
+  file_corpora_train_x = path.join(mkdtemp(), 'alex-res-adapted-003_temp_corpora_train_x.dat') #Update per experiment
+  file_corpora_test_x = path.join(mkdtemp(), 'alex-res-adapted-003_temp_corpora_test_x.dat')
+
+  #Shaping
+  shape_train_x = (len(corpora_train),max_len_sentences,embeddigs_cols,1)
+  shape_test_x = (len(corpora_test),max_len_sentences,embeddigs_cols,1)
+
+  #Data sets
+  corpora_train_x = np.memmap(
+        filename = file_corpora_train_x, 
+        dtype='float32', 
+        mode='w+', 
+        shape = shape_train_x)
+
+  corpora_test_x = np.memmap( #Test Corpora (for future evaluation)
+        filename = file_corpora_test_x, 
+        dtype='float32', 
+        mode='w+', 
+        shape = shape_test_x)
+
+  target_train_y = np.array(target_train) #Train Target
+  target_test_y = np.array(target_test) #Test Target (for future evaluation)
+
+  #Reshaping Train Inputs
+  for doc in range(len(corpora_train)):
+    #print(corpora_train[doc].shape[1])
+    for words_rows in range(corpora_train[doc].shape[0]):
+        embed_flatten = np.array(corpora_train[doc][words_rows]).flatten() #<--- Capture doc and word
+        for embedding_cols in range(embed_flatten.shape[0]):
+            corpora_train_x[doc,words_rows,embedding_cols,0] = embed_flatten[embedding_cols]
+
+  #Reshaping Test Inputs (for future evaluation)
+  for doc in range(len(corpora_test)):
+    for words_rows in range(corpora_test[doc].shape[0]):
+        embed_flatten = np.array(corpora_test[doc][words_rows]).flatten() #<--- Capture doc and word
+        for embedding_cols in range(embed_flatten.shape[0]):
+            corpora_test_x[doc,words_rows,embedding_cols,0] = embed_flatten[embedding_cols]
+
+  return [corpora_train_x, target_train_y]

@@ -151,7 +151,7 @@ def create_pipeline(
     })
   trainer = Trainer(**trainer_args)
   # TODO(step 6): Uncomment here to add Trainer to the pipeline.
-  #components.append(trainer)
+  components.append(trainer)
 
   # Get the latest blessed model for model validation.
   model_resolver = ResolverNode(

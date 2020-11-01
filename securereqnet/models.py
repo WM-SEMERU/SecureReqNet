@@ -4,13 +4,15 @@ __all__ = ['load_securereqnet_model', 'create_alpha', 'fit_model']
 
 # Cell
 from tensorflow.keras.models import load_model
+import os
 def load_securereqnet_model(model):
     '''
     Returns a pretrained version of the selected model
 
     Users can select: alpha
     '''
-    path = 'pretrained_models/' + model + '.hdf5'
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'pretrained_models') +'/' + model + ".hdf5"
+    # path = 'pretrained_models/' + model + '.hdf5'
     criticality_network_load = load_model(path) #<----- The Model'
     return criticality_network_load
 

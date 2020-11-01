@@ -76,7 +76,7 @@ def __create_example_gen(data_path):
     Provides tf.Example records to the pipeline's downstream components.
     Assumes the TFRecord dataset is pre-split into training and evaluation directories.
     Input: A base path to the pre-split dataset
-    # Output: tf.Example records
+    Output: tf.Example records
     """
     tf_input = example_gen_pb2.Input(splits=[
                     example_gen_pb2.Input.Split(name='train', pattern=os.path.join('tfrecords_train','*')),

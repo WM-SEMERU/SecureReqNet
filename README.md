@@ -136,6 +136,9 @@ criticality_network = Model(inputs=[gram_input],outputs=[predictions])
 > If you are using **α-SecureReqNet**, please consider citing [(N. Palacio, et al., 2019)](https://arxiv.org/abs/1908.00614)
 
 
+### Want to try out α-SecureReqNet? Checkout this example in google colab:
+https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq#scrollTo=R-mkf_Caz_q5
+
 ## Datasets
 
 The context of our empirical study includes the four datasets (*Embedding*, *Training*, *Validation*, & *Test*) illustrated in the following table. These datasets are comprised of textual documents from different sources.
@@ -174,10 +177,3 @@ Wikipedia | 10000 | - | - | - |
 
 - Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
 - Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)
-
-```python
-from nbdev.export import *
-notebook2script()
-
-
-```

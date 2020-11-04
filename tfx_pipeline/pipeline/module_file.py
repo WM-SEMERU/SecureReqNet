@@ -31,13 +31,13 @@ def run_fn(fn_args: TrainerFnArgs):
   eval_batch_size = 1
 
   # Collects a list of the paths to tfrecord files in the eval directory in train_records_list
-  train_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '..\\data\\records\\tfrecords_train')
+  train_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../data/records/tfrecords_train')
   train_records_list = os.listdir(train_records_path)
   for i in range(0,len(train_records_list)):
     train_records_list[i] = os.path.join(train_records_path, train_records_list[i])
 
   # Collects a list of the paths to tfrecord files in the eval directory in eval_records_list
-  eval_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '..\\data\\records\\tfrecords_eval')
+  eval_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../data/records/tfrecords_eval')
   eval_records_list = os.listdir(eval_records_path)
   for i in range(0,len(eval_records_list)):
     eval_records_list[i] = os.path.join(eval_records_path, eval_records_list[i])

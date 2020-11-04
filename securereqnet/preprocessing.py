@@ -162,6 +162,7 @@ def process_corpora(corpora_train,corpora_test,save_file=False,path="",name=""):
 # Cell
 from .utils import Embeddings
 import nltk
+import os
 import numpy as np
 
 def vectorize_sentences(sentences):
@@ -170,7 +171,8 @@ def vectorize_sentences(sentences):
     Output: List of vectorized strings in same order as input"""
 
     embeddings = Embeddings()
-    embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
+    embed_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'data',"word_embeddings-embed_size_100-epochs_100.csv")
+    #embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
     embeddings_dict = embeddings.get_embeddings_dict(embed_path)
     inp_shape = (len(sentences), 618, 100, 1)
     inp = np.zeros(shape=inp_shape, dtype='float32')

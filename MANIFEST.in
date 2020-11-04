@@ -1,1 +1,2 @@
-include securereqnet/securereqnet_data/*.csv
+include securereqnet/data/*.csv
+include securereqnet/pretrained_models/*.*

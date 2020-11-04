@@ -11,17 +11,23 @@ def load_securereqnet_model(model):
 
     Users can select: alpha
     '''
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'pretrained_models') +'/' + model + ".hdf5"
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'pretrained_models',model + ".hdf5")
     # path = 'pretrained_models/' + model + '.hdf5'
     criticality_network_load = load_model(path) #<----- The Model'
     return criticality_network_load
 
 # Cell
-def create_alpha(embed_size,max_len_sentences):
+import tensorflow as tf
+from tensorflow.keras import layers
+from tensorflow.keras.layers import Dot, Input, Dense, Reshape, LSTM, Conv2D, Flatten, MaxPooling1D, Dropout, MaxPooling2D
+from tensorflow.keras.layers import Embedding, Multiply, Subtract
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.python.keras.layers import Lambda
+
+def create_alpha():
     '''Creates a securereqnet alpha model and compiles it'''
     #BaseLine Architecture <-------
-    embeddigs_cols = embed_size
-    input_sh = (max_len_sentences,embeddigs_cols,1)
+    input_sh = (618,100,1)
     #Selecting filters?
     #https://stackoverflow.com/questions/48243360/how-to-determine-the-filter-parameter-in-the-keras-conv2d-function
     #https://stats.stackexchange.com/questions/196646/what-is-the-significance-of-the-number-of-convolution-filters-in-a-convolutional
@@ -99,6 +105,9 @@ def create_alpha(embed_size,max_len_sentences):
 
 
 # Cell
+from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
+from tensorflow.keras.callbacks import EarlyStopping
+
 def fit_model(corpora_train_x,train_y,criticality_network,save_model=True,save_history=True,path=''):
     '''
     Fits a securereqnet model to the data

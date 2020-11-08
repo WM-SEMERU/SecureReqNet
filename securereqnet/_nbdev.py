@@ -5,7 +5,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"Dynamic_Dataset": "03_utils.ipynb",
          "Processing_Dataset": "03_utils.ipynb",
          "Embeddings": "03_utils.ipynb",
-         "englishStemmer": "03_utils.ipynb",
+         "englishStemmer": "04_preprocessing.ipynb",
          "__read_dataset": "04_preprocessing.ipynb",
          "__train_test_split": "04_preprocessing.ipynb",
          "__create_corpora": "04_preprocessing.ipynb",
@@ -17,29 +17,16 @@ index = {"Dynamic_Dataset": "03_utils.ipynb",
          "load_securereqnet_model": "08_models.ipynb",
          "create_alpha": "08_models.ipynb",
          "fit_model": "08_models.ipynb",
-         "Record_Generator": "09_record_generator.ipynb",
          "__get_predictions": "10_deployment.ipynb",
          "__decode": "10_deployment.ipynb",
          "create_app": "10_deployment.ipynb",
-         "serve": "10_deployment.ipynb",
-         "__create_example_gen": "pipeline.ipynb",
-         "__create_statistics_gen": "pipeline.ipynb",
-         "__create_schema_gen": "pipeline.ipynb",
-         "__create_transform": "pipeline.ipynb",
-         "__create_evaluator": "pipeline.ipynb",
-         "__create_trainer": "pipeline.ipynb",
-         "__create_model_resolver": "pipeline.ipynb",
-         "__create_infra": "pipeline.ipynb",
-         "__create_pusher": "pipeline.ipynb",
-         "create_pipeline": "pipeline.ipynb"}
+         "serve": "10_deployment.ipynb"}
 
 modules = ["utils.py",
            "preprocessing.py",
            "model_evaluation.py",
            "models.py",
-           "record_generator.py",
-           "deployment.py",
-           "pipeline.py"]
+           "deployment.py"]
 
 doc_url = "https://rmclanton.github.io/SecureReqNet/"
 

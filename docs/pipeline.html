@@ -26,28 +26,6 @@ nb_path: "nbs/pipeline.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/roger/.local/lib/python3.8/site-packages/tfx/orchestration/data_types.py:191: UserWarning: RuntimeParameter is only supported on KubeflowDagRunner currently.
-  warnings.warn(&#39;RuntimeParameter is only supported on KubeflowDagRunner &#39;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 </div>
     {% endraw %}
 
@@ -57,359 +35,54 @@ nb_path: "nbs/pipeline.ipynb"
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_example_gen" class="doc_header"><code>__create_example_gen</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_example_gen</code>(<strong><code>data_path</code></strong>)</p>
-</blockquote>
-<p>Provides tf.Example records to the pipeline's downstream components.
-Assumes the TFRecord dataset is pre-split into training and evaluation directories.
-Input: A base path to the pre-split dataset
-Output: tf.Example records</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-StatisticsGen-component">The StatisticsGen component<a class="anchor-link" href="#The-StatisticsGen-component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_statistics_gen" class="doc_header"><code>__create_statistics_gen</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L89" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_statistics_gen</code>(<strong><code>examples</code></strong>)</p>
-</blockquote>
-<p>Computes statistics over data for visualization and example validation.
-Input: Examples from the ExampleGen component
-Output: Dataset statistics to be used by the SchemaGen component</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-SchemaGen-component">The SchemaGen component<a class="anchor-link" href="#The-SchemaGen-component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_schema_gen" class="doc_header"><code>__create_schema_gen</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_schema_gen</code>(<strong><code>statistics</code></strong>)</p>
-</blockquote>
-<p>Generates schema based on statistics files.
-Input: Statistics from the StatisticsGen component    Output: A schema of the model for use in the Transform and Trainer components.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-Transform-component">The Transform component<a class="anchor-link" href="#The-Transform-component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_transform" class="doc_header"><code>__create_transform</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L108" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_transform</code>(<strong><code>examples</code></strong>, <strong><code>schema</code></strong>, <strong><code>preprocessing_fn</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-Evaluator-Component">The Evaluator Component<a class="anchor-link" href="#The-Evaluator-Component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_evaluator" class="doc_header"><code>__create_evaluator</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L113" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_evaluator</code>(<strong><code>examples</code></strong>, <strong><code>model</code></strong>, <strong><code>baseline_model</code></strong>)</p>
-</blockquote>
-<p>Evaluates an input model based on the binary cross-entropy loss,
-binary accuracy, and AUC metrics. Compares the input model
-to one previously blessed by the Evaluator component.
-Input: An eval split from ExampleGen, a model from Trainer, and an EvalSavedModel
-Output: Analysis and validation results
-Defines the configuration to be used for evaluation. Includes metrics.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-Trainer-component">The Trainer component<a class="anchor-link" href="#The-Trainer-component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_trainer" class="doc_header"><code>__create_trainer</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L166" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_trainer</code>(<strong><code>trainer_args</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-ModelResolver-component">The ModelResolver component<a class="anchor-link" href="#The-ModelResolver-component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_model_resolver" class="doc_header"><code>__create_model_resolver</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L171" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_model_resolver</code>()</p>
-</blockquote>
-<p>Specifies the latest blessed model to be used as a
-baseline for model validation.
-Input: A name and class for the resolver, and the model and blessing.
-Output: The latest blessed mode</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-InfraValidator-Component">The InfraValidator Component<a class="anchor-link" href="#The-InfraValidator-Component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_infra" class="doc_header"><code>__create_infra</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L186" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_infra</code>(<strong><code>model</code></strong>, <strong><code>examples</code></strong>)</p>
-</blockquote>
-<p>Launches sandboxed server with the model
-Validates that model can be loaded and queried
-Input: A model from the Trainer component, examples from the ExampleGen component
-Output: A blessed model that is sent to the Pusher component</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="The-Pusher-component">The Pusher component<a class="anchor-link" href="#The-Pusher-component"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_pusher" class="doc_header"><code>__create_pusher</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L214" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_pusher</code>(<strong><code>pusher_args</code></strong>)</p>
-</blockquote>
-<p>Takes infravalidated model and deploys it to a serving location
-Input: A blessed model from the InfraValidator component
-Output: The same model</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Main-Pipeline-Method">Main Pipeline Method<a class="anchor-link" href="#Main-Pipeline-Method"> </a></h2><p>Defines a factory for the pipeline. Factory methods are described above.</p>
@@ -417,63 +90,6 @@ Output: The same model</p>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_pipeline" class="doc_header"><code>create_pipeline</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/pipeline.py#L224" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_pipeline</code>(<strong><code>pipeline_name</code></strong>:<code>str</code>, <strong><code>pipeline_root</code></strong>:<code>str</code>, <strong><code>data_path</code></strong>:<code>str</code>, <strong><code>module_file</code></strong>:<code>str</code>, <strong><code>preprocessing_fn</code></strong>:<code>str</code>, <strong><code>train_args</code></strong>:<code>TrainArgs</code>, <strong><code>eval_args</code></strong>:<code>EvalArgs</code>, <strong><code>eval_accuracy_threshold</code></strong>:<code>float</code>, <strong><code>serving_model_dir</code></strong>:<code>str</code>, <strong><code>metadata_connection_config</code></strong>:<code>Optional</code>[<code>ConnectionConfig</code>]=<em><code>None</code></em>, <strong><code>beam_pipeline_args</code></strong>:<code>Optional</code>[<code>List</code>[<code>str</code>]]=<em><code>None</code></em>, <strong><code>ai_platform_training_args</code></strong>:<code>Optional</code>[<code>Dict</code>[<code>str</code>, <code>str</code>]]=<em><code>None</code></em>, <strong><code>ai_platform_serving_args</code></strong>:<code>Optional</code>[<code>Dict</code>[<code>str</code>, <code>Any</code>]]=<em><code>None</code></em>)</p>
-</blockquote>
-<p>Uses factory methods to create the pipeline
-Input: Various parameters from configs
-Output: A TFX pipeline</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-336091811b53&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> 
-<span class="ansi-green-intense-fg ansi-bold">      3</span> def create_pipeline(
-<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg">     </span>pipeline_name<span class="ansi-blue-fg">:</span> Text<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>     pipeline_root<span class="ansi-blue-fg">:</span> Text<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span>     data_path<span class="ansi-blue-fg">:</span> Text<span class="ansi-blue-fg">,</span>
-
-<span class="ansi-red-fg">NameError</span>: name &#39;Text&#39; is not defined</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 </div>
  
 

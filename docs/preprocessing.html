@@ -1,6 +1,6 @@
 ---
 
-title: Title
+title: Preprocessing 
 
 
 keywords: fastai
@@ -48,77 +48,6 @@ nb_path: "nbs/04_preprocessing.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_colwidth</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.stem.snowball</span> <span class="kn">import</span> <span class="n">SnowballStemmer</span>
-<span class="n">englishStemmer</span><span class="o">=</span><span class="n">SnowballStemmer</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -126,223 +55,7 @@ nb_path: "nbs/04_preprocessing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="__read_dataset" class="doc_header"><code>__read_dataset</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__read_dataset</code>(<strong><code>path</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../data/augmented_dataset/&quot;</span>
-<span class="n">process_unit</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">__read_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__train_test_split" class="doc_header"><code>__train_test_split</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__train_test_split</code>(<strong><code>process_unit</code></strong>, <strong><code>ground_truth</code></strong>, <strong><code>isZipFile</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span><span class="p">,</span> <span class="n">train</span> <span class="o">=</span> <span class="n">__train_test_split</span><span class="p">(</span><span class="n">process_unit</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>11612
-104510
-(&#39;(1,0)&#39;, b&#39;Multiple cross-site scripting (XSS) vulnerabilities in frame-maker.php in the Walk Score plugin 0.5.5 and earlier for WordPress allow remote attackers to inject arbitrary web script or HTML via the (1) s or (2) o parameter.&#39;)
-(&#39;(1,0)&#39;, b&#39;The currently used Rails version, in the stable branch, is insecure\n\nYou should update the Gemfile.lock to hotfix this.\n\nhttp://weblog.rubyonrails.org/2014/2/18/Rails_3_2_17_4_0_3_and_4_1_0_beta2_have_been_released/&#39;)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for elem in test:</span>
-<span class="c1">#    print(elem[0])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[nltk_data] Downloading package stopwords to /home/roger/nltk_data...
-[nltk_data]   Package stopwords is already up-to-date!
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>True</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="__create_corpora" class="doc_header"><code>__create_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>__create_corpora</code>(<strong><code>test</code></strong>, <strong><code>train</code></strong>)</p>
-</blockquote>
-<p>Creates the corpora for training. Returns corpora_train,corpora_test,max_len_sentences,embed_size</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_training_corpora" class="doc_header"><code>get_training_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L98" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_training_corpora</code>(<strong><code>path</code></strong>, <strong><code>isZip</code></strong>)</p>
+<h4 id="get_training_corpora" class="doc_header"><code>get_training_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_training_corpora</code>(<strong><code>path</code></strong>, <strong><code>isZip</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -373,7 +86,7 @@ nb_path: "nbs/04_preprocessing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="process_corpora" class="doc_header"><code>process_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L107" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_corpora</code>(<strong><code>corpora_train</code></strong>, <strong><code>corpora_test</code></strong>, <strong><code>save_file</code></strong>=<em><code>False</code></em>, <strong><code>path</code></strong>=<em><code>''</code></em>, <strong><code>name</code></strong>=<em><code>''</code></em>)</p>
+<h4 id="process_corpora" class="doc_header"><code>process_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_corpora</code>(<strong><code>corpora_train</code></strong>, <strong><code>corpora_test</code></strong>, <strong><code>save_file</code></strong>=<em><code>False</code></em>, <strong><code>path</code></strong>=<em><code>''</code></em>, <strong><code>name</code></strong>=<em><code>''</code></em>)</p>
 </blockquote>
 <p>Process the corpora data for model training. Takes in corpora_train,corpora_test,save,path,name.</p>
 <p>@param save_file (bool): Determine if the data should be saved on disk.</p>
@@ -408,7 +121,7 @@ nb_path: "nbs/04_preprocessing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="vectorize_sentences" class="doc_header"><code>vectorize_sentences</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L168" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>vectorize_sentences</code>(<strong><code>sentences</code></strong>)</p>
+<h4 id="vectorize_sentences" class="doc_header"><code>vectorize_sentences</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L171" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>vectorize_sentences</code>(<strong><code>sentences</code></strong>)</p>
 </blockquote>
 <p>Input: List of strings to be vectorized
 Output: List of vectorized strings in same order as input</p>

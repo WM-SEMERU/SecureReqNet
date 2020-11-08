@@ -13,8 +13,8 @@ entries:
       title: Utils
       url: utils.html
     - output: web,pdf
-      title: Testing
-      url: testing.html
+      title: Embeddings
+      url: Embeddings.html
     - output: web,pdf
       title: Preprocessing
       url: preprocessing.html
@@ -25,14 +25,8 @@ entries:
       title: Models
       url: models.html
     - output: web,pdf
-      title: RecordGenerator
-      url: record_generator.html
-    - output: web,pdf
       title: Deployment
       url: deployment.html
-    - output: web,pdf
-      title: Pipeline
-      url: pipeline.html
     - output: web,pdf
       title: Alpha SecureReqNet
       url: alpha_securereqnet.html

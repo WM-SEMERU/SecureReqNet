@@ -55,43 +55,15 @@ nb_path: "nbs/04_preprocessing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_training_corpora" class="doc_header"><code>get_training_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_training_corpora</code>(<strong><code>path</code></strong>, <strong><code>isZip</code></strong>)</p>
+<h4 id="process_corpora" class="doc_header"><code>process_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_corpora</code>(<strong><code>data_path</code></strong>, <strong><code>isZip</code></strong>=<em><code>True</code></em>, <strong><code>save_file</code></strong>=<em><code>False</code></em>, <strong><code>save_path</code></strong>=<em><code>''</code></em>, <strong><code>name</code></strong>=<em><code>''</code></em>)</p>
 </blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="process_corpora" class="doc_header"><code>process_corpora</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_corpora</code>(<strong><code>corpora_train</code></strong>, <strong><code>corpora_test</code></strong>, <strong><code>save_file</code></strong>=<em><code>False</code></em>, <strong><code>path</code></strong>=<em><code>''</code></em>, <strong><code>name</code></strong>=<em><code>''</code></em>)</p>
-</blockquote>
-<p>Process the corpora data for model training. Takes in corpora_train,corpora_test,save,path,name.</p>
+<p>Process the corpora data for model training. Takes in corpora_train,corpora_test,max_len_sentences,save,path,name.</p>
 <p>@param save_file (bool): Determine if the data should be saved on disk.</p>
-<p>@param path (string): Path to where the dataset should be save to.</p>
+<p>@param data_path (string): Path to the dataset to process</p>
+<p>@param save_path (string): Path to where the processed dataset should be save to.</p>
+<p>@param isZip: True if data is in a zipped file</p>
 <p>@param name (string): Name of the model used to name files saved.</p>
+<p>returns train_x, test_x, train_y, test_y</p>
 
 </div>
 
@@ -106,6 +78,38 @@ nb_path: "nbs/04_preprocessing.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">trY</span><span class="p">,</span><span class="n">trT</span> <span class="o">=</span> <span class="n">process_corpora</span><span class="p">(</span><span class="s2">&quot;../data/small_dataset/&quot;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Max. Sentence # words: 527
+Mix. Sentence # words: 6
+</pre>
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -121,7 +125,7 @@ nb_path: "nbs/04_preprocessing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="vectorize_sentences" class="doc_header"><code>vectorize_sentences</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L171" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>vectorize_sentences</code>(<strong><code>sentences</code></strong>)</p>
+<h4 id="vectorize_sentences" class="doc_header"><code>vectorize_sentences</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/preprocessing.py#L187" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>vectorize_sentences</code>(<strong><code>sentences</code></strong>)</p>
 </blockquote>
 <p>Input: List of strings to be vectorized
 Output: List of vectorized strings in same order as input</p>

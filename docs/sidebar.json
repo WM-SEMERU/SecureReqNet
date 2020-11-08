@@ -1,14 +1,12 @@
 {
   "SecureReqNet": {
     "Overview": "/",
-    "Utils": "utils.html",  
-    "Testing": "testing.html",
+    "Utils": "utils.html",
+    "Embeddings": "Embeddings.html",
     "Preprocessing": "preprocessing.html",
     "Model Evaluation": "model_evaluation.html",
     "Models": "models.html",
-    "RecordGenerator": "record_generator.html",
     "Deployment": "deployment.html",
-    "Pipeline": "pipeline.html",
     "Alpha SecureReqNet": "alpha_securereqnet.html"     
   }
 }

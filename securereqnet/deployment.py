@@ -12,7 +12,7 @@ from tempfile import mkdtemp
 import os.path as path
 from .preprocessing import vectorize_sentences
 import numpy as np
-from waitress import serve
+import waitress
 
 # Internal Cell
 # takes a list of sentences, vectorizes them and sends the result to the uri of the TFX serving endpoint
@@ -83,4 +83,4 @@ def serve(host, port):
     """
     Serves a waitress production server on the given host and post
     """
-    serve(create_app(), host = host, port = port)
+    waitress.serve(create_app(), host = host, port = port)

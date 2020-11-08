@@ -4,6 +4,17 @@
 
 We present a machine learning approach, named SecureReqNet, to automatically identify whether issues describe security related content. SecureReqNet hinges on the idea of predicting severity on software using vulnerability desciptions (Han, et al., 2017) by incorporating desing principles from AlexNet (Krizhevsky, et al., 2013).
 
+## Install with `pip install securereqnet`
+
+### SecureReqNet Documenation website at:
+https://rmclanton.github.io/SecureReqNet/
+
+### Want to try out α-SecureReqNet? Checkout this example in google colab:
+https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq
+
+### Or serve your own version:
+https://colab.research.google.com/drive/1pb_QQOm0jA0SwejgqxBXKBhkuM42al4k 
+
 ### Research and Components Roadmap
 - [x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) 
 - [x] Using Deep Neural Network to predict security relatedness on issues (or requirements)
@@ -25,11 +36,6 @@ We present a machine learning approach, named SecureReqNet, to automatically ide
 
 
 1. **SecureReqNet (shallow)** was based on the best architecture achived by Han, et al. Such architecture implemented one convolution layer with 3 kernes of different sizes. The authors set up the size of each kernel as 1-gram, 3-gram, and 5-gram to reduce an input matrix. This matrix was built by means of an unsupervised word2vec where the rows represents the words in a given document (or issue) and the columns the size of the embedding. Details of how we trained our word2vec can be found in the notebook [*03_Clustering*](https://github.com/danaderp/SecureReqNet/blob/master/nbs/03_Clustering.ipynb).  **SecureReqNet (shallow)** has a max pooling layer followed by a flatten function. The final tensor is a merged vector from the 3 initial kernels. Unlike Han, et al.' SVM multi-class output layer, we utilized a binary classification throughout a softmax layer.
-
-
-Building instructions
-
-`pip install securereqnet`
 
 
 ```python
@@ -135,9 +141,6 @@ criticality_network = Model(inputs=[gram_input],outputs=[predictions])
 
 > If you are using **α-SecureReqNet**, please consider citing [(N. Palacio, et al., 2019)](https://arxiv.org/abs/1908.00614)
 
-
-### Want to try out α-SecureReqNet? Checkout this example in google colab:
-https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq#scrollTo=R-mkf_Caz_q5
 
 ## Datasets
 

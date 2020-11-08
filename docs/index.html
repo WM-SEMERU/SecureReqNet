@@ -38,6 +38,33 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Install-with-pip-install-securereqnet">Install with <code>pip install securereqnet</code><a class="anchor-link" href="#Install-with-pip-install-securereqnet"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="SecureReqNet-Documenation-website-at:">SecureReqNet Documenation website at:<a class="anchor-link" href="#SecureReqNet-Documenation-website-at:"> </a></h3><p><a href="https://rmclanton.github.io/SecureReqNet/">https://rmclanton.github.io/SecureReqNet/</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:">Want to try out &#945;-SecureReqNet? Checkout this example in google colab:<a class="anchor-link" href="#Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:"> </a></h3><p><a href="https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq">https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Or-serve-your-own-version:">Or serve your own version:<a class="anchor-link" href="#Or-serve-your-own-version:"> </a></h3><p><a href="https://colab.research.google.com/drive/1pb_QQOm0jA0SwejgqxBXKBhkuM42al4k">https://colab.research.google.com/drive/1pb_QQOm0jA0SwejgqxBXKBhkuM42al4k</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Research-and-Components-Roadmap">Research and Components Roadmap<a class="anchor-link" href="#Research-and-Components-Roadmap"> </a></h3><ul>
 <li>[x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) </li>
 <li>[x] Using Deep Neural Network to predict security relatedness on issues (or requirements)</li>
@@ -82,14 +109,6 @@ nb_path: "nbs/index.ipynb"
 <ol>
 <li><strong>SecureReqNet (shallow)</strong> was based on the best architecture achived by Han, et al. Such architecture implemented one convolution layer with 3 kernes of different sizes. The authors set up the size of each kernel as 1-gram, 3-gram, and 5-gram to reduce an input matrix. This matrix was built by means of an unsupervised word2vec where the rows represents the words in a given document (or issue) and the columns the size of the embedding. Details of how we trained our word2vec can be found in the notebook <a href="https://github.com/danaderp/SecureReqNet/blob/master/nbs/03_Clustering.ipynb"><em>03_Clustering</em></a>.  <strong>SecureReqNet (shallow)</strong> has a max pooling layer followed by a flatten function. The final tensor is a merged vector from the 3 initial kernels. Unlike Han, et al.' SVM multi-class output layer, we utilized a binary classification throughout a softmax layer.</li>
 </ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Building instructions</p>
-<p><code>pip install securereqnet</code></p>
 
 </div>
 </div>
@@ -222,13 +241,6 @@ nb_path: "nbs/index.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p>If you are using <strong>α-SecureReqNet</strong>, please consider citing <a href="https://arxiv.org/abs/1908.00614">(N. Palacio, et al., 2019)</a></p>
 </blockquote>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:">Want to try out &#945;-SecureReqNet? Checkout this example in google colab:<a class="anchor-link" href="#Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:"> </a></h3><p><a href="https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq#scrollTo=R-mkf_Caz_q5">https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq#scrollTo=R-mkf_Caz_q5</a></p>
 
 </div>
 </div>

@@ -27,6 +27,8 @@ from tensorflow.python.keras.layers import Lambda
 def create_alpha():
     '''Creates a securereqnet alpha model and compiles it'''
     #BaseLine Architecture <-------
+    embeddigs_cols = 100
+    max_len_sentences = 618
     input_sh = (618,100,1)
     #Selecting filters?
     #https://stackoverflow.com/questions/48243360/how-to-determine-the-filter-parameter-in-the-keras-conv2d-function

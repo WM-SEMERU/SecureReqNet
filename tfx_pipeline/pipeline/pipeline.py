@@ -12,9 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""TFX taxi template pipeline definition.
-
-This file defines TFX pipeline and various components in the pipeline.
+"""
+This file defines the TFX pipeline and various components in the pipeline.
 """
 
 from __future__ import absolute_import
@@ -68,6 +67,8 @@ def create_pipeline(
     train_args: trainer_pb2.TrainArgs,
     eval_args: trainer_pb2.EvalArgs,
     eval_accuracy_threshold: float,
+    loss_threshold: float,
+    auc_threshold: float,
     serving_model_dir: Text,
     metadata_connection_config: Optional[
         metadata_store_pb2.ConnectionConfig] = None,
@@ -75,26 +76,17 @@ def create_pipeline(
     ai_platform_training_args: Optional[Dict[Text, Text]] = None,
     ai_platform_serving_args: Optional[Dict[Text, Any]] = None,
 ) -> pipeline.Pipeline:
-  """Implements the chicago taxi pipeline with TFX."""
 
   components = []
 
-  # Brings data into the pipeline or otherwise joins/converts training data.
-
-  # Ingests pre-split data based on specified file pattern
+  # Provides tf.Example records to the pipeline's downstream components.
+  # Assumes the TFRecord dataset is pre-split into training and evaluation directories.
+  # Input: A base path to the pre-split dataset
+  # Output: tf.Example records
   tf_input = example_gen_pb2.Input(splits=[
-                    example_gen_pb2.Input.Split(name='train', pattern='tfrecords_train/*'),
-                    example_gen_pb2.Input.Split(name='eval', pattern='tfrecords_eval/*')
+                    example_gen_pb2.Input.Split(name='train', pattern=os.path.join('tfrecords_train','*')),
+                    example_gen_pb2.Input.Split(name='eval', pattern=os.path.join('tfrecords_eval','*'))
                 ])
-
-  '''
-  # Splits input data with a 90:10 train:eval ratio
-  output = example_gen_pb2.Output(
-                split_config=example_gen_pb2.SplitConfig(splits=[
-                    example_gen_pb2.SplitConfig.Split(name='train', hash_buckets=9),
-                    example_gen_pb2.SplitConfig.Split(name='eval', hash_buckets=1)
-                ]))
-  '''
 
   example_gen = ImportExampleGen(input_base=data_path, input_config=tf_input)
   
@@ -105,11 +97,15 @@ def create_pipeline(
   components.append(example_gen)
 
   # Computes statistics over data for visualization and example validation.
+  # Input: Examples from the ExampleGen component
+  # Output: Dataset statistics to be used by the SchemaGen component
   statistics_gen = StatisticsGen(examples=example_gen.outputs['examples'])
   # TODO(step 5): Uncomment here to add StatisticsGen to the pipeline.
   components.append(statistics_gen)
 
   # Generates schema based on statistics files.
+  # Input: Statistics from the StatisticsGen component\
+  # Output: A schema of the model for use in the ExampleValidator, Transform, and Trainer components.
   schema_gen = SchemaGen(
       statistics=statistics_gen.outputs['statistics'],
       infer_feature_shape=True)
@@ -129,7 +125,7 @@ def create_pipeline(
       schema=schema_gen.outputs['schema'],
       preprocessing_fn=preprocessing_fn)
   # TODO(step 6): Uncomment here to add Transform to the pipeline.
-  #components.append(transform)
+  # components.append(transform)
 
   # Uses user-provided Python function that implements a model using TF-Learn.
   trainer_args = {
@@ -141,7 +137,7 @@ def create_pipeline(
       'train_args': train_args,
       'eval_args': eval_args,
       'custom_executor_spec':
-          executor_spec.ExecutorClassSpec(trainer_executor.Executor),
+          executor_spec.ExecutorClassSpec(trainer_executor.GenericExecutor),
   }
   if ai_platform_training_args is not None:
     trainer_args.update({
@@ -156,9 +152,12 @@ def create_pipeline(
     })
   trainer = Trainer(**trainer_args)
   # TODO(step 6): Uncomment here to add Trainer to the pipeline.
-  # components.append(trainer)
+  components.append(trainer)
 
-  # Get the latest blessed model for model validation.
+  # Specifies the latest blessed model to be used as a
+  # baseline for model validation.
+  # Input: A name and class for the resolver, and the model and blessing.
+  # Output: The latest blessed model
   model_resolver = ResolverNode(
       instance_name='latest_blessed_model_resolver',
       resolver_class=latest_blessed_model_resolver.LatestBlessedModelResolver,
@@ -167,12 +166,24 @@ def create_pipeline(
   # TODO(step 6): Uncomment here to add ResolverNode to the pipeline.
   # components.append(model_resolver)
 
-  # Uses TFMA to compute a evaluation statistics over features of a model and
-  # perform quality validation of a candidate model (compared to a baseline).
+  # Defines the configuration to be used for evaluation. Includes metrics.
   eval_config = tfma.EvalConfig(
-      model_specs=[tfma.ModelSpec(label_key='big_tipper')],
+      model_specs=[tfma.ModelSpec(signature_name='eval')],
       slicing_specs=[tfma.SlicingSpec()],
       metrics_specs=[
+          # binary cross-entropy loss
+          tfma.MetricsSpec(metrics=[
+              tfma.MetricConfig(
+                  class_name='BinaryCrossentropy',
+                  threshold=tfma.MetricThreshold(
+                      value_threshold=tfma.GenericValueThreshold(
+                          upper_bound={'value': loss_threshold}),
+                      change_threshold=tfma.GenericChangeThreshold(
+                          direction=tfma.MetricDirection.LOWER_IS_BETTER,
+                          absolute={'value': -1e-10})))
+          ]),
+
+          # binary accuracy
           tfma.MetricsSpec(metrics=[
               tfma.MetricConfig(
                   class_name='BinaryAccuracy',
@@ -182,8 +193,28 @@ def create_pipeline(
                       change_threshold=tfma.GenericChangeThreshold(
                           direction=tfma.MetricDirection.HIGHER_IS_BETTER,
                           absolute={'value': -1e-10})))
+          ]),
+
+          # AUC
+          tfma.MetricsSpec(metrics=[
+              tfma.MetricConfig(
+                  class_name='AUC',
+                  threshold=tfma.MetricThreshold(
+                      value_threshold=tfma.GenericValueThreshold(
+                          lower_bound={'value': auc_threshold}),
+                      change_threshold=tfma.GenericChangeThreshold(
+                          direction=tfma.MetricDirection.HIGHER_IS_BETTER,
+                          absolute={'value': -1e-10})))
           ])
+          
       ])
+
+  # Evaluates an input model based on the binary cross-entropy loss,
+  # binary accuracy, and AUC metrics. Compares the input model
+  # to one previously blessed by the Evaluator component.
+  # Input: An eval split from ExampleGen, a model from Trainer,
+  #        an EvalSavedModel, and eval configurations
+  # Output: Analysis and validation results
   evaluator = Evaluator(
       examples=example_gen.outputs['examples'],
       model=trainer.outputs['model'],
@@ -192,6 +223,12 @@ def create_pipeline(
       eval_config=eval_config)
   # TODO(step 6): Uncomment here to add Evaluator to the pipeline.
   # components.append(evaluator)
+
+
+  # Launches sandboxed server with the model
+  # Validates that model can be loaded and queried
+  # Input: A model from the Trainer component, examples from the ExampleGen component
+  # Output: A blessed model that is sent to the Pusher component
 
   infra_validator = InfraValidator(
       model=trainer.outputs['model'],
@@ -220,21 +257,14 @@ def create_pipeline(
           trainer.outputs['model'],
       'model_blessing':
           evaluator.outputs['blessing'],
+      # Uncomment these when deploying InfraValidator
+      #'infra_blessing':
+      #    infra_validator.outputs['blessing'],
       'push_destination':
           pusher_pb2.PushDestination(
               filesystem=pusher_pb2.PushDestination.Filesystem(
                   base_directory=serving_model_dir)),
   }
-  if ai_platform_serving_args is not None:
-    pusher_args.update({
-        'custom_executor_spec':
-            executor_spec.ExecutorClassSpec(ai_platform_pusher_executor.Executor
-                                           ),
-        'custom_config': {
-            ai_platform_pusher_executor.SERVING_ARGS_KEY:
-                ai_platform_serving_args
-        },
-    })
   pusher = Pusher(**pusher_args)  # pylint: disable=unused-variable
   # TODO(step 6): Uncomment here to add Pusher to the pipeline.
   # components.append(pusher)

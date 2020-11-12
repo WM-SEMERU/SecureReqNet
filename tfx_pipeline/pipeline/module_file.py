@@ -1,179 +1,181 @@
+import csv
+from tensorflow.keras.preprocessing import text
+from nltk.corpus import gutenberg
+from string import punctuation
+from tensorflow.keras.preprocessing.sequence import skipgrams
+import pandas as pd
+import numpy as np
+import re
+import nltk
+from nltk.stem.snowball import SnowballStemmer
+englishStemmer=SnowballStemmer("english")
+from securereqnet import utils
 import tensorflow_transform as tft
 import tensorflow as tf
 import numpy as np
 from tfx.components.trainer import executor
 import os
+from tfx.components.trainer.executor import TrainerFnArgs
+from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
+from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras import layers
+from tensorflow.keras.layers import Dot, Input, Dense, Reshape, LSTM, Conv2D, Flatten, MaxPooling1D, Dropout, MaxPooling2D
+from tensorflow.keras.layers import Embedding, Multiply, Subtract
+from tensorflow.keras.models import Sequential, Model
 
 # TFX will call this function
-def trainer_fn(trainer_fn_args, schema):
-  files = os.listdir("C:\\Users\\John\\Documents\\GitHub\\SecureReqNet\\data\\records\\tfrecords_train")
+def run_fn(fn_args: TrainerFnArgs):
+  tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
 
-  """Build the estimator using the high level API.
-
-  Args:
-    trainer_fn_args: Holds args used to train the model as name/value pairs.
-    schema: Holds the schema of the training examples.
-
-  Returns:
-    A dict of the following:
-
-      - estimator: The estimator that will be used for training and eval.
-      - train_spec: Spec for training.
-      - eval_spec: Spec for eval.
-      - eval_input_receiver_fn: Input function for eval.
-  """
-  # Number of nodes in the first layer of the DNN
-  #first_dnn_layer_size = 32
-  #num_dnn_layers = 4
-  #dnn_decay_factor = 0.7
-
-  train_batch_size = 40
-  eval_batch_size = 40
-
-  tf_transform_output = tft.TFTransformOutput(trainer_fn_args.transform_output)
+  train_batch_size = 1
+  eval_batch_size = 1
 
   # Collects a list of the paths to tfrecord files in the eval directory in train_records_list
-  train_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '..\\data\\records\\tfrecords_train')
+  train_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../data/records/tfrecords_train')
   train_records_list = os.listdir(train_records_path)
   for i in range(0,len(train_records_list)):
     train_records_list[i] = os.path.join(train_records_path, train_records_list[i])
 
   # Collects a list of the paths to tfrecord files in the eval directory in eval_records_list
-  eval_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '..\\data\\records\\tfrecords_eval')
+  eval_records_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../data/records/tfrecords_eval')
   eval_records_list = os.listdir(eval_records_path)
   for i in range(0,len(eval_records_list)):
     eval_records_list[i] = os.path.join(eval_records_path, eval_records_list[i])
   
   train_eval_records = [train_records_list, eval_records_list]
-  # This iterates through both the list of train and eval tfrecord paths, and uses the resulting 
-  # x and y tensors from each record to make combined tensors for x and y where the first dimension
-  # is split by record, as per the dataset requirements. 
-  loop_num = 0
-  for record_list in train_eval_records:
-    record_x = []
-    record_y = []
+    
+  #train_dataset = _input_fn(  # pylint: disable=g-long-lambda
+  #    train_records_list,
+  #    tf_transform_output,
+  #    batch_size=train_batch_size)
 
-    records = tf.data.TFRecordDataset(record_list)
-    for raw_record in records.take(10):
-      example = tf.train.Example()
-      example.ParseFromString(raw_record.numpy())
-      record_values = parse_tfrecord_string(str(example))
-      record_x.append(record_values[0])
-      record_y.append(record_values[1])
-      print(len(record_y))
+  #eval_dataset = _input_fn(  # pylint: disable=g-long-lambda
+  #    eval_records_list,
+  #    tf_transform_output,
+  #    batch_size=eval_batch_size)
 
-    full_x = record_x[0]
-    for i in range(1, len(record_x)-1):
-      full_x = tf.concat([full_x, record_x[i]], 0)
+  model_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../pretrained_models/alpha')
+  model = tf.keras.models.load_model(model_path)
+  #model.trainable = True
+  #print(model.trainable_variables)
+  model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
-    # If there's only one record, len(record_x)-1 doesn't work. Temporary
-    if(loop_num == 0):
-      full_x = tf.reshape(full_x, [len(record_x)-1, 618,100,1])
-    else:
-      full_x = tf.reshape(full_x, [1, 618,100,1])
+  filepath = "../08_test/best_model.hdf5"
 
-    print(len(record_y))
-    full_y = record_y[0]
-    for i in range(1, len(record_y)-1):
-      full_y = tf.stack(full_y)
-      print(full_y)
-    #full_y = tf.reshape(full_y, [len(record_y), ])
+  es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=100)
+  mc = ModelCheckpoint(filepath, monitor='val_accuracy', mode='max', verbose=1, save_best_only=True)
+  callbacks_list = [es,mc]
 
-    print(full_x.get_shape())
-    print(full_y.get_shape())
-    dataset = (full_x, full_y)
-    if(loop_num == 0):
-      train_dataset = dataset
-    else:
-      eval_dataset = dataset
-    loop_num += 1
+  dataset_list = generate_dataset()
 
-  train_input_fn = lambda: _input_fn(  # pylint: disable=g-long-lambda
-      train_dataset,
-      tf_transform_output,
-      batch_size=train_batch_size)
-
-  eval_input_fn = lambda: _input_fn(  # pylint: disable=g-long-lambda
-      eval_dataset,
-      tf_transform_output,
-      batch_size=eval_batch_size)
-
-  train_spec = tf.estimator.TrainSpec(  # pylint: disable=g-long-lambda
-      train_input_fn,
-      max_steps=trainer_fn_args.train_steps)
-
-  serving_receiver_fn = lambda: _example_serving_receiver_fn(  # pylint: disable=g-long-lambda
-      tf_transform_output, schema)
-
-  exporter = tf.estimator.FinalExporter('securereqnet', serving_receiver_fn)
-  eval_spec = tf.estimator.EvalSpec(
-      eval_input_fn,
-      steps=trainer_fn_args.eval_steps,
-      exporters=[exporter],
-      name='securereqnet-eval')
-
-  run_config = tf.estimator.RunConfig(
-      save_checkpoints_steps=999, keep_checkpoint_max=1)
-
-  run_config = run_config.replace(model_dir=trainer_fn_args.serving_model_dir)
-  #warm_start_from = trainer_fn_args.base_models[
-  #    0] if trainer_fn_args.base_models else None
-
-  model_path = os.path.join(os.path.dirname(os.path.abspath("__file__")), '../pretrained_models/alpha.hdf5')
-
-  estimator = tf.keras.estimator.model_to_estimator(
-    keras_model_path=model_path, custom_objects=None, model_dir=None,
-    config=None, checkpoint_format='checkpoint', metric_names_map=None
+  print(fn_args.serving_model_dir)
+  
+  model.fit(
+            x = dataset_list[0],
+            y = dataset_list[1],
+            batch_size=1,
+            epochs=20, #5 <------ Hyperparameter
+            validation_split=0.2,
+            callbacks=callbacks_list
   )
 
+  model.save(fn_args.serving_model_dir, save_format='tf')
 
-  # Create an input receiver for TFMA processing
-  receiver_fn = lambda: _eval_input_receiver_fn(  # pylint: disable=g-long-lambda
-      tf_transform_output, schema)
 
-  return {
-      'estimator': estimator,
-      'train_spec': train_spec,
-      'eval_spec': eval_spec,
-      'eval_input_receiver_fn': receiver_fn
-  }
 
-# Provides input data for training as minibatches.
-def _input_fn(training_files, transform_output, batch_size):
-  print("")
+def generate_dataset():
+  #../data replaces datasets for the to access data
+  path = "../data/combined_dataset/"
+  process_unit = utils.Processing_Dataset(path)
+  ground_truth = process_unit.get_ground_truth()
 
-# Parses the string output of a tfrecord and returns the x values and y values in a list
-def parse_tfrecord_string(record_string):
-  #print(record_string.splitlines(False))
-  lines = record_string.splitlines(False)
-  x_index = 0
-  y_index = 0
-  y_end_index = 0
-  scanningX = False
-  scanningY = False
-  for i in range(0, len(lines)):
-    if('key: "x"' in lines[i]):
-      scanningX = True
-      scanningY = False
-      x_index = i+3
-    elif('key: "y"' in lines[i]):
-      scanningX = False
-      scanningY = True
-      y_index = i+3
-    # Since the length of the y values is variable, we need to record the index of
-    # the final value so we know how much to slice.
-    if(scanningY and "}" in lines[i]):
-      y_end_index = i
-      scanningY = False
-    if("value: " in lines[i] and scanningX):
-      lines[i] =  float(lines[i].replace("value: ", "").strip())
-    elif("value: " in lines[i]):
-      lines[i] =  int(lines[i].replace("value: ", "").strip())
+  dataset = utils.Dynamic_Dataset(ground_truth, path,False)
 
-  x_slice = lines[x_index:x_index+61800]
-  y_slice = lines[y_index:y_end_index]
+  #As the data is stored in a zip file isZip = True
+  test, train = process_unit.get_test_and_training(ground_truth,isZip = True)
 
-  x_tensor = tf.convert_to_tensor(x_slice, dtype=tf.float32)
-  y_tensor = tf.convert_to_tensor(y_slice)
+  nltk.download('stopwords')
 
-  return [x_tensor, y_tensor]
+  embeddings = utils.Embeddings()
+  max_words = 5000 #<------- [Parameter]
+  pre_corpora_train = [doc for doc in train if len(doc[1])< max_words]
+  pre_corpora_test = [doc for doc in test if len(doc[1])< max_words]
+
+  embed_path = '../data/word_embeddings-embed_size_100-epochs_100.csv'
+  embeddings_dict = embeddings.get_embeddings_dict(embed_path)
+  
+  # .decode("utf-8") takes the doc's which are saved as byte files and converts them into strings for tokenization
+  corpora_train = [embeddings.vectorize(doc[1].decode("utf-8"), embeddings_dict) for doc in pre_corpora_train]#vectorization Inputs
+  corpora_test = [embeddings.vectorize(doc[1].decode("utf-8"), embeddings_dict) for doc in pre_corpora_test]#vectorization
+
+  target_train = [[int(list(doc[0])[1]),int(list(doc[0])[3])] for doc in pre_corpora_train]#vectorization Output
+  target_test = [[int(list(doc[0])[1]),int(list(doc[0])[3])]for doc in pre_corpora_test]#vectorization Output
+  #target_train
+
+  max_len_sentences_train = max([len(doc) for doc in corpora_train]) #<------- [Parameter]
+  max_len_sentences_test = max([len(doc) for doc in corpora_test]) #<------- [Parameter]
+
+  max_len_sentences = max(max_len_sentences_train,max_len_sentences_test)
+
+  min_len_sentences_train = min([len(doc) for doc in corpora_train]) #<------- [Parameter]
+  min_len_sentences_test = min([len(doc) for doc in corpora_test]) #<------- [Parameter]
+
+  min_len_sentences = max(min_len_sentences_train,min_len_sentences_test)
+
+  embed_size = np.size(corpora_train[0][0])
+
+  #BaseLine Architecture <-------
+  embeddigs_cols = 100
+  input_sh = (618,100,1)
+  max_len_sentences = 618
+  #Selecting filters? 
+  #https://stackoverflow.com/questions/48243360/how-to-determine-the-filter-parameter-in-the-keras-conv2d-function
+  #https://stats.stackexchange.com/questions/196646/what-is-the-significance-of-the-number-of-convolution-filters-in-a-convolutional
+
+  N_filters = 128 # <-------- [HyperParameter] Powers of 2 Numer of Features
+  K = 2 # <-------- [HyperParameter] Number of Classess
+  
+  #Data set organization
+  from tempfile import mkdtemp
+  import os.path as path
+
+  #Memoization 
+  file_corpora_train_x = path.join(mkdtemp(), 'alex-res-adapted-003_temp_corpora_train_x.dat') #Update per experiment
+  file_corpora_test_x = path.join(mkdtemp(), 'alex-res-adapted-003_temp_corpora_test_x.dat')
+
+  #Shaping
+  shape_train_x = (len(corpora_train),max_len_sentences,embeddigs_cols,1)
+  shape_test_x = (len(corpora_test),max_len_sentences,embeddigs_cols,1)
+
+  #Data sets
+  corpora_train_x = np.memmap(
+        filename = file_corpora_train_x, 
+        dtype='float32', 
+        mode='w+', 
+        shape = shape_train_x)
+
+  corpora_test_x = np.memmap( #Test Corpora (for future evaluation)
+        filename = file_corpora_test_x, 
+        dtype='float32', 
+        mode='w+', 
+        shape = shape_test_x)
+
+  target_train_y = np.array(target_train) #Train Target
+  target_test_y = np.array(target_test) #Test Target (for future evaluation)
+
+  #Reshaping Train Inputs
+  for doc in range(len(corpora_train)):
+    #print(corpora_train[doc].shape[1])
+    for words_rows in range(corpora_train[doc].shape[0]):
+        embed_flatten = np.array(corpora_train[doc][words_rows]).flatten() #<--- Capture doc and word
+        for embedding_cols in range(embed_flatten.shape[0]):
+            corpora_train_x[doc,words_rows,embedding_cols,0] = embed_flatten[embedding_cols]
+
+  #Reshaping Test Inputs (for future evaluation)
+  for doc in range(len(corpora_test)):
+    for words_rows in range(corpora_test[doc].shape[0]):
+        embed_flatten = np.array(corpora_test[doc][words_rows]).flatten() #<--- Capture doc and word
+        for embedding_cols in range(embed_flatten.shape[0]):
+            corpora_test_x[doc,words_rows,embedding_cols,0] = embed_flatten[embedding_cols]
+
+  return [corpora_train_x, target_train_y]

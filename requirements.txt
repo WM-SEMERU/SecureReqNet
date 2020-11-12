@@ -11,6 +11,8 @@ defusedxml==0.6.0
 entrypoints==0.3
 enum34==1.1.6
 fastscript==0.1.2
+flask==1.1.2
+funcsigs==1.0.2
 gast==0.3.3
 google-pasta==0.2.0
 grpcio==1.32.0
@@ -79,6 +81,7 @@ testpath==0.4.2
 tf-estimator-nightly==1.14.0.dev2019080601
 tornado==6.0.3
 traitlets==4.3.2
+waitress==1.4.4
 wcwidth==0.1.7
 webencodings==0.5.1
 Werkzeug==0.15.5

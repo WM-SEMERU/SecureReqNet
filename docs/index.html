@@ -6,8 +6,8 @@ title: SecureReqNet
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Summary description here."
-description: "Summary description here."
+summary: "Maintained by @danaderp. Last update: October 2020"
+description: "Maintained by @danaderp. Last update: October 2020"
 nb_path: "nbs/index.ipynb"
 ---
 <!--
@@ -31,91 +31,322 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This file will become your README and also the index of your documentation.</p>
+<p>We present a machine learning approach, named SecureReqNet, to automatically identify whether issues describe security related content. SecureReqNet hinges on the idea of predicting severity on software using vulnerability desciptions (Han, et al., 2017) by incorporating desing principles from AlexNet (Krizhevsky, et al., 2013).</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2>
+<h2 id="Install-with-pip-install-securereqnet">Install with <code>pip install securereqnet</code><a class="anchor-link" href="#Install-with-pip-install-securereqnet"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Building instructions
-Run the following command if you get a module error from securereqnet saying it can't be found
-<code>pip install -e .</code></p>
-<p><code>pip install securereqnet</code></p>
-<h1 id="deployment-team-will-update-this">deployment team will update this<a class="anchor-link" href="#deployment-team-will-update-this"> </a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Fill me in please! Don't forget code examples:</p>
+<h3 id="SecureReqNet-Documenation-website-at:">SecureReqNet Documenation website at:<a class="anchor-link" href="#SecureReqNet-Documenation-website-at:"> </a></h3><p><a href="https://rmclanton.github.io/SecureReqNet/">https://rmclanton.github.io/SecureReqNet/</a></p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:">Want to try out &#945;-SecureReqNet? Checkout this example in google colab:<a class="anchor-link" href="#Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:"> </a></h3><p><a href="https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq">https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq</a></p>
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Or-serve-your-own-version:">Or serve your own version:<a class="anchor-link" href="#Or-serve-your-own-version:"> </a></h3><p><a href="https://colab.research.google.com/drive/1pb_QQOm0jA0SwejgqxBXKBhkuM42al4k">https://colab.research.google.com/drive/1pb_QQOm0jA0SwejgqxBXKBhkuM42al4k</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Research-and-Components-Roadmap">Research and Components Roadmap<a class="anchor-link" href="#Research-and-Components-Roadmap"> </a></h3><ul>
+<li>[x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) </li>
+<li>[x] Using Deep Neural Network to predict security relatedness on issues (or requirements)</li>
+<li>[ ] Using a Neural Network to predict quantitatively (regression) how critical is an issue (or requirement)</li>
+<li>[ ] Implementing a Transformer Architecture to predict security criticality on issues (or requirements)</li>
+<li>[ ] Recovering security related relationships among software artifacts by employing traceability theory</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>SecureReqNet</em> consists of a two-phase deep learning architecture that operates <em>(for now)</em> purely on the natural language descriptions of issues. The first phase of our approach learns high dimensional sentence embeddings from hundreds of thousands of descriptions extracted from software vulnerabilities listed in the CVE database and issue descriptions extracted from open source projects using an unsupervised learning process. The second phase then utilizes this semantic ontology of embeddings to train a deep convolutional neural network capable of predicting whether a given issue contains security-related information.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<object data="https://github.com/danaderp/SecureReqNet/blob/master/data/plots/architecture.pdf" type="application/pdf" width="100%"> 
+</object>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://github.com/danaderp/SecureReqNet/blob/master/data/plots/architecture-1.png" alt="α-SecureReqNet"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>SecureReqNet</em> has four versions that vary in terms of the size of the tensors and the parameters of the convolutional layers.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><strong>SecureReqNet (shallow)</strong> was based on the best architecture achived by Han, et al. Such architecture implemented one convolution layer with 3 kernes of different sizes. The authors set up the size of each kernel as 1-gram, 3-gram, and 5-gram to reduce an input matrix. This matrix was built by means of an unsupervised word2vec where the rows represents the words in a given document (or issue) and the columns the size of the embedding. Details of how we trained our word2vec can be found in the notebook <a href="https://github.com/danaderp/SecureReqNet/blob/master/nbs/03_Clustering.ipynb"><em>03_Clustering</em></a>.  <strong>SecureReqNet (shallow)</strong> has a max pooling layer followed by a flatten function. The final tensor is a merged vector from the 3 initial kernels. Unlike Han, et al.' SVM multi-class output layer, we utilized a binary classification throughout a softmax layer.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="c1"># 1st Convolutional Layer (1-gram)</span>
+<span class="n">conv_filter_1_gram</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span> <span class="n">N_filters</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="n">input_sh</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                       <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">embeddigs_cols</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">,</span><span class="n">data_format</span><span class="o">=</span><span class="s2">&quot;channels_last&quot;</span><span class="p">)(</span><span class="n">gram_input</span><span class="p">)</span>
+<span class="c1"># 2sd Convolutional Layer (3-gram)</span>
+<span class="n">conv_filter_3_gram</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span> <span class="n">N_filters</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="n">input_sh</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                       <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">embeddigs_cols</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">gram_input</span><span class="p">)</span>
+<span class="c1"># 3rd Convolutional Layer (5-gram)</span>
+<span class="n">conv_filter_5_gram</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span> <span class="n">N_filters</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="n">input_sh</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                       <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">embeddigs_cols</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">gram_input</span><span class="p">)</span>
+
+<span class="c1"># Max Pooling Layer</span>
+<span class="n">max_pool_1_gram</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">((</span><span class="n">max_len_sentences</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_filter_1_gram</span><span class="p">)</span>
+<span class="n">max_pool_3_gram</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">((</span><span class="n">max_len_sentences</span><span class="o">-</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_filter_3_gram</span><span class="p">)</span>
+<span class="n">max_pool_5_gram</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">((</span><span class="n">max_len_sentences</span><span class="o">-</span><span class="mi">5</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_filter_5_gram</span><span class="p">)</span>     
+
+<span class="c1"># Fully Connected layer</span>
+<span class="n">fully_connected_1_gram</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">max_pool_1_gram</span><span class="p">)</span>
+<span class="n">fully_connected_3_gram</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">max_pool_3_gram</span><span class="p">)</span>
+<span class="n">fully_connected_5_gram</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">max_pool_5_gram</span><span class="p">)</span>
+
+<span class="n">merged_vector</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">fully_connected_1_gram</span><span class="p">,</span> <span class="n">fully_connected_3_gram</span><span class="p">,</span> 
+                                    <span class="n">fully_connected_5_gram</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">integration_layer</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">merged_vector</span><span class="p">)</span> <span class="c1"># &lt;-------- [HyperParameter]</span>
+
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">integration_layer</span><span class="p">)</span>
+
+<span class="c1">#Criticality Model</span>
+<span class="n">criticality_network</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">gram_input</span><span class="p">],</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">predictions</span><span class="p">])</span>
 </pre></div>
 
-    </div>
 </div>
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>2</pre>
 </div>
-
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><strong>SecureReqNet (deep)</strong> was an expansion of <strong>SecureReqNet (shallow)</strong>. We included an extra convolutional layer, a max pooling, and a flatten function. The final tensor is a merged vector from the 3 initial kernels. A fully connected sigmoid layers was added just before the binary softmax layer. </li>
+</ol>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><strong>Alex-SecureReqNet (deep)</strong> was based on the proposed architecture by Krizhevsky et al., where 5 convolutional layers extract the abstract features and 3 fully connected reduce the dimensionality. This is the classical convolutional ImageNet network with a small adaptation in the final layer to induce binary classification. </li>
+</ol>
 
 </div>
-    {% endraw %}
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><strong>α-SecureReqNet (deep)</strong> was a modification of the <strong>Alex-SecureReqNet (deep)</strong> in the convolutional layers. The modification consisted in implementing the n-gram kernel strategy for text-based datasets <a href="https://ieeexplore.ieee.org/abstract/document/8094415">(Han, et al., 2017)</a>. The input layer is a document embedding in the shape of a matrix. The first convolutional layer has a kernel of 7-gram size to reduce the input matrix into 32 vector feature maps. Later, it is applied a max pooling and a flatten function to obtain a column matrix. The second convolutional layer has a 5-gram filter followed by a max pooling and flatten function that merged 64 features. The third, fourth, and fifth convolutional layers are very similar to the original distribution in ImageNet but using 3-gram filters and 128/64 features respectively. Three fully connected layers went after the fifth conv layer to reduce the dimensionality and control the overfitting with the dropout units. The final layer is again a binary softmax layer (security vs non-security related).</li>
+</ol>
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="c1"># 1st Convolutional Layer Convolutional Layer (7-gram)</span>
+<span class="n">conv_1_layer</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="n">input_sh</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                      <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">embeddigs_cols</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">gram_input</span><span class="p">)</span>
+<span class="c1"># Max Pooling </span>
+<span class="n">max_1_pooling</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">((</span><span class="n">max_len_sentences</span><span class="o">-</span><span class="mi">7</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_1_layer</span><span class="p">)</span>
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">notebook2script</span><span class="p">()</span>
+<span class="c1"># Fully Connected layer</span>
+<span class="n">fully_connected_1_gram</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">max_1_pooling</span><span class="p">)</span>
+<span class="n">fully_connected_1_gram</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))(</span><span class="n">fully_connected_1_gram</span><span class="p">)</span>
+
+<span class="c1"># 2nd Convolutional Layer (5-gram)</span>
+<span class="n">conv_2_layer</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                      <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">fully_connected_1_gram</span><span class="p">)</span>
+
+<span class="n">max_2_pooling</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">((</span><span class="mi">32</span><span class="o">-</span><span class="mi">5</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_2_layer</span><span class="p">)</span>  
+
+<span class="c1"># Fully Connected layer</span>
+<span class="n">fully_connected_2_gram</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">max_2_pooling</span><span class="p">)</span>
+<span class="n">fully_connected_2_gram</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))(</span><span class="n">fully_connected_2_gram</span><span class="p">)</span>
+
+<span class="c1"># 3rd Convolutional Layer (3-gram)</span>
+<span class="n">conv_3_layer</span> <span class="o">=</span>  <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                      <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">fully_connected_2_gram</span><span class="p">)</span>
+
+<span class="c1"># 4th Convolutional Layer (3-gram)</span>
+<span class="n">conv_4_layer</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                     <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_3_layer</span><span class="p">)</span>
+
+<span class="c1"># 5th Convolutional Layer (3-gram)</span>
+<span class="n">conv_5_layer</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> 
+                     <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_4_layer</span><span class="p">)</span>
+
+<span class="c1"># Max Pooling</span>
+<span class="n">max_5_pooling</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">58</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)(</span><span class="n">conv_5_layer</span><span class="p">)</span>  
+
+<span class="c1"># Fully Connected layer</span>
+<span class="n">fully_connected</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">max_5_pooling</span><span class="p">)</span>
+
+<span class="c1"># 1st Fully Connected Layer</span>
+<span class="n">deep_dense_1_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">fully_connected</span><span class="p">)</span>
+<span class="n">deep_dense_1_layer</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">deep_dense_1_layer</span><span class="p">)</span> <span class="c1"># &lt;-------- [HyperParameter]</span>
+
+<span class="c1"># 2nd Fully Connected Layer</span>
+<span class="n">deep_dense_2_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">deep_dense_1_layer</span><span class="p">)</span>
+<span class="n">deep_dense_2_layer</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">deep_dense_2_layer</span><span class="p">)</span> <span class="c1"># &lt;-------- [HyperParameter]</span>
+
+<span class="c1"># 3rd Fully Connected Layer</span>
+<span class="n">deep_dense_3_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">deep_dense_2_layer</span><span class="p">)</span>
+<span class="n">deep_dense_3_layer</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">deep_dense_3_layer</span><span class="p">)</span> <span class="c1"># &lt;-------- [HyperParameter]</span>
+
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">deep_dense_3_layer</span><span class="p">)</span>
+
+<span class="c1">#Criticality Model</span>
+<span class="n">criticality_network</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">gram_input</span><span class="p">],</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">predictions</span><span class="p">])</span>
 </pre></div>
 
-    </div>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>If you are using <strong>α-SecureReqNet</strong>, please consider citing <a href="https://arxiv.org/abs/1908.00614">(N. Palacio, et al., 2019)</a></p>
+</blockquote>
 
 </div>
-    {% endraw %}
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Datasets">Datasets<a class="anchor-link" href="#Datasets"> </a></h2><p>The context of our empirical study includes the four datasets (<em>Embedding</em>, <em>Training</em>, <em>Validation</em>, &amp; <em>Test</em>) illustrated in the following table. These datasets are comprised of textual documents from different sources.</p>
+<table>
+<thead><tr>
+<th>Dataset Source</th>
+<th>Embedding</th>
+<th>Training</th>
+<th>Validation</th>
+<th>Testing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CVE Database</td>
+<td>52908</td>
+<td>37036</td>
+<td>10582</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>GitLab Issues (SR)</td>
+<td>578</td>
+<td>405</td>
+<td>116</td>
+<td>58</td>
+<td></td>
+</tr>
+<tr>
+<td>GitLab Issues (Non-SR)</td>
+<td>578</td>
+<td>405</td>
+<td>116</td>
+<td>58</td>
+<td></td>
+</tr>
+<tr>
+<td>GitHub Issues (SR)</td>
+<td>4575</td>
+<td>3203</td>
+<td>915</td>
+<td>458</td>
+<td></td>
+</tr>
+<tr>
+<td>GitHub Issues (Non-SR)</td>
+<td>47483</td>
+<td>33238</td>
+<td>9497</td>
+<td>458</td>
+<td></td>
+</tr>
+<tr>
+<td>Wikipedia</td>
+<td>10000</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><em>CVE Database</em>: Our CVE Dataset was derived by crawling the National Vulnerability Database (NVD) and extracting the vulnerability description for each CVE entry. In total, we extracted over 100,000 CVE descriptions, however, in order to construct a dataset balanced equally between SR and non-SR text, we randomly sampled 52,908 CVE descriptions. </li>
+<li><em>GitLab Issues</em>: To obtain a large set of diverse issues extracted from the issue trackers of a high-quality open source project we crawled the issue tracker of the GitLab Community Edition (CE) <a href="https://gitlab.com/gitlab-org/gitlab-ce/issues">project</a>. This project contains open source components of the GitLab suite of developer tools (used by millions) with an issue tracker that includes a sophisticated labeling system. To extract SR issues, we crawled this issue tracker and extracted issue descriptions containing "security" label. To extract non-SR issues we extracted entries without the "security" label and manually verified the non-SR nature of the descriptions by randomly sampling of 10% of the issues.</li>
+<li><em>GitHub Issues</em>: Given the limited number of SR GitLab issues that we were able to extract, we also crawled the issue trackers of the most popular projects on GitHub (according to number of stars) and extracted issues with the "security" tag in order to derive a larger and more diverse dataset. Again, we randomly crawled non-SR issues and performed a random sampling to ensure the validity of the non-SR issues. </li>
+<li><em>Wikipedia Articles</em>: If we trained our neural embeddings on <em>only</em> highly specialized software text extracted from issues, we risk our model not learning more generalized word contexts that could help differentiate between SR and non-SR issues. Thus, we randomly crawled and extracted the text from 10,000 Wikipedia articles in order to bolster the generalizablility of our learned neural word embeddings.</li>
+</ul>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Project-Description-for-CSCI-435/535">Project Description for CSCI 435/535<a class="anchor-link" href="#Project-Description-for-CSCI-435/535"> </a></h2><blockquote><blockquote><p>Project Leads:@danaderp&gt; The goal of the project is to migrate the components into nbdev architecture, implement interpretability components to test the neural net, leverage security datasets, and document.</p>
+</blockquote>
+</blockquote>
+<h3 id="The-goals-of-this-project:">The goals of this project:<a class="anchor-link" href="#The-goals-of-this-project:"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>[ ] Migrate SecureReqNet into nbdev</li>
+<li>[ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)</li>
+<li>[ ] Implement some interpretability techniques to test SecureReqNet</li>
+<li>[ ] Leverage Security Datasets</li>
+</ul>
+<h3 id="Project-Requirements:">Project Requirements:<a class="anchor-link" href="#Project-Requirements:"> </a></h3><ul>
+<li>Required Knowledge: Python, Git, Linear Algebra, and Statistics</li>
+<li>Preferred Knowledge: Machine Learning, TensorFlow, and Probabilistic Computation</li>
+</ul>
+<h3 id="Recommended-Readings:">Recommended Readings:<a class="anchor-link" href="#Recommended-Readings:"> </a></h3><ul>
+<li>Exploratory Programming with Nbdev <a href="https://www.fast.ai/2019/12/02/nbdev/">link</a></li>
+<li>Interpretability Analysis Book <a href="https://christophm.github.io/interpretable-ml-book/">link</a></li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
  
 

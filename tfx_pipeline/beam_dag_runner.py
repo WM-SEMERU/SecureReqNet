@@ -51,9 +51,9 @@ SERVING_MODEL_DIR = os.path.join(PIPELINE_ROOT, 'serving_model')
 #       Kubeflow), you can use a path starting "gs://YOUR_BUCKET_NAME/path" for
 #       DATA_PATH. For example,
 #       DATA_PATH = 'gs://bucket/chicago_taxi_trips/csv/'.
-DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data/records')
+DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..','data','records')
 
-MODULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../tfx_pipeline/pipeline/module_file.py')
+MODULE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..','tfx_pipeline','pipeline','module_file.py')
 
 
 def run():
@@ -71,6 +71,8 @@ def run():
           train_args=trainer_pb2.TrainArgs(num_steps=configs.TRAIN_NUM_STEPS),
           eval_args=trainer_pb2.EvalArgs(num_steps=configs.EVAL_NUM_STEPS),
           eval_accuracy_threshold=configs.EVAL_ACCURACY_THRESHOLD,
+          loss_threshold=configs.LOSS_THRESHOLD,
+          auc_threshold=configs.AUC_THRESHOLD,
           serving_model_dir=SERVING_MODEL_DIR,
           # TODO(step 7): (Optional) Uncomment here to use provide GCP related
           #               config for BigQuery with Beam DirectRunner.

@@ -1,12 +1,12 @@
 {
   "SecureReqNet": {
     "Overview": "/",
-    "Utils": "utils.html",  
-    "Testing": "testing.html",
+    "Utils": "utils.html",
+    "Embeddings": "Embeddings.html",
     "Preprocessing": "preprocessing.html",
     "Model Evaluation": "model_evaluation.html",
     "Models": "models.html",
-    "Alpha SecureReqNet": "alpha_securereqnet.html",
-    "securereqnet": "core.html"        
+    "Deployment": "deployment.html",
+    "Alpha SecureReqNet": "alpha_securereqnet.html"     
   }
 }

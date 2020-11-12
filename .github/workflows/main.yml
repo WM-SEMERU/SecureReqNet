@@ -31,6 +31,13 @@ jobs:
     - name: Check if there is no diff library/notebooks
       run: |
         if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
+    - name: Install securereqnet package
+      run: |
+        echo "Downloading NLTK stopwords!"
+        python -m nltk.downloader stopwords
+        echo "Installing..."
+        pip install -e .
     - name: Run tests
       run: |
-        nbdev_test_nbs --fname "nbs/11_testing.ipynb" --flags "util"
+        nbdev_test_nbs --fname "nbs/05_testing.ipynb" --flags "util"
+        nbdev_test_nbs --fname "nbs/10_deployment.ipynb" --flags "deployment"

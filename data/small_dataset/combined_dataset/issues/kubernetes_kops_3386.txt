@@ -1,0 +1,13 @@
+AWS IAM policy cleanup for Master & Node Instance Groups
+
+
+Following on from PR #3343, there are some outstanding tasks to look into:
+
+Make ASG permissions optional based on use
+Prefix ASG permissions based on related resource
+Make IAM Cert permissions optional based on use of certs on ELBs
+Validate the correct set of ECR actions are allowed
+Extend the Equal function to support checking Condition Keys
+Route53 check on China region and fail accordingly (R53 not currently supported there)
+
+FYI @chrislovecnm , are there any I've missed off?

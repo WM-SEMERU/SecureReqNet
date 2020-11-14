@@ -1,0 +1,18 @@
+security encoders
+
+
+http://symfony.com/doc/current/cookbook/security/custom_provider.html#modify-security-yml
+    encoders:
+        Acme\WebserviceUserBundle\Security\User\WebserviceUser: sha512
+
+http://symfony.com/doc/current/book/security.html#c-encoding-the-user-s-password
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
+
+
+Seems a bit weird that in the first instance you put the algorihm directly after the class and in the second case it has it's own key.
+What's the purpose of Symfony\Component\Security\Core\User\User? The first tutorial says you should make your own user class.
+Sha512 seems a bit outdated by now, perhaps the doc needs some updating?
+

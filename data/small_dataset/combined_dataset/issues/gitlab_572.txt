@@ -1,0 +1,10 @@
+Summary: Issues mentioned during creating are referred.
+
+Steps to reproduce:
+
+1. Create a merge request mention an issue via hash<number>
+2. Edit that merge request and mention another issue
+
+Expected Behavior: All mentioned issues should be linked.
+
+Observed Behavior: Only issues mentioned during creation are linked.

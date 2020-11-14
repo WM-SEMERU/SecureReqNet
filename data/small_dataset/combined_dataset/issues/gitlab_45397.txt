@@ -1,0 +1,1 @@
+Update faraday_middleware to 0.12.0 or later to make YAML.load safer.

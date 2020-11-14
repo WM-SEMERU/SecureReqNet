@@ -1,0 +1,44 @@
+[FrameworkBundle] Removed eval() from KernelShutdownOnTearDownTrait
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Apart from triggering the #30362 bug, the eval() block from #30124 also broke my workflow: static code analyzers don't like this, and the trait even crashes PHPStan.
+It may also bring up other compatibility issues to other people (ie: I know companies that completely disable eval() on their servers).
+As it was only required to keep the trait compatible with PHP 5.x, it is unnecessary on 4.x that requires PHP 7.1+, and this PR removes it on the 4.2 branch.

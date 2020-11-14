@@ -1,0 +1,21 @@
+'in' needs to translate to canReadPub/canReadProp
+
+
+Original issue 347 created by erights on 2008-06-01T02:33:29.000Z:
+In r1541
+<script type="text/javascript">
+'_FROZEN_' in Object;
+</script>
+cajoles to
+<script type="text/javascript">{
+_.loadModule(function (, IMPORTS__) {
+{
+var Object = _.readImports(IMPORTS, 'Object');
+caja.result('_FROZEN' in Object);
+}
+});
+}</script>
+which evaluates to true. The problem is that we aren't translating 'in'
+(beyond expanding its operands). This allows Caja code to test which
+property names are actually present on the object at the uncajoled level,
+which should be hidden.

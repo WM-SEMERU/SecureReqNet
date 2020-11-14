@@ -1,0 +1,12 @@
+According to the readme of omnibus project (https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md) I tried to enable redirect http to https by editing the `gitlab.rb` file and putting in the settings `nginx['redirect_http_to_https'] = true`. But after doing a `gitlab-ctl reconfigure` nginx failed to start.
+
+I simply commented out the line in the .rb file and everything works a charm. This is what the rb file looks like:
+
+```
+external_url "https://iptlabz.com:443"
+#nginx['redirect_http_to_https'] = true
+nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.crt"
+nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.key"
+```
+
+If I uncomment the 2nd line then after doing a reconfigure nginx will not start. But auto redirect works even if the line is commented.

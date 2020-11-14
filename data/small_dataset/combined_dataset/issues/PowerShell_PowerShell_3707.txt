@@ -1,0 +1,7 @@
+Set-AuthenticodeSignature should support Key Vault certificates
+
+
+Today, signing PowerShell scripts/modules requires a certificate to be present in the certificate store or via a PFX file.
+There's a growing number of situations where these are not available -- for example, if the key is stored in Key Vault an RSA-HSM key. There's no way to get a private key out.
+There should be a way for PowerShell code signing to either use the KeyVault SignAsync API directly or at least have an extension mechanism where the sign digest can be externalized and someone else can write an adapter.
+This also has the added benefit of working cross platform as the crypto itself is done in the HSM.

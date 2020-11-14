@@ -1,0 +1,75 @@
+authentication token lost from the session after login_check redirection
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.1
+
+
+
+I have made some code changes to store sessions in Database using PdoSessionHandler. I am using Guard Authentication. checkCredentials is working fine is working fine, insert into "sessions" table is also working fine. But the Authentication token in the session is lost after /login_check redirect.
+Authentication token is stored in the serialized format under "_security_secured_area" in the session and the session is also saved in the DB but after the redirect from /login_check to /login_redirect session is available with the same id but the auth token details are missing. Probably it is not able to populate auth details from the DB.
+Here is my packages/security.yaml
+firewalls:
+ 
+    secured_area:
+        pattern:    ^/
+        anonymous: ~
+        guard:
+            authenticators:
+                - App\Security\LoginFormAuthenticator
+        logout:
+            path:   _logout
+            target: _public_signin
+
+        logout_on_user_change: true
+        remember_me:
+            secret:   '%kernel.secret%'
+            lifetime: 2592000 # 30 days in seconds
+            path:     /
+            domain: ~
+            remember_me_parameter: _stay_signedin
+            # by default, the feature is enabled by checking a
+            # checkbox in the login form (see below), uncomment the
+            # following line to always enable it.
+            #always_remember_me: true
+            token_provider: token_service
+I have written event subscriber to print the session contents to a file after the authentication and just before the redirect , I can see "_security_secured_area" in the session and also in the DB But after the redirect "auth" token details are lost from the session.
+Here is my gurardAuthenticator:
+public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+{
+    $user = $token->getUser();
+
+    if ($user->getNewUser() === true) {
+        $url = '_onboard';
+    } elseif ($user->getResetPass() === true) {
+        $url = '_change_temp_password';
+    } else {
+        $url = '_login_redirect';
+    }
+    return new RedirectResponse($this->urlGenerator->generate($url));
+}

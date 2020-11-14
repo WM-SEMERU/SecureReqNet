@@ -1,0 +1,10 @@
+Increase buffer pool size and streams high water marks
+
+
+Our Buffer pool size is currently set to 8kb. This seems pretty low for most hardware used these days.
+Similar with our default high water marks in streams (16kb for all streams besides fs readable streams that are set to 64kb).
+Increasing the buffer size allows less allocations to be used in general and increasing the default high water mark reduces the number of chunks which improves the throughout a lot.
+I would like to increase the buffer pool size to 128kb. The regular high water mark could increase to 64kb and the high water mark for fs to e.g., 256kb.
+Those numbers are all "magical" numbers but they seem better defaults than the current ones. Please let me know if there are reasons to either not change the defaults or if you have an alternative suggestion.
+It is also possible to change the Buffer's pool size default during runtime and to set each high water mark per stream.
+@nodejs/fs @nodejs/streams @nodejs/buffer PTAL

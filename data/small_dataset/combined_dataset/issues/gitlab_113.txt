@@ -1,0 +1,2 @@
+Needed (minimum) Git version and possible problems with it does not mention in system requirements page
+doc/install/requirements.md

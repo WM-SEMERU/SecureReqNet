@@ -1,0 +1,27 @@
+unsigned modules should not load with `AllSigned` policy
+
+
+Steps to reproduce
+Set-ExecutionPolicy -Policy AllSigned -scope process
+import-module pester -force  #Import a module which lives in $PSHome
+But if you copy Pester out of $PSHome it will not load
+Expected behavior
+
+Actual behavior
+module loads without error
+Notes
+PS 5.1 has the same behavior
+Environment data
+> $PSVersionTable
+Name                           Value
+----                           -----
+PSVersion                      6.0.0-rc
+PSEdition                      Core
+GitCommitId                    v6.0.0-rc
+OS                             Microsoft Windows 6.1.7601 S
+Platform                       Win32NT
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1
+WSManStackVersion              3.0
+

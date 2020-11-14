@@ -1,0 +1,47 @@
+drive synthesis of necessary ssh public/private keys from prior successful AWS login
+
+
+kops create cluster --zones=us-east-1c mandatoryfreedom.com
+I0113 19:36:46.561048   14236 create_cluster.go:331] Inferred --cloud=aws from zone "us-east-1c"
+
+error reading SSH key file "/home/stens/.ssh/id_rsa.pub": open /home/stens/.ssh/id_rsa.pub: no such file or directory
+
+I am migrating off kube-up.sh onto kops ... above I attempt to cut a fresh cluster
+beautiful thing about kube-up.sh is that once a successful login to AWS has happened using
+export      AWS_ACCESS_KEY_ID=$(cat ${AWS_ACCOUNT_CONFIGDIR}/id)
+export  AWS_SECRET_ACCESS_KEY=$(cat ${AWS_ACCOUNT_CONFIGDIR}/key)
+
+aws ecr get-login --region ${AWS_REGION} 
+
+later when calling kube-up.sh it will automatically deal with creating public/private ssh keys as per
+kube-up.sh
+...
+STATEMENT   sts:AssumeRole  Allow
+PRINCIPAL   ec2.amazonaws.com
+INSTANCEPROFILE arn:aws:iam::064066309977:instance-profile/kubernetes-minion    2016-07-06T15:46:02Z    AIPAJY6ROOGM4OX4MIBUC                               kubernetes-minion   /
+ROLES   arn:aws:iam::064066309977:role/kubernetes-minion    2016-07-06T15:46:01Z    /   AROAJJSIGFI2UHIZBUL5S   kubernetes-minion
+ASSUMEROLEPOLICYDOCUMENT    2012-10-17
+STATEMENT   sts:AssumeRole  Allow
+PRINCIPAL   ec2.amazonaws.com
+Generating public/private rsa key pair.
+Your identification has been saved in /home/stens/.ssh/kube_aws_rsa.
+Your public key has been saved in /home/stens/.ssh/kube_aws_rsa.pub.
+The key fingerprint is:
+SHA256:vMrnyJe4B6Hf9p/uvqxD521pVs4cB2zYOgRPljt7M4Q stens@mail.emptyadjacentpossible.com
+The key's randomart image is:
++---[RSA 2048]----+
+|             .   |
+|          . +    |
+|           = *   |
+|      ..    E *  |
+|     . .S  . * . |
+|    . .  .. = +.o|
+|     . +.o o + Oo|
+|     oooB ....* +|
+|      *B..oBO=   |
++----[SHA256]-----+
+Using SSH key with (AWS) fingerprint: SHA256:vMrnyJe4B6Hf9p/uvqxD521pVs4cB2zYOgRPljt7M4Q
+Creating vpc.
+
+NOTICE - I never had to deal with supplying my own /home/stens/.ssh/kube_aws_rsa.*
+It would be very nice if as people migrate off kube-up.sh and onto kops this leveraging of a successful AWS login to dynamically spin up necessary ssh public/private keys was again the default behaviour. In the past we did not have to mention anything about ssh public/private keys when spinning up an AWS cluster using kube-up.sh

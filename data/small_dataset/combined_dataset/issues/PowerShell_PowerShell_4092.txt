@@ -1,0 +1,36 @@
+Get-Help does not work in JEA sessions
+
+
+
+Note: Ported from bug 9314110
+
+Steps to reproduce
+New-PSSessionConfigurationFile -Path .\repro.pssc -SessionType RestrictedRemoteServer -RunAsVirtualAccount
+Register-PSSessionConfiguration -Path .\repro.pssc -Name Repro -Force
+Enter-PSSession -ComputerName . -ConfigurationName Repro
+Get-Help Select-Object
+Expected behavior
+NAME
+    Select-Object
+
+SYNOPSIS
+    Selects objects or object properties.
+[...]
+
+Actual behavior
+Cannot find path '' because it does not exist.
+    + CategoryInfo          : ObjectNotFound: (:) [Get-Help], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetHelpCommand
+
+Environment data
+> $PSVersionTable
+Name                           Value
+----                           -----
+PSVersion                      5.1.15063.413
+PSEdition                      Desktop
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                   10.0.15063.413
+CLRVersion                     4.0.30319.42000
+WSManStackVersion              3.0
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1

@@ -1,0 +1,4 @@
+Symfony 2.6, error with Impersonate User
+
+
+I'm getting an error when I try to impersonate a user, this error only happens with symfony 2.6 and I get the "access denied" message or redirects me to the login page, I clarify that I'm using a user with role ROLE_ALLOWED_TO_SWITCH

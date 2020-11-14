@@ -1,0 +1,50 @@
+[FrameworkBundle] update xsd to match the 4.2 configuration
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/A
+
+
+
+Update the FrameworkBundle xsd to match the 4.2 configuration

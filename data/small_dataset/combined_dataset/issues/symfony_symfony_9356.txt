@@ -1,0 +1,23 @@
+[Security:ContextListenerg] Bug - refreshUser method makes method calls on unserialized user object
+
+
+Class: Symfony\Component\Security\Http\Firewall\ContextListener
+Method: refreshUser
+Line: 146
+Symfony v2.3.6
+PROBLEM TRACE: ==========
+
+ContextListener grabs the unserialized object to check whether it implements UserInterface, line 148:
+
+$user = $token->getUser();
+
+User received from the UserProvider is injected into $token but the $user variable in the method is still the unserialized user object, line 159:
+
+$token->setUser($provider->refreshUser($user));
+
+Debug calls the getUsername() method on the unserialized user object but it should make the call on the user object received from UserProvider, lines 162, 170:
+
+$this->logger->debug(sprintf('Username "%s" was reloaded from user provider.', $user->getUsername()));
+SOLUTION: ==========
+...$user->getUsername() ..
+// $user to be the User object recevied from the UserProvider as this one has the properties set, where the unserialized object usually only has the "id" set.

@@ -1,0 +1,47 @@
+I'am using Gitlab 7.2.1 CE.
+
+I have activated the redmine issue tracker in the gitlab.yml as well as in the project settings.
+'Issues' Button of the Project does redirect to redmine, 'new issue' does redirect me to redmine too - great.
+
+But if I commit messages, by example my test commit messages:
+
+![Screen Shot 2014-09-10 at 3.35.33 AM](https://gitlab.com/uploads/gitlab-org/gitlab-ce/0a3221cd0a/Screen_Shot_2014-09-10_at_3.35.33_AM.png)
+
+No number of the commit is a link to the issue. 
+Everything is just plain text in the commits!
+
+The config part:
+```
+       ## If not nil, links from /#\d/ entities from commit messages will replaced with this
+       ## Use placeholders:
+       ##  :project_id        - GitLab project identifier
+       ##  :issues_tracker_id - Project Name or Id in external issue tracker
+       ##  :id                - Issue id (from commit messages)
+       issues_url: "https://gitlab.domain.com/issues/:id"
+```
+
+"If not nil, links from /#\d/ entities from commit messages will replaced with this"
+Doesn't seem to work. I have googled for a solution, found nothing which works.
+
+Please fix this Bug!
+
+**Update:**
+Interesting. I have activated Jira as well in my config and set it in the profile.
+With Jira (which has the same style as redmine in the config: title, project_url, issues_url, new_issues_url) does it work! (Not on the main page... its plain text there as well (see screenshot from first post)) but if I click on the commit itself, i get the correct href!
+
+Heres what I'am talking about:
+
+Activated Jira:
+![Screen Shot 2014-09-10 at 4.00.04 AM](https://gitlab.com/uploads/gitlab-org/gitlab-ce/edac524d06/Screen_Shot_2014-09-10_at_4.00.04_AM.png)
+
+Activated Redmine:
+![Screen Shot 2014-09-10 at 4.00.24 AM](https://gitlab.com/uploads/gitlab-org/gitlab-ce/ea5a6101a4/Screen_Shot_2014-09-10_at_4.00.24_AM.png)
+
+Please fix it.
+Let the numbers link to the issue tracker of redmine.
+On the commit page itself as well as on the main project page:
+
+
+![Screen Shot 2014-09-10 at 4.05.27 AM](https://gitlab.com/uploads/gitlab-org/gitlab-ce/04f4eca48d/Screen_Shot_2014-09-10_at_4.05.27_AM.png)
+
+Regards, Emovere

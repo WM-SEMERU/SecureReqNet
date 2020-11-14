@@ -1,0 +1,6 @@
+DOM data manipulation (DOM-based)
+
+
+The application may be vulnerable to DOM-based DOM data manipulation. Data is read from window.name and written to the 'name' property of a DOM element via the following statement:
+• window.name= window.name.replace(NG_ENABLE_..., "" )
+Note: The name of the current window is a valid attack vector for DOM-based vulnerabilities. An attacker can directly control the name of the targeted application's window by using code on their own domain to load the targeted page using either window.open() or an iframe tag, and specifying the desired window name.

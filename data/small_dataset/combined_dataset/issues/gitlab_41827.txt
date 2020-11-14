@@ -1,0 +1,7 @@
+I received an email from Jobert of HackerOne, who has been doing some testing:
+>  
+I was looking at the API and noticed that the /api/v4/ldap endpoint only requires authentication. There's no additional authorization check in place. It *seems* to be missing, but I'm unsure if it's intentional or not. It seems to return all of the LDAP groups when an LDAP provider is configured, which doesn't seem necessary to be accessible for normal users. Would you mind checking if that's intentional? There's no API documentation for the endpoint, too. Thanks!
+
+Can someone confirm and/or validate?
+
+/cc @stanhu @jritchey

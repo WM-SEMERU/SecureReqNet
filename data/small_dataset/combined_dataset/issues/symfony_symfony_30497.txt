@@ -1,0 +1,50 @@
+[HttpKernel] Change default log level for output streams
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes (visual)
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#27510
+
+
+License
+MIT
+
+
+
+BEFORE
+
+AFTER
+
+This should improve the first DX/UX for console-based apps.

@@ -1,0 +1,5 @@
+don't allow files to be downloaded without prompt
+
+
+c.f. https://scarybeastsecurity.blogspot.com/2016/11/0day-poc-risky-design-decisions-in.html
+it would be even better if we had some UI to indicate the origin of the download

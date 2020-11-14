@@ -1,0 +1,25 @@
+Update apiserver to use more recent sigs.k8s.io/sturctured-merge-diff commit
+
+
+https://github.com/kubernetes-sigs/structured-merge-diff/pull/71/files#diff-51cdfee1244be54c41b34b0a4ccb3ecaR79 removed the ParseableType interface.
+Attempting to do a minor upgrade of the kubernetes client will cause go modules to select the latest commit for both k8s.io/apiserver and sigs.k8s.io/structured-merge-diff -- test-infra fejta$ hack/update-deps.sh --minor k8s.io/{api,apiserver,apimachinery,apiextensions-apiserver,gengo,klog,kube-openapi}
+This will fail because k8s.io/apiserver has not been updated to use this new code yet.
+/assign @apelisse @lavalamp @jennybuckley
+This will make it hard for people using the kubernetes client to upgrade.
+# k8s.io/apiserver/pkg/endpoints/handlers/fieldmanager/internal
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/gvkparser.go:41:3: cannot use nil as type typed.ParseableType in return argument
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:55:3: cannot use nil as type typed.TypedValue in return argument
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:57:2: not enough arguments to return
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:57:35: typed.DeducedParseableType is not a type
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:62:2: not enough arguments to return
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:62:35: typed.DeducedParseableType is not a type
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:91:3: cannot use nil as type typed.TypedValue in return argument
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:95:7: cannot convert nil to type typed.ParseableType
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:96:3: cannot use nil as type typed.TypedValue in return argument
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/versionconverter.go:35:5: cannot use &versionConverter literal (type *versionConverter) as type merge.Converter in assignment:
+	*versionConverter does not implement merge.Converter (wrong type for Convert method)
+		have Convert(typed.TypedValue, fieldpath.APIVersion) (typed.TypedValue, error)
+		want Convert(*typed.TypedValue, fieldpath.APIVersion) (*typed.TypedValue, error)
+../../../go/pkg/mod/k8s.io/apiserver@v0.0.0-20190406052822-6b396918ed3b/pkg/endpoints/handlers/fieldmanager/internal/typeconverter.go:96:3: too many errors
+FAILED
+note this can be worked around with a replace 	sigs.k8s.io/structured-merge-diff => sigs.k8s.io/structured-merge-diff v0.0.0-20190302045857-e85c7b244fd2 stanza (assuming the rest of the code works with this commit

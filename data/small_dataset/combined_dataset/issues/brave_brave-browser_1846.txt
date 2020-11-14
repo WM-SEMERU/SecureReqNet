@@ -1,0 +1,5 @@
+brave extension audit shows critical vuln
+
+
+related: #1845
+running npm audit in brave-extension shows found 4 vulnerabilities (1 low, 2 moderate, 1 critical) in 16658 scanned packages

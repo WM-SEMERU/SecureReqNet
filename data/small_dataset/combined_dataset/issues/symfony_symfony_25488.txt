@@ -1,0 +1,86 @@
+Guard not calling start() after getCredentials()
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Symfony version
+3.3.14
+
+
+
+Guard doesn't seem to be calling start() after getCredentials.
+Assume user is not logged in (anonymous) when visiting route.  Everything else works fine.
+Expected output should be 'here1';
+fiewall:
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:     
+            anonymous: ~
+            logout: ~
+
+            form_login:
+                    use_referer: true
+                    csrf_token_generator: security.csrf.token_manager                    
+            provider: r_users
+            guard:
+                authenticators:
+                    - form_login_authenticator
+                entry_point: form_authenticator
+            
+            # activate different ways to authenticate
+
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            #http_basic: ~
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            #form_login: ~
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }        
+controller:
+/**
+  * @Route("/forms/{form_id}", name="form74")  
+  * @Security("has_role('ROLE_USER')")
+  */
+  public function serveForm(Request $request, $form_id, \Swift_Mailer $mailer) {
+     ......
+  }
+
+authenticator:
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+{
+.....
+    public function getCredentials(Request $request)
+    {
+     return null;
+    }
+
+    /**
+     * Called when authentication is needed, but it's not sent
+     */
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        echo 'here1';
+        exit;
+        $this->session->getFlashBag()->add('error', 'You must be signed in to view this area.');
+        $this->session->set('referer', $request->getUri());
+        
+        $url = $this->router->generate('login');
+
+        return new Response($url, Response::HTTP_UNAUTHORIZED);
+    }
+}

@@ -1,0 +1,6 @@
+I don't know if this is currently possible. But it would be nice if the gitlab.rb config file could configure a backup schedule. Further more it would also be nice for it to be able to configure it to upload to S3.
+
+This would automatically create the necessary cron jobs and such.
+
+My understanding was that this is supported through the existing RUBY backup gem.
+Link for clarity http://www.icicletech.com/blog/gitlab-backup-made-easy

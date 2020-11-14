@@ -1,0 +1,5 @@
+Removed name from theme documentation.
+
+
+What I did
+Removed name from options since it´s deprecated.

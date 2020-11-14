@@ -1,0 +1,8 @@
+Custom AccessDeniedHandler didn't work
+
+
+Symfony version(s) affected: 4.1.3
+Description
+Symfony ignores the custom AccessDeniedHandler. It never will called.
+How to reproduce
+Read (http://symfony.com/doc/current/security/access_denied_handler.html) and build it in a clean Symfony project. Secure an URL an called it. You will see, this your handler will never called.

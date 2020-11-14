@@ -1,0 +1,14 @@
+[WIP DO NOT MERGE] api: Set network name as part of the network usage response
+
+
+Problem: Network name is not part of the network usage response
+Root Cause: Code does not set the network name
+Solution: Set the network name for network usage type usage records in the API response
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+

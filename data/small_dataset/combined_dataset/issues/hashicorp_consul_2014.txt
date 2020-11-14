@@ -1,0 +1,5 @@
+Use a cryptographically secure seed
+
+
+SeededSecurely is present if someone or something wants to query the way the library was seeded.
+Obtained from: nomad

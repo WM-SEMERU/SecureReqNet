@@ -1,0 +1,24 @@
+### Summary
+
+The user and group permissions on `/var/opt/gitlab/redis`, `gitlab-redis:git`, are causing detections as vulnerabilities by some 3rd party commercial scanners.  The rule being violated is that the owning group does not match the group of the user account.
+
+From @stanhu:
+
+> Unicorn needs access to /var/opt/gitlab/redis/redis.socket, which is why the git user has read and execute permissions in that directory.
+> Note that gitlab-redis user has a shell of /bin/false, but the git user has a shell of /bin/sh that points to gitlab-shell.
+> ...could fix this by moving to a TCP socket for communication with Redis and then altering the permissions. There's no reason the git user should be able to read the redis.conf and Redis dump.rdb file in that directory.
+> ...but could be tricky in the UNIX socket case because both Redis and Unicorn need to access the 
+
+User report: https://gitlab.zendesk.com/agent/tickets/99335 (GitLab internal only)
+
+### Steps to reproduce
+
+This is currently the default when installing omnibus.
+
+### Output of checks
+
+This behavior is present in 10.8.x and newer.
+
+### Possible fixes
+
+The `redis.socket` can be moved to another location accessible to both `Redis` and `Unicorn`, maybe `/var/run/gitlab`.

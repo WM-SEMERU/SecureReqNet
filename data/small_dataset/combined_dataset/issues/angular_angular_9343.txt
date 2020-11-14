@@ -1,0 +1,15 @@
+Allow Custom CSS Variables in [ngStyle]
+
+
+This could be both a bug or a feature request …
+Current behavior
+When binding a custom CSS variable via [style.--feat-image]=...' or [ngStyle]=“{‘--feat-image’: … }” the property is ignored by angular and not bound. I assume there is a whitelist for certain (CSS) properties, which does not include possible CSS variables yet.
+Expected/desired behavior
+The value should be bound. If a whitelist of properties is needed, one fix could be to allow any property starting with --.
+More information about CSS variables here: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
+Please tell us about your environment:
+
+Angular version: 2.0.0-rc.2
+Browser: Chrome 50.0.2661.102
+Language: TypeScript 1.8.10
+

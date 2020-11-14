@@ -1,0 +1,46 @@
+[FrameworkBundle] Fix UrlGenerator::generate to return an empty string instead of null
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30306
+
+
+License
+MIT
+
+
+
+Fix #30306 : Controller::generateUrl() must be of the type string, null returned

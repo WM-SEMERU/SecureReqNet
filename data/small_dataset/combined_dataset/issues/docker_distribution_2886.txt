@@ -1,0 +1,5 @@
+support external redis sentinel cluster
+
+
+Signed-off-by: Jeremy Xu jeremyxu2010@gmail.com
+Support external redis sentinel cluster. #2885

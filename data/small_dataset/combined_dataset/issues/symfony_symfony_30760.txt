@@ -1,0 +1,72 @@
+[EventDispatcher][DX] Autoconfigure event listeners
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+NA
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs/pull/11252
+
+
+
+Now that event's FQDN could be used a eventName, this PR adds an alternative to EventSubscriberInterface that uses method's typehint to guess the event to subscribe.
+usage for developers:
+class MyListener implements EventListenerInterface {
+  public function __invoke(MyEvent $e) {
+  }
+}
+
+That's is. No more services to configure nor getSubscribedEvents to implement.
+This PR contains 2 parts:
+
+extends the tag kernel.event_listener to automatically register available methods when the tag does not contains the required name attribute.
+add a new EventListenerInterface (which is empty) that's just use to trigger the registerForAutoconfiguration.
+
+Few questionable choices made on that PR.
+
+reuse the tag kernel.event_listener instead of creating a new one
+priority is not configurable: EventSubscriberInterface is here for that
+
+Fixed 2 issues:
+
+tag container.hot_path was harcoded in subscriber logic (instead of using the injected variable)
+dynamic registration of onMyEventName when event name is a FQDN className
+

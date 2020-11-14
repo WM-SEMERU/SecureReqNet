@@ -1,0 +1,22 @@
+Block link-local and localhost service/endpoint addresses in apiserver proxy
+
+
+Reported by @stephenR
+It's possible to turn the master into a proxy to localhost or the GCE metadata server by adding a new endpoint that points to the service.
+To reproduce, add a new endpoint by posting to http://apiserver/api/v1beta3/endpoints with a description like:
+{ "metadata": { "name": "myendpoint", [...] },
+  "subsets": [
+    {
+      "addresses": [
+        { "IP": "169.254.169.254", [...] }
+      ],
+      "ports": [
+        { "port": 80, "protocol": "TCP" }
+] } ] }
+
+If you then go to http://apiserver/api/v1beta3/proxy/namespaces/default/services/myendpoint/ you can interact with the master's metadata server.
+We can't validate that Endpoints are within the cluster CIDR because we deliberately allow importing of external addresses -- that was the original purpose of allowing users to post Endpoints.
+I wouldn't disallow link-local and localhost addresses in Endpoints, either, since that might be useful in the future. I'd prefer to just disallow proxying to such addresses.
+Obviously we'd need to resolve DNS names before checking.
+See also #8871
+cc @roberthbailey @a-robinson @stephenR @lavalamp

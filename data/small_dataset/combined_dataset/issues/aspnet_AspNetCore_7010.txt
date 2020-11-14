@@ -1,0 +1,8 @@
+After successful login redirects back to login page
+
+
+I updated my visual studio 2017 to the latest 15.9.5.
+I have created an out the box asp.net core 2.2 web mvc project with individual user accounts. I set the db up (update-database from package manager console) and ran the site in IIS Express. All good to this point. Registered a user and could sign in.
+Deployed the app to IIS - running as an application under the default site and its stuck redirecting back to the login page after successfully signing in. (All deployed correctly - app = no managed code)
+So I commit the project to a bit bucket repo and ask a friend to try this on their machine. With IIS Express and the database I have given him it's stuck - redirecting back to login after successful sign.
+No custom code - all scaffolded code.

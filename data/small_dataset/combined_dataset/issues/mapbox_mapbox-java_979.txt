@@ -1,0 +1,33 @@
+Special character `á` incorrectly encoded in raw Geocoding API request URL
+
+
+What kind of issue is this?
+
+ Questions are better to ask on Stack Overflow. We are actively monitoring the questions there and oftentimes, others have already asked a similar question.
+ Feature request should start off by describing the problem the feature will resolve. Please open a GitHub ticket beforehand with information about the feature to spark some discussion about the topic and once you have our support.
+ Bug Report can be reported using the provided template below:
+
+Expected Behavior
+Using a geocoder with the Mapbox Maps SDK for Android should support special characters. So the search Santa Catarina Mártir,Puebla should yield results whether the Geocoding API call is initiated in a browser or via the Mapbox Maps SDK for Android.
+Current Behavior
+Expected results return when geocoding api request is initiated in a browser (i.e. in the Search Playground), but when using the SDK the raw geocoding API request URL includes the incorrect encoding for special character á so no results are returned.
+Possible Solution
+Steps to Reproduce
+
+Run your app (including a geocoder) in Android Studio and use this code to log out the raw geocoding API request URL:
+
+Log.d("GeocodingActivity", "onResponse: call.request() = " + call.request());
+
+
+Enter the search "Santa Catarina Mártir,Puebla" and grab the geocoding API request URL.
+See that it doesn't return any results and the query contains incorrect encoding: https://api.mapbox.com/geocoding/v5/mapbox.places/Santa+Catarina+M%25C3%25A1rtir%252CPuebla.json?access_token={{access-token}}&country=mx%2Cmx&types=poi%2Caddress&language=en
+Compare to the same search with the same parameters in the Search Playground and the raw request: https://api.mapbox.com/geocoding/v5/mapbox.places/Santa%20Catarina%20M%C3%A1rtir%2C%20puebla.json?access_token={{access_token}}&cachebuster=1551922406234&autocomplete=false&country=mx&limit=1&language=en
+
+Context (Environment)
+using gradle, compiling the following versions:
+    compile "com.mapbox.mapboxsdk:mapbox-sdk-services:4.5.0"
+  compile "com.mapbox.mapboxsdk:mapbox-sdk-geojson:4.5.0"
+
+Detailed Description
+Possible Implementation
+cc @langsmith

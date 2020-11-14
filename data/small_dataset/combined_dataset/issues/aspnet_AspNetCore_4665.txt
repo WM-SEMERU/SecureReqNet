@@ -1,0 +1,50 @@
+Add EventSource/EventCounter tracing and metrics for Authentication
+
+
+This is part of the larger EventCounter/EventSource effort across the platform. Specific events and counters are suggested below. Let the discussions begin! :)
+Start/Stop/Failure events will all have Duration event counters associated with them that will time the duration between Start and Stop. Stop events occur even in the case of failure (think finally blocks).
+
+
+Microsoft-AspNetCore-Authentication Event Source
+
+RemoteAuthenticationFailure traces calls to RemoteAuthenticationEvents.RemoteFailure
+TicketReceived traces calls to RemoteAuthenticationEvents.TicketReceived
+HandleRequestStart/Stop/Failure traces IAuthenticationRequestHandler.HandleRequestAsync but only starts after ShouldHandleRequestAsync succeeds. Thus not tracing requests that are not handled by the handler.
+
+
+
+Microsoft-AspNetCore-Authentication-Cookies Event Source
+
+CookieRefreshed traces when CookieAuthenticationHandler.RequestRefresh is called. Payload includes issue time, the old expiration and the new expiration?
+CookieExpired traces when an expired cookie token is received. Obviously this can't catch expiry of tokens until the expired token is actually presented to the server.
+
+
+
+Microsoft-AspNetCore-Authentication-JwtBearer Event Source
+
+TokenValidationFailed traces tokens that fail to validate
+InvalidTokensReceived counter incremented when token validation fails
+
+
+
+Microsoft-AspNetCore-Authentication-OAuth Event Source (shared by OAuth providers)
+
+CorrelationFailed traces occasions where the correlation ID cannot be verified.
+CorrelationFailures counter incremented when token validation fails
+ExchangeCodeStart/Stop/Failure traces the backchannel request to exchange the code for a token
+
+
+
+Microsoft-AspNetCore-Authentication-OpenIDConnect Event Source (shared by OIDC providers)
+
+RedeemAuthorizationCodeStart/Stop/Failure traces the backchannel request to redeem an authorization code
+TokenValidationFailed traces tokens that fail to validate
+InvalidTokensReceived counter incremented when token validation fails
+GetUserInformationStart/Stop/Failure traces the backchannel request to get user information
+
+
+
+I want to avoid the whole "the perfect is the enemy of the good" issue and focus on a relatively simple set of initial events. So I focused on tracing external dependencies and possible malicious actions (invalid tokens). Once in, it should be easy to iterate and add more events.
+Also, there's a broad category of AuthN-related events which will live in HttpAbstractions with AuthorizationService
+See https://gist.github.com/anurse/af1859663ac91c6cf69c820cebe92303 for some guidance on adding EventSources and EventCounters to ASP.NET projects.
+/cc @PinpointTownes @Tratcher @davidfowl

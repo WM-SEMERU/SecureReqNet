@@ -1,0 +1,5 @@
+Personal access tokens are persistent credentials that unless set by the user, have no expiration. We currently store these as plain text in the postgres database which leaves us open to SQL injection, database leaks, etc.
+
+A proposal was made in https://gitlab.com/gitlab-org/gitlab-ce/issues/29810#note_28404385 to start hashing all PATs in the database using SHA256 and an instance-global salt. This issue is to track that change.
+
+/cc @DouweM @kathyw @jurbanc

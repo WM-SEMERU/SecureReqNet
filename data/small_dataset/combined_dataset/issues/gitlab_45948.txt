@@ -1,0 +1,18 @@
+Email https://groups.google.com/a/gitlab.com/forum/#!topic/security/T91k5t7kOGU:
+
+> my company is using Gitlab CE 10.4.2  on Rhel 7 and I think we might discovered a Security issue with the deploy keys.
+> One of my colleges (regular Gitlab user) tried to delete a public deploy key for his project via the REST API Version 4 (https://docs.gitlab.com/ce/api/deploy_keys.html#delete-deploy-key).
+> But instead of removing the association from his project the key was completely removed although the keys was used by other projects. According to the documentation this should only happen if the key is only used by his project.
+> 
+> I discovered a closed issue (https://gitlab.com/gitlab-org/gitlab-ce/issues/26243) with the same problem but this was fixed in version 8.15 of the Gitlab (https://gitlab.com/BM5k/gitlab-ce/commit/d2db3649993b5ad3708d737c88998dc3e4d7ad80#92d7cfdc53ba028ae68170389838288bada01a69_117_115).
+> Instead of getting the actual deploy key instance with the ‘deploy_keys’
+>  method now the association will be retrieved via the ‘deploy_keys_projects’ method.
+> 
+> So I took a look in the source code of the Gitlab version which is used by my company and I found that the 'deploy_keys' method is used again. This also occurs in the current master.
+> 10.4.2: https://gitlab.com/gitlab-org/gitlab-ce/blob/v10.4.7/lib/api/deploy_keys.rb#L151
+> Master: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/api/deploy_keys.rb#L151
+> 
+> As far as I understand this, if you try to delete a deploy key from a project the key will be completely removed from the database instead of the association.
+> 
+> Kind regards
+> Christian Seelheim

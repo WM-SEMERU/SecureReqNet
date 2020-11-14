@@ -1,0 +1,7 @@
+Update to electron 2.0.x
+
+
+
+ Electron breaking API changes
+ Make sure it builds and runs on all platforms
+

@@ -1,0 +1,6 @@
+[Routing] Use double colon in custom routing example
+
+
+#eufossa
+Using single column is deprecated since Symfony 4.1.
+@wouterj

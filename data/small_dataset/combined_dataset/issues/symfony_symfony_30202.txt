@@ -1,0 +1,46 @@
+[Validator] Add missing DE validator translations
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30156
+
+
+License
+MIT
+
+
+
+Updated the validator translation file with the missing German (DE) translations.

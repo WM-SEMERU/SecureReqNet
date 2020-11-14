@@ -1,0 +1,58 @@
+Positive Attention value in Rewards Panel despite minimum page time requirement not being met
+
+
+Steps to Reproduce
+
+Clean profile
+Enable rewards
+Go to interia.pl and wait till the page is added to a-c table
+Change Minimum page time before logging a visit to 1 minute
+Go to Interia.pl
+Open Rewards Panel
+
+Actual result:
+Positive Attention value
+
+Expected result:
+0% Attention
+
+Reproduces how often:
+Easily reproduced
+Brave version (brave://version info)
+
+
+
+Brave
+0.63.30 Chromium: 73.0.3683.75 (Official Build) beta (64-bit)
+
+
+
+
+Revision
+909ee014fcea6828f9a610e6716145bc0b3ebf4a-refs/branch-heads/3683@{#803}
+
+
+OS
+Windows 10 OS Build 17134.523
+
+
+
+
+
+
+Brave
+0.65.16 Chromium: 74.0.3729.40 (Official Build) nightly (64-bit)
+
+
+
+
+Revision
+278d6a0d856d8314f36fb9a68b6e1d85cd0d14e7-refs/branch-heads/3729@{#470}
+
+
+OS
+Windows 10 OS Build 17134.523
+
+
+
+cc @brave/legacy_qa @NejcZdovc

@@ -1,0 +1,4 @@
+Missing Error for Get-HPOVUser
+
+
+Get-HPOVUser does not bring any error when there no connection to HPOV appliance.

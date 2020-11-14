@@ -1,0 +1,14 @@
+[SecurityBundle] Fatal error on check is granted for class field when cache is enabled
+
+
+When i call in twig is_granted('VIEW', nameClass, 'fooFieldName') application throw error:
+Fatal Error: Argument 1 passed to Symfony\Component\Security\Acl\Domain\UserSecurityIdentity::equals() must implement interface Symfony\Component\Security\Acl\Model\SecurityIdentityInterface, instance of Symfony\Component\Security\Acl\Domain\FieldEntry given, called in /var/www/naio/vendor/symfony/symfony/src/Symfony/Component/Security/Acl/Domain/PermissionGrantingStrategy.php on line 151
+This is problem with serializaton of FieldEntry and Entry types.
+serialization working when Acl have only one object of FieldEntry, but when is more that faild
+I show this on test written in pull request #12873;
+My config cache:
+doctrine:
+orm:
+metadata_cache_driver: apc
+result_cache_driver: apc
+query_cache_driver: apc

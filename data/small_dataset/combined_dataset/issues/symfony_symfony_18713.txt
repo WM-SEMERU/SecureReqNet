@@ -1,0 +1,22 @@
+[Guard] Locking with concurrent requests
+
+
+Hello everyone,
+I have a REST API built with with Symfony 3.0.4.
+When I am working on my laptop on the dev environment, I encouter a weird issue...
+I have a front-end built with VueJS making requests to the API. When loading a new vue I make up to 5 simultaneous requests to the API and I have some serious blockage : I have at least 20 seconds delay for the requests and a lot of time it just timeout and I have to reboot php-fpm, nginx and clear the SF3 cache.
+In the profiler I see that the blockage happens in the Guard component. I have two guess :
+
+there's a lock on the Guard level
+there's a lock happening at the database level (could be Doctrine, php-mysql or just mysql itself)
+
+Because it's a stateless API, it fetch the API token and the user profile from the database on each request (I know it's bad, but I only managed to cache half of it so far).
+Here are screenshots of two requests done at the same time :
+
+
+And here are the logs of one the request :
+
+For comparison, if I do my requests one at a time I rarely have more than 1000ms for the response.
+I do not have this problem on the production server or the pre-production server...
+So if anyone has an idea, I'm open !
+Pierre.

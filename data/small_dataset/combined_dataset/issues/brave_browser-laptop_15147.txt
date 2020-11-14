@@ -1,0 +1,15 @@
+Completely broken bookmarks manager
+
+
+Description
+After deleting a folder and importing again from Chrome there is a "ghost disabled" bookmark on the toolbar and the bookmark manager is completely off not showing any bookmarks.
+Steps to Reproduce
+
+Import from Chrome
+Delete a folder
+Re-import from Chrome
+
+Brave Version
+0.23.105
+Additional Information
+The folder I deleted before the problem appeared was an imported folder. I moved it (because drag n drop is broken too for bookmark folders on Toolbar) and it went in two places. I deleted the first one and then I got at the toolbar an undeletable disabled bookmark icon that I guess breaks the bookmark manager completely.

@@ -1,0 +1,39 @@
+Revert ETH Wallet functionality
+
+
+Revert "Merge pull request #15035 from Slava/eth-wallet-payments"
+This reverts commit 22f4cc8.
+Revert "Merge pull request #15033 from ryanml/fix-15031"
+This reverts commit 16a7383.
+Revert "Merge pull request #15032 from ryanml/fix-15023"
+This reverts commit ee4df6f.
+Revert "Merge pull request #15034 from brave/static-nodes-dir"
+This reverts commit cd37100.
+Revert "Merge pull request #15029 from brave/geth-sanity-updates"
+This reverts commit 84b416b.
+Revert "Merge pull request #15022 from brave/deleteDidDetach"
+This reverts commit c209fbd.
+Revert "Merge pull request #15027 from Slava/eth-wallet-password"
+This reverts commit c1d1fe9.
+Revert "Merge pull request #14734 from Slava/feature/ethwallet"
+This reverts commit 72820e8.
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+Reviewer Checklist:
+
+ Request a security/privacy review as needed if one was not already requested.
+
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

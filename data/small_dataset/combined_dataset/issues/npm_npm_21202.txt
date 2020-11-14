@@ -1,0 +1,10 @@
+ESLint-scope 3.7.2 has been hacked
+
+
+Please see the following issue:
+eslint/eslint-scope#39
+eslint-scope 3.7.2 has been published an hour ago which is a hacked version that steals the NPM accounts or something.
+Please pull the version 3.7.2 from the npm and freeze the account so this does not get propagated.
+As a matter of fact, there is no release tag for 3.7.2 on Github, so I think it would be great to consider double checking with Github repository before publishing any code.
+This would at least limit the possibility of uploading the malicious code to NPM without having Github credentials to tag the release/version.
+Additionally I believe it's possible to check if the release was signed and somehow enforce all tagged commits to be signed. I think Github returns such information via their API, at least you can see the verified commits via Github's web interface so there must be a way. Developer may be able to opt-in for this extra security via some .rc file stored in Git repo.

@@ -1,0 +1,4 @@
+[ACL] AccessDecisionManager doesn't check if voter supports object's class
+
+
+All methods decide* does not call method $voter->supportsClass() before voting.

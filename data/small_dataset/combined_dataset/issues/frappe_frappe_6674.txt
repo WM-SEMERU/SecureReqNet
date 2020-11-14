@@ -1,0 +1,24 @@
+[Bug: Important] V11 - DocType Report Ignored User Role Permissions
+
+
+Vulnerable: DocType Report Ignored User Role Permissions and DocType Permission Level.
+User can access field that admin want to hide by simply change
+/desk#List/Purchase%20Receipt/List to /desk#List/Purchase%20Receipt/Report
+There're 2 main problem regarding this issues.
+
+User can access report page even Report has been disable from User Role Permission.
+If we disable Report from User Role Permission, all it does is remove Report button on Doctype List page.
+But user can still access Report page directly from url.
+ie http://localhost:8000/desk#List/Purchase%20Receipt/Report
+
+
+
+
+When User is on DocType Report page doctype permission level will be ignored.
+
+
+
+I'm on
+Python 3
+ERPNext: v11.0.3-beta.31 () (staging)
+Frappe Framework: v11.0.3-beta.40 () (staging)

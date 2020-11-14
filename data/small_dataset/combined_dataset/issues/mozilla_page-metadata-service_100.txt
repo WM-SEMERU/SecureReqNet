@@ -1,0 +1,4 @@
+Add a remote URL blacklist
+
+
+We should add a black list of domains/hosts which we will not attempt to establish remote connections to.  This can include private IP ranges, localhost, as well as known third party hosts/domains which pose a risk to either the service or its consumers.

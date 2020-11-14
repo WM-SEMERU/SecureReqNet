@@ -1,0 +1,5 @@
+Update System.Net.Security to > 4.0.0
+
+
+System.Net.Security has a security advisory and must be updated to a version > 4.0.0
+aspnet/Announcements#239

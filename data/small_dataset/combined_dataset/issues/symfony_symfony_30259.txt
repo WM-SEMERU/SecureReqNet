@@ -1,0 +1,11 @@
+[Messenger] Consumers not showing in RabbitMQ admin?!
+
+
+Symfony version(s) affected: 4.2.0 - 4.2.3
+Description
+When running the messenger:consume-messages command, the registered consumer(s) will not show in admin area of RabbitMQ, although the messages get consumed.
+That's the current state:
+
+And this is how it should look like:
+
+Is this an actual bug, is it by design or am I doing something wrong?

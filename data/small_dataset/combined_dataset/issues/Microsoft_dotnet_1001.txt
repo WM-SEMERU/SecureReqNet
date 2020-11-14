@@ -1,0 +1,5 @@
+BuildAppxSideloadPackageForUap ignored using .Net Core version 6.2.8
+
+
+I have a big UWP project, and to optimize compilation time I've set BuildAppxSideloadPackageForUap to false in my csproj file, to prevent .Net Native compilation during Release appxupload creation.
+Recently I've updated Microsoft.NETCore.UniversalWindowsPlatform NuGet package to version 6.2.8, and the flag seems to be completely ignored now.

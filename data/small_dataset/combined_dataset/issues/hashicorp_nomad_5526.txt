@@ -1,0 +1,9 @@
+Add metrics for allocated cpu(memory) for each task.
+
+
+Nomad version
+Nomad v0.9.0-rc1 (7c00ab4)
+Operating system and Environment details
+Windows Server 2019
+Issue
+Can you add metrics for allocated memory/cpu for each job/task? It needs to calculate percentage of available resources. For example: nomad_client_allocated_memory{job="test-job", task="task-1"} 1000

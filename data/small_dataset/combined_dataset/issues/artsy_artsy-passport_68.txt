@@ -1,0 +1,7 @@
+redirectBack prevents "open redirects"
+
+
+Steps to reproduce :
+1 Get logged out.
+2 Open https://www.artsy.net/log_in?redirect_uri=http://artsy.net%0D%0Aattacker.com/
+3 After getting logged, you'll be redirected on artsy.netattacker.com (an external website).

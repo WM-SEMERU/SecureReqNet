@@ -1,0 +1,6 @@
+Adds fix for origin and destination overriding list
+
+
+closes: #378
+replaces PR #383
+you are allowed to set only origin and destination or origin, destination, and a list of coordinates. if a list is provided, it will go in between the origin and destination when creating the string for the API.

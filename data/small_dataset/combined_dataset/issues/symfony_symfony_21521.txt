@@ -1,0 +1,29 @@
+[SecurityBundle] Remove FirewallMap from classes to compile
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#21520
+
+
+License
+MIT
+
+
+

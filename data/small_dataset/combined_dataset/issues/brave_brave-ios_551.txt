@@ -1,0 +1,19 @@
+External links should request user confirmation
+
+
+Description:
+Third party apps can be opened from Brave without user confirmation
+Steps to Reproduce
+
+Navigate to mailto://abc@abc.com
+
+Actual result: 
+Mail opens
+Expected result:
+Request user confirmation before opening external apps.
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Everytime
+Brave Version: 
+1.7 (18.11.30.03)
+Device details: 
+iPhone SE/iOS 12.1

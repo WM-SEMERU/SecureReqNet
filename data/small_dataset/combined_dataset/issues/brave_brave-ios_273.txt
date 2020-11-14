@@ -1,0 +1,17 @@
+Script pulled through invalid SSL on SSL page leaving browser vulnerable to man-in-the-middle-attacks
+
+
+Script pulled through invalid SSL on SSL page
+Steps to Reproduce
+
+Navigate to one of the URLs in the Additional Information section
+
+Actual result: Test fails
+Expected result: Test should pass
+Reproduces how often: Every time
+Brave Version: Latest development build hash cefaeab
+Device details: iPad Pro 10.5" iOS 12
+Additional Information
+Test scripts which pass on 1.6:
+https://ios.browsr-tests.com/alt/ssl_http_script.php
+https://ios.browsr-tests.com/alt/ssl_delayed_script.php

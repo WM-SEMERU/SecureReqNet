@@ -1,0 +1,27 @@
+PolicyEvaluator.AuthenticateAsync does not provide AuthenticationProperties
+
+
+I've the following situation:
+ASP.NET Core 2.2.0 WebApp with Identity.
+I've configured two JwtBearer Authentications and the Application Cookie Authentication (interim solution for backward compatiblity).
+The default scheme is the Application Cookie Scheme.
+The JwtBearer has the option "SaveToken" set to TRUE;
+Since I don't need to distinguish between the Authorization Schemes, I'm working with a simple [Authorize]-Attribute.
+To achieve this, I've the following code
+services.AddAuthorization(options =>
+{
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .AddAuthenticationSchemes(
+            JwtBearerDefaults.AuthenticationScheme,
+            IdentityConstants.ApplicationScheme
+            )
+        .RequireAuthenticatedUser().Build();
+});
+
+If a request to a protected ressource is sent with a valid bearer token and without the Cookie, the Authorization Middleware is trying to authorize via Cookie - which fails.
+After some other stuff, AuthenticateAsync on the PolicyEvalutor is called (this method) , which calls AuthenticateAsync on the two schemes mentioned above (one JwtBearerHandler and the Cookie Handler).
+The Authentication on the JwtBearerHandler is successful and the token is saved in the AuthenticationProperties of the AuthenticationResult.
+But since the PolicyEvaluator eventually needs to merges the results of the different schemes, those Properties are lost. The PolicyEvaluator creates a new AuthenticationTicket and only merges the UserPrincipal and not the AuthenticationProperties.
+The question for me is: is this the expected behaviour?
+I would say no, the PolicyEvaluator should merge the AuthenticationProperties.
+As a side node: changing the default Auth-Scheme does not solve the problem, since both schemes are saving AuthenticationProperties - which means, that I would have the same situation, if a request only provides a cookie and no bearer token.

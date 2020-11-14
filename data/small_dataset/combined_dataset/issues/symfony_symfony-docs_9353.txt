@@ -1,0 +1,6 @@
+Add example for using a voter to restrict switch_user
+
+
+
+No description provided.
+

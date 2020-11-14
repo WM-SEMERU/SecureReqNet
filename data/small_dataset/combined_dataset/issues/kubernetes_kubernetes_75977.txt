@@ -1,0 +1,28 @@
+enable external sources in verify-shellcheck
+
+
+What type of PR is this?
+
+Uncomment only one  /kind <> line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+/kind api-change
+/kind bug
+
+/kind cleanup
+
+/kind design
+/kind documentation
+/kind failing-test
+/kind feature
+/kind flake
+
+What this PR does / why we need it: enables --external-sources in hack/verify-shellcheck.sh.
+We need this because we lint individual files, and shellcheck will only follow files specified as input, we want it to follow sourced files with fixed paths without complaining spuriously and without adding shellcheck-specific comments to the sources.
+Which issue(s) this PR fixes:
+Fixes #
+xref: #75912 (comment)
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+
+/sig testing
+/priority important-longterm

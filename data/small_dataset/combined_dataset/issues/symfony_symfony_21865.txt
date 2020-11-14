@@ -1,0 +1,50 @@
+[Security] context listener: hardening user provider handling
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#4498
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+After the wrong fix in #21791 this is the second attempt to solve #4498. If more than one user provider support the user for the current context, all of them will be applied instead of returning prematurely when the first user provider does not find the logged in user.

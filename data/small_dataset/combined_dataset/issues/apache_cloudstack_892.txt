@@ -1,0 +1,15 @@
+CLOUDSTACK-8910: The reserved_capacity field increases suddenly after…
+
+
+… a vmware host failure
+In case of vmware host failure, all the VMs including stopped VMs migrate to the new host. For the Stopped Vms powerhost gets updated. This was triggering HandlePowerStateReport which finally calls updatePowerState updating update_time for the VM. This cause the capacity being reserved for stopped VMs capacity skip counting hours.
+Added the change to avoid update if the VM is in stopped state and host Id is null.
+Verified the fix manually.
+Here are the repro steps:
+
+take a HA enabled cluster with two hosts.
+should have few started and stopped VMs to each of the host.
+Now shutdown one host.
+All VMs(including stopped) on the host will migrate to another host.
+Now update time of even stopped VMs get updated and will reserve the capacity for skip counting hours on the host identified by last_host_id.
+

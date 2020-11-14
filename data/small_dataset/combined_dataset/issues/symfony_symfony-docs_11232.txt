@@ -1,0 +1,4 @@
+Fix the example about overriding the getProjectDir method
+
+
+This method must return the canonical path for things to work fine everywhere.

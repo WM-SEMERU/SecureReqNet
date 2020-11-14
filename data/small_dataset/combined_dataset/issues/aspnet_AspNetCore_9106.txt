@@ -1,0 +1,9 @@
+Azure Linux Web App, "it" culture not working
+
+
+Describe the bug
+Create a new aspnetcore 2.2 web app, enable it and en cultures as the documentation instructs, and make a page that prints the current date in short date format "d".
+Run it locally with an italian browser, it correctly use the dd/MM/yyyy pattern, then deploy it to azure linux web app (code and framework dependent, not container) navigate to that page with the same browser with italian language : the displayed date has the english M/d/yyyy pattern.
+Printing the output of this code in a page confirms that the database of culture information has problems :
+new System.Globalization.CultureInfo("it").DateTimeFormat.ShortDatePattern)
+new System.Globalization.CultureInfo("en").DateTimeFormat.ShortDatePattern)

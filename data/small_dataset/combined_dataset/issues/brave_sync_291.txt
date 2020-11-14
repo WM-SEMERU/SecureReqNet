@@ -1,0 +1,4 @@
+Update design wiki page
+
+
+Sync (although limited) is now available in beta on at least Android. The design wiki page claims that it is still not. Should ideally be updated, although the sync seems to be very limited (to bookmarks) at this time.

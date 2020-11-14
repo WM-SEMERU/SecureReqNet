@@ -1,0 +1,22 @@
+[Form] Import single block from a template?
+
+
+I use different templates to override different widgets. For example, our customer wants read-only inputs to be displayed as text. To do this, I've created a form/disabled_as_text.html.twig file and registered it in my config under twig.form_themes.
+The file should've looked something like this:
+{% use 'bootstrap_4_layout.html.twig' %}
+
+{%- block form_widget_simple -%}
+    {% if disabled %}
+        <div class="d-block">
+            {{ value }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{%- endblock -%}
+
+...
+https://symfony.com/doc/current/form/form_themes.html#reusing-parts-of-a-built-in-form-theme
+The problem is that use imports ALL blocks from that template. When the form is rendered it goes through all the templates defined in twig.form_themes and calls the first one that contains the required block. Since form/disabled_as_text.html.twig includes all blocks from the base layout all the other form files will never be called.
+A workaround would be to rename all the unneeded blocks using {% use '...' with block_name as _block_name %} but I hope it's obvious that this is not a viable solution.
+Something like {% use '...' with block_name only %} is needed.

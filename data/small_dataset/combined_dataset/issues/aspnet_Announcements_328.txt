@@ -1,0 +1,6 @@
+Microsoft.AspNetCore.SpaServices and NodeServices no longer fallback to console logger by default
+
+
+Microsoft.AspNetCore.SpaServices and Microsoft.AspNetCore.NodeServices used to automatically create a console logger when logging is not configured. To align them with how other AspNetCore packages implement logging we are removing this automatic fallback.
+From now on Microsoft.AspNetCore.SpaServices and Microsoft.AspNetCore.NodeServices would not display any console log when logging is not configured.
+To configure console logging please add services.AddLogging(builder => builder.AddConsole()) to your Setup.ConfigureServices method.

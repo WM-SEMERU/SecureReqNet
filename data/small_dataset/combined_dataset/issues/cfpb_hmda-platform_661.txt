@@ -1,0 +1,4 @@
+Add auth services to docker-compose.yaml
+
+
+Once cfpb/hmda-platform-ui#257 is in, and we're happy with the Compose setup in hmda-platform-auth, let's migrate that setup to this repo, excluding the non-HMDA-specific bits like oidc-client and echo-api.  We may want to wait on cfpb/hmda-platform-auth#20 before doing this, though may not be a hard dependency.

@@ -1,0 +1,7 @@
+playground: empty "cajoled source"
+
+
+This is a bug in the Caja Playground. Following the instructions in the tutorial (with the canvas clock example), the contents under the "cajoled source" tab are just a 2-line empty <script></script>, not the cajoled source as expected.
+Instructions to repeat this, in more detail: in the playground [http://caja.appspot.com/], (1) click the line which chooses that example, (2) click the Cajole button [clock is shown as expected, and is running], (3) click the Cajoled Source tab (empty script is shown).
+This is in Google Chrome Version 52.0.2743.116 (64-bit) (latest), on a Mac running Yosemite (10.10.5).
+(For some reason I'm unable to search open issues for text, so I can't be sure this isn't a known issue.)

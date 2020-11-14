@@ -1,0 +1,28 @@
+Segfault on Node 10.x doesn't occur in 6.x
+
+
+
+Version: v10.15.2 (also happens with other v10.x versions)
+Platform: Ubuntu 18.04.1 LTS (GNU/Linux 4.15.0 GCP x86_64)
+
+Since last year I've been having issues switching to 10.x from 6.x because of rare crashes that give no error.  I have several production servers with hundreds of users and it's been too difficult to reproduce with a local server so far because it seems to only happens under load and it's fairly rare.
+There's a large amount of code that I can't really reduce for testing without affecting my users. Since I haven't had the time or ability to debug this properly I was hoping someone could point me in the right direction, or that this would be helpful to the developers if this is a bug in 10.x or v8.
+There are no errors to report, but here are some of the recent segfaults in various syslogs that only happen when a server is on node 10:
+Feb 12 21:56:29 EU1 kernel: [22262355.042532] node[20512]: segfault at 3d77ac406468 ip 0000000000efade2 sp 00007f263e259c10 error 4 in node[400000+1e90000]
+Mar 13 19:39:09 SEA1 kernel: [2908566.872204] node[4145]: segfault at 23e4891a2fb0 ip 0000000000efa272 sp 00007fbbf4dd0c10 error 4 in node[400000+1e8f000]
+Mar 16 08:59:55 SEA1 kernel: [3129393.630360] node[14805]: segfault at 1ac3c9db79c8 ip 0000000000efa272 sp 00007f10629f0c10 error 4 in node[400000+1e8f000]
+Mar 16 20:25:29 USW1 kernel: [3173535.851715] node[31823]: segfault at 13aa4aac9a78 ip 0000000000efa272 sp 00007fdb85380c10 error 4 in node[400000+1e8f000]
+Mar 17 00:26:56 USE2 kernel: [25489067.874929] node[17011]: segfault at 93788ef0108 ip 0000000000efade2 sp 00007fc14bffec10 error 4 in node[400000+1e90000]
+Mar 19 22:10:11 USW1 kernel: [3438995.257871] node[11791]: segfault at 7b0370d05c8 ip 0000000000efa272 sp 00007f88d3403c10 error 4 in node[400000+1e8f000]
+Mar 21 11:46:28 USW1 kernel: [3574361.032453] node[18756]: segfault at 10f0170f9b8 ip 0000000000efa272 sp 00007fdb9e281c10 error 4 in node (deleted)[400000+1e8f000]
+Mar 27 18:55:30 USE2 kernel: [26419545.476970] node[21011]: segfault at 706d2e8f0b8 ip 0000000000efade2 sp 00007f2b59fadc10 error 4 in node[400000+1e90000]
+Apr  1 20:39:24 SEA1 kernel: [319450.383166] node[8710]: segfault at 16f9cfd832b0 ip 0000000000efa272 sp 00007f7850aa2c10 error 4 in node[400000+1e8f000]
+Apr  1 20:23:53 USE1 kernel: [26742046.491931] node[4466]: segfault at 3253e97d4310 ip 0000000000efa272 sp 00007f1b2fffec10 error 4 in node[400000+1e8f000]
+Apr  2 14:58:52 EU1 kernel: [26470558.192840] node[27273]: segfault at 1bbcf96ba358 ip 0000000000efade2 sp 00007f1e95a03c10 error 4 in node[400000+1e90000]
+The module versions have been different throughout the last year and on different servers but here is what is currently being used on USW1 as an example:
+
+mongodb@3.1.0-beta4
+ws@5.2.0
+
+I haven't done much testing in node 8.x due to some major garbage collection delay which is another issue altogether. Similarly I haven't had success on version 11.x. I was able to reproduce the crash on my local windows machine once upon a time after days of experimentation on node 10, but not reliably, and I can't seem to get it to occur anymore. It's possible some newer changes have reduced the frequency of this crash because I remember it happening more often in 2018.
+I've been mostly using the N version switcher to test different versions. Let me know if there is any other info I can provide or some way to look up these segfault addresses to narrow things down. Thanks!

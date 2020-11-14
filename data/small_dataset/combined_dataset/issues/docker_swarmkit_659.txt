@@ -1,0 +1,7 @@
+Store root CA key in raft
+
+
+This stores the root CA's key in raft so other managers can use it.
+Currently the root key is stored unencrypted. A followup will store it
+in an encrypted form that can be unlocked by other managers using a
+secret.

@@ -1,0 +1,5 @@
+The object returned by `/projects/:id/merge_request/:merge_request_id` does not contain the MR creation time, however you can view it on the web UI.
+
+The reason is that we'd like to know which merge requests are "stuck" by polling on the open ones and sending a daily email with ones older than X days.
+
+Also on [github](https://github.com/gitlabhq/gitlabhq/issues/6902), you should probably close the issues there.

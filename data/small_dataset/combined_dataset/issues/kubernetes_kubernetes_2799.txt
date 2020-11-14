@@ -1,0 +1,4 @@
+TLS Configuration
+
+
+I've gotten a request to be able to configure the TLS used internally by Kubernetes (e.g. specify cipher suites, minimum SSL/TLS version, etc.). This will likely be a number of additional options; what would be the preferred method of implementing this? More command line options, a config file, something else?

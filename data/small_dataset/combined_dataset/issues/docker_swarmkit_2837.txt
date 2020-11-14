@@ -1,0 +1,4 @@
+Bump protobuf 1.2.0, and re-generate
+
+
+ping @dperny @wk8 @stevvooe ptal

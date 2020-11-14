@@ -1,0 +1,9 @@
+Upgrade from Kubernetes 1.5.6 to 1.6.x breaks weave
+
+
+Seems like weave daemonset was not upgraded when I upgraded the cluster.
+As a workaround I manually deleted the daemon set and re-created it following weave's docs:
+kubectl delete daemonset weave-net -n kube-system
+kubectl apply -f https://git.io/weave-kube-1.6
+
+Tested with kops 1.6.0-alpha.2

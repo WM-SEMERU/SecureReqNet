@@ -1,0 +1,5 @@
+'- [x] Upgrade RedCloth to 4.3.2
+
+Security fix of [RedCloth](https://github.com/jgarber/redcloth/blob/master/CHANGELOG) for CVE-2012-6684 has released recently, let's update RedCloth to 4.3.2.
+
+cf. !2037 (and its revert MR !2071)

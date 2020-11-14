@@ -1,0 +1,4 @@
+Note how to use multiple Guard Authenticators with different User Providers
+
+
+If multiple guard authenticators have different providers, link to the details on chaining providers together.

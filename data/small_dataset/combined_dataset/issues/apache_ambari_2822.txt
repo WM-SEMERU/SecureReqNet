@@ -1,0 +1,8 @@
+[AMBARI-25137] SecondaryNamenodeDeletedCheck did not consider the situation of multi-clusters
+
+
+…ple clusters,fix it
+What changes were proposed in this pull request?
+add findByCluster method in HostComponentStateDAO for using in SecondaryNamenodeDeletedCheck to get the cluster HostComponentStateEntity list
+How was this patch tested?
+manual tests

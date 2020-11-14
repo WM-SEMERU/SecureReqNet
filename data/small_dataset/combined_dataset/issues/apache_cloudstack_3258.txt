@@ -1,0 +1,30 @@
+[WIP DO NOT MERGE] Configure hiding table columns through config.js file
+
+
+Description
+We want to support hiding table columns, specifically in metrics table, through config file so that users can make the relevant bits hidden as per their organization. Current work will support the metrics table but can be extended to any table with minimal work in future.
+Config file will take the key of the metrics column from metrics.js file for the sake of minimal changes and simplicity of development.
+Problem: The keyboard list in the UI is not consistent across views such as in the instance wizard and in the register template form. There is also no way to custom about url/text and doc title and help URL in the UI.
+Root Cause: The list is hardcoded in the UI allowing no centralised configuration.
+Solution: Introduce a new config.js file installed at the /usr/share/cloudstackmanagement/webapp/config.js location. The config.js allows configurable keyboard list, about url/text, doc title,  and help URL.
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+How Has This Been Tested?
+Testing and further documentation in progress and will be updated with proper notes.
+Image with all columns showing up -
+
+Change in config.js file -
+
+View after change in config file -
+
+Another Example with Hosts Metrics -
+
+
+

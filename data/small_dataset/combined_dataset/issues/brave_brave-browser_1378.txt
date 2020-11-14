@@ -1,0 +1,5 @@
+Only allow whitelisted protocols in tor mode
+
+
+brave/browser-laptop#14664
+brave/browser-laptop#14665

@@ -1,0 +1,28 @@
+Disallow data URLs in top level navigation
+
+
+Description 
+Data URLs can be used for spoofing. Disallow top level navigations to data URLs.
+Steps to Reproduce 
+
+Navigate to http://yigittestman.000webhostapp.com/spoof/aaa.html
+Open the hyperlink in new tab
+
+Actual result: 
+Can navigate to data urls
+Expected result:
+Disallow top-level navigations to data URLs.
+Issue reproduces how often: 
+Easily
+Issue happens on: 
+
+Current Playstore version? Yes
+Beta build? No
+
+Device Details:
+
+Device(Phone, Tablet, Phablet): Pixel 2XL
+Android Version: Android 9
+
+Brave version:
+1.0.82 /Cr 72

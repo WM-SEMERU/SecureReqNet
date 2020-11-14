@@ -1,0 +1,29 @@
+Security for time series
+
+
+Design
+
+Be able to limit data that a user can see. We can leverage the security features of Apache Accumulo for this. Data will need to be labeled when it is sent to Timely, and we will need to know the identity of the user performing the query so that we can determine what he/she can see.
+Ingest
+
+Define a metric tag name that will be used to convey the column visibility to apply when storing the data in Accumulo. Suggest being terse with the tag name, like 'viz'. The tag value supplied by the user will be applied directly with no translation by Timely. The viz tag would not be stored like the other tags sent in the metric, it would only be used to populate the column visibility in the key.
+Query
+
+We will need to know the identity of the Grafana user. I don't think there is a feature within Grafana that will pass the user identity back to the data source. I think there may be two ways to do this:
+
+With direct data source access from the browser (not proxying through the Grafana server) and using 2-way SSL we can obtain the subject DN from the users certificate. Needed for this approach:
+
+Adding configuration for enabling SSL in Timely
+Adding Netty SSL handlers
+Ability to get authorizations for a user (JAAS?)
+
+
+Have the user log into Timely before using Grafana. The response from Timely could set a session cookie in the users browser that is passed back to Timely for each query. Needed for this approach:
+
+New api method supporting username and password.
+JAAS integration for user authentication and authorization
+caching of session cookies to user identities and roles
+
+
+
+Once we have the authorizations for the user, then we can use them in the query to Accumulo. The viz tag would not be returned in the query results.

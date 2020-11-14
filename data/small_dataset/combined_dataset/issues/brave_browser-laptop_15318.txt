@@ -1,0 +1,9 @@
+Pixiv Ugoira/Animations
+
+
+Description
+Ugoira/Animations in pixiv do not work with brave browser.
+Steps to Reproduce
+Just look at any ugoira in pixiv.net
+What version of Brave are you using?
+0.56.15

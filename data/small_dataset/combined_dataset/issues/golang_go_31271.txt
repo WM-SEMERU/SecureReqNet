@@ -1,0 +1,29 @@
+cmd/go: go test ./... gives duplicate reports when no source files availabe
+
+
+What version of Go are you using (go version)?
+% go version
+go version devel +964fe4b80f Thu Apr 4 00:26:24 2019 +0000 darwin/amd64
+
+
+Does this issue reproduce with the latest release?
+yes
+What did you do?
+% mkdir ~/devel/test && cd ~/devel/test
+% go mod init github.com/davecheney/test
+% go test ./...
+
+What did you expect to see?
+no packages to test
+
+or
+"./..." matched no packages
+
+or
+no output
+What did you see instead?
+% go test ./...
+go: warning: "./..." matched no packages
+no packages to test
+
+Note the duplicate warning and error message.

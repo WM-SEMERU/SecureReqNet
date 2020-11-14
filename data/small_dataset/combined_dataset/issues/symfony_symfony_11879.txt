@@ -1,0 +1,29 @@
+[SecurityBundle] SwitchUserListener deal with attemptSwitchUser and LogicException
+
+
+Hi,
+I would like to know how you deal with the SwithUserListener and the LogicException here : 
+
+
+symfony/src/Symfony/Component/Security/Http/Firewall/SwitchUserListener.php
+
+
+         Line 91
+      in
+      397687f
+
+
+
+
+
+
+  throw new \LogicException(sprintf('Switch User failed: "%s"', $e->getMessage())); 
+
+
+
+
+    ?
+Example, from your backend you switch on user, then you change again with an other user and you have a LogicException. Ok.
+So with on the kernel.exception I can get this exception but I don't know if this LogicException is throw from this Listener or an other.
+May be we need a specific exception.
+This was introduced by this PR #3580

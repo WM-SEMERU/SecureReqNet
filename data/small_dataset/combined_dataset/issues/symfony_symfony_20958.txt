@@ -1,0 +1,51 @@
+[WIP] [Security] improved DaoAuthenticationProvider exception handling
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+NA
+
+
+License
+MIT
+
+
+
+In short, this improves the way how the DaoAuthenticationProvider handles exceptions.
+I encountered myself in the following situation:
+Event though I throw a DisabledException on my implementation of the UserProviderInterface (pointing that the user status is not active anymore), the DaoAuthenticationProvider would then throw a "generic" AuthenticationServiceException which only provides the user with a "system problem" message even though it's a user status problem.
+This pr is a simple, but efficient way of dealing with this issue.
+Let me know if you guys agree with this, if yes I will add tests in DaoAuthenticationProviderTest.
+Ps: this is my 1st pr on symfony...please be extra patient. 😆

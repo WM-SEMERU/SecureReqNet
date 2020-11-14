@@ -1,0 +1,17 @@
+Update XR code to use rigid transforms and new pose/transform stuff from the spec
+
+
+This updates our XR code to use euclid's new RigidTransform3D type, which is more efficent and convenient to work with.
+It additionally brings us up to speed with the spec:
+
+XRViewerPose was made a subclass of XRPose (immersive-web/webxr#496)
+XRView.viewMatrix was removed in favor of XRRigidTransform.inverse.matrix (immersive-web/webxr#531)
+XRRigidTransform.inverse is an attribute (immersive-web/webxr#560)
+XRRigidTransform now validates positions in its constructor (immersive-web/webxr#568)
+
+Furthermore, it adds support for XRRigidTransform.matrix.
+While fixing this I also noticed that our view matrix code was incorrect, we calculated view matrices as pose.to_column_major_array(), whereas it should be pose.inverse().to_row_major_array() (since Euclid uses row vectors, whenever the spec says it wants a column major array we should use .to_row_major_array() since all web specs implicitly use column vectors). For 3DOF devices poses are mostly rotations anyway, so the effective transpose behaved like an inversion, but was incorrect.
+This PR gets rid of view.viewMatrix anyway, however I felt like I should mention this discrepancy, since otherwise the replacement of view.viewMatrix with view.transform.inverse.matrix doesn't make sense
+r? @jdm
+
+This change is 

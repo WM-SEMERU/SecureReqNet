@@ -1,0 +1,8 @@
+refactor(core): run migration schematics for v8 beta and rc releases
+
+
+Currently the static-query and template-var-assignment schematic only runs
+for 8.0.0 which does not include any betas or release candidates. We want to
+run the schematic in the beta's and RC in order to get early feedback about the
+schematics. Enabling it promptly with V8 stable release can result in accidental
+breakages that we would like to fix/identify before.

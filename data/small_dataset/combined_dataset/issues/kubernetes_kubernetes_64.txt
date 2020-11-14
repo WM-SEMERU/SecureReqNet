@@ -1,0 +1,6 @@
+Secure API endpoint from MITM attacks
+
+
+Connections to the master use TLS with a self-signed server certificate, which provides no protection against man-in-the-middle attacks. The setup script acknowledges this but leaves it to the user to mitigate.
+https://github.com/GoogleCloudPlatform/kubernetes/blob/b03f1f0e54ff167603e57829e501b151f3258393/cluster/kube-up.sh#L153
+The generated certificate should be communicated to the client somehow -- perhaps through VM metadata or GCS?

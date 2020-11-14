@@ -1,0 +1,62 @@
+Can no longer use templated parameters on components in a library project
+
+
+Again, maybe this will get fixed by the ongoing SDK work, but raising this to track it anyway. Apologies if I'm being excessively fussy.
+I've not been successful in upgrading my Material Design components library to work with the preview 4 code due to the following.
+Repro
+
+Using .NET Core 3.0.100-preview4-011074 and Microsoft.AspNetCore.Blazor.Templates.0.9.0-preview4-19204-04, create a new Blazor (client-side) standalone and Blazor library alongside each other:
+
+dotnet new blazor -o MyStandalone
+dotnet new blazorlib -o MyBlazorLib
+
+
+Apply workarounds to the Blazor standalone app so you can run it
+
+Add <RazorLangVersion>3.0</RazorLangVersion> and <GenerateRazorAssemblyInfo>false</GenerateRazorAssemblyInfo> to its csproj
+Check it builds and runs
+
+
+Apply workarounds to the Blazor library project so you can build it
+
+Add <RazorLangVersion>3.0</RazorLangVersion> and <GenerateRazorAssemblyInfo>false</GenerateRazorAssemblyInfo> to its csproj
+Check it builds
+
+
+Add a project reference from MyStandalone to MyBlazorLib
+In MyStandalone's root _Imports.razor, add @using MyBlazorLib
+In MyStandalone's Index.razor, add a <Component1 />
+
+See it runs and renders the component from the library correctly
+
+
+In Component1.razor, try to add two parameters:
+
+@functions {
+    [Parameter] string SomeString { get; set; }
+    [Parameter] RenderFragment<DateTime> SomeDateThing { get; set; }
+}
+
+Problem 1: For some reason, ParameterAttribute and RenderFragment aren't in scope, even though (AFAIK) the compiler is meant to add @using Microsoft.AspNetCore.Components implicitly
+
+Workaround: Explicitly add @using Microsoft.AspNetCore.Components to the top of Component1.razor
+
+
+Now try to pass values for these parameters. Back in the other project's Index.razor, see that it is aware that both parameters exist:
+
+
+
+You can successfully pass a value for SomeString. See it lights up correctly:
+
+
+
+Problem 2: You cannot pass a value for SomeDateThing. Intellisense doesn't show it as an option, and it doesn't light up in purple:
+
+
+It's not just a VS thing. It's really broken at compile-time. If you try to reference the @context value (since this is a parameterised template), the compiler doesn't know what you're talking about. The build will fail.
+
+
+Problem 3 The error list shows completely different errors. The build output only gives one error (The name 'context' does not exist in the current context), but VS shows:
+
+
+@rynowak @pranavkm

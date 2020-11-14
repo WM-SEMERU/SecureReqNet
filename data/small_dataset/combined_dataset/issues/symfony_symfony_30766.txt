@@ -1,0 +1,72 @@
+[WIP][Messenger] Handling & Tracking Failed Messages Support
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+TODO
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11236
+
+
+
+Hi o/!
+This is a proposal to add global "failed messages" handling to Messenger. Messages are already retried a configurable number of times. But what happens if those all fail (e.g. due to a temporary network issue with an external service)? Currently, the messages are rejecting and lost. There is an event the user can hook into, but I think we can do better.
+In this system, the envelopes would be "stored" somewhere for later. There would be 3 new commands you could use to handle them:
+# see all failed messages or one in more detail
+bin/console messenger:failed:show
+bin/console messenger:failed:show 15
+
+# remove all or just one message
+bin/console messenger:failed:remove --all
+bin/console messenger:failed:remove 15
+
+# retry all failed message or just one
+bin/console messenger:failed:retry --all
+bin/console messenger:failed:retry 15
+
+The configuration would probably look like this:
+framework:
+    messenger:
+        # ...
+
+        failure_handler: 'doctrine://default'
+Most true messaging/queuing systems (AMQP, SQS) already have a concept of a "dead letter queue/exchange", where you can configure failed messages to go to. And this is something that we can/should document using if people are interested. However, they have few practical disadvantages. First, since these are normal queues, you can "consume" them, but you can't easily see a full list of them or look at once specific one to decide if you want to retry or remove it. Second, less robust transports like Redis & Doctrine do not have dead letter exchanges/queues built in.
+Cheers!

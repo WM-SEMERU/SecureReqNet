@@ -1,0 +1,9 @@
+Installation: Windows SmartScreen
+
+
+Opening the 32-bit installer on Windows 10:
+
+Windows protected your PC
+Windows SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.
+
+Perhaps because the publisher information is not set?

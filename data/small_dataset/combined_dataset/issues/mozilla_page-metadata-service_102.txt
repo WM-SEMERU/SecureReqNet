@@ -1,0 +1,4 @@
+Rate limit connections by domain
+
+
+We need to track the rate at which we connect to remote hosts/domains and then limit them.  Ie we should not be attempting to hit some example.com more than X times per second.  If rate limit is exceeded we should pause that work until we are able to complete it.  We can use redis to track this effectively.

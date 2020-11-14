@@ -1,0 +1,12 @@
+update typescript docs to reference docgen loader
+
+
+I'm guessing this was an oversight from some recent upgrade.
+Issue: documentation told me to install a plugin, but it appears it then wants me to use a loader.
+What I did
+Checked what the modern approach is (use the loader) and updated the documentation.
+How to test
+
+Does this need an update to the documentation?
+
+Yes.

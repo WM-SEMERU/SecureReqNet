@@ -1,0 +1,50 @@
+[Security] Added option to return true in the method isRememberMeRequested
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#21807
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Replaces #21989

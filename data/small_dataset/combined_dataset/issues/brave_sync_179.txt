@@ -1,0 +1,5 @@
+github security vulnerability alert for Electron
+
+
+github shows a security alert for the Electron dependency:
+

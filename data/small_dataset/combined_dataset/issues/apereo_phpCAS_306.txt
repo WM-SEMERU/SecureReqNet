@@ -1,0 +1,4 @@
+Own portal login
+
+
+Is there a way to send the access data directly to the central authentication or does the service always expect this CAS login page? The logout also works.

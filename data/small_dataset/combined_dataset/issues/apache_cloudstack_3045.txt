@@ -1,0 +1,31 @@
+Support multiple networks on vm in advanced zone with security groups
+
+
+ISSUE TYPE
+
+Enhancement Request
+
+COMPONENT NAME
+API, UI
+
+CLOUDSTACK VERSION
+4.12.0
+
+CONFIGURATION
+advanced zone with security groups
+
+OS / ENVIRONMENT
+Ubuntu/KVM
+
+SUMMARY
+We have the requirement that vm needs multiple IPs in different networks.
+It is currently not supported by cloudstack
+
+STEPS TO REPRODUCE
+While create vm using instance wizard, if multiple shared networks are checked, an error message is displayed: "Can't create a vm with multiple networks one of which is Security Group enabled"
+If create a vm with one network, and add vm to other networks. the nics will not work except the first nic.
+iptables rules are only applied on first nic
+EXPECTED RESULTS
+Operations should succeed
+iptables/ebtables rules should be applied on all nics
+

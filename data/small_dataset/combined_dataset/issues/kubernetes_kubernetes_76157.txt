@@ -1,0 +1,11 @@
+Call Done only on sync'ed key
+
+
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+Currently ssc.queue.Done(key) is called at the end of processNextWorkItem().
+However, if the sync() fails, we call ssc.queue.AddRateLimited on the key.
+In this case, the Done() should not be called.
+NONE
+

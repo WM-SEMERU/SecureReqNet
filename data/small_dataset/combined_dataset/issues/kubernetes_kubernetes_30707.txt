@@ -1,0 +1,7 @@
+Proposal: simple ClusterInfo object and discovery methods/APIs
+
+
+This is a design proposal (forked from https://docs.google.com/document/d/1GVMLTBrEH5kXGxo0fWTqiRxG4dSxQQzyUGLA7PxhzRY/edit#) for how clients can easily figure out how to talk to a cluster and keep that information up to date.
+Related issues: #30395, #30360, #30361, #5754
+
+This change is 

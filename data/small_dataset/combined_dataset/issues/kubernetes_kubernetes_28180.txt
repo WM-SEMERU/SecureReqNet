@@ -1,0 +1,10 @@
+Everything but serviceaccount/token controller supports ECDSA
+
+
+Apiserver and kubeconfig all work using ECDSA keys for PKI but the service account controller supports only RSA because our jwt code assumes RSA although this is not a requirement of jwt in general:
+https://github.com/kubernetes/kubernetes/blob/master/pkg/serviceaccount/jwt.go#L63
+This produces a cryptic non-fatal error in the early controller-manager boot that could be easily missed and pods will fail to create assuming ServiceAccount admission controller is enabled (which it usually is).
+E0628 02:31:57.135921       6 controllermanager.go:440] Error reading key for service account token controller: asn1: structure error: tags don't match (16 vs {class:0 tag:4 length:48 isCompound:false}) {optional:false explicit:false application:false defaultValue:<nil> tag:<nil> stringType:0 timeType:0 set:false omitEmpty:false} AlgorithmIdentifier @5
+
+Is EC something that we want to support? If yes, we should enable it in the JWT parser. If no, we should explicitly validate against it.
+cc @liggitt @erictune

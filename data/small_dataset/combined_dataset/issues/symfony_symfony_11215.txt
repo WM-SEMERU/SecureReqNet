@@ -1,0 +1,21 @@
+[Security] Add missing dot at the end of an exception message
+
+
+
+
+
+Q
+A
+
+
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+

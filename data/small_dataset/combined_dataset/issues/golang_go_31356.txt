@@ -1,0 +1,4 @@
+Remove length check to prevent length guessing
+
+
+in crypto/subtle ConstantTime is not always constant. When the two strings length don't match, the time is always lower.

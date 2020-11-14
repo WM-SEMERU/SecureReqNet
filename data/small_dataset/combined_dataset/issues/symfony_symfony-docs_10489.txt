@@ -1,0 +1,4 @@
+Add tip for custom message
+
+
+Provides information on adding a custom message when throwing an exception.

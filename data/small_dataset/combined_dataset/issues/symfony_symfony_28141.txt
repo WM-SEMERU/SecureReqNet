@@ -1,0 +1,12 @@
+[SecurityBundle][DX] http://symfony.com/schema/dic/security schema is missing
+
+
+Symfony version(s) affected: ^3|^4 (and possibly ^2)
+Description
+SecurityBundle references namespace 'http://symfony.com/schema/dic/security'
+but it's xsd schema is missing. this is nice to have but not feature impeding.
+How to reproduce
+there are numerous references for 'http://symfony.com/schema/dic/security' in 'src/Symfony/Bundle/SecurityBundle/Tests/DependencyInjection/Fixtures/xml/*.xml'
+and \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension::getNamespace returns this namespace.
+Possible Solution
+provide schema for 'http://symfony.com/schema/dic/security', like the ones for services, twig xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd http://symfony.com/schema/dic/twig http://symfony.com/schema/dic/twig/twig-1.0.xsd"

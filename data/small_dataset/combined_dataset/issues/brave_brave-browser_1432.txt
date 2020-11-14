@@ -1,0 +1,13 @@
+Disable developer mode extensions warning every session
+
+
+Description
+I have a developer extension installed and every time I open Brave from close I get a warning to disable it. We should surface the ability to click "Don't show me this again" in some capacity.
+Steps to Reproduce
+
+Side load an extension
+Close Brave
+Open Brave
+
+Actual result:
+

@@ -1,0 +1,5 @@
+Let go.mod and go.sum be approved by dep-approvers
+
+
+Follow up from #74877
+/cc @cblecker @nikhita

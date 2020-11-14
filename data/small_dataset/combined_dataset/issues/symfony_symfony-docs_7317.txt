@@ -1,0 +1,4 @@
+Added the references to security vulnerabilities discovered in 2016
+
+
+Dear Symfony Docs maintainers, please give this PR top priority when merging PRs. Thanks!

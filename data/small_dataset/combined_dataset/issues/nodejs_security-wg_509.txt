@@ -1,0 +1,4 @@
+processes: use iojs email addresses to submit CVEs
+
+
+Fixes: nodejs/TSC#684

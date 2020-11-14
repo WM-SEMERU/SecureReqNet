@@ -1,0 +1,13 @@
+Give write callback incase of piping
+
+
+Is your feature request related to a problem? Please describe.
+Please describe the problem you are trying to solve.
+We are piping two streams. We also need a callback to fire after chunk of data is flushed.
+Describe the solution you'd like
+Give a callback function in pipe function.
+src.pipe(dest, cb)
+
+Describe alternatives you've considered
+Alternative would be to remove pipe and have manual writes
+If it is okay I can implement this and give a PR

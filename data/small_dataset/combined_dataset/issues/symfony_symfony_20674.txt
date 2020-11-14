@@ -1,0 +1,50 @@
+[FrameworkBundle][SecurityBundle] Use stderr for some other commands
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+Follows #20632 and updates some other places where outputting to stderr would be nice to have in order to have clean redirected outputs.

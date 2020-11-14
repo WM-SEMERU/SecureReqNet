@@ -1,0 +1,4 @@
+fix($parse): do not convert to string computed properties multiple times
+
+
+Do not convert to string properties multiple times.

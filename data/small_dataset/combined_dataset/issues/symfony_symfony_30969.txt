@@ -1,0 +1,53 @@
+[Filesystem] Add the Path class
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+no    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+The current Filesystem component is great to deal with the actual file system. It is however lacking when it comes to manipulating with file paths, and when it does, it checks the paths existence which might not what you desire in certain cases.
+This PR proposes to merge webmozart/path-util (the path related part only) to Symfony. The library has been very stable, well tested, well documented, but is lacking some love as webmozart doesn't have time to check it anymore.
+The current state is the original as is to get a first assessment on what to be changed before working more on this if there is an interest.
+It is also worth mentioning that this class has been heavily used in Box and Puli with success among others.

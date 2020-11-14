@@ -1,0 +1,23 @@
+Error from server (Forbidden): Forbidden (user=kube-apiserver-kubelet-client, verb=get, resource=nodes, subresource=proxy )
+
+
+kube version: 1.8.3
+os version: debian stretch
+I can not access any logs by kubectl:
+# kubectl logs -f kube-controller-manager-uy08-07 -n kube-system
+Error from server (Forbidden): Forbidden (user=kube-apiserver-kubelet-client, verb=get, resource=nodes, subresource=proxy) ( pods/log kube-controller-manager-uy08-07)
+
+I generate the certs manually by openssl:
+#apiserver-kubelet-client
+openssl genrsa -out apiserver-kubelet-client.key 2048
+openssl req -new -key apiserver-kubelet-client.key -out apiserver-kubelet-client.csr -subj "/O=system:masters,/CN=kube-apiserver-kubelet-client"
+openssl x509 -req -set_serial $(date +%s%N) -in apiserver-kubelet-client.csr -CA ca.crt -CAkey ca.key -out apiserver-kubelet-client.crt -days 365 -extensions v3_req -extfile apiserver-kubelet-client-openssl.cnf
+
+[ v3_req ]
+
+# Extensions to add to a certificate request
+
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth
+
+It seems that the cert are available, have I missed anthing?

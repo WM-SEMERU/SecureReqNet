@@ -1,0 +1,12 @@
+If a password length is set to a non-default setting, the process of creating new (built-in, not oauth or federated users) does not honor the minimum password length and fails to create users based on the configured minimum password length check failing. 
+
+password generation happens here: 
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/models/user.rb#L245
+
+Minimum (default) set here:
+https://gitlab.com/gitlab-org/gitlab-ce/blob/v6.6.5/config/initializers/devise.rb#L105
+
+Example of how to set it to another value here: 
+https://gitlab.com/gitlab-org/gitlab-ce/blob/v6.6.5/config/initializers/devise_password_length.rb.example#L5
+
+Ideally the user gen process should pick a random number in the range defined by x..y --or at least should use the min of that range rather than an arbitrary value of 8

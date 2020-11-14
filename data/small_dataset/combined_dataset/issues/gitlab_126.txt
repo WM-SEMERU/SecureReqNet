@@ -1,0 +1,1 @@
+A few of the status updates in the init script (e.g. "shutting down Unicorn...", etc.) refer to the other tool's actual status, e.g. "shutting down Unicorn..." is actually printed when Sidekiq is shutting down, and vice-versa.

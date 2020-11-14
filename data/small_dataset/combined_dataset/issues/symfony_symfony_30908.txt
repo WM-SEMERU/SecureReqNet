@@ -1,0 +1,54 @@
+[Workflow] Added workflow_transition_blockers twig function
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+symfony/symfony-docs#11268
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11268
+
+
+
+EUFOSSA
+
+also related to #26689
+I'm not a big fan of the current name. What should I pick?
+cc @javiereguiluz

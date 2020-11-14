@@ -1,0 +1,50 @@
+No more support for custom anon/remember tokens based on FQCN
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26940
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+
+This PR deprecates the ability to configure a custom anonymous and remember me token class, via the AuthenticationTrustResolver. The only change required if you have changed the token classes like this, is to extend the Anonymous/RememberMe token classes.

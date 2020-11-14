@@ -1,0 +1,44 @@
+This issue was originally reported to security@gitlab.com by a user, reported to HackerOne: https://hackerone.com/reports/380621
+
+### Summary
+
+In the Merge Request `Changes` view, lines showing the hunk locations starting with `@@` containing matching `<` and `>` characters common in many programming languages are rendering as HTML elements that should not be rendered or getting stripped instead of using user data.
+
+### Steps to reproduce
+
+1. Create a source file with line containing `<input>` or `<script>` with at least 3 lines following it.
+2. Commit a change to a line 3 lines below the element in step 1 to a new branch.
+3. Create an MR for the single commit branch.
+
+### What is the current *bug* behavior?
+
+The `<input>` or `<script>` element will be correctly displayed in the `New Merge Request` form, but when viewed under `Changes` in the submitted merge request, will render as a text input or be stripped from the output, respectively.  Other elements may also be allowed through.
+
+### Example Project
+
+
+ * [Stripped <script>](https://gitlab.com/gitlab-com/security-tools/gitlab-ce-49085/merge_requests/1/diffs)
+ * [Correct <script></script> in commit view](https://gitlab.com/gitlab-com/security-tools/gitlab-ce-49085/commit/b66e0fb0172983b53473271101e5449a33a0cc4c)
+ * [Text input](https://gitlab.com/gitlab-com/security-tools/gitlab-ce-49085/merge_requests/2/diffs)
+ * [Correct <Input> in commit view](https://gitlab.com/gitlab-com/security-tools/gitlab-ce-49085/commit/3b329a854299375b5033e5a138c39b53cf06680b)
+
+### What is the expected *correct* behavior?
+
+The contents of the source file should be properly sanitized and displayed.
+
+### Relevant logs and/or screenshots!
+
+Correctly rendered as a "New Merge Request":
+![new_merge_request](/uploads/ef3784e3d11011e7ee13e6bdbea3c55f/new_merge_request.gif)
+
+Incorrectly rendering a text input element:
+![merge_request_changes](/uploads/fe2307a269d3cb96b0eec7f552c9ffcc/merge_request_changes.gif)
+
+
+### Output of checks
+
+This bug happens on GitLab.com.
+
+### Possible fixes
+
+This is most likely a regression of the MR refactor.

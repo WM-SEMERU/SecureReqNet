@@ -1,0 +1,8 @@
+Fixed advertised.listeners block in kafka
+
+
+What changes were proposed in this pull request?
+advertised.listeners were not set properly and they remain as localhost:. Code responsible for the same was under else block of params.kerberos_security_enabled. Advertised.listeners were just being set in case if kerberos security is disabled. Advertised.listeners block should be called irrespective of kerberos enabled or disabled and depending on if someone has set this property in config or not.
+How was this patch tested?
+Made changes to file and restarted kafka-broker. Advertised.listeners have hostname instead of localhost
+Please review Ambari Contributing Guide before opening a pull request.

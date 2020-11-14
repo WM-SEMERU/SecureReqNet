@@ -1,0 +1,40 @@
+x/net/html: Tokenizer could track Line/Column of token
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.1 linux/amd64
+
+Does this issue reproduce with the latest release?
+Yes.
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build083125343=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+I wanted to get the line and column for the current Token, which forced me to fork the package. The key change is adding something like the following to the end of readByte() in token.go:
+	// Increment the line and column tracker
+	if x == '\n' {
+		z.currentLine++
+		z.currentColumn = 0
+	} else {
+		z.currentColumn++
+	}
+What did you expect to see?
+I'd like to see a public method on Tokenizer that returns the starting and ending line/column of the current Token. The method could return a new struct with these four values.
+What did you see instead?
+There isn't a way to figure out where the token is in the input aside from byte offset. I could feed that byte offset into user code to determine where the line/column is, but then I'd have to parse the input twice and build up that lookup table first.

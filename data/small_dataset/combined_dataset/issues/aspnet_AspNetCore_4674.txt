@@ -1,0 +1,5 @@
+Certify OIDC middleware?
+
+
+Wouldn't that be useful??
+https://openid.net/certification/

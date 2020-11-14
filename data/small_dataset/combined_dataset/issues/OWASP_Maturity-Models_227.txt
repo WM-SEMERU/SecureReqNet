@@ -1,0 +1,8 @@
+More search filters
+
+
+Add more flexible search filters especially in the following pages:
+Schema details
+http://138.68.145.52/view/project/samm/schema-details
+Observed details
+http://138.68.145.52/view/project/samm/observed-details

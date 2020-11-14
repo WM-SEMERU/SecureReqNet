@@ -1,0 +1,6 @@
+Fix remaining uses of Object.prototype.toString.call as a brand test to do something else.
+
+
+Original issue 1955 created by erights on 2015-02-15T18:54:30.000Z:
+As of this writing, Object.prototype.toString.call(specimen) is still a reliable brand test on all deployed browsers, but TC39 recently agreed on a change so that it would no longer be.
+Uses in SES fixed at r5708. Remaining uses at least in cajaTamingGoogleLoader.js and taming-membrane.js, either of which may actually be safe.

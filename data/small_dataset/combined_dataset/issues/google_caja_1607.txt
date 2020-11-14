@@ -1,0 +1,15 @@
+Undefended exception prototypes may be revealed to guest code by Domado in ES5 mode
+
+
+Original issue 1607 created by jasvir on 2012-12-18T06:32:39.000Z:
+What steps will reproduce the problem?
+kpreid pointed out that exceptions thrown by Domado (unlike exceptions thrown by feral functions tamed by the taming membrane) aren't wrapped.  This allows guest code to gain access and modify the host Object.prototype.  Here's a test case that alerts true instead of false.
+<div id="parent"></div>
+<div id="notchild"></div>
+<script>
+try {
+​document.getElementById('parent').removeChild(document.getElementById('notchild'));
+} catch (e) {
+alert(e.proto.proto.proto.constructor.FERAL_FRAME_OBJECT___ === undefined)
+}
+</script>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​

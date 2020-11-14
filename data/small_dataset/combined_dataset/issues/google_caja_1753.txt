@@ -1,0 +1,5 @@
+Need rewriteFunctionCalls mitigation
+
+
+Original issue 1755 created by erights on 2013-06-04T17:41:13.000Z:
+Because of https://code.google.com/p/google-caja/wiki/SES#this_-binding_of_Global_Function_Calls , we need a mitigating rewrite from function call expressions, e.g., f(), to function call expressions that ensure that undefined is provided as the this-binding of the called function, e.g., (1,f)().

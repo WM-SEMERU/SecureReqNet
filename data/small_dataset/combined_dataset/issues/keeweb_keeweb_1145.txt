@@ -1,0 +1,8 @@
+The offer to add integration with ssh-agent as in keepassxc
+
+
+Is your feature request related to a problem? Please describe.
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+Open and private keys may stored in keepass database record and adds to ssh-agent on demande and affermative answer in popup.
+In ubuntu it  works after installing ssh-askpass-gnome.
+https://keepassxc.org/docs/#faq-ssh-agent-how

@@ -1,0 +1,13 @@
+As reported in https://gitlab.com/gitlab-org/gitlab-ce/issues/33573#note_58697008, try adding:
+
+This math is inline $`a^2+b^2=c^2`$.
+
+```math
+a^2+b^2=c^2
+```
+
+In the JavaScript console, I now see:
+
+![image](/uploads/7887cd4d90ec20dc63f0576f6b8bf205/image.png)
+
+`Request header field X-CSRF-Token is not allowed by Access-Control-Allow-Headers in preflight response.`

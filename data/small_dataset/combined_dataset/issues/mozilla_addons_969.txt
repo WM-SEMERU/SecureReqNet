@@ -1,0 +1,10 @@
+Thunderbird and Seamonkey clients are not being served redirects to addons.thunderbird.net
+
+
+Per mozilla/addons-server#6390 we should be redirecting some Thunderbird and Seamonkey URLs to https://addons.thunderbird.net/
+However, when the User-Agent of the request is Thunderbird or Seamonkey, instead we serve it with addons-server and it's 500ing for some URLs that we've removed from addons-server.
+The rewrite is visible here:
+https://github.com/mozilla-services/cloudops-deployment/blob/b7dde84a0cad09b1d71efc651604b99acd7f18fe/projects/amo/puppet/modules/amo_proxy/templates/nginx.addons.conf.erb#L216-L219
+However, a few lines above, to handle mozilla/addons-frontend#3719 there is another bit of config that directly calls addons-server if the User Agent header is Thunderbird or Seamonkey: https://github.com/mozilla-services/cloudops-deployment/blob/b7dde84a0cad09b1d71efc651604b99acd7f18fe/projects/amo/puppet/modules/amo_proxy/templates/nginx.addons.conf.erb#L205-L210
+That bit with the User-Agent detection should be removed.
+Sentry traceback that helped us figure out that the requests were erroneously going to addons-server: https://sentry.prod.mozaws.net/operations/olympia-prod/issues/5328593/

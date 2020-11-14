@@ -1,0 +1,30 @@
+Add separate CA for etcd certificates
+
+
+/kind feature
+/area etcd
+/area kubeadm
+/area security
+/sig cluster-lifecycle
+What happened:
+When generated etcd certificates, kubeadm reuses the kubernetes CA.
+This means that any kubernetes client cert (such as certs used to contact the apiserver) can also interact with etcd directly, bypassing validation, RBAC, and other logic.
+What you expected to happen:
+kubeadm should generate TLS identities for etcd from a separate CA as recommended in kubernetes/kubernetes#57415 (comment).
+Etcd should only be accessible via certs intended for talking to etcd.
+Anything else we need to know?:
+This was discussed on the SIG Cluster Lifecycle call: Tue 20 February 2017.
+Functionality:
+
+Generate CA key and cert for etcd
+Change over to the etcd CA for the etcd server, peer, and apiserver-client identities.
+Add flags / hostMounts for etcd static pod
+Add flags / hostMounts for apiserver static pod
+During the upgrade case from 1.9 → 1.10, generate the new CA
+
+Considerations:
+Shoud we use the existing kubernetes CA or create a dedicated etcd CA ?
+It was decided in #594 that we should try using a shared kubernetes CA.
+This becomes complicated because it's not possible to authenticate etcd peers based on their CN's in versions of etcd older than v3.3. We also need to configure RBAC for clients which currently has to be done after etcd is bootstrapped.
+Adding support for a shared CA could be a good candidate for another issue.
+The tradeoff is that we need to manage a third CA in addition to the kubernetes and front-proxy CA's.

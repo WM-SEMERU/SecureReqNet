@@ -1,0 +1,23 @@
+Update kubeadm OWNERS file
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Align OWNER file to what we have in K/K. More specifically
+
+Graduates @rosti to approver (and reviewer) 🎉
+Adds @ereslibre @yagonobre as reviewers 🎉
+Removes @stealthybox & @xiangpengzhao 👋
+
+Thanks for your contributions, and hopefully we'll see you
+around again @stealthybox & @xiangpengzhao!
+Congrats new reviewers and approvers!
+Does this PR introduce a user-facing change?:
+NONE
+
+/sig cluster-lifecycle
+/area kubeadm
+/priority backlog
+@kubernetes/sig-cluster-lifecycle
+/assign @luxas @timothysc @fabriziopandini @neolit123

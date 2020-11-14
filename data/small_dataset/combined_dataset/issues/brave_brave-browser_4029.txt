@@ -1,0 +1,32 @@
+Improve quality of verified domain 3p checking
+
+
+Description
+Associate some domains with others for our shields 3p checking.
+Example:
+ksandbox.org and www.khanacademy.org
+https://twitter.com/pamelafox/status/1114210142893953024
+Currently checks are done via SameDomainOrHost
+Steps to Reproduce
+
+Go to https://www.khanacademy.org/computer-programming/new/pjs
+Type in some code
+Hit save
+
+Actual result:
+Error happens because of device recognition blocking
+Expected result:
+Should work
+Reproduces how often:
+Always
+Brave version (brave://version info)
+All, tested on 0.64.36
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?  Yes
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?  yes
+Is the issue reproducible on the latest version of Chrome?  no
+

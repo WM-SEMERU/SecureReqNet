@@ -1,0 +1,3 @@
+'- Create merge request
+- Start typing a name in 'Assignee'
+- After typing a few letters 'Unassigned' still shows at the top, making you unable to just hit enter to finish your 'search'

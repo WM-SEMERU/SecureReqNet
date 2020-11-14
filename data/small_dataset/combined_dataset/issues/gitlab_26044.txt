@@ -1,0 +1,17 @@
+'This will solve https://gitlab.com/gitlab-org/gitlab-ce/issues/17808#note_20388748.
+
+**The option works with Git >= 2.11+ only!**
+
+## GitLab CE
+
+- New admin panel option to set a limit (in bytes) `receive_max_input_size`
+- Pass this option to gitlab-shell in the response of `/internal/allowed`
+- Pass this option to gitlab-workhorse in GitHttpController (IIRC)
+
+## GitLab Shell
+
+- Apply `receive_max_input_size` as an extra option to git receive-pack (see https://gitlab.com/gitlab-org/gitlab-ce/issues/17808#note_19303910)
+
+## GitLab Workhorse
+
+- Same as GitLab Shell

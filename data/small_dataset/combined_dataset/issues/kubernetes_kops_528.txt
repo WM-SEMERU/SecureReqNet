@@ -1,0 +1,30 @@
+IAM Role tweak for end user flexibility
+
+
+I'm very happy that KOPS is tightening down the IAM roles.
+However, could you add an exception for KOPS_STATE_STORE.  Instead of:
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<KOPS_STATE_STORE>/<CLUSTER_NAME>",
+        "arn:aws:s3:::<KOPS_STATE_STORE>/<CLUSTER_NAME>/*"
+      ]
+
+could you add:
+        "arn:aws:s3:::<KOPS_STATE_STORE>/user/"
+        "arn:aws:s3:::<KOPS_STATE_STORE>/user/*"
+
+final version:
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<KOPS_STATE_STORE>/<CLUSTER_NAME>",
+        "arn:aws:s3:::<KOPS_STATE_STORE>/<CLUSTER_NAME>/*",
+        "arn:aws:s3:::<KOPS_STATE_STORE>/user/",
+        "arn:aws:s3:::<KOPS_STATE_STORE>/user/*"
+      ]
+
+
+so that there's a cubby hole in the profile where end users of kops might stash things of use (Kubernetes known user tokens, EIP IP allocations to shuffle, etc, etc)

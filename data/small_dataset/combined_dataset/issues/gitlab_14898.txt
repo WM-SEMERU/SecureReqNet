@@ -1,0 +1,16 @@
+HO: [128062](https://hackerone.com/bugs?subject=gitlab&report_id=128062&view=new&substates%5B%5D=new&text_query=&sort_type=latest_activity&sort_direction=descending&limit=25&page=1#activity-887840)  
+ZD: https://gitlab.zendesk.com/agent/tickets/18962  
+
+## Summary 
+
+When someone is added with access level Developer to a project with a protected branch push is allowed.
+
+Clicking the `Developers can push` checkbox twice block pushes.
+
+## Description
+
+When a new project is created, the "Protected branches" feature shows that only members with access level Master can push to the master branch. This is shown in the UI. However, when someone is added with access level Developer, it can actually push to the master branch. This shouldn't be possible. And here's when it becomes interesting: when the check box in the screenshot above is clicked twice (first allow developers push, then disallow developers to push), it blocks the push access. Seems like there an incorrect value check (NULL, true, false perhaps?) when someone pushes to the branch.
+
+***
+
+/cc @DouweM 

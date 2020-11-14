@@ -1,0 +1,5 @@
+Public project links are viewable by anonymous users, but if you get a link to a group, you will be asked to sign, even if the group has public projects.
+
+We're trying to make our GitLab installation as public as possible, so we've rejiggered the UI and controllers around making it more accessible. Unfortunately - I didn't know we'd be going this far, so I don't have any clean merge requests. I'm trying to re-assemble our patches though.
+
+Patch: https://gist.github.com/dvander/9406554

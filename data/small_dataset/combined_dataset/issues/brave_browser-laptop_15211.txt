@@ -1,0 +1,15 @@
+General improvements to install instruction updates for Linux
+
+
+Adds install instructions for Solus, adds Debian Buster and Stretch and removes old unmaintained versions of Ubuntu...
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+Not really, just needs to be merged after #15210 get's deployed in a new update.

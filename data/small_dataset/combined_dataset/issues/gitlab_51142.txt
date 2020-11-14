@@ -1,0 +1,46 @@
+'HackerOne report:https://hackerone.com/reports/405050
+
+**Details:**
+Hi,
+
+
+I have found an issue which can be used by an attacker to make internal request to localhost i.e 127.0.0.1 and all local ip range.
+
+POC:
+====
+
+* log into gitlab and create project and go to integrations
+* now go to hipchat integration and and enter in the serve `http://127.0.0.1:22/#`
+* and see error `wrong status line: \"SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.4\""`
+
+{F342112}
+
+* i also confirmed in latest gitlab ee with netcat:
+
+{F342114}
+
+
+
+i can also evade path with `#` and change post to get with `redirect`
+
+## Impact
+
+access to internal services
+
+Timeline:
+2018-09-04 07:18:31 +0000: @ bull (comment)
+I will let you know if i can escalate this any furthur.
+
+
+Please let me know if you need any more information or if i missed something
+Thanks
+@ bull
+
+---
+
+2018-09-05 17:37:03 +0000: @asaba (user assigned to bug [team-only])
+
+## Security Team Comments
+
+The server url is passed directly to the `HipChat::Client`.  It should be sanitized for localhost addresses and respect the `allow_local_requests` settings.
+https://gitlab.com/gitlab-org/gitlab-ce/blob/e7cb8a4195ce0b22dc7173aff0e56b9e322a8882/app/models/project_services/hipchat_service.rb#L77

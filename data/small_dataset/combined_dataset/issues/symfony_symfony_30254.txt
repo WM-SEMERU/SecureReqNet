@@ -1,0 +1,37 @@
+Fix time string format
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4 up to 4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Fixed tickets
+#30253 
+
+
+

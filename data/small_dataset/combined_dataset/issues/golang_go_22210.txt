@@ -1,0 +1,34 @@
+crypto/elliptic: ECDSA parameters should be validated.
+
+
+What version of Go are you using (go version)?
+go1.9.1 linux/amd64
+What operating system and processor architecture are you using (go env)?
+GOHOSTARCH="amd64" (intel)
+GOHOSTOS="linux"
+What did you do?
+Playground link:
+https://play.golang.org/p/Ldd8fvrP5m
+I've been playing around with Go's ECDSA package and have noticed a few problems, none of practical security relevance, since those problems have premises unlikely to happen in real use cases. (I actually discussed those on Go's security mailing list a long time ago.)
+The problems are all about parameters validation in ECDSA.
+What did you expect to see?
+The Go's implementation should conform to the DSS standard, notably by performing verification that the point used are actually on the curve at hand.
+But if the checks I discuss here are considered not worthy, a workaround like what has been done for DSA might be good to completely avoid any risk of infinite loops.
+I would expect a method to check the validity of the provided parameters, as per FIPS 186-4 sections 3.1 and 3.3.
+What did you see instead?
+
+
+No check is performed on the curve's points used to see whether they are on the curve or not, so it is possible to use a point not even on the curve. (Whether this is dangerous for ECDSA has not been studied.)
+Note that checks that points are on the curve are performed in the TLS package (where they are important, because of the invalid curve attack) thanks to the elliptic.Unmarshal method.
+
+
+I also see that no check is performed on the private parameter "d" to verify if it's within well defined bounds. So it is possible to sign using a 0 value, which is not among the correct boundaries which are [1, n-1] (even if the value 1 does not make much sense from a security point of view).
+There is an example on the playground linked where this causes an infinite loop when signing an null hash with a null private integer.
+The value 0 is simply invalid as a private integer and should be rejected.
+
+
+There are no "validation" methods for keys, this could be a good way to avoid performing such checks at each signature/verification: by providing a method users are supposed to use to validate the keys.
+
+
+Such checks are important in my opinion and are part of the so-called "defense in depth" we want to generally ensure in a crypto library.
+What are your opinions on these topics?

@@ -1,0 +1,39 @@
+[bug][Security] LogoutHandlers not called when no session cookie
+
+
+Problem:
+
+Session cookie is not present (deleted, expired, invalid, etc)
+RememberMe cookie is present
+User is logging out
+RememberMe cookie is not deleted
+
+Alternatively:
+
+Session cookie is not present (deleted, expired, invalid, etc)
+User is logging out
+No LogoutHandlerInterface implementation is called (because there is no token)
+
+
+After debugging I see what happens:
+
+security.logout_listener is created
+security.logout_listener is given LogoutHandlerInterfaces: 1, 2, 3
+authentication listeners are created from factories, including RememberMeFactory
+RememberMeFactory adds its own LogoutHandlerInterface
+Security listeners are merged
+Firewall iterates over listeners and stops on the first giving Response.
+
+Problem? Listeners are called in this order: ChannelListener, ContextListener, ContainerAwareEventDispatcher, LogoutListener, UsernamePasswordFormAuthenticationListener, RememberMeListener, AnonymousAuthenticationListener, AccessListener.
+So if the user doesn't have a session cookie, LogoutListener doesn't call any LogoutHandlerInterfaces, because there is no token (yet).
+
+IMHO LogoutListener should be called last, after other listeners, which might authenticate user before he/she is logged out. Otherwise none of the handlers are called.
+In my situation it is crucial that RememberMeServices (as LogoutHandlerInterface) + CookieClearingLogoutHandler get called, because Symfony co–exists with non–Symfony app.
+
+I don't know what's the correct solution, but as a fast hack it could work to:
+
+override LogoutListener and call LogoutHandlerInterfaces manually with a dummy TokenInterface if there is no token yet,
+override LogoutListener and do custom actions here (but I believe LogoutHandlerInterfaces should be used, as they might contain important logic),
+override LogoutSuccessHandlerInterface, but same problem as above,
+override FirewallMap to change the order of listeners (as it should have already been done in SecurityExtension?).
+

@@ -1,0 +1,10 @@
+Detection of when target url is the same as the login_path is extremely brittle
+
+
+The DefaultAuthenticationSuccessHanlder class attempts to redirect you to the specified default_target_path if the referrer is equal to the specified login_path, however, this detection is extremely brittle. Simply adding a blank query string ( /login? instead of /login) when visiting the login_path directly causes the login to wrap back to the login_path rather than using the default target path.
+Specifically, these lines (122 through 124) from Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler.php are the issue:
+if ($this->options['use_referer'] && ($targetUrl = $request->headers->get('Referer')) && $targetUrl !== $this->httpUtils->generateUri($request, $this->options['login_path'])) {
+    return $targetUrl;
+}
+The last part of the condition in this if statement checks only if the Referer matches the login_path exactly, not taking into account negligible cases such as an empty query string.
+I am new to Symfony, so I'm not sure how to accomplish a less brittle check directly using Symfony components, however, I have patched my custom AuthenticationSuccessHandler to split the url and remove any empty query string before comparing the two paths in order to catch this case.

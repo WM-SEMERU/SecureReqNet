@@ -1,0 +1,147 @@
+[RFC][DX][Security] Add basic access level control in firewall config
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.4.0
+
+
+
+The firewall and access control are the 2 most important parts, but also arguably, the most complicated parts of the Symfony Security. One of the issues with the Firewall is, that when you want to authenticate, nothing really  happens unless you specify some form of authorization required (such as access_control). If I remove my access_control configuration, my listeners won't trigger and won't authenticate me.
+When configuring the access_control option, you usually only need to specify 2 things to get started:
+
+A path usually identical to your firewall pattern per firewall
+Roles which are allowed to access
+
+Example having a system where you always need to authenticate for the majority of pages
+# Example 1
+security:
+    access_control:
+        - { path: ^/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/password-reset/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY }
+    firewalls:
+        secured_area:
+            pattern: ^/.*
+            anonymous: ~ # to avoid 'host.com redirected you too many times.'
+            provider: some_provider
+Or, when you have the password-reset behind its own firewall (because you have to identify the person making the reset):
+# Example 2
+security:
+    access_control:
+        - { path: ^/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY }
+    firewalls:
+        password_reset:
+            pattern: ^/password-reset/.*
+            stateless: true # uses a get token for example
+            provider: some_provider_1
+        secured_area:
+            pattern: ^/.*
+            anonymous: ~ # to avoid 'host.com redirected you too many times.'
+            provider: some_provider_2
+And in case you have an open website, where you have certain areas that require full authentication:
+# Example 3
+security:
+    firewalls:
+# No additional changes require to get this to work
+#        password_reset:
+#            pattern: ^/password-reset/.*
+#            stateless: true # uses a get token for example
+#            provider: some_provider
+        secured_area:
+            pattern: ^/.*
+            anonymous: ~
+            provider: some_provider
+There are a few things that I notice in this configuration:
+
+In Example 1 and Example 2, I have to provide anonymous: ~ in order for the login to work, even though the minimum authentication level is FULLY. If I don't provide it, the browser will get stuck in an infinite redirect loop
+In Example 3, everything is anonymous, but I will have to manually add an exclusion list for every page where full authentication would be required to access
+In all examples, the exclusion lists in the majority of cases, is a simple list of page (based on URL pattern), with either FULLY or ANONYMOUS authentication
+I have a setting called roles which actually is about the authentication level
+I always have to provide a minimum access level, regardless of my setup
+
+Making it a bit more intuitive
+I propose to give the firewall config the ability to define a minimum access level required:
+# Example 1
+security:
+    # access_control is now generated from minimum_access_levels
+    firewalls:
+        secured_area:
+            pattern: ^/.*
+            anonymous: ~ # to avoid 'host.com redirected you too many times.'
+            provider: some_provider
+            minimum_access_levels:
+                anonymous: [^/login, ^/password-reset]
+                full: ^/.*
+# Example 2
+security:
+    access_control:
+        - { path: ^/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY }
+    firewalls:
+        password_reset:
+            pattern: ^/password-reset/.*
+            stateless: true # uses a get token for example
+            provider: some_provider_1
+# default values because no remember me and no anonymous
+#            minimum_access_level:
+#                full: ~  # tilde defaults to current pattern
+        secured_area:
+            pattern: ^/.*
+            anonymous: ~ # to avoid 'host.com redirected you too many times.'
+            provider: some_provider_2
+            minimum_access_level:
+                anonymous: ^/login
+# Example 3
+security:
+    access_control:
+        - { path: ^/settings/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/profile/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    firewalls:
+# No additional changes require to get this to work
+#        password_reset:
+#            pattern: ^/password-reset/.*
+#            stateless: true # uses a get token for example
+#            provider: some_provider
+        secured_area:
+            pattern: ^/.*
+            anonymous: ~
+            provider: some_provider
+            minimum_access_level:
+# this option could be omitted because of `anonymous: ~` in the firewall
+# anonymous: ~ means it refers to the pattern of this firewall
+# as anonymous is allowed, the lowest available access is anonymous here
+#                anonymous: ~
+                full: [^/settings/, ^/profile/]
+Summary
+What these examples show, is that you can now define the minimum access control required for specific firewalls. As each path can only be picked up by 1 firewall, this is possible. It will also introduce some sane defaults, if you define anonymous: ~, it will automatically add an access_control rule specifying that the current pattern requires at least anonymous access, same goes for remembered and fully.
+Instead of defining paths with an access control level (role), you can define access levels directly in the firewall, as they are tightly coupled to authentication and not authorization (though access can be denied based on access level).
+There's 1 issue that can't be solved here. When you want no anonymous authentication, you'll still have to specify it for a login page, as it would otherwise get the full requirement. This is actually something I think should be solved in the code rather than configuration, as this triggers an infinite redirect loop.
+Implementation Detail
+Implementation shouldn't be too complex. You can still add access_control rules manually, which should always be processed first. My suggestion is to either append this to the access_control in a pre-defined template, on the bottom of the list, or to actually add firewall matchers directly at the bottom of the list.

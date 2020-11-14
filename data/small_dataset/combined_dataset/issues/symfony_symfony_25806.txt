@@ -1,0 +1,431 @@
+Security + JSON_LOGIN return an HTTP 500 instead of an HTTP 403
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.0.3
+
+
+
+I'm using the Security component with the (marked as experimental) json_login system that has been introduced in Symfony 3.3
+It works quite well, but when i access a route protected by this firewall i get a 500 Symfony\Component\Security\Core\Exception\InsufficientAuthentificationException coming from an Symfony\Component\Security\Core\Exception\AccessDeniedException whereas i expect to get a 403 HTTPException (or something like this).
+I've looked at the web and finally i'm looking at the source code. I can see that json_login can expect a failure_handler config but when i follow the official documentation i got a 500 with a json string :
+{
+  type: "https://tools.ietf.org/html/rfc2616#section-10",
+  title: "An error occurred",
+  detail: "Type error: Argument 1 passed to Symfony\Component\Security\Http\Authentication\CustomAuthenticationFailureHandler::__construct() must implement interface Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface, instance of App\Security\AccessDeniedHandler given, called in C:\dev\projects\fiducial\sf-flex-encore-vuejs\var\cache\dev\ContainerOkj7dm8\getSecurity_Authentication_Listener_Json_VuejsService.php on line 8",
+  trace: [
+    {
+      namespace: "",
+      short_class: "",
+      class: "",
+      type: "",
+      function: "",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\security\Http\Authentication\CustomAuthenticationFailureHandler.php",
+      line: 28,
+      args: [ ]
+    },
+    {
+      namespace: "Symfony\Component\Security\Http\Authentication",
+      short_class: "CustomAuthenticationFailureHandler",
+      class: "Symfony\Component\Security\Http\Authentication\CustomAuthenticationFailureHandler",
+      type: "->",
+      function: "__construct",
+      file: "/dev/projects/sf-flex-encore-vuejs/var\cache\dev\ContainerOkj7dm8\getSecurity_Authentication_Listener_Json_VuejsService.php",
+      line: 8,
+      args: [
+        [
+          "object",
+          "App\Security\AccessDeniedHandler"
+        ],
+        [
+          "array",
+          [ ]
+        ]
+      ]
+    },
+    {
+      namespace: "",
+      short_class: "",
+      class: "",
+      type: "",
+      function: "require",
+      file: "/dev/projects/sf-flex-encore-vuejs/var\cache\dev\ContainerOkj7dm8\srcDevDebugProjectContainer.php",
+      line: 162,
+      args: [
+        [
+          "string",
+          "/dev/projects/sf-flex-encore-vuejs/var\cache\dev\ContainerOkj7dm8\getSecurity_Authentication_Listener_Json_VuejsService.php"
+        ]
+      ]
+    },
+    {
+      namespace: "ContainerOkj7dm8",
+      short_class: "srcDevDebugProjectContainer",
+      class: "ContainerOkj7dm8\srcDevDebugProjectContainer",
+      type: "->",
+      function: "load",
+      file: "/dev/projects/sf-flex-encore-vuejs/var\cache\dev\ContainerOkj7dm8\getSecurity_Firewall_Map_Context_VuejsService.php",
+      line: 12,
+      args: [
+        [
+          "string",
+          "/dev/projects/sf-flex-encore-vuejs/var\cache\dev\ContainerOkj7dm8/getSecurity_Authentication_Listener_Json_VuejsService.php"
+        ]
+      ]
+    },
+    {
+      namespace: "ContainerOkj7dm8",
+      short_class: "srcDevDebugProjectContainer",
+      class: "ContainerOkj7dm8\srcDevDebugProjectContainer",
+      type: "->",
+      function: "{closure}",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\security-bundle\Debug\TraceableFirewallListener.php",
+      line: 33,
+      args: [ ]
+    },
+    {
+      namespace: "Symfony\Bundle\SecurityBundle\Debug",
+      short_class: "TraceableFirewallListener",
+      class: "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener",
+      type: "->",
+      function: "handleRequest",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\security\Http\Firewall.php",
+      line: 56,
+      args: [
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ],
+        [
+          "object",
+          "Symfony\Component\DependencyInjection\Argument\RewindableGenerator"
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\Security\Http",
+      short_class: "Firewall",
+      class: "Symfony\Component\Security\Http\Firewall",
+      type: "->",
+      function: "onKernelRequest",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\security-bundle\EventListener\FirewallListener.php",
+      line: 48,
+      args: [
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Bundle\SecurityBundle\EventListener",
+      short_class: "FirewallListener",
+      class: "Symfony\Bundle\SecurityBundle\EventListener\FirewallListener",
+      type: "->",
+      function: "onKernelRequest",
+      file: null,
+      line: null,
+      args: [
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ],
+        [
+          "string",
+          "kernel.request"
+        ],
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher"
+        ]
+      ]
+    },
+    {
+      namespace: "",
+      short_class: "",
+      class: "",
+      type: "",
+      function: "call_user_func",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\event-dispatcher\Debug\WrappedListener.php",
+      line: 104,
+      args: [
+        [
+          "array",
+          [
+            [
+              "object",
+              "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener"
+            ],
+            [
+              "string",
+              "onKernelRequest"
+            ]
+          ]
+        ],
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ],
+        [
+          "string",
+          "kernel.request"
+        ],
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher"
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\EventDispatcher\Debug",
+      short_class: "WrappedListener",
+      class: "Symfony\Component\EventDispatcher\Debug\WrappedListener",
+      type: "->",
+      function: "__invoke",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\event-dispatcher\EventDispatcher.php",
+      line: 212,
+      args: [
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ],
+        [
+          "string",
+          "kernel.request"
+        ],
+        [
+          "object",
+          "Symfony\Component\EventDispatcher\EventDispatcher"
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\EventDispatcher",
+      short_class: "EventDispatcher",
+      class: "Symfony\Component\EventDispatcher\EventDispatcher",
+      type: "->",
+      function: "doDispatch",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\event-dispatcher\EventDispatcher.php",
+      line: 44,
+      args: [
+        [
+          "array",
+          [
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ],
+            [
+              "object",
+              "Symfony\Component\EventDispatcher\Debug\WrappedListener"
+            ]
+          ]
+        ],
+        [
+          "string",
+          "kernel.request"
+        ],
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\EventDispatcher",
+      short_class: "EventDispatcher",
+      class: "Symfony\Component\EventDispatcher\EventDispatcher",
+      type: "->",
+      function: "dispatch",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\event-dispatcher\Debug\TraceableEventDispatcher.php",
+      line: 139,
+      args: [
+        [
+          "string",
+          "kernel.request"
+        ],
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\EventDispatcher\Debug",
+      short_class: "TraceableEventDispatcher",
+      class: "Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher",
+      type: "->",
+      function: "dispatch",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\http-kernel\HttpKernel.php",
+      line: 125,
+      args: [
+        [
+          "string",
+          "kernel.request"
+        ],
+        [
+          "object",
+          "Symfony\Component\HttpKernel\Event\GetResponseEvent"
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\HttpKernel",
+      short_class: "HttpKernel",
+      class: "Symfony\Component\HttpKernel\HttpKernel",
+      type: "->",
+      function: "handleRaw",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\http-kernel\HttpKernel.php",
+      line: 66,
+      args: [
+        [
+          "object",
+          "Symfony\Component\HttpFoundation\Request"
+        ],
+        [
+          "integer",
+          1
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\HttpKernel",
+      short_class: "HttpKernel",
+      class: "Symfony\Component\HttpKernel\HttpKernel",
+      type: "->",
+      function: "handle",
+      file: "/dev/projects/sf-flex-encore-vuejs/vendor\symfony\http-kernel\Kernel.php",
+      line: 190,
+      args: [
+        [
+          "object",
+          "Symfony\Component\HttpFoundation\Request"
+        ],
+        [
+          "integer",
+          1
+        ],
+        [
+          "boolean",
+          true
+        ]
+      ]
+    },
+    {
+      namespace: "Symfony\Component\HttpKernel",
+      short_class: "Kernel",
+      class: "Symfony\Component\HttpKernel\Kernel",
+      type: "->",
+      function: "handle",
+      file: "/dev/projects/sf-flex-encore-vuejs/public/index.php",
+      line: 25,
+      args: [
+        [
+          "object",
+          "Symfony\Component\HttpFoundation\Request"
+        ]
+      ]
+    }
+  ]
+}
+
+
+And when i implements what is said on the previous message i return to my 500 .
+Here is a part of the security.yaml:
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        vuejs:
+            pattern: ^/(demo/(vuejs|form|login/json(|/isloggedin|/logout))|api)
+            anonymous: ~
+            json_login:
+                check_path: /demo/login/json
+                # this doesn't work, see in the security.yaml:12 for more explanation
+                #check_path: demo_login_json_check
+                failure_handler: App\Security\AccessDeniedHandler
+            logout:
+                path:   demo_login_json_logout
+                target: index
+                invalidate_session: true
+
+What's wrong ? coz the handler is never used when i run throught Xdebug
+The project is available here : https://github.com/Rebolon/php-sf-flex-webpack-encore-vuejs/tree/fix/31-auth-500-instead-of-403
+The route to test and reproduce is /demo/login/json/issue/sf-25806

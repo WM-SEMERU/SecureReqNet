@@ -1,0 +1,42 @@
+[Security] Form authentication throws error on non string username
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.4
+
+
+
+\Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener trusts that submitted data will contain string as username.
+In case that provided data is array, trim (that's used on the input values) will throw trim() expects parameter 1 to be string, array given which results in a 500 status code.
+Simple CURL that causes this behaviour would look like this:
+curl \
+    'http://127.0.0.1:8080/app_dev.php/login_check' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data '_username%5Bname%5D=user&_password=pass'
+
+One quick solution would be to cast before passing to trim but perhaps some use of validator component would be a better approach?

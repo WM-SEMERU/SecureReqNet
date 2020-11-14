@@ -1,0 +1,5 @@
+Strip img tags
+
+
+Because inline images sent in emails synced in Lever get included as attachments/files, we are going to completely strip the img tags instead of trying to display a gray box in their place.
+Related to: https://github.com/lever/caja/pull/3

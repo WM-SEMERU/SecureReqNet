@@ -1,0 +1,4 @@
+Fix generics problems preventing 'ant MinifiedJs' from working under javac 9
+
+
+Changed just enough to make that work.

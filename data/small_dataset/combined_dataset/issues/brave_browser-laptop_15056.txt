@@ -1,0 +1,39 @@
+Drag and drop the triangle to wrong color will not change the new captcha immediately
+
+
+Description
+Drag and drop the triangle to wrong color will not change the new captcha immediately
+Steps to Reproduce
+
+Launch Brave with clean profile from CLI
+Make the payment switch ON
+Click on Claim my free tokens
+Drag and drop the triangle to wrong color
+Observe that the Captch will not change immediately
+
+Actual result:
+Drag and drop the triangle to wrong color will not change the new captcha immediately
+
+Expected result:
+Drag and drop the triangle to wrong color should change the new captcha immediately
+Reproduces how often:
+Always
+Brave Version
+0.23.102
+about:brave info:
+Brave: 0.23.102
+V8: 6.8.275.24
+rev: 43eb667
+Muon: 8.0.8
+OS Release: 10.0.17134
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+NA
+Additional Information
+cc: @kjozwiak @LaurenWags @srirambv @btlechowski
+#14980

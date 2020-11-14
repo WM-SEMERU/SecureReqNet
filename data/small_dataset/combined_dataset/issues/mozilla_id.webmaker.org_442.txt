@@ -1,0 +1,4 @@
+added favicon
+
+
+favicon is added to the signup page of id.webmaker.org. PR #442 . Let me know if any changes are required. This is in reference to the issue opened by @flukeout  as #434

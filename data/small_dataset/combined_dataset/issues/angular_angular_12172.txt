@@ -1,0 +1,6 @@
+fix(compiler): support inert script tags in templates
+
+
+fixes #9695
+/cc @mprobst @rjamet for security
+The former behavior was to remove all script tags from the template. After this PR, only script tags containing javascript are removed, other inert tags are left untouched. One of the use case is JSON-LD as described in the original issue

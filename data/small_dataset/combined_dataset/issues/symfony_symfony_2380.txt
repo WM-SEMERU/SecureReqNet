@@ -1,0 +1,4 @@
+Missing denied roles in AccessDeniedException
+
+
+I'm developing heavy javascript application. I need to customize user interaction based on which role voter denied access (show login page, register window or subscription payment).  Can AccessDeniedException have roles populated (as an class attribute) by decision manager ? It is very easy solution to implement. Any other better solution ? It will be helpful also for standard application to customize error page by changing the message based on role denied.

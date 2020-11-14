@@ -1,0 +1,11 @@
+The re-watch mechanism does not work as expectations
+
+
+If we have two apiservers and restart one on an upgrade, all watchers will go to the other on and never shuffle to the new one.
+var (
+	// We try to spread the load on apiserver by setting timeouts for
+	// watch requests - it is random in [minWatchTimeout, 2*minWatchTimeout].
+	minWatchTimeout = 5 * time.Minute
+)
+
+We do the re-watch in reflector actually, but the underly client will be reused.

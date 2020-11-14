@@ -1,0 +1,14 @@
+navigator.mediaDevices.enumerateDevices() returns too much info
+
+
+Test plan
+See #14970
+Original issue description
+STR:
+
+cd test/fixtures and start a local server, ex: on port 8000
+go to localhost:PORT/enumerate_devices.html
+
+Actual result: shows a description of every media device
+Expected result: behaves the same as in Chrome (no device descriptions are shown, only an opaque ID).
+Tested on MacOS, both master and current release (0.23.x).

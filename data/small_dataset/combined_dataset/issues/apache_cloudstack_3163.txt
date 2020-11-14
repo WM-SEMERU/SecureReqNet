@@ -1,0 +1,19 @@
+systemd: fix services to allow TLS configurations via java.security.ciphers
+
+
+This fixes the management server and systemd services to allow the
+java.security.ciphers file to configure disabled TLS protocols and
+algorithms. This also cleans up systemd service files for agent and
+usage server, and deprecates use of jsvc when systemd can be used
+directly.
+This fixes #3140
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+How Has This Been Tested?
+Deploy systemd based environments using CentOS7 and Ubuntu 18.04. Verified first that TLS settings has no effect, then with the changes applied found in both usage, kvm agent and management server that systemd service works OK and TLS was configurable again.

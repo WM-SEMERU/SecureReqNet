@@ -1,0 +1,29 @@
+Update vendor cleanup
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+
+Removes comments from the staging repo go.mod files that don't make sense when published
+Detects and prints error messages if staging repos attempt to depend on k8s.io/kubernetes packages (as encountered in #76090)
+
+Sample output when run on that PR:
+Disallowed k8s.io/cri-api -> k8s.io/kubernetes dependencies exist via the following imports:
+# k8s.io/kubernetes/pkg/apis/core
+k8s.io/cri-api/pkg/streaming
+k8s.io/kubernetes/pkg/kubelet/server/portforward
+k8s.io/kubernetes/pkg/apis/core
+
+# k8s.io/kubernetes/pkg/kubelet/server/portforward
+k8s.io/cri-api/pkg/streaming
+k8s.io/kubernetes/pkg/kubelet/server/portforward
+
+# k8s.io/kubernetes/pkg/kubelet/server/remotecommand
+k8s.io/cri-api/pkg/streaming
+k8s.io/kubernetes/pkg/kubelet/server/remotecommand
+
+Does this PR introduce a user-facing change?:
+NONE
+
+/cc @sttts

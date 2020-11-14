@@ -1,0 +1,32 @@
+cfssl panic
+
+
+2016/04/15 14:44:07 transport: http2Server.HandleStreams failed to receive the preface from client: EOF
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal 0xb code=0x1 addr=0x18 pc=0x4391305]
+
+goroutine 742 [running]:
+panic(0x48f3ae0, 0xc820012130)
+    /usr/local/opt/go/libexec/src/runtime/panic.go:464 +0x3e6
+github.com/docker/swarm-v2/vendor/github.com/cloudflare/cfssl/signer/local.(*Signer).Policy(0x0, 0x4a08520)
+    /Users/al/go/src/github.com/docker/swarm-v2/vendor/github.com/cloudflare/cfssl/signer/local/local.go:446 +0x5
+github.com/docker/swarm-v2/vendor/github.com/cloudflare/cfssl/signer.Profile(0x5d50810, 0x0, 0x0, 0x0, 0x4013027, 0x0, 0x0)
+    /Users/al/go/src/github.com/docker/swarm-v2/vendor/github.com/cloudflare/cfssl/signer/signer.go:109 +0x54
+github.com/docker/swarm-v2/vendor/github.com/cloudflare/cfssl/signer/local.(*Signer).Sign(0x0, 0xc820a3c4c0, 0x1, 0x1, 0xc820a36840, 0x146, 0xc820a82600, 0x0, 0x0, 0x0, ...)
+    /Users/al/go/src/github.com/docker/swarm-v2/vendor/github.com/cloudflare/cfssl/signer/local/local.go:196 +0xfe
+github.com/docker/swarm-v2/ca.ParseValidateAndSignCSR(0x5d50810, 0x0, 0xc820a366e0, 0x146, 0x160, 0xc820aa41c0, 0x19, 0xc820a3c438, 0x5, 0x0, ...)
+    /Users/al/go/src/github.com/docker/swarm-v2/ca/certificates.go:179 +0x26c
+github.com/docker/swarm-v2/ca.(*Server).IssueCertificate(0xc820134138, 0x5f60948, 0xc820a56a80, 0xc820a56ae0, 0xc820685a80, 0x0, 0x0)
+    /Users/al/go/src/github.com/docker/swarm-v2/ca/server.go:34 +0x159
+github.com/docker/swarm-v2/api._CA_IssueCertificate_Handler(0x48a7520, 0xc820134138, 0x5f60948, 0xc820a56a80, 0xc820a825c0, 0x0, 0x0, 0x0, 0x0)
+    /Users/al/go/src/github.com/docker/swarm-v2/api/ca.pb.go:252 +0x132
+github.com/docker/swarm-v2/vendor/google.golang.org/grpc.(*Server).processUnaryRPC(0xc82012b000, 0x5f653f0, 0xc8206973b0, 0xc820aa8000, 0xc8201b2420, 0x4edb540, 0xc820a56a50, 0x0, 0x0)
+    /Users/al/go/src/github.com/docker/swarm-v2/vendor/google.golang.org/grpc/server.go:497 +0xe13
+github.com/docker/swarm-v2/vendor/google.golang.org/grpc.(*Server).handleStream(0xc82012b000, 0x5f653f0, 0xc8206973b0, 0xc820aa8000, 0xc820a56a50)
+    /Users/al/go/src/github.com/docker/swarm-v2/vendor/google.golang.org/grpc/server.go:646 +0x109d
+github.com/docker/swarm-v2/vendor/google.golang.org/grpc.(*Server).serveStreams.func1.1(0xc820a3c3d0, 0xc82012b000, 0x5f653f0, 0xc8206973b0, 0xc820aa8000)
+    /Users/al/go/src/github.com/docker/swarm-v2/vendor/google.golang.org/grpc/server.go:323 +0xa0
+created by github.com/docker/swarm-v2/vendor/google.golang.org/grpc.(*Server).serveStreams.func1
+    /Users/al/go/src/github.com/docker/swarm-v2/vendor/google.golang.org/grpc/server.go:324 +0x9a
+
+/cc @diogomonica

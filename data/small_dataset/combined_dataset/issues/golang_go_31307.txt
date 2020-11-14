@@ -1,0 +1,74 @@
+x/tools/cmd/gopls: CodeAction fails with "no file information for file"
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.2 linux/amd64
+$ go list -m golang.org/x/tools
+golang.org/x/tools v0.0.0-20190406165526-0d5674b3111a
+
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN="/home/myitcv/gostuff/src/github.com/myitcv/govim/cmd/govim/.bin"
+GOCACHE="/home/myitcv/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/myitcv/gostuff"
+GOPROXY=""
+GORACE=""
+GOROOT="/home/myitcv/gos"
+GOTMPDIR=""
+GOTOOLDIR="/home/myitcv/gos/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD="/home/myitcv/gostuff/src/github.com/myitcv/govim/go.mod"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build226898939=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+Vim has the concept of a buffer. A buffer is the in-memory text of a file. Therefore it is possible in Vim to create a new buffer for a Go file that does not exist on disk (yet).
+Consider the following govim testscript in which we create a new Go buffer, populate it with some contents, then attempt to save the file. The "pre" action on saving the file is to call CodeAction to effectively run goimports on the code pre-save.
+# Test completions for a file that does not yet exist on disk
+
+vim ex 'e main.go'
+vim ex 'r main.txt | 0d_'
+vim ex 'w main.go'
+cmp main.go main.txt
+
+-- go.mod --
+module mod.com
+
+-- main.txt --
+package main
+
+func main() {
+}
+-- main.go.golden --
+package main
+
+import "os/exec"
+
+func main() {
+}
+
+For every buffer in govim, textDocument/didOpen is called followed by textDocument/didChange, so at the point of attempting to write the file gopls will "know" exactly the contents that will be written to disk.
+What did you expect to see?
+This to succeed.
+What did you see instead?
+An error returned from gopls:
+no file information for file://$WORK/main.go
+
+cc @stamblerre @ianthehat

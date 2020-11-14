@@ -1,0 +1,112 @@
+[Security] No token after authentication
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.0.3
+
+
+
+Server configuration
+
+Debian 9.3 Stretch
+Nginx
+PHP 7.2
+
+Code
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        database_users:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+
+            anonymous: true
+
+            provider: database_users
+
+            form_login:
+                check_path: security_login
+                login_path: security_login
+                default_target_path: /
+
+            logout:
+                path: security_logout
+                target: /
+public function login(Request $request, AuthenticationUtils $utils): Response
+{
+    return $this->render('Security/login.html.twig', [
+        'lastUsername'  =>  $utils->getLastUsername(),
+        'error'         =>  $utils->getLastAuthenticationError()
+    ]);
+}
+<form action="{{ path('security_login') }}" method="POST">
+    <div class="form-group">
+        <label for="username">{% trans %}Nom d'utilisateur{% endtrans %}</label>
+        <input type="text" class="form-control" id="username" name="_username" value="{{ lastUsername }}">
+    </div>
+    <div class="form-group">
+        <label for="password">{% trans %}Mot de passe{% endtrans %}</label>
+        <input type="password" class="form-control" id="password" name="_password">
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+    <a href="">{% trans %}Mot de passe oublié ?{% endtrans %}</a><br><br>
+    <button type="submit" class="btn-secondary btn">{% trans %}Connexion{% endtrans %}</button>
+</form>
+Bug
+If the user try to log in, he is redirected to the page /{_locale}/login
+However, the page will remain entirely blank without displaying the Profiler
+The only solution is to refresh the user page but the user is still not logged in even if the logs by Monolog certified that the authentication is done correctly.
+[2018-01-21 03:09:28] request.INFO: Matched route "security_login". {"route":"security_login","route_parameters":{"_locale":"fr","_controller":"App\\Controller\\SecurityController::login","_route":"security_login"},"request_uri":"http://snowtricks.jeremy-barette.fr/fr/login","method":"GET"} []
+
+[2018-01-21 03:09:28] security.INFO: Populated the TokenStorage with an anonymous Token. [] []
+
+[2018-01-21 03:09:29] request.INFO: Matched route "_wdt". {"route":"_wdt","route_parameters":{"_controller":"web_profiler.controller.profiler:toolbarAction","token":"818ef5","_route":"_wdt"},"request_uri":"http://snowtricks.jeremy-barette.fr/_wdt/818ef5","method":"GET"} []
+
+[2018-01-21 03:09:35] request.INFO: Matched route "security_login". {"route":"security_login","route_parameters":{"_locale":"fr","_controller":"App\\Controller\\SecurityController::login","_route":"security_login"},"request_uri":"http://snowtricks.jeremy-barette.fr/fr/login","method":"POST"} []
+
+[2018-01-21 03:09:35] doctrine.DEBUG: SELECT t0.id AS id_1, t0.avatar AS avatar_2, t0.username AS username_3, t0.email AS email_4, t0.password AS password_5, t0.is_active AS is_active_6, t0.token_reset AS token_reset_7 FROM users t0 WHERE t0.username = ? LIMIT 1 ["Test"] []
+
+[2018-01-21 03:09:36] security.INFO: User has been authenticated successfully. {"username":"Test"} []
+
+Reproduce the bug
+Do not hesitate to go on the following link to see what is happening : http://snowtricks.jeremy-barette.fr/en/login
+
+Username : Test
+Password : test
+

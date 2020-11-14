@@ -1,0 +1,5 @@
+Email validator
+
+
+Validators::isEmail(’petr@skᬡ1898.cz’) vraci true.. ten divnej znak je takovej ctverecek s otaznickem.. viz obrazek,
+

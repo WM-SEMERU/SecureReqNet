@@ -1,0 +1,52 @@
+Client certificate auth is using the subject CN from the intermediate CA cert, not from the end entity cert
+
+
+Is this a request for help? (If yes, you should use our troubleshooting guide and community support channels, see http://kubernetes.io/docs/troubleshooting/.):
+I tried slack, someone else ran in to my issue as well and just used separate CAs
+What keywords did you search in Kubernetes issues before filing this one? (If you have found any duplicates, you should instead reply there.):
+intermediate certificate
+Is this a BUG REPORT or FEATURE REQUEST? (choose one):
+FEATURE REQUEST
+Kubernetes version (use kubectl version):
+Client Version: version.Info{Major:"1", Minor:"3", GitVersion:"v1.3.7+a2cba278", GitCommit:"a2cba278cba1f6881bb0a7704d9cac6fca6ed435", GitTreeState:"not a git tree", BuildDate:"2016-09-23T02:19:56Z", GoVersion:"go1.7.1", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"4+", GitVersion:"v1.4.0-beta.8+coreos.0", GitCommit:"9c19ded313d3b3b86eadf179aed553854138abd7", GitTreeState:"clean", BuildDate:"2016-09-19T18:58:14Z", GoVersion:"go1.6.3", Compiler:"gc", Platform:"linux/amd64"}
+Environment:
+
+Cloud provider or hardware configuration:
+aws
+OS (e.g. from /etc/os-release):
+NAME=CoreOS
+ID=coreos
+VERSION=1122.2.0
+VERSION_ID=1122.2.0
+BUILD_ID=2016-09-06-1449
+PRETTY_NAME="CoreOS 1122.2.0 (MoreOS)"
+ANSI_COLOR="1;32"
+HOME_URL="https://coreos.com/"
+BUG_REPORT_URL="https://github.com/coreos/bugs/issues"
+Kernel (e.g. uname -a):
+Linux ip-10-0-0-50.ec2.internal 4.7.0-coreos #1 SMP Tue Sep 6 14:39:20 UTC 2016 x86_64 Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz GenuineIntel GNU/Linux
+Install tools:
+kube-aws
+Manually generated ssl certs
+Others:
+I'm using client-cert+ABAC auth and have audit logging enabled.
+
+What happened:
+Clients using SSL certs for auth show the subject CN of their intermediate cert not their entity cert.
+I set the client-cert to a certificate chain:
+
+
+
+ca.pem on all machines is set to the Root Cert
+What you expected to happen:
+I expect the client to use the Subject CN of the entity cert.
+The key I'm using is for the entity and the connection is secure, My audit logs just show the CN for the intermediate CA.
+How to reproduce it (as minimally and precisely as possible):
+Create a root CA cert
+Use it to sign an intermediate CA cert.
+Use root cert as CA, use certificate chain bundle as client cert, use correct client key
+I'm seeing this in audit logs when I use the chain:
+2016-10-10T23:04:07.466636575Z AUDIT: id="79f6295c-d229-488b-af12-67cca35e6eee" ip="10.0.0.12" method="GET" user="PeriscopeData Key1 Sub-CA" as="" namespace="" uri="/api/v1/nodes?fieldSelector=metadata.name%3Dip-10-0-0-12.ec2.internal&resourceVersion=0"
+When I set the ca.pem to my sub-ca key and don't use my bundled certs, I see
+2016-10-11T00:40:33.367066951Z AUDIT: id="704c267f-e487-4468-b39a-32ca4ef749ec" ip="10.0.0.12" method="GET" user="kube-worker" as="" namespace="" uri="/api/v1/nodes/ip-10-0-0-12.ec2.internal"

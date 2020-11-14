@@ -1,0 +1,13 @@
+Security Problem: Screenshot Function
+
+
+Original issue 402 created by TriplexAccount.P.N on 2014-07-08T10:27:41.000Z:
+Copied from google/google-authenticator#401 because it applies to Android app (as well?).
+What steps will reproduce the problem?
+
+Call Screenshot Function from the specific smartphone
+
+What version of the product are you using? On what operating system?
+Google Authentificator: 2.49
+Please provide any additional information below.
+In general, it is not possible to take a screenshot of any inner user interface from a banking app for security reason. The Google Authentificator can be comprimised by using a trojan with screenshot function. Please disable the ability to take a screenshot from the main interface from the Google Authentificator.

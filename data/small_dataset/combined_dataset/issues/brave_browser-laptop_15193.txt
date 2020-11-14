@@ -1,0 +1,27 @@
+Brave is not localized - macOS
+
+
+Description
+If your system language = French and you install Brave, Brave should be displayed in French. Currently, it is being displayed in English.
+Steps to Reproduce
+
+Open System Preferences > Language and Region.
+Set Preferred Language = French (move to the top of the list).
+Set Region = France.
+Reboot your machine.
+Install Brave (clean profile).
+
+Actual result:
+Brave is in English
+
+Expected result:
+Brave should be localized (display in French)
+Reproduces how often:
+Easily
+Brave Version
+about:brave info:
+0.23.107
+Reproducible on current live release:
+Yes
+Additional Information
+Does not reproduce on Win/Linux.

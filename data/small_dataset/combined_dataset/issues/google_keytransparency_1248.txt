@@ -1,0 +1,9 @@
+Add Canonical Err Codes
+
+
+Add canonical error codes to the errors that may occur during sequencing.
+The main purpose of this is to expose a metric that can export the numbers of sequencing errors that are:
+
+InvalidArgument - various kinds of data corruption or user error.
+Internal - conditions that we expect to never happen.
+

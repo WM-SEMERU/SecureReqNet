@@ -1,0 +1,19 @@
+### Summary
+
+On the todos page, you can pass in any project ID and see that project's name.
+
+### Steps to reproduce
+
+Go to https://gitlab.com/dashboard/todos?project_id=12345. This shows a private project, which I don't have access to, as the title of the dropdown.
+
+### What is the current *bug* behavior?
+
+Any project ID is accepted and used to get the title of the dropdown, without access checks.
+
+### What is the expected *correct* behavior?
+
+If you pass the ID of a project you can't see, it should behave the same as passing the ID of a deleted project.
+
+[`project_dropdown_label`](https://gitlab.com/gitlab-org/gitlab-ce/blob/v9.2.2/app/helpers/issuables_helper.rb#L93-104) is the offending helper, added in 8.12: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/6072
+
+This behaves like `user_dropdown_label` above it, but note that users are OK, because any user can see any other user's name - that's not private information in GitLab terms.

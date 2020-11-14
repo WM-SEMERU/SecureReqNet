@@ -1,0 +1,16 @@
+Undescore in property name cannot be normalized
+
+
+Symfony version(s) affected: 4.2.2
+Description
+I've added property with underscore in the name and after normalization the property was not there.
+How to reproduce
+make:entity
+add new property with underscore, for example: "sender_collapse"
+try to normalize it
+Possible Solution
+I've found, that in vendor\symfony\property-info\Extractor\ReflectionExtractor.php method getAccessorMethod checks if there is method in entity class that is called as property name with underscore (for example getSender_collapse()) which I didn't have, because make:entity command generates methods without underscores.
+Of course symfony recommends to use camelCase for variables, functions, methods, but I haven't found to written explicitly I had to use camelCase for entity properties as well.
+I've changed my entity properties to camelCase and it worked.
+I think there should be either warning while trying to add property with underscore make:entity or generating scheme with doctrine or a fix for generating proper property names for ReflectionExtractor class.
+Additional context

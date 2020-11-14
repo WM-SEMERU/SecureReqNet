@@ -1,0 +1,4 @@
+CookiePolicyOptions sets minimumsamesitelevel to lax by default and that breaks oauth providers
+
+
+This happens when you plug-in the cookie policy middleware on the app and use an oauth provider for authentication.

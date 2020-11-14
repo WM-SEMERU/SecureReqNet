@@ -1,0 +1,7 @@
+Console SQL function doc generation
+
+
+
+The previous SQL function auto generation script was written in Bash
+Now it's implemented in Node.js for easier maintenance
+

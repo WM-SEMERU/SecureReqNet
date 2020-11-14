@@ -1,0 +1,6 @@
+Store information within one account
+
+
+Accouding to Sync documentation on https://github.com/brave/sync/wiki/Design. It is written that brave will not able to recover bookmarks and other information if we remove brave from all devices.
+It is the case with me where I am using brave on my laptop and using brave on my smartphone. But I do not want both devices to be in sync, because I am using a laptop for my official purpose and smartphone for my personal purpose. So, I do not want to mix my personal bookmarks with professional. So I can't recover my data if I format my laptop or smartphone.
+Can you please add this feature so that I can store my data using one account, either google account or brave own account. I prefer adding Google account for sync purpose.

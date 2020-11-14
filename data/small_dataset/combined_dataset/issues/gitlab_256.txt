@@ -1,0 +1,32 @@
+Backup script is broken since 6.7,
+When we run sudo -u git -H bundle exec rake gitlab:backup:create RAILS_ENV=production we got a fatal
+
+Here the trace log:
+```
+invalid byte sequence in UTF-8
+/home/git/gitlab/lib/backup/manager.rb:104:in `split'
+/home/git/gitlab/lib/backup/manager.rb:104:in `tar_version'
+/home/git/gitlab/lib/backup/manager.rb:11:in `pack'
+/home/git/gitlab/lib/tasks/gitlab/backup.rake:15:in `block (3 levels) in <top (required)>'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/task.rb:236:in `call'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/task.rb:236:in `block in execute'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/task.rb:231:in `each'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/task.rb:231:in `execute'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/task.rb:175:in `block in invoke_with_call_chain'
+/usr/local/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/task.rb:168:in `invoke_with_call_chain'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/task.rb:161:in `invoke'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:149:in `invoke_task'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:106:in `block (2 levels) in top_level'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:106:in `each'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:106:in `block in top_level'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:115:in `run_with_threads'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:100:in `top_level'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:78:in `block in run'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:165:in `standard_exception_handling'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/lib/rake/application.rb:75:in `run'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/rake-10.1.1/bin/rake:33:in `<top (required)>'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/bin/rake:23:in `load'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/bin/rake:23:in `<main>'
+```
+Install has been update from 6.5 to 6.7 without troubles

@@ -1,0 +1,8 @@
+Brave reports as vulnerable to spectre on test site
+
+
+Test plan
+#12577 (comment)
+
+I'm using Brave 0.19.131 & checked the new security feature which is related to Spectre & Meltdown vulnerability. So, I tried using this http://xlab.tencent.com/special/spectre/spectre_check.html, it's saying it's vulnerable for Spectre. Check the Screenshot. I'm using macOS Sierra.
+

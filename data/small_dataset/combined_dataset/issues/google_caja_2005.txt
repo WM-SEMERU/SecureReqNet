@@ -1,0 +1,5 @@
+Allow scroll to null and undefined
+
+
+Chrome, Safari, Firefox, IE11 evaluate scrollTo() null and undefined as zero.
+Caja prevents scrolling to null and undefined. This fix corrects that behavior.

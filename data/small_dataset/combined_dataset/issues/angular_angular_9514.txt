@@ -1,0 +1,8 @@
+test(security): Ensure xlink:href is not bindable.
+
+
+The DOM schema does not allow binding any properties to dangerous SVG
+attributes/properties. This change adds a smoke test to verify that
+behaviour, by testing that xlink:href (a sample dangerous property)
+is not bindable.
+Fixes #9510.

@@ -1,0 +1,7 @@
+Support for chaining authentication providers that shares the same security context
+
+
+Hi,
+in my current project I implemented a proprietary single sign-on service authentication provider that logs in users automatically. If the automatism fails, I want to provide a fallback through another authentication provider ( http_basic, form_login).
+I read about chaining user providers but nothing about chaining authentication providers that shares the same security context. Is it possible to do this?
+I would be grateful for any advice.

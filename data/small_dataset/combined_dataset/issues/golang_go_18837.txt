@@ -1,0 +1,13 @@
+net/http: document filepath sanitization for ServeFile
+
+
+This is a petty formulation issue, but the subject is quite sensitive so I thought I would bring it up. The documentation for http.ServeFile(w ResponseWriter, r *Request, name string) states that name needs to be sanitized to prevent ascension into parent directories. It further states that ServeFile rejects requests that contain ".." as path elements.
+I assume the implication of both statements combined is that patterns like
+http.ServeFile(w, r, filepath.Join(".", r.URL.Path))
+http.ServeFile(w, r, filepath.Join("dir", r.URL.Path))
+
+are "safe" in the sense that ascension into the respective parent directories is not possible.
+However this is not obvious from the current documentation as there may more obscure ways of ascending than ".." that are less obvious (I am honestly not sure).
+Imo it would be a good idea to state explicitly whether the file path in the above patterns is sufficiently sanitized or not because I see only two scenarios:
+-If the patterns above are not safe the current documentation may cause security problems
+-If the patterns are safe some users won't take advantage of this great function because it is not explicitly stated (this is me right now).

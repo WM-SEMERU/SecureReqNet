@@ -1,0 +1,8 @@
+Configure firewall.
+
+
+I see two options:
+
+configure with ansible the firewall
+Create a 'firewall' controller daemon that check services and ingress
+

@@ -1,0 +1,6 @@
+Support certificate rotation
+
+
+[FEATURE REQUEST]
+We need some way to rotate certificates.  Right now we mint certs that expire after 1 year and we have no built in provision to rotate them.
+We should either have components manage rotating their own certificates (and writing the certs back to the kubeconfig) or have a way to easily do this from the outside without disrupting a running cluster.  Notifying users when rotation is necessary should be part of our design here too.

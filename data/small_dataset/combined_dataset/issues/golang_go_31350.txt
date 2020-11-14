@@ -1,0 +1,7 @@
+regexp: get rid of the internal/testenv dependency
+
+
+regexp/exec_test.go depends on internal/testenv for the sole purpose of doing this in 2 tests: isRaceBuilder := strings.HasSuffix(testenv.Builder(), "-race")
+Would it be possible to refactor both tests, possibly moving some of their testcases to the exec2_test.go file which has // +build !race? I'm not sure if they are strictly equivalent.
+This would make testing patches on the regexp module easier.
+thanks!

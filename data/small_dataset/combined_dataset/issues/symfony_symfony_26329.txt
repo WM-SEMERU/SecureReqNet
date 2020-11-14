@@ -1,0 +1,42 @@
+[Security] Check provider return value in ChainProvider loadUserByUse…
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+unsure
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+The Chain  provider does not check for a valid UserInterface Object, I think this should throw an exception if the object is not implementing UserInterface

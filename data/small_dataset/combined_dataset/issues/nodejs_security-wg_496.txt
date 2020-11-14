@@ -1,0 +1,12 @@
+vuln: added 2 vulnerabilities for Feb 2019 core releases
+
+
+Covers Node.js security releases:
+
+6.17.0
+8.15.1
+10.15.2
+11.10.1
+
+Ref: https://nodejs.org/en/blog/vulnerability/february-2019-security-releases/
+I'd appreciate if someone else could close this out when approved please.

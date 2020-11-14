@@ -1,0 +1,20 @@
+JwtRegisteredClaimNames invalid references to RFC7519
+
+
+Describe the bug
+Invalid JwtRegisteredClaimNames and invalid references to RFC7519 standard documentation.
+I wanted to use actor claim validation but it was failing since I implemented OAuth Token Exchange Draft
+I traced this a while, and found out that logic was different so had to implement my own case.
+But while tracing I found many claim types pointing to RFC7519 standard - Section 4
+( RFC7519 Section 4 )
+, but they don't exist there.
+To Reproduce
+Open JwtRegisteredClaimNames (Go To Definition) class in IDE or editor of choice and
+compare to RFC7519 Section 4
+You will see wrong references and non existing claim types that refer to RFC7519 Section 4.
+Expected behavior
+To be in sync with standard
+Screenshots
+
+Additional context
+Versions: All up to latest 5.4.0 from System.IdentityModel.Tokens.Jwt NuGet package

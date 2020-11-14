@@ -1,0 +1,4 @@
+[SignalR]: AuthorizeHelper should no-op if endpoint routing has already executed auth
+
+
+Similar to the solution in #8387, we need to avoid re-running auth in SignalR if the middleware previously ran.

@@ -1,0 +1,16 @@
+CONIKS - wide-tree constant change with each update?
+
+
+Hi there!
+I'm digging through CONIKS papers and it seems that it is an absolute must to select new tree-wide constant for each tree update (and to rebuild the whole tree respectively) to prevent parallel attacks through past versions of the same tree structure (like parallel birthday attack for instance).
+According to the code, it is not the case for Trillian. Why so?
+Papers Im looking at:
+
+
+CONIKS: Bringing Key Transparency to End Users
+
+
+Efficient Sparse Merkle Trees. Caching Strategies and Secure (Non-)Membership Proofs
+
+
+Thank you!

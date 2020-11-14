@@ -1,0 +1,13 @@
+crypto: fix rsa key gen with non-default exponent
+
+
+EVP_PKEY_CTX_set_rsa_keygen_pubexp() accepts ownership of the exponent
+on success, so do not free it.
+Fixes: #27087
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

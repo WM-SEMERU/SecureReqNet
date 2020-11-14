@@ -1,0 +1,16 @@
+Constant source node DOM
+
+
+This is the DOM implementation for ConstantSourceNode.  Additional modification is likely, but I wanted to get the review process started for guidance.
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #___ (GitHub issue number if applicable)
+
+
+ There are tests for these changes OR
+ These changes do not require tests because ___
+
+
+This change is 

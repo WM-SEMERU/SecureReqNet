@@ -1,0 +1,11 @@
+Member cannot login to their account : user do not have document access
+
+
+Dear All,
+We have received a lot of our platform users report that they cannot login to their account.
+Just happneded in yesterday , our admin did not change anything on setting or touch anything on the premission.
+Here is the error message, when the members tried to log in:
+"user do not have document access"
+Does anyone has the solution ?
+Cheers!
+Cat

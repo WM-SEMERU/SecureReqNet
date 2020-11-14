@@ -1,0 +1,18 @@
+buffer: hard-deprecate SlowBuffer
+
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test nosign (Windows) passes
+ tests and/or benchmarks are included
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+buffer
+Description of change
+This emits a warning first time SlowBuffer instance is created and instructs the users to switch to Buffer.alloc() or Buffer.allocUnsafeSlow(), both of which are not pooled.
+Refs: #8169
+Refs: #7152
+Not sure if we should do this in v7 or v8. It looks like SlowBuffer is used only by a small number of modules (I found 416, only 330 of which — outside of tests, and some of those are false positives). Module authors could use safe-buffer to polyfill for older Node.js versions, though.
+Labelling as in progress because this lacks tests.
+/cc @nodejs/ctc, @seishun

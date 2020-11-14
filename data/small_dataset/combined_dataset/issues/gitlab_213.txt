@@ -1,0 +1,5 @@
+Hi,
+I´m coming from Stash and there is it very easy to search after file names. This "feature" i missing in Gitlab.
+It would be great if Gitlab also get such a "feature" :)
+
+mfg ternes3

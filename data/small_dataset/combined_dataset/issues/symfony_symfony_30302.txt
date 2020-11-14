@@ -1,0 +1,31 @@
+[Validator] IdenticalTo only usable for objects not arrays
+
+
+Description
+With the current state of the validator package its a pain to validate arrays.
+For example all the IdenticalTo, EqualTo validators have a propertyPath option which is only usable for objects.
+So I dont have any possibility to validate an value based on all inputs values because CallbackValidator does not pass the whole input but only the value.
+Given the following example:
+$constraints = [
+  new Assert\Collection([
+     "fields" => [
+        "password" => [new Assert\NotBlank()], 
+        "passwordConfirm" => [new Assert\IdenticalTo(["propertyPath" => "password"])]
+  ])
+];
+
+//PasswordConfirm should be matched against password but isnt
+$errors = Validation::createValidator()->validate(["password" => "123456", "passwordConfirm" => "54321"]);
+Implementing something equal with Callback does also not work because I have to know the input when defining the constraints which allows no abstraction.
+$data = [/* ... */]
+$constraints = [
+  new Assert\Collection([
+    "password" => [new Assert\NotBlank()],
+    "passwordConfirm" => [new Assert\Callback([
+       "callback" => function($value, $context, $payload) use ($data) {   //use-statement here will make problems
+
+       })
+     ])]
+  ])
+
+];

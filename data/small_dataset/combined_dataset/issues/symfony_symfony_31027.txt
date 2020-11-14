@@ -1,0 +1,52 @@
+[Config] Deprecate TreeBuilder::root
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+
+
+
+Fixed tickets
+#29876
+
+
+License
+MIT
+
+
+Doc PR
+—
+
+
+
+Alternative idea to #31015. Or is the root method still needed?
+It would look like this:
+

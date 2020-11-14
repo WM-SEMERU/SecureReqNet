@@ -1,0 +1,8 @@
+Bug 1531933 – Use proper image sizes
+
+
+Testing:
+
+Try some layout variants (recommend: 66-beta-2-complex, basic, dev-test-all).
+Ensure no images break (caveat: since there's a CDN and a image processing service middle tier you may see something broken or slow to load if you're the first to hit it...try reloading if that happens!)
+

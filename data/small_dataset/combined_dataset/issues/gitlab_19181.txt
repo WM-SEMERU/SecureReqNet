@@ -1,0 +1,13 @@
+H1: [140707](https://hackerone.com/bugs?subject=gitlab&report_id=140707&view=new&substates%5B%5D=new&text_query=&sort_type=latest_activity&sort_direction=descending&limit=25&page=1)   
+
+# Description
+
+Reporter is suggesting we send a notification email when the account's password has been changed.
+
+
+## Note
+ There is a previous report at [13920](https://hackerone.com/bugs?subject=gitlab&report_id=139201&view=new&substates%5B%5D=new&text_query=&sort_type=latest_activity&sort_direction=descending&limit=25&page=1) similar to this request but requiring the email to be confirmed prior to the change
+
+***
+
+/cc @rspeicher you worked on the previous report, What do you think about this one? 

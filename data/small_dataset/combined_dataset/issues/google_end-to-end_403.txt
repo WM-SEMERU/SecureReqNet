@@ -1,0 +1,4 @@
+Support ascii armored files messages delimited by \n\n
+
+
+Some PGP clients result in messages with \n\n between lines when parsed from Gmail. This patch allows these messages to be decrypted.

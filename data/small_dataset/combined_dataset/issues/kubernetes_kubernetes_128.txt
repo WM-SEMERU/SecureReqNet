@@ -1,0 +1,4 @@
+All remote resources should be fetched over HTTPS
+
+
+There's a whole lot of stuff being downloaded/connected to over HTTP instead of HTTPS, this should be either configurable or ideally done via HTTPS by default.

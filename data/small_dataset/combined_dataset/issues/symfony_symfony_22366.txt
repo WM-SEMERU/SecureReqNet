@@ -1,0 +1,88 @@
+Firewall use another user provider from other's firewall when authentication is failed
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+2.8.9
+
+
+
+My Symfony project consists two user provider that is used in two different firewalls.
+#app/config/security.yml
+
+security:
+    access_decision_manager:
+        strategy: unanimous
+    providers:
+        ldap:
+            id: some.security.user.provider
+        fos_userbundle:
+            id: fos_user.user_provider.username
+    firewalls:
+        some_other:
+            provider:   fos_userbundle 
+            pattern:    ^/some-route
+            security:   true
+            anonymous:  ~
+            form_login:
+                default_target_path: /some-route
+                login_path:          /some-route/login
+                check_path:          /some-route/login_check
+                csrf_provider: security.csrf.token_manager
+            logout:
+                path:   /some-route/logout
+                target: /some-route 
+        main:
+            provider: ldap
+            pattern: ^/
+            security: true
+            anonymous: ~
+            # other_form_login option was created to not using form_login
+            # created by a factory that extend 
+            # Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory
+            other_form_login: 
+                failure_handler: main.security.authentication.failure_handler
+                success_handler: main.security.authentication.success_handler
+            logout:
+                path: /logout
+                target: /
+
+
+When I'm trying to login at /some-route/login using a username from ldap user provider, it succeeds even though I'm using fos_userbundle provider.
+Here is what I have tried:
+
+
+I tried to change user provider of main firewall to fos_userbundle, it doesn't succeeds anymore when I'm using a username from ldap user provider. But I must use the ldap provider for main firewall
+
+
+When I'm logged in using /some-route/login with ldap user provider and going to / route, it shows anonymous on the toolbar which means it doesn't go to main firewall
+
+
+I have tried to change main firewall route to ^/main but it still succeed when I'm trying to login with username from ldap provider.
+
+
+EDIT: add other_form_login option that might be involved in generating this bug.

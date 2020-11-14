@@ -1,0 +1,52 @@
+[Security] added userChecker to SimpleAuthenticationProvider
+
+
+[Security] added userChecker to SimpleAuthenticationProvider
+[SecurityBundle] [DependencyInjection] updated SimpleFormFactory
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26314
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+Introduces user checker to the simple authentication provider.

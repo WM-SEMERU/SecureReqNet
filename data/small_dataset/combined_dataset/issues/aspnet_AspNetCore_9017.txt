@@ -1,0 +1,22 @@
+Allow IReconnectPolicy.nextRetryDelayInMilliseconds to return a promise in the SignalR TS client
+
+
+Epic #8797
+See https://github.com/aspnet/AspNetCore/pull/8566/files#r269656331
+The following is the current signature for IReconnectPolicy.nextRetryDelayInMilliseconds
+/** An abstraction that controls when the client attempts to reconnect and how many times it does so. */
+export interface IReconnectPolicy {
+    /** Called after the transport loses the connection.
+     *
+     * @param {number} previousRetryCount The number of failed reconnect attempts so far.
+     *
+     * @param {number} elapsedMilliseconds The amount of time in milliseconds spent reconnecting so far.
+     *
+     * @returns {number | null} The amount of time in milliseconds to wait before the next reconnect attempt. `null` tells the client to stop retrying and close.
+     */
+    nextRetryDelayInMilliseconds(previousRetryCount: number, elapsedMilliseconds: number): number | null;
+}
+
+The proposal is to change it to:
+    nextRetryDelayInMilliseconds(previousRetryCount: number, elapsedMilliseconds: number): number | Promise<void> | null
+If a promise is returned instead of a number, we'd await the promise instead of the set number of milliseconds.

@@ -1,0 +1,43 @@
+firewall provider key issue
+
+
+Hello guys,
+I'm working with Easyadminbundle and I added a custom action that give the administrator the possibility to connect any other other in the application using :
+     public function connectAction(Request $request){
+        $id = $request->get('id');
+        $userRepo = $this->getDoctrine()->getRepository(User::class);
+        $user = $userRepo->findOneBy(["id"=>$id]);
+        if(!$user)
+            return $this->redirectToRoute('easyadmin');
+        $token = new UsernamePasswordToken($user, $user->getPassword(), "main", $user->getRoles());
+        $this->get("security.token_storage")->setToken($token);
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+        return $this->redirectToRoute('folder_list');
+    }
+but when I do this the user is connected against the "admin" instead of the main firewall :
+    firewalls:
+        admin:
+            pattern: ^/admin
+            form_login:
+                login_path: admin_login
+                check_path: admin_login
+                provider: fos_userbundle
+                always_use_default_target_path: true
+                default_target_path: /admin
+            logout:
+                path: admin_logout
+                target: admin_login
+            anonymous:    true
+        main:
+            pattern: ^/
+            form_login:
+                login_path: fos_user_security_login
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                success_handler: app.authentication_success_handler
+            logout:
+                path: /logout
+                target: /
+            anonymous:    true
+What do you think about this ?

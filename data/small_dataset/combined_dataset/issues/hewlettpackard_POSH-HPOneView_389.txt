@@ -1,0 +1,42 @@
+Get-HPOVEnclosure throws error when using -Report
+
+
+Expected Behavior
+Get a full report of the Synergy 12000 Frame .
+Actual Behavior
+get following error and cmdlets fails
+      Interconnect Name            Logical Interconnect     State      Status Consistency state
+----- -----------------            --------------------     -----      ------ -----------------
+      Frame01, interconnect 1 LE_1-LIG_SAS-1      Configured OK                      
+      Frame01, interconnect 3 LE_1-LIG_VC_Default Configured OK     Consistent       
+      Frame01, interconnect 4 LE_1-LIG_SAS-1      Configured OK                      
+      Frame01, interconnect 6 LE_1-LIG_VC_Default Configured OK     Consistent       
+Enclosure-Report : Cannot validate argument on parameter 'uri'. -URI must being with a '/' (eg. /rest/server-hardware) in its value. Please correct the value and try again.
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\4.10.1889.2173\HPOneView.410.psm1:41425 char:45
++ ...        $_EnclosureCollection | ForEach-Object { Enclosure-Report $_ }
++                                                     ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidData: (:) [Enclosure-Report], ParameterBindingValidationException
+    + FullyQualifiedErrorId : ParameterArgumentValidationError,Enclosure-Report
+
+Steps to reproduce
+Connect-HPOVMgmt -Hostname $IP -UserName $username -Password $password -AuthLoginDomain "local"
+$Enclosure = Get-HPOVEnclosure -Name "*"
+Get-HPOVEnclosure -Name ($Enclosure).Name -report
+
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion or $PSLibraryVersion):
+4.10.1889.2173 C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\4.10.1889.2173
+HPE OneView Composer Version (Get-HPOVVersion -ApplianceVer):   ApplianceVersion:
+4.10.04.370820.00 4.10.1889.2173 C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\4.10.1889.2173
+Output from $PSVersionTable on your Windows Host:
+Name                           Value                                                                                                                                                                             
+----                           -----                                                                                                                                                                             
+PSVersion                      5.1.14409.1005                                                                                                                                                                    
+PSEdition                      Desktop                                                                                                                                                                           
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}                                                                                                                                                           
+BuildVersion                   10.0.14409.1005                                                                                                                                                                   
+CLRVersion                     4.0.30319.42000                                                                                                                                                                   
+WSManStackVersion              3.0                                                                                                                                                                               
+PSRemotingProtocolVersion      2.3                                                                                                                                                                               
+SerializationVersion           1.1.0.1
+

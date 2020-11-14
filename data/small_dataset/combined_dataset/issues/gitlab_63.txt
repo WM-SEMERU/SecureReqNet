@@ -1,0 +1,7 @@
+The internal API contains a "/discover" method to allow gitlab-shell to find out the name associated with a key_id. This is filtered via UserSafe to contain only the "name" parameter.
+
+Right now, the only use of both /discover and UserSafe is to allow this functionality in case audit_usernames = true. However, fetching the username from a key_id is a very useful thing to have as keying behavior off of usernames is often far easier than keying behavior off of numeric IDs.
+
+My proposal is to modify UserSafe to expose ":name, :username" instead of just ":name". I don't think this is unsafe (you're not returning the email, after all) and doesn't incur meaningful additional overhead, but vastly helps those of us that need to add logic in the hook before/after the gitlab-shell update call.
+
+I've tried this small change locally and it works well.

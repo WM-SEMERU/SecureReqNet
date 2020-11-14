@@ -1,0 +1,19 @@
+Map: CONIKS map hasher
+
+
+To provide l bits of security in the map we need the following:
+
+A collision and pre-image resistant hash function H of 2l bits.
+A tree specific nonce to prevent multi-tree attacks [1][2]
+An index specific value for both leafs and empty branches to prevent attacking multiple locations within the same tree [1][2]
+
+In particular, this means that the HStar2 algorithm does not provide the full l bits of security in a multi-tree setting, and we need to adjust the tree hasher interface to support supplying location and tree specific values during the computation of leaves and empty branches.
+[1]: https://eprint.iacr.org/2016/683.pdf Section 5.1
+[2]: https://eprint.iacr.org/2014/1004.pdf Section 3.1
+Proposal for MapHasher:
+type MapHasher interface {
+	HashEmpty(treeNonce int64, index []byte, height int) []byte
+	HashLeaf(treeNonce int64, index []byte, depth int, leaf []byte) []byte
+	HashChildren(l, r []byte) []byte
+	BitLen() int
+}

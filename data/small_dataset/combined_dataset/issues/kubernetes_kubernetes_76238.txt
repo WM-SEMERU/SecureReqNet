@@ -1,0 +1,13 @@
+change default 5s ttl to 30s for coredns to be same with kube-dns/dnsmasq
+
+
+What type of PR is this?
+
+/kind bug
+
+What this PR does / why we need it:
+According to https://coredns.io/plugins/kubernetes/,  coredns uses 5s ttl for kubernetes zone by default, this isn't consistent with 30s ttl in dnsmasq based kube-dns.  Although https://github.com/kubernetes/dns/blob/master/docs/specification.md doesn't specify the value for ttl, it's better to keep it same,  actually this issue confused me a lot when I did benchmark against two kubernetes cluster, one uses dnsmasq, one uses coredns, I spent a lot of time to locate the root cause.
+Special notes for your reviewer:
+I use  kube-dns only for k8s service,  I'm not sure whether this change is appropriate for other kinds of k8s resources such as k8s pod.
+Does this PR introduce a user-facing change?:
+NONE.

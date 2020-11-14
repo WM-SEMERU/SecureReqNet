@@ -1,0 +1,5 @@
+[READY] [feature] Added dashboard read only with new Rho role
+
+
+I needed a user who could only access the read-only dashboards, so I've added a new built-in role Rho (ρ) as logged user but less powerful than Gamma.
+As Gamma user this role need a complementary role to have access to view the dashboards.

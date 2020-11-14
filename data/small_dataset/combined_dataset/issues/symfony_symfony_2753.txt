@@ -1,0 +1,4 @@
+[SecurityContext] Request listener exception
+
+
+When uses the Security Context from a request listener throws an exception: Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException: The security context contains no authentication token

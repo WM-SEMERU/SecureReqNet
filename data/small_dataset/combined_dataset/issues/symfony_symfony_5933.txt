@@ -1,0 +1,10 @@
+Improve the Extensibility of Authentication
+
+
+I can spare this issue report with too long-winded a description with the following: https://groups.google.com/forum/?fromgroups=#!topic/symfony2/AZpgbEk4Src
+The short version I'll mention here is:
+I really think the authentication system in Symfony puts way too much hassle on the developer just to alter a few behaviours.  In my case, that is to allow users with a null password value to sign in without a password (intranet solution).
+There's definite room if not need for improvement as I've spent a considerable amount of time trying to figure out a solution and am still turning up empty handed.
+I've got a pastebin in the thread above which outlines one approach I took which was to extend the Dao classes, but none of it is really coming together.  My authentication providers gets instantiated... I'm not entirely certain what needs what  for the whole mechanism to "grab hold" of my implementation.
+While I recognize it's a no-no to report a ticket for something that seems like a request for help; I feel I've made it past that point and into the realm of "this really needs to be better".  Having spoken on IRC and groups with some people confirming that things could be better, or just not getting any clear direction, this merits a closer look.
+Overall Symfony's conceptualization of security makes good sense, I feel that there might be some hairy spots in the implementation that make it not in any way useful or usable for most developers - like me! :D

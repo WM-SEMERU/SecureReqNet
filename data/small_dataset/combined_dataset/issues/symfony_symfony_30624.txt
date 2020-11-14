@@ -1,0 +1,6 @@
+Make RedisAdapter TagAware by using native Redis Sets
+
+
+The only way to have a cache adapter with tagging features in symfony currently is to explicitly create a TagAwareAdapter backed by some other cache adapter.
+However, redis does have SETS, see https://www.compose.com/articles/how-to-handle-tagged-data-with-redis-sets/ and the official docs
+Shouldn't it be possible to include this into the RedisAdapter just from the beginning? I'd expect massive performance improvements from this.

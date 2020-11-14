@@ -1,0 +1,5 @@
+RemoteError should expose raw error details
+
+
+Currently, FailureContext - used by the RemoteError event - doesn't expose the raw protocol error details but an exception, which makes determining the root cause of the error much harder (one may want to detect access_denied errors, for instance)
+We should consider adding the error code to this class. Sadly, RemoteAuthenticationHandler and the RemoteError event are supposed to be protocol-agnostic and things like error/error_description/error_uri are OAuth2-specific, so adding Error/ErrorDescription/ErrorUri to FailureContext will likely break the existing layering.

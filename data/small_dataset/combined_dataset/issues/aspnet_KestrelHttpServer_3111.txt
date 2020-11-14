@@ -1,0 +1,34 @@
+SslStream object disposed exception
+
+
+I'm not sure if this is the right place to report this, but I'm seeing this exception occasionally:
+kubernetes docker pod uname -a:
+Linux platform-prod-577cf48b4b-wrg7x 4.15.0-1030-azure #31~16.04.1-Ubuntu SMP Tue Oct 30
+context:
+running kestrel behind nginx on linux in docker image based on dotnet:2.1-aspnetcore-runtime
+19:40:01 UTC 2018 x86_64 GNU/Linux
+Unhandled Exception: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'SslStream'.
+   at System.Net.Security.SslState.ThrowIfExceptional()
+   at System.Net.Security.SslState.CheckThrow(Boolean authSuccessCheck, Boolean shutdownCheck)
+   at System.Net.Security.SslState.CheckOldKeyDecryptedData(Memory`1 buffer)
+   at System.Net.Security.SslState.HandleQueuedCallback(Object& queuedStateRequest)
+   at System.Net.Security.SslState.FinishHandshakeRead(Int32 newState)
+   at System.Net.Security.SslState.FinishHandshake(Exception e, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslState.RehandshakeCompleteCallback(IAsyncResult result)
+   at System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   at System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   at System.Net.AsyncProtocolRequest.CompleteUserWithError(Exception e)
+   at System.Net.FixedSizeReader.ReadPacketAsync(Stream transport, AsyncProtocolRequest request)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+
+pod error code:
+Last State:     Terminated
+      Reason:       Error
+      Exit Code:    139
+      Started:      Fri, 07 Dec 2018 17:06:46 -0800
+      Finished:     Fri, 07 Dec 2018 23:48:04 -0800
+
+let me know if there is more info I could provide. thanks.

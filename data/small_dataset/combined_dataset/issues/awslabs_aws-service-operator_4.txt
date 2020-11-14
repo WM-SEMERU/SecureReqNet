@@ -1,0 +1,5 @@
+Figure out least perms RBAC rule for operator
+
+
+Right now just to make this work it has a very open policy and should be paired
+down before we have production users.

@@ -1,0 +1,53 @@
+[SecurityBundle] Allow accessing remember_me services via FirewallMap
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#3137, #11158 (not sure)
+
+
+License
+MIT
+
+
+Doc PR
+todo
+
+
+
+This allows to retrieve the RememberMeServices service of the current firewall using:
+FirwallMap::getRememberMeServices(Request $request) : RememberMeServicesInterface
+An alternative could be to create a public alias of the service.
+It seems there are use cases, see the ticket and the ones mentioning it (some from FOSUserBundle).

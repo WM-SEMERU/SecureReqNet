@@ -1,0 +1,99 @@
+'```
+Link:          https://hackerone.com/reports/418072
+By:            @ngalog
+```
+
+Details:
+PoC:
+- Private project: https://gitlab.com/golduserngalog/securitything/pipelines/31862396/security 
+- Click Security Tab
+- Click Render path contains....
+- Click Brakeman Warning...
+- Popup
+
+![Screen_Shot_2018-10-03_at_9.30.44_PM](/uploads/13bd80149faa9859468e4e7b87b40b06/Screen_Shot_2018-10-03_at_9.30.44_PM.png)
+
+Steps to reproduce:
+- Create a new project, enable auto devops
+- Create following files, `.gitlab-ci.yml` and `gl-sast-report.json`
+
+gl-sast-report.json
+```
+[
+  {
+    "tool": "brakeman",
+    "category": "sast",
+    "name": "Render path conta&quot;ins parameter value",
+    "message": "Render path contains &quot;parameter value",
+    "cve": "0239276870b43e64a4a111dc62da6fbe5334102484d6f2dde529e0d7ebca4109",
+    "confidence": "Low",
+    "location": {
+      "file": "a://app/views/admin/groups/index.ht&quot;ml.haml",
+      "start_line": 18
+    },
+    "identifiers": [
+      {
+        "type": "brakeman_warning_code",
+        "name": "Brakeman Warning Code 15",
+        "value": "15",
+        "url": "javascript:alert(1)//https://brakemanscanner.org/docs/warning&quot;_types/dynamic_render_path/"
+      }
+    ],
+    "file": "a://app/views/admin/groups/index.html.ha&quot;ml",
+    "line": 18,
+    "url": "javascript:alert(2)//https://brakemanscanner.org/docs/warning_types/dynamic_render_path/"
+  },
+  {
+    "tool": "brakeman",
+    "category": "sast",
+    "name": "Possible SQL injection",
+    "message": "Possible SQL injection",
+    "cve": "032dab1a6714c5a70ee47e21e47f87921a658abf0d97288a2ccdf14f425524f4",
+    "confidence": "Medium",
+    "location": {
+      "file": "lib/gitlab/background_migration/populate_import_state.rb",
+      "start_line": 21,
+      "class": "Gitlab::BackgroundMigration::PopulateImportState",
+      "method": "move_attributes_data_to_import_state"
+    },
+    "identifiers": [
+      {
+        "type": "brakeman_warning_code",
+        "name": "Brakeman Warning Code 0",
+        "value": "0",
+        "url": "https://brakemanscanner.org/docs/warning_types/sql_injection/"
+      }
+    ],
+    "file": "lib/gitlab/background_migration/populate_import_state.rb",
+    "line": 21,
+    "url": "https://brakemanscanner.org/docs/warning_types/sql_injection/"
+  }
+]
+```
+
+.gitlab-ci.yml
+```
+image: alpine
+
+sast:
+  script:
+    - echo hi
+  artifacts:
+    paths:
+    - gl-sast-report.json
+
+```
+
+Final file structure
+![Screen_Shot_2018-10-03_at_9.33.21_PM](/uploads/3ba601c8362fdd61149220240af1f3c3/Screen_Shot_2018-10-03_at_9.33.21_PM.png)
+
+Finally, it also fires in security dashboard also.
+
+Security Dashboard
+![Screen_Shot_2018-10-03_at_9.33.50_PM](/uploads/3b93bb08108c601cda3bb7c19a90dcf4/Screen_Shot_2018-10-03_at_9.33.50_PM.png)
+Pipeline security
+![Screen_Shot_2018-10-03_at_9.30.44_PM__1_](/uploads/f95107eb3e051ec9fa70b28d00699ad2/Screen_Shot_2018-10-03_at_9.30.44_PM__1_.png)
+
+## Impact
+
+Persistent XSS

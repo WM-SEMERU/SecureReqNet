@@ -1,0 +1,46 @@
+[Security] User refreshment from identical users provider type
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+When we are using two privoders with the same supported class but with different users, there is a faill because the first UsernameNotFoundException will stop the refresh processus.

@@ -1,0 +1,5 @@
+Fix samples test script
+
+
+This was accidentally broken when Paul and I changed a tiny bit of seemingly unneeded logic for testing if simulation mode is enabled. Unfortunately, testing environment variables in CMake does not play well
+with its logic operators, and so while if ($ENV{SIM}) behaved as expected, the very similar if (NOT $ENV{SIM}) behaved completely unexpectedly. This bug temporarily disabled the testing of non-simulation samples in CI.

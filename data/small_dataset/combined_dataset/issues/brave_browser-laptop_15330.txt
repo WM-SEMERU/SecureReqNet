@@ -1,0 +1,5 @@
+Screwed Kongregate and Playfab
+
+
+Installed this new version of Brave and for some reason my Kongregate games are all screwed up. The console shows Playfab Account logged in: False
+I went to Chrome, loaded a game, exported the save file, opened Brave, imported the file and it loaded up. Closed Brave, reopened it, and it was as if I did nothing. Console said it couldn't find either the offline or the online (which it can't because Playfab is screwed)

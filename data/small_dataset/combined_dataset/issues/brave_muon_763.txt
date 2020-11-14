@@ -1,0 +1,9 @@
+Webview mutes parent.postMessage()
+
+
+Moving an application to Muon from Electron.
+The app contained "iframe" with page that called parent.postMessage() to send JSON data to renderer process. After changing "iframe" to "webview" the function stopped working. The page that sends the message is not Node.
+documentation mentions:
+// In guest page. const {ipcRenderer} = require('electron') ipcRenderer.on('ping', () => { ipcRenderer.sendToHost('pong') })
+But there is no node in guest page? I suppose the above is from Electron docs that were not adapted yet.
+What workaround may you suggest?

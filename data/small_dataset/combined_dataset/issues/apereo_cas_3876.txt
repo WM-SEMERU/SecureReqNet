@@ -1,0 +1,6 @@
+WIP: Introduce reusable configuration holder object
+
+
+Useful to gather common dependencies needed by various CAS components
+which reduces the complexity and size of constructors in configuration
+code.

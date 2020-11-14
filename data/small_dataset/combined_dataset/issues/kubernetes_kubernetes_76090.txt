@@ -1,0 +1,23 @@
+Moving streaming library to staging/cri-api/pkg/streaming
+
+
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+This PR is required to make life easier for people developing on cri-api, so that they do not need to vendor kubernetes for this library (as vendoring k8s is hard)
+
+ Move out streaming library to staging/cri-api/pkg/streaming
+ Isolate remotecommand and portforward dependencies
+ Isolate apis/core
+
+Which issue(s) this PR fixes:
+Fixes #75828
+KEP under discussion:
+kubernetes/enhancements#937
+Special notes for your reviewer:
+None
+cc @dims
+Does this PR introduce a user-facing change?:
+None
+Streaming library has a new location under staging/cri-api/pkg/streaming
+

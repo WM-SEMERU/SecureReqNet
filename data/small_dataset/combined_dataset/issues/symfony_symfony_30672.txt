@@ -1,0 +1,63 @@
+[Kernel] Add Kernel component
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29275, #27479
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+See #29275 for all details.
+To help code review there are one commit per action.
+Todo
+
+ Release specifications, see questions on #29275 (comment)
+ Create the PR to add the kernel component (@alquerci)
+
+ List test cases
+ Implements tests cases (@alquerci)
+ Write how to migrate on UPGRADE-6.0.md (@alquerci)
+
+
+ Create the PR for update the documentation
+

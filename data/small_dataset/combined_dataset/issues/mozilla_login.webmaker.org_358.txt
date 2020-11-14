@@ -1,0 +1,4 @@
+need to update sequelize, security vulnerability
+
+
+npm WARN deprecated sequelize@1.7.10: critical security fix in v3.0.0

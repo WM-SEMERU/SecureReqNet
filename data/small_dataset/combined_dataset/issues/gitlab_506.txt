@@ -1,0 +1,5 @@
+It is possible to assign using the following ULR anybody to an issue regardless if the person is member of the project or not.
+
+```issues/new?issue%5Bassignee_id%5D=<someone's id>```
+
+The person is no member of that project and the project is private.

@@ -1,0 +1,11 @@
+'With Subresource Integrity, the browser compares the hash of the asset provided by GitLab with the resource its loaded, preventing malicious assets from being loaded (e.g. if a CDN was compromised). Essentially, it adds an extra hurdle to get over if someone wants to compromise a GitLab instance.
+
+This is [already implemented in sprockets-rails](https://github.com/rails/sprockets-rails#sri-support), so it should be relatively easy to add.
+
+SRI is currently supported by the latest versions of Chrome, Firefox, and Opera. For Microsoft Edge, the feature has been “Under Consideration” since at least September 2015 and – as of June 2016 – [has yet to have that status updated](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/subresourceintegrity). Unfortunately, [the same is true of WebKit](https://webkit.org/status/#feature-subresource-integrity)
+
+## Resources
+- [Subresource Integrity on the GitHub Engineering Blog](http://githubengineering.com/subresource-integrity/)
+- [SRI support in Sprockets](https://github.com/rails/sprockets-rails#sri-support)
+
+cc: @jschatz1 @iamphill @annabeldunstone @fatihacet @alfredo1 @lbennett 

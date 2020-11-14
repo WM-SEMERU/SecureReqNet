@@ -1,0 +1,7 @@
+[Cookbook][Security] Clarification on the the use of Voter::supportsClass
+
+
+Hello,
+I noticed that the cookbook (http://symfony.com/doc/master/cookbook/security/voters_data_permission.html#creating-the-custom-voter) uses instanceof in the supportsClass method even though the api states that the parameter $class is a string (http://api.symfony.com/master/Symfony/Component/Security/Core/Authorization/Voter/VoterInterface.html#method_supportsClass).
+I'm now unsure if the cookbook is wrong and hope you can clarify and/or correct it.
+Greetings

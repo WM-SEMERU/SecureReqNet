@@ -1,0 +1,59 @@
+[Translation] Floating number plural broken
+
+
+Symfony version(s) affected: 4.2.3
+Description
+Decimal number between 1 and 2 produces incorrect plural in English.
+How to reproduce
+
+$t = new \Symfony\Component\Translation\Translator('en');
+
+$t->addLoader('array', new \Symfony\Component\Translation\Loader\ArrayLoader());
+$t->addResource('array', [
+    'liter' => '%count% liter|%count% liters',
+], 'en');
+
+echo $t->trans('liter', ['%count%' => 1.5]);
+
+echo "\n";
+
+$t = new \Symfony\Component\Translation\Translator('fr');
+
+$t->addLoader('array', new \Symfony\Component\Translation\Loader\ArrayLoader());
+$t->addResource('array', [
+    'liter' => '%count% litre|%count% litres',
+], 'fr');
+
+echo $t->trans('liter', ['%count%' => 1.5]);
+It outputs:
+1.5 liter
+1.5 litre
+
+It should output:
+1.5 liters
+1.5 litre
+
+Possible Solution
+int typing here should be removed, it's a float, numbers should not be truncated:
+
+
+
+symfony/src/Symfony/Component/Translation/IdentityTranslator.php
+
+
+         Line 57
+      in
+      32aa969
+
+
+
+
+
+
+  private function getPluralizationRule(int $number, string $locale): int 
+
+
+
+
+
+Related to #16256

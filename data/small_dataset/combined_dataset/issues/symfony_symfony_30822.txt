@@ -1,0 +1,4 @@
+[Twig] Access master request in twig
+
+
+I propose to make master request available in AppVariable class in purpose to be accessible in a template without having it as a controller argument.

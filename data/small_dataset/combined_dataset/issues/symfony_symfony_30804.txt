@@ -1,0 +1,15 @@
+Application option to only try exact found commands, not similars
+
+
+I don't like Application 'smart-finding' a command that's similar to what I typed, and executing it without any notification, even though that's not what I typed. Currently that behavior is hard-coded in Application::find(). I would love an option to disable that behavior. A public method, or a protected property (to disable in a child application class).
+With that option enabled (or the smart-find disabled, whichever way you want to name it) it would just throw an error. Something like:
+
+Command "%s" not found.\nDid you mean "%s"?
+
+And then the user can choose what to do.
+I would make a PR, but all class properties are private, and I would make a protected $enableSmartFind = true; (which is probably not allowed), so any subclass can disable it.
+
+It'd also be lovely to use some of that private info in a child class. A child class can't even do:
+$allCommands = $this->commandLoader ? array_merge($this->commandLoader->getNames(), array_keys($this->commands)) : array_keys($this->commands);
+
+(like in find()) to find all registered commands. Why so private..?

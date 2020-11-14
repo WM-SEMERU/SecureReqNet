@@ -1,0 +1,7 @@
+[DNM] Updates URLs for API documentation for mapbox-java
+
+
+🚧  Do not merge until API documentation changes land 🚧
+This PR updates links to the API docs to match the new URL structure.
+@langsmith to review please 🙏
+cc @mapbox/docs

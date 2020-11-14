@@ -1,0 +1,31 @@
+I'm upgrading in stages from 5.0 to 7.0.  First I was able to upgrade to 5.4 and then to 6.0.  No problems there.
+
+When upgrading from 6.0 to 7.0, the migration `20140416074002_add_index_on_iid.rb` fails with an
+
+     undefined method `shift' in #<MergeRequest...>
+
+My DB has a single Merge Request (we're not using MR at the time).  I left RoR before 3.0, so I'm not up-to-date about scopes anymore.  The point seems that the `of_project` scope is returning a single record instead of an array.  I moved on by changing the line 22 from:
+
+      if items.size > 1
+
+to:
+
+      if items.is_a? Array and items.size > 1
+
+
+But now when I click on the MR I get the following error:
+
+    NoMethodError (undefined method `id' for nil:NilClass):
+      app/models/commit.rb:55:in `id'
+      app/models/merge_request_diff.rb:70:in `new'
+      app/models/merge_request_diff.rb:70:in `block in load_commits'
+      app/models/merge_request_diff.rb:70:in `map'
+      app/models/merge_request_diff.rb:70:in `load_commits'
+      app/models/merge_request_diff.rb:52:in `commits'
+      app/models/merge_request.rb:37:in `commits'
+      app/models/merge_request.rb:223:in `closes_issues'
+      app/controllers/projects/merge_requests_controller.rb:196:in `closes_issues'
+
+
+Probably there's no relation.  Looking at the code it seems that one of the commits has been lost.  If that's the case (though an edge case), it'd problably be best to offer a message and allow to remove the dangling MR.
+  

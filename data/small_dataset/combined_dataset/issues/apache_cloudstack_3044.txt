@@ -1,0 +1,26 @@
+protocol number support in security group rules
+
+
+ISSUE TYPE
+
+Improvement Request
+
+COMPONENT NAME
+API, UI
+CLOUDSTACK VERSION
+4.12.0
+CONFIGURATION
+Advanced zone with security groups
+OS / ENVIRONMENT
+Ubuntu 16.04/KVM
+SUMMARY
+We need to support security group rules with protocol number (for example, GRE-> 47, AH-> 51, ESP->50)
+list of protocol number can be found at https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+STEPS TO REPRODUCE
+go to Security groups, and add ingress/egress rules
+Currently only TCP/UDP/ICMP protocol are allowed when create a security group rule on UI/API
+EXPECTED RESULTS
+it is better to be able to add security group rules with protocol number.
+it is also good if we can allow "all" on UI.
+ACTUAL RESULTS
+not supported yet

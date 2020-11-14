@@ -1,0 +1,50 @@
+[Routing] Fix routes annotation loading with glob pattern
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29747
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Loading routes annotation loading with glob pattern triggers an error if one of the targetted directory contains an abstract class. This fixes it

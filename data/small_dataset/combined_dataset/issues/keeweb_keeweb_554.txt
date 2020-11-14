@@ -1,0 +1,34 @@
+[Privacy Issue] Shortcut pastes password into any app in foreground
+
+
+
+what were your actions?
+
+
+Chrome full screen on mac. Press Ctrl+Alt+T to fill password.
+Keeweb shows popup to select website comes.
+Select website
+Popup disappears
+Slack is open behind the popup. This app gets selected and focus goes into that app.
+Keeweb fills password into the chatbox. Voila, embarrassingly enough everyone has your username and password now.
+Go change your password on the website
+
+
+what was expected?
+
+Only paste the username/password if the selected app is the one where the action was initiated
+
+app version
+
+Version 1.3.3 (52701af)
+
+your user-agent (from Settings/Help section)
+
+Mac App
+
+does it happen on Demo or New database?
+Yup.
+please, open dev tools in your browser and attach output log from Console tab
+(if you are using desktop app, devtools can be opened from Settings/General/Advanced)
+N/A
+

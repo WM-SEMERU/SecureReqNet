@@ -1,0 +1,4 @@
+@l2succes: replaces receive_emails with agreed_to_receive_emails
+
+
+This is needed in order to pass the new gdpr properties in force (desktop/mobile).

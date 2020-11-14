@@ -1,0 +1,27 @@
+Dynamic PV with ReclaimPolicy `Delete` not deleted in cloud provider if first delete call failed.
+
+
+What happened:
+A dynamically provisioned PV is not being cleaned up in the cloud although the ReclaimPolicy is Delete and an unmount was successful. The PV is gone in Kubernetes, but it is still present in the cloud provider.
+What you expected to happen:
+The dynamically provisioned PV should be cleaned up in the cloud provider and be gone from Kubernetes, but it is only deleted from Kubernetes.
+How to reproduce it (as minimally and precisely as possible):
+
+Create simple StatefulSet with pvc template (for this example, I'll use the very simple one from https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/web/web.yaml). This is used as it was quite fast to setup a pvc bound to a pod.
+Wait for the pods + pvcs + pv to come up, be attached and running
+kubectl delete pv --wait=false <name of the pv>
+kubectl delete pvc --wait=false <name of the pvc claiming the pv>
+kubectl delete pod <name of the pod owning the pvc>
+
+Anything else we need to know?:
+I checked the kube-controller-manager logs: The PVC unmount succeeds as soon as the Pod is deleted. As soon as the unmount is successful, the kcm tries to delete the PV. However, this fails as the unmount did not yet 'propagate' to the cloud provider. In the meantime, the PVC is deleted and so the pv-protection finalizer is removed from the PV, triggering the garbage collector on the PV and removing it, thus there is never a second reconciliation happening that can actually cleanup the volume.
+Environment:
+
+Kubernetes version (use kubectl version):
+
+Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.3", GitCommit:"721bfa751924da8d1680787490c54b9179b1fed0", GitTreeState:"clean", BuildDate:"2019-02-01T20:08:12Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"11+", GitVersion:"v1.11.7-gke.12", GitCommit:"06f08e60069231bd21bdf673cf0595aac80b99f6", GitTreeState:"clean", BuildDate:"2019-02-25T20:37:10Z", GoVersion:"go1.10.8b4", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration: GKE
+

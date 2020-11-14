@@ -1,0 +1,15 @@
+[AppArmor] Report AppArmor status
+
+
+We try really hard to ensure that a container that specifies an AppArmor profile will not be allowed to run without the proflie. However, if a node is running a version < v1.4 we don't have any way to enforce this. To address this problem, we need a way to tell whether AppArmor has actually been enabled on the container.
+As with other AppArmor fields, this status can be represented as a Pod annotation:
+apparmor.security.alpha.kubernetes.io/status
+
+There are a couple possibilities for what to set as the value:
+
+enabled - AppArmor status on a pod is really an all-or-nothing deal. Either the Kubelet is AppArmor-aware, in which case the Pod will only run if the profiles can be applied, or it's not and the annotations will be ignored. This could be represented with a simple boolean value (although in practice if the annotation is present the value will always be enabled)
+{"container1":"enforce","container2":"complain"} - This option adds a little more introspection and indicates what mode each container's profile is in. The format is a json map of container name to profile mode. Adding the profile name would be redundant with the spec.
+
+I'm inclined towards the first option for it's simplicity, and we could provide the more detailed information from the second option through another channel (e.g. cAdvisor).
+Can we get a feature exception to add this for v1.4? ( @pwittrock )
+cc/ @thockin @dchen1107 @jfrazelle @matchstick

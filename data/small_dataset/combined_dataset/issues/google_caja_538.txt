@@ -1,0 +1,11 @@
+Create tests to ensure that no untested JavaScript constructs appear in cajoler output
+
+
+Original issue 538 created by zestyping on 2008-06-12T06:55:27.000Z:
+It's important not to let the cajoler get out of sync with your
+specification and test suite for the subset of JavaScript used
+in cajoled code.  So, create a suite of tests that checks that the
+cajoler produces only the constructs you expect.  (For example, give
+several samples of large Caja programs as input, and parse the
+cajoled output to verify that it contains only constructs from the
+set of JavaScript constructs you have specified and tested.)

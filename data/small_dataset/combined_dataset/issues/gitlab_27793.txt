@@ -1,0 +1,3 @@
+### Description
+
+As far as I can see there is no any way to authenticate user (through API) besides generating access tokens, and all possible ways to authenticate user with email and password and generate private token are deprecated and don't work with 2-way auth. Do you plan to include any new way to authenticate users through username password in v4 API? I need that functionality for integration with internal project management solution and mobile clients, that we are going to open source.

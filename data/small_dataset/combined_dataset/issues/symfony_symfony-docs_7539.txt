@@ -1,0 +1,5 @@
+Simplified UserPasswordEncoderCommand
+
+
+Not sure if we show the details of this command ... but if we do, we must update it because it was simplified to show a choice list of possible user classes.
+See symfony/symfony#20677

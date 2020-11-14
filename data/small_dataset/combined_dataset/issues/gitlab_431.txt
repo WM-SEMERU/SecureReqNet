@@ -1,0 +1,5 @@
+Hy guys,
+
+I tried to create a page like 'test1.2.3'. After adding description et click on create, got error 500. Page seems created but can't access it ;(
+
+Thanks

@@ -1,0 +1,49 @@
+[Routing] deprecate some router options
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+yes 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#28865 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+

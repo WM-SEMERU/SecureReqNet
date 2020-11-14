@@ -1,0 +1,10 @@
+'If you would enable custom gravatars. And you want to use the 'email' parameter. Shouldn't that be URL encoded? I always thought that the @@-sign was prohibited in an url.
+
+I'm asking this because we have an internal server with all the user photos that I would like to enable in our private server. But the firewall is configured to do strict URL checking, which doesn't accept the 'at-sign' in the url.
+
+I think the url encoding should be done in this line, but I never used ruby, so I dont know how to url-encode in ruby.
+https://gitlab.com/gitlab-org/gitlab-ce/blob/7-0-stable/app/services/gravatar_service.rb#L9
+
+@dzaporozhets I put in on your name because I saw you're the last one who edited this file :smiley_smile: 
+
+In an ldap environment if would sometimes be useful to display a picture based on username, but that would be an other feature request

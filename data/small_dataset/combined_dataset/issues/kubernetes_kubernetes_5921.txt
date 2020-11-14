@@ -1,0 +1,61 @@
+Securing kubernetes-ro use cases
+
+
+We'd like all communications to the apiserver to be over https and with authorization.
+Kubernetes-ro does not meet these standards.
+This bug is about things that use the kubernetes-ro service or the KUBERNETES_RO_* env vars.
+kube-proxy is discussed separately in #5917 since it explicitly uses port explicitly 7080 and has a straightforward fix.
+Existing Uses
+Use cases for kubernetes-ro
+
+cluster/addons/dns/kube2sky/kube2sky.go
+cluster/addons/fluentd-elasticsearch/logging-demo/README.md
+examples/cassandra/java/io/k8s/cassandra/KubernetesSeedProvider.java
+examples/phabricator/cloudsql-authenticator/run.sh
+examples/rethinkdb/image/run.sh
+examples/rethinkdb/image/run.sh
+contrib/for-tests/network-tester/webserver.go
+users have said they use kubernetes-ro.
+
+Backwards Compatibile or Breakage?
+In order to make this be https, we have to break some uses cases, because some existing use cases assume it is http.  So, we could either have a breakage day, or have it be configurable at cluster setup time, and just move GCE/GKE to the https option.  The latter seems expedient but it would force some code like kube2sky and elasticsearch to handle both options.  Better to just break it.
+Decision: breakage.
+Credential distribution
+We need to distribute credentials to clients.  The use cases are in pods, so we need a way to distribute credentials to all pods that need them.  Credentials would probably be in the form of a kubernetes_auth file.
+We could use secrets to distribute the kubernetes_auth files.  This does make some of the pod descriptions quite a bit mode verbose.  But we can address that later using service accounts or config templates/expansions.
+credential creation
+
+In the place where we create a "kubelet" token, also create a token for user "readonlyuser".
+Put this token into a kubernetes_auth file.
+Put the kubernetes_auth file along with the master's certificates into a secret object.
+Post this secret to the master in cluster/saltbase/salt/kube-addons/kube-addons.sh.
+
+credential use
+
+Change all pods that currently reference kubernetes-ro/KUBERNETES_RO to have a secret volume source.
+Change all the go code that references KUBERNETES_RO to instead take a --kubernetes_auth flag.
+change the java code and shell code to extract master address and the auth token and the certs from the kubernetes_auth file and use https.
+change all the shell code that uses KUBERNETES_RO and curl to extract the auth token from the kubernetes_auth
+
+Cleanup
+
+Stop advertising kubernetes-ro service (remove from pkg/master/publish.go)
+fix docs to never speak of it again.
+
+As an initial step, every cluster should be built with a secret with user readonly-user
+Alternative
+Run a proxy on each node which listens on each netns's localhost address, or one some other address visible to all netnses.  Listen for http.  Proxy via HTTPS to the master. See #2209
+Advantages:
+
+no credentials to distribute to pods, and to perhaps be compromised
+no verbosity in pods for the secret volume source
+no breakage for users
+Disadvantages:
+
+fixing urls in proxies
+unforseen complexity with proxying.
+uses a special mechanism for kubernetes auth, instead of the the more general option we expect users to use (Secrets).
+more moving parts.  more magic, instead of well-understood, composable mechanisms.
+
+
+

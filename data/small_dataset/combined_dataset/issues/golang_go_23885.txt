@@ -1,0 +1,9 @@
+proposal: x/crypto/chacha20poly1305: add support for XChaCha20
+
+
+Currently golang.org/x/crypto/chacha20poly1305 only supports the IETF ChaCha20, which has a nonce size of 96 bits. However, according to the folks from libsodium, this nonce size is too short to allow you to use random nonces.
+However, XChaCha20 (which has an extended nonce size of 192 bits, but uses the same underlying construction from my non-cryptographer understanding) has a long enough nonce that random nonces are safe. Here's the quote from libsodium:
+
+Unlike plain ChaCha20, the nonce is 192 bits long, so that generating a random nonce for every message is safe. If the output of the PRNG is indistinguishable from random data, the probability for a collision to happen is negligible.
+
+Is there any interest or plan to implement XChaCha20 support? I've found some third-party libraries, but I don't trust them as much as I'd trust golang.org/x/crypto maintainers.

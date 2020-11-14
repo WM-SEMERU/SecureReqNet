@@ -1,0 +1,6 @@
+Explicitly freeze [[ThrowTypeError]] and other singletons.
+
+
+Original issue 1661 created by kpreid.switchb.org on 2013-02-26T21:29:04.000Z:
+https://bugs.webkit.org/show_bug.cgi?id=108873 is a bug where the ES5-specified singleton [[ThrowTypeError]] is extensible. As far as I know, this is not an issue for SES because the transitive freezing/whitelisting will reach at least one strict function within SES itself which will contain a reference to [[ThrowTypeError]].
+However, it seems to me that in principle, we ought to give explicit attention to singletons which are ambiently reachable from JS language primitives (in this case, function construction) and make sure they are defended. For example, suppose some crazy person edited the SES whitelist to exclude Array; it is not obvious that this implies that Object.getPrototypeOf([]) is not necessarily frozen.

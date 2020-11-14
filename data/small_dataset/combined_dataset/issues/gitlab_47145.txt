@@ -1,0 +1,11 @@
+### Description
+
+A user should be able to make an issue confidential by using quick action.
+
+In particular, this could be used in templates for security or other sensitive issue types.
+
+### Proposal
+
+Add `/confidential` as a quick action that will override the value of the checkbox on issue creation.
+
+### Links / references

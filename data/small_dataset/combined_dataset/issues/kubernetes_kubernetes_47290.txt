@@ -1,0 +1,11 @@
+validate host paths on the kubelet for backsteps
+
+
+What this PR does / why we need it:
+This PR adds validation on the kubelet to ensure the host path does not contain backsteps that could allow the volume to escape the PSP's allowed host paths. Currently, there is validation done at in API server; however, that does not account for mismatch of OS's on the kubelet vs api server.
+Which issue this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close that issue when PR gets merged): fixes #47107
+Special notes for your reviewer:
+cc @liggitt
+Release note:
+Paths containing backsteps (for example, "../bar") are no longer allowed in hostPath volume paths, or in volumeMount subpaths
+

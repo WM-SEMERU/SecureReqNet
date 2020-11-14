@@ -1,0 +1,8 @@
+disable websql
+
+
+as a quick fix for https://blade.tencent.com/magellan/index_en.html, since we are not planning on doing more chromium updates to this deprecated repo
+QA test plan:
+open devtools
+confirm that window.openDatabase is undefined
+other client-side storage mechanisms mentioned in https://www.html5rocks.com/en/tutorials/offline/storage/, such as window.localStorage, should be defined

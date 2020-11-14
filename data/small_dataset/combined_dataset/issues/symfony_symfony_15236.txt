@@ -1,0 +1,29 @@
+InsufficientAuthenticationException is thrown and results in a 500 when I expect a 403
+
+
+I'm using Symfony 2.3 and written something very similar to this cookbook entry (http://symfony.com/doc/2.3/cookbook/security/voters.html). I think my issue very much looks like #8467, although I believe my use case is different. Because I am not using a user provider at all, anonymous authentication is totally ok.
+Now, InsufficientAuthenticationException is thrown with AccessDeniedException as a previous exception when I've denied access in my custom voter. I do not see why this first exception is thrown, since I just expect to return a 403 as a response and not a fatal 500.
+Some more info: I've got two firewalls. One is ignoring all dev related paths. The other simply allows anonymous users. My security.yml looks like this:
+security:
+    encoders:
+        Acme\DemoBundle\Entity\Person:
+            id: acme.demo.blowfish_password_encoder
+
+    providers:
+        in_memory:
+            memory: ~
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        default:
+            anonymous: ~
+
+    access_control:
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    access_decision_manager:
+        strategy: unanimous
+Can anyone elaborate on this?

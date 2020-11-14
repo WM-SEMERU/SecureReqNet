@@ -1,0 +1,50 @@
+[SecurityBundle] Don't normalize username of in-memory users
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+It's common to have e.g. emails as keys in security.providers.in_memory.users since keys are username. Actually they are normalized so foo-bar@gmail.com becomes foo_bar@gmail.com and authentication fails unexpectedly.

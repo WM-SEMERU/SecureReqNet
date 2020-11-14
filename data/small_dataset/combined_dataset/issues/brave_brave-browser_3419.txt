@@ -1,0 +1,13 @@
+Mitigate HSTS fingerprinting
+
+
+From: brave/browser-laptop#12223
+Description
+it has been reported in various places that Criteo is using HSTS supercookies (where they buy a bunch of domains and set HSTS on a different subset of domains for each user in order to uniquely identify them) for ad tracking. https://www.gothamcityresearch.com/single-post/2017/10/12/Criteo-SA-NASDAQ-CRTO-Why-We-Believe-Criteo%E2%80%99s-Undisclosed-Practices-are-Illegal-and-Harmful-to-Advertisers
+possibilities:
+
+double-key HSTS
+disallow 3rd parties from setting HSTS
+
+Test Plan
+Specified here: brave/brave-core#1744

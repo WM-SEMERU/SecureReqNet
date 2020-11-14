@@ -1,0 +1,25 @@
+Even though I can create groups in GitLab itself (as I am granted with privilege to create groups) I cannot find a way how to force API to create group with current user as owner of the group and thus chance to add projects and members through API.
+
+In other words: POST /groups should not be admin only, as not only admin has right to create group.
+
+But following change (mad with respect to group_controller) doesn't cut it:
+
+lib/api/groups.rb - line 43
+
+```ruby
+post do
+  required_attributes! [:name, :path]
+
+  attrs = attributes_for_keys [:name, :path]
+  @group = Group.new(attrs)
+
+  if @group.save
+    @group.add_owner(current_user)
+    present @group, with: Entities::Group
+  else
+    not_found!
+  end
+end
+```
+
+This creates group with name and path as intended, but current_user in not added to this group and whole presented result is a nil.

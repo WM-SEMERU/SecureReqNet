@@ -1,0 +1,34 @@
+Thousands separator not working with format.locale
+
+
+Issue description
+The format.locale on Dash table version 3.6.0 is not working correctly.
+Steps to reproduce the issue
+Using dash-table==3.6.0 and the example code from the documentation on https://dash.plot.ly/datatable as a basis I added 'format': {'locale': {'group': '.', 'decimal': ','}}
+import dash
+import dash_table
+import pandas as pd
+import locale
+
+locale.setlocale( locale.LC_ALL, 'de_DE.UTF-8' )
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/solar.csv')
+
+app = dash.Dash(__name__)
+
+app.layout = dash_table.DataTable(
+    id='table',
+    columns=[{"name": i, "id": i, "type": "numeric", 'format': {'locale': {'group': '.', 'decimal': ','}}} for i in df.columns],
+    data=df.to_dict("rows"),
+    
+)
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+
+What's the expected result?
+The numbers should have a thousands separator.
+What's the actual result?
+The thousands separator is not showing.
+Additional informations
+Also symbols seem not to work.

@@ -1,0 +1,8 @@
+crypto/tls: make ClientSessionState serializable
+
+
+The ClientSessionCache interface passes ClientSessionState objects to the application to hold on to. Since these objects are opaque, they can only be held in memory, and they can't be saved or synchronized.
+We should add a way to serialize and deserialize these objects, without making promises about their contents, but aiming for backwards compatibility if possible. Probably worth doing after 1.3 so that we skip that format change.
+This can probably be just an implementation of BinaryMarshaler and BinaryUnmarshaler.
+There isn't even a forward secrecy concern here because in 1.2 the tickets are sent in plaintext with the connection (sigh), and in 1.3 there's a DH round anyway.
+See also #19199 and #25228 for the server-side story of keeping state.

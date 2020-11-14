@@ -1,0 +1,34 @@
+Migrate command `updatecookie`
+
+
+Descriptions of the changes in this PR:
+#2059
+Description
+Provide some admin operation about cookie
+Command to update cookie
+
+Usage:  bkctl cookie admin [flags]
+
+Flags:
+
+    -d, --delete
+        Delete cookie both locally and in zooKeeper
+
+    -e, --expandstorage
+        Add new empty ledger/index directories
+
+    -f, --force
+        Force delete cookie
+
+    -host, --hostname
+        Expects config useHostNameAsBookieID=true as the option value
+
+    -l, --list
+        List paths of all the cookies present locally and on zooKeeper
+
+
+    -h, --help
+        Display help information
+
+Changes
+Update command updatecookie to admin

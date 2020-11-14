@@ -1,0 +1,54 @@
+[Console] Doc Block: More intuitive usage example in ArrayInput.
+
+
+Make the ArrayInput doc block example more self-explanatory and less misleading. Show the common use case of having command, and replace the confusing name argument with something more arbitrary.
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+The current doc block example for ArrayInput seems to imply that the command name goes in as name, but this is actually just a random argument, named "name", in this case.
+new ArrayInput(['name' => 'foo', '--bar' => 'foobar']);
+It might be more helpful to provide an example that works with Symfony's Console component out of the box, as that is a common use case:
+new ArrayInput(['command' => 'foo:bar', 'foo' => 'bar', '--bar' => 'foobar']);

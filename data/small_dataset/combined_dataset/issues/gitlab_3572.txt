@@ -1,0 +1,5 @@
+Hey guys,
+
+It would be really nice if something like 'password' is no valid password. I`ve found how to increase the password length but nothing that forces to use a combination of numbers, (special) characters, capitals...
+
+greetings

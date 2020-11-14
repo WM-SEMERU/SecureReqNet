@@ -1,0 +1,720 @@
+Update all dependencies
+
+
+This PR contains the following updates:
+
+
+
+Package
+Type
+Update
+Change
+References
+
+
+
+
+@​babel/cli
+devDependencies
+minor
+^7.2.3 -> ^7.4.3
+homepage, source
+
+
+@​babel/core
+devDependencies
+patch
+^7.4.0 -> ^7.4.3
+homepage, source
+
+
+@​babel/polyfill
+devDependencies
+patch
+^7.4.0 -> ^7.4.3
+homepage, source
+
+
+@​babel/preset-env
+devDependencies
+patch
+^7.4.2 -> ^7.4.3
+homepage, source
+
+
+@​storybook/cli
+devDependencies
+patch
+^5.0.5 -> ^5.0.6
+source
+
+
+@​storybook/react
+devDependencies
+patch
+^5.0.5 -> ^5.0.6
+source
+
+
+@​types/ramda
+devDependencies
+patch
+^0.26.5 -> ^0.26.6
+source
+
+
+@​types/react
+devDependencies
+patch
+^16.8.8 -> ^16.8.13
+source
+
+
+core-js
+devDependencies
+major
+^2.6.5 -> ^3.0.1
+source
+
+
+react
+devDependencies
+patch
+16.8.5 -> 16.8.6
+homepage, source
+
+
+react-dom
+devDependencies
+patch
+16.8.5 -> 16.8.6
+homepage, source
+
+
+tslint
+devDependencies
+minor
+^5.14.0 -> ^5.15.0
+homepage, source
+
+
+typescript
+devDependencies
+minor
+^3.3.4000 -> ^3.4.2
+homepage, source
+
+
+webpack-dev-server
+devDependencies
+minor
+^3.2.1 -> ^3.3.0
+source
+
+
+
+
+Release Notes
+
+babel/babel
+v7.4.3
+Compare Source
+👓 Spec Compliance
+
+babel-parser
+
+#​9769 Don't accept '\08' or '\09' in strict mode. (@​danez)
+#​9768 Correctly check for-in and for-of loop for invalid left-hand side. (@​danez)
+#​9767 Parse right-hand-side of for/of as an assignment expression. (@​danez)
+#​9748 [typescript] parsing template literal as type . (@​tanhauhau)
+
+
+
+🚀 New Feature
+
+babel-plugin-transform-runtime
+
+#​9754 [runtime-corejs3] Only polyfill instance methods when it might be needed. (@​nicolo-ribaudo)
+
+
+
+🐛 Bug Fix
+
+babel-polyfill
+
+#​9780 Closes #​9232, add some missed modules to @babel/polyfill/noConflict. (@​zloirock)
+
+
+babel-cli
+
+#​9807 Upgrade lodash to 4.17.11. (@​danez)
+
+
+babel-helper-module-transforms, babel-plugin-transform-modules-commonjs
+
+#​9802 Fix lazy option of babel-plugin-transform-modules-commonjs. (@​AndreasCag)
+
+
+babel-helper-create-class-features-plugin, babel-plugin-proposal-private-methods
+
+#​9801 Fix super method call in private instance method calling overridden method. (@​MattiasBuelens)
+
+
+babel-plugin-proposal-object-rest-spread, babel-plugin-transform-destructuring
+
+#​9416 Destructuring: Fix handling of impure computed keys with object rest. (@​motiz88)
+
+
+babel-plugin-transform-destructuring
+
+#​9412 Destructuring: Fix array unpacking assignments with holes on RHS. (@​motiz88)
+
+
+babel-traverse
+
+#​9415 @​babel/traverse: Fix NodePath.getData. (@​71)
+
+
+babel-parser
+
+#​9760 Allow HTML comments on first line. (@​danez)
+#​9700 Fix compatibility between estree and TS plugin. (@​danez)
+
+
+babel-helpers
+
+#​9756 Allow coreJS Symbol to be type object. (@​conartist6)
+
+
+babel-preset-env
+
+#​9752 Normalize core-js entry points. (@​zloirock)
+
+
+
+💅 Polish
+
+babel-parser
+
+#​9762 Optimize parseBindingAtom code to get better error messages. (@​danez)
+
+
+babel-core, babel-plugin-transform-for-of
+
+#​9698 Move array reference into for head initializer. (@​danez)
+
+
+
+🏠 Internal
+
+Other
+
+#​9806 Update test262. (@​danez)
+
+
+babel-parser, babel-preset-typescript
+
+#​9761 Explicit labels for tokenTypes. (@​danez)
+
+
+
+
+
+storybooks/storybook
+v5.0.6
+Compare Source
+Bug Fixes
+
+Addon-a11y: Fix color-blindness emulation in Firefox (#​6297)
+Addon-info: Fixed contrast of Show Info button for a11y (#​6301)
+Addon-cssresources: Fix panel layout (#​6263)
+Addon-info: forwardRef elements use displayName if available (#​6222)
+UI: Set expanded stories to objects instead of arrays (#​6290)
+Addon-actions: safe render for cyclic obj (#​6240)
+Core: Upgrade @​babel/preset-env to fix corejs option (#​6281)
+Core: Enforces corejs v2 for babel (#​6267)
+Knobs: Rename ALL panel to Other for ungrouped knobs (#​6232)
+
+
+
+zloirock/core-js
+v3.0.1
+Compare Source
+
+Fixed some cases of work with malformed URI sequences in URLSearchParams, #​525
+Added a workaround for a rollup issue, #​513
+
+v3.0.0
+Compare Source
+
+Features
+
+Add new features:
+
+Object.fromEntries (ECMAScript 2019)
+Symbol#description (ECMAScript 2019)
+New Set methods (stage 2 proposal)
+
+Set#difference
+Set#intersection
+Set#isDisjointFrom
+Set#isSubsetOf
+Set#isSupersetOf
+Set#symmetricDifference
+Set#union
+
+
+Promise.allSettled (stage 2 proposal)
+Getting last item from Array (stage 1 proposal)
+
+Array#lastItem
+Array#lastIndex
+
+
+String#replaceAll (stage 1 proposal)
+String#codePoints (stage 1 proposal)
+New collections methods (stage 1 proposal)
+
+Map.groupBy
+Map.keyBy
+Map#deleteAll
+Map#every
+Map#filter
+Map#find
+Map#findKey
+Map#includes
+Map#keyOf
+Map#mapKeys
+Map#mapValues
+Map#merge
+Map#reduce
+Map#some
+Map#update
+Set#addAll
+Set#deleteAll
+Set#every
+Set#filter
+Set#find
+Set#join
+Set#map
+Set#reduce
+Set#some
+WeakMap#deleteAll
+WeakSet#addAll
+WeakSet#deleteAll
+
+
+compositeKey and compositeSymbol methods (stage 1 proposal)
+Number.fromString (stage 1 proposal)
+Math.seededPRNG (stage 1 proposal)
+Symbol.patternMatch (for stage 1 pattern matching proposal)
+Symbol.dispose (for stage 1 using statement proposal)
+Promise.any (with AggregateError) (stage 0 proposal)
+URL and URLSearchParam from URL standard, also stage 0 proposal to ECMAScript
+
+URL
+
+URL#href
+URL#origin
+URL#protocol
+URL#username
+URL#password
+URL#host
+URL#hostname
+URL#port
+URL#pathname
+URL#search
+URL#searchParams
+URL#hash
+URL#toString
+URL#toJSON
+
+
+URLSearchParams
+
+URLSearchParams#append
+URLSearchParams#delete
+URLSearchParams#get
+URLSearchParams#getAll
+URLSearchParams#has
+URLSearchParams#set
+URLSearchParams#sort
+URLSearchParams#toString
+URLSearchParams#keys
+URLSearchParams#values
+URLSearchParams#entries
+URLSearchParams#@&#8203;@&#8203;iterator
+
+
+
+
+.forEach method on iterable DOM collections (#​329)
+
+
+Improve existing features:
+
+Add triggering unhandled Promise rejection events (instead of only global handlers), #​205.
+Wrap fetch for correct with polyfilled Promise and preventing problems like #​178, #​332, #​371.
+Add support of @@&#8203;isConcatSpreadable to Array#concat.
+Add support of @@&#8203;species to Array#{concat, filter, map, slice, splice}.
+Add direct .exec calling to RegExp#{@&#8203;@&#8203;replace, @&#8203;@&#8203;split, @&#8203;@&#8203;match, @&#8203;@&#8203;search}. Also, added fixes for RegExp#exec method. #​411, #​434, #​453, thanks @​nicolo-ribaudo.
+Correct iterators prototypes chain, related #​261.
+Correct Typed Arrays prototypes chain, related #​378.
+Make the internal state of polyfilled features completely unobservable, #​146.
+Add validation of receiver's internal class to missed non-generic methods.
+Fix descriptors of global properties.
+In the version without global pollution, if Object#toString does not support @@&#8203;toStringTag, add to wrapped prototypes own toString method with @@&#8203;toStringTag logic, see #​199.
+
+
+Update standard features and proposals:
+
+asap (old stage 0 proposal) replaced by queueMicrotask (a part of HTML spec)
+Update Observable (#​257, #​276, etc.)
+Update Array#flatten -> Array#flat and Array#flatMap
+Update global stage 3 proposal - rename global to globalThis
+Update String#matchAll (proposal-string-matchall#​17, proposal-string-matchall#​38, proposal-string-matchall#​41, etc.) and move to the stage 3
+Update .name properties of String#{trimStart, trimEnd , trimLeft, trimRight}, move to the stage 3
+Remove mongolian vowel separator (U+180E) from the list of whitespaces for methods like String#trim (ES6 -> ES7)
+
+
+Mark ES2016, ES2017, ES2018, ES2019 features as stable:
+
+Array#{ flat, flatMap }
+{ Array, %TypedArray% }#includes
+Object.{ values, entries}
+Object.getOwnPropertyDescriptors
+String#{ padStart, padEnd }
+String#{ trimStart, trimEnd, trimLeft, trimRight }
+Promise#finally
+Symbol.asyncIterator
+Object#__(define|lookup)[GS]etter__
+
+
+Remove obsolete features:
+
+Error.isError (withdrawn)
+System.global and global (replaced by globalThis)
+Map#toJSON and Set#toJSON (rejected)
+RegExp.escape (rejected)
+Reflect.enumerate (removed from the spec)
+Unnecessary iteration methods from CSSRuleList, MediaList, StyleSheetList
+
+
+No more non-standard features, finally removed:
+
+Dict
+Object.{classof, isObject, define, make}
+Function#part
+Number#@&#8203;@&#8203;iterator
+String#{escapeHTML, unescapeHTML}
+delay
+
+
+Add .sham flag to features which can't be properly polyfilled and / or not recommended for usage:
+
+Symbol constructor - we can't add new primitives. Object.prototype accessors too expensive.
+Object.{create, defineProperty, defineProperties, getOwnPropertyDescriptor, getOwnPropertyDescriptos}, Reflect.{defineProperty, getOwnPropertyDescriptor} can't be properly polyfilled without descriptors support.
+Object.{freeze, seal, preventExtensions}, Reflect.preventExtensions can't be properly polyfilled in ES3 environment.
+Object.getPrototypeOf can be deceived in ES3 environment.
+Reflect.construct can't be polyfilled for a correct work with newTarget argument on built-ins.
+Typed Array constructors polyfill is quite correct but too expensive.
+URL constructor in engines without descriptors support.
+
+
+
+
+Bug and compatibility fixes:
+
+Fix deoptimisation of iterators in V8, #​377.
+Fix import of property before constructor which should contain this property, #​262.
+Fix some cases of IE11 WeakMap frozen keys fallback, #​384.
+Fix non-enumerable integer keys issue because of Nashorn ~ JDK8 bug, #​389.
+Fix Safari 12.0 Array#reverse bug.
+One more fix for microtasks in iOS related #​339.
+Added a fallback for Rhino bug, #​440.
+Many other internal fixes and improvements.
+
+
+Repository:
+
+Change core-js repository structure to monorepo with packages in /packages/ directory.
+Clean-up it, remove all possible duplicates, generated files, etc.
+
+
+Packages:
+
+Extract a version without global namespace pollution to a separate core-js-pure package (replacement for core-js/library).
+Leave only one pair of bundles (global, with all polyfills) and move it to core-js-bundle package.
+Remove bundling logic from core-js package, leave it only in core-js-builder package.
+Clean-up packages.
+Because of all approaches, reduce size of packages from ~2mb for core-js@2 to:
+
+~500kb for core-js package
+~440kb for core-js-pure package
+
+
+Finally remove bower.json
+
+
+CommonJS API, namespaces:
+
+Add availability configuration of aggressiveness.
+Move core-js/library to separate core-js-pure package.
+Because of removing all non-standard features, we no longer need core-js/shim entry point, replace it just with core-js.
+Move all features from ES5, ES2015, ES2016, ES2017, ES2018 and ES2019 to one namespace for stable ES - it's available as core-js/es, all those features in modules folder has es. prefix.
+Change prefix for ES proposals from es7. to esnext., they no longer available in core-js/es7, use core-js/stage/* instead of that.
+Rename core-js(/library)/fn to core-js(-pure)/features for improve readability.
+Allow more granular inclusion of features from /es/ path (for example, core-js/es/array/from).
+Add /stable/ entry points as an equal of /features/ for stable features, without proposals.
+Add /proposals/ entry points for allow include all features from one proposal (for example, core-js/proposals/reflect-metadata).
+Add /es|stable|features/instance/ entry points for getting polyfill of the related method for passed instance (could be used in cases like babel-runtime).
+Split typed arrays polyfills. Now you can, for example, load only required method (for example, core-js/es/typed-array/from).
+Extract well-known symbols definition from es.symbol module for loading only required features, for example, in MS Edge.
+Rename web.dom namespace to web.dom-collections.
+Rename es6.regexp.{match, replace, search, split} -> es.string.{match, replace, search, split} - mainly it's fixes / adding support of well-known symbols to string methods, only in second place adding related methods to regexp prototype.
+Relax /modules/ directory by moving internal modules to /internals/ directory.
+Remove deprecated array entry points: core-js(/library)/fn/array/{pop, push, reverse, shift, unshift}.
+core object no longer available in the global version, entry points which previously returned it now returns globalThis object. Also, don't set global core property.
+Add some missing entry points.
+
+
+Tools, tests, code quality:
+
+Added core-js-compat package with:
+
+Data about the necessity of core-js modules and API for getting a list of required core-js modules by browserslist query, #​466.
+Data which modules load by each entry point (mainly useful for tools like @babel/preset-env).
+Data which modules added in minor versions (mainly useful for tools like @babel/preset-env).
+
+
+core-js-builder package:
+
+Added targets option with browserslist query.
+Removed an option for generation bundle of a version without global namespace pollution - now it's an odd use case.
+Removed UMD wrapper from a generated code of bundles - we don't need it for a global polyfill.
+
+
+Getting rid of LiveScript, usage another language in JS standard library looks strange and impedes usage of tools like ESLint:
+
+Tests are rewritten to JS.
+Scripts are rewritten to JS.
+
+
+Babel with minimalistic config (which should work anywhere) used on tests.
+ESLint used on tests and tools.
+Source code refactored for improving readability.
+
+
+
+
+
+facebook/react
+v16.8.6
+Compare Source
+React DOM
+
+Fix an incorrect bailout in useReducer(). (@​acdlite in #​15124)
+Fix iframe warnings in Safari DevTools. (@​renanvalentin in #​15099)
+Warn if contextType is set to Context.Consumer instead of Context. (@​aweary in #​14831)
+Warn if contextType is set to invalid values. (@​gaearon in #​15142)
+
+
+
+palantir/tslint
+v5.15.0
+Compare Source
+
+[api] WalkContext and AbstractWalker type parameter defaults to void (#​2600)
+[bugfix]no-void-expression now allows conditional expressions (#​4606)
+[bugfix] fix linebreak handling in ordered-imports (#​4583)
+[bugfix] fix static-this false positive for higher order components (#​4580)
+[bugfix] Fixed crash in unnecessary-else from blank if statements (#​4603)
+[bugfix] Fixed false positive in unnecessary-else after non-jumping statement (#​4603)
+[bugfix]interface-name now handles interface starting with "I18n" correctly (#​4486)
+[bugfix]no-string-throw fix inserts whitespace if not present after throw keyword (#​4540)
+[bugfix]quotemark: fix some edge cases for backtick option (#​4618)
+[bugfix]unnecessary-constructor: don't flag non-private constructors that are actually necessary (#​4619)
+[enhancement] Upgrade js-yaml to avoid security issue (#​4595)
+[new-rule-option] allow-single-line-comments option for file-header rule (#​4560)
+[new-rule-option] ignore-rest-args option for no-any rule (#​4581)
+[new-rule]no-null-undefined-union (#​4589)
+
+Thanks to our contributors!
+
+Max Belsky
+Steve Moser
+Christian Flach
+Roman Rogowski
+Terry
+Luke
+Andy Hanson
+Vitalij Krotov
+Josh Goldberg
+Vincent Langlet
+Neha Rathi
+Eric Ferreira
+
+
+
+Microsoft/TypeScript
+v3.4.2
+Compare Source
+This update solely changes TSServer to provide responses to configurePlugin requests, and allows global plugins to be loaded by external projects during project creation. This enables TSServer plugins (like IntelliCode) to be used in editors like Visual Studio.
+For the complete list of fixed issues, check out the
+
+fixed issues query for Typescript v3.4 RC.
+fixed issues query for Typescript v3.4.1.
+relevant change for 3.4.2
+
+Downloads are available on:
+
+npm
+Visual Studio 2017 (Select new version in project options)
+NuGet package
+
+v3.4.1
+Compare Source
+For release notes, check out the release announcement.
+For new features, check out the What's new in TypeScript 3.4.
+For breaking changes, check out the Breaking changes in TypeScript 3.4 page.
+For the complete list of fixed issues, check out the
+
+fixed issues query for Typescript v3.4 RC.
+fixed issues query for Typescript v3.4.1.
+
+Downloads are available on:
+
+npm
+Visual Studio 2017 (Select new version in project options)
+NuGet package
+
+Special thanks to all of our contributors this release:
+
+@​AnyhowStep
+Alan Pierce
+Alexander Tarasyuk
+Anders Hejlsberg
+Andy Hanson
+Benedikt Meurer
+Benjamin Lichtman
+Collins Abitekaniza
+Daniel Krom
+Daniel Rosenwasser
+@​fullheightcoding
+Gabriela Araujo Britto
+@​ispedals
+Jack Williams
+Jesse Trinity
+Jordi Oliveras Rovira
+Joseph Wunderlich
+K. Preißer
+Kagami Sascha Rosylight
+Klaus Meinhardt
+Masahiro Wakame
+Matt McCutchen
+Matthew Aynalem
+Mine Starks
+Nathan Shively-Sanders
+Ron Buckton
+Ryan Cavanaugh
+Sheetal Nandi
+Titian Cernicova-Dragomir
+@​tomholub
+Wenlu Wang
+Wesley Wigham
+
+
+
+webpack/webpack-dev-server
+v3.3.0
+Compare Source
+Bug Fixes
+
+deps: update dependency yargs to v12.0.5 (#​1707) (fa17131)
+example/util: use path.resolve (#​1678) (5d1476e), closes #​1428
+compatibility with webpack-cli@3.3 (#​1754) (fd7cb0d)
+ignore proxy when bypass return false (#​1696) (aa7de77)
+respect stats option from webpack config (#​1665) (efaa740)
+use location.port when location.hostname is used to infer HMR socket URL (#​1664) (2f7f052)
+Server: validate express.static.mime.types (#​1765) (919ff77)
+
+Features
+
+add option "serveIndex" to enable/disable serveIndex middleware (#​1752) (d5d60cb)
+add webpack as argument to before and after options (#​1760) (0984d4b)
+http2 option to enable/disable HTTP/2 with HTTPS (#​1721) (dcd2434)
+random port retry logic (#​1692) (419f02e)
+relax depth limit from chokidar for content base (#​1697) (7ea9ab9)
+
+3.2.1 (2019-02-25)
+Bug Fixes
+
+deprecation message about setup now warning about v4 (#​1684) (523a6ec)
+regression: allow ca, key and cert will be string (#​1676) (b8d5c1e)
+regression: handle key, cert, cacert and pfx in CLI (#​1688) (4b2076c)
+regression: problem with idb-connector after update internal-ip (#​1691) (eb48691)
+
+3.1.14 (2018-12-24)
+Bug Fixes
+
+add workaround for Origin header in sockjs (#​1608) (1dfd4fb)
+
+3.1.13 (2018-12-22)
+Bug Fixes
+
+delete a comma for Node.js <= v7.x (#​1609) (0bab1c0)
+
+3.1.12 (2018-12-22)
+Bug Fixes
+
+regression in checkHost for checking Origin header (#​1606) (8bb3ca8)
+
+3.1.11 (2018-12-21)
+Bug Fixes
+
+bin/options: correct check for color support (options.color) (#​1555) (55398b5)
+package: update spdy v3.4.1...4.0.0 (assertion error) (#​1491) (#​1563) (7a3a257)
+Server: correct node version checks (#​1543) (927a2b3)
+Server: mime type for wasm in contentBase directory (#​1575) (#​1580) (fadae5d)
+add url for compatibility with webpack@5 (#​1598) (#​1599) (68dd49a)
+check origin header for websocket connection (#​1603) (b3217ca)
+
+3.1.10 (2018-10-23)
+Bug Fixes
+
+options: add writeToDisk option to schema (#​1520) (d2f4902)
+package: update sockjs-client v1.1.5...1.3.0 (url-parse vulnerability) (#​1537) (e719959)
+Server: set tls.DEFAULT_ECDH_CURVE to 'auto' (#​1531) (c12def3)
+
+3.1.9 (2018-09-24)
+3.1.8 (2018-09-06)
+Bug Fixes
+
+package: yargs security vulnerability (dependencies) (#​1492) (8fb67c9)
+utils/createLogger: ensure quiet always takes precedence (options.quiet) (#​1486) (7a6ca47)
+
+3.1.7 (2018-08-29)
+Bug Fixes
+
+Server: don't use spdy on node >= v10.0.0 (#​1451) (8ab9eb6)
+
+3.1.6 (2018-08-26)
+Bug Fixes
+
+bin: handle process signals correctly when the server isn't ready yet (#​1432) (334c3a5)
+examples/cli: correct template path in open-page example (#​1401) (df30727)
+schema: allow the output filename to be a {Function} (#​1409) (e2220c4)
+
+
+
+Renovate configuration
+📅 Schedule: "before 2am" (UTC).
+🚦 Automerge: Disabled by config. Please merge this manually once you are satisfied.
+♻️ Rebasing: Whenever PR becomes conflicted, or if you modify the PR title to begin with "rebase!".
+👻 Immortal: This PR will be recreated if closed unmerged. Get config help if that's undesired.
+
+
+ If you want to rebase/retry this PR, check this box
+
+
+This PR has been generated by Renovate Bot. View repository job log here.

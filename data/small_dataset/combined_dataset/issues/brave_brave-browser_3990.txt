@@ -1,0 +1,34 @@
+NordVPN does not work in Private Mode
+
+
+Description
+NordVPN does not work in Private Mode
+Steps to Reproduce
+
+With a NordVPN account and the NordVPN extension, and the extension enabled for use in private windows, open a private window an attempt to connect to the service.
+If you have not logged in on a normal tab, you will get prompted to login, and it will appear success, but not actually work.
+If you have already logged in on a normal tab, you get a pop-up to enter your credentials. Entering your credentials returns you to the request to enter your credentials.
+
+Actual result:
+This error is from 0.61.51: Something went wrong: https://i.imgur.com/ezDxIY5.png
+VPN credential popup: https://i.imgur.com/gP3ptHA.png
+Expected result:
+My private window activity is VPNd.
+Reproduces how often:
+Always happens.
+Brave version (brave://version info)
+This is present in the current Stable branch:
+Version 0.61.52 Chromium: 73.0.3683.86 (Official Build) (64-bit)
+This is present in the current Beta branch:
+Version 0.63.29 Chromium: 73.0.3683.75 (Official Build) beta (64-bit)
+This is present in the current Dev branch:
+Version 0.64.30 Chromium: 73.0.3683.75 (Official Build) dev (64-bit)
+This is present in the current nightly branch:
+Version 0.65.2 Chromium: 73.0.3683.75 (Official Build) nightly (64-bit)
+This bug was not always present. Using the mainline branch, it was first noticed with this version:
+Version 0.61.51 Chromium: 73.0.3683.75 (Official Build) (64-bit)
+Versions prior to this did not exhibit this bug, but I cannot precisely tell you which was the last specific version where this bug did not exist.
+I am running OSX Mojave, 10.14.3 (18D109)
+I do not have this problem with Chrome incognito windows.
+Reproducible on current release:
+Yes.

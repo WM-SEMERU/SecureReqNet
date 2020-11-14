@@ -1,0 +1,40 @@
+Unable to print
+
+
+Description
+Unable to print with 0.23.201 cr69 build. Terminal displays:
+[40783:12803:0828/154053.334723:ERROR:service_manager_connection_impl.cc(317)] Can't create service pdf_compositor. No handler found.
+Steps to Reproduce
+
+Launch 0.23.201 from terminal
+Navigate to a web page or PDF
+Attempt to print (File > Print).
+Print dialog is shown. Select Print button.
+File does not print.
+
+Actual result:
+File does not print. Terminal displays [40783:12803:0828/154053.334723:ERROR:service_manager_connection_impl.cc(317)] Can't create service pdf_compositor. No handler found.
+Expected result:
+File should print
+Reproduces how often:
+easily
+Brave Version
+about:brave info:
+Brave: 0.23.201
+V8: 6.9.427.17
+rev: 17d2d17
+Muon: 8.1.0
+OS Release: 16.7.0
+Update Channel: Beta
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.57
+Reproducible on current live release:
+no, does not reproduce in 0.23.104
+Additional Information
+Reproduced by @srirambv on Windows
+Attempt to print other ways with the same result:
+- Right click on page background, select Print from context menu. Repeat steps 4-5 from STR
+- Right click on page background, select Print, Select PDF droplist and then 'Save as PDF'. Enter PDF name and then Save. When you go to view the PDF it is blank and terminal displays the same message as above.

@@ -1,0 +1,4 @@
+Track unsuccessful and successful logins on a per-user basis
+
+
+For both auditing and to possibly display to users. See mozilla/fxa-content-server#112.

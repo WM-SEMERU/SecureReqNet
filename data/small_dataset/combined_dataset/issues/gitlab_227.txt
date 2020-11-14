@@ -1,0 +1,92 @@
+```
+krainboltgreene@DifferenceEngineers:/home/git/gitlab  6-8-stable ✔                              23h15m
+▶ bundle exec bin/rake -T
+rake aborted!
+cannot load such file -- rb-inotify
+/home/git/gitlab/config/application.rb:6:in `<top (required)>'
+/home/git/gitlab/Rakefile:5:in `require'
+/home/git/gitlab/Rakefile:5:in `<top (required)>'
+(See full trace by running task with --trace)
+```
+
+Entirely standard installation:
+
+  - Ruby:
+    ```
+    ▶ ruby -v
+    ruby 2.0.0p353 (2013-11-22 revision 43784) [x86_64-linux]
+    ```
+
+  - Operating System
+    ```
+    ▶ lsb_release -a
+    No LSB modules are available.
+    Distributor ID:	Ubuntu
+    Description:	Ubuntu 14.04 LTS
+    Release:	14.04
+    Codename:	trusty
+    ```
+
+  - Kernel: 
+    ```
+    ▶ uname -a
+    Linux DifferenceEngineers 3.13.0-24-generic #46-Ubuntu SMP Thu Apr 10 19:11:08 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+    ```
+  - Provider: Digital Ocean
+  - Gemlist:
+    ```
+    ace-rails-ap-2.0.1                     gon-5.0.1                     rails-observers-0.1.2
+    actionmailer-4.0.3                     grape-0.6.1                   railties-4.0.3
+    actionpack-4.0.3                       grape-entity-0.4.2            raindrops-0.12.0
+    activemodel-4.0.3                      haml-4.0.4                    rake-10.1.1
+    activerecord-4.0.3                     haml-rails-0.5.1              raphael-rails-2.1.2
+    activerecord-deprecated_finders-1.0.3  hashie-2.0.5                  redcarpet-2.2.2
+    activesupport-4.0.3                    hike-1.2.3                    redis-3.0.6
+    acts-as-taggable-on-2.4.1              hipchat-0.14.0                redis-actionpack-4.0.0
+    arel-4.0.2                             httparty-0.13.0               redis-activesupport-4.0.0
+    asciidoctor-0.1.4                      httpauth-0.2.0                redis-namespace-1.4.1
+    atomic-1.1.16                          http_parser.rb-0.5.3          redis-rack-1.5.0
+    axiom-types-0.0.5                      i18n-0.6.9                    redis-rails-4.0.0
+    bcrypt-ruby-3.1.2                      ice_nine-0.10.0               redis-store-1.1.4
+    bootstrap-sass-3.0.3.0                 jquery-atwho-rails-0.3.3      ref-1.0.5
+    builder-3.1.4                          jquery-rails-2.1.3            rouge-1.3.3
+    carrierwave-0.9.0                      jquery-turbolinks-2.0.1       rubyntlm-0.1.1
+    celluloid-0.15.2                       jquery-ui-rails-2.0.2         rugged-0.19.0
+    charlock_holmes-0.6.9.4                json-1.8.1                    sanitize-2.1.0
+    coercible-1.0.0                        jwt-0.1.8                     sass-3.2.12
+    coffee-rails-4.0.1                     kaminari-0.15.1               sass-rails-4.0.1
+    coffee-script-2.2.0                    kgio-2.8.1                    seed-fu-2.3.0
+    coffee-script-source-1.6.3             libv8-3.16.14.3-x86_64-linux  select2-rails-3.5.2
+    colored-1.2                            mail-2.5.4                    settingslogic-2.0.9
+    connection_pool-1.2.0                  mime-types-1.25.1             sidekiq-2.17.0
+    d3_rails-3.1.10                        mini_portile-0.5.3            simple_oauth-0.1.9
+    default_value_for-3.0.0                minitest-4.7.5                sinatra-1.4.4
+    descendants_tracker-0.0.3              multi_json-1.9.2              six-0.2.0
+    devise-3.0.4                           multipart-post-1.2.0          slack-notifier-0.3.2
+    devise-async-0.8.0                     multi_xml-0.5.5               slim-2.0.2
+    diff-lcs-1.2.5                         net-ldap-0.3.1                sprockets-2.10.1
+    dotenv-0.9.0                           nokogiri-1.6.1                sprockets-rails-2.0.1
+    email_validator-1.4.0                  nprogress-rails-0.1.2.3       stamp-0.5.0
+    emoji-1.0.1                            oauth-0.4.7                   state_machine-1.2.0
+    enumerize-0.7.0                        oauth2-0.8.1                  stringex-2.5.1
+    equalizer-0.0.8                        omniauth-1.1.4                temple-0.6.7
+    erubis-2.7.0                           omniauth-github-1.1.1         therubyracer-0.12.0
+    escape_utils-0.2.4                     omniauth-google-oauth2-0.2.1  thor-0.18.1
+    eventmachine-1.0.3                     omniauth-oauth-1.0.1          thread_safe-0.3.1
+    execjs-2.0.2                           omniauth-oauth2-1.1.1         tilt-1.4.1
+    faraday-0.8.8                          omniauth-twitter-1.0.1        timers-1.1.0
+    faraday_middleware-0.9.0               orm_adapter-0.5.0             tinder-1.9.3
+    font-awesome-rails-3.2.1.3             pg-0.15.1                     treetop-1.4.15
+    foreman-0.63.0                         polyglot-0.3.4                turbolinks-2.0.0
+    gemnasium-gitlab-service-0.2.1         posix-spawn-0.3.8             twitter-stream-0.1.16
+    github-markup-1.1.0                    protected_attributes-1.0.5    tzinfo-0.3.39
+    gitlab_emoji-0.0.1.1                   pyu-ruby-sasl-0.0.3.3         uglifier-2.3.2
+    gitlab-flowdock-git-hook-0.4.2.2       rack-1.5.2                    underscore-rails-1.4.4
+    gitlab_git-5.8.0                       rack-accept-0.4.5             unicorn-4.6.3
+    gitlab-grack-2.0.0.pre                 rack-attack-2.3.0             unicorn-worker-killer-0.4.2
+    gitlab-grit-2.6.5                      rack-cors-0.2.9               version_sorter-1.1.0
+    gitlab-linguist-3.0.0                  rack-mount-0.8.3              virtus-1.0.1
+    gitlab_meta-6.0                        rack-protection-1.5.1         warden-1.2.3
+    gitlab_omniauth-ldap-1.0.4             rack-test-0.6.2
+    gollum-lib-3.0.0                       rails-4.0.3
+    ```

@@ -1,0 +1,51 @@
+minor: remove the logger as it seems uneeded
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+none  
+
+
+License
+MIT
+
+
+Doc PR
+not needed
+
+
+
+It seems that the logger is not used in here cc @nicolas-grekas, to close if it's the wanted code.
+#euchackaton

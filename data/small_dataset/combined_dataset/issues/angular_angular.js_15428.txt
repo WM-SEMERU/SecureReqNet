@@ -1,0 +1,5 @@
+feat(security): do not bootstrap from unknown schemes with a different origin
+
+
+Follow-up to #15427. There is no reason for allowing cross-origin automatic bootstrapping at URLs with an unknown scheme.
+@mprobst @petebacondarwin

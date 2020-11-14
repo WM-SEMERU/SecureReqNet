@@ -1,0 +1,32 @@
+### Problem to solve
+
+You can't programmatically manage OAuth tokens for `current_user`. This limitation makes non-web workflows, like native or CLI based apps harder to deploy, as you have to ask the user to login, go to specific url generate a token grant specific permissions and copy token back.
+
+Also there is no way to automatically revoke leaked tokens, provide any type of UI (like in native apps) to manage OAuth authorizations and grants, etc.
+
+### Further details
+
+GitHub solves that with OAuth API endpoint that allows you to (as an OAuth client user):
+
+1. List / Inspect / Remove OAuth grants (you can use this to remove access of previously granted web applications / services)
+1. List / Inspect (without disclosing the token) / Create new Access Token (this allows `hub` and `boxen` CLI apps to only ask for username and password and get back a personal token with specific scope access. Don't need to provide `client_id` or `client_secret`, so it's safe to use with non-binary scripts)
+1. Update permissions for existing Access Tokens (replace scopes, add scopes or remove scopes)
+1. Reset Access Token (useful to periodically rotate it, or as a security update measure)
+
+There is also functionality for OAuth Application owners:
+
+1. Create access tokens for on behalf of the current user (useful for desktop applications that will ask for username and password and will get an access token with specific grants as result. requires `client_id` and `client_secret`) 
+1. Revoke a single token for an OAuth application (useful if token leaked)
+1. Revoke specific application grant for a specific user (only use case I can think of is if the integration no longer needs that grant and is being conservative, could also be used when downgrading plans that will no longer need access to X)
+
+### Proposal
+
+While not everything is essential and we can split it into many interactions, it's useful to have at first the [Get-or-Create Authorization for specific App](https://developer.github.com/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint) and then implement listing / revoking capabilities.
+
+### What does success look like, and how can we measure that?
+
+1. Being able to create an access token for a CLI script by providing only the 
+
+### Links / references
+
+https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization

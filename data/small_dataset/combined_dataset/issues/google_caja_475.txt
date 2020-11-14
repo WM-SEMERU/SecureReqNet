@@ -1,0 +1,28 @@
+URICallback issues
+
+
+Original issue 475 created by jasvir on 2008-06-10T22:05:40.000Z:
+
+Clarify the documention for URICallback retrieve such that:
+
+it is clear that the transformations done on retrieved content that it
+is decided by the container
+the transformations which the container should never do
+
+
+Change the URICallback API so that retrieval or rewriting is done
+at the same time as the decision is taken.
+URL and mimetype may not be sufficient for a container to decide
+whether or not to retrieve and whether to cajole the retrieved content
+because the context it is used in is not completely captured by the
+mimetype.  Possible contexts include:
+
+img
+script
+raw bytes (for example when a JSON object is retrieved but not evaled)
+
+
+A container should never retrieve and cajole a script because the
+cajoled output will be inlined into an already cajoled script --
+something which will probably not work correctly.
+

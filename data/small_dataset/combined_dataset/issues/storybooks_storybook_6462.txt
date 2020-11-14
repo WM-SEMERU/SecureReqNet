@@ -1,0 +1,115 @@
+chore(deps): bump marked from 0.5.2 to 0.6.2 in /docs
+
+
+Bumps marked from 0.5.2 to 0.6.2.
+
+Release notes
+Sourced from marked's releases.
+
+0.6.2
+Security
+
+Link redos #1426
+Text redos #1460
+
+Fixes
+
+Links parens #1435
+New line after table with escaped pipe #1439
+List item tables #1446
+
+Enhancements
+
+Pass token boolean to the listitem function #1440
+Allow html without \n after #1438
+
+CLI
+
+Update man page to include --test and fix argv parameters #1442
+Add a --version flag to print marked version #1448
+
+Testing
+
+Normalize marked tests #1444
+Update tests to node 4 syntax #1449
+
+0.6.1
+Fixes
+
+Fix parenthesis url redos #1414
+
+Docs
+
+Update demo site to use a worker #1418
+Update devDependencies to last stable #1409
+Update documentation about extending Renderer #1417
+Remove --save option as it isn't required anymore #1422
+Add snyk badge #1420
+
+0.6.0
+Breaking Changes
+
+Drop support for Node v0.10 and old browsers such as Internet Explorer
+
+You should not have any problems if using Node 4+ or a modern browser
+
+
+Add parameter slugger to Renderer.prototype.heading method  #1401
+
+You should not have any problems if you do not override this method
+
+
+
+New Features
+ ... (truncated)
+
+
+
+Commits
+
+529a8d4 Merge pull request #1441 from styfle/release-0.6.2
+fc5dbf1 🗜️ minify [skip ci]
+b1ddd3c Merge pull request #1460 from andersk/inline-text-quadratic
+be27472 Improve worst-case performance of inline.text regex
+6b88601 0.6.2
+ba1de1e 🗜️ minify [skip ci]
+d94253c Merge pull request #1438 from UziTech/html-new-line-fix
+6eec528 Merge pull request #1449 from UziTech/use-htmldiffer
+0cd0333 remove redundant comments
+ff127c5 use template literals
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot squash and merge will squash and merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge and block automerging
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

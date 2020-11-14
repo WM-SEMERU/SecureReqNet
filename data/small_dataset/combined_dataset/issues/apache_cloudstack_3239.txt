@@ -1,0 +1,54 @@
+[WIP DO NOT MERGE] KVM: Fix agents dont reconnect post maintenance
+
+
+Description
+Before this fix, there were two possible scenarios when cancelling maintenance/prepare for maintenance on a KVM host:
+
+If global setting 'kvm.ssh.to.agent' = true, then the management server performed SSH into the host and restarted the CloudStack agent service.
+If global setting 'kvm.ssh.to.agent' = false, then the management server required that the CloudStack agent service on the host was restarted manually, for the host to become operational again. Restart was to establish a new connection between management server and the host agent, as it was closed after the host is notified to be put into maintenance
+
+After cancelling maintenance on one-time SSH password hosts, hosts did not reconnect and were not operational unless a manual restart on the CloudStack agent service was performed.
+This feature keeps the connection between management server and host agent alive while preparing for maintenance and when on maintenance. This imples that:
+
+Host agent is connected during maintenance period unless it is stopped
+If the host or the agent are restarted during maintenance period, a new connection will be established between the agent and the management server.
+If a host agent is connected to the management server when cancelling maintenance, then the current connection is kept alive regardless the value of the global setting 'kvm.ssh.to.agent'
+If a host agent is disconnected when cancelling maintenance:
+
+If 'kvm.ssh.to.agent' = true, then the management server restarts the agent service via SSH into the host
+If 'kvm.ssh.to.agent' = false, then an error is thrown indicating that the agent must be connected to the management server.
+
+
+
+Summary
+
+When an admin cancels maintenance mode on a KVM host:
+
+If 'kvm.ssh.to.agent' = false and the agent is connected then maintenance mode is cancelled, then maintenance mode is cancelled.
+If 'kvm.ssh.to.agent' = true and the agent is connected, then maintenance mode is cancelled.
+If 'kvm.ssh.to.agent' = true and the angent is not connected, then the management server will attempt to SSH into the host and restart the agent. If the agent connects, then maintenance mode is cancelled. If the agent still does not connect then maintenance mode fails to be cancelled and a suitable message is returned.
+If 'kvm.ssh.to.agent' = false and the agent is not connected, then maintenance mode fails to be cancelled and a suitable message is returned
+
+
+A host must be able to exit maintenance under the following circumstances:
+
+Host agent has remained online throughout the maintenance period
+Host agent has been restarted after host went into maintenance
+KVM host has been fully restarted during the maintenance period
+
+
+A host in maintenance mode and with agent connected must be shown to remain connected to CloudStack management whilst rejecting all CloudStack operations (new internal agent state = hostInMaintenance)
+Hosts in which SSH is allowed (kvm.ssh.to.agent = true) must be able to still exit maintenance mode regardless of whether the host or agent have been restarted during the maintenance period. (i.e. no regressions to existing functionality)
+Hosts in maintenance mode which have either or both the host itself or the host agent restarted should be reconnected to management server with the management server agent in the new internal hostInMaintenance state
+
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+How Has This Been Tested?
+Tested on 2xKVM hosts environment, NFS primary and secondary storage, changing values of the global setting 'kvm.ssh.to.agent' for each case to test

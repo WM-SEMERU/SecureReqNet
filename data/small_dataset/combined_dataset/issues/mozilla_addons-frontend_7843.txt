@@ -1,0 +1,8 @@
+FormData is not defined in Node
+
+
+There is an error with FormData on the server:
+ReferenceError: FormData is not defined
+
+Let's use this lib to fix the problem: https://github.com/form-data/isomorphic-form-data Nope, because of form-data/form-data#403. I wrote: https://github.com/willdurand/isomorphic-formdata, which uses https://github.com/octet-stream/form-data in node context.
+I believe we did not run into this problem earlier because we were not triggering one part of the code involving FormData before, but that seems weird because it is part of the api layer...

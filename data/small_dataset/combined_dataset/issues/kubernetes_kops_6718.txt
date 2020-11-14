@@ -1,0 +1,43 @@
+locate asset "kubelet": found multiple matching assets for key: "kubelet"
+
+
+1. What kops version are you running? The command kops version, will display
+this information. 1.12 alpha3
+**2. What Kubernetes version are you running? 1.11.5 trying to upgrade to 1.11.8
+3. What cloud provider are you using? openstack
+4. What commands did you run?  What is the simplest way to reproduce this issue?
+kops set cluster spec.kubernetesVersion=1.11.8
+kops rolling-update cluster --yes
+(then in another terminal flooding that kops update cluster --yes)
+5. What happened after the commands executed?
+It re-creates bastion host fine, it works after that. However, when first master is killed, and new master is starting I get following error:
+Apr 02 13:39:54 master-zone-1-2-1-os11-k8s-local nodeup[657]: I0402 13:39:54.975034     657 build_flags.go:50] ignoring non-field: .CPUCFSQuotaPeriod
+Apr 02 13:39:54 master-zone-1-2-1-os11-k8s-local nodeup[657]: I0402 13:39:54.975046     657 task.go:98] task *nodetasks.File does not implement HasLifecycle
+Apr 02 13:39:54 master-zone-1-2-1-os11-k8s-local nodeup[657]: I0402 13:39:54.975055     657 assetstore.go:125] Matching assets:
+Apr 02 13:39:54 master-zone-1-2-1-os11-k8s-local nodeup[657]: I0402 13:39:54.975058     657 assetstore.go:127]     kubelet https://storage.googleapis.com/kubernetes-release/release/v1.11.8/bin/linux/amd64/kubelet
+Apr 02 13:39:54 master-zone-1-2-1-os11-k8s-local nodeup[657]: I0402 13:39:54.975061     657 assetstore.go:127]     kubelet https://storage.googleapis.com/kubernetes-release/release/v1.11.8/bin/linux/amd64/kubelet
+Apr 02 13:39:54 master-zone-1-2-1-os11-k8s-local nodeup[657]: W0402 13:39:54.975069     657 main.go:142] got error running nodeup (will retry in 30s): error building loader: error trying to locate asset "kubelet": found multiple matching assets for key: "kubelet"
+
+When I recreated that master kube_env.yaml looks following (that was in kops stdout)
+cat > kube_env.yaml << '__EOF_KUBE_ENV'
+Assets:
+- e0b7ecb1f48d05417559c19182c073a1622252e3@https://storage.googleapis.com/kubernetes-release/release/v1.11.8/bin/linux/amd64/kubelet
+- 58695010a4af0a59c9bb8124c706e411fa5488b4@https://storage.googleapis.com/kubernetes-release/release/v1.11.8/bin/linux/amd64/kubectl
+- d595d3ded6499a64e8dac02466e2f5f2ce257c9f@https://storage.googleapis.com/kubernetes-release/network-plugins/cni-plugins-amd64-v0.6.0.tgz
+- d7b2f8301966d57b201c96b251090f5af9702ca3@https://kopstest.s3.company.com/.build/dist/linux/amd64/utils.tar.gz
+ClusterName: os11.k8s.local
+ConfigBase: do://kopstest/os11.k8s.local
+InstanceGroupName: master-zone-1-2
+Tags:
+- _automatic_upgrades
+channels:
+- do://kopstest/os11.k8s.local/addons/bootstrap-channel.yaml
+protokubeImage:
+  hash: 46ee0eb3e53ba07ba2cb7cb14d0521c52de21a86
+  name: protokube:1.12.0-alpha.1
+  sources:
+  - https://kopstest.s3.company.com/.build/dist/images/protokube.tar.gz
+
+__EOF_KUBE_ENV
+
+/kind bug

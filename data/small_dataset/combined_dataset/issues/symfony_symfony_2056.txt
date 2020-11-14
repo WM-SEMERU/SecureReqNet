@@ -1,0 +1,10 @@
+[2.1] [Security] [ACL] New service security.acl.identity_resolver
+
+
+This PR follows #2035 and is a first try for a better implementation for 2.1.
+I opened it to discuss it. I haven't even tested it yet!
+With this implementation, the example from the cookbook would have to be changed to: https://gist.github.com/1180537
+Also, every bundle similar to the DoctrineBundle (i.e. every Doctrine*****Bundle having proxy objects or lazy-loaded domain objects) would have to create a new service tagged with security.identity_resolver and implementing interface Symfony\Component\Security\Acl\Model\DomainObjectIdentityRetrievalStrategyInterface.
+The names of interfaces/classes/tag/service id are not really great so don't hesitate to propose better ones.
+This implementation, although maybe not perfect, seems really cleaner than solution in #2035 (although I don't think this can be merged in 2.0) because we don't have to hard-code anything (like every proxy interfaces in #2035).
+@schmittjoh @fabpot @stof What do you think?

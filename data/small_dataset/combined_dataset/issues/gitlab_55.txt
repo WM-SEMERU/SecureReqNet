@@ -1,0 +1,18 @@
+Didn't think, I will write this ticket, but here it goes. GitLab generates too many e-mails based on 1 event. IMHO, 1 event = 1 email. Not three, or four.
+
+Examples:
+
+User comments merge request. Following e-mails are generated:
+1. notification about comment merge request.
+2. notification about comment in commit.
+3. notification about mention of commit in merge request.
+4. (not always, but seen) notification of mention of merge request in commit. 
+
+4 emails for one event. Too much!
+
+Closing merge request generates two identical notifications. 
+
+Closing by commit generate two messages: Issue closed by commit and issue was closed. 
+
+
+And while we here: user A assigned merge request to user C. User B came and merged issue. Two identical notifications does not show that. 

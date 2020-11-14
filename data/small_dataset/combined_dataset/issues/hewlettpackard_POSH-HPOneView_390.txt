@@ -1,0 +1,129 @@
+ConvertTo-HPOVPowerShellScript Not Saving Output to a File
+
+
+Expected Behavior
+ConvertTo-HPOVPowerShellScript | Out-File "Output_File.txt" should write the output to a file.
+Using a pipe > does not work either.
+Actual Behavior
+ConvertTo-HPOVPowerShellScript always writes only to the Powershell console window. It never writes to a file like other cmdlets do, and it does not write to the transcript log (Powershell feature) when this is turned on. So the only way to capture the output information is a screen copy. This prevents automating this task (complete without human interaction) and a burden for large deployments.
+Steps to reproduce
+The new ConvertTo-HPOVPowerShellScript is a really beneficial scripting tool. This will help OneView scripters with accurate examples and the ability to restore individual items after an undesired deletion.
+I have run into a few issues using it and have described them here.
+Issue 1
+The output only displays in the Powershell window. I cannot get the output to be saved in a text file.
+
+How can the output be saved to a text file?
+
+I tried these and whenever the cmdlet ConvertTo-HPOVPowerShellScript is used, the output is only displayed in the PowerShell window.
+Write-Output $(Get-HPOVServerProfileTemplate) | Out-File "This_Works1.txt"
+Write-Output $(Get-HPOVServerProfileTemplate | ConvertTo-HPOVPowerShellScript) | Out-File "Does_Not_Work1.txt"
+Get-HPOVServerProfileTemplate | ConvertTo-HPOVPowerShellScript  #(this works on screen)
+Get-HPOVServerProfileTemplate | ConvertTo-HPOVPowerShellScript | Out-File "Does_Not_Work2.txt"
+Get-HPOVServerProfileTemplate > "This_Works3.txt"
+Get-HPOVServerProfileTemplate | ConvertTo-HPOVPowerShellScript > "Does_Not_Work3.txt"
+This is what I ultimately want to do:
+$ExportPath = 'C:\Data\OneView'
+$ExportCmdLet = 'Get-HPOVServerProfileTemplate'
+& $ExportCmdLet | Format-List | Out-File "$ExportPath$ExportFile" -Width 250
+if (Test-path $ExportPath$ExportFile) {
+'# ' + (Get-Content -raw "$ExportPath$ExportFile").replace("rnrnrn", "rnrn").replace("rnrnrn", "rnrn").Trim().replace("rn", "rn# ") | Set-Content "$ExportPath$ExportFile"
+& $ExportCmdLet | ConvertTo-HPOVPowerShellScript | Out-File "$ExportPath$ExportFile" -Append -Width 250
+}
+Issue 2
+Under "Detailed Description" the cmdlet Get-HPOVApplianceProxy is listed twice. Missing the email cmdlet. Looks like a typo. I'm not able to determine which cmdlet should be used for email notification.
+
+Appliance Email Notifications (Get-HPOVApplianceProxy) * Appliance Proxy (Get-HPOVApplianceProxy) *
+Link: https://github.com/HewlettPackard/POSH-HPOneView/wiki/ConvertTo-HPOVPowerShellScript
+
+
+Issue 3
+Under "Detailed Description" the cmdlet Get-HPOVSanNanager has a typo. Should be Get-HPOVSanManager
+
+SAN Manager (Get-HPOVSanNanager) *
+Link: https://github.com/HewlettPackard/POSH-HPOneView/wiki/ConvertTo-HPOVPowerShellScript
+
+
+Issue 4
+Under "Detailed Description" the cmdlet Get-HPOVLogicalEnclosureGroup is called out in the list, but there is no such cmdlet.
+
+Logical Enclosure Group (Get-HPOVLogicalEnclosureGroup) *
+Link: https://github.com/HewlettPackard/POSH-HPOneView/wiki/ConvertTo-HPOVPowerShellScript
+
+
+Issue 5
+Not sure if this error is a problem with my oneview config or the ConvertTo-HPOVPowerShellScript script. It would be nice if it exited more gracefully.
+When I run this by itself: PS C:> Get-HPOVAddressPool
+Name Type Enabled Count   Allocated Available
+VMAC VMAC True    1048576 2         1048574
+VWWN VWWN True    1048576 0         1048576
+VSN  VSN  False   0       0         0
+IPV4 IPV4 True    461     46        415
+When I run this: PS C:> Get-HPOVAddressPool | ConvertTo-HPOVPowerShellScript
+I get these errors:
+04-Feb-2019 21:30 Get-HPOVAddressPool  -->  C:\data\SFL Lab\SDDC OneView\Export\Export-PowerShell\AddressPool.txt
+ConvertTo-HPOVPowerShellScript : The "Pool" resource category for "VMAC" is currently not supported.
+At C:\data\SFL Lab\SDDC OneView\HPE\Common-HPE.ps1:2615 char:21
+
+& $ExportCmdLet | ConvertTo-HPOVPowerShellScript | Out-File "$Expor ...
+
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+CategoryInfo          : InvalidArgument: (InputObject:PSCustomObject) [ConvertTo-HPOVPowerShellScript], InputObj
+ectResourceException
+FullyQualifiedErrorId : InvalidInputObjectResource,ConvertTo-HPOVPowerShellScript
+
+
+
+ConvertTo-HPOVPowerShellScript : The "Pool" resource category for "VWWN" is currently not supported.
+At C:\data\SFL Lab\SDDC OneView\HPE\Common-HPE.ps1:2615 char:21
+
+& $ExportCmdLet | ConvertTo-HPOVPowerShellScript | Out-File "$Expor ...
+
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+CategoryInfo          : InvalidArgument: (InputObject:PSCustomObject) [ConvertTo-HPOVPowerShellScript], InputObj
+ectResourceException
+FullyQualifiedErrorId : InvalidInputObjectResource,ConvertTo-HPOVPowerShellScript
+
+
+
+ConvertTo-HPOVPowerShellScript : The "Pool" resource category for "VSN" is currently not supported.
+At C:\data\SFL Lab\SDDC OneView\HPE\Common-HPE.ps1:2615 char:21
+
+& $ExportCmdLet | ConvertTo-HPOVPowerShellScript | Out-File "$Expor ...
+
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+CategoryInfo          : InvalidArgument: (InputObject:PSCustomObject) [ConvertTo-HPOVPowerShellScript], InputObj
+ectResourceException
+FullyQualifiedErrorId : InvalidInputObjectResource,ConvertTo-HPOVPowerShellScript
+
+
+
+ConvertTo-HPOVPowerShellScript : The "Pool" resource category for "IPV4" is currently not supported.
+At C:\data\SFL Lab\SDDC OneView\HPE\Common-HPE.ps1:2615 char:21
+
+& $ExportCmdLet | ConvertTo-HPOVPowerShellScript | Out-File "$Expor ...
+
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+CategoryInfo          : InvalidArgument: (InputObject:PSCustomObject) [ConvertTo-HPOVPowerShellScript], InputObj
+ectResourceException
+FullyQualifiedErrorId : InvalidInputObjectResource,ConvertTo-HPOVPowerShellScript
+
+
+
+Version Information
+Name              Version
+PowerShell        5.1.14409.1018
+OneView   4.10.04.370820.00
+HPOneView.410     4.10.1928.2181
+FormatPx          1.1.3.15
+NuGet             1.3.3
+PackageManagement 1.3.1
+PowerShellGet     2.0.4
+SnippetPx         1.0.6.19

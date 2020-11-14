@@ -1,0 +1,46 @@
+html/template: <script> tags with type "text/template" now escapes EJS templates
+
+
+Please answer these questions before submitting your issue. Thanks!
+What version of Go are you using (go version)?
+Go 1.8
+What operating system and processor architecture are you using (go env)?
+GOARCH="amd64"
+GOBIN=""
+GOEXE=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/go"
+GORACE=""
+GOROOT="/usr/local/go"
+GOTOOLDIR="/usr/local/go/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build705350648=/tmp/go-build -gno-record-gcc-switches"
+CXX="g++"
+CGO_ENABLED="1"
+PKG_CONFIG="pkg-config"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+What did you do?
+When emitting an EJS template (interpolation happens through the <%=  directive) inside a Golang HTML template, the <%= is escaped to &lt;%=. This does not happen on versions of Go < 1.8. The following play.golang.org link works as expected.
+https://play.golang.org/p/BXzy9OWSSq
+What did you expect to see?
+  <script id="new-key" type="text/template">
+      <tr class="api-key">
+        <td class="api-key-cell"><%= key %></td>
+      </tr>
+   </script>
+
+What did you see instead?
+  <script id="new-key" type="text/template">
+      <tr class="api-key">
+        <td class="api-key-cell">&lt;%= key %></td>
+      </tr>
+   </script>
+
+I'm content with this being a desired security addition to Golang HTML templates, but I wanted to raise this as an issue for existing users who embed Javascript templates into their Golang templates.

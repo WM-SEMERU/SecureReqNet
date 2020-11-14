@@ -1,0 +1,7 @@
+Inability to update a user's roles after login
+
+
+I'm implementing the security component in my app and was surprised to find that a user's roles are decided at login time and cannot be easily updated after that. While the chosen UserInterface object can be refreshed on each load to check for changes (like the password changing or any other details), there is no way to check to see if the user's roles have changed since login. My roles are coming from the UserInterface getRoles method.
+This means if I have an admin user for example and I remove their admin abilities, they remain an admin until they decide to log out. Or moving a user to a "banned" role would have no effect.
+Ideally, a UsernamePasswordToken or any other token that contains a UserInterface object would check the UserInterface object's getRoles method to see if the roles have changed. But even just a setRoles method on AbstractToken would be useful so that the option is there to keep user's roles fresh.
+Of course I may be missing something that allows you to make sure a user's roles are kept fresh so I'd love to hear about it :)

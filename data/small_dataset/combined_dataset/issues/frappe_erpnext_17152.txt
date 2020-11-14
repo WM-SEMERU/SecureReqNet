@@ -1,0 +1,9 @@
+fix(selling): Add missing label to company address field
+
+
+The company address display field in Sales Order is missing a label, and is inconsistent with the same field in Sales Invoice and Delivery Note.
+Made to develop at #17151.
+Before:
+
+After:
+

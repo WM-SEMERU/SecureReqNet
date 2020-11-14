@@ -1,0 +1,5 @@
+Please, add the 'stats' page [0] across all user's repos. to view activity from the point of view of the user, and not only on a specific repo.
+
+thanks!
+
+[0]: https://gitlab.com/username/petmesh/repository/stats

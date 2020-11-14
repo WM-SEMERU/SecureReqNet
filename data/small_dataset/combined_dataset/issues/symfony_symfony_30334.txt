@@ -1,0 +1,55 @@
+[DI] add ReverseContainer: a locator that turns services back to their ids
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR introduces a ReverseContainer, which is a class you can type hint for to get it as a service.
+When you have a ReverseContainer at hand, you can then use it to know the service id of an object (if the object is not found, null is returned):
+$id = $reverseContainer->getId($someObject);
+You can also call $reverseContainer->getService($id); and get the service in return.
+To be reversible, a service must either be public or be tagged with container.reversible.
+I'm using this feature to serialize service references in a message, then send them through a Messenger bus, allowing the handler on the other side to use that referenced service to process the message. More specifically, my use case is sending messages for early cache expiration events through a bus and have a worker compute the soon-to-expire value in the background. The reversible services are the computation callbacks and the cache pools I need to compute the value for.

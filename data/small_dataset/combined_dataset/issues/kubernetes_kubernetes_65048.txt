@@ -1,0 +1,24 @@
+Enable customize root CA
+
+
+Is this a BUG REPORT or FEATURE REQUEST?:
+
+Uncomment only one, leave it on its own line:
+/kind bug
+
+/kind feature
+What happened:
+Currently, we are using easyrsa to generate root CA for kubernetes at https://github.com/kubernetes/kubernetes/blob/master/cluster/centos/make-ca-cert.sh#L69 , it is suggested that we should enable customer use their own root CA.
+/sig security
+What you expected to happen:
+How to reproduce it (as minimally and precisely as possible):
+Anything else we need to know?:
+Environment:
+
+Kubernetes version (use kubectl version):
+Cloud provider or hardware configuration:
+OS (e.g. from /etc/os-release):
+Kernel (e.g. uname -a):
+Install tools:
+Others:
+

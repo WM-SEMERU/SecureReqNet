@@ -1,0 +1,46 @@
+[Security] User refreshment from identical users provider type
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+?
+
+
+Fixed tickets
+#12465
+
+
+License
+MIT
+
+
+
+#12465 rebase with fixes.

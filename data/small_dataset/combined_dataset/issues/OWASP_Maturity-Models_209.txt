@@ -1,0 +1,41 @@
+Observed controller modifies project objects
+
+
+This is quite a nasty bug, which was already in the code base (sleeping zombie) which become active after Add ability to load all required project data in one go #207
+Here is the bug in action:
+
+Open Observed view
+
+
+
+go into another project view (for example the scores)
+
+
+
+go back to the Observed view
+
+
+Note how all data is gone (i.e. all values are 0)
+This is caused by this map_Data function
+
+Here is the test replicates the issue
+  it 'Issue 209 - Observed controller modifies project objects',->
+    inject ($controller, $rootScope, $routeParams, $httpBackend)->
+      $routeParams.project = 'bsimm'                            # set project to oad
+      $scope = $rootScope.$new()                                # create a new scope
+      $controller('ObservedController', { $scope: $scope })     # create controller
+      $httpBackend.flush()                                      # trigger http calls to load project_Data
+
+      using $scope, ->
+        schema_Before     = JSON.stringify @.schema             # capture data after 1st execution of $scope.map_Data()
+        activities_Before = JSON.stringify @.project_Activities
+
+        #$scope.map_Domains()                                   # map_Domains doe not affect project_Data objects
+        $scope.map_Data()                                       # this is the function that changes the data
+
+        schema_After      = JSON.stringify @.schema             # capture data after 2nd execution of $scope.map_Data()
+        activities_After  = JSON.stringify @.project_Activities
+
+        schema_Before    .assert_Is     schema_After            # confirm that schema value was not change
+        activities_Before.assert_Is_Not activities_After        # these should be equal (activities data was changed)
+

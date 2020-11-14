@@ -1,0 +1,9 @@
+proposal: crypto/x509: add functions to download certificates from windows update, and retrieve certificates from windows x509stores
+
+
+SystemCertPool() hasn't been working on Windows (#16736). That issue was fixed once. But since Windows does not ship with all of its root certificates installed, it caused some unexpected behavior (#18609).
+The missing certificates can be downloaded from windows update using certutil.exe present on Windows.
+There are also other multiple certificate stores on Windows. There are two store locations, and a bunch of stores in each location.
+We could retrieve the certificates from windows update and all of the above locations. Then remove the disallowed certificates from that entire collection. That way SystemCertPool() can be fixed.
+I have been working on it - CL 127577. While working on it, I created two new functions. One would retrieve the certificates from any location mentioned in the MSDN docs - windows509Store(). And the other would download the certificates from windows update - downloadWUCerts().
+I opened this proposal to welcome a discussion regarding whether or not we should export those two new functions to the standard library. The code would be there regardless. Because there are multiple certificate stores on Windows, these functions could provide the end user a bit more control if needed.

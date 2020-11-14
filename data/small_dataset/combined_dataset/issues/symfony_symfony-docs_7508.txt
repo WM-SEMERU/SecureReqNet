@@ -1,0 +1,4 @@
+Added a caution note about the LDAP injection attacks
+
+
+After reading this comment by @csarrazi I'm not sure which protection does the LDAP component offer and which one it doesn't ... so please, review this carefully. Thanks!

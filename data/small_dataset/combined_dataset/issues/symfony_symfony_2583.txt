@@ -1,0 +1,6 @@
+[Security][Feature] access_control matching with HTTP method
+
+
+Hey guys!
+I wondered (or rather some OpenSky Nashville guys wondered) if it would be a good idea to allow access_control entries to match additionally by the request HTTP method. This would be helpful especially for very RESTful apps.
+Thoughts?

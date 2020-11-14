@@ -1,0 +1,22 @@
+Abort on unsupported or unknown flags.
+
+
+I'm opening this issue because:
+
+ Other (see below for feature requests):
+
+What's the feature?
+Abort execution when npm client is launched with unsupported or unknown flags.
+What problem is the feature intended to solve?
+Atm, running npm with an unsupported flag does not abort or produce any warnings on unsupported flags.
+E.g. running npm --igore-scripts install coffeescript does not give any warnings, does not bail out, but tries to execute node super-evil-script-omg-for-reals.js, which is clearly not something that the user wanted.
+Morever, the user probably wanted to launch npm with --ignore-scripts option for security reasons, but that didn't work — that causes a security problem for the user. The user surely don't want post/pre-install scripts to be run when they make a mistype in the --ignore-scripts option, and that is exactly what happens now.
+This is not a vulnerability, though, so a public report is ok (I notified the npm, Inc team of this earlier, though).
+Is the absence of this feature blocking you or your team? If so, how?
+No.
+Is this feature similar to an existing feature in another tool?
+Yes. Many other tools bail out on unsupported options:
+$ node --foo
+node: bad option: --foo
+Is this a feature you're prepared to implement, with support from the npm CLI team?
+Most likely, no.

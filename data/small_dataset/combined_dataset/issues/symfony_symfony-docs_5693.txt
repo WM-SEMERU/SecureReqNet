@@ -1,0 +1,4 @@
+Strange authorization checker example
+
+
+In this §, the code snippet shows how to get the authorization checker, but not how to use it. I guess denyAccessUnlessGranted probably uses it internally, but that is confusing.

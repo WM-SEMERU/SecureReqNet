@@ -1,0 +1,15 @@
+Simplify the security config required for login forms
+
+
+Description
+Simplify the security config of a login form.
+Example
+It's common to use this config when setting up a traditional login form:
+security:
+    firewalls:
+        main:
+            # ...
+            form_login:
+                check_path:  some_route_name
+                login_path:  some_route_name
+Could we make check_path optional and initialize it to the same value as login_path by default? If some user needs to customize this default value, just define the check_path explicitly as all developers are forced to do now.

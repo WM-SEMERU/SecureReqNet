@@ -1,0 +1,6 @@
+There is no Attack Detection or 'AppSensor like' capabilites
+
+
+It would be great to add AppSensor like capabilities to this project
+At the moment, if this app is attacker unless the app completely crashes, there is very little feedback provided
+Accepting risk (for now)

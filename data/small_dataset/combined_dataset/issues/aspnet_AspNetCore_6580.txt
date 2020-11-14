@@ -1,0 +1,10 @@
+Have unique type names for Azure AAD and ADB2C auth packages
+
+
+These two:
+
+https://github.com/aspnet/AspNetCore/tree/master/src/Azure/AzureAD/Authentication.AzureAD.UI/src
+https://github.com/aspnet/AspNetCore/tree/master/src/Azure/AzureAD/Authentication.AzureADB2C.UI/src
+
+Have types that are of the same name/namespace but different assemblies. While this doesn't currently cause any specific technical problem, it's super gross, and can cause internal headaches when looking at stack traces or doing searches.
+The types should each be prefixes appropriately.

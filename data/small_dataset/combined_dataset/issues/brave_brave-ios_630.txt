@@ -1,0 +1,27 @@
+Private Browsing Leaking History when using "Open in Brave"
+
+
+Description:
+Steps to Reproduce
+
+Using “Private browsing only”
+In 3rd party application, open link from share sheet, select "Open in Brave"
+Brave opens with default screen
+Open link from share sheet again
+Link opens in Brave, non-private browsing mode; page is retained in browser history.
+
+Actual result: 
+Stores private history in the history table
+Expected result:
+Keep private search data private
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+100%
+Brave Version: 
+1.7
+Device details: 
+Website problems only:
+
+did you check with Brave Shields down?
+did you check in Safari/Firefox (WkWebView-based browsers)?
+
+Additional Information

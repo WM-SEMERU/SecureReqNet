@@ -1,0 +1,16 @@
+Incorrect comment in security documentation
+
+
+In the security documentation under "Retrieving the User Object" in the code example, there is a comment saying "the above is a shortcut for this".
+use Symfony\Component\Security\Core\User\UserInterface;
+
+public function indexAction(UserInterface $user)
+{
+    if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        throw $this->createAccessDeniedException();
+    }
+
+    // the above is a shortcut for this
+    $user = $this->get('security.token_storage')->getToken()->getUser();
+}
+Which is incorrect. Or am I missing something?

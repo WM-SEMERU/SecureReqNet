@@ -1,0 +1,16 @@
+When branching textfiles with embedded binary chars it's not possible to create a mergerequest
+
+Log: 
+Started POST "/backend/merge_requests" for 127.0.0.1 at 2014-06-16 16:48:33 +0200
+Processing by Projects::MergeRequestsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3ioSCoxHbVIU28q5ldSL8AUyGaov1zbf2HrA2UmTW5c=", "merge_request"=>{"source_project_id"=>"177", "source_branch"=>"tickets/54023_fix_test", "target_project_id"=>"177", "target_branch"=>"master", "title"=>"Tickets/54023 fix test", "description"=>"Vorher accepten: https://gitlab/backend/merge_requests/43"}, "project_id"=>"backend"}
+Completed 500 Internal Server Error in 432ms
+
+RuntimeError (expected SCALAR, SEQUENCE-START, MAPPING-START, or ALIAS):
+  app/models/merge_request_diff.rb:146:in `reload_diffs'
+  app/models/merge_request_diff.rb:44:in `reload_content'
+  app/services/merge_requests/create_service.rb:9:in `execute'
+  app/controllers/projects/merge_requests_controller.rb:80:in `create'
+  app/controllers/application_controller.rb:59:in `set_current_user_for_thread'
+
+

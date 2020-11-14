@@ -1,0 +1,54 @@
+[Form][CallbackTransformer] Make args optional
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+I could not find a good title for this 😕
+If you only want to transform for one side and not the other, you end up passing an useless callable :
+new CallbackTransformer(function ($value) {
+    return $value;
+}, ...)

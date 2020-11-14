@@ -1,0 +1,5 @@
+Remove 'unsafe-inline' rule from CSP
+
+
+Joi on the front end forces us to allow unsafe inline javascript in our CSP.
+@alicoding is removing Joi in an upcoming patch. until then, this is blocked

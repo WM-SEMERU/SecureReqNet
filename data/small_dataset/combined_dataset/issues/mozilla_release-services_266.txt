@@ -1,0 +1,8 @@
+use taskcluster secrets instead of variables in heroku
+
+
+Sometimes we are having some downtime when forget to copy-paste correct secrets in Heroku (in Setting panel).
+What happens is that we set this secrets correctly in staging but forget to setup on some Heroku applications in production. Then when we deploy to production we - hopefully - see errors in time before bigger damage is done. Also needed secrets are different between different applications.
+The idea behind this issue is that we would read - at flask startup in settings.py - needed configuration from Taskcluster secrets. Then the only variables that we would need to set on Heroku is a temporary Taskcluster credentials.
+Above architecture would also allow us to recycle credentials easier.
+One thing which we would need to solve is that when we change this secrets we would need to restart all the applications that require it.

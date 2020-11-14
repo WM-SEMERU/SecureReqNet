@@ -1,0 +1,20 @@
+**[HackerOne report #439446](https://hackerone.com/reports/439446)** by ngalog on 2018-11-12:
+
+**Summary:** 
+New feature introduced in latest version of gitlab instance, it has a operation setting page, and you can inject xss payload and turn it into a stored XSS
+
+## Steps To Reproduce:
+Visit https://gitlab.com/:project_namespace/settings/operations
+
+Jaeger URL: `https://replaceme.com/'><script>alert(document.cookie)</script>`
+Click save changes, alert box pops up
+
+Although this xss is only visible to maintainer, anyone could be added to the malicious project as a maintainer.
+
+## Impact
+
+stored xss
+
+## Fix
+
+Security issue: https://dev.gitlab.org/gitlab/gitlab-ee/issues/357

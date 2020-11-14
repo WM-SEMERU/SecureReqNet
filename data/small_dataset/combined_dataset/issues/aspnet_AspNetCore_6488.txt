@@ -1,0 +1,52 @@
+Microsoft Security Advisory CVE-2019-0548: ASP.NET Core Denial Of Service Vulnerability
+
+
+Microsoft Security Advisory CVE-2019-0548: ASP.NET Core Denial Of Service Vulnerability
+Executive Summary
+Microsoft is releasing this security advisory to provide information about a vulnerability in public ASP.NET Core 1.0, 1.1, 2.1 and 2.2. This advisory also provides guidance on what developers can do to update their applications correctly.
+Microsoft is aware of a security vulnerability in all public versions of ASP.NET Core where, if an application is hosted on Internet Information Server (IIS) a remote unauthenticated attacker can use a specially crafted request can cause a Denial of Service.
+Announcement
+The original announcement for this issue can be found at aspnet/Announcements#335
+Mitigation Factors
+Any site hosted behind a different proxy, such as nginx or an application hosted in Azure, which uses Application Request Routing (ARR) as a proxy is not affected.
+Affected Software
+The vulnerability affects any Microsoft ASP.NET 1.0/1.1/2.1 Core applications if it is hosted on an IIS server running AspNetCoreModule (ANCM) prior to 12.1.18340.7 or,
+The vulnerability affects any Microsoft ASP.NET 2.2 Core applications if it is hosted on an IIS server running AspNetCoreModule (ANCM) prior to 12.2.18346.0
+Advisory FAQ
+How do I know if I am affected?
+Open a PowerShell prompt and run the following command
+(Get-Item $env:SystemDrive\Windows\System32\inetsrv\aspnetcore.dll).VersionInfo
+or use the Windows file properties dialog to check the version on C:\Windows\System32\inetsrv\aspnetcore.dll, where C: is your OS install drive.
+ASP.NET Core 1.0/1.1/2.1 applications are affected if the file version is less than 12.1.18340.7.
+ASP.NET Core 2.2 applications are affected if the file version is less than 12.2.18346.0.
+How do I fix the issue?
+Install the latest version of the ASP.NET Core Runtime & Hosting Bundle appropriate to the highest version of .NET Core running on your servers.
+
+Hosting Bundle for ASP.NET Core applications up to v2.2
+Hosting Bundle for ASP.NET Core applications up to v2.1
+Hosting Bundle for ASP.NET Core applications up to v1.1
+
+Note: The ASP.NET Core Runtime & Hosting Bundle v1.1 had an incorrect download link before 1/10/2019. Please re-download Hosting Bundle if downloaded before this date.
+
+
+
+Then restart IIS by running
+net stop was /y
+net start w3svc
+
+from an elevated command line.
+Other Information
+Reporting Security Issues
+If you have found a potential security issue in .NET Core, please email details to secure@microsoft.com. Reports may qualify for the .NET Core Bug Bounty. Details of the .NET Core Bug Bounty including Terms and Conditions are at https://aka.ms/corebounty.
+Support
+You can ask questions about this issue on GitHub in the .NET Core or ASP.NET Core organizations. These are located at https://github.com/dotnet/ and https://github.com/aspnet/. The Announcements repo for each product (https://github.com/dotnet/Announcements and https://github.com/aspnet/Announcements) will contain this bulletin as an issue and will include a link to a discussion issue where you can ask questions.
+Disclaimer
+The information provided in this advisory is provided "as is" without warranty of any kind. Microsoft disclaims all warranties, either express or implied, including the warranties of merchantability and fitness for a particular purpose. In no event shall Microsoft Corporation or its suppliers be liable for any damages whatsoever including direct, indirect, incidental, consequential, loss of business profits or special damages, even if Microsoft Corporation or its suppliers have been advised of the possibility of such damages. Some states do not allow the exclusion or limitation of liability for consequential or incidental damages so the foregoing limitation may not apply.
+External Links
+CVE-2019-0548
+Revisions
+V1.0 (Jan 8 2018): Advisory published.
+V1.1 (Jan 9 2018): Update ANCM version for AspNetCore 2.1 and 1.1.
+V1.2 (Jan 10 2018): Mention 2.2 is affected and that the 1.1 Hosting Bundle download link was incorrect.
+Version 1.2
+Last Updated 2019-01-10

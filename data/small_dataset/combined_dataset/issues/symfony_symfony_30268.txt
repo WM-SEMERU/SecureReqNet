@@ -1,0 +1,355 @@
+[DependencyInjection] Dumper with container.dumper.inline_class_loader flag doesn't generate multiple files
+
+
+Symfony version(s) affected: 3.4+ and 4.2+
+Description
+I'm using Symfony's DI component in Crunz (https://github.com/lavary/crunz) and i would like to improve performance and reduce I/O a little bit by using container.dumper.inline_class_loader flag on container, but for some reason dumper doesn't generate multiple files and everything is stored in file CrunzContainer.php
+How to reproduce
+Feature branch: https://github.com/PabloKowalczyk/crunz/tree/inline-di-loader.
+Run ./crunz schedule:list, dumped container will be at /tmp/.crunz/<user>/v1.11.1/CrunzContainer.php
+Possible Solution
+I don't know.
+Additional context
+Maybe it will be helpful:
+CrunzContainer.php content:
+<?php
+
+use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Exception\LogicException;
+use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
+
+/**
+ * This class has been auto-generated
+ * by the Symfony Dependency Injection Component.
+ *
+ * @final since Symfony 3.3
+ */
+class CrunzContainer extends Container
+{
+    private $parameters;
+    private $targetDirs = [];
+
+    public function __construct()
+    {
+        $this->parameters = $this->getDefaultParameters();
+
+        $this->services = [];
+        $this->normalizedIds = [
+            'crunz\\configuration\\configuration' => 'Crunz\\Configuration\\Configuration',
+            'crunz\\console\\command\\closureruncommand' => 'Crunz\\Console\\Command\\ClosureRunCommand',
+            'crunz\\console\\command\\configgeneratorcommand' => 'Crunz\\Console\\Command\\ConfigGeneratorCommand',
+            'crunz\\console\\command\\schedulelistcommand' => 'Crunz\\Console\\Command\\ScheduleListCommand',
+            'crunz\\console\\command\\scheduleruncommand' => 'Crunz\\Console\\Command\\ScheduleRunCommand',
+            'crunz\\console\\command\\taskgeneratorcommand' => 'Crunz\\Console\\Command\\TaskGeneratorCommand',
+            'crunz\\filesystem\\filesysteminterface' => 'Crunz\\Filesystem\\FilesystemInterface',
+            'crunz\\logger\\consoleloggerinterface' => 'Crunz\\Logger\\ConsoleLoggerInterface',
+            'crunz\\task\\collection' => 'Crunz\\Task\\Collection',
+            'crunz\\timezone\\providerinterface' => 'Crunz\\Timezone\\ProviderInterface',
+            'symfony\\component\\console\\input\\inputinterface' => 'Symfony\\Component\\Console\\Input\\InputInterface',
+            'symfony\\component\\console\\output\\outputinterface' => 'Symfony\\Component\\Console\\Output\\OutputInterface',
+            'symfony\\component\\console\\style\\symfonystyle' => 'Symfony\\Component\\Console\\Style\\SymfonyStyle',
+        ];
+        $this->methodMap = [
+            'Crunz\\Configuration\\Configuration' => 'getConfigurationService',
+            'Crunz\\Console\\Command\\ClosureRunCommand' => 'getClosureRunCommandService',
+            'Crunz\\Console\\Command\\ConfigGeneratorCommand' => 'getConfigGeneratorCommandService',
+            'Crunz\\Console\\Command\\ScheduleListCommand' => 'getScheduleListCommandService',
+            'Crunz\\Console\\Command\\ScheduleRunCommand' => 'getScheduleRunCommandService',
+            'Crunz\\Console\\Command\\TaskGeneratorCommand' => 'getTaskGeneratorCommandService',
+            'Crunz\\Filesystem\\FilesystemInterface' => 'getFilesystemInterfaceService',
+            'Crunz\\Logger\\ConsoleLoggerInterface' => 'getConsoleLoggerInterfaceService',
+            'Crunz\\Task\\Collection' => 'getCollectionService',
+            'Crunz\\Timezone\\ProviderInterface' => 'getProviderInterfaceService',
+            'Symfony\\Component\\Console\\Input\\InputInterface' => 'getInputInterfaceService',
+            'Symfony\\Component\\Console\\Output\\OutputInterface' => 'getOutputInterfaceService',
+            'Symfony\\Component\\Console\\Style\\SymfonyStyle' => 'getSymfonyStyleService',
+        ];
+        $this->privates = [
+            'Crunz\\Configuration\\Configuration' => true,
+            'Crunz\\Filesystem\\FilesystemInterface' => true,
+            'Crunz\\Logger\\ConsoleLoggerInterface' => true,
+            'Crunz\\Task\\Collection' => true,
+            'Crunz\\Timezone\\ProviderInterface' => true,
+        ];
+
+        $this->aliases = [];
+    }
+
+    public function getRemovedIds()
+    {
+        return [
+            'Crunz\\Configuration\\Configuration' => true,
+            'Crunz\\Configuration\\ConfigurationParserInterface' => true,
+            'Crunz\\Configuration\\Definition' => true,
+            'Crunz\\Configuration\\FileParser' => true,
+            'Crunz\\EventRunner' => true,
+            'Crunz\\Filesystem\\FilesystemInterface' => true,
+            'Crunz\\Finder\\FinderInterface' => true,
+            'Crunz\\HttpClient\\CurlHttpClient' => true,
+            'Crunz\\HttpClient\\FallbackHttpClient' => true,
+            'Crunz\\HttpClient\\HttpClientInterface' => true,
+            'Crunz\\HttpClient\\StreamHttpClient' => true,
+            'Crunz\\Invoker' => true,
+            'Crunz\\Logger\\ConsoleLoggerInterface' => true,
+            'Crunz\\Logger\\LoggerFactory' => true,
+            'Crunz\\Mailer' => true,
+            'Crunz\\Output\\OutputFactory' => true,
+            'Crunz\\Schedule\\ScheduleFactory' => true,
+            'Crunz\\Task\\Collection' => true,
+            'Crunz\\Task\\Timezone' => true,
+            'Crunz\\Timezone\\ProviderInterface' => true,
+            'Psr\\Container\\ContainerInterface' => true,
+            'Symfony\\Component\\Config\\Definition\\Processor' => true,
+            'Symfony\\Component\\DependencyInjection\\ContainerInterface' => true,
+            'Symfony\\Component\\Filesystem\\Filesystem' => true,
+            'Symfony\\Component\\Yaml\\Yaml' => true,
+        ];
+    }
+
+    public function compile()
+    {
+        throw new LogicException('You cannot compile a dumped container that was already compiled.');
+    }
+
+    public function isCompiled()
+    {
+        return true;
+    }
+
+    public function isFrozen()
+    {
+        @trigger_error(sprintf('The %s() method is deprecated since Symfony 3.3 and will be removed in 4.0. Use the isCompiled() method instead.', __METHOD__), E_USER_DEPRECATED);
+
+        return true;
+    }
+
+    /**
+     * Gets the public 'Crunz\Console\Command\ClosureRunCommand' shared service.
+     *
+     * @return \Crunz\Console\Command\ClosureRunCommand
+     */
+    protected function getClosureRunCommandService()
+    {
+        return $this->services['Crunz\Console\Command\ClosureRunCommand'] = new \Crunz\Console\Command\ClosureRunCommand();
+    }
+
+    /**
+     * Gets the public 'Crunz\Console\Command\ConfigGeneratorCommand' shared service.
+     *
+     * @return \Crunz\Console\Command\ConfigGeneratorCommand
+     */
+    protected function getConfigGeneratorCommandService()
+    {
+        return $this->services['Crunz\Console\Command\ConfigGeneratorCommand'] = new \Crunz\Console\Command\ConfigGeneratorCommand(${($_ = isset($this->services['Crunz\Timezone\ProviderInterface']) ? $this->services['Crunz\Timezone\ProviderInterface'] : ($this->services['Crunz\Timezone\ProviderInterface'] = new \Crunz\Timezone\Provider())) && false ?: '_'}, new \Symfony\Component\Filesystem\Filesystem(), ${($_ = isset($this->services['Crunz\Filesystem\FilesystemInterface']) ? $this->services['Crunz\Filesystem\FilesystemInterface'] : ($this->services['Crunz\Filesystem\FilesystemInterface'] = new \Crunz\Filesystem\Filesystem())) && false ?: '_'});
+    }
+
+    /**
+     * Gets the public 'Crunz\Console\Command\ScheduleListCommand' shared service.
+     *
+     * @return \Crunz\Console\Command\ScheduleListCommand
+     */
+    protected function getScheduleListCommandService()
+    {
+        return $this->services['Crunz\Console\Command\ScheduleListCommand'] = new \Crunz\Console\Command\ScheduleListCommand(${($_ = isset($this->services['Crunz\Configuration\Configuration']) ? $this->services['Crunz\Configuration\Configuration'] : $this->getConfigurationService()) && false ?: '_'}, ${($_ = isset($this->services['Crunz\Task\Collection']) ? $this->services['Crunz\Task\Collection'] : $this->getCollectionService()) && false ?: '_'});
+    }
+
+    /**
+     * Gets the public 'Crunz\Console\Command\ScheduleRunCommand' shared service.
+     *
+     * @return \Crunz\Console\Command\ScheduleRunCommand
+     */
+    protected function getScheduleRunCommandService()
+    {
+        $a = ${($_ = isset($this->services['Crunz\Configuration\Configuration']) ? $this->services['Crunz\Configuration\Configuration'] : $this->getConfigurationService()) && false ?: '_'};
+        $b = ${($_ = isset($this->services['Crunz\Logger\ConsoleLoggerInterface']) ? $this->services['Crunz\Logger\ConsoleLoggerInterface'] : $this->getConsoleLoggerInterfaceService()) && false ?: '_'};
+
+        return $this->services['Crunz\Console\Command\ScheduleRunCommand'] = new \Crunz\Console\Command\ScheduleRunCommand(${($_ = isset($this->services['Crunz\Task\Collection']) ? $this->services['Crunz\Task\Collection'] : $this->getCollectionService()) && false ?: '_'}, $a, new \Crunz\EventRunner(new \Crunz\Invoker(), $a, new \Crunz\Mailer($a), new \Crunz\Logger\LoggerFactory($a), new \Crunz\HttpClient\HttpClientLoggerDecorator(new \Crunz\HttpClient\FallbackHttpClient(new \Crunz\HttpClient\StreamHttpClient(), new \Crunz\HttpClient\CurlHttpClient(), $b), $b), $b), new \Crunz\Task\Timezone($a, ${($_ = isset($this->services['Crunz\Timezone\ProviderInterface']) ? $this->services['Crunz\Timezone\ProviderInterface'] : ($this->services['Crunz\Timezone\ProviderInterface'] = new \Crunz\Timezone\Provider())) && false ?: '_'}, $b), new \Crunz\Schedule\ScheduleFactory());
+    }
+
+    /**
+     * Gets the public 'Crunz\Console\Command\TaskGeneratorCommand' shared service.
+     *
+     * @return \Crunz\Console\Command\TaskGeneratorCommand
+     */
+    protected function getTaskGeneratorCommandService()
+    {
+        return $this->services['Crunz\Console\Command\TaskGeneratorCommand'] = new \Crunz\Console\Command\TaskGeneratorCommand(${($_ = isset($this->services['Crunz\Configuration\Configuration']) ? $this->services['Crunz\Configuration\Configuration'] : $this->getConfigurationService()) && false ?: '_'});
+    }
+
+    /**
+     * Gets the public 'Symfony\Component\Console\Input\InputInterface' shared service.
+     *
+     * @return \Symfony\Component\Console\Input\ArgvInput
+     */
+    protected function getInputInterfaceService()
+    {
+        return $this->services['Symfony\Component\Console\Input\InputInterface'] = new \Symfony\Component\Console\Input\ArgvInput();
+    }
+
+    /**
+     * Gets the public 'Symfony\Component\Console\Output\OutputInterface' shared service.
+     *
+     * @return \Symfony\Component\Console\Output\ConsoleOutput
+     */
+    protected function getOutputInterfaceService()
+    {
+        return $this->services['Symfony\Component\Console\Output\OutputInterface'] = (new \Crunz\Output\OutputFactory(${($_ = isset($this->services['Symfony\Component\Console\Input\InputInterface']) ? $this->services['Symfony\Component\Console\Input\InputInterface'] : ($this->services['Symfony\Component\Console\Input\InputInterface'] = new \Symfony\Component\Console\Input\ArgvInput())) && false ?: '_'}))->createOutput();
+    }
+
+    /**
+     * Gets the public 'Symfony\Component\Console\Style\SymfonyStyle' shared service.
+     *
+     * @return \Symfony\Component\Console\Style\SymfonyStyle
+     */
+    protected function getSymfonyStyleService()
+    {
+        return $this->services['Symfony\Component\Console\Style\SymfonyStyle'] = new \Symfony\Component\Console\Style\SymfonyStyle(${($_ = isset($this->services['Symfony\Component\Console\Input\InputInterface']) ? $this->services['Symfony\Component\Console\Input\InputInterface'] : ($this->services['Symfony\Component\Console\Input\InputInterface'] = new \Symfony\Component\Console\Input\ArgvInput())) && false ?: '_'}, ${($_ = isset($this->services['Symfony\Component\Console\Output\OutputInterface']) ? $this->services['Symfony\Component\Console\Output\OutputInterface'] : $this->getOutputInterfaceService()) && false ?: '_'});
+    }
+
+    /**
+     * Gets the private 'Crunz\Configuration\Configuration' shared service.
+     *
+     * @return \Crunz\Configuration\Configuration
+     */
+    protected function getConfigurationService()
+    {
+        $a = ${($_ = isset($this->services['Crunz\Filesystem\FilesystemInterface']) ? $this->services['Crunz\Filesystem\FilesystemInterface'] : ($this->services['Crunz\Filesystem\FilesystemInterface'] = new \Crunz\Filesystem\Filesystem())) && false ?: '_'};
+
+        return $this->services['Crunz\Configuration\Configuration'] = new \Crunz\Configuration\Configuration(new \Crunz\Configuration\ConfigurationParser(new \Crunz\Configuration\Definition(), new \Symfony\Component\Config\Definition\Processor(), new \Crunz\Configuration\FileParser(new \Symfony\Component\Yaml\Yaml()), ${($_ = isset($this->services['Crunz\Logger\ConsoleLoggerInterface']) ? $this->services['Crunz\Logger\ConsoleLoggerInterface'] : $this->getConsoleLoggerInterfaceService()) && false ?: '_'}, $a), $a);
+    }
+
+    /**
+     * Gets the private 'Crunz\Filesystem\FilesystemInterface' shared service.
+     *
+     * @return \Crunz\Filesystem\Filesystem
+     */
+    protected function getFilesystemInterfaceService()
+    {
+        return $this->services['Crunz\Filesystem\FilesystemInterface'] = new \Crunz\Filesystem\Filesystem();
+    }
+
+    /**
+     * Gets the private 'Crunz\Logger\ConsoleLoggerInterface' shared service.
+     *
+     * @return \Crunz\Logger\ConsoleLogger
+     */
+    protected function getConsoleLoggerInterfaceService()
+    {
+        return $this->services['Crunz\Logger\ConsoleLoggerInterface'] = new \Crunz\Logger\ConsoleLogger(${($_ = isset($this->services['Symfony\Component\Console\Style\SymfonyStyle']) ? $this->services['Symfony\Component\Console\Style\SymfonyStyle'] : $this->getSymfonyStyleService()) && false ?: '_'});
+    }
+
+    /**
+     * Gets the private 'Crunz\Task\Collection' shared service.
+     *
+     * @return \Crunz\Task\Collection
+     */
+    protected function getCollectionService()
+    {
+        return $this->services['Crunz\Task\Collection'] = new \Crunz\Task\Collection(${($_ = isset($this->services['Crunz\Configuration\Configuration']) ? $this->services['Crunz\Configuration\Configuration'] : $this->getConfigurationService()) && false ?: '_'}, new \Crunz\Finder\Finder(), ${($_ = isset($this->services['Crunz\Logger\ConsoleLoggerInterface']) ? $this->services['Crunz\Logger\ConsoleLoggerInterface'] : $this->getConsoleLoggerInterfaceService()) && false ?: '_'});
+    }
+
+    /**
+     * Gets the private 'Crunz\Timezone\ProviderInterface' shared service.
+     *
+     * @return \Crunz\Timezone\Provider
+     */
+    protected function getProviderInterfaceService()
+    {
+        return $this->services['Crunz\Timezone\ProviderInterface'] = new \Crunz\Timezone\Provider();
+    }
+
+    public function getParameter($name)
+    {
+        $name = (string) $name;
+        if (!(isset($this->parameters[$name]) || isset($this->loadedDynamicParameters[$name]) || array_key_exists($name, $this->parameters))) {
+            $name = $this->normalizeParameterName($name);
+
+            if (!(isset($this->parameters[$name]) || isset($this->loadedDynamicParameters[$name]) || array_key_exists($name, $this->parameters))) {
+                throw new InvalidArgumentException(sprintf('The parameter "%s" must be defined.', $name));
+            }
+        }
+        if (isset($this->loadedDynamicParameters[$name])) {
+            return $this->loadedDynamicParameters[$name] ? $this->dynamicParameters[$name] : $this->getDynamicParameter($name);
+        }
+
+        return $this->parameters[$name];
+    }
+
+    public function hasParameter($name)
+    {
+        $name = (string) $name;
+        $name = $this->normalizeParameterName($name);
+
+        return isset($this->parameters[$name]) || isset($this->loadedDynamicParameters[$name]) || array_key_exists($name, $this->parameters);
+    }
+
+    public function setParameter($name, $value)
+    {
+        throw new LogicException('Impossible to call set() on a frozen ParameterBag.');
+    }
+
+    public function getParameterBag()
+    {
+        if (null === $this->parameterBag) {
+            $parameters = $this->parameters;
+            foreach ($this->loadedDynamicParameters as $name => $loaded) {
+                $parameters[$name] = $loaded ? $this->dynamicParameters[$name] : $this->getDynamicParameter($name);
+            }
+            $this->parameterBag = new FrozenParameterBag($parameters);
+        }
+
+        return $this->parameterBag;
+    }
+
+    private $loadedDynamicParameters = [];
+    private $dynamicParameters = [];
+
+    /**
+     * Computes a dynamic parameter.
+     *
+     * @param string $name The name of the dynamic parameter to load
+     *
+     * @return mixed The value of the dynamic parameter
+     *
+     * @throws InvalidArgumentException When the dynamic parameter does not exist
+     */
+    private function getDynamicParameter($name)
+    {
+        throw new InvalidArgumentException(sprintf('The dynamic parameter "%s" must be defined.', $name));
+    }
+
+    private $normalizedParameterNames = [];
+
+    private function normalizeParameterName($name)
+    {
+        if (isset($this->normalizedParameterNames[$normalizedName = strtolower($name)]) || isset($this->parameters[$normalizedName]) || array_key_exists($normalizedName, $this->parameters)) {
+            $normalizedName = isset($this->normalizedParameterNames[$normalizedName]) ? $this->normalizedParameterNames[$normalizedName] : $normalizedName;
+            if ((string) $name !== $normalizedName) {
+                @trigger_error(sprintf('Parameter names will be made case sensitive in Symfony 4.0. Using "%s" instead of "%s" is deprecated since Symfony 3.4.', $name, $normalizedName), E_USER_DEPRECATED);
+            }
+        } else {
+            $normalizedName = $this->normalizedParameterNames[$normalizedName] = (string) $name;
+        }
+
+        return $normalizedName;
+    }
+
+    /**
+     * Gets the default parameters.
+     *
+     * @return array An array of the default parameters
+     */
+    protected function getDefaultParameters()
+    {
+        return [
+            'container.autowiring.strict_mode' => true,
+            'container.dumper.inline_class_loader' => true,
+        ];
+    }
+}
+CrunzContainer.php.meta content:
+a:27:{i:0;C:50:"Symfony\Component\Config\Resource\ComposerResource":47:{a:1:{s:20:"/var/www/html/vendor";i:1550313157;}}i:1;C:46:"Symfony\Component\Config\Resource\FileResource":41:{s:33:"/var/www/html/config/services.php";}i:2;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":164:{a:3:{i:0;a:1:{s:49:"/var/www/html/src/Configuration/Configuration.php";N;}i:1;s:33:"Crunz\Configuration\Configuration";i:2;s:32:"3ac48659118f6126bfdfd389a723c86b";}}i:3;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":250:{a:3:{i:0;a:2:{s:64:"/var/www/html/src/Configuration/ConfigurationParserInterface.php";N;s:55:"/var/www/html/src/Configuration/ConfigurationParser.php";N;}i:1;s:39:"Crunz\Configuration\ConfigurationParser";i:2;s:32:"5d837dcfe5b21c1d8d2e544cbe0c3a10";}}i:4;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":158:{a:3:{i:0;a:1:{s:46:"/var/www/html/src/Configuration/Definition.php";N;}i:1;s:30:"Crunz\Configuration\Definition";i:2;s:32:"9463bb945cce9b95049cf6b11fcb9cc7";}}i:5;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":158:{a:3:{i:0;a:1:{s:46:"/var/www/html/src/Configuration/FileParser.php";N;}i:1;s:30:"Crunz\Configuration\FileParser";i:2;s:32:"36fe873da4e70d48f9404dfe7129cf16";}}i:6;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":214:{a:3:{i:0;a:2:{s:52:"/var/www/html/src/Filesystem/FilesystemInterface.php";N;s:43:"/var/www/html/src/Filesystem/Filesystem.php";N;}i:1;s:27:"Crunz\Filesystem\Filesystem";i:2;s:32:"0ca3f7e03a14901c551667982eb739af";}}i:7;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":231:{a:3:{i:0;a:2:{s:55:"/var/www/html/src/Console/Command/ClosureRunCommand.php";N;s:45:"/var/www/html/src/Console/Command/Command.php";N;}i:1;s:39:"Crunz\Console\Command\ClosureRunCommand";i:2;s:32:"8d9c2be92a2bb3bc6cb63dc707e04872";}}i:8;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":241:{a:3:{i:0;a:2:{s:60:"/var/www/html/src/Console/Command/ConfigGeneratorCommand.php";N;s:45:"/var/www/html/src/Console/Command/Command.php";N;}i:1;s:44:"Crunz\Console\Command\ConfigGeneratorCommand";i:2;s:32:"3cacb0589dc78145d971ebd137708124";}}i:9;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":202:{a:3:{i:0;a:2:{s:48:"/var/www/html/src/Timezone/ProviderInterface.php";N;s:39:"/var/www/html/src/Timezone/Provider.php";N;}i:1;s:23:"Crunz\Timezone\Provider";i:2;s:32:"60e97e24bc80e66f207618ddb1a62513";}}i:10;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":235:{a:3:{i:0;a:2:{s:57:"/var/www/html/src/Console/Command/ScheduleListCommand.php";N;s:45:"/var/www/html/src/Console/Command/Command.php";N;}i:1;s:41:"Crunz\Console\Command\ScheduleListCommand";i:2;s:32:"50cbcdacfa9dfd66ad1a1eb0626983e9";}}i:11;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":233:{a:3:{i:0;a:2:{s:56:"/var/www/html/src/Console/Command/ScheduleRunCommand.php";N;s:45:"/var/www/html/src/Console/Command/Command.php";N;}i:1;s:40:"Crunz\Console\Command\ScheduleRunCommand";i:2;s:32:"2fe7d1a95083e4f69eb80b6d4f1b633d";}}i:12;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":132:{a:3:{i:0;a:1:{s:33:"/var/www/html/src/EventRunner.php";N;}i:1;s:17:"Crunz\EventRunner";i:2;s:32:"7a3b68053649d4cddc806f4fcef43197";}}i:13;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":124:{a:3:{i:0;a:1:{s:29:"/var/www/html/src/Invoker.php";N;}i:1;s:13:"Crunz\Invoker";i:2;s:32:"fae934616412480c37c3fb92bda0e4d3";}}i:14;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":122:{a:3:{i:0;a:1:{s:28:"/var/www/html/src/Mailer.php";N;}i:1;s:12:"Crunz\Mailer";i:2;s:32:"b8f2888c4ae4c8126a1c2d94f06867d0";}}i:15;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":150:{a:3:{i:0;a:1:{s:42:"/var/www/html/src/Logger/LoggerFactory.php";N;}i:1;s:26:"Crunz\Logger\LoggerFactory";i:2;s:32:"0b276ebc8cad04efb6a9ca712ed4b928";}}i:16;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":244:{a:3:{i:0;a:2:{s:52:"/var/www/html/src/HttpClient/HttpClientInterface.php";N;s:58:"/var/www/html/src/HttpClient/HttpClientLoggerDecorator.php";N;}i:1;s:42:"Crunz\HttpClient\HttpClientLoggerDecorator";i:2;s:32:"9d209b192daaca00c46bf044d75919f8";}}i:17;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":230:{a:3:{i:0;a:2:{s:52:"/var/www/html/src/HttpClient/HttpClientInterface.php";N;s:51:"/var/www/html/src/HttpClient/FallbackHttpClient.php";N;}i:1;s:35:"Crunz\HttpClient\FallbackHttpClient";i:2;s:32:"0588cc5e0d6d38464e042ee30e3fd6fc";}}i:18;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":226:{a:3:{i:0;a:2:{s:52:"/var/www/html/src/HttpClient/HttpClientInterface.php";N;s:49:"/var/www/html/src/HttpClient/StreamHttpClient.php";N;}i:1;s:33:"Crunz\HttpClient\StreamHttpClient";i:2;s:32:"c83fe4d0062584974112b5b25ce55cd3";}}i:19;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":222:{a:3:{i:0;a:2:{s:52:"/var/www/html/src/HttpClient/HttpClientInterface.php";N;s:47:"/var/www/html/src/HttpClient/CurlHttpClient.php";N;}i:1;s:31:"Crunz\HttpClient\CurlHttpClient";i:2;s:32:"c5abba37696b0161e43f299aa823473e";}}i:20;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":136:{a:3:{i:0;a:1:{s:35:"/var/www/html/src/Task/Timezone.php";N;}i:1;s:19:"Crunz\Task\Timezone";i:2;s:32:"f2f6296a53567bc1aa2f3622b0b27488";}}i:21;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":158:{a:3:{i:0;a:1:{s:46:"/var/www/html/src/Schedule/ScheduleFactory.php";N;}i:1;s:30:"Crunz\Schedule\ScheduleFactory";i:2;s:32:"cb871da57eb1a302c370944837984618";}}i:22;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":237:{a:3:{i:0;a:2:{s:58:"/var/www/html/src/Console/Command/TaskGeneratorCommand.php";N;s:45:"/var/www/html/src/Console/Command/Command.php";N;}i:1;s:42:"Crunz\Console\Command\TaskGeneratorCommand";i:2;s:32:"34c22a26718e717c0ae0fc8b220155bb";}}i:23;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":211:{a:3:{i:0;a:2:{s:51:"/var/www/html/src/Logger/ConsoleLoggerInterface.php";N;s:42:"/var/www/html/src/Logger/ConsoleLogger.php";N;}i:1;s:26:"Crunz\Logger\ConsoleLogger";i:2;s:32:"f4110332fbeddbaa07c03e499943c534";}}i:24;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":140:{a:3:{i:0;a:1:{s:37:"/var/www/html/src/Task/Collection.php";N;}i:1;s:21:"Crunz\Task\Collection";i:2;s:32:"8ce965679db84e9b9baee551d0375a6d";}}i:25;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":190:{a:3:{i:0;a:2:{s:44:"/var/www/html/src/Finder/FinderInterface.php";N;s:35:"/var/www/html/src/Finder/Finder.php";N;}i:1;s:19:"Crunz\Finder\Finder";i:2;s:32:"76dc5d02351a70e03198e1b71c2881b6";}}i:26;C:57:"Symfony\Component\Config\Resource\ReflectionClassResource":150:{a:3:{i:0;a:1:{s:42:"/var/www/html/src/Output/OutputFactory.php";N;}i:1;s:26:"Crunz\Output\OutputFactory";i:2;s:32:"d203a65be57a1bf0439947dcbe2dbdb5";}}}

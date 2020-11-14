@@ -1,0 +1,4 @@
+Add auth sample for DI event injection
+
+
+The auth handlers all have event classes that can be passed in directly or injected via DI. We need samples for the DI scenario.

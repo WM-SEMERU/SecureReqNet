@@ -1,0 +1,5 @@
+[security] Remove jackson-databind security warning
+
+
+Fix vulnerability detected by Github:
+com.fasterxml.jackson.core:jackson-databind vulnerabilities found in parent/pom.xml on Oct 16

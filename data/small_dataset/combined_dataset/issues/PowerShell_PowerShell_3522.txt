@@ -1,0 +1,26 @@
+Role Capability file (.psrc) won't be found in a versioned module sub-folder
+
+
+Steps to reproduce
+Create a role capability file 'MyJEARole.psrc' in a folder 'RoleCapabilities' of a module.
+Install the module in a version sub-folder inside your ModulePath i.e.: 'C:\Program Files\WindowsPowerShell\Modules\MyJEAModule\0.1.0'.
+The full path of the psrc file will be 'C:\Program Files\WindowsPowerShell\Modules\MyJEAModule\0.1.0\RoleCapabilities\MyJEARole.psrc'.
+Refer to the role 'MyJEARole' in a pssc file and register the session configuration.
+Try enter the PSSession with the registered configuration.
+Expected behavior
+Enter-PSSession is successful (and the right capability file is applied)
+Actual behavior
+Enter-PSSession fails with the following message:
+Could not find the role capability, 'MyJEARole'. The role capability must be a file named 'MyJEARole.psrc' within a 'RoleCapabilities' directory in a module in the current module path.
+Environment data
+PSVersion                      5.1.14409.1005
+PSEdition                      Desktop
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                   10.0.14409.1005
+CLRVersion                     4.0.30319.42000
+WSManStackVersion              3.0
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1
+Note
+I think the problem comes from the function GetRoleCapabilityPath in src/System.Management.Automation/engine/remoting/fanin/InitialSessionStateProvider.cs. This function looks for the folder 'RoleCapabilities' only in the first level of folders in each ModulePath; so this function cannot find 'RoleCapabilities' if the module contains version(s) subfolder(s).
+But... what if we have multiple versions of the same module with multiple versions of the psrc file? Currently the search function would stop at the first ocurence of the psrc file that would correspond to the oldest version of the module. Probably not the best behavior. Maybe we could specify the version of the module containing the psrc file with the ModulesToImport parameter in pssc file ?

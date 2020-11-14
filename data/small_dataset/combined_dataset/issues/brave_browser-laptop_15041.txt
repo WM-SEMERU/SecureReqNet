@@ -1,0 +1,81 @@
+Brave Wallet deleted in a different tab still shows up on ETH wallet
+
+
+Description
+Brave Wallet deleted in a different tab still shows up on ETH wallet
+Steps to Reproduce
+
+Build from master (6ab4f61), launch a clean profile
+Enable ETH Wallet, click on Fund Brave Wallet, shows placeholder text to enable payment
+In the same tab go to Payments and enable it
+On the same tab go back to ETH wallet and fund brave wallet, shows brave wallet address pre-populated
+Go back to payments and delete wallet from advance settings
+Go back to ETH wallet and fund brave wallet, shows placeholder text
+Open preferences in a new tab and enable payments
+Go back to ETH wallet on previous tab(where you did steps 2-6), Fund brave wallet, shows the new wallet address
+Go back to second preferences tab from step 7 and delete payments wallet
+Switch back to first preference page with ETH Wallet, fund brave wallet retains Brave wallet address even though it was deleted in step 9 on second preferences page
+Click any other preferences menu and back to ETH wallet and fund brave wallet still retains the second wallet address even though the wallet is deleted
+
+Actual result:
+Watch full recording to see the issue
+
+Expected result:
+Should be aware of Brave wallet being deleted on other tabs
+Reproduces how often:
+100% on master
+Brave Version
+
+
+
+Brave
+0.25.0
+
+
+
+
+V8
+6.8.275.24
+
+
+rev
+6ab4f61
+
+
+Muon
+8.0.8
+
+
+OS Release
+10.0.17134
+
+
+Update Channel
+ 
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Microsoft Windows
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Reproducible on current live release:
+N/A
+Additional Information
+cc: @mrose17 @Slava @ryanml @kjozwiak @LaurenWags @GeetaSarvadnya

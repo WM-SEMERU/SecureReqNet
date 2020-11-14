@@ -1,0 +1,21 @@
+https://sentry.gitlap.com/gitlab/gitlabcom/issues/46202/
+
+```
+Errno::EINVAL: Invalid argument @ rb_file_s_rename - 
+  lib/gitlab/project_transfer.rb:30:in `move'
+    FileUtils.mv(from, to)
+  lib/gitlab/project_transfer.rb:17:in `rename_namespace'
+    move(path_was, path)
+  app/models/concerns/storage/legacy_namespace.rb:24:in `move_dir'
+    Gitlab::UploadsTransfer.new.rename_namespace(full_path_was, full_path)
+  lib/gitlab/database/load_balancing/connection_proxy.rb:77:in `block in write_using_load_balancer'
+    connection.send(name, *args, &block)
+  lib/gitlab/database/load_balancing/load_balancer.rb:66:in `block in read_write'
+    yield ActiveRecord::Base.retrieve_connection
+...
+(233 additional frame(s) were not displayed)
+
+Errno::EINVAL: Invalid argument @ rb_file_s_rename - (/opt/gitlab/embedded/service/gitlab-rails/public/uploads/username, /opt/gitlab/embedded/service/gitlab-rails/public/uploads/username/username)
+```
+
+/cc @markglenfletcher

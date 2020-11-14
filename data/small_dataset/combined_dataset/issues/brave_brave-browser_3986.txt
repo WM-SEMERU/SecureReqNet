@@ -1,0 +1,4 @@
+Manage rewards by its pref
+
+
+Refactor rewards code to be fully managed by the pref, nothing should happen if the pref is disabled, ledger utility process should only be created when pref is on too. cc @NejcZdovc @bbondy

@@ -1,0 +1,45 @@
+[Security] Remove dependency on security-core from security-csrf
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+possibly
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#15872
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

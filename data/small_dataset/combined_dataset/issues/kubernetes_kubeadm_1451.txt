@@ -1,0 +1,6 @@
+move the self-hosting documentation from the kubeadm init authored page
+
+
+move references of self-hosting away from the kubeadm init authored page:
+https://github.com/kubernetes/website/blob/master/content/en/docs/reference/setup-tools/kubeadm/kubeadm-init.md#self-hosting-the-kubernetes-control-plane-self-hosting
+destination is possibly a new page.

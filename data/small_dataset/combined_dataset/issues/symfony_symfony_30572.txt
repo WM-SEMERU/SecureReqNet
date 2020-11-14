@@ -1,0 +1,55 @@
+[Cache] add integration with Messenger to allow computing cached values in a worker
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR needs and for now embeds #30334. See 2nd commit.
+Using the new CacheInterface enables probabilistic early expiration by default. This means that from time to time, items are elected as early-expired while they are still fresh (see Wikipedia for details).
+This PR adds a new messenger_bus option when configuring cache pools. When this option is set, cache pools are configured to send those early-expired items on a Messenger bus, then serve the current value immediately, while the updated value is computed in a worker in the background.
+CacheInterface::get($key, $callback) accepts any callable, but sending any callable on a bus is not possible (e.g. a Closure cannot be serialized). To bypass this constraint, this feature works only with callables in the form [$service, 'publicMethod'], where $service is any public or reversible service.
+This limitation is a serious one: this $service must compute a value when knowing only its key. This means keys should embed enough information for this to happen. I think that's not that hard - and we may find ways to provide additional context in the future.
+At least the goal is worth it: in theory, this strategy allows achieving a 100% hit ratio even when invalidation-by-expiration is used.

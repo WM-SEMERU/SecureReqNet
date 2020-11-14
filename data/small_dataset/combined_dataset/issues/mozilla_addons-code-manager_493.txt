@@ -1,0 +1,4 @@
+Set a origin + path for the CDN hosted statics
+
+
+From: #485 (comment)

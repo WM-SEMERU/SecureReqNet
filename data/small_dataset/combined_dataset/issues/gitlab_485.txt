@@ -1,0 +1,31 @@
+'In milestones list a percent complete value is visible. In milestone detail this value is missing.
+
+Milestones list:
+
+`````
+Version 1.0
+32 Issues   0 Merge Requests   31% complete
+[====================                              ]
+`````
+
+Milestone detail -- current:
+
+`````
+Version 1.0
+Some description
+----------------------------------------------------
+Progress: 10 closed – 22 open
+[====================                              ]
+`````
+
+Milestone detail -- expected:
+
+`````
+Version 1.0
+Some description
+----------------------------------------------------
+Progress: 10 closed – 22 open (31 % of 32 complete)
+[====================                              ]
+`````
+
+It is just tiny detail, but it is very annoying ;)

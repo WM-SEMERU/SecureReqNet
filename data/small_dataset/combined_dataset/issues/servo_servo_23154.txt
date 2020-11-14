@@ -1,0 +1,24 @@
+Implement WheelEvent interface
+
+
+Created a new dom interface: "WheelEvent" and added WPT tests to confirm the interface works. To do this I had to do the following:
+
+Create a new WheelEvent dom interface. It can be found in script/dom/wheelevent.rs and dom/webidls/WheelEvent.webidl
+Add a new WheelEvent option to the compositor's CompositorEvent enum
+Add a new Wheel option to the compositor's WindowEvent enum
+Add a new WheelDelta type to the script_traits module
+Modify the scroll_event logic. Now we send a WheelEvent before scrolling. Repeat: we send the WheelEvent notification BEFORE we send the scroll delta.
+Add two manual wpt tests to the uievents/order-of-events test collection
+
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #22843 (GitHub issue number if applicable)
+
+
+ There are tests for these changes OR
+ These changes do not require tests because ___
+
+
+This change is 

@@ -1,0 +1,6 @@
+Fixes for use of deprecated fields in SignedLogRoot.
+
+
+
+
+

@@ -1,0 +1,5 @@
+Update CODEOWNERS
+
+
+FYI @aspnet/build - replacing Doug with the team as the codeowner.
+Also, added columns to make file more readable

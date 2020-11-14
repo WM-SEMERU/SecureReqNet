@@ -1,0 +1,85 @@
+[DI] Add support for "wither" methods - for greater immutable services
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#10991
+
+
+
+Let's say we want to define an immutable service while still using traits for composing its optional features. A nice way to do so without hitting the downsides of setters is to use withers. Here would be an example:
+ class MyService
+{
+    use LoggerAwareTrait;
+}
+
+trait LoggerAwareTrait
+{
+    private $logger;
+
+    /**
+     * @required
+     * @return static
+     */
+    public function withLogger(LoggerInterface $logger)
+    {
+        $new = clone $this;
+        $new->logger = $logger;
+
+        return $new;
+    }
+}
+
+$service = new MyService();
+$service = $service->withLogger($logger);
+As you can see, this nicely solves the setter issues.
+BUT how do you make the service container create such a service? Right now, you need to resort to complex gymnastic using the "factory" setting - manageable for only one wither, but definitely not when more are involved and not compatible with autowiring.
+So here we are: this PR allows configuring such services seamlessly.
+Using explicit configuration, it adds a 3rd parameter to method calls configuration: after the method name and its parameters, you can pass true and done, you just declared a wither:
+services:
+    MyService:
+        calls:
+            - [withLogger, ['@logger'], true]
+In XML, you could use the new returns-clone attribute on the <call> tag.
+And when using autowiring, the code looks for the @return static annotation and turns the flag on if found.
+There is only one limitation: unlike services with regular setters, services with withers cannot be part of circular loops that involve calls to wither methods (unless they're declared lazy of course).

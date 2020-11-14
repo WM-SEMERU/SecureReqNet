@@ -1,0 +1,4 @@
+Update README.MD for readability
+
+
+added some newlines to make clearer what the docker commands are

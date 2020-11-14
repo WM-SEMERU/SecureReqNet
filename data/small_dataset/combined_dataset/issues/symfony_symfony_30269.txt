@@ -1,0 +1,22 @@
+event subscriber gets registered and called twice
+
+
+Symfony version(s) affected: 4.2.3
+Description
+Depending on how I define an Event Subscriber as service it gets registered once or twice. Its listener methods gets then called once or twice.
+How to reproduce
+If I define the service like this it gets registered twice.
+    app.subscriber.oauth:
+        class: App\EventListenerSubscriber\OauthSubscriber
+        arguments: ['@session', '@router', '@security.token_storage', '@event_dispatcher', '@app.entity_manager.user', '@app.fos_user.mailer.twig_swift']
+        tags:
+            - { name: kernel.event_subscriber }
+
+But if I define it like this it gets registered only once.
+    App\EventListenerSubscriber\OauthSubscriber:
+        arguments: ['@session', '@router', '@security.token_storage', '@event_dispatcher', '@app.entity_manager.user', '@app.fos_user.mailer.twig_swift']
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+I check the registered listeners here: Symfony\Component\EventDispatcher\EventDispatcher::doDispatch()

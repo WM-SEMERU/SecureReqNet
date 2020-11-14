@@ -1,0 +1,4 @@
+Switch to upstream glutin osmesa support
+
+
+There's an OsMesaContextExt trait that can be imported which allows creating a software rendering context that integrates with glutin. That might allow us to remove a bunch of OsMesa-specific code inside Servo.

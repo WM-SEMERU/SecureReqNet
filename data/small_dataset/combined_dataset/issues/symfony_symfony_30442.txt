@@ -1,0 +1,69 @@
+[OptionsResolver] Fix an error message to be more accurate
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30432
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+See #30432 for more details:
+
+Symfony version(s) affected: 3.4, maybe other versions too (not tested)
+Description
+Error message when allowedTypes is an array contains [] but should not:
+The option "testme" with value array is expected to be of type "string[]", but one of the elements is of type "integer[]".
+It should be:
+The option "testme" with value array is expected to be of type "string[]", but one of the elements is of type "integer".
+How to reproduce
+$resolver = (new OptionsResolver())
+    ->setDefault('testme', [])
+    ->setAllowedTypes('testme', ['string[]'])
+    ->resolve(['testme' => ['test', 12]]);
+
+
+In addition I changed an error message to be more
+accurate if provided more than one incorrect value:
+
+[...] is expected to be of type "integer[][]", but is of type "integer|boolean|string".
+

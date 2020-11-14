@@ -1,0 +1,96 @@
+'**Be sure to follow the [Security Releases guide](https://gitlab.com/gitlab-org/release-tools/blob/master/doc/security.md).**
+
+- Picked into respective `stable` branches from the `dev/security` branch. [`Pick into Stable` 9.5 merged merge requests]:
+  - [ ] REFERENCE_TO_MR_TO_PICK
+- [x] **Push `ce/9-5-stable` to `dev` only: `git push dev 9-5-stable`**
+- [x] **Push `ee/9-5-stable-ee` to `dev` only: `git push dev 9-5-stable-ee`**
+- [x] Merge `ce/9-5-stable` into `ee/9-5-stable-ee` following [the security process]
+- [x] Check [`omnibus-gitlab/9-5-stable` CHANGELOG.md][omnibus-stable-changelog]
+- [x] Check [`omnibus-gitlab/9-5-stable-ee` CHANGELOG.md][omnibus-stable-ee-changelog]
+- [x] **Push `omnibus-gitlab/9-5-stable` to `dev` only: `git push dev 9-5-stable`**
+- [x] **Push `omnibus-gitlab/9-5-stable-ee` to `dev` only: `git push dev 9-5-stable-ee`**
+- [x] While waiting for tests to be green, now is a good time to start on [the blog post], **in a private snippet**: https://dev.gitlab.org/snippets/179
+  - [x] Ensure the blog post discloses as much information about the vulnerability as is responsibly possible. We aim for clarity and transparency, and try to avoid secrecy and ambiguity.
+  - [x] If the vulnerability was responsibly disclosed to us by a security researcher, ensure they're [publicly acknowledged] and thank them again privately as well.
+- [x] Ensure [tests are green on CE]
+- [x] Ensure [tests are green on EE]
+- [x] Check for any problematic migrations in EE (EE migrations include CE ones), and paste the diff in a snippet: `git diff v9.5.3-ee..9-5-stable-ee -- db/migrate` =>
+- [x] Tag the `9.5.4` version using the [`release` task]:
+
+      ```sh
+      SECURITY=true bundle exec rake "release[9.5.4]"
+      ```
+- [x] Check that [EE packages are built], [CE packages are built] and appears on `packages.gitlab.com`: [EE](https://packages.gitlab.com/app/gitlab/gitlab-ee/search?q=9.5.4) / [CE](https://packages.gitlab.com/app/gitlab/gitlab-ce/search?q=9.5.4)
+- [x] In `#production`:
+
+      ```
+      I'm going to deploy `9.5.4` to staging
+      ```
+- [x] Deploy [`9.5.4`](https://packages.gitlab.com/gitlab/gitlab-ee/packages/ubuntu/xenial/gitlab-ee_9.5.4-ee.0_amd64.deb) to [staging.gitlab.com]
+- [x] In `#production`:
+
+      ```
+      I'm going to deploy `9.5.4` to production
+      ```
+- [x] Deploy [`9.5.4`](https://packages.gitlab.com/gitlab/gitlab-ee/packages/ubuntu/xenial/gitlab-ee_9.5.4-ee.0_amd64.deb) to [GitLab.com]
+- [x] Create the `9.5.4` version on https://version.gitlab.com
+- [x] Mark any applicable previous releases as vulnerable on https://version.gitlab.com.
+- [ ] Check any sensitive information from the confidential security issues, and redact them if needed
+- [x] Create the blog post merge request
+- [x] Deploy the blog post
+- [x] Push `ce/9-5-stable` to all remotes
+- [x] Push `ee/9-5-stable-ee` to all remotes
+- [x] Push tags to all remotes
+- [ ] Make the confidential security issues public
+- [x] Tweet (prepare the Tweet text below or paste the tweet URL instead):
+
+      ```
+      GitLab 9.5.4 is released! BLOG_POST_URL DESCRIPTION OF THE CHANGES
+      ```
+- [ ] Coordinate with the Marketing team to send out a security newsletter
+- In the [9.5 Regressions]() issue:
+  - [ ] Add the following notice:
+
+      ```
+      `9.5.4` has been tagged, further fixes will go into `9.5.5` as necessary.
+      ```
+  - [ ] Remove notes for the regressions fixed by version `9.5.4`
+- [x] Cherry-pick the merges from the `security` branch into `master` and push to all remotes.
+- [ ] Add [`omnibus-gitlab/9.5.4+ce.0` CHANGELOG.md][omnibus-tag-changelog] items to [`omnibus-gitlab/master` CHANGELOG.md][omnibus-master-changelog]
+
+---
+
+For references:
+- https://dev.gitlab.org/gitlab/gitlab-ee/commits/9-5-stable-ee
+- https://dev.gitlab.org/gitlab/gitlabhq/commits/9-5-stable
+- https://dev.gitlab.org/gitlab/omnibus-gitlab/commits/9-5-stable-ee
+- https://dev.gitlab.org/gitlab/omnibus-gitlab/commits/9-5-stable
+
+[`Pick into Stable` 9.5 merged merge requests]: https://gitlab.com/groups/gitlab-org/merge_requests?label_name%5B%5D=Pick+into+Stable&milestone_title=9.5&scope=all&sort=id_desc&state=merged
+
+[omnibus-stable-changelog]: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/9-5-stable/CHANGELOG.md
+[omnibus-stable-ee-changelog]: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/9-5-stable-ee/CHANGELOG.md
+
+[tests are green on CE]: https://dev.gitlab.org/gitlab/gitlabhq/commits/9-5-stable
+[tests are green on EE]: https://dev.gitlab.org/gitlab/gitlab-ee/commits/9-5-stable-ee
+[EE packages are built]: https://dev.gitlab.org/gitlab/omnibus-gitlab/commits/8-10-stable-ee
+[CE packages are built]: https://dev.gitlab.org/gitlab/omnibus-gitlab/commits/8-10-stable
+
+[omnibus-tag-changelog]: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/9.5.4+ce.0/CHANGELOG.md
+[omnibus-master-changelog]: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/CHANGELOG.md
+
+[EE packages are built]: https://dev.gitlab.org/gitlab/omnibus-gitlab/commits/9-5-stable-ee
+[CE packages are built]: https://dev.gitlab.org/gitlab/omnibus-gitlab/commits/9-5-stable
+
+[`gitlab/gitlab-ee`]: https://packages.gitlab.com/gitlab/gitlab-ee
+[`gitlab/gitlab-ce`]: https://packages.gitlab.com/gitlab/gitlab-ce
+
+[`release` task]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc%2Frake-tasks.md#releaseversion
+[`patch_issue` task]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc%2Frake-tasks.md#patch_issueversion
+
+[staging.gitlab.com]: https://gitlab.com/gitlab-org/takeoff#deploying-gitlab
+[GitLab.com]: https://gitlab.com/gitlab-org/takeoff#deploying-gitlab
+
+[publicly acknowledged]: https://about.gitlab.com/vulnerability-acknowledgements/
+[the blog post]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc/security.md#about-the-blog-post
+[the security process]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc/security.md#merging-ce-stable-into-ee-stable

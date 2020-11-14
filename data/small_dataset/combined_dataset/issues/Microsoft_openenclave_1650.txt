@@ -1,0 +1,9 @@
+Provide Itanium C++ ABI header (cxxabi.h)
+
+
+Some libraries out there use the Itanium C++ ABI header cxxabi.h to do things like name demangling. OE has this already from libcxxrt but doesn't install the relevant headers. Any chance these could be added to the install? That would be:
+cxxabi.h, which depends on:
+unwind.h, which depends on:
+  unwind-arm.h
+  unwind-itanium.h
+

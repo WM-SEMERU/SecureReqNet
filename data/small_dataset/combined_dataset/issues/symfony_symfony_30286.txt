@@ -1,0 +1,56 @@
+Drop more usages of Serializable
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+When the serialized payload of some class is used for ephemeral needs, my proposal here is to drop implementing Serializable and provide a deprecation layer based on __sleep to still call the serialize/unserialize methods. This means that at the behavior level, we provide BC, and at the payload level, we don't.
+That leaves us with only two "not ephemeral" use cases:
+
+Route and CompilerRoute instances are serialized by Drupal. We'd better not break such existing payloads without being sure it's ok for Drupal (ping @alexpott). My proposal in this PR is to schedule the BC break for Symfony 5, and ask Drupal (and others) to add a check in their unserialization logic so that they are able to recompile the cached list of routes if unserialize fails due to this change. They could alternatively implement Serializable on their own, without calling parent::(un)serialize().
+TokenInterface from Security - for this one, I have no idea yet, except either plan for breaking BC at the payload level (which would mean invalidating all sessions when moving to SF5) - or create a new interface if we think breaking sessions is not reasonable. For now, I've kept using Serializable, which could be also fine keeping if we mark the corresponding method final to force
+
+WDYT?

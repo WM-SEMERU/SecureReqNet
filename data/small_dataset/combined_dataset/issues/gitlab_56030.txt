@@ -1,0 +1,32 @@
+'### Problem to solve
+
+There are certain kinds of evidence which are important to collect as part of a release. This can include a wide variety of things, but typically will be:
+
+- Evidence of pipeline steps run, including their output
+- Test scenarios run, and their results
+- Compliance or security checks run, and their results
+- Checksums associated with the above items to prevent tampering after the fact
+
+It should be possible when creating a release to include these as part of the release entity.
+
+Secure releases should receive a secure checksum themselves (which includes thereby a secure checksum of all contained information) and should not be editable after the fact. If a release containing evidence needs to be modified, it should be deleted and regenerated.
+
+### Target audience
+
+Release Managers, compliance and security teams
+
+### Further details
+
+One interesting decision here is how this interacts with binary authorization (https://gitlab.com/gitlab-org/gitlab-ee/issues/7268). If releases end up being the artifact to sign, then this evidence collection (and signature of the release) can be the same thing as the attestation criteria.
+
+### Proposal
+
+Add new kind of entity called `evidence` to releases. These entities should contain the raw materials, not links, and should include a strong checksum gathered at the time the release was created to ensure they cannot be tampered with later.
+
+### What does success look like, and how can we measure that?
+
+TBD
+
+### Links / references
+
+TBD

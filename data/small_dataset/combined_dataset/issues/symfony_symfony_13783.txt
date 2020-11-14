@@ -1,0 +1,4 @@
+Login takes up to 2 min Since 2.6.4
+
+
+It seems like something has changed in Symfony 2.6.4. Since I upgraded our install from 2.6.3 logins are taking anywhere up to 2 min. We are using FOSUserBundle and the logs look exactly normal that it is loading from the database. I am using a pdosession handler locally and a dynamodb session handler on AWS and they both are experiencing the same issues.

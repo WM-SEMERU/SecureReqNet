@@ -1,0 +1,11 @@
+when i clik in "HTTPS" button on "Activity" tab of any proyect, any action happens.
+
+this are using opera, midory2 or midory3, icecat17, firefox11, firefox9, firefox7, firefox17, chromiun13, chromium15, chromium17
+
+i recently migred from github due gitlab are a 100% free software, but many things dont work, this are one of reasons due why github are too famous
+
+i wish to use gitlab, but please, with that problem i cant!
+
+same problem when i wish touse the web editor for issues or files in repos
+
+*I CANNOT SEE EDITOR IN ISSUE TO RESPOND TO U*

@@ -1,0 +1,6 @@
+Managed service Identity support in SF and containers
+
+
+Hi,
+Is MSI supported from windows containers?. I tried getting access token from within container for VM enabled for MSI and I get a time out exception.  Getting the token from VM it self works fine.
+"["An error occurred while sending the request. The operation timed out \n\nAn error occurred while sending the request."]"

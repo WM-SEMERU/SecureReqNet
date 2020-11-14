@@ -1,0 +1,5 @@
+Handling truncated domains
+
+
+From: brave/browser-ios#1100
+This issue was highlighted in the HindSight paper recently: https://www.securitee.org/files/hindsight_ccs2017.pdf

@@ -1,0 +1,98 @@
+KdbxError: Error InvalidArg: data
+
+
+Hey !
+Describe the bug
+The error prevents me to open the password manager
+To Reproduce
+Just open KeeWeb and type your password.
+Expected behavior
+What it does when it works : open the password manager
+Screenshots
+
+Environment
+I can't access settings but I use Brave Browser on Win10.
+However, this error happened in the past on many other Chromium-based browsers.
+Kdbx File
+Personal data
+Logs
+(index):1 Document was loaded from Application Cache with manifest https://app.keeweb.info/manifest.appcache
+(index):1 Application Cache Checking event
+(index):1 Application Cache NoUpdate event
+(index):12 2019-03-18T15:17:10.617Z [app] Started in 379ms ¯\_(ツ)_/¯
+(index):12 2019-03-18T15:17:23.396Z [open:passwords_database] File open request
+(index):12 2019-03-18T15:17:23.396Z [open:passwords_database] Open file from cache, will sync after load gdrive
+(index):12 2019-03-18T15:17:23.397Z [storage-cache] Load be6b9849-4d06-0da3-cfe1-8415c1535eb9
+(index):12 2019-03-18T15:17:23.410Z [storage-cache] Loaded be6b9849-4d06-0da3-cfe1-8415c1535eb9 1ms
+(index):12 2019-03-18T15:17:23.411Z [open:passwords_database] Loaded file from cache null
+(index):12 2019-03-18T15:17:23.413Z [file] Error opening file InvalidArg Error InvalidArg: data r {name: "KdbxError", code: "InvalidArg", message: "Error InvalidArg: data"}
+s.error @ (index):12
+(anonymous) @ (index):12
+Promise.catch (async)
+open @ (index):12
+u @ (index):12
+openFileWithData @ (index):12
+(anonymous) @ (index):12
+n.onsuccess @ (index):12
+IndexedDB (async)
+(anonymous) @ (index):12
+e.onsuccess @ (index):12
+IndexedDB (async)
+initDb @ (index):12
+load @ (index):12
+load @ (index):12
+openFileFromCache @ (index):12
+openFile @ (index):12
+requestAnimationFrame (async)
+(anonymous) @ (index):12
+e @ (index):12
+(anonymous) @ (index):12
+requestAnimationFrame (async)
+(anonymous) @ (index):12
+e @ (index):12
+afterPaint @ (index):12
+openDb @ (index):12
+inputKeydown @ (index):12
+M @ (index):12
+(anonymous) @ (index):12
+(anonymous) @ (index):12
+dispatch @ (index):12
+p.handle @ (index):12
+(index):12 2019-03-18T15:17:23.414Z [open-view] Error opening file r {name: "KdbxError", code: "InvalidArg", message: "Error InvalidArg: data"}
+s.error @ (index):12
+openDbComplete @ (index):12
+(anonymous) @ (index):12
+t @ (index):12
+(anonymous) @ (index):12
+Promise.catch (async)
+open @ (index):12
+u @ (index):12
+openFileWithData @ (index):12
+(anonymous) @ (index):12
+n.onsuccess @ (index):12
+IndexedDB (async)
+(anonymous) @ (index):12
+e.onsuccess @ (index):12
+IndexedDB (async)
+initDb @ (index):12
+load @ (index):12
+load @ (index):12
+openFileFromCache @ (index):12
+openFile @ (index):12
+requestAnimationFrame (async)
+(anonymous) @ (index):12
+e @ (index):12
+(anonymous) @ (index):12
+requestAnimationFrame (async)
+(anonymous) @ (index):12
+e @ (index):12
+afterPaint @ (index):12
+openDb @ (index):12
+inputKeydown @ (index):12
+M @ (index):12
+(anonymous) @ (index):12
+(anonymous) @ (index):12
+dispatch @ (index):12
+p.handle @ (index):12
+
+Thanks !

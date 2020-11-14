@@ -1,0 +1,9 @@
+Authentication by external API
+
+
+Description
+For an real world application im using an API to authenticate that is build in symfony as well and handles all the roles and al other security things for the frontend i want to use the symfony 4 framework as well and that it use the authentication over the API.
+The API will provide the authentication user, token and roles so the frontend framework can use this to signin.
+In the previous this is possible but since all class that could have do this is deprecated and uses guard which requires an user entity what i don't want because i don't want duplicate user databases because it's already in the API.
+Example
+So my idea was an authenticator class to provide the support and authentication the authentication will returns the required userinterface with the username and roles to fake the user identity so it can log in the user and use all the security features like '@security'

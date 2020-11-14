@@ -1,0 +1,12 @@
+Add an option to temporarily disable mixed content protection
+
+
+Currently we cannot access resource like flash video of mixed content site (ex. https://forgetfulbc.blogspot.com/2016/08/lastweek-t3.html) and it will be upgraded to https by https everywhere so downgrade to http for this site is not working.
+Firefox and Chrome provide an option to disable the protection temporarily
+Firefox
+
+
+Chrome
+
+
+cc @diracdeltas

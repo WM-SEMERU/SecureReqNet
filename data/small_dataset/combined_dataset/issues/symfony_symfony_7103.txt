@@ -1,0 +1,10 @@
+[security] Enable a firewall to a specific host (subdomain)
+
+
+Symfony 2.2 introduces a possibility to point a route to a specific host, or a subdomain.
+Now, it should be possible to define a specific host to a firewall. I believe it should be like this:
+firewalls:
+    manager:
+        pattern: ^/.*
+        host: manager.domain.com
+        ...

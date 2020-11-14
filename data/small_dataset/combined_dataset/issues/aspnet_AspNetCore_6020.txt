@@ -1,0 +1,13 @@
+[Authorize(AuthenticationSchemes = AzureADDefaults.BearerAuthenticationScheme)] generates compiler error CS0182
+
+
+According to the documentation it should be possible to explicitly specify or override the AuthenticationScheme for a controller with the Authorize attribute.
+The following snippet is from the ValuesController.cs file in the base ASP.NET Core Web Application API template with "Work or School accounts" authentication.
+[Route("api/[controller]")]
+[Authorize(AuthenticationSchemes = AzureADDefaults.BearerAuthenticationScheme)]
+[ApiController]
+public class ValuesController : ControllerBase
+{ ... } 
+However, the above code generates compiler error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type.
+A potential fix could be to change the member properties of AzureADDefaults from static readonly to const as in the JwtBearerDefaults class
+public const string BearerAuthenticationScheme = "AzureADBearer";

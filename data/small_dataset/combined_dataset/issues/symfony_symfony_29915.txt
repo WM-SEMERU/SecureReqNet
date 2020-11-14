@@ -1,0 +1,20 @@
+[Translator] Decorator using new TranslatorInterface
+
+
+I'm not sure if I'm doing something wrong, or if this is a bug, but a while ago I created a TranslatorDecorator:
+class TranslatorDecorator implements TranslatorInterface, TranslatorBagInterface {}
+When I noticed the Symfony\Component\Translation\TranslatorInterface was deprecated, I replaced it with the new Symfony\Contracts\Translation\TranslatorInterface and implemented the LocalAwareInterface too:
+class TranslatorDecorator implements TranslatorInterface, TranslatorBagInterface, LocaleAwareInterface  {}
+I've defined the decorator in my services like this:
+services:
+    app.translator_decorator:
+        class:     My\Bundle\TranslatorDecorator
+        decorates: translator.default
+        arguments:
+            - '@app.translator_decorator.inner'
+        public: false
+
+Now, this all works on a dev environment, but on production (APP_ENV=prod), I'm always getting this fatal error:
+Uncaught TypeError: Argument 1 passed to Symfony\Component\Validator\ValidatorBuilder::setTranslator() must implement interface Symfony\Component\Translation\TranslatorInterface, instance of My\Bundle\TranslatorDecorator given
+
+Am I doing something wrong? I can't seem to figure it out 😅

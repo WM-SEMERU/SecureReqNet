@@ -1,0 +1,12 @@
+**This is about static analysis of security vulnerabilities, not scanning a running application, for example.**
+
+* Use open source libraries to scan code
+* Use CI to run scanner
+* Make it part of Auto DevOps (like code quality and tests)
+* Detect language/framework and run matching scan tool
+
+cc @markpundsack 
+
+Based on https://gitlab.com/gitlab-org/gitlab-ce/issues/32000#note_41469199. 
+
+Maybe duplicate of https://gitlab.com/gitlab-org/gitlab-ee/issues/2592 

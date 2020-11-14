@@ -1,0 +1,5 @@
+Remove SRI enforcement from the site
+
+
+SRI turns out to be trouble for 3rd party services that update their JS-include-based API hooks often - e.g. Pontoon, Google Analytics, Optimizely. The hashes change without notice, and SRI's rejection of resources has the potential for major site breakage.
+Thought we needed SRI for security requirements, but can't find an email or bug mentioning it. So, since it seems more trouble than it's worth without better tooling (e.g. Issue #1121), let's remove it for now.

@@ -1,0 +1,8 @@
+Static RegExp properties have bizarre mutability properties on Firefox
+
+
+Original issue 520 created by erights on 2008-06-11T22:49:23.000Z:
+It just so happens that Firefox defines a mutable static RegExp.multiline
+property with bizarre behavior
+<http://www.devguru.com/Technologies/ecmascript/QuickRef/regexp.html#multiline>
+which we may need to work around even after we repair bug 519.

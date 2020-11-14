@@ -1,0 +1,21 @@
+Un expected behavior  of ng-submit , getting triggred on hitting enter in input field
+
+
+I'm submitting a ...
+
+[x ] Bug report from 1.7.6
+ regression from 1.7.0
+ security issue
+ issue caused by a new browser version
+ other 
+
+Current behavior:
+On clicking enter in the input field even when type="text"  ng-submit is getting triggred. It is not even the case of button tag without mentioning of type="button"
+Expected / new behavior:
+It should not submit form on clicking enter when enter is hit in input field.
+Minimal reproduction of the problem with instructions:
+code pen : https://codepen.io/rajathms/pen/zbqNXd
+Step to reproduce the bug:  click enter in any of the input field you will get alert saying "ng-submit triggered"
+AngularJS version:  1.7.6
+Angular Material version:  1.1.13
+Browser: all

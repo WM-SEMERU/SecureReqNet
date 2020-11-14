@@ -1,0 +1,5 @@
+ResetSendPing and ResetTimeout APIs Removed from SignalR HubConnection class
+
+
+The ResetSendPing and ResetTimeout APIs were removed from the SignalR's HubConnection API. These methods were originally intended only for internal use but were made public in 2.2. These API's will no longer be available starting in the 3.0 Preview 4 release.
+Use issue: aspnet/AspNetCore#8543 for discussion.

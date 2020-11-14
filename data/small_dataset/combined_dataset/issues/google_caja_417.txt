@@ -1,0 +1,9 @@
+Should deleteFieldEntirely() also delete own grant flag properties?
+
+
+Original issue 417 created by erights on 2008-06-09T01:30:23.000Z:
+deleteFieldEntirely() used to delete all the internal properties associated
+with a deleted Caja property. It now deletes only the fastpath flags,
+leaving the grant flags when these are different (grantSet and grantCall).
+Should these be deleted too? Probably. Do we currently have a security risk
+because they aren't? Probably.

@@ -1,0 +1,9 @@
+Lock a user's account after X unsuccessful login attempts
+
+
+Per #222 (comment)
+
+
+lock a user's account after "x" total unsuccessful consecutive login attempts. By moving to X consecutive failed logins instead of resetting the quota after 1 hour, we may thwart attempts for attackers to throttle login requests to stay under suspicion. A fine line between "security" and mass inconvenience.
+
+

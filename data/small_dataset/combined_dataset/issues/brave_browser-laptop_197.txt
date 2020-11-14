@@ -1,0 +1,5 @@
+Publish code signing keys and signatures
+
+
+We should publish our code signing keys and signatures so that anyone can independently verify them. See https://www.torproject.org/docs/verifying-signatures.html.en for an example of a project that does this.
+I also think it's a good idea to sign git tags.

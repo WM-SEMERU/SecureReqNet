@@ -1,0 +1,4 @@
+Added the docs for the VarExporter component
+
+
+Fixes #10230.

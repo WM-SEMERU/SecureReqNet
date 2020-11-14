@@ -1,0 +1,96 @@
+[Routing] Implement host per locale
+
+
+Description
+Be able to configure host per locale in the same way that we can configure prefix per locale.
+Thus we will be able to indicate that the
+
+url beginning with www.website.es matches the locale es (spanish)
+url beginning with www.website.be/nl/ matches the locale is nl_BE (dutch of BELGIUM)
+
+History
+Prefix/path per locale is possibe from Symfony 4.1. Development has been done in that PR.
+Vocabulary used
+In www.website.be/nl/offers/index.html :
+
+host:  www.website.be
+path-prefix: /nl (can be also named path/folder/directory/prefix)
+full-prefix: www.website.be/nl (host + path-prefix = full-prefix)
+
+Configuration
+Below are 2 examples of how to configure that, can we agree with one and how it will work ?
+
+Host + path-prefix in same configuration
+Set both the host and path-prefix (full-prefix) :
+
+site:
+    resource: '../src/Controller/'
+    prefix:
+        en: '/site'
+        es: '://www.website.es'
+        nl_BE: '://www.website.be/nl/'
+    type: annotation
+That above code without es: '://www.website.es' row and ://www.website.be is working in Symfony 4.1
+Note that we are using :// to be able to detect later that the configuration is using a full-prefix and not only a prefix-path.
+Questions:
+
+Must it begin with :// or //  ?
+Extract host from configuration :
+
+starts with ":// => it's a full-prefix (host + path-prefix)
+otherwise => it's only a path prefix
+in the really specific case that we want to have the following url possible  www.website.com/://www.website.com/site/index.html only specifying the path-prefix the conf will be
+
+
+
+[...]
+    prefix:
+        en: '/://www.website.com/site'
+
+Others solutions to detect that the conf starts with a host ?
+
+regex?
+the conf can only starts with
+
+"/" for a path-prefix
+"://" for a host or full-prefix
+otherwise, it throws a configuration error
+
+
+
+
+What happens when the host is also on the non locale level ? (Eg: @Route(host="www.website.com") or host: www.website.com)
+Should we rename prefix:?
+In the above configuration what happens if url starts with www.website.es/site ? Throws a configuration error ? Thus mixing configurations will be possible if there is no "host" only configuration.
+
+
+Host in separate configuration
+
+site:
+    resource: '../src/Controller/'
+    prefix:
+        en: '/site'
+        es: '/sitio'
+    host:
+        es: 'www.website.es'
+    type: annotation
+Questions:
+
+What happens when both the locale host and non locale host are set  ? Use the 1. locale host - 2. non locale host - 3. Throws an exception
+
+Quick code to implement the feature with 1) conf :
+YAMLFileLoader:197
+const URL_KEY = '://';
+//if the it starts with ://
+if (substr($localePrefix, 0, strlen(self::URL_KEY)) === self::URL_KEY) {
+  $posFirstSlash = strpos($localePrefix, '/', strlen(self::URL_KEY));
+  $localeHost = substr($localePrefix, strlen(self::URL_KEY), $posFirstSlash-strlen(self::URL_KEY));
+  $localePrefix = substr($localePrefix, $posFirstSlash);
+  $localizedRoute->setHost($localeHost);
+}
+Related with :
+
+#26143
+https://symfony.com/doc/current/routing/hostname_pattern.html
+https://github.com/remmel/JMSI18nRoutingBundle
+

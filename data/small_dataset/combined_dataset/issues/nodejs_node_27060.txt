@@ -1,0 +1,9 @@
+path: slightly improve normalize method
+
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ commit message follows commit guidelines
+

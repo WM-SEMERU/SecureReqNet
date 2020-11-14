@@ -1,0 +1,4 @@
+Remove select execution code from SQL planner
+
+
+#7373 changed SQL planning to eliminate the use of select queries for time-ordered SQL SELECTs.  This PR removes the code in the SQL planning that executes select queries.  It also removes the druid.sql.planner.selectThreshold config property which is no longer used.

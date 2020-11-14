@@ -1,0 +1,40 @@
+[4.1] AccessDeniedException in production log (dev log too)
+
+
+Symfony version(s) affected: 4.1
+Description
+When i try to access in security page, i have an exception critical in my log, this error critical don't exist in 4.0.x
+Trace :
+Uncaught PHP Exception Symfony\Component\Security\Core\Exception\AccessDeniedException: "Access Denied." at /var/www/demo-master/vendor/symfony/security/Http/Firewall/AccessListener.php line 68
+Hide context    Hide trace
+[▼
+  "exception" => AccessDeniedException {#316 ▶}
+]
+{▼
+  /var/www/demo-master/vendor/symfony/security/Http/Firewall/AccessListener.php:68 {▶}
+  /var/www/demo-master/vendor/symfony/security-bundle/Debug/WrappedListener.php:46 {▶}
+  /var/www/demo-master/vendor/symfony/security-bundle/Debug/TraceableFirewallListener.php:35 {▶}
+  /var/www/demo-master/vendor/symfony/security/Http/Firewall.php:61 {▶}
+  /var/www/demo-master/vendor/symfony/security-bundle/EventListener/FirewallListener.php:48 {▶}
+  Symfony\Bundle\SecurityBundle\EventListener\FirewallListener->onKernelRequest() {}
+  /var/www/demo-master/vendor/symfony/event-dispatcher/Debug/WrappedListener.php:104 {▶}
+  /var/www/demo-master/vendor/symfony/event-dispatcher/EventDispatcher.php:212 {▶}
+  /var/www/demo-master/vendor/symfony/event-dispatcher/EventDispatcher.php:44 {▶}
+  /var/www/demo-master/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php:141 {▶}
+  /var/www/demo-master/vendor/symfony/http-kernel/HttpKernel.php:125 {▶}
+  /var/www/demo-master/vendor/symfony/http-kernel/HttpKernel.php:66 {▶}
+  /var/www/demo-master/vendor/symfony/http-kernel/Kernel.php:188 {▶}
+  /var/www/demo-master/public/index.php:37 {▼
+    › $request = Request::createFromGlobals();
+    › $response = $kernel->handle($request);
+    › $response->send();
+    arguments: {▶}
+  }
+}
+
+How to reproduce
+Just clone symfony-demo and try to access in http://127.0.0.1:8000/fr/admin/post/
+go to the profiler and select the page 302 (@admin_index) you can see an exception & error critical in log.
+If i downgrade in 4.0.x, i don't have this critical error.
+Possible Solution
+For me access denied is not critical

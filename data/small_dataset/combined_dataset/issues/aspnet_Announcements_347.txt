@@ -1,0 +1,35 @@
+Microsoft.Interop.JSRuntime.Current has been removed
+
+
+In ASP.NET Core 3.0.0-preview3, we are removing the ability to access the Microsoft.Interop.IJSRuntime via the static JSRuntime.Current property. Application users may continue to access the IJSRuntime instance by injecting it in to their components. For example,
+Previously:
+// Stock.cshtml
+@functions {
+    
+    public override void OnInit()
+    {
+        StocksService.OnStockTickerUpdated += stockUpdate =>
+        {
+            JSRuntime.Current.InvokeAsync<object>(
+                "handleTickerChanged", stockUpdate.symbol, stockUpdate.price);
+        };
+    }
+}
+
+After 3.0.0-preview3,
+// Stock.cshtml
+@inject IJSRuntime JSRuntime
+
+@functions {
+    
+    public override void OnInit()
+    {
+        StocksService.OnStockTickerUpdated += stockUpdate =>
+        {
+            JSRuntime.InvokeAsync<object>(
+                "handleTickerChanged", stockUpdate.symbol, stockUpdate.price);
+        };
+    }
+}
+Related issue: aspnet/AspNetCore#6828
+Please use aspnet/AspNetCore#8117 for discussions.

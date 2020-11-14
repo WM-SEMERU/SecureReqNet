@@ -1,0 +1,4 @@
+Add `Access-Control-Allow-Credentials` to `validation.json` URLs
+
+
+In #11048, we added CORS headers to the validation.json URLs but it looks like Access-Control-Allow-Credentials is missing.

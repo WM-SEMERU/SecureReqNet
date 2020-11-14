@@ -1,0 +1,12 @@
+Support for Consul KV
+
+
+Perhaps this is already on the roadmap but it would nice to be able to use values from consul as metadata for a job as well as env variables this way configuration and such can be updated dynamically causing a restart of a job?
+perhaps allowing for something like this in the env section:
+env {
+  MY_CONFIG_OPTION="{{consul "myapp/config/option"}}"
+}
+
+This would tell nomad to fill that env variable in with the value from the consul path given.
+It would also be nice if after allocation it would watch that value for changes and restart the job accordingly.
+Please let me know if you think this is a good idea or should I be composing tool on top of nomad (consul-template) to accomplish this.

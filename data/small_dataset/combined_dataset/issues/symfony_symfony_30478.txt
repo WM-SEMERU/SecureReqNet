@@ -1,0 +1,44 @@
+make:entity --regenerate creates an inconsistent function
+
+
+Symfony 3.4.23
+I'm currently following a Symfony tutorial, and I've gotten to the part of Doctrine bidirectional relations (sorry if the terms I'm using are wrong, I'm not an native English speaker). My model is based on an Advert (One-To-Many) that displays an array of Applications (Many-To-One) made to this Advert. So an Application has to be linked to an Advert, hence the nullable false :
+class Application
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="applications")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $advert;
+
+    //
+}
+
+And I added an $applications attribute to my Advert class:
+class Advert
+{ 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="advert")
+     */
+    private $applications;
+
+    //
+}
+
+But when I use php bin/console make:entity --regenerate, to get the removeApplication() function, the code I'm getting is the following:
+public function removeApplication(Application $application): self
+{
+    if ($this->applications->contains($application)) {
+        $this->applications->removeElement($application);
+        // set the owning side to null (unless already changed)
+        if ($application->getAdvert() === $this) {
+            $application->setAdvert(null);
+        }
+    }
+
+    return $this;
+}
+
+The function sets the $advert of the Application to null while this attribute is explicitly set to nullable = false. I noticed this inconsistency because I'm using Symfony 3.4.23 whereas the tutorial I'm following is based on an older version, so the functions generated in the tutorial were much simpler and did not handle the $advert attribute.
+Any idea why this is happening and if it might cause an error later in my project? Let me know if you need more pieces of code to understand the problem.
+Original question: https://stackoverflow.com/questions/55006548/makeentity-regenerate-creates-an-incorrect-function/55017382#55017382

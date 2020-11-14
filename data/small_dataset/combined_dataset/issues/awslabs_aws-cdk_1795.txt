@@ -1,0 +1,5 @@
+Cleanse output of `cdk doctor` from known/probable credentials
+
+
+The output of cdk doctor will list all environment variables with a name starting with AWS_ as those might influence the workings of the application.
+We need to redact the values for the environment variables known to be used for credentials, as well as probably any environment variable name that looks passwords-y (contains "password", or "pass", or "passwd", for example).

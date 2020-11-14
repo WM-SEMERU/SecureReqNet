@@ -1,0 +1,5 @@
+Support for token revocation on SignOut in OAuthMiddleware
+
+
+To invalidate refresh tokens when the user signs out, it would be great if the OAuthMiddleware could support OAuth 2.0 Token Revocation (RFC 7005).
+Related to #1236, I'm interested to consider a PR to add this support.

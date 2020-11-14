@@ -1,0 +1,23 @@
+'At the moment we are using JSON artifacts to render security reports (SAST, DAST, Container Scanning, Dependency Scanning) and License Management Reports in the Frontend. Those reports contain fields that are rendered as links (`<a>`) and link attribute (`href`) is filled with unsanitized URLs and therefore prone to XSS attacks. See reports here:
+
+- https://gitlab.com/gitlab-org/gitlab-ce/issues/52411
+- https://gitlab.com/gitlab-org/gitlab-ce/issues/52418
+- https://gitlab.com/gitlab-org/gitlab-ce/issues/52417
+
+This issue is to provide a SSOT discussion for the problem solution.
+
+ - - -
+
+Relevant code links:
+- [ee/vue_shared/security_reports/components/modal.vue#L149-157](https://gitlab.com/gitlab-org/gitlab-ee/blob/42034ca939085ef2bb6d10355081ab5d7860d333/ee/app/assets/javascripts/vue_shared/security_reports/components/modal.vue#L149-157)
+- [ee/vue_shared/security_reports/components/modal.vue#L169-176](https://gitlab.com/gitlab-org/gitlab-ee/blob/42034ca939085ef2bb6d10355081ab5d7860d333/ee/app/assets/javascripts/vue_shared/security_reports/components/modal.vue#L169-176)
+- [ee/vue_shared/security_reports/components/modal.vue#L181-191](https://gitlab.com/gitlab-org/gitlab-ee/blob/42034ca939085ef2bb6d10355081ab5d7860d333/ee/app/assets/javascripts/vue_shared/security_reports/components/modal.vue#L181-191)
+- [ee/vue_shared/license_management/components/set_approval_status_modal.vue#L66-70](https://gitlab.com/gitlab-org/gitlab-ee/blob/42034ca939085ef2bb6d10355081ab5d7860d333/ee/app/assets/javascripts/vue_shared/license_management/components/set_approval_status_modal.vue#L66-70)
+
+ - - -
+
+Proposal:
+
+I would create a `<safe-link/>` Vue Component, which just allows `http` and `https` links. If the `href` attribute is safe, it will render the link as a `<a>`. If it is unsafe, it will just render the links text as a `<span>`.
+
+Future ~UX improvements could be a tooltip or something similar to explain to the user why the link.

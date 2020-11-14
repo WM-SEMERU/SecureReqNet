@@ -1,0 +1,4 @@
+Enable C++ compiler warning level 4
+
+
+We're using level 3, and there's a number of warnings in level 4 that are mandatory for compliance.

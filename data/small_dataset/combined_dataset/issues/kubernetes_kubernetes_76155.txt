@@ -1,0 +1,36 @@
+bootstrap kubernetes from private registry
+
+
+What happened:
+Can't pull images from private registry
+What you expected to happen:
+Kubernetes pull images from private registry
+How to reproduce it (as minimally and precisely as possible):
+
+kubeadm config images pull
+upload images to private registry
+bootstrap kubernetes from private registry
+init calico
+join node
+kubectl create secret generic regcred 
+--from-file=.dockerconfigjson=<path/to/.docker/config.json> 
+--type=kubernetes.io/dockerconfigjson
+pulling image "registry/images/pause:3.1": Error response from daemon: Get https://registry/v2/images/pause/manifests/3.1: denied: access forbidden
+
+Anything else we need to know?:
+gitlab registry
+docker pull = ok
+imagepullsecrets not work when added to sa (kube-proxy for example)
+trying kubectl create secret docker-registry regcred --docker-server= --docker-username= --docker-password= --docker-email= - nothing change
+imagepullsecrets not work when added to daemonset
+Environment:
+
+Kubernetes version (use kubectl version):
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:45:25Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+OS (e.g: cat /etc/os-release):
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+Kernel (e.g. uname -a): 3.10.0-957.10.1.el7.x86_64 #1 SMP Mon Mar 18 15:06:45 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+Install tools: kubeadm init --config
+

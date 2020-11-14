@@ -1,0 +1,11 @@
+URL Analytic problem  With  [Area]
+
+
+Action parameter  Analytic problem when the route is a [area] and the parameter  has the field name is area.
+Steps to reproduce the behavior:
+
+Using this version of ASP.NET Core '2.2'
+when a controller under a area,the route like  test.com/abc/test/save,the "abc" is area name
+if the [action]的parameter ,eg .   class  Address,contain a filed name Area
+then address.Area will be set to "abc",is a problem ,means i can't use name "Area" in any class filed define if the class  use to be a action parameter
+

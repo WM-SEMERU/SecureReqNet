@@ -1,0 +1,1 @@
+I've changed the notification status for one of my groups to watch but I'm not getting any notifications sent for any activity for the projects in the group.

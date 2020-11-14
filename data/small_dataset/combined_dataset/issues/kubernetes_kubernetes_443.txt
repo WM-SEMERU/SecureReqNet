@@ -1,0 +1,11 @@
+Allow actors against the apiserver to be authenticated and actions to be authorized
+
+
+It should be possible to control access to the Kubernetes API via some mechanism which is easily integrated into large organizations, as well as simple to configure for single administrators.  There are three related concepts - identity (who is acting), authentication (how does an API request get associated with an identity), and authorization (whether the action that is being taken with an identity in a context should be allowed).
+A few thoughts:
+
+The details of identity, authentication, and authorization can vary across environments.  For Kubernetes, it would make sense to ensure these concerns are separated from the primary resource APIs so that different deployments can provide their own solutions
+As a best practice, separating authentication from general API calls helps reduce the cost of integration.  This may suggest something like the use of OAuth2 tokens for the API, with custom authentication solutions integrating into the token acquisition flow.
+Allowing authorization to be restricted using scopes is important for machine integration and delegation of trust to 3rd parties - a monitoring program does not automatically need the authority to delete pods
+Proper auditing (important in many business domains) depends heavily on ensuring that an action taken can be traced to a specific identity, time and place of authentication, and the authorizations the identity was operating under.  While not necessarily a core resource, it should be easy for administrators to audit Kubernetes in the context of their larger structure.
+

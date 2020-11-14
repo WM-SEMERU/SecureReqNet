@@ -1,0 +1,28 @@
+[DX] A simple way to check if user is logged in and obtain logged in user
+
+
+Problem
+Checking if user is logged in is easy with:
+AuthorizationCheckerInterface::isGranted('IS_AUTHENTICATED_REMEMBERED');
+Unless you get Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException: The token storage contains no authentication token. One possible reason may be that there is no firewall configured for this URL
+This was reported in #16878 and reported is instructed to "So inject the token storage and check if token is available in your custom code."
+So it becomes:
+
+null === TokenStorageInterface::getToken() ? false : AuthorizationCheckerInterface::isGranted('IS_AUTHENTICATED_REMEMBERED');
+And it involves two dependencies.
+It's not much easier if you want to obtain current user:
+if (!$token = TokenStorageInterface->getToken()) {
+    return;
+}
+
+$user = $token->getUser();
+if (!is_object($user)) {
+    return;
+}
+
+return $user;
+And we can see this code on many places:
+
+https://github.com/Sylius/Sylius/blob/190a314d7e84d36093ec2736111dabc713c6b7bf/src/Sylius/Bundle/CoreBundle/Validator/Constraints/UniqueReviewerEmailValidator.php#L89-L98
+https://github.com/Sylius/Sylius/blob/190a314d7e84d36093ec2736111dabc713c6b7bf/src/Sylius/Bundle/CoreBundle/Context/CustomerContext.php#L49-L53
+

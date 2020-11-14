@@ -1,0 +1,13 @@
+wrong code on "How to create a custom Authentication Provider"
+
+
+Hi Guys.
+I've just seen an error on section "The Authentication Provider" of the chapter "How to create a custom Authentication Provider"
+Specifically in the WsseProvider's validateDigest method. There is a mistake because it validates that the nonce is unique within 5 minutes with a wrong calculus.
+It check this:
+file_get_contents($this->cacheDir.'/'.$nonce) + 300 > time()
+when it should check this one:
+(time() - file_get_contents($this->cacheDir . '/' . $nonce) ) > 300
+The first option only works with a specific nonce a single time while the second works with that nonce during 5 minutes (what is expected).
+I hope have explained the error correctly, it is a little late and I fall asleep.
+Regards.

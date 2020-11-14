@@ -1,0 +1,89 @@
+'This issue contains part one (back-end items) to implement customer-facing interactive web terminals, which will happen in https://gitlab.com/gitlab-org/gitlab-ce/issues/56073. Please see that issue for details other than the first part of the implementation plan.
+
+### Implementation Plan
+
+See also https://gitlab.com/gitlab-org/gitlab-ce/issues/56073 for steps 6-8, where the feature is turned on in gitlab.com.
+
+#### 1. Create a new runner manager 
+
+Create a new private runner manager `private-runners-manager-5.gitlab.com` either under `gitlab-runner-prm-gce-us-east1-c` or `gitlab-runner-prm-gce-us-east1-d` which will be used for initial testing for the web terminals, with this we will not interupt the current runner managers if we find performance/securirty issues and we can isolate any problems we might encounter.
+
+- The runner will the same executor `docker+machince` the only difference between `private-runners-manager-5.gitlab.com` & `private-runners-manager-4/3.gitlab.com` would be the [`[session_server]`](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#the-session_server-section) section.
+- This specific runner will be managed by Chef using https://ops.gitlab.net/gitlab-cookbooks/chef-repo creating a new role `gitlab-runner-prm5.json` where it will override the configuration to for the `[session_server]` section.
+- The runner will have the following extra configuration
+    ```diff 
+    concurrent = 300
+    check_interval = 4
+    metrics_server = "0.0.0.0:9402"
+    sentry_dsn = "***"
+    + [session_server]
+    +   listen_address = "0.0.0.0:8093" # <- This is where the runner will bind the server
+    +   advertise_address = IP:PORT # <- This the address that will be sent to GitLab.com that will be used to contact the runner and create the websocket tunnel. Ideally this is just the IP of the machine with the same port as the `listen_address`
+    ```
+**Questions:**
+- Will the runner logs are automatically picked up or is there any configuration needed there. (infrastructure)
+- For the value of `advertise_address` is it simply taking the IP of the machine? Is there some load balancing that needs to be done? (infrastructure)
+
+**Requirements/Stakeholders:**
+- ~Verify  Someone with access to create a new runner
+- **SRE**  Someone with GCP access to create a new box and expose the IP adress
+
+#### 2. Register a new runner with GitLab.com
+
+A new runner will be registered for the `gitlab-org` group same as the other private runner managers. The runner should be [tagged](https://docs.gitlab.com/ee/ci/runners/#using-tags) and only [pick up jobs with tags](https://docs.gitlab.com/ee/ci/runners/#preventing-runners-with-tags-from-picking-jobs-without-tags). This runner can be used for both the web terminal inside of the web IDE to start off with. 
+
+- The runner should have the following tags:
+  - `interactive-web-terminal`
+  - `gitlab-org`
+
+**Requirements/Stakeholders:**
+- **SRE/~Verify** Need help from a GitLab.com admin to add the runner.
+
+#### 3. Start using it for web ide on `https://gitlab.com/gitlab-org/gitlab-ee`
+
+Configure the web ide to use `private-runners-manager-5.gitlab.com` by specifying tags the tags mentioned in step 2. An example of the web ide configuration can be found below
+
+```yaml
+terminal:
+  image: ruby:2.5
+  script: sleep 1800
+  tags:
+    - interactive-web-terminal
+    - gitlab-org
+```
+
+The terminal will only be available for 30min at a time to start off with, we can increase this as we go further along with this.
+
+*NOTE: Instead of using `gitlab-ee` we could just use `gitlab-ce` it would just be at a wider audience. If we decide to just go with `gitlab-ee` we need to backport it to `gitlab-ce`.*
+
+**Requirements/Stakeholders:**
+- ~Verify will execute the following steps.
+
+#### 4. Monitor
+
+The reason monitoring is the 4th step and not the first or second is because we still don't know if there are any major blockers or security concerns that would radically change how terminals work.
+
+- We need to start monitoring WebSocket connections. This can be done either at an HA proxy level or at a workhorse level and adding it to grafana. 
+- Track the runner logs, specifically `private-runners-manager-5.gitlab.com` checking how many errors do we get, what are the errors and do a weekly report of the state of things.
+- Use https://dashboards.gitlab.net/d/000000159/ci?refresh=5m&orgId=1 (internal link only) to monitor runner managers resources.
+- Create something similar to `/debug/jobs/list?v=2` or append to `/metrics` to add the following data:
+  - Available terminals
+  - Active terminals
+
+  With this data we can create a new graph which specifies how many available terminals are available and how much are active
+  **Note:** *This has not been implemented yet and needs to be discussed if we need something like this*
+
+**Requirements/Stakeholders:**
+- **SRE&~Verify**: Help/Mentoring from the infrastructure team is needed to creating the needed monitoring @dawsmith would appreciate the help :pray: 
+
+#### 5. Security concerns
+
+We should consider checking if there are any security concerns since this is exposing the `gitlab-runner` component to the outside world. 
+
+**Main Concerns:**
+- Exposing `gitlab-runner` IP to GitLab.com
+- The user will have access to the docker container, on a root level. Since it's using `docker+machince` executor and the user escapes from the container he will be in the provisioned machine and not in the runner manager VM.
+
+**Requirements/Stakeholders:**
+- **Security&~Verify** Help/Mentoring from the security team is needed to evaluate this @kathyw would appreciate the help :pray:
+

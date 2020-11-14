@@ -1,0 +1,4 @@
+Content Security Policy
+
+
+fixes #270

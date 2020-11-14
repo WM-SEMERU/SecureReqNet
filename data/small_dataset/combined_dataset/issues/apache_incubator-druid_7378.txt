@@ -1,0 +1,18 @@
+Task killed by Overlord because it is not responding to Pause
+
+
+Tasks are being killed by overlord because peon is not responding to pause. Here are the logs (running druid-12.2-rc3)
+2019-03-26T17:37:52,197 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT2S]
+2019-03-26T17:38:06,086 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT4S]
+2019-03-26T17:38:17,907 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT8S]
+2019-03-26T17:38:31,488 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT10S]
+2019-03-26T17:38:47,043 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT10S]
+2019-03-26T17:39:07,162 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT10S]
+2019-03-26T17:39:23,724 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT10S]
+2019-03-26T17:39:40,749 INFO [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Still waiting for task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] to pause; will try again in [PT10S]
+
+After the pause is unsuccessful the supervisor kills the task
+2019-03-26T17:39:59,213 ERROR [KafkaIndexTaskClient-crash_kafka-2] io.druid.indexing.kafka.KafkaIndexTaskClient - Task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] failed to pause, aborting
+2019-03-26T17:39:59,214 WARN [KafkaSupervisor-crash_kafka-Worker-31] io.druid.indexing.kafka.supervisor.KafkaSupervisor - Task [index_kafka_crash_kafka_26413ac1d0cf193_paphciek] failed to respond to [pause] in a timely manner, killing task
+
+Haven't gotten a chance to investigate why pause is unsuccessful.

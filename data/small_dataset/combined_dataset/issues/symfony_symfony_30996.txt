@@ -1,0 +1,58 @@
+default_locale not passed to UrlGenerator
+
+
+Symfony version(s) affected: >=4.1
+Description
+Symfony 4.1 introduced Internationalized routing.
+After defining a route with multiple locale I tried to generate a url with a command and got the following error:
+Unable to generate a URL for the named route "locale" as such route does not exist.
+
+The route:
+    /**
+     * @Route({
+     *    "en": "/locale",
+     *    "hr": "/lokalno"
+     * }, name="locale")
+     */
+The code that generates the url:
+$this->router->generate('locale');
+After some playing around I realized that I need to explicitly set the locale in order for the url to be generated, which was strange since I had the framework.default_locale set to hr.
+// This works
+$this->router->generate('locale.hr');
+I did a little digging and noticed that the UrlGenerator class has a $defaultLocale parameter and the following code:
+$locale = $parameters['_locale']
+    ?? $this->context->getParameter('_locale')
+    ?: $this->defaultLocale;
+The problem is that the $defaultLocale parameter is never set when the class is instantiated. I would expect the framework.default_locale parameter to be passed here.
+How to reproduce
+# framework.yaml
+framework:
+    default_locale: hr
+// Controller
+class LocaleController extends AbstractController
+{
+    /**
+     * @Route({
+     *    "en": "/locale",
+     *    "hr": "/lokalno"
+     * }, name="locale")
+     */
+    public function index()
+    {
+        // ...
+    }
+}
+// Command
+class LocaleCommand extends Command
+{
+    protected static $defaultName = 'app:locale';
+
+    // ...
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln($this->router->generate('locale'));
+    }
+}
+Possible Solution
+A possible solution would be to override the way the UrlGenerator class is instantiated in the FrameworkBundle Router class and pass the framework.default_locale as the $defaultLocale parameter.

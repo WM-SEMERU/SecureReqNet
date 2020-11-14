@@ -1,0 +1,18 @@
+change deprecated Kubelet --allow-privileged flag default to true
+
+
+This enables a smooth transition to PSP. Today, users would have to
+manually set --allow-privileged to true before transitioning to PSP,
+which isn't a smooth deprecation path for the flag (we want people
+to stop setting it). This PR makes the default behavior isomorphic
+with what will happen after the flag is removed.
+Defaulting --allow-privileged to true should be safe, because it simply
+allows a superset of Pods to run (all workloads continue to work).
+WRT #58010 (comment)
+the --allow-privileged flag is effectively useless for security, so this
+shouldn't be a concern from that perspective.
+I also bumped the deprecation timeline in the comment to 1.13.0, so that
+we give people the full period of time to stop setting
+--allow-privileged, now that the behavior makes it possible to do so.
+The Kubelet's deprecated --allow-privileged flag now defaults to true. This enables users to stop setting --allow-privileged in order to transition to PodSecurityPolicy. Previously, users had to continue setting --allow-privileged, because the default was false.
+

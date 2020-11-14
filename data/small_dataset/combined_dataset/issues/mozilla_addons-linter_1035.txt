@@ -1,0 +1,7 @@
+Library blacklist blocks valid submissions
+
+
+The new library blacklist is currently preventing me from submitting new versions of my featured add-on Decentraleyes. It wrongly suspects that the add-on actively uses several libraries that are known to suffer from security vulnerabilities. It's a CDN emulator, and does not internally rely on said libraries.
+While I expect there to be certain measures in place to prevent add-ons from using unsafe libraries, the current implementation effectively kills my extension. There should be a way to bypass this check (e.g. by providing an explanation on submission, or by requesting specific add-ons to be whitelisted).
+
+A screenshot of the AMO "Add a new Version" panel.

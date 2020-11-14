@@ -1,0 +1,13 @@
+# Issue 
+
+![image](/uploads/7fe7623040c61973a0658e185df20bd0/image.png)
+
+I noticed that after clicking on the trash icon to delete a repository project mirror, the database entry isn't actually deleted. It looks like the update request just sets the `enabled` flag to `false`:
+
+```json
+project: {remote_mirrors_attributes: {id: 3, enabled: 0}}
+```
+
+This is a security issue because the credentials are present in the `remote_mirrors_attributes`.
+
+/cc: @lbennett

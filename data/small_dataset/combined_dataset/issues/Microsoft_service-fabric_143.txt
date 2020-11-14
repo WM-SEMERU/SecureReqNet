@@ -1,0 +1,16 @@
+Unable to create a SF cluster with certificate in KeyVault
+
+
+
+Create a cluster via SF creation dialog in Portal or using PowerShell.
+Make it protected: specify a ceritifcate in parameters.json or in portal by referencing your KeyVault ceritificate.
+
+e.g.
+sourceVaultValue -  "/subscriptions/XXX/resourceGroups/XXX/providers/Microsoft.KeyVault/vaults/xxxKeyVault"
+certificateUrlValue - "https://xxx.vault.azure.net/certificates/xxx/thumbprint"
+SF deployment will fail with  certificateUrlValue is not a valid versioned Key Vault Secret URL.
+AFAIK it was possible to load certificates in secrets some time ago, now this feature is obsolete and we have to load certificates in "Certificates" section of a KeyVault.
+This section generates URL with "certificates" segment in the URL, while Azure validation asks for "secrets" segment.  As a result deployment fails.
+Solution
+So if I simply replace "certificates" with "secrets" it works and deploys fine.
+Still it's not obvious and definitely an issue.

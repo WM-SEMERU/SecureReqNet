@@ -1,0 +1,16 @@
+dotnet watch run does not listen to Razor file change events on disk
+
+
+Describe the bug
+Changing Razor files in a project does not result in dotnet watch run re-triggering run.
+To Reproduce
+Steps to reproduce the behavior:
+
+Open VSCode
+Open a ASP.NET Core web project
+In the terminal window type dotnet watch run, wait for it to boot
+Change a .cshtml or .razor file
+See dotnet watch run not do anything
+
+Expected behavior
+Server is rebooted.

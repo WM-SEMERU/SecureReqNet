@@ -1,0 +1,5 @@
+[master] Update certificate for SignalR Java client
+
+
+There's a matching change coming for 2.2 (it's a different change so it's not a simple merge forward). 2.1 is not affected since SignalR didn't ship there.
+Part of aspnet/AspNetCore-Internal#2109

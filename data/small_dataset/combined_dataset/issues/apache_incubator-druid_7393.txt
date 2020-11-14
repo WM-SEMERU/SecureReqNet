@@ -1,0 +1,5 @@
+Add concurrency documentation to MetadataSegmentView
+
+
+MetadataSegmentView lacks concurrency documentation.
+FYI @surekhasaharan

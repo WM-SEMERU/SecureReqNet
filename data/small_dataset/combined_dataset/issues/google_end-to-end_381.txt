@@ -1,0 +1,35 @@
+Build: warnings building with closure-templates
+
+
+$ ./do.sh build_extension
+All dependencies met.
+All dependencies met.
+Compiling Soy templates...
+Done.
+Using previous template build. Run ./do.sh clean if you want to rebuild the templates.
+Building End-To-End extension to build/extension
+Compiling JS files...
+.lib/closure-templates-compiler/soyutils_usegoog.js:1701: WARNING - Property insertWordBreaks of type goog.format has been deprecated: Prefer wrapping with CSS white-space: pre-wrap.
+  var result = goog.format.insertWordBreaks(
+               ^
+
+0 error(s), 1 warning(s), 98.7% typed
+..lib/closure-templates-compiler/soyutils_usegoog.js:1701: WARNING - Property insertWordBreaks of type goog.format has been deprecated: Prefer wrapping with CSS white-space: pre-wrap.
+  var result = goog.format.insertWordBreaks(
+               ^
+
+0 error(s), 1 warning(s), 98.8% typed
+.lib/closure-templates-compiler/soyutils_usegoog.js:1701: WARNING - Property insertWordBreaks of type goog.format has been deprecated: Prefer wrapping with CSS white-space: pre-wrap.
+  var result = goog.format.insertWordBreaks(
+               ^
+
+0 error(s), 1 warning(s), 98.8% typed
+.lib/closure-templates-compiler/soyutils_usegoog.js:1701: WARNING - Property insertWordBreaks of type goog.format has been deprecated: Prefer wrapping with CSS white-space: pre-wrap.
+  var result = goog.format.insertWordBreaks(
+               ^
+
+0 error(s), 1 warning(s), 98.8% typed
+Compiling CSS files...
+Copying extension files...
+Done.
+

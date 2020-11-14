@@ -1,0 +1,4 @@
+Documentation for hosting caja server
+
+
+I am trying to make guest pages able to include external scripts, however this does not work using the "https://caja.appspot.com", however this does not allow external scripts. How can I run my own caja server, is there any documentation?

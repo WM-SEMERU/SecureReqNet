@@ -1,0 +1,4 @@
+Documented the local Symfony server
+
+
+This merges #11207 in 3.4 (it was wrongly merged in 4.2).

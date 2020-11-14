@@ -1,0 +1,7 @@
+Summary: UI Feature request to have a bubble offering the overview of each project listed in the "personal projects column" of the user front page, avoiding to have to click on the project to know what its description is.
+
+Steps to reproduce: move your mouse above the name of a project listed in the "personal projects column" of the user front page. Currently the color just turns blue, which is nice but does not offer added value for the user
+
+Expected behavior: moving above the name of a project, a bubble could offer the description of the project, avoiding to have to click on the project to know what its description is.
+
+![personal-projects-list](https://gitlab.com/uploads/gitlab-org/gitlab-ce/96bd717256/personal-projects-list.png)

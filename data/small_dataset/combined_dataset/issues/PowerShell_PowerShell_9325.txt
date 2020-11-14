@@ -1,0 +1,12 @@
+PowerShell should set its CWD on *nix
+
+
+Discussing this with @TylerLeonhardt.
+A number of applications and utilities use the process CWD information provided by the OS to do useful things. For example iTerm2 can follow your shell session's CWD in the title.
+I feel like there has been discussion of this before but can't provide it anywhere, so opening an issue.
+My proposal is:
+
+PowerShell has multiple runspaces, each of which can be in a different location at the same time
+Therefore PowerShell should expose its CWD as the location of runspace 1, since this is very likely to be the interactive runspace
+This should be available as a simple API internally that is a no-op on other runspaces, and it should be executed beside whatever changes PowerShell's own concept of CWD.
+

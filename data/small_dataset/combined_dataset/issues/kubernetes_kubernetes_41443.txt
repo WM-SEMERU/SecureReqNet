@@ -1,0 +1,5 @@
+Log initiating user with request in kubelet for auditing purposes
+
+
+Requests are logged into the Kubelet log, but they don't currently include any identifying information. Simply identifying the authenticated user won't be particularly useful since it will all come through the apiserver. Rather, we want to log the user that initially sent the request to the apiserver, which was then forwarded to the kubelet. I believe acting-as attributes fill these requirements in the request, but I'm not sure whether that is currently enabled for apiserver -> kubelet requests.
+/cc @liggitt @kubernetes/sig-auth-feature-requests @enisoc

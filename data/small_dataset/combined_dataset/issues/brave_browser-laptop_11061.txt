@@ -1,0 +1,7 @@
+replace moment with date-fns for date helpers
+
+
+Test plan
+#11062 (comment)
+
+Initially, the plan was to reduce bundle cost given moment is enourmous. However after reading this and looking at this this killed two birds with one stone.

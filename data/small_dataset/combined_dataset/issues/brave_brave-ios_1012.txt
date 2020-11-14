@@ -1,0 +1,5 @@
+Add Setting Item to Share Brave
+
+
+Description:
+Add the ability to share Brave in the settings

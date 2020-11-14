@@ -1,0 +1,6 @@
+"auto" mode for "remember_me.secure"
+
+
+Description
+This is a follow-up to #28244, in which @nicolas-grekas added an "auto" mode for framework.session.cookie_secure. A tiny but great feature by the way. 😄
+IMHO it would make sense to add an "auto" mode for security.firewalls.*.remember_me.secure as well, wouldn't it? Or just make the remember me cookie secure automatically if the session cookie is?

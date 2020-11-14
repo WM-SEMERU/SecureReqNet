@@ -1,0 +1,16 @@
+CloudStack management java.security.ciphers has no effect on JVM process
+
+
+The /etc/cloudstack/management/java.security.ciphers has no effect on the list of disabled TLS algorithms in the management server JVM process. For example, on port 8250 TLS1.0, 1.1 are still allowed/supported protocols. (Tested using openssl s_client -connect localhost:8250 -tls1)
+However, workaround exists to configure jdk.tls.disabledAlgorithms in the global security file: $JRE_HOME/lib/security/java.security.
+ISSUE TYPE
+
+Bug Report
+
+COMPONENT NAME
+Management Server
+
+CLOUDSTACK VERSION
+4.11
+
+CONFIGURATION

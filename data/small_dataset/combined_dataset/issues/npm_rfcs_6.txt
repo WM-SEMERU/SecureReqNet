@@ -1,0 +1,6 @@
+Drop in replacements
+
+
+I apologize if this is a little disorganized/eclectic. Still working through how this all fits in with npm. Stripped out a large portion of the original doc I had written after hearing there is a WIP on an rfcs for deep aliasing, and didn't want to duplicate that effort.
+This rfcs is about marking a package as being a viable candidate for both aliasing and/or deep-aliasing for another package.
+Should this get accepted, being able to search for packages in lieu of another package, regardless of depth, should become pretty easy.

@@ -1,0 +1,9 @@
+We have a few endpoints that return HTML that should be returning JSON instead. With JSON we can prevent XSS because we won't need to render the given HTML and we can also uniform and keep some components as a SSOT (for Vue cases where we use Vue + HAML)
+
+|endpoint|effort level||
+|--|--|--|
+|`/jobs/{id}/trace.json?`|high|PoC: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/12791|
+|`/pipelines/{id}/stage.json`|low|We already have this in Vue in some cases|
+|||
+
+cc @ayufan

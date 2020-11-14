@@ -1,0 +1,8 @@
+Hi!
+I've upgrader my GitLab to 6.8 version. But since the upgrade, the default no_avatar image does not display.
+After somes research, the image called is /assets/no_avatar.png
+But in my assets folder, the image is no_avatar-1af60455b82013dc3c9d9079cb021d47.png
+
+So i've an 404 error from nginx.
+
+Thanks!

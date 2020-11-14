@@ -1,0 +1,4 @@
+[hackerone] #441746 - Blank address bar
+
+
+https://hackerone.com/reports/441746

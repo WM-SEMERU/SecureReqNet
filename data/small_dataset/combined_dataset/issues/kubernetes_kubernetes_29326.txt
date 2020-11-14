@@ -1,0 +1,4 @@
+Pods should not be able to mount arbitrary host volumes
+
+
+Kubernetes administrators should be able to constrain through policies which (if any) host volumes are mountable by a pod.  Otherwise, pods can obtain access to sensitive data on the host (certificates and so forth) that an administrator might not want them to have access to.

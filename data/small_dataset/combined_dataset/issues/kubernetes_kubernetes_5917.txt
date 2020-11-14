@@ -1,0 +1,12 @@
+Move kube-proxy to use authed-port instead of readonly-port.
+
+
+Want to retire readonly port.  Also wanted by GKE.
+
+In cluster/saltbase/salt/kube-proxy/default change --master=http://" + grains.api_servers + ":7080 to --master=https://" + grains.api_servers + ":6443, etc
+add a line like fs.StringVar(&s.AuthPath, "auth_path", s.AuthPath, "Path to .kubernetes_auth file, specifying how to authenticate to API server.") to proxy command.
+add a line like cmd/kubelet/app/server.go:236: authInfo, err := clientauth.LoadFromFile(s.AuthPath) to proxy cmd.`.
+set {% set auth_path = "--auth_path=/var/lib/kubelet/kubernetes_auth" -%}
+e2e test it.
+
+Bonus: fix other distros.

@@ -1,0 +1,6 @@
+Fix set origin and destination
+
+
+Fixes #378
+Fix setOrigin and setDestination replacing beginning and end positions instead of adding them.
+👀 @cammace @zugaldia

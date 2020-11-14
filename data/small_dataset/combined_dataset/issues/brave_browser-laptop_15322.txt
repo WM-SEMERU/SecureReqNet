@@ -1,0 +1,38 @@
+Brave repository access denied after refresh
+
+
+I followed the updated instructions for adding the repository to my openSUSE Leap 42.3 system as described here:
+https://github.com/brave/browser-laptop/blob/master/docs/linuxInstall.md#opensuse-amd64
+After adding the repository with
+sudo zypper addrepo --type yast2 https://s3-us-west-2.amazonaws.com/brave-rpm-release/x86_64/ brave-rpm-release
+The repository is marked as a yast2 type repo
+#  | Alias                               | Name                                              | Enabled | GPG Check | Refresh | Type  
+---+-------------------------------------+---------------------------------------------------+---------+-----------+---------+-------
+3  | brave-rpm-release                   | brave-rpm-release                                 | Yes     | ( p) Yes  | No      | yast2
+
+After running zypper refresh, the type changes to rpm-md, and then no longer works.
+Warning: File 'repomd.xml' from repository 'brave-rpm-release' is unsigned.
+
+    Note: Signing data enables the recipient to verify that no modifications occurred after the data
+    were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system
+    and in extreme cases even to a system compromise.
+
+    Note: File 'repomd.xml' is the repositories master index file. It ensures the integrity of the
+    whole repo.
+
+    Warning: We can't verify that no one meddled with this file, so it might not be trustworthy
+    anymore! You should not continue unless you know it's safe.
+
+File 'repomd.xml' from repository 'brave-rpm-release' is unsigned, continue? [yes/no] (no): yes
+Retrieving repository 'brave-rpm-release' metadata ...........................................................................................[done]
+Building repository 'brave-rpm-release' cache ................................................................................................[done]
+
+Here is the listing immediately after zypper refresh
+#  | Alias                               | Name                                              | Enabled | GPG Check | Refresh | Type  
+---+-------------------------------------+---------------------------------------------------+---------+-----------+---------+-------
+3  | brave-rpm-release                   | brave-rpm-release                                 | Yes     | ( p) Yes  | No      | rpm-md
+
+and what happens after you do a refresh again
+Permission to access 'https://s3-us-west-2.amazonaws.com/brave-rpm-release/x86_64/media.1/media' denied.
+Abort, retry, ignore? [a/r/i/...? shows all options] (a): 
+

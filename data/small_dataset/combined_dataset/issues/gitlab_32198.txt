@@ -1,0 +1,151 @@
+'### Summary
+
+Disabling OAuth sign-in in Admin settings should never allow a user to login using their OAuth account.
+
+### Steps to reproduce
+
+1. Enable GitHub integration (http://docs.gitlab.com/ce/integration/github.html)
+2. Configure LDAP connection (might work with normal accounts as well, but tested with an LDAP login)
+3. Disable GitHub OAuth Sign-in under Sign-In Restrictions on the Admin settings page
+4. Logon to an LDAP account and connect it to your GitHub account
+5. Logout of the GitLab installation and ensure you are also logged out of GitHub.
+6. Bring up the login page and edit the form definition so that it posts back to "/users/auth/github" instead of ldapmain: `
+<form id="new_ldap_user" class="gl-show-field-errors" action="/users/auth/github" accept-charset="UTF-8" method="post">
+</form>`
+7. Enter any values into the username and password field for the ldap credentials and click sign in.
+8. If you are logged into GitHub you will be logged in without any more prompts.  If you aren't logged into GitHub you will be prompted to logon and when you do you will be given access.
+
+### What is the current *bug* behavior?
+
+I am either logged into GitLab using my provided GitHub credentials, or if already logged into GitHub I'm logged into the associated account.
+
+### What is the expected *correct* behavior?
+
+Login should not be allowed.
+
+### Relevant logs and/or screenshots
+
+Confirmation that sign-in to GitHub is disabled:
+
+![github-login-disabled](/uploads/f45760076ef0610ae38976e5ce0b4fa4/github-login-disabled.png)
+
+Changed html before posting (also shows that the OAuth logins are actually disabled as no icons below the login form):
+
+![change-form-action](/uploads/4244490c03a93f1dbf9736fc242982bb/change-form-action.png)
+
+Confirmation that the login happened by GitHub:
+
+![logged-in-via-github](/uploads/52665d7316fc23bac75cbf0a4866749a/logged-in-via-github.png)
+
+
+### Output of checks
+
+Very minor change for LDAP logons and support for MySQL are the only differences with the main omnibus gitlab installation.  Built from fork at https://gitlab.com/stevenorman/gitlab-ce
+
+```
+~ $ sudo gitlab-rake gitlab:env:info
+[sudo] password for stevenorman:
+
+System information
+System:
+Current User:   git
+Using RVM:      no
+Ruby Version:   2.3.3p222
+Gem Version:    2.6.6
+Bundler Version:1.13.7
+Rake Version:   10.5.0
+Redis Version:  3.2.5
+Git Version:    2.11.1
+Sidekiq Version:4.2.7
+
+GitLab information
+Version:        9.1.3-TR
+Revision:       17da30c
+Directory:      /opt/gitlab/embedded/service/gitlab-rails
+DB Adapter:     mysql2
+URL:            https://git.<snip>.com
+HTTP Clone URL: https://git.<snip>.com/some-group/some-project.git
+SSH Clone URL:  git@git.<snip>.com:some-group/some-project.git
+Using LDAP:     yes
+Using Omniauth: yes
+Omniauth Providers: github
+
+GitLab Shell
+Version:        5.0.2
+Repository storage paths:
+- default:      /<snip>/git-data/repositories
+Hooks:          /opt/gitlab/embedded/service/gitlab-shell/hooks
+Git:            /opt/gitlab/embedded/bin/git
+```
+
+#### Results of GitLab application Check
+
+```
+Checking GitLab Shell ...
+
+GitLab Shell version >= 5.0.2 ? ... OK (5.0.2)
+Repo base directory exists?
+default... yes
+Repo storage directories are symlinks?
+default... no
+Repo paths owned by git:git?
+default... yes
+Repo paths access is drwxrws---?
+default... yes
+hooks directories in repos are links: ...
+<snip> all projects yes or empty
+Running /opt/gitlab/embedded/service/gitlab-shell/bin/check
+Check GitLab API access: OK
+Access to /var/opt/gitlab/.ssh/authorized_keys: OK
+Send ping to redis server: OK
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking Reply by email ...
+
+Reply by email is disabled in config/gitlab.yml
+
+Checking Reply by email ... Finished
+
+Checking LDAP ...
+
+Server: ldapmain
+LDAP authentication... Success
+<snip> user list
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Git configured with autocrlf=input? ... yes
+Database config exists? ... yes
+All migrations up? ... yes
+Database contains orphaned GroupMembers? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Uploads directory setup correctly? ... yes
+Init script exists? ... skipped (omnibus-gitlab has no init script)
+Init script up-to-date? ... skipped (omnibus-gitlab has no init script)
+projects have namespace: ...
+<snip> all yes
+Redis version >= 2.8.0? ... yes
+Ruby version >= 2.1.0 ? ... yes (2.3.3)
+Your git bin path is "/opt/gitlab/embedded/bin/git"
+Git version >= 2.7.3 ? ... yes (2.11.1)
+Active users: 758
+
+Checking GitLab ... Finished
+```
+
+### Possible fixes
+
+Route for GitHub logins (and probably other OAuth providers) should be checking for the relevant application setting.

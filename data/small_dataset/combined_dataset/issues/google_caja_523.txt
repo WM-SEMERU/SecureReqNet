@@ -1,0 +1,9 @@
+accesskey attribute probably shouldn't be whitelisted
+
+
+Original issue 523 created by felix8a on 2008-06-11T23:07:39.000Z:
+html4-attributes-whitelist.json
+whitelists a:accesskey, etc.
+I think it's unlikely that any container would want to allow that,
+since a gadget could interfere with the container's accesskeys,
+and there isn't a way to negotiate accesskeys for multiple gadgets on a page.

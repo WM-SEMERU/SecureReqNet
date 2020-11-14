@@ -1,0 +1,4 @@
+I using this feature for a long time, but I never receive any message from notification center.
+I trace the source code and hipchat gem, I found current source code didn't add `notify: true` options to trigger hipchat client popup any message to the system.
+
+So I hope gitlab can add options to the service config page, and let user choose tirgger popup message or not.

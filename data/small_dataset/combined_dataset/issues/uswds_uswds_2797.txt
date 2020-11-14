@@ -1,0 +1,4 @@
+Address any vulnerabilities associated with mem@1.1.0
+
+
+We're seeing Snyk notifications around USWDS and mem@1.1.0. I'm confident that this is not a realistic vulnerability, but it would be nice if it were not a red flag at all. Can we update our use of mem?

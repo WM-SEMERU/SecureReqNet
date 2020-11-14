@@ -1,0 +1,24 @@
+Installing symfony/stopwatch overrides custom event dispatcher service definition
+
+
+Symfony version(s) affected: 4.2.2
+Description
+Installing the Symfony Stopwatch component overwrites a custom-defined Event Dispatcher.
+How to reproduce
+We have a custom event dispatcher that was working fine, and defined like so:
+    event_dispatcher:
+        class: App\Domain\Common\Components\EventDispatcher\EventDispatcher
+        public: true
+    App\Domain\Common\Components\EventDispatcher\EventDispatcherInterface: '@event_dispatcher'
+Our EventDispatcherInterface extends Symfony\Component\EventDispatcher\EventDispatcherInterface.
+After installing the stopwatch component, ./bin/console debug:container event_dispatcher confirms that event_dispatcher no longer points to our implementation, but another one:
+  Service ID       debug.event_dispatcher
+  Class            Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher
+  Tags             monolog.logger (channel: event)
+
+If I remove the stopwatch component, our custom dispatcher is correctly registered:
+  Service ID       event_dispatcher
+  Class            App\Domain\Common\Components\EventDispatcher\EventDispatcher
+  Tags             -
+
+I am not sure where Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher is being registered, but it should not overwrite what we have defined in our services.yaml file.

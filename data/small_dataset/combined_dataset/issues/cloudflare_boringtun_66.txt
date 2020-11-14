@@ -1,0 +1,4 @@
+Use make_array where appropriate
+
+
+Fixes #42

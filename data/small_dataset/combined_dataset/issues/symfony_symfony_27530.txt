@@ -1,0 +1,16 @@
+Add Route Access Control
+
+
+Can we add the "isGranted" method that comes with "FrameworkExtraBundle" to the route? We can use the Flex Yada Composer to secure the packages installed. Adding with Access_Control is laborious and inflexible. It can be useful for dynamically loaded routes.
+admin_account_list:
+    path:       /accounts
+    controller: Example\ExampleBundle\AccountController::list
+    methods: [GET, POST]
+    isGranted: [ROLE_ADMIN, ROLE_EDITOR, ROLE_VIEWER] // New Features
+
+admin_account_edit:
+    path:       /accounts/edit/{user}
+    controller: Example\ExampleBundle\AccountController::edit
+    methods: [GET, POST]
+    isGranted: [ROLE_ADMIN, ROLE_EDITOR] // New Features
+

@@ -1,0 +1,9 @@
+Add kinder e2e command
+
+
+This PR implements kinder test e2e and kinder test e2e-kubeadm commands
+NB. There are few TODO in the code, but this should be enough to get started with the kubeadm upgrade tests
+/kind feature
+/priority important-longterm
+/assign @neolit123
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

@@ -1,0 +1,37 @@
+Closed tabs get reopened when app is relaunched
+
+
+Description:
+Closed tabs get reopened when app is relaunched
+Steps to Reproduce
+
+Install 1.6.6 beta
+Visit #1799 and go to bravery section
+Open all links listed in new tab
+Start closing the opened tabs one by one
+Remove app from memory and relaunch after 5 secs
+All closed tabs gets reopened when browser is relaunched
+
+Actual result:
+Closed tabs get reopened when app is relaunched
+Expected result:
+Should not reopen closed tabs when app is relaunched
+Reproduces how often: [Easily reproduced/Intermittent issue]
+Easy
+Brave Version:
+1.6.6(18.11.09.11)
+Device details:
+iPad (iOS 12)
+Website problems only:
+
+
+did you check with Brave Shields down?
+
+
+did you check in Puffin/Dolphin (UIWebView-based browsers)?
+
+
+did you check in Safari/Firefox (WkWebView-based browsers)?
+
+
+Additional Information

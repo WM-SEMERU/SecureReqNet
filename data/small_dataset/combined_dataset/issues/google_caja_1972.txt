@@ -1,0 +1,13 @@
+v8 bug causes Caja to judge Chrome Canary unsafe.
+
+
+https://code.google.com/p/v8/issues/detail?id=4315 says:
+On Chrome Canary 46.0.2460.0 the following properties are all born non-configurable, non-writable.
+Float32Array.from Float32Array.of Float64Array.from Float64Array.of Int16Array.from Int16Array.of Int32Array.from Int32Array.of Int8Array.from Int8Array.of Uint16Array.from Uint16Array.of Uint32Array.from Uint32Array.of Uint8Array.from Uint8Array.of Uint8ClampedArray.from Uint8ClampedArray.of
+By the spec, they should all be configurable, writable. To facilitate initialize-time monkey-patching of the primordials, they should at least be configurable. For example, SES does not yet list these on its whitelist
+https://github.com/google/caja/blob/master/src/com/google/caja/ses/whitelist.js#L162
+and so must remove them or render them obviously harmless (such as by setting them to undefined and freezing them). However, with these settings, SES cannot, causing it to reject the platform as not known to be SES-safe. Visit
+https://rawgit.com/google/caja/master/src/com/google/caja/ses/explicit.html
+and expand the line
+[+] 18 Cannot be poisoned. Not isolated(5) is not SES-safe.
+

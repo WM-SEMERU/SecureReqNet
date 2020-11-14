@@ -1,0 +1,12 @@
+async_hooks: minor cleanup and improvements
+
+
+Cleanup some code and make the emit hooks very slightly faster.
+CI: https://ci.nodejs.org/job/node-test-pull-request/22080/
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

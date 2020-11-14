@@ -1,0 +1,25 @@
+Add variable name dumped to the `dump` result
+
+
+Description
+I know that it can be done with X-debug or other tools but it will also good if the VarDumper can also provide the original $var name.
+Example
+$message = 'Symfony is awesome';
+$admin = (new User());
+dd($message, $admin); 
+// output 
+"Symfony is awesome"
+User {#570 ▼
+  -id: 1
+  -email: "user@email.fr"
+ ...
+
+with this feature
+
+ddd($message, $admin);
+//  output 
+$message : "Symfony is awesome"
+$admin : User {#570 ▼
+  -id: 1
+  -email: "user@email.fr"
+ ...

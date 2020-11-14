@@ -1,0 +1,11 @@
+It would be nice to have the possibility to define more than one LDAP server, one could do something like this:
+
+```
+gitlab.yml
+
+ldap:
+  server: ['ldap1.example.com', 'ldap2.example.com', ... ]
+
+```
+
+The authentication should then try the next server in the list when one of the servers does not reply or just takes a random server from the list. Maybe one has to define an additional attribute in the ldap section to define the timeout.

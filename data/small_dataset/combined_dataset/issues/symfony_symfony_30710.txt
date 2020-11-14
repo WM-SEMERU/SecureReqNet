@@ -1,0 +1,54 @@
+Message injection a service and handler will work error
+
+
+Symfony version(s) affected: 4.2.0
+Description
+when I injection a service to a message,then handle it,it give me an error
+Cannot create an instance of App\Data\TransportObject\Auth\SendRegMailRequest from serialized data because its constructor requires parameter "templatin
+  g" to be present.
+
+my message like this
+public function __construct(Templating $templating)
+    {
+        $this->templating = $templating;
+        $this->code = Str::random(6);
+        $this->key = Str::random(15);
+    }
+
+    public function setEmail($email): self
+    {
+        $this->email = $email;
+        $this->setTitle("Register for user {$email}")
+            ->setFrom('lichnow@qq.com')
+            ->setAddress($email)
+            ->setBody($this->templating->render(
+                'emails/registration.html.twig',
+                [
+                    'email' => $this->email,
+                    'code' => $this->code
+                ]
+            ));
+        return $this;
+    }
+
+and handler
+public function __invoke(SendRegMailRequest $regMail)
+    {
+        $validate = $this->cache->getItem("auth.code.register.validator.{$regMail->getKey()}");
+        $validate->set([
+            'email' => $regMail->getEmail(),
+            'code' => $regMail->getCode(),
+        ]);
+        $validate->expiresAt(Carbon::now()->addMinute(30));
+        $this->cache->save($validate);
+        $this->sendMail($regMail);
+}
+
+I test dispatch it
+public function index(SendRegMailRequest $regMail)
+    {
+        $regMail->setEmail('canyang999@126.com');
+        $this->bus->dispatch($regMail);
+    }
+
+how to type-in a service to a message(auto-writing and autoconfigure is enabled)?or it must set templating to be argument in service for this message?

@@ -1,0 +1,25 @@
+crypto/subtle ConstantTimeCompare is not constant unless both strings have equal length.
+
+
+What version of Go are you using (go version)?
+$ go 1.12 linux/amd64
+
+On The documentation crypto/subtle We check for the length first before performing any operation:
+func ConstantTimeCompare(x, y []byte) int {
+	if len(x) != len(y) { // <--- here
+		return 0
+	}
+
+	var v byte
+
+	for i := 0; i < len(x); i++ {
+		v |= x[i] ^ y[i]
+	}
+
+	return ConstantTimeByteEq(v, 0)
+}
+
+Doesn't this defeat the purpose of constant time?
+I created an example with variable strings length being compared, with the result we can easily deduce if the strings are of equal length.
+https://play.golang.org/p/j3QE3zqwL2C
+When the two strings length don't match, the time is always lower. With different length, we get around 2700ns as a base. With the same length, we get a greater value.

@@ -1,0 +1,8 @@
+Please see this Sentry issue, for example:
+
+https://sentry.gitlap.com/gitlab/gitlabcom/issues/10674/events/997818/
+
+Includes:
+* authentication_token (is to be fixed by https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2041)
+* incoming_email_token
+* runners_token

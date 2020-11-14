@@ -1,0 +1,10 @@
+Lock down allowed upgrade protocols in apiserver proxy to spdy and websockets
+
+
+From CVE-2018-1002105 post-mortem
+/assign
+/area security
+/area apiserver
+/priority important-longterm
+/kind cleanup
+/sig api-machinery

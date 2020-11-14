@@ -1,0 +1,12 @@
+eliminate rootzone server
+
+
+
+ configure www.persona.org to be served by S3
+ configure webheads to serve redirects for persona.org
+ set persona.org to resolve to the webhead ELB
+ wait for the ttl on persona.org to expire
+ block traffic on the rootzone server
+ verify that persona.org continues to function
+ destroy the rootzone server
+

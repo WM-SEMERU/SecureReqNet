@@ -1,0 +1,14 @@
+Open in a link in a new Tap doesn‘t work anymore in private windows. Since iOS 12.2
+
+
+Description:
+A user reports that since 12.2, long pressing a link in a private window and pressing Open doesn't work.
+We are supposed to have “Open In New Tab”/“Open In New Private Tab”/etc.
+But Apple’s Open/Add to Reading List/Copy/Share… comes up
+
+Steps to Reproduce
+1.Long press on a URL in private mode
+Brave Version: 
+1.9
+Device details: 
+iPhone xs

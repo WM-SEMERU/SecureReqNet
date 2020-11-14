@@ -1,0 +1,7 @@
+**Steps to reproduce**
+
+1. View this project's page
+2. On the right hand side, note that it says "Owned by [GitLab.org](https://gitlab.com/groups/gitlab-org) group"
+3. If you click that link you reach a 404
+
+I didn't see a bug report about this, but I wonder if it has to do with the "Public Groups" feature mentioned in the [CHANGELOG](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CHANGELOG) for 6.7.0

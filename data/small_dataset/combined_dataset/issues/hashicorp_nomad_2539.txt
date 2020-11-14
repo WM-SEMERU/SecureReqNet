@@ -1,0 +1,21 @@
+Feature: Allow for specifying TLS host name
+
+
+This is related to: 7ee2a15#commitcomment-21699487
+Issue
+For now nomad hardcores tls hostname to server.xxx.nomad, but in my case it would be useful to set it to something custom, so I can use tls certificate issued by 3rd party on real domain (like Let's encrypt).
+Ideally I'd be able to configure nomad like so:
+tls {
+  http = true
+  rpc  = true
+
+  ca_file   = "ca.pem"
+  cert_file = "nomad.pem"
+  key_file  = "nomad-key.pem"
+
+  verify_server_hostname = true
+  server_hostname = "example.com"
+}
+
+or the server hostname would be fetched from certificate itself
+Use case: Allow for easy access to nomad master's  HTTP API available under public domain without certificate issues when accessing via browser/curl, and at the same have verify_server_hostname = true for nomad agents. I'm fine with generating certificates per-server as let's encrypt makes it really easy.

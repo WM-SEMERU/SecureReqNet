@@ -1,0 +1,9 @@
+stream: remove dead code
+
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ commit message follows commit guidelines
+
+Removed unreachable code. In line 511, state.ended is set to true. So process.nextTick(emitReadable_, stream); can't be reached.

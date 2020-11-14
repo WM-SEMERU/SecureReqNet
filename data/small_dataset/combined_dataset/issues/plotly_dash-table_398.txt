@@ -1,0 +1,5 @@
+Callback to cell not fired second time selected cells
+
+
+I have a callback function of the selected cells properties. When the user clicks ones of the cells the callback is fired. However the second time the user clicks the same cell, the callback is not fired. Is this correct behavior or a bug?
+@app.callback( Output('test', 'children'), [ Input('table', 'selected_cells'), ]) def test(selected_cells): return 'test_done' 

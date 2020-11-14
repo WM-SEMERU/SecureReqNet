@@ -1,0 +1,18 @@
+allow :last-child
+
+
+Original issue 1852 created by joe.marino@fl-dc.org on 2013-09-04T00:10:56.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+no idea
+chrome latest
+What steps will reproduce the problem?
+
+use :last-child in code
+2.
+3.
+
+What is the expected output? What do you see instead?
+for example using to round edges of last item in a dropdown list to match the border-radius of overall menu
+what I see is the normal non-radiused border
+Please provide any additional information below.
+found this which directed me here: http://stackoverflow.com/questions/16565328/last-child-css-selector-not-working-in-gas-with-htmlservice

@@ -1,0 +1,27 @@
+[BUG][Profiler][Timeline] JS error with custom events/sections
+
+
+Symfony version(s) affected: 4.3-DEV
+Description
+Looks like #30450 broke the Timeline panel in profiler with sections other than standard symfony ones. I have a custom caching bundle that uses the Stopwatch to measure (and also display in profiler) cache call duration. When the Timeline page loads, it throws JS error because the category ovrflo_cache does not exist (as it is not one of the hardcoded ones).
+How to reproduce
+This controller will reproduce the problem:
+    public function index(Stopwatch $stopwatch)
+    {
+        $stopwatch->start('some_name', 'some_category');
+        sleep(1);
+        $stopwatch->stop('some_name');
+
+        return new Response('</body>');
+    }
+
+Click on the debug toolbar, go to Timeline, open Dev Tools and you'll see the error.
+Possible Solution
+I fiddled with the JS in @WebProfiler/Collector/time.js and I got it to work. I am ready to submit a PR with my code, but I'm not proud of it. I'm a bit rusty with JS/ES6. If you want me to submit a PR with my fix, let me know. If someone else wants to take a stab at it, the issues I found are with 2 calls
+
+Legend.add cannot find the category in this.categories
+Legend.getClassname cannot find the category in this.classnames
+My fix detects those undefined values and adds the category in both places with default values.
+
+Edit: I just pushed my fix if anyone wants to take a look at it: ovrflo@17be20a
+This probably affects any third party bundle that uses the Stopwatch. We should fix this ASAP.

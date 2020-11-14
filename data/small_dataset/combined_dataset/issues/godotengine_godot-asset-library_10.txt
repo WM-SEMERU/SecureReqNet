@@ -1,0 +1,5 @@
+Algorithm for creating session tokens is pretty bad
+
+
+Currently, an attacker just needs to guess the secret, after which he would be able to create session tokens for any existing user, as long as he knows the id.
+I guess user_id-based tokens should be dropped, and only session tokens be given.

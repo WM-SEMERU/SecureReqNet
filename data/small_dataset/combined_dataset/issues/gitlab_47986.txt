@@ -1,0 +1,1 @@
+As per https://gitlab.com/gitlab-org/gitlab-ce/issues/45168, we never want to write this. We always want to use `safe_params` (or some other safe method) as the argument.

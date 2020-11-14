@@ -1,0 +1,6 @@
+Remove the $sce context for the src attribute on video, audio, and source
+
+
+Video, audio, and track sources require $sce.RESOURCE_URL, so by default you need a $sce.trustAsResourceUrl to set them dynamically if the resources are not on the same subdomain. This is not justified: no script execution is possible through the src attribute as far as the state of the art goes, so there's no reason to restrict it.
+The change shouldn't be breaking: uses of $sce.trustAsResourceUrl before assigning to src or ng-src attributes will just be silently unwrapped.
+(BTW, not sure about the amount of tests to add there. We have  already, I'm adding one of the new set, but adding the two others just doesn't seem productive)

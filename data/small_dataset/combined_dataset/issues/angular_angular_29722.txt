@@ -1,0 +1,37 @@
+build: upgrade yargs package to 13.1.0
+
+
+PR Checklist
+Please check if your PR fulfills the following requirements:
+
+ The commit message follows our guidelines: https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+PR Type
+What kind of change does this PR introduce?
+
+ Bugfix
+ Feature
+ Code style update (formatting, local variables)
+ Refactoring (no functional changes, no api changes)
+ Build related changes
+ CI related changes
+ Documentation content changes
+ angular.io application / infrastructure changes
+ Other... Please describe:
+
+What is the current behavior?
+There is a vulnerability in yargs package, because its version is old.
+https://app.snyk.io/vuln/npm:mem:20180117
+What is the new behavior?
+I updated the version of the yargs package. Vulnerability should not be.
+Does this PR introduce a breaking change?
+
+ Yes
+ No
+
+I'm not sure.
+Other information
+You are using the old version of the yargs package, which at that time used the old version of the os-local package, which used the vulnerable version of the package mem.
+https://app.snyk.io/vuln/npm:mem:20180117

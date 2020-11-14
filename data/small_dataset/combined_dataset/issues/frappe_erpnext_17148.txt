@@ -1,0 +1,9 @@
+Appointment not showing in Patient Encounter
+
+
+hello can any 1 help me that how can i fix this issue...
+The appointment field is showing nothing here in v.11 of Erpnext although i have saved 4 to 5 appointments in appointment doctype......
+Thanks in advance...
+
+These are the Patient Appointment which i have saved but these are not showing in the patient Encounter
+

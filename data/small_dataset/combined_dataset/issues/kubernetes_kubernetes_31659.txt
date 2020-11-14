@@ -1,0 +1,24 @@
+Append "AppArmor enabled" to the Node ready condition message
+
+
+As discussed, add a "AppArmor enabled" message to the node ready condition message. This is a temporary solution to surfacing the AppArmor status until node feature reporting is enabled.
+Example:
+$ kubectl get nodes e2e-test-stclair-minion-group-lmvk -o yaml
+...
+  - lastHeartbeatTime: 2016-08-30T00:52:11Z
+    lastTransitionTime: 2016-08-30T00:43:28Z
+    message: kubelet is posting ready status. AppArmor enabled
+    reason: KubeletReady
+    status: "True"
+    type: Ready
+...
+
+
+1.4 justification:
+
+Risk: Low. This is a small change to append a human readable message.
+Rollback: Nothing depends on this functionality.
+Cost: Not knowing whether AppArmor is actually supported by a node. Although pods should be rejected if it's not enabled, we can't do anything for older (< v1.4) nodes. This positive affirmation provides confirmation that AppArmor is enabled for the current version.
+
+
+This change is 

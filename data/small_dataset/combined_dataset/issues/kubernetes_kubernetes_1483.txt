@@ -1,0 +1,4 @@
+kube-up scripts dump kubernetes password to console
+
+
+I just posted my username and password to Azure in a Github comment because the Azure provider dumps the credentials to the console. I'd argue it ought not do that.

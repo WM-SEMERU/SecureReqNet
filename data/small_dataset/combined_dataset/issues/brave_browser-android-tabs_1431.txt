@@ -1,0 +1,5 @@
+Fixed text for wrong device time while syncing
+
+
+Addition to #1418, fixing the text with regards to brave-core notices brave/brave-core#2155 (review) and brave/brave-browser#4011.
+

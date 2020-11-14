@@ -1,0 +1,16 @@
+NUL code units not escaped in Cajoled strings
+
+
+Original issue 433 created by collin.jackson on 2008-06-09T21:45:37.000Z:
+What steps will reproduce the problem?
+Replace the ? in the below expression with null bytes and cajole it:
+return "</scr?ipt><script>alert(document.cookie)</scr?ipt>";
+What is the expected output?
+return "</scr\000ipt><script>alert(document.cookie)</scr\000ipt>";
+What do you see instead?
+Firefox: return "</scr?ipt><script>alert(document.cookie)</scr?ipt>";
+IE: return "</script><script>alert(document.cookie)</script>";
+The IE version will alert document.cookie.
+What version of the product are you using? On what operating system?
+Caja Test Bed. I wasn't able to get the test bed to run on IE, so I'm not
+100% sure this attack works, but there should be a test for it regardless.

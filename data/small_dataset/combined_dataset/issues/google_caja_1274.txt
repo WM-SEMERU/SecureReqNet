@@ -1,0 +1,7 @@
+Current "virtualize" strategy isn't safe
+
+
+Original issue 1274 created by erights@google.com on 2010-09-26T21:02:14.000Z:
+The current "virtualize" strategy generally leaves the original primordial method in place, and only virtually overrides it, from the perspective of guest code, by installing a visible accessor equivalent. We assumed that uncajoled host code could then continue to innocently access the original value of these properties at their original name, since the installed accessors are non-configurable and properly intercept [[Put]]s (assignments) to properties of the same name on derived objects.
+However, the accessors do not and should not intercept Object.defineProperty defining an overriding data property of the same on a derived object. Thus, we cannot protect such innocent usage by uncajoled code. Instead, the tamer must ensure that no innocent code that relies on such assumptions can encounter an object that might violate those assumptions.
+For most currently "virtualize"d primordial methods, we should do objective replacement instead.

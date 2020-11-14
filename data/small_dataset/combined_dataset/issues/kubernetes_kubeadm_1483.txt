@@ -1,0 +1,8 @@
+update kinder docs
+
+
+This PR adds some more details to the kinder README.md file and updates the roadmap with what we expect to implement for getting kinder supporting E2E testing for kubeadm upgrades
+/kind documentation
+/priority important-longterm
+/assign @neolit123
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

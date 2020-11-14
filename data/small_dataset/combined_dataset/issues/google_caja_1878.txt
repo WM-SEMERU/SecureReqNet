@@ -1,0 +1,31 @@
+CORS requests fail in Firefox
+
+
+Original issue 1880 created by ekoleda+devrel@googlers.com on 2014-01-07T15:52:10.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+Rev 5643, Firefox 26.0, Ubuntu
+What steps will reproduce the problem?
+
+Run the following code in the Caja playground (ES5 mode)
+
+<h1>CORS Test</h1>
+<div id="result"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script>
+<script>
+$(document).ready(function() {
+$('#result').text('Running...');
+$.support.cors = true;
+$.ajax({
+url: 'https://cors-test.appspot.com/test'
+}).done(function() {
+$('#result').text('It worked!');
+}).fail(function(jqXHR, textStatus, errorThrown) {
+$('#result').text('It failed: ' + errorThrown);
+});
+});
+</script>
+What is the expected output? What do you see instead?
+Expected: It worked!
+Actual: It failed: NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
+Please provide any additional information below.
+The same code works fine in Chrome, or in Firefox outside of Caja.

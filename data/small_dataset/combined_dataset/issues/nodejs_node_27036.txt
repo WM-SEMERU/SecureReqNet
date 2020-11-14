@@ -1,0 +1,11 @@
+doc: remove unnecessary intro in governance doc
+
+
+The introductory paragraph in GOVERNANCE.md does not add anything that
+isn't obvious from the document itself. Remove it.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+

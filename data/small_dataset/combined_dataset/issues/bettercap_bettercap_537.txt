@@ -1,0 +1,37 @@
+"separator unmatched" when trying to crack bettercap captured pcap file
+
+
+I'm working on cracking a pmkid file. I have collected pcap file using bettercap.
+Then convert using this:
+hcxpcaptool -z bettercap-wifi-handshakes.pcap.pmkid bettercap-wifi-handshakes.pcap
+They appear to convert:
+summary:
+file name....................: bettercap-wifi-handshakes.pcap
+file type....................: pcap 2.4
+file hardware information....: unknown
+file os information..........: unknown
+file application information.: unknown
+network type.................: DLT_IEEE802_11_RADIO (127)
+endianness...................: little endian
+read errors..................: flawless
+packets inside...............: 185
+skipped packets..............: 0
+packets with GPS data........: 0
+packets with FCS.............: 6
+beacons (with ESSID inside)..: 7
+probe responses..............: 6
+EAPOL packets................: 172
+EAPOL PMKIDs.................: 10
+best handshakes..............: 5 (ap-less: 0)
+4 PMKID(s) written to bettercap-wifi-handshakes.pcap.pmkid
+I then try to run hashcat against it and it returns "separator unmatched" for all of my entries. This is a simple 2 digit test below. What is going on here?
+hashcat -m16800 -a3 -w3  bettercap-wifi-handshakes.pcap.pmkid %d%d --force
+hashcat (v5.1.0-849-gcf8c815c) starting...
+OpenCL Platform #1: The pocl project
+
+Device #1: pthread-Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz, 256/738 MB allocatable, 1MCU
+
+Hashfile 'bettercap-wifi-handshakes.pcap.pmkid' on line 1 (048614...59a934d61726368303332382f322e34): Separator unmatched
+Hashfile 'bettercap-wifi-handshakes.pcap.pmkid' on line 2 (947be6...d5bc0e1008b148e785*443542433045): Separator unmatched
+Hashfile 'bettercap-wifi-handshakes.pcap.pmkid' on line 3 (4128f6...4b656e6e65792773204e6574776f726b): Separator unmatched
+Hashfile 'bettercap-wifi-handshakes.pcap.pmkid' on line 4 (462f44...4b656e6e65792773204e6574776f726b): Separator unmatched

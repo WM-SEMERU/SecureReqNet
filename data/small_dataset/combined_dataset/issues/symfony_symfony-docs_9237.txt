@@ -1,0 +1,5 @@
+Warn of environmental variable inclusion in phpinfo/super globals dump
+
+
+We should warn in the docs that dumping $_SERVER, $_ENV, or outputting phpinfo() would disclose contents of environmental variables which, as of Symfony 4 best practices, would include database credentials.
+Originally commented upon: https://twitter.com/mdekrijger/status/958688583858212865

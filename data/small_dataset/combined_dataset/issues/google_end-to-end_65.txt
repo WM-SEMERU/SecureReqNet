@@ -1,0 +1,13 @@
+Change wording on import dialog to stress the fact that the user must verify the fingerprints of the keys and subkeys being imported.
+
+
+From evn@google.com on June 05, 2014 22:51:49
+Is this report about the crypto library or the extension?
+Extension
+What is the security bug?
+We should be more explicit when telling the user to verify the fingerprint of keys before importing them.
+How would someone exploit it?
+Since subkey's fingerprints aren't as easy to verify, some users might not do it, and import a subkey they don't trust (after just verifying the main key).
+We could even add some UI to help the user verify them (checkboxes in the confirmation dialog?). Also, we can hide signed subkeys from the list probably.
+(this was reported by kbsriram@ - let me know if we can make this bug public, thanks!)
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=28

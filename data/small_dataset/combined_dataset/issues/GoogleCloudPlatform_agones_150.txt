@@ -1,0 +1,4 @@
+Lock down RBAC permission on Sidecar [was: sidecar as DaemonSet?]
+
+
+It's not immediately obvious to me what the value is of running a sidecar 1-to-1 with each game server. Have you all considered running the sidecar process as a DaemonSet instead?

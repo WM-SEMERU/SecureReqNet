@@ -1,0 +1,15 @@
+Explain format of paths in security.access_control
+
+
+The following pages explain how the firewall works:
+
+https://symfony.com/doc/master/security/access_control.html
+https://symfony.com/doc/master/security.html#securing-url-patterns-access-control
+https://symfony.com/doc/master/best_practices/security.html
+
+They never explain that we can use a regular expression.
+For example, we use this configuration in on of our projects and it works:
+- { path: ^/api/(entity1|entity2)/\d+$, methods: ['GET'], roles: ROLE_USER }
+
+It matches /api/entity1/528491 and /api/entity2/528491.
+I think that the documentation should explain that we can use regular expression in path.

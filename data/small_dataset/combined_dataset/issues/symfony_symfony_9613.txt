@@ -1,0 +1,5 @@
+Changed Role to RoleInterface
+
+
+Changed Role to RoleInterface so that one doesn't have to extend Role, but simply implement RoleInterface.
+Maybe be better to merge to branch 2.3/2.4

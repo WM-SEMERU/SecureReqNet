@@ -1,0 +1,17 @@
+disable extension context menus in private tabs
+
+
+fix #8180
+Test Plan:
+
+enable lastpass
+right-click on a page in a regular tab. you should see the lastpass context menu.
+right-click on a page in a private tab. you should not see the lastpass context menu.
+
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+
+Test Plan:

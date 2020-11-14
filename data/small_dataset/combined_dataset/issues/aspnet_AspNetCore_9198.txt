@@ -1,0 +1,23 @@
+StopApplication shuts down host but not application
+
+
+Describe the bug
+When calling StopApplication() on IApplicationLifetime which is resolved from DI it only stops the host but application is kept alive and running.
+To Reproduce
+Using ASP.NET Core Web API template call StopApplication() on resolved interface in either controller or hosted service.
+Startup:
+        public static void Main(string[] args)
+        {
+            CreateWebHostBuilder(args).Build().Run();
+        }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
+Stopping, where _serviceProvider is IServiceProvider and IApplicationLifetime is Microsoft.Extensions.Hosting interface.
+var lifetime = _serviceProvider.GetService(typeof(IApplicationLifetime)) as IApplicationLifetime;
+lifetime.StopApplication();
+Expected behavior
+Entire application shuts down.
+Additional context
+This is happening on dotnet 2.2 using WebHost to start the application.

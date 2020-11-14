@@ -1,0 +1,42 @@
+[Bridge][Twig] DebugCommand - fix escaping and filter
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+cherry-pick on 4.2, conflicts resolved, original PR  #30660 (comment)

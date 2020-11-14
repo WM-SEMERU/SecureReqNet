@@ -1,0 +1,4 @@
+Don't log action and page handler arguments
+
+
+Fixes #9121

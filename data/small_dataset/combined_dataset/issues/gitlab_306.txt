@@ -1,0 +1,8 @@
+'The GitLab LDAP user filter is supposed to be triggered in two situations:
+
+- when the last LDAP check is more than 1 hour old;
+- when the LDAP user signs in.
+
+It seems that when we backported the filter from GitLab EE to CE, the code that checks the filter during sign-in (in the OmniauthCallbacksController) was lost.
+
+We need to add the check to the OmniauthCallbacksController.

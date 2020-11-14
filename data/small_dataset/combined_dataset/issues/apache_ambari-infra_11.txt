@@ -1,0 +1,14 @@
+AMBARI-24832 - Infra Manager: set archive file permission on hdfs to 640
+
+
+What changes were proposed in this pull request?
+When archiving solr documents to hdfs set the permission of the files to 640
+How was this patch tested?
+UTs and ITs passed.
+Manually:
+
+Deploy Ambari and a cluster: zookeeper, hdfs infra solr, infra manager, logsearch
+Enable archiving service logs and set the destination to Hdfs
+Start the archiver_service_logs job using Infra Manager rest api
+Check the files permission on hdfs in the specified destination directory
+

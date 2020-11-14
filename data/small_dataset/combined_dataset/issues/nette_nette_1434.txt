@@ -1,0 +1,4 @@
+SimpleAuthenticator: roles support
+
+
+Related thread: http://forum.nette.org/cs/17088-jak-priradit-uzevatelum-role-v-config-neon (czech only)

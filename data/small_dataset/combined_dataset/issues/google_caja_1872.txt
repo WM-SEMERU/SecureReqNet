@@ -1,0 +1,5 @@
+testResizing/testScrolling broke at r5642
+
+
+Original issue 1874 created by kpreid.switchb.org on 2013-12-10T22:14:12.000Z:
+On Firefox and Chrome I am seeing test-domado-special.js tests testResizing and testScrolling failing with incorrect numbers at and after r5642, which was "remove css-history-sniff defense code (merge from es53 branch)".

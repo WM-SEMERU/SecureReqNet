@@ -1,0 +1,44 @@
+symfony - how to handled the guest user login functionality
+
+
+I have created the symfony api and  i have used JWT authentications for api authentications.
+If authentications are success, i have listed the api content like
+localhost/api/articles  - It have records like 100. 
+If guest user don't have any authentications, i want to access the api and showing the limited content like
+localhost/api/articles  - It have records like 10. 
+My Security.yaml mentioned in below:
+security:
+encoders:
+App\Security\User:
+algorithm: plaintext
+providers:
+    app_user_provider:
+        id: App\Security\UserProvider
+
+firewalls:
+    dev:
+        pattern: ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+
+    userAuthenticationVerify:
+        pattern:  ^/v1/api/userauthverify/login
+        stateless: true
+        anonymous: true
+
+    api:
+        pattern:   ^/v1/api
+        stateless: true
+        anonymous: false
+        lexik_jwt: ~ 
+        provider: app_user_provider
+        guard:
+            authenticators:
+                -   api.jwt_token_authenticator
+
+access_control:
+    - { path: ^/v1/api/userauthverify/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/v1/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/v1/api, roles: ROLE_USER }
+
+How to handled the above mentioned scenario ?
+Thanks for your help...!

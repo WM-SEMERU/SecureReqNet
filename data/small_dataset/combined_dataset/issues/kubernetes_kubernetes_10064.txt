@@ -1,0 +1,5 @@
+Shouldnt be returning etcd errors
+
+
+As discussed with @bgrant0607, we return etcd error as is if update fails: https://github.com/GoogleCloudPlatform/kubernetes/blob/5520386b180d3ddc4fa7b7dfe6f52642cc0c25f3/pkg/api/errors/etcd/etcd.go#L48. All other functions except InterpretUpdateError() are fine.
+Also, we shouldnt be checking resourceVersion while updating in the apiServer: https://github.com/GoogleCloudPlatform/kubernetes/blob/4fdcbc3096432692ee27c8d3f7e85580b29f780c/pkg/registry/generic/etcd/etcd.go#L302. We should let etcd do the conflict check.

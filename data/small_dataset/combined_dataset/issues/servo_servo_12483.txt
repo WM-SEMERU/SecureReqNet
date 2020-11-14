@@ -1,0 +1,6 @@
+Use separate storage thread for public and private pipelines
+
+
+Servo supports marking certain pipelines as private (like Chrome's incognito mode and Firefox's private browsing). new_resource_threads creates separate resource threads for public and private pipelines, but shares the same storage thread. This means that the sessionStorage and localStorage APIs are shared between public and private pipelines, which is not good. We should write a test that uses the mozbrowser API to load pages in private and public mozbrowser iframes and verifies that the storage values are not shared, and make new_resource_threads create separate storage threads.
+Code: components/net/resource_thread.rs
+Test: add a new test to tests/wpt/mozilla/tests/mozilla/mozbrowser/, using private_browsing.html as inspiration.

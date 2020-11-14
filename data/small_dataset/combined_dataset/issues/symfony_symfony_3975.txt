@@ -1,0 +1,26 @@
+Error on init:acl if oracle (oci8) database driver is used (ORA-00972: identifier is too long)
+
+
+Hi,
+when I want to init ACL via shell I get this error message:
+
+C:\projects\osl>php app\console init:acl
+[Doctrine\DBAL\Driver\OCI8\OCI8Exception]
+ORA-00972: identifier is too long
+init:acl
+
+This is a problem because it makes ACL unusable on an Oracle database :(
+My System:
+
+PHP Version 5.3.10 with php_oci8_11g.dll extension
+Oracle Database 11g Express Edition Release 11.2.0.2.0
+
+My app/config/parameters.ini
+        database_driver="oci8"
+        database_host="127.0.0.1"
+        database_port="1521"
+        database_name="XE"
+        database_user="user"
+        database_password="password"
+
+Or is there anything I am doing wrong?

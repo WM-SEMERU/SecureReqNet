@@ -1,0 +1,13 @@
+I've uploaded an avatar, then I deleted the avatar again, because I wanted to revert back to Gravatar.
+The result is that I currently have a broken avatar, and i can't save my profile anymore.
+
+**Steps to reproduce**
+
+1. Have a gravatar
+2. Upload a custom avatar and save profile
+3. Remove avatar and save profile
+4. Now you don't have an avatar anymore, and you can't save your profile.
+
+**Expected output**
+
+The avatar was deleted, and I returned to my gravatar avatar,

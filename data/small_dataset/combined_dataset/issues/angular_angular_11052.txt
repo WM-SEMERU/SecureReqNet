@@ -1,0 +1,12 @@
+[Question][Security] ngNonBindable elements
+
+
+The template parser uses 2 visitors:
+
+1 for regular nodes,
+1 for non bindable nodes (NonBindableVisitor)
+
+Seems like security/schema checks are only used in the former one.
+Could this be a vulnerability that would allow JS injections ?
+I don't have time to investigate more for now
+/cc @mhevery @rjamet @mprobst @IgorMinar

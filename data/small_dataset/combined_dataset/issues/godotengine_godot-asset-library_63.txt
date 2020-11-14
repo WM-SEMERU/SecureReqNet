@@ -1,0 +1,18 @@
+Asset downloads: enforce the usage of a commit hash or tag zip archive (and thus single repo per asset)
+
+
+We currently took a loose approach for assets, allowing people to give a directly URL to a potentially self-hosted zip archive. Reviewing the currently approved assets show a big variety of usages, but it's quickly become hard to maintain and encourages bad practices (like uploading static zip archives directly in the git repo to download as raw files).
+After discussing it with @reduz on tonight's IRC meeting, we thought that it would be better to go back to the initial design:
+
+Asset submitters should have to give the following information:
+
+GitHub repository URL, e.g. https://github.com/KOBUGE-Games/godot-logger (or other source hosting providers if we can handle their respective APIs)
+Commit hash or git tag, e.g. 74c2903670b30ec36ad306006f82d1f27dd8757b
+The download zip would thus get automatically generated (e.g. https://github.com/KOBUGE-Games/godot-logger/archive/74c2903670b30ec36ad306006f82d1f27dd8757b.zip), we don't ask for a download URL
+
+
+This means 1 GitHub (or other supported provider) repo == 1 addon. It won't be possible to version several plugins in the same repo (or they would be distributed all at once :p).
+Security wise, it's much better, as we can check the contents of the git repo visually without having to download a Dropbox-hosted zip archive, extract it and check the contents.
+
+It should be relatively straightforward to implement as most of the logic is there already, and building the URL for the GitHub API is easy.
+Question: what other providers do we want to support if any, and how?

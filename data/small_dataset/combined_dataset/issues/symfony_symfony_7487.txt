@@ -1,0 +1,7 @@
+[Security] error when switching back from the same impersonated user
+
+
+Let's say I'm logged in as user A, then switch into user A. Now switching back to the originating user results in an error:
+Argument 2 passed to Symfony\Component\Security\Http\Event\SwitchUserEvent::__construct() must implement interface Symfony\Component\Security\Core\User\UserInterface, string given, called in vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/SwitchUserListener.php on line 159 and defined in vendor/symfony/symfony/src/Symfony/Component/Security/Http/Event/SwitchUserEvent.php line 24
+This happens for me in 2.1.9-dev (18cd187 currently) and only if it's about the same user. Maybe 2.0.x is also affected.
+SwitchUserEvent expects a UserInterface for the 2nd argument, but receives the user's password hash.

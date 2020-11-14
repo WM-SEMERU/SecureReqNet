@@ -1,0 +1,27 @@
+Add support for SVG based favicons
+
+
+Currently there is no support for SVG format favicons. Since most websites now have SVG icons, we should start supporting it.
+Benefits:
+
+Scalability: Get any size image at runtime cache
+File Size: Smaller file size when compared to same image of different sizes.
+
+Description:
+Steps to Reproduce
+
+
+
+
+
+Actual result: 
+Expected result:
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Brave Version: 
+Device details: 
+Website problems only:
+
+did you check with Brave Shields down?
+did you check in Safari/Firefox (WkWebView-based browsers)?
+
+Additional Information

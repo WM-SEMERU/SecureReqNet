@@ -1,0 +1,53 @@
+[Security] json auth listener should not produce a 500 response on bad request format
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+To me, it looks wrong to simply throw a BadCredentialsException in the wild, which produces a 500 (unless an entrypoint handles it, which you probably don't have on a json login firewall). There isn't any server error, the client request originated the error due to a wrong format.
+Instead, the listener should give a chance to the failure handler to resolve it, and return a proper 4XX response. (BTW, the UsernamePasswordFormAuthenticationListener also throws a similar BadCredentialsException on a too long submitted username, which is caught and forwarded to the failure handler)
+Better diff: https://github.com/symfony/symfony/pull/22034/files?w=1
+BTW, should we have another exception type like BadCredentialsFormatException or whatever in order to distinct a proper BadCredentialsException from a format issue in a failure listener?

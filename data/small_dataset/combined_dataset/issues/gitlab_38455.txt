@@ -1,0 +1,31 @@
+'### Description
+
+Our Kubernetes service integration lets you copy secrets that are ultimately shared with the runner for CI/CD jobs. While this is functional, it usually results in secrets with more power than necessary as people usually copy in the `default` secrets (because we tell them to). We could use those powerful secrets, or the new username/password from GKE clusters, to generate new secrets with less scope specifically for a project. Perhaps we even want different secrets per environment or even per pipeline or job. Today at least people could manually create secrets specifically for the project and enter those creds in instead. When we offer Kubernetes integration at the group level, this will be even more important as entering in per-project integration will be painful.
+
+The runner itself, if running inside the cluster, still has direct access to Kubernetes (by default) and so those creds may be greater than the ones we provide. We should look at ways to provide our limited-scope creds to the runner instead, not just via project variables, but via the direct k8s mechanism (I forget what it's called). Of course, if we do give spawned runners specific creds, then maybe we don't need to expose the project variables at all, and can do away with several lines of `.gitlab-ci.yml` configureation. But since our templates support k8s and non-k8s in the same scripts, we probably need to redundancy.
+
+### Proposal
+
+### Links / references
+
+### Documentation blurb
+
+#### Overview
+
+What is it?
+Why should someone use this feature?
+What is the underlying (business) problem?
+How do you use this feature?
+
+#### Use cases
+
+Who is this for? Provide one or more use cases.
+
+### Feature checklist
+
+Make sure these are completed before closing the issue,
+with a link to the relevant commit.
+
+- [ ] [Feature assurance](https://about.gitlab.com/handbook/product/#feature-assurance)
+- [ ] Documentation
+- [ ] Added to [features.yml](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/features.yml)

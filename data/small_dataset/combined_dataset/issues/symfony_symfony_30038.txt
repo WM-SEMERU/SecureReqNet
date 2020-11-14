@@ -1,0 +1,48 @@
+[Cache] Add __destruct() on TraceableAdapter to fix fatal error
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+N/A?
+
+
+License
+MIT
+
+
+
+Fixes:
+PHP Fatal error:  Uncaught Error: Call to undefined method Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter::__destruct() in /usr/sf/var/cache/dev/ContainerOjtvevg/TagAwareAdapter_5b4740c.php:128
+Stack trace:
+#0 [internal function]: TagAwareAdapter_5b4740c->__destruct()
+
+When setting a TagAwareAdapter as cache service.
+In my case it was a custom TagAwareAdapter (which does not decorate other cache services), but I think the issue is probably also there if you use the default TagAwareAdapter and set it as cache service.

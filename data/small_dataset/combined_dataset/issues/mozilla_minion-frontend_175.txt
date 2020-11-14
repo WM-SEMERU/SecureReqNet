@@ -1,0 +1,6 @@
+Add init scripts for minion-backend, to work with supervisor
+
+
+
+
+

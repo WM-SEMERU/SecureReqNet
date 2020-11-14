@@ -1,0 +1,7 @@
+Upgrade to Ansible >2.7.6
+
+
+All CI jobs are using Ansible 2.7.10.
+We already know that 2.7.0 doesn't work.
+Ansible 2.6.0 doesn't work either (errors related to kube_token_auth and kube_apiserver_storage_backend).
+Therefore I suggest to upgrade to >2.7.0

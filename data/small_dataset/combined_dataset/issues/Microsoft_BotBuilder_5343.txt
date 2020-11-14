@@ -1,0 +1,18 @@
+Waterfall steps validator not sending SuggestedActions
+
+
+This is not for asking questions or filing bugs
+To get help with an issue with your bot
+
+"How To" questions should be submitted on Stack Overflow where there is a robust community to help you
+
+To file an issue against a component please go to the components repo
+
+Create Azure Bot Framework Service or Channel issue
+Create Bot Builder Tools issue
+Create Bot Builder SDK V3 (.NET or Javascript) issue
+Create Bot Builder SDK V4 .NET issue
+Create Bot Builder SDK V4 Javascript issue
+Create Bot Builder SDK V4 Java issue
+Create Bot Builder SDK V4 Python issue
+

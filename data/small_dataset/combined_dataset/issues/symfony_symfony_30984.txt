@@ -1,0 +1,50 @@
+[FrameworkBundle] Added a keep-in-memory option for cache adapters
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no (option is false by default)
+
+
+Deprecations?
+no
+
+
+Tests pass?
+need tests
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#...
+
+
+
+Adding a keep-in-memory option for cache adapters which is basically a shortcut using ChainAdapter with ArrayCache as first adapter.

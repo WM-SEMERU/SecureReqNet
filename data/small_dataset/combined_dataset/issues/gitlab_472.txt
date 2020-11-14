@@ -1,0 +1,4 @@
+Label color shoud be manual config，
+
+default is OK， like bug is red,enhancement is blue，
+but I want config the oher label's color 

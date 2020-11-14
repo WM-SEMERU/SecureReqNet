@@ -1,0 +1,8 @@
+CSS sanitizing drops style following an extra semi-colon
+
+
+When sanitizing CSS, if you give it this string of CSS
+color:#292f33;;font-size:28px;padding:0px;
+The result will be
+color:#292f33 ; padding:0px ;
+Which is missing the font-size style entirely. However, if the extra semi-colon after the color style is removed, then font-size is preserved.

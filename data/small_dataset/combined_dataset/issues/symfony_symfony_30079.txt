@@ -1,0 +1,51 @@
+[ExpressionLanguage] Add xor operator
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+I need a xor operator in ExpressionLanguage. I could solve it with a function but  it would be better to have it as operator in my opinion.
+Need to add some more tests and a doc PR of course. For now give me feedback if this feature is wanted or not.

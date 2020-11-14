@@ -1,0 +1,8 @@
+dispatcher: add per-node, session allocation rate limiting
+
+
+Currently, two nodes carrying identical key material will mutually invalidate each other sessions. This can can happen if there is a misconfiguration, where two nodes get the same identity. To protect against this condition, we always invalidate an existing session and issue a new one.
+To avoid high frequency fight over obtaining a session in this scenario, we should add per-node session rate limiting, such that only a certain number of sessions can be assigned per time period.
+The result should be that the condition is both easier to detect and doesn't result in thrashing in the dispatcher.
+Note that this feature must be in the dispatcher. Ideally, the rate limiting state gets stored directly on the node object.
+cc @diogomonica

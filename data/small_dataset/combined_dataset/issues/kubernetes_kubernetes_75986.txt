@@ -1,0 +1,14 @@
+Reduce event spam for function GenerateAttachVolumeFunc
+
+
+What type of PR is this?
+/kind cleanup
+/sig storage
+What this PR does / why we need it:
+Delete return type error of the function, expand the scope of generated function, delete generated events inside the function(these events will be produced when the generated function is run with rate limiting) to reduce the event spam caused by GenerateAttachVolumFunc.
+Which issue(s) this PR fixes:
+Fixes #74988
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+Reduce event spam for AttachVolume storage operation
+

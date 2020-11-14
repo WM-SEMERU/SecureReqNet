@@ -1,0 +1,70 @@
+CWE-79: Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)
+
+
+I'm submitting a...
+
+[ ] Regression (a behavior that used to work and stopped working in a new release)
+[x] Bug report  
+[ ] Feature request
+[ ] Documentation issue or request
+[ ] Support request => Please do not submit support request here, instead see https://github.com/angular/angular/blob/master/CONTRIBUTING.md#question
+
+Current behavior
+Expected behavior
+I am not sure whether this should be a issue to report here or to ask in Stack Overflow. Please let me know if this is not the proper place. 
+We are using Angular.js 4 for a web portal, while submitting the code for SCA, IBM AppScan reported the following findings in Angular.js libraries:
+CWE-79: Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)
+
+No Form Validation Allowed(1)
+
+* @param {?} ctx
+* @param {?} specs
+* @return {?}
+*/
+function registerContext(ctx, specs) {
+    for (var _i = 0, specs_1 = specs; _i < specs_1.length; _i++) {
+        var spec = specs_1[_i];
+        SECURITY_SCHEMA[spec.toLowerCase()] = ctx;
+    }
+}
+// Case is insignificant below, all element and attribute names are lower-cased for lookup.
+
+
+JQuery Insecure Manipulation of Child Node(1)
+
+        }
+        if (this._latestValue === this._latestReturnedValue) {
+            return this._latestReturnedValue;
+        }
+        this._latestReturnedValue = this._latestValue;
+        return __WEBPACK_IMPORTED_MODULE_1__angular_core__["WrappedValue"].wrap(this._latestValue);
+    };
+    /**
+    * @param {?} obj
+    *
+
+Would like to check whether this is a real issue or false positive.
+Minimal reproduction of the problem with instructions
+What is the motivation / use case for changing the behavior?
+Environment
+
+Angular version: 4.0.0
+
+
+Browser:
+- [ ] Chrome (desktop) version XX
+- [ ] Chrome (Android) version XX
+- [ ] Chrome (iOS) version XX
+- [ ] Firefox version XX
+- [ ] Safari (desktop) version XX
+- [ ] Safari (iOS) version XX
+- [ ] IE version XX
+- [ ] Edge version XX
+ 
+For Tooling issues:
+- Node version: XX  
+- Platform:  
+
+Others:
+
+

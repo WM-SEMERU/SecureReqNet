@@ -1,0 +1,6 @@
+Change the signature of `getVersionInfo()`
+
+
+Fixes #534
+Fixes #442
+

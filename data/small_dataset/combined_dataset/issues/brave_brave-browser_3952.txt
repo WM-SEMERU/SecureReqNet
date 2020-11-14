@@ -1,0 +1,15 @@
+chrome.instanceID not responding
+
+
+Description
+All chrome.instanceID.* methods are not responding to callbacks or runtime.lastError
+Steps to Reproduce
+chrome.instanceID.getID(function (id) {
+// never enters here
+});
+Expected result:
+Should execute the callback and return id or runtime.lastError
+Reproduces how often:
+Everytime
+Brave version (brave://version info)
+Latest

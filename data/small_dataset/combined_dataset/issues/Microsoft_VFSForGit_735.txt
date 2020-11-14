@@ -1,0 +1,20 @@
+[features/upgrade_extensibility] Additional ACL changes
+
+
+Part of the work required for #717
+After doing testing with the changes in #728 I found the following issues:
+
+The upgrader's logs directory could not be written to by a non-elevated process
+Download and Tools directory were not having the proper ACLs explicitly set
+
+Changes in this PR:
+
+Explicitly remove any ACLs previously set on the C:\ProgramData\GVFS directory
+Explicitly remove any ACLs previously set on the C\ProgramData\GVFS\GVFS.Upgrade\Downloads directory
+Allow users to modify the GVFS.Upgrade\Logs directory so that gvfs upgrade can create log files when running without elevation
+Add\Update unit tests
+Fixed an issue where running the unit tests would attempt to delete the downloads directory on the dev machine (running the unit tests)
+Renamed GVFS.Common.NuGetUpgrader to GVFS.Common.NuGetUpgrade to avoid naming conflicts with the NuGetUpgrader class.
+Code cleanup
+
+Tagging as WIP as manual testing is still in progress

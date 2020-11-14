@@ -1,0 +1,10 @@
+Verify integrity of dependencies in production with yarn
+
+
+After #1391 we will be using yarn to install dependencies in production.
+Let's make sure all packages get installed without any surprises.
+
+A production install should never upgrade a package or its dependencies, even if a sub-dependency is declared with a loose version range. Please see this detailed example of what we should prevent.
+Verify the integrity of all packages. If one gets tampered with, the install step should fail. (Does yarn already do this by default? Maybe we need yarn check)
+
+This issue is about preventing malware on NPM from creeping into a production build (see the eslint malware scenario as an example). It would still be possible for a developer to unknowingly introduce malware when upgrading a dependency -- that problem is out of scope.

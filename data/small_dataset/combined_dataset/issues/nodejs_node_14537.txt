@@ -1,0 +1,36 @@
+Distrust Symantec root certs
+
+
+Similarly to #9434, I think that we should follow Google/Mozilla on this one, too.
+I'm opening this in advance as it deserves some messaging and announcements in advance, after the decision would be made.
+Refs:
+
+https://wiki.mozilla.org/CA:Symantec_Issues (includes issuing fake google.com and gmail.com certs, issuing certs after deadline, vulnerabilities, audition failures, etc.).
+https://git.cryto.net/joepie91/ca-incidents#symantec — more Symantec CA issues.
+https://groups.google.com/a/chromium.org/d/msg/blink-dev/eUAKwjihhBs/rpxMXjZHCQAJ (some of the story and proposed schedule for Chrome back in March).
+https://groups.google.com/a/chromium.org/d/msg/blink-dev/eUAKwjihhBs/El1mH8S6AwAJ — final proposal by Google
+https://groups.google.com/d/msg/mozilla.dev.security.policy/Oaeqtddo_Cw/Vl7bJvQKCQAJ (Mozilla thread, citing the final decision by Google, some proposed dates for Firefox)
+https://groups.google.com/d/msg/mozilla.dev.security.policy/gn1i2JNVCnc/CcTfqVcrBgAJ (another Mozilla thread)
+
+Not yet listed on the CA:Symantec_Issues page: https://blog.hboeck.de/archives/888-How-I-tricked-Symantec-with-a-Fake-Private-Key.html (also I believe that this came up after Google/Mozilla drafted the current plan).
+The final roadmap for Chrome is (dates are approximate as usual per Chrome release schedule):
+
+October 24, 2017 (Chrome 62) — start printing warnings to DevTools console for certs that will be rejected in Chrome 66.
+That's around Node.js 9.0 release.
+April 17, 2018 (Chrome 66) — reject Symantec-signed certs issued before June 1, 2016.
+That's around Node.js 10.0 release.
+October 23, 2018 (Chrome 70) — reject all Symantec-signed certs.
+That's around Node.js 11.0 release.
+
+The roadmap for Mozilla is not final yet, but it's expected that they will reject all Symantec-signed certs starting from October 16, 2018 (Firefox 63) or November 27, 2018 (Firefox 64). There also is an intermediate step, that they are considering to place somewhere between December 1, 2017 and April 2018, as I understood things.
+So, for Node.js, I would propose to:
+
+Distrust Symantec-signed certs, issued before June 1, 2016, in Node.js 10.0 (April 2018).
+Distrust all Symantec-signed certs in Node.js 11.0 (October 2018).
+Message that in advance through regular channels.
+It could be useful to print deprecation messages for Symantec-signed certs issued before June 1, 2016 under --pending-deprecation for Node.js 9.0 release, ref: #11968, cc @jasnell.
+Chrome will start logging those to DevTools console in October 2017.
+I don't think that we should print those deprecation messages by default at all, as those will most likely be just thirdparty website issues that will just confuse users in most cases, and they will be forced to fix that by browsers.
+
+/cc @shigeki, @bnoordhuis, @indutny specifically and @nodejs/ctc in general.
+This also affects Thawte, GeoTrust and RapidSSL certs.

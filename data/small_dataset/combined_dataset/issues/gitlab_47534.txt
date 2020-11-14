@@ -1,0 +1,22 @@
+### Summary
+As admins of a self hosted gitlab with tons of students, we decided that we only want admins to be able to generate mattermost teams. We deactivated team creation on mattermost side (earlier with the `mattermost['team_enable_team_creation'] = false`, now via the mattermost system console settings and additionally via `mattermost['env'] = {..., 'MM_TEAMSETTINGS_ENABLETEAMCREATION' => 'false',`). However, we recently noticed that some students had managed to create teams.
+
+Looking into this, i discovered that creating new teams has a checkbox (sadly even auto-enabled #33937) to "Create a Mattermost team for this group". Sadly, this allows students to circumvent all our attempts to hinder team creation. I think that gitlab here acts as a mattermost admin and hence is allowed to create the new team.
+
+### Steps to reproduce
+Create a new team, click the checkbox.
+
+### What is the current *bug* behavior?
+New mattermost team is created without admin's ability to hinder this.
+
+### What is the expected *correct* behavior?
+Some setting (config or gitlab admin area) to disallow mattermost team creation from gitlab by normal users.
+
+### Relevant logs and/or screenshots
+![image](/uploads/7125bd294f67661d554c5af2298c3681/image.png)
+
+#### Results of GitLab environment info
+Omnibus 10.8.3
+
+### Possible source of regression
+Somewhere in code introduced for #23964

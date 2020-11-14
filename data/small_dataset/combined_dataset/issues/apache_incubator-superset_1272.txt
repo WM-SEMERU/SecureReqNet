@@ -1,0 +1,7 @@
+Loaded examples don't have permissions
+
+
+When following the standard install instructions, example datasets are installed. If a new user is assigned the role 'Alpha', they are able to view the database, tables, slices and dashboards. If a new role is created by duplicating the Alpha role (e.g. 'Alpha_copy'), and the new user assigned this role instead, then the slices and dashboards are no longer visible, despite having an identical permission set. Is this expected?
+A related issue is that if the 'Public' role is assigned the 'all datasource access on all_datasource_access' permission, and a user assigned both Gamma and Public roles, they also cannot see the slices and dashboards, as may be expected - as they can't seem to see the tables. The security page has permissions such as 'datasource access on [main].birth_names', which aren't available to me in the permissions auto-complete box after a clean install. Is this a bug or are the permission sets created before the tables in the install routine? If so how do you create permission properties for tables?
+Thanks,
+Sam

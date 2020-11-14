@@ -1,0 +1,11 @@
+quickstart with Dockerfile
+
+
+Description
+Quickstart is the entry point that all beginners would look into. It would be nice to provide dockerfile or docker-compose file so people can start druid by docker pull, and start druid easily and immediately.
+Motivation
+As a beginner I would like to start druid with docker so I can easily set druid up and load some data for playing around
+Currently the quickstart asks for downloading zookeeper and druid, and then start by some commands.
+http://druid.io/docs/latest/tutorials/index.html
+In addition, if user's java version is java11, it would fail due to druid supports till java8.
+If using dockerfile, this would not be an issue.

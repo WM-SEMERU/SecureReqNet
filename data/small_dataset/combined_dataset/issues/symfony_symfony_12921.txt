@@ -1,0 +1,9 @@
+AbstractAuthenticationListener incorrectly assumes your token is a UsernamePasswordToken
+
+
+I'm working on my own auth provider that has its own token and authentication listener class. I'm making use of all the helpful abstract classes, including AbstractAuthenticationListener. The top of the class indicates:
+
+The AbstractAuthenticationListener is the preferred base class for all browser-/HTTP-based authentication requests.
+
+However, it assumes that you're using a UsernamePasswordToken in the private onFailure method (when clearing the token on auth failure). Since it's private I can't override it.
+I don't have a solution, but if this is a "won't fix" then we should at least indicate in the class doc block that a UsernamePasswordToken must be used, and not just a TokenInterface

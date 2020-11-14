@@ -1,0 +1,64 @@
+[Debug vs DI][TestSuite] Use a class name that does not actually exist
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Using "Foo", a class name that corresponds to no less than 22 fixture
+classes, results in the first found "Foo" being loaded when one is
+found by the ClassNotFoundFatalErrorHandler error handler, I am not sure
+exactly why, but it is not really a big issue because this is a fatal
+error handler and execution is not supposed to continue after that.
+Except that is very much the case when running the whole test suite
+sequentially with ./phpunit . Then we arrive to the DI component test
+suite, and a failure happens because \foo was not supposed to be defined:
+
+Failed asserting that exception message 'The definition for "\foo" has
+no class attribute, and appears to reference a class or interface in the
+global namespace. Leaving out the "class" attribute is only allowed for
+namespaced classes. Please specify the class attribute explicitly to get
+rid of this error.' contains 'The definition for "\foo" has no class.'.
+

@@ -1,0 +1,11 @@
+Endpoint routing should complain if you do not have middleware configured
+
+
+As part of #8387, we are going to make MVC rely on the Auth and Cors middlewares to perform work rather than rely on filters when endpoint routing is enabled. Doing this is fairly straightforward, we need to ensure that the right endpoint metadata is available, and the middleware is configured.
+A fall-out of this choice is that we need to guarantee that the auth or cors middleware was configured in the request pipeline failing which the presence of these attributes would have done nothing.
+One design that seems promising for this is for EndpointRoutingMiddleware to complain if the auth or cors middleware isn't configured. Psuedo-code:
+if (!context.Items.ContainsKey(AuthorizationMiddlewareInvokedKey) && HasAuthAttribute(endpoint))
+{
+   throw;
+}
+Endpoint routing does not currently reference Auth or Cors and it would be preferable to leave it so.

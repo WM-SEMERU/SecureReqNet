@@ -1,0 +1,30 @@
+```
+Processing by Projects::MergeRequestsController#diffs as HTML
+  Parameters: {"project_id"=>"strongview/sm-base", "id"=>"34"}
+Completed 500 Internal Server Error in 80ms
+
+ActionView::Template::Error (Object not found - failed to find pack entry (9865e8a31ec863916b0cfdf39346d2f55012aeca)):
+    18:     .description
+    19:       .wiki
+    20:         = preserve do
+    21:           = markdown @merge_request.description
+    22:
+    23:   .context
+    24:     %cite.cgray
+  app/models/repository.rb:147:in `method_missing'
+  app/models/repository.rb:157:in `blob_at'
+  app/helpers/gitlab_markdown_helper.rb:167:in `file_exists?'
+  app/helpers/gitlab_markdown_helper.rb:133:in `relative_file_path'
+  app/helpers/gitlab_markdown_helper.rb:113:in `rebuild_path'
+  app/helpers/gitlab_markdown_helper.rb:69:in `block in create_relative_links'
+  app/helpers/gitlab_markdown_helper.rb:65:in `each'
+  app/helpers/gitlab_markdown_helper.rb:65:in `create_relative_links'
+  lib/redcarpet/render/gitlab_html.rb:48:in `postprocess'
+  app/helpers/gitlab_markdown_helper.rb:51:in `render'
+  app/helpers/gitlab_markdown_helper.rb:51:in `markdown'
+  app/views/projects/merge_requests/show/_mr_box.html.haml:21:in `block in _app_views_projects_merge_requests_show__mr_box_html_haml__3407503513307477331_70261437574520'
+  app/views/projects/merge_requests/show/_mr_box.html.haml:20:in `_app_views_projects_merge_requests_show__mr_box_html_haml__3407503513307477331_70261437574520'
+  app/views/projects/merge_requests/_show.html.haml:4:in `_app_views_projects_merge_requests__show_html_haml___3607321005659223984_70261435897960'
+  app/views/projects/merge_requests/diffs.html.haml:1:in `_app_views_projects_merge_requests_diffs_html_haml___159672777777853278_70261435811920'
+  app/controllers/projects/merge_requests_controller.rb:54:in `diffs'
+```

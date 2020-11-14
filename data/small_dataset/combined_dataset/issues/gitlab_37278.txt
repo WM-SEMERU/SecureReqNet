@@ -1,0 +1,304 @@
+'### Summary
+
+In the Admin Settings, you can restrict the domains that users may use to sign up with. This works, but it does not prevent a user from simply changing their e-mail-address to another domain (non-whitelisted) and then they are able to create a new account using the whitelisted domain. 
+
+### Steps to reproduce
+
+* Under Admin Area -> Settings -> Sign-up Restrictions -> Whitelisted domains for sign-ups, whitelist a specific domain (example.com)
+* User creates an account with the email-address john@example.com
+* User changes his email-address to john@notauthorized.com
+* User can create a new account with the email address john@example.com
+
+### Example Project
+
+Not applicable
+
+### What is the current *bug* behavior?
+
+As described in "Steps to reproduce"
+
+### What is the expected *correct* behavior?
+
+User cannot change his email-address to a non-whitelisted domain
+
+### Relevant logs and/or screenshots
+
+Not applicable
+
+### Output of checks
+
+Not applicable
+
+#### Results of GitLab environment info
+
+<details>
+<summary>Expand for output related to GitLab environment info</summary>
+<pre>
+
+
+System information
+System:         Debian 8.9
+Current User:   git
+Using RVM:      no
+Ruby Version:   2.3.3p222
+Gem Version:    2.6.6
+Bundler Version:1.13.7
+Rake Version:   12.0.0
+Redis Version:  3.2.5
+Git Version:    2.13.5
+Sidekiq Version:5.0.4
+Go Version:     unknown
+
+GitLab information
+Version:        9.5.1
+Revision:       c47ae37
+Directory:      /opt/gitlab/embedded/service/gitlab-rails
+DB Adapter:     postgresql
+URL:            https://git.domain.de
+HTTP Clone URL: https://git.domain.de/some-group/some-project.git
+SSH Clone URL:  git@git.domain.de:some-group/some-project.git
+Using LDAP:     no
+Using Omniauth: no
+
+GitLab Shell
+Version:        5.8.0
+Repository storage paths:
+- default:      /mnt/web/gitlab-data/repositories
+Hooks:          /opt/gitlab/embedded/service/gitlab-shell/hooks
+Git:            /opt/gitlab/embedded/bin/git
+
+</pre>
+</details>
+
+#### Results of GitLab application Check
+
+<details>
+<summary>Expand for output related to the GitLab application check</summary>
+<pre>
+Checking GitLab Shell ...
+
+GitLab Shell version >= 5.8.0 ? ... OK (5.8.0)
+Repo base directory exists?
+default... yes
+Repo storage directories are symlinks?
+default... no
+Repo paths owned by git:root, or git:git?
+default... yes
+Repo paths access is drwxrws---?
+default... yes
+hooks directories in repos are links: ... 
+4/2 ... repository is empty
+5/3 ... repository is empty
+8/4 ... ok
+13/5 ... repository is empty
+8/6 ... ok
+8/7 ... ok
+107/8 ... ok
+20/9 ... repository is empty
+21/11 ... ok
+23/12 ... ok
+8/13 ... ok
+8/14 ... ok
+28/15 ... repository is empty
+30/16 ... ok
+107/17 ... ok
+2/18 ... ok
+32/20 ... ok
+34/21 ... ok
+18/22 ... ok
+8/23 ... ok
+4/24 ... repository is empty
+3/25 ... ok
+3/26 ... ok
+107/27 ... ok
+39/28 ... ok
+40/29 ... ok
+107/30 ... ok
+24/31 ... ok
+18/33 ... ok
+42/34 ... ok
+25/35 ... ok
+107/36 ... ok
+40/37 ... ok
+4/38 ... repository is empty
+3/39 ... ok
+49/40 ... ok
+107/41 ... ok
+18/42 ... ok
+54/43 ... ok
+43/44 ... ok
+56/45 ... ok
+60/46 ... ok
+57/47 ... ok
+57/48 ... ok
+57/49 ... ok
+52/50 ... ok
+42/51 ... repository is empty
+40/52 ... ok
+32/53 ... ok
+32/54 ... ok
+70/55 ... ok
+70/56 ... ok
+8/58 ... ok
+78/61 ... ok
+82/62 ... ok
+107/63 ... ok
+40/66 ... ok
+86/67 ... ok
+40/68 ... ok
+91/70 ... ok
+94/71 ... ok
+94/72 ... repository is empty
+32/73 ... ok
+93/74 ... ok
+36/75 ... ok
+36/76 ... ok
+40/78 ... ok
+91/79 ... ok
+107/80 ... ok
+107/81 ... ok
+107/82 ... ok
+107/83 ... ok
+98/84 ... ok
+6/85 ... ok
+107/86 ... ok
+Running /opt/gitlab/embedded/service/gitlab-shell/bin/check
+Check GitLab API access: OK
+Access to /var/opt/gitlab/.ssh/authorized_keys: OK
+Send ping to redis server: OK
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking Reply by email ...
+
+Reply by email is disabled in config/gitlab.yml
+
+Checking Reply by email ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Git configured correctly? ... yes
+Database config exists? ... yes
+All migrations up? ... yes
+Database contains orphaned GroupMembers? ... no
+GitLab config exists? ... yes
+GitLab config up to date? ... yes
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Uploads directory exists? ... yes
+Uploads directory has correct permissions? ... yes
+Uploads directory tmp has correct permissions? ... no
+  Try fixing it:
+  sudo chown -R git /var/opt/gitlab/gitlab-rails/uploads
+  sudo find /var/opt/gitlab/gitlab-rails/uploads -type f -exec chmod 0644 {} \;
+  sudo find /var/opt/gitlab/gitlab-rails/uploads -type d -not -path /var/opt/gitlab/gitlab-rails/uploads -exec chmod 0700 {} \;
+  For more information see:
+  doc/install/installation.md in section "GitLab"
+  Please fix the error above and rerun the checks.
+Init script exists? ... skipped (omnibus-gitlab has no init script)
+Init script up-to-date? ... skipped (omnibus-gitlab has no init script)
+Projects have namespace: ... 
+4/2 ... yes
+5/3 ... yes
+8/4 ... yes
+13/5 ... yes
+8/6 ... yes
+8/7 ... yes
+107/8 ... yes
+20/9 ... yes
+21/11 ... yes
+23/12 ... yes
+8/13 ... yes
+8/14 ... yes
+28/15 ... yes
+30/16 ... yes
+107/17 ... yes
+2/18 ... yes
+32/20 ... yes
+34/21 ... yes
+18/22 ... yes
+8/23 ... yes
+4/24 ... yes
+3/25 ... yes
+3/26 ... yes
+107/27 ... yes
+39/28 ... yes
+40/29 ... yes
+107/30 ... yes
+24/31 ... yes
+18/33 ... yes
+42/34 ... yes
+25/35 ... yes
+107/36 ... yes
+40/37 ... yes
+4/38 ... yes
+3/39 ... yes
+49/40 ... yes
+107/41 ... yes
+18/42 ... yes
+54/43 ... yes
+43/44 ... yes
+56/45 ... yes
+60/46 ... yes
+57/47 ... yes
+57/48 ... yes
+57/49 ... yes
+52/50 ... yes
+42/51 ... yes
+40/52 ... yes
+32/53 ... yes
+32/54 ... yes
+70/55 ... yes
+70/56 ... yes
+8/58 ... yes
+78/61 ... yes
+82/62 ... yes
+107/63 ... yes
+40/66 ... yes
+86/67 ... yes
+40/68 ... yes
+91/70 ... yes
+94/71 ... yes
+94/72 ... yes
+32/73 ... yes
+93/74 ... yes
+36/75 ... yes
+36/76 ... yes
+40/78 ... yes
+91/79 ... yes
+107/80 ... yes
+107/81 ... yes
+107/82 ... yes
+107/83 ... yes
+98/84 ... yes
+6/85 ... yes
+107/86 ... yes
+Redis version >= 2.8.0? ... yes
+Ruby version >= 2.3.3 ? ... yes (2.3.3)
+Git version >= 2.7.3 ? ... yes (2.13.5)
+Active users: ... 96
+
+Checking GitLab ... Finished
+
+</pre>
+</details>
+
+### Possible fixes
+
+Add a check to the email change code that checks for compliance
+
+~bug ~"feature proposal" 

@@ -1,0 +1,9 @@
+Missing template for intra-SIG governance
+
+
+There is a short template file missing for intra-SIG governance in the below file. https://github.com/kubernetes/community/blob/master/governance.md
+A short template for intra-SIG governance has been developed in order to simplify SIG creation, and additional templates are being developed, but SIGs should be relatively free to customize or change how they operate, within some broad guidelines and constraints imposed by cross-SIG processes (e.g., the release process) and assets (e.g., the kubernetes repo).
+
+I think the link to the template is either deleted or missing. https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+If the template needs to be created, I'm happy to help.
+@nikhita @parispittman

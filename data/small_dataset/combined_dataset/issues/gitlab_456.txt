@@ -1,0 +1,19 @@
+When reassigning an issue, an incorrect email notification is sent. An issue was originally assigned to me (Geoffrey Fairchild). I had a colleague reassign the issue to himself and then back to me. These are the two emails I received (in this order).
+
+First:
+
+> Reassigned Issue 30
+> 
+> https://git.***.***/***/project/issues/30
+> 
+> Assignee changed from Geoffrey Fairchild to Geoffrey Fairchild
+
+Second:
+
+> Reassigned Issue 30
+> 
+> https://git.***.***/***/project/issues/30
+> 
+> Assignee changed from *** to Geoffrey Fairchild
+
+I don't really understand the first email. Shouldn't that say "Assignee changed from Geoffrey Fairchild to ***"? This consistently happens every time we reassign issues.

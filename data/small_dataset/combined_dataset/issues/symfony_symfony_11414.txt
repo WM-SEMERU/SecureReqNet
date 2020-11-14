@@ -1,0 +1,45 @@
+[Security] [Firewall] Bug fixed in SimplePreAuthenticationListener when createToken() not return TokenInterface object
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+#11490
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

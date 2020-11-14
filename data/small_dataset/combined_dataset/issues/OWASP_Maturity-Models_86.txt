@@ -1,0 +1,8 @@
+Write test that checks travis logs for leak of GitHub tokens
+
+
+as seen at
+
+and
+https://api.travis-ci.org/jobs/141860636/log.txt?deansi=true
+Interesting question is where and when to run this

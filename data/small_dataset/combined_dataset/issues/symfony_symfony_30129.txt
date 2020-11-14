@@ -1,0 +1,65 @@
+[Console] Extended commands aren't using parent $defaultName
+
+
+Symfony version(s) affected: 4.2.3
+Description
+I'm trying to add abstract base commands in my framework so the app can freely extend these. I've noticed that you always have to declare static::$defaultName in the child classes as this property (inherited from the parent class) is ignored in Command::getDefaultName().
+This is because get_called_class() (ie.: App\Command\RequestCommand) won't match the reflected property class ($r->class  ie.: Framework\Commands\RequestCommand) so Command::getDefaultName() will return null.
+The bug that I'm reporting is that you must always declare static::$defaultName if you are about to extend a command. Symfony ignores inheritance here.
+How to reproduce
+
+Base command:
+
+<?php
+namespace Framework\Command;
+
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+abstract class RequestCommand extends Command
+{
+    protected static $defaultName = 'app:request';
+    protected function configure()
+    {
+        $this
+          ->setDescription('Forge and resolve an HTTP request.')
+          ->setHelp('This command allows you to forge an HTTP request from the CLI.');
+    }
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        dd('exec app:request');
+    }
+}
+
+Extended command:
+
+<?php
+namespace App\Command;
+
+use Framework\Command\RequestCommand as BaseCommand;
+
+class RequestCommand extends BaseCommand
+{
+    //protected static $defaultName = 'app:request'; // you have to uncomment this line to get symfony to read this property
+}
+
+Possible Solution
+I think that this could get easily fixed by using a class reflector in Symfony/Component/Console/Command/Command.php:
+    /**
+     * @return string|null The default command name or null when no default name is set
+     */
+    public static function getDefaultName()
+    {
+        $class = \get_called_class();
+        $c = new \ReflectionClass($class);
+        $r = new \ReflectionProperty($class, 'defaultName');
+        return $class === $r->class || $c->isSubclassOf($r->class) ? static::$defaultName : null;
+    }
+By doing that, the Command::getDefaultName() method will be aware of the extended commands. However, I'm don't know why Symfony needs the matching  $class === $r->class anyway? so I didn't issue this as a pull request.
+Maybe detect if the class is abstract?
+Additional context
+This is the error that I'm getting:
+The command defined in "App\Command\RequestCommand" cannot have an empty name.
+
+To get it working, you have to repeat the property declaration static::$defaultName in your child classes which is a bummer as I want to add some base "default" commands directly in the framework.

@@ -1,0 +1,165 @@
+build(deps-dev): bump mocha from 6.0.2 to 6.1.1
+
+
+Bumps mocha from 6.0.2 to 6.1.1.
+
+Release notes
+Sourced from mocha's releases.
+
+v6.1.1
+6.1.1 / 2019-04-07
+🐛 Fixes
+
+Fix Windows End-of-Line publishing issue
+
+v6.1.0
+6.1.0 / 2019-04-07
+🔒 Security Fixes
+
+#3845: Update dependency "js-yaml" to v3.13.0 per npm security advisory ([@​plroebuck](https://github.com/plroebuck))
+
+🎉 Enhancements
+
+#3766: Make reporter constructor support optional options parameter ([@​plroebuck](https://github.com/plroebuck))
+#3760: Add support for config files with .jsonc extension ([@​sstephant](https://github.com/sstephant))
+
+📠 Deprecations
+These are soft-deprecated, and will emit a warning upon use. Support will be removed in (likely) the next major version of Mocha:
+
+#3719: Deprecate this.skip() for "after all" hooks ([@​juergba](https://github.com/juergba))
+
+🐛 Fixes
+
+#3829: Use cwd-relative pathname to load config file ([@​plroebuck](https://github.com/plroebuck))
+#3745: Fix async calls of this.skip() in "before each" hooks ([@​juergba](https://github.com/juergba))
+#3669: Enable --allow-uncaught for uncaught exceptions thrown inside hooks ([@​givanse](https://github.com/givanse))
+
+and some regressions:
+
+#3848: Fix Suite cloning by copying root property ([@​fatso83](https://github.com/fatso83))
+#3816: Guard against undefined timeout option ([@​boneskull](https://github.com/boneskull))
+#3814: Update "yargs" in order to avoid deprecation message ([@​boneskull](https://github.com/boneskull))
+#3788: Fix support for multiple node flags ([@​aginzberg](https://github.com/aginzberg))
+
+📖 Documentation
+
+mochajs/mocha-examples: New repository of working examples of common configurations using mocha ([@​craigtaub](https://github.com/craigtaub))
+#3850: Remove pound icon showing on header hover on docs ([@​jd2rogers2](https://github.com/jd2rogers2))
+#3812: Add autoprefixer to documentation page CSS ([@​Munter](https://github.com/Munter))
+#3811: Update doc examples "tests.html" ([@​DavidLi119](https://github.com/DavidLi119))
+#3807: Mocha website HTML tweaks ([@​plroebuck](https://github.com/plroebuck))
+#3793: Update config file example ".mocharc.yml" ([@​cspotcode](https://github.com/cspotcode))
+
+🔩 Other
+
+#3830: Replace dependency "findup-sync" with "find-up" for faster startup ([@​cspotcode](https://github.com/cspotcode))
+
+ ... (truncated)
+
+
+
+Changelog
+Sourced from mocha's changelog.
+
+6.1.1 / 2019-04-07
+🐛 Fixes
+
+Fix Windows End-of-Line publishing issue
+
+6.1.0 / 2019-04-07
+🔒 Security Fixes
+
+#3845: Update dependency "js-yaml" to v3.13.0 per npm security advisory ([@​plroebuck](https://github.com/plroebuck))
+
+🎉 Enhancements
+
+#3766: Make reporter constructor support optional options parameter ([@​plroebuck](https://github.com/plroebuck))
+#3760: Add support for config files with .jsonc extension ([@​sstephant](https://github.com/sstephant))
+
+📠 Deprecations
+These are soft-deprecated, and will emit a warning upon use. Support will be removed in (likely) the next major version of Mocha:
+
+#3719: Deprecate this.skip() for "after all" hooks ([@​juergba](https://github.com/juergba))
+
+🐛 Fixes
+
+#3829: Use cwd-relative pathname to load config file ([@​plroebuck](https://github.com/plroebuck))
+#3745: Fix async calls of this.skip() in "before each" hooks ([@​juergba](https://github.com/juergba))
+#3669: Enable --allow-uncaught for uncaught exceptions thrown inside hooks ([@​givanse](https://github.com/givanse))
+
+and some regressions:
+
+#3848: Fix Suite cloning by copying root property ([@​fatso83](https://github.com/fatso83))
+#3816: Guard against undefined timeout option ([@​boneskull](https://github.com/boneskull))
+#3814: Update "yargs" in order to avoid deprecation message ([@​boneskull](https://github.com/boneskull))
+#3788: Fix support for multiple node flags ([@​aginzberg](https://github.com/aginzberg))
+
+📖 Documentation
+
+mochajs/mocha-examples: New repository of working examples of common configurations using mocha ([@​craigtaub](https://github.com/craigtaub))
+#3850: Remove pound icon showing on header hover on docs ([@​jd2rogers2](https://github.com/jd2rogers2))
+#3812: Add autoprefixer to documentation page CSS ([@​Munter](https://github.com/Munter))
+#3811: Update doc examples "tests.html" ([@​DavidLi119](https://github.com/DavidLi119))
+#3807: Mocha website HTML tweaks ([@​plroebuck](https://github.com/plroebuck))
+#3793: Update config file example ".mocharc.yml" ([@​cspotcode](https://github.com/cspotcode))
+
+🔩 Other
+
+#3830: Replace dependency "findup-sync" with "find-up" for faster startup ([@​cspotcode](https://github.com/cspotcode))
+#3799: Update devDependencies to fix many npm vulnerabilities ([@​XhmikosR](https://github.com/XhmikosR))
+
+
+
+
+Commits
+
+9b516bf Release v6.1.1
+9e138b1 update CHANGELOG for v6.1.1 [ci skip]
+d7de948 Set eol for publishing
+f4fc95a Release v6.1.0
+bd29dbd update CHANGELOG for v6.1.0 [ci skip]
+aaf2b72 Use cwd-relative pathname to load config file (#3829)
+b079d24 upgrade deps as per npm audit fix; closes #3854
+e87c689 Deprecate this.skip() for "after all" hooks (#3719)
+81cfa90 Copy Suite property "root" when cloning; closes #3847 (#3848)
+8aa2fc4 Fix issue 3714, hide pound icon showing on hover header on docs page (#3850)
+Additional commits viewable in compare view
+
+
+
+Maintainer changes
+This version was pushed to npm by juergba, a new releaser for mocha since your current version.
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot squash and merge will squash and merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge and block automerging
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

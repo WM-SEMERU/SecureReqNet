@@ -1,0 +1,13 @@
+Add more functional tests to auth samples
+
+
+
+ ClaimsTransformation
+ Cookies
+ CustomPolicyProvider
+ DynamicSchemes
+ Identity.External
+ PathSchemes
+ StaticFileAuthZ
+ https://github.com/blowdart/AspNetAuthorizationWorkshop (need to create sample as well)
+

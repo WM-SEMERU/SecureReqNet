@@ -1,0 +1,4 @@
+Add example for using a voter to restrict switch_user
+
+
+This recreates #9353, which has too many conflicts when merging it.

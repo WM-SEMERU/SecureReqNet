@@ -1,0 +1,19 @@
+CouchDB-Container loses connection when saving data very fast
+
+
+Description
+I am saving the output of a simulated CAN interface with a node js system to a CouchDB database in a docker container. This are very small data sets which are read from the interface very fast. I registered an EventListener which saves every message to the couchDB using nano(library). After aproximately ~150 messages which get saved successfully to the db (this takes about 1 second) the connection crashes and is refused by the database (also its not possible to reach the db via browser from outside the container after this point).
+When logging into the docker container via bash everything seems to be working fine --> container running, port 5984 exposed, couchDB on 0.0.0.0:5984 reachable via curl. If I restart the container everything is working fine again, up until I run the CAN dump again.
+So does anybody maybe know if this is an issue with the docker container or maybe with too many couchDB connections/saves?
+Example CAN message --> 1 dataset:
+{ ts_sec: 1553609965, ts_usec: 113638, id: 319, data: <Buffer 00 00 00 05 00 00 00 1f> }
+Error message from DB after the saves:
+{ Error: connect ECONNREFUSED 127.0.0.1:5984 at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1104:14) name: 'Error', scope: 'socket', errid: 'request', errno: 'ECONNREFUSED', code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 5984, description: 'connect ECONNREFUSED 127.0.0.1:5984', stacktrace: [ 'Error: connect ECONNREFUSED 127.0.0.1:5984', '    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1104:14)' ] }
+Steps to Reproduce
+Install CouchDB docker container
+Save about 150 datasets to db using nano and node js in ~1 sec or faster
+Your Environment
+CouchDB: https://hub.docker.com/_/couchdb - image from the time of this post
+Browser name and version: Chrome
+Operating System and version: Official Kali Linux 19.1 virtualboxVM
+Thank you very much and it would be great if somebody has an idea how I could solve this problem besides a hack to save the data slower to the db...

@@ -1,0 +1,41 @@
+[WIP] Golang 1.12 regressions benchmark
+
+
+Ref #75833
+The results differ when playing with number of go-routines and items processed by a single one, but in general, with go 1.12 the latency is 20%+ higher than with go 1.11
+This is the example for 200.000 workers, 2500 items for each of them:
+go 1.12:
+--- FAIL: BenchmarkLatency
+    serialization_proto_test.go:277: 99th perc: 36476
+FAIL
+exit status 1
+FAIL	k8s.io/kubernetes/pkg/api/testing	537.319s
+--- FAIL: BenchmarkLatency
+    serialization_proto_test.go:277: 99th perc: 36227
+FAIL
+exit status 1
+FAIL	k8s.io/kubernetes/pkg/api/testing	528.838s
+--- FAIL: BenchmarkLatency
+    serialization_proto_test.go:277: 99th perc: 36471
+FAIL
+exit status 1
+FAIL	k8s.io/kubernetes/pkg/api/testing	528.875s
+
+go 1.11:
+--- FAIL: BenchmarkLatency
+    serialization_proto_test.go:277: 99th perc: 29372
+FAIL
+exit status 1
+FAIL	k8s.io/kubernetes/pkg/api/testing	553.116s
+--- FAIL: BenchmarkLatency
+    serialization_proto_test.go:277: 99th perc: 28774
+FAIL
+exit status 1
+FAIL	k8s.io/kubernetes/pkg/api/testing	527.144s
+--- FAIL: BenchmarkLatency
+    serialization_proto_test.go:277: 99th perc: 28263
+FAIL
+exit status 1
+FAIL	k8s.io/kubernetes/pkg/api/testing	518.509s
+
+I'm not convinced this is exactly reason of our regression, but it may definitely contribute to it.

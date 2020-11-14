@@ -1,0 +1,5 @@
+Is there any way to get the Lambda context within the handler fuctions?
+
+
+The funtions in the SparkResources class, which are the REST controller funcitons, don't appear to have any means of getting a hold of the Lambda context object. (It isn't in the signature of the Route defined in the SparkResources class.)
+Hopefully I'm wrong about that. If so, how can the context be accessed?

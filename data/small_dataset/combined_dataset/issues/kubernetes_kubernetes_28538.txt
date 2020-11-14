@@ -1,0 +1,5 @@
+Allow use of encrypted secrets
+
+
+If secret contents could be encrypted/decrypted by an encryption provider plugin (e.g., KMS on AWS) running in the kube master or in kubelets (though the kubelet option may require more complex IAM setup), then it would be acceptable to check in secret manifests into source control.
+This is a significant pain point for my team at the moment.

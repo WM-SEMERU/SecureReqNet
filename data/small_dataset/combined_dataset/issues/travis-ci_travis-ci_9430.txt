@@ -1,0 +1,15 @@
+Environment Variables are insecure and transferred to new repository owners
+
+
+If a GitHub repository is transferred to a new owner, all associated environment variables are transferred as well - including the "secure" ones.
+Reproduction - Short Version
+The short version is this:
+
+On one GitHub account, create a repository with a .travis.yml file
+On the Travis CI account associated with step 1, set up an environment variable and elect not to show the value in the build log
+Transfer the GitHub repository to another account.
+
+At this point, the environment variables defined in step 2 are accessible by the new owner from step 3.
+
+The longer version is that these "secure" variables aren't actually secure. Simple string manipulations can expose the variables in the build log and they are transferred to the new owner.
+I've written a longer write up on this bug here. It was originally reported in December of 2017 to the security team, but multiple followups haven't been responded to. At this point, we're over three months since the initial report and I feel others need to know that their environment variables can be accessed if you transfer your repository or if you have a malicious commit applied to your build scripts, where you manipulate the build log string outputs to show the variable values.

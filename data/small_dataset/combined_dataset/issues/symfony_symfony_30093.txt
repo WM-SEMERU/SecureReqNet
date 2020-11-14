@@ -1,0 +1,50 @@
+[DependencyInjection] add $lazyLoad context to the generated code for lazy non-shared service by PhpDumper
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.1
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29930
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Fix #29930  by adding $lazyLoad context to the generated code for lazy non-shared service by PhpDumper

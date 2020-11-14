@@ -1,0 +1,18 @@
+Basic audit log
+
+
+Fixes #2203 by introducing simple audit logging, including the information about impersonation. We currently have something identical in openshift, but I'm open to any suggestions. Sample logs look like that:
+as <self>:
+AUDIT: id="75114bb5-970a-47d5-a5f1-1e99cea0574c" ip="127.0.0.1" method="GET" user="test-admin" as="<self>" namespace="openshift" uri="/api/v1/namespaces/openshift/pods/python"
+AUDIT: id="75114bb5-970a-47d5-a5f1-1e99cea0574c" response=200
+
+as user:
+AUDIT: id="b0a443ae-f7d8-408c-a355-eb9501fd5c59" ip="192.168.121.118" method="GET" user="system:admin" as="test-admin" namespace="openshift" uri="/api/v1/namespaces/openshift/pods/python"
+AUDIT: id="b0a443ae-f7d8-408c-a355-eb9501fd5c59" response=200
+
+* Add basic audit logging
+
+@ericchiang @smarterclayton @roberthbailey @erictune @ghodss
+
+
+This change is 

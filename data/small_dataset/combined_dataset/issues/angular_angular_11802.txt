@@ -1,0 +1,6 @@
+refactor(TemplateParser): clearer error message for on* binding
+
+
+fixes #11756
+security related
+/cc @mhevery @rjamet @mprobst

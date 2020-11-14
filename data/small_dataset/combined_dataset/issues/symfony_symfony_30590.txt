@@ -1,0 +1,50 @@
+[WIP] [Console] Pretty word wrapping
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30519
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11190
+
+
+
+This new feature was born from a bugfix. This feature add a PrettyWordWrapping class that you can use in console, when you want to wrap the text.

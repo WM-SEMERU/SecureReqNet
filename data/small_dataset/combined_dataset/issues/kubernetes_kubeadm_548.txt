@@ -1,0 +1,6 @@
+Regenerate API server serving certificates when upgrading to v1.9
+
+
+As kubeadm went beta in v1.6 (March 2016), we have supported upgrading clusters since, and the API server serving certs are valid for one year, we now have to add support for refreshing the API server serving certs when upgrading.
+Otherwise we risk having invalid certs at the time v1.10 is released (might be before or after, and consumers might take some time to upgrade to v1.10)
+What we basically need to do is nothing else than backing up /etc/kubernetes/pki/apiserver.{crt,key} to an expired directory or something like that, and invoking kubeadm alpha phase certs apiserver internally, just generating the API server serving cert again in cmd/kubeadm/app/phases/upgrade/postupgrade.go

@@ -1,0 +1,19 @@
+Hello,
+
+renaming a repo over the settings page (dangerous settings) lead into a 500 error.
+It would be good to redirect the user after renaming.
+
+Following can be found in the log:
+```
+Started PATCH "/thework/thework-console" for xxx at 2014-08-11 14:07:08 +0200
+Processing by ProjectsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4OU+TBX5w3ZxomRrnNEJw3HrbMADuJf2ecON7Oi8Pt0=", "project"=>{"path"=>"console"}, "id"=>"thework/thework-console"}
+Completed 500 Internal Server Error in 454ms
+
+Exception (repository cannot be renamed):
+  app/models/project.rb:522:in `rename_repo'
+  app/services/projects/update_service.rb:17:in `execute'
+  app/controllers/projects_controller.rb:32:in `update'
+```
+
+It seems that the repository isn't renamed on the file system.

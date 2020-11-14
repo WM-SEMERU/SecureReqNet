@@ -1,0 +1,15 @@
+Monitor and Troubleshooting logs docs out of sync with Docker UCP 3.1.x logs
+
+
+Problem description
+This Monitoring and Troubleshooting docs for logs doesn't sync up with Docker UCP 3.1.x UI. There is no "Configure Remote Syslog Server" in Docker UCP 3.1.5.
+Problem location
+https://docs.docker.com/ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+The UCP-->Admin Settings-->Logs UI has changed in UCP version 3.1.x
+https://docs.docker.com/ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+The following screen shot is for UCP3.1.5, doesn't match the docs
+
+Project version(s) affected
+UCP: 3.1.5
+Engine: 18.09
+Suggestions for a fix

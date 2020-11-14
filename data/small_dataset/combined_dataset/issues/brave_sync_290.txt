@@ -1,0 +1,9 @@
+Check text on bad request status
+
+
+When the time or/and time zone on the client device is not correct, sync auth server rejects authentication with error 400/'Signed request body of the client timestamp is required.'. The clients can see only Credential server response 400 . For the case when it is caused by time issue, this is passed to the client.
+Fixes: #157 .
+Probably addresses:
+#114
+#212
+brave/browser-android-tabs#788

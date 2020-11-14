@@ -1,0 +1,11 @@
+Application has no ability to set file based permissions for Data repos
+
+
+This means that it will not be possible to prevent user of data "repo A" to modify data from "repo B"
+The current model is based on running the full app on Docker.
+So if isolation between repos (and data stores) is needed, then run it on different containers
+See also:
+
+There is no Authentication and Authorization #16
+All data can be modified by web users #35
+

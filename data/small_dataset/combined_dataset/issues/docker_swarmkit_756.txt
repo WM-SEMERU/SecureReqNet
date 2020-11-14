@@ -1,0 +1,6 @@
+Store node ID to check on certificate issuance
+
+
+Currently, if the node restarts before its certificate gets issued, it will request a new one. The old node entry will stay around, but no node will ever use it. If a node got into a crash loop where it requested certificates but never received them, it might DoS the managers by creating new node entries in a loop.
+I think we should store the node ID in a file after we get it back from the IssueNodeCertificate request. Then on restart, if this ID exists, we should wait for the certificate to be issued instead of requesting a new certificate.
+cc @diogomonica @tonistiigi

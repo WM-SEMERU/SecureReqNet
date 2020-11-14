@@ -1,0 +1,44 @@
+The following ldapsearch command works, flawlessly. 
+
+> ldapsearch -LLL -s sub -P 3 -D "CN=<username>,OU=IT,OU=Non-Users,OU=Users,OU=UserAccount,DC=<company>,DC=com" -H ldaps://<ldap.company>.com:<port> -w '<password>' -v -b 'OU=Users,OU=UserAccount,DC=<company>,DC=com' '(&(objectClass=person)(sAMAccountName=<query_username>))'
+
+But, regardless, of how much I double-check the values are typed correctly, this, configured in gitlab.yml, does not. 
+
+>   ldap:
+>     enabled: true
+>     host: '<ldap.company>.com'
+>     port: <port>
+>     uid: 'sAMAccountName'
+>     method:  'ssl'
+>     bind_dn: 'CN=<username>,OU=IT,OU=Non-Users,OU=Users,OU=UserAccount,DC=<company>,DC=com'
+>     password: '<password>'
+>     allow_username_or_email_login: true
+>     base: 'OU=Users,OU=UserAccount,DC=<company>,DC=com'
+>     user_filter: ''
+>     group_base: ''
+
+Yes, the BindDN is at a different location than the other users, but it is south of it, so the query base is valid. 
+
+All attempts throw this error on the screen: 
+> Could not authorize you from LDAP because "Invalid credentials"
+
+production.log indicates the following: 
+
+> Started GET "/users/sign_in" for 127.0.0.1 at 2014-07-18 08:13:17 -0400
+> Processing by Devise::SessionsController#new as HTML
+> Completed 200 OK in 21ms (Views: 12.8ms | ActiveRecord: 0.0ms)
+> Started POST "/users/auth/ldap/callback" for 127.0.0.1 at 2014-07-18 08:13:25 -0400
+> Processing by OmniauthCallbacksController#failure as HTML
+>   Parameters: {"utf8"=>"✓", "authenticity_token"=>"<token>", "username"=>"<login_user>", "password"=>"[FILTERED]"}
+> Redirected to http://<IP>/users/sign_in
+> Completed 302 Found in 3ms (ActiveRecord: 0.0ms)
+> Started GET "/users/sign_in" for 127.0.0.1 at 2014-07-18 08:13:56 -0400
+> Processing by Devise::SessionsController#new as HTML
+> Completed 200 OK in 10ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+> Started POST "/users/auth/ldap/callback" for 127.0.0.1 at 2014-07-18 08:20:03 -0400
+
+The LDAP in question is Active Directory, and while I don't have access to the server natively in order to query the logs, the "badPwdCount" is incremented for each attempt at a web login, and I don't understand how, or why.  
+
+I know the perils of end users and their insistence that they're typing their usernames and passwords in correctly, but I've checked, triple-checked, octuple-checked that there aren't any typos in my declarations, and I can't find any other incident with this same error combination.  I know that the syntax here is correct.  
+
+What could possibly be the problem? 

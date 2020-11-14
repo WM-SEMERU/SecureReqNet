@@ -1,0 +1,54 @@
+fix(bazel): structure change in template files for correctly start with Bazel
+
+
+🐞 bug report
+Affected Package
+@angular/bazel@8.0.0-beta.11
+Is this a regression?
+No
+Description
+I start the server via the ng serve command.
+All dependencies that are in the rule ts_devserver in scripts attribute in development console failed with Error: 404. And does not start the development-server correctly.
+🔬 Minimal Reproduction
+🌍  Your Environment
+"dependencies": {
+    "@angular/animations": "8.0.0-beta.11",
+    "@angular/bazel": "8.0.0-beta.11",
+    "@angular/common": "8.0.0-beta.11",
+    "@angular/compiler": "8.0.0-beta.11",
+    "@angular/core": "8.0.0-beta.11",
+    "@angular/forms": "8.0.0-beta.11",
+    "@angular/platform-browser": "8.0.0-beta.11",
+    "@angular/platform-browser-dynamic": "8.0.0-beta.11",
+    "@angular/router": "8.0.0-beta.11",
+    "core-js": "^2.5.4",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.8.26"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "0.800.0-beta.11",
+    "@angular/cli": "8.0.0-beta.10",
+    "@angular/compiler-cli": "8.0.0-beta.11",
+    "@angular/language-service": "8.0.0-beta.11",
+    "@bazel/bazel": "^0.24.0",
+    "@bazel/ibazel": "^0.9.0",
+    "@bazel/karma": "^0.27.9",
+    "@bazel/typescript": "^0.27.9",
+    "@types/node": "~8.9.4",
+    "@types/jasmine": "~2.8.8",
+    "@types/jasminewd2": "~2.0.3",
+    "codelyzer": "~4.5.0",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~4.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "~5.4.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.11.0",
+    "typescript": "3.3.3333"
+  }
+

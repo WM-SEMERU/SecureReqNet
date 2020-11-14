@@ -1,0 +1,3 @@
+I have a Gitlab 6.7.5 installed via omnibus. I had to setup a new instance without the omnibus install so I installed the latest 6.8.1. Now when I try to restore from the backup that was taken with 6.7.5, it complains with an error.
+
+Is there a recommended way for dealing with this issue?

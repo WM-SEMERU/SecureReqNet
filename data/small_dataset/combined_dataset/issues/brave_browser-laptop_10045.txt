@@ -1,0 +1,8 @@
+Import Encrypted Cookies from Chrome
+
+
+Testplan
+#10045 (comment)
+
+For now, we can only import unencrypted cookies which is not very useful for users
+Depends on #10044 , we don't want encrypted cookies to be unencrypted after importing

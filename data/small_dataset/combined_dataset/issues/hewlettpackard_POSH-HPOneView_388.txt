@@ -1,0 +1,32 @@
+Add-HPOVEnclosure -Monitored does not work with -Credentials parameter
+
+
+When using -Credential paramater it asks for EnclosureGroup, which it shouldn't since adding a monitored only enclosure.
+Using -username/password parameters works fine.
+Steps to reproduce
+PS C:\Scripts\OneView> Add-HPOVEnclosure -Hostname 10.38.106.4 -Monitored -Credential $HPiLOCred
+
+cmdlet Add-HPOVEnclosure at command pipeline position 1
+Supply values for the following parameters:
+EnclosureGroup:
+PS C:\Scripts\OneView> Add-HPOVEnclosure -Hostname 10.38.106.4 -Monitored -Username Administrator -Password ########
+WARNING: The -Username and -Password parameters are being deprecated.  Please transition your scripts to using the -Credential parameter.
+
+Appliance        Name Owner         Created            Duration TaskState PercentComplete
+---------        ---- -----         -------            -------- --------- ---------------
+hpeov            Add  Administrator 30.1.2019 22.16.57 00:08:50 Completed 100
+Version Information
+ApplianceVersion: 4.10.04.370820.00
+LibraryVersion: 4.10.1889.2173
+PS C:\Scripts\OneView> $PSVersionTable
+
+Name                           Value
+----                           -----
+PSVersion                      5.1.17134.407
+PSEdition                      Desktop
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                   10.0.17134.407
+CLRVersion                     4.0.30319.42000
+WSManStackVersion              3.0
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1

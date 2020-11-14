@@ -1,0 +1,10 @@
+old version doesn't work after install new version of Dotnet Core
+
+
+Describe the bug
+I've install the new version of .Net Core 2.2.202. But I have a project with .Net Core 2.0.
+
+When I trid to build in Visual Studio 2017, it showed the following message:
+
+Since I couldn't build the project with current 2.2.202. I uninstalled the SDK 2.2.202. But It still didn't work.
+So how can I revert to the old environment or I can exchange the .Net Core SDK in Visual Studio 2017?

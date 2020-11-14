@@ -1,0 +1,15 @@
+Drag and drop not working cdkDragBoundary in Responsive layout
+
+
+Hi,
+I am using Angular CDK 7.3.7  Drag and drop with cdkDragBoundary. Its working fine until the screen size changed, if I changed then the boundary restriction is not working perfectly ie the restriction area  not changing as per new dimension of  responsive layout.
+Is it know issue or do i need to do anything in my coding. I am using Angular through webpack hook for customize as per project requirement. Please find the version I am using
+"npm version": "6.9.0",
+"node version": "10.15.3",
+"@angular/cdk": "^7.3.6",
+"@angular/common": "^7.1.2",
+"@angular/compiler": "^7.1.2",
+"@angular/compiler-cli": "^7.2.8",
+"@angular/core": "^7.1.2",
+"webpack": "^4.20.2",
+"typescript": "^3.1.1",

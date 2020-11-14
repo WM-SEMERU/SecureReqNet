@@ -1,0 +1,19 @@
+Cannot set Brave as default browser Arch Linux
+
+
+Description
+Cannot set Brave as the default browser in Arch linux. Set as default option does nothing.
+System:
+Kernel: 4.19.4-zen1-1-zen x86_64 bits: 64
+Desktop: Gnome 3.30.2
+Distro: Arch Linux
+Steps to Reproduce
+
+Install brave-bin or brave-dev-bin from the AUR
+Run the Brave browser
+Click on "Set as default" browser button
+Rinse and repeat...
+
+What version of Brave are you using?
+Brave Version 0.56.15 Chromium: 70.0.3538.110 (Official Build) unknown (64-bit)
+In case you need any further information regarding the matter or troubleshooting, let me know and I will happily help out.

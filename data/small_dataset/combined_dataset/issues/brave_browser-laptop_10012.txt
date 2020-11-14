@@ -1,0 +1,31 @@
+WebTorrent: Torrent server should be restricted to same origin
+
+
+
+
+Did you search for similar issues before submitting this one? Yes.
+
+
+Describe the issue you encountered:
+
+
+another origin could make an XHR or fetch request to the localhost torrent server URL, if they could guess the server address + port + url, which isn't very hard through enumeration.
+
+
+Platform (Win7, 8, 10? macOS? Linux distro?): All
+
+
+Brave Version (revision SHA): master
+
+
+Steps to reproduce:
+
+Open inspector on a webtorrent media viewer page.
+Select the <video> node and copy the URL.
+Make a fetch or XHR request from another domain and see that it is allowed.
+
+
+
+Can this issue be consistently reproduced? Yes.
+
+

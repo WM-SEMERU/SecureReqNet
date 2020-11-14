@@ -1,0 +1,7 @@
+Include the Safe* interfaces in the exports of @angular/platform-browser
+
+
+After reading #8491, I tried to implement the solution to mark the generated style string as safe.
+this.svgUrl = sanitizer.bypassSecurityTrustStyle('url(\'image.svg\')');
+However, bypassSecurityTrustStyle() returns SafeStyle instead of string (as the comment suggests) and this marker interface isn't exported by @angular/platform-browser. That means, I cannot properly type my class member.
+Please export the marker interfaces SafeStyle, SafeHtml, etc. so this solution works without any.

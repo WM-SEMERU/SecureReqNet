@@ -1,0 +1,16 @@
+remove about:preferences from web_accessible_resources
+
+
+fix #4913
+Auditors: @bridiver
+Test Plan:
+
+open about:preferences and open devtools
+the top-level HTTP response should not show an 'Access-Control-Allow-Origin' header
+
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+

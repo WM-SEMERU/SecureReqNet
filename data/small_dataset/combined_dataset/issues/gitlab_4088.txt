@@ -1,0 +1,27 @@
+Zendesk: https://gitlab.zendesk.com/agent/tickets/13482  
+GitLab: 8.2.3  
+
+## Description
+CRIME vulnerability based on the following Nessus report:
+
+> #### Description  
+> This remote service has one of two configurations that are known to be required for the CRIME attack:
+> - SSL/TLS compression is enabled.
+> - TLS advertises the SPDY protocol earlier than version 4.   
+> ...  
+
+> #### Output  
+> The following configuration indicates that the remote service 
+> may be vulnerable to the CRIME attack:  
+>   - SPDY support earlier than version 4 is advertised. 
+
+Currently there is no way of disabling SPDY from ```/etc/gitlab/gitlab.rb``` and manual patches of NGINX are overwritten on ```gitlab-ctl reconfigure```.
+
+## Next Steps
+* Follow up on plans to migrate to HTTP2 and remove the SPDY support. 
+* Before we get there I suggest, if possible, an option from ```gitlab.rb```to manage SPDY
+* Update our embedded NGINX to the latest version. Pretty sure this is part of the first option though.   
+
+***
+
+Any ideas would be much appreciated @JobV @ayufan @dblessing 

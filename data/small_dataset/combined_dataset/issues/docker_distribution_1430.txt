@@ -1,0 +1,8 @@
+Evaluate impact of nss/nspr issues
+
+
+ceph-rados people, can you assess how the following is (possibly) impacting librados? (cc @gierschv )
+
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7183
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7575
+

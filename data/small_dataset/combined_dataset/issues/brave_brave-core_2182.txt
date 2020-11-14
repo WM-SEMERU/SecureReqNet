@@ -1,0 +1,55 @@
+Hides expiry date for ads
+
+
+Resolves brave/brave-browser#4042
+UI implementation: brave/brave-ui#444
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+Verified that these changes build without errors on
+
+ Windows
+ macOS
+ Linux
+
+
+Verified that these changes pass automated tests (npm test brave_unit_tests && npm test brave_browser_tests && npm run test-security) on
+
+ Windows
+ macOS
+ Linux
+
+
+ Verified that all lint errors/warnings are resolved (npm run lint)
+ Ran git rebase master (if needed).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed.
+ Add appropriate QA labels (QA/Yes or QA/No) to include the closed issue in milestone
+
+Test Plan:
+plan 1:
+
+clean profile
+enable rewards
+claim grant from settings page and panel and make sure that it shows expiration date
+make sure that you also see expiration date in the wallet under details (settings and panel)
+
+plan 2:
+
+clean profile
+enable rewards
+view some ads
+get ads grant
+make sure that you don't see expiration date on the final step
+make sure that you don't see expiration date in the wallet under details (settings and panel)
+
+Reviewer Checklist:
+
+ New files have MPL-2.0 license header.
+ Request a security/privacy review as needed.
+ Adequate test coverage exists to prevent regressions
+ Verify test plan is specified in PR before merging to source
+

@@ -1,0 +1,67 @@
+[Security] add "lazy_authentication" mode to firewalls
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26769 et al.
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Wouhou, here is my first significant PR on the Security component :)
+This PR is aimed at allowing unauthenticated access to resources that don't read the user token. It applies to stateful firewalls only. Right now, when a stateful firewall is configured, a user token is always hydrated from the session. This has the effect of making the response uncacheable.
+When access control defines no specific roles for a resource and when no further is_granted() checks are made when computing it, one doesn't really need statefulness.
+This PR allows differentiating the "anonymous" mode from the "unauthenticated" one: "anonymous" is stateful and allows e.g. tracking the journey of a user on a website even if we don't know who this is. "unauthenticated" on the other end is anonymous+stateless - i.e. we don't track navigation.
+When "lazy_authentication" is enabled, all security listeners are called lazily only when the user token is actually read from the token storage.
+A visible side effect is that ESI fragments can be more easily cached (see linked issue). Another one is that the debug toolbar will report as "unauthenticated" when browsing such a page. And a last one is that once #27806 is merged, TokenProcessor won't add the username on the logs when a resource didn't start the authentication stack.
+The next step should be to enable this rule by default in https://github.com/symfony/recipes/blob/master/symfony/security-bundle/3.3/config/packages/security.yaml:
+security:
+    firewalls:
+        main:
+            anonymous: true
+            lazy_authentication: true
+TODO:
+
+ add tests
+ doc PR
+
+WDYT?

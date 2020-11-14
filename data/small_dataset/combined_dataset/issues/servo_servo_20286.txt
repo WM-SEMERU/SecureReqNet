@@ -1,0 +1,5 @@
+Support Feature-Policy
+
+
+This is needed for WebVR and other fancy features, to let websites explicitly say they don't want any WebVR stuff running.
+https://wicg.github.io/feature-policy/

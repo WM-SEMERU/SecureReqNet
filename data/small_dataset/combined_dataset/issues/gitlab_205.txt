@@ -1,0 +1,11 @@
+**Summary:**
+
+some files are not showed on gitlab UI on a commit
+
+**Steps to Reproduce:**
+
+1. commit something (e.g: Screenshot 2)
+
+2. `git push origin master`
+
+3. see commit information @ gitlab (e.g Screenshot 3)

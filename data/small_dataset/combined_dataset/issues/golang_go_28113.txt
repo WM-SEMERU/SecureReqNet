@@ -1,0 +1,5 @@
+proposal: crypto/cipher: export xor.go functions
+
+
+These functions are useful for everyone, please export them so everyone can use them:
+https://github.com/golang/go/blob/master/src/crypto/cipher/xor.go

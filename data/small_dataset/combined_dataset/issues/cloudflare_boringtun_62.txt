@@ -1,0 +1,8 @@
+Result::is_ok used incorrectly
+
+
+
+https://github.com/cloudflare/boringtun/blob/master/src/device/api.rs#L19
+https://github.com/cloudflare/boringtun/blob/master/src/device/api.rs#L43
+
+Both of these seem to be trying to use it as an assertion, however Result::is_ok() simply returns a bool. I think both of these should be using expect() instead.

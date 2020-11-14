@@ -1,0 +1,27 @@
+### Summary
+
+When adding an email to "Linked emails" in the profile settings I don't have to prove that the email actually belongs to me.
+There are two problems with this:
+
+1. I can claim ownership of any email and prevent the actual owner from adding the email to his profile
+1. I can claim ownership of any email and claim the ownership of the corresponding commits
+1. (Future problem, not implemented yet: For the GPG key verification https://gitlab.com/gitlab-org/gitlab-ce/issues/20268 we need to be able to verify the emails)
+
+### Steps to reproduce
+
+1. Login into Gitlab
+1. Go to Settings > Emails
+1. Fill in any (unclaimed) email to the field "Email"
+1. Click on "Add email address"
+
+### What is the current *bug* behavior?
+
+The email address is registered as the users' email.
+
+### What is the expected *correct* behavior?
+
+The email should only be registered to the user's profile after proving that the user actually owns the email address.
+
+### Possible fixes
+
+Adding an email address should send a verification email to the added email address. Only after clicking on the verification link in the email the email is added to the user's profile.

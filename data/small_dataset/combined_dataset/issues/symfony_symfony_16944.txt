@@ -1,0 +1,46 @@
+[Security][Guard] checkCredentials() should have a @return annotation
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+none
+
+
+
+According to its documentation, an implementation of the GuardAuthenticatorInterface::checkCredentials() method should return true on success. I've added a @return annotation to the PHPDoc block to reflect the fact that this method should actually return something.

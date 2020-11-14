@@ -1,0 +1,28 @@
+UI: Ember Upgrade, Miscellaneous Dependencies
+
+
+This is step 3 of 4 for upgrading Ember. The goal of this step is to get the list of outdated packages as small as possible.
+Master
+yarn outdated --json | tail -n 1 | jq ".data.body | length"
+50
+f-ui-ember-v3
+yarn outdated --json | tail -n 1 | jq ".data.body | length"
+43
+After
+yarn outdated --json | tail -n 1 | jq ".data.body | length"
+16
+Granted it's okay to have out of date packages, and sometimes it's necessary (e.g., the current version of query-string doesn't support any version of IE), but 27 packages were still okay to upgrade.
+The remaining dependencies fall in one of these categories:
+
+Ember > 3.4
+Bulma (intentionally not upgrading)
+Is large enough to be its own project (core-js, d3)
+
+Code changes
+Only four upgrades resulted in breaking changes.
+
+ember-cli-mirage: Mirage no longer likes models that are plural, so I singularized everything, even if it didn't make sense.
+ember-inline-svg: This was a minor upgrade, but should have been a major one since it upgraded its own dependency on svgo to a new major version. This change enabled an svgo plugin that was previously disabled by default. The fix was to configure ember-inline-svg to continue to not use that plugin.
+eslint: The object-spread rule was deprecated in favor of targeting ES2018
+lint-staged/husky: Husky now uses its own husky key in package.json to avoid polluting scripts. This is weird when used in conjunction with lint-staged, since lint-staged hid that detail.
+

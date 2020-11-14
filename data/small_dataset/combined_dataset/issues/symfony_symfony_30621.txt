@@ -1,0 +1,53 @@
+[Cache] Ensure key exists before checking array value
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Without this fix we're getting warnings like
+PHP Notice:  Undefined index: %5BOUR-KEY%5D%5B1%5D in vendor/symfony/cache/Traits/PhpFilesTrait.php on line 136
+
+when doing a $cache->contains() in some cases. I'm having a lot of trouble tracking down exactly when and where this error will happen and what changes in our app / cache cause it, but this fix seems benign enough that maybe it can be merged without that backstory.

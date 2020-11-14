@@ -1,0 +1,4 @@
+Update Blazor survey link
+
+
+Fixes #8860

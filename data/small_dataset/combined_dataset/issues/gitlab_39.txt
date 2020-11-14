@@ -1,0 +1,68 @@
+Issue: After the upgrade to 6.5 all users in LDAP without an email address attribute are unable to login. We have some users who do need access to gitlab but do not have an email address attribute in Active Directory (2008). This was working with 6.4.
+
+Expected behaviour: users without email address attribute should be able to login to gitlab.
+
+Workaround: adding the email address attribute to the AD account works, after that the user can login. When the email address is removed from AD the user cannot login anymore.
+
+production.log:
+
+	Processing by OmniauthCallbacksController#failure as HTML
+
+	Parameters: {"utf8"=>"✓", "authenticity_token"=>"-", "username"=>"user@example.tld", "password"=>"[FILTERED]"}
+
+	Redirected to https://<gitlab>.tld/users/sign_in
+
+	Completed 302 Found in 84ms (ActiveRecord: 0.0ms)
+
+	Started GET "/users/sign_in" for 127.0.0.1 at 2014-01-28 10:19:10 +0100
+
+
+unicorn.stdout.log:
+
+    E, [2014-01-28T10:20:23.289767 #30850] ERROR -- omniauth: (ldap) Authentication failure! ldap_error: OmniAuth::Error, (LDAP) Account must provide an uid and email address
+    I, [2014-01-28T10:23:28.844448 #30850]  INFO -- omniauth: (ldap) Callback phase initiated.
+
+Relevant config:
+
+	  ldap:
+	    enabled: true
+	    host: '<ip>'
+	    base: 'CN=Users,DC=example,DC=tld'
+	    port: 389
+	    uid: 'sAMAccountName'
+	    method: 'plain' 
+	    bind_dn: 'CN=Gitlab LDAP,CN=Users,DC=Example,DC=tld'
+	    password: 'password'
+	    allow_username_or_email_login: true
+
+`bundle exec rake gitlab:check RAILS_ENV=production` returns LDAP users, even the ones without email address attributes. All other checks pass.
+
+Information:
+
+	bundle exec rake gitlab:env:info RAILS_ENV=production
+
+	System information
+	System:		Ubuntu 12.04
+	Current User:	git
+	Using RVM:	no
+	Ruby Version:	2.0.0p353
+	Gem Version:	2.0.14
+	Bundler Version:1.3.5
+	Rake Version:	10.1.0
+
+	GitLab information
+	Version:	6.5.1
+	Revision:	6f6f158
+	Directory:	/home/git/gitlab
+	DB Adapter:	mysql2
+	URL:		https://<gitlab>.tld
+	HTTP Clone URL:	https://<gitlab>.tld/some-project.git
+	SSH Clone URL:	git@<gitlab>.tld:some-project.git
+	Using LDAP:	yes
+	Using Omniauth:	no
+
+	GitLab Shell
+	Version:	1.8.0
+	Repositories:	/home/git/repositories/
+	Hooks:		/home/git/gitlab-shell/hooks/
+	Git:		/usr/bin/git

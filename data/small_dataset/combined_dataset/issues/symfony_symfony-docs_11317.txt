@@ -1,0 +1,4 @@
+[Validator] add documentation for the new `Timezone` constraint.
+
+
+This is the documentation related to PR symfony/symfony#30900

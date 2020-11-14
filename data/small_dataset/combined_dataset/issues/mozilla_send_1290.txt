@@ -1,0 +1,6 @@
+Call setTranslate on android.
+
+
+
+
+

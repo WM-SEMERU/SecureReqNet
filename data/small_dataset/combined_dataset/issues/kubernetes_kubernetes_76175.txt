@@ -1,0 +1,26 @@
+Refactor loops over `SupportedMediaTypes()` where mediaType is used to match a single SerializerInfo{}
+
+
+/kind cleanup
+What this PR does / why we need it:
+I've found all of the places where we are looping over SupportedMediaTypes() and evaluated whether to refactor using this existing helper:  runtime.SerializerInfoForMediaType().
+This existing helper function has similar behavior to yesterday's proposed:
+func (f CodecFactory) EncoderForMediaType(mediaType string) runtime.Encoder
+
+Matching the encoder is common prep-work for encoding runtime.Objects into JSON/YAML for transmission over the wire or writing to ComponentConfigs.
+Component Standard WG would like clean examples in the code WRT encoding objects.
+Tracking Issue: #75426
+Special notes for your reviewer:
+The major difference I see with this function is that:
+
+if SupportedMediaTypes() is missing a matching MediaType
+and it contains a SerializerInfo{} with an empty MediaType
+
+it will return the empty MediaType encoder as a positive match.
+I'm not sure what the significance of a SerializerInfo{} with an empty MediaType is but we do have places in the code where we assert that this is not true.
+For the kube-proxy and kube-scheduler changes, I'm not sure why were separately fetching/checking for the YAML serializer and then creating a new one.
+This patch simplifies that by using the matched info.Serializer.
+Does this PR introduce a user-facing change?:
+NONE
+
+/cc @liggitt @luxas @neolit123

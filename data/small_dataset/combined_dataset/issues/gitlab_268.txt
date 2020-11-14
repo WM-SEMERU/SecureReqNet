@@ -1,0 +1,1 @@
+When downloading a .doc File the browser open a new tab with the content of the file instead of downloading the file.

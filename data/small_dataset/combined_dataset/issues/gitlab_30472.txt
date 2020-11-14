@@ -1,0 +1,16 @@
+'`Project#project_members` uses the `members` table, but `Project#team.members` uses the `project_authorizations` table. This can lead to an inconsistent state seen in gitlab-com/infrastructure#1486 where the user can see the project, but the admin cannot see that the user has access to the project. For example:
+
+```
+irb(main):015:0> ProjectAuthorization.where(user_id: user.id)
+D, [2017-04-04T23:34:58.688574 #23742] DEBUG -- :   ProjectAuthorization Load (0.7ms)  SELECT "project_authorizations".* FROM "project_authorizations" WHERE "project_authorizations"."user_id" = $1  [["user_id", 843529]]
+=> #<ActiveRecord::Relation [#<ProjectAuthorization user_id: 843529, project_id: 2010956, access_level: 40>, #<ProjectAuthorization user_id: 843529, project_id: 2333233, access_level: 40>]>
+```
+
+```
+irb(main):004:0> project.team.members.map(&:username)
+D, [2017-04-04T23:32:19.132321 #23742] DEBUG -- :   User Load (3.9ms)  SELECT "users".* FROM "users" INNER JOIN "project_authorizations" ON "users"."id" = "project_authorizations"."user_id" WHERE "project_authorizations"."project_id" = $1  ORDER BY "users"."id" DESC  [["project_id", 2333233]]
+=> ["sam1", "lion1", "grac1", "zhang1", "ivant1", "cat1", "god1"]
+```
+
+
+I think running `User#refresh_authorized_projects` makes things consistent, but we should design the system so that is difficult or impossible to get into this state. For example, if we're going to update one thing, we should update both in a transaction.

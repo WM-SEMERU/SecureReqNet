@@ -1,0 +1,20 @@
+Update Third-party Triage Process Documentation
+
+
+What I expected
+The steps for triage should be clear and in alignment with the settings in HackerOne.
+What I experienced
+
+ HackerOne requires a Change State > Triaged action to be take in 2 business days, this step is not documented in the process.
+ The process outlines three possible responses during the Triage they are: Acceptance, Rejection, and Need more information. The Common Response templates in HackerOne are acknowledge the report, acknowledge the report + triage and Duplicate. The responses in the process outline should match with the Common Responses in HackerOne.
+ The process requires the asset field to be set by the team member triaging the vulnerability. This not currently possible in most cases because only 2 out of 11 team members currently have the   Program permission enabled in their accounts in HackerOne.
+ The process document references a missing article on How do I triage a report?.
+ The Correction follow-up process documentation section incorrectly asserts that vulnerabilities will be made public if and only if the maintainers are unreachable. The program documentation on HackerOne asserts If no fix is available after 45 days, the advisory will timeout and will be made publicly available..
+ The Correction follow-up process documentation section incorrectly asserts that the package maintainer can choose a release date for the publication of the vulnerability report and that the vulnerability will not be disclosed automatically after 45 days. This is not consistent with the documentation on the HackerOne program page.
+ The Correction follow-up process documentation section should state which fields need updating, just like the Triage section does.
+ The Publication process documentation section contradicts the Correction follow-up sections assertion that With the package maintainer, they define a release date for the publication of the vulnerability. Ideally, this release date should not happen before the package has been patched. when it states, Within 45 days after the triage date, the vulnerability must be made public.
+ The link to the CVSS v.3 documentation is broken in the Publication section.
+ The Publication section contradicts the HackerOne program documentation when it asserts that If a patch is being actively developed by the package maintainer, an additional delay can be added with the approval of the triage team and the individual who reported the vulnerability (this is a simple vote where each member of the triage team and the vulnerability reporter have 1 vote each).
+ The CVE request email is a broken link in the Publication section.
+ The HackerOne: How does public disclosure work? link in the Publication section is broken.
+

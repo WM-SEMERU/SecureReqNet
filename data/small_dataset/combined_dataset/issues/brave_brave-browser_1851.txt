@@ -1,0 +1,4 @@
+feature: support encrypted SNI
+
+
+per slack discussion from a while ago, we should support encrypted SNI on all platforms: https://blog.mozilla.org/security/2018/10/18/encrypted-sni-comes-to-firefox-nightly/

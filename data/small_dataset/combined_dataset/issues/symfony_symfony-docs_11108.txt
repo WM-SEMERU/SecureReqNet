@@ -1,0 +1,4 @@
+Update form_login_setup.rst
+
+
+Add access_control property in security.yml file in order to allow anonymous authenticated users to access the /login route

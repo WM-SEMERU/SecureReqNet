@@ -1,0 +1,11 @@
+Find solution for data table flickering between Observed views
+
+
+The root cause of the problem seems to be the small (25ms to 250ms) time that it takes to fetch the data from the back end (which is enough to let the UI refresh and clean the view, before the data is loaded, and picked up in the next digest)
+Adding a cache layer on the networks calls (ignore test errors in pic)
+
+Shows that the problem doesn't occur when there are no network calls (i.e. the data is cached on the client)
+Possible solutions:
+a) only redirect to the controller once the data required for that controller exists
+b) have a service that is responsible for loading the data with nothing rendered before that services finishes (i.e. a better version with what is currently implemented with Team_Data). This only works if there are multiple tabs that need that data
+Solving this should also allow the solving of Score and radar data is loaded multiple times #205 which captures the multiple loads of schema and radar data

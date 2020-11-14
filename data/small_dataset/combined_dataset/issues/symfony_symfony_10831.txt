@@ -1,0 +1,46 @@
+Stateless firewall, session definition and set-cookie
+
+
+I've noticed strange behaviour while developing stateless API for website and I was able to reproduce it with symfony/framework-standard-edition 2.3.13.
+config.yml snippet
+framework:
+    ...
+    session:
+        cookie_lifetime: 3600
+        cookie_httponly: true
+        name:     mysid
+    ...
+security.yml snippet
+security:
+    ...
+    firewalls:
+        secured_area:
+            pattern:    ^/demo/secured/
+            stateless:    true
+            http_basic:
+                realm: "Secured Demo Area"
+#            form_login:
+    ...
+Making valid credentials request:
+$ curl -siL "http://localhost:8000/demo/secured/hello/admin?x1" -u admin:adminpass | more
+HTTP/1.1 200 OK
+Host: localhost:8000
+Set-Cookie: mysid=nhldccahv6u85regq687fr2no7; expires=Thu, 01-May-2014 11:02:05 GMT; Max-Age=3600; path=/; HttpOnly
+...
+It creates session cookie nhldccahv6u85regq687fr2no7 but session does not contain any data.
+Profiler: Session Attributes -> No session attributes
+By making request without credentials
+$ curl -siL "http://localhost:8000/demo/secured/hello/admin?x2" | more
+HTTP/1.1 401 Unauthorized
+Host: localhost:8000
+Set-Cookie: mysid=esjm66tm49ig8cuv67t3he69b7; expires=Thu, 01-May-2014 10:56:21 GMT; Max-Age=3600; path=/; HttpOnly
+WWW-Authenticate: Basic realm="Secured Demo Area"
+...
+Another session cookie created esjm66tm49ig8cuv67t3he69b7 and session now contains following:
+Session Attributes
+Key Value
+_security.secured_area.target_path  "http://localhost:8000/demo/secured/hello/admin?x2"
+
+After small research it looks like a problem is in SessionListener where it injects the session to the request without paying attention to stateless setup.
+May be there is a simple way to avoid it? or any workarounds?
+Very appreciated.

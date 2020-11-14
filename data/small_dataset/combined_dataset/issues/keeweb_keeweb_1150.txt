@@ -1,0 +1,9 @@
+Emptying trash unreliable
+
+
+Two related problems:
+
+Any groups are correctly deleted from the file but they and/or their entries are not removed from the view until the file is reloaded
+Only around half of the entries in the root of the trash are deleted from the file although all are removed from the view
+
+PR incoming...

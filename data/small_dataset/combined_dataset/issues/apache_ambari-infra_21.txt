@@ -1,0 +1,11 @@
+AMBARI-24980 - Infra Manager: java 11 support
+
+
+What changes were proposed in this pull request?
+
+Run infra manager using java 11
+Run Integration test using java 11
+Install java 11 to infra manager docker image
+
+How was this patch tested?
+ITs and UTs passed when using java 11

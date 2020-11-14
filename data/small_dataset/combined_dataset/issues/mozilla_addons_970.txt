@@ -1,0 +1,14 @@
+External Api v4
+
+
+What happened?
+For example following link shows me no data
+https://addons.mozilla.org/api/v4/addons/search/?guid=jid1-BoFifL9Vbdl2zQ@jetpack
+(it is guid from Webextension https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/ )
+What did you expect to happen?
+that it schows me data
+Anything else we should know?
+following link works as expected
+https://addons.mozilla.org/api/v4/addons/search/?guid=jid1-XX0TcCGBa7GVGw@jetpack
+(it is guid from Webextension https://addons.mozilla.org/de/firefox/addon/anchors-reveal/ )
+i tested it on a fresh firefox profile 66.0.2 (64bit)

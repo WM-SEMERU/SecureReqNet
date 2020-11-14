@@ -1,0 +1,15 @@
+### Summary
+
+The new "Allow requests to the local network from hooks and services" option in Gitlab settings should be **enabled** by default, and clearly called out in the release notes.
+
+### Proposal
+
+Many users may already have webhooks configured to connect with other servers on their local network, and the implementation of this new setting has the potential to interfere with existing jobs with little documentation to explain why webhooks are suddenly breaking.
+
+Since previous behavior has been to allow such requests by default, the option should be **enabled** by default, at least for the next few versions, to give people ample time to learn that the option is there and change the setting accordingly. Though it might be a little extra work, making the checkbox a "tri-state" checkbox could allow for a visual cue that the setting is currently auto-enabled (and this value might be represented in configuration as "2" or some other non-boolean value) to differentiate it from the user having *manually* enabled the option.
+
+Once a few more versions have gone by and administrators have had ample time to get used to the option and set it to their liking, a future release can revert the "auto-enabled" setting to false/0/whatever (with a corresponding prominent warning in the release notes saying that if the option has not been manually enabled at this time, it will be turned off). Of course if the user *has* manually enabled the setting, it should be set to true/1/whatever so the reversion of auto-enable will not touch it.
+
+### References
+
+[Issue 44480](https://gitlab.com/gitlab-org/gitlab-ce/issues/44480). The user here found the setting themselves and marked the issue closed, but subsequent comments have indicated many others have run into the issue as well, and the symptoms of the issue are nebulous enough (a vanilla Gitlab "500" error that gives no clue whatsoever, when testing webhooks) that it's difficult and time-consuming to troubleshoot, especially for anyone with lesser Google Fu.

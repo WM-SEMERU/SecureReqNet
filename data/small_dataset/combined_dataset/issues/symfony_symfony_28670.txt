@@ -1,0 +1,50 @@
+Fix a typo in error messages
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#28667
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+Fixes a typo in some error messages. Configurators should be Authenticators.

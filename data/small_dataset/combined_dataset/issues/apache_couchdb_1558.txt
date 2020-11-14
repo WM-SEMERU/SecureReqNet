@@ -1,0 +1,20 @@
+Prevent modification of /_users/_security object with opt-out ini file setting
+
+
+Expected Behavior
+Modifying the _security object inside of _users is unsupported, and can lead to some unusual behaviour - see #1556.
+Current Behavior
+We allow people to shoot themselves in the foot by modifying _users/_security.
+Possible Solution
+Always return a 403 on write attempts for _users/_security. @rnewson do you have any comment on this?
+Steps to Reproduce (for bugs)
+
+dev/run -n 1 --with-admin-party-please
+`curl -X PUT http://localhost:15984/_users/_security -d '{"foo": "bar"}'
+
+Context
+People are trying to change the rules for who can read/write documents in _users and it goes very badly.
+Your Environment
+
+Version used: 2.2.0
+

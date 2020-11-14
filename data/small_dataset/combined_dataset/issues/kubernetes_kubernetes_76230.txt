@@ -1,0 +1,9 @@
+Break out of loop in removeZone when zone is found
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+After the zone is found, we can break out of the loop in NodeTree#removeZone
+NONE
+

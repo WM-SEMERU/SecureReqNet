@@ -1,0 +1,4 @@
+Please deploy stage to prod
+
+
+Not sure what's the hash on stage - but we're ready to push it to PROD.  Please find us on IRC to test the push.

@@ -1,0 +1,9 @@
+Impersonate an user with remote_user and form_login firewalls
+
+
+Hi,
+I have an application with a remote_user authentication firewall on which I need to set the impersonate system to make admin users able to login as another user.
+I know that the impersonating mechanism is not compatible with pre authenticated firewalls like remote_user so I decided to add a second firewall with form_login.
+But the remote_user firewall seem to take the priority on the  form_login so I cannot switch user. I still be logged with the remote_user credentials.
+Is it possible to use User impersonation when multiple firewalls are configured and a remote_user is one of them?
+Thanks

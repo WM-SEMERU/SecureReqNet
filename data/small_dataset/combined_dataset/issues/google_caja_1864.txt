@@ -1,0 +1,11 @@
+Reduce Java
+
+
+Original issue 1866 created by kpreid.switchb.org on 2013-10-21T19:47:00.000Z:
+With the removal of ES5/3 and the cajoler from trunk, we no longer have major components written in Java. We would like to reduce or eliminate our remaining uses of Java; this issue is to track that overall project. Notable remaining Java:
+
+The JavaScript minifier. I hypothesize that we can replace it with Closure Compiler (given disabling the renaming and other optimizations which make it have an different input language), which we already have build integration for.
+The fetching proxy (used for loading scripts). This needs to be a server component, and might as well be written in Java as anything else, but it is currently built on the “cajoling service” code which could be eliminated or simplified otherwise.
+The HTML/CSS whitelist compiler. I currently think it would be plausible to rewrite this in JavaScript.
+The Caja Playground.
+

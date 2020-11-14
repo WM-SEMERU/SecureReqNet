@@ -1,0 +1,24 @@
+Sometimes (in random periods) gitlab can't merge all MergeRequests (Merge button inactive). In log we have the following error:
+```
+July 23, 2014 10:16 -> ERROR -> Command failed [1]: /usr/bin/git --git-dir=/home/git/gitlab-satellites/activebilling/core/.git checkout -b master origin/master
+
+error: The following untracked working tree files would be overwritten by checkout:
+        db/migrate/20140721135259_add_account_id_to_notes.rb
+        db/migrate/20140722075207_add_allow_subdomain_to_dns_domains.rb
+        db/migrate/20140722081127_add_attachment_to_notes.rb
+        db/migrate/20140722081319_drop_note_attachments.rb
+        vendor/assets/javascripts/ng-upload.js
+Please move or remove them before you can switch branches.
+Aborting
+```
+```
+Our environment is:
+Ubuntu 12.04.3 LTS
+GitLab 6.8.1
+GitLab Shell 1.9.3
+GitLab API v3
+Ruby 2.0.0p353
+Rails 4.0.3
+```
+
+Currently we resolve this issue by rebuilding satellites and reopen each MR. Any ideas how to fix this problem?

@@ -1,0 +1,25 @@
+Unexpected behavior when throwing an HttpException with previous AuthenticationException
+
+
+When you throw an HttpException with a previous AuthenticationException, you will get redirected to the login page. This is unexpected, because the auth exception is already handled by userland (controller) code and should not be intercepted on by the security system.
+/**
+ * @Route("/verify/{token}")
+ * @Template("WebBundle:User:verify.html.twig")
+ * @param Request $request
+ * @param string $token
+ */
+public function verifyAction(Request $request, $token) {
+    try {
+        $user = $this->um->getRepository()->loadUserByVerificationToken($token);
+        $verification = $this->formFactory->create('verification');
+                ...
+        return array(
+            'verification'  => $verification->createView(),
+        );
+    } catch(UsernameNotFoundException $e) {
+        throw new BadRequestHttpException('invalid verification token', $e);
+    }
+}
+The problem is that the ExceptionListener does check the exception and all previous exception for an auth exception:
+https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Firewall/ExceptionListener.php#L87
+I know this may can not be fixed due to BC breaks.

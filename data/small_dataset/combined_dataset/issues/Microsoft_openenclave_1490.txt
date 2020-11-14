@@ -1,0 +1,5 @@
+Bump mbedTLS to 2.7.9
+
+
+Fixes partially #1456 by upgrading mbedTLS from 2.7.6 to 2.7.9
+Resolves #1446

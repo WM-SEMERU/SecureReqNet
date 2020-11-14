@@ -1,0 +1,4 @@
+docs(security): point users to docs when sanitization fails.
+
+
+CC @naomiblack

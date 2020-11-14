@@ -1,0 +1,4 @@
+typo
+
+
+to be consistent throughout the docs

@@ -1,0 +1,16 @@
+[WIP] Moves humanreadable printer into cli-runtime; out of core
+
+
+
+Moves humanreadable.go (and humanreadable_test.go) to join other printers in cli-runtime repository; a common repository out of core
+Copies PrintOptions into cli-runtime/interfaces.go
+Removes pkg/printers/interfaces.go, since this is exactly the same as the one in cli-runtime
+Updates numerous files in pkg/registry and elsewhere to import the cli-runtime/pkg/printers
+
+Helps fix:
+kubernetes/kubectl#80
+NONE
+
+/kind cleanup
+/sig cli
+/assign

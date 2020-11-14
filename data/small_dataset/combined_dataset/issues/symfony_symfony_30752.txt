@@ -1,0 +1,50 @@
+[HttpClient] use "nyholm/psr7" by default in Psr18Client
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This makes the factory arguments of Psr18Client optional, with a fallback to using Nyholm\Psr7\Factory\Psr17Factory when no factories are provided.

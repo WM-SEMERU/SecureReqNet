@@ -1,0 +1,28 @@
+### Problem to solve
+Allow clients to use redis with SSL (rediss://) connections.
+
+### Further details
+
+The Ruby library redis-rb already has [support for `rediss://`](https://github.com/redis/redis-rb#ssltls-support), so I wouldn't imagine it would be too difficult to add support in Gitlab (or maybe it already works? Just needs a way to specify the cert file?)
+
+### Proposal
+
+Allow clients to pass in / provide options to connect using `rediss://`.
+
+Something like the following (maybe):
+```
+gitlab_rails['redis_host'] = 'rediss://my.remote.rediss.deploy'
+gitlab_rails['redis_port'] = 55555
+gitlab_rails['redis_password'] = 'redis_password'
+gitlab_rails['redis_ssl_cert'] = '/path/to/cert.cert'
+```
+
+### What does success look like, and how can we measure that?
+
+Success would be if a client could connect using `rediss://` instead of only `redis://`
+
+### Links / references
+
+* [redis-rb](https://github.com/redis/redis-rb#ssltls-support)
+* [Compose.io rediss](https://www.compose.com/articles/ssl-connections-arrive-for-redis-on-compose/)
+* [redislabs doc](https://redislabs.com/resources/how-to-redis-enterprise/#using-ssl-and-redis-rb)

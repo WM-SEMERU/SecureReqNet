@@ -1,0 +1,13 @@
+We currently are not allowing users to create custom domains until a security vulnerability is fixed. We also do not allow users to edit their existing certificates. This could mean that a user could delete their domain, expecting to be able to re-add their domain with a new certificate, only to find that they are unable to.
+
+We should add a confirmation modal after clicking "Remove" on a custom domain.
+
+```
+# Remove customdomain.com
+
+Due to an [existing security vulnerability](https://about.gitlab.com/2018/02/05/gitlab-pages-custom-domain-validation/), you will **not** be able to add any custom domains at this time. 
+
+You are about to remove customdomain.com and will not be able to re-add the domain until the vulnerability is patched.
+
+[Cancel] [Delete domain]
+```

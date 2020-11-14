@@ -1,0 +1,135 @@
+Couldn't retrieve stats: Unexpected response code: 404
+
+
+Nomad version
+$ nomad -v
+Nomad v0.8.3 (c85483da3471f4bd3a7c3de112e95f551071769f)
+
+Operating system and Environment details
+Ubuntu 16.04
+Issue
+I can see an allocation from nomad node status -self, but I get a 404 when I try to get the status on that allocation. This seems to be happening at an increasing rate. Sometimes a node will sort itself, it seems, but most times it will never recover and will simply have to be terminated.
+$ nomad node status -self
+ID            = ec0f83a1
+Name          = ip-10-0-9-155
+Class         = <none>
+DC            = dc1
+Drain         = false
+Eligibility   = eligible
+Status        = ready
+Uptime        = 13m45s
+Driver Status = docker,exec
+
+Node Events
+Time                  Subsystem  Message
+2019-04-02T14:28:21Z  Cluster    Node Registered
+
+Allocated Resources
+CPU           Memory       Disk        IOPS
+0/211200 MHz  0 B/749 GiB  0 B/95 GiB  0/0
+
+Allocation Resource Utilization
+CPU           Memory
+0/211200 MHz  0 B/749 GiB
+
+Host Resource Utilization
+CPU           Memory           Disk
+0/211200 MHz  3.0 GiB/749 GiB  2.0 GiB/97 GiB
+
+Allocations
+ID        Node ID   Task Group  Version  Desired  Status   Created    Modified
+28b3edbd  ec0f83a1  jobs        0        run      pending  2m42s ago  2m42s ago
+a33637fa  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+20c4212b  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+68fb0132  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+d19967ed  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+5520e8cf  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+0739e6d7  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+1984bcb2  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+4d53d76d  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+65eb2af8  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+d677e551  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+c3dcf5d6  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+63a5f5ed  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+31a17d47  ec0f83a1  jobs        0        run      pending  3m39s ago  3m39s ago
+dfc3389a  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+51cce06d  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+71152815  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+80737418  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+75807c53  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+e434b120  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+f183ce16  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+bc32ac93  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+5a2ae062  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+c99dd682  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+b9454234  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+ff1a98ba  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+3d235958  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+9d6088ba  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+0e2a51dd  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+d293e326  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+05a78479  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+2cea67f2  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+2372fd2c  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+8e704c9c  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+7728b75d  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+f752348b  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+b7e335f4  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+3287115d  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+893c3168  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+6337dce1  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+dc7f0f3d  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+72a39ae3  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+f44beb68  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+07d900df  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+6e3268e9  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+6201e013  ec0f83a1  jobs        0        run      pending  3m40s ago  3m40s ago
+14f33f6d  ec0f83a1  jobs        0        run      pending  3m41s ago  3m41s ago
+f2511863  ec0f83a1  jobs        0        run      pending  3m41s ago  3m41s ago
+83eddb7d  ec0f83a1  jobs        0        run      pending  3m41s ago  3m41s ago
+cc82d53b  ec0f83a1  jobs        0        run      pending  3m41s ago  3m41s ago
+ubuntu@ip-10-0-9-155:~$ nomad status 6201e013
+ID                  = 6201e013
+Eval ID             = a9a08839
+Name                = AFFY_TO_PCL_0_4096/dispatch-1554215309-a9c0f078.jobs[0]
+Node ID             = ec0f83a1
+Job ID              = AFFY_TO_PCL_0_4096/dispatch-1554215309-a9c0f078
+Job Version         = 0
+Client Status       = pending
+Client Description  = <none>
+Desired Status      = run
+Desired Description = <none>
+Created             = 3m48s ago
+Modified            = 3m48s ago
+
+Couldn't retrieve stats: Unexpected response code: 404 (rpc error: Unknown allocation "6201e013-500c-9524-5f30-844bd1aec9cf")
+
+Client Log:
+$ cat /var/log/nomad_client.log 
+==> Loaded configuration from client.hcl
+==> Starting Nomad agent...
+==> Nomad agent configuration:
+
+                Client: true
+             Log Level: WARN
+                Region: global (DC: dc1)
+                Server: false
+               Version: 0.8.3
+
+==> Nomad agent started! Log data will stream in below:
+
+    2019/04/02 14:28:21.892933 [WARN] fingerprint.network: Unable to parse Speed in output of '/sbin/ethtool ens5'
+    2019/04/02 14:30:03.034103 [ERR] nomad: "ClientAllocations.Stats" RPC failed to server 10.0.25.197:4647: rpc error: Unknown allocation "65eb2af8-6ab4-2201-6246-7641610b39af"
+    2019/04/02 14:30:03.034180 [ERR] http: Request /v1/client/allocation/65eb2af8-6ab4-2201-6246-7641610b39af/stats, error: rpc error: Unknown allocation "65eb2af8-6ab4-2201-6246-7641610b39af"
+    2019/04/02 14:30:16.255729 [ERR] nomad: "ClientAllocations.Stats" RPC failed to server 10.0.227.9:4647: rpc error: Unknown allocation "dfc3389a-75d3-992b-83fb-1acd6ee45853"
+    2019/04/02 14:30:16.255785 [ERR] http: Request /v1/client/allocation/dfc3389a-75d3-992b-83fb-1acd6ee45853/stats, error: rpc error: Unknown allocation "dfc3389a-75d3-992b-83fb-1acd6ee45853"
+    2019/04/02 14:31:47.354762 [ERR] nomad: "ClientAllocations.Stats" RPC failed to server 10.0.17.212:4647: rpc error: Unknown allocation "65eb2af8-6ab4-2201-6246-7641610b39af"
+    2019/04/02 14:31:47.354832 [ERR] http: Request /v1/client/allocation/65eb2af8-6ab4-2201-6246-7641610b39af/stats, error: rpc error: Unknown allocation "65eb2af8-6ab4-2201-6246-7641610b39af"
+    2019/04/02 14:32:18.217433 [ERR] nomad: "ClientAllocations.Stats" RPC failed to server 10.0.17.212:4647: rpc error: Unknown allocation "6201e013-500c-9524-5f30-844bd1aec9cf"
+    2019/04/02 14:32:18.217523 [ERR] http: Request /v1/client/allocation/6201e013-500c-9524-5f30-844bd1aec9cf/stats, error: rpc error: Unknown allocation "6201e013-500c-9524-5f30-844bd1aec9cf"
+    2019/04/02 14:33:16.420950 [ERR] nomad: "ClientAllocations.Stats" RPC failed to server 10.0.227.9:4647: rpc error: Unknown allocation "6201e013-500c-9524-5f30-844bd1aec9cf"
+    2019/04/02 14:33:16.421009 [ERR] http: Request /v1/client/allocation/6201e013-500c-9524-5f30-844bd1aec9cf/stats, error: rpc error: Unknown allocation "6201e013-500c-9524-5f30-844bd1aec9cf"
+    2019/04/02 14:33:24.991421 [ERR] nomad: "ClientAllocations.Stats" RPC failed to server 10.0.17.212:4647: rpc error: Unknown allocation "dfc3389a-75d3-992b-83fb-1acd6ee45853"
+    2019/04/02 14:33:24.991502 [ERR] http: Request /v1/client/allocation/dfc3389a-75d3-992b-83fb-1acd6ee45853/stats, error: rpc error: Unknown allocation "dfc3389a-75d3-992b-83fb-1acd6ee45853"
+
+I suspect this is an out-of-disk-on-the-main-server error, but the behavior is still incorrect. It shouldn't 404.

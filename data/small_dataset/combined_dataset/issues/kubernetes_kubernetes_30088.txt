@@ -1,0 +1,6 @@
+DoS protection for ingress
+
+
+We should AT LEAST document how to handle it, but ideally give users an easy way to prevent agains some of the most common attacks both at l7 and l4.
+Most obvious options is to accumulate logs from a bank of nginx ingress controllers via fluentd into ES/Cloud logging and setup a reconciliation loop that feeds into a DoS engine, which then sends accept/reject policy back down to nginx, through the Ingress. We'd need to add a DoS section to Ingress for this.
+We could also do pof at iptables layer (http://www.ioremap.net/projects/osf/), or some iptables firewalling as discussed #22679 and #13774. Would be nice if the apiserver could use the DoS engine to protect itself, when/if we move it behind an Ingress.

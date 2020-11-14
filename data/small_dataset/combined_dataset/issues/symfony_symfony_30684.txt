@@ -1,0 +1,6 @@
+[Form] Form throws error (binary content)
+
+
+Symfony version(s) affected: 3.4.23
+Description
+I've updated from 3.4.18 to 3.4.23 and I have a form with Symfony\Component\Form\Extension\Core\Type\FileType as binaryContent. It was working well but now throws a field exception (it says on debuuger info, validation tab, the following "Submitted data was expected to be text or number"). I've downgraded to 3.4.18 and its working well as described before.

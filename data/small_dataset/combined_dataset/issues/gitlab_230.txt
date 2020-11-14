@@ -1,0 +1,1 @@
+The  buttons "Assigned to me", "Created by me" and "Everyone's" are in different order on the "merge requests of a group" page (for example https://gitlab.com/groups/gitlab-org/merge_requests) than on a "merge requests of a project" (for example https://gitlab.com/gitlab-org/gitlab-ce/merge_requests) page.

@@ -1,0 +1,14 @@
+[DX] The built-in security listeners should support stateless authentication
+
+
+The built-in security listeners such as "form_login" are designed to only work well when using cookies. There is a stateless parameter that can be set to true, however even when it is true and sessions are disabled, a cookie will be set. (The basic auth listener will work with stateless authentication)
+This is mentioned briefly in the docs at http://symfony.com/doc/current/book/security.html#stateless-authentication:
+If you use a form login, Symfony2 will create a cookie even if you set stateless to true.
+
+And I confirmed it by reading the source for the security listeners.
+If you check https://github.com/symfony/SecurityBundle/tree/master/DependencyInjection/Security/Factory, the basic auth listeners just implement the SecurityFactoryInterface, most of them inherit the AbstractFactory. Here are the built-in listeners: https://github.com/symfony/Security/tree/master/Http/Firewall. This is the one the 'form_login' uses: https://github.com/symfony/Security/blob/master/Http/Firewall/UsernamePasswordFormAuthenticationListener.php. In attemptAuthentication() a session variable is set.
+In my projects, more and more I am not using symfony2 as a traditional framework, I have been disabling sessions and twig in the production environment and instead making heavy use of FOSRestBundle, JMSSerializerBundle, NelmioApiDocBundle etc. Instead I've been building my frontends with AngularJS and authenticating using Json Web Tokens. The frontend and backend are completely separated code bases.
+I've been working on and contributing to the LexikJWTAuthenticationBundle and I created an additional side project at https://github.com/gfreeau/GfreeauGetJWTBundle.
+This implements a basic security listener that accepts input via post and returns a Json Web Token without creating sessions or cookies.
+I think something like this should be in the symfony core and I'd go a step further and suggest we need to make a "Symfony Rest Edition", to go alongside the Symfony Standard Edition.
+More and more developers are needing to write APIs for their mobile apps and single page applications, I think symfony2 should treat this use case as a first class experience.

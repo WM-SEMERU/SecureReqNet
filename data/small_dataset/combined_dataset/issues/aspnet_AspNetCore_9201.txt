@@ -1,0 +1,41 @@
+SIGTERM graceful request shutdown?
+
+
+Hello, currently I'm not sure but currently it looks like that dotnet core does correctly respond to SIGTERM, however requests are still getting killed.
+Current behavior:
+
+Request Started
+SIGTERM
+New Request Blocked
+Request "Killed" (i.e. empty response)
+
+Wished behavior:
+
+Request Started
+SIGTERM
+New Request Blocked
+Request Served Successfully if within a configurable timeout.
+
+The good thing is that with IApplicationLifetime and ApplicationStopping somebody can actually handle that in a way that is good for K8s, i.e.:
+bool IsStopping {get;set;}
+
+        private void OnShutdown()
+        {
+            IsStopping = true;
+            Console.WriteLine("Shutting Down");
+            Thread.Sleep(500000); // suitable timeout
+            Console.WriteLine("Stopped");
+        }
+
+        [AllowAnonymous]
+        [HttpGet("healthz")]
+        public async Task<IActionResult> Healthz()
+        {
+            Thread.Sleep(60000); // await Task.Delay(60000) does not change a thing
+
+            return Ok();
+        }
+
+however that still means that somebody needs to implement that by himself. I think dotnet core should have a built-in way of doing that.
+if there will be no built-in way I think at least the docs should be improved for things like k8s
+or at least document the current sigterm behavior.

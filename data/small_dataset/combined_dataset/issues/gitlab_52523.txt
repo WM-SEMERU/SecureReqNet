@@ -1,0 +1,44 @@
+'**[HackerOne report #421299](https://hackerone.com/reports/421299)** by ngalog on 2018-10-09:
+
+**Summary:**
+From https://docs.gitlab.com/ee/user/discussions/#lock-discussions, we know that after an issue is locked, non-member could not comment on this project.
+And logically, for confidential issues, user without sufficient permission would not be able to comment on the issue.
+
+However this could be bypassed if the user has the ability to comment on other issues, and change the `noteable_id` in POST data value to the locked issue note id.
+
+PoC:
+https://gitlab.com/gitlab-org/gitlab-ce/issues/46779
+You will see @markglenfletcher locked this issue · 4 months ago, but user Ron Chan has just made a comment on this locked issue.
+
+## Steps To Reproduce:
+- Pick a locked issue issue, and visit the link and capture the ajax request going on background using proxy tools like Burp, eg locked issue: `https://gitlab.com/gitlab-org/gitlab-ce/issues/46779`
+- You should notice a request look like this  `https://gitlab.com/gitlab-org/gitlab-ce/noteable/issue/11023080/notes` , jot down the numeric id, will be useful in next step
+- Pick a public issues that you could make an comment as guest in the same project, and make a comment on it and intercept the request
+- it should look like this
+
+```
+POST /gitlab-org/gitlab-ce/notes?target_id=14783006&target_type=issue HTTP/1.1
+Host: gitlab.com
+...
+
+note%5Bnoteable_type%5D=Issue&note%5Bnoteable_id%5D=10023010&note%5Bnote%5D=poc&merge_request_diff_head_sha=undefined
+```
+
+- Change the `note%5Bnoteable_id%5D` value to `11023080`, i.e. the one you jot down earlier
+- Now you should see the comment is made even the issue is locked
+
+## Additional Info
+This is the same for discussion, if you have the discussion id.
+Also, you could do the same on confidential issue as well, but it would be more challenging for attacker to do this since the noteable_id for that confidential issue would be harder to discover, but since it is just an incremental numeric id, with dedication and time, it shouldn't be too hard to do the same for confidential issue.
+
+
+
+![locked.PNG](https://h1-attachments-test.s3.us-east-1.amazonaws.com/421299/357648/locked.PNG)
+
+## Impact
+
+Able to comment on issues even they are locked/confidential
+
+## Attachments
+**Warning:** Attachments received through HackerOne, please exercise caution!
+* [locked.PNG](https://h1-attachments-test.s3.us-east-1.amazonaws.com/421299/357648/locked.PNG)

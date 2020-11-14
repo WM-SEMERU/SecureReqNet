@@ -1,0 +1,5 @@
+Upgrade guava to 27.0.1
+
+
+Motivation
+As reported in #3493 we're using Guava 21 which has some known vulnerabilities. Upgrade to latest version.

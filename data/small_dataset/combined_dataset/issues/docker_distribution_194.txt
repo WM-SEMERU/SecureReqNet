@@ -1,0 +1,10 @@
+propose approach and syntax for "sugary" content digests
+
+
+While the digests provide a lot of benefits, they are long and unwieldy for users. To mitigate this, we should propose a syntax for shortening identifiers, much in the way git does. It should meet at least the following requirements:
+
+Resolves content uniquely with a low probability of collision
+Shortened digests should not leak into persistent systems
+The solution should not compromise security
+
+This was request in moby/moby#10740 (comment).

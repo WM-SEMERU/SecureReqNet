@@ -1,0 +1,32 @@
+charts not displaying on nasdaq
+
+
+Description
+Charts don't display on the nasdaq website when Block Thirdparty Cookies is enabled
+https://www.nasdaq.com/symbol/aapl
+Steps to Reproduce
+
+Visit https://www.nasdaq.com/symbol/aapl
+Intra day etc chart is not seen
+Open brave shield and enable cookies
+Charts now display
+
+Actual result:
+No charts
+Expected result:
+Charts display
+Reproduces how often:
+100%
+Brave Version
+about:brave info:
+Brave: 0.23.79
+V8: 6.8.275.24
+rev: 51b4905
+Muon: 8.0.7
+OS Release: 10.0.17134
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84

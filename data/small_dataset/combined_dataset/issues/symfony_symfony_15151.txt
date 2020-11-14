@@ -1,0 +1,49 @@
+[Security] Deprecated supportsAttribute and supportsClass methods
+
+
+These methods aren't used at all in a Symfony application and don't make sense to use in the application. They are only used internally in the voters. This means the voter interface can be made much easier.
+I'm not sure how we do these deprecations, should we remove the methods from the interface now already? Also, I don't think it's possible to trigger deprecation notices for the voter methods?
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+one of #11742
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Abstract Voter
+There is one remaining question about the abstract voter. This currently has abstract getSupportedAttributes() and getSupportedClass() methods. One of the reasons to remove the methods for the interface was that these methods are not flexible. Does it make sense to deprecate these methods as well and replace them by an abstract protected vote(array $attributes, $class) method in the AbstractVoter (which is called from AbstractVoter#vote()) ?

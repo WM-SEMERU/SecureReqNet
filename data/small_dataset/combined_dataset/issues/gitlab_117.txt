@@ -1,0 +1,3 @@
+In a user's profile, we wanted to differentiate between projects the user owns versus contributes to. This turned out to be pretty simple:
+
+https://gist.github.com/anonymous/9406579

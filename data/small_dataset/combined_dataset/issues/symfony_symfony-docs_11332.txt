@@ -1,0 +1,4 @@
+Add doctrine orm installation instructions
+
+
+Follow up branch of #10798 including the requested changes. Also changed the base branch to 3.4 because it applies there too :)

@@ -1,0 +1,53 @@
+[Contracts][EventDispatcher] add EventDispatcherInterface to symfony/contracts and use it where possible
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR adds a new EventDispatcherInterface in Contracts. This interface contains only one method: dispatch($event, $eventName). That covers almost all use cases of the event dispatcher in components (some use add/removeListeners/Subscribers but they are a minority.)
+While doing so, it allows dispatching any objects as events - not only instances of Event.
+This allows decoupling e.g. Messenger from the EventDispatcher component.
+Next steps could be about planning to remove the base Event class from some concrete event classes and/or moving EventSubscriberInterface to symfony/contracts. It would allow decoupling e.g. Workflow from the component - but that's too far away for now, let's think about it in 5.1.

@@ -1,0 +1,3 @@
+When trying to create a merge request through the API, I see no way to specify the `description` of the merge request, nor do I see a way to specify the `milestone_id`. Using the web-ui it is possible to do this, but the API documentation makes no mention of these fields.
+
+We use merge requests extensively in our deployment of gitlab, and would like to build a tool to automate the merge request creation based on certain events in our environment. Right now, the lack of these fields (description, milestone_id) means that we have no way to automate this.

@@ -1,0 +1,74 @@
+Intermittent 502 error during deploy-all errand in GCP SB Tile for PCF
+
+
+GCP SB Tile Version: 4.2.2
+GCP SB Stemcell (Ubuntu Xenial): 170.30
+PAS Version: 2.3.8
+PAS Stemcell: 97.65
+IaaS: GCP
+We are having an issue where we are seeing intermittent failures of the deploy-all errand in the tile during apply changes. Here is the log output from Ops Manager:
+Using deployment 'gcp-service-broker-5d1d94c7b64adbc38729'
+
+Task 525
+
+Task 525 | 15:30:57 | Preparing deployment: Preparing deployment
+Task 525 | 15:30:58 | Warning: Ambiguous request: the requested errand name 'deploy-all' matches both a job name and an errand instance group name. Executing errand on all relevant instances with job 'deploy-all'.
+Task 525 | 15:31:01 | Preparing package compilation: Finding packages to compile (00:00:00)
+Task 525 | 15:31:01 | Preparing deployment: Preparing deployment (00:00:04)
+Task 525 | 15:31:01 | Creating missing vms: deploy-all/3780a28d-f51d-4a79-b34b-b5618482d906 (0) (00:00:50)
+Task 525 | 15:31:51 | Updating instance deploy-all: deploy-all/3780a28d-f51d-4a79-b34b-b5618482d906 (0) (canary) (00:02:03)
+Task 525 | 15:33:54 | Running errand: deploy-all/3780a28d-f51d-4a79-b34b-b5618482d906 (0) (00:00:40)
+Task 525 | 15:34:34 | Fetching logs for deploy-all/3780a28d-f51d-4a79-b34b-b5618482d906 (0): Finding and packing log files (00:00:01)
+
+Task 525 Started  Thu Apr  4 15:30:57 UTC 2019
+Task 525 Finished Thu Apr  4 15:34:35 UTC 2019
+Task 525 Duration 00:03:38
+Task 525 done
+
+Instance   deploy-all/3780a28d-f51d-4a79-b34b-b5618482d906  
+Exit Code  1  
+Stdout     cf version 6.42.0+0cba12168.2019-01-10  
+           cf api <redacted>
+           cf auth system_services ********  
+           cf target -o system  
+           cf target -s gcp-service-broker-space  
+           cf push gcp-service-broker-4.2.2 -n gcp-service-broker -d cf01.useast4.devstubapp.cloud -f /var/vcap/packages/gcp_service_broker/manifest.yml -s cflinuxfs3 --no-start  
+           Pushing from manifest to org system / space gcp-service-broker-space as system_services...  
+           Using manifest file /var/vcap/packages/gcp_service_broker/manifest.yml  
+             
+             
+           Deprecation warning: Specifying app manifest attributes at the top level is deprecated. Found: buildpack, env, path.  
+           Please see http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#deprecated for alternatives and other app manifest deprecations. This feature will be removed in the future.  
+             
+             
+           Using manifest file /var/vcap/packages/gcp_service_broker/manifest.yml  
+             
+           Using stack cflinuxfs3...  
+           OK  
+           Updating app gcp-service-broker-4.2.2 in org system / space gcp-service-broker-space as system_services...  
+           OK  
+             
+           Using route <redacted>
+           Uploading gcp-service-broker-4.2.2...  
+           FAILED  
+           Error processing app files: Error uploading application.  
+           Server error, status code: 502, error code: 0, message:   
+             
+Stderr     Using cflinuxfs3 stack  
+             
+
+1 errand(s)
+
+
+Errand 'deploy-all' completed with error (exit code 1)
+Exit code 1
+===== 2019-04-04 15:35:02 UTC Finished "/usr/local/bin/bosh --no-color --non-interactive --tty --environment=172.23.0.10 --deployment=gcp-service-broker-5d1d94c7b64adbc38729 run-errand deploy-all"; Duration: 245s; Exit Status: 1
+{"type": "step_finished", "id": "errands.running.gcp-service-broker-5d1d94c7b64adbc38729.deploy-all"}
+Exited with 1.
+could not execute "apply-changes": installation was unsuccessful
+
+
+As you can see the failure occurs during the cf push process, specifically during the uploading of the application files.
+The network flow is pretty basic: deploy-all vm -> NAT Gateway -> External LB -> Gorouter Backend Service.
+I did some digging around on our load balancer logs and found that we were getting a 502 from the PUT /v2/resource_match request around that same time against the Cloud Controller API. Doing some research on the flow seems to indicate that this is related to trying to match file caches within PCF during application pushes and there is timeout on the backend.
+We are using the default timeout value of 30 seconds. Is this insufficient for the resource cache checking for this service broker?

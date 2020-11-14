@@ -1,0 +1,7 @@
+add @Keep annotations
+
+
+One of the typical issues we hit downstream, is integrating a mapbox-java dependency in an Android project using proguard. Since we generate jar files as binaries from this repository, we can't include a proguard mapping file. As a result we need to maintain the proguard mapping  downstream while ideally this is done in this repository instead.
+An alternative way of providing proguard integration is using the @Keep annotation. This is used by proguard at compile time to determine to not obfuscate a method/class/.. etc.
+This issue tracks looking into adding this @Keep annotation.
+cc @mapbox/maps-android @mapbox/navigation-android

@@ -1,0 +1,53 @@
+[SecurityBundle] Allow for custom request matchers in access control
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes/no
+
+
+Fixed tickets
+#... 
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Re-opening #20272 in the same spirit of #22572, and i have no better solution to enable route matching :)
+Not sure about the config yet, it differs from the logout listener where both configs (path + request_matcher) must match.
+So for access control to get the same behavior (where all configs must match) it needs a chain request matcher or get creative with AccessMap::add.
+Otherwise i think the logout listener should follow this behavior.

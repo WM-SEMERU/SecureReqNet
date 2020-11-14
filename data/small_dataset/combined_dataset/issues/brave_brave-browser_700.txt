@@ -1,0 +1,6 @@
+consider using upstream https-everywhere chrome extension instead of our custom one
+
+
+benefits: rulesets stay up-to-date without us needing to manually update
+downsides: may be less performant
+https://chrome.google.com/webstore/detail/https-everywhere/gcbommkclmclpchllfjekcdonpmejbdp

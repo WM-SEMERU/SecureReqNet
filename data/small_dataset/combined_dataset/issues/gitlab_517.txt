@@ -1,0 +1,7 @@
+I just came across an odd behaviour, when I had to delete some blocked users from Gitlab which left our company:
+
+Whenever any non default filter is selected in user area of the admin area (eg any other filter than "active" is selected) and any user gets deleted, the filter is removed and you're back to seeing active users.
+
+I think the state of the filter should get saved and recalled when refreshing the view.
+
+Tested on Gitlab 7.1.1

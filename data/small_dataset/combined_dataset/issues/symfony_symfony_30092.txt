@@ -1,0 +1,6 @@
+Inflector pluralize not present ??
+
+
+https://github.com/symfony/inflector Inflector converts words between their singular and plural forms (English only). https://symfony.com/
+https://github.com/symfony/inflector/blob/eb5c654f16c0e18d3a332984dc0ce44b0d218813/Inflector.php
+Doesn't contain method to pluralize. No documentation on how pluralize functionality is supposed to work. Package is available on packagist.org as stand-alone package.

@@ -1,0 +1,42 @@
+Load balancer appcookie configuration deprecated in HAproxy
+
+
+ISSUE TYPE
+
+Improvement Request
+
+COMPONENT NAME
+
+ACS 4.11.x VR load balancing with AppCookie stickiness
+
+CLOUDSTACK VERSION
+
+ACS 4.11.x
+
+CONFIGURATION
+
+Advanced zone, guest isolated network with LB configuration on public IP
+
+OS / ENVIRONMENT
+
+N/A
+
+SUMMARY
+
+AppCookie configuration is deprecated in HAproxy
+https://cbonte.github.io/haproxy-dconv/1.7/configuration.html#appsession
+
+STEPS TO REPRODUCE
+
+Create new LB rule with AppCookie stickiness
+Observe haproxy logs on VR stating:
+03:59:09 r-1667-VM haproxy[40552]: [ALERT] 090/035909 (40552) : parsing [/etc/haproxy/haproxy.cfg:38] : 'appsession' is not supported anymore, please check the documentation.
+
+EXPECTED RESULTS
+
+N/A
+
+ACTUAL RESULTS
+
+Error as above
+

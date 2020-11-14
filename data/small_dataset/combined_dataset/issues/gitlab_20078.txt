@@ -1,0 +1,73 @@
+The code used to populate the permissions for issues/merge requests grants one the `read_issue` or `read_merge_request` permission when the user is the author or assignee of an issue/merge request. We can see this in the following code:
+
+```ruby
+[:issue, :merge_request].each do |name|
+  define_method "#{name}_abilities" do |user, subject|
+    rules = []
+
+    if subject.author == user || (subject.respond_to?(:assignee) && subject.assignee == user)
+      rules += [
+        :"read_#{name}",
+        :"update_#{name}",
+      ]
+    end
+
+    rules += project_abilities(user, subject.project)
+    rules = filter_confidential_issues_abilities(user, subject, rules) if subject.is_a?(Issue)
+    rules
+  end
+end
+```
+
+The problem here is that the read/update permissions (and possibly others) are **not** removed when the project is private _and_ the user is _not_ a member. We can confirm this using the following spec:
+
+```ruby
+require 'spec_helper'
+
+describe Ability do
+  describe '.issue_abilities' do
+    it 'does not include the read_issue permission when the issue author is not a member of the private project' do
+      project = create(:project)
+      issue = create(:issue, project: project)
+
+      expect(project.team.member?(issue.author)).to eq(false)
+
+      expect(described_class.issue_abilities(issue.author, issue)).
+        not_to include(:read_issue)
+    end
+  end
+end
+```
+
+This will produce:
+
+```
+F
+
+Failures:
+
+  1) Ability.issue_abilities does not include the read_issue permission when the issue author is not a member of the private project
+     Failure/Error:
+       expect(described_class.issue_abilities(issue.author, issue)).
+         not_to include(:read_issue)
+     
+       expected [:read_issue, :update_issue] not to include :read_issue
+       Diff:
+       @@ -1,2 +1,2 @@
+       -[:read_issue]
+       +[:read_issue, :update_issue]
+       
+     # ./spec/permission_spec.rb:11:in `block (3 levels) in <top (required)>'
+     # /home/yorickpeterse/.gem/ruby/2.1.8/gems/rspec-retry-0.4.5/lib/rspec/retry.rb:98:in `block in run'
+     # /home/yorickpeterse/.gem/ruby/2.1.8/gems/rspec-retry-0.4.5/lib/rspec/retry.rb:88:in `loop'
+     # /home/yorickpeterse/.gem/ruby/2.1.8/gems/rspec-retry-0.4.5/lib/rspec/retry.rb:88:in `run'
+     # /home/yorickpeterse/.gem/ruby/2.1.8/gems/rspec-retry-0.4.5/lib/rspec_ext/rspec_ext.rb:12:in `run_with_retry'
+     # /home/yorickpeterse/.gem/ruby/2.1.8/gems/rspec-retry-0.4.5/lib/rspec/retry.rb:22:in `block (2 levels) in setup'
+
+Finished in 3.52 seconds (files took 7.2 seconds to load)
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/permission_spec.rb:5 # Ability.issue_abilities does not include the read_issue permission when the issue author is not a member of the private project
+```

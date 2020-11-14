@@ -1,0 +1,9 @@
+Adding coarse-grained security policy at service and namespace levels
+
+
+In follow up to the discussion in the micro-segmentation thread in kubernetes-sig-network, I would like to propose an API standard for coarse-grained security policy at the service and namespace levels.
+I propose adding a private option to the ServiceType field, where private services are only accessible within their namespace. The ClusterIP, NodePort, LoadBalancer service types will be unaffected by the proposed additions.
+In addition, I propose adding a networkPolicy field to namespaces, with private or public options.  Pods within a private namespace are only accessible by pods within the same namespace.  Pods within a public namespace are accessible from anywhere in the cluster.
+A service should inherit its policy from the namespace it belongs to; therefore, if a namespace has a private networkPolicy, services within the namespace will have a private type, unless otherwise specified. Similarly, if a namespace has a public networkPolicy, services within the namespace will have a ClusterIP type, unless otherwise specified.
+These proposed additions to the API will be implemented by the network plugin. If the network plugin does not support them, the default behavior will not break applications. The current default behavior in Kubernetes equates to namespaces with a public networkPolicy and services with a ClusterIP type. This will not change for the 1.X releases in order to maintain backward compatibility.  For 2.0, the default should change to a private namespace networkPolicy and a private service type. If a more open policy is desired, it must be specified in the spec.
+I’m keen to get more general feedback from the community on this as I begin to look into implementing it in the API.

@@ -1,0 +1,8 @@
+Add ability to specify cpuRequest for API Server
+
+
+Adds ability to specify cupRequest for the API Server
+spec:
+  kubeAPIServer:
+    cpuRequest: 300m
+

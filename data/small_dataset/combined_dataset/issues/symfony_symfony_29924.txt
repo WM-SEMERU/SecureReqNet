@@ -1,0 +1,71 @@
+[Routing] Incorrect redirection when route param has trailing slash
+
+
+Symfony version(s) affected: 4.2.2
+Description
+Symfony 4 redirects (301) a route containing a route param when the route param ends with a trailing slash. Route parameters allow a trailing slash if configured as shown here. Symfony 4 should detect that the route param has a trailing slash and not return a redirect response.
+Lets test the expected behavior first in Symfony 3.4
+**Correct behavior in Symfony 3.4 **
+Step 1. Set your route
+#app/config/routing.yml
+index:
+    path:       /share/{token}
+    controller:  AppBundle:Default:token
+    defaults:
+        token: null
+    requirements:
+        token: .+
+
+Step 2. Implement the action
+// src/AppBundle/Controller/DefaultController.php
+class DefaultController extends Controller
+{
+    /**
+     * @param Request $request
+     *
+     * @param $token
+     *
+     * @return Response
+     */
+    public function tokenAction(Request $request, $token = null)
+    {
+        return new Response(
+            'token is ' . $token
+        );
+    }
+}
+Step 3. Serve the application and visit the path http://127.0.0.1:8000/share/token/
+Below output is the expected and correct output.
+token is token/
+Now lets see what Symfony 4.2 does.
+Incorrect behavior in Symfony 4.2
+Step 1. Set your route
+# config/routes.yaml
+index:
+    path:       /share/{token}
+    controller:  App\Controller\DefaultController::index
+    requirements:
+        token: .+
+
+Step 2. Implement the action
+// src/Controller/DefaultController.php
+    /**
+     * @param Request $request
+     * @param $token
+     *
+     * @return Response
+     */
+    public function index( Request $request, $token ) : Response
+    {
+        return new Response(
+            'token is ' . $token
+        );
+    }
+Step 3. Serve the application and visit the path http://127.0.0.1:8000/share/token/
+Below output is the incorrect output.
+token is token
+the webserver log is
+[Fri Jan 18 17:58:32 2019] 127.0.0.1:13835 [301]: /share/token/
+2019-01-18T06:58:32+00:00 [info] Matched route "index".
+[Fri Jan 18 17:58:32 2019] 127.0.0.1:13836 [200]: /share/token
+

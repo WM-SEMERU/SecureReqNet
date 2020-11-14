@@ -1,0 +1,1 @@
+I think this is because, GitLab remembers the last page before logout and redirects to that on re-login even if when logging in as a different user. This causes issues like 404 when the newly logged in user doesn't have the privileges to view the last page the previous user was viewing before the logout.

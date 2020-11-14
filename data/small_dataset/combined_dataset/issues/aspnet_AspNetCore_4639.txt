@@ -1,0 +1,6 @@
+chunkingcookiemanager leaks unused chunks
+
+
+There seems to be a bug in Microsoft.AspNetCore.Authentication.Cookies.ChunkingCookieManager when used in conjunction with CookieAuthentication.  What I've seen is that as the size of the Authentication cookie changes the number of chunks needed to the accommodate the cookie data will change as well.  If the number of cookies needed decreases, then chunks that are no longer needed are not being cleaned up.
+Normally this isn't a big deal, but I'm currently running in a system that has a hard limit on the header size of 10240 bytes.  The specify scenario I'm running into has the Authentication cookies going from 2 chunks (3 total cookies) to 1 chunk (1 cookie).  This has the added bonus of replacing the value in the cookie that previously stored the chunk count (really small), to now storing the entire Authentication Ticket (relatively large), in turn nearly doubling the amount of header space consumed by the Authentication cookie.
+It seems like it could be beneficial to have ChunkingCookieManager  expire these "vestigial" as it's setting the new chunks on the response.

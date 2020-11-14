@@ -1,0 +1,69 @@
+apache pulsar 安全认证问题
+
+
+1、根据apache pulsar 的OpenSSL Certificate Authority 创建了 root pair 、intermediate、和 client certificates
+2、根据这章 Transport Encryption using TLS 生成   broker.cert.pem
+3、配置 broker.conf  proxy.conf  client.conf
+4、编写java 类
+ public static void main(String[] args) throws PulsarClientException, FileNotFoundException {
+
+        PulsarClient client = PulsarClient.builder()
+                .serviceUrl("pulsar+ssl://192.168.75.135:6651/")
+                .enableTls(true)
+
+                
+                .tlsTrustCertsFilePath("/root/ca/certs/ca.cert.pem")
+                .enableTlsHostnameVerification(false) // false by default, in any case
+                .allowTlsInsecureConnection(false) // false by default, in any case
+                .build();
+
+        Producer<byte[]> producer = client.newProducer().topic("my-topic").create();
+
+        for (int i = 0; i < 1000; i++) {
+
+            producer.send(("message"+i).getBytes());
+        }
+        producer.close();
+        client.close();
+    }
+
+5、运行 main 方法
+6、报错：
+Exception in thread "main" org.apache.pulsar.client.api.PulsarClientException: java.util.concurrent.CompletionException: org.apache.pulsar.shade.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /192.168.75.135:6651
+	at org.apache.pulsar.client.impl.ConnectionPool.lambda$null$9(ConnectionPool.java:227)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:404)
+	at org.apache.pulsar.shade.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:463)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:886)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.util.concurrent.CompletionException: org.apache.pulsar.shade.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /192.168.75.135:6651
+	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:292)
+	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:308)
+	at java.util.concurrent.CompletableFuture.uniAccept(CompletableFuture.java:647)
+	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:632)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:474)
+	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:1977)
+	at org.apache.pulsar.client.impl.ConnectionPool.lambda$connectToAddress$17(ConnectionPool.java:300)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:511)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:504)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:483)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:424)
+	at org.apache.pulsar.shade.io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:121)
+	at org.apache.pulsar.shade.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at org.apache.pulsar.shade.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at org.apache.pulsar.shade.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:633)
+	at org.apache.pulsar.shade.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at org.apache.pulsar.shade.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at org.apache.pulsar.shade.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	... 3 more
+Caused by: org.apache.pulsar.shade.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /192.168.75.135:6651
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.pulsar.shade.io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:325)
+	at org.apache.pulsar.shade.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	... 7 more
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+
+7、随便问下说下 bin/pulsar-client produce my-topic --messages "hello-pulsar" 也是拒绝连接的错误， 环境是启动好的

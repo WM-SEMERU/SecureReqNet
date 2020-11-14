@@ -1,0 +1,13 @@
+allow calling sanitizeStylesheet on style elements
+
+
+Original issue 1895 created by benjaminrk on 2014-02-27T00:12:18.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+r5670, using html-css-sanitizer-bundle.js
+What steps will reproduce the problem?
+
+sanitize HTML with style tags
+
+What is the expected output? What do you see instead?
+When CSS sanitization is defined (unless 'undefined' === typeof parseCssDeclarations), style attributes are sanitized via parseCssDeclarations. It seems logical that style elements would be treated similarly, and sanitized with sanitizeStylesheet if it is defined. However sanitizeStylesheet is never called.
+The default behavior does not seem unreasonable, but the way handlers are inaccessible behind closures makes it quite difficult to change this behavior without rewriting the entirety of makeHtmlSanitizer. It seems logical that the decision returned by tagPolicy should be able to affect the processing of the content of the element (generically, not just style elements).

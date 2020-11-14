@@ -1,0 +1,4 @@
+Documented the new Kernel project_dir argument
+
+
+This documents symfony/symfony#30651 and symfony/recipes#555

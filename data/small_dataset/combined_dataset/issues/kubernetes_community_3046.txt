@@ -1,0 +1,4 @@
+Added vendor selection and new mailing lists
+
+
+Updated wg-security-audit README to include vendor selection and new publicly viewable mailing list.

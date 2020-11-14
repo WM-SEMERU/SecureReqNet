@@ -1,0 +1,25 @@
+Folders are empty, all BM's are imported outside the folders
+
+
+Description:
+Folders are empty,   all BM's are imported outside the folders
+Steps to Reproduce
+
+Sync iOS and Android through QR code
+Start creating BM's   in Android
+Bookmark 2 sites outside the folder
+Bookmark 3rd site, click on Edit and move the site to Folder A
+Bookmark 4th site, click on Edit and move the site to Folder B which is created inside the folder A
+Bookmark 5th site, click on Edit and move the site to Folder C which is created inside the folder B
+Verify the BM's and folder structure in ios
+
+Actual result:
+Folders are synced but no BM's inside the folders. All the BM's are imported outside the folders
+Expected result:
+Folders should be displayed with BM's
+Reproduces how often: [Easily reproduced/Intermittent issue]
+Always
+Brave Version:
+Sync Build v1.6.6 (18.10.22.12)
+Device details:
+iPhone 8 - ios 12

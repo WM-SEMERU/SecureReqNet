@@ -1,0 +1,54 @@
+[EventDispatcher] Fix BC/FC layer
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Fixes
+
+TypeError: Argument 3 passed to Symfony\Component\EventDispatcher\EventDispatcher::doDispatch() must be an instance of Symfony\Component\EventDispatcher\Event
+
+Spotted in lexik/LexikJWTAuthenticationBundle#637

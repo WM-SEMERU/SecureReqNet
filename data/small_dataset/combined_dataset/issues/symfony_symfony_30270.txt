@@ -1,0 +1,15 @@
+Container::set method description is wrong
+
+
+Symfony version(s) affected: 4.2
+Description
+The Symfony\Component\DependencyInjection\Container::set annotation states the following:
+
+Setting a service to null resets the service: has() returns false and get()
+behaves in the same way as if the service was never created.
+
+
+But this is impossible to do because only synthetic services can be set to null. It is impossible to dispose a regular public or private service instance when using with app servers like PHP RoadRunner which doesn't finish scripts. In this case DB connections defined as regular services are not disposed and quickly wastes DB max connections.
+Possible Solution
+Allow to null any service.
+Or define and document a legal way to do that.

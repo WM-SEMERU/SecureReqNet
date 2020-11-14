@@ -1,0 +1,19 @@
+Docker for production
+
+
+Hi
+Related to #489
+Some key differences:
+
+uses requirements-default.txt as bootstrap, should be usable in production
+Postgres and Memcached are linked as external services (as is customary when running container stacks)
+either LDAP or XML or other custom configuration may be easily added via volumes (or extending the image)
+
+With the kind help of @mschoengens we prepared a sample docker-compose which may be found in contrib/docker.
+As for the Dockerfile, I placed in root directory because this makes for the best scenario for using Docker during development (ie using Docker as the main build tool to make sure the image is always functioning).
+Whether to keep it there, I guess it all depends on how you like to work at Apple. If you do keep that file in root, what could be easily done is an integration with Docker Hub to have automated builds for the whole codebase.
+An alternative could be to create a Docker build that retrieves the latest content from this GitHub repo instead, making it more "stable" and less developer-oriented.
+Happy to discuss this if needed.
+As a side note, I'm now working on an Helm chart to provide a setup similar to that of the docker-compose, but with LDAP, and HA for all services.
+Cheers
+Giorgio

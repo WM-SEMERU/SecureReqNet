@@ -1,0 +1,5 @@
+Add pointer check on all boundary functions.
+
+
+All boundary functions whose input parameters can be controlled by host if the data is actually from outside enclave or inside enclave.
+Refer to  #212 for the fix to GetReport function.

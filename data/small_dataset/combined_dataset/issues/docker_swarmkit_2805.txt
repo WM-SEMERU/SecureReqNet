@@ -1,0 +1,5 @@
+Refactor condition in restart supervisor
+
+
+Small change to refactor a condition in the restart supervisor's shouldRestart method. The old condition made my brain hurt. This should make it easier for everyone to understand.
+Skipping the usual pull request boilerplate because this is such a tiny refactor with no user-facing impact, which passes the unit tests.

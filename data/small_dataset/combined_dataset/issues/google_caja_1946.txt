@@ -1,0 +1,24 @@
+"ant runtests" has failures
+
+
+Original issue 1948 created by erights on 2014-12-15T01:38:56.000Z:
+"ant runtests" reports the following failures:
+guest-scan-min  Failure 100000 ms passed while waiting for: completion (Remaining elements = [<div id="testUniverse-caja-guest-0___" class="testcontainer done failed">])
+junit.framework.AssertionFailedError: 100000 ms passed while waiting for: completion (Remaining elements = [<div id="testUniverse-caja-guest-0___" class="testcontainer done failed">])
+at com.google.caja.plugin.BrowserTestCase.countdown(BrowserTestCase.java:262)
+at com.google.caja.plugin.BrowserTestCase.waitForCompletion(BrowserTestCase.java:222)
+at com.google.caja.plugin.BrowserTestCase.driveBrowser(BrowserTestCase.java:209)
+at com.google.caja.plugin.BrowserTestCase.runBrowserTest(BrowserTestCase.java:130)
+at com.google.caja.plugin.CatalogTestCase.runTest(CatalogTestCase.java:34)
+at com.google.caja.plugin.CatalogRunner$1.evaluate(CatalogRunner.java:94)
+at com.google.caja.plugin.CatalogRunner.runChild(CatalogRunner.java:88)
+at com.google.caja.plugin.CatalogRunner.runChild(CatalogRunner.java:42)
+282.660
+taming-tamed-min    Failure The title shows 1/40 fail 39/40 pass - Browser test case (Netscape 5.0 (Macintosh))
+junit.framework.AssertionFailedError: The title shows 1/40 fail 39/40 pass - Browser test case (Netscape 5.0 (Macintosh))
+at com.google.caja.plugin.BrowserTestCase.driveBrowser(BrowserTestCase.java:213)
+at com.google.caja.plugin.BrowserTestCase.runBrowserTest(BrowserTestCase.java:130)
+at com.google.caja.plugin.CatalogTestCase.runTest(CatalogTestCase.java:34)
+at com.google.caja.plugin.CatalogRunner$1.evaluate(CatalogRunner.java:94)
+at com.google.caja.plugin.CatalogRunner.runChild(CatalogRunner.java:88)
+at com.google.caja.plugin.CatalogRunner.runChild(CatalogRunner.java:42)

@@ -1,0 +1,5 @@
+PasswordEncoder should support BCrypt
+
+
+see discussion here:
+https://groups.google.com/group/symfony-devs/browse_thread/thread/92ae24eafd13e29e?hl=en

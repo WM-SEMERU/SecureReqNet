@@ -1,0 +1,12 @@
+[RTC] Form Text Validation Enhancements
+
+
+[Request To Comment] To anybody who intends to use the Core Components, please provide your feedback about the following requirements. We want to make sure that we build a component that fits your needs, so don't hesitate to tell us how that component should work, so that you will be able to use it.
+User Story:
+As a content author, I want to configure more advanced validations for form text fields
+Acceptance Criteria:
+
+Configure a regular expression to validate the form input
+Configure an error message to show when the regex is violated
+Configure when the validation should run (blur, submit)
+

@@ -1,0 +1,8 @@
+Provide better Maven support
+
+
+Original issue 1938 created by hoeller.martin on 2014-09-12T12:26:10.000Z:
+If a Maven project want's to use Caja as a dependency, Caja must be in a Maven repository. As Caja is not in maven central (http://repo1.maven.org) it is provided via its own pseudo repository: http://google-caja.googlecode.com/svn/maven/ to provide minimal support for maven projects.
+However, the directory structure in this pseudo-repository does not match Caja's current groupId com.google.caja. This results in problems/incorrect configuration in maven projects using Caja. For example: http://mail-archives.apache.org/mod_mbox/incubator-shindig-dev/201409.mbox/browser
+So the ideal solution would be, to deploy Caja to maven central (as also suggested an explained here: http://code.google.com/p/google-caja/issues/detail?id=1306#c1)
+If this is no option, please fix at least the directory structure in the pseudo-repository, so one can use the correct maven-coordinates to retrieve caja from this pseudo-repository.

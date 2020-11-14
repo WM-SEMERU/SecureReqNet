@@ -1,0 +1,56 @@
+[Security] don't do nested calls to serialize()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29951
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+The problem (originally reported as Symfony\Component\Security\Core\Authentication\Token\AbstractToken issue), may occur also in classes extending Symfony\Component\Security\Core\Exception\AuthenticationException
+Tasks:
+
+ Skip native serializer (workaround itself)
+ Token test
+ Exception test
+

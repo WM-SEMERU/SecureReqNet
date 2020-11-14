@@ -1,0 +1,4 @@
+Media backend initialization in script/ makes recompilation slow
+
+
+One of my motivations for servo/media#209 was that changing the implementation of the gstreamer backend caused us to recompile script. This makes it really frustrating to perform exploratory work in that backend. Unfortunately, by adding just-in-time initialization of the backend throughout script, we have introduced the same problem. I propose that we move the initialization to component/servo instead, where we can run it in run_content_process and Servo::new, and accept that we may end up initializing it unnecessarily in exchange for significant developer ergonomic benefits.

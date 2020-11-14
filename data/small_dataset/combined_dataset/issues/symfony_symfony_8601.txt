@@ -1,0 +1,45 @@
+[Security] Decode switch user username before use it.
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#8571
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

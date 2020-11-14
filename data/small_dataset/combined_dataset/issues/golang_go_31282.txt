@@ -1,0 +1,21 @@
+x/text/unicode/norm: tests run over 10 minutes and time out on js/wasm
+
+
+What's so hard about x/text/unicode/norm that makes it kill js/wasm?
+https://build.golang.org/log/275a5abfdca723fd4574927bd1e076ee93e04ee8
+...
+ok  	golang.org/x/text/search	7.146s
+?   	golang.org/x/text/secure	[no test files]
+ok  	golang.org/x/text/secure/bidirule	11.127s
+ok  	golang.org/x/text/secure/precis	13.066s
+ok  	golang.org/x/text/transform	13.374s
+?   	golang.org/x/text/unicode	[no test files]
+ok  	golang.org/x/text/unicode/bidi	10.438s
+ok  	golang.org/x/text/unicode/cldr	11.382s
+*** Test killed with quit: ran too long (10m0s).
+FAIL	golang.org/x/text/unicode/norm	600.299s
+ok  	golang.org/x/text/unicode/rangetable	32.598s
+ok  	golang.org/x/text/unicode/runenames	11.347s
+ok  	golang.org/x/text/width	9.961s
+
+/cc @neelance @cherrymui @mpvl

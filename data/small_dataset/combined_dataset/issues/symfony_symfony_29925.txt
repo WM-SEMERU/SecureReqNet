@@ -1,0 +1,20 @@
+Implicit param converter seems to not work anymore 4.2.2
+
+
+Symfony version(s) affected: 4.2.2
+Hello!
+Description
+I'm in pain to make the well known implicit ParamConverter trick work with Symfony 4.2.2:
+/**
+ * @Route("/{id}", name="admin_post_show")
+ */
+public function show(Post $post)
+
+It tells that the Post argument cannot be autowired.
+How to reproduce
+Just follow the exemple given in the best practices guide.
+Possible Solution
+No idea, sorry!
+Additional context
+Could relate to #29819 (not sure as the ticket is closed).
+Thank you for your feedback!

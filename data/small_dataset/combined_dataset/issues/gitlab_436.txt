@@ -1,0 +1,1 @@
+When tray to create a branch with a blank space (for example two words) returns err0r 500

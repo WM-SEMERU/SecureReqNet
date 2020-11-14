@@ -1,0 +1,31 @@
+```
+Link:          https://hackerone.com/reports/402907
+By:            @math1as
+```
+
+Details:
+##Description:
+
+validate_localhost function (1.jpg) check the ip address that user input into webhooks , service ,etc.
+but it could be bypassed, for example , not only 127.0.0.1 => localhost
+using 127.0.0.2 could also access to local address and port.
+
+## Steps To Reproduce:
+
+see 2.png , webhooks could send request to local port , bypassed the check function.
+
+I also test this vulnerability in gitlab.com , see 3.jpg , I add a webhook points to local port 8080
+
+and 4.jpg shows the result from local server
+
+## Impact
+
+attacker could access to local and internal service. ignore the check function.
+
+![2](/uploads/2a34b2324988cdf9a6d0901da1c0b0ba/2.png)
+
+![1](/uploads/28c202d02d6de1fe48633f09bbdba4aa/1.png)
+
+![3](/uploads/296e978711cf56ed0164540c8e7ef48a/3.jpg)
+
+![4](/uploads/88f08a1599d82fd0c4388e5cac7bd4f3/4.jpg)

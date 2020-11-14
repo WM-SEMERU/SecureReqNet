@@ -1,0 +1,93 @@
+Error parsing header X-XSS-Protection: 1; mode=block, 1; mode=block:
+
+
+Symfony version(s) affected: 4.2.3
+Description
+I see this error in the browser console Error parsing header X-XSS-Protection: 1; mode=block, 1; mode=block: expected semicolon at character position 13.
+How to reproduce
+// init
+$headers = [];
+
+// Upgrading legacy sites to HTTPS
+//
+// Transitioning large collections of unmodifiable legacy web content to encrypted, authenticated HTTPS connections
+// can be challenging as the content frequently includes links to insecure resources, triggering mixed content warnings.
+// This release includes a new CSP directive, upgrade-insecure-resources, to upgrade insecure resource HTTPS more easily,
+// requests to HTTPS before fetching them. This change allows developers to serve their hard-to-update legacy content via
+// improving security for their users.
+//
+// https://w3c.github.io/webappsec/specs/upgrade/
+// https://googlechrome.github.io/samples/csp-upgrade-insecure-requests/index.html
+$headers['Content-Security-Policy'] = 'upgrade-insecure-requests';
+
+// Force client-side SSL redirection.
+//
+// If a user types `example.com` in their browser, even if the server
+// redirects them to the secure version of the website, that still leaves
+// a window of opportunity (the initial HTTP connection) for an attacker
+// to downgrade or redirect the request.
+//
+// The following header ensures that browser will ONLY connect to your
+// server via HTTPS, regardless of what the users type in the browser's
+// address bar.
+//
+// (!) Remove the `includeSubDomains` optional directive if the website's
+// subdomains are not using HTTPS.
+//
+// http://www.html5rocks.com/en/tutorials/security/transport-layer-security/
+// https://tools.ietf.org/html/draft-ietf-websec-strict-transport-sec-14#section-6.1
+// http://blogs.msdn.com/b/ieinternals/archive/2014/08/18/hsts-strict-transport-security-attacks-mitigations-deployment-https.aspx
+$headers['Strict-Transport-Security'] = 'max-age=86400; includeSubDomains';
+
+// With Content Security Policy (CSP) enabled (and a browser that supports it (http://caniuse.com/#feat=contentsecuritypolicy),
+// you can tell the browser that it can only download content from the domains you explicitly allow.
+// http://www.html5rocks.com/en/tutorials/security/content-security-policy/
+// https://www.owasp.org/index.php/Content_Security_Policy
+//
+// WARNING: "Report-Only" is only the first step, it does nothing but reporting ...
+//
+// You need to change our application code so we can increase security by disabling 'unsafe-inline' 'unsafe-eval'
+// directives for css and js (if you have inline css or js, you will need to keep it too).
+//
+// http://www.html5rocks.com/en/tutorials/security/content-security-policy/#inline-code-considered-harmful
+// $headers['Content-Security-Policy-Report-Only'] = "script-src 'self'; report-uri " . Path::getUrlRoot() . "/adm/content-security-policy-report.php";
+
+// Config to don't allow the browser to render the page inside an frame or iframe
+// and avoid clickjacking (http://en.wikipedia.org/wiki/Clickjacking)
+// if you need to allow [i]frames, you can use SAMEORIGIN or even set an uri with ALLOW-FROM uri
+//
+// https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options
+$headers['X-Frame-Options'] = 'SAMEORIGIN';
+
+// "Great for analytics, bad for your users’ privacy. At some point the web got woke and decided that maybe
+// it wasn’t a good idea to send it all the time." - https://blog.appcanary.com/2017/http-security-headers.html
+//
+// https://scotthelme.co.uk/a-new-security-header-referrer-policy/
+// https://wiki.mozilla.org/Security/Guidelines/Web_Security
+$headers['Referrer-Policy'] = 'origin-when-cross-origin';
+
+// When serving user-supplied content, include a X-Content-Type-Options: nosniff header along with the Content-Type: header,
+// to disable content-type sniffing on some browsers.
+//
+// https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+// currently supported in IE > 8 http://blogs.msdn.com/b/ie/archive/2008/09/02/ie8-security-part-vi-beta-2-update.aspx
+// http://msdn.microsoft.com/en-us/library/ie/gg622941(v=vs.85).aspx
+// 'soon' on Firefox https://bugzilla.mozilla.org/show_bug.cgi?id=471020
+$headers['X-Content-Type-Options'] = 'nosniff';
+
+// This header enables the Cross-site scripting (XSS) filter built into most recent web browsers.
+// It's usually enabled by default anyway, so the role of this header is to re-enable the filter for
+// this particular website if it was disabled by the user.
+//
+// https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+$headers['X-XSS-Protection'] = '1; mode=block';
+
+$headers['X-UA-Compatible'] = 'IE=edge,chrome=1';
+
+$headers['Content-Type'] = 'text/html; charset=utf-8';
+
+// ------------------------
+
+new \Symfony\Component\HttpFoundation\Response('foo', 200, $headers)
+Possible Solution
+Overwrite the headers instead of adding them, same like the "Content-Type" fix? #29057

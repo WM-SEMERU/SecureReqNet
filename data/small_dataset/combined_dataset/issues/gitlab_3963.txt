@@ -1,0 +1,168 @@
+'Dev: https://dev.gitlab.org/gitlab/gitlabhq/issues/2407
+
+GitLab currently has one '.secret' file which serves multiple purposes.
+
+- Gitlab::Application.config.secret_token
+- Gitlab::Application.config.secret_key_base
+- devise :two_factor_authenticatable, otp_secret_encryption_key (since 7.11)
+
+The impact of rotating the first two secrets is much lower than that of rotating the third. If the first two get rotated, some users get signed out and confirmation links stop working. 
+If the third is rotated, an admin needs to go into the rails console to disable 2FA for all users, and each of those users needs to remove GitLab from their authenticator app, add it again, and print / store a new set of recovery keys.
+
+I was surprised to learn about this today when we accidentally rotated the secret.
+
+What can we do to inform users and avoid such accidental rotation? Do we need to reconsider how we store the OTP (2FA) secret encryption key?
+
+Jacob
+
+> I propose we create a separate file for the DB encryption secret and we start telling users to keep that secret in a safe place.
+
+Marin
+
+> **Is it wise to re-use the session/CSRF secret**
+
+> Revoking one secret now does 2 things which is bad
+
+>**Do we need to reconsider how we store the OTP (2FA) secret encryption key?**
+
+> I think this will influence everyone who had 2fa enabled and it can be quite a pain to enforce. What would be interesting to consider is separating the current secret for 2fa into a separate file and create something(rake task?) that will duplicate the current one into this new file if 2fa is enabled.
+This way we get to keep all users with working 2fa and give admins an option of choosing to revoke secrets at any time.
+
+Jacob
+
+> It occurred to me that technically, we could have a script that re-encrypts OTP secrets using a new otp_secret_encryption_key, because the user's OTP secrets are stored in the DB with symmetric encryption. Decrypt each user secret with the old encryption key and re-encrypt with the new key.
+For example, if we want to rotate the 'wonky secret token' on gitlab.com we could do so with minor inconvenience to our users if we re-encrypt their OTP secrets (barcodes) with the new secret token. That way their existing barcodes keep working.
+I am not sure what this adds to the discussion but I wanted to put it out there that this is possible.
+
+Dmitriy
+
+> sounds great
+
+Jacob
+
+> Assigning 7.13 because the current situation is dangerous for GitLab sysadmins: it is not obvious how important it is to keep the DB encryption secret safe, or that that secret even exists.
+
+Dmitriy
+
+>  I dont see how one `.secret` is more important than another `.secret` but I am ok with decouple if. Wondering how we are going to do this without breaking 2FA for existing accounts. And what will be new name/location for another N+1 secret value? Maybe its time for `config/secrets.yml` file with all secrets here?
+
+Jacob
+
+> **I dont see how one .secret is more important than another .secret**
+
+> Lose the cookie signing secret: no big deal. Lose the DB encryption secret: users with 2FA can no longer sign in. I think the DB encryption secret is a lot more important.
+
+> **And what will be new name/location for another N+1 secret value?**
+
+> I don't know, this is a new thing for GitLab. But I think this is important and we need to come up with a design for it. Also, we are getting the same problem in GitLab CI when we store 'runner secrets' for the user in the DB: losing the DB encryption key is bad.
+
+> **Wondering how we are going to do this without breaking 2FA for existing accounts.**
+
+> Create a migration that reads the current .secret, decrypts data in the DB, and re-encrypts with the new key?
+
+> I think it would be great to have config/secret.yml where we place all our secret keys so we dont have `.gitlab_shell_secret`, `.secret`, `.very_secret`, `.much_secret` files
+
+```
+gitlab_shell: "eff07d30...."
+two_factor_auth: "eff07d30...."
+session: "eff07d30...."
+```
+
+> OK we can use a secrets.yml.
+What about the GitLab installation instructions?
+"Just download this package, install it, and store the DB encryption key in a safe place"?? cc sytse
+
+Sytse
+
+> Instructions should be in 2FA docs for admins. I totally agree with storing everything in config/secrets.yml (Rails standard). Can we remove them from gitlab.rb?
+
+Marin
+
+> We have `gitlab-secrets.json` that is read by omnibus-gitlab which contains some secrets. Removing all secrets from gitlab.rb will be a breaking change and possibly a large undertaking. This will also cause another split in the documentation ( "if you use version prior to X.X.X store here, otherwise here").
+I do not see why this would be needed however considering that `gitlab.rb` is already owned by root and accesible to small subset of users. Only possible benefit I see is that you could dump all secrets using JSON but you can already do that when specifying attribute overrides
+
+Jacob
+
+> **Instructions should be in 2FA docs for admins.**
+
+> Fair enough, but only if 2FA is disabled by default. Otherwise users start using it without admins knowing about it.
+
+> **Can we remove them from gitlab.rb?**
+
+> I do not understand this question. Do you mean moving them to a separate file in /etc/gitlab?
+
+Sytse
+
+>1. I'm OK with disabling 2FA by default and having a link to the docs in the UI where you enable it (and maybe a text warning)
+2. Move them from gitlab.rb to secret.yml, but I realize that maybe gitlab.rb will write secret.yml?
+
+Marin
+
+> Move them from gitlab.rb to secret.yml, but I realize that maybe gitlab.rb will write secret.yml?
+
+> Why would we need to move secrets from gitlab.rb to secrets.yml? Omnibus-gitlab will have to write to secrets.yml anyway because application won't work without it. Moving anything from gitlab.rb to another file will complicate things for users further with little benefit; we've been radiating for over a year that `gitlab.rb` is the only place you need to change things in.
+
+Marin
+
+> **2 Move them from gitlab.rb to secret.yml, but I realize that maybe gitlab.rb will write secret.yml?**
+
+> secrets.yml is a [Rails 4.1 feature](http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml) and it lives in the Rails folder (/opt/gitlab/embedded/service/gitlab-rails). gitlab.rb is an omnibus configuration file and it lives in /etc/gitlab. You could indeed say that 'gitlab.rb writes secrets.yml', I hope that what I just wrote explains why.
+
+Jacob
+
+> OK so are these the next steps now?
+- use a separate DB encryption key, store it in `config/secrets.yml`. Migrate the current 'cookie secret' to that value for existing installations
+- turn off 2FA by default
+- next to the option to turn it on, link to documentation that explains to admins that/why they need to keep the DB encryption key in a safe place
+
+
+Dmitriy
+
+> what do you mean by `turn off 2FA by default`?
+
+Jacob
+
+>  I think we should avoid the following:
+- sysadmin installs GitLab without knowing about DB encryption key
+- user enables 2FA without sysadmin knowing
+- something happens, DB encryption key is lost (because the admin did not know it exists)
+- user looses 2FA access
+If the sysadmin needs to explicitly enable 2FA, we can warn them at that time that they need to store the DB encryption key in a safe place.
+
+Dmitriy
+
+> so you propose application setting where you enable 2FA feature?
+
+Jacob
+
+> Yes
+
+Marin
+
+> **How will Omnibus interact with secrets in config/secrets.yml if at all?**
+
+> sytse Until the decision is clearer on how it will be handled in GitLab (and CI) I don't think I have a clear vision on what needs to change in omnibus.
+
+Dmitriy
+
+>  jacob I am ok with that
+
+Sytse
+
+> Same issue for GitLab CI is in https://dev.gitlab.org/gitlab/gitlab-ci/issues/277#note_52972
+
+Jacob
+
+> Users keep losing the DB encryption key 'in the wild' https://gitlab.com/gitlab-org/gitlab-ce/issues/1960 , this issue needs a milestone.
+
+> 2FA is out there, our poor documentation and tooling for admins is hurting people.
+
+Job
+
+> jacobvosmaer I don't understand, I don't have proper context for this. This can be in 7.14 if it's important, of course.
+
+Sytse
+
+> job It is causing data (token) loss at customers today
+
+@jacobvosmaer @dzaporozhets @sytses @jnijhof @marin @JobV 

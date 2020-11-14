@@ -1,0 +1,49 @@
+[YAML] Bogus { } is not treated as an error
+
+
+Symfony version(s) affected: 4.2.3
+Description
+Given the following YAML:
+access_control:
+    - test: abc,
+      ips:
+        - 127.0.0.1
+        - ::1
+    - {
+        test: abc
+        ips:
+          - 127.0.0.1
+          - ::1
+      }
+    - {
+        test: abc
+        ips:
+            - 127.0.0.1
+            - ::1
+      }
+The output should be an error, while instead the code is parsed info
+How to reproduce
+dd(Yaml::parse("access_control:
+    - test: abc,
+      ips:
+        - 127.0.0.1
+        - ::1
+    - {
+        test: abc
+        ips:
+          - 127.0.0.1
+          - ::1
+      }
+    - {
+        test: abc
+        ips:
+            - 127.0.0.1
+            - ::1
+      }
+"));
+Possible Solution
+I'm not confident to dig into the YAML component parser ;)
+Additional context
+The actual output looks like the following:
+
+This combined with the fact security component doesn't validate IPs caused a small headache ;)

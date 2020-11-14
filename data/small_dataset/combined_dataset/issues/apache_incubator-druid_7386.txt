@@ -1,0 +1,4 @@
+Why mark `maxPendingPersists` as deprecated
+
+
+In #4815, the maxPendingPersists  in KafkaTuningConfig has been marked as deprecated and the value is always zero so that I can't change it ( I use the version of 0.12.2), but in the up-to-date code, the SeekableStreamIndexTaskTuningConfig#maxPendingPersists can be set again by users. I wonder the internal reason of these changes, any problem of maxPendingPersists? I think this parameter is useful if there are some pending persists, tweak this parameter can help avoid the blocking of ingestion. @pjain1 @jsun98 .

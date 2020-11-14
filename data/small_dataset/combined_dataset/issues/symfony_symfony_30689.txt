@@ -1,0 +1,8 @@
+[HttpFoundation] Invalid redirect Location
+
+
+The Bug is here again - #22518
+I can it reproduce. (the same case like #22517)
+for example here is a code.
+https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/RedirectResponse.php#L39
+The Code is not available more in actual state of code.

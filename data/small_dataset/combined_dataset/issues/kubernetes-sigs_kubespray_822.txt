@@ -1,0 +1,4 @@
+Full TLS for cluster components
+
+
+Users want option to deploy K8s clusters by Kargo with nothing using unsecure HTTP connections, even to localhost:port. Related http://kubernetes.io/docs/admin/kube-apiserver/ and kubernetes/kubernetes#10159

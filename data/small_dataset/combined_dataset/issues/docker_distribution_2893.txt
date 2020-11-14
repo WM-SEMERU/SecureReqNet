@@ -1,0 +1,87 @@
+registry: timeout / error 500 with s3 storage backend when docker daemon has '--iptables=false'
+
+
+My /etc/docker/registry/config.yml:
+version: 0.1
+log:
+  fields:
+    service: registry
+http:
+  addr: :5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+storage:
+  cache:
+    blobdescriptor: redis
+  s3:
+    accesskey: "MY-ACCESS-KEY"
+    secretkey: "MY-SECRET-KEY"
+    bucket: "docker-registry"
+    region: "ch-dk-2"
+    regionendpoint: "https://sos-ch-dk-2.exo.io"
+
+redis:
+  addr: redis:6379
+
+When I push the image I got on the client:
+38a4415321cb: Waiting 
+c8c1e3f3f6f0: Waiting 
+d8d170d0d3f5: Waiting 
+f4ef6c768615: Waiting 
+61d574688f05: Waiting 
+177475d1764a: Waiting 
+f232deb24d7e: Waiting 
+41dc11cf410c: Retrying in 5 seconds 
+5f70bf18a086: Retrying in 5 seconds 
+74baed274b96: Retrying in 5 seconds 
+c612e8f7fb61: Waiting 
+0944f641c149: Waiting 
+04e6ce4a09a1: Waiting 
+6cd590575900: Waiting
+
+Immediately after trying the push, docker log says:
+2019-04-05T07:38:55.438681000Z 172.17.0.1 - - [05/Apr/2019:07:38:55 +0000] "GET /v2/ HTTP/1.1" 200 2 "" "docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \\(linux\\))"
+2019-04-05T07:38:55.439191000Z time="2019-04-05T07:38:55.436031433Z" level=info msg="response completed" go.version=go1.11.2 http.request.host="MY-REGISTRY:5000" http.request.id=6adabf03-f8d5-4bb6-8bc7-c2228704c01a http.request.method=GET http.request.remoteaddr="172.17.0.1:50020" http.request.uri="/v2/" http.request.useragent="docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \(linux\))" http.response.contenttype="application/json; charset=utf-8" http.response.duration=3.644674ms http.response.status=200 http.response.written=2
+
+and then:
+2019-04-05T07:40:32.353015000Z 172.17.0.1 - - [05/Apr/2019:07:38:32 +0000] "POST /v2/qm19.04.1/blobs/uploads/ HTTP/1.1" 500 104 "" "docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \\(linux\\))"
+2019-04-05T07:40:32.353662000Z time="2019-04-05T07:40:32.350330434Z" level=error msg="response completed with error" err.code=unknown err.detail="s3aws: RequestError: send request failed
+2019-04-05T07:40:32.354030000Z caused by: Put https://sos-ch-dk-2.exo.io/docker-registry/docker/registry/v2/repositories/qm19.04.1/_uploads/aac3f57e-5d51-4187-940f-d270cbd7acd5/startedat: dial tcp: i/o timeout" err.message="unknown error" go.version=go1.11.2 http.request.host="MY-REGISTRY:5000" http.request.id=02338860-09b3-4922-9804-8e253853a11b http.request.method=POST http.request.remoteaddr="172.17.0.1:50016" http.request.uri="/v2/qm19.04.1/blobs/uploads/" http.request.useragent="docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \(linux\))" http.response.contenttype="application/json; charset=utf-8" http.response.duration=2m0.231587132s http.response.status=500 http.response.written=104 vars.name=qm19.04.1 
+2019-04-05T07:40:32.360789000Z time="2019-04-05T07:40:32.356944214Z" level=error msg="response completed with error" err.code=unknown err.detail="s3aws: RequestError: send request failed
+2019-04-05T07:40:32.361151000Z caused by: Put https://sos-ch-dk-2.exo.io/docker-registry/docker/registry/v2/repositories/qm19.04.1/_uploads/296b2ed8-a5b4-4990-a322-ff8daeddd215/startedat: dial tcp: i/o timeout" err.message="unknown error" go.version=go1.11.2 http.request.host="MY-REGISTRY:5000" http.request.id=89995c7d-dc68-4b96-8e35-744eae859bac http.request.method=POST http.request.remoteaddr="172.17.0.1:50014" http.request.uri="/v2/qm19.04.1/blobs/uploads/" http.request.useragent="docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \(linux\))" http.response.contenttype="application/json; charset=utf-8" http.response.duration=2m0.234160559s http.response.status=500 http.response.written=104 vars.name=qm19.04.1 
+2019-04-05T07:40:32.365827000Z time="2019-04-05T07:40:32.35740606Z" level=error msg="response completed with error" err.code=unknown err.detail="s3aws: RequestError: send request failed
+2019-04-05T07:40:32.366350000Z caused by: Put https://sos-ch-dk-2.exo.io/docker-registry/docker/registry/v2/repositories/qm19.04.1/_uploads/61fb0a6b-0939-4473-8323-0e7c90906124/startedat: dial tcp: lookup sos-ch-dk-2.exo.io on 208.67.222.222:53: read udp 172.17.0.2:58949->208.67.222.222:53: i/o timeout" err.message="unknown error" go.version=go1.11.2 http.request.host="MY-REGISTRY:5000" http.request.id=d66e4ed4-bfe4-4c79-adde-c83b809cede7 http.request.method=POST http.request.remoteaddr="172.17.0.1:50012" http.request.uri="/v2/qm19.04.1/blobs/uploads/" http.request.useragent="docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \(linux\))" http.response.contenttype="application/json; charset=utf-8" http.response.duration=2m0.23654523s http.response.status=500 http.response.written=104 vars.name=qm19.04.1 
+2019-04-05T07:40:32.370903000Z time="2019-04-05T07:40:32.357684066Z" level=error msg="response completed with error" err.code=unknown err.detail="s3aws: RequestError: send request failed
+2019-04-05T07:40:32.371266000Z caused by: Get https://sos-ch-dk-2.exo.io/docker-registry/docker/registry/v2/repositories/qm19.04.1/_layers/sha256/8bf0ec1da046581083b682b9e6b355b16094cfdefb0dc2d7bcb0af6166747d18/link: dial tcp: lookup sos-ch-dk-2.exo.io on 208.67.222.222:53: read udp 172.17.0.2:58949->208.67.222.222:53: i/o timeout" err.message="unknown error" go.version=go1.11.2 http.request.host="MY-REGISTRY:5000" http.request.id=faf415c6-54ce-43fe-a813-3c2d2daf6aa9 http.request.method=HEAD http.request.remoteaddr="172.17.0.1:50006" http.request.uri="/v2/qm19.04.1/blobs/sha256:8bf0ec1da046581083b682b9e6b355b16094cfdefb0dc2d7bcb0af6166747d18" http.request.useragent="docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \(linux\))" http.response.contenttype="application/json; charset=utf-8" http.response.duration=2m20.257509261s http.response.status=500 http.response.written=104 vars.digest="sha256:8bf0ec1da046581083b682b9e6b355b16094cfdefb0dc2d7bcb0af6166747d18" vars.name=qm19.04.1 
+2019-04-05T07:40:32.373962000Z time="2019-04-05T07:40:32.357957827Z" level=error msg="response completed with error" err.code=unknown err.detail="s3aws: RequestError: send request failed
+2019-04-05T07:40:32.374300000Z caused by: Get https://sos-ch-dk-2.exo.io/docker-registry/docker/registry/v2/repositories/qm19.04.1/_layers/sha256/b1820f5c55c43d2e4cb9a66700454c17c67bc6364174a0d0a01d7bfbdfb217d8/link: dial tcp: lookup sos-ch-dk-2.exo.io on 208.67.222.222:53: read udp 172.17.0.2:58949->208.67.222.222:53: i/o timeout" err.message="unknown error" go.version=go1.11.2 http.request.host="MY-REGISTRY:5000" http.request.id=d5bc49ad-09ab-4c47-8402-bb2fea0236c8 http.request.method=HEAD http.request.remoteaddr="172.17.0.1:50004" http.request.uri="/v2/qm19.04.1/blobs/sha256:b1820f5c55c43d2e4cb9a66700454c17c67bc6364174a0d0a01d7bfbdfb217d8" http.request.useragent="docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \(linux\))" http.response.contenttype="application/json; charset=utf-8" http.response.duration=2m20.255312065s http.response.status=500 http.response.written=104 vars.digest="sha256:b1820f5c55c43d2e4cb9a66700454c17c67bc6364174a0d0a01d7bfbdfb217d8" vars.name=qm19.04.1 
+2019-04-05T07:40:32.379548000Z 172.17.0.1 - - [05/Apr/2019:07:38:32 +0000] "POST /v2/qm19.04.1/blobs/uploads/ HTTP/1.1" 500 104 "" "docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \\(linux\\))"
+2019-04-05T07:40:32.379941000Z 172.17.0.1 - - [05/Apr/2019:07:38:32 +0000] "POST /v2/qm19.04.1/blobs/uploads/ HTTP/1.1" 500 104 "" "docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \\(linux\\))"
+2019-04-05T07:40:32.380267000Z 172.17.0.1 - - [05/Apr/2019:07:38:12 +0000] "HEAD /v2/qm19.04.1/blobs/sha256:8bf0ec1da046581083b682b9e6b355b16094cfdefb0dc2d7bcb0af6166747d18 HTTP/1.1" 500 104 "" "docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \\(linux\\))"
+2019-04-05T07:40:32.380559000Z 172.17.0.1 - - [05/Apr/2019:07:38:12 +0000] "HEAD /v2/qm19.04.1/blobs/sha256:b1820f5c55c43d2e4cb9a66700454c17c67bc6364174a0d0a01d7bfbdfb217d8 HTTP/1.1" 500 104 "" "docker/1.12.6 go/go1.8.3 kernel/3.10.0-693.2.2.el7.x86_64 os/linux arch/amd64 UpstreamClient(Docker-Client/1.12.6 \\(linux\\))"
+
+Then after 40 sec I got also errors from redis:
+2019-04-05T07:41:02.409223000Z time="2019-04-05T07:41:02.405922122Z" level=error msg="error connecting to redis instance redis:6379: dial tcp: lookup redis on 208.67.222.222:53: read udp 172.17.0.2:56715->208.67.222.222:53: i/o timeout" go.version=go1.11.2 instance.id=5dcbda93-48be-4857-80d2-660afb08c637 service=registry version=v2.7.1 
+2019-04-05T07:41:02.409685000Z time="2019-04-05T07:41:02.406031316Z" level=error msg="redis: error connecting: dial tcp: lookup redis on 208.67.222.222:53: read udp 172.17.0.2:56715->208.67.222.222:53: i/o timeout" go.version=go1.11.2 instance.id=5dcbda93-48be-4857-80d2-660afb08c637 redis.connect.duration=29.982468552s service=registry version=v2.7.1 
+2019-04-05T07:41:02.410063000Z time="2019-04-05T07:41:02.40677458Z" level=error msg="error connecting to redis instance redis:6379: dial tcp: lookup redis on 208.67.222.222:53: read udp 172.17.0.2:56715->208.67.222.222:53: i/o timeout" go.version=go1.11.2 instance.id=5dcbda93-48be-4857-80d2-660afb08c637 service=registry version=v2.7.1 
+2019-04-05T07:41:02.410335000Z time="2019-04-05T07:41:02.406821136Z" level=error msg="redis: error connecting: dial tcp: lookup redis on 208.67.222.222:53: read udp 172.17.0.2:56715->208.67.222.222:53: i/o timeout" go.version=go1.11.2 instance.id=5dcbda93-48be-4857-80d2-660afb08c637 redis.connect.duration=30.003476812s service=registry version=v2.7.1 
+2019-04-05T07:41:02.410603000Z time="2019-04-05T07:41:02.407231613Z" level=error msg="error connecting to redis instance redis:6379: dial tcp: lookup redis on 208.67.222.222:53: read udp 172.17.0.2:56715->208.67.222.222:53: i/o timeout" go.version=go1.11.2 instance.id=5dcbda93-48be-4857-80d2-660afb08c637 service=registry version=v2.7.1 
+2019-04-05T07:41:02.410929000Z time="2019-04-05T07:41:02.407262505Z" level=error msg="redis: error connecting: dial tcp: lookup redis on 208.67.222.222:53: read udp 172.17.0.2:56715->208.67.222.222:53: i/o timeout" go.version=go1.11.2 instance.id=5dcbda93-48be-4857-80d2-660afb08c637 redis.connect.duration=29.99352542s service=registry version=v2.7.1 
+
+Just ftr, but is obviously from the log above, a curl from the client  goes fine:
+ ~ $ curl -I -L MY-REGISTRY:5000/v2
+HTTP/1.1 301 Moved Permanently
+Content-Type: text/html; charset=utf-8
+Docker-Distribution-Api-Version: registry/2.0
+Location: /v2/
+Date: Fri, 05 Apr 2019 07:44:39 GMT
+
+HTTP/1.1 200 OK
+Content-Length: 2
+Content-Type: application/json; charset=utf-8
+Docker-Distribution-Api-Version: registry/2.0
+X-Content-Type-Options: nosniff
+Date: Fri, 05 Apr 2019 07:44:39 GMT
+
+This happens only when the docker daemon has '--iptables=false'. The port 5000 is reachable and there are no iptables rules on the machine.
+Do I am missing something or it is a bug?

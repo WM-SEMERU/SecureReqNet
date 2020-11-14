@@ -1,0 +1,16 @@
+Adding RemainingItemCount to ListMeta
+
+
+Adding ListMeta.RemainingItemCount. If the server has more data available for a LIST request, the ListOptions.RemainingItemCount is set to the number of remaining objects.
+This doesn't add any additional traffic to etcd. The etcd server already included the count in the GET response.
+Without this "count" feature, clients need to list through all pages to get a count.
+Alternatives:
+
+etcd v3 API supports --count-only, and the Kubernetes storage layer does support Count(), so alternatively, we can add a COUNT verb to Kubernetes REST API, but that sounds like an overkill. With the API in this PR, clients can get a cheap count by setting listOptions.Limit=1.
+
+/sig api-machinery
+/kind api-change
+/assign @jpbetz @lavalamp
+-->
+Adding ListMeta.RemainingItemCount. When responding a LIST request, if the server has more data available, it sets the ListOptions.RemainingItemCount to the number of remaining objects.
+

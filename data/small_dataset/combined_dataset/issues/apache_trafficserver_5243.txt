@@ -1,0 +1,15 @@
+FAIL: test_UDPNet with pcre 8.43
+
+
+I saw below unit test failure with pcre-8.43 (installed via homebrew) on macOS.
+$ ./test_UDPNet
+REGRESSION_TEST initialization begun
+REGRESSION TEST UDPNet_echo started
+Echo Server port: 64351
+[Apr  8 15:43:26.327] [ET_UDP 0] DEBUG: <UnixUDPNet.cc:214 (udp_read_from_net)> (udp-read) read 1 at a time
+[Apr  8 15:43:26.433] [ET_UDP 0] DEBUG: <UnixUDPNet.cc:764 (service)> (udp-send) Adding 0x7fd7f283cf60
+[Apr  8 15:43:26.433] [ET_UDP 0] DEBUG: <UnixUDPNet.cc:855 (SendUDPPacket)> (udp-send) Sending 0x7fd7f283cf60
+UDP Echo Server exit failure
+
+I haven't looked at root cause, but when I downgrade pcre to 8.42, the failure is gone.
+FWIW, the commit on homebrew to down grade pcre to 8.42 is 2d60d48733fe5633939c01e1e88312ab381e02f6.

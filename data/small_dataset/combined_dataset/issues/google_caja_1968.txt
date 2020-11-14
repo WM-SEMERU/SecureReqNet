@@ -1,0 +1,7 @@
+Add support for CSS unicode-range single_codepoint
+
+
+Right now, the caja CSS Lexer only supports actual ranges as a value in the unicode-range property, like "U+0025-00FF".
+According to the specification (http://dev.w3.org/csswg/css-fonts-3/#composite-fonts) it is also possible to define a single code point, like "U+A5;"
+However, the CSS Lexer expects a "-" in each unicode-range value and throws this exception:
+com.google.caja.lexer.ParseException: http://www.example.org:1+165: Expected - not ,

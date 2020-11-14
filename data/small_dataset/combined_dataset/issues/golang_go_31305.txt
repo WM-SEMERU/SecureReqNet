@@ -1,0 +1,72 @@
+go1.12.2 test FAIL at cmd/vendor/golang.org/x/arch/arm64/arm64asm
+
+
+Relevant to #21506 and #23237.
+Looks like a regression.
+I can't recall this fail going from 1.10 to 1.11 on this staging env,
+though its binutils certainly are newer than were at 1.10->1.11 testing.
+I know that it is relevant to the binutils changing its output, but either tests should
+account for changes in objdump or should fail with suitable message if objdump version
+is not known to the tests.
+$  objdump --version
+GNU objdump (GNU Binutils) 2.31.1.20180828-19
+
+$ go version
+go version go1.11.1 linux/amd64
+#... other releases tested
+go version go1.12.2 linux/amd64
+
+go env Output
+$ go env
+GOARCH="amd64"
+GOBIN="/testbed/staging/bin"
+GOCACHE="/testbed/staging/gocache"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/testbed/staging/user/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/testbed/staging/go"
+GOTMPDIR="/testbed/staging/gotmp/"
+GOTOOLDIR="/testbed/staging/go/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/testbed/staging/gotmp/go-build503835491=/tmp/go-build -gno-record-gcc-switches"
+$ git checkout go1.12.2
+$ cd src && ./all.bash
+
+all.bash Output: (with 1.12.2 as bootstrap)
+--- FAIL: TestObjdumpARM64TestDecodeGNUSyntaxdata (0.18s)
+    ext_test.go:197: decode(9f3003d5) = "dsb #0x00", 4, want "ssbb", 4
+
+    ext_test.go:197: decode(9f3403d5) = "dsb #0x04", 4, want "pssbb", 4
+
+    ext_test.go:203: 4651 test cases, 933 expected mismatches, 2 failures; 56747 cases/second
+    ext_test.go:204: decoder coverage: 96.4%;
+    ext_test.go:203: 4651 test cases, 0 expected mismatches, 0 failures; 54157 cases/second
+    ext_test.go:204: decoder coverage: 96.4%;
+--- FAIL: TestObjdumpARM64TestDecodeGoSyntaxdata (0.12s)
+    ext_test.go:197: decode(9f3003d5) = "dsb #0x00", 4, want "ssbb", 4
+
+    ext_test.go:197: decode(9f3403d5) = "dsb #0x04", 4, want "pssbb", 4
+
+    ext_test.go:203: 4564 test cases, 964 expected mismatches, 2 failures; 62673 cases/second
+    ext_test.go:204: decoder coverage: 96.4%;
+    ext_test.go:203: 4564 test cases, 0 expected mismatches, 0 failures; 62482 cases/second
+    ext_test.go:204: decoder coverage: 96.4%;
+FAIL
+FAIL    cmd/vendor/golang.org/x/arch/arm64/arm64asm 2.087s
+
+FAIL: cmd/vendor/golang.org/x/arch/arm64/arm64asm

@@ -1,0 +1,20 @@
+Reopen the Official HackerOne Report Channel for Third-party Module Vulnerabilities
+
+
+Summary
+The reporting channel for third-party module vulnerabilities has been mostly(totally?) paused since November of 2018.
+
+The reason the program is paused is because the team has not met the published service level agreement for triaging vulnerabilities that are reported within 2 days.
+The current report triage time is 11 days, and the published process requires all triage activities to be completed in 2 business days.
+As a new member of the team, I see a few reasons that triage might not be happening within 2 business days.
+
+The triage process document incorrectly documents the steps that are required to triage a vulnerability report.
+Triage team members do not have appropriate access permissions to complete the triage steps.
+The program lacks visible accountability to published standards.
+
+Solution Steps
+
+ Fix the process documentation to reflect the actual steps required to triage a vulnerability. #498
+ Fix the permission settings on HackerOne to allow team members to complete the triage steps. #499
+ Make compliance with published standards more visible to team members.
+

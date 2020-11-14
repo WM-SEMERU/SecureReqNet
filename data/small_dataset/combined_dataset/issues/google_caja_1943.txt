@@ -1,0 +1,10 @@
+JQuery 2.1.1 Version
+
+
+Original issue 1945 created by pradeep.niet07 on 2014-12-03T15:47:44.000Z:
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+I see error (in the chrome console)
+"In strict mode code, functions can only be declared at top level or immediately within another function."
+On the other hand, version
+2.1.0/jquery.min.js and 2.1.1/jquery.js are loading just fine.
+Please see the attachment.

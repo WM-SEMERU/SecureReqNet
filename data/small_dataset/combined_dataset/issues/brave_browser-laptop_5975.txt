@@ -1,0 +1,14 @@
+Panopticlick reports Brave as susceptible to Fingerprinting
+
+
+Did you search for similar issues before submitting this one?
+Yes
+Describe the issue you encountered:
+Panopticlick reports Brave as being susceptible to fingerprinting, even if fingerprinting protection turned on.
+Expected behavior:
+Brave is not fingerprintable (or not fingerprinting to a meaningful degree)
+Platform (Win7, 8, 10? macOS? Linux distro?): All
+Brave Version: 0.12.10
+
+
+#242 #1354 #2229 #2259

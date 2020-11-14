@@ -1,0 +1,4 @@
+Check for XSS in templates
+
+
+I've looked a little at code and I don't see any usage of htmlspecialchars() nor regexps for escaping HTML/JS - does it mean, that every user can put their own JS (including trojan horse, etc.) into asset name/describtion/etc?

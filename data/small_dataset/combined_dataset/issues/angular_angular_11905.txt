@@ -1,0 +1,22 @@
+feature request: Distinguish between strict and non-strict mode for DomSanitizer
+
+
+[x] feature request
+
+Current behavior
+Now, DomSanitizer removes all HTML-unsafe attributes, without validate them (such as id, name...), even if they are empty value.
+Expected behavior
+Allow the developers to choose between strict and non-strict mode for DomSanitizer validations. Or, just check HTML-unsafe attributes on safety.
+Reproduction of the problem
+See plunker
+Before to create this issue, I asked on stackoverflow: Angular 2: sanitizing HTML stripped some content with div id - this is bug or feature?.
+As explained to me, this behavior is due to the known safety rules:
+
+Strictly validate unsafe attributes such as background, id and name.
+
+But in my example on plunker, HTML-unsafe attributes not check any validation. They just removed! In my example removes empty id:
+<div id="">This is div with id attribute</div>
+Maybe this is bug?
+
+Angular version: 2.0.0
+

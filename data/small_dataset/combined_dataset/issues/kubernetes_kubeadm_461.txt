@@ -1,0 +1,8 @@
+kubeadm token create cannot read from config file
+
+
+Choose one: FEATURE REQUEST
+Versions
+kubeadm version (use kubeadm version):v1.8.0-beta1
+What happened?
+kubeadm token create can only work with a specified token string. Using a config file keeps the token off of bash history.

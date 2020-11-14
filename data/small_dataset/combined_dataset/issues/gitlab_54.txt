@@ -1,0 +1,13 @@
+Code:
+
+```markdown
+(*test*)
+[*test*]
+```
+
+Output:
+
+(*test*)  
+[*test*]
+
+Expected *emphasis* inside.

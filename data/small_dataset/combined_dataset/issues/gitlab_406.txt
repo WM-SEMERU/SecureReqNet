@@ -1,0 +1,12 @@
+## Problem
+
+There is no error message when trying to create an erroneous tag, from the "New Tag" page.
+
+At the following path: /:user:/:project:/tags/new.
+
+## How to reproduce the bug
+
+1. try to create a new tag with a space character in it (let's say "my new tag")
+2. click on the "create tag" button
+
+The user is brought back to the tag list. The new tag doesn't appear in the list. There is no error message available.

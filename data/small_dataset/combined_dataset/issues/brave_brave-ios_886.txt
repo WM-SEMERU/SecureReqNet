@@ -1,0 +1,22 @@
+github security alert for lodash
+
+
+Description:
+github shows a security alert on this repo. can probably fix by reinstalling packages and regenerating package-lock.json
+Steps to Reproduce
+
+go to https://github.com/brave/brave-ios/network/alerts
+
+
+
+Actual result: 
+Expected result:
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Brave Version: 
+Device details: 
+Website problems only:
+
+did you check with Brave Shields down?
+did you check in Safari/Firefox (WkWebView-based browsers)?
+
+Additional Information

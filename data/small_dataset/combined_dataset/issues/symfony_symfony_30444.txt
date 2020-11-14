@@ -1,0 +1,59 @@
+[Validator] Fix email constraint default loose mode
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+yes     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Current default behavior for EmailConstraint is to use the loose mode, this mode uses the regexp /^.+\@\S+\.\S+$/ which considers email addresses starting with whitespace characters as valid.
+So for instance, these emails are considered valid (which does not seem to be the case... at least, they broke my application):
+ foo@example.com
+
+foo@example.com foo@example.com
+
+The strict mode already consider those email addresses as invalid 👏... but it's a shame to have to rely on a third party library only because of some whitespace characters 😞
+As a fix, I propose the regexp: /^\S+\@\S+\.\S+$/.
+I didn't find anything explaining why this is not already the default regexp...
+To avoid BC breaks, I suggest to merge this in 5.x, but it's up to you.

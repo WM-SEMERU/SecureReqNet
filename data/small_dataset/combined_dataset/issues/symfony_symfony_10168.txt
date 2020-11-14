@@ -1,0 +1,16 @@
+Anonymous user should be a user object, not a string
+
+
+In AnonymousAuthenticationListener.php:
+$this->context->setToken(new AnonymousToken($this->key, 'anon.', array()));
+Why are you setting the anonymous user to a string value?
+Wouldn't it be better to create an empty user object that all methods would still work on?
+I noticed this when resolving a bug where
+$user   = $this->get("security.context")->getToken()->getUser();
+$user->getId(); //error here.. because $user == 'anon.'
+was throwing a "Call to a member function getId() on a non-object" error when the user was an anonymous user. I'm on symfony 2.0.16, but I see that this is still in use, and afaik is extremely bad practice.
+Shouldn't that method, and all methods, actually exist for any user returned by getUser()?  Sure, the user is anonymous, but wouldn't it be much more intuitive and effective to encapsulate all user logic within the user object, than to require anyone to check for
+if ($user === 'anon.') { //this should be unnecessary...
+It is also pretty ugly in AbstractToken.php's setUser($user) function.
+I understand the need as it applies to simple tokens to allow setting a string or object value.. but a user, which is always a user everywhere on every website, should be an object with the same methods, no matter what type of user it is.
+Am I crazy or missing something here...?

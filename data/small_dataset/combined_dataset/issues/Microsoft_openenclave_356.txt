@@ -1,0 +1,9 @@
+Quote Revocation: Add necessary CRL and cert handling support
+
+
+This tracks the crypto library dependencies needed to support quote revocation in oe_verify_report()
+
+ Add CRL cert chain validation
+ Enclave CRL validation during PCK cert chain validation
+ Add x509 certificate property parsing methods for extracting Intel's custom PCK cert properties (e.g. SVN values)
+

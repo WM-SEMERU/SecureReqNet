@@ -1,0 +1,33 @@
+Documentation describe the way how user keys could be retrieved https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/users.md#list-ssh-keys-for-user
+
+```
+> curl -s -H 'PRIVATE-TOKEN: ...' -H 'CONTENT-TYPE: application/json' http://example.com/api/v3/users/:user_id/keys
+< HTTP/1.1 405 Method Not Allowed
+```
+
+Another way I've tried is to use _sudo_ https://github.com/gitlabhq/gitlabhq/blob/5-0-stable/doc/api/users.md#list-ssh-keys
+
+```
+> curl -s -H 'SUDO: :user_id' -H 'PRIVATE-TOKEN: ...' -H 'CONTENT-TYPE: application/json' http://example.com/api/v3/user/keys
+< Ignores SUDO and retrieves always same data 
+```
+
+Environment
+
+```
+System information
+System:         Ubuntu 12.10
+Current User:   ...
+Using RVM:      no
+Ruby Version:   1.9.3p327
+Gem Version:    1.8.23
+Bundler Version:1.3.2
+Rake Version:   10.0.3
+
+GitLab information
+Version:        5.0.0pre
+Revision:       7367f1c
+
+GitLab Shell
+Version:        1.0.4
+```

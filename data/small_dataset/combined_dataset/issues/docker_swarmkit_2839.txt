@@ -1,0 +1,9 @@
+PlacementPreference SpreadOver only nodes with label when possible
+
+
+Allow placement preferences only to nodes with the specified label, as long as possible.
+The current scheduling behavior can cause scheduling problems.
+From: https://github.com/docker/swarmkit/blob/master/design/topology.md
+"Nodes that are missing the label used by SpreadOver will still receive task assignments. As a group, they will receive tasks in equal proportion to any of the other groups identified by a specific label value. In a sense, a missing label is the same as having the label with a null value attached to it"
+If I have two nodes with label X and a third without a label, running 3 service instances will put an instance on each node, the solution in the above document is to use constraints, which will prevent the service from running if only node 3 is up.
+I think the best way is to prevent spreading to the null labeled nodes, this will allow running services according to the preferences as long as possible, if satisfying these preferences is not possible, the service will run on nodes without the label.

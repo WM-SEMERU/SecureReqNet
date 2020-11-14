@@ -1,0 +1,6 @@
+Garbage collect cleans unfinished uploads
+
+
+We added garbage collection for every 10 minutes. We noticed that since we enabled this that some images that re very large (and take more time to upload) we can't pull them later.
+Simular error like #2778
+It looks like it is cleaning the uploaded files before the image is fully uploaded. We now only clean at a single time (that is calm).

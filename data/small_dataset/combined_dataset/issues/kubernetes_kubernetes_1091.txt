@@ -1,0 +1,12 @@
+Authenticated docker pulls
+
+
+This is just a strawman to get the conversation going. While this PR is functional, I don't think this is the right solution.
+I've only got one major requirement for this feature, and it is not accomplished in this PR: the kubelet must be able to pull from multiple registries, each with their own set of credentials.
+To meet this requirement, I see three reasonable options:
+
+configure kubelet from dockercfg
+configure kubelet from CLI flags
+add docker creds to container manifest
+
+Any thoughts out there?

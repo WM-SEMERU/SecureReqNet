@@ -1,0 +1,8 @@
+Option to clear history/cache when browser closed/quit
+
+
+Test plan
+See brave/brave-core#1213
+Description
+Brave-core doesn't have an option to clear browsing history/cache upon browser exit. It would be great to have this option to bridge parity between browser-laptop and brave-core
+

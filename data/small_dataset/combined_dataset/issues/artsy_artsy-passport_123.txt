@@ -1,0 +1,4 @@
+align gdpr property names
+
+
+cc @mzikherman - A helper in our backbone views was used to account for the AB test + presence of 2 checkboxes, and so we needed to make this property name consistent whether in a url or signup POST body.

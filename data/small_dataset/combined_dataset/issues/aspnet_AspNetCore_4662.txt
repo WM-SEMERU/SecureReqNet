@@ -1,0 +1,25 @@
+xplat Integrated Windows Authentication (ntlm/Kerberos)
+
+
+From @evil-shrike on January 25, 2018 12:41
+I haven't found any ticket for tracking the xplat Windows-auth support in aspnet/dotnet core.
+I understand that currently we have only out-of-the-box Windows auth support in IIS/IISExpress and http.sys and only on Windows.
+There's a decent article in docs https://docs.microsoft.com/en-us/aspnet/core/security/authentication/windowsauth?branch=pr-en-us-3622&tabs=aspnetcore2x on how to configure Windows auth. But it says nothing about non-Windows use-cases.
+There're many issues here on Github and questions around on sites like SO on "how to implement Windows authentication in aspnet core on Linux". But all issues are closed with reasoning like "Kestrel doesn't implement Windows auth currenly, use IIS or https.sys". This is understandable but it's unclear what to do if we need to host an app on Linux and support integrated Windows auth (in intranet networks).
+So there are several points which need to be addressed:
+
+what options do exist currently (at the time of 2.0/2.1) for getting integrated Windows authentication on Linux and other *nix OSes?
+what are plans (if any) for improving/adding such functionality?
+
+I understand that strictly speaking this issue is related to Kestrel project probably, but it's more easily to find it here though. Moreover it's implementation details where Windows-auth support should live.
+Anyway it should be some source of information describing what to do with aspnet core apps on Linux for adding Windows auth.
+Some additional info:
+
+middleware for ntlm support - https://github.com/OneBitSoftware/Microsoft.AspNetCore.Authentication.ActiveDirectory (ntlm only, Windows only - "Achieving server-side NTLM handshaking depends the Windows platform due to interop, dependency on domain-joined machines and secur32.dll")
+it's possible to authenticate via Kerberos on Linux - https://technet.microsoft.com/en-us/library/2008.12.linux.aspx
+there's Application Proxy with Kerberos Constrained Delegation in Windows Server and Azure AD which seems to solve such problems - https://blogs.technet.microsoft.com/applicationproxyblog/2015/09/21/all-you-want-to-know-about-kerberos-constrained-delegation-kcd/ but it's complex
+there're modules for Nginx (http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ntlm) (requires commercial license) and Apache httpd (http://adldap.sourceforge.net/wiki/doku.php?id=mod_auth_ntlm_winbind) (it's unclear how stable it is) to add ntlm support
+It seems that Java has Kerberos support out-of-the-box - https://docs.oracle.com/javase/8/docs/technotes/guides/security/jgss/single-signon.html
+Java implementation for app servers - http://spnego.sourceforge.net/  (not sure how it relates to the previous point)
+
+Copied from original issue: #2824

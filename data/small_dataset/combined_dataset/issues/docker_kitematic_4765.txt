@@ -1,0 +1,14 @@
+Kitematic 0.17.7 not working (not able access docker hub)
+
+
+Expected behavior
+docker hub able to download docker images
+Actual behavior
+docker hub fails: context canceled
+Information about the Issue
+context canceled
+Steps to reproduce the behavior
+
+install latest version of docker desktop for windows
+install kitematic and try to download any image from docker hub
+

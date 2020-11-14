@@ -1,0 +1,62 @@
+Browser fingerprint is unique
+
+
+I know it's early, but this might be a good time to think about uniqueness of browser fingerprint.  I ran brave through http://panopticlick.eff.org and it came up very unique.  The user agent was most identifying.  It would be really cool if we could reduce the entropy here.
+Raw copy/paste from the web site (sorry it is not tabular):
+Browser Characteristic  bits of identifying information one in x browsers have this value   value
+Limited supercookie test
+0.83
+1.77
+DOM localStorage: Yes, DOM sessionStorage: Yes, IE userData: No
+Hash of canvas fingerprint
+N/A
+N/A
+9e8a7569169de5fc7a07a3637e6d8d8a
+Screen Size and Color Depth
+3.45
+10.96
+1920x1080x24
+Browser Plugin Details
+3.17
+8.98
+undefined
+Time Zone
+3.69
+12.9
+300
+DNT Header Enabled?
+N/A
+N/A
+False
+HTTP_ACCEPT Headers
+N/A
+N/A
+text/html, /; q=0.01 gzip, deflate en-US
+Hash of WebGL fingerprint
+N/A
+N/A
+2494f33d4be800b9f6d5032548ac0d2c
+Language
+N/A
+N/A
+en-US
+System Fonts
+N/A
+N/A
+Arial, Courier, Courier New, Helvetica, Times, Times New Roman, Wingdings 2, Wingdings 3 (via javascript)
+Platform
+N/A
+N/A
+Linux x86_64
+User Agent
+21.6
+3189530.5
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) brave/0.7.7 Chrome/47.0.2526.73 Electron/0.36.2 Safari/537.36
+Touch Support
+N/A
+N/A
+Max touchpoints: 0; TouchEvent supported: false; onTouchStart supported: false
+Are Cookies Enabled?
+0.42
+1.34
+Yes

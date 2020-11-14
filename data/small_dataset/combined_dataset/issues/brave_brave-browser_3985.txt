@@ -1,0 +1,28 @@
+Embedded Twitter videos do not play
+
+
+Description
+Embedded Twitter videos do not play even with Social media Twitter option ON.
+Steps to Reproduce
+
+Ensure your allow embedded tweets option is ON
+Go to https://www.dailywire.com/news/45415/tucker-carlson-unloads-ocasio-cortez-moron-nasty-ryan-saavedra <- the link shared to me in social media
+Scroll past the videos until you see the video for Twitter. If you don't see it use Chrome with no blocking to see it so you know where it should be.
+
+Actual result:
+Twitter video does not play
+Expected result:
+Twitter video should play when allow embedded tweet option is ON.
+Reproduces how often:
+Always.
+Brave version (brave://version info)
+All, fix is only in list updates though.
+Reproducible on current release:
+Yes
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields? Yes
+Is the issue reproducible on the latest version of Chrome?  No.
+
+Additional Information
+No fix needed here in brave code, only in list updates. The exception rule will only apply when the option for embedded tweets is on.

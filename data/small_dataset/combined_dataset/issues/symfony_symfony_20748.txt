@@ -1,0 +1,15 @@
+Simpler roles check in AuthorizationVoters
+
+
+Using Symfony 3.2 with FosUserBundle and needing to check the roles in a voter I followed the instructions in the documentation. http://symfony.com/doc/master/security/voters.html#checking-for-roles-inside-a-voter
+Warming up the cache in the dev environment workes and the voter seems to work aswell.
+In "prod" on the other hand, I get this one:
+
+[Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException]
+Circular reference detected for service "security.access.decision_manager",
+path: "cache_warmer -> twig -> security.authorization_checker -> security.
+access.decision_manager".
+
+Checking roles from inside a voter could be a lot simpler with just checking them against the token instead of having to inject the decisionManager.
+But this isn't that easy as long as we use a role hierarchy. Checking against each of the roles in the hierarchy is a hack I would like not to add.
+Could it be possible to add access to the calculated ("expanded"?) hierarchy from the token? This could be done in the login process to avoid having to calculate each time.

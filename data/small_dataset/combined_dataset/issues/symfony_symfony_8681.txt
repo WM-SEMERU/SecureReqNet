@@ -1,0 +1,8 @@
+[Security]  _switch_user=_exit doesn't work if switched to same user
+
+
+subj. if you logged as user 'test', and then visit
+example.com/?_switch_user=test
+and then visit
+example.com/?_switch_user=_exit
+you will see an error: "Catchable Fatal Error: Argument 2 passed to Symfony\Component\Security\Http\Event\SwitchUserEvent::__construct() must implement interface Symfony\Component\Security\Core\User\UserInterface, string given"

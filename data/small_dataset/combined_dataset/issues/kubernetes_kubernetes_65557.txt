@@ -1,0 +1,11 @@
+Priority & Preemption should be restricted-by-default
+
+
+/kind bug
+/area security
+/sig scheduling
+/priority important-soon
+Currently, an admin who has Priority & Preemption enabled (as they are by default) and has  ResourceQuotaScopeSelectors disabled (as they are by default) has no way to restrict regular users of Kubernetes from creating as many system-node-critical and system-cluster-critical pods as they care to.  This can result in creating a denial-of-service if users abuse priorities in competition with each other.
+By 1.12, we could have ResourceQuotaScopeSelectors enabled by default and add a default restriction on the use of system-* priorities.  However, that kind of leaves 1.11 users in the lurch.  What can we do to restrict the ability of regular users to abuse system-* priorities that can be added to 1.11.1?
+/assign @bsalamat
+/cc @derekwaynecarr @vikaschoudhary16 @liggitt

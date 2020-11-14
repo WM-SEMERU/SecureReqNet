@@ -1,0 +1,15 @@
+A user reported via email to the security list that there is a Cross-site Scripting (XSS) vulnerability in the project import feature for GitLab export files.
+
+Using a file name containing HTML results in persistent XSS:
+
+```
+$ touch \'\<img\ onerror\=alert\(1\)\ src\=x\>.tar.gz\'
+$ ls -l
+'<img onerror=alert(1) src=x>.tar.gz'
+```
+
+Importing this file results in script execution. The link sticks around as `/namespace/project/import/new` and can therefore be sent to other users.
+
+I've verified this vulnerability on a test instance.
+
+I've deleted the list of hamlit filters so that I can update it for the latest release. I'm only including files that are known or suspected to be vulnerable.

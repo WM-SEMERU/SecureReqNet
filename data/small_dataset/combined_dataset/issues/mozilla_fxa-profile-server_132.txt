@@ -1,0 +1,4 @@
+Rate-limit avatar upload attempts using fxa-customs-server?
+
+
+Avatar uploads are a potentially expensive operation that we could profitably rate-limit by IP-address and/or email-address.  It may be possible to use fxa-customs-server for this without too much work.  @seanmonstar what do you think about the potential benefits vs potential implementation costs of doing so?

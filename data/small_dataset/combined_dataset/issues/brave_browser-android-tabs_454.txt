@@ -1,0 +1,9 @@
+implement safe browsing
+
+
+Description:
+Implement Safe Browsing.
+Steps to reproduce:
+1. Navigate to https://www.raisegame.com
+2. Verify Test that Safe Browsing works (as it does on browser-laptop and iOS)
+3. Verify Turning Safe Browsing off and shields off both disable safe browsing for https://www.raisegame.com/.

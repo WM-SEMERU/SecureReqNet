@@ -1,0 +1,4 @@
+Default setting for key encryption rounds pretty low.
+
+
+At the moment the standard setting is at the keepass default of 6000 which is too low for a modern CPU imho. E.g. keepassx's benchmark suggests a value of over 13 * 10**6 rounds for a not so new MacBook Air.

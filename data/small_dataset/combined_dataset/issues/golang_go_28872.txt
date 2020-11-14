@@ -1,0 +1,35 @@
+proposal: encoding/asn1: expose parseTagAndLength
+
+
+When working with ldap over the network, the reader does not know in advance the size of the request (the size of the buffer to read).
+To know that the full request was read you need to parse the tag and length. This is just about what the function parseTagAndLength does. You only need to add the offset to the length.
+To expose this function I suggest adding a public ParseTagAndLength that exposes this functionality and calculates the total expected buffer length.
+usage example:
+func readRequest(conn net.Conn, readBuf []byte) ([]byte, error) {
+   const minReadBuf = 1024
+   var err error
+   readBuf = readBuf[0:cap(readBuf)]
+
+   var nRead = 0
+   var tagSize = 1
+
+   for nRead < tagSize {
+      nBufStart := nRead
+      if (len(readBuf) - nBufStart) < minReadBuf {
+         readBuf = append(readBuf, make([]byte, minReadBuf)...)
+      }
+
+      nRead, err = conn.Read(readBuf[nBufStart:])
+      // no request: return
+      if err != nil || nRead == 0 {
+         return readBuf[0:nBufStart], err
+      }
+
+      nRead += nBufStart
+      var rawVal asn1.RawValue
+      rawVal, tagSize, err = asn1.ParseTagAndLength(readBuf[0:nRead])
+   }
+
+   return readBuf[0:nRead], err
+}
+

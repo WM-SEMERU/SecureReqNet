@@ -1,0 +1,31 @@
+Aws-exports.js showing in production (major flaw)
+
+
+Describe the bug
+The Aws-exports and App.js files are showing in production. I was going through this tutorial https://aws-amplify.github.io/docs/js/react and the project was successfully built but all the secret information is visible.
+To Reproduce
+Steps to reproduce the behavior:
+
+Upload code to Github.
+Deploy app from Github using the amplify console.
+Open the built project's website
+Inspect the website using the google chrome dev tools.
+Go to the Sources tab and inspect the folders.
+
+Expected behavior
+The folders should look like this
+
+Screenshots
+
+Desktop (please complete the following information):
+
+OS: [Win10]
+Browser [Chrome]
+Version [72.0.3626.121]
+
+Additional context
+Add any other context about the problem here.
+Sample code
+This repository will be available until the issue is fixed. https://github.com/RoniqueRicketts/amplifytestertwo
+Here is a sample of the YML file provided by the online console.
+version: 0.1 backend: phases: build: commands: - '# Execute Amplify CLI with the helper script' - amplifyPush --simple frontend: phases: preBuild: commands: - yarn install build: commands: - yarn run build artifacts: baseDirectory: build files: - '**/*' cache: paths: - node_modules/**/* 

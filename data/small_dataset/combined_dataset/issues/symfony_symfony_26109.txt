@@ -1,0 +1,44 @@
+Firewall that allows authentication with HTTP GET parameter error
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+2.8.34
+
+
+
+Hi @nicolas-grekas ,
+I'm getting an error since changes (commit 899bf99) to the vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/UsernamePasswordFormAuthenticationListener.php.
+The value of post_only parameter in the firewall config is false.
+firewalls:
+    form_login:
+        post_only: false
+
+Since the update to 2.8.34, I get this error:
+Catchable Fatal Error: Argument 1 passed to Symfony\Component\Security\Http\ParameterBagUtils::getParameterBagValue() must be an instance of Symfony\Component\HttpFoundation\ParameterBag, instance of Symfony\Component\HttpFoundation\Request given, called in vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/UsernamePasswordFormAuthenticationListener.php on line 100 and defined
+
+TY!

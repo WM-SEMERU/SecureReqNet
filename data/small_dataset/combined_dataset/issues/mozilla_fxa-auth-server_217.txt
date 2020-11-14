@@ -1,0 +1,4 @@
+Proof of work
+
+
+Implement the proof of work protocol from the spec.

@@ -1,0 +1,5 @@
+githost.log
+
+July 23, 2014 13:46 -> ERROR -> POST-RECEIVE: Check gitlab.yml config for correct gitlab_shell.repos_path variable. "/home/git/repositories/" does not match "mygroup/myproject"
+
+After upgrading to 7.1.0 from 7.0.0, I am getting the above error now whenever I push to a project.  My path has always been /home/git/repositories and I have never moved it.  Gitlab-shell is 1.9.6 (well, actually the master).

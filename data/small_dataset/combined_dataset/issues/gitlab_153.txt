@@ -1,0 +1,27 @@
+We have a Project just for the issue tracking, so we never pushed anything to it.  
+When trying to render the Template /issue/new I get an Error 500.  
+Our workaround now is to push an empty README  
+
+```
+Started GET "/dbittorf/museum-schnuetgen-relaunch-2013/issues/new?issue%5Bassignee_id%5D=&issue%5Bmilestone_id%5D=" for 127.0.0.1 at 2014-03-25 12:56:43 +0000
+Processing by Projects::IssuesController#new as HTML
+Parameters: {"issue"=>{"assignee_id"=>"", "milestone_id"=>""}, "project_id"=>"dbittorf/museum-schnuetgen-relaunch-2013"}
+Rendered projects/issues/_form.html.haml (8.3ms)
+Rendered projects/issues/new.html.haml within layouts/projects (9.0ms)
+Completed 500 Internal Server Error in 65ms
+ActionView::Template::Error (undefined method `sha' for nil:NilClass):
+1: %div.issue-form-holder
+2: %h3.page-title= @issue.new_record? ? "New Issue" : "Edit Issue ##{@issue.iid}"
+3: %hr
+4: - if @repository.contribution_guide && !@issue.persisted?
+5: - contribution_guide_url = project_blob_path(@project, tree_join(@repository.root_ref, @repository.contribution_guide.name))
+6: .alert.alert-info.col-sm-10.col-sm-offset-2
+7: ="Please review the <strong>#{link_to "guidelines for contribution", contribution_guide_url}</strong> to this repository.".html_safe
+app/models/repository.rb:183:in `tree'
+app/models/repository.rb:173:in `block in contribution_guide'
+app/models/repository.rb:172:in `contribution_guide'
+app/views/projects/issues/_form.html.haml:4:in `_app_views_projects_issues__form_html_haml___732593033_115756600'
+app/views/projects/issues/new.html.haml:1:in `_app_views_projects_issues_new_html_haml__1005615385_115740920'
+app/controllers/projects/issues_controller.rb:46:in `new'
+app/controllers/application_controller.rb:58:in `set_current_user_for_thread'
+```

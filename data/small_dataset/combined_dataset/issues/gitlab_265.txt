@@ -1,0 +1,3 @@
+It would be nice to have option to choose what way repo can be accessed: only over HTTP(S) or only over SSH or both. For example I think for public repos SSH link should not be visible (only those who have write access to the repo should see it). 
+Or option to set access way to repo (public or private) to choose between HTTP(S), SSH, both...
+

@@ -1,0 +1,4 @@
+Prevent wildcard (lucene query syntax) in dimension endpoints
+
+
+Currently the dimensions endpoint prevents all values of a high cardinality dimension from being displayed. As a workaround we can use a wildcard to get all the values filters=urls|id-in[*]. Ideally we would want to prevent users from accessing all values of high cardinality dimensions so they don't overload Fili.

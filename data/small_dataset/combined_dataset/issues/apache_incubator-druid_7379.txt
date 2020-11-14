@@ -1,0 +1,4 @@
+[Backport] maxTotalRows should be checked in DataSourceCompactionConfig before setting targetCompactionSizeBytes
+
+
+Backport of #7368 to 0.14.0-incubating

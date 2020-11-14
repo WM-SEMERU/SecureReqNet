@@ -1,0 +1,16 @@
+doc: revise Collaborator description in GOVERNANCE.md
+
+
+
+Active voice
+Remove Node.js Foundation mention. It may be appropriate to add
+something back in when the new foundation is bootstrapped. We
+don't control membership criteria, so best to link to something else
+when it becomes available rather than make guarantees in this doc.
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+

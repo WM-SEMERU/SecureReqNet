@@ -1,0 +1,3 @@
+I'm running a fresh install of GitLab running version 6.8.1
+
+After importing a private repository from GitHub, I noticed that my username and password were visible in plaintext in the production.log of the admin section. That type of information shouldn't make it into logs, but should be masked or removed.

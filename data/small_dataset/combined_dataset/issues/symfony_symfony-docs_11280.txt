@@ -1,0 +1,4 @@
+Documented the Mime component
+
+
+Contents are based on this presentation from Fabien: https://speakerdeck.com/fabpot/mailer

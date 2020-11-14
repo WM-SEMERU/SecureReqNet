@@ -1,0 +1,5 @@
+Updated the security guard diagram
+
+
+Fixes #10844. This is how it looks adding @ThomasLandauer's suggested change:
+

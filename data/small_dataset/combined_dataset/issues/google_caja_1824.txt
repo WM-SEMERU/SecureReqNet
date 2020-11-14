@@ -1,0 +1,6 @@
+compileExpr lacks Unicode whitespace gimmick
+
+
+Original issue 1826 created by kpreid.switchb.org on 2013-07-30T17:17:20.000Z:
+r5468 forces rerendering in compileModule if there is funny whitespace, in order to obtain a source string which omits it. However, compileModule is not a bottleneck for eval; there is also compileExpr. Thus, cajaVM.compileExpr('1\u2000') fails whereas cajaVM.compileModule('1\u2000') correctly succeeds.
+We should make sure that compileExpr and compileModule behave the same outside of the syntactic distinction they are intended to make. Perhaps some refactoring?

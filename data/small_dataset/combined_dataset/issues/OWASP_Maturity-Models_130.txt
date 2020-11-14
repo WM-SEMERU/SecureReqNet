@@ -1,0 +1,7 @@
+Add ability to delete teams
+
+
+This is related for #87 (Ability to add new teams) and needed for better testing (which needs to create and delete teams)
+This is quite an dangerous method, since it will allow the deletion of existing mappings.
+That said, at the moment all content is managed via git repos and the data in the QA server exists only inside the host docker container which is wiped out on every release
+One way to make it less dangerous, we could implement it as a move into a 'deleted' folder which will require manual delete

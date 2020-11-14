@@ -1,0 +1,5 @@
+authentication process, add image of the process, feature
+
+
+Is it possible to add image of the authentication process, including firewall, acl, tokens, listeners (especially gurad listeners), guards, describing how everything works.
+Trying to implement custom 2fa authorization, and now I realise that is really hard to understand the whole process using the code.

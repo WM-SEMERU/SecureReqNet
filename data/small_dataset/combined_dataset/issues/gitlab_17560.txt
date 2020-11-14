@@ -1,0 +1,3 @@
+When importing a project via the "Any Git URL" option using a git URL containing HTTPS credentials, if there is a failure during the import, anyone with appropriate permissions can navigate to the project page and view a failed import screen. 
+
+This screen does not obfuscate the git credentials which were used during the failed import.

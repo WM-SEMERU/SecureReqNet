@@ -1,0 +1,4 @@
+use is_granted() instead of deprecated has_role()
+
+
+using has_role() was deprecated in symfony/symfony#27305 since 4.2 by @nicolas-grekas

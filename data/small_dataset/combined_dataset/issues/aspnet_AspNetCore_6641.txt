@@ -1,0 +1,8 @@
+Centralized Identity Paths
+
+
+I understand how asp.net has changed, and there are a lot of things that are still missing. Is there an easy what to get the Cookie Options programmatically so that I can build links according to the website configuration, and not manually changing it, like we used to have in asp.net webforms.
+I'm pulling the IOptionsMonitor from HttpContext.RequestServices but the data is initializes to the asp.net core defaults. So I know I'm missing something.
+Documentation on sharing cookies between multiple apps on the same domain is ok, but that's just for setting the cookie, but for a SSO site the redirect will be to the main subdomain and integrating the "domain" from this settings is useful for testing for "local redirects", that either are on the same domain of the login url or the current domain of the request. So a default url is useful in various use cases, like redirecting to the principal domain when login without a redirect url on the query string.
+I'd have to create code for loading it from appsettings.json and I found all these settings basic requeriments for a site, that if we should be included on the primary assemblies by Microsoft.
+¿Any suggestion how could I read those values from the Cookie Authentication Settings?

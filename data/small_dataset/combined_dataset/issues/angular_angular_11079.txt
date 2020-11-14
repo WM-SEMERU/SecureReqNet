@@ -1,0 +1,45 @@
+[Security] Safe values, sanitization, and web components
+
+
+from @mprobst in #11026 (comment)
+To clarify the note about the security context for external web component elements: the vulnerability scenario is that a user has an Angular component that passes data to a web component (e.g. Polymer component):
+@Component({
+  template: `<p><custom-element [someProp]="someInput"></custom-element></p>`,
+})
+class MyClass {
+  data = 'someInput';
+}
+
+// Meanwhile:
+Polymer({
+  is: 'custom-element',
+
+  properties: {
+    someProp: String,
+  }
+
+  ready: function() {
+    this.innerHtml = this.someProp;  // oh noes!
+  }
+});
+With this change, there is no way to tell Angular that it needs to sanitize someProp on a custom-element element for an HTML context, which is a bit sad. On the other hand, the Polymer code is arguably wrong, it needs to sanitize its input before binding into innerHtml.
+Potential fixes:
+
+allow (and require the user) to declare the security context of all properties when adding an @NgModule.schema for custom elements
+
+That'd be kind of nice and in line with our architecture, but hoping for the user to properly declare dangerous properties might be overly optimistic. In reality, I would expect this to go wrong all the time, and so we end up with something complicated that leaves users and apps less safe. It's also separating the declaration of what's dangerous from the actual implementation, meaning they will likely diverge.
+
+
+share knowledge of safe values, sanitization, etc between Angular and Polymer
+
+This has a strong "boil the ocean" vibe to it. I think Google's security team has somewhat vague plans for a shared SafeValue library, we could definitely revisit once that's happened.
+
+
+require the web component to properly sanitize its inputs
+
+This is what it has to do anyway, to be correct. The failure mode is now that data coming from Angular might be over-sanitized, and the user will have to use whatever way the component expects them to do to mark the data as safe (potentially after sanitizing it using DomSanitizationService).
+
+
+
+I think 3 from the list above is the most reasonable scenario. The failure mode is mostly benign (over sanitization), and it's a reasonable expectation that components do proper escaping of unsafe inputs – if you cannot expect that, then all is broken anyway. If/when 2 happens, we can migrate from 3 to 2, so we can improve on this later.
+Approach 3 is what is currently implemented by @vicb here, so the PR is good to go as is.

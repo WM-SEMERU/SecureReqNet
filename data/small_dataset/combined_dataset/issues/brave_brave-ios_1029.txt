@@ -1,0 +1,6 @@
+Implement 'Bookmark all tabs' feature
+
+
+Description:
+For parity with desktop, an option to bookmark all open tabs. This option would allow you to specify a folder in which each opened tab will be bookmarked.
+Users would like the ability to sync opened tabs between devices. That would require a bit more work; bookmarking all opened tabs (and opening tabs for all bookmarks in a folder) would allow us to offer a minimal-friction work-around until a more complete solution is available.

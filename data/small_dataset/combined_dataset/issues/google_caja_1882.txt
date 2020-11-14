@@ -1,0 +1,7 @@
+Caja.js proxyFetchMaker callback parameter should be hashed url
+
+
+Original issue 1884 created by james.keane@wishabi.com on 2014-01-30T21:02:52.000Z:
+I am trying to put a caching layer in front of the caja server to improve loading time of resources that remain relatively stable.
+When the front end requests a file to be cajoled it generates a request with the callback parameter incremented by a simple counter. This causes issues with the caching layer since although the response is largely the same, the callback is not.
+I don't see why the requested URL can't be hashed and used as the callback parameter, this would make all requests for that resource similar and allow for caching.

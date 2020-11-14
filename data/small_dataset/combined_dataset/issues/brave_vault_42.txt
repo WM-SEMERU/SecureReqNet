@@ -1,0 +1,6 @@
+validate user-controlled Buffer input
+
+
+src/controllers/helper.js calls Buffer(header.signature, 'hex'). If a malicious user supplies a number as the header signature, this method returns header.signature bytes of uninitialized memory. While this is not a problem on its own, this could potentially lead to unintended memory disclosure (for instance, if we return an error to the user that includes the signature seen by the server).
+The same issue arises from Buffer(user.publicKey) if the user-supplied public key isn't validated.
+solution - validate input types before initializing the buffer.

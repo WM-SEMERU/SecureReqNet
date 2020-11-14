@@ -1,0 +1,64 @@
+[Messenger] Add missing information in messenger logs
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes-ish
+
+
+New feature?
+yes-ish
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+When using messenger:consume, I get the following logs:
+2019-03-25T11:39:05+01:00 [info] Received message "Symfony\Component\Mailer\EnvelopedMessage"
+2019-03-25T11:39:05+01:00 [warning] An exception occurred while handling message "Symfony\Component\Mailer\EnvelopedMessage"
+2019-03-25T11:39:05+01:00 [info] Retrying Symfony\Component\Mailer\EnvelopedMessage - retry #1.
+2019-03-25T11:39:05+01:00 [info] Sending message "Symfony\Component\Mailer\EnvelopedMessage" with "Symfony\Component\Messenger\Transport\AmqpExt\AmqpTransport"
+2019-03-25T11:39:06+01:00 [info] Received message "Symfony\Component\Mailer\EnvelopedMessage"
+2019-03-25T11:39:06+01:00 [warning] An exception occurred while handling message "Symfony\Component\Mailer\EnvelopedMessage"
+2019-03-25T11:39:06+01:00 [info] Retrying Symfony\Component\Mailer\EnvelopedMessage - retry #2.
+2019-03-25T11:39:06+01:00 [info] Sending message "Symfony\Component\Mailer\EnvelopedMessage" with "Symfony\Component\Messenger\Transport\AmqpExt\AmqpTransport"
+2019-03-25T11:39:09+01:00 [info] Received message "Symfony\Component\Mailer\EnvelopedMessage"
+2019-03-25T11:39:09+01:00 [warning] An exception occurred while handling message "Symfony\Component\Mailer\EnvelopedMessage"
+2019-03-25T11:39:09+01:00 [info] Retrying Symfony\Component\Mailer\EnvelopedMessage - retry #3.
+2019-03-25T11:39:09+01:00 [info] Sending message "Symfony\Component\Mailer\EnvelopedMessage" with "Symfony\Component\Messenger\Transport\AmqpExt\AmqpTransport"
+
+So, an. error occurred, but I have no idea what's going on. The exception is in the context, but the context is not displayed by default. So, this PR fixes it.

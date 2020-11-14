@@ -1,0 +1,20 @@
+Basic auth extension
+
+
+This PR adds an extension that provides implementations of the auth interfaces introduced in #4271 :
+
+an Authenticator which supports HTTP Basic authentication
+an Escalator which supports HTTP Basic authentication
+an Authorizer which implements basic role-based access control
+
+With the large amount of changes (almost a rewrite) from the last round of PR reviews on #4823, I felt like it would be easier to close the old PR and start a fresh one.
+Some design notes:
+
+The user/role information is stored in the metadata store, using the "druid_config" table as a key-value store, user/role maps are stored as serialized byte arrays
+On the coordinator a *MetadataStorageUpdater class is responsible for handling writes to the user/role DB and holds a deserialized cached copy of the latest DB state
+Each node has a *CacheManager instance that polls the coordinator for the latest DB state periodically, this also syncs the auth DB state at startup time
+The coordinator can also notify and push updates to remote nodes, using the *CacheNotifier classes
+The BasicHTTPAuthenticator and BasicRoleBasedAuthorizer perform their checks using cached info from the *CacheManager instance, to avoid overloading the coordinator
+The coordinator nodes have a jersey resource for configuring the auth DB, which also holds the endpoint that nodes poll to get the latest DB state
+A jersey resource is also installed on non-coordinator nodes, containing an endpoint that listens for DB state updates
+

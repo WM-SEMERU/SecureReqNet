@@ -1,0 +1,6 @@
+Clusters built with kubeadm don't support basic auth
+
+
+From @kelseyhightower on October 25, 2016 18:15
+Some people are having trouble authenticating to the Kubernetes dashboard when the cluster is built with kubeadm. Seems like the deployed api server does not support basic auth, which makes it impossible to hit the Dashboard UI without using kubectl proxy.
+Copied from original issue: kubernetes/kubernetes#35536

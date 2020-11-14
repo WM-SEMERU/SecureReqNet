@@ -1,0 +1,26 @@
+[Form][Date(Time)Type] Use a custom string date format
+
+
+Currently there is no way to use a custom string date format (cf 
+
+
+symfony/src/Symfony/Component/Form/Extension/Core/Type/DateTimeType.php
+
+
+         Line 179
+      in
+      508602d
+
+
+
+
+
+
+  new DateTimeToStringTransformer($options['model_timezone'], $options['model_timezone']) 
+
+
+
+
+).
+This is a problem if you already have data in another format than the default one. It becomes impossible to use these form types without a data migration.
+Should we add a "string_format" option ? @xabbuh

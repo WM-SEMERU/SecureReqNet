@@ -1,0 +1,65 @@
+x/tools/cmd/gopls: completion returns error when there are zero completions
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.2 linux/amd64
+$ go list -m golang.org/x/tools
+golang.org/x/tools v0.0.0-20190406165526-0d5674b3111a
+
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN="/home/myitcv/gostuff/src/github.com/myitcv/govim/cmd/govim/.bin"
+GOCACHE="/home/myitcv/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/myitcv/gostuff"
+GOPROXY=""
+GORACE=""
+GOROOT="/home/myitcv/gos"
+GOTMPDIR=""
+GOTOOLDIR="/home/myitcv/gos/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD="/home/myitcv/gostuff/src/github.com/myitcv/govim/go.mod"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build316650147=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+Considering the following govim testscript in which I attempt a completion in a file that does not completely type-check:
+vim ex 'e main.go'
+vim ex 'call cursor(5,1)'
+vim ex 'call feedkeys(\"A\\<C-X>\\<C-O>\", \"x\")'
+
+-- go.mod --
+module mod.com
+
+-- main.go --
+package main
+
+func main() {
+	cmd := exec.Command("ls")
+	out, err := cmd.
+}
+
+What did you expect to see?
+I think I would expect this call to simply return zero results, i.e. for there to be no completion candidates.
+What did you see instead?
+An error returned by gopls:
+cannot resolve cmd
+
+The reason I think this is wrong is that I'm otherwise unclear how we would distinguish between a more fundamental, low-level error and the case of there simply being no completions because of either a type-check error/some other reason.
+But very much look to @stamblerre and @ianthehat for their thoughts on what is right/wrong here.

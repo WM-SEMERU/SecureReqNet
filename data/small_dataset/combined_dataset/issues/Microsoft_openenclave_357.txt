@@ -1,0 +1,6 @@
+Quote Revocation: Enforce a dev-specified min issued date-time for CRL and TCBInfo
+
+
+As part of quote revocation, to compensate for that fact that there is no secure time currently supported inside the enclave, we need to provide mechanism for the Open Enclave app developer to mitigate replay attacks that can be mounted by a malicious host. For example, a host could capture an outdated but cryptographically valid CRL & TCBInfo pair, and always provide them to the enclave during oe_verify_report().
+Until we have a secure time implementation from Intel, the proposal is to allow the app dev to provide a minimum date-time that the CRL/TCBInfo must be newer than. Since this information is encoded into the enclave and protected by its MRSIGNER/MRENCLAVE values, it presents a hardcoded enclave trusted backstop much like the app's own SVN check.
+This work item requires additional design investigation to finalize the API changes necessary to support it.

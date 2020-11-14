@@ -1,0 +1,7 @@
+[FIX] Remove broken link to Current QA server
+
+
+README.md:
+
+Link being used as example is pointing to another application.
+

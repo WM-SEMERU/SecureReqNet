@@ -1,0 +1,33 @@
+SecurityBundle configuration via environment variables
+
+
+Symfony version(s) affected: 4.1
+Description
+Security bundle configuration does not resolve environment variables (at least cookie_secure)
+How to reproduce
+framework:
+    session:
+        cookie_secure: '%env(bool:APP_SECURE)%'
+
+This config looks good, whereas Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddSessionDomainConstraintPass does not take it into account and uses $sessionOptions['cookie_secure'] as-is, which holds the env_b5fff47290c287c9_bool_APP_SECURE_93dabfcdbc8f9f7829f1a29cd3d2d083 value.
+Possible Solution
+Instead of YAML use the following ugly php-based configuration (or its variations)
+<?php
+
+$envSecure = getenv('APP_SECURE');
+if ($envSecure === false) {
+    $envSecure = true;
+} else {
+    $envSecure = filter_var($envSecure, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]);
+
+    if ($envSecure === null) {
+        $envSecure = true;
+    }
+}
+
+$container->loadFromExtension('framework', [
+    'session' => [
+        'cookie_secure' => $envSecure,
+    ],
+]);
+Additional context

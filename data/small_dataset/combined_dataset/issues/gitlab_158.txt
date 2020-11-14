@@ -1,0 +1,1 @@
+It seems that quick search doesn't search proejects, which are not visible. Onlu global search finds any projects in GL without any problems.

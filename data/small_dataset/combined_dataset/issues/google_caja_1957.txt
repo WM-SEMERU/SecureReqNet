@@ -1,0 +1,21 @@
+viewport doesn't work at all
+
+
+Original issue 1959 created by asfandtnt on 2015-03-16T14:30:30.000Z:
+What steps will reproduce the problem?
+
+I create a responsive site in GAS using bootstrap
+when you look into a mobile device zoom is not working and media.
+3.in mobile it give me desktop layout
+
+not working at any mobile.
+where as if i host my application some where else every thing work like charm.
+this is what i am using in GAS
+function doGet() {
+return HtmlService.createTemplateFromFile('AppUI').evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME);
+}
+function include(filename) {
+return HtmlService.createHtmlOutputFromFile(filename)
+.setSandboxMode(HtmlService.SandboxMode.IFRAME)
+.getContent();
+}

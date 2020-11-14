@@ -1,0 +1,6 @@
+Traditional Login Form does not need http_basic: configuration
+
+
+This is more like cherry on the cake rather than a fundamental issue, but the documentation available at: http://symfony.com/doc/current/cookbook/security/form_login_setup.html about creating a traditional login form seems to imply that http_basic: configuration is required.
+My initial thought was it should not be required since a login form typically replaces basic http authentication. But, since I am not a Symfony2 expert, I asked a question on Stackoverflow at http://stackoverflow.com/questions/32990643/symfony2-is-basic-authentication-configuration-required-for-traditional-login/32990667#32990667 and someone confirmed that it is not required.
+I believe we should mention this in the documentation for the sake of clarity.

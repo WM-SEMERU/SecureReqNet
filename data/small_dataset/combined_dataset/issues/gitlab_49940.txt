@@ -1,0 +1,10 @@
+### Summary
+Gitlab depends on doorkeeper ~> 4.3 which has vulnerability CVE-2018-1000211.
+
+
+### Possible fixes
+
+Update gitlab to use 4.4.0.
+
+/label ~bug 
+/label ~security

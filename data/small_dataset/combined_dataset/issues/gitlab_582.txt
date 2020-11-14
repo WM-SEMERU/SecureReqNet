@@ -1,0 +1,16 @@
+Running Gitlab on Ubuntu 14.04 Server
+Client: Mac OS X 10.9.4
+
+
+git push -u origin master
+
+fatal: 'test/developer.git' does not appear to be a git repository
+
+fatal: Could not read from remote repository.
+
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+ssh username@host.com  i can login without pass 

@@ -1,0 +1,52 @@
+[DX] Ability to authentication a User directly
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#11158
+
+
+License
+MIT
+
+
+
+Simple usage example:
+class LoginController extends ContainerAware
+{
+    public function loginAction()
+    {
+        $user = new User('norzechowicz', 'password123');
+        $this->container->get('security.login_manager')->loginUser('firewall_name', $user);
+
+        return new Response();
+    }
+}

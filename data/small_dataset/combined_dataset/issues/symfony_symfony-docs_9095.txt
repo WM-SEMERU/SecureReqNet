@@ -1,0 +1,5 @@
+[Security] Added target user to SwitchUserListener
+
+
+This adds the target user to the SwitchUserListener's accessDecisionManager->decide() call as the $object parameter to give any registered voters extra information.
+See symfony/symfony#25092

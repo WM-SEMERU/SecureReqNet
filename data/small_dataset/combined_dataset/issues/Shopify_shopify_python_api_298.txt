@@ -1,0 +1,4 @@
+Fix tests
+
+
+This PR splits some code off from @antwal larger PR #292  (thanks!) in order to get tests passing in master.

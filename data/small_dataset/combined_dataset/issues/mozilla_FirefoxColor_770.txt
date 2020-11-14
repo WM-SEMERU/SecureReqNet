@@ -1,0 +1,45 @@
+Update eslint to the latest version 🚀
+
+
+The devDependency eslint was updated from 5.15.3 to 5.16.0.
+This version is not covered by your current version range.
+If you don’t accept this pull request, your project will work just like it did before. However, you might be missing out on a bunch of new features, fixes and/or performance improvements from the dependency update.
+
+
+Release Notes for v5.16.0
+
+dfef227 Build: gensite passes rulesMeta to formatter rendering (#11567) (Kevin Partington)
+c06d38c Fix: Allow HTML formatter to handle no meta data (#11566) (Ilya Volodin)
+87a5c03 Docs: func-style: clarify when allowArrowFunctions is used (#11548) (Oliver Joseph Ash)
+bc3e427 Update: pass rule meta to formatters RFC 10 (#11551) (Chris Meyer)
+b452f27 Chore: Update README to pull in reviewer data (#11506) (Nicholas C. Zakas)
+afe3d25 Upgrade: Bump js-yaml dependency to fix Denial of Service vulnerability (#11550) (Vernon de Goede)
+4fe7eb7 Chore: use nyc instead of istanbul (#11532) (Toru Nagashima)
+f16af43 Chore: fix formatters/table test (#11534) (Toru Nagashima)
+78358a8 Docs: fix duplicate punctuation in CLI docs (#11528) (Teddy Katz)
+
+
+
+Commits
+The new version differs by 11 commits.
+
+ded2f94 5.16.0
+ea36e13 Build: changelog update for 5.16.0
+dfef227 Build: gensite passes rulesMeta to formatter rendering (#11567)
+c06d38c Fix: Allow HTML formatter to handle no meta data (#11566)
+87a5c03 Docs: func-style: clarify when allowArrowFunctions is used (#11548)
+bc3e427 Update: pass rule meta to formatters RFC 10 (#11551)
+b452f27 Chore: Update README to pull in reviewer data (#11506)
+afe3d25 Upgrade: Bump js-yaml dependency to fix Denial of Service vulnerability (#11550)
+4fe7eb7 Chore: use nyc instead of istanbul (#11532)
+f16af43 Chore: fix formatters/table test (#11534)
+78358a8 Docs: fix duplicate punctuation in CLI docs (#11528)
+
+See the full diff
+
+
+FAQ and help
+There is a collection of frequently asked questions. If those don’t help, you can always ask the humans behind Greenkeeper.
+
+
+Your Greenkeeper bot 🌴

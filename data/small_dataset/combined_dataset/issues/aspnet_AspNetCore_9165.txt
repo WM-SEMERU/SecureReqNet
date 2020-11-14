@@ -1,0 +1,7 @@
+Netcore debugging broken on macOS in preview4 nightly
+
+
+Up to preview 3 one could use VS Code or VS Mac (with some issues) to compile, run and debug netcore3 projects. From a couple of weeks ago the nightly builds of preview 4 do not debug, I submitted a bug to the omnisharp project. It was analysed and determined that the issue is in the coreclr project.
+The relevant issue is: dotnet/coreclr#23773
+What happens is that coreclr throws an exception on the start of debugging. This basically renders the macOS platform incapable of any netcore work until this is resolved.
+I'm just logging it here for reference in case someone comes across this issue after preview 4 is released.

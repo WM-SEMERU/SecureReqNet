@@ -1,0 +1,6 @@
+Add CDN endpoints to CSP
+
+
+When CDN endpoints are known the CSP should be updated to configure script-src, img-src and font-src and any other relevant directives with the CDN endpoints.
+If the favicon is served from the main origin then 'self' will need to remain under img-src otherwise it can be removed. For all others 'self' should be removed when the CDN hosts are added.
+When setting the directives, it's preferable to use a path rather than just an origin if at all possible. E.g. https://cdn.blah.net/static/ is better than just https://cdn.blah.net

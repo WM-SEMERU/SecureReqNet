@@ -1,0 +1,9 @@
+Npm start error
+
+
+So, I am new to compiling and tweaking. Followed a guide related “Chrome Extensions on Brave” Loading Chrome Extensions in Brave | Brave Browser
+Got so many error but I troubleshooted all but in the end after launching the webpack developer server and entering the “npm start” command, I got a few errors. Uploaded SS
+Yeah I know I can install beta version if I wanna use Chrome Extn. but as I said earlier, I am new to compiling and a bit curious, so I wanna do it.
+Any help will be appreciated.
+
+

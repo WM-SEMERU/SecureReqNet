@@ -1,0 +1,9 @@
+[security] missing exception wrapper
+
+
+The handleLogoutException states:
+    Logout exception occurred; wrapping with AccessDeniedHttpException
+
+however, there is never any wrapping done. It seems that either the log message is wrong, or the method is missing the actual wrapping, which would be something like:
+  throw new AccessDeniedHttpException('Logout exception occurred', $exception);
+

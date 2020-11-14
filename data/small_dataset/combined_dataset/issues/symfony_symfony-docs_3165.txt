@@ -1,0 +1,5 @@
+Wrong advice in "How to load Security Users from the Database (the Entity Provider)" cookbook entry
+
+
+The cookbook recommends implementing a custom serialize() method on your User object that only persists the id. However, this creates an unexpected issue. As the cookbook says, the User object will be refreshed after deserialization, but because the username field (among others) is missing from the deserialized object, Symfony will detect that the object has changed, and therefore it will set the token's authenticated flag to false. This should not happen.
+The creators of the FOSBundle have also noticed this issue, please see their comment.

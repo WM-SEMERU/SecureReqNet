@@ -1,0 +1,50 @@
+[Security] validate empty passwords again
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#23341 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+It looks like this part of #23341 causes serious security issues for some users who rely on the validator to also compare the empty string with their user's password (see for example #23341 (comment)). Thus I suggest to revert this part of #23341.

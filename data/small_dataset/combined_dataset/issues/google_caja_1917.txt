@@ -1,0 +1,7 @@
+Native Proxy test does not work with ES6 Proxies
+
+
+Original issue 1919 created by andrebargull on 2014-05-15T12:49:34.000Z:
+https://code.google.com/p/google-caja/source/browse/trunk/src/com/google/caja/ses/startSES.js#&nbsp;1144
+The test condition should be changed to global.Proxy &amp;&amp; global.Proxy.create &amp;&amp; .... Adding support for direct proxies would be desirable, but may require more work.
+Related: https://bugzilla.mozilla.org/show_bug.cgi?id=892903

@@ -1,0 +1,7 @@
+CVE-2017-14919 page is still empty/reserved.
+
+
+I noticed https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-14919 is still empty/reserved.
+I would expect that page to have details on the security bug as listed on
+https://nodejs.org/en/blog/vulnerability/oct-2017-dos/
+and advice users to upgrade to node 8.8.1 (for node 8).

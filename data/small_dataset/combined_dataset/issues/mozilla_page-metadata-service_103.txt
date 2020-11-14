@@ -1,0 +1,5 @@
+Add nsp to CI checks
+
+
+We should check our packages for security vulnerabilities during continuous integration/testing using nsp:
+https://github.com/nodesecurity/nsp

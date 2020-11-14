@@ -1,0 +1,8 @@
+Virtually add Function.prototype.bind() to caja.js for caja code
+
+
+Original issue 242 created by erights on 2008-05-02T23:43:28.000Z:
+Yet another element from the obsolete erights/first-class branch that needs
+to be revived for trunk.
+By "virtually add", we mean: use the fault handler so that it appears to be
+there for Caja code but is absent for uncajoled Javascript code.

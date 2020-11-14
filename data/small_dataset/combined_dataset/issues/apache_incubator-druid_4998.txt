@@ -1,0 +1,5 @@
+Filter unauthorized datasources in INFORMATION_SCHEMA queries
+
+
+This PR filters out datasources that the user is not authorized to read from the output of SQL INFORMATION_SCHEMA queries.
+Prior to this patch, access to INFORMATION_SCHEMA was all-or-nothing based on whether the user had access to a datasource type resource named "INFORMATION_SCHEMA".

@@ -1,0 +1,5 @@
+Automated cherry pick of #76099: GCE/Windows: disable stackdriver logging agent
+
+
+Cherry pick of #76099 on release-1.14.
+#76099: GCE/Windows: disable stackdriver logging agent

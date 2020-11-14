@@ -1,0 +1,29 @@
+SYMFONY 4.2.3 [Security] JSON login is not working as expected
+
+
+Symfony version(s) affected: 4.2.3
+Description
+In the POSTMAN software I write in the body the identifiers and password in json format to receive a JWT security token. Recently, I receive this type of message:
+The controller must return a "Symfony\Component\HttpFoundation\Response" object but it returned null. Did you forget to add a return statement somewhere in your controller?
+How to reproduce
+Controller APIController  :
+    /**
+    * @return Response
+    **/
+    public function login(Request $request)
+    {
+    }
+My security.yaml :
+login_json:
+            pattern: ^/api/login
+            stateless: true
+            anonymous: true
+            json_login: 
+                check_path:               /api/login
+                success_handler:        lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+My route.yaml file :
+login_check:
+    path: /api/login
+    controller: App\Controller\APIController::login
+    methods:  [POST]

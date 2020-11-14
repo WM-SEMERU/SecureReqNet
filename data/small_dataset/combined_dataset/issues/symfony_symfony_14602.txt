@@ -1,0 +1,103 @@
+[2.8] [Ldap] Added support for LDAP (New Component + integration in the Security Component).
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+not yet
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+not yet
+
+
+
+Current state:
+
+ Implement logic
+ Post-review tuning and stabilization
+ Fix tests
+
+This PR is a follow-up to #5189, which was in a stand-still for a few years now. It tries to fix the remaining issues which were mentioned in the discussion.
+There are still a few issues with the PR, as it is. For example, it introduces two new firewall factories, whereas the base factories (form_login and http_basic) could simply introduce new configuration options.
+Also, for a user to use an LDAP server as an authentication provider, he first needs to define a service which should be an instance of Symfony\Component\Security\Ldap\Ldap.
+For example:
+services:
+    my_ldap:
+        class: Symfony\Component\Security\Ldap\Ldap
+        arguments: [ "ldap.mydomain.tld" ]
+Then, in security.yml, this service can be used in both the user provider and the firewalls:
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        ldap_users:
+            ldap:
+                service: my_ldap
+                base_dn: dc=MyDomain,dc=tld
+                search_dn: CN=My User,OU=Users,DC=MyDomain,DC=tld
+                search_password: p455w0rd
+                filter: (sAMAccountName={username})
+                default_roles: ROLE_USER
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        demo_login:
+            pattern:  ^/login$
+            security: false
+        api:
+            provider: ldap_users
+            stateless: true
+            pattern:    ^/api
+            http_basic_ldap:
+                service: my_ldap
+                dn_string: "{username}@MYDOMAIN"
+        demo_secured_area:
+            provider: ldap_users
+            pattern:    ^/
+            logout:
+                path:   logout
+                target: login
+            form_login_ldap:
+                service: my_ldap
+                dn_string: CN={username},OU=Users,DC=MyDomain,DC=tld
+                check_path: login_check
+                login_path: login

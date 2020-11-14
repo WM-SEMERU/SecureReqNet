@@ -1,0 +1,21 @@
+Intermittent failure in hang_monitor_tests
+
+
+     Running target/debug/deps/hang_monitor_tests-d923c72bc20a525c
+running 3 tests
+Enabling profiler.
+Disabling profiler.
+Resolving 1/10
+Resolving 2/10
+Resolving 3/10
+Resolving 4/10
+Resolving 5/10
+Resolving 6/10
+Resolving 7/10
+Resolving 8/10
+Resolving 9/10
+Resolving 10/10
+test test_sampler ... ok
+error: process didn't exit successfully: `/home/travis/build/servo/servo/target/debug/deps/hang_monitor_tests-d923c72bc20a525c` (signal: 27)
+The command "./mach test-unit" exited with 101.
+

@@ -1,0 +1,90 @@
+cmd/go: broken go.mod resolution across modules
+
+
+What version of Go are you using (go version)?
+% go version
+go version go1.12.2 linux/amd64
+
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+go env Output% go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/home/cy/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/cy/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/home/cy/go/go1.12.2"
+GOTMPDIR=""
+GOTOOLDIR="/home/cy/go/go1.12.2/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD="/home/cy/tmp/relmods/go.mod"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build084314890=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+I am experimenting with a multi-module project setup where one module is located in a sub-directory of another module. When executing a build/run/test command for the child directory from the parent directory, it updates the go.mod in the parent. It's not totally clear to me if this is expected behavior. At the very least it is unintuitive and makes managing a multi module repository a bit tricky.
+% ls -R
+.:
+go.mod  submod
+
+./submod:
+go.mod  go.sum  main.go
+
+% cat go.mod 
+module relmods
+
+go 1.12
+
+% cat submod/main.go 
+package main
+
+import log "github.com/sirupsen/logrus"
+
+func main() {
+        log.Info("hello")
+}
+
+)% cat submod/go.mod 
+module submod
+
+go 1.12
+
+require github.com/sirupsen/logrus v1.4.1 // indirect
+
+% cd submod && go run main.go && cd ../
+INFO[0000] hello                                        
+
+% cat go.mod 
+module relmods
+
+go 1.12
+
+% go run submod/main.go 
+INFO[0000] hello                                        
+
+% cat go.mod 
+module relmods
+
+go 1.12
+
+require github.com/sirupsen/logrus v1.4.1 // indirect
+
+What did you expect to see?
+The go.mod of the parent is untouched, and the go.mod of the child is used to calculate dependencies.
+What did you see instead?
+The go.mod of the parent is modified.

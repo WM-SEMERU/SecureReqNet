@@ -1,0 +1,177 @@
+kubeadm init hang
+
+
+Is this a request for help?
+If yes, you should use our troubleshooting guide and community support channels, see http://kubernetes.io/docs/troubleshooting/.
+If no, delete this section and continue on.
+What keywords did you search in kubeadm issues before filing this one?
+If you have found any duplicates, you should instead reply there and close this page.
+If you have not found any duplicates, delete this section and continue on.
+Is this a BUG REPORT or FEATURE REQUEST?
+Choose one: BUG REPORT or FEATURE REQUEST
+I installed kubeadm, but it always hang as follows:
+\root@openstack-master-tpz64:/var/log# kubeadm init --config /etc/kubernetes/kubeadm_config.yaml -v 10
+I0330 03:12:30.552983   14283 initconfiguration.go:169] loading configuration from the given file
+I0330 03:12:30.557019   14283 interface.go:384] Looking for default routes with IPv4 addresses
+I0330 03:12:30.557050   14283 interface.go:389] Default route transits interface "ens3"
+I0330 03:12:30.557172   14283 interface.go:196] Interface ens3 is up
+I0330 03:12:30.557239   14283 interface.go:244] Interface "ens3" has 2 addresses :[10.49.0.22/24 fe80::f816:3eff:fedd:5b48/64].
+I0330 03:12:30.557273   14283 interface.go:211] Checking addr  10.49.0.22/24.
+I0330 03:12:30.557288   14283 interface.go:218] IP found 10.49.0.22
+I0330 03:12:30.557304   14283 interface.go:250] Found valid IPv4 address 10.49.0.22 for interface "ens3".
+I0330 03:12:30.557316   14283 interface.go:395] Found active IP 10.49.0.22
+I0330 03:12:30.557490   14283 feature_gate.go:206] feature gates: &{map[]}
+[init] Using Kubernetes version: v1.13.5
+[preflight] Running pre-flight checks
+I0330 03:12:30.557739   14283 checks.go:572] validating Kubernetes and kubeadm version
+I0330 03:12:30.557774   14283 checks.go:171] validating if the firewall is enabled and active
+I0330 03:12:30.562511   14283 checks.go:208] validating availability of port 443
+I0330 03:12:30.562606   14283 checks.go:208] validating availability of port 10251
+I0330 03:12:30.562631   14283 checks.go:208] validating availability of port 10252
+I0330 03:12:30.562657   14283 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-apiserver.yaml
+I0330 03:12:30.562673   14283 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-controller-manager.yaml
+I0330 03:12:30.562684   14283 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-scheduler.yaml
+I0330 03:12:30.562693   14283 checks.go:283] validating the existence of file /etc/kubernetes/manifests/etcd.yaml
+I0330 03:12:30.562704   14283 checks.go:430] validating if the connectivity type is via proxy or direct
+I0330 03:12:30.562738   14283 checks.go:466] validating http connectivity to first IP address in the CIDR
+I0330 03:12:30.562761   14283 checks.go:466] validating http connectivity to first IP address in the CIDR
+I0330 03:12:30.562770   14283 checks.go:104] validating the container runtime
+I0330 03:12:30.645730   14283 checks.go:130] validating if the service is enabled and active
+I0330 03:12:30.663868   14283 checks.go:332] validating the contents of file /proc/sys/net/bridge/bridge-nf-call-iptables
+I0330 03:12:30.663939   14283 checks.go:332] validating the contents of file /proc/sys/net/ipv4/ip_forward
+I0330 03:12:30.663980   14283 checks.go:644] validating whether swap is enabled or not
+I0330 03:12:30.664014   14283 checks.go:373] validating the presence of executable ip
+I0330 03:12:30.664046   14283 checks.go:373] validating the presence of executable iptables
+I0330 03:12:30.664066   14283 checks.go:373] validating the presence of executable mount
+I0330 03:12:30.664085   14283 checks.go:373] validating the presence of executable nsenter
+I0330 03:12:30.664101   14283 checks.go:373] validating the presence of executable ebtables
+I0330 03:12:30.664118   14283 checks.go:373] validating the presence of executable ethtool
+I0330 03:12:30.664135   14283 checks.go:373] validating the presence of executable socat
+I0330 03:12:30.664151   14283 checks.go:373] validating the presence of executable tc
+I0330 03:12:30.664170   14283 checks.go:373] validating the presence of executable touch
+I0330 03:12:30.664187   14283 checks.go:515] running all checks
+I0330 03:12:30.693996   14283 checks.go:403] checking whether the given node name is reachable using net.LookupHost
+I0330 03:12:30.694236   14283 checks.go:613] validating kubelet version <<< Hang here
+
+Any tips for debug such issue? Thanks.
+root@openstack-master-tpz64:/var/log# cat /etc/kubernetes/kubeadm_config.yaml
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: InitConfiguration
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token:
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+localAPIEndpoint:
+  bindPort: 443
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  kubeletExtraArgs:
+    cloud-config: /etc/kubernetes/cloud.conf
+    cloud-provider: openstack
+  taints:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+---
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+kubernetesVersion: v1.13.5
+apiServer:
+  extraArgs:
+    cloud-config: /etc/kubernetes/cloud.conf
+    cloud-provider: openstack
+  extraVolumes:
+  - hostPath: /etc/kubernetes/cloud.conf
+    mountPath: /etc/kubernetes/cloud.conf
+    name: cloud
+    readOnly: true
+  timeoutForControlPlane: 4m0s
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controlPlaneEndpoint: 9.20.204.233:443
+controllerManager:
+  extraArgs:
+    allocate-node-cidrs: "true"
+    cloud-config: /etc/kubernetes/cloud.conf
+    cloud-provider: openstack
+    cluster-cidr: 192.168.0.0/16
+    service-cluster-ip-range: 10.96.0.0/12
+  extraVolumes:
+  - hostPath: /etc/kubernetes/cloud.conf
+    mountPath: /etc/kubernetes/cloud.conf
+    name: cloud
+    readOnly: true
+dns:
+  type: CoreDNS
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: k8s.gcr.io
+networking:
+  dnsDomain: cluster.local
+  podSubnet: ""
+  serviceSubnet: 10.96.0.0/12
+
+root@openstack-master-tpz64:/var/log# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether fa:16:3e:dd:5b:48 brd ff:ff:ff:ff:ff:ff
+    inet 10.49.0.22/24 brd 10.49.0.255 scope global ens3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f816:3eff:fedd:5b48/64 scope link
+       valid_lft forever preferred_lft forever
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+    link/ether 02:42:b2:06:e3:62 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+
+Versions
+
+1.14.0
+1.13.5
+
+kubeadm version (use kubeadm version):
+Environment:
+
+Kubernetes version (use kubectl version):
+Cloud provider or hardware configuration: OpenStack
+OS (e.g. from /etc/os-release):
+
+root@openstack-master-tpz64:/var/log# cat /etc/*release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.6 LTS"
+NAME="Ubuntu"
+VERSION="16.04.6 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.6 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+
+
+Kernel (e.g. uname -a):
+
+root@openstack-master-tpz64:/var/log# uname -a
+Linux openstack-master-tpz64 4.4.0-131-generic #157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Others:
+
+What happened?
+What you expected to happen?
+How to reproduce it (as minimally and precisely as possible)?
+Anything else we need to know?

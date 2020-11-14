@@ -1,0 +1,5 @@
+Follow-up from https://gitlab.com/gitlab-org/gitlab-ce/issues/49120#note_87503065:
+
+Right now the frontend cookies don't appear to set this flag. I think we should change all calls to `Cookies.set` to something that will enable `secure` if HTTPS is being requested: https://github.com/js-cookie/js-cookie/blob/8b311b9dab5751fab3b09b58d215262e908e92e1/README.md#secure
+
+![image](/uploads/f97459338b65a63e3a3160d5baf475c7/image.png)

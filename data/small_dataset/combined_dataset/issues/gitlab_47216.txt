@@ -1,0 +1,5 @@
+Listed in comparison here: https://shop.ungleich.ch/github-alternative
+
+We support IPv6, but just not on GitLab.com. 
+
+Once we're moved to GCP, we should enable it.

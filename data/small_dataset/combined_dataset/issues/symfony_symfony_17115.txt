@@ -1,0 +1,6 @@
+Proposal: Better Remember Me Tokens
+
+
+https://github.com/fabpot/symfony/blob/f88e600833b6822db5873e25deaefd14948e4878/src/Symfony/Component/Security/Http/RememberMe/TokenBasedRememberMeServices.php#L32-L65
+Storing a bunch of data, even with a MAC, in the user's cookie strikes me as dangerous.
+I've previously outlined a zero-knowledge, side-channel resistant design for a remember me implementation, and it's been adopted by Gatekeeper (if you need a reference implementation).

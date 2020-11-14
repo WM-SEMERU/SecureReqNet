@@ -1,0 +1,10 @@
+[Security] Support removing tokens from a session.
+
+
+Currently there is no way to remove a session's security token without invalidating the entire session and all its data (the ContextListener will only update the session if a token is non-null and non-anonymous). This patch fixes that.
+I consider this a bug and I found no tests to prove otherwise. Let me know if I'm mistaken. Originally mentioned at https://groups.google.com/d/topic/symfony-devs/ojLvh0WUbfo/discussion
+Bug fix: yes
+Feature addition: no
+Backwards compatibility break: no
+Symfony2 tests pass: yes
+Fixes the following tickets: -

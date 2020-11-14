@@ -1,0 +1,4 @@
+Hook auth options validation into validation feature
+
+
+@Tratcher reminded by that issue today, basically we just move the call to Validate from the auth handler to options itself

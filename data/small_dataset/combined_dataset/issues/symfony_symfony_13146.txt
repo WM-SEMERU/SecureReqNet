@@ -1,0 +1,45 @@
+[Security] Missing return type in "UserInterface"
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#13037
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

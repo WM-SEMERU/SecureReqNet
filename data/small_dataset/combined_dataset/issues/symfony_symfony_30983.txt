@@ -1,0 +1,52 @@
+[Form] Added an AbstractChoiceLoader
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+~   
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+Follow up #30962 and #30966.
+Based on #30966 , only review lat commit until it is merged.
+#EUFOSSA

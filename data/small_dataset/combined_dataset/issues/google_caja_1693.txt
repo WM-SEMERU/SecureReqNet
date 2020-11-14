@@ -1,0 +1,6 @@
+.api() should be replaced with a feral-side-only interface
+
+
+Original issue 1693 created by kpreid.switchb.org on 2013-04-09T17:09:19.000Z:
+.api() takes a record whose values are placed directly into the imports of the guest code. This is unduly hazardous (compared to the rest of the caja.js interface) due to the possibility of forgetting to tame the value and thus exposing undefended prototypes.
+Therefore, I believe .api() should be deprecated in favor of an interface which takes feral-side objects and tames them internally. Any special behaviors of existing uses of .api() can be reproduced using tamesTo() if needed.

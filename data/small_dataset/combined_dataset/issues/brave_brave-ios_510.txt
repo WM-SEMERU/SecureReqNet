@@ -1,0 +1,19 @@
+NULL deref in updateTextWithURL - TabLocationView.swift
+
+
+Description:
+NULL deref while opening a punycode URL
+Steps to Reproduce
+
+Open http://xn--eby-7cd.com/
+
+Actual result: 
+Crash
+Expected result:
+No crash
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Always
+Brave Version: 
+Dev (commit - 60a82d3)
+Device details: 
+Simulator (iOS 12.1 - iPhone XS)

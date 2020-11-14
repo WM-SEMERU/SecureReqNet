@@ -1,0 +1,9 @@
+x/crypto/chacha20poly1305: request for xchacha20 variant
+
+
+The chacha20poly1305 package includes the IETF version used for TLS. It would also be useful to have a standard implementation of the XChaCha20 variation of the algorithm since it uses a larger nonce size (192 bits) that is considered suitable for safely using with random nonces.
+The libsodium docs suggest this version as the recommended AEAD construction:
+https://download.libsodium.org/doc/secret-key_cryptography/xchacha20-poly1305_construction.html
+For reference, a Go implementation supporting XChaCha20 is available from:
+https://github.com/aead/chacha20poly1305
+I had looked at using nacl/secretbox, but we have a use for the "additional data" which it doesn't support.

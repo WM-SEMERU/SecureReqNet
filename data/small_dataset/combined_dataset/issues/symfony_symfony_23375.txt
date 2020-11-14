@@ -1,0 +1,42 @@
+AccessDecisionManager circular reference with Service Definition "calls" functionality
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+yes/no
+
+
+RFC?
+yes/no
+
+
+Symfony version
+<= 3.2.9
+
+
+
+Hi everyone
+I wanted to check if somebody has experienced the same issue or if anybody can pinpoint the error location, which has been fixed with Symfony 3.3 and above.
+We are using Symfony 3.2.8 and am not able to update to 3.3 for now. We have a "BaseVoter" where we inject the "@security.access.decision_manager" as argument.
+This base voter has some implementations for e.g. doctrine, which set the entity manager via service definition "calls".
+Either the base or doctrine voter are used by concrete security.voters.
+As soon as we face the combination of passing the AccessDecisionManager as argument or get it via container and make a call to setXYZ (we tried simple string calls even), we are seeing a circular reference.
+This does not occur in Symfony 3.3 and it also does not occur if we pass the entity manager via argument and not via "calls" parameter.
+Is this known to some? Is this related to the order of calls regarding setVoters in the AccessDecisionManager or how could this be explained? Took us some time to find the issue and circumvent it for now ^^
+Thanks a lot in advance

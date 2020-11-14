@@ -1,0 +1,4 @@
+The documentation is missing the init update command:
+
+sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
+sudo chmod +x /etc/init.d/gitlab

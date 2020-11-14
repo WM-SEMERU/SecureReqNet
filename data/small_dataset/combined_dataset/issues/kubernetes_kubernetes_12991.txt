@@ -1,0 +1,5 @@
+Make it easier to setup and debug cert issues
+
+
+We need something like the debugging services doc (https://github.com/kubernetes/kubernetes/blob/4244a7cb2fff33d5e0c2081357abcd9324bb25af/docs/user-guide/application-troubleshooting.md) it keeps coming up on irc, email etc. People have a hard time with cert. They don't always use the getting-started scripts, and sometimes the script of that cloudprovider doesn't work. I usually point them at scratch.md, but that only helps 25% of the time.
+@liggitt @erictune

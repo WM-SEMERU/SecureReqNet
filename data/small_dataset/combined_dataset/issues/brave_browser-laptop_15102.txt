@@ -1,0 +1,8 @@
+Update to Chromium 69.0.3497.100
+
+
+Test plan
+
+Visit about:brave
+Verify libchromiumcontent version is 69.0.3497.100
+

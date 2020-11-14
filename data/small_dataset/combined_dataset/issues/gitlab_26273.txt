@@ -1,0 +1,23 @@
+'### Summary
+ 
+**This bug happens on GitLab.com**
+ 
+Failed 2-factor logins where the password is correctly entered but the second factor is not valid do not show up in the user-accessible audit log available at
+ https://gitlab.com/profile/audit_log  
+ 
+They should appear because this means a possible security warning is not flagged for an user to inspect - someone knows the account password but doesn't have access to the second factor. This happens for both the traditional Authenticator App as second factor and for FIDO U2F authentication.
+ 
+i tried on purpose to login with the correct password but to fail the 2-factor login on my account with both a randomly entered code and an unregistered Yubikey and neither of these failures caused an event to appear in the audit log.
+ 
+### Steps to reproduce
+- try to login with a 2-factor enabled account.
+- enter the password correctly but enter random incorrect numbers in the App code field or use a U2F key that's not associated with the account.
+ 
+### Expected behavior
+i'd expect to see a failed login event in the audit log that says the password was correct but the second factor was not.
+ 
+### Actual behavior
+no failed login events appear in the audit log
+ 
+### Possible fixes
+show failed logins in the audit log when the password was correctly entered but the second factor was not correct.

@@ -1,0 +1,22 @@
+Unable to see the python stack trace for HTTP 500
+
+
+Make sure these boxes are checked before submitting your issue - thank you!
+
+ I have checked the superset logs for python stacktraces and included it here as text if there are any.
+ I have reproduced the issue with at least the latest released version of superset.
+ I have checked the issue tracker for the same issue and I haven't found one similar.
+
+Superset version
+0.28.1
+Expected results
+python stack trace in console
+Actual results
+No stack trace but just INFO
+Steps to reproduce
+I want to debug an issue but I'm not able to see anything in the console. Its just printing INFO messages.
+This is the error I get:
+Sql lab > select schema > select table
+Error occurred while fetching table metadata
+The following is there in config.py but I cannot see any trace!
+SHOW_STACKTRACE = True

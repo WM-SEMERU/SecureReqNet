@@ -1,0 +1,4 @@
+npm audit script misses sync deps
+
+
+npm audit_deps should check src/brave/brave_sync/extension since there are npm packages in there

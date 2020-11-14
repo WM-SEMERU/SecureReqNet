@@ -1,0 +1,6 @@
+Regular schedule for Security releases?
+
+
+I think @sam-github suggested this in an issue, but I think it would be good to have a specific issue to discuss.
+I'm +1. It's understood that we will still have to have some emergency security releases based on disclosed vulnerabilities or OpenSSL updates but it seems like planning for a regular cadence would be good both for the project and the consumers or Node.js.
+@nodejs/security-wg

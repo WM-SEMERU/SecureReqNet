@@ -1,0 +1,6 @@
+Fix supervisor tombstone auth handling
+
+
+#5501 resulted in "tombstone" NoopSupervisorSpecs being filtered out of the spec histories.
+This PR adjusts NoopSupervisorSpecs so that they record the datasource list of the previous running spec, for authorization purposes.
+NoopSupervisorSpecs created before this change will have a null datasource list and will be visible to all users, for backwards compatibility.

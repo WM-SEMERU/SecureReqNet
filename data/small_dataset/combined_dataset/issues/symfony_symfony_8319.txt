@@ -1,0 +1,4 @@
+2.2.3 - prevents login
+
+
+When I upgraded to 2.2.3 our login page would authenticate, but then it would somehow unauthenticate and push back to the login page.  When I downgraded back to 2.2.2, our system worked fine.

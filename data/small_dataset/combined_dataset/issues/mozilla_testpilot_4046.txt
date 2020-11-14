@@ -1,0 +1,4 @@
+Rename Price Wise to Price Tracker
+
+
+Fixes #4045

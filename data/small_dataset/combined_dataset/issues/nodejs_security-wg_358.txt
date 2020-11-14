@@ -1,0 +1,40 @@
+Create issue to propose session at JSInteractive collaborator summit
+
+
+see nodejs/summit#100
+Providing example template for proposal
+
+Security and Node.js - lead by the Security Working Group
+Summit Topic: Security and Node.js
+Motivation/Abstract
+This working session aims to bring the security working group together with the
+broader collaborator base to discuss issues around security.  Are there gaps
+collaborators think the WG should tackle, a review of some of the current hot
+tops as well as a review of the WG processes to validate they are still
+appropriate/applicable.
+Agenda
+
+
+What does broad community believe security-wg should be working on?
+
+
+Security Guidelines
+
+Coding conventions, etc. Should we have something more official like "project" or "security-wg" guidelines
+Lets get Jamie Davis to held lead this discussion. (Michael to reach out to see if he is going to be at the collaborator summit)
+
+
+
+Review status on progress on security policies
+
+Cover @addaleax PR, etc.
+
+
+
+Review existing processes  (bug bounty, 3rd party triage, core security processes)
+
+Are current processes still valid/appropriate
+Are there  additional processes we should capture
+
+
+

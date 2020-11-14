@@ -1,0 +1,5 @@
+Add docs about the security user value resolver
+
+
+In symfony/symfony#18510 I've added an ArgumentValueResolver to add the UserInterface to resolve to the logged-in user. However, this is not documented yet. If someone is up for it, feel free to write docs, otherwise I will write something soon (tm) when I have some time.
+If I've started, I will refer this issue so it won't be done twice.

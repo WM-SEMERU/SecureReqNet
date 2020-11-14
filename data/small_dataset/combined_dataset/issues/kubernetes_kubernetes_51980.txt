@@ -1,0 +1,16 @@
+CRI: Should kubelet or runtime handle Capability ALL?
+
+
+"all" is not a valid capability string, but docker supports it, e.g. docker run --cap-drop ALL.
+Since we pass the capabilities strings from K8s API to docker directly, K8s API also supports it. And there are user relying on this now:
+https://github.com/microservices-demo/microservices-demo/blob/master/deploy/kubernetes/complete-demo.yaml#L24
+The problems are:
+
+Should we support this in K8s API? Since we've supported it so far, I doubt we could deprecate it.
+Should we support this in Kubelet? This is a linux specific thing, but we are doing linux specific thing in Kubelet anyway.
+Should we support this in container runtime?
+
+Since it's code freeze, I don't think we could update K8s now. We'll support this in cri-containerd for now, and let's revisit this in 1.9.
+/cc @ijc Thanks for finding this.
+@yujuhong @feiskyer @tallclair @mrunalp
+/cc @kubernetes/sig-node-api-reviews

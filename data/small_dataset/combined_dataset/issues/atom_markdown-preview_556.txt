@@ -1,0 +1,6 @@
+Provide service for rendering markdown to HTML
+
+
+When working on the atom-ide-datatip package I was re-creating basic functionality to render the markdown delivered by the Language Server into HTML that can be displayed as part of an overlay. By doing so I currently miss some of the advanced features such as syntax highlighting of code snippets in the markdown string.
+After briefly looking into the rendering code here (lib/renderer.coffee) I was thinking of the possibility to introduce a consumable service here that will allow other Atom packages to interact with the markdown renderer to get properly formatted output.
+What's your opinion on that? If you find this suitable for the current package I would start investigating this further and provide you a PR on that.

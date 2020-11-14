@@ -1,0 +1,69 @@
+Microsoft Security Advisory CVE-2018-8415: Microsoft PowerShell Tampering Vulnerability
+
+
+Microsoft Security Advisory CVE-2018-8415: Microsoft PowerShell Tampering Vulnerability
+Executive Summary
+A tampering vulnerability exists in PowerShell that could allow an attacker to execute unlogged code.
+To exploit this vulnerability, an attacker would need to log on to the affected system and run a specially crafted application.
+The security update addresses the vulnerability by correcting log management of special characters.System administrators are advised to update PowerShell Core to version 6.0.5 or 6.1.1.
+Discussion
+Please use PowerShell/PowerShell#8254 for discussion of this advisory.
+Affected Software
+The vulnerability affects PowerShell Core prior to the following versions:
+
+
+
+PowerShell Core Version
+Fixed in
+
+
+
+
+6.0
+6.0.5
+
+
+6.1
+6.1.1
+
+
+6.2
+PowerShell/PowerShell#8253
+
+
+
+Advisory FAQ
+How do I know if I am affected?
+If all of the following are true:
+
+Run pwsh -v, then, check the version in the table in Affected Software to see if your version of PowerShell Core is affected.
+If you are running a version of PowerShell Core where the executable is not pwsh or pwsh.exe, then you are affected.  This only existed for preview version of 6.0.
+
+How do I update to an unaffected version?
+Follow the instructions at Installing PowerShell Core to install the latest version of PowerShell Core.
+Other Information
+Commit IDs
+f8f3774d
+Reporting Security Issues
+If you have found a potential security issue in PowerShell Core,
+please email details to secure@microsoft.com.
+Support
+You can ask questions about this issue on GitHub in the PowerShell organization.
+This is located at https://github.com/PowerShell/.
+The Announcements repo (https://github.com/PowerShell/Announcements)
+will contain this bulletin as an issue and will include a link to a discussion issue where you can ask questions.
+What if the update breaks my script or module?
+You can uninstall the newer version of PowerShell Core and install the previous version of PowerShell Core.
+This should be treated as a temporary measure.
+Therefore, the script or module should be updated to work with the patched version of PowerShell Core.
+Acknowledgments
+Amirreza Niakanlahiji (@DissectMalware) of University of North Carolina at Charlotte
+Microsoft recognizes the efforts of those in the security community who help us protect customers through coordinated vulnerability disclosure.
+See acknowledgments for more information.
+External Links
+CVE-2018-8415
+Revisions
+V1.0 (November 13, 2018): Advisory published.
+v1.1 (November 13, 2018): Updated Acknowledgments
+Version 1.1
+Last Updated 2018-11-13

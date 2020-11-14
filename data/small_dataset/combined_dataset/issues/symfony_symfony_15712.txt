@@ -1,0 +1,13 @@
+Security login redirect to fragment (using ESI for example)
+
+
+The login page use a global layout, which includes fragment using ESI (or SSI).
+When the login success, the redirect is made to the internal fragment URI.
+After a little search on it, my guess is because the fragment URI is catched in
+Symfony\Component\Security\Http\Firewall\ExceptionListener
+as normal URL, and is then saved in session on the setTargetPath function here:
+    if ($request->hasSession() && $request->isMethodSafe() && !$request->isXmlHttpRequest()) {
+        $request->getSession()->set('_security.'.$this->providerKey.'.target_path', $request->getUri());
+    }
+
+Adding a test to check if the URI is a fragment might do the trick, but I may missing some points here.

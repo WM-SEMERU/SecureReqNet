@@ -1,0 +1,1 @@
+Have a font file what was removed in a commit. Gitlab just shows "No preview for this file type" when viewing either the inline or sid-by-side diffs. It is impossible to tell whether the file was added or removed.

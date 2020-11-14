@@ -1,0 +1,6 @@
+### Description
+
+After !7383 will be merged into master, there would be nice if we could enable or disable write access for the public deploy keys (added through admin interface) for each project. If we add public deploy key with write access it will be able to push to any repo granted to it and if we give it read-only access it will not able to write to any project at all.
+
+### Links / references
+#1376

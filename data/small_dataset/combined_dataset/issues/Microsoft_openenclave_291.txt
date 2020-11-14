@@ -1,0 +1,7 @@
+OE_IsOutsideEnclave fixes - added new case and wrapping check
+
+
+Fix for #157 Double-check OE_IsOutsideEnclave()
+Added wrapping check to ensure that unsigned integer operations do not wrap.
+Added condition to test for a range starting before and ending beyond the enclave.
+4 formatting errors fixed with this.

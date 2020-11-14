@@ -1,0 +1,34 @@
+Needs to handle AuthFailed, SaslAuthenticated events
+
+
+FEATURE REQUEST
+
+Please describe the feature you are requesting.
+
+Address TODO item in ZooKeeperWatcherBase:
+    // TODO: Needs to handle AuthFailed, SaslAuthenticated events
+    switch (event.getState()) {
+    case SyncConnected:
+        LOG.info("ZooKeeper client is connected now.");
+        clientConnectLatch.countDown();
+        break;
+    case Disconnected:
+        LOG.info("ZooKeeper client is disconnected from zookeeper now, but it is OK unless we received EXPIRED event.");
+        break;
+    case Expired:
+        clientConnectLatch = new CountDownLatch(1);
+        LOG.error("ZooKeeper client connection to the ZooKeeper server has expired!");
+        break;
+    default:
+        // do nothing
+        break;
+    }
+
+
+Indicate the importance of this issue to you (blocker, must-have, should-have, nice-to-have). Are you currently using any workarounds to address this issue?
+
+nice-to-have
+
+Provide any additional detail on your proposed use case for this feature.
+
+N/A

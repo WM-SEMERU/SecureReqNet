@@ -1,0 +1,6 @@
+Update wg-security-audit leads; include RFP link in readme.md
+
+
+I don't think PR 2872 used the generator to update wg leads. Including that in this PR.
+We are ready to publish the RFP for the third party security audit. Added link to RFP in wg-security-audit README.md.
+CC: @cblecker @joelsmith @cji

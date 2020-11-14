@@ -1,0 +1,3 @@
+We were experimenting with using issue URL fragments as branch names (to create a link between issues and branches — e.g., aral/myproject/issues/9 as a branch name) and, although Git is happy with this, it seems to have broken Gitlab so that the new remote branches we add have stopped showing up in the merge requests drop-down.
+
+Thoughts? :)

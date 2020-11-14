@@ -1,0 +1,17 @@
+crypto.createHash(weakAlgo) should print deprecation warning
+
+
+ask-500-worst package is an (apparently serious) package created by someone looking to reduce bad passwords. From the README:
+
+To protect your customer's passwords, we first hash the password with MD5 before sending it to the server to be tested.
+
+Indeed the package uses:
+crypto.createHash('md5')
+
+108 people downloaded the package last week. It may be better if:
+crypto.createHash('md5')
+
+Output something like
+WARN: md5 is not a secure hashing algorithm
+
+So users are aware of the danger here.

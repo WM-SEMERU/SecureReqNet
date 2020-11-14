@@ -1,0 +1,20 @@
+Promote TokenReview to v1
+
+
+Peer to #40709
+We have multiple features that depend on this API:
+
+webhook authentication
+kubelet delegated authentication
+add-on API server delegated authentication
+
+The API has been in use since 1.3 in beta status (v1beta1) with negligible changes:
+
+Added a status field for reporting errors evaluating the token
+
+This PR promotes the existing v1beta1 API to v1 with no changes
+Because the API does not persist data (it is a query/response-style API), there are no data migration concerns.
+This positions us to promote the features that depend on this API to stable in 1.7
+cc @kubernetes/sig-auth-api-reviews @kubernetes/sig-auth-misc
+The authentication.k8s.io API group was promoted to v1
+

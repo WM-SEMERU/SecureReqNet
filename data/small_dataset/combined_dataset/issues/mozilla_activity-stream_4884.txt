@@ -1,0 +1,8 @@
+Bug 1540939 - Remove SnippetsFeed and related components
+
+
+I also turned back on test/unit/lib/ActivityStream.test.js which was commented out.
+There's an m-c patch that also needs to land in order to remove browser.aboutHomeSnippets.updateUrl
+
+ todo: m-c patch
+

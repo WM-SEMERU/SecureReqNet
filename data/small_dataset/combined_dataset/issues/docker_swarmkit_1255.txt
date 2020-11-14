@@ -1,0 +1,131 @@
+Flaky Test: CA TestNewNodeCertificateBadToken
+
+
+Reproducible locally on master every few runs:
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:37133: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:37133: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:37133: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:37043: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:37043: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="grpc: Server.Serve failed to create ServerTransport:  connection error: desc = \"transport: write tcp 127.0.0.1:37043->127.0.0.1:56790: write: broken pipe\"" 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:37043: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:37043: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-worker." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:34165: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:42111: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:42111: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:42111: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:45611: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:37-07:00" level=info msg="Failed to dial 127.0.0.1:38527: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-worker." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-worker." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:43237: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: remote CA does not match fingerprint. Expected: 3f72881f0095fc4e38ad6749af77f610c0b2d0506554c559a64b1b47935ac3ce" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: remote CA does not match fingerprint. Expected: 3f72881f0095fc4e38ad6749af77f610c0b2d0506554c559a64b1b47935ac3ce" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: remote CA does not match fingerprint. Expected: 3f72881f0095fc4e38ad6749af77f610c0b2d0506554c559a64b1b47935ac3ce" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: remote CA does not match fingerprint. Expected: 3f72881f0095fc4e38ad6749af77f610c0b2d0506554c559a64b1b47935ac3ce" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: remote CA does not match fingerprint. Expected: 3f72881f0095fc4e38ad6749af77f610c0b2d0506554c559a64b1b47935ac3ce" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="failed to retrieve remote root CA certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:44999: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:44999: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:44999: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:44999: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:35363: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="grpc: Server.Serve failed to create ServerTransport:  connection error: desc = \"transport: write tcp 127.0.0.1:35363->127.0.0.1:51662: write: broken pipe\"" 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:35363: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:35363: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:35363: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:41625: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:41625: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:41625: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:41625: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:44921: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:44921: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="grpc: Server.Serve failed to create ServerTransport:  connection error: desc = \"transport: write tcp 127.0.0.1:44921->127.0.0.1:56986: write: broken pipe\"" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: valid remote address picker required" 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:40371: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:40371: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:40371: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Failed to dial 127.0.0.1:40371: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-worker." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-manager." 
+time="2016-07-27T18:32:42-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-07-27T18:32:42-07:00" level=warning msg="node does not exist" method=issueRenewCertificate node.id=3i80l7v599e815a10wv2v2tzz 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 5 desc = node 3i80l7v599e815a10wv2v2tzz not found when attempting to renew certificate" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="node does not exist" method=issueRenewCertificate node.id=3i80l7v599e815a10wv2v2tzz 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 5 desc = node 3i80l7v599e815a10wv2v2tzz not found when attempting to renew certificate" 
+time="2016-07-27T18:32:42-07:00" level=warning msg="node does not exist" method=issueRenewCertificate node.id=3i80l7v599e815a10wv2v2tzz 
+time="2016-07-27T18:32:42-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 5 desc = node 3i80l7v599e815a10wv2v2tzz not found when attempting to renew certificate" 
+time="2016-07-27T18:32:43-07:00" level=warning msg="node does not exist" method=issueRenewCertificate node.id=3i80l7v599e815a10wv2v2tzz 
+time="2016-07-27T18:32:43-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 5 desc = node 3i80l7v599e815a10wv2v2tzz not found when attempting to renew certificate" 
+time="2016-07-27T18:32:43-07:00" level=warning msg="node does not exist" method=issueRenewCertificate node.id=3i80l7v599e815a10wv2v2tzz 
+time="2016-07-27T18:32:43-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 5 desc = node 3i80l7v599e815a10wv2v2tzz not found when attempting to renew certificate" 
+time="2016-07-27T18:32:43-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-07-27T18:32:43-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 1 desc = context canceled" 
+time="2016-07-27T18:32:43-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 1 desc = context canceled" 
+time="2016-07-27T18:32:43-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 1 desc = context canceled" 
+time="2016-07-27T18:32:43-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 1 desc = context canceled" 
+time="2016-07-27T18:32:43-07:00" level=warning msg="error fetching signed node certificate: rpc error: code = 1 desc = context canceled" 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:39123: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:39123: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:39123: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:39123: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:39123: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-manager." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:43133: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:43133: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:43133: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:40219: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:40219: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:40219: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:42475: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=error msg="failed to sign CSR" error="{\"code\":9002,\"message\":\"CSR Decode failed\"}" method="(*Server).signNodeCert" module=ca node.id=97liy9khyk2ny7gn1oew4tv48 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:37483: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:43517: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:45371: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:43-07:00" level=info msg="grpc: Server.Serve failed to create ServerTransport:  connection error: desc = \"transport: write tcp 127.0.0.1:45371->127.0.0.1:33538: write: broken pipe\"" 
+time="2016-07-27T18:32:43-07:00" level=info msg="Failed to dial 127.0.0.1:45371: grpc: the client connection is closing; please retry." 
+--- FAIL: TestNewNodeCertificateBadToken (0.03s)
+        Error Trace:    server_test.go:264
+    Error:      Not equal: "rpc error: code = 3 desc = A valid join token is necessary to join this cluster" (expected)
+                    != "rpc error: code = 10 desc = CA signer is stopped" (actual)
+    Messages:   An error with value "rpc error: code = 3 desc = A valid join token is necessary to join this cluster" is expected but got "rpc error: code = 10 desc = CA signer is stopped". 
+
+        Error Trace:    server_test.go:269
+    Error:      Not equal: "rpc error: code = 3 desc = A valid join token is necessary to join this cluster" (expected)
+                    != "rpc error: code = 10 desc = CA signer is stopped" (actual)
+    Messages:   An error with value "rpc error: code = 3 desc = A valid join token is necessary to join this cluster" is expected but got "rpc error: code = 10 desc = CA signer is stopped". 
+
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:46187: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:42729: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:42729: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:42729: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:42729: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:35229: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:35229: grpc: the client connection is closing; please retry." 
+time="2016-07-27T18:32:44-07:00" level=info msg="Failed to dial 127.0.0.1:35229: grpc: the client connection is closing; please retry." 
+FAIL
+FAIL    github.com/docker/swarmkit/ca   9.636s
+
+/cc @diogomonica

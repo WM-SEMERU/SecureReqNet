@@ -1,0 +1,4 @@
+use a GitHub token with minimal access
+
+
+We should probably create a one-off GitHub user just for this repo, like we did for electron/i18n with @glotbot

@@ -1,0 +1,49 @@
+[Security] improve some firewall config comments
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#19398
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

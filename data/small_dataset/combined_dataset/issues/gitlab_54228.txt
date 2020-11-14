@@ -1,0 +1,33 @@
+**[HackerOne report #441085](https://hackerone.com/reports/441085)** by vijay_kumar1110 on 2018-11-15:
+
+##Note :
+I am not sure about this as it has been introduced 2 days back only in the production and I wasn't able to find any Documentation and Permissions for this issue. Just reporting according to UI.
+
+##Description : 
+Just 2 days back i have seen a New Feature/Tab in the project section called Operations which is showing "Jaeger tracing" URL . In my understanding of UI , This information/Page is only visible to Maintainer and owner of the account but this information is visible to lower role users too. If you Login from Reported Role user then you will be able to access this Settings page. 
+
+##Vulnerable Pages :
+https://gitlab.com/[username]/[Project_namespace]/settings/operations
+
+In the response you will be able to view this page and  Jaeger tracing Operation URL. 
+
+
+## Steps To Reproduce:
+1. Create a Victim account and add new group.(victim group,namespace_ID : 12345)
+2. Add new user (Attacker user)into this group as Reporter  role.
+3. Now login from Attacker account and go to the victim group.
+4. You will notice that attacker doesn't have access to  settings and Operations -- &gt; Tracing sections.  
+5. Now Access the Above mentioned URL .
+6. Now you will notice that reported user is able to access this information . 
+
+
+## Supporting Material/References:
+Let me know if you require one.
+
+## Impact
+
+Access to Jaeger tracing Operation pages by Reported role user in private/Public projects(Privilege escalation)
+
+## Fix
+
+Security issue: https://dev.gitlab.org/gitlab/gitlab-ee/issues/358

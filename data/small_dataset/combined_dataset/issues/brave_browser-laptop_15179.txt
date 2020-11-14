@@ -1,0 +1,11 @@
+update to tor 0.3.4 series
+
+
+Test plan
+
+Open a new Tor tab; load a site, ensure it works
+Visit about:brave
+Tor version should be 0.3.4.8
+
+Original issue details
+see brave/tor_build_scripts#23 for details

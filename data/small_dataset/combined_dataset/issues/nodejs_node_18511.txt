@@ -1,0 +1,15 @@
+security,unix: audit use of process.env in lib/ for setuid binary
+
+
+Wrapped SafeGetenv() in util binding with the
+purpose of protecting the cases when env vars are
+accessed with the privileges of another user in jsland.
+Fixes: #9160
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+os, module, util binding

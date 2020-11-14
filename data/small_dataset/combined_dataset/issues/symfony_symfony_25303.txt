@@ -1,0 +1,38 @@
+[DX] Configure a default CSRF provider
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+4.1
+
+
+
+In this article -> https://symfony.com/doc/current/security/csrf_in_login_form.html we say:
+
+Then, the security component needs a CSRF token provider. You can set this to use the default provider available in the security component:
+
+And we force the user to add some config somewhere. Can't we make this built-in CSRF provider the default value of this option to save one config step? Thanks!

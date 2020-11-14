@@ -1,0 +1,6 @@
+Document how Secrets are stored and how to secure them
+
+
+For purposes of security and compliance, it's important to my organization to understand how sensitive information is stored, and what the attack vectors are for someone to compromise the secrets.
+In the current documentation, it doesn't make any mention of where Secrets are stored at rest. Are they in etcd? Are they stored in plaintext, or are they encrypted?  If they're encrypted, where does the key live?
+In other words, if I was an attacker trying to gain access to the Secrets stored in kubernetes, how could I read them and/or change them?  Also, what best practices should an admin put in place to block an attacker?

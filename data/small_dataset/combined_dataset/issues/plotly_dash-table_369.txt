@@ -1,0 +1,45 @@
+Unable to update sorting_settings via callback after user manually sorts
+
+
+As per title, updating the sorting_settings via a callback works fine until the user manually sorts.  Here is a short working test case, the update sorting button works fine until you manually sort the table and then it stops working:
+import random
+import dash
+import dash_table
+import dash_html_components as html
+from dash.exceptions import PreventUpdate
+
+# initialise the server
+app = dash.Dash(__name__)
+COLUMNS = ('A', 'B', 'C')
+ROWS = 10
+
+app.layout = html.Div([
+    html.Button('Change Order', id='change-order'),
+    dash_table.DataTable(
+        id='data-table',
+        columns=[{"name": c, "id": c} for c in COLUMNS],
+        data=[{c: random.randint(0, 9) for c in COLUMNS} for _ in range(ROWS)],
+        sorting='fe',
+        sorting_settings=[{'column_id': c, 'direction': 'asc'} for c in COLUMNS],
+        style_table={'width': '200px'}
+    )
+])
+
+
+@app.callback(
+    output=dash.dependencies.Output('data-table', 'sorting_settings'),
+    inputs=[dash.dependencies.Input('change-order', 'n_clicks')])
+def update_sorting(n_clicks):
+    if n_clicks is None:
+        raise PreventUpdate
+
+    if n_clicks % 2 == 0:
+        return [{'column_id': c, 'direction': 'asc'} for c in COLUMNS]
+    else:
+        return [{'column_id': c, 'direction': 'desc'} for c in reversed(COLUMNS)]
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+
+This impacts a real world application I have where the table is normally sorted via hidden columns, but the user wants to be able to turn this sorting off and manually sort for a while, but then turn the sorting back on again. My plan was to update the sorting_settings based on callbacks but this doesn't seem to work because of this bug.

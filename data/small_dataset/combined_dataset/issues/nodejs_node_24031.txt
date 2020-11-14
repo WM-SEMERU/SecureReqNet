@@ -1,0 +1,11 @@
+doc: add SECURITY.md to readme.md
+
+
+This adds a SECURITY.md file and links to the security document per the
+request of @Trott at a recent SF Node meetup.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+

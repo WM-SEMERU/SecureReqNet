@@ -1,0 +1,6 @@
+fix(deps): Fix the npm audit warnings in jsxgettext-recursive
+
+
+Use jsxgettext-recursive-next (maintained by us), instead.
+blocks #6595
+@mozilla/fxa-devs - r?

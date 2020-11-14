@@ -1,0 +1,4 @@
+Redacts AWS join credientials from /v1/agent/self output.
+
+
+These would otherwise be displayed in /v1/agent/self output.

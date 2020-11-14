@@ -1,0 +1,12 @@
+Add Seccomp to Annotations
+
+
+Add Seccomp API
+
+This is a WIP of #24602, with some included changes to that proposal that I mentioned on it. For the most part those changes are that instead of passing the path to the profiles, the SeccompProfile struct is passed to the API. This way if using kubectl you can pass a local profile.
+Things left to do:
+
+ Add Tests
+ Add ability to pass seccomp profile to kubectl, mostly wondering about the design on this one
+
+This is my first PR to kubernetes so without a doubt some test somewhere will probably fail ;)

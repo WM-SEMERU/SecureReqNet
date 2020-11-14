@@ -1,0 +1,5 @@
+Find unmaintained
+
+
+Allow users to search their package.json for old/unmaintained packages as part of an audit subcommand or flag.
+Shoutout to @iarna

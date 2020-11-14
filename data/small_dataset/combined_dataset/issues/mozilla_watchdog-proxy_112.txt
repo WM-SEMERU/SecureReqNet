@@ -1,0 +1,5 @@
+Encrypt positive matches in S3
+
+
+In order to better secure known positive matches retained while awaiting review, we should investigate encrypting the image and associated metadata.
+Assuming AWS Lambda can handle it, we could for example use GPG - i.e. store public keys for legal team members with the service, and on positive match encrypt each S3 resource and delete the originals. (And of course, ensure that the original has actually been deleted on S3 and not retained through versioning or etc)

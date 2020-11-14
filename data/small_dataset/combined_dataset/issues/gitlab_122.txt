@@ -1,0 +1,9 @@
+The public landing page is great to have, but it can get pretty busy if you have a lot of projects, or if you just want it to showcase major projects. We made a few changes to streamline it, mostly in culling information which user usually doesn't need to immediately see:
+
+ - Parenthetical project count after the page title
+ - Text explaining that projects are read-only if not logged in
+ - Commit/branch/tag counts on projects
+
+https://gist.github.com/dvander/9407078
+
+In addition, we moved the search tool to float to the right of the title: https://gist.github.com/dvander/9407141

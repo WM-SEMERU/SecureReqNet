@@ -1,0 +1,7 @@
+Google Gadget - Caja is not working
+
+
+Original issue 1846 created by aayushi@point-star.net on 2013-08-19T03:03:40.000Z:
+I am working on a google gadget that needs to display data from another php page inside gadget.
+I tried using XMLHttpRequest and then came to know that gadget does not allow it. So tried Caja. When I add caja tags in my gadget's XML file, my gadget disappears and then it takes hours to re-appear (after I remove caja tags). How to make gadget cajoable ? Any help on this will be greatly appreciated.
+Thanks.

@@ -1,0 +1,44 @@
+'### Description
+
+Originally discussed at https://gitlab.com/gitlab-org/gitlab-ce/issues/33281#note_36484896 while we were working on [Protected runner](https://gitlab.com/gitlab-org/gitlab-ce/issues/33281).
+
+---
+
+Comments from @markpundsack 
+
+> Should we also protect Container Registry? If user doesn't have a permission on the protected branch, the user should not be able to pull the image. This would be useful when using docker executor.
+
+@dosuken123 That's a really interesting questions. It's not really about being able to pull images as that's not generally the problem, but someone could push to an image (that otherwise would have been generated from a protected branch) using their regular login. Please create a separate issue to discuss. I'm not aware of anyone asking for this restriction, but maybe it just hasn't come up yet.
+
+---
+
+### Proposal
+
+### Links / references
+
+- https://gitlab.com/gitlab-org/gitlab-ce/issues/33281
+
+### Documentation blurb
+
+#### Overview
+
+What is it?
+Why should someone use this feature?
+What is the underlying (business) problem?
+How do you use this feature?
+
+#### Use cases
+
+Who is this for? Provide one or more use cases.
+
+### Feature checklist
+
+Make sure these are completed before closing the issue,
+with a link to the relevant commit.
+
+- [ ] [Feature assurance](https://about.gitlab.com/handbook/product/#feature-assurance)
+- [ ] Documentation
+- [ ] Added to [features.yml](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/features.yml)
+
+
+/cc @ayufan @markpundsack @bikebilly

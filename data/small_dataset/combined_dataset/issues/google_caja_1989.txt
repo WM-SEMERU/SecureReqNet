@@ -1,0 +1,14 @@
+html-sanitizer mixing property names in arrays causing headaches for Closure Compiler
+
+
+Kaitlyn E would like some errors from Closure Compiler to go away:
+.../html-sanitizer-bundle.js:2078: ERROR - restricted index type
+found   : string
+required: number
+          attribs = decision['attribs'];
+                             ^
+html-sanitizer-bundle.js:2085: ERROR - restricted index type
+found   : string
+required: number
+          tagNameRep = decision['tagName'];
+                                ^

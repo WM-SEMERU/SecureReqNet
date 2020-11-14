@@ -1,0 +1,6 @@
+CLOUDSTACK-9632: Upgrade bountycastle to v1.59
+
+
+This upgrades bountycastle dependency to latest v1.59.
+Pinging for review @DaanHoogland @borisstoyanov @rafaelweingartner @marcaurele @wido  and others
+@blueorangutan package

@@ -1,0 +1,16 @@
+util: highlight stack frames
+
+
+
+Using util.inspect on errors is going to highlight userland and
+node_module stack frames from now on. This is done by marking Node.js
+core frames grey and frames that contain node_modules in their path
+yellow.
+That way it's easy to grasp what frames belong to what code.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

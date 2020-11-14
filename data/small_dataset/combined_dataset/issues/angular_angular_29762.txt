@@ -1,0 +1,44 @@
+@angular/animations delay passed in options parameter for transition() call has no effect
+
+
+🐞 bug report
+Affected Package
+The issue is caused by package @angular/animations
+Is this a regression?
+I don't know, I just tried to use the AnimationOptions parameter for the first time in @angular/animations version 7.2.1
+Description
+I need to delay the starting of an animation, but the delay parameter of the animate() function doesn't fit, as the start event of the animation will be fired once the trigger was activated, regardless of the delay provided in this way: animate ('duration delay easing')
+In the transition() and AnimationOptions docs I came across the delay property, which is supposed to "set a time-delay for initiating an animation action".
+I was not able to observe any delay when providing the { delay: '2s' } as options parameter in my transition calls(). See stackblitz.
+I depend on this behaviour, as I need to update component state, based on the animation start event, which needs to fire after the delay.
+🔬 Minimal Reproduction
+https://stackblitz.com/edit/angular-qq6tyv
+🌍  Your Environment
+Angular Version:
+
+Angular CLI: 7.2.2
+Node: 10.13.0
+OS: darwin x64
+Angular: 7.2.1
+... animations, common, compiler, compiler-cli, core, forms
+... http, language-service, platform-browser
+... platform-browser-dynamic, router
+
+Package                           Version
+-----------------------------------------------------------
+@angular-devkit/architect         0.12.2
+@angular-devkit/build-angular     0.12.2
+@angular-devkit/build-optimizer   0.12.2
+@angular-devkit/build-webpack     0.12.2
+@angular-devkit/core              7.2.2
+@angular-devkit/schematics        7.2.2
+@angular/cli                      7.2.2
+@ngtools/webpack                  7.2.2
+@schematics/angular               7.2.2
+@schematics/update                0.12.2
+rxjs                              6.3.3
+typescript                        3.2.4
+webpack                           4.28.4
+
+
+Angular Animations version: 7.2.1

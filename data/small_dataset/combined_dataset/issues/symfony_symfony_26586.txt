@@ -1,0 +1,84 @@
+[Security] Add Callable voter
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Simple implementation of a CallableVoter.
+The callable must return true, false, mixed to respectively grant, denied, abstain.
+It allow this multiple syntax use
+use Symfony\Component\Security\Core\Authorization\Voter\CallableVoter;
+
+new CallableVoter(
+    function () {
+        return true;
+    }
+);
+
+new CallableVoter(
+    [
+        new class()
+        {
+            public function get()
+            {
+                return true;
+            }
+        },
+        'get',
+    ]
+);
+
+new CallableVoter(
+    new class()
+    {
+        public function __invoke()
+        {
+            return true;
+        }
+    }
+);
+What did you think about such addition?
+Feel free to comment or close it.

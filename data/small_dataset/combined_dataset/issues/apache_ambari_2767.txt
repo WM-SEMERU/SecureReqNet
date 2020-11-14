@@ -1,0 +1,12 @@
+[AMBARI-25107] Ambari is not respecting host component maintenance mode when performing "Restart All Required" at the cluster level
+
+
+What changes were proposed in this pull request?
+
+Put HSI in maintenance mode.
+Changed auth to local mapping in core-site.
+A bunch of services got a restart indicator.
+Triggering "Restart All Required" at the cluster level schedules HSI to be restarted.  HSI restart fails so the entire operation fails.  This is cumbersome because now the user has to trigger "restart affected" for individual services.
+
+How was this patch tested?
+Tested manually

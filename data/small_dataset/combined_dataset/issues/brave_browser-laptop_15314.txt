@@ -1,0 +1,8 @@
+Allow packager to output a different CFBundleName for the macOS packager
+
+
+Usage: BUNDLE_NAME="My\ App" CHANNEL=nightly npm run build-package
+Background for this is at brave/brave-browser#1914 (comment)
+Note that the name of the app is still cached somewhere. Only method I've found to clear that cache is to restart the system.
+We also need to verify that the upgrade process replaces this value in the user's Info.plist.
+Auditors: @bsclifton

@@ -1,0 +1,58 @@
+[Debug] Fix deprecation false positive
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR fixes unexpected deprecation notices when the format of a @param annotation is invalid, e.g.:
+/**
+ * @param callable (string $foo) $callback
+ */
+I got the issue when using code from amphp/amp: https://github.com/amphp/amp/blob/master/lib/Promise.php
+  1x: The "Amp\Failure::onResolve()" method will require a new "callable(\Throwable|null $reason" argument in the next major version of its parent class "Amp\Promise", not defining it is deprecated.
+    1x in TaskWorker::Amp\Parallel\Worker\{closure} from Amp\Parallel\Worker
+
+The current fix makes the regular expression match argument types more strictly but I'm not sure Symfony should be responsible of triggering those deprecation notices for external packages in the first place. If we limit the notices to Symfony codebase, we can assume the current regular expression is ok.

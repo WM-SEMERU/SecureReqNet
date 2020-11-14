@@ -1,0 +1,20 @@
+'As described in https://gitlab.com/gitlab-org/gitlab-ce/issues/15532#guessing-namespaces, on the new MR (compare) view, you can see a private project's namespace and name by simply putting `merge_request%5Btarget_project_id%5D=3` in the URL.
+
+For instance, in my local setup, the `twitter/flight` project is private to my current `user1` but I can see its namespace and name in the view:
+
+![Screen_Shot_2016-04-25_at_15.10.54](/uploads/e93fec8e97d8ae58d39ecc0cece63362/Screen_Shot_2016-04-25_at_15.10.54.jpg)
+
+As a fix, I suggest adding the following change in `MergeRequests::BuildService#execute`:
+
+```diff
+      def execute
+        merge_request = MergeRequest.new(params)
+
+        # Set MR attributes
+        merge_request.can_be_created = false
+        merge_request.compare_commits = []
+        merge_request.source_project = project unless merge_request.source_project
++       merge_request.target_project = nil unless can?(current_user, :read_project, merge_request.target_project)
+        merge_request.target_project ||= (project.forked_from_project || project)
+        merge_request.target_branch ||= merge_request.target_project.default_branch
+```

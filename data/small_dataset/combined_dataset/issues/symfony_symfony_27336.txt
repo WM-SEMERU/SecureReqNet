@@ -1,0 +1,50 @@
+[Security][SecurityBundle] FirewallMap/FirewallContext deprecations
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes/no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Next to #24805.

@@ -1,0 +1,7 @@
+Update daily build info with correct feeds/blobs
+
+
+The information here seems out of date:
+https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md
+It lists the .NET Core blob feed but not the ASP.NET Core blob feed.
+cc @dougbu @danroth27

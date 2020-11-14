@@ -1,0 +1,6 @@
+Immediately send 401 on basic HTTP authentication failure
+
+
+The filter returned by BasicHTTPAuthenticator did not adhere to this part of the getFilter() method contract in Authenticator:
+"If the authentication fails (i.e., a filter recognized the authentication scheme of a request, but the credentials failed to authenticate successfully) the Filter should send an error response, without needing to proceed to other filters in the chain."
+This PR adjusts the BasicHTTPAuthenticator to immediately send a 401 in that situation.

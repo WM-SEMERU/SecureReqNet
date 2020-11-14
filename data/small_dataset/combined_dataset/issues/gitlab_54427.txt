@@ -1,0 +1,32 @@
+**[HackerOne report #449191](https://hackerone.com/reports/449191)** by jouko on 2018-11-23:
+
+**Summary:**
+A specially formatted Label reference in Markdown fields can be used to inject JavaScript on GitLab pages.
+
+**Description:**
+A tilde symbol followed by a double-quoted label name creates a link to the named label, i.e. ```~"label name"```. A malicious user can enter arbitrary entity-encoded HTML in the quotes. The entities are decoded on the resulting page allowing dangerous HTML to be embedded.
+
+Example:
+
+~~~~ markdown
+~"&lt;img src=x onerror=&quot;alert('hello')&quot;&gt;"
+~~~~
+
+
+## Steps To Reproduce:
+
+1. Edit e.g. a README.md file of a project
+2. Enter ```~"&lt;img src=x onerror=&quot;alert('hello')&quot;&gt;"```
+3. Click Preview or just save the modification
+4. Observe a JavaScript alert box when the page is viewed
+
+## Supporting Material/References:
+![gitlab5.png](https://h1.sec.gitlab.net/a/449191/379777/gitlab5.png)
+
+## Impact
+
+An attacker could inject JavaScript in projects to compromise accounts of people who view them. See #448691 for an example of how an attacker could change the victims' SSH keys or set their passwords.
+
+## Attachments
+**Warning:** Attachments received through HackerOne, please exercise caution!
+* [gitlab5.png](https://h1.sec.gitlab.net/a/449191/379777/gitlab5.png)

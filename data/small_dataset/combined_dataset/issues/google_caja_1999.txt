@@ -1,0 +1,9 @@
+Providing HTML content but nowhere to put it gives a cryptic error
+
+
+This code fails internally when it assumes that imports.document exists:
+caja.load(undefined, uriPolicy, function(frame) {
+  frame.code('guest.html', 'text/html', 'blah blah').run();
+});
+
+It should give a nice high-level error message instead.

@@ -1,0 +1,10 @@
+@storybook/addon-knobs: Vulnerability in the react-color -> lodash dependency
+
+
+Describe the bug
+A vulnerable dependency in the addon-knobs plugin.
+The react-color dependency contains the vulnerable version of lodash.
+react-color "^2.17.0"
+lodash "^4.17.11"
+Github flagged this up as below:
+

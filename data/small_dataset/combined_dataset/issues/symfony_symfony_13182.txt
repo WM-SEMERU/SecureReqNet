@@ -1,0 +1,46 @@
+[Security][acl] Fixed Sql Server error 1785: Multiple Cascade paths.
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#7560
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This commit fixed the "sql server error 1785" when try creating constraint FOREIGN KEY with multiple cascade paths and UNSIGNED type that is not support for him  to perform  php app/console acl:init.

@@ -1,0 +1,10 @@
+Audit and whitelist google.visualization.drawToolbar()
+
+
+Original issue 1841 created by ihab.awad on 2013-08-15T22:15:36.000Z:
+https://code.google.com/p/google-caja/source/browse/trunk/src/com/google/caja/apitaming/google.visualization.policyFactory.js
+// TODO: Not currently whitelisted because 'components' JSON contains
+// external URLs to data sources in various places, and so we need to
+// write custom code to audit.
+// google.visualization.drawToolbar = function(container, components) {};
+Need to complete this task.

@@ -1,0 +1,71 @@
+json_login is ignored
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes/no
+
+
+Symfony version
+3.3
+
+
+
+Hi, I am not sure if this belongs here..but I and some of my friends tried to test the new json_login options with a clean Symfony project following the documentation but none of us managed to get it working.
+security.yml
+security:
+providers:
+db_provider:
+entity:
+class: IgsemAuthBundle:User
+property: email
+role_hierarchy:
+ROLE_ADMIN:       ROLE_USER
+ROLE_USER:        IS_AUTHENTICATED_ANONYMOUSLY
+encoders:
+Igsem\AuthBundle\Entity\User:
+algorithm: bcrypt
+firewalls:
+dev:
+pattern: ^/(_(profiler|wdt)|css|images|js)/
+security: false
+main:
+anonymous: ~
+provider: db_provider
+json_login:
+check_path: check
+access_control:
+- { path: ^/secure, roles: ROLE_ADMIN }
+SecurityController.php
+/**
+
+@route("/check", name="check")
+*/
+public function checkAction(Request $request, AuthenticationUtils $authUtils)
+{
+}
+
+I tried multiple variations of the configuration and it always fails with an error saying the controller must return a response and the firewall just ignores the json_login.
+I am not sure if I missed something in the documentation or the documentation is missing some steps or if it is a bug..so sorry for spamming if my mistake :)
+Thanks a lot
+This is my first ticket so if it is not filled in correctly I do apologise

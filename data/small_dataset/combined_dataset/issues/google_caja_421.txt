@@ -1,0 +1,18 @@
+Trademarking completely broken. Also violates freezing constraints.
+
+
+Original issue 421 created by erights on 2008-06-09T02:13:58.000Z:
+var x = caja.freeze({});
+var y = caja.freeze({});
+caja.hasTrademark(x, y); // returns false
+caja.audit(x, y);
+caja.hasTrademark(x, y); // returns true
+The problem is that audit() was made accessible as caja.audit, enabling
+anyone to claim that anything is audited as anything. Besides making
+trademarking completely pointless, audit() also applies its trademark to
+already-constructed objects whether they are frozen or not. Above we
+demonstrate a visible difference of behavior after invoking a supposedly
+immutable object (caja) with only immutable arguments.
+audit() should be renamed stamp(). It should be accessible only as
+___.stamp(), and it should only be able to apply a trademark to a
+constructed object if applied during construction.

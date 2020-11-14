@@ -1,0 +1,7 @@
+fix broken link of sig storage contributor guide
+
+
+fix broken link of sig storage contributor guide
+Fixes #3554
+/kind cleanup
+/sig storage

@@ -1,0 +1,7 @@
+dockerd-current[9571]: time="2019-04-09T16:46:25.641703669+08:00" level=error msg="Error trying v2 registry: unexpected EOF"
+
+
+如题，从自建的harbor仓库拉取镜像，有一个项目库里的镜像总是拉取失败，其他项目库里的镜像可以正常拉取；
+镜像应该是没有问题的，其他机器都是可以正常拉取的。
+这个项目库里的镜像都是通过jenkins自动构建的。
+希望可以得到答复。

@@ -1,0 +1,13 @@
+paranoid strategy for client-side setInnerHtml
+
+
+Original issue 607 created by felix8a on 2008-06-13T22:35:36.000Z:
+given a string of assumed html,
+create a parse tree of that html while sanitizing.
+when it passes sanitization,
+assign it to innerhtml of an unattached node.
+then walk the resulting node tree,
+verifying that it matches the expected structure
+as recorded by your parse tree.
+if it mismatches, then you have a bug in the sanitizer,
+or an unexpected quirk of the browser.

@@ -1,0 +1,6 @@
+Verify apiserver certificate on kube-up
+
+
+At the moment, kube-up will call curl --insecure to check if the master is reachable, e.g. in cluster/gce/util.sh:597:
+until curl --insecure -H "Authorization: Bearer ${KUBE_BEARER_TOKEN}" \
+This will leak the bearer token to any man-in-the-middle attacker.

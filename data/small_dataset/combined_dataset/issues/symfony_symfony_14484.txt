@@ -1,0 +1,41 @@
+[SecurityBundle][WebProfiler] check authenticated user by tokenClass instead of username.
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Fixed tickets
+#13628
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+

@@ -1,0 +1,23 @@
+systemUUID is not set on Windows
+
+
+What happened:
+The windows kubelet does not set .status.nodeInfo.systemUUID on the node object.
+What you expected to happen:
+The windows kubelet sets the systemUUID from wmic csproduct get UUID
+How to reproduce it (as minimally and precisely as possible):
+Start the windows kubelet and check for UUID:
+kubectl get nodes -o json | jq '.items[]|[.metadata.name, .status.nodeInfo.systemUUID]'
+
+Anything else we need to know?:
+This will affect users running the out-of-tree vsphere CCM since that depends on the systemUUID, unlike the in-tree version.
+Also, looks like cAdvisor is the component responsible for providing the systemUUID so let me know if this issue needs to be moved to that repo.
+Environment:
+
+Kubernetes version (use kubectl version):
+Verified on 1.13.1 and 1.14
+Cloud provider or hardware configuration:
+None
+OS (e.g: cat /etc/os-release):
+Windows Server 2019
+

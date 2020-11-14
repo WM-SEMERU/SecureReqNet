@@ -1,0 +1,49 @@
+[Form] add option to render NumberType as type="number"
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#8106
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#10997
+
+
+

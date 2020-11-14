@@ -1,0 +1,58 @@
+[HA L7 LoadBalancer] kubeadm managed kubelets reject externally generated self-signed certificates
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+Versions
+kubeadm version (use kubeadm version):
+kubeadm version: &version.Info{Major:"1", Minor:"11", GitVersion:"v1.11.2", GitCommit:"bb9ffb1654d4a729bb4cec18ff088eacc153c239", GitTreeState:"clean", BuildDate:"2018-08-07T23:14:39Z", GoVersion:"go1.10.3", Compiler:"gc", Platform:"linux/amd64"}
+Environment:
+
+Kubernetes version (use kubectl version):
+
+Client Version: version.Info{Major:"1", Minor:"11", GitVersion:"v1.11.2", GitCommit:"bb9ffb1654d4a729bb4cec18ff088eacc153c239", GitTreeState:"clean", BuildDate:"2018-08-07T23:17:28Z", GoVersion:"go1.10.3", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration:
+AWS, T2 Medium
+
+
+OS (e.g. from /etc/os-release):
+Ubuntu 16.04
+
+
+Kernel (e.g. uname -a):
+
+
+Linux ip-172-31-13-197 4.4.0-1061-aws #70-Ubuntu SMP Fri May 25 21:47:34 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+Others:
+
+What happened?
+
+
+I tried to setup HA deployment as described here.
+
+
+I deployed my own Nginx on separated EC2 instance, and configured it to serve as a https load balancer.
+
+
+I generated a self-signed certificate and used it inside Nginx ssl binding configuration
+
+
+I copied that certificate to "master" node and added it to "trusted list" (as described here)
+
+
+I verified that certificate indeed trusted by doing cUrl to the Nginx machine
+
+
+When executing "kubeadm init --config kubeadm-config.yaml" the setup hangs on "[init] this might take a minute or longer if the control plane images have to be pulled" stage.
+
+
+What you expected to happen?
+Setup will succeed
+How to reproduce it (as minimally and precisely as possible)?
+Do the steps I described above (use load balancer with self-signed certificate)
+Anything else we need to know?
+This is what i getting from Journal logs:
+Aug 16 07:42:38 ip-172-31-13-197 kubelet[7367]: E0816 07:42:38.688683    7367 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:464: Failed to list *v1.Node: Get https://ip-172-31-10-234.eu-central-1.compute.internal:6443/api/v1/nodes?fieldSelector=metadata.name%3Dip-172-31-13-197&limit=500&resourceVersion=0: x509: certificate signed by unknown authority

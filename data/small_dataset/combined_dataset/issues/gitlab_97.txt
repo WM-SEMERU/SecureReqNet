@@ -1,0 +1,7 @@
+Hello. In the Dashboard -> Projects I use Sort: Recently updated. But I see:
+1. Last activity: 8 days ago
+2. Last activity: about an hour ago
+3. Last activity: 2 days ago
+... etc...
+The 'Recently updated' sorting don't work or I don't understand how it works?
+(GitLab CE 6.5.1)

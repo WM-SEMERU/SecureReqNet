@@ -1,0 +1,10 @@
+Implement plugin_dispatchEvent___ to properly gate form submission
+
+
+Original issue 63 created by mikesamuel on 2008-02-02T03:41:11.000Z:
+Our event dispatch method needs to clone the event and push processing back
+onto the event queue to overcome the attack detailed at
+http://code.google.com/p/google-caja/wiki/EventChecksCircumventableByInfLoops
+We should also change the form action to something innocuous such as
+about:blank so that we can reset form submission to only work when
+submitted via javascript.

@@ -1,0 +1,51 @@
+[Routing] Fix route URL generation in CLI context
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30996
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This fixes #30996 and makes URL generation in the CLI context behave the same as it does in the web context where the LocaleListener sets the default locale (to the router context).
+The Travis CI failure is related to the fact that the constraint for symfony/routing should be bumped to ^4.2.6 in the composer.json of the FrameworkBundle (when it gets tagged).

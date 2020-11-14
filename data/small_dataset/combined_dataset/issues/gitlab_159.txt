@@ -1,0 +1,3 @@
+After updating to version 6.7 the mail notifications only contain the text of the comment, but there's no link to the actual MR or issue the comment was added to. Is this a bug, or is this the default configuration now and I will have to configure some kind of mail template.
+
+Unfortunately the search functionality for issues is still a bit limited in gitlab, so I am not sure if somebody had this issue already. Full search on issues is a feature I am waiting for since version 5.0 I think ;-)

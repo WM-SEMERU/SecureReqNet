@@ -1,0 +1,14 @@
+Service account proposal.
+
+
+In a rough state but putting out for comment.
+There has been considerable discussion about the general problem of secret distribution for docker and kubernetes.
+While that is a great goal, I think it will take some time.
+In the shorter term, I want to be able to just distribute secrets for access to the kubernetes API.
+This proposal just focuses on that.
+That problem is important to solve because:
+
+it lets us run scheduler and controller-manager via /pods
+lets users write their own services, like cron, build controllers, etc, more easily.
+gets us closer to self-hosting.
+

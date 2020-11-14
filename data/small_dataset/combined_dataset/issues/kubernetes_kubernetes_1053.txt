@@ -1,0 +1,4 @@
+Add information about securing the Kubelet to security.md
+
+
+The kubelet API surface (creating pods, publishing info, and running commands in containers #836) gives a high level of access to individual containers and resource consumption on minions.  We should document how we plan on securing it in security.md.

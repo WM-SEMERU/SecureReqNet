@@ -1,0 +1,51 @@
+[HttpClient] Document the state object that is passed around by the HttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+In an attempt to make the code of the new HttpClient component more understandable, I've introduced internal classes that document the $multi object that is being passed around between *Client and *Response classes.
+My goal is to make the code more accessible to potential contributors and static code analyzers.

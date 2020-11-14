@@ -1,0 +1,11 @@
+Ability for volume AttachablePlugin.CanAttach() to return both bool and error
+
+
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+Ability to determine if a driver supports volume attach operation is important to CSI. This PR ensures that the determination of attachment capability fails is properly signaled to the volume API by returning an error.
+Which issue(s) this PR fixes:
+Fixes #75473
+NONE
+

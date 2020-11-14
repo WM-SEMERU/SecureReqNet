@@ -1,0 +1,6 @@
+Release 2.8 robust san handling
+
+
+This PR applies the robust san handling (described in PR #4435) to the release-2.8 branch, based on discussion here:
+#4394 (comment)
+#4435 (comment)

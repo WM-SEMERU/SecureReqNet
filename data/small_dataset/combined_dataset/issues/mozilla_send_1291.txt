@@ -1,0 +1,5 @@
+Fix #1283 Prevent loading any pages other than our file:/// url resou…
+
+
+…rces and accounts.firefox.com in the webview
+Also, remove debug logs.

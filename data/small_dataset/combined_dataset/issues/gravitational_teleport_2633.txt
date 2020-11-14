@@ -1,0 +1,5 @@
+Paginate on capacity throttling, fixes #2576
+
+
+This commit adds pagination for cases when DynamoDB turns on capacity throttling on large result sets.
+I'm adding this backport per customer's request experiencing this issue on production.

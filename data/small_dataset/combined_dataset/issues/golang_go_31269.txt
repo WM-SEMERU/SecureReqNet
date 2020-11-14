@@ -1,0 +1,6 @@
+x/tools/internal/gopathwalk: broken on darwin w/ readdirent: bad file descriptor
+
+
+@randall77, the "syscall: avoiding _getdirentries64 on darwin" CL also seems to have broken x/tools's gopathwalk used by goimports & various other tools:
+https://build.golang.org/log/ab1733a9ba43f978acbbd4b7a94d3e4da0477113
+Lots of errors, but all involving readdirent: bad file descriptor

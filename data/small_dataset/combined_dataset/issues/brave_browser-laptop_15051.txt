@@ -1,0 +1,33 @@
+Can't open HTML file with Brave
+
+
+Description
+Brave can't seem to open any .html file. When selecting "open with" and then Brave browser, the browser just opens normally with the "dashboard" but the html file isn't showed/opened.
+Steps to Reproduce
+
+Select any .html file
+Open it with Brave browser
+
+Actual result:
+Brave opens with its Dashboard, the file isn't opened.
+Expected result:
+The local .html file should be opened.
+Reproduces how often:
+So far, every time I've tried opening an .html file.
+Brave Version
+about:brave info:
+Brave: 0.23.79
+V8: 6.8.275.24
+rev: 51b4905
+Muon: 8.0.7
+OS Release: 4.15.0-32-generic
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux(Ubuntu MATE 18.04)
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+I'm using Brave as a snap.
+If any additional info is needed, I'd be happy to provide them...
+Regards,
+Sakib

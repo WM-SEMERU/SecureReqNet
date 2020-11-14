@@ -1,0 +1,46 @@
+[WIP] [Security] impersonating users continuously
+
+
+[Security] added the possibility to impersonate users continuously, without having to log out
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+-
+
+
+Tests pass?
+-
+
+
+Fixed tickets
+#12797
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+

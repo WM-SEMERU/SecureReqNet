@@ -1,0 +1,11 @@
+cmd/compile: intrinsify math/bits.RotateLeft{32,64} on all architectures
+
+
+#21536 (comment) reminded me about this. Currently the intrinsic is only implemented on amd64, arm64, ppc64 and s390x. We should enable it everywhere. It will need tests in tests/codegen. Could be a good beginner compiler issue to tackle.
+CLs so far:
+
+amd64: https://go-review.googlesource.com/c/go/+/132435
+arm64: https://go-review.googlesource.com/c/go/+/122542
+ppc64: https://go-review.googlesource.com/c/go/+/163760
+s390x: https://go-review.googlesource.com/c/go/+/133035
+

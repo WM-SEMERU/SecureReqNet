@@ -1,0 +1,29 @@
+**[HackerOne report #447820](https://hackerone.com/reports/447820)** by xanbanx on 2018-11-20:
+
+## Part 1
+
+GitLab supports to wikis natively. However, an integration can be setup to integrate an external wiki server. When setting up an external wiki service, the link to the wiki in the left sidebar of GitLab points to the external service. By enabling an external wiki service, the assumption is that the internal wiki is disabled. 
+
+However, the GitLab native wiki is still accessible via git, the API, or the web interface at `https://mygitlab.com/&lt;namespace&gt;/&lt;project-name&gt;/wikis/home`.
+
+## Part 2
+
+Things get even more complicated when you deactivate the wiki. You can deactivate the wiki under the project settings at `https://gitlab.com/&lt;namespace&gt;/&lt;project-name&gt;/edit`. However, this does not deactivate the external wiki server. Even more tragic, the internal wiki is still accessible via git, the API, or the web interface at `https://mygitlab.com/&lt;namespace&gt;/&lt;project-name&gt;/wikis/home`.
+
+## Steps to reproduce
+
+Tested under GitLab 11.5.0 RC13
+
+1. Create a project and add a wiki page
+2. Enable the external wiki service `https://mygitlab.com/&lt;namespace&gt;/&lt;project-name&gt;/services/external_wiki/edit`. The domain does not matter
+3. Perform the following steps to see that you still have access to the internal wiki
+  * `https://mygitlab.com/&lt;namespace&gt;/&lt;project-name&gt;/wikis/home` still returns the internal wiki
+  * The API request `GET /projects/:id/wikis` still returns all wiki slugs. Furthermore, all API requests to the wiki documented at https://docs.gitlab.com/ee/api/wikis.html are still possible including the creation, modification, or deletion of internal wiki pages.
+  * Clone the wiki repo with `git clone git@mygitlab.com:&lt;namespace&gt;/&lt;project-name&gt;.wiki.git
+4. Now disable the wiki `https://gitlab.com/&lt;namespace&gt;/&lt;project-name&gt;/edit` under the `General Permission` settings
+5. In the sidebar left you still see the wiki enabled
+6. Repeat the steps of step 3
+
+## Impact
+
+Users still have access to the internal wiki including the possibility to create, update, or delete pages. Furthermore, users can possibly steal private information, which was previously available in the internal wiki. This works even if wikis get disabled.

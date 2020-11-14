@@ -1,0 +1,4 @@
+Document requirements/recommended process for updating cluster TLS certs/keys
+
+
+If you're running Kubernetes with the master components secured with TLS, eventually you will need to update the certificate and key, and possibly even the CA cert. Right now there is no documentation about how this should be approached. What services need to be restarted when the CA cert, endpoint cert, or private key are changed on disk? If all the master components are running via the kubelet's static manifest directory, is it sufficient to just restart kubelet on the host? Or is it necessary to somehow manually restart each containerized master component that reads those files?

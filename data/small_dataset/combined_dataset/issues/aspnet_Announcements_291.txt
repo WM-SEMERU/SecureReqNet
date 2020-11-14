@@ -1,0 +1,5 @@
+Statement on ASP.NET susceptibility to the recent DuoLabs SAML vulnerability announcement.
+
+
+This week saw an announcement of vulnerabilities in  SAML parsing libraries by DUO Labs. Whilst no Microsoft implementations were listed we've seen a number of customer questions about this, especially given the recent WS-Fed support added to ASP.NET Core.
+ASP.NET and ASP.NET Core rely on libraries from the Windows Identity team. Their investigation shows their libraries are not vulnerable to this parsing vulnerability, thus any ASP.NET or ASP.NET Core application which uses the default Microsoft SAML libraries or authentication handlers are safe from this exploit.

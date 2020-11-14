@@ -1,0 +1,42 @@
+New extensions were released supporting PHP 7.3
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+see travis
+
+
+License
+MIT
+
+
+
+Requested in #30030

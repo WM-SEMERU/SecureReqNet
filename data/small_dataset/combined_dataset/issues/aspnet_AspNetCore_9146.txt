@@ -1,0 +1,65 @@
+Aspnet core with azure Ad failing only when hosting on docker
+
+
+I have an aspnet.core project that is using Azure Ad to authenticate. Everything works ok if I run it on localhost or if I host it on Azure. When using docker it works locally but it not works when I host my docker image on azure. I'm seeing an error like that:
+No webpage was found for the web address: https://xxxxx.azurewebsites.net/signin-oidc
+And this is what I see on the server logs:
+Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler[14] .AspNetCore.Correlation. state property not found. Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1] An unhandled exception has occurred while executing the request. System.Exception: An error was encountered while handling the remote login. ---> System.Exception: Correlation failed. --- End of inner exception stack trace --- at Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler1.HandleRequestAsync() at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context) at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context) at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+I'm using basically the same code that is provided by the Visual Studio Template:
+   public void ConfigureServices(IServiceCollection services)
+    {
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            options.CheckConsentNeeded = context => true;
+            options.MinimumSameSitePolicy = SameSiteMode.None;
+        });
+
+        services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
+            .AddAzureAD(options => Configuration.Bind("AzureAd", options));
+
+        services.AddMvc(options =>
+        {
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+            options.Filters.Add(new AuthorizeFilter(policy));
+        });
+
+
+        services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseCookiePolicy();
+
+        app.UseAuthentication();
+
+        app.Use(async (context, next) =>
+        {
+            context.Request.Scheme = "https";
+            await next.Invoke();
+        });
+
+        app.UseMvc(routes =>
+        {
+            routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
+        });
+    }

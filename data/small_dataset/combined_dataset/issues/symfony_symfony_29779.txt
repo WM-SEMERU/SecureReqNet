@@ -1,0 +1,50 @@
+[Security] Declare exceptions that are already thrown by implementations
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29650
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Adding exception declarations for PasswordEncoderInterface. I think it's a matter of opinion whether this change is a BC break. The BC promise doesn't cover such a case; I'd see it as a BC break to add exceptions in general, but in this case it's more of a "documentation" issue, as most implementations of the interface have been throwing those exceptions for years.

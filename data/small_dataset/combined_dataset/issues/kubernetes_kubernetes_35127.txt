@@ -1,0 +1,6 @@
+Amendments to SELinux enhancement proposal
+
+
+Makes some changes to the proposal from #33951 based on some further research.
+
+This change is 

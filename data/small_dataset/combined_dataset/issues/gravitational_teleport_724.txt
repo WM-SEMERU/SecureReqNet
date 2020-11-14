@@ -1,0 +1,5 @@
+Return access denied in case if no roles found
+
+
+Description
+In case of dynamic mapping, we should return access denied if we have failed to map any roles to the authentication. Otherwise it is possible to have a case when users can authenticate but will have no permissions at all, that is not only confusing but creates potential risk.

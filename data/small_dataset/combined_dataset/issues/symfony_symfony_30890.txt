@@ -1,0 +1,74 @@
+[Workflow] Changed initial_places to initial_marking, added property
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30662 and #30656
+
+
+License
+MIT
+
+
+Doc PR
+#30656
+
+
+
+EUFOSSA
+
+
+[Workflow] Changed initial_places to initial_marking, added property instead of type
+[Workflow] Finished integration of initial_marking + deprecated support for workflow + single state markin store
+[Workflow] Deprecate worflow and single state marking
+
+
+Here is an exemple of deprecation:
+                                                                                                                                                                             
+  3x: Passing something else than "method" has been deprecated in Symfony 4.3.                                                                                               
+    1x in PhpFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                        
+    1x in XmlFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                        
+    1x in YamlFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                       
+                                                                                                                                                                             
+  3x: The "framework.workflows.workflows.legacy.marking_store.arguments" configuration key has been deprecated in Symfony 4.3. Use "property" instead.                       
+    1x in PhpFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                        
+    1x in XmlFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                        
+    1x in YamlFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                       
+                                                                                                                                                                             
+  3x: The "framework.workflows.workflows.legacy.initial_place" configuration key has been deprecated in Symfony 4.3, use the "initial_marking" configuration key instead.    
+    1x in PhpFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                        
+    1x in XmlFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                        
+    1x in YamlFrameworkExtensionTest::testWorkflowLegacy from Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection                                                       
+

@@ -1,0 +1,8 @@
+On-demand de-provisioning.
+
+
+@wsanchez originally submitted this as ticket:111
+
+Principal and calendar home resources need to be de-provisioned somehow. See #⁠25 for how I expect it to work, based on the directory service.
+What's presently missing is handling the case where a disabled user is re-enabled with a new GUID (meaning it's a new user with the same short name). Right now, the new user sees the old user's data.
+Moving to 2.x for the rest.

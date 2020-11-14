@@ -1,0 +1,8 @@
+ZD: https://gitlab.zendesk.com/agent/tickets/21830  
+
+## Description
+
+Setup concurrent connection limit for each users.  We want to make sure if a user is logged in from one workstation/laptop and same user tries to login from another device then one session stay active and user previous session expired.
+
+***
+/cc @vsizov I'd like to know your thought s on this.

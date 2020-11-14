@@ -1,0 +1,5 @@
+Return null when csrfToken is not valid
+
+
+I am not 100% sure of this change, but throwing an InvalidCsrfTokenException when the csrfToken is not valid makes the framework redirect to the url returned by getLoginUrl method, and from there, it keeps redirecting in a loop until the browser kills the redirections.
+According to the documentation for getCredentials method, it should return null when there is some parameter missing, so I guess null is the correct value to return when the csrfToken validation fails.

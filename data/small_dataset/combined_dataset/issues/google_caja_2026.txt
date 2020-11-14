@@ -1,0 +1,6 @@
+Fix capitalization in the safeEntityNameRe regex
+
+
+
+
+

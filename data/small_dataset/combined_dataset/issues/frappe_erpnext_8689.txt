@@ -1,0 +1,6 @@
+Report Export Permission
+
+
+Currently the permission of exporting a report is based on the "Export" permission on linked reference doctype. As now report has it's own permission table, export permission should also be part of it.
+So, in "Has Role" table, there should be 2 more columns "Read" and "Export". And based on that, the permission should be checked.
+A patch is needed for existing reports.

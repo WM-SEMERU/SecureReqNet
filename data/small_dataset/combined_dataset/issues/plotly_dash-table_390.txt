@@ -1,0 +1,7 @@
+datatable dropdown fields not showing in the example?
+
+
+I'm trying to implement a dropdown in my dash datatable but the examples listed in the documentation don't appear to be working? Or am I doing something wrong?
+https://dash.plot.ly/datatable/dropdowns
+With both examples I don't see a dropdown within the table. The values are editable but there is no dropdown selection.
+

@@ -1,0 +1,4 @@
+Don't request to analyze non-existent files
+
+
+When starting project analyzer, don't analyze files that are listed in the project but don't really exist on disk.

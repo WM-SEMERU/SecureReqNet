@@ -1,0 +1,8 @@
+How to stop autoupdate of brave?
+
+
+From support
+
+is there a way i can stop autoupdate of brave?
+
+Related: #10863 - Throttling autoupdate

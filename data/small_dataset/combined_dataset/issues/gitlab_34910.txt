@@ -1,0 +1,28 @@
+'This vulnerability was reported via HackerOne.
+
+I've verified that this still works on 9.3. When adding users to a group you can specify a portion of their email address and effectively determine the full address. (e.g. "domain.com" will return all users with a "domain.com" email address).
+
+-----
+
+Title:         E-mail address disclosure through member search fields
+
+Scope:         None
+
+Weakness:      Information Disclosure
+
+Severity:      Medium (4.3)
+
+Link:          https://hackerone.com/reports/247862
+
+Date:          2017-07-10 16:17:29 +0000
+
+By:            @pstch
+
+Details:
+The user search field (when adding members to a group or project) allows any part of the e-mail address as a search criteria. This allows any authenticated user to find the e-mail addresses of any other account, or to easily scan for registered addresses, by brute-forcing the search field, guessing letters one-by-one based on the presence of results in the auto-completion. 
+
+I was able to guess a random e-mail address in my own workplace's installation (Gitlab 7.7.2) in less than 50 attempts, and I was able to reproduce the problem on a fresh Gitlab CE 9.3.5 installation using Omnibus.
+
+I am reporting this because as far as I know, these e-mail addresses should not be accessible to any unprivileged user.
+
+Thanks for your great work !

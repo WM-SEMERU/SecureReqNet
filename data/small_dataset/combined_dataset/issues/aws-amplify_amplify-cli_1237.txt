@@ -1,0 +1,10 @@
+Should *-cloudformation-template.json files be git ignored?
+
+
+** Which Category is your question related to? **
+Multi Team environments.
+** What AWS Services are you utilizing? **
+amplify env checkout branch
+amplify publish
+** Provide additional details e.g. code snippets **
+Whenever amplify publish is called the *-cloudformation-template.json are updated. Should those be in version control? Thanks.

@@ -1,0 +1,5 @@
+Rename precision constants
+
+
+Right now we have a few precision constants that are named after the directions engine in use, ie. OSRM_PRECISION_V4, OSRM_PRECISION_V5 etc. We should consider renaming the simply PRECISION_5, PRECISION_6 etc.
+cc: @zugaldia

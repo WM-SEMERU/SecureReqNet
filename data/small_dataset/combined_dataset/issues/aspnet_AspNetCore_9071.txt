@@ -1,0 +1,4 @@
+[Components] Add signalr service E2E integration test
+
+
+We should have a test to validate that our assumptions for server-side blazor work with the signalr service and that we don't break things by mistake.

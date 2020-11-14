@@ -1,0 +1,19 @@
+$_format is lost on failure_forward
+
+
+I've been debugging this for the past few days but to no avail.
+This is the excerpt from my security file:
+security:
+    firewalls:
+        default_json:
+            poshtar_login:
+                login_path: /login.json
+                check_path: /login.json
+                failure_forward: true
+            context: store
+            anonymous:  ~
+            logout:     { path: /logout }
+            pattern:    /.*
+            provider:   poshtar
+
+What I was able to figure out using a debugger is that the content type for subresponse? is set correctly to json, but sometime later, when responses get merged? and the request is asked again for a format the request returns html as the attributes bag is empty (controller resolver set the proper format in subrequest) so data sent to the browser has a wrong content type.

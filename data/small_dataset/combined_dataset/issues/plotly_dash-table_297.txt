@@ -1,0 +1,49 @@
+Deeper support for 'number' and 'text' types
+
+
+Relates to the #166 epic.
+1 - drop support for 'dropdown' column type
+A dropdown is not a type, hence it makes sense to move it out of there. It is also not quite a representation of the data because it is limiting the available values, not defining the presentation type.
+As a first step, moving this out of type into its own flag seems to make sense. It will probably need to be revisited in further steps as the API gets more defined.
+2 - add new column nested prop 'enumeration' that takes values true | false | 'maybe'
+A cell can either be always be a dropdown, never be a dropdown or sometimes be a dropdown. true and false behaves like the old type: 'dropdown' while 'maybe' will display the default representation for its type (e.g. an input) if there is no associated dropdown values -- and a dropdown if values are found
+4 - add data coercion on user-initiated value change and on copy/paste
+Validate numbers and strings and coerce into the destination type on those actions.
+5 - define behaviour on failed coercion for user-initiated value change and copy/paste
+Coercion and validation means that sometimes the validation will fail. We need to define the behaviour for those cases. Does copy/paste with some valid values and some invalid values partially work or fail? What is the user-interaction / error / warning for those cases / should a number default to NaN?
+One possibility would be to leave it to the user (+ default behaviour), for example:
+number: {
+    validation: {
+        on_change:  'nan' | 'skip' | 'prevent' | 'passthrough'
+    }
+}
+
+Where NaN would assign NaN as a value, skip would simply skip the invalid data / cell and prevent  would prevent a larger copy/paste from working at all if a column with 'prevent' was to fail validation, 'passthrough' just let's the value go through as-is if coercion fails. Would default to 'passthrough' initially and full implementation would require ux elements from the out of scope points below.
+6 - what do we do with initial data received from server -- do we assume the values are sane? do we coerce them -- if so, what is the end-result, user-interaction, etc. like in point 5.
+Up to now we have been considering that this data is sane and have had the same assumptions when filtering and sorting -- I think that for this issue it should stay that way.
+7 - 'any' type essentially behaves like the current implementation -- the table doesn't enforce anything
+API contract would look like this:
+columns: [{
+    type: 'number' | 'text' | 'any',
+    enumeration: boolean | 'maybe',
+    number /* TBD */: {
+        representation: 'input' | 'slider' | 'bar',
+        validation: /* TBD */,
+        formatter: /* TBD */
+    },
+    text /* TBD */: {
+        representation: 'input' | 'textarea',
+        validation: /* TBD */
+    },
+    /* etc for other types */
+}, ...]
+
+Follow up tasks include
+
+additional types
+fleshing out the type configurations (representation, validation, etc.)
+adding conditional styling on column type
+filtering, sorting improvements
+data sanitation?
+ux for failed validation
+

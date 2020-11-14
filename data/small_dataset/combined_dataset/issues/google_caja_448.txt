@@ -1,0 +1,10 @@
+Consider wrapping Math.random()
+
+
+Original issue 448 created by google@web.dwdw.me on 2008-06-10T01:18:58.000Z:
+Consider replacing or wrapping Math.random() with a pseudorandom number
+generator that you provide that you can be sure is cryptographically
+pseudorandom and does not introduce communication channels or a hazard of
+unintentional side channels.
+David-Sarah suggests that this should be up to the container provider, who
+can either whitelist Math.random() or not.

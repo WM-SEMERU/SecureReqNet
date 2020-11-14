@@ -1,0 +1,14 @@
+Can't get the OnTokenValidated event
+
+
+What's the proper way to add my custom claims to the validated token? I used to do it in the "OnTokenValidated" event by using something similar to:
+
+builder.AddOpenIdConnect(o =>
+             {
+                o.Events = new OpenIdConnectEvents
+                 {
+                     OnTokenValidated = async ctx =>
+                     {
+                     ...
+
+I'm no longer able to do this with the new AzureAD.UI package.

@@ -1,0 +1,11 @@
+`server.keepAliveTimeout` is not applied to sockets that are never used.
+
+
+
+Version: v8.11.4
+Platform: Windws 64-bit
+Subsystem: http & https
+
+Currently, server.keepAliveTimeout is applied to a socket only after the first response is sent out by the server. If a client connects to the server but does not send any requests, the idle socket is kept open until server.timeout is reached (120 seconds by default).
+My understanding is that server.keepAliveTimeout was added in Node v8.0.0 to reduce the number of unused idle sockets and in turn to reduce the overhead of the server. But unused sockets can still hang around. We can easily observe this behavior in Chrome which opens sockets that are never used but kept alive for a long time.
+I believe that a socket which has never been used should be treated the same as a keepAlive socket awaiting the next request and should be closed after server.keepAliveTimeout elapses.

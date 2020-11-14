@@ -1,0 +1,14 @@
+AMBARI-24777 - Infra Manager: Remove dependencies due to security concerns.
+
+
+What changes were proposed in this pull request?
+Fix CVE issues
+How was this patch tested?
+UTs and ITs passed
+Manually:
+
+Start Infra Manager in docker environment
+Check the scheduled jobs are working
+Query and Launch jobs using the swagger UI
+Check job results
+

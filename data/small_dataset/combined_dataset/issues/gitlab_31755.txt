@@ -1,0 +1,19 @@
+### Description && Proposal
+
+GitLab does, unless its disabled, a version check once the admin visits the right page. `/admin`. But it could happen that the admin doesn't go there, or is a regular user with SSH access to the VM. I believe we should do the following:
+
+Ever 24 hours we have a worker request the version status of the current install, with 3 possible results:
+1. up to date -> do nothing
+1. Update available -> do nothing
+1. Update ASAP -> action
+
+Where the actions could be one or more of the following:
+1. Email each admin to notify them they need to update (possibly very verbose, check is done every 24h)
+1. Display a banner, only to admins, that this version is vulnerable
+1. Something else which grabs the attention changes
+
+### Documentation blurb
+
+The GitLab version check is done when an admin either visits the admin dashboard, or once every 24 hours. This way your instance can know its out of date and proactively reach the admin to request him/her to upgrade the server.
+
+/cc @JobV

@@ -1,0 +1,101 @@
+'**[HackerOne report #450367](https://hackerone.com/reports/450367)** by p4fg on 2018-11-27:
+
+**Summary:**
+By testing for help-files under /help/update an attacker can gain valuable information on what major.minor-version of GitLab that is installed. This information seems otherwise only be accessible after logging in as a user.
+
+**Description:**
+By taking the list of all update-instructions from the latest version:
+```
+2.6-to-3.0.md
+2.9-to-3.0.md
+3.0-to-3.1.md
+3.1-to-4.0.md
+4.0-to-4.1.md
+4.1-to-4.2.md
+4.2-to-5.0.md
+5.0-to-5.1.md
+5.1-to-5.2.md
+5.1-to-5.4.md
+5.1-to-6.0.md
+5.2-to-5.3.md
+5.3-to-5.4.md
+5.4-to-6.0.md
+6.0-to-6.1.md
+6.1-to-6.2.md
+6.2-to-6.3.md
+6.3-to-6.4.md
+6.4-to-6.5.md
+6.5-to-6.6.md
+6.6-to-6.7.md
+6.7-to-6.8.md
+6.8-to-6.9.md
+6.9-to-7.0.md
+6.x-or-7.x-to-7.14.md
+7.0-to-7.1.md
+7.10-to-7.11.md
+7.11-to-7.12.md
+7.12-to-7.13.md
+7.13-to-7.14.md
+7.14-to-8.0.md
+7.1-to-7.2.md
+7.2-to-7.3.md
+7.3-to-7.4.md
+7.4-to-7.5.md
+7.5-to-7.6.md
+7.6-to-7.7.md
+7.7-to-7.8.md
+7.8-to-7.9.md
+7.9-to-7.10.md
+8.0-to-8.1.md
+8.10-to-8.11.md
+8.11-to-8.12.md
+8.12-to-8.13.md
+8.13-to-8.14.md
+8.14-to-8.15.md
+8.15-to-8.16.md
+8.16-to-8.17.md
+8.17-to-9.0.md
+8.1-to-8.2.md
+8.2-to-8.3.md
+8.3-to-8.4.md
+8.4-to-8.5.md
+8.5-to-8.6.md
+8.6-to-8.7.md
+8.7-to-8.8.md
+8.8-to-8.9.md
+8.9-to-8.10.md
+9.0-to-9.1.md
+9.1-to-9.2.md
+9.2-to-9.3.md
+9.3-to-9.4.md
+9.4-to-9.5.md
+9.5-to-10.0.md
+10.0-to-10.1.md
+10.1-to-10.2.md
+10.2-to-10.3.md
+10.3-to-10.4.md
+10.4-to-10.5.md
+10.5-to-10.6.md
+10.6-to-10.7.md
+10.7-to-10.8.md
+10.8-to-11.0.md
+11.0-to-11.1.md
+11.1-to-11.2.md
+11.2-to-11.3.md
+11.3-to-11.4.md
+11.4-to-11.5.md
+```
+And then one by one try to fetch them from the target server (automated script) it is trivial to see what version is installed. If the file for `10.5-to-10.6.md` exists and `10.6-to-10.7.md` is missing then the attacker can be fairly certain that the installed version is 10.6.
+
+If i could recommend some action it would be to not expose this section of the help after installation/upgrade. It is not needed after the server is installed/upgraded and certainly not by unauthenticated guest visitors. 
+
+A recommendation in some installation-instruction to delete the entire "update" section of the help would suffice.
+
+## Steps To Reproduce:
+Fetch the files from a server that is targeted.
+
+## Impact
+
+Knowing the version more exactly:
+- Aids an attacker to select exploits matching the server version (in the case of an older installation)
+- Helps an attacker to be more stealthy by not trying non-working exploits.

@@ -1,0 +1,6 @@
+Server web root (i.e. path) is exposed by API
+
+
+
+
+This is by design and risk is to be accepted (once there is a test that proves it)

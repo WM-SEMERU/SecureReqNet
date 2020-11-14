@@ -1,0 +1,10 @@
+Unit tests should stop calling sudo kill
+
+
+In tests/functional/plugins/base.by the _kill_ports function looks like this:
+  def _kill_ports(ports):
+      for port in ports:
+          p = Popen(['sudo', '/bin/kill `sudo lsof -t -i:%s`' %str(port)],\
+                  stdout=PIPE, stderr=PIPE, shell=True)
+
+This is not good, very scary actually, and should be rewritten into something that does not require sudo access at all.

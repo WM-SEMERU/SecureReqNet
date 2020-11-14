@@ -1,0 +1,34 @@
+[http-client] pending request throws exception on __destruct and hide the original exception
+
+
+Symfony version(s) affected: 4.3
+Description
+When starting 2 async requests, and ignoring the second request for instance because the first request fails and we are dealing with it.
+Then, if the 2nd request fails too, it triggerrs an exception that hide the previous one.
+How to reproduce
+        $client = HttpClient::create();
+        $a = $client->request('GET', 'http://www.symfony.com/404');
+        $b = $client->request('GET', 'http://www.symfony.com/404');
+
+        try {
+            $a->getContent();
+        } catch (ClientExceptionInterface $e) {
+            // no need to go further
+            throw new \RuntimeException('boom');
+        }
+Here, the caller get a ClientExceptionInterface related to the 2 request. Wheras the boom exception were expected.
+Possible Solution
+Hacky solution from a developper point of view: swallowing all pending requests and ignoring errors
+        $client = HttpClient::create();
+        $a = $client->request('GET', 'http://www.symfony.com/404');
+        $b = $client->request('GET', 'http://www.symfony.com/404');
+
+        try {
+            $a->getContent();
+        } catch (ClientExceptionInterface $e) {
+            // finish $b
+            $b->getStatusCode();
+
+            // no need to go further
+            throw new \RuntimeException('boom');
+        }

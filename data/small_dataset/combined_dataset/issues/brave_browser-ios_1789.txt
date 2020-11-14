@@ -1,0 +1,5 @@
+Remove syncing label.
+
+
+It was unreliable and we are removing for now.
+When a device is not synced yet, the sync callout is still present.

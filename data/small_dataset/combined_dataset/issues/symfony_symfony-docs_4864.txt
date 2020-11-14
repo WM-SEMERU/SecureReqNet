@@ -1,0 +1,10 @@
+[Security] Authenticating users with api keys using SimplePreAuthenticatorInterface
+
+
+Issue originally posted by @mseshachalam at symfony/symfony#13330:
+In the doc http://symfony.com/doc/current/cookbook/security/api_key_authentication.html ,
+the below method's second parameter is user provider.
+public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
+When we make the ApiKeyAuthenticator service, the same class will have a class level user provider variable.
+Could some please explain the difference between these two user provider variables ?
+Thanks

@@ -1,0 +1,12 @@
+Issue 933: Add support for PEM Key file formats
+
+
+(@bug W-4203319@) TLS authentication to support PEM format X.509
+certificates along with JKS and PKCS12 formats.
+Added another KeyStore Type to the list of formats (JKS, PKCS12)
+currently supported during SSLContext creation.
+@rev ayegorov@
+Signed-off-by: Kishore Kasi Udayashankar kudayashankar@salesforce.com
+Descriptions of the changes in this PR:
+(PR description content here)...
+Master Issue: #933

@@ -1,0 +1,7 @@
+AMBARI-25230 improve fast-hdfs tool exception handling (benyoka)
+
+
+What changes were proposed in this pull request?
+Improved the exception handling for fast hdfs tool so that it does not silently ignore (except printing out to stdout which is not always captured by tooling) failures nor throws NPE hiding the original issue.
+How was this patch tested?
+Tested manually, both happy- and exception paths.

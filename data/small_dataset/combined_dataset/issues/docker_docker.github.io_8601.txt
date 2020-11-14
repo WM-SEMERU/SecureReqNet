@@ -1,0 +1,6 @@
+add an example for self-built registry
+
+
+Proposed changes
+Unreleased project version (optional)
+Related issues (optional)

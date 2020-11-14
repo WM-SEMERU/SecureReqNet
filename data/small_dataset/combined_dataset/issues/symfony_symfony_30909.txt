@@ -1,0 +1,82 @@
+[Translator] Add comments when dumping po files
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+?    
+
+
+Fixed tickets
+#29962
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+This code
+$catalogue = new MessageCatalogue('fr');
+$dumper = new PoFileDumper();
+
+$catalogue->set('key.one', 'First key', 'custom');
+$catalogue->setMetadata('key.one', ['sources' => 'src/file_1', 'comments' => 'Comment', 'flags' => 'fuzzy'], 'custom');
+
+$catalogue->set('key.second', 'Second key', 'custom');
+$catalogue->setMetadata('key.second', ['sources' => ['src/file_1', 'src/file_2'], 'comments' => ['Comment 1', 'Comment 2'], 'flags' => ['fuzzy', 'another']], 'custom');
+
+$dumper->dump($catalogue, [
+    'path' => 'xxx',
+]);
+Will produces this output:
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+
+# Comment
+#, fuzzy
+#: src/file_1
+msgid "key.one"
+msgstr "First key"
+
+# Comment 1
+# Comment 2
+#, fuzzy,another
+#: src/file_1 src/file_2
+msgid "key.second"
+msgstr "Second key"
+

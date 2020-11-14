@@ -1,0 +1,41 @@
+After successful payment contribution, click on Brave_Payments history file is causing browser crash
+
+
+Description
+After successful contribution, when user click on Payment History -> Brave_Payments_2018-08-29.pdf file, the browser is getting crashed.
+Description
+After successful payment contribution, click on Brave_Payments history file is causing browser crash
+Steps to Reproduce
+
+Launch Brave with clean profile from CLI with staging flag
+Enable payments
+Claim the UGP grant
+Add few sites to ledger
+Complete the contribution
+
+Actual result:
+Crash Report ID 53d7a37631cd5ea6
+After successful payment contribution, click on Brave_Payments history file is causing browser crash
+
+Expected result:
+Should not be any crash
+Reproduces how often:
+Always
+Brave Version
+0.23.201
+about:brave info:
+Brave: 0.23.201
+V8: 6.9.427.17
+rev: 17d2d17
+Muon: 8.1.0
+OS Release: 10.0.17134
+Update Channel: Beta
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.57
+Reproducible on current live release:
+No
+Additional Information
+cc: @kjozwiak @LaurenWags @srirambv @btlechowski

@@ -1,0 +1,5 @@
+Security: Attach identity to queries made through the escalated client
+
+
+The patch #5330 attached an "identity" field to query metrics and request logs, but it's only set to the actual external user on the broker. On historicals, it's set to the Druid internal user, since the broker uses an escalated client to talk to historicals after verifying authorization. (It does this because it makes it possible to reuse a single connection pool for all users)
+It would be better for the historicals to emit the actual external user too, so you could do things like compute how much historical CPU time is used by a particular user. To do this, we could add a header like X-Druid-Original-User to requests made through escalated clients on behalf of some external user, and then have the historicals and realtime tasks report that in their query metrics and logs, instead of reporting the internal escalation user.

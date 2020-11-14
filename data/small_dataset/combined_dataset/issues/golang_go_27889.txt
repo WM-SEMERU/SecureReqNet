@@ -1,0 +1,5 @@
+proposal: crypto/dsa: Implement crypto.Signer
+
+
+I would like to add an implementation of crypto.Signer to *dsa.PrivateKey. It's simple to do, but a) is an API change and b) creates a new dependency crypto/dsa -> encoding/asn1, so I'm going through the proposal process.
+I am writing a package to use gpgagent for private-key operations. This proposal isn't directly related to that, but having the Signer interface provides a nice complement to other existing public key ciphers. In particular, it feels a bit weird to implement a crypto.Signer for a cipher, if the canonical package doesn't do it itself - unless there is a good reason to that I'm unaware of. There might also be some opportunity to simplify x/crypto/openpgp a bit, given that all supported ciphers implement crypto.Signers at that point.

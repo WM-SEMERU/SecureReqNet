@@ -1,0 +1,6 @@
+[security] Removing UsernamePasswordFormAuthenticationListener in favor of using the SimpleFormAuthenticationListener
+
+
+Right now, the only difference between the UsernamePasswordFormAuthenticationListener and the SimpleFormAuthenticationListener is the fact that the authentication provider can be injected. All other code inside is equal.
+I think it would be fairly easy to remove the UsernamePasswordFormAuthenticationListener altogether, and let the form_login factory insert the SimpleFormAuthenticationListener with a custom authentication provided that creates the UsernamePasswordToken.
+This way, we could get rid of the whole UsernamePasswordFormAuthenticationListener class, and the duplicated code.

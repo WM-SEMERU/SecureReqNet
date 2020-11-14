@@ -1,0 +1,7 @@
+Today I trying to add a Issue in one my old Project.  
+Server returns **Error 500**.  
+
+Unfortunatelly I haven't other details.  
+I can set you as member of project.
+
+The project is: https://gitlab.com/infonet-xilium/piccoli-lavori/issues

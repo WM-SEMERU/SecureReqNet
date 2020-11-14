@@ -1,0 +1,31 @@
+[Security] [Firewall] Configuring multiple HTTP authentication methods
+
+
+Hi,
+I would like to discuss the possibility of how to improve the outcome of a failing authentication process.
+I saw, that the two http-authentication methods for basic and digest authentication have their own AuthenticationEntryPoint where each of them creates a response, sets the corresponding response-header and returns a 401 status-code.
+All this is correct. But if you define both, the basic and the digest authentication, just one of their AuthenticationEntryPoint classes will be called on a failing login and the client does not get informed about it.
+In the first answer of http://stackoverflow.com/questions/3576197/http-authentication-www-authenticate-header-multiple-realms I read, that it's possible to return a set of possible authentication methods to be used, and the clients responsibility now is to take the most secure one it supports.
+Now I tried to activate both, http_basic and http_digest authentication methods, and it just failed ... here's the error-message:
+ContextErrorException: Catchable Fatal Error: Argument 4 passed to Symfony\Component\Security\Http\Firewall\DigestAuthenticationListener::__construct() must be an instance of Symfony\Component\Security\Http\EntryPoint\DigestAuthenticationEntryPoint, instance of Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint given, called in /var/www/sf2.local/app/cache/dev/appDevDebugProjectContainer.php on line 2912 and defined in /var/www/sf2.local/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/DigestAuthenticationListener.php line 40
+
+    in /var/www/sf2.local/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/DigestAuthenticationListener.php line 40
+    at ErrorHandler->handle('4096', 'Argument 4 passed to Symfony\Component\Security\Http\Firewall\DigestAuthenticationListener::__construct() must be an instance of Symfony\Component\Security\Http\EntryPoint\DigestAuthenticationEntryPoint, instance of Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint given, called in /var/www/sf2.local/app/cache/dev/appDevDebugProjectContainer.php on line 2912 and defined', '/var/www/sf2.local/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/DigestAuthenticationListener.php', '40', array('securityContext' => object(SecurityContext), 'provider' => object(ChainUserProvider), 'providerKey' => 'secured_area')) in /var/www/sf2.local/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/DigestAuthenticationListener.php line 40
+    at DigestAuthenticationListener->__construct(object(SecurityContext), object(ChainUserProvider), 'secured_area', object(BasicAuthenticationEntryPoint), object(Logger)) in /var/www/sf2.local/app/cache/dev/appDevDebugProjectContainer.php line 2912
+    at appDevDebugProjectContainer->getSecurity_Firewall_Map_Context_SecuredAreaService() in /var/www/sf2.local/app/bootstrap.php.cache line 2033
+    at Container->get('security.firewall.map.context.secured_area') in /var/www/sf2.local/app/cache/dev/classes.php line 2758
+    at FirewallMap->getListeners(object(Request)) in /var/www/sf2.local/app/cache/dev/classes.php line 2418
+    at Firewall->onKernelRequest(object(GetResponseEvent), 'kernel.request', object(TraceableEventDispatcher))
+    at call_user_func(array(object(Firewall), 'onKernelRequest'), object(GetResponseEvent), 'kernel.request', object(TraceableEventDispatcher)) in /var/www/sf2.local/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Debug/TraceableEventDispatcher.php line 392
+    at TraceableEventDispatcher->Symfony\Component\HttpKernel\Debug\{closure}(object(GetResponseEvent), 'kernel.request', object(ContainerAwareEventDispatcher))
+    at call_user_func(object(Closure), object(GetResponseEvent), 'kernel.request', object(ContainerAwareEventDispatcher)) in /var/www/sf2.local/app/cache/dev/classes.php line 1747
+    at EventDispatcher->doDispatch(array(object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure), object(Closure)), 'kernel.request', object(GetResponseEvent)) in /var/www/sf2.local/app/cache/dev/classes.php line 1680
+    at EventDispatcher->dispatch('kernel.request', object(GetResponseEvent)) in /var/www/sf2.local/app/cache/dev/classes.php line 1844
+    at ContainerAwareEventDispatcher->dispatch('kernel.request', object(GetResponseEvent)) in /var/www/sf2.local/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Debug/TraceableEventDispatcher.php line 139
+    at TraceableEventDispatcher->dispatch('kernel.request', object(GetResponseEvent)) in /var/www/sf2.local/app/bootstrap.php.cache line 2900
+    at HttpKernel->handleRaw(object(Request), '1') in /var/www/sf2.local/app/bootstrap.php.cache line 2883
+    at HttpKernel->handle(object(Request), '1', true) in /var/www/sf2.local/app/bootstrap.php.cache line 3022
+    at ContainerAwareHttpKernel->handle(object(Request), '1', true) in /var/www/sf2.local/app/bootstrap.php.cache line 2303
+    at Kernel->handle(object(Request)) in /var/www/sf2.local/web/app_dev.php line 28
+
+Any comments on that? I, personally, think this should be fixed and the code should be rethought to come up with a way, where I can activate both authentication-methods and I get both as possible methods to authenticate on a 401-response.

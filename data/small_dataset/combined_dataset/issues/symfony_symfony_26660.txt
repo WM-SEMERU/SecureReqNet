@@ -1,0 +1,59 @@
+[SecurityBundle] allow using custom function inside allow_if expressions
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+#23208
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#9552
+
+
+
+This is a follow-up for #26263
+As discussed there I propose to allow using custom functions as a new feature only and thus targeting master here.
+If we agree to move forward with this there are some todos:
+
+ fix tests
+ add cache warmer for allow_if expressions
+ update documentation to mention this new feature
+ update UPGRADE files
+
+ping @nicolas-grekas @stof

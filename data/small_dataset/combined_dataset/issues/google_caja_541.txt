@@ -1,0 +1,12 @@
+Failure to load an external script is not fatal
+
+
+Original issue 541 created by felix8a on 2008-06-12T14:42:04.000Z:
+if <script src="..."> doesn't NPE (issue 540)
+and the external js can't be loaded,
+caja emits PluginMessageType.FAILED_TO_LOAD_EXTERNAL_URL,
+which is a warning.
+I don't think this can break the sandbox,
+but it might interfere with security assumptions of gadgets,
+since I can sometimes artificially force your server to fail while your
+gadget is being cajoled.

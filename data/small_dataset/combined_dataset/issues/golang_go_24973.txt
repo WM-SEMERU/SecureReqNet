@@ -1,0 +1,12 @@
+x/crypto: cryptobyte: encode int64 with context-specific tags
+
+
+We frequently have to deal with asn.1 formatted with context-specific
+tags even for things like integers, for example:
+http://lapo.it/asn1js/#A0108004010203048102050682040708090A
+To do that efficiently with cryptobyte I've added two additional
+functions to marshal such values to and from int64:
+func (b *Builder) AddInt64(tag asn1.Tag, v int64)
+func (s *String) ReadASN1Int64(out *int64, tag asn1.Tag) bool
+I assume versions for uint64 will also be required.
+Does it make sense to add those to the cryptobyte API or is there a workaround?

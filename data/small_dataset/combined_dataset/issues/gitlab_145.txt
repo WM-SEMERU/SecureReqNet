@@ -1,0 +1,5 @@
+When you click the "Dangerous settings" button, then click "Remove Project", your project doesn't get completely removed. It sticks around on the file system, meaning the user can't re-create a project with the same name.
+
+GitLab provides a tool to garage collect old projects, but it doesn't seem to actually remove anything for me.
+
+The project should be removed from the file system immediately upon hitting the button. If there is concern about accidental removals or backups - some ideas that come to mind are renaming, moving to a separate deleted repositories path, or moving to /tmp. With the current functionality, you can't re-create projects without contacting an administrator.

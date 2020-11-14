@@ -1,0 +1,4 @@
+Unable to build on Solaris
+
+
+"vendor"ed logrus cannot be built on Solaris, so that toxiproxy-cli cannot be build on Solaris.

@@ -1,0 +1,46 @@
+'Security Release:  11.7-RC6, 11.6.4, 11.5.7, and 11.4.14
+
+## Releases tasks
+
+- https://gitlab.com/gitlab-org/release/docs/blob/master/general/security/release-manager.md
+- https://gitlab.com/gitlab-org/release/docs/blob/master/general/security/developer.md
+- https://gitlab.com/gitlab-org/release/docs/blob/master/general/security/security-engineer.md
+
+## Version issues:
+
+* 11.6.4: https://gitlab.com/gitlab-org/release/tasks/issues/637
+* 11.5.7: https://gitlab.com/gitlab-org/release/tasks/issues/638
+* 11.4.14: https://gitlab.com/gitlab-org/release/tasks/issues/639
+
+## Security Issues:
+
+### CE
+
+* [Private repositories access through project import](https://gitlab.com/gitlab-org/gitlab-ce/issues/56202)
+
+## Security Issues in dev.gitlab.org:
+
+### CE
+
+- https://dev.gitlab.org/gitlab/gitlabhq/issues/2770
+
+| Version | MR | Status|
+|---------|----|-------|
+| 11.7 |  https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2773 | merged |
+| 11.6 |  https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2774 | merged |
+| 11.5 | https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2775 | merged |
+| 11.4 | https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2776 | merged |
+| master | https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2772 | merged |
+
+
+
+## QA
+https://gitlab.com/gitlab-org/release/tasks/issues/
+
+## Blog post
+
+Dev: ~~https://dev.gitlab.org/gitlab/www-gitlab-com/merge_requests/54~~<br/>
+gitlab.com: https://gitlab.com/gitlab-com/www-gitlab-com/merge_requests/18183
+
+## Email notification
+https://gitlab.com/gitlab-com/marketing/digital-marketing-programs/issues/92

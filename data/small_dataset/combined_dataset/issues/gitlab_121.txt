@@ -1,0 +1,1 @@
+When a group has no activity, you see the message: "Project activity will be displayed here", which reads a little strange. "No activity" or "No recent activity" might read better. https://gist.github.com/9406988

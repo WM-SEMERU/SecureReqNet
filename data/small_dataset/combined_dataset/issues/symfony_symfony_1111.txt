@@ -1,0 +1,7 @@
+[Security] Security tweaks to SecurityExtension
+
+
+Hey guys-
+Comments in the commit message. Due to their nature, the DI Extension classes tend to be hard to read. This includes several changes to SecurityExtension that were a result of me trying to go through the class, study, debug, etc.
+Side note: I think the way that factories are processed (by calling SecurityFactoryInterface::create(), which returns an array of several things) can use some improvement. There are a few places where the return signature to functions is an array of several different items, which is hard to follow.
+Thanks!

@@ -1,0 +1,11 @@
+Server agents with TLS enabled accept non-TLS client RPC connections
+
+
+If you configure TLS on Nomad server agents they still accept non-TLS RPC connections from Nomad client agents.
+This means as of 0.5.6 TLS can only be required for communication between servers. Clients will still properly use TLS when configured to do so, but clients with no TLS configuration will still be able to communicate with servers and participate in the cluster.
+Since the HTTP API does not require a client certificate even with TLS enabled, this bug does not significantly change the security guarantees of Nomad's TLS implementation.
+Nomad agents should be network isolated from untrusted access regardless of TLS configuration.
+Desired behavior
+The desired behavior is that RPC TLS is all-or-nothing: if it's configured on servers then they should require TLS for all RPC communications.
+Optionally we may allow requiring mTLS for the HTTP API to allow network isolation.
+Originally reported to the mailing list here: https://groups.google.com/d/msg/nomad-tool/jhkLr8XQRgE/cgxOm0x3AAAJ

@@ -1,0 +1,29 @@
+PDF files downloaded twice
+
+
+Description
+Links to PDF downloads the PDF twice. If PDf is nt available any more, it is not displayed.
+Steps to Reproduce
+
+Setup a network trace (for instance, with Fiddler)
+Attempt to to access a PDF file. Notice that the document is downloaded twice.
+If the document is not available from the same link twice, notice that it will not be displayed in Brave.
+
+Actual result:
+
+Expected result:
+Reproduces how often:
+Systematic
+Brave version (brave://version info)
+0.61.52 Chromium: 73.0.3683.86 (Official Build) (64-bit)
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+Unknown
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields? No
+Is the issue reproducible on the latest version of Chrome? No
+
+Additional Information

@@ -1,0 +1,12 @@
+make the system:authenticated group adder smarter
+
+
+Fixes #42437
+This prevents the group adder from adding the system:authenticated group when:
+
+it's already in the list
+the user is system:anonymous
+system:unauthenticated is in the list
+
+Smaller alternative to #42421 for 1.6.
+@kubernetes/sig-auth-pr-reviews @enj @liggitt

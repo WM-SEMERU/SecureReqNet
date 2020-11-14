@@ -1,0 +1,16 @@
+proposal: crypto/x509: add support to get SSL context from certificate store on windows
+
+
+Please answer these questions before submitting your issue. Thanks!
+What version of Go are you using (go version)?
+1.9.2 windows/amd64
+Does this issue reproduce with the latest release?
+yes
+What operating system and processor architecture are you using (go env)?
+windows
+What did you expect to see?
+A way to be able to get the ssl context from windows certificate store and use it for https requests from server required client authentication.
+What did you see instead?
+windows syscalls which are not well documented on their usage in go. I would expect this to be done out of the box for users.
+Info on windows certificate store
+Windows documentation for .NET

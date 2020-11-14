@@ -1,0 +1,17 @@
+Added new `detect-child-process` rule (#252)
+
+
+PR checklist
+
+ Addresses an existing issue: fixes #252
+ New feature, bugfix, or enhancement
+
+ Includes tests
+
+
+ Documentation update
+
+Overview of change:
+Added new detect-child-process rule.
+Is there anything you'd like reviewers to focus on?
+Spelling (docs), Rule meta (not sure about issueClass, severity and level).

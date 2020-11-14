@@ -1,0 +1,38 @@
+internal password manager doesn't prompt users to save password under twitch.tv
+
+
+Description
+Originally reported from Brave's community:
+
+https://community.brave.com/t/importing-passwords-doesnt-work-browser-doesnt-always-ask-to-remember-logins/14327
+
+Logging into twitch.tv while using Brave's internal password manager never displays the Save Password notification.
+Steps to Reproduce
+
+launch 0.19.139 and ensure that you have the internal password manager selected
+visit and login into https://www.twitch.tv/
+
+Actual result:
+Brave's internal password manager not displaying "Save Password" notification so there's no way for users to save the password.
+Expected result:
+Users that are logging into twitch.tv should be prompted with a notification that should allow them to save the password.
+Reproduces how often:
+100% reproducible when using the STR mentioned above.
+Brave Version
+about:brave info:
+Reproducible on current live release:
+Yes, currently reproducible under 0.19.139 and 0.19.134:
+
+Brave: 0.19.139 - Reproduced
+rev: 99aa17d
+Muon: 4.7.2
+libchromiumcontent: 64.0.3282.85
+
+
+Brave: 0.19.134 - Reproduced
+rev: 316cfa5
+Muon: 4.5.38
+libchromiumcontent: 63.0.3239.132
+
+Additional Information
+CCing @darkdh

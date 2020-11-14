@@ -1,0 +1,16 @@
+process: initial impl of feature access control
+
+
+Just playing around with something here … this doesn’t need to happen, or can happen in a completely different way or by somebody else. I’d love to get ideas and feedback on this, though.
+/cc @nodejs/security @nodejs/collaborators
+
+Implement process.accessControl, a simple API for restricting usage of certain in-process APIs,
+and similarly an accessControl option when setting up workers.
+Refs: #22107
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

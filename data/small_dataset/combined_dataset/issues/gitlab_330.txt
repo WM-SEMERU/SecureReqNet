@@ -1,0 +1,5 @@
+Currently, the comments order in Wall is from old to new.
+
+In my opinion it should be the reverse order.
+
+If there are a lot of comments to find the last one, you will need to browse the entire page.

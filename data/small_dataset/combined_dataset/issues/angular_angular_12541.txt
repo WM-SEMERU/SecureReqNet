@@ -1,0 +1,32 @@
+Report row/column of the template at security sanitization
+
+
+I'm submitting a ...  (check one with "x")
+[ ] bug report => search github for a similar issue or PR before submitting
+[x] feature request
+[ ] support request => Please do not submit support request here, instead see https://github.com/angular/angular/blob/master/CONTRIBUTING.md#question
+
+Current behavior
+Current template sanitizer emits the same warning messages always.
+WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss).
+
+This is inconvenient when there are multiple insecure points. It's very difficult to look up the point in the template.
+Expected behavior
+Report security warnings with row and column in the template.
+An idea:
+WARNING: [my-cmp.component.html:3:5] sanitizing HTML stripped some content (see http://g.co/ng/security#xss).
+
+Minimal reproduction of the problem with instructions
+What is the motivation / use case for changing the behavior?
+To make debugging easy.
+
+
+Angular version: 2.1.1
+
+
+Browser: [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]
+
+
+Language: TypeScript 2.0
+
+

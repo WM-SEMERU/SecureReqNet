@@ -1,0 +1,14 @@
+Can't Post Note to Pages
+
+
+My code:
+$fb->post("MY_PAGE_ID/notes", [ 
+	"subject" => "Subject Notes",
+	"message" => "Messages Notes"
+], $token_pages);
+Then result:
+An uncaught Exception was encountered
+Message: (#200) This endpoint is deprecated since the required permission publish_actions is deprecated
+Filename: vendor/facebook/graph-sdk/src/Facebook/Exceptions/FacebookResponseException.php
+How to resolve? or what is best practice for my problem?
+Thanks

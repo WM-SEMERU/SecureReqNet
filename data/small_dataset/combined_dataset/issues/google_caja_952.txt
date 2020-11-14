@@ -1,0 +1,47 @@
+Temporaries optimized away too aggressively. Dodged TOCTTOU bullet. Wounded by out-of-order evaluation.
+
+
+Original issue 952 created by erights on 2008-12-05T23:19:42.000Z:
+The nextfruit CL (committed as of r2956) generates far fewer temporaries
+variables. Of course, the intent is to generate far fewer unneeded
+temporary variables. But the check performed by Rule#reuse() is not safe:
+if (rhs instanceof Reference || rhs instanceof Literal) {
+
+It says "if the expression that would be repeated by the expansion is a
+simple variable name or a literal", then repeat it. Otherwise, do the safe
+thing: evaluating the expression, store its value in a new temporary, and
+repeat the temporary.
+The problem (which Mike Samuel alerted me to) is that if any of the
+expressions evaluated between these repetitions much cause this variable to
+be modified (which can happen even if they don't mention it), then the
+repeated evaluations of this variable name might give different results.
+Since these representations sometimes appears in the expansion in order to
+check permission and then use verified permission, this might open up a
+TOCTTOU (Time of check to time of use) security hole.
+This temporary avoidance logic is used in three places, the Cajita
+translation rules: readPublic, setPublic, and callPublic. Fortuitously,
+none are vulnerable to the above TOCTOU problem, downgrading this bug to a
+high priority documentation defect.
+However, callPublic suffers from a related hazard. For example:
+var f1 = function(){return 8;}
+var f2 = function(){return 9;}
+f1.call({}, f1=f2);
+
+cajita-cajoles to
+var x0___;
+var f1 = ___.frozenFunc(function(){return 8;});
+var f2 = ___.frozenFunc(function(){return 9;});
+(x0___ = f1 = f2, 
+ f1.call_canCall___ ? 
+        f1.call(null, x0___) : 
+        ___.callPub(f1, 'call', [ null, x0___ ]));
+
+The problem here is that the argument was evaluated early and saved in a
+temporary, as it should be, but the expression for the function being
+called -- f1 -- was "optimized" into just using the variable directly where
+it appears. This means that the variable is inadvertantly read after the
+arguments are evaluated.
+As a result, this program incorrectly returns 9 when cajoled but correctly
+returns 8 uncajoled. Unlike the above TOCTTOU hazard, this problem doesn't
+threaten a direct breach of Cajita's security properties, but it does
+threaten the integrity of programs written in Cajita.

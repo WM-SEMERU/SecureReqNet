@@ -1,0 +1,18 @@
+Enabling Brave Rewards Negatively Impacts Performance
+
+
+Description
+For many users, enabling Brave Rewards will result in a negative impact to performance.
+
+https://twitter.com/liammannix/status/1111434714663915520
+
+Reproduces how often:
+TBD
+Brave version (brave://version info)
+0.61.52
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds? TBD
+
+Additional Information
+Difficult to tie the reports to specific interactions at this point. Profiling a few scenarios would help to better understand the scope and impact of this issue.

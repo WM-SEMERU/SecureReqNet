@@ -1,0 +1,3 @@
+See https://dev.gitlab.org/gitlab/gitlabhq/issues/2658#note_68778
+
+This is a meta-issue so we don't forget about it.

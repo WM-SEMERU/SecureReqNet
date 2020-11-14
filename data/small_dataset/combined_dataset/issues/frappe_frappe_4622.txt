@@ -1,0 +1,10 @@
+Password reset shouldn't be allowed on a disabled account
+
+
+Steps to replicate:
+
+Make a user with system manager role.
+Disable it.
+Reset password for that user, which sends an email to reset the password using which the user can login and enable itself.
+
+Discuss issue link: https://discuss.erpnext.com/t/password-reset-on-a-disabled-account/31619

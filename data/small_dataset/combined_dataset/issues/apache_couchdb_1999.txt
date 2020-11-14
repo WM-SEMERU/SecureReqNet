@@ -1,0 +1,26 @@
+Port javascript attachment test suite into elixir
+
+
+Overview
+This PR ports attachments JavaScript test suite into elixir. The following test suites are migrated in this PR:
+
+attachment_names
+attachment_paths
+attachment_ranges
+attachments_multipart
+attachment_view
+
+Testing recommendations
+make elixir tests=test/attachment_names_test.exs
+make elixir tests=test/attachment_paths_test.exs
+make elixir tests=test/attachment_ranges_test.exs
+make elixir tests=test/attachments_multipart_test.exs
+make elixir tests=test/attachment_view_test.exs
+
+Related Issues or Pull Requests
+Checklist
+
+ Code is written and works correctly;
+ Changes are covered by tests;
+ Documentation reflects the changes;
+

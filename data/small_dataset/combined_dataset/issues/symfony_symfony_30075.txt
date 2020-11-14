@@ -1,0 +1,51 @@
+[DependencyInjection] Added information about deprecated aliases in debug:autowiring
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Fix and improves a bit PR #29968 and #29995
+

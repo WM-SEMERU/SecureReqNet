@@ -1,0 +1,16 @@
+Be careful about locales
+
+
+Original issue 530 created by google@web.dwdw.me on 2008-06-11T23:58:07.000Z:
+There are places in the code that do something like
+if ("SCRIPT".equals(tagName.toUpperCase())) {
+.. rip out the script tag, do something to make everyone safe ...
+}
+Problem: If the Cajoler is running in the Turkish locale, then
+"SCRIPT".equals("script".toUpperCase()) is false.  "i".toUpperCase() does
+not return what you might expect: it returns a capital I with a dot on top
+of it.
+Impact: the Cajoler may be insecure in Turkey.
+In general, you should be careful about locales.
+One possible fix: replace all of these uses of uppercasing with a call to a
+locale-independent uppercase method that does what you'd expect.

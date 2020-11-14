@@ -1,0 +1,43 @@
+ASP.NET Core web app throws unhandled "Correlation failed" exception when navigated to from Microsoft Word
+
+
+Describe the bug
+When navigating to an ASP.NET core Web app from a hyperlink in Microsoft word to an web app configured for AAD an correlation exception is thrown, whereas everything works fine when navigating to directly
+To Reproduce
+Steps to reproduce the behavior:
+
+Using this version of ASP.NET Core 2.2.101' (but also fails with previous version)
+Run this code 'Dotnet new mvc --auth SingleOrg' and fill-in the application coordinates
+Run the app directly. This work
+Copy the URL of the app to word, which therefore creates a hyperlink
+
+Expected behavior
+From Word, we should navigate to the application by ctrl+click on the link, and be able to sign-in.
+Actual
+An exception is thrown
+Exception: Correlation failed. Unknown location
+Additional context
+This is blocking a first party scenario (DT Design Studio platform).
+Here are details
+An unhandled exception occurred while processing the request.
+Exception: Correlation failed.
+Unknown location
+Exception: An error was encountered while handling the remote login.
+Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleRequestAsync()
+Exception: Correlation failed.
+
+Show raw exception details 
+System.Exception: Correlation failed.
+Exception: An error was encountered while handling the remote login.
+Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleRequestAsync()
+Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+
+System.Exception: An error was encountered while handling the remote login. ---> System.Exception: Correlation failed.
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRequestAsync()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+

@@ -1,0 +1,53 @@
+Security holes in POE
+
+
+Original issue 345 created by erights on 2008-05-31T21:53:45.000Z:
+<script>
+(true && caja.readPub)({}, 'foo');
+</script>
+in the testbed applet r1541 correctly cajoles, and incorrectly results in
+this.getExtension is not a function
+http://cajadores.com/demos/testbed/caja.js
+Line 1071
+This particular symptom is mostly harmless, but the problems it's a symptom
+of are scary. Fortunately, we expect to make POE conditional on warts mode.
+Once we do, the following security hole should only apply with warts on and
+we can then lower its priority. However, currently, POE is not yet
+conditional on warts mode, so I'm classifying this as high priority.
+Ihab, IIUC, you're expecting to make POE conditional on warts, so I'm
+assigning this to you. Once you do, please lower its priority and reassign
+to metaweta.
+POE requires per-plugin state (the POE table), and it requires certain
+members of the "caja" and "___" objects to make use of that state.
+Therefore, the default new-module handler creates fresh per-plugin
+instances of caja and ___. To access this per-plugin state, various members
+of caja and ___, such as readPub(), were modified to use "this" internally.
+However, at least readPub is still whitelisted as a simple-function. The
+above code abuses the resulting ability to call it as a simple-function,
+causing it to be invoked with its "this" bound to the global object.
+readPub() assumes its "this" is bound to the per-plugin "___". However, as
+shown above, it is also a member of the per-plugin "caja" object.
+Therefore, the following fails in the same way for a different reason:
+<script>
+caja.readPub({},'foo');
+</script>
+This calls readPub() with its "this" bound to the per-plugin "caja" rather
+than the per-plugin "___".
+Other related problems: The per-plugin "caja" is a beget of the global caja
+rather than copy. The beget code is
+function begetCajaObjects() {
+function beget(obj) { function F(){} F.prototype=obj; return new F; }
+return { caja: beget(caja), _: copy(_) };
+}
+Since the per-plugin "caja" directly inherits from neither Array.prototype
+nor Object.prototype,
+<script>
+caja.isJSONContainer(caja);
+</script>
+should be false. Instead it's true. I believe the problem is that the above
+beget code violates assumptions made in the Caja runtime. In particular,
+the prototype of the per-plugin caja object should have its "constructor"
+property set to point to a function whose "prototype" property points back
+at it.
+We need to ensure that none these POE problems endanger the integrity of
+wartless Caja, once we have the runtime warts flag.

@@ -1,0 +1,92 @@
+[DependencyInjection] Invokable Factory Services
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11014
+
+
+
+
+Failing test is in the Twig bridge, and outside of the the scope of this PR.
+
+Allow referencing invokable factory services, just as route definitions reference invokable controllers.
+This functionality was also added for service configurators for consistency.
+Example
+<?php
+
+namespace App\Factory;
+
+class ServiceFactory
+{
+    public function __invoke(bool $debug)
+    {
+        return new Service($debug);
+    }
+}
+services:
+    App\Service:
+        # Prepend with "@" to differentiate between service and function.
+        factory: '@App\Factory\ServiceFactory'
+        arguments: [ '%kernel.debug%' ]
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+               http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- ... -->
+        <service id="App\Service"
+                 class="App\Service">
+            <factory service="App\Factory\ServiceFactory" />
+        </service>
+    </services>
+</container>
+<?php
+
+use App\Service;
+use App\Factory\ServiceFactory;
+use Symfony\Component\DependencyInjection\Reference;
+
+$container->register(Service::class, Service::class)
+    ->setFactory(new Reference(ServiceFactory::class));

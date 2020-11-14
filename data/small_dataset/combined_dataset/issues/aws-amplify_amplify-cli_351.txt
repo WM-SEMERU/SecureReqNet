@@ -1,0 +1,16 @@
+Create IAM user with least privileges
+
+
+Is your feature request related to a problem? Please describe.
+amplify configure creates an IAM user with administrative access as noted in the docs:
+
+By default we give administrator access to this IAM user since the CLI needs access to a variety of services for deployments.
+
+This seems to go against the principle of least privilege outlined by the AWS Well-Architected Framework - Security Pillar (July 2018) whitepaper:
+
+Establishing a principle of least privilege ensures that authenticated identities
+are only permitted to perform the most minimal set of functions necessary to
+fulfill a specific task, while balancing usability and efficiency.
+
+Describe the solution you'd like
+An IAM user with least privilege. In the interim, there should be more guidance on what developers could do to lock down privileges (e.g., example policies).

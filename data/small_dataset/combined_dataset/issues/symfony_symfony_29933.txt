@@ -1,0 +1,43 @@
+[PropertyInfo] ReflectionExtractor not supporting snake_case properties
+
+
+Symfony version(s) affected: 3.4.18
+Description
+When extracting metadata about properties, the reflection extractor fails to recognize setters/getters for class properties that have snake_case.
+\Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+getMutatorMethod() and getAccessorMethod() have the same logic:
+$ucProperty = ucfirst($property);
+
+According to PSR-1, there is no restriction about property names - they intentionally omit any provisions whether to use SturdlyCase, camelCase or snake_case.
+At the same time, PSR-1 states that methods must be in camelCase.
+How to reproduce
+<?php
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
+
+require __DIR__ . '/vendor/autoload.php';
+
+class MyEntity
+{
+    /** @var \DateTime */
+    private $foo_bar;
+
+    public function getFooBar(): DateTime
+    {
+        return $this->foo_bar;
+    }
+
+    public function setFooBar(DateTime $value): void
+    {
+        $this->foo_bar = $value;
+    }
+}
+
+$extractor = new ReflectionExtractor();
+$extractor->getTypes('MyEntity', 'foo_bar');
+// returns null
+// attempts setFoo_bar()
+
+
+Possible Solution
+For best compatibility with PSR-1, the extractor should attempt methods that do not contain "_".
+E.g. in addition to "setFoo_bar", it should also attempt "setFooBar" (or "setfoobar" - in PHP, method names are not case-sensitive)

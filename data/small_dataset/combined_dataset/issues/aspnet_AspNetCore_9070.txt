@@ -1,0 +1,24 @@
+@if in foreach not evaluating correctly
+
+
+I'm wondering why this @if statement is not evaluating correctly.
+This code should demonstrate the question:
+@{
+    var list = new List<string> { "test 0", "test 1" };
+    var i = 0;
+}
+@foreach (var item in list)
+{
+    <div index="@i" item="@if (i == 0){ @i }"></div>
+    i++;
+}
+
+Renders:
+<div index="0" item=""></div>
+<div index="1" item=""></div>
+
+Expected:
+<div index="0" item="0"></div>
+<div index="1" item=""></div>
+
+Additional, putting a breakpoint on the <div> @if shows i = 2 on the first hit. #confused This is on a razor page if that makes a difference.

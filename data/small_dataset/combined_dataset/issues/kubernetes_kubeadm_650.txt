@@ -1,0 +1,18 @@
+Enable support for authenticating tokens (e.g. SAs) in the Kubelet API
+
+
+
+To enable API bearer tokens (including service account tokens) to be used to authenticate to the kubelet’s HTTPS endpoint:
+
+ensure the authentication.k8s.io/v1beta1 API group is enabled in the API server
+start the kubelet with the --authentication-token-webhook, --kubeconfig, and --require-kubeconfig flags
+the kubelet calls the TokenReview API on the configured API server to determine user information from bearer tokens
+
+
+Ref: https://kubernetes.io/docs/admin/kubelet-authentication-authorization/#kubelet-authentication
+Thanks to @liggitt and @brancz that brought to my attention that this wasn't enabled right now (which I to be completely honest had expected intutively, but without actually checking it up)
+We basically just have to pass --authentication-token-webhook to the kubelet as well.
+This is a prereq for v1.10
+Files to update:
+https://github.com/kubernetes/kubernetes/blob/master/build/debs/10-kubeadm.conf
+https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/apis/kubeadm/v1alpha1/defaults.go#L181

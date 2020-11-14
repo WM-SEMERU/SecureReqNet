@@ -1,0 +1,4 @@
+Consider improving the documentation of access decision strategies
+
+
+As @fabpot said in symfony/symfony#15130 (comment) we probably need to consider improving the documentation around this feature.

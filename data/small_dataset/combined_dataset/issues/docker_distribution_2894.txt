@@ -1,0 +1,4 @@
+Fix typo: offest -> offset
+
+
+Signed-off-by: Jesse Brown jabrown85@gmail.com

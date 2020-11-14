@@ -1,0 +1,4 @@
+Use local functions
+
+
+Replace lambda with local functions

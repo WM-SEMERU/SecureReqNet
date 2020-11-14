@@ -1,0 +1,12 @@
+security vulnerabilities in 3rd party dependencies
+
+
+Similar as apache/pulsar#2882, bookkeeper has 3rd party dependencies that are exposed to security vulnerabilities
+mvn com.redhat.victims.maven:security-versions:check
+
+Results:
+[ERROR] jline:jline is vulnerable to CVE-2013-2035
+[ERROR] com.fasterxml.jackson.core:jackson-databind is vulnerable to CVE-2017-17485
+[ERROR] com.fasterxml.jackson.core:jackson-databind is vulnerable to CVE-2017-7525
+[ERROR] com.fasterxml.jackson.core:jackson-databind is vulnerable to CVE-2018-5968
+

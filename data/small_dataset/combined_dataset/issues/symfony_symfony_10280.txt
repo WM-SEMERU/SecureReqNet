@@ -1,0 +1,4 @@
+View accessible routes per role
+
+
+To check if all routes have been secured properly it would be really good to have the router:debug command accept a role as parameter to only show the routes available to that role.

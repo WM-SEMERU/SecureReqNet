@@ -1,0 +1,6 @@
+harmonize code of conduct docs
+
+
+refs: #441
+The Code of Conduct .md file work with the .rst docs and have the same content.
+@willkg figured out a nice way to do this and wrote it up at https://bluesock.org/~willkg/blog/mozilla/code_of_conduct.html

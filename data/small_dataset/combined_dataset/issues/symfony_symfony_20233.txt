@@ -1,0 +1,4 @@
+Error 500 rose on 'AccessDeniedException'
+
+
+When the user tries to access a route needing an user authentication using the Anonymous account, a HTTP 500 error is rose. Why not a 403? Is there any way to rise a 403?

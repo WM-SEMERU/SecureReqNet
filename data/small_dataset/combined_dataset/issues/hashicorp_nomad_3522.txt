@@ -1,0 +1,6 @@
+Add support for wrapped tokens
+
+
+Nomad, via the vault stanza, supports the retrieval of a Vault Token and the introduction of this secret into a scheduled job. At present, it only supports unwrapped tokens. If a token were intercepted, it would allow an actor to make requests to obtain secrets within our system.
+Vault has support for wrapped tokens. This methodology allows the process performing secret introduction to only have access to a token with a limited lifetime while also providing cover and malfeasance detection.
+I think this is an important security feature that should be included within Nomad.

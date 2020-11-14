@@ -1,0 +1,152 @@
+Write a function to test get_package_mapping logic for security purposes
+
+
+dashR currently uses a function to retrieve local paths to dependencies called get_package_mapping, which is critical for properly formatting response$body:
+
+
+
+dashR/R/utils.R
+
+
+        Lines 394 to 425
+      in
+      7fa2581
+
+
+
+
+
+
+ get_package_mapping <- function(script_name, url_package, dependencies) { 
+
+
+
+ # TODO: improve validation of dependency inputs, particularly 
+
+
+
+ #       to avoid duplicating dependencies in the package_map 
+
+
+
+ package_map <- vapply(unique(dependencies), function(x) { 
+
+
+
+ if (x$name %in% c('react', 'react-dom')) { 
+
+
+
+ x$name <- 'dash-renderer' 
+
+
+
+     } 
+
+
+
+ dep_path <- paste(x$src$file,  
+
+
+
+ x$script, 
+
+
+
+ sep = "/") 
+
+
+
+ 
+
+
+
+ # remove n>1 slashes and replace with / if present 
+
+
+
+ result <- c(pkg_name=ifelse("package" %in% names(x), x$package, NULL), 
+
+
+
+ dep_name=x$name, 
+
+
+
+ dep_path=gsub("//+", replacement = "/", dep_path) 
+
+
+
+     ) 
+
+
+
+   }, FUN.VALUE = character(3)) 
+
+
+
+ 
+
+
+
+ package_map <- t(package_map) 
+
+
+
+ 
+
+
+
+ # pos_match is a vector of logical() values -- this allows filtering 
+
+
+
+ # of the package_map entries based on name, path, and matching of 
+
+
+
+ # URL package name against R package names. when all conditions are 
+
+
+
+ # satisfied, pos_match will return TRUE 
+
+
+
+ pos_match <- grepl(paste0(script_name, "$"), package_map[, "dep_path"]) & 
+
+
+
+                grepl(url_package, package_map[,"dep_name"]) 
+
+
+
+ 
+
+
+
+ rpkg_name <- package_map[,"pkg_name"][pos_match] 
+
+
+
+ rpkg_path <- package_map[,"dep_path"][pos_match] 
+
+
+
+ 
+
+
+
+ return(list(rpkg_name=rpkg_name, rpkg_path=rpkg_path)) 
+
+
+
+ } 
+
+
+
+
+
+There are potential security issues associated with malicious users specifying arbitrary paths; we should be careful that URLs cannot be constructed such that the dep_pkg constructed from the URL is a non-Dash-related package.
+We should write a function to test that get_package_mapping validates its input and attempts to block arbitrary code execution.
+@chriddyp @alexcjohnson

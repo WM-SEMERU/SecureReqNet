@@ -1,0 +1,40 @@
+[Security] JSON login is not working as expected
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.0.8
+
+
+
+This was originally reported by @Guikingone in symfony/symfony-docs#9611.
+
+With a code like this, the Security Layer should intercept the request and return a dedicated response along with the credentials:
+
+But with this response, I see the following exception:
+
+If I add return new JsonResponse(); to the method, the exception is gone.

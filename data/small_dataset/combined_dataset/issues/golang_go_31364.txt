@@ -1,0 +1,26 @@
+x/mobile/bind: Reflection to get ApplicationContext is disallowed on Android P (API Level 28) and causes a crash on Android Q
+
+
+Problem
+For loading gobind-libraries on Android, currently the non-SDK method android.app.AppGlobals.getInitialApplication is used via reflection in LoadJNI.java to provide the ApplicationContext to the native-library.
+Application appl = (Application)Class.forName("android.app.AppGlobals").getMethod("getInitialApplication").invoke(null);
+androidCtx = appl.getApplicationContext();
+Usage of non-SDK methods is not allowed in Android P and up (API level 28 and higher), for more information see: developer.android.com: Restrictions on non-SDK interfaces
+From Android Q on this prevents an gobind-library from loading and causes an exception:
+ D/StrictMode: StrictMode policy violation: android.os.strictmode.NonSdkApiUsedViolation: Landroid/app/AppGlobals;->getInitialApplication()Landroid/app/Application;
+        at android.os.StrictMode.lambda$static$1(StrictMode.java:406)
+        at android.os.-$$Lambda$StrictMode$lu9ekkHJ2HMz0jd3F8K8MnhenxQ.accept(Unknown Source:2)
+        at java.lang.Class.getDeclaredMethodInternal(Native Method)
+        at java.lang.Class.getPublicMethodRecursive(Class.java:2079)
+        at java.lang.Class.getMethod(Class.java:2066)
+        at java.lang.Class.getMethod(Class.java:1693)
+        at go.LoadJNI.<clinit>(LoadJNI.java:28)
+        at java.lang.Class.classForName(Native Method)
+        at java.lang.Class.forName(Class.java:454)
+        at java.lang.Class.forName(Class.java:379)
+        at go.Seq.<clinit>(Seq.java:38)
+        at go.Seq.touch(Seq.java:55)
+
+Solution
+I think we should consider asking the ApplicationContext to be provided by the application when loading the gobind-library instead of acquiring it via reflection.
+An proposal to defer context-binding was discussed in #12725. Another option would be to defer loading of the library itself.

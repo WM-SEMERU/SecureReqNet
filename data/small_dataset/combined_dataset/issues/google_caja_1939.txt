@@ -1,0 +1,9 @@
+Browser lock up for large css files.
+
+
+Original issue 1941 created by james.keane@wishabi.com on 2014-10-09T19:50:21.000Z:
+Caja causes browser lock up when loading any significantly large css file inside of a guest on Firefox 33.
+Firefox 33 is currently in Beta, but due to be released this month.
+Attached is a sample file that links to the minified css of the bootstrap project.
+Relevant changes in Firefox 33 that may be causing this issue: https://blog.mozilla.org/javascript/2014/07/21/slimmer-and-faster-javascript-strings-in-firefox/
+The lock-up is caused by CRLF to LF normalization at csslexer.js:229

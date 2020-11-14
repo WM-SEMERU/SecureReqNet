@@ -1,0 +1,6 @@
+[SecurityBundle] Add Docs for SecurityFactoryInterface
+
+
+The methods of the SecurityFactoryInterface do not have any comments. It would be helpfull if there were comments describing how the methods should be implemented and how the are used.
+http://symfony.com/doc/2.3/cookbook/security/custom_authentication_provider.html
+is describing the Interface a bit, but especially the signature of the create method is unclear.

@@ -1,0 +1,6 @@
+refactor calls inside MM-API since they are very similar
+
+
+
+after method added by fix Add error handling to MM_API #198
+related to Refactor MM-API tests since they are all very similar #79

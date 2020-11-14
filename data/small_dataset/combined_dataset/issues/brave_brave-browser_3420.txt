@@ -1,0 +1,18 @@
+feature request: alternative to user namespace sandbox on Linux
+
+
+(follow up to #1986 since that issue got closed by my PR to change the Linux sandboxing error message)
+Problem:
+
+On Linux, Brave generally does not run unless either the --no-sandbox flag is passed or user namespaces are enabled.
+Previously, the default error message told users to try running with --no-sandbox. In brave/brave-core#1204, I changed it to tell users they probably need user namespaces enabled. The rationale was that running with any sandbox, even a subpar one, is better than running without any sandbox.
+Users often complain to us that we should not be encouraging enabling of userns because it's an insecure/poorly-designed feature. Citations include https://lists.archlinux.org/pipermail/arch-general/2017-February/043066.html and https://wiki.archlinux.org/index.php/security#Sandboxing_applications.
+
+The main argument from https://lists.archlinux.org/pipermail/arch-general/2017-February/043066.html is that userns has so many vulnerabilities to the point of being useless, and hence is security theater; in other words we should assume any code that runs with some privileges in a user namespace can run with those privileges on the host itself.
+However, if that were true, running Brave in a userns sandbox would be equivalent to running Brave without a sandbox. Does userns actively make security worse? (Other than perhaps luring people into a false sense of security.)
+Some potential options:
+
+In the error message (brave/brave-core#1204), mention that userns is considered harmful by some and the other option is to just run without the sandbox. I'm not a big fan of this since it's a complicated and not-necessarily-actionable message for non-technical users.
+Ship the Chromium setuid sandbox which is supposedly being deprecated soon or was already deprecated, also citing security reasons: https://bugs.chromium.org/p/chromium/issues/detail?id=312380
+Write our own sandbox :(
+

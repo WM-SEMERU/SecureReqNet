@@ -1,0 +1,6 @@
+World Writable emptydir directories
+
+
+So this PR - #9384 added 777 as default mode for EmptyDirs so as it can be used by non-root containers, but this was before fsGroup and other things.
+Is this still relevant? I was thinking it might be okay to move this to 770 but recently added RunAsGroup feature for containers may not play nicely with it if user has specified different GID for each container - kubernetes/community#756 . Can we recommend users who use different GID for each container to specify a fsGroup rather than relying on configmap/emptydir to have 777 permission?
+The problem with having world-writable directories laying around in local file-system is bunch of auditing tools already flag this up and make k8s unsuitable for such deployments.

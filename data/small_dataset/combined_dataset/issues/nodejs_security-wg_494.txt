@@ -1,0 +1,8 @@
+[ANN - APR 26th 2019] Migrating vulnerabilities database into its own repository
+
+
+As planned in #359, the content of the vulnerabilities is migrated to their own repository.
+Starting April 26th 2019, all PR of new vulnerabilities will be performed in the new repository: https://github.com/nodejs/security-advisories.
+On May 26th 2019, we will remove the vuln directory and it's content from this repository.
+Please reach to anyone you know who might be using this dataset to share this roadmap.
+I added the security-wg-agenda label to ensure this is mentionned to the next meetings of the WG.

@@ -1,0 +1,175 @@
+messenger component can not send email in amqp handler
+
+
+Symfony version(s) affected: 4.2.0
+Description
+The messgener component (in the symfony application), after using the Bus dispatch event, can send mail and do anything in the synchronous state,but can not send mail in the asynchronous state (with rabbitmq and configured ampq tranport) , but other things, such as writing Documents, etc. are all ok, what is the cause?
+# config/packages/messenger.yml
+framework:
+    messenger:
+        transports:
+            # Uncomment the following line to enable a transport named "amqp"
+             amqp: '%env(MESSENGER_TRANSPORT_DSN)%'
+
+        routing:
+            # Route your messages to the transports
+             'App\Message\EmailNotification': amqp
+
+message
+# src/Message/EmailNotification.php
+<?php
+namespace App\Message;
+
+
+class EmailNotification
+{
+    /**
+     * @var string
+     */
+    protected $from;
+    /**
+     * @var string|array
+     */
+    protected $address;
+    /**
+     * @var string
+     */
+    protected $title;
+    /**
+     * @var string
+     */
+    protected $body;
+    /**
+     * @var string
+     */
+    protected $contentType = 'text/html';
+
+    /**
+     * @return string
+     */
+    public function getFrom(): string
+    {
+        return $this->from;
+    }
+
+    /**
+     * @param string $from
+     * @return EmailNotification
+     */
+    public function setFrom(string $from): self
+    {
+        $this->from = $from;
+        return $this;
+    }
+
+    /**
+     * @return array|string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string|array $address
+     * @return EmailNotification
+     */
+    public function setAddress($address): self
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody(): string
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param string $body
+     * @return EmailNotification
+     */
+    public function setBody(string $body): self
+    {
+        $this->body = $body;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentType(): string
+    {
+        return $this->contentType;
+    }
+
+    /**
+     * @param string $contentType
+     * @return EmailNotification
+     */
+    public function setContentType(string $contentType): self
+    {
+        $this->contentType = $contentType;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return EmailNotification
+     */
+    public function setTitle($title): self
+    {
+        $this->title = $title;
+        return $this;
+    }
+}
+
+handler
+<?php
+namespace App\Message\Handler;
+
+use App\Message\EmailNotification;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+
+class EmailNotificationHandler implements MessageHandlerInterface
+{
+    private $mailer;
+    public function __construct(\Swift_Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
+    public function __invoke(EmailNotification $email)
+    {
+        $message = (new \Swift_Message($email->getTitle()))
+            ->setFrom($email->getFrom())
+            ->setTo($email->getAddress())
+            ->setBody($email->getBody(),$email->getContentType());
+        $this->mailer->send($message);
+        for ($i=0;$i<5;$i++){
+            file_put_contents(__DIR__.'/ddd.txt',"hack\n",FILE_APPEND);
+            sleep(2);
+        }
+    }
+}
+
+and I dispatch it in DefaultController like this:
+$email = (new EmailNotification())
+            ->setTitle('can send?')
+            ->setFrom('test@gmail.com')
+            ->setAddress(['lichnow@gmail.com'])
+            ->setBody($this->renderView('emails/test.html.twig',['name' => 'wengye']));
+        $bus->dispatch($email);
+
+what's wrong of this component?

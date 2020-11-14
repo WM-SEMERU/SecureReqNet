@@ -1,0 +1,6 @@
+Validate `data` attribute
+
+
+Currently, when the data attribute is set to None, Dash will happily accept as a valid value but this will result in the dreaded "Error loading dependencies" in the app.
+This came up over in plotly/dash#616, where it resulted in a bug that was hard to pin down.
+It would be nice if the validation could extend to values passed in by the callback, rather than just on the initial contents of the layout (although I don't know if we've solved this problem for validation of components elsewhere) as this was how the linked example manifested.

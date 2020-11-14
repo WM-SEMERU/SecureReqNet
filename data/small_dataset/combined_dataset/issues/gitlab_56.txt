@@ -1,0 +1,2 @@
+I try to set config.time_zone = 'Taipei' in application.rb.
+but I look-up database, just get default UTC time. It not change time zone.

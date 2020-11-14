@@ -1,0 +1,9 @@
+Poor user experience with DIGEST authentication
+
+
+@cyrusdaboo originally submitted this as ticket:54
+
+Owner: @dreid
+
+
+When the server is set to digest authentication and a browser is pointed to a resource, the user is prompted for their user/pswd everytime the resource is refreshed. The problem is that the Twisted digest authenticator generates a new 'opaque' parameter for each request, which prevents clients from caching and replaying authentication. Twisted needs to be changed to cache the 'opaque' parameter. A good example to follow is that of apache mod_auth_digest which keeps a per-client 'opaque' parameter in a garbage collected map.

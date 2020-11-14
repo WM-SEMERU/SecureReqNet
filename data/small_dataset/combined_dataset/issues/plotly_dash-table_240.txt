@@ -1,0 +1,6 @@
+Configurable behavior on column deletion
+
+
+Based on the discussion starting at comment: #239 (comment)
+When deleting a column, the corresponding data property is removed from the data. While this is the desired behavior for many use cases, this is not always the case.
+Provide a property (e.g. delete_column_behavior='remove' | 'hide' | 'clear data' (default='clear data')).

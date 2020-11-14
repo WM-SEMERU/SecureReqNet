@@ -1,0 +1,3 @@
+```
+ActiveRecord::StatementInvalid (Mysql2::Error: Data too long for column 'description' at row 1: INSERT INTO `issues` (`author_id`, `created_at`, `description`, `iid`, `project_id`, `state`, `title`, `updated_at`) VALUES (
+```

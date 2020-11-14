@@ -1,0 +1,8 @@
+Proposal: Initial namespaces proposal
+
+
+This is based on feedback and discussion that came out of #1017
+There was discussion that the term project may be problematic, so have removed it in favor of namespace.
+I think this aligns nicely with the ACL model discussed thus far.
+Feedback appreciated.
+@erictune @lavalamp @smarterclayton

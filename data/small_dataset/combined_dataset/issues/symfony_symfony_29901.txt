@@ -1,0 +1,14 @@
+[Webpack Encore][Twig] include asset again into error pages
+
+
+Symfony version(s) affected: 4.2
+Description
+The EntrypointLookup prevents including a file multiple times by default. But it prevents re-using a stylesheet in an error template if an error occurs during the rendering of a template that re-uses the layout. This is because the ExceptionController will clear the output buffers.
+How to reproduce
+
+checkout symfony/demo
+add a twig runtime error into the homepage template inside the body, f.ex. {{ 1 / 0 }}
+the error template will not embed the "css/app" stylesheet again as it has been already rendered before
+
+Possible Solution
+The EntryPointLookup class must only return a template once per request.

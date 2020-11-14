@@ -1,0 +1,13 @@
+[18.09 backport] Include old error-message for backward compatibility
+
+
+Backport of #2797 for 18.09
+cherry-pick was clean
+Commit 2061af7 (#2779) fixed the API returning incorrect status codes, but also changed the error message for conflicting service-names to be in line with other objects (secrets, configs); "service XX already exists".
+Unfortunately, there are existing consumers of the API that perform string-matching, and changing the error-message resulted in a breaking change.
+This patch prepends the ErrNameConflict error-message to the error-message, so that those consumers still find the original message, but preserves the enhancement made in 2061af7 (inclusion of the conflicting service name).
+With this patch applied, the error message will look like this;
+name conflicts with an existing object: service myservice already exists
+
+- Description for the changelog
+- Include old error-message for backward compatibility [docker/swarmkit#2797](https://github.com/docker/swarmkit/pull/2797)

@@ -1,0 +1,46 @@
+[Feature] Apply Spread stanzas to Parameterized Jobs
+
+
+Experiment:
+Cluster with 9 clients.
+Quickly schedule 1000 parameterized jobs with a spread stanza.
+
+Job:
+job "parameterized-test" {
+  datacenters = ["dc1"]
+  type = "batch"
+  parameterized {}
+  spread {
+    attribute = "${node.unique.id}"
+  }
+  task "parameterized-test" {
+    driver = "exec"
+    config {
+      command = "/bin/bash"
+      args = ["-c", "sleep 10; date -u"]
+    }
+  }
+}
+Script:
+#!/bin/bash
+
+for _ in {1..1000}; do
+  nomad job dispatch parameterized-test &
+done
+Version:
+Nomad v0.9.0-rc1 (7c00ab4f3f37cfd1e258b38fd2ad99e7bc23e4c3)
+
+Result:
+client-1: ~1000 allocs
+client-{2..9}: <5 allocs (if any)
+
+This result is as I expected. It seems in line with what I'd expect from bin packing. Additionally, my understanding is that the spread stanza would work on multiple groups/tasks specified within the same job and not across a children of a parameterized job like in this case.
+
+#4701
+
+Feature Request:
+The linked issue below mentions that "Spread at the cluster level is in a future roadmap".
+That may be the solution to this request and tracking that issue may make this one redundant, but I wanted to specifically request that parameterized jobs are supported for spread-style scheduling so that in the future this experiment might result in more like ~100 allocs spread across the 9 clients.
+
+#3690
+

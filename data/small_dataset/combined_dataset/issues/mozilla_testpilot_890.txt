@@ -1,0 +1,5 @@
+Move Test Pilot /admin/ to something hosted behind a secure Mozilla VPN
+
+
+Currently, if you are a user with is_superuser set, you can access https://testpilot.firefox.com/admin/
+Security-wise, this would be much improved by hosting the /admin/ pages behind a firewall that requires Mozilla VPN access.

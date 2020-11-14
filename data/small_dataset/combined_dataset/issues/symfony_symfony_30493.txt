@@ -1,0 +1,20 @@
+debug:autowiring doesn't show classes when run without --all
+
+
+Symfony version(s) affected: 4.2.4
+Description
+When there is an autowirable class, that could be shown via debug:autowiring, an exception should be expected if the '--all' flag is not set and the passed argument doesn't match the alias.
+How to reproduce
+Create a new project:
+  symfony new test
+  cd test
+
+Create a simple class Test.php in src. This is autowired.
+Executing
+  bin/console debug:autowiring Test
+
+it doesn't show the class, nor it returns an exception. This is because, since the service has no alias, there is no text added to the output here: https://github.com/symfony/framework-bundle/blob/master/Command/DebugAutowiringCommand.php#L114
+Possible Solutions
+Throw an exception in the line above.
+Print something that says "There are matching services but without that exact match".
+Print the class anyway.

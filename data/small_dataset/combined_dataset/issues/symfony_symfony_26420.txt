@@ -1,0 +1,42 @@
+[SecurityBundle] Drop spurious character added to regex
+
+
+The character was introduced in 5f9471e, and breaks the testsuite when run with native php 7.2.
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+License
+MIT
+
+
+

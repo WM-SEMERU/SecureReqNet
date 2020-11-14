@@ -1,0 +1,22 @@
+New-HPOVUser issue?
+
+
+Trying to do a simple add user and getting an index error with latest POSH 2.xx library:
+PS C:\Users\tknight\Desktop\OneView\HP OV 2.0 DCS\Toms PS scripts - 2.0 working copy> $ConnectedSessions
+ConnectionID Name                          UserName      AuthLoginDomain
+
+1            tk1-ov200-dcsdemo.advizex.net Administrator LOCAL
+PS C:\Users\tknight\Desktop\OneView\HP OV 2.0 DCS\Toms PS scripts - 2.0 working copy> New-HPOVUser Nat   -fullName "Nat Network Admin"  -password hpinvent -roles "Network administrator"
+New-HPOVUser : Index operation failed; the array index evaluated to null.
+At line:1 char:1
+
+New-HPOVUser Nat   -fullName "Nat Network Admin"  -password hpinvent -roles "Net ...
+
+- CategoryInfo          : InvalidOperation: (:) [New-HPOVUser], RuntimeException
+- FullyQualifiedErrorId : NullArrayIndex,New-HPOVUser
+
+
+
+
+PS
+I did with and without -ApplianceConnection. Same script worked with 1.20

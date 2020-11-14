@@ -1,0 +1,9 @@
+Investigate alternatives to proxying through the apiserver for things like pod/exec
+
+
+From CVE-2018-1002105 post-mortem
+/area security
+/area apiserver
+/priority important-longterm
+/kind feature
+/sig api-machinery

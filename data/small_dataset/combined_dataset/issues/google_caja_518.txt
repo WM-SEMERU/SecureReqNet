@@ -1,0 +1,30 @@
+No clear contract for who is responsible for sanitizing ONFOO= style attributes
+
+
+Original issue 518 created by google@web.dwdw.me on 2008-06-11T22:46:42.000Z:
+The HTML whitelist contains many examples of ON* attributes that are
+whitelisted (A:ONBLUR, *:ONCLICK, BODY:ONLOAD, etc.).  It's up to the
+RewriteHtmlStage and SanitizeHtmlStage to jointly ensure that all of those
+attributes have had their Javascript extracted, parsed into a Javascript
+parse tree (for Cajoling), and those attributes don't remain if you can't
+pull it out into a Javascript parse tree that will be cajoled.
+The problem: There is currently no clear division of responsibility between
+RewriteHtmlStage and SanitizeHtmlStage for who is responsible for ensuring
+the value of these attributes is made safe.  Currently, we have to hope
+that the combination of these two is enough to make things safe (neither
+one on its own is sufficient), and there is no documented contract that
+describes which one is responsible for which part of that sanitization
+task.  This is both a security risk and a hazard for maintenance, since it
+essentially means that one cannot change the code of either of these
+modules without being thoroughly familiar with the code of the other.
+Suggested fix: Establish a contract for who is responsible for this, and
+document it somewhere.  For instance, one possibility might be to say that
+RewriteHtmlStage is responsible for pulling out the value of every ON*
+attribute and parsing it as Javascript and putting a marker in the HTML
+parse tree referring to the Javascript parse tree, and if it finds any ON*
+attribute whose value cannot be parsed successfully as Javascript, then
+delete that ON* attribute; and the SanitizeHtmlStage might be responsible
+for checking that this has been done correctly: i.e., that every remaining
+ON* attribute has a value that is a special marker that refers to a
+Javascript parse tree that will be cajoled (and not, e.g., a plain text
+string).  But you can evaluate what architecture makes most sense.

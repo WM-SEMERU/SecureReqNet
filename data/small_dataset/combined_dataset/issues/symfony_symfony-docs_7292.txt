@@ -1,0 +1,4 @@
+Removed an unneeded note
+
+
+This looks like a leftover of the old times when we didn't have a services.yml file and this config wasn't automatically imported.

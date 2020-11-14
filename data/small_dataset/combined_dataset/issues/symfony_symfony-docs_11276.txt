@@ -1,0 +1,6 @@
+Fixes escaping of IDE config and adds example for PhpStorm
+
+
+
+No description provided.
+

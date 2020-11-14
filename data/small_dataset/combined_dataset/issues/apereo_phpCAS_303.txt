@@ -1,0 +1,4 @@
+Fix protocol in case not using HTTPS
+
+
+Useful in development enviroment.

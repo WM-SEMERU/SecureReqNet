@@ -1,0 +1,8 @@
+Ability to set SELinux labels for volumes
+
+
+Users of Linux distributions with SELinux in enforcing mode will likely need to have Kubernetes set the appropriate SELinux label on any volumes created, at least for EmptyDir volumes (directories created on the host system that are then bind mounted into the Docker container). I believe we are currently using svirt_sandbox_file_t but we may want to make the label configurable.
+For my particular use case, I was trying to run the docker registry container inside a pod, and I wanted to specify a volume for storing the registry's persistent data (docker images). The registry isn't allowed to write to the volume because SELinux denies it. Here's an example denial:
+type=SYSCALL msg=audit(1406642880.633:277689): arch=c000003e syscall=83 success=no exit=-13 a0=1192350 a1=1ff a2=0 a3=7fff485ffbf0 items=0 ppid=7433 pid=11170 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="gunicorn" exe="/usr/bin/python2.7" subj=system_u:system_r:svirt_lxc_net_t:s0:c251,c327 key=(null) type=AVC msg=audit(1406642880.633:277689): avc:  denied  { write } for  pid=11170 comm="gunicorn" name="data" dev="dm-0" ino=2506756 scontext=system_u:system_r:svirt_lxc_net_t:s0:c251,c327 tcontext=system_u:object_r:root_t:s0 tclass=dir
+
+/cc @rhatdan @smarterclayton

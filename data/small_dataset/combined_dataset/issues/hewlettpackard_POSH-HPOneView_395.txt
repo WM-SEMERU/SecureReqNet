@@ -1,0 +1,20 @@
+New Change NetOp Password for 4.20 and VC Interconnects
+
+
+Please fill in as much information as possible to help resolve your issue.
+Expected Behavior
+OV 4.20 adds a feature to be able to change the NetOP password. Can this be exposed through this tool?
+Actual Behavior
+Currently not supported on the tool.
+Steps to reproduce
+PATCH/rest/interconnects/{id}
+
+
+
+Set the password for the netop user in the interconnect. Note: netop user is only                               supported for Virtual Connect SE 40Gb F8 Modules and Virtual Connect SE 100Gb F32                               Modules for Synergy.
+replace
+/netOpPasswd
+Password
+
+
+

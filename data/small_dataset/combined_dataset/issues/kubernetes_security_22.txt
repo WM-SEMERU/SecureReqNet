@@ -1,0 +1,6 @@
+Update CVE request details, add issue publishing requirement
+
+
+/cc @philips
+/hold
+for DWF -> MITRE switch

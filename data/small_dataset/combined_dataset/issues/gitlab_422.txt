@@ -1,0 +1,12 @@
+Attempting to create a new project via importing an existing private repository hangs:
+
+* Click "New Project"
+* Enter project information
+* Click "Import existing repository?"
+* Enter HTTPS URL of private repository
+* Click "Create Project"
+
+A project page is created for the repository that displays the message "Importing repository." and an indeterminate progress indicator. The import operation never appears to complete.
+
+If a user can fork the repository, shouldn't they also be able to clone it in the above way?
+If a user does not have access to the repository, the UI should provide a notification that the repository could not be cloned.

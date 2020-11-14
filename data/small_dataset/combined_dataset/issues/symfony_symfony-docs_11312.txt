@@ -1,0 +1,4 @@
+[Flex] Replace `SYMFONY_*` env vars with `APP_*`
+
+
+Finishes #11302

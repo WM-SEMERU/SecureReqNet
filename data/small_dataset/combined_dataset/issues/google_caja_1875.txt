@@ -1,0 +1,7 @@
+SES HTML logger does not report stack on IE 11
+
+
+Original issue 1877 created by kpreid.switchb.org on 2013-12-19T22:02:56.000Z:
+In explicit.html, execute ses.logger.error('boo', new Error('boom')).
+On Chrome, this will include a toggle for displaying the traceback of the error. On IE 11, it does not.
+I have not looked at whether this is a UI bug or a lack of getStack functionality.

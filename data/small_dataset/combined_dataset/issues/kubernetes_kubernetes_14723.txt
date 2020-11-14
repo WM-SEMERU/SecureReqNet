@@ -1,0 +1,49 @@
+kube-apiserver tls cert does not work if no client-ca-file specified
+
+
+Only tls cert and key file specified, which means no client cert authentication here, does not work.
+It should be work.
+# kube-apiserver --service-cluster-ip-range=10.254.0.0/16  --etcd-servers=http://127.0.0.1:2379 --tls-cert-file=/etc/ssl/certs/host.crt --tls-private-key-file=/etc/ssl/certs/host.key
+I0929 17:22:23.726220   15841 plugins.go:69] No cloud provider specified.
+I0929 17:22:24.063938   15841 master.go:273] Node port range unspecified. Defaulting to 30000-32767.
+I0929 17:22:24.065227   15841 master.go:295] Will report 172.16.2.5 as public IP address.
+[restful] 2015/09/29 17:22:24 log.go:30: [restful/swagger] listing is available at https://10.73.2.5:6443/swaggerapi/
+[restful] 2015/09/29 17:22:24 log.go:30: [restful/swagger] https://172.16.2.5:6443/swaggerui/ is mapped to folder /swagger-ui/
+I0929 17:22:24.098802   15841 server.go:441] Serving securely on 0.0.0.0:6443
+I0929 17:22:24.098820   15841 server.go:483] Serving insecurely on 127.0.0.1:8080
+
+# curl --cacert /etc/ssl/certs/rootCA.crt https://test1.redhat.com:6443
+Unauthorized
+# kubectl -s https://test1.redhat.com:6443 --certificate-authority=/etc/ssl/certs/rootCA.crt api-versions 
+Please enter Username:
+
+specified with client-ca-file, works as expected
+# kube-apiserver --service-cluster-ip-range=10.254.0.0/16  --etcd-servers=http://127.0.0.1:2379 client-ca-file=/etc/ssl/certs/rootCA.crt --tls-cert-file=/etc/ssl/certs/host.crt --tls-private-key-file=/etc/ssl/certs/host.key
+I0929 17:33:07.420204   16349 plugins.go:69] No cloud provider specified.
+I0929 17:33:07.649465   16349 master.go:273] Node port range unspecified. Defaulting to 30000-32767.
+I0929 17:33:07.650717   16349 master.go:295] Will report 10.73.2.5 as public IP address.
+[restful] 2015/09/29 17:33:07 log.go:30: [restful/swagger] listing is available at https://10.73.2.5:6443/swaggerapi/
+[restful] 2015/09/29 17:33:07 log.go:30: [restful/swagger] https://10.73.2.5:6443/swaggerui/ is mapped to folder /swagger-ui/
+I0929 17:33:07.682704   16349 server.go:441] Serving securely on 0.0.0.0:6443
+I0929 17:33:07.682738   16349 server.go:483] Serving insecurely on 127.0.0.1:8080
+
+
+# curl --cacert /etc/ssl/certs/rootCA.crt --cert ^C
+# kubectl -s https://test1.redhat.com:6443 --certificate-authority=/etc/ssl/certs/rootCA.crt --client-certificate=/etc/ssl/certs/host.crt --client-key=/etc/ssl/certs/host.key api-versions 
+Available Server Api Versions: v1
+# curl --cacert /etc/ssl/certs/rootCA.crt --cert /etc/ssl/certs/host.crt --key /etc/ssl/certs/host.key https://test1.redhat.com:6443
+{
+  "paths": [
+    "/api",
+    "/api/v1",
+    "/healthz",
+    "/healthz/ping",
+    "/logs/",
+    "/metrics",
+    "/resetMetrics",
+    "/swagger-ui/",
+    "/swaggerapi/",
+    "/ui/",
+    "/version"
+  ]
+

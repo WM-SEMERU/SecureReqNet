@@ -1,0 +1,17 @@
+Got a 500 error in the browser and the following info in the production.log. The actual labels seem to generate correctly, at least they show up in the Labels section.
+
+```
+Started POST "/<namespace>/<project>/labels/generate" for 127.0.0.1 at 2014-05-28 22:37:22 -0700
+Processing by Projects::LabelsController#generate as HTML
+  Parameters: {"authenticity_token"=>"mqvUnLqh2PVOON9cYKTUviakrCEXmqwh7NuBUPXkXlk=", "project_id"=>"<namespace>/<project>"}
+Completed 500 Internal Server Error in 320ms
+
+ActionView::MissingTemplate (Missing template projects/labels/generate, projects/application/generate, application/generate with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :slim, :coffee, :haml]}. Searched in:
+  * "/opt/gitlab/embedded/service/gitlab-rails/app/views"
+  * "/opt/gitlab/embedded/service/gem/ruby/2.0.0/gems/kaminari-0.15.1/app/views"
+  * "/opt/gitlab/embedded/service/gem/ruby/2.0.0/gems/devise-3.0.4/app/views"
+):
+  app/controllers/application_controller.rb:59:in `set_current_user_for_thread'
+```
+
+

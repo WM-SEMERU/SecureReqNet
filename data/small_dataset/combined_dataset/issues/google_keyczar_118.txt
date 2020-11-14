@@ -1,0 +1,21 @@
+authenticate key material ciphertext for PBE keysets
+
+
+C++, C#, and Go have support of PBE keysets, however since the format used 
+doesn't make use of a MAC. If the user inputs a wrong password, invalid json 
+formatting is the only way the an implementation can tell if the password needs 
+to be re-prompted. Using authenticated encryption would solve this issue.
+
+How to handle authenticated encryption becomes trickier. If using Aes-then-Hmac 
+you need two keys. 
+
+ * Thus you could run PBKDF2 for a large enough size to produce all the keymaterial. However, PBKDF2 is not very efficient at doing that, and adds extra slow dow for the user and not an attacker.
+ * Running for each key PBKDF2 with two salts has the same deal.
+ * PBKDF2 for a master key and use a less expensive kdf to produce two sub keys.
+ * Use PBKDF2 just for an aes key (like now) and then encrypt a random hmac key.
+
+Or just use AES-GCM mode for PBE.
+
+Other options?
+
+Original issue reported on code.google.com by jtu...@gmail.com on 19 Jan 2013 at 12:47

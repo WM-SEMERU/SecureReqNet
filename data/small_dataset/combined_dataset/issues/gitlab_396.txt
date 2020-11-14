@@ -1,0 +1,1 @@
+Basically a feature request but it would be great to be able to set notifications at a project level where my only permissions to the project are inherited from the group the project is in.

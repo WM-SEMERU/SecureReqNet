@@ -1,0 +1,13 @@
+PasswordProvider abstraction could be abused for races
+
+
+Some classes that have multiple PasswordProvider fields could inherently be subject to races:
+
+SSLClientConfig
+MySQLConnectorConfig
+ClientSSLContextBuilder
+TLSServerConfig
+BasicHTTPAuthenticator
+BasicAuthDBConfig
+AWSCredentialsConfig
+

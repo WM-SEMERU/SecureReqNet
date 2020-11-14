@@ -1,0 +1,21 @@
+Creating satellites through the rake task no longer seems to work.
+
+```
+Foo / Bar ...
+... rake aborted!
+undefined method `success?' for nil:NilClass
+/home/git/gitlabhq/lib/tasks/gitlab/enable_automerge.rake:34:in `block in create_satellites'
+/home/git/gitlabhq/vendor/bundle/ruby/2.1.0/gems/activerecord-4.0.3/lib/active_record/relation/batches.rb:26:in `block (2 levels) in find_each'
+/home/git/gitlabhq/vendor/bundle/ruby/2.1.0/gems/activerecord-4.0.3/lib/active_record/relation/batches.rb:26:in `each'
+/home/git/gitlabhq/vendor/bundle/ruby/2.1.0/gems/activerecord-4.0.3/lib/active_record/relation/batches.rb:26:in `block in find_each'
+/home/git/gitlabhq/vendor/bundle/ruby/2.1.0/gems/activerecord-4.0.3/lib/active_record/relation/batches.rb:75:in `find_in_batches'
+/home/git/gitlabhq/vendor/bundle/ruby/2.1.0/gems/activerecord-deprecated_finders-1.0.3/lib/active_record/deprecated_finders/relation.rb:70:in `find_in_batches'
+/home/git/gitlabhq/vendor/bundle/ruby/2.1.0/gems/activerecord-4.0.3/lib/active_record/relation/batches.rb:25:in `find_each'
+/home/git/gitlabhq/vendor/bundle/ruby/2.1.0/gems/activerecord-4.0.3/lib/active_record/querying.rb:8:in `find_each'
+/home/git/gitlabhq/lib/tasks/gitlab/enable_automerge.rake:19:in `create_satellites'
+/home/git/gitlabhq/lib/tasks/gitlab/enable_automerge.rake:5:in `block (3 levels) in <top (required)>'
+Tasks: TOP => gitlab:satellites:create
+(See full trace by running task with --trace)
+```
+
+It seems at some point satellites were created using `system`, but they were changed to use popen. It doesn't seem like popen sets `$?`.

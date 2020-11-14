@@ -1,0 +1,26 @@
+Brave Fails BrowserScope Security Test #3
+
+
+https://www.browserscope.org/security/test
+Results
+
+PASS postMessage API
+PASS JSON.parse API
+FAIL toStaticHTML API
+PASS httpOnly cookie API
+PASS X-Frame-Options
+PASS X-Content-Type-Options
+PASS Block reflected XSS
+PASS Block location spoofing
+PASS Block JSON hijacking
+PASS Block XSS in CSS
+PASS Sandbox attribute
+PASS Origin header
+PASS Strict Transport Security
+PASS Block cross-origin CSS attacks
+PASS Content Security Policy
+PASS Cross Origin Resource Sharing
+PASS Block visited link sniffing
+
+Brave fails the 3rd test...  toStaticHTML API
+Hopefully BRAVE can close this gap soon.

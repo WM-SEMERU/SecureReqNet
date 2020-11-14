@@ -1,0 +1,5 @@
+Configure Kube2Sky to talk to the master securely
+
+
+Sice kube2sky is part of cluster bootstrapping, it should use the same communication pathway as the kubelet and kube-proxy.
+@thockin @ArtfulCoder @vishh @cjcullen

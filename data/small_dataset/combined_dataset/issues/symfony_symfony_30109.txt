@@ -1,0 +1,8 @@
+[Messenger] Only instantiate the handlers that are needed to handle the message
+
+
+Description
+Currently, when a message is handled, all the handlers for every message are instantiated. This seems very inefficient. It seems like there should be a way to delay instantiating the handler until it is determined which handlers will be needed and only instantiate those handlers.
+This happens when using synchronous messages. This also happens with asynchronous messages through RabbitMQ when using multiple queues with one message class per queue. You typically want a worker handling one queue/message type which you can do through bin/console & transports. As soon as message comes in all the handlers for all the messages are instantiated instead of just the ones for that message.
+Example
+In a large application there may be hundreds of different messages and handlers. In servicing a REST request you may only dispatch one message synchronously. When that message is handled, all the message handlers are instantiated, even ones that are only meant to be used asynchronously. It would be much better if just the necessary handlers are instantiated and not hundreds.

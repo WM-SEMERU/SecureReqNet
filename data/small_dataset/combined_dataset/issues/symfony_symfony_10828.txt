@@ -1,0 +1,5 @@
+Getting DisabledException even though provided password is invalid
+
+
+Is this intended? I have user registration that sends an email with an activation link, and if the user hasn't yet activated their account then I'd like to present the user with a 'Resend Activation' link.
+However even if the user provides an invalid password but a valid username then the DisabledException is still being thrown. Frankly I'd rather show the 'Resend Activation' link only when the credentials are valid.

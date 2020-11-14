@@ -1,0 +1,31 @@
+Favicons mismatch on devices after bookmarks sync
+
+
+Description:
+Favicons mismatch on devices after bookmarks sync
+Device details:
+
+Device 1: iPhone 7+ (iOS12) Sync chain creator
+Device 2: iPhone 6+ (iOS12)
+
+Steps to Reproduce
+
+Create bookmarks on device 1 before sync chain is created
+Ensure all bookmarks have favicons shown in bookmark manager
+Create sync chain and add device 2 to the chain by scanning QR code
+Wait for the bookmarks to be sync'd on device 2
+Some bookmarks show letter on device 2 but device 1 has proper site favicon
+
+Actual result:
+Device 1 with proper favicons
+
+Device 2 letter instead of favicon
+
+Expected result:
+Should be same on both devices
+Reproduces how often: [Easily reproduced/Intermittent issue]
+Easy
+Brave Version:
+Sync build
+Additional Information
+Visiting the site doesn't update the favicons on either of the devices

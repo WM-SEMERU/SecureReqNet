@@ -1,0 +1,375 @@
+Microsoft Security Advisory CVE-2018-0786: Security Feature Bypass in X509 Certificate Validation
+
+
+Microsoft Security Advisory CVE-2018-0786
+Security Feature Bypass in X509 Certificate Validation
+Executive Summary
+Microsoft is releasing this security advisory to provide information about a vulnerability in the WCF packages for .NET Core 1.0 and 1.1, and 2.0. This advisory also provides guidance on what developers can do to update their applications correctly.
+Microsoft is aware of a security vulnerability in the public versions of .NET Core where an attacker could present a certificate that is marked invalid for a specific use, but a component uses it for that purpose. This action disregards the Enhanced Key Usage tagging.
+The security update addresses the vulnerability by ensuring that .NET Core components completely validate certificates.
+In addition to updating any vulnerable packages and redeploying applications system administrators are advised to update their .NET Core runtimes to versions 1.0.9, 1.1.6 and 2.0.5. Developers are advised to update their .NET Core SDK to version 2.1.4 or 1.1.7. These runtime and SDK versions address CVE-2018-0764.
+Announcement
+The original announcement can be found at dotnet/announcements#51
+Affected Software
+The vulnerability affects any Microsoft .NET Core project if it uses any of affected packages versions listed below
+
+
+
+Package name
+Package versions
+Fixed package versions
+.NET Core version
+
+
+
+
+System.ServiceModel.Primitives
+4.4.0
+4.4.1
+2.0
+
+
+System.ServiceModel.Http
+4.4.0
+4.4.1
+2.0
+
+
+System.ServiceModel.NetTcp
+4.4.0
+4.4.1
+2.0
+
+
+System.ServiceModel.Duplex
+4.4.0
+4.4.1
+2.0
+
+
+System.ServiceModel.Security
+4.4.0
+4.4.1
+2.0
+
+
+System.Private.ServiceModel
+4.4.0
+4.4.1
+2.0
+
+
+
+
+
+
+Package name
+Package versions
+Fixed package versions
+.NET Core version
+
+
+
+
+System.ServiceModel.Primitives
+4.3.0
+4.3.1
+1.1
+
+
+System.ServiceModel.Http
+4.3.0
+4.3.1
+1.1
+
+
+System.ServiceModel.NetTcp
+4.3.0
+4.3.1
+1.1
+
+
+System.ServiceModel.Duplex
+4.3.0
+4.3.1
+1.1
+
+
+System.ServiceModel.Security
+4.3.0
+4.3.1
+1.1
+
+
+System.Private.ServiceModel
+4.3.0
+4.3.1
+1.1
+
+
+
+
+
+
+Package name
+Package versions
+Fixed package versions
+.NET Core version
+
+
+
+
+System.ServiceModel.Primitives
+4.1.0
+4.1.1
+1.0
+
+
+System.ServiceModel.Http
+4.1.0
+4.1.1
+1.0
+
+
+System.ServiceModel.NetTcp
+4.1.0
+4.1.1
+1.0
+
+
+System.ServiceModel.Duplex
+4.0.1
+4.0.2
+1.0
+
+
+System.ServiceModel.Security
+4.0.1
+4.0.2
+1.0
+
+
+System.Private.ServiceModel
+4.1.0
+4.1.1
+1.0
+
+
+
+This vulnerability also affects any .NET native applications using the following NuGet packages.
+
+
+
+NuGet Packages
+Fixed NuGet Packages
+
+
+
+
+Microsoft.NETCore.UniversalWindowsPlatform 5.2.* (contains   .NET native 1.4.*)
+Microsoft.NETCore.UniversalWindowsPlatform 5.2.4
+
+
+Microsoft.NETCore.UniversalWindowsPlatform 5.3.* (contains   .NET native 1.6.*)
+Microsoft.NETCore.UniversalWindowsPlatform 5.3.5
+
+
+Microsoft.NETCore.UniversalWindowsPlatform 5.4.* (contains   .NET native 1.7.*)
+Microsoft.NETCore.UniversalWindowsPlatform 5.4.2
+
+
+Microsoft.NETCore.UniversalWindowsPlatform 6.0.* (contains   .NET native 2.0.*)
+Microsoft.NETCore.UniversalWindowsPlatform 6.0.6
+
+
+
+Advisory FAQ
+How do I know if I am affected?
+.NET Core and ASP.NET Core have two types of dependencies: direct and transitive. If your project has a direct or transitive dependency on any of the packages and versions listed above, you are affected.
+NET Core Project formats
+.NET Core has two different project file formats, depending on what software created the project.
+
+project.json is the format used in .NET Core 1.0 and Microsoft Visual Studio 2015.
+csproj is the format used in .NET Core 1.1 and Microsoft Visual Studio 2017.
+
+You must ensure you follow the correct update instructions for your project type.
+Direct Dependencies
+Direct dependencies are dependencies where you specifically add a package to your project. For example, if you add the Microsoft.AspNetCore.Mvc package to your project then you have taken a direct dependency on Microsoft.AspNetCore.Mvc.
+Direct dependencies are discoverable by reviewing your project.json or csproj file.
+Transitive Dependencies
+Transitive dependencies occur when you add a package to your project that in turn relies on another package. For example, the Microsoft.AspNetCore.Mvc package depends on the Microsoft.AspNetCore.Mvc.Core package (among others). If your project has a direct dependency on Microsoft.AspNetCore.Mvc then it also has a transitive dependency on the Microsoft.AspNetCore.Mvc.Core package.
+Transitive dependencies are reviewable in the Visual Studio Solution Explorer window, which supports searching, or by reviewing the project.lock.json file contained in the root directory of your project for project.json projects or the project.assets.json file contained in the obj directory of your project for csproj projects. These files are the authoritative list of all packages used by your project, containing both direct and transitive dependencies.
+How do I fix my affected application?
+You will need to fix both direct dependencies and review and fix any transitive dependencies. The affected packages and versions in the previous “Affected Software” section include each vulnerable package, the vulnerable versions, and the patched versions
+Fixing Direct Dependencies – project.json/VS2015
+Open your project.json file in your editor. Look for the dependencies section. Below is an example dependencies section:
+    "dependencies": {
+      "Microsoft.NETCore.App": {
+        "version": "1.0.1",
+        "type": "platform"
+      },
+     "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
+     "System.ServiceModel.Security ": "4.0.1",
+    }
+This example has three direct dependencies: Microsoft.NETCore.App, Microsoft.AspNetCore.Server.Kestrel and System.ServiceModel.Security.
+Microsoft.NetCore.App is the platform the application targets, you should ignore this. The other packages expose their version to the right of the package name. In our example, our non-platform packages are version 1.0.1.
+Review your direct dependencies for any instance of the packages and versions listed above. In the example above, there is a direct dependency on the vulnerable package, System.ServiceModel.Security version 4.0.1.
+To update to the fixed package, change the version number to be the appropriate package for your release. In the example, this would be updating System.ServiceModel.Security to 4.0.2
+After updating the vulnerable package versions, save your project.json file.
+The dependencies section in our example project.json would now look as follows:
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
+     "System.ServiceModel.Security ": "4.0.2",
+  }
+If you are using Visual Studio and save your updated project.json file, Visual Studio will restore the new package version. You can see the restore results by opening the Output Window (Ctrl+Alt+O) and changing the Show output from drop-down list to Package Manager.
+If you are not using Visual Studio, open a command line and change to your project directory. Execute the dotnet restore command to restore your new dependency.
+After you have addressed all of your direct dependencies, you must also review your transitive dependencies.
+Fixing Direct Dependencies – csproj/VS2017
+Open your projectname.csproj file in your editor, or right click the project in Visual Studio 2017 and choose Edit projectname.csproj from the content menu, where projectname is the name of your project. Look for PackageReference nodes. The following shows an example project file:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Security" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0 " />
+  </ItemGroup>
+</Project>
+The example has a single direct dependency, as seen by the PackageReference element. The name of the package is in the Include attribute, and the package version number is in the Version attribute that is exposed to the right of the package name. The example shows a single package System.ServiceModel.Security version 4.3.0.
+Review your PackageReference elements for any instance of the packages and versions listed above. In the example above, there is a direct dependency on the vulnerable package, System.ServiceModel.Security version 4.3.0.
+To update to the fixed package, change the version number to the appropriate package for your release. In the example, this would be updating System.ServiceModel.Security to 4.3.1.
+After updating the vulnerable package version, save your csproj file. The example csproj would now look as follows:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Security" Version="4.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0 " />
+  </ItemGroup>
+</Project>
+If you are using Visual Studio and save your updated csproj file, Visual Studio will restore the new package version. You can see the restore results by opening the Output Window (Ctrl+Alt+O) and changing the Show output from drop-down list to Package Manager.
+If you are not using Visual Studio open a command line and change to your project directory. Execute the dotnet restore command to restore your new dependency.
+After updating your direct dependencies
+Recompile your application.
+If after recompilation you see a Dependency conflict warning, you must update your other direct dependencies to the appropriate version.
+To fix this, edit the version for the expected package to be the version expected by updating your csproj or project.json in the same way that you used to update the vulnerable package versions.
+After you have addressed all of your direct dependencies, you must also review your transitive dependencies.
+Reviewing Transitive Dependencies
+There are two ways to view transitive dependencies. You can either use Visual Studio’s Solution Explorer, or you can review your project.lock.json (project.json/VS2015) or project.assets.json (csproj/VS2017) file.
+Using Visual Studio Solution Explorer (VS2015)
+If you want to use Visual Studio 2015, open your project in Visual Studio 2015 and then press Ctrl+; to activate the search in Solution Explorer. Search for each of the vulnerable package names and make a note of the version numbers of any results you find.
+For example, searching for Microsoft.AspNetCore.Mvc.Core in an example project that contains a reference to Microsoft.AspNetCore.Mvc shows the following results in Visual Studio 2015.
+
+The search results appear as a tree. In these results, you can see we have found references to Microsoft.AspNetCore.Mvc, version 1.0.1, ` vulnerable version.
+The first entry under the References heading refers to the target framework your application is using. This will be .NETCoreApp, .NETStandard or .NET-Framework-vX.Y.Z (where X.Y.Z is an actual version number) depending on how you configured your application. Under your target framework will be the list of packages you have directly taken a dependency on. In this example, the application takes a dependency on Microsoft.AspNetCore.Mvc. Microsoft.AspNetCore.Mvc in turn has leaf nodes that list its dependencies and their versions. In this case the Microsoft.AspNetCore.Mvc package takes a dependency on a vulnerable version of Microsoft.AspNetCore.Mvc.Core and numerous other packages.
+Manually reviewing project.lock.json (project.json/VS2015)
+Open the project.lock.json file in your editor. We suggest you use an editor that understands json and allows you to collapse and expand nodes to review this file; both Visual Studio and Visual Studio Code provide this functionality.
+If you are using Visual Studio the project.lock.json file is “under” the project.json file. Click the right pointing triangle, ▷, to the left of the project.json file to expand the solution tree to expose the project.lock.json file. The following image shows a project with the project.json file expanded to show the project.lock.json file.
+
+Search the project.lock.json file for the vulnerable packages, using the format packagename/, using each of the package names from the table above. If you find any vulnerable assembly name in your search examine the line on which they are found, the version number is after the / and compare to the vulnerable versions table above. For example a search result that shows Microsoft.AspNetCore.Mvc.Cors/1.0.1 is a reference to v1.0.1 of Microsoft.AspNetCore.Mvc.Cors.   If your project.lock.json file includes references to any of the package versions shown above then you will need to fix the transitive dependencies.
+Fixing transitive dependencies (project.json/VS2015)
+If you have not found any reference to any of the vulnerable package versions listed above this means none of your direct dependencies depend on any vulnerable packages or you have already fixed the problem by updating the direct dependencies.
+If your transitive dependency review found references to any of the vulnerable packages you must add a direct dependency to the updated package to your project.json file to override the transitive dependency. Open your project.json and find the dependencies section. For example:
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0"
+  }
+For each of the vulnerable packages your search returned you must add a direct dependency to the updated version by adding it to the project.json file. You do this by adding a new line to the dependencies section, referring the fixed version. For example, if your search showed a transitive reference to the vulnerable System.ServiceModel.Security version 4.0.1  you would add a reference to the appropriate fixed version, 4.0.2. Edit the project.json file as follows:
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "System.ServiceModel.Security": "4.0.2",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0"
+  }
+After you have added direct dependencies to the fixed packages, save your project.json file.
+If you are using Visual Studio save your updated project.json file and Visual Studio will restore the new package versions. You can see the restore results by opening the Output Window (Ctrl+Alt+O) and changing the Show output from drop-down list to Package Manager.
+If you are not using Visual Studio open a command line and change to your project directory. Execute the dotnet restore command to restore your new dependencies.
+Using Visual Studio Solution Explorer (VS2017)
+If you want to use Solution Explorer, open your project in Visual Studio 2017, and then press Ctrl+; to activate the search in Solution Explorer. Search for each of the vulnerable package names and make a note of the version numbers of any results you find.
+For example, searching for Microsoft.AspNetCore.Mvc.Core in an example project that contains a package that takes a dependency on Microsoft.AspNetCore.Mvc shows the following results in Visual Studio 2017.
+
+The search results appear as a tree. In these results, you can see we have found references to Microsoft.AspNetCore.Mvc.Core version 1.1.2.
+Under the Dependencies node will be a NuGet node. Under the NuGet node will be the list of packages you have directly taken a dependency on and their versions. In this example, the application takes a direct dependency on Microsoft.AspNetCore.Mvc. Microsoft.AspNetCore.Mvc in turn has leaf nodes that list its dependencies and their versions. In the example the Microsoft.AspNetCore.Mvc package takes a dependency on a version of Microsoft.AspNetCore.Mvc.ApiExplorer which in turn takes a dependency on a vulnerable version of Microsoft.AspNetCore.Mvc.Core.
+Manually reviewing project.assets.json (VS2017)
+Open the project.assets.json file from your project’s obj directory in your editor. We suggest you use an editor that understands json and allows you to collapse and expand nodes to review this file; both Visual Studio and Visual Studio Code provide this functionality.
+Search the project.assets.json file for each of the vulnerable packages, using the format packagename/ using the package name from the table above. If you find the assembly name in your search examine the line on which they are found, the version number is after the / and compare to the vulnerable versions table above. For example a search result that shows Microsoft.AspNetCore.Mvc.Cors/1.1.0 is a reference to v1.1.0 of Microsoft.AspNetCore.Mvc.Cors.   If your project.assets.json file includes references to any of the vulnerable packages shown above then you will need to fix the transitive dependencies.
+If you have not found any reference to any vulnerable packages this means none of your direct dependencies depend on any vulnerable packages or you have already fixed the problem by updating the direct dependencies.
+If your transitive dependency review found references to any of the vulnerable packages you must add a direct dependency to the updated package to your csproj file to override the transitive dependency. Open your projectname.csproj file in your editor, or right click on the project in Visual Studio 2017 and choose Edit projectname.csproj from the content menu, where projectname is the name of your project. Look for PackageReference nodes, for example:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+</Project>
+For each of the vulnerable packages your search returned you must add a direct dependency to the updated version by adding it to the csproj file. You do this by adding a new line to the dependencies section, referring the fixed version. For example, if your search showed a transitive reference to the vulnerable System.ServiceModel.Security, version 4.3.0 you would add a reference to the appropriate fixed version,.
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Security" Version="4.3.1`" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+After you have added the direct dependency reference, save your csproj file.
+If you are using Visual Studio, save your updated csproj file and Visual Studio will restore the new package versions. You can see the restore results by opening the Output Window (Ctrl+Alt+O) and changing the Show output from drop-down list to Package Manager.
+If you are not using Visual Studio, open a command line and change to your project directory. Execute the dotnet restore command to restore your new dependencies.
+Rebuilding your application
+Finally rebuild your application, test as you would do normally and redeploy using your favored deployment mechanism.
+How do I fix my .NET native application?
+.NET native requires that applications be re-processed by the .NET native compiler to incorporate the fixes and the re-processed version needs to be distributed via the Windows Store.
+We recommend that you update your .NET UWP apps to use the latest minor version of the Microsoft.NETCore.UniversalWindowsPlatform NuGet package so that you can build and verify that your app works as expected when updated. If you are using version 6.0.x, you should update to 6.0.6 and if you’re using 5.2.x, you can update to 5.2.4. Of course, you can update to a higher major version too, but we are distributing security updates for all impacted major versions (currently 5.2.x, 5.3.x, 5.4.x and 6.0.x). Additionally, whether or not you update your NuGet packages, all applications submitted to the store after today will be automatically fixed during submission processing.
+If you do not update your app in the Store, it will automatically be reprocessed and distributed via an application update in the next few weeks. Users who have automatic app updates enabled will get the fix with no intervention on your or their parts. Because updated apps are distributed through the Windows Store, sideloaded apps will not be automatically updated. We recommend that developers who distribute sideloaded apps update the affected NuGet packages, rebuild their applications and distribute them to their users.
+Microsoft is committed to keeping UWP applications secure and to supporting developers. If you have feedback on the fix distribution process, please let us know at dotnetnative@microsoft.com.
+Other Information
+Reporting Security Issues
+If you have found a potential security issue in .NET Core, please email details to secure@microsoft.com. Reports may qualify for the .NET Core Bug Bounty. Details of the .NET Core Bug Bounty including Terms and Conditions are at https://aka.ms/corebounty.
+Support
+You can ask questions about this issue on GitHub in the .NET Core or ASP.NET Core organizations. These are located at https://github.com/dotnet/ and https://github.com/aspnet/. The Announcements repo for each product (https://github.com/dotnet/Announcements and https://github.com/aspnet/Announcements) will contain this bulletin as an issue and will include a link to a discussion issue where you can ask questions.
+What if the update breaks my application?
+An application can be pinned to a previous version of the runtime by editing the application.runtime.config file for that application and editing the framework version and setting rollForward to false. This should be treated as a temporary measure and the application updated to work with the patched versions of the framework.
+Note that this file is optional, you may need to create it for each application alongside the executable.
+External Links
+CVE-2018-0786
+Revisions
+V2.0 (Jan 29, 2018): Advisory updated with correct package versions and update instructions.
+V1.0 (Jan 9, 2018): Advisory published.
+Version 2.0
+Last Updated 2018-01-29

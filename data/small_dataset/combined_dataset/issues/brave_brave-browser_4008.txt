@@ -1,0 +1,16 @@
+Fix the Ad Rewards settings panel
+
+
+References:
+Currently the uncashed tokens are sent to the server, against a wallet ID, every week.
+On the 5th of each month, Brave Rewards resets the estimated earnings counter to zero.
+Issue:
+Because the uncashed tokens are not in sync (weekly redemption vs. one time monthly payment), when the counter resets to zero, the user may perceive that they lost earned tokens.
+Fix:
+When the clock gets to the 5th of the month, the user should see the tokens that were not redeemed yet.
+
+so grant will show all uncashed tokens redeemed
+and the user will see value for tokens not yet redeemed (instead of 0)
+
+Prioritizing it as a P1 since it feels like earned BAT was lost.
+@jsecretan @evq @NejcZdovc @tmancey

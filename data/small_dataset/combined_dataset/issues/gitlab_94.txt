@@ -1,0 +1,25 @@
+When syntax highlighting code in GFM the HTML does not get escaped as it did under GitLab Community Edition 6.5. This may be due to the switch from pygments to highlight.js as the server side processing escaped the HTML. However this is not an issue when viewing files with code and HTML embedded in it as all the "&lt;" and "&gt;" appear to be properly escaped.
+
+Below is syntax highlighting of Perl with HTML with "italic" &lt;i&gt; tags.
+
+```perl
+$var = "This is perl code with <i>HTML</i>";
+print $var;
+```
+
+Attached is a link to pygments generated output of the above create Feb 25th 22:13 EST (http://pygments.org/demo/269238/)
+
+The link here also shows this bug running 6.6.2 at the time: https://gitlab.com/help/markdown#code-and-syntax-highlighting
+
+From the link above to the Markdown help page, the following example does not show "tag" with &lt;b&gt;, but instead makes the text bold.
+
+<pre>
+```
+No language indicated, so no syntax highlighting.
+s = "There is no highlighting for this."
+But let's throw in a <b>tag</b>.
+```
+</pre>
+
+Below is a link in GitHub which shows the expected output:
+https://github.com/gitlabhq/gitlabhq/blob/master/doc/markdown/markdown.md#code-and-syntax-highlighting

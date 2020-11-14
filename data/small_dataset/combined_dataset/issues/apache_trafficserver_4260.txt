@@ -1,0 +1,5 @@
+Removes logging of secrets
+
+
+This log statement was dangerous, and redacting the sensitive information also made it much less useful. So this change removes the
+statement. A useful log can be added later if needed.

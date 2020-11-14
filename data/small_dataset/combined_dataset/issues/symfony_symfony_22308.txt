@@ -1,0 +1,50 @@
+[Security] You are not allowed to define new elements for path "security.firewalls"
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+Symfony version
+-
+
+
+
+One of the most frustrating limitations of the Security component config is that you can't define the firewalls in different files:
+InvalidConfigurationException in PrototypedArrayNode.php line 325:
+
+You are not allowed to define new elements for path "security.firewalls". Please
+define all elements for this path in one config file.
+
+But this could be so useful! Like in this example:
+# app/config/dev/security.yml
+security:
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+# app/config/security.yml
+security:
+    # ...
+    firewalls:
+        main:
+            # ...
+So, my question for those experts in the internals of the Security component: would be really hard to remove this limitation? Maybe it's a matter of changing a few lines of code but nobody really tried to do that. Thanks!

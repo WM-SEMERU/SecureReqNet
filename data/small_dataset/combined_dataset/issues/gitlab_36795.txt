@@ -1,0 +1,18 @@
+### Description
+
+There's multiple secrets in config/secrets.yml, while these are very sensitive, there's currently no way to 'rotate' these. I.e. if they're replaced, information (CI variables, SSL keys, 2FA secrets, etc.) is effectively lost with no way of decrypting it.
+
+From a security point of view there should be a way to rotate these.
+
+### Proposal
+
+A rake task (or other tool) that takes the old secrets, a set of new secrets reencrypts things with the new set. (After which the old ones can be removed)
+
+#### Use cases
+
+ A couple of use-cases:
+ - Regular/periodic rotation without dataloss.
+ - In case one or more are known to have been compromised
+ - When moving the data elsewhere, for example updating a test server with production data.
+
+There's probably more.

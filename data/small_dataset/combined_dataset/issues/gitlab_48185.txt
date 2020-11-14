@@ -1,0 +1,5 @@
+At the end of May, a severe security vulnerability was discovered in Git that pertains to submodules. Please see https://nvd.nist.gov/vuln/detail/CVE-2018-11235. The version of Git currently in 10.4.7 and others, including 10.6.3, 10.5.7, are exploitable in a very very bad way. Since all gitlab (TBMI) runs under the same user, any project which relies on submodules potentially exposes the entire Gitlab system and all users to this vulnerability.
+
+Do I need to recommend immediate action?
+
+Please tag: omnibus, security

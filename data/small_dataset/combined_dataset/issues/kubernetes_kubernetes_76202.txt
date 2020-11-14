@@ -1,0 +1,60 @@
+hostpath Volume leads to unmanaged/orphan PV
+
+
+Remember when back in the days we needed to create a Persistent Volume before creating the Pod, as otherwise we would get an error? Well, it seems that now you can create a Pod with a hostPath volume without creating the PV first, which, I think, can lead to scary scenarios.
+For example:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-volume
+  labels:
+    app: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+      name: nginx-http
+    volumeMounts:
+    - name: nginx
+      mountPath: /root/nginx-volume 
+  volumes:
+  - name: nginx
+    hostPath:
+      path: /var/demo
+
+Given the Pod above, if I create it, it won't through any error. If SSH into the pod, or node, the paths exist...:
+root@nginx-volume:/# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          97G   18G   80G  18% /
+tmpfs           3.7G     0  3.7G   0% /dev
+tmpfs           3.7G     0  3.7G   0% /sys/fs/cgroup
+/dev/sda1        97G   18G   80G  18% /root/nginx-volume
+shm              64M     0   64M   0% /dev/shm
+tmpfs           3.7G   12K  3.7G   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs           3.7G     0  3.7G   0% /sys/firmware
+
+..., and for the Pod it is allowing to use the entire Node capacity.
+Now the problems. If I do kubectl get pv, I get nothing:
+$ kubectl get pv
+No resources found.
+
+Now, it looks like I have an object, that is not visible to me, and has access to my entire node disk. So it could be accumulating data there without any control until my node blows up, and I wouldn't even know why.
+I continued with the test, and decided to create the PV manually and then the Pod (like it used to be done). I created the following PV;
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/demo"
+
+Then, when I created the pod, and accessed it, I still had all the node capacity available for the Pod, which means it never smelled the PV I created manually. On the other hand this makes sense. It seems that the object never gets into the etcd server. That is why I can't list it.
+Finally, when I delete the pod and SSH into the node, the data, of course, is there.
+I made the tests on GKE and bare metal. Both v1.12.
+Has anyone noticed this? If so, is there any logical explanation of why of this functionality? It seems to me a dangerous approach.

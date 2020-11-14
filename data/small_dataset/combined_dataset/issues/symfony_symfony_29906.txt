@@ -1,0 +1,17 @@
+Class "twig.controller.exception" does not exist
+
+
+Greetings,
+I work on a project, which is on Symfony 3.4.
+On my dev computer, I don't have any problem.
+But, when I tried to clone on another computer my project from Git, some functionalities don't work.
+In fact, I got a problem when I tried to log with FOSUSerBundle.
+In var/logs, it gives me :
+[2019-01-16 13:10:35] request.CRITICAL: Uncaught PHP Exception InvalidArgumentException: "Class "twig.controller.exception" does not exist." at C:\workspace\cms\vendor\symfony\symfony\src\Symfony\Component\HttpKernel\Controller\ControllerResolver.php line 180 {"exception":"[object] (InvalidArgumentException(code: 0): Class \"twig.controller.exception\" does not exist. at C:\\workspace\\cms\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\HttpKernel\\Controller\\ControllerResolver.php:180, Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0): No route found for \"GET /fonts/glyphicons-halflings-regular.woff2\" (from \"http://localhost:8000/css/bootstrap.css\") at C:\\workspace\\cms\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\HttpKernel\\EventListener\\RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException(code: 0):  at C:\\workspace\\cms\\var\\cache\\dev\\appDevDebugProjectContainerUrlMatcher.php:764)"} [] [2019-01-16 13:10:35] request.CRITICAL: Exception thrown when handling an exception (InvalidArgumentException: Class "twig.controller.exception" does not exist. at C:\workspace\cms\vendor\symfony\symfony\src\Symfony\Component\HttpKernel\Controller\ControllerResolver.php line 180) {"exception":"[object] (InvalidArgumentException(code: 0): Class \"twig.controller.exception\" does not exist. at C:\\workspace\\cms\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\HttpKernel\\Controller\\ControllerResolver.php:180)"} 
+I consulted #28015 and #27438 but can't find a suitable answer.
+I also tried composer update twig/twig but it shows me a lot of dependencies errors.
+So I am stucked on the freshly configured computer (dev machine is ok).
+Thanks for your further help.
+Kind regards,
+NB : Attached a screen of composer show with symfony's bundle, if it could help.
+capture

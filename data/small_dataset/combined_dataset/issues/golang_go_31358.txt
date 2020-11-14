@@ -1,0 +1,78 @@
+FreeOSMemory  FcntlFlock question
+
+
+go version 1.12 linux 64bit
+i need The program is allowed to run only once. but i found code used “FreeOSMemory”  syscall.FcntlFlock Always return ok.
+
+import "fmt"
+import "os"
+import "runtime/debug"
+import "time"
+import "syscall"
+
+func checkLock() (bool, error) {
+	f, err := os.OpenFile("test.lock", os.O_WRONLY|os.O_CREATE, 0666)
+	spec := syscall.Flock_t{
+		Type:   syscall.F_WRLCK,
+		Whence: int16(os.SEEK_SET),
+		Start:  0,
+		Len:    0,
+		Pid:    int32(os.Getpid()),
+	}
+	if err := syscall.FcntlFlock(f.Fd(), syscall.F_SETLK, &spec); err != nil {
+		return true, err
+	}
+	return false, nil
+}
+
+func main() {
+	isLock, err := checkLock()
+	if err != nil && isLock {
+		fmt.Println("the program is runing exit.:", err)
+		return
+	}
+	for {
+		fmt.Println("time.......")
+		time.Sleep(20000 * time.Millisecond)
+		debug.FreeOSMemory()
+	}
+}
+
+run a test  pid 35758:
+[root@node85 ~]# ./test 
+time ......
+time ......
+run other test:
+[root@node85 ~]# ./test 
+the program is runing : resource temporarily unavailable
+[root@node85 ~]# ./test 
+the program is runing : resource temporarily unavailable
+[root@node85 ~]# ./test 
+the program is runing : resource temporarily unavailable
+[root@node85 ~]# ./test 
+the program is runing : resource temporarily unavailable
+[root@node85 ~]# ./test 
+time ......
+
+[root@node85 ~]# ll /proc/35758/fd
+总用量 0
+lrwx------ 1 root root 64 4月   9 12:29 0 -> /dev/pts/7
+lrwx------ 1 root root 64 4月   9 12:29 1 -> /dev/pts/7
+lrwx------ 1 root root 64 4月   9 12:29 2 -> /dev/pts/7
+l-wx------ 1 root root 64 4月   9 12:29 3 -> /root/test.lock
+lrwx------ 1 root root 64 4月   9 12:29 4 -> anon_inode:[eventpoll]
+[root@node85 ~]# ll /proc/35758/fd
+总用量 0
+lrwx------ 1 root root 64 4月   9 12:29 0 -> /dev/pts/7
+lrwx------ 1 root root 64 4月   9 12:29 1 -> /dev/pts/7
+lrwx------ 1 root root 64 4月   9 12:29 2 -> /dev/pts/7
+l-wx------ 1 root root 64 4月   9 12:29 3 -> /root/test.lock
+lrwx------ 1 root root 64 4月   9 12:29 4 -> anon_inode:[eventpoll]
+[root@node85 ~]# ll /proc/35758/fd
+总用量 0
+lrwx------ 1 root root 64 4月   9 12:29 0 -> /dev/pts/7
+lrwx------ 1 root root 64 4月   9 12:29 1 -> /dev/pts/7
+lrwx------ 1 root root 64 4月   9 12:29 2 -> /dev/pts/7
+lrwx------ 1 root root 64 4月   9 12:29 4 -> anon_inode:[eventpoll]
+[root@node85 ~]# 
+

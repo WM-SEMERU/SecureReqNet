@@ -1,0 +1,29 @@
+deps: float 949ff366 from openssl (ECDSA blinding) (8.x backport)
+
+
+Same as #21345 but for 1.0.2 on 8.x.
+Pending OpenSSL 1.0.2p release.
+Ref: https://www.nccgroup.trust/us/our-research/technical-advisory-return-of-the-hidden-number-problem/
+Ref: #21345
+Upstream: openssl/openssl@949ff36
+Original commit message:
+Add blinding to an ECDSA signature
+
+Keegan Ryan (NCC Group) has demonstrated a side channel attack on an
+ECDSA signature operation. During signing the signer calculates:
+
+s:= k^-1 * (m + r * priv_key) mod order
+
+The addition operation above provides a sufficient signal for a
+flush+reload attack to derive the private key given sufficient signature
+operations.
+
+As a mitigation (based on a suggestion from Keegan) we add blinding to
+the operation so that:
+
+s := k^-1 * blind^-1 (blind * m + blind * r * priv_key) mod order
+
+Since this attack is a localhost side channel only no CVE is assigned.
+
+Reviewed-by: Rich Salz <rsalz@openssl.org>
+

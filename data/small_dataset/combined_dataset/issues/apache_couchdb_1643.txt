@@ -1,0 +1,12 @@
+_active_tasks is exposed to non-admins
+
+
+Expected Behavior
+According to docs /_active_tasks should not return list of tasks to users having no _admin role.
+Current Behavior
+Seems at least all 2.1+ versions expose this endpoint to any authorized user. However, at least 1.6.1 does not.
+Your Environment
+
+Version used: 2.1.2, 2.2
+OS: Xenial
+

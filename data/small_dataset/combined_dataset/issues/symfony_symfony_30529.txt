@@ -1,0 +1,11 @@
+[DI] Repository wiring problem in TEST environment
+
+
+Symfony version(s) affected: 4.2.4 and probably earlier versions.
+Description
+Under certain conditions, a project running in the TEST environment throws an exception due to symfony incorrectly setting up a repository based on Service Entity Repository:
+TypeError: Argument 1 passed to App\Repository\DummyARepository::__construct() must implement interface Symfony\Bridge\Doctrine\RegistryInterface, instance of Doctrine\ORM\EntityManager given, called in C:\xampp\htdocs\ser_bug\vendor\doctrine\orm\lib\Doctrine\ORM\Repository\DefaultRepositoryFactory.php on line 68.
+How to reproduce
+It took a while to identify what it was in my real project that provided the conditions in which this bug appeared. I have created a simple demo project that triggers the bug reproduceably. It can be found at
+https://github.com/adrx/symfony_ser_bug.
+I am not capable of finding the source of the problem in the symfony code. I hope this demo of the bug will assist more capable folks to fix the bug so that my project's code behaves the same way in the TEST environment as in dev or prod.

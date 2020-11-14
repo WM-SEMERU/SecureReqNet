@@ -1,0 +1,11 @@
+Fix Code Style on Configure
+
+
+Summary of the changes (Less than 80 chars)
+
+This change aids in readability and consistency.
+
+Addresses #bugnumber (in this specific format)
+
+Does not address an open bug
+

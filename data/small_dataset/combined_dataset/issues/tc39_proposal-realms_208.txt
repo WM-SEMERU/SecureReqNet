@@ -1,0 +1,10 @@
+Clean Up Shim Removal
+
+
+In moving the shim to https://github.com/Agoric/realms-shim (#205), there were a few remaining bits and pieces that needed fixing:
+
+The .nycrc file is shim related and should be moved with the shim
+We needed to update the pointers to the shim to point to the realms-shim repo instead.
+The package.json referred to files that no longer exist.
+Due to a bad merge (apologies), some recently changed shim files remained.
+

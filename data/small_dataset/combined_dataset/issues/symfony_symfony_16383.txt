@@ -1,0 +1,24 @@
+Check the password in DaoAuthenticationProvider is not working.
+
+
+Checking 
+
+
+symfony/src/Symfony/Component/Security/Core/Authentication/Provider/DaoAuthenticationProvider.php
+
+
+         Line 58
+      in
+      3909460
+
+
+
+
+
+
+  if ($currentUser->getPassword() !== $user->getPassword()) { 
+
+
+
+
+ is not working because $currentUser and $user are same.

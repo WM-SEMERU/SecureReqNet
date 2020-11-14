@@ -1,0 +1,6 @@
+In current 7.2/7.2.1 unicorn.rb.example contains a 30 seconds timeout how ever this is not always enough for certain operations (for example, a zip download of a large repo).
+
+Nginx.conf.example have already has 300 seconds timeout. AFAIK, there is no reason to set unicorn.rb to the same 300 sec TO.
+
+Merge request:
+https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/177

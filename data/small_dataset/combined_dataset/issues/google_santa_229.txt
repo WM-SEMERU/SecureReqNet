@@ -1,0 +1,11 @@
+Long paths bypass Santa
+
+
+vn_getpath() may return errors, for instance, if the path is longer than MAXPATHLEN (there may be other cases as well).
+In such cases the executable will be allowed to execute.
+For example, the following execution of a new binary isn't blocked:
+cd /tmp
+for i in {1..4}; do mkdir `python -c "print 255 * 'x'"`; cd $_; done
+echo "int main() { return 0; }" | gcc -x c -
+./a.out
+

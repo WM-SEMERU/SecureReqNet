@@ -1,0 +1,5 @@
+issue
+"I make releases every week. Each release has own tag. When something got broken, I need to go and lookup which release was running on specific date, I go to tags list page in repository, but instead of datestamp I see ""four weeks ago"", ""about month ago"", etc. This is nice, sometimes, but I want to see everywhere datestamped information. Same for issues tracker, commits, etc. 
+In some places, I can roll over mouse in order to see timestamp, but this is bad design.
+
+I would like to see an option to show absolute date stamp instead of relative. One checkbox, fixes huge annoyance in GitLab. "

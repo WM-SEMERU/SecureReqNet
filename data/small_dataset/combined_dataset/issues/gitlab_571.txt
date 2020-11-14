@@ -1,0 +1,11 @@
+'Hello,
+
+I have noticed that a merge request only takes the first mentioned issue to close automatically.
+
+It makes no difference how to write down the issues:
+
+- ```Fixed hash4 and hash6```
+- ```Fixed hash4 Fixed hash6```
+- ```Fixed hash4
+
+Fixed hash6```

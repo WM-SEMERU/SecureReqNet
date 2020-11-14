@@ -1,0 +1,312 @@
+Invalid token when confirm email and Correlation failed when facebook sign in
+
+
+Describe the bug
+For few weeks I do have issue with confirm email and external logins. Those issues are totally random.
+So some users receive Correlation failed when try to login with facebook or google but I am not able to reproduce this.
+But I see this error in App Insight logs and those users who try to activate email usually are not confirmed
+To Reproduce
+My startup.cs
+namespace Flymark.Online.Web
+{
+    public class Startup
+    {
+        private readonly IHostingEnvironment _env;
+
+        public Startup(IHostingEnvironment env)
+        {
+            _env = env;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+
+        public IConfigurationRoot Configuration { get; }
+
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Configure SnapshotCollector from application settings
+            services.Configure<SnapshotCollectorConfiguration>(
+                Configuration.GetSection(nameof(SnapshotCollectorConfiguration)));
+            // Add SnapshotCollector telemetry processor.
+            services.AddSingleton<ITelemetryProcessorFactory>(sp => new SnapshotCollectorTelemetryProcessorFactory(sp));
+            services.AddApplicationInsightsTelemetryProcessor<TelemetryFilter>();
+            services.AddSingleton<ITelemetryInitializer, AppInsightsInitializer>();
+            services.AddCors();
+            var decompressionOptions = new RequestDecompressionOptions();
+
+            decompressionOptions.UseDefaults();
+            services.AddRequestDecompression(decompressionOptions);
+
+            FlymarkAppSettings.Init(Configuration, _env.EnvironmentName);
+
+            var storageUri = new Uri(Configuration.GetValue<string>("Flymark:DataProtectionStorageUrl"));
+            //Get a reference to a container to use for the sample code, and create it if it does not exist.
+            var container = new CloudBlobClient(storageUri).GetContainerReference("data-protection");
+            services.AddDataProtection()
+                .SetApplicationName("Flymark.Online")
+                .PersistKeysToAzureBlobStorage(container, "data-protection.xml");
+
+            services.AddDetection();
+            services.AddAutoMapper();
+
+            services.AddWebMarkupMin(
+                    options =>
+                    {
+                        options.AllowMinificationInDevelopmentEnvironment = true;
+                        options.AllowCompressionInDevelopmentEnvironment = true;
+                    })
+                .AddHtmlMinification(o =>
+                {
+                    o.ExcludedPages = new List<IUrlMatcher>
+                    {
+                        new WildcardUrlMatcher("/scripts/*")
+                    };
+                    o.MinificationSettings.AttributeQuotesRemovalMode = HtmlAttributeQuotesRemovalMode.KeepQuotes;
+                    o.MinificationSettings.EmptyTagRenderMode = HtmlEmptyTagRenderMode.NoSlash;
+                    o.MinificationSettings.RemoveOptionalEndTags = false;
+                })
+                .AddXmlMinification()
+                .AddHttpCompression();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+            });
+
+            services
+                .AddScoped<UserStore<ApplicationUser, IdentityRole<int>, FlymarkContext, int, IdentityUserClaim<int>,
+                        IdentityUserRole<int>, IdentityUserLogin<int>, IdentityUserToken<int>, IdentityRoleClaim<int>>,
+                    ApplicationUserStore>();
+            services.AddScoped<UserManager<ApplicationUser>, FlymarkUserManager>();
+            services.AddScoped<RoleManager<IdentityRole<int>>, ApplicationRoleManager>();
+            services.AddScoped<SignInManager<ApplicationUser>, ApplicationSignInManager>();
+            services
+                .AddScoped<RoleStore<IdentityRole<int>, FlymarkContext, int, IdentityUserRole<int>,
+                    IdentityRoleClaim<int>>, ApplicationRoleStore>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>(
+                    o =>
+                    {
+                        o.User.RequireUniqueEmail = true; 
+                    })
+                .AddUserStore<ApplicationUserStore>()
+                .AddUserManager<FlymarkUserManager>()
+                .AddRoleStore<ApplicationRoleStore>()
+                .AddRoleManager<ApplicationRoleManager>()
+                .AddSignInManager<ApplicationSignInManager>()
+                .AddClaimsPrincipalFactory<FlymarkClaimsPrincipalFactory>()
+                .AddDefaultTokenProviders();
+            services.AddSingleton<ILoggerFactory, LoggerFactory>(sp =>
+                new LoggerFactory(
+                    sp.GetRequiredService<IEnumerable<ILoggerProvider>>(),
+                    sp.GetRequiredService<IOptionsMonitor<LoggerFilterOptions>>()
+                )
+            );
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
+            services.AddMemoryCache();
+            services.AddSingleton<IEmailSender, FlymarkEmailSender>();
+
+            services.AddMvc(o =>
+                {
+                    o.Conventions.Add(new FlymarkAsyncConvention());
+                    o.AllowValidatingTopLevelNodes = false;
+                    o.AllowEmptyInputInBodyModelBinding = true;
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.DateFormatString = "dd/MM/yyyy";
+                    opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    var resolver = opt.SerializerSettings.ContractResolver;
+                    if (resolver == null) return;
+                    if (resolver is DefaultContractResolver res) res.NamingStrategy = null;
+                });
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+                options.Lockout.MaxFailedAccessAttempts = 20;
+            });
+            services
+                .AddAuthorization(options =>
+                {
+                    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                        .AddAuthenticationSchemes(OAuthValidationDefaults.AuthenticationScheme,
+                            IdentityConstants.ApplicationScheme)
+                        .RequireAuthenticatedUser()
+                        .Build();
+                });
+            services.AddAuthentication()
+                .AddExternalAuthProviders(Configuration)
+                .AddFlymarkOpenIdConnectServer()
+                .AddOAuthValidation(OAuthValidationDefaults.AuthenticationScheme);
+
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                // This is the key to control how often validation takes place
+                options.ValidationInterval = TimeSpan.FromMinutes(15);
+            });
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Identity/Account/LogIn";
+                config.AccessDeniedPath = "/Identity/Account/LogIn";
+                config.SlidingExpiration = true;
+                config.Events.OnRedirectToLogin = OnRedirectToLoginAsync;
+            });
+        }
+        private Task OnRedirectToLoginAsync(RedirectContext<CookieAuthenticationOptions> context)
+        {
+            if (context.HttpContext.Request.Path.Value.Contains("/api"))
+                context.Response.StatusCode = 401;
+            else
+                context.Response.Redirect(context.RedirectUri);
+
+            return Task.CompletedTask;
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
+
+            //builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterModule(new FlymarkDalDiModule
+            {
+                Configuration = Configuration
+            });
+            builder.RegisterModule(new DbDiModule(FlymarkAppSettings.Instance.DbContextConnection,
+                FlymarkAppSettings.Instance.StorageConnectionString));
+            builder.RegisterModule<FlymarkWebDiModule>();
+        }
+
+        private CultureInfo CreateCulture(string key)
+        {
+            return new CultureInfo(key)
+            {
+                NumberFormat = {NumberDecimalSeparator = "."},
+                DateTimeFormat = {ShortDatePattern = "dd/MM/yyyy"}
+            };
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            ILoggerFactory loggerFactory, IMapper mapper)
+        {
+#if DEBUG
+            mapper.ConfigurationProvider.AssertConfigurationIsValid();
+#endif
+           
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    OnPrepareResponse = context =>
+                    {
+                        context.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store");
+                        context.Context.Response.Headers.Add("Expires", "-1");
+                    }
+                });
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error/Error500");
+                app.UseStaticFiles();
+            }
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .SetPreflightMaxAge(TimeSpan.FromMinutes(5))
+                    .AllowAnyHeader();
+            });
+            app.UseRequestDecompression();
+            app.UseLegacyTokenContentTypeFixMiddleware();
+            var supportedCultures = new[]
+            {
+                CreateCulture("en"),
+                CreateCulture("ru"),
+                CreateCulture("uk")
+            };
+            app.UseFlymarkExceptionMiddleware();
+            app.UseCookiePolicy();
+            app
+                .UseAuthentication()
+                .UseDomainMiddleware()
+                .UseRequestLocalization(new RequestLocalizationOptions
+                {
+                    DefaultRequestCulture = new RequestCulture("en"),
+                    SupportedCultures = supportedCultures,
+                    SupportedUICultures = supportedCultures
+                })
+                .UseWebMarkupMin();
+
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+
+                if (ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
+                {
+                    //Re-execute the request so the user gets the error page
+                    var originalPath = ctx.Request.Path.Value;
+                    ctx.Items["originalPath"] = originalPath;
+                    ctx.Request.Path = "/error/error404";
+                    await next();
+                }
+            });
+            app
+                .UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                        "areaRoute",
+                        "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+                    routes.MapRoute(
+                        "default",
+                        "{controller=Home}/{action=Index}/{id?}");
+                });
+        }
+    }
+}
+
+for email confirmation I do have standard identity code
+var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+var callbackUrl = Url.Page("/Account/ConfirmEmail",
+                        null,
+                        new {userId = user.Id, code = code.ToBase64String()},
+                        returnDomainUrl.Scheme,
+                        returnDomainUrl.Host);
+
+
+except I am setting specific url, which is different from where user is registering. As you can see I am even doing to base 64 but i think its not necessary as looks like Url.Page is encoding
+Also I do have angularjs but it shouldn't break it..
+I am using ASP.NET Core 2.2
+Expected behavior
+A clear and concise description of what you expected to happen.
+Additional context
+Add any other context about the problem here.
+Include the output of dotnet --info
+Runtime Environment:
+OS Name:     Windows
+OS Version:  10.0.17763
+OS Platform: Windows
+RID:         win10-x64
+Base Path:   C:\Program Files\dotnet\sdk\2.2.101\
+Host (useful for support):
+Version: 2.2.0
+Commit:  1249f08fed

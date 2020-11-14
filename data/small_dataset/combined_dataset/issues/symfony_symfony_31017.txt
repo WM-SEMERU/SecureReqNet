@@ -1,0 +1,41 @@
+[Form] TransformationFailedException with JSON submitted data
+
+
+Symfony version(s) affected: 3.4.24 / 4.2.5
+Description
+TransformationFailedException thrown when JSON is submitted through HiddenType field. I have one form that is passing a JSON which is a canvas map of a captured signature.
+This commit creates the breaking change for us:
+symfony/form@4f7d286#diff-9c65c1fe9e9fce8398f48544b0bbf2a5
+Specifically this block of code:
+} elseif (\is_array($submittedData) && !$this->config->getCompound() && !$this->config->hasOption('multiple')) {
+    $submittedData = null;
+    $this->transformationFailure = new TransformationFailedException('Submitted data was expected to be text or number, array given.');
+}
+This runs before a transformer can clean the data and a mapper does not seem to be a good fit for this.
+How to reproduce
+Submit JSON through a HiddenType form field
+Possible Solution
+Check for an additional form option scalar = false or something along those lines.
+Example JSON:
+[  
+   {  
+      "lx":132,
+      "ly":67,
+      "mx":132,
+      "my":66
+   },
+   {  
+      "lx":118,
+      "ly":27,
+      "mx":118,
+      "my":26
+   },
+   {  
+      "lx":144,
+      "ly":19,
+      "mx":144,
+      "my":18
+   }
+]
+This can get quite large depending on the size of the complexity of the signature. Transformers and mappers seem to run after this exception is thrown.
+Thoughts?

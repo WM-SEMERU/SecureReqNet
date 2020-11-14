@@ -1,0 +1,59 @@
+cross-build broken again?...? ...build constraints exclude all Go files...
+
+
+cross-build broken Again in k8s-v1.14.0 ? I am not sure. but I am suffering it!
+What happened:
+When I try to compile k8s-v1.14.0's cmd/kubelet module, I got the ERROR, and the ERROR is same to #58106, the bug  fixed some time ago, Why it comes up again! I don't know why!
+Error as below:
+......
++++ [0408 16:50:40] Building go targets for linux/amd64:
+cmd/kubelet
+vendor/github.com/google/cadvisor/accelerators/nvidia.go:29:2: build constraints exclude all Go files in /home/GoWorks/src/k8s.io/kubernetes/kubernetes/_output/local/go/src/k8s.io/kubernetes/vendor/github.com/mindprince/gonvml
+!!! [0408 16:50:42] Call tree:
+!!! [0408 16:50:42]  1: /home/GoWorks/src/k8s.io/kubernetes/kubernetes/hack/lib/golang.sh:630 kube::golang::build_some_binaries(...)
+!!! [0408 16:50:42]  2: /home/GoWorks/src/k8s.io/kubernetes/kubernetes/hack/lib/golang.sh:765 kube::golang::build_binaries_for_platform(...)
+!!! [0408 16:50:42]  3: hack/make-rules/build.sh:27 kube::golang::build_binaries(...)
+!!! [0408 16:50:42] Call tree:
+!!! [0408 16:50:42]  1: hack/make-rules/build.sh:27 kube::golang::build_binaries(...)
+!!! [0408 16:50:42] Call tree:
+!!! [0408 16:50:42]  1: hack/make-rules/build.sh:27 kube::golang::build_binaries(...)
+make: *** [all] Error 1
+What you expected to happen:
+I want to know why and how to fix it!!!
+How to reproduce it (as minimally and precisely as possible):
+comile kubelet module step:
+[root@foo kubernetes]# KUBE_BUILD_PLATFORMS=linux/amd64 make all WHAT=cmd/kubelet GOFLAGS=-v GOGCFLAGS="-N -l"
+Environment:
+kubernetes source code: v1.14.0
+[root@foo kubernetes]# uname -msr
+Linux 3.10.0-862.11.6.el7.x86_64 x86_64
+[root@foo kubernetes]# go version
+go version go1.12.2 linux/amd64
+[root@foo kubernetes]# go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/root/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/GoWorks"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/local/go"
+GOTMPDIR=""
+GOTOOLDIR="/usr/local/go/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="0"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build524368587=/tmp/go-build -gno-record-gcc-switches"
+[root@foo kubernetes]#

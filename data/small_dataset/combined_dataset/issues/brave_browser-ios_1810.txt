@@ -1,0 +1,21 @@
+'Look Up' Causes a Page Refresh
+
+
+Description:
+Looking up a text selection causes the page to refresh (clearing populated form fields, etc).
+Steps to Reproduce
+Go to any page and make a selection.
+From the selection context menu, select Look Up.
+Dismiss the look-up window.
+Actual result:
+Page is refreshed.
+Expected result:
+Page should not refresh.
+Reproduces how often:
+Easily reproduced.
+Brave Version:
+1.6.6 (18.11.15.17)
+Device details:
+iPhone 6s+
+Additional Information
+Reported on Twitter.

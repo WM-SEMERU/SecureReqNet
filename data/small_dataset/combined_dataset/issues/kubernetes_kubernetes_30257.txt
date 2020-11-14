@@ -1,0 +1,6 @@
+Add annotations to the PodSecurityPolicy Provider interface
+
+
+@pweil- is this what you were thinking in terms of API changes? I really like to avoid functions with more than 2 return values, but couldn't think of a cleaner approach in this case.
+
+This change is 

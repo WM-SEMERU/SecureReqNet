@@ -1,0 +1,32 @@
+'From external security tests, https://gitlab.com/gitlab-com/infrastructure/issues/2438:
+
+- Effort: Trivial
+- Impact: High
+- Location: HttpHeaders
+
+#### Details
+
+It was found that API responses, unlike most other responses from the Gitlab application, are missing the X-Content-Type-Options (XCTO) header. This allows to use the API responses for various client-side attacks as shown in subsequent findings.
+
+Example API response headers:
+
+```
+Server: nginx
+Date: Tue, 25 Jul 2017 09:22:09 GMT
+Connection: keep-alive
+Cache-Control: max-age=0, private, must-revalidate
+Etag: W/"bb127251e3e48a3927c3ce74b6a53d59"
+Vary: Origin
+X-Frame-Options: SAMEORIGIN
+X-Request-Id: 76fa97f0-8c61-4d15-9e54-0ee0109b5d3d
+X-Runtime: 0.029132
+Strict-Transport-Security: max-age=31536000
+```
+
+#### Reproduction Steps
+
+Request anything from the API and observe the response headers.
+
+#### Recommendation
+
+It is recommended to use all HTTP security headers deployed by the website for the API as well. Adding the XCTO response header should not impact the website/API functionality in any way.

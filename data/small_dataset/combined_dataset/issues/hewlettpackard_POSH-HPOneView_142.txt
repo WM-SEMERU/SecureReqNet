@@ -1,0 +1,13 @@
+Connect-HPOVMgmt -- SecureString Password Input
+
+
+Please fill in as much information as possible to help resolve your issue.
+Expected Behavior
+Connect-HPOVMgmt -Password SecureString input
+Actual Behavior
+Connect-HPOVMgmt expects plaintext password instead of SecureString like New-HPOVLdapGroup and New-HPOVLdapDirectory
+Steps to reproduce
+Connect-HPOVMgmt
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion): 2.0.530.0
+HPE OneView Appliance Version:  2.00.07

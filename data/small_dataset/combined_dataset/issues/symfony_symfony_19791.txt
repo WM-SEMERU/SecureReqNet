@@ -1,0 +1,13 @@
+keep throwing an exception when impersonating with username having '+' included
+
+
+when I impersonated with username jerry+123@gmail.com, it kept saying 'You are already switched to "jerry+123@gmail.com" user', which caused by the if statement at line 121 in SwitchUserListener.php
+...
+if ($token->getUsername() === $request->get($this->usernameParameter)) {
+    return $token;
+}
+throw new \LogicException(sprintf('You are already switched to "%s" user.', $token->getUsername()));
+...
+
+the $token->getUsername() returned correct value, jerry+123@gmail.com, but $request->get($this->usernameParameter) returned something like this jerry 123@gmail.com
+The version currently used is 2.7, but I have checked the latest versoin, there is same code in same place, any ideas guys?

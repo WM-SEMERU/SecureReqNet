@@ -1,0 +1,5 @@
+Add an auth sample for cookies + bearer
+
+
+This is a constant ask. Our guidance is to place [Authorize("Bearer")] on the API controllers but we have now sample showing this approach.
+This or a similar sample should be a SPA app with a built in token server.

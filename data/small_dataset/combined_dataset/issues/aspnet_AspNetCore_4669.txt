@@ -1,0 +1,46 @@
+Cannot cast Newtonsoft.Json.Linq.JArray to Newtonsoft.Json.Linq.JToken
+
+
+I use Identityserver4 and try to connect with a .ner core 2.0 mvc app to Open Id authentication
+My Configuration is here
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+            .AddOpenIdConnect(options =>
+            {
+                options.ClientId = "clientId";
+                options.ClientSecret = "secret";
+                options.Authority = Configuration["IdentityServerAddress"];
+                options.SignedOutRedirectUri = Configuration["IdentityServerManagerAddress"];
+                options.ResponseType = "code id_token";
+                options.Scope.Add("openid");
+                options.Scope.Add("roles");
+                options.Scope.Add("profile");
+                options.Scope.Add("offline_access");
+                options.Scope.Add("phone_number"); 
+                options.SignInScheme = "Cookies";
+                options.GetClaimsFromUserInfoEndpoint = true;
+                options.SaveTokens = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "name",
+                    RoleClaimType = "role"
+                };
+            });
+
+
+but I got this error :
+InvalidCastException: Cannot cast Newtonsoft.Json.Linq.JArray to Newtonsoft.Json.Linq.JToken.
+Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler+<HandleRequestAsync>d__12.MoveNext()
+System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+Microsoft.AspNetCore.Authentication.AuthenticationMiddleware+<Invoke>d__6.MoveNext()
+System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware+<Invoke>d__7.MoveNext()
+
+

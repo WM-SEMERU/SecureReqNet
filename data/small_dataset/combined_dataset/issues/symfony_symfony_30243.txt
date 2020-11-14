@@ -1,0 +1,46 @@
+[Validator] Added missing translations for Afrikaans
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30148
+
+
+License
+MIT
+
+
+
+Added missing translations for Afrikaans

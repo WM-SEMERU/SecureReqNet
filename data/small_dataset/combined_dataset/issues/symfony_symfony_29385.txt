@@ -1,0 +1,10 @@
+Symfony 4.2 - Injecting security voter into another service type-hinting mismatch.
+
+
+Symfony version(s) affected: 4.2
+Description
+Since upgrading from Symfony 4.1 to 4.2, if I type hint a service argument as my security voter, I get a type-hint mis-match as what is actually injected is a TraceableVoter.
+How to reproduce
+Inject a voter service (which is created using the following article: https://symfony.com/doc/current/security/voters.html#creating-the-custom-voter) into another service with auto-wiring.
+Possible Solution
+Do not inject voters into other services - perhaps this is best practice - I wanted to use the same supports method from the voter in another AccessSubscriber event subscriber for ApiPlatform. I will instead extract the supports method to be used both the voter and the event subscriber for now.

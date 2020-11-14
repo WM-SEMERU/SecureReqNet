@@ -1,0 +1,42 @@
+cmd/go: Allow go mod cache location to be overridden, e.g. GOMODCACHE (for CI purposes)
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.11.5 linux/amd64
+
+Does this issue reproduce with the latest release?
+No documentation about wished behaviour found
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/home/dionysius/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/dionysius/Projects/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/lib/go-1.11"
+GOTMPDIR=""
+GOTOOLDIR="/usr/lib/go-1.11/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build210250960=/tmp/go-build -gno-record-gcc-switches"
+
+What did you expect?
+There seem not to exist something what I'd like to do (yet). The issue is, freshly loading all dependent modules can take some time and network I/O. If the CI jobs are split into each type, all of them load concurrently the same cache for their own lifetime - think of: unit-test, unit with race, linting, building, all separated. And if each job is spawned from a clean golang image, like with docker for example, the cache starts empty.
+In Gitlab, the cache option can be used, but must be within the projects source dir. I already used the cache option once for GOCACHE and GODEPCACHE (i believe the env name was that) to overwrite their location to my liking. But I seem unable to set the cache path for modules. How about a GOMODCACHE env, which would be used if non-empty?
+I know that the mod cache dir is in $GOPATH/pkg/mod, but changing the full GOPATH to somewhere within the source folder seems off to me.

@@ -1,0 +1,3 @@
+Since we gonna support masking of CI variables, we should revist all existing generated variables and enable `masked: true` flag for them to ensure that they do not leak.
+
+We should mask anything is either TOKEN or PASSWORD. I don't think that we have to mask anything else.

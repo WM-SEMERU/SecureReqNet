@@ -1,0 +1,29 @@
+[HttpClient] + [BrowserKit] wrong ContentType
+
+
+Symfony version(s) affected: 4.3
+Description
+When using BrowserKit with the new HTTP client, form submited don't use the application/x-www-form-urlencoded anymore.
+How to reproduce
+$browser = new HttpBrowser();
+$crawler = $browser->request('GET', '...');
+$form = $crawler->filter('#loginForm')->form([
+  'foo' => 'bar',
+]);
+$crawler = $browser->submit($form);
+
+Using goute:
+header: Content-Type: application/x-www-form-urlencoded
+body: foo=bar
+
+Using HttpClient
+header: "content-type: multipart/form-data; boundary="_=_symfony_1554420844_51f5d9435f5d60a6325e892d77e3d1f2_=_""
+body: 
+--_=_symfony_1554420844_51f5d9435f5d60a6325e892d77e3d1f2_=_
+Content-Type: text/plain; charset=utf-8; name=Foo
+Content-Transfer-Encoding: 8bit
+Content-Disposition: form-data; name=foo
+
+bar
+
+The requested server (an 3rd party app behind a Microsoft IIS) accept the first one, but reject the second

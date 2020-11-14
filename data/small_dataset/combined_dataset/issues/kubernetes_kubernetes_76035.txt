@@ -1,0 +1,10 @@
+not tolerated pods should be better detailed
+
+
+When trying to see why pods don't start using either kubectl get events or kubectl describe pod , the base message is not detailed enough.
+Warning  FailedScheduling  5s (x4 over 65s)  default-scheduler  0/1 nodes are available: 1 node(s) had taints that the pod didn't tolerate.
+What would you like to be added:
+Details of the taint and details of what it didn't tolerate
+Why is this needed:
+To get much much better debug information by default when trying to understand why pods can't launch.
+/sig cli

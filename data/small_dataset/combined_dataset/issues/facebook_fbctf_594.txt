@@ -1,0 +1,920 @@
+Major Performance Enhancements and Bug Fixes
+
+
+
+
+NOTICE:  This PR is extremely large.  Due to the interdependencies, these code changes are being included as a single PR.
+
+
+Local Caching of Database and Memcached Results
+
+
+Replaced PR #574
+
+
+Results from the database (MySQL) are stored and queried from the Cache service (Memcached). Results from Memcached are now stored locally within HHVM memory as well.
+
+
+New class Cache has been added, with four methods:
+
+setCache()
+getCache()
+deleteCache()
+flushCache()
+
+
+
+The new Cache class object is included as a static property of the Model class and all children.
+
+
+Through the new Cache object, all Model sub-classes will automatically utilize the temporary HHVM-memory cache for results that have already been retrieved.
+
+
+The Cache object is created and used throughout a single HHVM execution thread (user request).
+
+
+This change results in a massive reduction in Memcached requests (over 99% - at scale), providing a significant improvement in scalability and performance.
+
+
+The local cache can be deleted or flushed from the Model class or any child class with the usage of deleteLocalCache().  The deleteLocalCache() method works like invalidateMCRecords().  When called from a child class, a $key can be passed in, matching the MC key identifier used elsewhere, or if no $key is specified all of the local caches for that class will be deleted.  If the calling class is Model then the entire local cache is flushed.
+
+
+Some non-HTTP code has local cache values explicitly deleted, or the local cache completely flushed, as the execution thread is continuous:
+
+
+Prevent autorun.php from storing timestamps in the local cache, forever (the script runs continuously).
+
+
+Flush the local cache before the next cycle of bases.php to ensure the game is still running and the configuration of the bases has not changed (the script runs continuously).
+
+
+Flush the local cache before the next import cycle of liveimport.php to ensure we get the up-to-date team and level data (the script runs continuously).
+
+
+
+
+The Cache class is specifically separate from Model (as an independent class) so that other code may instantiate and utilize a temporary (request-exclusive) local-memory-based caching solution, with a common interface.  The usage provides local caching without storing the data in MySQL, Memcached, or exposing it to other areas of the application. (For example, this is being utilized in some Integration code already.)
+
+
+Implemented CR from PR #574.
+
+
+Relevant:  Issue #456 and Comment #456 (comment)
+
+
+
+
+Blocking AJAX Requests
+
+
+Replaced PR #575
+
+
+Expansion and Bug Fixes of PR #565
+
+
+AJAX requests for the gameboard are now individually blocking.  A new request will not be dispatched until the previous request has completed.
+
+
+AJAX requests will individually stop subsequent requests on a hard-error.
+
+
+The blocking of continuous AJAX requests, when the previous has not yet returned, or on a hard error, provides a modest performance benefit by not compounding the issue with more unfulfillable requests.
+
+
+Forceful refreshes are still dispatched every 60 seconds, regardless of the blocking state on those requests.
+
+
+Relevant:  Issue #456 and Comment #456 (comment)
+
+
+
+
+AJAX Endpoint Optimization
+
+
+Removed nested loops within multiple AJAX endpoints:
+
+
+map-data.php
+
+
+country-data.php
+
+
+ leaderboard.php
+
+
+
+
+All Attachments, including Link and Filename, are now cached and obtained through:  Attachment::genAllAttachmentsFileNamesLinks().
+
+
+All Team names of those who have completed a level, are now cached and obtained through MultiTeam::genCompletedLevelTeamNames().
+
+
+All Levels and Country for map displays are cached and obtained through Level::genAllLevelsCountryMap() and Country::genAllEnabledCountriesForMap().
+
+
+Relevant:  Issue #456
+
+
+
+
+Memcached Cluster Support
+
+
+The platform now supports a cluster of Memcached nodes.
+
+
+Configuration for the MC_HOST within the settings.ini file is now an array, instead of a single value:
+
+MC_HOST[] = 127.0.0.1
+
+
+
+Multiple Memcached servers can be configured by providing additional MC_HOST lines:
+
+
+MC_HOST[] = 1.2.3.4
+
+
+MC_HOST[] = 5.6.7.8
+
+
+
+
+The platform uses a Write-Many Read-Once approach to the Memcached Cluster.  Specifically, data is written to all of the configured Memcached nodes and then read from a single node at random.  This approach ensures that all of the nodes stay in sync and up-to-date while providing a vital performance benefit to the more expensive and frequent operation of reading.
+
+
+The existing Model methods (setMCRecords() and invalidateMCRecords()) all call and utilize the new cluster methods:
+
+
+writeMCCluster()
+
+
+invalidateMCCluster()
+
+
+
+
+The flushing of Memcached has also been updated to support the multi-cluster approach:  flushMCCluster().
+
+
+Note that the usage of a Memcached Cluster is seamless for administrators and users, and works in conjunction with the Local Cache.  Also note, the platform works identically, for administrators and users, for both single-node and multi-node Memcached configurations.
+
+
+The default configuration remains a single-node configuration.  The utilization of a Memcached Cluster requires the following:
+
+
+The configuration and deployment of multiple Memcached nodes (the quick_setup install_multi_cache or Memcached specific provision, will work).
+
+
+The modification of settings.ini to include all of the desired Memcached hosts.
+
+
+All Memcached hosts must be identically configured.
+
+
+
+
+Usage of a Memcached Cluster is only recommended in the Multi-Server deployment modes.
+
+
+Relevant:  Issue #456
+
+
+
+
+Load Balancing of Application Servers (HHVM)
+
+
+The platform now supports the ability to load balance multiple HHVM servers.
+
+
+To facilitate the load balancing of the HHVM servers, the following changes were made:
+
+
+Scripts (autorun, progressive, etc.) are now tracked on a per-server level, preventing multiple copies of the scripts from being executed on the HHVM servers.
+
+
+Additional database verification on scoring events to prevent multiple captures.
+
+
+
+
+Load Balancing of HHVM is only recommended in the Multi-Server deployment modes.
+
+
+Relevant:  Issue #456
+
+
+
+
+Leaderboard Limits
+
+
+MultiTeam::genLeaderboard() now limits the total number of teams returned based on a configurable setting.
+
+
+A new argument has been added to MultiTeam::genLeaderboard(): limit.  This value, either true or false, indicates where the limit should be enforced, and defaults to true.
+
+
+When the data is not cached, MultiTeam::genLeaderboard() will only build, cache, and return the number of teams needed to meet the limit.
+
+
+When the data is already cached, MultiTeam::genLeaderboard() will ensure the limit value has not changed and returned the cached results.  If the configured limit value has been changed, MultiTeam::genLeaderboard() will build, cache, and return the number based on the new limit.
+
+
+The "Scoreboard" modal (found from the main gameboard) is a special case where all teams should be displayed.  As such, the Scoreboard modal sets the limit value to false retuning all teams.  This full leaderboard will be cached, but all other display limits are still enforced based on the configured limit.  Once invalidated, the cached data will return to the limited subset.
+
+
+Because a full leaderboard is not always cached, this does result in the first hit to the Scoreboard modal requiring a database hit.
+
+
+A user, whose rank is above the limit, will have their rank shown to them as $limit+.  For example, if the limit is set to 50 and the user's rank is above 50, they would see:  51+ as their rank.
+
+
+Overall, the caching of the Leaderboard, one of the more resource-intensive and frequent queries, resulted in significant performance gains.
+
+
+The Leaderboard limit is configurable by administrators within the administrative interface.  The default value is 50.
+
+
+Relevant:  Issue #456
+
+
+
+
+Activity Log Limits
+
+
+The Activity Log is now limited to the most recent 100 log entries.  The value is not configurable.
+
+
+The activity log is continually queried and contains a large amount of data, as such, it is a very resource-intensive request.
+
+
+The limit on the results built, cached, and returned for the activity log provides a notable improvement in performance.
+
+
+Relevant:  Issue #456
+
+
+
+
+Database Optimization
+
+
+Expansion of PR #564
+
+
+Added additional indexing of the database tables in the schema.
+
+
+The additional indexing provides further performance improvements to the platform queries, especially those found in MultiTeam and those queries continually utilized as a result of the AJAX calls.
+
+
+Relevant:  Issue #456 and Comment #456 (comment)
+
+
+
+
+Team and MultiTeam Performance Improvements
+
+
+Updated numerous Team::genTeam() calls to used the cached version: MultiTeam::genTeam().
+
+
+Optimized the database query within MultiTeam::genFirstCapture() to return the team_id and build the Team from the cache.
+
+
+Optimized the database query within MultiTeam::genCompletedLevel() to return the team_id and build the Team from the cache.
+
+
+Optimized the database query within MultiTeam::genAllCompletedLevels() to return the team_id and build the Team from the cache.
+
+
+A full invalidation of the MultiTeam cache is no longer executed when a new team is created.  Newly created teams will not have any valid scoring activity.  Delaying the rebuild of the scoring related cache provides a modest performance improvement.  The new team will not show up in certain areas (namely the full scoreboard) until they or someone else perform a scoring action.  To ensure the team is properly functioning, following cache is specifically invalided on a new team creation:
+
+ALL_TEAMS
+ALL_ACTIVE_TEAMS
+ALL_VISIBLE_TEAMS
+TEAMS_BY_LOGO
+
+
+
+Fixed an extremely rare race condition within MultiTeam::genFirstCapture().
+
+
+Relevant:  Issue #456
+
+
+
+
+Combined Awaitables
+
+
+Combined Awaitables which were not in nested loops.
+
+
+Combined Awaitables found in some nested loops, where existing code provided a streamlined approach.
+
+
+Given the lack of support for concurrent queries to a single database connection, some queries were combined via multiQuery() (in the case where the queries were modifying data within the database).  TODO:  Build and utilize additional AsyncMysqlConnection within the pool for suitable concurrent queries.
+
+
+Annotated Awaitables within a nested loop for future optimization.
+
+
+Relevant:  Issue #577
+
+
+
+
+Facebook and Google Login Integration
+
+
+Replaced PR #573
+
+
+The platform now supports Login via OAuth2 for Facebook and Google. When configured and enabled, users will have the option to link and login to their existing account with a Facebook or Google account.
+
+
+Automated registration through Facebook or Google OAuth2 is now supported. When configured and enabled, users will have the option to register an account by using and linking an existing account with Facebook or Google.
+
+
+New configuration options added to the database schema:
+
+
+Added facebook_login. This configuration option is a toggleable setting to enable or disable login via Facebook.
+
+
+Added google_login. This configuration option is a toggleable setting to enable or disable login via Google.
+
+
+Added facebook_registration. This configuration option is a toggleable setting to enable or disable registration via Facebook.
+
+
+Added google_registration. This configuration option is a toggleable setting to enable or disable registration via Google.
+
+
+Added registration_prefix. This configuration option is a string that sets the prefix for the randomly generated username/team name for teams registered via (Facebook or Google) OAuth.
+
+
+
+
+New Integration section within the Administrative interface allows for control over the Facebook and Google Login, Registration, and the automatic team name prefix option.
+
+
+Overhauled the Login page to support the new Login buttons.  Login page now displays appropriate messages based on the configuration of login.
+
+
+Login form is dynamically generated, based on the configuration options and settings.
+
+
+Overhauled the Registration page to support the new Registration buttons.  The registration page now displays appropriate messages based on the configuration of registration.
+
+
+The registration form is dynamically generated, based on the configuration options and settings.
+
+
+Account Linking for Facebook sets both the Login OAuth values and the LiveSync values (single step for both).
+
+
+Account Linking for Google sets both the Login OAuth values and the LiveSync values (single step for both).
+
+
+Facebook Account linkage option has been added to the Account modal.
+
+
+The Account modal now shows which accounts are already linked.
+
+
+The Account modal will color-code the buttons on an error (red) and success (green).
+
+
+New table "teams_oauth" has been added to handle the OAuth data for Facebook and Google account linkage.
+
+
+New class Integration handles the linkage of Facebook or Google accounts with an FBCTF account (both Login OAuth values and the LiveSync values). The Integration class also includes the underlying methods for authentication in both the linkage and login routines and the OAuth registration process.
+
+
+New URL endpoints have been created and simplified for the Integration actions:
+
+
+New data endpoint data/integration_login.php. This endpoint accepts a type argument, currently supporting types of facebook and google. Through this endpoint, the login process is handled in conjunction with the Integration class.
+
+
+The new callback URL for Facebook Login: /data/integration_login.php?type=facebook
+
+
+The new callback URL for Google Login: /data/integration_login.php?type=google
+
+
+New data endpoint data/integration_oauth.php. This endpoint accepts a type argument, currently supporting types of facebook'and google. Through this endpoint, the OAuth account linkage is handled in conjunction with the Integration class.
+
+
+The new callback URL for Facebook linkage: /data/integration_login.php?type=facebook
+
+
+The new callback URL for Google linkage: /data/integration_login.php?type=google
+
+
+Old Google-specific endpoint (data/google_oauth.php) has been removed.
+
+
+
+
+New Team class methods: genAuthTokenExists(), genTeamFromOAuthToken(), genSetOAuthToken().
+
+
+Team::genAuthTokenExists() allows an OAuth token to be verified.
+
+
+Team::genTeamFromOAuthToken() returns a Team object based on the OAuth token supplied.
+
+
+Team::genSetOAuthToken() sets the OAuth token for a team.
+
+
+
+
+The settings.ini (including the packaged example file) and Configuration have methods to verify and return Facebook and Google API settings.
+
+
+Configuration::getFacebookOAuthSettingsExists() verifies the Facebook API App ID and APP Secret are set in the settings.ini file.
+
+
+Configuration::getFacebookOAuthSettingsAppId() returns the Facebook API App ID.
+
+
+Configuration::getFacebookOAuthSettingsAppSecret() returns the Facebook API App Secret.
+
+
+Configuration::getGoogleOAuthFileExists() verifies the Google API JSON file is set and exists in the settings.ini file.
+
+
+Configuration::getGoogleOAuthFile() returns the filename for the Google API JSON file.
+
+
+All of Facebook and Google API configuration values are cached (in Memcached) to prevent the repeated loading, reading, and parsing of the settings.ini file.
+
+
+
+
+To use the new Facebook or Google integration the following must be completed:
+
+
+A Facebook and/or Google Application must be created, and OAuth2 API keys must be obtained.
+
+
+The API keys must be provided in the Settings.ini file.
+
+
+Desired settings must be configured from within the administrative interface (Configuration) - the default has all integration turned off.
+
+
+
+
+The Facebook OAuth code provides CSRF protection through the Graph SDK.
+
+
+The Google OAuth code provides CSRF protection through the usage of the integration_csrf_token cookie and API state value.
+
+
+Note: Facebook Login/Integration will not work in development mode - this is due to a pending issue in the Facebook Graph SDK (facebook/php-graph-sdk#853) utilization of the pending PR (facebook/php-graph-sdk#854) resolves this issue. Alternatively, the Integration with Facebook will work in production mode, the recommended mode for a live game.
+
+
+Implemented CR from PR #573.
+
+
+Relevant:  PR #591 and PR #459.
+
+
+
+
+LiveSync API and LiveImport Script Update
+
+
+LiveSync has been updated to support and supply Facebook and Google OAuth output. All of the users LiveSync integrations (FBCTF, Facebook, and Google) are now provided through the API. As a result, so long as one of the three LiveSync methods are configured by the user (which happens automatically when linking an account to Facebook or Google) the data will become available through the LiveSync API.
+
+
+LiveSync now includes a "general" type. The new general type output includes the scoring information using the local team name on the FBCTF instance. This new type is not for importation on another FBCTF instance but does provide the opportunity for third-parties to use the data for score tracking, metric collections, and displays. As such, this new LiveSync data allows the scoring data for a single FBCTF instance to be tracked.
+
+
+The liveimport.sh script, used to import LiveSync API data, will ignore the new general LiveSync type.
+
+
+Updated Team::genLiveSyncKeyExists() and Team::genTeamFromLiveSyncKey() to use the new Integration class methods:  Integration::genFacebookThirdPartyExists) and Integration::genFacebookThirdPartyEmail().
+
+
+Within the liveimport.sh script: when the type is facebook_oauth, Team::genLiveSyncKeyExists() and Team::genTeamFromLiveSyncKey() properly use the Facebook third_party_id.
+
+
+Integration::genFacebookThirdPartyExists() and Integration::genFacebookThirdPartyEmail() query the Facebook API for the coorosponding user, storing the results in a temporary HHVM-memory cache, via  the Cache class.
+
+
+Given that liveimport.sh now needs to query the Facebook API for any facebook_oauth typed items, the script will utilize the HHVM-memory cache of Integration to limit the number of hits to the Facebook API.
+
+
+The liveimport.sh script now includes the Cache class and the Facebook Graph SDK.
+
+
+Relevant:  PR #459.
+
+
+
+
+Error and Exception Handling
+
+
+All Exceptions, including Redirect Exceptions, are now caught.
+
+
+The NGINX configuration has been updated to catch errors from HHVM (FastCGI) and return error.php.
+
+
+The error.php page has been updated with a themed error page.
+
+
+The error.php page will redirect to index.php?page=error so long as index.php?page=error is not generating any HTTP errors.  If an error is detected on index.php?page=error then no redirect will occur.  The verification of the HTTP status ensures no redirect loops occur.
+
+
+The DataController class now includes a sendData() method to catch errors and exceptions.  DataController children classes now utilize sendData() instead of outputing their results directly.
+
+
+On Exception within an AJAX request, an empty JSON array is returned.  This empty array prevents client-side errors.
+
+
+The ModuleController class now includes a sendRender() method to catch errors and exceptions.  ModuleController children classes now utilize sendRender() instead of outputing their results directly.
+
+
+On Exception within a Module request, an empty string is returned.  This empty string prevents client-side and front-end errors.
+
+
+A new AJAX endpoint has been added:  /data/session.php.  The response of the endpoint is used to determine if the user's session is still active.  If a user's session is no longer active, they will be redirected from the gameboard to the login page.  This redirection ensures that they do not continually perform AJAX requests.
+
+
+Custom HTTP headers are used to monitor AJAX responses:
+
+
+The Login page now includes a custom HTTP header: Login-Page.
+
+
+The Error page now includes a custom HTTP header:  Error-Page.
+
+
+
+
+The custom HTTP headers are used client-side (JS) to determine if a request or page rendered an error or requires authentication.
+
+
+Exception log outputs now include additional information on which Exception was thrown.
+
+
+Users should no longer directly receive an HTTP 500.
+
+
+These Exception changes prevent the error logs from being filled with unauthenticated requests.  The changes also provide a user-friendly experience when things malfunction or a user needs to reauthenticate.
+
+
+Relevant:  #563
+
+
+
+
+Team Account Modal Update
+
+
+Users can now change their team name from within the Account modal.
+
+
+The account Modal now contains the following options:
+
+
+Team Name
+
+
+Facebook Account Linkage
+
+
+Google Account Linkage
+
+
+FBCTF LiveSync Authentication
+
+
+
+
+Relevant:  PR #459.
+
+
+
+
+Non-Visible/Inactive Team Update
+
+
+Ensure that non-visible or inactive team do not show up for any other users.
+
+
+Non-Visible/Inactive teams are not awarded as the "first capture."
+
+
+Non-Visible/Inactive teams do not show in the "captured by" list.
+
+
+Countries will not show as captured (for other teams) if only captured by a Non-Visible/Inactive team.
+
+
+Activity Log entries for a Non-Visible or Inactive team are not included in the activity log for other users.
+
+
+Updated ScoreLog::genAllPreviousScore() and ScoreLog::genPreviousScore() to only include Visible and Active teams, or the user's own team.
+
+
+Teams who are Non-Visible or Inactive will have a rank of "N/A."
+
+
+Relevant:  PR #513
+
+
+
+
+Mobile Page Update
+
+
+The mobile page is shown when a user's window has a resolution under 960px.  While this is geared towards mobile users, it can happen when the window size on a non-mobile device is too small.
+
+
+The mobile page now includes a "Refresh" button, which will reload the page.
+
+
+The mobile page will refresh, attempting to re-render correctly, after 2 seconds.
+
+
+If a user resizes their window to a larger size, they should reload into a properly displayed screen, and not the mobile warning.
+
+
+
+
+Login and Registration JS Fixes
+
+
+Consistently corrected the usage of teamname and team_name across PHP and JS code.
+
+
+Ensured that all JavaScript is using team_name.
+
+
+Ensured that all PHP is using team_name when interacting with JS.
+
+
+Updated the input filters within PHP when retrieving input for the team name, using team_name.
+
+
+Updated Login errors to highlight the username and password fields.
+
+
+Relevant:  Issue #571, Issue #558, Issue #521, PR #592, and PR #523
+
+
+
+
+System Statistics JSON Endpoint
+
+
+A new administrative-only JSON endpoint has been added that provides statistical data about the platform and game.
+
+
+The endpoint is found at /data/stata.php.  Access to the endpoint requires an authenticated administrative session.
+
+
+The endpoint provides the following information:
+
+
+Number of Teams (teams)
+
+
+Number of Sessions (sessions)
+
+
+Total Number of Levels (levels)
+
+
+Number of Active Levels (active_levels)
+
+
+Number of Hints (hints)
+
+
+Number of Captures (captures)
+
+
+AsyncMysqlConnectionPool Statistics (database)
+
+
+Created Connections (created_pool_connections)
+
+
+Destroyed Connections (destroyed_pool_connections)
+
+
+Connection Requests (connections_requested)
+
+
+Pool Hits (pool_hits)
+
+
+Pool Misses (pool_misses)
+
+
+
+
+Memcached Statistics (memcached)
+
+
+Node Address
+
+
+Node Address:Port
+
+
+Process ID (pid)
+
+
+Uptime (uptime)
+
+
+Threads (threads)
+
+
+Timestamp (time)
+
+
+Size of Pointer (pointer_size)
+
+
+Total User Time for Memcached Process (rusage_user_seconds)
+
+
+Total User Time for Memcached Process (rusage_user_microseconds)
+
+
+Total System Time for Memcached Process (rusage_system_seconds)
+
+
+Total System Time for Memcached Process (rusage_system_microseconds)
+
+
+Current Items in Cache (curr_items)
+
+
+Total Items in Cache (total_items)
+
+
+Max Bytes Limit (limit_maxbytes)
+
+
+Number of Current Connections (curr_connections)
+
+
+Number of Total Connections (total_connections)
+
+
+Number of Current Connection Structures Allocated (connection_structures)
+
+
+Number of Bytes Used (bytes)
+
+
+Total Number of Cache Get Requests (cmd_get)
+
+
+Total Number of Cache Set Requests (cmd_set)
+
+
+Total Number Successful of Cache Retrievals (get_hits)
+
+
+Total Number Unsuccessful of Cache Retrievals (get_ misses)
+
+
+Total Number of Cache Evictions (evictions)
+
+
+Total Number of Bytes Read (bytes_read)
+
+
+Total Number of Bytes Written (bytes_writter)
+
+
+Memcached Version (version)
+
+
+
+
+
+
+
+
+System Load Statistics (load)
+
+
+One Minute Average (0)
+
+
+Five Minute Average (1)
+
+
+Fifteen Minute Average (2)
+
+
+
+
+System CPU Utilization (load)
+
+
+Userspace Utilization Percentage (user)
+
+
+Nice Utilization Percentage (nice)
+
+
+System Utilization Percentage (sys)
+
+
+Idle Percentage (idle)
+
+
+
+
+
+
+The endpoint provides current data and can be pooled/ingested for historical data reporting.
+
+
+For more information on the AsyncMysqlConnectionPool statistics, please see:  https://docs.hhvm.com/hack/reference/class/AsyncMysqlConnection/ and https://docs.hhvm.com/hack/reference/class/AsyncMysqlConnectionPool/getPoolStats/
+
+
+For more information on the Memcached statistics, please see:  https://github.com/memcached/memcached/blob/master/doc/protocol.txt and https://secure.php.net/manual/en/memcached.getstats.php
+
+
+
+
+Miscellaneous Changes
+
+
+Added Announcement and ActivityLog to autorun.php.
+
+
+Added Announcement and ActivityLog to bases.php.
+
+
+Added/Updated UTF-8 encoding on various user-controlled values, such as team name.
+
+
+Switched usage of gmp and openssl_random for random_bytes().
+
+
+Switched cookies to use bin2hex() instead of base64_encode().
+
+
+Changed the "Sign Up" link to a button on the login page.
+
+
+Allow any Logo to be re-used once all logos are in use.
+
+
+Invalidate Scores and Hint cache when a Team is deleted.
+
+
+Reverify the game status (running or stopped) before the next cycle of base scoring in bases.php.
+
+
+Allow the game to stop even if some scripts (autorun, bases, progressive, etc.) are not running.
+
+
+Fixed a bug where teams with a custom logo could not be edited by an administrator.
+
+
+Added "Reset Schedule" button to administrative interface to completely remove a previously set game schedule.  The game schedule can only be reset if the game is not running.  Otherwise, the existing schedule must be modified.
+
+
+Force the game schedule and autorun.php to use UTC, regardless of client or server timezone settings.  It is still recommended that the platform systems be deployed with UTC as the timezone.
+
+
+Moved "Begin Game," "Pause Game," and "End Game" outside of the scrollable admin list into a new fixed pane below the navigation list.
+
+
+Updated ActivityLog to delete entries when deleting a team.
+
+
+Updated PHPUnit tests based on the new changes.
+
+
+Formatted all code files as part of this PR.
+
+
+
+

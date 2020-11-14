@@ -1,0 +1,4 @@
+Limit the amount of received data with each webhook request
+
+
+Just to prevent DoS attacks, making the server eating too much memory.

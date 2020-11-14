@@ -1,0 +1,46 @@
+[WIP] update PSR6Cache for support @ and / characters
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30395
+
+
+License
+MIT
+
+
+
+Work In Progress...

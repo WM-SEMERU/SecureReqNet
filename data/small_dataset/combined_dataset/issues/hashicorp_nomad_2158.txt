@@ -1,0 +1,9 @@
+Users Whitelist
+
+
+
+nomad needs a user.whitelist. having to blacklist hundreds of user accounts to satisfy security reqs is a PITA.
+
+-- from: https://twitter.com/iKryten/status/817129940005122048
+Currently nomad allows blacklisting running tasks as certain users (such as root). For locking down a system a whitelist is much more succinct and easier to implement correctly.
+Nomad should have a user.whitelist setting to allow specifying exactly what users tasks can run as.

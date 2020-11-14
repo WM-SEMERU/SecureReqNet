@@ -1,0 +1,50 @@
+[Messenger] Add a BC layer for the `ConsumeMessagesCommand` arguments
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no - removing some
+
+
+Deprecations?
+yes (files already updated in previous PR)
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+ø
+
+
+License
+MIT
+
+
+Doc PR
+ø
+
+
+
+Instead of conflicting symfony/messenger with an old symfony/framework-bundle, let's add a simple BC layer.

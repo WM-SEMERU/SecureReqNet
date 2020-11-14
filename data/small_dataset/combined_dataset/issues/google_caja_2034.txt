@@ -1,0 +1,6 @@
+Caja does not make use of SMB2 FSCTL_SRV_COPYCHUNK
+
+
+Copying or moving files within a share that holds two mounts of different devices sends the data to client and client has to send it back to server.
+FSCTL_SRV_COPYCHUNK should avoid the indirection to client and directly move it from one device to the other on server.
+Tested on Ubuntu Mate 18.04 with Caja 1.20.2. Server has samba 4.1+ installed.

@@ -1,0 +1,132 @@
+[Security] Update user phpdoc on tokens
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+As implemented here:
+
+
+
+symfony/src/Symfony/Component/Security/Core/Authentication/Token/AbstractToken.php
+
+
+        Lines 78 to 88
+      in
+      1e16a8b
+
+
+
+
+
+
+  /** 
+
+
+
+      * Sets the user in the token. 
+
+
+
+      * 
+
+
+
+      * The user can be a UserInterface instance, or an object implementing 
+
+
+
+      * a __toString method or the username as a regular string. 
+
+
+
+      * 
+
+
+
+      * @param string|object $user The user 
+
+
+
+      * 
+
+
+
+      * @throws \InvalidArgumentException 
+
+
+
+  */ 
+
+
+
+  public function setUser($user) 
+
+
+
+
+
+Note IMHO string|object is intended, and used consistently elsewhere, e.g.: 
+
+
+symfony/src/Symfony/Component/Security/Core/Authentication/Token/PreAuthenticatedToken.php
+
+
+         Line 27
+      in
+      f803762
+
+
+
+
+
+
+      * @param string|object            $user        The user can be a UserInterface instance, or an object implementing a __toString method or the username as a regular string 
+
+
+
+
+

@@ -1,0 +1,189 @@
+[AutoMapper] New component to automatically map a source object to a target object
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#17516 #22051
+
+
+License
+MIT
+
+
+Doc PR
+todo
+
+
+
+This PR brings a new component to the Symfony. It's a follow up on the AST Generator Component that was done on #17516 which was lacking of real buisness value and only adding technical one. (It can also certainly replace #22051, but both can be merged without conflicts)
+In this component code generation is only an implementation detail, however by its nature it achieves the goal of having ultra fast normalizers in Symfony.
+Description
+Taken from https://github.com/AutoMapper/AutoMapper
+
+AutoMapper is a simple little library built to solve a deceptively complex problem - getting rid of code that mapped one object to another. This type of code is rather dreary and boring to write, so why not invent a tool to do it for us?
+
+In PHP libraries and application mapping from one object to another is fairly common:
+
+ObjectNormalizer / GetSetMethodNormalizer in symfony/serializer
+Mapping request data to object in symfony/form
+Hydrate object from sql results in doctrine
+Migrating legacy data to new model
+Mapping from database model to dto objects (API / CQRS / ...)
+...
+
+The goal of this component is to offer an abstraction on top of this subject. For that goal it provides an unique interface (other code is only implementation detail):
+interface AutoMapperInterface
+{
+    /**
+     * Map data from to target.
+     *
+     * @param array|object        $source  Any data object, which may be an object or an array
+     * @param string|array|object $target  To which type of data, or data, the source should be mapped
+     * @param Context             $context Options mappers have access to
+     *
+     * @return array|object The mapped object
+     */
+    public function map($source, $target, Context $context = null);
+}
+The source is from where the data comes from, it can be either an array or an object.
+The target is where the data should be mapped to, it can be either a string (representing a type: array or class name) or directly an array or object (in that case construction of the object is avoided).
+Current implementation handle all of those possiblities at the exception of the mapping from a dynamic object (array / stdClass) to another dynamic object.
+Usage
+Someone who wants to map an object will only have to do this:
+// With class name
+$target = $automapper->map($source, Foo::class);
+// With existing object
+$target = new Foo();
+$target = $automapper->map($source, $target);
+// To an array
+$target = $automapper->map($source, 'array');
+// From an array
+$source = ['a' => 'b'];
+$target = $automapper->map($source, Foo::class);
+Context
+Context object allow to pass options for the mapping:
+// Using context
+$context = new Context();
+$target = $automapper->map($source, Foo::class, $context);
+
+// Groups (serializer annotation), will only map value that match those group in source and target
+$context = new Context(['groupA', 'groupB']);
+// Allowed attributes, will only map specific properties (exclude others), allow nesting for sub mapping like the serializer component
+$context = new Context(null, ['propertyA', 'propertyB', 'foo' => ['fooPropertyA']]);
+// Ignored attributes, exclude thos propreties include others
+$context = new Context(null, null, ['propertyA', 'propertyB', 'foo' => ['fooPropertyA']]);
+// Set circular reference limit
+$context->setCircularReferenceLimit(2);
+// Set circular reference handler
+$context->setCircularReferenceHandler(function () { ... });
+Other features
+Private properties
+This component map private properties (However this can deactivated).
+Nested Mapping
+This component map nested class when it's possible.
+Circular Reference
+Default circular reference implementation is to keep them during mapping, which means somethings like:
+$foo = new Foo();
+$foo->setFoo($foo);
+
+$target = $this->automapper->map($foo, 'array');
+will produce an array where the foo property will be a reference to the parent.
+Having that allow using this component as a DeepCloning service by mapping to the same object:
+$foo = new Foo();
+$foo->setFoo($foo);
+
+$deepClonedFoo = $this->automapper->map($foo, Foo::class);
+Max Depth
+This component understand the Max Depth Annotation of the Serializer component and will not map after it's reached.
+Name Converter
+Default implementation allows you to pass a Name Converter when converting to or from an array to change the property name used.
+Discriminator Mapping
+This component understand the Discriminiator Mapping Annotation of the Serializer component and should correctly handle construction of object when having inheritance.
+Type casting
+This component will try to correctly map scalar values (going from int to string, etc ...).
+History
+Initial code of this component was done in an expiremental library here: https://github.com/janephp/automapper
+After some works and talks with @dunglas and @nicolas-grekas  i propose this library as a new component for Symfony, which can be used by other components and could help in resolving some future bugs due to PHP 7.4 (more explanations below).
+Implementation
+Default implementation use code generation for mapping, it reads once the metadata needed to build the mapper then write PHP code, after this, no metadata reading or analysis is done, only the generated mapper is used.
+This allow for very fast mapping, here is some benchmarks using the library where the code comes from (jane/automapper):
+
+https://travis-ci.org/idr0id/php-mappers-benchmarks/builds/361253808?utm_source=github_status&utm_medium=notification
+https://travis-ci.org/php-serializers/ivory-serializer-benchmark
+
+Benchmark on the component on serializer part only (code source here https://github.com/joelwurtz/ivory-serializer-benchmark/tree/symfony/automapper):
+
+Example of generated code
+Normalizer Bridge
+A normalizer Bridge is available where its goal is to be 100% feature compatible with the ObjectNormalizer of the symfony/serializer component. The goal of this bridge is not to replace the ObjectNormalizer but rather providing a very fast alternative.
+As shown in the benchmark above, using this bridge leads up to more than 8x speed increase in normalization.
+Existing PHP librairies on automapping
+
+https://github.com/mark-gerarts/automapper-plus
+
+Has some nice features poke @mark-gerarts some API are based on your works and C# automapper, would be nice to have you here for your input.
+
+https://github.com/Nylle/PHP-AutoMapper
+https://github.com/idr0id/Papper
+https://github.com/michelsalib/BCCAutoMapperBundle
+
+Things that needs to be done
+This PR should be mostly readly in terms of code and functionnalities for a first stage, however there is still some things to be done:
+
+Tests, tests and tests: i did not copy the old tests as i want to rewrite them for this component (will be done in the next days)
+Documentation: documentation explaining this new component (will be done once the main interface and usage is ok)
+
+Future consideration
+Things that could be done but not in this PR:
+
+symfony/form bridge for mapping request data to object
+symfony/framework-bundle integration
+symfony/validator integration:
+
+PHP 7.4 may give a problem to the symfony/validator component where typed properties can be problem, given a class like this:
+
+class Foo {
+    /** @Assert\NotNull() */
+    public int $foo;
+}
+An user may send a null value (in a form by example or json), and PHP will raise an error before the validation, since the validation occurs on the mapped object.
+This component can help resolving this case with the actual behavior:
+
+Create a dummy class with the same properties as Foo but without type checking
+Mapping user data to this dummy class (using the automapper component)
+Validating this dummy class with the metadata from the Foo class
+Mapping the dummy object to the foo class (using the automapper component)
+
+Feel free to challenge as much as possible

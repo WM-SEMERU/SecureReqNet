@@ -1,0 +1,24 @@
+[Security] SimpleFormAuthenticationListener forces $csrfTokenManager to be of type CsrfTokenManagerInterface in constructor
+
+
+Using Symfony 2.4.2, when I configure this in my security.yml:
+security:
+    firewalls:
+        main:
+            pattern: ^/
+            simple_form:
+                check_path: login_check
+                login_path: login
+                csrf_provider: form.csrf_provider
+
+I get the following error:
+ContextErrorException: Catchable Fatal Error: Argument 11 passed to Symfony\Component\Security\Http\Firewall\SimpleFormAuthenticationListener::__construct() must implement interface Symfony\Component\Security\Csrf\CsrfTokenManagerInterface, instance of Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfTokenManagerAdapter given, called in /vagrant/www/app/cache/webservice_dev/appWebservice_devDebugProjectContainer.php on line 2229 and defined in /vagrant/www/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/SimpleFormAuthenticationListener.php line 56
+
+This seems to be fixed by changing a constructor argument of SimpleFormAuthenticationListener from:
+CsrfTokenManagerInterface $csrfTokenManager = null
+
+to:
+$csrfTokenManager = null
+
+As was done for other classes including UsernamePasswordFormAuthenticationListener in this change: d4bb5f4
+Since I am very new to Symfony2: can anyone confirm that the above fix is correct? I will then send a pull request.

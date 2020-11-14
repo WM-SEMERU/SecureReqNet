@@ -1,0 +1,4 @@
+Added a note about using the security checker independently
+
+
+Related to #9544.

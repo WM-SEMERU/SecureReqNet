@@ -1,0 +1,39 @@
+AbstractRememberMeServices - isRememberMeRequested - should honor boolean
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes/no
+
+
+Symfony version
+3.2
+
+
+
+Symfony\Component\Security\Http\RememberMe\AbstractRememberMeServices
+Method: isRememberMeRequested
+Line: 322
+Comment: Seems practical to equate a boolean, not just string values. Function returns a boolean; should equate a boolean.
+Why: I am using an external form to log in users. I overwrote the remember me parameter as a boolean in a sub request. Remember me stopped working, this appears to be the cause of the issue.
+Notes: Using Silex 2.0. I understand this parameter should be the value of a checkbox but for better flexibility I don't see the harm in equating a boolean as well.

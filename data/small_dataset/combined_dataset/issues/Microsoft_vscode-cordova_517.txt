@@ -1,0 +1,4 @@
+Bundle extension code to decrease its loading time
+
+
+We have started to get a lot of "Extension causes high cpu load" issues and, as VS Code team suggested, we need to bundle extension code into one .js file to avoid performance problems.

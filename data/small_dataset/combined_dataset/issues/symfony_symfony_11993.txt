@@ -1,0 +1,63 @@
+[Security] make it possible to override the default success/failure handler
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#5432, #9272, #10417, #11926
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#4258
+
+
+
+Overriding the default success/failure handler of the security firewalls is possible via the success_handler and failure_handler setting but this approach is not flexible as it does not allow you to get the options/provider key.
+To sum up the problem:
+
+Overriding the default success/failure handler is possible via a service;
+When not overridden, the default success/failure handler gets options and the provider key;
+Those options and the provider key are injected by the factory as they are dynamic (they depend on the firewall and the provider key), so getting those options/provider key is not possible for a custom service that is only configured via the container configuration;
+Extending the default handler does not help as the injection mechanism is only triggered when no custom provider is set;
+Wrapping the default handler is not possible as the service id is dynamic.
+
+... and of course we need to keep BC and make it work for people extending the default handler but also for people just using the interface.
+Instead of the current PR, I propose this slightly different approach. It's not perfect, but given the above constraint, I think this is an acceptable trade-of.
+So, several use cases:
+
+Using the default handler (no change);
+Using a custom handler that implements AuthenticationSuccessHandlerInterface directly and does not need any options (no change);
+Using a custom handler that needs the options/provider key (that's the new use case this PR supports).
+
+This PR introduces 2 new classes that wrap custom handlers. If those classes define the setOptions() and/or setProviderKey() methods, they are automatically called with the correct arguments. Yours handler does not need to extend the default handler DefaultAuthentication*Handler, but doing so helps as the setters are already defined there.

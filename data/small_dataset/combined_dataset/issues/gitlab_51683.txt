@@ -1,0 +1,23 @@
+```
+Title:         Leak Private Namespace when moving issue from private project to public project
+Scope:         *.gitlab.com
+Weakness:      None
+Severity:      Low
+Link:          https://hackerone.com/reports/411428
+Date:          2018-09-19 12:49:44 +0000
+By:            @ngalog
+```
+
+Details:
+Usually Private Project Namespace is protected everywhere, not in anyway is leaked in the API calls or in front end.
+
+However I discovered a feature "move issue" is leaking the private project namespace if someone move an issue from private project to public project, it will leak in the description.
+
+PoC
+https://gitlab.com/golduserngalog/public/issues/1
+
+One thing to note, cause I don't really know how to read ruby code, this "bug" could share the same root cause with #410428
+
+## Impact
+
+Leak Private Namespace when moving issue from private project to public project

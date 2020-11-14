@@ -1,0 +1,11 @@
+Request user confirmation before opening all external applications
+
+
+STR:
+
+Load:
+
+<script>
+  document.location = 'mailto://test@test.com';
+</script>
+

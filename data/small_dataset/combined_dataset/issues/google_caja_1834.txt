@@ -1,0 +1,6 @@
+Document canRepair: false
+
+
+Original issue 1836 created by kpreid.switchb.org on 2013-08-08T18:48:38.000Z:
+In SES, some problems are marked canRepair: false, not because no possible repair exists, but because we no longer expect to see that problem and so the repair code is not worth keeping around (r5524).
+I propose to add to every canRepair: false a comment explaining why no repair is present.

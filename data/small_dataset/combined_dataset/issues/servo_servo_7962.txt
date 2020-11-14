@@ -1,0 +1,31 @@
+Harden against HTTP cookie-based attacks
+
+
+This paper demonstrates several cookie-based attacks.  Servo (and all browsers) needs to implement the hardening described in the paper on page 719.  Specifically:
+
+
+A browser MUST NOT accept a cookie presented
+in an HTTP response with the secure flag set, nor
+overwrite an unexpired secure cookie, except the
+case in 5.
+Cookies with the secure flag MUST be given
+higher priority over non-secure cookies.
+A browser MUST only send the highest priority
+cookie for any cookie name.
+In removing cookies due to a too-full cookie store,
+the browser MUST NOT remove a secure cookie
+when there are non-secure cookies that can be removed.
+The browser MUST allow an HTTP connection
+to clear a secure cookie by setting an alreadyexpired
+expiration date, but the browser MUST
+NOT remove the cookie from the store. Instead,
+the browser MUST set the “do not send” flag and
+maintain the original expiration date.
+The browser MUST NOT send a cookie with the
+“do not send” flag, nor send any non-secure cookie
+with the same name.
+When issuing a request, the browser MUST rank the
+cookie list by a) presence of the secure flag, and b)
+specificity of the domain scope.
+
+

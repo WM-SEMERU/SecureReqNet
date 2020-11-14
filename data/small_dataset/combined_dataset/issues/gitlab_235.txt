@@ -1,0 +1,1 @@
+Please add an option to preview an issue before submitting it.

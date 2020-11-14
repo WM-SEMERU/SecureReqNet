@@ -1,0 +1,4 @@
+Remove trailing whitespace in sequencer_api.proto
+
+
+Remove trailing whitespace in sequencer_api.proto

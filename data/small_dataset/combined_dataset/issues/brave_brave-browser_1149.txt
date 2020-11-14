@@ -1,0 +1,27 @@
+Update error/warning page communication and iconography
+
+
+Description
+Generally speaking we need to update the error page communication to omit mentions of the Chrome brand, chrome support links and chrome iconography across the board. This encompasses 60+ instances of communication between all the error page variations though the iconography specifically seems to fall specifically within these 6 icon groups:
+
+Network Error pages - Sad document icon
+SSL Errors - Red Triangle Alert Icon
+Clock is ahead/behind - Clock icon
+Loud Malware/Phishing pages - White Triangle Alert Icons (red background)
+Captive Portal - Wifi symbol
+No internet - Dinosaur
+
+Additionally, the typographic and button styling should be updated to Brave brand parity. i.e. Poppins, Muli and rounded button aesthetic. This could also be a unique opportunity to introduce some brand personality and talk to users with a little more care and relatable verbiage since it directly relates to their security which is pretty central to Brave values.
+Steps to Reproduce
+
+Type "chrome://interstitials/" into the brave URL bar to view ssl, clock, loud security alert and captive portal error states.
+Type "chrome://network-errors/" into the brave URL bar to view network error states.
+Type "chrome://dino/" into the Brave URL bar to view the "no internet" state.
+
+Actual result:
+
+Expected result:
+This is a proposed initial stylistic update to the iconography for these states.
+
+Additional Information
+To get a better understanding of the variations encompassing error page communication in this issue visit the info strings logic docs on chromium for interstitial errors and general error pages.

@@ -1,0 +1,4 @@
+Fix function name in expression
+
+
+Replaced incorrect is_authenticated_fully() with is_fully_authenticated() in the sidebar note

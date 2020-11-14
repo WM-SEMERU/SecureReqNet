@@ -1,0 +1,9 @@
+Allow credentials to be included in cross-site HTTP requests (accounts/session endpoint)
+
+
+The current CORS configuration returns Access-Control-Allow-Origin: * in the API responses, which makes it impossible to send credentials (cookies) along with an API call from a client hosted on a different domain.
+This is problematic because code-manager cannot send credentials when it needs to. The error in Chrome or FF is:
+Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
+
+Code-manager needs to send credentials when logging out a user: mozilla/addons-code-manager#515.
+The CORS configuration should allow credentials for this endpoint. According to the CORS middleware source code, setting CORS_ALLOW_CREDENTIALS to True will add an extra header (Access-Control-Allow-Credentials) and change the Access-Control-Allow-Origin value to the origin of the request. Read below, we decided to only change the CORS config for the accounts/session endpoint.

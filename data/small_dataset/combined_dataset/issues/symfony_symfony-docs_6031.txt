@@ -1,0 +1,10 @@
+Updating csrf doc for Symfony 3
+
+
+Hey guys,
+https://github.com/symfony/symfony/blob/master/UPGRADE-3.0.md
+Says this:
+The options "csrf_provider" and "intention" were renamed to "csrf_token_generator" and "csrf_token_id".
+However this is not updated here (for 3.0 version):
+http://symfony.com/doc/current/cookbook/security/csrf_in_login_form.html
+I hope this is the right place for reporting it.

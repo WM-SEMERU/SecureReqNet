@@ -1,0 +1,27 @@
+```
+Link:          https://hackerone.com/reports/406396
+By:            @lucky_sen
+```
+
+Details:
+**Summary:** There is one IDOR vulnerability which lead  to comment on some one confidential issue for which no other user are authorized.
+
+**Description:**
+As i notice confidential issue are only access by admin and no other member have rights to access it. Still i am able to make comments on some one confidential issue due to IDOR vulnerability at  `note[note]` parameter. `note[note]` are not properly validate at the endpoint `Issue_name/notes?`
+
+
+## Steps To Reproduce:
+
+  1.Create one confidential issue and set project permission as internal.
+  1. Logged in as another user and make comment on any non-confidential issue (Or create your own issue)
+  1. Change the `note[note]` value in interceptor with confidential issue. (comment posted on confidential issue)
+
+## Supporting Material/References:
+
+redacted
+
+## Impact
+
+Attacker are able to perform unauthorized function action.
+
+***Thanks!***

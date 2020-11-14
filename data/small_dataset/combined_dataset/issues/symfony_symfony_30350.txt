@@ -1,0 +1,50 @@
+[VarDumper] Keep a ref to objects to ensure their handle cannot be reused while cloning
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Fixes the root issue that led to #30311 (comment)

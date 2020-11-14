@@ -1,0 +1,59 @@
+Ciphertext can be decrypted when using array as password
+
+
+Issuetype: bug
+Version: v6.14.0
+Platform: Linux  4.4.0-116-generic ~14.04.1-Ubuntu SMP x86_64 GNU/Linux
+Subsystem: crypto
+Hi, I am using crypto module for encryption and decryption.
+const { pbkdf2, createCipheriv } = require('crypto');
+
+const encryptData = (plainText, password) => new Promise((resolve, reject) => { 
+    const salt = randomBytes(32);
+    const iv = randomBytes(16);    
+
+    pbkdf2(password, salt, 100000, 32, 'sha512', (error, derivedKey) => {
+        if (error) {
+            console.log(error);
+            reject(error);
+        }
+        else {
+            let encrypted = '';
+            const cipher = createCipheriv('aes-256-ctr', derivedKey, iv);
+            encrypted += cipher.update(plainText, 'utf8', 'hex');
+            encrypted += cipher.final('hex');
+            const data = {
+                cipherText: encrypted,
+                salt: salt.toString('hex'),
+                iv: iv.toString('hex')
+            };
+            resolve(data);            
+        }
+    });
+});
+
+const decryptData = (cipherText, password, salt, iv) => new Promise((resolve, reject) => {
+    const _salt = Buffer.from(salt, 'hex');
+    const _iv = Buffer.from(iv, 'hex');
+    pbkdf2(password, _salt, 100000, 32, 'sha512', (error, derivedKey) => {
+        if (error) {
+            reject(error);
+        }
+        else {
+            let decrypted = '';
+            const decipher = createCipheriv('aes-256-ctr', derivedKey, _iv);
+            decrypted += decipher.update(cipherText, 'hex', 'utf8');
+            decrypted += decipher.final('utf8');
+            resolve(decrypted);
+        }
+    });
+});
+Data that is encrypted: "Hello World"
+I think my decryption code is broken in 4th step.
+
+If I use "LOCKIT" as password to encrypt the above string and use the same password to decrypt the cipherText, I can get Hello World back.
+If I use a different password "IAMSTEALINGIT",I am getting an error invalid encoded string.
+If an array variable to passed as password ["LOCKIT"], I can encrypt and decrypt the data.
+The data is encrypted using ["LOCKIT"]. If I try to decrypt the data using [" "], ["SNEAKYTHIEF"], ["ONEPUNCH"] as passwords, I am getting Hello World as the decrypted data.
+
+I don't know whether my code is correct or not. Can someone help me with this issue?

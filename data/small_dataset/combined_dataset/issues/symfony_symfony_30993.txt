@@ -1,0 +1,47 @@
+[FrameworkBundle] Fix for Controller DEPRECATED  when using composer --optimized
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+Yes
+
+
+New feature?
+No
+
+
+BC breaks?
+No
+
+
+Deprecations?
+No
+
+
+Tests pass?
+Yes
+
+
+Fixed tickets
+---
+
+
+License
+MIT
+
+
+
+Using composer --optimize-autoload causes console cache:clear (without warmup) to give DEPRECATED error, that stays in profiler.
+I moved @trigger_error from beggining of the file to Controller __consctruct method.

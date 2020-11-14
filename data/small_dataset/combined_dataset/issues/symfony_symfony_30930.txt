@@ -1,0 +1,71 @@
+[WIP] [FrameworkBundle] Fixed issue when a parameter contains a '%'
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+
+On my computer:
+dump(get_cfg_var('xdebug.file_link_format'));
+"subl://%f:%l"
+
+When I ran bin/console debug:config framework I got this exception:
+
+In ParameterBag.php line 100:
+
+  [Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException]
+  The parameter "templating.helper.code.file_link_format" has a
+dependency on a non-existent parameter "f:".
+
+Exception trace:
+ () at
+/home/gregoire/dev/github.com/lyrixx/symfony/src/Symfony/Component/DependencyInjection/ParameterBag/ParameterBag.php:100
+...
+
+This issue was introduced here / cc @ro0NL
+This PR does not really fix the issue: I'm able to debug the config, The
+the debug:container --env-vars does not work anymore. How could we fix
+both issue? cc @nicolas-grekas

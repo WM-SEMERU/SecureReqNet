@@ -1,0 +1,12 @@
+'This came up in !8018 ([discussion here](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/8018/diffs#4ed0c03b53dbc8320da88e7887465514cd9e90a4_189_196)): when a user is blocked/ldap-blocked, their OAuth access grants/tokens are still valid and could theoretically be used to access APIs.
+
+My first approach was to simply deleted these tokens when a user is blocked, but that brings up a few concerns:
+
+- users have to reauthorize their OAuth clients after they're unblocked
+- revoked tokens should always be kept in the DB (see [related discussion on Doorkeeper's issue tracker](https://github.com/doorkeeper-gem/doorkeeper/issues/500))
+
+To avoid these issues, I think it would be easier to simply add a check for blocked users in `AccessTokenValidationService` and return an appropriate error response (e.g. `TokenNotFoundError`).
+
+Unfortunately I currently don't have any time to look into this, so I'll leave it up to you :)
+
+/cc ~authentication ~oauth ~security

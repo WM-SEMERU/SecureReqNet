@@ -1,0 +1,9 @@
+Updated README
+
+
+Description
+Updated README to mention Azure API for FHIR and reference the docs.microsoft.com pages
+Related issues
+N/A
+Testing
+N/A

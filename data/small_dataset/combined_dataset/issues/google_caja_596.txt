@@ -1,0 +1,19 @@
+domita.js etc. should be more careful about its use of regexps
+
+
+Original issue 596 created by google@web.dwdw.me on 2008-06-13T08:47:03.000Z:
+domita.js (and similar .js files) are not written in Caja.  Therefore they
+must be careful about their use of regexps, to avoid the crazy behaviors.
+Background (as I understand it): The hazards of Regexp are described in
+issue # 528, if r is a RegExp, then r.exec() and r.test() leak information
+about other strings passed to other RegExp objects (even in other gadgets).
+I suspect that r.exec(undefined) will be equivalent to r.exec(), and
+similarly for r.test().  If this is right, it means that everywhere that
+your Javascript uses RegExp.exec(s) or RegExp.test(s), you must first test
+to make sure that s !== undefined.
+There are various places that call RegExp.test(x) in domita.js and
+html-sanitizer.js.  I did not find any where it's possible to have
+x===undefined, but this pattern is slightly fragile, so I thought I'd
+mention it here as a hazard.
+Perhaps this is an argument for writing that code in Caja so that it
+benefits from however issue # 528 is resolved?

@@ -1,0 +1,6 @@
+Allow injection of "Security" through CDI
+
+
+The Security object is created in SecurityMpService. At the end of the configure1 method, the Security object is "registered" in MpServiceContext, which seems to just add it to otherwise inaccessible Map.
+It would be good to have it registered in CDI at this point to avoid parsing the Security config multiple times.
+The Security object is normally accessible through @Context injection from Jersey server, but this is not available to us in some cases when we use microprofile (for CDI) without Jersey server (e.g. microservice consuming messages from message queue).

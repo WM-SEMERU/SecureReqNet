@@ -1,0 +1,9 @@
+[Security] Typo in Security Main Page
+
+
+Under the section
+Always Check if the User is Logged In
+the code:
+use Symfony\Component\Security\Core\User\UserInterface\UserInterface;
+should be
+use Symfony\Component\Security\Core\User\UserInterface;

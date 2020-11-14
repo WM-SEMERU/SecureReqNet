@@ -1,0 +1,44 @@
+Enable vaapi support
+
+
+Partially fixes #1024
+By default browser will blacklist all drivers on linux for vaapi decoding.
+To enable it , need to pass --ignore-gpu-blacklist in order to get it working since libva has problems atm with intel GPUs. I am hoping that it will be fixed in the future versions. There are a lot of activities in upstream in this.
+Only adding this support on 64 bit build at the moment.
+Based on this upstream commit: chromium/chromium@31225b9
+Need to add libva 2.4 as a build and runtime dependency.
+Test Plan:
+
+Check if build succeeds.
+Run brave with --ignore-gpu-blacklist flag and see if the video is playing with hardware decoders or not. ( video needs to be supported by hardware)
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+Verified that these changes build without errors on
+
+ Windows
+ macOS
+ Linux
+
+
+Verified that these changes pass automated tests (npm test brave_unit_tests && npm test brave_browser_tests && npm run test-security) on
+
+ Windows
+ macOS
+ Linux
+
+
+ Ran git rebase master (if needed).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Requested a security/privacy review as needed.
+
+Reviewer Checklist:
+
+ New files have MPL-2.0 license header.
+ Request a security/privacy review as needed.
+ Adequate test coverage exists to prevent regressions.
+

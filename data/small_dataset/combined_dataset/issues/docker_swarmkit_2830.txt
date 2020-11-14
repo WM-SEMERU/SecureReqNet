@@ -1,0 +1,29 @@
+swarmctl susceptible to 4MB grpc message limit
+
+
+Please mark this low priority.  Just planting a post for swarmctl to indicate that it too seems to be affected by the likes of moby/moby#37997.
+Discovered this issue when it occurred to me that swarmctl might be used to prune excessive swarmkit objects that trigger the issue, thereby removing the immediate need to change engine versions.  The work-around for swarmctl is the same as for dockerd: use an older one without the 4mb grpc message limit.
+My specific need is on config list, but as indicated by the above moby issue, other calls are likely affected.
+Steps to recreate issue on config list:
+setup:
+truncate -s 511999 bigconfig.txt
+cat bigconfig.txt | swarmctl config create big1
+cat bigconfig.txt | swarmctl config create big2
+cat bigconfig.txt | swarmctl config create big3
+cat bigconfig.txt | swarmctl config create big4
+cat bigconfig.txt | swarmctl config create big5
+cat bigconfig.txt | swarmctl config create big6
+cat bigconfig.txt | swarmctl config create big7
+cat bigconfig.txt | swarmctl config create big8
+cat bigconfig.txt | swarmctl config create big9
+
+experience:
+$ swarmctl config ls
+Error: grpc: received message larger than max (4692733 vs. 4194304)
+
+Affected Versions
+client:
+$ swarmctl version
+swarmctl github.com/docker/swarmkit v1.12.0-2067-gebfb0aa1
+
+server: dockerd 18.09.2-ce

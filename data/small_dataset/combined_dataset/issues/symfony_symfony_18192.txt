@@ -1,0 +1,11 @@
+Can not authorize using LDAP component: ldap->bind never fires.
+
+
+Helo,
+I try to authorize in Active directory following this doc: http://symfony.com/blog/new-in-symfony-2-8-ldap-component
+I also added a simple login form: http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+But after form submission user is still Anonymous with no error displayed.
+I added some output to Ldap component and find that ldap->bind never fires.
+All the setings are in the question on stackoverflow:
+http://stackoverflow.com/questions/36031680/can-not-authorize-in-active-directory-in-symfony-3
+If needed I can provide them here too.

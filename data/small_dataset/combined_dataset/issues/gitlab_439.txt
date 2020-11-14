@@ -1,0 +1,1 @@
+When a period is used in a branch name in a way that gives it a valid extension type, gitlab returns a 500 error.  For example, if the branch name is 'fix_package.json', this will return a 500 error.

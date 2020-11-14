@@ -1,0 +1,7 @@
+Deprecate kubernetes-ro service
+
+
+Now that the "secrets" type has been merged, and we have namespaces, I don't think it often makes sense to give blanket readonly access to objects.  So, lets deprecated it.
+I don't know that we want to rip it out all in one go.
+Nothing is using the kubernetes-ro service as far as I can see from searching the codebase, however some customers might depend on it, and maybe openshift does.  For GKE, I think we'd like it gone.  So, lets add a flag to the master that disables its creation.  If a customer needs it we can tell them how to get it back, but it will discourage new uses.
+Once service-accounts land, we can give people that need it a way to automatically generate policy and credentials for things in pods.  Then we can delete kubernetes-ro it altogether.

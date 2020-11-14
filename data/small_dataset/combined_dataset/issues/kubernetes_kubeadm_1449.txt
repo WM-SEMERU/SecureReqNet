@@ -1,0 +1,13 @@
+edit release notes draft for 1.14
+
+
+release notes draft for 1.14 is here
+https://docs.google.com/document/d/1PAbK3D6-GorRf_Fi1U_q-Vvt9wM4MMh-qQfiq-dtOTE/edit
+tasks:
+
+edit/move PR release notes where/if needed.
+add SIG theme; kubeadm mostly, as other projects are k8s release unbound.
+
+/assign @timothysc @fabriziopandini @neolit123
+/kind documentation
+/priority important-soon

@@ -1,0 +1,7 @@
+custom Password Authenticator documentation gives token with no $user to onAuthenticationSuccess() event
+
+
+the $token->getUser() method in onAuthenticationSuccess() event returns the logged user unless one follows Symfony's Cookbook entry in order to create a custom Password Authenticator, introduced in Symfony 2.4, in which case $token->getUser() returns null
+http://symfony.com/doc/master/cookbook/security/custom_password_authenticator.html
+in both cases, custom or regular Password Authenticator, the token passed to the event is a Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken but the custom Password Authenticator in the documentation doesn't set the $user property as an object but as a string instead
+trying to set the token's $user property as the User returned by the userProvider's loadUserByUsername() method in the authenticateToken() method of the custom Password Authenticator, as done in the documentation's example, results in strange behaviour: users are authenticated, the onAuthenticationSuccess() event is triggered, but then an authentication exception is thrown

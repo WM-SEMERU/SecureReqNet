@@ -1,0 +1,4 @@
+[Security][Guard] Added a picture for Guard Authenticator
+
+
+This illustration shows how GuardAuthenticationListener calls methods of Guard Authenticator.

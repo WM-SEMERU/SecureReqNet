@@ -1,0 +1,50 @@
+[Config] ensure moving away from Serializable wont break cache:clear
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+When a resource implementation moves away from Serializable, the cache:clear command currently fails with Warning: Class Symfony\Component\Config\Resource\ClassExistenceResource has no unserializer. This change makes it ignore the failure, which is fine.

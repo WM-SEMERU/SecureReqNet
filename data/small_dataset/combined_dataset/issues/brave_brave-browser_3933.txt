@@ -1,0 +1,27 @@
+Favicons of brave welcome and rewards page are white in nightly and master on macOS
+
+
+Description
+favicon of brave://welcome in nightly channel seems off in dark mode, looks normal in light mode though.
+btw I'm using macOS, didn't try other platforms.
+Steps to Reproduce
+Install nightly or run a local build based on master and visit brave://welcome
+Actual result:
+
+Expected result:
+
+Reproduces how often:
+Every time.
+Brave version (brave://version info)
+0.64.23 Chromium: 73.0.3683.75 (Official Build) nightly(64-bit)
+Reproducible on current release:
+Not reproducible in current dev channel
+(0.63.20 Chromium: 73.0.3683.75 (Official Build) dev(64-bit))
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+No.
+Is the issue reproducible on the latest version of Chrome?
+Not applicable.
+
+cc @cezaraugusto @petemill

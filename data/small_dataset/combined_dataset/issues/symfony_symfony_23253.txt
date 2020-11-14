@@ -1,0 +1,60 @@
+Throwing AccessDeniedException when getCredentials() in GuardAuthenticator are null
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes/no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3
+
+
+
+Hi, I upgraded to Symfony3.3 from 3.2. I am using GuardAuthenticator to authenticate my users. I also have ExceptionListener to provide my own responses to different exceptions depending on is it AJAX or not.
+In class below there are two methods
+class SsoAuthenticator extends AbstractGuardAuthenticator {
+.....
+
+    public function getCredentials(Request $request)
+    {
+        //it returns credentials or NULL
+    }
+.....
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        $url = $this->container->getParameter('sso.server_url');
+        $url .= '/login?redirect=' . urlencode(
+                $request->getScheme() . '://' .
+                $request->getHttpHost() .
+                $request->getRequestUri()
+            );
+
+        return new RedirectResponse($url);
+    }
+}
+
+According to documentation methos start() is called when method getCredentials() returns null;
+It was working fine with symfony3.2. But when I upgraded to symfony3.3 it stopped working. Method start() was not called anymore. After long investigating it appeard, that in symfony3.3 you throw AccessDeniedException which you didn't in Symfony3.2. And now, when I have my ExceptionListener yours AccessDeniedException goes first to my ExceptionListener and then I return some Response and method start() is not called anylonger. I had to add some conditions in my ExceptionListener that when is raised AccessDeniedException i must do return;  and then method start() is finally called.
+Well, IMHO it is not a good solution. I think you shouldn't throw exception when getCredentials() returns NULL. I think you should do what you said you will do which is call start() method directly. Now I, and maybe others need to play with this strange situation.
+Robert

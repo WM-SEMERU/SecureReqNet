@@ -1,0 +1,22 @@
+'## Steps to reproduce
+
+1. Add a secret variable and mark it as protected. It should only be accessible on protected tags/branches to prevent unauthorized access
+2. Create a branch matching a protected branch or wildcard. A `master` protection is created by default and can be used here instead
+3. Add `.gitlab-ci.yml` with a script that will steal the secret variable. For test purposes `echo $PROTECTED_SECRET` works but an attacker might do this silently
+4. Create a tag with the same name as `(2)`
+5. Find way to trigger a pipeline for that tag.
+    - *Note:* We'd expect this to happen automatically, but because of a bug we accidentally check `can_update_branch?` for the tag and prevent the pipeline being created. If that bug is fixed this step can be skipped, but for now an attacker might be able to trigger the pipeline using [trigger tokens](https://docs.gitlab.com/ee/ci/triggers/#triggering-a-pipeline) or repository mirroring. See discussion below.
+6. Notice that the secret incorrectly available to the script
+
+### Output
+
+```bash
+$ echo $PROTECTED_SECRET
+myhiddenpassword
+Job succeeded
+```
+
+## Related
+
+- https://gitlab.com/gitlab-org/gitlab-ce/issues/38984
+- https://gitlab.com/gitlab-org/gitlab-ce/issues/42085

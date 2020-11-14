@@ -1,0 +1,6 @@
+Add documentation for the redis transport
+
+
+This will add documentation how to configure and using the redis transport with the messenger component.
+symfony/symfony#30917
+#EUFOSSA

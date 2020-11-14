@@ -1,0 +1,7 @@
+Update to node 8
+
+
+
+Updated Hapi + related dependencies
+Extracted react-validation-mixin logic that we need and customize the mixin for use in the form on the front-end.
+

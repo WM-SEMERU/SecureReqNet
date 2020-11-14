@@ -1,0 +1,91 @@
+Segmentation Fault during rolling-update [kops v1.11.1]
+
+
+1. What kops version are you running? The command kops version, will display
+this information.
+Version 1.11.1
+2. What Kubernetes version are you running? kubectl version will print the
+version if a cluster is running or provide the Kubernetes version specified as
+a kops flag.
+Server Version: version.Info{Major:"1", Minor:"11", GitVersion:"v1.11.8", GitCommit:"4e209c9383fa00631d124c8adcc011d617339b3c", GitTreeState:"clean", BuildDate:"2019-02-28T18:40:05Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
+
+3. What cloud provider are you using?
+AWS
+4. What commands did you run?  What is the simplest way to reproduce this issue?
+kops rolling-update cluster kops-cluster.staging.k8s --yes
+
+5. What happened after the commands executed?
+Two master nodes were successfully deleted and re-created. Upon validation of the cluster after the re-creation of the second one, the kops client experienced a segmentation fault.
+❯ kops rolling-update cluster kops-cluster.staging.k8s --yes
+NAME				STATUS		NEEDUPDATE	READY	MIN	MAX	NODES
+master-us-east-1a		NeedsUpdate	1		0	1	1	1
+master-us-east-1b		NeedsUpdate	1		0	1	1	1
+master-us-east-1c		NeedsUpdate	1		0	1	1	1
+monitoring-nodes		NeedsUpdate	1		0	1	2	1
+nodes				NeedsUpdate	5		0	1	6	5
+stateful-nodes-us-east-1a	NeedsUpdate	1		0	1	2	1
+stateful-nodes-us-east-1b	NeedsUpdate	1		0	1	2	1
+stateful-nodes-us-east-1c	NeedsUpdate	1		0	1	2	1
+I0401 13:58:45.468404   11313 instancegroups.go:165] Draining the node: "ip-172-30-139-226.ec2.internal".
+node/ip-172-30-139-226.ec2.internal already cordoned
+node/ip-172-30-139-226.ec2.internal already cordoned
+WARNING: Ignoring DaemonSet-managed pods: kube-flannel-ds-shls4, update-operator-container-linux-update-operator-mdp6l, node-exporter-v4rns, weave-scope-agent-tvpnp
+I0401 13:58:46.594262   11313 instancegroups.go:358] Waiting for 1m30s for pods to stabilize after draining.
+I0401 14:00:16.599308   11313 instancegroups.go:185] deleting node "ip-172-30-139-226.ec2.internal" from kubernetes
+I0401 14:00:16.671444   11313 instancegroups.go:299] Stopping instance "i-0751fd14e5db642b7", node "ip-172-30-139-226.ec2.internal", in group "master-us-east-1b.masters.kops-cluster.staging.k8s" (this may take a while).
+I0401 14:00:17.295256   11313 instancegroups.go:198] waiting for 5m0s after terminating instance
+I0401 14:05:17.307859   11313 instancegroups.go:209] Validating the cluster.
+I0401 14:05:19.764165   11313 instancegroups.go:273] Cluster did not pass validation, will try again in "30s" until duration "5m0s" expires: kube-system pod "update-operator-container-linux-update-operator-b5hq5" is not healthy.
+I0401 14:05:52.075087   11313 instancegroups.go:273] Cluster did not pass validation, will try again in "30s" until duration "5m0s" expires: kube-system pod "dns-controller-54976b8d97-5wq79" is not healthy.
+I0401 14:06:21.614880   11313 instancegroups.go:276] Cluster validated.
+I0401 14:06:23.123780   11313 instancegroups.go:165] Draining the node: "ip-172-30-149-194.ec2.internal".
+node/ip-172-30-149-194.ec2.internal cordoned
+node/ip-172-30-149-194.ec2.internal cordoned
+WARNING: Ignoring DaemonSet-managed pods: kube-flannel-ds-j62v6, update-operator-container-linux-update-operator-r26nt, node-exporter-6ncql, weave-scope-agent-cltp6
+pod/cluster-autoscaler-65d7b8c665-2d6qn evicted
+I0401 14:06:30.558238   11313 instancegroups.go:358] Waiting for 1m30s for pods to stabilize after draining.
+I0401 14:08:00.561059   11313 instancegroups.go:185] deleting node "ip-172-30-149-194.ec2.internal" from kubernetes
+I0401 14:08:00.680948   11313 instancegroups.go:299] Stopping instance "i-0d00a1a6866a0b343", node "ip-172-30-149-194.ec2.internal", in group "master-us-east-1c.masters.kops-cluster.staging.k8s" (this may take a while).
+I0401 14:08:01.278494   11313 instancegroups.go:198] waiting for 5m0s after terminating instance
+I0401 14:13:01.291672   11313 instancegroups.go:209] Validating the cluster.
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x8 pc=0x367a37e]
+
+goroutine 1 [running]:
+k8s.io/kops/pkg/validation.hasPlaceHolderIP(0xc000b558e0, 0x18, 0xa, 0xc000b55800, 0x18)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/pkg/validation/validate_cluster.go:70 +0x12e
+k8s.io/kops/pkg/validation.ValidateCluster(0xc0006aa400, 0xc00066a850, 0x4baaa60, 0xc0010d60f0, 0x10c7256, 0xc0000ae0c0, 0xc000ea0000)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/pkg/validation/validate_cluster.go:98 +0x91a
+k8s.io/kops/pkg/instancegroups.(*RollingUpdateInstanceGroup).tryValidateCluster(0xc000bff420, 0xc000667180, 0xc0006aa400, 0xc00066a850, 0x45d964b800, 0x6fc23ac00, 0x0)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/pkg/instancegroups/instancegroups.go:267 +0x67
+k8s.io/kops/pkg/instancegroups.(*RollingUpdateInstanceGroup).ValidateClusterWithDuration(0xc000bff420, 0xc000667180, 0xc0006aa400, 0xc00066a850, 0x45d964b800, 0x1, 0x1)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/pkg/instancegroups/instancegroups.go:243 +0x83
+k8s.io/kops/pkg/instancegroups.(*RollingUpdateInstanceGroup).RollingUpdate(0xc000bff420, 0xc000667180, 0xc0006aa400, 0xc00066a850, 0x0, 0x45d964b800, 0x45d964b800, 0x0, 0x0)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/pkg/instancegroups/instancegroups.go:211 +0x449
+k8s.io/kops/pkg/instancegroups.(*RollingUpdateCluster).RollingUpdate(0xc000667180, 0xc000b70030, 0xc0006aa400, 0xc00066a850, 0xc0000ce000, 0xc000f7c900)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/pkg/instancegroups/rollingupdate.go:130 +0x8bd
+main.RunRollingUpdateCluster(0xc000ef1ce0, 0x4adc200, 0xc0000ce000, 0xc000ed1a00, 0x0, 0x0)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/cmd/kops/rollingupdatecluster.go:408 +0xe02
+main.NewCmdRollingUpdateCluster.func1(0xc000f62780, 0xc000f5e320, 0x1, 0x2)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/cmd/kops/rollingupdatecluster.go:207 +0xd9
+k8s.io/kops/vendor/github.com/spf13/cobra.(*Command).execute(0xc000f62780, 0xc000f5e2e0, 0x2, 0x2, 0xc000f62780, 0xc000f5e2e0)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/vendor/github.com/spf13/cobra/command.go:760 +0x2ae
+k8s.io/kops/vendor/github.com/spf13/cobra.(*Command).ExecuteC(0x73b8ea0, 0x73ee690, 0x0, 0x0)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/vendor/github.com/spf13/cobra/command.go:846 +0x2c0
+k8s.io/kops/vendor/github.com/spf13/cobra.(*Command).Execute(...)
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/vendor/github.com/spf13/cobra/command.go:794
+main.Execute()
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/cmd/kops/root.go:97 +0x95
+main.main()
+	/private/tmp/kops-20190301-76333-2o9wrz/kops-1.11.1/src/k8s.io/kops/cmd/kops/main.go:25 +0x20
+
+6. What did you expect to happen?
+A rolling update of the whole cluster with no segfault! The intention here was to upgrade Kubernetes from v1.10.6 to v1.11.8.
+7. Please provide your cluster manifest. Execute
+kops get --name my.example.com -o yaml to display your cluster manifest.
+You may want to remove your cluster name and other sensitive information.
+https://gist.github.com/eherot/1155563339accd3eec07385c63c6bb6a#file-kops-cluster-staging-k8s-yaml
+8. Please run the commands with most verbose logging by adding the -v 10 flag.
+Paste the logs into this report, or in a gist and provide the gist link here.
+I ran it a second time and this did not happen again.
+9. Anything else do we need to know?

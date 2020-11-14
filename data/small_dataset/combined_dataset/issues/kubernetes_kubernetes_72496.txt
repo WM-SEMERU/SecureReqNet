@@ -1,0 +1,5 @@
+Automated cherry pick of #72495: Bump dashboard to v1.10.1 for CVE-2018-18264
+
+
+Cherry pick of #72495 on release-1.13.
+#72495: Bump dashboard to v1.10.1 for CVE-2018-18264

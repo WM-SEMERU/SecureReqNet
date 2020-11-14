@@ -1,0 +1,26 @@
+AMBARI-24918 - Infra Manager: ssl support
+
+
+What changes were proposed in this pull request?
+
+Handle java.net.ssl related system properties:
+
+
+use keystore and trustsore for communicating with Solr
+turn on https for Infra Manager REST api
+
+
+Refactor Infra Manager security package: a secret can have different property names in different secret stores
+Set container names in docker environment because if component name is not specified in the docker-compose file the generated container name contains a random sequence.
+
+How was this patch tested?
+ITs UTs passed
+Manually:
+
+Deploy Ambari and a cluster: Zookeeper, Infra Solr, Infra Manager, Logsearch
+Generate self signed certificates
+Enable ssl for Infra Solr, Logsearch and Infra Manager using the generated certificates
+Enable archiving job
+Run archiving job
+Check that archive files exists in the destination folder
+

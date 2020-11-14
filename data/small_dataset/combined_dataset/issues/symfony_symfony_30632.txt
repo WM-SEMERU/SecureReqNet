@@ -1,0 +1,42 @@
+Response.php update for more coherence
+
+
+$headers has been defined at the beginning of the method to avoid using $this->headers and $headers is used everywhere but not on these lines
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+

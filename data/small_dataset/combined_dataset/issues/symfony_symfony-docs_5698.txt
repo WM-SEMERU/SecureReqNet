@@ -1,0 +1,6 @@
+Documentation should not reference external BCrypt tool
+
+
+Currently the documentation suggests using this online tool to generate BCrypt hashes.
+Although this tool may have been set up with the best of intentions - we have no way of proving that the operator is not farming the input BCrypt hashes (or that the service has not been compromised).
+I think these references in the documentation should be removed, as it is not a good security practice to generate password hashes like this.

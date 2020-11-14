@@ -1,0 +1,6 @@
+return more endpoint information with req.Client
+
+
+This is a refactoring of the req.Client return value inside onRequest(req, res) and onResponse(req, res) calls.
+Instead of returning just the IPv4 address as a string, req.Client returns a string mapped interface consisting of 3 strings: req.Client.IP, req.Client.MAC, and req.Client.Alias.
+This allows us to track the network activity of targeted devices more persistently within JS modules.

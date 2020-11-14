@@ -1,0 +1,10 @@
+Security Flaw : Apply User Permissions is being ignored for blank field values
+
+
+Hi
+User permission does not work if the Field value is blank. The list shows where user field matches (territory =ERP) and also where Territory is blank. They system should only show where Territory = ERP and not blank ones.
+
+
+
+Regards
+Rohit

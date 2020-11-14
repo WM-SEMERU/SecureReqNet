@@ -1,0 +1,4 @@
+No support for caching time in minutes
+
+
+feature request I guess

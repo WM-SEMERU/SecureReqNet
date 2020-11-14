@@ -1,0 +1,61 @@
+While cloning an existing repository while using deployment keys over SSH we sometimes get the error below:
+
+```
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+
+I'm cloning a repo from cron on a 5 minute schedule and about twice per hour the cron job will receive the error message above and the clone will fail (yes I know I can use hooks instead of pulling on a schedule and likely will fix that soon but it should still work).
+Waiting 1-2 minutes and trying again the clone will succeed without any issues.
+
+* I'm using Gitlab CE Omnibus 7.1.1 facfec4 on RHEL 6.5 (all RPM's/Kernel update as of today)
+* Linux Kernel: 2.6.32-431.23.3.el6.x86_64
+* Repositories in question are fairly small (2.2MB and 19MB)
+* Git clone URL is SSH with a Deployment key
+* No errors in logs on Gitlab server side during failure
+* Multiple source hosts receive this error message not just one
+* Git client software is ```git version 1.8.1.5``` also on RHEL 6.5
+* Gitlab Server VM: 4 vCPU's (avg load 0.5, avg CPU usage 10% or less) and 4GB RAM (1.9GB free)
+* 2 Clients are on same VLAN as Gitlab Server, 1 is not, all 3 get the fatal error sometimes
+* Gitlab authorized_keys file has been rebuilt just in case it was corrupt
+
+I have searched a fair amount before opening this issue, most of the 'fatal' messages related to cloning a Gitlab repo seem to be people having problems with keys and or permissions related to the repository or a large repo with some timeout issues. I don't seem to be having any of those problems and I am able (with the deployment key in question) to clone this and other properly setup repos but some of the time they simply fail to clone and then work fine a minute later.
+
+Any pointers on where to go from here (turn up debug levels, other places to look?) would be greatly appreciated. Thank you!
+
+My current configuration file is fairly standard and is shown below (some values changed obviously):
+
+```
+external_url "https://gitlab.mycompany.com"
+nginx['redirect_http_to_https'] = true
+nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.crt"
+nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.key"
+
+# NFS Data dir
+git_data_dir "/opt/gitlab/share"
+
+# These settings are documented in more detail at
+# https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/gitlab.yml.example#L118
+gitlab_rails['ldap_enabled'] = true
+gitlab_rails['ldap_host'] = 'int.corp.lan'
+gitlab_rails['ldap_port'] = 389
+gitlab_rails['ldap_uid'] = 'sAMAccountName'
+gitlab_rails['ldap_method'] = 'plain' # 'ssl' or 'plain'
+gitlab_rails['ldap_bind_dn'] = 'CN=myaccount,OU=Service accounts,DC=int,DC=corp,DC=lan'
+gitlab_rails['ldap_password'] = 'notmyrealpassword'
+gitlab_rails['ldap_allow_username_or_email_login'] = true
+gitlab_rails['ldap_base'] = 'dc=int, dc=corp, dc=lan'
+
+# Email addresses
+email_from "gitlab@gitlab.mycompany.com"
+support_email "gitlab@gitlab.mycompany.com"
+
+# Gravatar defaults are set wrong - so set to the normal defaults!
+gitlab_rails['gravatar_plain_url'] = "http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=mm"
+gitlab_rails['gravatar_ssl_url']   = "https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=mm"
+
+# Increase unicorn timeout for large repos cloning over HTTPS
+unicorn['worker_timeout'] = '180' #3min
+```

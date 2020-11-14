@@ -1,0 +1,27 @@
+Toggling 'Show only included sites' removes a couple of pinned sites from the top of Payments
+
+
+Have you searched for similar issues? Yes
+Description
+I think the titles best describes the issue. The only extra thing I can add is that the two that go away that have been pinned have a slight shade or transparency to them. It's not like the rest where you have grey, light grey, grey down the list of Sites. This has the text shaded as well.
+Steps to Reproduce
+I wouldn't know how, I only noticed it in the recent update.
+Actual result: I'd include a screenshot if it's essential but setting percentages is causing another issue for this to be presented.
+Expected result: Sites should remain where they are when 'Show only included sites' is toggled especially when they are pinned. Technically nothing pinned should ever be removed from the top, right?
+Reproduces how often: 100%
+about:brave info:
+Brave: 0.23.105 
+V8: 6.8.275.24 
+rev: 9a46f8f5cb22a9daf2af21989aed25911aa6f839 
+Muon: 8.0.9 
+OS Release: 4.12.14-lp150.12.16-default 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: Linux 
+Node.js: 7.9.0 
+Tor: 0.3.3.8 (git-99f9816efa08ab83) 
+Brave Sync: v1.4.2 
+libchromiumcontent: 68.0.3440.84
+
+Additional Information
+un-toggling does make it appear to the top again but they still have a slight transparency to them.

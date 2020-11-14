@@ -1,0 +1,32 @@
+[WIP DO NOT MERGE] Allow users to share templates with Accounts or Projects through the
+
+
+Problem: CloudStack users want the ability to share templates with other accounts or projects through the UI.
+Root Cause: The ‘updateTemplatePermissions’ is only available via API and needs to be integrated with the UI in order to allow users to share templates with other accounts within the same domain, and also with projects that the sharing account has access to.
+Solution: The CloudStack UI template view has been extended to include a button that allows users to update template permissions through the ‘updateTemplatePermissions’ API. This API supports 3 operations i.e. add, remove or reset. The reset operation does not require any parameters and it simply removes all permissions for a template. The add and remove parameters require either accounts or projects to be specified for sharing or stop sharing templates. The ‘listAccounts’ API has been extended to allow users to see all the accounts within the same domain if the global setting ‘allow.view.all.domain.accounts’ is set to true. This allows the accounts selection to be a multi-selection.
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+Reset Operation hides the Accounts and Project ID fields as this operation does not require any additional parameters to be set.
+Operation = Reset; Account and Project fields not displayed
+
+Operation = Add/Remove , global setting: 'allow.user.view.all.domain.accounts' = false;
+
+Operation = Add , global setting: 'allow.user.view.all.domain.accounts' = true; Domain has 3 accounts in total (bt1, bt2 and bt3). Logged in user is bt1 and so it is not shown on the dropdown list.
+
+Operation = Remove , global setting: 'allow.user.view.all.domain.accounts' = true; Domain has 3 accounts in total (bt1, bt2 and bt3). The current template was only shared with bt2 by bt1 so dropdown menu only shows accounts that the current template has been shared with.
+
+How Has This Been Tested?
+
+Create 2 Accounts (acc1 and acc2) within the same domain.
+Log in to the CloudStack UI with acc1 user account and upload a private template for this user.
+Navigate to the newly created UI and click on the "Update Template Permissions" button.
+A new window should pop up, select "Add" for this window and input acc2 in the Accounts input field and then click OK.
+With CloudMonkey/CloudStack UI, check for shared templates using acc2 user account. The template from acc1 user account should now be visible to acc2 under shared templates.
+

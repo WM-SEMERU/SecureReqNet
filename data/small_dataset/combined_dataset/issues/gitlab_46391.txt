@@ -1,0 +1,10 @@
+'Zendesk: https://gitlab.zendesk.com/agent/tickets/96126 (internal)
+
+
+Customer is subject to FIPS and has to restrict which TLS protocol versions and ciphers are used in its services. As a result, after an upgrade of GitLab and by proxy, OpenSSL, there are no longer default ciphers in common and GitLab could not connect to their LDAP server. We implemented a hack on their system, specifically setting ciphers that the GitLab LDAP client could use to connect. After this communication worked again.
+
+We need to expose `ciphers` configuration that `Net::LDAP` uses inside `tls_options`. We already expose `ca_file` and `ssl_version` so adding `ciphers` would be similar. 
+
+It would be great if we can ship this in a patch, or slip it into 10.8 otherwise this customer's instance will break again upon upgrade. I'm surprised we haven't run into this issue with other customers with similar compliance constraints, but undoubtedly we will encounter is sooner or later.
+
+@stanhu What release do you think this is appropriate for? I can put together a MR.

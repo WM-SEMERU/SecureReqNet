@@ -1,0 +1,12 @@
+[AMBARI-25099] [Log Search UI] two timezones with the same ID
+
+
+What changes were proposed in this pull request?
+We used an depecrated library to generate maps. I created a more Angular way component with the same functionality without jQuery.
+How was this patch tested?
+It wast tested manually by testing the dropdowns too, since it was also touched (fixed).
+It was tested via unit tests too:
+PhantomJS 2.1.1 (Mac OS X 0.0.0): Executed 295 of 295 SUCCESS (14.709 secs / 14.524 secs)
+✨  Done in 47.13s.
+
+Please review Ambari Contributing Guide before opening a pull request.

@@ -1,0 +1,44 @@
+[SecurityBundle] Tests segfaults with php 7.1.0 on OS X 10.12.2
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3 (master)
+
+
+
+For some reasons, since 7497f1c, using php 7.1.0 (built: Dec  2 2016, Liip PHP OS X 10.12.2), I get segmentation faults when executing tests on the SecurityBundle:
+./phpunit src/Symfony/Bundle/SecurityBundle/
+
+#!/usr/bin/env php
+PHPUnit 5.7.5 by Sebastian Bergmann and contributors.
+
+Testing src/Symfony/Bundle/SecurityBundle/
+...............................................................  63 / 139 ( 45%)
+...................Segmentation fault: 11
+There are actually many tests triggering a segfault, but executing a test case alone might pass for some of them whereas it fails when starting the whole SecurityBundle test suite.
+(I know segfaults are issues with the php engine, but it might be useful to identify the issue)

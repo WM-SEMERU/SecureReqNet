@@ -1,0 +1,4 @@
+Linkify can hit maximum recursion depth
+
+
+Currently you can construct a string that will cause linkify to raise a RuntimeError. That should be fixed ASAP.

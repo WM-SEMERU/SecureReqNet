@@ -1,0 +1,7 @@
+Version: GitLab 6.5.1
+
+Produced JSON string on push of 1 commit to a new branch:
+Document: {u'user_id': 3, u'repository': {u'url': u'gitlab@https://.....ehovind/test2.git', u'homepage': u'https://repo...../ehovind/test2', u'name': u'test2', u'description': u''}, u'user_name': u'Espen', u'after': u'79b9dad3706d06c5edd04b57b516dfa0bc22de92', u'total_commits_count': 0, u'commits': [], u'project_id': 10, u'ref': u'refs/heads/master', u'before': u'0000000000000000000000000000000000000000'}
+
+Total commits: 0? Even though there certainly is a commit in the push (79b9dad3...).
+

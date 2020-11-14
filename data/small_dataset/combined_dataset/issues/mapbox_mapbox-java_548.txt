@@ -1,0 +1,29 @@
+New directions callback
+
+
+We can create a ServiceCallback which includes an additional callback onNoRoute which is invoked when the response returns 0 routes. This would remove the boilerplate code needed every time a request is made:
+if (response.body() == null) {
+   Log.e(LOG_TAG, "No routes found, make sure you set the right user and access token.");
+  return;
+}
+if (response.body().routes().size() < 1) {
+  return;
+}
+and the new callback would look something like:
+builder.build().enqueueCall(new MapboxService.ServiceCallback<T>() {
+      @Override
+      public void onResponse(Response<T> response) {
+
+      }
+
+      @Override
+      public void onNoRoute(Response<T> response) {
+
+      }
+
+      @Override
+      public void onFailure(Throwable t) {
+
+      }
+    });
+cc: @zugaldia

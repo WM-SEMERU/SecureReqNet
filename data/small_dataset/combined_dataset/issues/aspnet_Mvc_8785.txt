@@ -1,0 +1,30 @@
+Returning Task returns 200 OK even though downstream may have returned NotFoundResult.
+
+
+Is this a Bug or Feature request?:
+Bug
+Steps to reproduce (preferably a link to a GitHub repo with a repro project):
+        // This returns 200 OK even though GetNumber returns NotFound!!!
+        [HttpDelete("{id}")]
+        public Task DeleteAsyncNotWorking(int id)
+        {
+            return GetNumber();
+        }
+
+        // This works as intended.
+        [HttpDelete("working/{id}")]
+        public Task<ActionResult<int>> DeleteAsyncWorking(int id)
+        {
+            return GetNumber();
+        }
+
+        private async Task<ActionResult<int>> GetNumber()
+        {
+            await Task.CompletedTask;
+
+            return NotFound();
+        }
+Description of the problem:
+GetNumber() returns NotFound(). If you call Task DeleteAsyncNotWorking with something like Postman you will see 200OK. This is really confusing... I have to go to all of my methods now and make sure they return the correct codes.
+Version of Microsoft.AspNetCore.Mvc or Microsoft.AspNetCore.App or Microsoft.AspNetCore.All:
+2.2.0

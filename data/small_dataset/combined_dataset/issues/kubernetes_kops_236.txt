@@ -1,0 +1,4 @@
+Document Authentication Configuration
+
+
+I'm aware that there are a few different kubernetes authentication options such as basic auth, client certificate, and tokens. It's not clear to me which is setup by kops.

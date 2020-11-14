@@ -1,0 +1,30 @@
+Incorrect downloading tooltip message
+
+
+Description
+Downloading tooltip message doesn't show correct percentage.
+Steps to Reproduce
+
+Start to download a file
+Move mouse over download info in the bottom of window
+Wait until tooltip message appears
+
+Actual result:
+
+Expected result:
+It is expected to see download percentage instead of {{ downloadPercent }} template
+Reproduces how often:
+Brave Version
+Brave: 0.23.107
+V8: 6.8.275.24
+rev: 6f2fc65
+Muon: 8.0.10
+OS Release: 4.15.0-33-generic
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+Additional Information

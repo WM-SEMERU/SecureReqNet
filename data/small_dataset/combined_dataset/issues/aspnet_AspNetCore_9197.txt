@@ -1,0 +1,26 @@
+Intellisense/aspnetcore not allowing void -> object casting
+
+
+Describe the bug
+When using ActionResult<object> as a result, the resulting method allows for the return of void from another function, but it shouldn't, as this gives a ProgramException.
+I dont know if this is a Roslyn bug or AspNetCore bug.
+To Reproduce
+Steps to reproduce the behavior:
+
+Using this version of ASP.NET Core 2.2
+Run this code
+
+        private void ReturnVoid() { }
+
+
+        public ActionResult<object> FaultyMethod()
+        {
+            return ReturnVoid();
+        }
+
+With these argumentsx
+See error ProgramException
+
+Expected behavior
+It should return an EmptyResult to the end user. Or give an error in intellisense/Roslyn that this sort of thing should not happen.
+Or am I missing something here?

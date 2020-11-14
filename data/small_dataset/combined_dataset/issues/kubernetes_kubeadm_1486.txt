@@ -1,0 +1,145 @@
+runtime.go panic in the kubelet with 1.14
+
+
+BUG REPORT
+Versions
+kubeadm version : v1.14.0
+Environment:
+
+Kubernetes version: v1.14.0
+OS: CentOS Linux release 7.6.1810
+Kernel: 5.0.5-1.el7.elrepo.x86_64
+
+What happened?
+  some wrong happened, when I try to deploy worker node to my cluster whith kubeadm join ....，anything do follows Creating a single master cluster with kubeadm ,but output as follows:
+[root@k8snode1 ~]# kubeadm join 10.4.37.24:6443 --token 6ep0i4.q5teqelyzw3jopa6 --discovery-token-ca-cert-hash sha256:b6ecd6ad73e072f2290a14213e32b681cd41c9010a9403bb32e1e213f7c167d2
+[preflight] Running pre-flight checks
+	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+[kubelet-start] Downloading configuration for the kubelet from the "kubelet-config-1.14" ConfigMap in the kube-system namespace
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Activating the kubelet service
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+[kubelet-check] Initial timeout of 40s passed.
+
+Unfortunately, an error has occurred:
+	timed out waiting for the condition
+
+This error is likely caused by:
+	- The kubelet is not running
+	- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+	- 'systemctl status kubelet'
+	- 'journalctl -xeu kubelet'
+error execution phase kubelet-start: timed out waiting for the condition
+
+kubelet's status is running when I execute systemctl status kubelet，as this:
+● kubelet.service - kubelet: The Kubernetes Node Agent
+   Loaded: loaded (/usr/lib/systemd/system/kubelet.service; enabled; vendor preset: disabled)
+  Drop-In: /etc/systemd/system/kubelet.service.d
+           └─10-kubeadm.conf
+   Active: active (running) since 二 2019-04-02 15:04:44 CST; 2min 25s ago
+     Docs: https://kubernetes.io/docs/
+ Main PID: 9735 (kubelet)
+    Tasks: 14
+   Memory: 28.6M
+   CGroup: /system.slice/kubelet.service
+           └─9735 /usr/bin/kubelet
+
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:189
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:214
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:125
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:152
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:153
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:88
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:124
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:54
+4月 02 15:07:09 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:71
+4月 02 15:07:09 k8snode1 kubelet[9735]: /usr/local/go/src/runtime/asm_amd64.s:1337
+
+then I try to look kubelet’s log, some info as follows:
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:51
+4月 02 15:37:33 k8snode1 kubelet[9735]: /usr/local/go/src/runtime/panic.go:522
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:189
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:214
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:125
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:152
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:153
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:88
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:124
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:54
+4月 02 15:37:33 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:71
+4月 02 15:37:33 k8snode1 kubelet[9735]: /usr/local/go/src/runtime/asm_amd64.s:1337
+4月 02 15:37:34 k8snode1 kubelet[9735]: E0402 15:37:34.018898    9735 runtime.go:69] Observed a panic: "invalid memory address or nil pointer dereference" (runtime error: invalid memory address or nil pointer dereference)
+4月 02 15:37:34 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:76
+4月 02 15:37:34 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:65
+4月 02 15:37:34 k8snode1 kubelet[9735]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:51
+
+It give me some infos, like invalid memory address or nil pointer dereference, but I can't ensure whether it cause my pain, and I can't deal with it.
+Cluster and master node has been iniited successfully, as follows:
+[root@k8smaster ~]# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+k8smaster   Ready    master   46h   v1.14.0
+and only master node, cluster's status is ok:
+[root@k8smaster ~]# kubectl get cs
+NAME                 STATUS    MESSAGE             ERROR
+controller-manager   Healthy   ok                  
+scheduler            Healthy   ok                  
+etcd-0               Healthy   {"health":"true"}
+my worker node is cloned from master after master node pulled docker images that kubeadm needed to init or join, as follows:
+[root@k8snode1 ~]# docker images
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy                v1.14.0             5cd54e388aba        8 days ago          82.1MB
+k8s.gcr.io/kube-scheduler            v1.14.0             00638a24688b        8 days ago          81.6MB
+k8s.gcr.io/kube-apiserver            v1.14.0             ecf910f40d6e        8 days ago          210MB
+k8s.gcr.io/kube-controller-manager   v1.14.0             b95b1efa0436        8 days ago          158MB
+k8s.gcr.io/coredns                   1.3.1               eb516548c180        2 months ago        40.3MB
+hello-world                          latest              fce289e99eb9        3 months ago        1.84kB
+k8s.gcr.io/etcd                      3.3.10              2c4adeb21b4f        4 months ago        258MB
+quay.io/coreos/flannel               v0.10.0-amd64       f0fad859c909        14 months ago       44.6MB
+k8s.gcr.io/pause                     3.1                 da86e6ba6ca1        15 months ago       742kB
+and kubeadm/kubelet/kubernetes version are:
+[root@k8snode1 ~]# kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:51:21Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+
+[root@k8snode1 ~]# kubelet --version
+Kubernetes v1.14.0
+
+[root@k8snode1 ~]# kubectl version
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:45:25Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+It looks ok, and kubelet's log is (whole log is a repetitive composition of the following):
+4月 03 09:26:34 k8snode1 kubelet[9519]: /usr/local/go/src/runtime/asm_amd64.s:1337
+4月 03 09:26:35 k8snode1 kubelet[9519]: E0403 09:26:35.512103    9519 runtime.go:69] Observed a panic: "invalid memory address or nil pointer dereference" (runtime error: invalid memory address or nil pointer dereference)
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:76
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:65
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:51
+4月 03 09:26:35 k8snode1 kubelet[9519]: /usr/local/go/src/runtime/panic.go:522
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:189
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:214
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:125
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:152
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:153
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:88
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:124
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:54
+4月 03 09:26:35 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:71
+4月 03 09:26:35 k8snode1 kubelet[9519]: /usr/local/go/src/runtime/asm_amd64.s:1337
+4月 03 09:26:36 k8snode1 kubelet[9519]: E0403 09:26:36.513553    9519 runtime.go:69] Observed a panic: "invalid memory address or nil pointer dereference" (runtime error: invalid memory address or nil pointer dereference)
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:76
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:65
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:51
+4月 03 09:26:36 k8snode1 kubelet[9519]: /usr/local/go/src/runtime/panic.go:522
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:189
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:214
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:125
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:152
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:153
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:88
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/client-go/tools/cache/reflector.go:124
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:54
+4月 03 09:26:36 k8snode1 kubelet[9519]: /workspace/anago-v1.14.0-rc.1.5+641856db183520/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/wait/wait.go:71
+

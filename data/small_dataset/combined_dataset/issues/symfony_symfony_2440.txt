@@ -1,0 +1,4 @@
+[2.1][Security] Integrate security access_control rules with routes
+
+
+It would be nice to have the possibility to integrate security access_control rules with routes. Maybe describing this rules inside the routes.

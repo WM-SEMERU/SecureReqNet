@@ -1,0 +1,49 @@
+[SecurityBundle] do not override custom access decision configs
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#28766
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

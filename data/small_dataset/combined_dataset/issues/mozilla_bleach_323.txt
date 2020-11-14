@@ -1,0 +1,9 @@
+Convert invisible characters to ? in Characters tokens
+
+
+This prevents someone from using backspace and other invisible characters from
+tricking a user into copy and pasting a seemingly innocuous command into doing
+something they really don't want to do.
+I made the replacement character a constant figuring people can replace it if
+they want something different.
+Fixes #298.

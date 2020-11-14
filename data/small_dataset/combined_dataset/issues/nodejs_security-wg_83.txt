@@ -1,0 +1,4 @@
+Update on Node.js Security Working Group
+
+
+I thought it would be good to write a blog post on what is currently happening within this working group and projects that you might need help on. It can be a reflection on what you've achieved in 2017 and main goals/projects you are focusing on as we kick off 2018. What does this group think? And if you like this idea, who would like to be interviewed for this blog post? I would also have you review it before we post on the Node.js Foundation and Node.js Collection Medium page. I would imagine it would be similar in format to this TSC post with a forward by someone in this group and then an explanation on what you worked on in 2017, what you are doing now and where you need help: https://medium.com/the-node-js-collection/the-current-state-of-implementation-and-planning-for-esmodules-a4ecb2aac07a

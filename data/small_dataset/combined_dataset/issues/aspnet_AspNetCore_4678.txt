@@ -1,0 +1,4 @@
+OpenIdConnectEvents event for RemoteSignOut complete
+
+
+A useful event to have would be one that fires after the sid checking is complete and the authentication cookie has been removed.

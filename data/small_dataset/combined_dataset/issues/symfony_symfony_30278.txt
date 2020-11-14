@@ -1,0 +1,58 @@
+Remove unnecessary ProgressBar stdout writes (fixes flickering)
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Currently ProgressBar flickers when writing a lot.
+
+This patch fixes it and it's buttery smooth now.
+Additionally, this improves performance by 60%. Test code
+$maxSteps = 1000000;
+$progressBar = new ProgressBar(new ConsoleOutput(), $maxSteps);
+for ($i=0; $i<= $maxSteps; $i++) {
+    $progressBar->advance();
+}

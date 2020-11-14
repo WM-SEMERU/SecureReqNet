@@ -1,0 +1,16 @@
+[Security] Login _security.last_error captures any exception thrown
+
+
+The login form will capture any exception thrown during the call stack and display as the last error to the end user.
+Simple examples:
+
+Shut down your database server and try to login. The error will be SQLSTATE[HY000] [2002] Can't connect [...]
+If you input incorrect database name in parameters.yml, that will reveal to the outer world your database username and the database name:
+SQLSTATE[HY000] [1044] Access denied for user 'dbuser'@'127.0.0.1' to database 'topsecret'
+Now, if you extend your user object with an additional field and "forget" to run the migration, Doctrine will try to select the user with the new field, and that will display the entire failed query at the top of your login form, SELECT [all_fields_listed] FROM your_table.
+
+Other examples could be non-database related.
+It also won't log it at that time using monolog. The exception is silenced.
+Tested using latest stable in both prod and dev environments. Of course, all the above should never happen and we should take care to run our migrations, keep the database server up and running etc. - but as Murphy’s law states that if something can go wrong, it inevitably will.
+A workaround would be to check the error message and align with (Advanced)UserInterface checks, and for any other error messages, simply show "Unknown error" or re-throw a new Exception with the error message (still doesn't sound right though).
+Has anyone come across this before?

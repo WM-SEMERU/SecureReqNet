@@ -1,0 +1,6 @@
+Progress bar verbosity
+
+
+Description
+The ProgressBar automatically determines the format. There are 4 different formats for different verbosities.
+Is there a reason to not show the estimated time and memory? Having to go into very verbose mode adds all kind of logging to the console that i don't want to see. And while working with TYPO3 i'm not even able to go into very verbose.

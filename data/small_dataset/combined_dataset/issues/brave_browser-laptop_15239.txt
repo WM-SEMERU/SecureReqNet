@@ -1,0 +1,35 @@
+U2F Not Working for AWS MFA
+
+
+Description
+U2F does not work with AWS as a MFA.  It does work with AWS using Chrome.
+Steps to Reproduce
+
+Login to AWS account
+Navigate to IAM console
+Select a user and remove any existing MFA
+Select Manage MFA, and U2F security key
+
+Actual result:
+
+Expected result:
+
+Reproduces how often:
+100% reproducable
+Brave Version
+about:brave info:
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 16.7.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+Not sure
+Additional Information
+U2F used is Yubikey 4C

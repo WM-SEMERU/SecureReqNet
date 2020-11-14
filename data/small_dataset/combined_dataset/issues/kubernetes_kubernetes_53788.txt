@@ -1,0 +1,4 @@
+self-signed certs: warn on low entropy
+
+
+We have seen SNI test flakes which might be caused by low entropy: openshift/origin#16702

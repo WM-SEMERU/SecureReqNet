@@ -1,0 +1,4 @@
+There is a CSRF vuln on Add and Delete teams
+
+
+Because the add and delete are GET methods (see #137 and #130), they can be triggered via CSRF (i.e. from another tab)

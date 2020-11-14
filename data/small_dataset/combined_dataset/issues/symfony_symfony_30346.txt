@@ -1,0 +1,11 @@
+[Messenger] Use transport agnostic exceptions instead of throwing AMQPException
+
+
+Description
+If using AMQP, and RabbitMQ is not available, for example, dispatching a message through the bus will throw AMQPExceptions. I think this should be hidden for the client code that uses the bus, since the actual transport may vary.
+Example
+try {
+      $this->messageBus->dispatch((new SampleMessage());
+} catch (\AMQPException $e) {
+    // Do sth
+}``` 

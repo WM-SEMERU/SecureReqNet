@@ -1,0 +1,16 @@
+Maintainers can build Open Enclave using Clang compiler and extensions on Linux
+
+
+This addresses user suggestion #79. The immediate benefit is to enables maintainers to use the richer set of static analysis tools developed for clang not available to gcc:
+
+The highest priority is to enable use of the Speculative Load Hardening prototype extension to mitigate Spectre 1 vulnerabilities in the enclave runtime (https://lists.llvm.org/pipermail/llvm-dev/2018-March/122085.html)
+Clang also more static analysis tools around code quality and argument handling which we can enable by default.
+MSR has active research and prototypes for new static analysis tools for maintaining enclave safety which they can start refining given direct clang support.
+
+The story requires addressing the following items:
+
+ #276 Refactor enclave libraries to remove dependencies on compiler-specific __builtin functions
+ #277 Refactor enclave libraries to remove #pragma GCC dependencies
+ #284 OE_StackAlloc creates stack corruption when compiled under clang
+ #346 Clang does not support compiling to NOTE sections used for enclave properties
+

@@ -1,0 +1,5 @@
+Initial document load should handle redirects manually
+
+
+Right now, page loads are initiated by a ScriptThread, and the final response is received by the same ScriptThread which creates a Window, Document, and starts the HTML parser. This breaks our same-ish origin threading model if a same-origin load secretly redirects to a cross-origin URL behind the scenes. The spec says that the fetch should use the manual redirect mode, meaning that the load initiator should receive a 3xx response and make a fetch for the resulting URL, which would allow us to handle this case correctly. Additionally, it would likely make the most sense to have this happen in the Constellation, which would then dispatch the final network response to the appropriate script thread.
+cc @asajeffrey

@@ -1,0 +1,4 @@
+Add HSTS pinning
+
+
+Pages such as https://subdomain.preloaded-hsts.badssl.com/ should be disallowed from loading.

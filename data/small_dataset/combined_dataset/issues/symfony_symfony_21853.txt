@@ -1,0 +1,39 @@
+Create Role Hierarchy from database issue
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+yes
+
+
+BC Break report?
+yes/no
+
+
+RFC?
+yes/no
+
+
+Symfony version
+2.8.17
+
+
+
+I have issue with this line that is introduced with symfony 2.8 if I am correct.  https://github.com/symfony/security-bundle/blob/master/DependencyInjection/SecurityExtension.php#L187
+I have been creating role_hierarchy dynamically from the database using this top voted solution: http://stackoverflow.com/questions/11602337/how-to-change-role-hierarchy-storage-in-symfony2
+and it worked for a long time. The line that I have issues with checks if there are no roles defined in the config and never sets the role_hierarchy.
+The bug related to this issue which made it hard for me to figure out what changed, is that my profiler still shows all the inherited roles correctly but inside code isGranted returns false for my "dynamic roles".
+So inherited role shows the role, isGranted returns false if you follow the solution from stackoverflow which I am using.
+Is there any better way to accomplish dynamic roles? There is nothing in the docs...

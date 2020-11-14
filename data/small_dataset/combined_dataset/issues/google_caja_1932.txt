@@ -1,0 +1,7 @@
+drag and drop files doesn't work HTML5
+
+
+Original issue 1934 created by artur.boszczyk@trbls.com on 2014-08-19T09:06:14.000Z:
+What steps will reproduce the problem?
+This example has been run in Caja Playground and it doesn't work:
+http://hayageek.com/examples/jquery/drag-drop-file-upload/index.php

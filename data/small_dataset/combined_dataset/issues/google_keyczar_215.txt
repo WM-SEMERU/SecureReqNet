@@ -1,0 +1,5 @@
+Fix typos
+
+
+BitCoint -> Bitcoin
+bitcoin -> Bitcoin

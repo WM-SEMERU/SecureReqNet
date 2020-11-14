@@ -1,0 +1,67 @@
+updating a datatable with editable=True
+
+
+I'm trying to update a datatable from a dropdown menu like the 2nd example here:
+https://dash.plot.ly/dash-core-components/store
+It works fine if the editable property isn't set. However if I set this to true and then edit the table it will no longer update when the user makes a selection from the drop down menu. Is there something wrong with my code?
+I've debugged the callback function and can confirm it still fires AFTER a user has edited the table but the table will no longer update. It remains frozen with the edited values unless the page is refreshed in the browser.
+import collections
+import dash
+import pandas as pd
+
+from dash.dependencies import Output, Input
+from dash.exceptions import PreventUpdate
+
+import dash_html_components as html
+import dash_core_components as dcc
+import dash_table
+
+app = dash.Dash(__name__)
+
+df = pd.read_csv(
+    'https://raw.githubusercontent.com/'
+    'plotly/datasets/master/gapminderDataFiveYear.csv')
+
+countries = set(df['country'])
+
+
+app.layout = html.Div([
+    dcc.Store(id='memory-output'),
+    dcc.Dropdown(id='memory-countries', options=[
+        {'value': x, 'label': x} for x in countries
+    ], multi=True, value=['Canada', 'United States']),
+    dcc.Dropdown(id='memory-field', options=[
+        {'value': 'lifeExp', 'label': 'Life expectancy'},
+        {'value': 'gdpPercap', 'label': 'GDP per capita'},
+    ], value='lifeExp'),
+    html.Div([
+        dcc.Graph(id='memory-graph'),
+        dash_table.DataTable(
+            id='memory-table',
+            columns=[{'name': i, 'id': i} for i in df.columns],
+            **editable=True**
+        ),
+    ])
+])
+
+
+@app.callback(Output('memory-output', 'data'),
+              [Input('memory-countries', 'value')])
+def filter_countries(countries_selected):
+    if not countries_selected:
+        # Return all the rows on initial load/no country selected.
+        return df.to_dict('rows')
+
+    filtered = df.query('country in @countries_selected')
+
+    return filtered.to_dict('rows')
+
+
+@app.callback(Output('memory-table', 'data'),
+              [Input('memory-output', 'data')])
+def on_data_set_table(data):
+    if data is None:
+        raise PreventUpdate
+
+    return data
+

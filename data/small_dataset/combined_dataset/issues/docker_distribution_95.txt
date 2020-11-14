@@ -1,0 +1,5 @@
+Support TLS natively in registry
+
+
+Add configuration options to run registry under TLS. Configuration should expose common crypto/tls options. An easy to configure self-signed cert generation method should probably be added, as well.
+Supersedes docker/docker-registry#763.

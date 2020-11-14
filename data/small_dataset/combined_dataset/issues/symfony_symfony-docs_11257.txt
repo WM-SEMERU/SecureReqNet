@@ -1,0 +1,4 @@
+Added docs for the missing Intl polyfills
+
+
+Related to symfony/marketing#484.

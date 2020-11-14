@@ -1,0 +1,7 @@
+[Security] Clarification on use of multiple roles within access_control
+
+
+The access_control documentation does not mention behaviour when restricting access by multiple roles.
+The comment If the user does not have the given role(s), then access is denied seems to suggest that multiple roles should be possible and that, when defined with multiple roles, access is denied unless the user has ALL of the specified roles.
+In practice though, the result of this is dependent upon the access decision manager strategy. It is unclear if this is intended but undocumented behaviour, or an issue that needs to be raised in Symfony.
+The response to a related issue from 2013 (#3290) suggests that multiple roles will be handled with OR logic, but this does not seem to be the case, and I can't find anything in the documentation to confirm this.

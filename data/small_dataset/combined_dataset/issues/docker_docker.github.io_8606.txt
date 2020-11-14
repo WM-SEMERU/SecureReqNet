@@ -1,0 +1,5 @@
+Remove redundant "be"
+
+
+Proposed changes
+Removed a redundant "be" from the content trust document.

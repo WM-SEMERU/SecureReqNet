@@ -1,0 +1,11 @@
+Inheritable permissions and three-state permission mask
+
+
+i want to differentiate permisssions for only one domain object
+so there are basically two states:
+
+allow all except one
+deny all except one
+
+unfortunately symfony doesn't see difference between not setting permission and setting false
+there should be easier way to allowing/denying one object without setting object-scope permissions for all of them, it's a bit overkill, right?

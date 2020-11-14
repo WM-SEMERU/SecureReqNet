@@ -1,0 +1,4 @@
+new security rule: detect-non-literal-fs-filename
+
+
+https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-non-literal-fs-filename.js

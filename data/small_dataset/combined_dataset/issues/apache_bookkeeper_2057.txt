@@ -1,0 +1,46 @@
+Migrate command `updateledgers`
+
+
+FEATURE REQUEST
+
+Please describe the feature you are requesting.
+
+
+Using bkctl run update
+
+
+Indicate the importance of this issue to you (blocker, must-have, should-have, nice-to-have).
+Are you currently using any workarounds to address this issue?
+
+
+nice-to-have
+
+
+Provide any additional detail on your proposed use case for this feature.
+
+Update bookie id in ledgers (this may take a long time).
+
+Usage:  bkctl ledger update [flags]
+
+Flags:
+
+    -host, --hostname
+        Expects configuration useHostNameAsBookieID=true as the optin value
+
+    -l, --limit
+        Maximum number of ledgers of ledgers to update (default: no limit)
+
+    -p, --printprogress
+        Print messages on every configured seconds if verbose turned on
+        (default: 10 secs)
+
+    -v, --verbose
+        Print status of the ledger updation (default: false)
+
+    -s, updatepersec
+        Number of ledgers updating per second (default: 5 per sec)
+
+
+    -h, --help
+        Display help information
+

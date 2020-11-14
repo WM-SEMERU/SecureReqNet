@@ -1,0 +1,20 @@
+http: disallow two-byte characters in URL path
+
+
+This commit changes node's handling of two-byte characters in the path component
+of an http URL. Previously, node would just strip the higher byte when
+generating the request. So this code:
+http.request({host: "example.com", port: "80", "/\uFF2e"})
+
+would request http://example.com/. (. is the character for the byte 0x2e).
+This is not useful and can in some cases allow filter evasion. With this
+change, the code generates ERR_UNESCAPED_CHARACTERS, just like space and
+control characters already did.
+Checklist
+
+ make -j4 test (UNIX) passes
+ tests and/or benchmarks are included
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+http

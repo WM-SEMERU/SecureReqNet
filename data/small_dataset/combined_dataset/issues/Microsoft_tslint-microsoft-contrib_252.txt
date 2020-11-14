@@ -1,0 +1,4 @@
+new security rule: detect-child-process
+
+
+https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-child-process.js

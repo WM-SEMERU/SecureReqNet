@@ -1,0 +1,8 @@
+Setting: use Tor for all private tabs
+
+
+Carried over from brave/browser-laptop#14637
+
+I've been using Brave + Tor for only a couple of days and I already find it tiring to enable Tor-mode for every time I open a new private tab. More importantly, I sometimes forget about turning it on, only to find out when it's already too late.
+Having a check box under the Tor mode toggle button that remembers my choice would be super duper!
+

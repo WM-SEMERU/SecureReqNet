@@ -1,0 +1,12 @@
+doc: warn about GCM authenticity
+
+
+Until #17825 lands (which won't be before node 10 is released), the GCM implementation permits short (even single-byte) authentication tag lengths and represents a possible attack vector, compromising the authenticity of data. It is up to the user to validate the length, and this should be noted in the documentation.
+#17825 will reduce the chance of improperly passing authentication to 0.00000002% even if the user does not validate the tag length.
+Checklist
+
+ documentation is changed or added
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+doc

@@ -1,0 +1,48 @@
+Github security warning for `hoek`
+
+
+Bug Report or Feature Request (mark with an x)
+- [X] bug report -> please search issues before submitting
+
+
+Versions
+Angular CLI: 6.1.1
+Node: 10.7.0
+OS: linux x64
+Angular: 6.1.0
+... animations, common, compiler, compiler-cli, core, forms
+... http, language-service, platform-browser
+... platform-browser-dynamic, router
+Package                           Version
+@angular-devkit/architect         0.6.8
+@angular-devkit/build-angular     0.6.8
+@angular-devkit/build-optimizer   0.6.8
+@angular-devkit/core              0.6.8
+@angular-devkit/schematics        0.7.1
+@angular/cdk                      6.4.1
+@angular/cli                      6.1.1
+@angular/material                 6.4.1
+@ngtools/webpack                  6.0.8
+@schematics/angular               0.7.1
+@schematics/update                0.7.1
+rxjs                              6.2.2
+typescript                        2.7.2
+webpack                           4.8.3
+Repro steps
+
+ng new my-app
+push my-app to github
+
+You can use yarn why to see why we have hoek
+
+yarn why hoek
+
+=> Found "hoek@2.16.3"
+info Reasons this module exists
+   - "@angular-devkit#build-angular#node-sass#node-gyp#request#hawk" depends on it
+
+The log given by the failure
+
+This links to: https://nvd.nist.gov/vuln/detail/CVE-2018-3728
+Desired functionality
+Remove or bump dependency on node-sass to remove dependency on reported vulnerability in hoek.

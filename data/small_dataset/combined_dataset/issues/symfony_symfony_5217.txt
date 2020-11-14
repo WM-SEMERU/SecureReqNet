@@ -1,0 +1,22 @@
+Redirection causes corrupt content
+
+
+We're running a test environment secured by a BasicAuth configured in the vhost of that server.
+Since the upgrade on latest RC i'm experiencing following error on login/logout (Using FOSUser) in Firefox, Chrome just ignores the response
+Corrupted Content Error
+
+The page you are trying to view cannot be shown because an error in the data transmission was detected.
+
+The logic get's executed, when i request another page i'm properly authenticated.. just the redirect fails.
+I could "bypass" this warning on login, when i changed settings in my firewall - error on logout still exists
+use_referer: true
+
+When removing the BasicAuth from the vhost, the problem does not exist.
+Server is running on Debian6
+PHP 5.3.3-7+squeeze13 with Suhosin-Patch (cli) (built: Jun 10 2012 07:31:32) 
+
+Maybe anyone can reproduce this issue or let me know what information i shall provide
+Thanks
+-chris
+** Update
+I couldn't reproduce it on my local machine running on PHP5.4, might this be related to the problems described for Versions prior 5.3.8?

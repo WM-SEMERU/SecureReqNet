@@ -1,0 +1,7 @@
+apiserver: forward panic in WithTimeout filter
+
+
+Return apiserver panics as 500 errors instead terminating the apiserver process.
+
+Without this PR a panic in a HTTP handler will not be caught in the Go routine started by the timeout filter. Uncaught panics terminate the process.
+This is a strong condidate to be backported to 1.11, 1.10 and 1.9.

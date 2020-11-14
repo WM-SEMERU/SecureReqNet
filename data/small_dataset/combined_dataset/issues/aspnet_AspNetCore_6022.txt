@@ -1,0 +1,6 @@
+Hard to diagnose exception thrown when AzureADOptions.Instance is not set
+
+
+I was migrating an app that uses Azure AD auth from 1.x to 2.1, including using the new UI package. I had not set AzureADOptions.Instance (as this is new in 2.x and I didn't know it needed to be set). The exception that results does not have user-code on the stack, and thus has no line numbers. The exception is from the Uri constructor, which is being passed a null string (from this line).
+We should ensure we validate options properties before using them to create other types where they might throw, as it's incredibly hard for app devs to diagnose.
+@javiercn @blowdart

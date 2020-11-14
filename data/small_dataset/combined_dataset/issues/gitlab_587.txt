@@ -1,0 +1,3 @@
+If a markdown file has multiple headings with the same text, the different headings get the same ID attribute. This is invalid HTML and prevents linking directly to any of those headings after the first one.
+
+Example page: https://git.simon.geek.nz/simon_w/gridfieldrelationhandler/blob/master/README.md has multiple "Example" headings.

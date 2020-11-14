@@ -1,0 +1,24 @@
+debugReference() in caja.js is too gullible re argument object.
+
+
+Original issue 414 created by erights on 2008-06-09T01:02:14.000Z:
+debugReference() prints obj.constructor.name, where obj may be some
+arbitrary cajoled but untrusted object. We do not reserve the property name
+"constructor", so the debug output has no authenticity. Since we currently
+make no claims about such authenticity, this is low priority. But it is a
+security weakness that we used ".constructor" on an untrusted object rather
+than directorConstructor(). The subsequent use of ".name" is also
+problematic, as the existence of a "name" property on functions is not a
+standard part of ES3. Thus, even on a function, a static "name" might be
+used instead.
+<script type="text/javascript">
+({constructor: {name: "<I am god>"}}).foo;
+</script>
+when run in the testbed, correctly evaluates to undefined. However, it also
+logs "([<I am god>]).foo" in the firebug log. The same issues came up in
+diagnostic printing in the testbed applet, where it was solved. That
+solution should be applied here.
+Note that debugReference() also implicitly coerces both
+obj.constructor.name and obj itself to strings, thereby implicitly calling
+their toString() methods. However, the issues raised by this are already
+covered by issue 323.

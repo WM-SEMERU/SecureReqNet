@@ -1,0 +1,24 @@
+security icon should display in title mode
+
+
+Did you search for similar issues before submitting this one?
+Yes
+Describe the issue you encountered:
+Title mode does not show the lock icon so it's hard to know if the site is secure or not without hovering over the urlbar
+Expected behavior:
+Lock icon should always display the current status of the page
+
+Platform (Win7, 8, 10? macOS? Linux distro?):
+all
+Brave Version:
+0.11.6
+Steps to reproduce:
+
+Go to any http site
+Lock icon only appears when hovering over the urlbar
+
+
+Screenshot if needed:
+Any related issues:
+#2178
+

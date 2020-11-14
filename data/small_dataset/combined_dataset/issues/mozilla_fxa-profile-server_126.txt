@@ -1,0 +1,5 @@
+Limit allowed characters in display-name field
+
+
+We don't want to accidentally XSS ourselves like @pdehaan did over in mozilla/fxa-content-server#2794.
+We should limit the allows characters in display names to alphnumeric plus some sensible metachars.

@@ -1,0 +1,5 @@
+Account balance: 0 BAT but there is also 20 BAT in the wallet
+
+
+
+Brave version 0.23.79 on Fedora 28 Linux. (I’m assuming the data format means November 1st 2018, but it’s hard to tell. Could have expired on January 11th, 2018. I’ve had this profile for years now.)

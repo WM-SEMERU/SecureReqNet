@@ -1,0 +1,5 @@
+Remove logout hint
+
+
+Because while its true, it's confusing for users and the global logout is an industry-wide issue
+also Add a hint about back-end triggered session checks

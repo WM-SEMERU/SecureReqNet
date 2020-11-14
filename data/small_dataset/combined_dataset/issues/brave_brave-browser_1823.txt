@@ -1,0 +1,6 @@
+Add test to ensure assist_ranker is disabled
+
+
+c.f. #663 (comment)
+ranker fetch was disabled in brave/brave-core@ee476c3
+We need a regression test to ensure it stays disabled.

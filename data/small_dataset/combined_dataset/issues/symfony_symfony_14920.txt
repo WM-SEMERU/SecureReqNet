@@ -1,0 +1,6 @@
+[Security][Translation] duplicate translations
+
+
+After updating Symfony I thought I could see the effect of #14601 but it doesn't happen because there is two translations folders into the security component.
+I updated Security/Resources/translations/security.fr.xlf but Security/Core/Resources/translations/security.fr.xlf is used.
+I don't know if it's legit but now that translations have diverged I think something must be done.

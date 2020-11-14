@@ -1,0 +1,40 @@
+Web UI only works on leader server
+
+
+Nomad version
+Nomad v0.7.1 (0b295d399d00199cfab4621566babd25987ba06e)
+Operating system and Environment details
+Ubuntu Xenial on AMD64.
+Issue
+I’m using ACLs.
+I’m trying to access the Web UI but on every server and client except for the leader, the UI flashes shortly and then I get a
+Server Error
+
+A server error prevented data from being sent to the client.
+
+
+error message before being able to enter a token.  I’ve tried Safari, Chrome, and Firefox.
+The browser console looks like this:
+
+The only relevant log messages on the server side is these two:
+Dec 28 19:48:03 c-0175 nomad-server[232]:     2017/12/28 19:48:03.879031 [ERR] http: Request /v1/nodes, error: rpc error: Permission denied
+Dec 28 19:48:03 c-0175 nomad-server[232]:     2017/12/28 19:48:03.879388 [DEBUG] http: Request /v1/nodes (1.565328ms)
+Dec 28 19:48:03 c-0175 nomad-server[232]:     2017/12/28 19:48:03.879815 [ERR] http: Request /v1/agent/members, error: Permission denied
+Dec 28 19:48:03 c-0175 nomad-server[232]:     2017/12/28 19:48:03.880152 [DEBUG] http: Request /v1/agent/members (472.674µs)
+
+
+It’s unfortunate because I would like to use https://nomad.service.consul:4646 as the canonical URL (AFAIK, it’s impossible to determine the leader using a tag like with Vault?).
+Interestingly, the API works just fine – I’m not getting any errors when using the nomad CLI client with NOMAD_ADDR set to https://nomad.service.consul:4646
+
+Is this behaviour intended or documented?  I don’t seem to be able to find anything on Google or GitHub which is deeply confusing me.
+
+FTR, a successful request looks like this:
+
+in the browser.
+Reproduction steps
+
+have more than 1 nomad server
+activated ACLs
+anonymous has no policy
+try to access web ui on a server that isn’t the leader
+

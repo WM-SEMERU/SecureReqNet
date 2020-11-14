@@ -1,0 +1,5 @@
+x/crypto/sha3: add Keccak 256 support
+
+
+Ethereum and other crypto chains use the "original" Keccak hash. The difference is a dsbyte of 1 instead of 6 as in func NewKeccak256() hash.Hash { return &state{rate: 136, outputLen: 32, dsbyte: 0x01} }.
+Can we support this Hash in the library or allow the specification of the domain separation byte in some way?

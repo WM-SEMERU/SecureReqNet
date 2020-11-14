@@ -1,0 +1,5 @@
+Supports Directions precision-6
+
+
+Need to add geometry option precision-6 and allow decoding of precision-6 strings.
+cc: @zugaldia

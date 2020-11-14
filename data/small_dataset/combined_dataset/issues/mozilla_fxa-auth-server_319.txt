@@ -1,0 +1,9 @@
+What is our operational security story?
+
+
+Questions:
+
+Do we encrypt data in memcache/redis and in our DBs?
+If so, where is the data encrypted? On DB server or webhead?
+Are the internal network connections protected?
+

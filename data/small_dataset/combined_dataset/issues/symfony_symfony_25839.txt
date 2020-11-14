@@ -1,0 +1,49 @@
+[SecurityBundle] Deprecate in_memory.user abstract service
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#25837 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

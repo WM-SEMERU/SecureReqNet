@@ -1,0 +1,6 @@
+[Workflow] rename Twig function
+
+
+Hey everyone,
+this PR updates the Twig function name to the one which was introduced with symfony/symfony#30908
+(relates to #11268)

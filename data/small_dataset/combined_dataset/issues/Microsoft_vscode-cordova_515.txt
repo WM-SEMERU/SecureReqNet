@@ -1,0 +1,12 @@
+Extension causes high cpu load
+
+
+
+Issue Type: Performance
+Extension Name: cordova-tools
+Extension Version: 1.8.0
+OS Version: Linux x64 4.15.0-47-generic
+VSCode version: 1.32.3
+
+⚠️ Make sure to attach this file from your home-directory: /home/miquel/vsmobile.cordova-tools-unresponsive.cpuprofile.txt ⚠️
+Find more details here: https://github.com/Microsoft/vscode/wiki/Explain:-extension-causes-high-cpu-load

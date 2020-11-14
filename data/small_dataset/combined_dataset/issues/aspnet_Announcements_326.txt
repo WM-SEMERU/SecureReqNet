@@ -1,0 +1,20 @@
+Making "pubinternal" types in MVC internal
+
+
+In ASP.NET Core, pubinternal types are types that are declared as public but put in an .Internal namespace. While these types are public they have no support policy and are subject to breaking changes. Unfortunately accidental use of these types has been common, resulting in breaking changes to these projects and limiting our ability to maintain the framework.
+In ASP.NET Core 3.0, we are updating all pubinternal types in MVC to either be public in a supported namespace, or internal as appropriate. This includes types in the following namespaces:
+
+Microsoft.AspNetCore.Mvc.Formatters.Xml.Internal
+Microsoft.AspNetCore.Mvc.Cors.Internal
+Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
+Microsoft.AspNetCore.Mvc.RazorPages.Internal
+Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
+Microsoft.AspNetCore.Mvc.TagHelpers.Internal
+Microsoft.AspNetCore.Mvc.Internal
+Microsoft.AspNetCore.Mvc.Razor.Internal
+Microsoft.AspNetCore.Mvc.Formatters.Internal
+Microsoft.AspNetCore.Mvc.Core.Internal
+Microsoft.AspNetCore.Mvc.ModelBinding.Internal
+
+If there are specific types in these namespaces that are critical to your applications, please file an issue in https://github.com/aspnet/Mvc and we will consider making the requested types public.

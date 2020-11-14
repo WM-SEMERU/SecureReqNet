@@ -1,0 +1,79 @@
+Close session after fetching token in ContextListener
+
+
+Status quo
+Symfony currently implicitly starts the session when user management is used. This is necessary because the user is fetched from the session.
+
+
+
+symfony/src/Symfony/Component/Security/Http/Firewall/ContextListener.php
+
+
+         Line 89
+      in
+      c3ec061
+
+
+
+
+
+
+  if (null === $session || null === $token = $session->get($this->sessionKey)) { 
+
+
+
+
+
+
+
+
+symfony/src/Symfony/Component/Security/Http/Firewall/ContextListener.php
+
+
+         Line 138
+      in
+      c3ec061
+
+
+
+
+
+
+  $session->remove($this->sessionKey); 
+
+
+
+
+
+
+
+
+symfony/src/Symfony/Component/Security/Http/Firewall/ContextListener.php
+
+
+         Line 141
+      in
+      c3ec061
+
+
+
+
+
+
+  $session->set($this->sessionKey, serialize($token)); 
+
+
+
+
+
+Those lines will implicitly start the session.
+Feature request
+Symfony currently does not close the session after it's accessed. This means that the request will acquire a lock on the session file and make other requests wait for the entire request to finish, even if the session is not used after Symfony authenticates the user.
+This could be solved rather easily by adding a $session->save(); call after accessing the values from the session. This will release the lock and allow other requests to access the session file.
+This could have a few potential issues:
+
+More overhead because of additional serialization and deserialization of session data
+Race conditions where requests must be executed in a certain order, start to finish
+
+The big pro would be allowing parallel requests.
+WDYT?

@@ -1,0 +1,7 @@
+Validate AppArmor annotations in the API server
+
+
+This is important because it applies the same validation to the annotations that we would eventually want for the AppArmor fields, which will smooth the upgrade path.
+/cc @pmorie @pweil- @jfrazelle @vishh
+
+This change is 

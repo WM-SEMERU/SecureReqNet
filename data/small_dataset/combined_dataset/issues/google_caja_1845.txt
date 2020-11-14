@@ -1,0 +1,8 @@
+Allow flexbox
+
+
+Original issue 1847 created by bruant.d on 2013-08-19T10:40:29.000Z:
+It seems that everything related to CSS flexbox is stripped out.
+Flexbox is the way forward to make positionning on a webpage.
+Tutorial: http://www.html5rocks.com/en/tutorials/flexbox/quick/
+It's now unprefixed in Firefox and very soon in Chrome: http://caniuse.com/#feat=flexbox

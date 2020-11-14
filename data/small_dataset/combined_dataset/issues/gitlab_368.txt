@@ -1,0 +1,27 @@
+**Summary**
+Updating a branch after the merge request is created does not appear to update the merge request page.
+
+**Steps to reproduce:**
+
+
+1. ( Before 7.0.0 upgrade ) Create merge request between branch B into A
+1. Upgrade to 7.0.0 using omnibus installer
+1. Commit to branch B
+1. Push branch B to gitlab
+1. Load merge request page
+
+**Expected Behavior:**
+The newest commit from branch B should be in the list of commits in the merge request. As well as the content of that commit present in the diffs.
+
+**Observed Behavior:**
+The commits listed and diffs visible remain the same, no matter how often the page is reloaded. Even after the browser cache is cleared.  If the merge request is closed and reopened, the latest commits do appear in the commit list.
+
+**Other Info:**
+
+* Used omnibus installer to upgrade from 6.9.2
+* sudo gitlab-rake gitlab:check returns good on everything
+* gitlab version 7.0.0
+* gitlab-shell version 1.9.6
+* git version 2.0.0
+
+It seems that merge requests that were opened in 7.0.0 work fine.  The merge requests I was having problems with were closed and reopened and that seems to have resolved the issue for me.  New merge requests work fine.

@@ -1,0 +1,4 @@
+Proposal: get rid of 'known_hosts'
+
+
+[EDIT]invalid

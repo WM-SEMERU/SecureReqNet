@@ -1,0 +1,4 @@
+Consider prefixing OE libmbedtls for easier disambiguation
+
+
+My system has both the real libmbedtls and the OE version. find_package has to be carefully constructed to disambiguate between them, it would be less error prone if the OE version had the oe prefix.

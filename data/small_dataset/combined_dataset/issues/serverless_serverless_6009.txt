@@ -1,0 +1,6 @@
+Skipped CF step prevents plugin from working
+
+
+I'm using plugin https://github.com/svdgraaf/serverless-pseudo-parameters/issues, however it does not work when deploying only one function cause CloudFormation is skipped by updateFunctionConfiguration
+see https://github.com/serverless/serverless/pull/4173/files#diff-4cbb6c3b54085f7b84b5aea9b859bb1eR141.
+Can you think of any way to make it possible for a plugin in that case ? by updating that function and allowing it to use CF ? See svdgraaf/serverless-pseudo-parameters#15 (comment) for  more details.

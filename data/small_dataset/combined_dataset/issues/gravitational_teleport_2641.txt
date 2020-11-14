@@ -1,0 +1,5 @@
+fix confusing error around Enterprise-only features (`creating resources of type "saml" is not supported`)
+
+
+The tctl error message User Message: creating resources of type "saml" is not supported needs to be improved. Many commercial evaluations trip up over trying to use Enterprise features within OSS and that is the only hint they receive.
+Originally posted by @aberoham in #2246 (comment)

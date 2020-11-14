@@ -1,0 +1,5 @@
+Team data not shown
+
+
+I exported the data from the Generic DevOps Security Maturity Model in a data project https://github.com/wurstbrot/genericDevOpsSecurityMaturityModel-Data with the relevant json files.
+I added level 1 till 3 as an example for the team data, but the data is not shown in the radar. What am I doing wrong?

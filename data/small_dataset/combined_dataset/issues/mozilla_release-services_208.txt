@@ -1,0 +1,4 @@
+User sentry for error collection
+
+
+Got access to https://sentry.prod.mozaws.net in this ticket

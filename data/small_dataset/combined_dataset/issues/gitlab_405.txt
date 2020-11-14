@@ -1,0 +1,1 @@
+I would like to see an "external" access attribute when creating a new user. The major benefit here would be adding clients onto a GitLab installation without exposing them to internal projects. The "external" users would only be able to see public projects and projects they are explicitly added to.

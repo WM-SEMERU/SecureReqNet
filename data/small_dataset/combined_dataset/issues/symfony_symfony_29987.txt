@@ -1,0 +1,49 @@
+[Twig][Bootstrap 4 Theme]: Displaying errors like in official components/forms
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+Yes
+
+
+Fixed tickets
+#28086 #29986
+
+
+License
+MIT
+
+
+Doc PR
+—
+
+
+

@@ -1,0 +1,56 @@
+[SecurityBundle] Add a FirewallConfigRegistry service as main entry point
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.2
+
+
+Bug fix?
+no
+
+
+New feature?
+yes (but rework a new 3.2 feature)
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no (removes one)
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+20585#issuecomment-262085751
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+This PR reworks some parts of #19398 for solving issues like #20585 about accessing the firewall configs in different ways.
+The main entry point for getting firewall configs becomes the security.firewall.config_registry service.
+FirewallMap & FirewallContext stay unchanged, as they are more about the security execution context than getting the configuration.
+It also removes the deprecation introduced in FirewallContext (and even in case this one is not merged, I'd like to challenge this deprecation which seems superfluous instead of simply allowing null)
+However, if the only real uses-cases are only to access the config at runtime from the firewall name, we may not need that "complexity" and refactoring (see #20592 instead).
+WDYT?
+cc @chalasr

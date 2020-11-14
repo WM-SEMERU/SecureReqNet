@@ -1,0 +1,6 @@
+[Form] reversal of an error message when a CSRF token is invalid
+
+
+If form is sent with an invalid CSRF token, this error message will be displayed: The CSRF token is invalid. Please try to resubmit the form.
+This message is in fact instruction on how to bypass CSRF protection. This wording makes protection to be more like an attacker collaborator ;-)
+Please change message to something like Your session has expired. Please return to the home page and try again..

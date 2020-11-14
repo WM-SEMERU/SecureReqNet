@@ -1,0 +1,12 @@
+Widevine resource ID should be obtained properly
+
+
+Test plan
+See #13575
+Original issue details
+Currently we use appConfig.widevine.resourceId which is undefined so the improper setting is set.
+We should do it like getFlashResourceId.
+It was originally set to only the mac path which was wrong.
+And then went to undefined here:
+f682695
+I did a simple test and simply using the old value before that commit doesn't work properly.

@@ -1,0 +1,6 @@
+Permanent obsolete warning on  Release Channel v0.26.0
+
+
+I'm using the Brave.tar.bz2 on Void linux
+Since Release Channel v0.26.0, I get a permanent warning saying "this version of Brave is no longer supported", which does not happen on v0.25.2
+Thanks

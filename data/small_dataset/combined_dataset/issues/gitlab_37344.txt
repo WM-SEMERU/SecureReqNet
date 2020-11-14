@@ -1,0 +1,6 @@
+Closely related to https://gitlab.com/gitlab-org/gitlab-ce/issues/36979
+
+1. Set your name to `Appel<script>alert("XSS via name in profile")</script>`
+1. Post a comment
+
+![xsspoc](/uploads/850d8f8fe3bc9e553608eb5cc2ccc2a5/xsspoc.gif)

@@ -1,0 +1,56 @@
+[Serializer] Serialization versioning
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30848
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Add Serialization versioning.
+
+Added @Since annotation
+Added @Until annotation
+Added support of since and until to the xml and yaml mapping
+Added version context option
+

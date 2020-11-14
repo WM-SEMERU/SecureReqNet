@@ -1,0 +1,14 @@
+User Permissions Application Issue
+
+
+Hello All,
+Kindly refer to The issue raised here . The topic concerns HR Leave Application, Expense Claim, Timesheet etc.
+If you configure Employee permissions to allow Employee to have access only to their own records (as per ERPNext documentation) it works perfectly as intended. Only one Employee (the current user) is listed in the list view and only that one can access their own dashboard when opened.
+I have gone further to allow employees to have only 'Read' permissions for a subset of other Employees Information (mainly contacts info) in order to have a 'company directory'. Now an Employee can see others in the list and open as readonly. OK.
+When the current employee (say A) opens another Employee's (say B) record, the dashboard appears with Leave Application, Expense Claim, Timesheet, Salary Slip, Appraisal etc with a 'New' button on some of them.
+Case1: When 'Leave Application' link from the dashboard is clicked, listview appears with pre-filtered for the Employee B although there is a filter based on User Permissions for the Employee A. Therefore no record shows, either for selected employee or current user. Should not be the case.
+Case2: When 'new' is clicked for Leave Application, Employee B is pre-selected in the form. This implies that the Employee A can create a Leave application for Employee B. Should not be the case.
+The above applies for Leave Application, Expense Claim, Timesheet.
+Employee A should not have 'Create' permission for Leave Application, Expense Claim, Timesheet etc for anyone other than themselves. Infact they should NOT have 'Read' permissions for any other's documents above.
+How can this be resolved or is it an oversight?
+Note: A quick fix would be to hide the dashboard (it seems to be the culprit here) for all other Employees apart from the current Employee/User. How can I achieve that?

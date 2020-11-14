@@ -1,0 +1,53 @@
+[Security] Custom Logout listeners
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+4.1
+
+
+
+I've been implementing SSO logout in a public bundle, and it's struck me that there's no really good way for a public bundle to provide logout customizations.
+In this bundle (HappyrAuth0Bundle), after logging out in Symfony, I'd like to pass the user on to an endpoint on the SSO server to be logged out there, and pass the final target on to them, so the user is redirected first to the SSO server, then back to my Symfony application.
+If I was just writing a regular Symfony application, this would be trivially solvable with either a logout handler, or a logout success handler, but in a public bundle, I don't want to burden my users by having them configure or possibly write those. Ideally (and what I ended up implementing in the changeset) I'd want my users to be able to just write something like the following in their security.yml.
+security:
+    firewalls:
+        secured_area:
+            pattern: ^/
+            auth0_sso:
+                check_path: login_check
+            auth0_logout:
+                path: logout
+                target: /
+
+This is somewhat doable (see the changeset above), but in order to do so, I had to create a fake provider, use an interface for something it clearly wasn't meant to (SecurityFactoryInterface), and even then, there's no way to fully replicate the behavior as in logout, because I cannot get a hold of which firewall context is currently used when creating the services.
+There's also the possibility of wanting to disable functionality in the logout listener. In my auth0_logout section I don't allow for a logout success handler, because it doesn't make sense in an SSO context to allow a custom response; the response always has to be a redirect to the SSO service.
+Discussion points
+
+Am I wrong in thinking that it's necessary for good DX to provide a special auth0_logout key in the firewall configuration?
+If not, what is the preferable approach in making Symfony allow bundles to provide custom logouters? Should I focus on making it possible for SecurityFactories to not return providers and entrypoints, or should I create a new interface specifically for allowing custom logout providers?
+

@@ -1,0 +1,26 @@
+[HttpClient] Setting both json and body shouldn't be allowed
+
+
+Setting both body and json in the HttpOptions is allowed, but it will result in having the json encoded data set in 'body'. See 
+
+
+symfony/src/Symfony/Component/HttpClient/HttpClientTrait.php
+
+
+         Line 44
+      in
+      37b616f
+
+
+
+
+
+
+  $options['body'] = self::jsonEncode($options['json']); 
+
+
+
+
+
+I think an exception should be thrown when having this options both set. That might improve DX.
+I'm happy to provide a PR. What exception should be thrown?

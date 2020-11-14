@@ -1,0 +1,7 @@
+Undefined Index : ancestor_id
+
+
+Database: DB2
+Symfony version 2.2:
+It is failing in class aclProvider.php with undefined index ancestor_id. Dynamic SQL statement has "ANCESTOR_ID" , whereas in aclProvider.php, it is defined as "ancestor_id".
+Srinivasa Varrey

@@ -1,0 +1,24 @@
+"VerifyUserTokenAsync() failed with purpose..." for old token on iis hosted site with data protection set to "Load User Profile"=true
+
+
+Setup:
+
+iis 10
+windows server 2016 single server (not a farm)
+net core 2.1.7 targeting net472 using kestrel with iis integration
+app pool "Load user profile"=true and logs show data protections loading from "C:\Users\apppooluser\AppData\Local\ASP.NET\DataProtection-Keys"
+iis configured with the default 29 hours recycle of apppool (https://weblogs.asp.net/owscott/why-is-the-iis-default-app-pool-recycle-set-to-1740-minutes)
+There are several keys xml files in the "C:\Users\apppooluser\AppData\Local\ASP.NET\DataProtection-Keys" path and latest one last update time is more than a month away, before the generation of the token which failed validation as described below
+
+Problem:
+
+token generated on 3/23/2019 failed being validated on 2019-03-30,2019-04-01,2019-04-02
+token generated on 3/17/2019 failed being validated on 2019-04-03,2019-04-06
+
+Same token generation and validation works well in other cases while in the cases of the error it turned out that the period was big so I thought it might be related.
+As you see the protection persistency was configured using apppool "Load user profile" = true as suggested in: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/?view=aspnetcore-2.1#data-protection
+And logs confirmed it was loaded from the xml files in the appropriate path.
+NOTE: Once in a while I see "Existing cached key ring is expired. Refreshing." which reloads keys from the xml files but I guess this is normal.
+Since the code works in most cases and I checked and the generated parameters are same as being validated, I am guessing the only reason for this is related to the data protection mechanism. Any ideas what could make old tokens fail validation even though the data protection persistency is configured?
+Might be related: #5788
+Also might be related (claims keys are recycled): https://tech.trailmax.info/2015/05/asp-net-identity-invalid-token-for-password-reset-or-email-confirmation/#comment-3583600605

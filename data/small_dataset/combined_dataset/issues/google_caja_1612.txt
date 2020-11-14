@@ -1,0 +1,10 @@
+onload setTimeout code execution bug
+
+
+Original issue 1612 created by kpreid.switchb.org on 2012-12-21T01:06:38.000Z:
+Domado invokes the user-provided window.onload without any validation, resulting in code execution if it is a string. This occurs both in ES5 and ES5/3 modes.
+5517         var onload = tameWindow.onload;
+5518         if (onload) {
+5519           window.setTimeout(onload, 0);
+5520         }
+This can be fixed using ensureValidCallback.

@@ -1,0 +1,5 @@
+Do not allow administrators to maintain collections
+
+
+The collections API currently gives anyone with the Collections:Edit permission access to edit a collection, delete a collection and maintain the add-ons in a collection. As per our conversation about privileged APIs, nobody other than the owner, or a collaborator, should be able to maintain a collection via the API.
+The issue of collaborators can be handled separately, but for now we should update the API to disallow access to users with the Collections:Edit permission who are not the collection's owner.

@@ -1,0 +1,4 @@
+Protect connections between Brave and our Tor subprocess
+
+
+Connecting to a Tor subprocess (#12934) over TCP sockets isn't necessarily the safest way to control and use a critical browser component. How can we harden this? Are there OS-specific measures we could use?

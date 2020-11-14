@@ -1,0 +1,53 @@
+Fix bad method call with guard authentication + session migration
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no (but there needs to be on master)
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#27577
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+I messed up #27452 :/. Guard is the one class where the session migration is not on the listener, it's on the handler. The tricky part is that there is only ONE handler (unlike listeners where there is 1 listener per firewall). That means that implementing a session migration strategy that avoids stateless firewalls was a bit more tricky: I could only think to inject a map into GuardAuthenticationHandler. On the bright side, this also fixes session migration (not happening) when people call the authenticateUserAndHandleSuccess() method directly.
+On master, we'll need to add a deprecation to make the 3rd argument of authenticateWithToken() required - it's optional now for BC. We may also need to re-order the constructor args.
+I DID test this in a real 2.8 project, to make sure that things were properly wired up. Apologies for not doing that for the other PR.
+Cheers!

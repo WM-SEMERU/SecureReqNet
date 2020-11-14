@@ -1,0 +1,6 @@
+Rename project_Get to project_Teams
+
+
+And the rest call from /project/get/#{project} to /project/teams/#{project}
+
+It makes more sense as a name

@@ -1,0 +1,11 @@
+bug:  Vulnerable outdated javascript libraries in consul/ui/javascripts/libs/
+
+
+ember-1-10.js , ember-template-compiler.js  ->  CVE-2015-7565
+jquery-1.10.2.min.js
+"jquery/jquery#2432",
+"http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/",
+"http://research.insecurelabs.org/jquery/test/
+handlebars-1.3.0.min.js
+wycats/handlebars.js#1083"
+Note - I haven't done any in-depth assessment if these are actually exploitable in the way they are consumed in consul, however it's never great practice to use old outdated libraries with publicly known vulnerabilities.

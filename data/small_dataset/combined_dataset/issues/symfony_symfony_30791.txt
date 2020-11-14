@@ -1,0 +1,28 @@
+Process::fromShellCommandline with "find .. -exec"
+
+
+Symfony version(s) affected: 4.2.4
+Description
+        $process = Process::fromShellCommandline( 'find . -name "*.yml" ! -path "*/vendor/*" -exec vendor/bin/yaml-lint {} \;');
+        $process->run();
+I would like to make this command work, but it seems that the -exec is considered as some kind of special keyword by the Process component, or similar..?
+using the very same command directly from the bash works as expected.
+I am using this process in a symfony/console app and getting the following error
+In LintCommand.php line 27:
+
+  [Symfony\Component\Process\Exception\ProcessFailedException]
+  The command "find . -name "*.yml" ! -path "*/vendor/*" -exec vendor/bin/yam
+  l-lint {} \;" failed.
+
+  Exit Code: 1(General error)
+
+  Working directory: C:\xampp7.3\htdocs\linter
+
+  Output:
+  ================
+
+
+  Error Output:
+  ================
+  find: missing argument to `-exec'
+is this a bug, or do I used it wrong?

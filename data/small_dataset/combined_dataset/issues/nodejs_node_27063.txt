@@ -1,0 +1,21 @@
+fs: improve readFile performance
+
+
+This increases the maximum buffer size per read to 256kb when using
+fs.readFile. This is important to improve the read performance for
+bigger files.
+Refs: #25741
+Benchmark (512kb):
+17:32:35                                                  confidence improvement accuracy (*)    (**)   (***)
+17:32:35  fs/readfile.js concurrent=10 len=1024 dur=5                    -3.29 %       ±4.88%  ±6.48%  ±8.40%
+17:32:35  fs/readfile.js concurrent=10 len=16777216 dur=5        ***    592.66 %      ±18.04% ±24.13% ±31.68%
+17:32:35  fs/readfile.js concurrent=1 len=1024 dur=5                      2.18 %       ±4.41%  ±5.84%  ±7.57%
+17:32:35  fs/readfile.js concurrent=1 len=16777216 dur=5         ***    356.82 %      ±25.96% ±34.72% ±45.57%
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

@@ -1,0 +1,28 @@
+Encrypted userinfo jwt not working
+
+
+I'm integrating with an identity provider who uses OpenId connect with userinfo in an encrypted jwt.
+Unfortunately, OpenIdConnectHandler is unable to handle this specific case. Crashes at: https://github.com/aspnet/Security/blob/beaa2b443d46ef8adaf5c2a89eb475e1893037c2/src/Microsoft.AspNetCore.Authentication.OpenIdConnect/OpenIdConnectHandler.cs#L815-L819 because userInfoEndpointJwt.Payload is null in this case
+See also aspnet/Security#517 (comment) where @PinpointTownes suggests it will possibly crash but he can't test it versus a server with this behavior.
+Since it's allowed in the openid connect spec, the handler should probably be able to handle it.
+I managed to make it work by replacing the code above with this:
+else if (contentType.MediaType.Equals("application/jwt", StringComparison.OrdinalIgnoreCase))
+        {
+            var validationParameters = Options.TokenValidationParameters.Clone();
+            validationParameters.RequireSignedTokens = false;
+            validationParameters.ValidateLifetime = false;
+            if (_configuration != null)
+            {
+                var issuer = new[] { _configuration.Issuer };
+                validationParameters.ValidIssuers = validationParameters.ValidIssuers?.Concat(issuer) ?? issuer;
+                validationParameters.IssuerSigningKeys = validationParameters.IssuerSigningKeys?.Concat(_configuration.SigningKeys)
+                                                         ?? _configuration.SigningKeys;
+            }
+
+            var princip = Options.SecurityTokenValidator.ValidateToken(userInfoResponse, validationParameters, out SecurityToken validatedToken);
+            var userInfoJwt = validatedToken as JwtSecurityToken;
+            user = JObject.FromObject(userInfoJwt.Payload);
+            userInfoResponse = new JwtSecurityTokenHandler().WriteToken(userInfoJwt.InnerToken);
+}
+
+But this is just an ugly workaround for this specific provider, I'm sure someone can come up with a more generic implementation which fixes both cases. (The reason I'm replacing the userInfoResponse is because later in the method the userInfoResponse is being validated and this method ALSO assumes it's unencrypted)

@@ -1,0 +1,6 @@
+Revisit disabling ReferenceError
+
+
+Original issue 1863 created by kpreid.switchb.org on 2013-10-08T16:41:09.000Z:
+As of r5440 mitigation defaults to unbound variables returning undefined rather than throwing ReferenceError, so as to avoid source rewriting for the sake of typeof. (No issue was filed for that change. This issue was created to document and discuss it.)
+We should reconsider the costs of this for the future of Caja, and/or document it as a Caja gotcha.

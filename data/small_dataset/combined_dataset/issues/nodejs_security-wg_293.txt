@@ -1,0 +1,5 @@
+Acknowledging most active hackers for ecosystem
+
+
+Some hackers are very active and report a lot of valuable vulnerabilities to the third party triage team.
+I wonder if there could be a good way to give them more credit that only mentioning them as the authors of the vuln.

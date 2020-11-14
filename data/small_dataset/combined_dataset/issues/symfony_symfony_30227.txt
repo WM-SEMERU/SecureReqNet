@@ -1,0 +1,50 @@
+Update validators.bg.xlf
+
+
+Translated 83, 84, & 85
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features / 3.4 up to 4.2 for bug fixes 
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30151
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+

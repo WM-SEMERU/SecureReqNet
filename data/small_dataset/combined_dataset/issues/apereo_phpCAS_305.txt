@@ -1,0 +1,9 @@
+example_simple.php throws HTTP ERROR 500 after login - Debian 8 Linux Server
+
+
+Dear All,
+I am new to the phpCAS client. I just tried to run the example_simple.php on my project server (Debian 8 Linux hosted on AWS, Apache and PHP already configured and working correctly).
+It redirects as expected to the CAS login page but after authentication it throws  HTTP ERROR 500 instead of the Successful Login page.
+I tried the same code with similar configuration on my shared hosting server (Hostgator) and it everything worked correctly. I have tried to figure out why it is not working on my project server without success. Please I need help.
+
+

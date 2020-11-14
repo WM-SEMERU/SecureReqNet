@@ -1,0 +1,18 @@
+symfony-messgaer from serialized data because its constructor requires parameter "content" to be present.
+
+
+Symfony version(s) affected: 4.2
+Description
+use AQMP
+symfony-messgaer f Cannot create an instance of App\Infrastructure\Message\SmsNotification from serialized data because its constructor requires parameter "content" to be present.
+How to reproduce
+class SmsNotification
+{
+    private $content;
+
+    public function __construct(string $content)
+    {
+        $this->content = $content;
+    }
+
+}

@@ -1,0 +1,13 @@
+ES5/3 taming frame contains undefended methods
+
+
+Original issue 1668 created by kpreid.switchb.org on 2013-03-02T00:28:59.000Z:
+The methods of Object.prototype and Array.prototype in ES5/3 are not reachable except via accessor properties; therefore no cajaVM.def() Domado executes ever protects them; therefore these methods are undefended, but exposed to guests.
+(In the case of Array, all cases where we currently expose an array are deviations-from-spec where we return a decorated Array instead of a NodeList, but that might change as we offer more APIs.)
+Example:
+<script>
+alert(Object.isExtensible(document.forms.reverse)); // alerts true
+</script>​
+This is at least an inter-guest channel; it can probably be turned into an exploit by overriding one of the undefended methods' 'call' or 'apply' methods, but I have not been able to construct a working example.
+At the highest level, I would say the problem is that ES5/3 is providing to the taming frame a 'CES' rather than 'SES' environment, and that is how we should approach the fix. I'm not sure how to implement this cleanly, though.
+(One possibility, which would make some other things I have wanted to do easier as well, would be to add a conventional way to mark accessor properties as 'treat this like a data property', which cajaVM.def would then recognize and traverse; given this, the taming frame need merely ensure that everything is cajaVM.def()ed.)

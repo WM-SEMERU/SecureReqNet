@@ -1,0 +1,14 @@
+"ant runtests" get stuck
+
+
+"ant runtests" consistently gets stuck in get-scan-min
+guest-scan-min  Failure 800000 ms passed while waiting for: completion (Remaining elements = [])
+junit.framework.AssertionFailedError: 800000 ms passed while waiting for: completion (Remaining elements = [])
+at com.google.caja.plugin.BrowserTestCase.countdown(BrowserTestCase.java:262)
+at com.google.caja.plugin.BrowserTestCase.waitForCompletion(BrowserTestCase.java:222)
+at com.google.caja.plugin.BrowserTestCase.driveBrowser(BrowserTestCase.java:209)
+at com.google.caja.plugin.BrowserTestCase.runBrowserTest(BrowserTestCase.java:130)
+at com.google.caja.plugin.CatalogTestCase.runTest(CatalogTestCase.java:34)
+at com.google.caja.plugin.CatalogRunner$1.evaluate(CatalogRunner.java:94)
+at com.google.caja.plugin.CatalogRunner.runChild(CatalogRunner.java:88)
+at com.google.caja.plugin.CatalogRunner.runChild(CatalogRunner.java:42)

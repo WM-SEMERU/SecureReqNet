@@ -1,0 +1,6 @@
+Login Redirect Does not Honor Query String Parameters
+
+
+When a user successfully logs in, the user is redirected to the page he originally was trying to view via the onAuthenticationSuccess() function in  https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Authentication/DefaultAuthenticationSuccessHandler.php.
+I am using a javascript history state library to keep track of my javascript frontend state and it generates urls such as /my/site#foo=bar&more=links.
+When I am redirected from the login page, all the query string parameters after the url #foo=bar&more=links are not preserved. Could this possibly be fixed in future versions or is there a good reason not to honor the states of these types of requests?

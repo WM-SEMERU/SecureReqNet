@@ -1,0 +1,24 @@
+**[HackerOne report #429147](https://hackerone.com/reports/429147)** by nyangawa on 2018-10-26:
+
+**Summary:** 
+An invalid IP address check could be utilized to access any IP addresses including private IP addresses
+
+**Description:**
+The validators in `lib/gitlab/url_blocker.rb` does not check URL's like `http://[0:0:0:0:0:ffff:127.0.0.1]:6379`, which is an IPv6 address but used to map to IPv4. Replacing the `127.0.0.1` part to any other IP addresses is also possible.
+
+## Steps To Reproduce:
+
+(Add details for how we can reproduce the issue)
+
+  1. Create a webhook in any existing projects, with URL like `http://[0:0:0:0:0:ffff:127.0.0.1]:9100`
+  1. Test the webhook
+
+## Supporting Material/References:
+
+I did several harmless tests on Gitlab.com. https://gitlab.com/Nyangawa/www-gitlab-com/hooks/415288
+
+And verified it's possible in my 11.4.0 Gitlab docker instance.
+
+## Impact
+
+Due to some limits of Gitlab's web hook, this is an blind SSRF issue without full response printed. But it is still possible for an attacker to send POST requests to internal services to do further penetration to the infrastructure.

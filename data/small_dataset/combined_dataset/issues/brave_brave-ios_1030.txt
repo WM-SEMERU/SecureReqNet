@@ -1,0 +1,4 @@
+Favicon not showing, using fallback when it should not
+
+
+See videos and STR here https://community.brave.com/t/favicon-problem/51360/10

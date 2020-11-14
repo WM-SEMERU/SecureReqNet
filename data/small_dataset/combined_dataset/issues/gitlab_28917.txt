@@ -1,0 +1,24 @@
+### Summary
+
+Create group called 'project' then rename cause alll project avatar lost
+
+### Steps to reproduce
+
+1. Set avatar for exist project
+2. Create group called 'project'
+3. Rename 'project' group to other name
+4. Check project list, all project avatar lost.
+
+/var/opt/gitlab/gitlab-rails/uploads/project is conflict with project name.
+
+### What is the current *bug* behavior?
+
+'project' folder conflict with group named 'project', rename it cause project folder lost
+
+### What is the expected *correct* behavior?
+
+Should not allow create project named "project"
+
+#### Results of GitLab environment info
+
+GitLab 8.17.0 on Ubuntu 16.04 LTS

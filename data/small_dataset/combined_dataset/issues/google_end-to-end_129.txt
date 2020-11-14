@@ -1,0 +1,6 @@
+Strict format for user id
+
+
+From quanngu...@google.com on June 25, 2014 19:26:25
+In the server, we only allow PGP Key to contain unique email address that matches user's verified email address. If the client and server parse the email address differently then it may cause security problem. For instance, if there is a bug in email address parsing, the server may consider the following email address "user1@gmail.com user2@gmail.com" belongs to user1 while the client thinks it belongs to user2.
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=92

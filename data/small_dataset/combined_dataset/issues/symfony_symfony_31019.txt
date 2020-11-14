@@ -1,0 +1,50 @@
+[Security] Replace Argon2*PasswordEncoder by SodiumPasswordEncoder
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#31016
+
+
+License
+MIT
+
+
+Doc PR
+todo symfony/symfony-docs#11368
+
+
+
+See fixed ticket, much simpler/secure/maintainable.

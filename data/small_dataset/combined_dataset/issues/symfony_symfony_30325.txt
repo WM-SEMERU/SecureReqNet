@@ -1,0 +1,50 @@
+[HttpKernel] Prevent search engines from indexing dev applications
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30318
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+Add the X-Robots-Tag: noindex to dev (and test) applications to prevent search engines to index them.

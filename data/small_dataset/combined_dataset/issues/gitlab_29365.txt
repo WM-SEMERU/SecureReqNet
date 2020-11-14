@@ -1,0 +1,79 @@
+'Security Issue: https://dev.gitlab.org/gitlab/gitlabhq/issues/2769
+
+---
+
+These reports are effectively saying GitLab allows unicode characters in URLs that can appear identical to normal ASCII characters. Users can be fooled into clicking on external links.
+
+I'm torn on this, as the usual solution is to render all links in Punycode which might not be acceptable for users in countries that make use of these characters. Most browsers implement some protections for these attacks already, as details in the wikipedia link.
+
+HackerOne links: https://hackerone.com/reports/210895 https://hackerone.com/reports/210896 
+The raw reports are listed below:
+
+# IDN Homograph
+
+>>>
+Dear GitLab bug bounty team,
+
+### Short Description
+
+Gitlab.com is vulnerable to IDN homograph attacks.
+
+### What are the exploits?
+
+IDN homograph attacks exist whenever IDNs are displayed in Unicode and not encoded into Punycode.
+
+The following example appears to link to http://gitlab.com, but it actually links to https://xn--itlab-qmc.com:
+
+![idn-homograph-attack-gitlab](/uploads/94b317430642cd34c62a1428114dd69c/idn-homograph-attack-gitlab.png)
+
+Here is the actual URL in the source code:
+
+![idn-homograph-attack-source-code-gitlab](/uploads/21634e41670d091116eda2cdae1035d2/idn-homograph-attack-source-code-gitlab.png)
+
+### What are the steps you took?
+
+I opened an issue on a private repository of mine and pasted the following in the Description field:
+
+The website is located at: https://ɡitlab.com
+
+###How can this be fixed?
+
+All that you must do is display the Punycode version of the URL.
+
+More information on IDN Homograph attacks: https://en.wikipedia.org/wiki/IDN_homograph_attack (Don't worry this is a real url.)
+>>>
+
+# RTLO 
+
+>>>
+Dear GitLab bug bounty team,
+
+### Short Description
+
+Gitlab.com allows RTLO characters in links, exposing your users to possible phishing attacks.
+
+### Why does this vulnerability exist?
+
+The right to left override (RTLO or RLO) character is used for languages that are written from right to left.
+
+The following example appears to link to https://ed.io/aboutexe.mp3, but it actually links to https://ed.io/about%E2%80%AE3pm.exe:
+
+![rtlo-gitlab](/uploads/e8a79f4c3190d3f718f4c0bff7b012fa/rtlo-gitlab.png)
+
+Here is the actual URL in the source code:
+
+![rtlo-source-code-gitlab](/uploads/c8d049ea0d3accf2264ebe9d377e21ac/rtlo-source-code-gitlab.png)
+
+### What are the steps you took?
+
+I opened an issue on a private repository of mine and pasted the following in the Description field:
+
+The website is located at: https://ed.io/about&#8238;3pm.exe
+
+### How can this be fixed?
+
+Make sure to filter the RTLO character. For instance, this is how HackerOne handles RTLO characters:
+
+The website is located at: https://ed.io/about&#8238;3pm.exe
+
+>>>

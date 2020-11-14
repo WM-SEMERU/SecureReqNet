@@ -1,0 +1,61 @@
+```
+Started GET "/u/avirus" for 127.0.0.1 at 2014-08-25 10:57:04 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"username"=>"avirus"}
+Read fragment views/events/498-20140816202528401109000/6addc44650dc1f7c66594c3371b56320 (0.5ms)
+Read fragment views/events/497-20140816202432237638000/6addc44650dc1f7c66594c3371b56320 (0.2ms)
+Read fragment views/events/298-20140725112152773973000/6addc44650dc1f7c66594c3371b56320 (0.2ms)
+Read fragment views/events/297-20140725112109219291000/6addc44650dc1f7c66594c3371b56320 (0.2ms)
+Completed 500 Internal Server Error in 70ms
+
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"projects/issues", :id=>"BILL-251", :project_id=>#<Project id: 5, name: "kbill", path: "kbill", description: "", created_at: "2014-07-02 09:53:50", updated_at: "2014-08-21 15:26:30", creator_id: 6, issues_enabled: false, wall_enabled: false, merge_requests_enabled: true, wiki_enabled: true, namespace_id: 8, issues_tracker: "jira", issues_tracker_id: "BILL", snippets_enabled: false, last_activity_at: "2014-08-21 15:26:30", import_url: "", visibility_level: 0, archived: false, import_status: "none", repository_size: 13.66>, :username=>"avirus"} missing required keys: [:id]):
+    2:   .commit-row-title
+    3:     = link_to commit[:id][0..8], project_commit_path(project, commit[:id]), class: "commit_short_id", alt: ''
+    4:     &nbsp;
+    5:     = gfm event_commit_title(commit[:message]), project
+  app/helpers/issues_helper.rb:45:in `url_for_issue'
+  lib/gitlab/markdown.rb:186:in `reference_issue'
+  lib/gitlab/markdown.rb:168:in `reference_link'
+  lib/gitlab/markdown.rb:128:in `block in parse_references'
+  lib/gitlab/markdown.rb:117:in `gsub!'
+  lib/gitlab/markdown.rb:117:in `parse_references'
+  lib/gitlab/markdown.rb:93:in `parse'
+  lib/gitlab/markdown.rb:58:in `gfm'
+  app/views/events/_commit.html.haml:5:in `_app_views_events__commit_html_haml___1309183389882781586_31872380'
+  app/views/events/event/_push.html.haml:18:in `block in _app_views_events_event__push_html_haml__4564297540287159296_32264720'
+  app/views/events/event/_push.html.haml:17:in `each'
+  app/views/events/event/_push.html.haml:17:in `_app_views_events_event__push_html_haml__4564297540287159296_32264720'
+  app/views/events/_event.html.haml:10:in `block in _app_views_events__event_html_haml___1945602856794474462_33215940'
+  app/views/events/_event.html.haml:6:in `_app_views_events__event_html_haml___1945602856794474462_33215940'
+  app/views/users/show.html.haml:22:in `_app_views_users_show_html_haml__1965448106490991001_33968760'
+
+
+Started GET "/internal/kbill/commits/development" for 127.0.0.1 at 2014-08-25 10:58:22 +0300
+Processing by Projects::CommitsController#show as HTML
+  Parameters: {"project_id"=>"internal/kbill", "id"=>"development"}
+Completed 500 Internal Server Error in 177ms
+
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"projects/issues", :id=>"BILL-251", :project_id=>#<Project id: 5, name: "kbill", path: "kbill", description: "", created_at: "2014-07-02 09:53:50", updated_at: "2014-08-21 15:26:30", creator_id: 6, issues_enabled: false, wall_enabled: false, merge_requests_enabled: true, wiki_enabled: true, namespace_id: 8, issues_tracker: "jira", issues_tracker_id: "BILL", snippets_enabled: false, last_activity_at: "2014-08-21 15:26:30", import_url: "", visibility_level: 0, archived: false, import_status: "none", repository_size: 13.66>} missing required keys: [:id]):
+    3:     = link_to commit.short_id(8), project_commit_path(project, commit), class: "commit_short_id"
+    4:     &nbsp;
+    5:     %span.str-truncated
+    6:       = link_to_gfm commit.title, project_commit_path(project, commit.id), class: "commit-row-message"
+    7:       - if commit.description?
+    8:         %a.text-expander.js-toggle-button ...
+    9: 
+  app/helpers/issues_helper.rb:45:in `url_for_issue'
+  lib/gitlab/markdown.rb:186:in `reference_issue'
+  lib/gitlab/markdown.rb:168:in `reference_link'
+  lib/gitlab/markdown.rb:128:in `block in parse_references'
+  lib/gitlab/markdown.rb:117:in `gsub!'
+  lib/gitlab/markdown.rb:117:in `parse_references'
+  lib/gitlab/markdown.rb:93:in `parse'
+  lib/gitlab/markdown.rb:58:in `gfm'
+  app/helpers/gitlab_markdown_helper.rb:22:in `link_to_gfm'
+  app/views/projects/commits/_commit.html.haml:6:in `_app_views_projects_commits__commit_html_haml__2377588246744385529_33507420'
+  app/views/projects/commits/_commits.html.haml:10:in `block in _app_views_projects_commits__commits_html_haml__1610686101698021689_33675640'
+  app/views/projects/commits/_commits.html.haml:1:in `each'
+  app/views/projects/commits/_commits.html.haml:1:in `_app_views_projects_commits__commits_html_haml__1610686101698021689_33675640'
+  app/views/projects/commits/show.html.haml:18:in `_app_views_projects_commits_show_html_haml___3782956052612768779_34482440'
+  app/controllers/projects/commits_controller.rb:19:in `show'
+```

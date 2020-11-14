@@ -1,0 +1,61 @@
+question about module syntax
+
+
+What version of Go are you using (go version)?
+$ go version
+1.12
+
+Does this issue reproduce with the latest release?
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+mac OS
+
+What did you do?
+Two repository in github. URL path is github.com/shaocongliang/greet and github.com/shaocongliang/quote. greet doesn't have a go.mod file and only have a package named greet. quote has two package newton and euler.
+newton
+package newton
+
+import _ "github.com/shaocongliang/greet"
+// IsOdd return if odd
+func IsOdd(num int) bool {
+	return num%2 == 0
+}
+euler
+package euler
+
+import _ "github.com/Shaocongliang/greet"
+
+// IsEven return true if num is even or false(when num is odd)
+func IsEven(num int) bool {
+	return num%2 == 0
+}
+The only difference in euler and newton is letter-case, I clone quote to my computer(outside GOPATH).
+go mod init github.com/shaocongliang/quote
+go mod tidy
+As expected  go.mod was generated and content is
+module github.com/shaocongliang/quote
+
+go 1.12
+
+require (
+	github.com/Shaocongliang/greet v0.0.0-20190403070231-d5d253309639
+	github.com/shaocongliang/greet v0.0.0-20190403070231-d5d253309639
+)
+
+Sam Boyer wrote an article An Analysis of Vgo. There is such a paragraph in the article
+
+One of the single most powerful properties in vgo is the first line of go.mod:
+module root/import/path/for/module
+This declaration makes it a compiler-enforced requirement that all modules define the root import path at which anything in their tree must be imported. That is, any given package’s position in the global space of import paths is determined by how it was imported, not by the package itself. The module line, however, means that modules give themselves a canonical import position (aka, name), and that canonicality fluidly extends to all packages.
+The ambiguity of importer-defined identity caused a lot of pain for dep. For example, the Go toolchain has disallowed import paths that differ only by casing for years - e.g., github.com/Sirupsen/logrus vs. github.com/sirupsen/logrus. This was to try to preclude anyone creating a valid Go program that allowed the possibility of clashes between case-sensitive and case-insensitive filesystems. However, the compiler does not and could not determine which of the casing variants is canonical. Either is fine, but there can only be one. This put dep in an awkward position for the unfortunately-common case of sirupsen/logrus - so many people were running into it that we had to add a check to the solver that enforces a casing invariant.
+We considered adding a self-identification property like this in dep. But Glide has just such a property (package in glide.yaml). My experience there led me to believe that, if the compiler isn’t enforcing a self-identification property, then having such a property just adds more ambiguity, resulting in more harm than help.
+Fortunately, vgo fully embraces the idea of self-identifying code, which not only solves these problems but paves the way to what is probably the single most exciting property for Go developers: the elimination of GOPATH.
+
+require (
+	github.com/Shaocongliang/greet v0.0.0-20190403070231-d5d253309639
+	github.com/shaocongliang/greet v0.0.0-20190403070231-d5d253309639
+)
+
+Is this the embodiment of ”Module self-identification“? modules think Shaocongliang and shaocongliang are two different module.
+What did you expect to see?
+What did you see instead?

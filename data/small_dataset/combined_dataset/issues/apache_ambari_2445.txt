@@ -1,0 +1,8 @@
+AMBARI-24765. Fix CVE issues for Log Search (2.7.3)
+
+
+What changes were proposed in this pull request?
+Upgrade libraries in order to get rid of CVE issues
+How was this patch tested?
+UTs passed, FT manually in progress
+Please review @smolnar82 @rlevas @kasakrisz @swagle @avijayanhwx @g-boros

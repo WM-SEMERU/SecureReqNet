@@ -1,0 +1,25 @@
+I can't use the RawSecurityDescriptor class
+
+
+Describe the bug
+I can't use the RawSecurityDescriptor class, but I can find the RawSecurityDescriptor class in the API document
+UTL: https://docs.microsoft.com/zh-cn/dotnet/api/system.security.access control.rawsecurity descriptor?View=netcore-2.1
+To Reproduce
+Steps to reproduce the behavior:
+
+Using this version of ASP.NET Core '2.1'
+Run this code '
+using System;
+using System.Security.AccessControl;
+namespace DiscUtilsNetCore
+{
+public class Class1
+{
+RawSecurityDescriptor de;
+}
+}
+'
+cannot be compiled
+erroinf 严重性	代码	说明	项目	文件	行	禁止显示状态
+错误	CS0246	未能找到类型或命名空间名“RawSecurityDescriptor”(是否缺少 using 指令或程序集引用?)	DiscUtilsNetCore	D:\Project\DiscutilsNetcore\DiscUtilsNetCore\Class1.cs	7	活动的
+

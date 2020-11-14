@@ -1,0 +1,56 @@
+not able to write the PVC cassandra  statefullset
+
+
+hi all
+cassandra not starting and container failing with the below error
+NFO  20:32:33,472  DseDelegateSnitch.java:46 - Initialized DseDelegateSnitch with workload Cassandra, delegating to org.apache.cassandra.locator.GossipingPropertyFileSnitch
+ERROR 20:32:33,483  DseModule.java:103 - Unable to start server. Exiting...
+org.apache.cassandra.exceptions.ConfigurationException: commitlog directory '/var/lib/cassandra/commitlog' or, if it does not already exist, an existing parent directory of it, is not readable and writable for the DSE. Check file system and configuration.
+at org.apache.cassandra.config.DatabaseDescriptor.resolveAndCheckDirectory(DatabaseDescriptor.java:801) ~[cassandra-all-3.0.15.2128.jar:3.0.15.2128]
+at org.apache.cassandra.config.DatabaseDescriptor.applyConfig(DatabaseDescriptor.java:538) ~[cassandra-all-3.0.15.2128.jar:3.0.15.2128]
+at org.apache.cassandra.config.DatabaseDescriptor.(DatabaseDescriptor.java:131) ~[cassandra-all-3.0.15.2128.jar:3.0.15.2128]
+at com.datastax.bdp.config.DseConfig.isLdapAuthEnabled(DseConfig.java:552) ~[dse-core-5.0.13.jar:5.0.13]
+at com.datastax.bdp.config.DseConfig.init(DseConfig.java:402) ~[dse-core-5.0.13.jar:5.0.13]
+at com.datastax.bdp.DseCoreModule.(DseCoreModule.java:76) ~[dse-core-5.0.13.jar:5.0.13]
+at com.datastax.bdp.DseModule.getRequiredModules(DseModule.java:139) ~[dse-core-5.0.13.jar:5.0.13]
+at com.datastax.bdp.server.AbstractDseModule.configure(AbstractDseModule.java:27) ~[dse-core-5.0.13.jar:5.0.13]
+at com.datastax.bdp.DseModule.configure(DseModule.java:76) ~[dse-core-5.0.13.jar:5.0.13]
+at com.google.inject.AbstractModule.configu
+describe pod output:
+onditions:
+Type              Status
+Initialized       True
+Ready             False
+ContainersReady   False
+PodScheduled      True
+Volumes:
+cassandra-data-dse:
+Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+ClaimName:  cassandra-data-dse-cassandradse-0
+ReadOnly:   false
+default-token-t7wlw:
+Type:        Secret (a volume populated by a Secret)
+SecretName:  default-token-t7wlw
+Optional:    false
+QoS Class:       Guaranteed
+Node-Selectors:  
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+Type     Reason                  Age                      From                                                          Message
+
+Normal   Scheduled               1m                       default-scheduler                                             Successfully assigned com-cassandra-np/cassandradse-0 to gke-common-cluster--exk1-default-pool-f9834a09-243c
+Normal   SuccessfulAttachVolume  1m                       attachdetach-controller                                       AttachVolume.Attach succeeded for volume "pvc-a07bc793-557d-11e9-9a44-42010a8e0091"
+Normal   Pulling                 7s (x3 over 1m)          kubelet, gke-common-cluster--exk1-default-pool-f9834a09-243c  pulling image "gcr.io/np-com-internal-thd/dse-5.0.13:latest"
+Normal   Pulled                  7s (x3 over 1m)          kubelet, gke-common-cluster--exk1-default-pool-f9834a09-243c  Successfully pulled image "gcr.io/np-com-internal-thd/dse-5.0.13:latest"
+Normal   Created                 7s (x3 over 1m)          kubelet, gke-common-cluster--exk1-default-pool-f9834a09-243c  Created container
+Normal   Started                 7s (x3 over 1m)          kubelet, gke-common-cluster--exk1-default-pool-f9834a09-243c  Started container
+Warning  BackOff                  (x2 over 21s)  kubelet, gke-common-cluster--exk1-default-pool-f9834a09-243c  Back-off restarting failed container
+pod successfully scheduled
+volume successfully attached .
+while starting the cassandra container ,im getting unable to write to the mount which is caimed by a pvc.
+kubectl get pvc --namespace=com-cassandra-np
+NAME                                STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+cassandra-data-dse-cassandradse-0   Bound     pvc-a07bc793-557d-11e9-9a44-42010a8e0091   30Gi       RWO            ssdnew         1h
+cassandra-data-dse-cassandradse-1   Bound     pvc-a9df8f39-557d-11e9-9a44-42010a8e0091   30Gi       RWO            ssdnew         1h
+cassandra-data-dse-cassandradse-2   Bound     pvc-b7b0542b-557d-11e9-9a44-42010a8e0091   30Gi       RWO            ssdnew         1h

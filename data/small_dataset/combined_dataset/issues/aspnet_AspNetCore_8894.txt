@@ -1,0 +1,12 @@
+Need assistance understanding how /signin-oidc gets registered
+
+
+I am trying to write an authentication plugin for the NopCommerce 4.0 ecommerce engine, which is just an Asp.Net Core 2.0 application, using the microsoft.aspnetcore.authentication.openidconnect library.
+In ConfigureServices I have the registration for my OpenIdConnect, which I've tested in a vanilla Asp.Net Core app an works beautifully.
+When I click the Login button on the app, I am taken to our Auth0 provider for authentication.
+However, when I get the redirect back to /signin-oidc I am getting a 404.
+In order to make this work I need to understand what the Microsoft OpenIDConnect library is doing behind the scenes to self-register the /signin-oidc endpoint to figure out why it is not working in the NopCommerce engine. My guess is however the routes are being constructed, somehow is blocking the OpenIDConnect library from doing its thing.
+Can someone help me understand how the OpenIDConnect library is registering the /signin-oidc endpoint, please?
+I've spent some time looking at the code for microsoft.aspnetcore.authentication.openidconnect but I can't figure it out, so likely it is done in a dependency somewhere.
+Thanks in advance. Any help appreciated.
+PS - source code for NopCommerce is here (if it helps): https://github.com/nopSolutions/nopCommerce/releases/tag/release-4.00

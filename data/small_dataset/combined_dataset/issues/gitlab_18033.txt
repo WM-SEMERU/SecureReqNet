@@ -1,0 +1,12 @@
+## Summary
+
+Hi, in a commit in my private repo, I referenced this issue: https://gitlab.com/gitlab-org/gitlab-ce/issues/17769
+the fact that I referenced it, now shows up on that issue page.
+
+## Steps to reproduce
+
+Mention a normal issue in a commit in a private repo. The mention now shows on the public issue page.
+
+## Expected behavior
+
+I would expect it not to be seen anywhere, since my repo is private, and the name is mentioned in the public page. So now people can discover that a private repo with that name exists.

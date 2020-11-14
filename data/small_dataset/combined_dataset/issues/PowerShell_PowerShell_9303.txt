@@ -1,0 +1,41 @@
+Make sure non-Windows CI fails when a test fails
+
+
+PR Summary
+Make sure non-Windows CI fails when a test fails
+PR Context
+We discovered that some tests were failing after a PR and the CI was not failing
+PR Checklist
+
+ PR has a meaningful title
+
+Use the present tense and imperative mood when describing your changes
+
+
+ Summarized changes
+ Change is not breaking
+ Make sure all .h, .cpp, .cs, .ps1 and .psm1 files have the correct copyright header
+ This PR is ready to merge and is not Work in Progress.
+
+If the PR is work in progress, please add the prefix WIP: or [ WIP ] to the beginning of the title (the WIP bot will keep its status check at Pending while the prefix is present) and remove the prefix when the PR is ready.
+
+
+User-facing changes
+
+ Not Applicable
+OR
+ Documentation needed
+
+ Issue filed: 
+
+
+
+
+Testing - New and feature
+
+ N/A or can only be tested interactively
+OR
+ Make sure you've added a new test if existing tests do not effectively test the code changed
+
+
+

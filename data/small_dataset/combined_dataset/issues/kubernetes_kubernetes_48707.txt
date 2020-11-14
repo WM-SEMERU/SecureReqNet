@@ -1,0 +1,8 @@
+Allow nodes to create evictions for its own pods in NodeRestriction admission controller
+
+
+What this PR does / why we need it: This PR adds support for pods/eviction sub-resource to the NodeRestriction admission controller so it allows a node to evict pods bound to itself.
+Which issue this PR fixes: fixes #48666
+Special notes for your reviewer: The NodeRestriction already allows nodes to delete pods bound to itself, so allowing nodes to also delete pods via the Eviction API probably makes sense.
+The NodeRestriction admission plugin now allows a node to evict pods bound to itself
+

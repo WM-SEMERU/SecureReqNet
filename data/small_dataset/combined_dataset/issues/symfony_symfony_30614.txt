@@ -1,0 +1,4 @@
+How to smooth the cache
+
+
+The program is running. When you delete the cache directory, the php-fpm  will report 502，How to smooth the cache

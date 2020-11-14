@@ -1,0 +1,25 @@
+After upgrading to Gitlab 6.7 I am getting an "Access denied for your LDAP account.". I do know if it is connecting because if I try the wrong password I get an invalid credentials response. The unicorn log only shows: "I, [2014-03-21T10:27:37.303549 #7237]  INFO -- omniauth: (ldap) Callback phase initiated."
+
+This shows in the production log:
+
+```
+Started POST "/users/auth/ldap/callback" for 127.0.0.1 at 2014-03-21 10:30:46 -0700
+Processing by OmniauthCallbacksController#ldap as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"A_KEY_HERE_REDACTED", "username"=>"daniel_brooks", "password"=>"[FILTERED]"}
+Redirected to http://REDACTED/
+Completed 302 Found in 268ms (ActiveRecord: 258.1ms)
+Started GET "/" for 127.0.0.1 at 2014-03-21 10:30:47 -0700
+Processing by DashboardController#show as HTML
+Redirected to http://REDACTED/users/sign_in
+Filter chain halted as :ldap_security_check rendered or redirected
+Completed 302 Found in 163ms (ActiveRecord: 50.5ms)
+Started GET "/users/sign_in" for 127.0.0.1 at 2014-03-21 10:30:47 -0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/_new_ldap.html.haml (0.9ms)
+  Rendered devise/sessions/_new_base.html.haml (1.5ms)
+  Rendered devise/sessions/_oauth_providers.html.haml (0.1ms)
+  Rendered devise/sessions/new.html.haml within layouts/devise (3.4ms)
+  Rendered layouts/_head.html.haml (1.3ms)
+  Rendered layouts/_flash.html.haml (0.1ms)
+Completed 200 OK in 10ms (Views: 5.7ms | ActiveRecord: 0.0ms)
+```

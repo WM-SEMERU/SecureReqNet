@@ -1,0 +1,37 @@
+InnocentCodeRewriter causes valid ES5-strict code to fail
+
+
+Original issue 1019 created by erights on 2009-04-29T20:49:53.000Z:
+Originally reported by Adam Moore:
+On Thu, Apr 23, 2009 at 5:53 PM, Adam Moore <adamoore@yahoo-inc.com> wrote:
+>[...]
+> YUI = function(o) {
+>
+>    var Y = this;
+>
+>    // Allow instantiation without the new operator
+>    if (!(Y instanceof YUI)) {
+>        return new YUI(o);
+>    } else {
+>[...]
+The pattern above is valid in Valija, ES5-strict, ES5-nonstrict, and ES3.
+If YUI is called as a function rather than a method or
+constructor, then
+
+in ES3 or ES5-nonstrict, 'this' will be the global object.
+in ES5-strict, 'this' will be 'undefined'.
+in Valija today, 'this' will be cajita.USELESS. (But we should also fix
+Valija to track ES5-strict.)
+
+All the above cases work because all of these values are not "instanceof YUI".
+However, as Adam reports, it does not currently work as transformed by the
+InnocentCodeRewriter. Currently, to protect against a privilege escalation
+attack, the InnocentCodeRewriter rewrites all functions containing 'this'
+to throw if their 'this' is bound to the global object. Now that we
+understand how this causes valid ES5-strict code to fail, we should fix the
+innocent code transformer here so to track ES5-strict.
+We should rewrite all occurrences of 'this' in these functions so that, if
+the real 'this' was bound to the global object, their rewritten 'this' will
+instead be bound to 'undefined'.
+I'm classifying this as Security relevant, since this bug inhibits use of
+the InnocentCodeRewriter, thereby creating a security hazard.

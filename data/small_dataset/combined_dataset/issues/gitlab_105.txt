@@ -1,0 +1,7 @@
+Currently, the API only outputs the commit title and doesn't expose the full commit message. It would be helpful to get access to it. One approach may be to just expose the "description" field in the entities.rb file:
+
+```ruby
+class RepoCommit < Grape::Entity
+      expose :id, :short_id, :title, :description, :author_name, :author_email, :created_at
+end
+```

@@ -1,0 +1,13 @@
+ClientConfig should not default to http://localhost:8080
+
+
+This changes clientcmd to skip the default cluster, but preserves the
+behavior in kubectl. This prevents the possibility of an administrator
+misconfiguration in kubelet or other server component from allowing a
+third party who can bind to 8080 on that host from potentially
+impersonating an API server and gaining root access.
+@mikedanese @deads2k this removes the defaulting of http://localhost:8080 for server from everything except kubectl.
+
+This change is 
+Kubernetes server components using `kubeconfig` files no longer default to `http://localhost:8080`.  Administrators must specify a server value in their kubeconfig files.
+

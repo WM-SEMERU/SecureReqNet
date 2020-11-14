@@ -1,0 +1,19 @@
+Handling of unicode escapes in identifiers can lead to security issues
+
+
+Original issue 1867 created by dobkin@google.com on 2013-10-23T20:42:09.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+Rev 5570 built on 2013-08-21 14:41:33. Tested on Google Chrome, Version 30.0.1599.101, under Linux.
+In ES5 mode, Caja removes unicode escapes in identifiers when producing JavaScript. This can result in a keyword being treated as an identifier.
+What steps will reproduce the problem?
+
+Go to http://caja.appspot.com, set mode to 'ES5 Mode (Experimental)' and enter the following code
+
+<script>
+de\u006cete /"x/ })), alert(1), (function(){debugger})(), ((function() { //" ;
+f00();
+</script>
+
+When executing, code on the second line will be executed directly without going through rewriting. This happens because Caja treats delete as a variable reference that is divided by a string literal. However the browser will treat is a delete statement statement that is passed as a regex as an argument.
+
+I wasn't able to exploit this due to checks in verifyStrictExpression().

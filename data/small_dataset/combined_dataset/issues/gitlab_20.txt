@@ -1,0 +1,1 @@
+The backup rake task is skipping over empty repos, but this results in their wikis, if not empty to be skipped as well.

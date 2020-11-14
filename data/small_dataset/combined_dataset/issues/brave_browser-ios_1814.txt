@@ -1,0 +1,6 @@
+Edit button should be disabled inside an empty bookmark folder Issue#1469
+
+
+
+No description provided.
+

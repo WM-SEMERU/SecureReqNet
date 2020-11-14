@@ -1,0 +1,6 @@
+use brave.com domains instead of brave*.ssl.fastly.net domains
+
+
+related: brave/muon#401
+brave-laptop-updates.global.ssl.fastly.net and brave-download.global.ssl.fastly.net are used for brave updates. we should use the brave.com cnames for these domains so they can be certificate pinned.
+cc @bridiver @w0ts0n @evq @jumde

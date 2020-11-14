@@ -1,0 +1,9 @@
+After opening a Runner's edit page we see a form with a read-only token field:
+
+![runners-token](/uploads/f25e02b96c770e0b86677e5da3a1679f/runners-token.png)
+
+It's impossible to change the token and this field is designed to only show the token to a user. This seems to be a wrong idea from a security point of view and we should remove this field. The token is present in Runner's `config.toml` file. In any situation when such file doesn't exists and user doesn't remember the token a recommended solution should be to register a new Runner with the same settings (tags, `active`, `run-untagged` etc.). Registration is a simple, one-command step and there should be no need to know the Runner's token especially from GitLab UI.
+
+It's a similar situation as for user's Personal Access Tokens. The token is visible only when it's generated so user can copy and use it. In any case when the token was lost the only way to get things working is to generate and use a new token and it's recommended to revoke the old one. This seems to be a standard _token management policy_ these days and we should follow it also for Runner's authorization token.
+
+/cc @ayufan @bikebilly @markpundsack

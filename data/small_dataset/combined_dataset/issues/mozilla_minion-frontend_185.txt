@@ -1,0 +1,5 @@
+Add Mozilla Code of Conduct
+
+
+Fixes #184
+(Message COC002)

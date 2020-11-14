@@ -1,0 +1,3 @@
+At the moment the credentials can't be migrated properly between GitLab instances due to the issue with `db_key_base ` described here: https://gitlab.com/gitlab-org/gitlab-ce/issues/17873
+
+While there are some workarounds (described in that issue), it would be nice to find a better solution so we don't have to do the extra step.

@@ -1,0 +1,31 @@
+https://hackerone.com/reports/344505
+
+### Summary
+
+Any project model database column can be controlled on import by fields in the `project.json` of an exported project. 
+
+### Steps to reproduce
+
+Adding `namespace_id` to `project.json` can create a project in any namespace:
+
+1. Export a project using the web UI.
+2. Add a field and value such as `"namespace_id": 1"` to the `project.json`.
+3. Import the project using the web UI.  This results in a 404, but the project import has created some artifacts.
+4. Navigate to `/:importing_user/:project_name/edit` to update the path to complete the import to the target namespace/owner.
+
+This is just 1 example of many of the fields 
+
+This appears to be present in at least 10.7.1-ee Omnibus installs.
+
+### What is the current *bug* behavior?
+
+Almost any field can be directly assigned by setting a value in the `project.json`.
+
+Before the final move, the project appears configured like this:
+
+![test2___namespace1___Projects___Admin_Area___GitLab_-__Private_Browsing_](/uploads/0e3a9721dafb65e854731095357272dc/test2___namespace1___Projects___Admin_Area___GitLab_-__Private_Browsing_.gif)
+
+### Possible fixes
+
+This appears to attempt to add a test for `Project.column_names`, but is either not working or the values are being added elsewhere:
+https://gitlab.com/gitlab-org/gitlab-ce/blob/v10.7.1/lib/gitlab/import_export/project_tree_restorer.rb#L106

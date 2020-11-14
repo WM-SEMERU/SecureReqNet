@@ -1,0 +1,4 @@
+'Block all HTTP' mode
+
+
+HTTPS Everywhere has a global 'Block all HTTP' mode where no HTTP requests are allowed. It was pretty well-received and easy to add so we should add it

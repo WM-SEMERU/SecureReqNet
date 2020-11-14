@@ -1,0 +1,53 @@
+[Security] deprecate multiple providers in context listener
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Passing multiple user providers to the context listener does not make
+much sense. The listener is only responsible to refresh users for a
+particular firewall. Thus, it must only be aware of the user provider
+for this particular firewall.

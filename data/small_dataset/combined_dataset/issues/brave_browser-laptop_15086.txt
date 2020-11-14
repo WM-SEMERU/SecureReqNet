@@ -1,0 +1,5 @@
+URL bar spoofing [HackerOne 373721]
+
+
+https://hackerone.com/reports/373721
+This is a moderate-severity issue. It probably won't be fixed before the great switchover.

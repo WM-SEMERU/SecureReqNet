@@ -1,0 +1,12 @@
+Empty titles breaks KeeWeb in MS Edge
+
+
+Symptoms in MS Edge (v17) include being unable to open any file containing an entry with an empty title and triggering what appear to be fatal bugs when creating new entries (I've not found a way to work around yet but there's maybe a small chance the bugs are limited to failed rendering of the new entries rather than affecting data integrity). In any case, this makes usage of KeeWeb in MS Edge unreliable.
+Quickest way to reproduce is to load the demo database and add two entries one after another, without entering any contents for the title of the first entry. From then on the UI doesn't work properly (missing items, incorrect ordering, unresponsive clicking on some items). I haven't dug into exactly what bits of the UI break or exactly why because the underlying bug is indicated in the console:
+Failed to normalize: invalid or missing unicode character at index 0
+To fix, we need to change the string comparison "maximum character value" to \ufffd
+The current value of \uffffffff per the spec of fromCharCode gets truncated to \uffff
+\uffff (and \ufffe) are "Invalid Character"s and Edge throws an exception when making any attempt to compare against these characters.
+I'll make a PR in a minute which contains the same fix I've used and tested in Kee Vault.
+I note the comment "// bugged in Edge: #808" which suggests that in the past it was sufficient to bypass the Intl.Collator function so perhaps future Edge development has aligned the localeCompare function with the same Intl.Collator implementation (although I can find no details about this possible bug and the original reporter never confirmed that issue #808 was fixed).
+For Kee Vault I have removed that Edge-specific code path and it works for me but it's possible older versions of Edge than I'm interested in supporting might still benefit from that workaround. I'll report back if I hear of any real world issues in old versions but if not you might want to simplify that eventually too.

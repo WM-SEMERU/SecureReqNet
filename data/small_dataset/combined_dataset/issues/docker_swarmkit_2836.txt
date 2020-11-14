@@ -1,0 +1,17 @@
+[18.09 backport] Switch to go 1.11
+
+
+Whitespace changes are caused by the fact that gofmt from go-1.11
+uses a different heuristic as to how to format the file, making
+the source code that was OK for go-1.10 causing a warning with
+go-1.11.
+NOTE this whitespace change makes the gofmt from go-1.10 complain,
+so please upgrade your golang.
+[v2: regen pb files]
+Signed-off-by: Kir Kolyshkin kolyshkin@gmail.com
+(cherry picked from commit fd2d7f2)
+Signed-off-by: Sebastiaan van Stijn github@gone.nl
+- What I did
+- How I did it
+- How to test it
+- Description for the changelog

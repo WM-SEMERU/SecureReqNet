@@ -1,0 +1,13 @@
+x/tools/internal/lsp: handle rangeFormatting on files that do not parse
+
+
+If we don't check a package's parse errors before formatting, we may encounter a case where we delete code on format.
+Repro:
+package foo
+
+func _() {
+	f(),
+	f()
+}
+
+To handle this, we check the parse errors before formatting. However, we should confirm that these errors belong to the file in question and lie within the specified range before failing.

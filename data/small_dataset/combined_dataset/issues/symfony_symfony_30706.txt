@@ -1,0 +1,53 @@
+[PropertyInfo] Add possibility to extract private and protected properties in reflection extractor
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30248
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+This PR add the possibility to extract private and protected properties from a class by passing a new argument to the ReflectionExtractor
+This new argument consist of flag that filters properties, so someone will also be able to use the ReflectionExtractor only for private property
+new ReflectionExtractor(null, null, null, true, ReflectionExtractor::ALLOW_PRIVATE | ReflectionExtractor::ALLOW_PROTECTED)
+Flags method was prefered over a list of bool to avoid too many parameters and also be close to the reflection API of PHP

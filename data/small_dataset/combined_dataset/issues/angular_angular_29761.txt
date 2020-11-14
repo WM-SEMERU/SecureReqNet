@@ -1,0 +1,45 @@
+angular 7.3 routing breaks IE9
+
+
+🐞 bug report
+Affected Package
+Tested with @angular/cli:7.3.8
+Is this a regression?
+yes
+Description
+When starting an ng-project with routing enabled, the starter template is loaded only after opening the WebDevTools, but an unlimited amount of hashtags are added, resulting in a browser-crash. URL-Example: http://<computer.network.local>:4200/#/#/#/#/#/#/#/...
+🔬 Minimal Reproduction
+(1a) (if you don't have an IE9 lying around) Download an IE9-Win7 image from https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
+(1b) You need to be able to access your host computer, so you might have to set the new VM to "network bridge"
+(2) install @angular/cli@7.3.8: npm install -g @angular/cli@7.3.8
+(3) start a new project with routing and SASS support: ng new somefolder --defaults --routing
+(4) serve the project: cd somefolder; ng server --host 0.0.0.0 --disable-host-check
+(5) open the project in IE9 on the VM on http://<computer.network.local>:4200/ --> nothing is shown
+(6) Open the WebDevTools via F12 and reload --> starter template is shown, but an unlimited number of hashtags are added (see above) and the browser crashed.
+🔥 Exception or Error
+none, browser just crashed.
+🌍  Your Environment
+Angular Version:
+
+Angular CLI: 7.3.8
+Node: 10.15.0
+OS: linux x64
+Angular: 
+... 
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.13.8
+@angular-devkit/core         7.3.8
+@angular-devkit/schematics   7.3.8
+@schematics/angular          7.3.8
+@schematics/update           0.13.8
+rxjs                         6.3.3
+typescript                   3.2.4
+
+Anything else relevant?
+
+affected version: IE9.0.8112.16421
+IE10 and IE11 have been tested and do not show this behavior
+Behaviour can be reproduced on aot-build as well: ng serve --host 0.0.0.0 --disable-host-check --aot
+es5BrowserSupport is set to true by default - but behaviour can be reproduced with es5BrowserSupport: false as well (see angular.json). But the first load shows up without having to open the webdevtools then.
+

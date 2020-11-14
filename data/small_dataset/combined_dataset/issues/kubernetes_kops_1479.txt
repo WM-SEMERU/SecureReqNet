@@ -1,0 +1,6 @@
+Security: any pod can grant itself cluster-admin privileges.
+
+
+In a kops cluster, any pod can s3cmd --no-check-certificate get s3://your-state-store/your-cluster.k8s.your.domain.example.com/pki/private/ca/23456789.....key, and sign itself a cluster admin keypair.
+I find this to be a pretty high risk security issue. It defeats most of the security measures put in place, like RBAC and such, since escalation to cluster-admin is literally 2 well-known commands away.
+Ref: #363

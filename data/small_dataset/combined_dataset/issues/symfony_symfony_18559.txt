@@ -1,0 +1,5 @@
+[SecurityBundle] Extracting the acl configuration
+
+
+I need some help in symfony/acl-bundle#2, I'm trying to extract the configuration as described in #14718.
+Currently having some issues with .travis.yml, would be cool if someone could help out with it.

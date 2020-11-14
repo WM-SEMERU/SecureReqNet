@@ -1,0 +1,14 @@
+Run services as non-privileged users
+
+
+At the moment most services in kubernetes run as root. This includes (from glancing at ps aux on a minion):
+
+etcd
+kube2sky
+td-agent
+skydns
+elasticsearch
+heapster
+
+It's best practice to use non-root user accounts for services that don't need them. E.g. elasticsearch had remote code execution vulnerabilities in the past.
+Even though docker's root has a capability bounding set applied so it doesn't translate to a real root on the host, the attack surface for privilege escalation attacks is still increased.

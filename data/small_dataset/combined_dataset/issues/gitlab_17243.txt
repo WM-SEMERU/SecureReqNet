@@ -1,0 +1,16 @@
+'- Title:	Full path disclosure when creating a new project
+- Types:	Information Disclosure
+- Link:	https://hackerone.com/reports/135934
+- Date:	2016-05-03 06:20:55 -0400
+- By:		strukt
+
+Details:
+Hello,
+
+There's a full path disclosure bug when creating a new project, if the user tries to import the project from a git URL that doesn't exist, following are the steps to reproduce:
+
+1. Login to your GitLab account and go to https://gitlab.com/projects/new, fill in any name for the project.
+2. Enter http://strukt.tk/bla after clicking "Any repo by URL" in the "Import project from" section, and click "Create Project".
+3. You will be presented by an error message that says that http://strukt.tk/bla doesn't exist and that "Cloning into bare repository ..." with the full path.
+
+Regards

@@ -1,0 +1,13 @@
+generator: add support for committees
+
+
+Ref: #3298 (comment)
+sigs.yaml includes all our community groups except committees. This PR adds support for committees in the generator.
+Note: since committees can have private mailing lists, I have added a new field private_mailing_list in the Contacts section. PTAL.
+This PR also adds the Steering Committee, the Code of Conduct Committee and the Product Security Committee in sigs.yaml. I'll cc them on the PR for approval for their respective sections once the generator changes get lgtm (but will send an email to the steering ML now to get a general ok for the change).
+/assign @spiffxp
+generator owner
+/sig contributor-experience
+/committee steering
+/committee conduct
+/committee product-security

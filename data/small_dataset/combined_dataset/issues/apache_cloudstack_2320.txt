@@ -1,0 +1,10 @@
+CLOUDSTACK-10178: Hotfixes to make 4.10 work
+
+
+This PR implements several fixes which are vital for CS 4.10 to work:
+
+Fixes absent IPv6 network definition bugs for basic zone which lead to exceptions on KVM agent if it uses SGs (management and agent affected)
+Fixes the case when template is created from a snapshot (CLOUDSTACK-10140, merged #2322)
+Fixes ubuntu/debian br_netfilter dependency (CLOUDSTACK-10138, merged CLOUDSTACK-10138: Load br_netfilter in security_group management script)
+Fixes quota plugin bug (#2326)
+

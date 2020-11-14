@@ -1,0 +1,4 @@
+I use gitlab 7.0 on CentOS 6.5 x64.
+I'd like to have an ability to create/display annotated tags as described here
+http://git-scm.com/book/en/Git-Basics-Tagging#Annotated-Tags
+Please let me know if it's possible.

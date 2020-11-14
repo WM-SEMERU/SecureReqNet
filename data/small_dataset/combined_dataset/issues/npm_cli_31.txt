@@ -1,0 +1,6 @@
+feature: configurable audit level
+
+
+This is a port of my old PR at npm/npm#20992
+It allows npm audit to exit with a zero exit code if only vulnerabilities below a defined threshold are detected. The default is left at low so it should be wholly non-breaking.
+More discussion at https://npm.community/t/allow-a-configurable-vuln-level-to-make-npm-audit-fail/245/5

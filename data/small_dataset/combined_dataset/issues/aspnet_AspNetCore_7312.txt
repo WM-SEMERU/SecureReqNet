@@ -1,0 +1,7 @@
+SingleOrg auth does not work behind reverse proxy
+
+
+From @chriskuech on February 6, 2019 3:35
+Reverse proxies typically terminate HTTPS and relay requests over HTTP.  SingleOrg auth appears to infer the protocol from the request and use that protocol in the reply URL.  If the SingleOrg auth application is behind a reverse proxy, then the client requests the HTTPS site, the reverse proxy relays the HTTPS request as HTTP to the dotnet app, then the dotnet app receives the HTTP request, and redirects to the AAD endpoint using HTTP in the reply URL.  If we use HTTP in the reply URL, then the client receives a warning for using HTTP.
+We should be able to set the reply URL in appsettings.json or set a "use HTTPS in the reply URL" flag to mitigate this issue.
+Copied from original issue: dotnet/templating#1757

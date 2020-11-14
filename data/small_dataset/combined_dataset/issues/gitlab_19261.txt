@@ -1,0 +1,5 @@
+This would mean implement https://gitlab.com/gitlab-org/gitlab-ce/issues/19073#note_12712458
+
+It will involve a migration and updating all encrypted data. More research may also be done to avoid downtime (if possible) and find out which one would be the best mode to use. We'll also have to update the documentation in certain places and make sure the user has the right key length.
+
+There are also differences between EE and CE - as EE has more encrypted fields.

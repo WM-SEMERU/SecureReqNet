@@ -1,0 +1,41 @@
+console.trace in 11.13.0 has an extra line
+
+
+
+Version: 11.13.0
+Platform: macOS
+Subsystem: console
+
+It seems like this fix (#26764) added an extra line at the top of the trace which wasn't there before.
+v11.10.0:
+$ nvm use 11.10.0    
+Now using node v11.10.0 (npm v6.7.0)
+$ node           
+> console.trace('a')
+Trace: a
+    at repl:1:9
+    at Script.runInThisContext (vm.js:124:20)
+    at REPLServer.defaultEval (repl.js:322:29)
+    at bound (domain.js:400:14)
+    at REPLServer.runBound [as eval] (domain.js:413:12)
+    at REPLServer.onLine (repl.js:632:10)
+    at REPLServer.emit (events.js:202:15)
+    at REPLServer.EventEmitter.emit (domain.js:446:20)
+    at REPLServer.Interface._onLine (readline.js:308:10)
+    at REPLServer.Interface._line (readline.js:654:8)                                                       
+v11.13.0:
+$ nvm use 11.13.0 
+Now using system version of node: v11.13.0 (npm v6.7.0)
+$ node
+> console.trace('a')
+Trace: a
+    at Console.trace (internal/console/constructor.js:336:11)
+    at repl:1:9
+    at Script.runInThisContext (vm.js:124:20)
+    at REPLServer.defaultEval (repl.js:325:29)
+    at bound (domain.js:425:14)
+    at REPLServer.runBound [as eval] (domain.js:438:12)
+    at REPLServer.onLine (repl.js:650:10)
+    at REPLServer.emit (events.js:198:15)
+    at REPLServer.EventEmitter.emit (domain.js:481:20)
+    at REPLServer.Interface._onLine (readline.js:308:10)

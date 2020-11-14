@@ -1,0 +1,35 @@
+[Security Bundle][Route] Hash _fragment is lost during generation of login_path
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.3
+
+
+
+How to reproduce:  Being non-logged in I go to secure area, for example, /admin, it has to redirect to login_path which in my case contains #(for example /index#login), but url generated is /index.  That’s because an additional attribute “_firewall_context” has been introduced in symfony 3.3.3 (#22943).
+During generation of login_path url (in Symfony\Component\Routing\Generator\UrlGenerator.php) my _fragment added after parameters (http://index?_firewall_context=security.firewall.map.context.main#login) and lost after _firewall_context param is removed

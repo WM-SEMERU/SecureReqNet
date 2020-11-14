@@ -1,0 +1,16 @@
+docker-machine not working behind certificate tampering firewall (severe cert hurt)
+
+
+Running an image behind a corporate firewall that hacks the TLS certificate causes "docker run" to fail when pulling the image.
+docker run -ti ubuntu /bin/bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from ubuntu
+83e4dde6b9cf: Pulling fs layer
+83e4dde6b9cf: Error pulling dependent layers
+29460ac93442: Pulling fs layer
+d2a0ecffe6fa: Layer already being pulled by another client. Waiting.
+d2a0ecffe6fa: Error pulling image (latest) from ubuntu, Server error: Status 0 while fetching image layer (83e4dde6b9cfddf46b75a07ec8d65ad87a748b98cf27de7d5b3298c1f3455ae4)
+Error pulling image (latest) from ubuntu, Server error: Status 0 while fetching image layer (83e4dde6b9cfddf46b75a07ec8d65ad87a748b98cf27de7d5b3298c1f3455ae4)
+
+All attempts to add the corporate certificate to the local machine have failed since docker 1.5.  (Currently using docker-machine 0.3.0 and docker 1.7.1 with VMware Fusion.)
+It would be great to have an official procedure or even support for easily adding the corp certs.

@@ -1,0 +1,35 @@
+TypeError: Illegal invocation
+
+
+I'm submitting a ...
+
+ regression from 1.7.0
+ security issue
+ issue caused by a new browser version
+[ x] other 
+
+Current behavior:
+My app is slow down because of this error and other feature not worked due to this.
+Minimal reproduction of the problem with instructions:
+angular.js:13642 TypeError: Illegal invocation
+at equals (angular.js:1123)
+at equals (angular.js:1123)
+at equals (angular.js:1107)
+at Scope.$digest (angular.js:17213)
+at Scope.$apply (angular.js:17486)
+at HTMLButtonElement. (angular.js:25177)
+at HTMLButtonElement.dispatch (VM73494 jquery.js:4641)
+at HTMLButtonElement.elemData.handle (VM73494 jquery.js:4309)
+angular.js:13642 TypeError: Illegal invocation
+at equals (angular.js:1123)
+at equals (angular.js:1123)
+at equals (angular.js:1107)
+at Scope.$digest (angular.js:17213)
+at Scope.$apply (angular.js:17486)
+at angular.js:19317
+at completeOutstandingRequest (angular.js:5912)
+at angular.js:6191
+I am facing this issue when I try to make canvas using reader(fabric) for Image upload.
+AngularJS version: 1.5.6
+Browser: [all | Chrome XX]
+Anything else:

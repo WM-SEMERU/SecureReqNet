@@ -1,0 +1,4 @@
+private-distributors-list: add Platform9
+
+
+Fixes kubernetes/sig-release#533

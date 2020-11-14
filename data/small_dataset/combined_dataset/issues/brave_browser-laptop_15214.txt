@@ -1,0 +1,17 @@
+Release notes for 0.24.0 /w Chromium 69 (Release Channel)
+
+
+Release Notes
+
+Scrolling makes back button grow on MacBook Pro.(#14785)
+Back button getting large when scrolling up when already at top of screen.(#14829)
+Disabling nav scroll when content is horizontally scrollable..(#14871)
+Update to Muon 8.1.6.(#15101)
+Update to Chromium 69.0.3497.100.(#15102)
+Notifications not shown on Web Push Book.(#15124)
+Brave is not launching with Home Page address.(#15125)
+Opening local files in brave opens about:blank.(#15134)
+Opening tabs, PT, session tabs opens about:blank when there's no Win/Tabs opened.(#15162)
+Update to tor 0.3.4 series.(#15179)
+Opening local files via DnD creates about:blank tabs rather than opening the file.(#15203)
+

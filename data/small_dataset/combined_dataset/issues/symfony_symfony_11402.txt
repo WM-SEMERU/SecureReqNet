@@ -1,0 +1,7 @@
+Disabling account does not log user out on next request if the logged in user is one being disabled
+
+
+Disabling the users account who is logged in will not log them out in the next request that they make. However, if a different user disables a different account such as an admin disabling a users account then the user being disabled will be logged out automatically on the next request the newly disabled user makes.
+This seems to cause confusion for developers when say a logged-in user is disabling their own account. It would be great if the next request would then follow the same logic as if the user account was disabled by a different user. Without this working the same as if some other user disables a users account you must manually set the token to null to log the user out. You then lose the security firewall logic for how to handle invalid tokens.
+I think a beginner would have some challenges with with this but maybe I'm mistaken. Thoughts and input?
+cc/ @landr0id

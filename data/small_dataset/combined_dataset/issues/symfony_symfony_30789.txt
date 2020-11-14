@@ -1,0 +1,49 @@
+[Router] Eliminate extra strtr call in UrlGenerator
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+possible in obscure edge cases
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+related: #30751 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+

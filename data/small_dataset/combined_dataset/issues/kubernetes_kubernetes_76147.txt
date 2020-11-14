@@ -1,0 +1,58 @@
+Cannot list the logs in one of the API pods
+
+
+What happened:
+When I run:
+kubectl logs kube-apiserver-master01
+I am getting:
+failed to open log file "/var/log/pods/6db22ad086cc13a18bf0bd00eeaf6e05/kube-apiserver/0.log": open /var/log/pods/6db22ad086cc13a18bf0bd00eeaf6e05/kube-apiserver/0.log: no such file or directory
+What you expected to happen:
+To list the logs
+How to reproduce it (as minimally and precisely as possible):
+I have 3 master on CentOS 7 VM behind HA Proxy.
+I am able to display the logs for the of the APIs pods from the other 2 masters.
+Anything else we need to know?:
+Environment:
+
+Kubernetes version (use kubectl version):
+
+kubectl version
+Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-02-28T13:37:52Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-02-28T13:30:26Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration:
+1- The Cluster consists or VMs (3 masters, 2 infra, and 4 workers) on KVM.
+2- The VMs are CentOS 7 based
+
+
+OS (e.g: cat /etc/os-release):
+
+
+cat /etc/os-release
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+Kernel (e.g. uname -a):
+
+Linux master01 3.10.0-957.5.1.el7.x86_64 #1 SMP Fri Feb 1 14:54:57 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+Install tools:
+
+Kubeadm
+
+Others:
+@kubernetes/sig-api-machinery
+

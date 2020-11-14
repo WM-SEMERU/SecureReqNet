@@ -1,0 +1,9 @@
+Ability to blacklist possibly offending IPs
+
+
+Per #222 (comment)
+
+
+ability to blacklist (temporary or permanent) offending IPs that may be involved in a DDoS. Obviously not feasible for things like the 40k IP addresses involved in the recent GitHub attack (see #222), but may be mildly effective if we're seeing big spikes from 4-5 IPs.
+
+

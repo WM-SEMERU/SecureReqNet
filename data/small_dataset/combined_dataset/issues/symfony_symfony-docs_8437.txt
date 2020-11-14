@@ -1,0 +1,4 @@
+Document the Security helper methods
+
+
+The Security class now offers some helper methods for often used features: symfony/symfony#24337

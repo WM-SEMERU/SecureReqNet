@@ -1,0 +1,50 @@
+Avoid dots in generated class names
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29921
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+This PR removes dots from class names containers generated out of anonymous kernel classes.

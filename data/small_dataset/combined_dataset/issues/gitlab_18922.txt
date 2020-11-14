@@ -1,0 +1,5 @@
+https://github.com/getsentry/sentry/pull/2154#issuecomment-227295922
+
+Related to #18231 
+
+cc: @rspeicher 

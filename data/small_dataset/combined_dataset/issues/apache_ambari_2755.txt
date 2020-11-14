@@ -1,0 +1,19 @@
+AMBARI-24745. Enable encryption of sensitive data in Ambari DB using …
+
+
+…Ambari CLI	(dlysnichenko)
+What changes were proposed in this pull request?
+Enable encryption of sensitive data on Ambari DB using Ambari CLI. This is an update to the existing "ambari-server setup-security", option #2 - Encrypt passwords stored in ambari.properties file.
+In addition to what the current script does, the following must also happen:
+
+Change the subtitle to "Encrypt passwords managed by Ambari."
+Authenticate an Ambari administrator user
+Ask the user if they want to encrypt sensitive service configuration data
+Add command line options for authenticating an Ambari administrator and whether sensitive service configuration data is to be encrypted
+Issue a request to Ambari to encrypt sensitive data (if the user wants this)
+
+How was this patch tested?
+Unit tests are pending
+Checked encryption / re-encryption on live cluster.
+Decryption is not implemented yet
+Encryption without persisting master key is not possible (if we need it)

@@ -1,0 +1,6 @@
+[blocked] Fix vulnerability sonar violations
+
+
+See:
+https://sonarcloud.io/project/issues?id=sap_cloud-commerce-spartacus-storefront&resolved=false&types=VULNERABILITY
+Break down into separate issues if it makes sense.

@@ -1,0 +1,14 @@
+restructure LICENSES file generation
+
+
+This is a follow-up to #74877
+Prior to #74877, Godeps/LICENSES included a copy of a dependency's LICENSE file for every package of the dependency we referenced.
+#74877 switched to aggregating licenses at the module level. This is better in most ways, but means we don't have a fast way to check the licence for a particular vendored package (we have to manually drop the last path segment until we find the module root and the associated LICENSE file).
+Some options:
+
+vendor/modules.txt lists the packages included from each module we depend on; we could munge that into the aggregated LICENSES file, so we have a package listing along with each included license
+thoughts from @thockin: "What I want to have is a directory tree of copies of licenses, with nmetadata about fingerprint (this pattern-matches as apache2) and per-pkg xrefs, so for any pkg I can trivially see what the license text is and what the category is, and diffs are useful"
+
+/sig release
+/cc @cblecker
+fyi @thockin

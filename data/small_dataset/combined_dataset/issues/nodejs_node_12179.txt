@@ -1,0 +1,31 @@
+Type confusion bug in WriteFloatGeneric
+
+
+The buffer writeFloatLE family functions are prone to code [remote] execution attacks via type confusion. The binding layer WriteFloatGeneric function just casts the first argument:
+Local<Uint8Array> ts_obj = args[0].As<Uint8Array>();
+
+
+
+
+node/src/node_buffer.cc
+
+
+         Line 826
+      in
+      0e6c336
+
+
+
+
+
+
+ Local<Uint8Array> ts_obj = args[0].As<Uint8Array>(); 
+
+
+
+
+
+Few methods are called on the ts_obj after which if you choose a good argument means executing code with some choice.
+For example, the following doesn't crash until the memcpy on my machine:
+Buffer.prototype.writeFloatLE.call(0xdeadbeef, 0, 0, true);
+

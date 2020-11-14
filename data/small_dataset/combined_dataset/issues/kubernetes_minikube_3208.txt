@@ -1,0 +1,32 @@
+CVE-2018-1002103: Dashboard vulnerable to DNS rebinding attack
+
+
+CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N
+minikube exposes the Kubernetes Dashboard service with a   configuration that makes it vulnerable to DNS rebinding attacks.
+Thanks to Alex Kaskasoli (MWR Labs) for reporting this problem [1]
+Vulnerable versions:
+
+minikube 0.3.0 - 0.29.0
+
+Vulnerable configurations:
+
+VM environments which use a predictable IP address, such as VirtualBox or "None".
+
+Vulnerability impact:
+If an attacker gets a victim to visit a malicious web page, the attacker may be able to execute arbitrary code within the victim's minikube cluster.
+minikube exposes the Kubernetes Dashboard listening on the VM IP at port 30000.  In VM environments where the IP is easy to predict, the attacker can use DNS rebinding to indirectly make requests to the Kubernetes Dashboard without violating the Same-Origin Policy.
+The attacker can generate a CSRF token from the /api/v1/csrftoken/appdeploymentfromfile endpoint,  and pass this token to the /api/v1/appdeploymentfromfile endpoint to create a new Kubernetes Deployment running a payload of their choosing.
+This vulnerability can be combined with a VM-specific vulnerability to escape to the host operating system. If minikube mount is in use, the attacker could also directly access the host filesystem.
+Fixed versions:
+
+Fixed in v0.30.0 by #3210
+
+Fix impact:
+Network access to the dashboard service is now provided on an as-needed basis, and is managed by kubectl proxy which enforces HTTP header checks to protect against DNS rebinding attacks.
+Mitigations before upgrading:
+Disable the dashboard entirely:
+kubectl --namespace kube-system delete deployment kubernetes-dashboard
+Additional information
+
+[1] https://labs.mwrinfosecurity.com/advisories/minikube-rce/
+

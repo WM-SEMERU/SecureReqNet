@@ -1,0 +1,25 @@
+ledger notification should appear above the tab area
+
+
+Test plan
+#11625 (comment)
+
+ledger notifications are appearing in the tab area instead of above it. this is not ideal because:
+
+they are browser notifications, not tab-specific notifications. i.e., if you change tabs, the notification still appears.
+they can be spoofed by an attacker webpage if they are in the tab area
+
+
+expected behavior: browser notifications that are not tab-specific should appear above the tab strip, like the update notification for example:
+
+Brave: 0.19.27
+rev: e7f3a69
+Muon: 4.4.25
+libchromiumcontent: 61.0.3163.100
+V8: 6.1.534.41
+Node.js: 7.9.0
+Update Channel: Beta
+OS Platform: macOS
+OS Release: 15.6.0
+OS Architecture: x64
+cc @cezaraugusto @NejcZdovc

@@ -1,0 +1,10 @@
+[Security] AccesDeniedHttpException code not set in the Firewall ExceptionListener
+
+
+When I throw an AccesDeniedException from my Controller the ExceptionListener in the Firewall Security component "catches" it and modifies it before my ExceptionListeners are executed. The problem is that the "rethrown" exception set in the ExceptionListener doesn't include the original error code.
+"src/Symfony/Component/Security/Http/Firewall/ExceptionListener.php" Line 129:
+$event->setException(new AccessDeniedHttpException($exception->getMessage(), $exception));
+Should be:
+$event->setException(new AccessDeniedHttpException($exception->getMessage(), $exception, $exception->getCode()));
+I know that the AccessDenied is a 403 code but in my Exception Listener the getCode always returns 0 for the AccesDenied ones.
+Thanks!

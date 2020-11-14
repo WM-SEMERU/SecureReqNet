@@ -1,0 +1,23 @@
+kube-dns-autoscaler is unable to watch nodes
+
+
+1. What kops version are you running? The command kops version, will display
+this information.
+Version 1.12.0-alpha.2 (git-c3b99b857)
+
+2. What Kubernetes version are you running? kubectl version will print the
+version if a cluster is running or provide the Kubernetes version specified as
+a kops flag.
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-26T00:04:52Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.7", GitCommit:"6f482974b76db3f1e0f5d24605a9d1d38fad9a2b", GitTreeState:"clean", BuildDate:"2019-03-25T02:41:57Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
+
+3. What cloud provider are you using?
+AWS
+4. What commands did you run?  What is the simplest way to reproduce this issue?
+kubectl -n kube-system logs kube-dns-autoscaler-XXX-XXX | grep 'Failed to watch'
+Output:
+E0401 15:36:25.566480       1 reflector.go:304] github.com/kubernetes-incubator/cluster-proportional-autoscaler/pkg/autoscaler/k8sclient/k8sclient.go:92: Failed to watch *v1.Node: unknown (get nodes)
+
+I am rather new to the k8s internals, so I don't know what effect this has on the cluster. I noticed that the kube-dns team fixed this back in July 2018.
+However, it seems that the manifest in kops hasn't been updated in a while.
+Seems like a fairly straightforward bugfix to me, but I assume someone would perhaps like to correct this by updating the entire manifest instead of just adding "watch" to the allowed verbs. I could send a PR if you like though :-)

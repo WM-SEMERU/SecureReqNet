@@ -1,0 +1,5 @@
+Core data fault in history panel fix.
+
+
+Number of sections method changed its signature.
+This is fixed in 1.7 already.

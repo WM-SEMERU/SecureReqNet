@@ -1,0 +1,9 @@
+Document the contract of each component that performs a security-critical task
+
+
+Original issue 608 created by zestyping on 2008-06-14T00:05:34.000Z:
+For example, for the HTML sanitizer, specify what "sanitized HTML" consists
+of.  And so on, for each component that makes some sort of security promise:
+clearly specify the security promise so that a reviewer or maintainer can,
+given example input/output, tell whether the component has succeeded at
+upholding its promise.

@@ -1,0 +1,8 @@
+feat(security): allow url(...) style values.
+
+
+Allows sanitized URLs for CSS properties. These can be abused for information
+leakage, but only if the CSS rules are already set up to allow for it. That is,
+an attacker cannot cause information leakage without controlling the style rules
+present, or a very particular setup.
+Fixes #8514.

@@ -1,0 +1,89 @@
+[Security] make LdapBindAuthenticationProvider capable of searching for the DN
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#16823, #20905
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#7420
+
+
+
+I guess due to the separation between the user and auth provider something like the following isn't ok  (note: the following works just fine for me but if course in the end the username is the DN and not the user provided shorter username):
+diff --git a/src/Symfony/Component/Security/Core/Authentication/Provider/LdapBindAuthenticationProvider.php b/src/Symfony/Component/Security/Core/Authentication/Provider/LdapBindAuthenticationProvider.php
+index 5ebb09a..18d7825 100644
+--- a/src/Symfony/Component/Security/Core/Authentication/Provider/LdapBindAuthenticationProvider.php
++++ b/src/Symfony/Component/Security/Core/Authentication/Provider/LdapBindAuthenticationProvider.php
+@@ -70,7 +70,7 @@ class LdapBindAuthenticationProvider extends UserAuthenticationProvider
+      */
+     protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token)
+     {
+-        $username = $token->getUsername();
++        $username = $user->getUsername();
+         $password = $token->getCredentials();
+ 
+         if ('' === $password) {
+@@ -78,10 +78,7 @@ class LdapBindAuthenticationProvider extends UserAuthenticationProvider
+         }
+ 
+         try {
+-            $username = $this->ldap->escape($username, '', LdapInterface::ESCAPE_DN);
+-            $dn = str_replace('{username}', $username, $this->dnString);
+-
+-            $this->ldap->bind($dn, $password);
++            $this->ldap->bind($username, $password);
+         } catch (ConnectionException $e) {
+             throw new BadCredentialsException('The presented password is invalid.');
+         }
+diff --git a/src/Symfony/Component/Security/Core/User/LdapUserProvider.php b/src/Symfony/Component/Security/Core/User/LdapUserProvider.php
+index fc42419..8194c4c 100644
+--- a/src/Symfony/Component/Security/Core/User/LdapUserProvider.php
++++ b/src/Symfony/Component/Security/Core/User/LdapUserProvider.php
+@@ -115,7 +115,7 @@ class LdapUserProvider implements UserProviderInterface
+     {
+         $password = $this->getPassword($entry);
+ 
+-        return new User($username, $password, $this->defaultRoles);
++        return new User($entry->getDn(), $password, $this->defaultRoles);
+     }
+ 
+     /**
+Therefore I created an entire new auth provider.

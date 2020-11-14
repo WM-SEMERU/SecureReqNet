@@ -1,0 +1,36 @@
+Updating a cluster recreates etcd volumes if the name tag was modified
+
+
+1. What kops version are you running? The command kops version, will display
+this information.
+
+1.11.1
+
+2. What Kubernetes version are you running? kubectl version will print the
+version if a cluster is running or provide the Kubernetes version specified as
+a kops flag.
+
+1.11.8
+
+3. What cloud provider are you using?
+
+AWS
+
+4. What commands did you run?  What is the simplest way to reproduce this issue?
+
+Create a cluster using Kops 1.11.1.
+Once the cluster is reachable, change the Name tag of the two etcd volumes for one of the masters. For example, rename the volumes a.etcd-events.clustername and a.etcd-main.clustername to old-a-etc-events and old-etcd-main respectively.
+Run kops update cluster and notice that Kops wants to create new etcd volumes for the master in Availability Zone A because the Name tag on the existing volumes has been changed.
+Terminate the EC2 instance that is the master in Availability Zone A, and the replacement master will correctly attach the original; renamed etcd volumes as protokube matches the k8s.io/etcd/events and k8s.io/etcd/main tags, not the Name tag.
+Run kops update cluster --yes allowing Kops to create new etcd volumes for the master in Availability Zone A. These volumes will have all Kops-preferred tags, including Name.
+Terminate the master in Availability Zone A again, and the replacement will still attach the correct etch volumes. The new volumes are discovered by the master, but not mounted because the correct volumes have already been mounted (see Docker syslog on the master). The new volumes remain Available; unattached in AWS.
+
+5. What happened after the commands executed?
+
+Described in the above section, a kops update cluster recreates etcd volumes if their Name tag has been modified. Protokube and Kops have differing expectations of etcd volume tags
+
+6. What did you expect to happen?
+
+A kops update cluster should not create new etcd volumes if the volumes exist and will be discovered by protokube.
+Kops should use a tag other than Name to determine whether etcd volumes exist. Kops logic should match protokube for discovering etcd volumes.
+

@@ -1,0 +1,21 @@
+Make Service.UpdateStatus non-ambiguous
+
+
+See moby/moby#38520 for some background on this change
+In situations where only annotations of a service are updated, SwarmKit never
+marks a service as UpdateStateUpdating; the service's UpdateStatus is set
+to nil, and never updated after.
+Because of this, it's not possible to verify if an update actually happened /
+reconciled, unless resorting to hacky solutions, such as comparing the services
+Version before and after.
+Even those hacky solutions are not useful, because this requires knowledge
+about which conditions require tasks to be updated, and which conditions not (
+and require UpdateStatus to be checked). Such knowledge should be internal to
+SwarmKit, and not needed for users of the API.
+This patch modifies the behavior code to try to make this situation
+non-ambigious, by marking services as "updated" in all cases where the service
+has reconciled.
+Note that this patch causes an extra update to be performed (to write the
+service's UpdateStatus to the store). If this is a concern, we could possibly
+modify controlapi.UpdateService() to write the UpdateStatus immediately,
+instead of setting it to nil.

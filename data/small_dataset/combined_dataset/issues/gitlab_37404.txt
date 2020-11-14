@@ -1,0 +1,15 @@
+'### Summary
+
+The translate.gitlab.com uses a wildcard certificate by crowdin.
+
+### Steps to reproduce
+
+- navigate to https://translate.gitlab.com/
+
+### What is the expected *correct* behavior?
+
+https://translate.gitlab.com/ uses a certificate issued to translate.gitlab.com.
+
+### Screenshot
+
+![Screen_Shot_2017-09-04_at_17.51.42](/uploads/521e6c41759866f3992f596a920ec0ce/Screen_Shot_2017-09-04_at_17.51.42.png)

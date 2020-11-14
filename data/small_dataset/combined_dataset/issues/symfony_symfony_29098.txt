@@ -1,0 +1,69 @@
+[Security] Inconsistent behavior when Customizing the Target and Failure Request Parameters
+
+
+Symfony version(s) affected: 4.1 (I don't know if version 3.4 is affected, too)
+Description
+The documentation about "Using the form_login Authentication Provider", explaining how to customize the target and failure request parameters, states this:
+
+The name of the request attributes used to define the success and failure login redirects can be customized using the  target_path_parameter and failure_path_parameter options of the firewall that defines the login form.
+
+So, having a form like this:
+{# templates/security/login.html.twig #}
+<form action="{{ path('login') }}" method="post">
+    {# ... #}
+
+    <input type="hidden" name="go_to" value="{{ path('dashboard') }}" />
+    <input type="hidden" name="back_to" value="{{ path('forgot_password') }}" />
+    <input type="submit" name="login" />
+</form>
+I can redirect to the URL appending as query string parameters the values of fields go_to and back_to obtaining this URL:
+http://example.com/some/path?go_to=/dashboard&back_to=/forgot-password
+
+But this is not the behavior: in fact, setting the parameter target_path_parameter, the destination URL after login is the value of the field.
+For instance, the resulting URL is not the one in the example provided, but is, instead this:
+http://example.com/dashboard
+
+This seems to me to be wrong.
+How to reproduce
+
+Open the file config/packages/security.yaml
+Add the configuration option security.firewalls.main.form_login.target_path_parameter and set it to the username or email field of your login form:
+
+security:
+    ...
+    firewalls:
+        ...
+        main:
+            ...
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                use_referer: true
+                target_path_parameter: _username
+            ...
+If I log in with my username Aerendir, the error I receive is this:
+
+Unable to generate a URL for the named route "Aerendir" as such route does not exist.
+
+Possible Solution
+The problem is caused by the code in Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler::determineTargetUrl:
+/**
+     * Builds the target URL according to the defined options.
+     *
+     * @return string
+     */
+    protected function determineTargetUrl(Request $request)
+    {
+        ...
+
+        if ($targetUrl = ParameterBagUtils::getRequestParameterValue($request, $this->options['target_path_parameter'])) {
+            return $targetUrl;
+        }
+
+        ...
+
+        return $this->options['default_target_path'];
+    }
+As you can see, instead of building the URL appending the parameters found, it returns them as the route name and this causes the error.
+Additional context
+I need this behavior, as described in the documentation, because I need to mark the fact that the user just loggedin so I can act in consequence (showing a flash message or identifying him/her in my tracking software).

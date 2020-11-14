@@ -1,0 +1,6 @@
+media playback bug
+
+
+Description 
+See: https://community.brave.com/t/serious-bug-with-media-playback-in-1-0-90/52290
+A user is describing an issue where media is not playing back

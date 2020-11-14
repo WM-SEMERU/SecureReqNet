@@ -1,0 +1,21 @@
+### Summary
+
+The group CI/CD settings are accessible by members with a `Master` role even though all other group settings are locked down to the `Owner` role. They have to use the URL directly as the `Settings` menu is hidden from them at the group view.
+
+### Steps to reproduce
+
+Navigate to a group with `Master` role permissions and the `Settings` menu is not visible.
+
+Navigate to the same group's CI/CD setting's URL (https://gitlab.com/groups/`$GROUP`/-/settings/ci_cd) and all the variable are accessible with read/write permissions.
+
+### What is the current *bug* behavior?
+
+Group level secret variables are accessible to masters (not just owners) if they access them directly through URL.
+
+### What is the expected *correct* behavior?
+
+These settings should not be accessible by masters in the same way none of the other group settings are:
+
+* https://gitlab.com/groups/`$GROUP`/-/edit
+
+* https://gitlab.com/groups/`$GROUP`/-/projects

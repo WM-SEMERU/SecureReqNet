@@ -1,0 +1,13 @@
+html5 pattern attribute not working when served from HtmlService
+
+
+Original issue 1900 created by mark.fox@owis.org.in on 2014-03-10T17:52:56.000Z:
+I am serving from GAS using HtmlService and viewing it in Chrome.
+What steps will reproduce the problem?
+function doGet() {
+return HtmlService.createHtmlOutput('<form><input type="text" pattern="[0-9]{6}" /><input type="submit" value="try it" /></form>');
+}
+What is the expected output? What do you see instead?
+I expected to see a validation challenge when the text box does not contain six digits. When the html is pasted into JSFiddle it works as expected. When the same html is served from HtmlService (as above) nothing happens.
+Please provide any additional information below.
+I think it is something to do with Caja.

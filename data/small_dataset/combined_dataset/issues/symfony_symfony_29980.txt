@@ -1,0 +1,51 @@
+[Process] disable transient test on Windows
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This test makes our Windows CI red 80% of the time, let's disable it until someone can have a deeper look.
+PIng @Nek- , help wanted.

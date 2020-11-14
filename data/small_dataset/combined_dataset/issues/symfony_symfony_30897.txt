@@ -1,0 +1,51 @@
+[DIC] Add a `require` env var processor
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11313
+
+
+
+This adds a new require processor that will require() the PHP file given as input value and return the value returned from that file. Leverages opcaching (yay!).
+#EUFOSSA

@@ -1,0 +1,6 @@
+Minor fix-ups to default configuration files.
+
+
+. Replace ssl with server-ssl in timely-standalone.yml and timely-docker.yml
+. Add a value for cache.enabled in timely.yml
+(Was running timely-standalone per quick start documentation and discovered it wouldn't start)

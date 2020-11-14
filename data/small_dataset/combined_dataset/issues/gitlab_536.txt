@@ -1,0 +1,3 @@
+Our particular use case is to be able to define/modify/read _Issue tracker_ and _Project name or id in issues tracker_ of project settings.
+
+E.g. https://gitlab.example.com/api/v3/projects/:project_id returns only `"issues_enabled": true`

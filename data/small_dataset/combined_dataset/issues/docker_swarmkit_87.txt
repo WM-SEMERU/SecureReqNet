@@ -1,0 +1,6 @@
+NodeID on Dispatcher.RegisterRequest should be removed or ignored
+
+
+NodeID in api.RegisterRequest is currently in place to allow node registration to work without authentication and mtls support. Since we plan to ensure the use of mTLS, the presence of this field may be a future problem, since its presence means it may be used.
+We need to ensure that this field is properly validated against authentication system or via mTLS before releasing.
+@diogomonica @LK4D4

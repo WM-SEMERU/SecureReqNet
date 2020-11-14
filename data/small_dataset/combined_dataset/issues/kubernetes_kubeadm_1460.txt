@@ -1,0 +1,30 @@
+Add way to specify kubeadm's --ignore-preflight-errors in InitConfiguration and JoinConfiguration
+
+
+What would you like to be added:
+A single way to configure all of kubeadm's behaviour.
+In particular, given ignorePreflightErrors and externalcfg are currently disjoint:
+
+https://github.com/kubernetes/kubernetes/blob/a887ae8344adf9739c1d156a718c05fdf95b73ab/cmd/kubeadm/app/cmd/init.go#L104-L106
+https://github.com/kubernetes/kubernetes/blob/a887ae8344adf9739c1d156a718c05fdf95b73ab/cmd/kubeadm/app/cmd/join.go#L132-L133
+
+I would like a way to specify the set of strings corresponding to --ignore-preflight-errors's value as an "array" in (at least) InitConfiguration and JoinConfiguration.
+Why is this needed:
+This would simplify programmatic usage of kubeadm: one configuration file to generate, and then pass to kubeadm.
+Potential way forward:
+
+
+Keep --ignore-preflight-errors for backward-compatibility (for now).
+
+
+Add the following field to both InitConfiguration and JoinConfiguration:
+IgnorePreflightErrors []string `json:"ignorePreflightErrors,omitempty"`
+
+
+Take the union of both sets, validate it (as currently done), and use this going in the rest of the program.
+
+
+Misc.:
+Happy to make the change myself, once I get a "go" (or at least, no "no-go") from someone more knowledgeable. (Maybe @luxas? 🙂 )
+/kind feature
+/sig cluster-lifecycle

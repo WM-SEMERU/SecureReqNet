@@ -1,0 +1,7 @@
+Investigate minifier bug / upgrade JS processing libraries
+
+
+Original issue 1868 created by kpreid.switchb.org on 2013-10-29T23:46:31.000Z:
+I tried upgrading the versions of acorn and escodegen in our third_party. This resulted in a bug where the minified version only of mitigateSrcGotchas would mangle regexp literals by doubling characters: /ab/ becoming /aabb/.
+This indicates a serious bug in our minifier, since it should not be changing the semantics of the code. We should either fix it or replace it with Closure Compiler (see issue 1866).
+We should also upgrade acorn/estraverse/escodegen just to stay current on upstream fixes and API changes.

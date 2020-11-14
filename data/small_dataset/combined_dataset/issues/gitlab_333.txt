@@ -1,0 +1,88 @@
+**Summary**
+
+When pushing from a repository satellite back to the bare repo, it fails with the error:
+
+> GitLab: You are not allowed to access master!
+
+That also causes the web editor to fail with the error "Your changes could not be committed". Pushing from SSH works fine.
+
+**Steps to reproduce**
+
+1. Go to a repo satellite (on the server).
+2. Run `sudo -u git git push`.
+
+**Expected behavior**
+
+Pushing should work completely fine.
+
+**Observed behavior**
+
+Pushing fails with the following output:
+
+```
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 1.56 KiB | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: GitLab: You are not allowed to access master!
+remote: error: hook declined to update refs/heads/master
+To /home/git/repositories/leo/itframe.git
+ ! [remote rejected] master -> master (hook declined)
+error: failed to push some refs to '/home/git/repositories/leo/itframe.git'
+```
+
+**Investigation**
+
+After digging through GitLab's code, I found out that the API call that determines if you're allowed to push is (always) returning `false`.
+
+Here's the URL being called: https://example.com/api/v3/internal/allowed?action=git-receive-pack&ref=master&project=leo%2Fitframe&forced_push=false&oldrev=aabbcc&newrev=0123456
+
+You can notice that the parameter `user_id` or `key_id` is missing from the URL.
+
+It should be: https://example.com/api/v3/internal/allowed?user_id=1&action=git-receive-pack&ref=master&project=leo%2Fitframe&forced_push=false&oldrev=aabbcc&newrev=0123456
+
+That is causing the `@actor` variable in the gitlab-shell hook to be `nil`. As it hasn't been passed to the API, that in turn results in always getting `false`.
+
+**Checks**
+
+Everything is normal; all tests are passing.
+
+**Version**
+
+6.9.2, commit `e46b644`
+
+**Setup**
+
+```
+System information
+System:         Debian 7.5
+Current User:   git
+Using RVM:      no
+Ruby Version:   2.0.0p451
+Gem Version:    2.0.14
+Bundler Version:1.5.2
+Rake Version:   10.3.1
+Sidekiq Version:2.17.0
+
+GitLab information
+Version:        6.9.2
+Revision:       e46b644
+Directory:      /opt/gitlab-ce
+DB Adapter:     postgresql
+URL:            https://git.shoutca.st
+HTTP Clone URL: https://git.shoutca.st/some-project.git
+SSH Clone URL:  git@git.shoutca.st:some-project.git
+Using LDAP:     no
+Using Omniauth: no
+
+GitLab Shell
+Version:        1.9.6
+Repositories:   /home/git/repositories/
+Hooks:          /home/git/gitlab-shell/hooks/
+Git:            /usr/bin/git
+```
+
+**Workaround**
+
+Only run the permission check if we're over SSH. This allows the web editor to work, **but removes the permission check**.

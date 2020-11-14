@@ -1,0 +1,31 @@
+We have Issues with bigger Merge Requests. Scenario is like Following
+
+1. We have a origin repository
+2. We add another user with at least Reporter Permissions.
+3. User2 forks the repository into an own one (repository2)
+4. User 2 pushes a big commit to repository2
+4. User2 creates a Merge Request from repository2 to origin repository
+5. User1 wants to Review the Commit(s) in Origin Repository
+6. User1 won't see the commit(s) due to beeing too big
+7. User1 won't be able to download the diff, instead he gets a 404 Errorpage
+
+Production Log:
+
+Started GET "/heidelpay/shopsystem-2-1/merge_requests/11.diff" for 172.21.0.1 at 2014-04-03 17:14:10 +0200
+Processing by Projects::MergeRequestsController#show as DIFF
+  Parameters: {"project_id"=>"heidelpay/shopsystem-2-1", "id"=>"11"}
+
+ActiveRecord::RecordNotFound (ActiveRecord::RecordNotFound):
+  app/controllers/projects/merge_requests_controller.rb:186:in `merge_request'
+  app/controllers/application_controller.rb:58:in `set_current_user_for_thread'
+
+  Rendered errors/not_found.html.haml within layouts/errors (1.1ms)
+  Rendered layouts/_head.html.haml (3.2ms)
+  Rendered layouts/_search.html.haml (2.5ms)
+  Rendered layouts/_head_panel.html.haml (91.0ms)
+  Rendered layouts/_flash.html.haml (1.3ms)
+Completed 404 Not Found in 124ms (Views: 104.5ms | ActiveRecord: 1.8ms)
+
+
+8. Maybe another Bug: User1 clicks on the commit and is redirected to repository2 without having a membership. He also gets a 404 instead of permission denied or alike.
+

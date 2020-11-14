@@ -1,0 +1,20 @@
+Implement authorization-mode for kube-apiserver
+
+
+The current implementation does not start kube-apiserver with an authorization-mode specified.  This appears to give all accounts full access to the k8s api including the default service account each container gets.  A more secure configuration would be to use ABAC with a policy file of
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"admin", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"kubecfg", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"kubelet", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"kube-proxy", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"kube", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"system:controller_manager", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"system:dns", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"system:logging", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"system:monitoring", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"system:scheduler", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"system:serviceaccount:kube-system:default", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+
+which would only allow core system services to access the API.  Administrators could add to this file as needed for their specific implementation.  To duplicate the existing functionality the following line could also be added to allow the default service account full access:
+{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user":"system:serviceaccount:default:default", "namespace": "*", "resource": "*", "apiGroup": "*", "nonResourcePath": "*"}}
+
+These policies may need tweaking because I'm not 100% sure about all of the accounts.  For instance, is the account system:dns used or does the kube-dns pod use the default service account?

@@ -1,0 +1,72 @@
+When you change an the assignee we return in the user obj a lot of potentially sensitive information. 
+
+Look at the JSON return of the assignee in an issue. Look at the user object. I'd paste it here but that seems like a bad idea. It has the authentication_token in there. 
+
+```
+"assignee": {
+    "id": 1234,
+    "email": "email@example.com",
+    "created_at": "2016-02-13T04:08:15.532Z",
+    "updated_at": "2017-03-16T17:48:39.262Z",
+    "name": "First Last",
+    "admin": false,
+    "projects_limit": 100000,
+    "skype": "",
+    "linkedin": "",
+    "twitter": "",
+    "authentication_token": "actual_api_token_was_here",
+    "bio": "",
+    "username": "TeamMember1",
+    "can_create_group": true,
+    "can_create_team": false,
+    "state": "active",
+    "color_scheme_id": 1,
+    "password_expires_at": null,
+    "created_by_id": null,
+    "avatar": {
+      "url": null
+    },
+    "hide_no_ssh_key": true,
+    "website_url": "",
+    "last_credential_check_at": null,
+    "admin_email_unsubscribed_at": null,
+    "notification_email": "user@example.com",
+    "hide_no_password": false,
+    "password_automatically_set": false,
+    "location": "",
+    "public_email": "",
+    "encrypted_otp_secret": "bad_stuff_was_here",
+    "encrypted_otp_secret_iv": "bad_stuff_was_here",
+    "encrypted_otp_secret_salt": "bad_stuff_was_here",
+    "otp_required_for_login": true,
+    "otp_backup_codes": [
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here",
+      "bad_stuff_was_here"
+    ],
+    "dashboard": "stars",
+    "project_view": "activity",
+    "consumed_timestep": 49656217,
+    "layout": "fixed",
+    "hide_project_limit": false,
+    "note": null,
+    "otp_grace_period_started_at": "2016-10-07T15:15:53.302Z",
+    "ldap_email": false,
+    "external": false,
+    "organization": "",
+    "incoming_email_token": "bad_stuff_was_here",
+    "authorized_projects_populated": true,
+    "auditor": false,
+    "ghost": null,
+    "avatar_url": ""
+  },
+```
+
+cc @stanhu @briann  @smcgivern

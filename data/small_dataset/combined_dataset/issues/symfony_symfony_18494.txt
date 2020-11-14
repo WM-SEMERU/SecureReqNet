@@ -1,0 +1,36 @@
+Password rehash implementation (Bcrypt)
+
+
+Hi,
+I noticed that if you change the cost of an already hashed password (with Bcrypt), the hash won't change. It will be still valid (password_verify) but in fact it needs to be rehashed.
+For that purpose, PHP has a standart function : password_needs_rehash
+The following code use that behavior in the actual BCrypt encoder implementation.
+Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder :
+public function isPasswordValid($encoded, $raw, $salt)
+{
+    /**
+     * Password too long
+     */
+    if ($this->isPasswordTooLong($raw)) {
+        return false;
+    }
+
+    /**
+     * Wrong password
+     */
+    if (!password_verify($raw, $encoded)) {
+        return false;
+    }
+
+    $options = [ "cost" => $this->cost ];
+
+    if (password_needs_rehash($encoded, PASSWORD_BCRYPT, $options)) {
+        $newPassword = password_hash($raw, PASSWORD_BCRYPT, $options);
+
+        // Persist the new password
+    }
+
+    return true;
+}
+The new password needs to be persisted somehow.  Maybe by returning it, see UserPasswordValidator.php.
+Note that if PHP changes its PASSWORD_DEFAULT (BCrypt at the moment), the new encoder could migrate from BCrypt to the new algorithm without the need of rehash the entire database manually.

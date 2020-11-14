@@ -1,0 +1,4 @@
+Fix up Security samples
+
+
+#7765 None of these samples have been working since InProcess became the default model. This mitigates the issue until we can come up with a standard solution.

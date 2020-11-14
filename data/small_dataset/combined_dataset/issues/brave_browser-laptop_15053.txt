@@ -1,0 +1,46 @@
+tearing of tab into new window will crash tab
+
+
+Could not find similar issue.
+Description
+Tearing of a tab into a new window will crash the tab, i.e. showing the black-white pixelated sad smiley with x-s for eyes.
+Steps to Reproduce
+
+Open several tabs.
+Tear one tab into a new window by dragging it.
+
+Actual result:
+The tab crashes. It shows the page as in this image: https://user-images.githubusercontent.com/17010094/28104008-ceeb70b4-66d0-11e7-8535-d3a5e2b0a7ba.png
+But  it does show the title and favicon in the 'tab'.
+There are two 'Crash dump id's in the console. Example 1:
+
+Crash dump id: 2ae0caeb1764e91b
+Crash dump id: 9a8d2f038f41ff16
+
+Example 2:
+
+Crash dump id: b497ec4a49d276c8
+Crash dump id: 90b6dad25f5c1899
+
+Also this error shows up, not sure whether it is related:
+[2574:2574:0820/105820.702108:ERROR:latency_info.cc(163)] Surface::TakeLatencyInfoFromFrame, LatencyInfo vector size 101 is too big.
+Expected result:
+Tab loads.
+Reproduces how often:
+80%?
+Not all the time. Not sure when it works properly.
+Brave Version
+about:brave info:
+Brave: 0.23.73
+V8: 6.8.275.24
+rev: 50bdb6d
+Muon: 8.0.3
+OS Release: 4.15.0-32-generic
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.75
+Reproducible on current live release:
+Additional Information

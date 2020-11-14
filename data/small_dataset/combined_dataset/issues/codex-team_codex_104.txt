@@ -1,0 +1,4 @@
+Redis password
+
+
+Вынести Redis password из pre-dispatch в конфиге, убрав из репозитория. Сменить пароль.

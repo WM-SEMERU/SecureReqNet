@@ -1,0 +1,50 @@
+[Form] Fixed some phpdocs
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+~
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#6393
+
+
+
+ref symfony/symfony-docs#6144, symfony/symfony-docs#6297, #14050

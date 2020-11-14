@@ -1,0 +1,17 @@
+Hi,
+
+after importing couple of git project from file system vi command:
+
+bundle exec rake gitlab:import:repos RAILS_ENV=production
+
+I am given in some repos (I did not figure out the schema):
+"
+500
+We're sorry, but something went wrong.
+
+We've been notified about this issue and we'll take a look at it shortly.
+"
+Some repos don't work, some work like a charm.
+I have found problem with this in releases v6.4.3 and v6.5.1.
+
+Version v6.3.1 work without any problems.

@@ -1,0 +1,21 @@
+ensure input doesn't reach output without sanitization
+
+
+Original issue 517 created by felix8a on 2008-06-11T22:43:17.000Z:
+right now, it's too easy to accidentally pass an unsanitized input node
+through the pipeline unchanged and emit it verbatim, which violates the
+whitelist principle.
+the js stage has a phase that verifies there are no unsanitized nodes at
+the end, but there isn't a similar check for html and css nodes.
+this could be done with a flag on nodes, but we also discussed a number of
+ways of doing this in the type system instead.  a rationale for doing it
+with types is it reduces the amount of code that has to be audited to
+verify the sandboxing claim.
+one proposal is to parameterize Nodes with a class that marks which
+lifecycle wave the node belongs to, so you might have
+ParseTreeNode<ParsedWave>
+where ParsedWave inherits from LifeCycleWave, etc.
+and then various transformations would rewrite to Node<NormalizedWave> and
+then to Node<SafeWave>.
+('wave' is a bad name, but the normal name 'stage' already means something
+else.)

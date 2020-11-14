@@ -1,0 +1,45 @@
+How to mount file in linux
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.3 darwin/amd64
+
+
+Does this issue reproduce with the latest release?
+yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/Users/wnie/Library/Caches/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/Users/wnie/go/src/git.dev.fwmrm.net/core/common/src/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/local/go"
+GOTMPDIR=""
+GOTOOLDIR="/usr/local/go/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+CXX="clang++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/tx/kyk53m810j321smxnpxn47r9bpbt8m/T/go-build800267695=/tmp/go-build -gno-record-gcc-switches -fno-common"
+
+What did you do?
+Use syscall.Mount
+What did you expect to see?
+I want to know is there any update to use linux mount? Please show me an example.
+What did you see instead?
+This syscall.Mount() func is not exist. Conflict with the doc https://golang.org/pkg/syscall/#Mount

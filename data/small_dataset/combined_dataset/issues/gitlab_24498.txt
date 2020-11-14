@@ -1,0 +1,3 @@
+See [example of this occurring](https://gitlab.com/gitlab-org/gitlab-ce/issues/20799#note_18184802) here. I haven't pressed the unsubscribe button, but it looks like I could without logging in. I'd suggest forcibly stripping the GitLab footer from replies.
+
+MR: https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2528

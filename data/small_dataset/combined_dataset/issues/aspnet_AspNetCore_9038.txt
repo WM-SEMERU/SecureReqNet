@@ -1,0 +1,11 @@
+Compile exception when passing null as component attribute
+
+
+Describe the bug
+When null is put into a components attribute within a .razor/.cshtml file, a compilation error is reported.
+Example:
+<NavMenuItem href="/modules" Title="Module" Icon="IconType.ViewDashboard" Match="@(null)">
+The reported error is (freely translated):
+CS0121: The call does not distinguish clearly between the members or properties "RuntimeHelpers.TypeCheck<T>(T)" and "RuntimeHelpers.TypeCheck<T>(Func<Task>)"
+The razor compiler translates the above attribute assignment to:
+ builder.AddAttribute(37, "Match", Microsoft.AspNetCore.Components.RuntimeHelpers.TypeCheck<Microsoft.AspNetCore.Components.Routing.NavLinkMatch?>(null));

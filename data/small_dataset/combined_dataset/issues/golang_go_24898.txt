@@ -1,0 +1,12 @@
+proposal: x/crypto/sm3: new package
+
+
+SM3 is Shang Mi 3, Commercial Cryptographic hash algorithm 3.
+https://tools.ietf.org/html/draft-shen-sm3-hash-01
+OpenSSL 1.1.1.pre2
+https://github.com/openssl/openssl/tree/master/crypto/sm3
+armv8.2 has SM3 hardware instructions.
+https://community.arm.com/processors/b/blog/posts/introducing-2017s-extensions-to-the-arm-architecture
+Linux kernel
+https://github.com/torvalds/linux/blob/master/crypto/sm3_generic.c
+https://golang.org/cl/106615 by @mengzhuo

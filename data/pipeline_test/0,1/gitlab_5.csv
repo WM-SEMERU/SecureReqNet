@@ -1,0 +1,44 @@
+issue
+"I uploaded an excel file into an issue comment and the comment never shows up even if I go back to the issue.  I found the following in the log:
+
+```
+Processing by Projects::NotesController#create as HTML
+
+Parameters: {""utf8""=>""✓"", ""authenticity_token""=>""VJuZWIhE3no0akL9xYf4mBwU0W/gVcYMsCckDbP40Ec="", ""target_type""=>""issue"", ""target_id""=>""107"", ""note""=>{""commit_id""=>"""", ""noteable_id""=>""107"", ""noteable_type""=>""Issue"", ""note""=>""Data file"", ""attachment""=>#<ActionDispatch::Http::UploadedFile:0x007f9d3e0ef0c8 @tempfile=#<Tempfile:/tmp/RackMultipart20140110-29395-1ua1f3s>, @original_filename=""EmployeeDB_ResumeFields.xls"", @content_type=""application/vnd.ms-excel"", @headers=""Content-Disposition: form-data; name=\""note[attachment]\""; filename=\""EmployeeDB_ResumeFields.xls\""\r\nContent-Type: application/vnd.ms-excel\r\n"">}, ""project_id""=>""web-projects/resumedb""}
+
+Redirected to http://gitlab.ara.wan/web-projects/resumedb/issues/107
+
+Completed 302 Found in 115ms (ActiveRecord: 4.3ms)
+
+Started GET ""/web-projects/resumedb/issues/107"" for 10.80.26.98 at 2014-01-10 10:18:18 -0500
+
+Processing by Projects::IssuesController#show as HTML
+
+Parameters: {""project_id""=>""web-projects/resumedb"", ""id""=>""107""}
+
+Rendered votes/_votes_block.html.haml (2.0ms)
+
+Rendered projects/notes/_form.html.haml (4.4ms)
+
+Rendered projects/notes/_notes_with_form.html.haml (5.6ms)
+
+Rendered projects/issues/show.html.haml within layouts/projects (61.9ms)
+
+Rendered layouts/_head.html.haml (1.9ms)
+
+Rendered layouts/_broadcast.html.haml (2.0ms)
+
+Rendered layouts/_search.html.haml (28.2ms)
+
+Rendered layouts/_head_panel.html.haml (34.4ms)
+
+Rendered layouts/_init_auto_complete.html.haml (0.7ms)
+
+Rendered layouts/_flash.html.haml (0.2ms)
+
+Rendered shared/_no_ssh.html.haml (1.7ms)
+
+Rendered layouts/nav/_project.html.haml (16.8ms)
+
+Completed 200 OK in 304ms (Views: 118.5ms | ActiveRecord: 9.6ms)
+```"

@@ -1,0 +1,62 @@
+Uncaught TypeError: Invalid Point: (459, NaN)
+
+
+[Enter steps to reproduce:]
+
+In some larger .json files (~50+ kb?) the cursor would eventually stop moving forward about five characters from the end of a line.  It would not move forward using either the arrow keys or the mouse.
+Moving the cursor down a line, then backwards to wrap back to the previous line throws the Invalid Point error.
+
+Worth noting that restarting Atom made the problem stop occurring.  Haven't had it show up in any documents since.
+Atom: 1.35.1 x64
+Electron: 2.0.18
+OS: Microsoft Windows 10 Home
+Thrown From: Atom Core
+Stack Trace
+Uncaught TypeError: Invalid Point: (459, NaN)
+At C:\Users\Nathaniel\AppData\Local\atom\app-1.35.1\resources\app\static\<embedded>:11
+
+TypeError: Invalid Point: (459, NaN)
+    at Function.t.exports.Point.assertValid (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:14:43907)
+    at DisplayLayer.translateScreenPosition (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:14:85013)
+    at DisplayMarkerLayer.t.exports.DisplayMarkerLayer.translateScreenPosition (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:14:1093829)
+    at DisplayMarker.t.exports.DisplayMarker.setHeadScreenPosition (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:14:3175209)
+    at changePosition (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:521837)
+    at Cursor.changePosition (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:530381)
+    at Cursor.setScreenPosition (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:521803)
+    at Cursor.moveLeft (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:524625)
+    at moveCursors.t (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:30968)
+    at Array.forEach (<anonymous>)
+    at transact (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:33144)
+    at TextBuffer.transact (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:491885)
+    at TextEditor.transact (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:24215)
+    at TextEditor.moveCursors (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:33112)
+    at TextEditor.moveLeft (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:30951)
+    at TextEditor.core:move-left (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:298652)
+    at HTMLElement.o.(anonymous function) (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:307694)
+    at CommandRegistry.handleCommandEvent (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:350017)
+    at KeymapManager.t.exports.KeymapManager.dispatchCommandEvent (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:1212981)
+    at KeymapManager.t.exports.KeymapManager.handleKeyboardEvent (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:1209115)
+    at WindowEventHandler.handleDocumentKeyEvent (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:11:285196)
+
+Commands
+     -0:36.6.0 core:confirm (input.hidden-input)
+ 15x -0:26 core:select-right (input.hidden-input)
+     -0:22.7.0 core:select-down (input.hidden-input)
+     -0:22.3.0 core:select-up (input.hidden-input)
+     -0:21.6.0 core:select-right (input.hidden-input)
+     -0:21.1.0 core:move-down (input.hidden-input)
+  5x -0:20.9.0 core:move-left (input.hidden-input)
+  3x -0:19.7.0 editor:move-to-beginning-of-word (input.hidden-input)
+  6x -0:18.5.0 core:move-right (input.hidden-input)
+     -0:16 core:move-left (input.hidden-input)
+  4x -0:15.8.0 core:move-right (input.hidden-input)
+     -0:14.4.0 core:move-up (input.hidden-input)
+     -0:14.1.0 core:move-down (input.hidden-input)
+     -0:13.7.0 core:move-right (input.hidden-input)
+     -0:13.3.0 core:move-down (input.hidden-input)
+ 16x -0:13 core:move-left (input.hidden-input)
+
+Non-Core Packages
+git-blame 1.7.0 
+language-javascript-jsx 0.3.7 
+

@@ -1,0 +1,5 @@
+Automate anti-virus false-positive testing
+
+
+Various anti-virus and anti-malware tools identify Brave or bundled components as false-positives for malware from time to time. Playing catchup with these alerts can be time-consuming and inconsistent, especially given the opacity and intrigue around AV vendors' methods.
+We should get ahead of this by automating testing against popular AV vendors' services. VirusTotal (brave/devops#656) only gets us part way there: VirusTotal compares signatures, and we're more likely to trip a heuristic scanner. Integrating AV tests into our build & test process will let us find out about false-positives in the commit that causes them, and prevent issues before Brave ever hits people's machines.

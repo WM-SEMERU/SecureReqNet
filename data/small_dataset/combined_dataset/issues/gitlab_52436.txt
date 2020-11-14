@@ -1,0 +1,17 @@
+### Problem to solve
+
+Users are allowed to change their profile name without an admin's ability to prevent it.
+
+### Proposal
+
+Add an option to disable users ability to change their profile name.
+
+### What does success look like, and how can we measure that?
+
+Admins have the option of disabling users ability to change their profile name
+
+### Links / references
+
+Related to https://gitlab.com/gitlab-org/gitlab-ce/issues/15197
+
+Customer ticket -> https://gitlab.zendesk.com/agent/tickets/105524 (internal use)

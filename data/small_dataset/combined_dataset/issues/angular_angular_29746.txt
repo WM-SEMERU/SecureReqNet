@@ -1,0 +1,34 @@
+fix(router): hide emptyoutlet from consumers
+
+
+PR Checklist
+Please check if your PR fulfills the following requirements:
+
+ The commit message follows our guidelines: https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+PR Type
+What kind of change does this PR introduce?
+
+ Bugfix
+ Feature
+ Code style update (formatting, local variables)
+ Refactoring (no functional changes, no api changes)
+ Build related changes
+ CI related changes
+ Documentation content changes
+ angular.io application / infrastructure changes
+ Other... Please describe:
+
+What is the current behavior?
+Currently, the activate events and component getter on the router outlet will return an EmptyOutletComponent when using lazy loaded components on named outlets.
+Issue Number: #27696
+What is the new behavior?
+The new behavior is that the activate events as well as component get correctly return the lazy loaded component instead of an EmptyOutletComponent
+Does this PR introduce a breaking change?
+
+ Yes
+ No
+
+Other information

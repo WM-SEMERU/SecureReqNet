@@ -1,0 +1,8 @@
+Calendar proxy groups should not be readable
+
+
+@wsanchez originally submitted this as ticket:238
+
+Calendar proxy groups should not be readable
+I should probably be unable to know who you have given proxy access to your calendar.
+Need to make sure that iCal can still access the info it needs to know what proxy access it has, though.

@@ -1,0 +1,8 @@
+Update running_ssh_service.md
+
+
+Proposed changes
+The Dockerfile here specifies a static root password, screencast. Hard-coding this password into the container creates a security issue; if the container is bridged to the internet, either via NAT or a badly-configured hosting service, it becomes an easy target for attackers.
+This change goes some way towards fixing this by specifying that readers should generate a random password before building this image; however, this is a temporary solution. Long term, we need to determine how to wrap this Dockerfile in something that generates a random password at build time.
+Related issues (optional)
+Fixes #8390

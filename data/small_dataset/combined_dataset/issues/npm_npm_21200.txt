@@ -1,0 +1,75 @@
+cb() never called error using " ng new"
+
+
+Installed node on Win 7(Enterprise) 64bit [https://nodejs.org/en/download/]
+installed angular using command : npm install -g @angular/cli
+node -v
+v8.11.1
+npm -v
+6.1.0
+ng -v
+Angular CLI: 6.0.8
+Node: 8.11.1
+OS: win32 x64
+Angular:
+...
+Package Version
+@angular-devkit/architect 0.6.8
+@angular-devkit/core 0.6.8
+@angular-devkit/schematics 0.6.8
+@schematics/angular 0.6.8
+@schematics/update 0.6.8
+rxjs 6.2.1
+typescript 2.7.2
+Now, while creating a new project using "ng new projname" (location D drive)., it gives the following error:
+D:\Aj>ng new third
+CREATE third/angular.json (3539 bytes)
+CREATE third/package.json (1309 bytes)
+CREATE third/README.md (1022 bytes)
+CREATE third/tsconfig.json (384 bytes)
+CREATE third/tslint.json (2805 bytes)
+CREATE third/.editorconfig (245 bytes)
+CREATE third/.gitignore (503 bytes)
+CREATE third/src/environments/environment.prod.ts (51 bytes)
+CREATE third/src/environments/environment.ts (631 bytes)
+CREATE third/src/favicon.ico (5430 bytes)
+CREATE third/src/index.html (292 bytes)
+CREATE third/src/main.ts (370 bytes)
+CREATE third/src/polyfills.ts (3194 bytes)
+CREATE third/src/test.ts (642 bytes)
+CREATE third/src/assets/.gitkeep (0 bytes)
+CREATE third/src/styles.css (80 bytes)
+CREATE third/src/browserslist (375 bytes)
+CREATE third/src/karma.conf.js (964 bytes)
+CREATE third/src/tsconfig.app.json (194 bytes)
+CREATE third/src/tsconfig.spec.json (282 bytes)
+CREATE third/src/tslint.json (314 bytes)
+CREATE third/src/app/app.module.ts (314 bytes)
+CREATE third/src/app/app.component.html (1141 bytes)
+CREATE third/src/app/app.component.spec.ts (988 bytes)
+CREATE third/src/app/app.component.ts (207 bytes)
+CREATE third/src/app/app.component.css (0 bytes)
+CREATE third/e2e/protractor.conf.js (752 bytes)
+CREATE third/e2e/src/app.e2e-spec.ts (301 bytes)
+CREATE third/e2e/src/app.po.ts (208 bytes)
+CREATE third/e2e/tsconfig.e2e.json (213 bytes)
+npm WARN deprecated istanbul-lib-hook@1.2.1: 1.2.0 should have been a major vers
+ion bump
+npm ERR! cb() never called!
+npm ERR! This is an error with npm itself. Please report this error at:
+npm ERR! https://github.com/npm/npm/issues
+npm ERR! A complete log of this run can be found in:
+npm ERR! C:\Users\komkumar\AppData\Roaming\npm-cache_logs\2018-07-10T06_39_
+39_241Z-debug.log
+Package install failed, see above.
+Tried clearing cache, and running the command again. doesn't work.
+Tried the following steps, but didn't work:
+deleting npm , npm-cache folders from C:\Users\Username\AppData\Roaming
+2)uninstall node js
+reboot
+4)install again
+reboot
+run command "npm install -g @angular/cli"
+reboot
+run command "ng new firstproj" gives the same error. "cb() never called".
+Is there any solution for this?

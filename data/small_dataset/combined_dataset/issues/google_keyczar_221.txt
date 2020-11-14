@@ -1,0 +1,5 @@
+Is the library abandoned?
+
+
+Last commit was in February 2017. Is the library abandoned? More than two years passed.
+Can you recommend up to date library for Java which can replace keyczar?

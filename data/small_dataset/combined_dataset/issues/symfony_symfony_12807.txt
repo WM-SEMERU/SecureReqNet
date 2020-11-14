@@ -1,0 +1,48 @@
+[Security] Idle sessions expiration.
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#4576
+
+
+
+This new firewall allows you to block long running sessions.
+When the session cookie is valid until the browser is closed (cookie_lifetime = 0), but the user left the browser open for a long time, the session will be invalidated if the max_idle_time is exceeded. The max_idle_time value should be lesser or equal than the one from session.gc_maxlifetime.
+If an expiration_url is set, the user agent will be redirected to this URL after the session invalidation. If this parameter is not set, a SessionExpiredException will be thrown.

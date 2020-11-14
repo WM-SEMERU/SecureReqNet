@@ -1,0 +1,13 @@
+Get-HPOVLdapDirectory -- the property 'sessionId' cannot be found on this object
+
+
+Please fill in as much information as possible to help resolve your issue.
+Actual Behavior
+Get-HPOVLdapDirectory: The property 'sessionId' cannot be found on this object. Verify that the property exists and can be set.
+
+Steps to reproduce
+Connect-HPOVMgmt
+Get-HPOVLdapDirectory
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion): 2.0.530.1
+HPE OneView Appliance Version: 2.00.07

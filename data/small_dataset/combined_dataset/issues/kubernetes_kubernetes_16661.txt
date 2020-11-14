@@ -1,0 +1,7 @@
+Cross-namespace privilege escalation attack allowed by HPA
+
+
+An HPA request is submitted against namespaceA, but contains a reference to namespaceB (https://github.com/kubernetes/kubernetes/blob/master/pkg/apis/extensions/types.go#L75).  The request is accepted because I have rights to create on in namespaceA, but no checking is done to see if I can scale what I'm asking.
+The HPA request has a namespace, but it also duplicated a namespace field instead of using a LocalObjectReference extended with kind and subresource field.  The HPA controller then blindly uses the second namespace field: https://github.com/kubernetes/kubernetes/blob/master/pkg/controller/podautoscaler/horizontal.go#L99.
+This allowed someone in the dev namespace to accidentally (or intentionally) scale down resources in the production namespace.
+@ncdc Can you help me find the right groups to call out?

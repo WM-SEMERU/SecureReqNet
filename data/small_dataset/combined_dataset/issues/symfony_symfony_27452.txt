@@ -1,0 +1,54 @@
+Avoid migration on stateless firewalls
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+Related to #27395
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#9860
+
+
+
+This is a proof-of-concept. Once we agree / are happy, I need to add this to all of the other authentication mechanisms that recently got the session migration code & add tests.
+Basically, this avoids migrating the session if the firewall is stateless. There were 2 options to do this:
+A) Make the SessionAuthenticationStrategy aware of all stateless firewalls. This is the current approach
+or
+B) Make each individual authentication listener aware whether or not its firewall is stateless.

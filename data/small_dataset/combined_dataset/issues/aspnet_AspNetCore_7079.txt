@@ -1,0 +1,82 @@
+Possible issue with OAuth with external Identity provider + CORS
+
+
+I am developing a .net core 2.2 webAPI project for RESTful services. I have configured it to challenge OAuth authentication with an external Identity server (to get userinfo from Windows directory) and then use Cookie authentication to manage Identity/access.
+Everything works well for normal http requests. But when I make a XHR request from an Angular app, The request fails at /Authorize step because the request header has "Origin": null
+
+To Reproduce
+
+
+An XHR request to an end-point automatically spawns a challenge (user/login) to the Identity server
+
+
+
+The authorize endpoint as shown in the screen shot is then created but with Origin: null in its headers
+
+
+The Identity server copies the header value in request and adds it to Access-Control-Allow-Origin in the response
+
+
+The browser rejects the new callback URL, signin-auth0 redirection and throws:
+
+
+
+Startup.cs
+    public void ConfigureServices(IServiceCollection services)
+        {
+            . . .
+            services.AddCors(o => o.AddPolicy("CORSPolicy", builder =>
+            {
+                builder.WithOrigins("http://blah.com:8080")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }));
+
+            services.Configure<CookiePolicyOptions>(options => AuthenticationHandler.ConfigCookiePolicyOptions(options));
+
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddCookie(options => AuthenticationHandler.ConfigCookieOptions(options))
+                .AddOAuth("OAuth", options => AuthenticationHandler.ConfigOAuthOptions(options));
+
+            . . . 
+        }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            . . .
+            app.UseCors("CORSPolicy");
+            app.UseCookiePolicy();
+            app.UseAuthentication();           
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+            . . .
+        }
+
+
+User/Login route
+        [Route("api/[controller]/[action]")]
+        [HttpGet, AllowAnonymous]
+        public async Task Login(string redirect_uri)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                Redirect(redirect_uri);
+            }
+            await HttpContext.ChallengeAsync("OAuth", new AuthenticationProperties() { RedirectUri = redirect_uri });
+        }
+
+Additional context
+This will be deployed on a Heroku server.
+And my cookie policy is set to Lax
+Please let me know if you need more information OR snippets of my OAuth/Cookie Policy configuration. I have omitted excess code for brevity.
+Thank you.

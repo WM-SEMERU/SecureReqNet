@@ -1,0 +1,9 @@
+Migrate the web console back to Blueprint v3
+
+
+The saga concludes! 🎆
+First the web console was written in BP3 then it was discovered that the license on BP3 was non-standard so we hastily migrated the console to use BP1.0.1 which had a vanilla Apache 2.0 license. Now Palantir and the Blueprint team has agreed to change the license back to vanilla Apache 2.0.
+This PR upgrades Blueprint to version 3.15.0 (or above) which is Apache 2.0 licensed.
+This PR effectively undoes the work in #7139
+Result: the web console is a little more beautiful and a lot less hacky with easy to find current docs for its code UI framework.
+

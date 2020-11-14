@@ -1,0 +1,5 @@
+Verified sites need a different BAT logo
+
+
+Verified BAT sites should show a different logo (original logo had a blue bar for verified sites) so user knows pre-logo click that site was verified.
+cc @NejcZdovc

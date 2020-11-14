@@ -1,0 +1,9 @@
+Unhandled Win32 exception - no AeDebug postmortem or UnhandledExceptionFilter callback
+
+
+
+Version: v10.15.3
+Platform: Microsoft Windows 10 Enterprise, 64-bit, version 10.0.16299
+Subsystem: unknown
+
+On Windows, node just exits in the event of an unhandled Win32 Exception in an addon, such as an access violation that occurs outside the scope of an SEH block. Postmortem debugging (AeDebug) is not triggered. Similarly, an UnhandledExceptionFilter callback previously registered by the addon is not called. Is there an option to enable AeDebug and/or UnhandledExceptionFilter?

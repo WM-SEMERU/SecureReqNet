@@ -1,0 +1,11 @@
+[Security][Acl] Improve PermissionMap and MaskBuilder
+
+
+When we work with symfony/ACL, sometimes it can be usefull to customize the PermissionMap and/or to use a different MaskBuilder.
+I'd like to make them more easy to use and to customize.
+To do it, we just have to add :
+
+a MaskBuilderInterface (with the get/set/add/remove/reset methods)
+a getMaskBuilder() method in the PermissionMapInterface which returns a new instance of the MaskBuilder you use, so you can easily retrieve the MaskBuilder used by the "security.acl.permission.map" service, even if it is a custom MaskBuilder
+
+What do you think ?

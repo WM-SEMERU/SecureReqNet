@@ -1,0 +1,8 @@
+[Security] AuthenticationException not implementing ExceptionInterface
+
+
+Is there any reason why \Symfony\Component\Security\Core\Exception\AuthenticationException does not implement \Symfony\Component\Security\Core\Exception\ExceptionInterface?
+I would like to be able to catch all kind of Security related exceptions simply by using
+} catch (\Symfony\Component\Security\Core\Exception\ExceptionInterface $sex) {
+and I'm not able to catch for example \Symfony\Component\Security\Core\Exception\BadCredentialsException using that catch
+Cheers.

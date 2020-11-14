@@ -1,0 +1,39 @@
+First typed array is not zero-filled (v5.10.0)
+
+
+Version: v5.10.0
+Platform: Darwin [...] 14.5.0 Darwin Kernel Version 14.5.0: Mon Jan 11 18:48:35 PST 2016; root:xnu-2782.50.2~1/RELEASE_X86_64 x86_64
+The first typed array created during script execution may contain non-zero values. Subsequent typed arrays are zero-filled, as expected.
+I began to see this behavior after installing v5.10.0 from the following source: https://nodejs.org/dist/v5.10.0/node-v5.10.0-darwin-x64.tar.gz
+The previous version, 5.9.1, is not affected.
+I'm pasting sample output from the attached script zerofill_bug.txt below.
+zerofill_bug.txt
+File contents
+#!/usr/bin/env node
+console.log(new Float64Array(10));
+console.log(new Float64Array(10));
+
+Sample output
+Float64Array {
+  '0': 0,
+  '1': 0,
+  '2': 2.146862934e-314,
+  '3': 2.1468647947e-314,
+  '4': 2.146864866e-314,
+  '5': 2.1468649963e-314,
+  '6': 2.146865024e-314,
+  '7': 5.56270611491583e-309,
+  '8': 2.3194251029888626e+242,
+  '9': 9.765157996892863e+199 }
+Float64Array {
+  '0': 0,
+  '1': 0,
+  '2': 0,
+  '3': 0,
+  '4': 0,
+  '5': 0,
+  '6': 0,
+  '7': 0,
+  '8': 0,
+  '9': 0 }
+

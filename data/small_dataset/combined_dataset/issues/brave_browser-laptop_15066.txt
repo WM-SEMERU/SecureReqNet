@@ -1,0 +1,94 @@
+Claim token doesn't bring up the CAPTCHA modal
+
+
+Description
+Claim token doesn't bring up the CAPTCHA modal
+Steps to Reproduce
+
+Launch new profile using `LEDGER_ENVIRONMENT=staging LEDGER_VERBOSE=true 
+Enable Payments and click on the Claim my free tokens button
+CAPTCHA window is not shown but console gets spammed with the following message
+
+[ response for GET https://ledger-staging.mercury.basicattentiontoken.org/v2/captchas/8ccad5dd-fa5e-4b80-9eb4-9052f52f3406 ]
+>>> HTTP/1.1 200
+>>> accept-ranges: bytes
+>>> cache-control: private
+>>> captcha-hint:
+>>> connection: keep-alive
+>>> content-length: 24557
+>>> content-type: image/png
+>>> date: Tue, 21 Aug 2018 15:19:56 GMT
+>>> server: Cowboy
+>>> via: 1.1 vegur
+>>>
+>>> ...
+<<< GET https://balance-staging.mercury.basicattentiontoken.org/v2/wallet/8ccad5dd-fa5e-4b80-9eb4-9052f52f3406/balance
+<<< content-type: application/json; charset=utf-8
+<<< user-agent: Brave/0.23.102 Chrome/68.0.3440.84 Muon/8.0.8 Microsoft Windows x64
+<<< accept-encoding:
+<<<
+
+
+>>> captcha-hint: is empty which was not seen on console logs when #15058 was logged
+
+Actual result:
+Claim token doesn't bring up the CAPTCHA modal
+Expected result:
+Should bring CAPTCHA modal when claim token button is clicked
+Reproduces how often:
+100% on all platforms
+Brave Version
+
+
+
+Brave
+0.23.102
+
+
+
+
+V8
+6.8.275.24
+
+
+rev
+43eb667
+
+
+Muon
+8.0.8
+
+
+OS Release
+10.0.17134
+
+
+Update Channel
+Release
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Microsoft Windows
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Reproducible on current live release:
+N/A
+Additional Information
+Reproduced on mac by @LaurenWags @kjozwiak and @btlechowski reproduced it on Linux

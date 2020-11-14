@@ -1,0 +1,12 @@
+Move buildFileTree into a fileTree reducer
+
+
+Fixes #533
+This patch moves all of the functionality that creates the tree structure out of the FileTree component and into a new fileTree reducer. This includes:
+
+The types for FileNode, DirectoryNode and TreeNode.
+The functions getVersionName, getRootPath, recursiveSortInPlace and buildFileTree, all of which are used for generating the tree and were all moved exactly as is.
+The FileTree component now gets its tree prop via mapStateToProps from the fileTree reducer.
+The FileTree component now has a loadData function which is called from both componentDidMount and componentDidUpdate which checks whether has a value in the tree prop and if not dispatches fileTreeActions.buildTree.
+The new fileTree reducer exposes one action: buildTree which accepts a version and stores a tree structure in its state, and one selector: getTree which returns either the tree structure, or undefined if it hasn't been built yet for the requested version.
+

@@ -1,0 +1,5 @@
+propose SubjectAccessReview: can a user perform an action
+
+
+Existing authorization does not provide a way to know whether a particular action can be taken without actually trying the action.  SubjectAccessReview is a way to determine whether a particular user or group can perform a certain action, without actually attempting it.  This capability is useful when trying to describe to user what they can do and for determining what actions a UI should present to a given user.
+cc @derekwaynecarr @smarterclayton @liggitt

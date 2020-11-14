@@ -1,0 +1,50 @@
+Serializer: Use the context in supports calls
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.1 (4.0 has the correct call)
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+In both of these calls, $context was missing. It was available in 3.4 when @dunglas introduced the ContextAware(De)NormalizerInterface. My guess is that we missed this when reviewing the Cache thingy that was added recently (4.1).

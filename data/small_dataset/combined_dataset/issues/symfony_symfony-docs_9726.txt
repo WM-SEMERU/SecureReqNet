@@ -1,0 +1,4 @@
+Improved the multiple user providers article
+
+
+This tries to solve both #8582 and #8611. Please @xabbuh, @chalasr and @ogizanagi tell me if I did what you expected according to your comments in the related issues. Thanks!

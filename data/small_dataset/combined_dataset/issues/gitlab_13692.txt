@@ -1,0 +1,5 @@
+Zendesk issue: https://gitlab.zendesk.com/agent/tickets/14715
+
+GitLab global administrators can do a lot of things in GitLab. They can impersonate users, change user's passwords, etc. This is by design, but for a very small number of people, this causes some concern, too. We should document some of these concerns and mention that we believe it's important for GitLab administrators to be trusted. Don't give admin access to users that you are concerned might do things that will cause trouble. We can't protect against a rogue admin while still allowing full and flexible control of GitLab.
+
+cc/ @axil 

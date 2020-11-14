@@ -1,0 +1,6 @@
+Rewards settings style
+
+
+Resolves: brave/brave-browser#4035
+When the Brave UI PR is merged this should be the PR to update the commit sha with the few remaining updates in Core repo.
+Original Brave UI PR: brave/brave-ui#442

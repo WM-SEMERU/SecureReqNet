@@ -1,0 +1,4 @@
+Document the new customization options for the security
+
+
+see symfony/symfony#6069

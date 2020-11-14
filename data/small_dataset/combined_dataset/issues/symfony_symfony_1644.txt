@@ -1,0 +1,6 @@
+[Security] Redirect after login_check error
+
+
+The redirection of the Security Component doesn't work when I use a diffent HTTP port than the default ":80".
+I use a MAMP with it's standard ":8888" port. Each time I execute the login -> login_check method of the Component it strips my "port"-extension in the URL.
+So, my correct URL: "http://enetz2:8888/" becomes -> "http://enetz2/" which breaks my routing. ;-)

@@ -1,0 +1,23 @@
+Can’t use the “next site” feature in the comments section of spiegel.de with default shields.
+
+
+Description of the issue
+https://community.brave.com/t/cant-browse-the-next-pages-in-the-comment-section-of-spiegel-de/51520
+Can’t use the “next site” feature in the comments section of spiegel.de with default shields.
+Exact URL of the website in question. The site http://www.spiegel.de/ seems to block content or lose functionality in Brave. The problem seems to be HTTPS upgrades — site functions as intended after they’re turned off (or Shields down).
+http://www.spiegel.de/gesundheit/diagnose/organspende-in-deutschland-ploetzlich-geht-es-voran-kommentar-a-1260662.html
+Did the issue present with default Shields settings?
+[Default states are: Block: Ads/Trackers, 3rd Party Cookies, 3rd Party Fingerprinting Allow:
+
+
+Encrypt Connections enabled (HTTPS), Scripts] (yes/no)
+yes
+Does the site function as expected when Shields are turned off? (yes/no)
+yes
+Is there a specific Shields configuration that causes the site to break? If so, tell us that configuration. (yes/no)
+yes. Turning Https Everywhere off fixes the issue.
+Does the site function as expected when using Chrome? (yes/no)
+yes
+What Operating System and Brave version/Build are you using when you encounter the issue?(See the About Brave page in the main menu)
+0.61.52 Chromium: 73.0.3683.86 (Official Build) (64-bit)
+Windows 10 OS Build 17763.379

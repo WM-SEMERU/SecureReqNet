@@ -1,0 +1,61 @@
+AzureADB2C Error and Forgot Password routing incorrectly
+
+
+Describe the bug
+When an application is running within a folder on a site, the AzureADB2C Forgot Password redirect (/AzureADB2C/Account/ResetPassword/{SchemeName}) and Error redirect (/AzureADB2C/Account/Error) are not routing relative to the application path.  For example, if the application is located at https://www.example.com/MyApp, the Forgot Password redirect is going to https://www.example.com/AzureADB2C/Account/ResetPassword/AzureADB2C instead of https://www.example.com/MyApp/AzureADB2C/Account/ResetPassword/AzureADB2C.
+To Reproduce
+
+Using Visual Studio 2017, create a new ASP.NET Core Web Application using Core 2.1 and Web Application (Model-View-Controller). Set authentication to Individual User Accounts - Connect to an existing user store in the cloud and enter you Azure ADB2C tenant information.  (Microsoft.AspNetCore.Authentication.AzureADB2C.UI version 2.1.1)
+Add a page that requires authentication
+Build the application and deploy it to a folder on a web site with the folder configured as a web application
+Access the page that requires authentication through a browser, and at the login page click the "forgot your password" link
+Receive a 404 error because the the routing was not relative to the application.
+
+Expected behavior
+User should be routed to the correct path to trigger redirection to the Reset  Password Policy
+Additional context
+.NET Core SDK (reflecting any global.json):
+Version:   2.2.103
+Commit:    8edbc2570a
+Runtime Environment:
+OS Name:     Windows
+OS Version:  6.1.7601
+OS Platform: Windows
+RID:         win7-x64
+Base Path:   C:\Program Files\dotnet\sdk\2.2.103\
+Host (useful for support):
+Version: 2.2.1
+Commit:  878dd11e62
+.NET Core SDKs installed:
+1.0.0-preview2-003131 [C:\Program Files\dotnet\sdk]
+1.0.0-preview2-1-003177 [C:\Program Files\dotnet\sdk]
+1.1.11 [C:\Program Files\dotnet\sdk]
+1.1.12 [C:\Program Files\dotnet\sdk]
+2.1.403 [C:\Program Files\dotnet\sdk]
+2.1.500 [C:\Program Files\dotnet\sdk]
+2.1.503 [C:\Program Files\dotnet\sdk]
+2.1.504 [C:\Program Files\dotnet\sdk]
+2.2.103 [C:\Program Files\dotnet\sdk]
+.NET Core runtimes installed:
+Include the output of dotnet --info
+Microsoft.AspNetCore.All 2.1.5 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+Microsoft.AspNetCore.All 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+Microsoft.AspNetCore.All 2.1.7 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+Microsoft.AspNetCore.All 2.1.8 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+Microsoft.AspNetCore.All 2.2.1 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+Microsoft.AspNetCore.App 2.1.5 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 2.1.7 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 2.1.8 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 2.2.1 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+Microsoft.NETCore.App 1.0.1 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 1.0.13 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 1.0.14 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 1.1.0 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 1.1.10 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 1.1.11 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 2.1.5 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 2.1.7 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 2.1.8 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 2.2.1 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]

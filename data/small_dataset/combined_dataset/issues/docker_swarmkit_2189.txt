@@ -1,0 +1,20 @@
+Validate external CA URLs when creating a cluster for the first time, and accept the CA cert
+
+
+We validate that the external URLs are reachable and have an HTTPS scheme on updating the cluster, but not when initializing a cluster with external URLs.  See moby/moby#33216
+Probable tasks:
+
+ refactor some of the external CA validation logic from manager/controlapi/ca_rotation.go into the ca package
+ update node/node.go's Config to have a field for CA key and CA certificate
+ in node/node.go's loadSecurityConfig function, instead of just CreateRootCA if we need to create a new root CA, check if there is a cert and key configured in the n.config object, or a cert and external CAs (and fail if there is neither a key nor external CAs matching the cert)
+
+if there is a key and cert, generate a RootCA object using ca.NewRootCA with the cert and key - use it to create leaf certs
+if there is a cert and external CAs, generate a RootCA object using ca.NewRootCA with just the cert, and use a ca.NewExternalCA object to create the leaf certs (note that the external CA cannot require mTLS at this point, because we have no certs - in a future PR, we can add other authentication mechanisms)
+
+
+ Add tests in node/node_test.go to cover the loadSecurityConfig case where there is a CA key and cert provided, where there is a CA cert provided only and no external CAs, and a CA cert provided with an external CA.
+ plumb the cert and key through to the manager config in manager/manager.go, and make sure node/node.go passes this information along to the manager
+ in manager/manager.go's becomeLeader function, set the CA cert and key on the initialCAConfig, which gets passed to CreateCluster.
+ Add tests in manager/manager_test.go to ensure that these values are respected
+ Add integration test in integration/integration_test.go to cover creating a cluster with a provided CA cert and key.
+

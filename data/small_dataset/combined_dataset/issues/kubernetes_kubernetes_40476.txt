@@ -1,0 +1,23 @@
+kubelet access to API server should be subdivided
+
+
+In order to obtain the resources needed to run pods, Kubelets currently have broad access to the API:
+
+read any secret
+read any configmap
+read any persistentvolumeclaim
+create/update any pod and pod status
+create/update any node and node status
+
+To properly secure individual nodes and limit the ability of a particular node to access the cluster, the kubelet should only be allowed to retrieve data from the apiserver for resources associated with it. This essentially means that it is only be able to get pods scheduled to it, along with any related items, such as secrets, configmaps, pvcs, etc. This filtering applies to get/list/watch calls as well.
+We will not be able to use the generic policy engine for this, as it’s not possible to express rules for this scenario. Instead, we’ll likely need to create a new authorizer with hard-coded rules. We can make this work by building a ref-counter based summary of referenceable objects based on a watch of a subset of resources.
+Authorizer/Admission:
+
+identify requests from particular nodes (pattern already in place with node TLS bootstrapper, builds a user name the node name can be extracted from)
+build the graph of objects referenced by pods bound to the node
+limit the pods that a node is inherently allowed to create (only static pods, only bound to itself, no secret/pvc/configmap references)
+
+New API access patterns needed by the kubelet (only needed if we want to allow list/watch of secrets): moved to kubernetes/community#443
+
+{list,watch,get} {secrets,configmaps,persistentvolumeclaims,...} used by pods bound to the node
+

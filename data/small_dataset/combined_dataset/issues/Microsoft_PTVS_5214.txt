@@ -1,0 +1,4 @@
+InteliSense often doesn't work at all.
+
+
+Hi, I'm using visual studio 2019 pro, the released version this april 2nd...  Often when I open a project and enter a python file, no INtelliSense is working.  If I start typing 'imp', I expect things like Import to come up.  But a good chunk of the time nothing comes up.  Sometimes INtelliSense starts working after a few minutes, but other times I have to restart visual studio.

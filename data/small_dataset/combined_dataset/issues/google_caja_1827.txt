@@ -1,0 +1,6 @@
+False alleged safety when mitigation unavailable
+
+
+Original issue 1829 created by erights on 2013-08-04T18:29:29.000Z:
+The INCREMENT_IGNORES_FROZEN test judges failure as a SAFE_SPEC_VIOLATION because, when mitigation is available, startSES safely repairs this using mitigation. However, when mitigation is unavailable, this leads to a false safety report. See attached screenshot of visiting http://google-caja.googlecode.com/svn/trunk/src/com/google/caja/ses/explicit.html in Chrome 30, which suffers from the underlying bug https://code.google.com/p/v8/issues/detail?id=2779 . explicit.html runs without mitigation.
+Since Caja always runs with mitigation available, as a Caja bug I'm classifying this as low priority. However, it is clearly high priority for standalone use of SES.

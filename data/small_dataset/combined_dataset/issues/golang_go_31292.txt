@@ -1,0 +1,10 @@
+spec: clarify section on initialization order
+
+
+See #22326 for a discussion of a specific example and how the spec might be unclear. See specifically #22326 (comment) .
+Issues with the section on initialization order:
+
+The very first sentence may imply an algorithm that is different from the one explained by 2nd, more detailed paragraph.
+The section talks about declaration order, but variables named _ are "never declared" (yet they are processed for initialization order like any other variable).
+The section could use one or two more examples.
+

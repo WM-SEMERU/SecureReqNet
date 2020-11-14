@@ -1,0 +1,14 @@
+JwtSecurityTokenHandler should have safer defaults
+
+
+Describe the bug
+JwtSecurityTokenHandler used by ASP.NET Core JwtBearerHandler has unsafe defaults.
+DefaultTokenLifetimeInMinutes = 60
+MaximumTokenSizeInBytes = 2097152 (~2.09MB)
+To Reproduce
+New up JwtSecurityTokenHandler with defaults
+Expected behavior
+I understand there is some inheritance going on here but for JwtSecurityTokenHandler  I would suggest:
+DefaultTokenLifetimeInMinutes should have a safe default 5 minutes
+MaximumTokenSizeInBytes should have a safe default 250000
+Or at least a warning in the documentation with some best practice guidelines.

@@ -1,0 +1,11 @@
+Remove GitHub references
+
+
+Fixes #11295 for #EUFOSSA
+I will open a second PR for 4.2 as there are some new components that need to be changed as well, namely:
+
+Mercure
+Messenger
+VarExporter
+WebLink
+

@@ -1,0 +1,54 @@
+Avoid dispatching SendMessageToTransportsEvent on redeliver
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes - I think so
+
+
+New feature?
+no
+
+
+BC breaks?
+no (feature only on master)
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+a lot, soon :)
+
+
+
+This purpose of this event is to be a hook when a message is sent to a transport.
+If that message is redelivered later, that's not the purpose of this hook (there
+are Worker events for that) and could cause problems if the user unknowingly
+tries to modify the Envelope in some way, not thinking about how this might
+be a redelivery message.

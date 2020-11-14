@@ -1,0 +1,5 @@
+[RFC][Symfony 3.0] Adapt UserInterface and UserProviderInterface
+
+
+UserInterface::getUsername and UserProviderInterface::loadUserByUsername can be confusing because the username could be an email or something else.. So I suggest to rename username it in identifier or something like that.
+What do you think ?

@@ -1,0 +1,61 @@
+Relax probes' cipher requirements?
+
+
+BUG REPORT
+See openshift/origin#12133 for original bug report (copying here as needs to be fixed in Kubernetes).
+What happened:
+Readiness & liveness checks fails:
+Readiness probe failed: Get https://172.17.0.7:8443/health: remote error: tls: handshake failure
+
+Where curl succeeds:
+$ curl -vvv -k https://172.17.0.7:8443/health
+
+*   Trying 172.17.0.7...
+* TCP_NODELAY set
+* Connected to 172.17.0.7 (172.17.0.7) port 8443 (#0)
+* ALPN, offering http/1.1
+* Cipher selection: ALL:!EXPORT:!EXPORT40:!EXPORT56:!aNULL:!LOW:!RC4:@STRENGTH
+* successfully set certificate verify locations:
+*   CAfile: /home/jdyson/.linuxbrew/etc/openssl/cert.pem
+  CApath: none
+* TLSv1.2 (OUT), TLS header, Certificate Status (22):
+* TLSv1.2 (OUT), TLS handshake, Client hello (1):
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS change cipher, Client hello (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS change cipher, Client hello (1):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / DHE-RSA-AES256-GCM-SHA384
+* ALPN, server did not agree to a protocol
+* Server certificate:
+*  subject: CN=spring-boot-webmvc.myproject.svc
+*  start date: Dec  2 14:14:56 2016 GMT
+*  expire date: Dec  2 14:14:57 2018 GMT
+*  issuer: CN=openshift-service-serving-signer@1480333384
+*  SSL certificate verify result: self signed certificate in certificate chain (19), continuing anyway.
+> GET /health HTTP/1.1
+> Host: 172.17.0.7:8443
+> User-Agent: curl/7.50.3
+> Accept: */*
+> 
+< HTTP/1.1 200 
+< X-Application-Context: application:8443
+< Content-Type: application/json;charset=UTF-8
+< Transfer-Encoding: chunked
+< Date: Sun, 04 Dec 2016 20:09:45 GMT
+< 
+* Curl_http_done: called premature == 0
+* Connection #0 to host 172.17.0.7 left intact
+{"status":"UP","diskSpace":{"status":"UP","total":10725883904,"free":10238775296,"threshold":10485760}}
+
+What you expected to happen:
+Readiness & liveness probes should succeed.
+How to reproduce it (as minimally and precisely as possible):
+Create a Spring Boot deployment with TLS enabled, without specifying cipher suites so defaults are used.
+Anything else do we need to know:
+After updating cipher suites to a more modern set, readiness & liveness probes succeed. Go's default cipher suites are obviously stricter (more modern) than Java's.
+As probes already disable cert verification, can we also relax cipher requirements?

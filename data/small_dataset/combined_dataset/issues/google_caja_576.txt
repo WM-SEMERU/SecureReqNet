@@ -1,0 +1,9 @@
+addEventListener does not whitelist event type.
+
+
+Original issue 576 created by tyler.close on 2008-06-13T00:12:08.000Z:
+addEventListener takes a string name for the event to register for and only
+ensures that the argument is a string. Any string value is accepted. In
+contrast, setAttribute requires that the attribute name be a known value.
+Consequently, some kinds of event handlers can be registered through
+addEventListener, but not setAttribute.

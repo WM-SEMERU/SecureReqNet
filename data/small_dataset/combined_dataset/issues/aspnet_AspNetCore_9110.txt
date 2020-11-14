@@ -1,0 +1,4 @@
+[SPA templates] React service-worker interferes with identity.
+
+
+When publishing a react app with individual auth on, react includes a service-worker by default. This service-worker captures all the requests for identity/identity-server so they never make it to the server.

@@ -1,0 +1,15 @@
+[Security] Successful authentication handling architecture
+
+
+Normally authentication listeners extend AbstractAuthenticationListener which has onSuccess method.
+The onSuccess method may have a use of success handler if one provided.
+...
+        if (null !== $this->successHandler) {
+            $response = $this->successHandler->onAuthenticationSuccess($request, $token);
+        } else {
+            $response = $this->httpUtils->createRedirectResponse($request, $this->determineTargetUrl($request));
+        }
+When the success handler suppose to return a response object.
+Now, usually, is the handler is not provided the redirect URL is determined within the listener (method: createRedirectResponse). If you need to provide custom success handler with the same redirection logic, but with some additional functionality, you forced to have the entire createRedirectResponse method to be reimplemented in your own handler.
+Instead, even the default functionality should be encapsulated in some "DefaultSuccessHandler" class, which developer may or may not extend and inject into the listener.
+Thanks.

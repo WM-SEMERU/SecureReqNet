@@ -1,0 +1,38 @@
+Why are query strings stripped from referer when creating a redirect response after login?
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.13
+
+
+
+Hi, sorry if this is not the right place. I have a question regarding this commit by @fabpot on 19 July: 9c7a140#diff-a654f85d03c2e834cb8701bec08e2a4f
+Can someone explain why it is a security risk to redirect to the referer with the querystring after successful login?
+I have a login form in a modal and if a customer logs in on the search page, they are redirected to the search page but without their search term because this commit strips the querystring.
+I can easily work around this in my onAuthenticationSuccess but I'm concerned about security implications.
+Thanks.

@@ -1,0 +1,7 @@
+Add integration library for easy auth
+
+
+App Service has first class support for 3rd party authentication providers:
+
+Data flows to the application in various headers. We should support this in a more first class way that interoperates with our authentication system.
+/cc @HaoK @Tratcher

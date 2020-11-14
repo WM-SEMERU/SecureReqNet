@@ -1,0 +1,15 @@
+Forms with no action attribute don't use the proxy
+
+
+Original issue 485 created by collin.jackson on 2008-06-11T00:40:26.000Z:
+What steps will reproduce the problem?
+<form onsubmit=""><input type="submit"</form>
+What is the expected output?
+Form with button that does nothing when you click it (or uses the proxy)
+What do you see instead?
+Form with button that submits to the current page when you click it
+What version of the product are you using? On what operating system?
+Caja Test Bed
+Please provide any additional information below.
+I think the intent of elementPolicies.form is to cancel submissions of
+forms that have no action attribute.

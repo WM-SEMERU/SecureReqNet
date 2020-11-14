@@ -1,0 +1,11 @@
+Garbage collector should use a merge patch instead of Update
+
+
+Fix a TODO in GC controller that blocks using the new
+PartialObjectMetadata flow (because we don't support PUT of
+PartialObjectMetadata). This patch is equivalent to the previous
+mutation.
+Part of kubernetes/enhancements#929
+/kind bug
+NONE
+

@@ -1,0 +1,21 @@
+After upgrading to 6.5 I cannot login with my regular account or admin account.
+
+Output from production.log
+
+	Started POST "/users/sign_in" for 142.xxx.xxx.xxx at 2014-01-22 09:59:44 -0800
+	Processing by Devise::SessionsController#create as HTML
+	  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0AQsp3zad2JL686T6uPVwZCjuuFseiPXsDQIzMGt+IE=", "user"=>{"login"=>"xxxxx@xxxxx.xxx", "password"=>"[FILTERED]", "remember_me"=>"0"}}
+	Can't verify CSRF token authenticity
+	Redirected to http://xxxx.xxxx.xxxx/
+	Completed 302 Found in 67ms (ActiveRecord: 1.0ms)
+	Started GET "/" for 142.xxx.xxx.xxx at 2014-01-22 09:59:44 -0800
+	Processing by DashboardController#show as HTML
+	Completed 401 Unauthorized in 0ms
+	Started GET "/users/sign_in" for 142.xxx.xxx.xxx at 2014-01-22 09:59:44 -0800
+	Processing by Devise::SessionsController#new as HTML
+	  Rendered devise/sessions/_new_base.html.haml (2.1ms)
+	  Rendered devise/sessions/_oauth_providers.html.haml (0.0ms)
+	  Rendered devise/sessions/new.html.haml within layouts/devise (2.8ms)
+	  Rendered layouts/_head.html.haml (0.7ms)
+	  Rendered layouts/_flash.html.haml (0.1ms)
+	Completed 200 OK in 8ms (Views: 4.5ms | ActiveRecord: 0.0ms)

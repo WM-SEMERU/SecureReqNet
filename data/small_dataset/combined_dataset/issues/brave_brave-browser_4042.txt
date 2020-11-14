@@ -1,0 +1,10 @@
+Ads Rewards Grants: Expiry date change
+
+
+Any grants received via the server that below to Ads Rewards should have no expiry date.
+When the grants show up;
+a) they should show up as grants (no change)
+b) but no expiry date should be displayed (the ask)
+These grants will be signed for a really long period of time; but for the moment the BR wallet should not show the grants timetable.
+Existing grants, that are not ads rewards, will continue to work the same.
+@NejcZdovc

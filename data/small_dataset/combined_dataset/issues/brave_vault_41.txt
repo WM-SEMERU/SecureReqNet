@@ -1,0 +1,12 @@
+server.auth.strategy 'session' has hard-coded password?
+
+
+in src/index.js:
+  server.auth.strategy('session', 'cookie', {
+    password: 'cookie-encryption-password',
+    cookie: 'sid',
+    isSecure: runtime.login.isSecure
+  })
+
+what is this auth strategy used for?
+please address before open sourcing, thanks

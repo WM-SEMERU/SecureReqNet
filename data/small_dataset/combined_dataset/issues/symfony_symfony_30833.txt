@@ -1,0 +1,11 @@
+The router.options.generator_base_class  removed in 4.0
+
+
+Hi
+The Class parameters have been deprecated and will be removed in 4.0.
+
+router.options.generator_class
+router.options.generator_base_class
+
+I want to custom generateUrl   ,How Can I configure The generator_class
+Thanks

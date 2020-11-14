@@ -1,0 +1,38 @@
+Ability to change the Session handler according to the firewall
+
+
+Description
+Symfony provides multiple session handlers including the NullSessionHandler to ignore any Session action.
+I have the following security.yaml file (exctract):
+firewalls:
+    dev:
+        pattern: ^/(_(profiler|wdt|error|trans)|css|images|js)/
+        security: false
+
+    api:
+        pattern: ^/api/
+        stateless: true
+        # This will handle all oauth access token, JWToken and simple private token
+        simple_preauth:
+            authenticator: security.authentication.authenticator.api_key
+
+    main:
+        pattern: ^/
+        entry_point: security.entry_point.form_authentication
+        form_login:
+            provider: fos_userbundle
+            csrf_token_generator: security.csrf.token_manager
+            login_path: /login
+            check_path: /login_check
+
+        anonymous: ~
+        logout:
+            path: /logout
+        switch_user:
+            parameter: '%switch_user_parameter%'
+The API firewall is stateless, but some listeners are using the session to add some flash messages and then create a session on each API request.
+Of course, the solution would be to prevent session usage if this one is not started, and it's work. But AFAIK, I don't have any way to prevent another kind of mistake like that.
+I'm not sure it's the best way, and I'm 👍 for better idea, but it would be great if we could define an another session handler on each firewall.
+With this, I would be able to pass the NullSessionHandler and be sure nothing is saved nor returned on the HTTP headers, even if new written listener use the session directly.
+WDYT? First of all, am I totally wrong about the approach? Maybe yes, but let give a try ! 😄 🏃
+Thanks.

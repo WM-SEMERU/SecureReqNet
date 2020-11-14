@@ -1,0 +1,8 @@
+RunAsNonRoot should permit images with a non-root USER directive
+
+
+E.g. an image built from a Dockerfile specifying
+USER nobody:nobody
+
+should be permitted to run with a security context RunAsNonRoot: true
+/cc @kubernetes/sig-node-bugs

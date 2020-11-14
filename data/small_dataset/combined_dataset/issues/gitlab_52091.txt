@@ -1,0 +1,14 @@
+'We should upgrade to bootstrap 4.3.1.
+
+Bootstrap 4.3.1 now implements a HTML Sanitizer for popovers:
+
+> Update Bootstrap to 4.3.1 to mitigate CVE-2019-8331.
+> 
+> * [CVE-2019-8331](https://nvd.nist.gov/vuln/detail/CVE-2019-8331) (CVSS 3.0 Score 6.1)
+> * https://blog.getbootstrap.com/2019/02/13/bootstrap-4-3-1-and-3-4-1/
+
+This leads to some interesting problems, as that their sanitizer is rather strict.
+
+- - -
+
+As part of this issue, we should address https://gitlab.com/gitlab-org/gitlab-ce/blob/97cb22820d79f7c74cacf78a6dba2355bcf1392f/app/assets/stylesheets/framework/modal.scss#L26-29.

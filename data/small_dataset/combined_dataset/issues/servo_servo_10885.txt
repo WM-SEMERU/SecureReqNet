@@ -1,0 +1,6 @@
+Pipeline ID spoofing when iframes create pipeline ids?
+
+
+We are thinking about how to make pipeline ids unguessable, so that even if an attacker compromises their own pipeline, they can't escalate to compromise other ones by spoofing pipeline ids in requests to the constellation.
+We need to think about #7807 in this context: can an attacker navigate to alice.com, but generate the pipeline id for Alice and then spoof the constellation?
+IRC discussion with @Manishearth and @jdm at http://logs.glob.uno/?c=mozilla%23servo&s=27+Apr+2016&e=27+Apr+2016#c416685.

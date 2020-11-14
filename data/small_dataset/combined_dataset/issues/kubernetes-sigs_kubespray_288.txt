@@ -1,0 +1,4 @@
+add support for output of certs so kubectl can be configured
+
+
+This would close issue #257. After certs are generated, they are copied from the remote master[0] to a directory in the kargo root called output/certs/. This will allow the kubectl config commands to be run easily.

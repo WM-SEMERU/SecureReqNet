@@ -1,0 +1,42 @@
+**Summary:**
+after fetching master `GitLab 6.8.0 bf855d1`
+
+**Config:** `gitlab.yml`
+```
+    # Uncommment this line below if your ssh host is different from HTTP/HTTPS one
+    # (you'd obviously need to replace ssh.host_example.com with your own host).
+    # Otherwise, ssh host will be set to the `host:` value above
+    # ssh_host: ssh.host_example.com
+```
+**Logs:**
+```
+rake aborted!
+Missing setting 'ssh_host' in 'gitlab' section in /home/git/gitlab/config/gitlab.yml
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/settingslogic-2.0.9/lib/settingslogic.rb:189:in `missing_key'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/settingslogic-2.0.9/lib/settingslogic.rb:117:in `method_missing'
+/home/git/gitlab/config/initializers/1_settings.rb:120:in `<top (required)>'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:223:in `load'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:223:in `block in load'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:214:in `load_dependency'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:223:in `load'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/engine.rb:609:in `block (2 levels) in <class:Engine>'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/engine.rb:608:in `each'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/engine.rb:608:in `block in <class:Engine>'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/initializable.rb:30:in `instance_exec'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/initializable.rb:30:in `run'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/initializable.rb:55:in `block in run_initializers'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/initializable.rb:44:in `each'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/initializable.rb:44:in `tsort_each_child'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/initializable.rb:54:in `run_initializers'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/application.rb:215:in `initialize!'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/railtie/configurable.rb:30:in `method_missing'
+/home/git/gitlab/config/environment.rb:5:in `<top (required)>'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:229:in `require'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:229:in `block in require'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:214:in `load_dependency'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/activesupport-4.0.3/lib/active_support/dependencies.rb:229:in `require'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/application.rb:189:in `require_environment!'
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/railties-4.0.3/lib/rails/application.rb:250:in `block in run_tasks_blocks'
+Tasks: TOP => db:migrate => environment
+(See full trace by running task with --trace)
+```

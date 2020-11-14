@@ -1,0 +1,27 @@
+Dev: https://dev.gitlab.org/gitlab/gitlabhq/issues/2245
+
+If I sign into an app with GitLab omniauth as an admin I give a lot of rights to the app. Right now there is almost no warning at all that this is happening:
+
+![oauth](/uploads/048fc00e8f94776683ce504cbd8b233b/oauth.png)
+
+I think we should have at least some message here.
+
+Job
+
+> maybe we can do a quick fix?
+
+> Any applications with access to your account can do the same things as you. This also goes for administrators!
+
+Jacob
+
+>  I don't understand, what is 'quick' about what you propose?
+
+Job
+
+>  I think I assumed you were proposing something like a conditional alert. Either way this should be fast to do :)
+
+Jacob
+
+> OK FWIW I think a conditional alert would be better.
+
+cc/ @sytses @dzaporozhets @JobV @jacobvosmaer @DouweM 

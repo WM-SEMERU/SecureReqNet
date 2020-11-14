@@ -1,0 +1,37 @@
+Security vulnerabilities in packages that CLI @1.5.4 depends on (auditjs)
+
+
+Bug Report or Feature Request (mark with an x)
+- [x] bug report -> please search issues before submitting
+- [ ] feature request
+
+Versions.
+Angular CLI: 1.5.4
+Node: 6.9.5
+OS: win32 x64
+Angular: 4.4.6
+... animations, common, compiler, compiler-cli, core, forms
+... http, language-service, platform-browser
+... platform-browser-dynamic, router, tsc-wrapped, upgrade
+@ angular/cli: 1.5.4
+@ angular-devkit/build-optimizer: 0.0.33
+@ angular-devkit/core: 0.0.21
+@ angular-devkit/schematics: 0.0.37
+@ ngtools/json-schema: 1.1.0
+@ ngtools/webpack: 1.8.4
+@ schematics/angular: 0.1.7
+typescript: 2.3.4
+webpack: 3.8.1
+Repro steps.
+-> Generate new app using CLI (ng new sample-app)
+-> Install auditjs https://www.npmjs.com/package/auditjs
+-> Run auditjs inside generated sample-app
+The log given by the failure.
+auditjs outputs vulnerabilities in:
+qs@6.3.2
+sockjs@0.3.18
+Desired functionality.
+No vulnerabilities in packages used by Angular CLI based app.
+All of the packages that are highlighted as vulnerable are used under the hood by angular CLI so we can't just update them easily ourselves. This is crucial for enterprise application though, that packages that app depends on are free of known vulnerabilities. We are looking for CLI to be updated to use latest versions of packages which are free of vulnerabilities.
+This has been highlighted previously (#7660) - handlebars and uglify-js vulnerabilities are gone now, thanks for that :)
+sockjs seems to be used by webpack-dev-server only but I'm more concerned by new vulnerability - qs@6.3.2. Can we get that fixed asap please?

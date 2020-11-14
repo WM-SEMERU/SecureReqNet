@@ -1,0 +1,12 @@
+No authentication listener registered for firewall "secured_area" -> from doc example
+
+
+I am following the instructions available at: http://symfony.com/doc/current/book/security.html to create a basic authentication system.
+I have reached the Logging Out section at the bottom of the page. I have added the secured_area: in security.yml and a route in routing.yml. Yet, when I run my example, I get an error message:
+InvalidConfigurationException in SecurityExtension.php line 429:
+No authentication listener registered for firewall "secured_area".
+
+Someone has reported this issue on Stackoverflow at http://stackoverflow.com/a/29588718/520957. In the comments of the approved answer, someone says:
+I believe logout provider was not designated to working with basic authentication.
+
+If this is correct, the documentation should mention it, else it should clarify how to set-up the authentication listener. Thanks.

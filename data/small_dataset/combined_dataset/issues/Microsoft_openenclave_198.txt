@@ -1,0 +1,4 @@
+Enclave GetReport subject to tampering of user reportdata
+
+
+The implementation of  _OE_GetRemoteReport here copies the report data to host memory, and then makes an OCALL to the host library to generate the report (ultimately calling back into the enclave). Since the data crosses the enclave-host barrier, it could be tampered with on the host side before the report is signed. Thus enclave report data cannot be trusted.

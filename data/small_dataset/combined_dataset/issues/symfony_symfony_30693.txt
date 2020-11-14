@@ -1,0 +1,51 @@
+[DependencyInjection] Add test asserting service with factory is not tagged
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+I wrote a test for a scenario that was failing for me on 4.1 branch to find out it's already fixed in 4.2 (which is awesome). Since I already had a test written and couldn't really find a PR in the changelog that could have fixed my issue I figured I'll PR a test, so the behaviour I was expecting won't get broken :)
+EDIT: For the record, the issue in 4.1 is: Symfony\Component\DependencyInjection\Tests\Fixtures\BarInterface gets tagged due to _instanceof which results in it being handed to Symfony\Component\DependencyInjection\Tests\Fixtures\BarFactory via !tagged. In the end this results in a recursion which is not handled.

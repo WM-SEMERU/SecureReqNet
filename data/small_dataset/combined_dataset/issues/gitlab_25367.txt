@@ -1,0 +1,15 @@
+### Description
+
+We're collaborating with a very large and strategic organization that is developing a custom application which  will need to act on behalf of the user, performing both API calls and Git reads and writes. They don't want the user to have to go through an OAuth flow to authorize the application, and don't want him to be able to revoke access. 
+
+### Proposal
+
+It seems what they need is a capability similar to the impersonation OAuth token provided in [GitHub](https://developer.github.com/enterprise/2.3/v3/users/administration/#create-an-impersonation-oauth-token). Their requirements are as follows:
+
+1. Provide ability for an admin to retrieve an impersonation token for a user
+1. Allow access to both Git interactions (read AND write) and API calls
+1. Provide ability for admin to invalidate and regenerate the token
+1. User cannot invalidate the token
+1. Ideally do not require that a username be provided with the token to authenticate
+
+Having evaluated the various types of tokens currently supported in GitLab, a very low-bar implementation option that might be sufficient would be to add an additional field to the user model, just like the private token. Providing admin APIs to retrieve the token and regenerate it. The other possibility being explored is trying to fit this into the existing oauth token infrastructure (generating the token under the covers rather than having user go through oauth web flow), but it needs to be confirmed that the user could not revoke the token, and would also need to increase the scope of the token to allow write access to the Git repos. The third possibility would be an entirely new construct with its own model etc.

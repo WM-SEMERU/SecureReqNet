@@ -1,0 +1,10 @@
+[CLI 4.2.6][Symfony 3.4] The installer created the project with incomplete code
+
+
+Today I created a new symfony project using version 3.4, And I got an incomplete code without any warnings. it contains only 2 dirs: config and vendor.
+symfony new --full --version=3.4 ./3.4
+
+But when I executed the same install command for the second time, everything was (looks like) fine.
+
+
+Edit: no any other operations between 2 commands execution.

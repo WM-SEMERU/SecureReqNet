@@ -1,0 +1,4 @@
+Update json_login_setup.rst
+
+
+As stated in https://stackoverflow.com/questions/47972237/symfony-4-json-authentication-not-working/49071038#49071038, which helped me to find why it did not work, the POST Request only works with the header Content-Type: application/json, so just adding it will make it clear to everyone.

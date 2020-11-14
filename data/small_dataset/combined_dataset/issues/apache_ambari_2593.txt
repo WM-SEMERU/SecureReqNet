@@ -1,0 +1,20 @@
+AMBARI-24879. kAdmin principal name is set on the GUI when enabling Kerberos with MIT KDC using a new variable replacement function
+
+
+What changes were proposed in this pull request?
+The kadmin service principal name should be configurable for MIT KDC interactions. The current process assumes the kadmin service principal is kadmin/FQDN_KADMIN_HOST, but this could be different on some installations. For example, kadmin/admin.
+A new kerberos-env property should be added to allow a user to change the kadmin principal name - kerberos-env/kadmin_principal_name
+The default value for the new property should be kadmin/${admin_server_host|stripPort()}.  To be able to do this, we have to create a new variable replacement function. For example, stripPort.
+Note: related stack change is going to be submitted separately.
+How was this patch tested?
+Executing JUnit tests locally in ambari-server:
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 26:12 min
+[INFO] Finished at: 2018-11-12T16:43:44+01:00
+[INFO] Final Memory: 163M/1033M
+[INFO] ------------------------------------------------------------------------
+
+In addition to this I did an E2E testing within my vagrant environment where Kerberos was enabled using the new property (leave as the default and changing it to a custom value).
+

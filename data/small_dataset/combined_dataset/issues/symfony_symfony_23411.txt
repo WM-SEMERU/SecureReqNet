@@ -1,0 +1,52 @@
+[Security] Fix forced redirection to referer if use_referer is enabled
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+bug introduced by #19026
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+If use_referer option is enabled, then the following comparison is always true:
+parse_url($request->headers->get('Referer'), PHP_URL_PATH) !== parse_url($this->httpUtils->generateUri($request, $this->options['login_path']), PHP_URL_PATH)
+parse_url(..., PHP_URL_PATH) returns only the path part of an URL and $this->httpUtils->generateUri(..., ...) returns an absolute URL.

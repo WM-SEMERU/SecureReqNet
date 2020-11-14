@@ -1,0 +1,47 @@
+[TwigBundle] Adds bundle view path in a delayed compiler pass
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30359
+
+
+License
+MIT
+
+
+
+Replaces #30360.
+Delaies bundle view path registration into Twig filesystem loader in order to let 3rd party bundle override them if needed.

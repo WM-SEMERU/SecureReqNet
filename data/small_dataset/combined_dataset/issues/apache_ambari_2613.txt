@@ -1,0 +1,58 @@
+AMBARI-24894. Sensitive service configuration values should be decrypted when processing the Ambari agent command script, if enabled (amagyar)
+
+
+What changes were proposed in this pull request?
+The sensitive data in ambari-agent config updates should be encrypted. The ambari-server generates an encrpytion key which is stored persistently in the credential store.
+
+This key is used to encrypt the sesntive data. See:  AgentConfigUpdateEncryptor.java
+The key is shared with ambari-agent in a stomp message. See: HeartBeatHandler.java
+The key is stored in the memory of the ambari-agent. See: EncryptionKeyListener.py
+Decryption happens on the agent side. See: config_dictionary.py
+
+The python 3rd party crypto library (pycryptodome) is not yet added to this PR.
+How was this patch tested?
+
+
+
+
+enabled encyption
+
+$ ambari-server setup-security
+...
+$ echo security.passwords.encryption.enabled=true >> /etc/ambari-server/conf/ambari.properties 
+$ echo security.server.encrypt_sensitive_data=true >> /etc/ambari-server/conf/ambari.properties
+$ ambari-server restart
+
+changed a password type property on the ambari UI
+checked that the data in the command.json and agent cache file was encrypted
+
+
+
+
+
+restarted ambari agent and ambari server
+checked if there was no config update sent to the agent
+
+
+
+
+
+
+changed the encryption key and restarted ambari server
+
+
+checked that a config update was sent to the ambari agent
+
+
+changed the value of an encrypted property
+
+
+checked that a config update was sent to the ambari agent
+
+
+
+
+
+
+checked if properties marked as keystore=true are decrypted before they're written out to the credential store by the ambari agent
+

@@ -1,0 +1,50 @@
+[FrameworkBundle][SecurityBundle] Remove no-longer necessary Bundle::registerCommands override
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.1 
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+N/A   
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+These two bundles requires symfony/http-kernel:^4.1 which already makes Bundle::registerCommands a noop.

@@ -1,0 +1,6 @@
+Reduce metadata-proxy cpu requests to 30m
+
+
+After the recent change enabling metadata-proxy in tests (#54150) we started seeing problems with scheduling cluster autoscaler on master. Metadata-proxy eats all of the available space leaving nothing for CA to run on.
+This PR reduces the cpu requests for metadata-proxy allowing other components to fit in.
+cc: @kubernetes/sig-autoscaling-bugs

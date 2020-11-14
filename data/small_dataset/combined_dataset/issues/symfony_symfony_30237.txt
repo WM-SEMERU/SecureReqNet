@@ -1,0 +1,50 @@
+[Translation] Added a script to display the status of translations
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This is the script I used to get the missing translations for each locale. I think it could come in handy for Symfony to always keep translations in sync.

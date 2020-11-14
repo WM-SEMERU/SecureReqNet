@@ -1,0 +1,4 @@
+Documented the use of Docker with the Symfony server
+
+
+This need a detailed review by Docker experts. Thanks!

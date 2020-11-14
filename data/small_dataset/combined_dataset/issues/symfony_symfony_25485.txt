@@ -1,0 +1,87 @@
+Token is anonymous in AccessListener after authentication.
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.4
+
+
+
+I use Symfony with FOSUser but seems like the problem is with Symfony, I created this firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        admin:
+            pattern: "^/%admin_prefix%"
+            provider: fos_userbundle
+            form_login:
+                login_path: fos_user_security_login_admin
+                check_path: fos_user_security_check_admin
+                failure_path: fos_user_security_login_admin
+                csrf_token_generator: security.csrf.token_manager
+                default_target_path: dashboard
+            logout:
+                path: fos_user_security_logout_admin
+                target: fos_user_security_login_admin
+            anonymous: true
+            logout_on_user_change: true
+        main:
+            pattern: ^/
+            provider: fos_userbundle
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                failure_path: fos_user_security_login
+                csrf_token_generator: security.csrf.token_manager
+                default_target_path: homepage
+            logout:
+                path: fos_user_security_logout
+                target: homepage
+            anonymous: true
+            logout_on_user_change: true
+And I added custom Controllers for login from the admin firewall, when I try to login from admin it calls a controller that depending on the user Role redirects to homepage or to dashboard, the problem comes when is admin as in my access_control I require the ROLE_ADMIN, the thing is that in the redirect I can see that the role of $this->getUser() is in fact ROLE_ADMIN but in the dashboard the user is anonymous, at least in AccessListener, because after that when redirects again to the fos_user_security_login_admin the user is again ROLE_ADMIN.
+I tried debugging Symfony and addind:
+diff --git a/src/Symfony/Component/Security/Http/Firewall/AccessListener.php b/src/Symfony/Component/Security/Http/Firewall/AccessListener.php
+index ec5e217cba..07af5e88a2 100644
+--- a/src/Symfony/Component/Security/Http/Firewall/AccessListener.php
++++ b/src/Symfony/Component/Security/Http/Firewall/AccessListener.php
+@@ -47,6 +47,13 @@ class AccessListener implements ListenerInterface
+      */
+     public function handle(GetResponseEvent $event)
+     {
++        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
++        $session = $GLOBALS['request']->getSession();
++        $security_token = $session->get('_security_main');
++        if ($security_token != NULL) {
++            $token = unserialize($security_token);
++            $this->tokenStorage->setToken($token);
++        }
+         if (null === $token = $this->tokenStorage->getToken()) {
+             throw new AuthenticationCredentialsNotFoundException('A Token was not found in the TokenStorage.');
+         }
+to AccessListener I can use the right token, so seems like token_storage does not have the right token.
+But doing that something wired happens as then, the first redirect is already wrong, so it redirects to the homepage, the token is right, but $this->getUser() fails.

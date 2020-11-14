@@ -1,0 +1,9 @@
+Improve now what sentence
+
+
+The "Now What?" section means 2 things:
+
+Tell the developers that the component is ready.
+Tell the developers to go through a specific documentation.
+
+Therefore, I think it should be separated into two sentences for readable reason. By the way, I just remove unnecessary word "that" and add a comma.

@@ -1,0 +1,16 @@
+[question] Preferred way to use privileged ports with "exec" driver?
+
+
+Hi,
+Let's say I want to run Fabio as a Nomad system job using the exec driver and have it listen on port 80; considering that the default user used by the exec driver is nobody and that it cannot bind to ports < 1024 by default, what is considered the best practice to achieve this (unless binding to privileged ports in Nomad services is frowned upon)?
+I managed to achieve this by installing the Fabio binary locally on all Nomad clients and setcap 'cap_net_bind_service=+ep' fabio, but I'm not sure if this is considered best practice.
+Moreover, I've been in the habit of downloading the binaries to run for jobs using the artifact stanza; however, I did not find any documentation relating to setting capabilities in the exec driver.
+
+
+Is indeed not possible to bind to privileged ports with the exec driver and downloaded artifacts?
+
+
+If it's not currently possible to do so, is it something that would eventually make sense for me to look into in adding terms of functionality to the exec driver?
+
+
+Thanks!

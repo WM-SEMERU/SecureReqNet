@@ -1,0 +1,4 @@
+feat(security): support transform CSS functions for sanitization.
+
+
+Fixes part of #8514.

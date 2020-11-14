@@ -1,0 +1,7 @@
+Stop using API server's `--insecure-port`
+
+
+From startup logs:
+Flag --insecure-port has been deprecated, This flag will be removed in a future version.
+
+@fabriziopandini @timothysc

@@ -1,0 +1,74 @@
+Backing up wallet to file creates recovery file in AppData
+
+
+Testplan
+see #13279
+
+Description
+The brave_wallet_recovery.txt file is stored in %appdata%\brave\ before offering it for saving.
+The file's content contains this sentence "Save this key in a safe place, separate from your Brave browser.", so Brave acts against its own advice by saving this file in the profile.
+Steps to Reproduce
+
+Go to about:preferences#payments
+Click the cogwheel
+Click 'Back up your wallet'
+Click 'Save recovery file...'
+
+Actual result:
+The file being stored in %appdata%\brave\ as well as the location specified by the user.
+Expected result:
+The file only being stored in the location indicated by the user.
+Reproduces how often:
+Each time.
+Brave Version
+about:brave info:
+
+
+
+Brave
+0.19.37
+
+
+
+
+rev
+c6ee3b2
+
+
+Muon
+4.4.25
+
+
+libchromiumcontent
+61.0.3163.100
+
+
+V8
+6.1.534.41
+
+
+Node.js
+7.9.0
+
+
+Update Channel
+Beta
+
+
+OS Platform
+Microsoft Windows
+
+
+OS Release
+10.0.16296
+
+
+OS Architecture
+x64
+
+
+
+Reproducible on current live release:
+This is the live beta release.
+Additional Information
+Technically, all information to get the wallet would already be available in %appdata%\brave\, but having the recovery file there seems a bit overdoing it.

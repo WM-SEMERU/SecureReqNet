@@ -1,0 +1,4 @@
+Make AuthorizeFilter work in endpoint routing
+
+
+Fixes #8387

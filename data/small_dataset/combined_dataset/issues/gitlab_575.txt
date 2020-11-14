@@ -1,0 +1,288 @@
+'I have a fresh install on a new server, it's impossible to create a new project. Repository folder is empty no matter what. I can create groups and new folder for each group wwll be created in repository folder. Also it is possible to create new users, so it's neither a database or file/folder permission issue.
+
+
+I have manually added exception print out in `app/services/projects/create_service.rb` so it looks like this:
+```ruby
+@project
+ 75     rescue => ex
+ 76       @project.errors.add(:base, "Can't save project. Please try again later. Exception: #{ex.message} Inspect: #{ex.inspect}")
+ 77       @project
+ 78     end
+```
+ 
+I get this message: 
+```
+Can't save project. Please try again later. Exception: undefined local variable or method `tagging_contexts' for #<Project:0x00000004b4c630> Inspect: #<NameError: undefined local variable or method `tagging_contexts' for #<Project:0x00000004b4c630>>
+```
+ 
+
+I have enabled DEBUG log level and production logs has this for attempt to create a new project:
+
+```
+`[1m[36m (0.4ms)[0m [1mSELECT COUNT(*) FROM `projects` INNER JOIN `namespaces` ON `projects`.`namespace_id` = `namespaces`.`id` WHERE `namespaces`.`owner_id` = 1 AND `namespaces`.`type` IS NULL[0m
+
+[1m[35mUser Load (0.6ms)[0m SELECT `users`.* FROM `users` WHERE `users`.`email` = 'admin@example.com' LIMIT 1
+
+Completed 200 OK in 51ms (Views: 39.0ms | ActiveRecord: 7.6ms)
+
+Started POST "/projects" for 161.53.254.28 at 2014-09-09 15:12:28 +0200
+
+Processing by ProjectsController#create as JS
+
+Parameters: {"utf8"=>"✓", "project"=>{"name"=>"Test project", "namespace_id"=>"1", "path"=>"", "import_url"=>"", "description"=>"Test project", "visibility_level"=>"0"}, "commit"=>"Create project"}
+
+[1m[35mUser Load (0.5ms)[0m SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1
+
+[1m[36mNamespace Load (1.1ms)[0m [1mSELECT `namespaces`.* FROM `namespaces` WHERE `namespaces`.`id` = 1 LIMIT 1[0m
+
+[1m[35mUser Load (0.6ms)[0m SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+
+[1m[36m (0.3ms)[0m [1mBEGIN[0m
+
+[1m[35mNamespace Load (0.6ms)[0m SELECT `namespaces`.* FROM `namespaces` WHERE `namespaces`.`id` = 1 LIMIT 1
+
+[1m[36mProject Exists (0.7ms)[0m [1mSELECT 1 AS one FROM `projects` WHERE (`projects`.`name` = BINARY 'Test project' AND `projects`.`namespace_id` = 1) LIMIT 1[0m
+
+[1m[35mProject Exists (0.6ms)[0m SELECT 1 AS one FROM `projects` WHERE (`projects`.`path` = BINARY 'test-project' AND `projects`.`namespace_id` = 1) LIMIT 1
+
+[1m[36m (0.6ms)[0m [1mSELECT COUNT(*) FROM `projects` INNER JOIN `namespaces` ON `projects`.`namespace_id` = `namespaces`.`id` WHERE `namespaces`.`owner_id` = 1 AND `namespaces`.`type` IS NULL[0m
+
+[1m[35mSQL (0.8ms)[0m INSERT INTO `projects` (`archived`, `created_at`, `creator_id`, `description`, `import_status`, `import_url`, `issues_enabled`, `merge_requests_enabled`, `name`, `namespace_id`, `path`, `snippets_enabled`, `updated_at`, `visibility_level`, `wall_enabled`, `wiki_enabled`) VALUES (0, '2014-09-09 13:12:28', 1, 'Test project', 'none', '', 1, 1, 'Test project', 1, 'test-project', 1, '2014-09-09 13:12:28', 0, 0, 1)
+
+[1m[36m (3.6ms)[0m [1mROLLBACK[0m
+
+Completed 200 OK in 153ms (Views: 9.0ms | ActiveRecord: 9.5ms)
+```
+
+ 
+I have ran `sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production` and there are no errors in configuration:
+```
+[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.7 ? ... OK (1.9.7)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... can't check because of previous errors
+update hook up-to-date? ... yes
+update hooks in repos are links: ... can't check, you have no projects
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files: 
+	/data/gitlab/repositories: OK
+	/home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.4.14
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ... can't check, you have no projects
+Projects have satellites? ... can't check, you have no projects
+Redis version >= 2.0.0? ... yes
+Ruby version >= 2.0.0 ? ... yes (2.1.2)
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.9.1)
+
+Checking GitLab ... Finished
+```
+
+Here's my full backtrace if someone is interested:
+
+```
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activemodel-4.1.5/lib/active_model/attribute_methods.rb:435:in `method_missing'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/attribute_methods.rb:208:in `method_missing'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/acts-as-taggable-on-3.4.1/lib/acts_as_taggable_on/taggable/ownership.rb:78:in `save_owned_tags'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:424:in `block in make_lambda'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:221:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:221:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:86:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:86:in `run_callbacks'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/callbacks.rb:302:in `create_or_update'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/persistence.rb:103:in `save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/validations.rb:51:in `save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/attribute_methods/dirty.rb:21:in `save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:268:in `block (2 levels) in save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:329:in `block in with_transaction_returning_status'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/connection_adapters/abstract/database_statements.rb:199:in `transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:208:in `transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:326:in `with_transaction_returning_status'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:268:in `block in save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:283:in `rollback_active_record_state!'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:267:in `save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/integrations/active_record.rb:483:in `block in save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/integrations/active_record.rb:502:in `block (2 levels) in around_save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:150:in `block in run_actions'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:170:in `catch_exceptions'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:148:in `run_actions'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:133:in `run_callbacks'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:212:in `run_callbacks'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:63:in `block (2 levels) in perform'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:63:in `catch'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:63:in `block in perform'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:186:in `within_transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/transition_collection.rb:62:in `perform'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/integrations/active_record.rb:502:in `block in around_save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/integrations/active_record.rb:530:in `block in transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/connection_adapters/abstract/database_statements.rb:201:in `block in transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/connection_adapters/abstract/database_statements.rb:209:in `within_new_transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/connection_adapters/abstract/database_statements.rb:201:in `transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/transactions.rb:208:in `transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/integrations/active_record.rb:529:in `transaction'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/integrations/active_record.rb:501:in `around_save'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/state_machine-1.2.0/lib/state_machine/integrations/active_record.rb:483:in `save'",
+"/home/git/gitlab/app/services/projects/create_service.rb:40:in `execute'", "/home/git/gitlab/app/controllers/projects_controller.rb:23:in `create'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal/implicit_render.rb:4:in `send_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/abstract_controller/base.rb:189:in `process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal/rendering.rb:10:in `process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/abstract_controller/callbacks.rb:20:in `block in process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:113:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:113:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:229:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:229:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:229:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:229:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:166:in `block in halting'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:86:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:86:in `run_callbacks'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/abstract_controller/callbacks.rb:19:in `process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal/rescue.rb:29:in `process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/notifications.rb:159:in `block in instrument'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/notifications/instrumenter.rb:20:in `instrument'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/notifications.rb:159:in `instrument'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal/instrumentation.rb:30:in `process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/railties/controller_runtime.rb:18:in `process_action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/abstract_controller/base.rb:136:in `process'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionview-4.1.5/lib/action_view/rendering.rb:30:in `process'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal.rb:196:in `dispatch'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_controller/metal.rb:232:in `block in action'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/routing/route_set.rb:82:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/routing/route_set.rb:82:in `dispatch'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/routing/route_set.rb:50:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/journey/router.rb:71:in `block in call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/journey/router.rb:59:in `each'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/journey/router.rb:59:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/routing/route_set.rb:678:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/omniauth-1.1.4/lib/omniauth/strategy.rb:184:in `call!'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/omniauth-1.1.4/lib/omniauth/strategy.rb:164:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-cors-0.2.9/lib/rack/cors.rb:54:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-attack-4.1.0/lib/rack/attack.rb:104:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/warden-1.2.3/lib/warden/manager.rb:35:in `block in call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/warden-1.2.3/lib/warden/manager.rb:34:in `catch'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/warden-1.2.3/lib/warden/manager.rb:34:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/etag.rb:23:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/conditionalget.rb:35:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/params_parser.rb:27:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/flash.rb:254:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/session/abstract/id.rb:225:in `context'", "/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/session/abstract/id.rb:220:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/cookies.rb:560:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/query_cache.rb:36:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.5/lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/callbacks.rb:82:in `run_callbacks'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/callbacks.rb:27:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/remote_ip.rb:76:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.5/lib/rails/rack/logger.rb:38:in `call_app'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.5/lib/rails/rack/logger.rb:20:in `block in call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/tagged_logging.rb:68:in `block in tagged'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/tagged_logging.rb:26:in `tagged'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.5/lib/active_support/tagged_logging.rb:68:in `tagged'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.5/lib/rails/rack/logger.rb:20:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/request_store-1.1.0/lib/request_store/middleware.rb:8:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/request_id.rb:21:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/runtime.rb:17:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/lock.rb:17:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/sendfile.rb:112:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.5/lib/action_dispatch/middleware/ssl.rb:24:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.5/lib/rails/engine.rb:514:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.5/lib/rails/application.rb:144:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.5/lib/rails/railtie.rb:194:in `public_send'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.5/lib/rails/railtie.rb:194:in `method_missing'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/builder.rb:138:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/urlmap.rb:65:in `block in call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/urlmap.rb:50:in `each'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/urlmap.rb:50:in `call'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:552:in `process_client'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-worker-killer-0.4.2/lib/unicorn/worker_killer.rb:51:in `process_client'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:632:in `worker_loop'", "/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:500:in `spawn_missing_workers'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:142:in `start'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/bin/unicorn_rails:209:in `<top (required)>'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/bin/unicorn_rails:23:in `load'",
+"/home/git/gitlab/vendor/bundle/ruby/2.1.0/bin/unicorn_rails:23:in `<main>'"
+```

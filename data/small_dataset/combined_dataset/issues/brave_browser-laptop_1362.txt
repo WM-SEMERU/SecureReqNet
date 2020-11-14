@@ -1,0 +1,8 @@
+URI handling security risk.
+
+
+Windows 10.
+Brave 0.9.1.
+Have Skype Installed.
+When a website tries to use a URI, there is no pop-up asking the user if he wants to trigger the action. That can be a security flaw.
+e.g. https://join.skype.com/ocChbo2ozTef which is trying to launch Skype: URI.

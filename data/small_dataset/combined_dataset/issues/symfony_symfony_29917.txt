@@ -1,0 +1,27 @@
+Symfony onPreSubmit() update data then onSubmit() different data ??
+
+
+I update the data in my onPreSubmit() function :
+ public function onPreSubmit(FormEvent $event) {
+    $data = $event->getData();
+
+    unset($data['test']);
+
+    $event->setData($data);
+}
+
+When i dump dump($event->getData()) at the end of my function preSubmit(), all data is ok. But when I try to get the data in my onSubmit() function, the data is reset...
+public function onSubmit(FormEvent $event) {
+    $data = $event->getData();
+}
+
+The key "test" is still present... I guess it is a bug ?
+In my buildForm() function, the events are present :
+public function buildForm(FormBuilderInterface $builder, array $options) {
+    ...
+    ...
+    $builder->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData']);
+    $builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
+    $builder->addEventListener(FormEvents::SUBMIT, [$this, 'onSubmit']);
+}
+

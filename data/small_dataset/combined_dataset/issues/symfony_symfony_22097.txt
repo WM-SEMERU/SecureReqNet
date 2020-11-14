@@ -1,0 +1,49 @@
+[Security] Credentials check action ignores scheme (https) requirement
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+2.8
+
+
+
+My auth credentials check action:
+	/**
+	 * @Route("/login_check", schemes={"https"}, name="user_login_check")
+	 * @Method({"POST"})
+	 */
+	public function loginCheckAction()
+	{
+		throw new \BadMethodCallException('Firewall should have done stuff, not this action!');
+	}
+As we can see, I require secure connection to be used. The login form creates a proper url (with https instead of http), but it's not actually required. I can edit the url in form and successfully log in without https.
+For https to be actually required, I had to add this to my security.yml config:
+security:
+    access_control:
+        - { path: ^/login_check, requires_channel: https }
+
+To sum up the error: I would assume that route configuration should be enough to require https. It's not. Firewall configuration must be applied as well.

@@ -1,0 +1,12 @@
+Can't install http-foundation on a new symfony 2.8
+
+
+Symfony version(s) affected:2.8.49
+Description
+On my way to upgrade a 2.7 project, I first migrate it to 2.8
+Then I encounter a problem with http-foundation so I tried a project from scratch...
+How to reproduce
+php composer.phar create-project symfony/framework-standard-edition my_project_name "2.8.*"
+php  -d memory_limit=-1 composer.phar require symfony/http-foundation
+The result issues a "Your requirements could not be resolved to an installable set of packages."
+"

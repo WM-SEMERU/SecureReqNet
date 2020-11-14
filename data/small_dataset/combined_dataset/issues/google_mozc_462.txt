@@ -1,0 +1,5 @@
+Support Python 3
+
+
+Python 2.7 will be discontinued by upstream in 9 months, on 2020-01-01. See https://pythonclock.org/.
+Python code in Mozc should be ported to Python 3.

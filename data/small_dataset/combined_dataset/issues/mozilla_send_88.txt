@@ -1,0 +1,4 @@
+Take a hash of the unencrypted file before uploading
+
+
+Before we encrypt and upload the file, let's take a sha256 hash of it and send that to the server along with the other metadata like filename (and store it in redis).  This could help us trackdown malware or DMCA requests or such.

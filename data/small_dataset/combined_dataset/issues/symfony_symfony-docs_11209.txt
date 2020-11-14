@@ -1,0 +1,5 @@
+Documented the workflow metadata [redux]
+
+
+With @javiereguiluz's permission I have taken #9476 and incorporated the comments and code examples into it.
+This is the start of a push to improve the Workflow documentation. The focus now is on expanding the documentation by merging pull requests; organizing it will come later.

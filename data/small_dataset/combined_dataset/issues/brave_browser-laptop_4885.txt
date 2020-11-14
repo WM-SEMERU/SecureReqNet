@@ -1,0 +1,5 @@
+[HackerOne] about: pages may be clickjacked
+
+
+they should have the frame-ancestors header
+reported at https://hackerone.com/reports/175990

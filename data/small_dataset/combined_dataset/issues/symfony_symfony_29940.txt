@@ -1,0 +1,29 @@
+symfony/clear could not be found in any version
+
+
+Symfony version(s) affected: 4.2.1
+Description
+I was trying to install the profiler by using composer require symfony/profiler-pack --dev. But getting this error.
+Problem 1
+- The requested package symfony/clear could not be found in any version, there may be a typo in the package name.
+How to reproduce
+composer require symfony/profiler-pack --dev
+Using version ^1.0 for symfony/profiler-pack
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Restricting packages listed in "symfony/symfony" to "4.2.*"
+Your requirements could not be resolved to an installable set of packages.
+Problem 1
+- The requested package symfony/clear could not be found in any version, there may be a typo in the package name.
+Potential causes:
+
+A typo in the package name
+The package is not available in a stable-enough version according to your minimum-stability setting
+see https://getcomposer.org/doc/04-schema.md#minimum-stability for more details.
+It's a private package and you forgot to add a custom repository to find it
+
+Read https://getcomposer.org/doc/articles/troubleshooting.md for further common problems.
+Installation failed, reverting ./composer.json to its original content.
+Possible Solution
+Additional context

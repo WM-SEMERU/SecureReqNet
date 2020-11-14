@@ -1,0 +1,53 @@
+[HttpClient][Contracts] add HttpClient\ApiClientInterface et al.
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR adds a new ApiClientInterface on top of #30413.
+It's goal it to provide great DX when using (json) APIs.
+It also provides an implementation of the interface in the HttpClient component:
+

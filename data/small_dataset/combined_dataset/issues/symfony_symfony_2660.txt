@@ -1,0 +1,6 @@
+[ContextListener] The SecurityDataCollector class is getting roles that are not yet bound
+
+
+I am having a problem where the -to-many relationships on my User class are not being properly bound when the collect method of SecurityDataCollector is being called. This means that when the roles are retrieved from $token, each role is populated with Null and not the string values associated to the specific user i've just logged in with.
+This seems an issue when logging in using the traditional login form method (as documented here http://symfony.com/doc/2.0/book/security.html#using-a-traditional-login-form) and in security.xml  having an access control where the admin area is expecting a user to have a specific role. However no roles are bound to the user when the data array is populated in the collect method of SecurityDataCollector.
+I hope this gives you enough issue to fix this issue.

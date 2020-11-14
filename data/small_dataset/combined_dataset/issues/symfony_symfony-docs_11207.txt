@@ -1,0 +1,9 @@
+Documented the local Symfony server
+
+
+Two comments:
+
+It's entirely based on the great slides published by Fabien at https://speakerdeck.com/fabpot/symfony-local-web-server-dot-dot-dot-reloaded
+This is the article that explains the server itself ... but we need to think other possible integrations/mentions in other articles.
+
+Thanks.

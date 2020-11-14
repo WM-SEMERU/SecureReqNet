@@ -1,0 +1,52 @@
+[messenger] Adds a stamp to provide a routing key on message publishing
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29950
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11236
+
+
+
+Adds a stamp allowing to set a routing_key at MessageBus::dispatch() level.
+$message = (new Envelope('message'))->with(new RoutingKeyStamp('routing_key'));
+$bus->dispatch($message);

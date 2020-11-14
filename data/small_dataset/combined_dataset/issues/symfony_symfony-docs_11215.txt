@@ -1,0 +1,22 @@
+I m facing Issue on installation
+
+
+I m getting Issue on checking command line PHP ..
+PHP Setting Error
+**
+
+
+
+ERROR
+
+**
+The PHP exe file you specified did not run correctly:
+C:\xampp\php\php.exe
+The php.ini used by your command-line PHP is: C:\xampp\php\php.ini
+A setting in your php.ini could be causing the problem: Either the 'extension_dir' value is incorrect or the dll does not exist.
+Program Output:
+PHP Warning:  PHP Startup: Unable to load dynamic library 'C:\xampp\php\ext\php_pdo_sqlsrv_7_nts_x64.dll' - %1 is not a valid Win32 application.
+in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'C:\xampp\php\ext\php_sqlsrv_7_nts_x64.dll' - %1 is not a valid Win32 application.
+in Unknown on line 0
+PHP Warning:  Module 'openssl' already loaded in Unknown on line 0

@@ -1,0 +1,5 @@
+chore: bump SB devDependencies in storybook/components
+
+
+What I did
+I updated @storybook/addon-actions and @storybook/react to the latest alpha in @storybook/components as I thought my branch was sync to next when I merged #6095 but it looks like not.

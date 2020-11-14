@@ -1,0 +1,95 @@
+cmd/go: go get -u behaves as if -f is always provided (for non-custom import paths)
+
+
+This is an issue since 2015. I discovered it on January 11, 2017, but I'm only getting around to reporting it now. I have a suggestion for resolution.
+cmd/go documents the flag -f for use with go get -u at https://golang.org/cmd/go/#hdr-Download_and_install_packages_and_dependencies:
+
+The -f flag, valid only when -u is set, forces get -u not to verify that each package has been checked out from the source control repository implied by its import path. This can be useful if the source is a local fork of the original.
+
+However, for packages with a non-custom import path (custom import path being one that is defined by HTML meta tags, see isCustom), go get -u now behaves as if -f is always provided.
+For custom import paths (e.g., rsc.io/pdf), there is no such issue.
+What version of Go are you using (go version)?
+$ go version
+go version go1.8.1 darwin/amd64
+
+What operating system and processor architecture are you using (go env)?
+
+$ go env
+GOARCH="amd64"
+GOBIN=""
+GOEXE=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/tmp/fresh"
+GORACE=""
+GOROOT="/usr/local/go"
+GOTOOLDIR="/usr/local/go/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/tw/kgz4v2kn4n7d7ryg5k_z3dk40000gn/T/go-build606008153=/tmp/go-build -gno-record-gcc-switches -fno-common"
+CXX="clang++"
+CGO_ENABLED="1"
+PKG_CONFIG="pkg-config"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+
+
+What did you do?
+Everything works as expected for custom import paths:
+$ export GOPATH=/tmp/fresh
+$ go get -u rsc.io/pdf
+$ cd $GOPATH/src/rsc.io/pdf
+$ git remote -v
+origin	https://github.com/rsc/pdf (fetch)
+origin	https://github.com/rsc/pdf (push)
+$ git remote set-url origin https://github.com/wrong/repo
+$ go get -u rsc.io/pdf
+package rsc.io/pdf: rsc.io/pdf is a custom import path for https://github.com/rsc/pdf,
+but /tmp/fresh/src/rsc.io/pdf is checked out from https://github.com/wrong/repo
+$ echo $?
+1
+$ go get -u -f rsc.io/pdf
+$ echo $?
+0
+
+(For demonstration purposes, assume that https://github.com/wrong/repo contains arbitrary git history, such that it's git pull --ff-only-compatible with the repo I'm trying to update. I don't want to spend time creating GitHub repos that have this property, but it's possible.)
+However, this is what happens for a non-custom import path:
+$ go get -u github.com/gorilla/mux
+$ cd $GOPATH/src/github.com/gorilla/mux
+$ git remote -v
+origin	https://github.com/gorilla/mux (fetch)
+origin	https://github.com/gorilla/mux (push)
+$ git remote set-url origin https://github.com/wrong/repo
+$ go get -u github.com/gorilla/mux
+$ echo $?
+0
+$ go get -u -f github.com/gorilla/mux
+$ echo $?
+0
+
+What did you expect to see?
+$ git remote set-url origin https://github.com/wrong/repo
+$ go get -u github.com/gorilla/mux
+package github.com/gorilla/mux: github.com/gorilla/mux is an import path for https://github.com/gorilla/mux,
+but /tmp/fresh/src/github.com/gorilla/mux is checked out from https://github.com/wrong/repo
+$ echo $?
+1
+$ go get -u -f github.com/gorilla/mux
+$ echo $?
+0
+
+What did you see instead?
+$ git remote set-url origin https://github.com/wrong/repo
+$ go get -u github.com/gorilla/mux
+$ echo $?
+0
+$ go get -u -f github.com/gorilla/mux
+$ echo $?
+0
+
+Fix
+This regression was introduced while resolving another issue. I have a suggestion for how to fix it so both things are fixed. Details will follow in next comment.

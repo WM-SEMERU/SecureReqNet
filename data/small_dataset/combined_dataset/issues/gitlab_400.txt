@@ -1,0 +1,1 @@
+It would be nice to be able to see the preview in the wiki pages before having to commit them.

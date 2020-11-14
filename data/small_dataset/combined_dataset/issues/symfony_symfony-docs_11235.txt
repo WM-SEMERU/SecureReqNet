@@ -1,0 +1,4 @@
+clarify datetime type option deprecations
+
+
+tweaks the changes deprecations documented in #10982 based on the clarifications made in #11004

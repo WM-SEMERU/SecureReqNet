@@ -1,0 +1,49 @@
+clean up the text that warns users that their device time is wrong when syncing
+
+
+Description
+We'll need to clean up the following text before this warning makes it out from nightly --> dev. It's currently in 0.65.
+You can find the current text in the following example:
+brave/brave-core#2155 (comment)
+We should get this done sooner than later as this resolves a common support issues where users are receiving errors due to their times being wrong.
+Steps to Reproduce
+
+#3962
+
+Actual result:
+Example of current text: brave/brave-core#2155 (comment)
+Expected result:
+We'll need text from @bradleyrichter's team.
+Reproduces how often:
+100% reproducible using the STR mentioned above.
+Brave version (brave://version info)
+
+
+
+Brave
+0.65.17 Chromium: 74.0.3729.40 (Official Build) nightly(64-bit)
+
+
+
+
+Revision
+278d6a0d856d8314f36fb9a68b6e1d85cd0d14e7-refs/branch-heads/3729@{#470}
+
+
+OS
+Mac OS X
+
+
+
+Reproducible on current release:
+N/A
+
+Does it reproduce on brave-browser dev/beta builds? N/A. Change is currently only in the nightly build.
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields? N/A
+Is the issue reproducible on the latest version of Chrome? N/A
+
+Additional Information
+CCing @bradleyrichter @rebron @AlexeyBarabash

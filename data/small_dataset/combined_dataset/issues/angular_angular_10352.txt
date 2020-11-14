@@ -1,0 +1,15 @@
+Request dependency <=2.68 opens to potential memory exposure vulnerability
+
+
+Do you want to request a feature or report a bug?
+This ticket is to report a a potential security vulnerability caused by the request dependency.
+What is the current behavior?
+Various of the dependencies used by angular.js make use of a vulnerable version of the request package (<2.68) that allow potential memory exposure.
+Involved dependencies are: insight, fsevents
+details:
+
+https://snyk.io/vuln/npm:request:20160119
+yeoman/insight#48
+fsevents/fsevents#145
+
+In order to address a short term fix it is suggested to modify the current npm shrinkwrap to use request==2.74.0

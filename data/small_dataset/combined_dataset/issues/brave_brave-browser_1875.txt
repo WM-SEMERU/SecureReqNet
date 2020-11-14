@@ -1,0 +1,80 @@
+U2F Not Working
+
+
+Description
+U2F does not work anywhere, prompts time out or runs forever.
+Steps to Reproduce
+
+Go to the Yubico U2F demo
+Register for an account
+Try to register a Yubikey
+
+Actual result:
+
+Prompt for a key times out or runs forever. Additionally, the indicator on the key will not activate. On Yubikeys, this will result in no uniform blinking.
+Expected result:
+U2F key successfully registers or allows user to log in.
+Reproduces how often:
+Always
+Brave version (brave://version info)
+
+
+
+Brave Dev
+0.57.3 Chromium: 70.0.3538.67 (Official Build) dev (64-bit)
+
+
+
+
+Revision
+9ab0cfab84ded083718d3a4ff830726efd38869f-refs/branch-heads/3538@{#1002}
+
+
+OS
+Windows 10 (Build 18262)
+
+
+
+
+
+
+Brave
+0.55.20 Chromium: 70.0.3538.67 (Official Build) (64-bit)
+
+
+
+
+Revision
+9ab0cfab84ded083718d3a4ff830726efd38869f-refs/branch-heads/3538@{#1002}
+
+
+OS
+Windows 10 (Build 18262)
+
+
+
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+
+This occurs on dev and stable
+
+
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+
+No
+
+
+Is the issue reproducible on the latest version of Chrome?
+
+No. Chromium (71.0.3576.0, not Brave) behaves correctly.
+
+
+
+Additional Information
+Also tested with GitHub, Google, and Login.gov (which uses WebAuthn) with the same results.
+I installed regular Brave just to test, so it's a fresh install.
+I am also aware of #324, but unlike that issue, there are no errors in the console and prompts seem to run forever or until they time out instead of being interrupted.

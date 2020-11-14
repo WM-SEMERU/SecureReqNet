@@ -1,0 +1,8 @@
+proposal: crypto/tls: Expose maps for cipher suite IDs/names
+
+
+Setting up a set of cipher suites for your HTTP(s) server requires a lot of boilerplate code. It would be nice to have an easy way to parse the cipher suites, say, from a configuration file.
+This would make the TLS configuration friendlier (no need for more builder plate code) and easier to audit (given that some folks have opted not to configure this).
+We could achieve this by having a mapping from a string value towards the cipher suite constant, which would be kept alongside the constants that are already in the source code.
+Having this as part of the source code has the added benefit that, since the mapping would be besides the const values, it would be easier to maintain. As opposed to having this functionality as part of an external library.
+This would help address requests like #21167

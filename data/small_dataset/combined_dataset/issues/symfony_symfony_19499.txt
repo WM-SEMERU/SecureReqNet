@@ -1,0 +1,42 @@
+[SecurityBundle] BasicAuthenticationListener: simpler getting value from Request
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Unless I'm mistaken, the default null should be OK. If it's not, I will create a new PR with a test proving that false or other "special" value must be used.

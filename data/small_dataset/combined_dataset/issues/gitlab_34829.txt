@@ -1,0 +1,51 @@
+'### Description
+
+Admin users *should* be trusted, but sometimes the trust is misplaced.
+
+We encountered a situation with admin users impersonating other users to perform tasks instead of asking those other users to perform them. In one case, this resulted in a broken build, and downstream builds breaking as well. Until it was clear what happened, the developer whose name was attached to the build was on the hook. This wasn't fair.
+
+### Proposal
+
+The proposal has two parts
+- When an admin impersonates a user, that user is sent an alert e-mail to say this.
+- For further hardening, the impersonating should not be permitted until the user has granted permission, which would be on a case-by-case basis.
+
+The former should be default behaviour that can't be turned off. The latter could be configurable. Also, the latter could be default behaviour to allow an admin impersonate a user that uses DFA, integrating the process into the DFA implementation.
+
+There are proposals (see below) to provide additional logging when an admin impersonates a user. This is an additional proposal, not an alternative.
+
+The value here is that while logging can document the actions taken by an admin while impersonating another user, reviewing the log will not help recover from a destructive action, such as deleting a group.
+
+Alerting the user that an admin has started impersonating them has two general benefits:
+- It allows the user to know that someone else is performing actions on their behalf and they have the option of ignoring, accepting and monitoring, or objecting and reporting.
+- Admins now know that their actions will be immediately known, and they will behave accordingly. i.e. they will be less likely to impersonate without good reason.
+
+### Links / references
+
+- My Howto question on the gitlab forum: https://forum.gitlab.com/t/user-alert-when-admin-is-impersonating/8704
+- The gitlab-ce issue referenced in the response: https://forum.gitlab.com/t/user-alert-when-admin-is-impersonating/8704 (don't know if this is relevant)
+- Two gitlab-ee issues related:
+  - https://gitlab.com/gitlab-org/gitlab-ee/issues/315
+  - https://gitlab.com/gitlab-org/gitlab-ee/issues/743
+
+### Documentation blurb
+
+#### Overview
+
+What is it?
+Why should someone use this feature?
+What is the underlying (business) problem?
+How do you use this feature?
+
+#### Use cases
+
+Who is this for? Provide one or more use cases.
+
+### Feature checklist
+
+Make sure these are completed before closing the issue,
+with a link to the relevant commit.
+
+- [ ] [Feature assurance](https://about.gitlab.com/handbook/product/#feature-assurance)
+- [ ] Documentation
+- [ ] Added to [features.yml](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/features.yml)

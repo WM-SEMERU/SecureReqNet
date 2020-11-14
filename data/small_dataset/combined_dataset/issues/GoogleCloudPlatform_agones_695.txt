@@ -1,0 +1,7 @@
+Vendor tool dependencies
+
+
+With the conversion to go modules, our tool dependencies initially lost their vendored copies. It turns out there is an idiomatic way to fix this as described in golang/go#25922 (comment) .
+Proposal 1a: Do exactly as the above link describes and create agones/tools/tools.go and put all tools in that file as imports.
+The only thing we cannot do with that is vendor the annotations.proto and http.proto from grpc-ecosystem/grpc-gateway/third_party.  If I copy it over, then anyone runs go mod vendor it gets deleted.
+Proposal 1b:  Create the path agones/proto/googleapis/google/api and copy them from googleapis/google/api to there (since that is where grpc-gateway gets theirs from anyway and since their third_party directory appears to be non-module vendorable).

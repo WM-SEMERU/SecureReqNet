@@ -1,0 +1,9 @@
+Import cookie error
+
+
+Error: Setting cookie failed
+due to
+
+strict secure cookies (https://chromium.googlesource.com/chromium/src.git/+/a26e439d02baa9514b09c637bf5fa9f6790c4c3e)
+GetCookieDomainWithString check failed
+

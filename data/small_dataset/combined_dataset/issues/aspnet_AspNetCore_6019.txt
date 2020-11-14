@@ -1,0 +1,5 @@
+Get access token
+
+
+Following this azure-sample I'm able to retrieve access_token and sent it to B2C secured webapi.
+Have you planned this feature in this library?

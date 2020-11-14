@@ -1,0 +1,31 @@
+Error with Get-HPOVLogicalInterconnect using Export
+
+
+Expected Behavior
+When using the -Export parameter with Get-HPOVLogicalInterconnect an error is displayed and no file is exported. I think this was working in a previous POSH version, but not for sure. Has been awhile since I ran it.
+Actual Behavior
+Works:
+$aa = Get-HPOVLogicalInterconnect
+Does not work:
+$aa = Get-HPOVLogicalInterconnect -Export "C:\Drop\export_file.json"
+Error message:
+Set-Content : Cannot bind argument to parameter 'Path' because it is null.
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\4.10.1821.1567\HPOneView.410.psm1:67723 char:65
++ ... on | convertto-json -Depth 99 | Set-Content -Path $exportFile -force  ...
++                                                       ~~~~~~~~~~~
+    + CategoryInfo          : InvalidData: (:) [Set-Content], ParameterBindingValidationException
+    + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.PowerShell.Commands.SetContentC
+   ommand
+Steps to reproduce
+(Shown in "Does not work" step above)
+Version Information
+PowerShell : 5.1.14409.1012
+OneView version : 4.10.03.364293.00
+OneView type : Synergy Composer
+REST POSH Version : 4.10.1821.1567
+HPOneView.410 : 4.10.1821.1567
+FormatPx : 1.1.3.15
+SnippetPx : 1.0.6.19
+NuGet : 1.3.3
+PackageManagement : 1.2.2
+PowerShellGet : 2.0.1

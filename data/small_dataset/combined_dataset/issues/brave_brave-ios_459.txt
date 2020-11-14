@@ -1,0 +1,29 @@
+Open link in a new tab doesn't show https padlock
+
+
+Description:
+Open link in a new tab doesn't show https padlock
+Steps to Reproduce
+
+Open a site in a new tab
+Long press on a https link and open in a new tab
+Switch to the newly opened tab, URL bar doesn't show the green padlock before URL
+Reload the page, padlock appears
+
+Actual result: 
+Open link in a new tab doesn't show https padlock
+Expected result:
+Should always show the padlock for https sites when loaded
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Some what easy but when you try to record follows Sods law and never happens
+Brave Version: 
+1.7(18.11.21.22)
+Device details: 
+iPhone 7+ (iOS 12.1)
+Website problems only:
+
+did you check with Brave Shields down?
+did you check in Safari/Firefox (WkWebView-based browsers)?
+
+Additional Information
+cc: @tomlowenthal @jumde @diracdeltas

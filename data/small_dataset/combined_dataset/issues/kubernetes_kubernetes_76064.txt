@@ -1,0 +1,30 @@
+Kubelet Bandwidth Limiting Not Working
+
+
+What happened:
+I tried to set up bandwidth limiting by booting a cluster with kops, which by default sets up kubenet. I used the annotations
+- kubernetes.io/egress-bandwidth: xM
+- kubernetes.io/ingress-bandwidth: xM
+
+and then used iperf3 to test the ingress and egress bandwidths, with no effect.
+Does anyone know if this feature is still supported in kubenet? And if so what are the steps I need to take to boot a cluster that can use pod annotations to do tc shaping.
+What you expected to happen:
+Per #2856 traffic shaping should be implemented on Kubenet as of 4/12/2018.
+Anything else we need to know?:
+There are a lot of issues regarding traffic shaping not working. None have a concrete answer of how to get it to work on kubenet:
+
+#2856
+#41471
+
+Relevant:
+
+PR #11988 I believe this is where it was first implemented.
+
+Environment:
+
+Kubernetes version (use kubectl version): 1.11.8
+Cloud provider or hardware configuration: AWS
+
+CC:
+@mchang6137
+@kubernetes/sig-network

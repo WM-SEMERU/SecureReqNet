@@ -1,0 +1,4 @@
+Add Interceptor support for MapboxRouteTiles
+
+
+We can add a field for the Builder to add an Interceptor so we can monitor network download progress with the work moving in mapbox/mapbox-navigation-android#1753

@@ -1,0 +1,6 @@
+[Security] [Bug] AuthenticationManager is never run by AnonymousAuthenticationListener
+
+
+AnonymousAuthenticationProvider contains authenticate method that verifies wether populated AnonymousToken has the same key as current firewall, which is correct but never run.
+To fix that we need in method AnonymousAuthenticationListener::handle add call to AuthenticationManager::authenticate and catch Exception that method may throw.
+I've got a fix already and could send a PR if you think that's the right approach.

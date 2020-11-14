@@ -1,0 +1,68 @@
+(WIP) [HttpClient] Add a Record & Replay callback to the MockHttpClient.
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+partially #30502
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+Allow to record & replay responses for test / dev purpose:
+<?php
+
+$recorder = new FilesystemResponseRecorder('var/fixtures/http');
+$callback = new RecordAndReplayCallback($myNamingStrategy, $recorder, RecordAndReplayCallback::MODE_REPLAY_OR_RECORD, $httpClient)
+
+$mockClient = new MockHttpClient($callback);
+
+// Will make an actual HTTP request
+$client->request('POST', 'https://example.org/whatever');
+
+// Will replay the previous response
+$client->request('POST', 'https://example.org/whatever');
+TODO:
+
+ Provide a default naming strategy
+ Create the PR for the documentation
+ Integrate with Framework bundle for easy config
+

@@ -1,0 +1,5 @@
+Simplified Intl data access
+
+
+See symfony/symfony#28846
+i.e. the new Languages class is a combination of both LanguageDataProvider and LanguageBundle put into a static API. This applies to each data domain (currencies, etc.)

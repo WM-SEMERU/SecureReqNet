@@ -1,0 +1,47 @@
+Microsoft Security Advisory CVE-2018-0875: Hash Collision can cause Denial of Service
+
+
+Microsoft Security Advisory CVE-2018-0875: Hash Collision can cause Denial of Service
+Executive Summary
+Microsoft is releasing this security advisory to provide information about a vulnerability in the open source versions of PowerShell Core.
+This advisory also provides guidance on what developers can do to update their scripts and module correctly.
+Microsoft is aware of a security vulnerability in the public versions of .NET Core where a malicious file
+or web request could cause a denial of service (DoS) attack.
+System administrators are advised to update PowerShell Core to version 6.0.2.
+This version will also address CVE-2018-0786.
+Discussion
+Please use PowerShell/PowerShell#6401 for discussion of this advisory.
+Please use dotnet/corefx#28010 for discussion of the .NET CoreFx aspects this advisory.
+Affected Software
+The vulnerability affects PowerShell Core prior to version 6.0.2
+Advisory FAQ
+How do I know if I am affected?
+If all of the following are true:
+
+Run pwsh -v (if, you cannot launch PowerShell Core using pwsh you are affected).
+If the reported version starts with 6.0.1, you are affected.
+
+How do I update to an unaffected version?
+Follow the instructions at Get PowerShell
+to install the latest version of PowerShell Core.
+Other Information
+Reporting Security Issues
+If you have found a potential security issue in PowerShell Core,
+please email details to secure@microsoft.com.
+Support
+You can ask questions about this issue on GitHub in the PowerShell organization.
+This is located at https://github.com/PowerShell/.
+The Announcements repo (https://github.com/PowerShell/Announcements)
+will contain this bulletin as an issue and will include a link to a discussion issue where you can ask questions.
+What if the update breaks my script or module?
+You can uninstall the newer version of PowerShell Core and install the previous version of PowerShell Core.
+This should be treated as a temporary measure.
+Therefore, the script or module should be updated to work with the patched version of PowerShell Core.
+Acknowledgments
+Ben Adams of Illyriad Games
+External Links
+CVE-2018-0875
+Revisions
+V1.0 (Mar 15, 2018): Advisory published.
+Version 1.0
+Last Updated 2018-03-15

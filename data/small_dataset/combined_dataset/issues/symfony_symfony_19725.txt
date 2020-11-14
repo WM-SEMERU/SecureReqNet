@@ -1,0 +1,49 @@
+[Security] $attributes can be anything, but RoleVoter assumes strings
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#18042
+
+
+License
+MIT
+
+
+Doc PR
+reference to the documentation PR, if any
+
+
+

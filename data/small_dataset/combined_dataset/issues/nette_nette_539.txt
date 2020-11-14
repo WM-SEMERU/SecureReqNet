@@ -1,0 +1,15 @@
+User::isInRole() now works with array of IRole objects
+
+
+Nyní User::isInRole() kontroluje pouze stringy, což mi přijde poněkud "omezující".
+Současná situace:
+Mějme dvě třídy, Identity (implemenující IIdentity) a Role (implementující IRole).
+Třída Identity bude přes getter getRoles() načítat pole obsahující objekty s rolemi (Role).
+Někde v aplikaci chci zkontrolovat, zda uživatel je v roli 'admin', tudíž zavolám $user->isInRole('admin'); -- nicméně tato metoda funguje pouze pro pole stringů, ale ne pro pole objektů implementujících IRole; což absolutně nedává smysl a ani to není nikde zmíněno, že by to fungovat nemělo.
+Možná řešení:
+
+Oddělat třetí parametr u in_array() a donutit třídy implementující IRole, aby měly metodu __toString() vracející název role
+Přepsat metodu isInRole()
+???
+
+Osobně jsem zvolil 2), protože mi přijde "hloupé" dávat zbytečné požadavky do kontraktu (co přesně by __toString() musel vracet) a není to BC break.

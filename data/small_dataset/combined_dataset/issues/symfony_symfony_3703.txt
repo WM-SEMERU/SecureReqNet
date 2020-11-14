@@ -1,0 +1,10 @@
+[Login] Why it's necessary to have a phpsessid to login?
+
+
+We're in a scenario where there is  a login form created by Sencha, that sends username and password directly to login_check. We created an own Listener to bypass the csrf protection. The first time you do login, the AbstractAuthenticationListener throws an exception:
+            if (!$request->hasPreviousSession()) {
+                throw new SessionUnavailableException('Your session has timed-out, or you have disabled cookies.');
+            }
+
+Wich will be the best approach to resolve this?
+Joan

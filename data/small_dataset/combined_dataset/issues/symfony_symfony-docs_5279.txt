@@ -1,0 +1,4 @@
+Creating the custom Voter
+
+
+This is a small thing. In Voter example $user object is an instance of Symfony\Component\Security\Core\User\UserInterface. Then in a switch statement there is a call to method getId() on $user, but there is no such method in UserInterface.

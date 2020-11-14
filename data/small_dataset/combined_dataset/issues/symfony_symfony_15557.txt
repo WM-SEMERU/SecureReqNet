@@ -1,0 +1,46 @@
+[Security] Fixed persistence of AuthenticationException
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+During the refresh of an authenticated user the potential AuthenticationException is ignored, now it is persisted in session just like after an authentication failure.

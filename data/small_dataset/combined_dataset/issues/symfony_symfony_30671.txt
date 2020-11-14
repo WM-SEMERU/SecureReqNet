@@ -1,0 +1,51 @@
+Add optional parameter `prefetching` for AMQP connection
+
+
+Add prefetching connection parameter to setup channel prefetch count.
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+When setting up AMQP transport connection, it can be interesting to configure prefetching on a channel, which is not currently possible.

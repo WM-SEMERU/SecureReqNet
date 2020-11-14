@@ -1,0 +1,4 @@
+[hackerone] https://hackerone.com/reports/258141
+
+
+it's an issue also in Chromium so hopefully will be fixed upstream

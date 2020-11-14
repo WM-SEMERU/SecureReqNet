@@ -1,0 +1,9 @@
+ACL fails when evaluating domain object as property of another domain object
+
+
+In this example my models are: Project, ProjectRole - ProjectRole has a ManyToOne Unidirectional relationship back to Project.
+I'm rendering the controller from my view in a few places:
+
+When I render from a view that passes in a project instance straight from the $em; no problem.
+However, when I render from a view that passes in $project_role.project the ACL does not work
+

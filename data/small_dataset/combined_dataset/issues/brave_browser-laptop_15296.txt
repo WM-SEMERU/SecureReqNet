@@ -1,0 +1,39 @@
+Brave crashes when trying to close or open tabs for certain websites
+
+
+Description
+When opening or closing tabs for certain websites Brave crashes.
+Steps to Reproduce
+Certain examples (but not limited to):
+
+
+open browser, open several (5-6) tabs and go anywhere (let's say you go to github.com)
+
+
+open a new tab, go to mail.google.com, do stuff
+
+
+click the close tab X icon
+
+
+Brave crashes
+
+
+do the same as above only instead of going to mail.google.com go to news.google.com
+
+
+right click on any link to a news site away from google, click "open link in new tab"
+
+
+Brave crashes about 60-70% of the time
+
+
+There are several other sites that cause the browser to crash, I simply can't remember them all.
+about:brave info:
+This started happening on the dev branch with Brave version 0.56.4
+Happens on my:
+
+debian sid laptop
+windows 10 laptop
+windows 2016 server VM
+

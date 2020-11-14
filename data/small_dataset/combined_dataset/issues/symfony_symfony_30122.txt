@@ -1,0 +1,46 @@
+[Security] fix switch user without having current token
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#22729
+
+
+License
+MIT
+
+
+
+Attempting to switch a user cause an error when not having any token in the storage

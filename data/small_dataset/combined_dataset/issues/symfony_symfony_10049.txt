@@ -1,0 +1,9 @@
+[Security] Save referer before throwing authentication exception
+
+
+There is firewall with login form. use_referer=true.
+
+open /test page
+sign in using invalid password -> got redirected to login form
+sign in using valid password -> got redirected to / but expected to be redirected to /test
+

@@ -1,0 +1,9 @@
+Fine-grained control of secret data in volume
+
+
+Currently the SecretVolumeSource does not allow the user to control:
+
+Which file names a piece of secret data should be presented with
+What permissions a piece of secret data should have
+
+It should be possible to control both of these things.

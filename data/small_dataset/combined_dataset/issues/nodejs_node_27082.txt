@@ -1,0 +1,15 @@
+lib: remove `env: node` in eslint config for lib files
+
+
+This patch removes the redundant require-globals custom
+eslint rule by removing env: node in the eslint config
+and whitelist the globals that can be accessed in native
+modules instead of black listing them. This makes sense
+for our lib/ files because here we are creating the
+Node.js environment instead of running in a normal user
+land Node.js environment.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ commit message follows commit guidelines
+

@@ -1,0 +1,7 @@
+runtime/cgo: unrecognized relocation with binaries shipped in go1.12.2 [1.11 backport]
+
+
+@andybons requested issue #31293 to be considered for backport to the next 1.11 minor release.
+
+@gopherbot please backport to 1.11 and 1.12; the fix doesn't need to be cherry-picked, but it will be used to track the issue in the milestone.
+

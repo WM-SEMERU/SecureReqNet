@@ -1,0 +1,2 @@
+Just installed the update, but the version number under help didn't increase. Although the second number (After the Major, Minor and Bugfix number) changed.
+Just for the records.

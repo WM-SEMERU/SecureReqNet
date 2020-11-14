@@ -1,0 +1,57 @@
+Possible ReDOS through React and other packages
+
+
+I notice our synk-ci step has been failing for the past few merges. The error from the log says:
+Testing /home/travis/build/mozilla/addons-frontend...
+✗ Medium severity vulnerability found on ua-parser-js@0.7.17
+- desc: Regular Expression Denial of Service (ReDoS)
+- info: https://snyk.io/vuln/npm:ua-parser-js:20180227
+- from: mozilla-addons-frontend@0.0.1 > react@16.4.2 > fbjs@0.8.16 > ua-parser-js@0.7.17
+Your dependencies are out of date, otherwise you would be using a newer ua-parser-js than ua-parser-js@0.7.17.
+✗ Medium severity vulnerability found on ua-parser-js@0.7.17
+- desc: Regular Expression Denial of Service (ReDoS)
+- info: https://snyk.io/vuln/npm:ua-parser-js:20180227
+- from: mozilla-addons-frontend@0.0.1 > react-dom@16.4.2 > fbjs@0.8.16 > ua-parser-js@0.7.17
+Your dependencies are out of date, otherwise you would be using a newer ua-parser-js than ua-parser-js@0.7.17.
+✗ Medium severity vulnerability found on ua-parser-js@0.7.17
+- desc: Regular Expression Denial of Service (ReDoS)
+- info: https://snyk.io/vuln/npm:ua-parser-js:20180227
+- from: mozilla-addons-frontend@0.0.1 > react@16.4.2 > prop-types@15.6.1 > fbjs@0.8.16 > ua-parser-js@0.7.17
+Your dependencies are out of date, otherwise you would be using a newer ua-parser-js than ua-parser-js@0.7.17.
+✗ Medium severity vulnerability found on ua-parser-js@0.7.17
+- desc: Regular Expression Denial of Service (ReDoS)
+- info: https://snyk.io/vuln/npm:ua-parser-js:20180227
+- from: mozilla-addons-frontend@0.0.1 > react-dom@16.4.2 > prop-types@15.6.1 > fbjs@0.8.16 > ua-parser-js@0.7.17
+Your dependencies are out of date, otherwise you would be using a newer ua-parser-js than ua-parser-js@0.7.17.
+✗ Medium severity vulnerability found on ua-parser-js@0.7.17
+- desc: Regular Expression Denial of Service (ReDoS)
+- info: https://snyk.io/vuln/npm:ua-parser-js:20180227
+- from: mozilla-addons-frontend@0.0.1 > react-redux@5.0.7 > prop-types@15.6.1 > fbjs@0.8.16 > ua-parser-js@0.7.17
+Your dependencies are out of date, otherwise you would be using a newer ua-parser-js than ua-parser-js@0.7.17.
+✗ Medium severity vulnerability found on ua-parser-js@0.7.17
+- desc: Regular Expression Denial of Service (ReDoS)
+- info: https://snyk.io/vuln/npm:ua-parser-js:20180227
+- from: mozilla-addons-frontend@0.0.1 > react-textarea-autosize@7.0.4 > prop-types@15.6.1 > fbjs@0.8.16 > ua-parser-js@0.7.17
+Your dependencies are out of date, otherwise you would be using a newer ua-parser-js than ua-parser-js@0.7.17.
+Organisation: add-ons-team
+Package manager: yarn
+Target file: package.json
+Open source: yes
+Local Snyk policy found
+Tested 515 dependencies for known vulnerabilities, found 1 vulnerability, 6 vulnerable paths.
+Run `snyk wizard` to address these issues.
+
+but this is odd because our package.json file specifies version 0.7.18 of `ua-parser-js, which is the latest version.
+If I run npm list ua-parser-js locally, I see:
+mozilla-addons-frontend@0.0.1 /Users/bsilverberg/Documents/gitRepos/addons-frontend
+├─┬ react@16.4.2
+│ └─┬ fbjs@0.8.16
+│   └── ua-parser-js@0.7.17
+├─┬ react-super-responsive-table@4.3.1
+│ └─┬ create-react-context@0.2.2
+│   └─┬ fbjs@0.8.17
+│     └── ua-parser-js@0.7.18  deduped
+└── ua-parser-js@0.7.18
+
+I'm not entirely sure how to interpret that, but I think it means I have 0.7.18 installed locally.
+@kumar303 Do we think this is just a temporary blip in the snyk service as we've seen a couple of times in the past?

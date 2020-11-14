@@ -1,0 +1,11 @@
+Update addons-notes README with Vue example
+
+
+Issue: #5293
+What I did
+README for addons-notes was missing an example for Vue. Added an example based on other addon READMEs and solution suggested by @ndelangen in the specified issue. Cleaned the README to better match other addon READMEs.
+Tested the example with Storybook 5.0.6 and Storybook Addon Notes 5.0.6.
+Side note: Not sure if the following line in the README is still valid:
+
+NOTE: Documentation on master branch is for alpha version, stable release is on master
+

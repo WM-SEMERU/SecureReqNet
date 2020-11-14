@@ -1,0 +1,144 @@
+kubeadm upgrade plan not working for v1.13.5 to v1.14.0
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+Bug Report
+Versions
+kubeadm version (use kubeadm version):
+v.1.14.0
+Environment:
+
+
+Kubernetes version (use kubectl version): v1.13.5
+
+
+Cloud provider or hardware configuration: AWS EC2
+
+
+OS (e.g. from /etc/os-release): Ubuntu 16.04.6 LTS
+
+
+Kernel (e.g. uname -a): Linux k8s-node-1 4.4.0-143-generic #169-Ubuntu SMP Thu Feb 7 07:56:38 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Others: kubeadm provisioned single master k8s cluster (3 nodes), this cluster was created using kubeadm when k8s was at v1.9.0.
+
+
+What happened?
+Use kubeadm to ugrade the cluster, v1.13.4 to v1.13.5 was successful. To v1.14.0 failed becaues kubeadm upgrade plan pre-flight checks trying to connec to etcd using the node's private IP (assigned to NIC eth0) instead of the loopback address etcd is binding to.
+Error
+root@k8s-node-1:~# sudo kubeadm upgrade plan
+[preflight] Running pre-flight checks.
+[upgrade] Making sure the cluster is healthy:
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+error syncing endpoints with etc: dial tcp 192.168.100.21:2379: connect: connection refused
+As per the kubeadm init workflow, single master k8s cluster etcd pod is created via static pod manifests. By looking at the manifest, etcd binds 127.0.0.1 and is not exposed to external world.
+root@k8s-node-1:/etc/kubernetes/manifests# cat etcd.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  creationTimestamp: null
+  labels:
+    component: etcd
+    tier: control-plane
+  name: etcd
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - etcd
+    - --advertise-client-urls=https://127.0.0.1:2379
+    - --cert-file=/etc/kubernetes/pki/etcd/server.crt
+    - --client-cert-auth=true
+    - --data-dir=/var/lib/etcd
+    - --initial-advertise-peer-urls=https://127.0.0.1:2380
+    - --initial-cluster=k8s-node-1=https://127.0.0.1:2380
+    - --key-file=/etc/kubernetes/pki/etcd/server.key
+    - --listen-client-urls=https://127.0.0.1:2379
+    - --listen-peer-urls=https://127.0.0.1:2380
+    - --name=k8s-node-1
+    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+    - --peer-client-cert-auth=true
+    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
+    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    - --snapshot-count=10000
+    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    image: k8s.gcr.io/etcd:3.2.24
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -ec
+        - ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt
+          --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
+          get foo
+      failureThreshold: 8
+      initialDelaySeconds: 15
+      timeoutSeconds: 15
+    name: etcd
+    resources: {}
+    volumeMounts:
+    - mountPath: /var/lib/etcd
+      name: etcd-data
+    - mountPath: /etc/kubernetes/pki/etcd
+      name: etcd-certs
+  hostNetwork: true
+  priorityClassName: system-cluster-critical
+  volumes:
+  - hostPath:
+      path: /var/lib/etcd
+      type: DirectoryOrCreate
+    name: etcd-data
+  - hostPath:
+      path: /etc/kubernetes/pki/etcd
+      type: DirectoryOrCreate
+    name: etcd-certs
+status: {}
+What you expected to happen?
+kubeadm upgrade plan should work as expected to output the details, just like v1.13.4 to v.1.3.5.
+ubuntu@k8s-node-1:~$ sudo kubeadm upgrade plan
+[preflight] Running pre-flight checks.
+[upgrade] Making sure the cluster is healthy:
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+[upgrade] Fetching available versions to upgrade to
+[upgrade/versions] Cluster version: v1.13.4
+[upgrade/versions] kubeadm version: v1.13.5
+I0327 09:52:14.655319   12224 version.go:237] remote version is much newer: v1.14.0; falling back to: stable-1.13
+[upgrade/versions] Latest stable version: v1.13.5
+[upgrade/versions] Latest version in the v1.13 series: v1.13.5
+
+Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
+COMPONENT   CURRENT       AVAILABLE
+Kubelet     2 x v1.13.4   v1.13.5
+            1 x v1.13.5   v1.13.5
+
+Upgrade to the latest version in the v1.13 series:
+
+COMPONENT            CURRENT   AVAILABLE
+API Server           v1.13.4   v1.13.5
+Controller Manager   v1.13.4   v1.13.5
+Scheduler            v1.13.4   v1.13.5
+Kube Proxy           v1.13.4   v1.13.5
+CoreDNS              1.2.6     1.2.6
+Etcd                 3.2.24    3.2.24
+
+You can now apply the upgrade by executing the following command:
+
+        kubeadm upgrade apply v1.13.5
+
+_____________________________________________________________________
+
+ubuntu@k8s-node-1:~$ sudo kubeadm upgrade apply v1.13.5
+How to reproduce it (as minimally and precisely as possible)?
+Follow the upgrade guide, upgrade any v.1.13.x cluster (created using kubeadm) to v1.14.0.
+I've tried to change the bind address but it has so many dependencies that breaks more than it fixes. Also tried to expose the pod as NodePort service, tried using iptables rules to forward traffic destined to the IP address (192.168.100.12 in this case) port 2379 to loopback with no luck.
+Is there a way to override the etcd endpoint when running kubeadm upgrade plan that'll be the easiest solution.
+Anything else we need to know?
+Hmm...

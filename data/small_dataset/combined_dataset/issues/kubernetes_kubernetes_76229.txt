@@ -1,0 +1,9 @@
+Use read lock for PriorityQueue#PendingPods
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+PriorityQueue#PendingPods only performs read operations. Using read lock should suffice.
+NONE
+

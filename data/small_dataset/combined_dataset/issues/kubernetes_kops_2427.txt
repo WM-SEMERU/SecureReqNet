@@ -1,0 +1,4 @@
+Route53 mapper should add `listHostedZones` for master node
+
+
+Route53 mapper doesn't add this policy to master node and throws error Access denied. No permission to listHostedZones.

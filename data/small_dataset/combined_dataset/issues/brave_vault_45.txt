@@ -1,0 +1,4 @@
+Add NSP security check
+
+
+Can basically copy/paste brave/browser-laptop#205

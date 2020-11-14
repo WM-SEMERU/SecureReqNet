@@ -1,0 +1,49 @@
+[3.4] [Validator] Add missing french validators translations
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+~
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+

@@ -1,0 +1,14 @@
+Build OE libraries with more secure flags
+
+
+Apply recommended security hardening flags to build of oehostapp and oecore
+libs. This includes:
+
+Compile host apps with -D_FORTIFY_SOURCE=2 and -fstack-protector-strong.
+Link both enclaves and host apps with -z,noexecstack.
+Link enclaves with -z,now in addition.
+Update pkg-config to apply these by default for samples.
+Update host and enclave/core CMakeLists.txt to export these flags.
+Update CHANGELOG.md to reflect this.
+
+Fixes #1600

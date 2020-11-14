@@ -1,0 +1,5 @@
+Resetting origin or destination in same directions builder, adds to list instead of replacing
+
+
+Described in the title, if you setOrigin twice, it will only add to the list instead of replacing the origin found in the list.
+@zugaldia

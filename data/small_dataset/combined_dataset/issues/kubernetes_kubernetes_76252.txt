@@ -1,0 +1,13 @@
+Change Mutex to RWMutex for pod backoff
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+pod_backoff.go is using Mutex while it can be replaced by RWMutex
+Which issue(s) this PR fixes:
+Fixes #
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+

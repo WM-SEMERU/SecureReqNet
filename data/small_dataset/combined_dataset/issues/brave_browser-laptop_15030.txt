@@ -1,0 +1,27 @@
+unable to scroll when etherscan.io opened from ETH Wallet
+
+
+Description
+When you open etherscan.io from the ETH Wallet account page, you are unable to scroll on that page using trackpad or mouse wheel.
+Steps to Reproduce
+
+Launch 0.23.100
+Navigate to ETH Wallet page (already enabled, synced, and have a wallet created)
+Click on your wallet.
+On the account page, select 'View on Etherscan' button.
+On the etherscan.io tab that is opened, try scrolling with trackpad or mouse wheel.
+
+Actual result:
+You are unable to scroll with trackpad or mousewheel. Click back on Preferences and go back to etherscan.io tab. Now you can scroll with trackpad/mouse wheel.
+
+Expected result:
+Should be able to scroll via trackpad or mouse wheel the first time you're navigated to the page.
+Reproduces how often:
+easily
+Brave Version
+about:brave info:
+0.23.100
+Reproducible on current live release:
+n/a
+Additional Information
+reproduced by @kjozwiak

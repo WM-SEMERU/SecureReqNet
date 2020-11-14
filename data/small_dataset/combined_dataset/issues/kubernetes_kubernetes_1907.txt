@@ -1,0 +1,6 @@
+Distribute auth tokens to pods
+
+
+Before allowing pods to make changes to the cluster state, we need to check their identity and verify that they're permitted to make changes.
+An idea for checking identity: suppose we generate a token when a BoundPod is created. Kubelet passes this token into the pod via an ENV var. apiserver can then look up this token to verify identity.
+Clearly there's some security implications; if the wrong actor is able to read the BoundPods endpoint, they could impersonate another pod.

@@ -1,0 +1,5 @@
+In https://gitlab.com/gitlab-org/gitlab-ce/issues/29661, we leaked too much information by using `to_json(include: { ... })` without carefully considering the implications.
+
+We should create a RuboCop cop to warn when `include` is used without `only` in one of these methods. Longer-term, these methods should be replaced with serializers.
+
+If that's too hard, we could create a cop to warn whenever `{as,to}_json` are called with any arguments, but objects in `lib/` often define these methods without any AR backing, which means they are acting as their own serializers. (To me, the overhead of adding a serializer doesn't seem worth it in those cases, but if we get to a point where they are the only places we use these methods, it might be worth it.)

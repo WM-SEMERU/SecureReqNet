@@ -1,0 +1,34 @@
+[Security] Bug on HTTP Basic Auth
+
+
+Hello,
+I am experiencing a bug on symfony v2.6.9 security system. It throws exception Access Denied with status code 500 instead 403. The same security.yml file works perfectly on latest version.
+security.yml:
+security:
+    providers:
+        in_memory:
+            memory:
+                users:
+                    api:
+                        password: test123
+                        roles: ROLE_USER
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        api:
+            pattern: ^/api
+            http_basic:
+                provider: in_memory
+
+        default:
+            anonymous: ~
+
+    access_control:
+        - { path: ^/api, roles: ROLE_USER}
+
+Error in log file
+[2015-07-28 17:47:56] product_search.CRITICAL: Uncaught PHP Exception Symfony\Component\Security\Core\Exception\AccessDeniedException: "Access Denied" at /Users/gcds/Projects/Work/Web/PHP/symfony/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/AccessListener.php line 70: http://127.0.0.1:8000/api {"exception":"[object] (Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException(code: 403): Access Denied at /Users/gcds/Projects/Work/Web/PHP/symfony/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/AccessListener.php:70)"} []
+

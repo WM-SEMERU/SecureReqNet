@@ -1,0 +1,9 @@
+improving getting version and git SHA
+
+
+Motivation
+Improving the method in which we retrieve the version and git properties.
+Modifications
+Just use a template file and substitute properties for literals
+Get rid of properties files that is not necessary
+Move code to pulsar-common so other modules have access to the code as well

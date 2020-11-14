@@ -1,0 +1,1081 @@
+[Security] Can switch current logged in user
+
+
+I ran into a huge problem....
+So in the following screen shots, I have two users in the database... one is jordanstout@gmail.com and the other is jordanstout2@gmail.com...
+
+http://i55.tinypic.com/1073rbp.png -- I'm logged in as jordanstout@gmail.com here
+http://i52.tinypic.com/21lnywy.png -- I changed my email to an existing user.. this is before I hit Save
+http://i53.tinypic.com/291l07r.png -- I hit Save and get the UniqueEntity error, however, notice the security user changed at the bottom?... Now I just switched to jordanstout2@gmail.com's account... the user's ID even changed.
+
+Is this a bug or did I do something completely wrong?.... I would assume that security context user's id should never change?
+My current code is as follows:
+UserController.php
+/**
+ * @Route("/user/profile", name="user_profile")
+ * @Template()
+ */
+public function profileAction()
+{
+    $form    = $this->createForm(new UserType(false), $user = $this->getUser());
+    $handler = $this->createHandler(new UserHandler(), $form);
+
+    if ($handler->process($this->container->get('security.encoder_factory'), false)) {
+        $this->get('session')->setFlash('success', 'Successfully edited profile!');
+        return $this->redirect($this->generateUrl('user_profile'));
+    }
+
+    return array(
+        'user' => $user,
+        'form' => $form->createView()
+    );
+}
+
+UserType.php
+public $new;
+
+public function __construct($new = true)
+{
+    $this->new = $new;
+}
+
+public function buildForm(FormBuilder $builder, array $options)
+{
+    $builder
+        ->add('firstName', 'text', array('label' => 'First Name'))
+        ->add('lastName', 'text', array('label' => 'Last Name'))
+        ->add('email')
+        ->add('plainPassword', 'repeated', array(
+            'type'            => 'password',
+            'first_name'      => "Password",
+            'second_name'     => "Re-enter Password",
+            'invalid_message' => "The passwords don't match!"
+        ));
+}
+
+public function getDefaultOptions(array $options)
+{
+    return array(
+        'data_class' => 'JStout\MainBundle\Entity\User',
+        'validation_groups' => $this->new ? 'Registration' : 'Edit'
+    );
+}
+
+UserHandler.php
+public function process(EncoderFactory $encoderFactory, $new = true)
+{
+    if ('POST' == $this->request->getMethod()) {
+        // bind form data
+        $this->form->bindRequest($this->request);
+
+        // If form is valid
+        if ($this->form->isValid() && ($user = $this->form->getData()) instanceOf User) {
+            // if user is new or password isn't null
+            if (true === $new || $user->getPlainPassword() != '') {
+                $encoder = $encoderFactory->getEncoder($user);
+                $user->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
+                $user->setPassword($encoder->encodePassword($user->getPlainPassword(), $user->getSalt()));
+                $user->eraseCredentials();
+            }
+
+            // save user to the database
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+security.yml
+security:
+    encoders:
+        JStout\MainBundle\Entity\User:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 100
+
+    providers:
+        main:
+            entity: { class: JStout\MainBundle\Entity\User, property: email }
+
+    firewalls:
+        main:
+            pattern: .*
+            form_login:
+                login_path: /user/login
+                check_path: /user/login/check
+                default_target_path: /user
+            logout:
+                path: /user/logout
+                target: /
+            anonymous: true
+
+    access_control:
+        # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
+        - { path: ^/_wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # AsseticBundle paths used when using the controller for assets
+        - { path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # URLs user's should have access to at all times
+        - { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/login/check$, role: IS_AUTHENTICATED_ANONYMOUSLY } # for the case of a failed login
+        # Secured parts of the site
+        - { path: ^/admin/*, role: ROLE_ADMIN }
+        - { path: ^/user/*, role: ROLE_USER_TRIAL }
+        # Of none of the above matches, allow anonymous browsing...
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    role_hierarchy:
+        ROLE_USER: ROLE_USER_TRIAL
+
+    acl:
+        connection: default
+
+User.php Entity
+namespace JStout\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+
+/**
+ * JStout\MainBundle\Entity\User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity
+ * @DoctrineAssert\UniqueEntity(fields="email", message="Oops! That email already exists in our system", groups={"Registration", "Edit"})
+ */
+class User implements AdvancedUserInterface
+{
+    const ROLE_DEFAULT = 'ROLE_USER_TRIAL';
+
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string $email
+     *
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
+     * @Assert\Email(message="Please enter a valid email", groups={"Registration", "Edit"})
+     * @Assert\NotBlank(message="Please enter your email", groups={"Registration", "Edit"})
+     * @Assert\MaxLength(limit="100", message="Please enter a valid email", groups={"Registration", "Edit"})
+     */
+    private $email;
+
+    /**
+     * @var string $firstName
+     *
+     * @ORM\Column(name="first_name", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="Please enter your first name", groups={"Registration", "Edit"})
+     * @Assert\MaxLength(limit="50", message="Your first name is too long", groups={"Registration", "Edit"})
+     */
+    private $firstName;
+
+    /**
+     * @var string $lastName
+     *
+     * @ORM\Column(name="last_name", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="Please enter your last name", groups={"Registration", "Edit"})
+     * @Assert\MaxLength(limit="50", message="Your last name is too long", groups={"Registration", "Edit"})
+     */
+    private $lastName;
+
+    /**
+     * @var string $address
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @var string $address2
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $address2;
+
+    /**
+     * @var string $city
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @var string $state
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $state;
+
+    /**
+     * @var string $postal
+     *
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $postal;
+
+    /**
+     * @var date $dob
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dob;
+
+    /**
+     * @var array $roles
+     *
+     * @ORM\Column(type="array", nullable=false)
+     */
+    private $roles;
+
+    /**
+     * @var string $salt
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $salt;
+
+    /**
+     * @var string $password
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $password;
+
+    /**
+     * @var string $plainPassword
+     *
+     * @Assert\NotBlank(message="Please enter a password", groups="Registration")
+     * @Assert\MinLength(limit="5", message="Your password is too short", groups="Registration")
+     * @Assert\MaxLength(limit="255", message="Your password is too long", groups="Registration")
+     */
+    private $plainPassword;
+
+    /**
+     * @var datetime $lastLoginAt
+     *
+     * @ORM\Column(name="last_login_at", type="datetime", nullable=true)
+     */
+    private $lastLoginAt;
+
+    /**
+     * @var string $lastLoginIp
+     *
+     * @ORM\Column(name="last_login_ip", type="string", length=15, nullable=true)
+     */
+    private $lastLoginIp;
+
+    /**
+     * @var boolean $enabled
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $enabled;
+
+    /**
+     * @var boolean $locked
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $locked;
+
+    /**
+     * @var boolean $expired
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $expired;
+
+    /**
+     * @var datetime $expiresAt
+     *
+     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
+     */
+    private $expiresAt;
+
+    /**
+     * @var string $confirmationToken
+     *
+     * @ORM\Column(name="confirmation_token", type="string", length=255, nullable=true)
+     */
+    private $confirmationToken;
+
+    /**
+     * @var datetime $passwordRequestedAt
+     *
+     * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
+     */
+    private $passwordRequestedAt;
+
+    /**
+     * @var datetime $createdAt
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var datetime $updatedAt
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var boolean $credentialsExpired
+     *
+     * @ORM\Column(name="credentials_expired", type="boolean", nullable=false)
+     */
+    private $credentialsExpired;
+
+    /**
+     * @var datetime $credentialsExpireAt
+     *
+     * @ORM\Column(name="credentials_expire_at", type="datetime", nullable=true)
+     */
+    private $credentialsExpireAt;
+
+    /**
+     * @var Info
+     *
+     * @ORM\ManyToOne(targetEntity="Info")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="info_id", referencedColumnName="id")
+     * })
+     */
+    private $info;
+
+    public function __construct()
+    {
+        $this->enabled   = true;
+        $this->locked    = false;
+        $this->expired   = false;
+        $this->roles     = array();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+        $this->credentialsExpired = false;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set address2
+     *
+     * @param string $address2
+     */
+    public function setAddress2($address2)
+    {
+        $this->address2 = $address2;
+    }
+
+    /**
+     * Get address2
+     *
+     * @return string 
+     */
+    public function getAddress2()
+    {
+        return $this->address2;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set postal
+     *
+     * @param string $postal
+     */
+    public function setPostal($postal)
+    {
+        $this->postal = $postal;
+    }
+
+    /**
+     * Get postal
+     *
+     * @return string 
+     */
+    public function getPostal()
+    {
+        return $this->postal;
+    }
+
+    /**
+     * Set dob
+     *
+     * @param date $dob
+     */
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
+    }
+
+    /**
+     * Get dob
+     *
+     * @return date 
+     */
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
+    /**
+     * Add Role
+     *
+     * @param string $role
+     */
+    public function addRole($role)
+    {
+        $role = strtoupper($role);
+        if ($role === self::ROLE_DEFAULT) {
+            return;
+        }
+
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+    }
+
+    /**
+     * Set Roles
+     *
+     * @param array $roles
+     */
+    public function setRoles(array $roles)
+    {
+        $this->roles = array();
+
+        foreach ($roles as $role) {
+            $this->addRole($role);
+        }
+    }
+
+    /**
+     * Get Roles
+     *
+     * @return array The Roles
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+
+        // we need to make sure to have at least one role
+        $roles[] = self::ROLE_DEFAULT;
+
+        return array_unique($roles);
+    }
+
+    /**
+    * Never use this to check if this user has access to anything!
+    *
+    * Use the SecurityContext, or an implementation of AccessDecisionManager
+    * instead, e.g.
+    *
+    * $securityContext->isGranted('ROLE_USER');
+    *
+    * @param string $role
+    * @return Boolean
+    */
+    function hasRole($role)
+    {
+        return in_array(strtoupper($role), $this->getRoles(), true);
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @ORM\PreUpdate
+     */
+    public function touchUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set plain password
+     *
+     * @param string $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * Get plain password
+     *
+     * @return string $plainPassword
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * Set lastLoginAt
+     *
+     * @param datetime $lastLoginAt
+     */
+    public function setLastLoginAt($lastLoginAt)
+    {
+        $this->lastLoginAt = $lastLoginAt;
+    }
+
+    /**
+     * Get lastLoginAt
+     *
+     * @return datetime 
+     */
+    public function getLastLoginAt()
+    {
+        return $this->lastLoginAt;
+    }
+
+    /**
+     * Set lastLoginIp
+     *
+     * @param string $lastLoginIp
+     */
+    public function setLastLoginIp($lastLoginIp)
+    {
+        $this->lastLoginIp = $lastLoginIp;
+    }
+
+    /**
+     * Get lastLoginIp
+     *
+     * @return string 
+     */
+    public function getLastLoginIp()
+    {
+        return $this->lastLoginIp;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set locked
+     *
+     * @param boolean $locked
+     */
+    public function setLocked($locked)
+    {
+        $this->locked = $locked;
+    }
+
+    /**
+     * Get locked
+     *
+     * @return boolean 
+     */
+    public function getLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * Set expired
+     *
+     * @param boolean $expired
+     */
+    public function setExpired($expired)
+    {
+        $this->expired = $expired;
+    }
+
+    /**
+     * Get expired
+     *
+     * @return boolean 
+     */
+    public function getExpired()
+    {
+        return $this->expired;
+    }
+
+    /**
+     * Set expiresAt
+     *
+     * @param datetime $expiresAt
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
+    }
+
+    /**
+     * Get expiresAt
+     *
+     * @return datetime 
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * Set confirmationToken
+     *
+     * @param string $confirmationToken
+     */
+    public function setConfirmationToken($confirmationToken)
+    {
+        $this->confirmationToken = $confirmationToken;
+    }
+
+    /**
+     * Get confirmationToken
+     *
+     * @return string 
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * Set passwordRequestedAt
+     *
+     * @param datetime $passwordRequestedAt
+     */
+    public function setPasswordRequestedAt($passwordRequestedAt)
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+    }
+
+    /**
+     * Get passwordRequestedAt
+     *
+     * @return datetime 
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return datetime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set credentialsExpired
+     *
+     * @param boolean $credentialsExpired
+     */
+    public function setCredentialsExpired($credentialsExpired)
+    {
+        $this->credentialsExpired = $credentialsExpired;
+    }
+
+    /**
+     * Get credentialsExpired
+     *
+     * @return boolean 
+     */
+    public function getCredentialsExpired()
+    {
+        return $this->credentialsExpired;
+    }
+
+    /**
+     * Set credentialsExpireAt
+     *
+     * @param datetime $credentialsExpireAt
+     */
+    public function setCredentialsExpireAt($credentialsExpireAt)
+    {
+        $this->credentialsExpireAt = $credentialsExpireAt;
+    }
+
+    /**
+     * Get credentialsExpireAt
+     *
+     * @return datetime 
+     */
+    public function getCredentialsExpireAt()
+    {
+        return $this->credentialsExpireAt;
+    }
+
+    /**
+     * Set info
+     *
+     * @param JStout\MainBundle\Entity\Info $info
+     */
+    public function setInfo(\JStout\MainBundle\Entity\Info $info)
+    {
+        $this->info = $info;
+    }
+
+    /**
+     * Get info
+     *
+     * @return JStout\MainBundle\Entity\Info 
+     */
+    public function getInfo()
+    {
+        return $this->info;
+    }
+
+    /**
+    * Checks whether the user's account has expired.
+    *
+    * Implements AdvancedUserInterface
+    *
+    * @return Boolean true if the user's account is non expired, false otherwise
+    */
+    public function isAccountNonExpired()
+    {
+        if (true === $this->expired) {
+            return false;
+        }
+
+        if (null !== $this->expiresAt && $this->expiresAt->getTimestamp() < time()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+    * Checks whether the user is locked.
+    *
+    * Implements AdvancedUserInterface
+    *
+    * @return Boolean true if the user is not locked, false otherwise
+    */
+    public function isAccountNonLocked()
+    {
+        return !$this->locked;
+    }
+
+    /**
+    * Checks whether the user's credentials (password) has expired.
+    *
+    * Implements AdvancedUserInterface
+    *
+    * @return Boolean true if the user's credentials are non expired, false otherwise
+    */
+    public function isCredentialsNonExpired()
+    {
+        if (true === $this->credentialsExpired) {
+            return false;
+        }
+
+        if (null !== $this->credentialsExpireAt && $this->credentialsExpireAt->getTimestamp() < time()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+    * Checks whether the user is enabled.
+    *
+    * Implements AdvancedUserInterface
+    *
+    * @return Boolean true if the user is enabled, false otherwise
+    */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * @return void
+     */
+    function eraseCredentials()
+    {
+        $this->plainPassword = null;
+    }
+
+    /**
+     * The equality comparison should neither be done by referential equality
+     * nor by comparing identities (i.e. getId() === getId()).
+     *
+     * However, you do not need to compare every attribute, but only those that
+     * are relevant for assessing whether re-authentication is required.
+     *
+     * @param UserInterface $user
+     * @return Boolean
+     */
+    public function equals(UserInterface $user)
+    {
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+        if ($this->getSalt() !== $user->getSalt()) {
+            return false;
+        }
+
+        if ($this->isAccountNonExpired() !== $user->isAccountNonExpired()) {
+            return false;
+        }
+
+        if (!$this->locked !== $user->isAccountNonLocked()) {
+            return false;
+        }
+
+        if ($this->isCredentialsNonExpired() !== $user->isCredentialsNonExpired()) {
+            return false;
+        }
+
+        if ($this->enabled !== $user->isEnabled()) {
+            return false;
+        }
+
+        return true;
+    }
+}
+

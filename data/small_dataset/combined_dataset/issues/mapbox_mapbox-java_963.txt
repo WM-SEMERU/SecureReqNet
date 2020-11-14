@@ -1,0 +1,8 @@
+Pass error responses for Mapbox Directions and MapMatching
+
+
+We are currently checking / passing error responses to Callback#onFailure.  From the Retrofit javadoc > Callback#onFailure:
+
+Invoked when a network exception occurred talking to the server or when an unexpected exception occurred creating the request or processing the response.
+
+Technically, when we receive an error code (DirectionsError) from either the Directions or MapMatching API, this scenario is not occurring so we shouldn't force the error message to onFailure wrapped in a Throwable.

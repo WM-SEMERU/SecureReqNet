@@ -1,0 +1,137 @@
+'This is something we've agreed upon in the Frontend team but haven't yet made an official policy, so this is a tracking issue for that.
+
+In order to protect against XSS we'd like to block any inline scripts on GitLab.com using a Content Security Policy (see #18231). This would mean that – should a vulnerability be found which allows unsanitized HTML – it wouldn't be possible to abuse the vulnerability and inject arbitrary scripts into the page.
+
+While this is an inconvenience, it's definitely a worthwhile tradeoff. In many places throughout the app, inline JS is used for passing data to the actual JavaScript. These kinds of use cases can easily be replaced by data elements.
+
+----------
+
+For example:
+
+```haml
+:javascript
+   var opts = {
+     merge_check_url: "#{merge_check_namespace_project_merge_request_path(@project.namespace, @project, @merge_request)}",
+     check_enable: #{@merge_request.unchecked? ? "true" : "false"},
+     ci_status_url: "#{ci_status_namespace_project_merge_request_path(@project.namespace, @project, @merge_request)}",
+     gitlab_icon: "#{asset_path 'gitlab_logo.png'}"
+   }
+```
+
+can be replaced with
+
+```haml
+.js-merge-request-widget-options{ data: {
+   merge_check_url: merge_check_namespace_project_merge_request_path(@project.namespace, @project, @merge_request),
+   check_enable: (@merge_request.unchecked? ? true : false),
+   ci_status_url: ci_status_namespace_project_merge_request_path(@project.namespace, @project, @merge_request),
+   gitlab_icon: asset_path('gitlab_logo.png')
+}}
+```
+
+and then the data is captured in the CoffeeScript:
+
+```coffee
+mergeCheckUrl = $('.js-merge-request-widget-options').data('merge-check-url')
+checkEnable = $('.js-merge-request-widget-options').data('check-enable')
+# etc.
+```
+
+------
+
+So how many uses of inline scripts are there? As of July 15, 2016:
+
+- `%script` (10 uses in 2 files)
+  - [`app/views/u2f/_register.html.haml`](app/views/u2f/_register.html.haml)
+  - [`app/views/u2f/_authenticate.html.haml`](app/views/u2f/_authenticate.html.haml)
+- `:javascript` (71 uses across a number of files)
+
+```bash
+$ git grep ':javascript'
+app/views/admin/labels/_form.html.haml::javascript
+app/views/dashboard/todos/index.html.haml::javascript
+app/views/groups/group_members/index.html.haml::javascript
+app/views/groups/milestones/new.html.haml::javascript
+app/views/help/ui.html.haml:    :javascript
+app/views/import/bitbucket/status.html.haml::javascript
+app/views/import/fogbugz/new_user_map.html.haml::javascript
+app/views/import/fogbugz/status.html.haml::javascript
+app/views/import/github/status.html.haml::javascript
+app/views/import/gitlab/status.html.haml::javascript
+app/views/import/gitorious/status.html.haml::javascript
+app/views/import/google_code/status.html.haml::javascript
+app/views/layouts/_bootlint.haml::javascript
+app/views/layouts/_google_analytics.html.haml::javascript
+app/views/layouts/_piwik.html.haml::javascript
+app/views/layouts/_search.html.haml:      :javascript
+app/views/layouts/_search.html.haml:      :javascript
+app/views/layouts/_search.html.haml:    :javascript
+app/views/layouts/header/_default.html.haml:    :javascript
+app/views/layouts/project.html.haml:    :javascript
+app/views/profiles/personal_access_tokens/index.html.haml::javascript
+app/views/profiles/two_factor_auths/show.html.haml:  :javascript
+app/views/projects/_activity.html.haml::javascript
+app/views/projects/_home_panel.html.haml::javascript
+app/views/projects/blob/_new_dir.html.haml::javascript
+app/views/projects/blob/_remove.html.haml::javascript
+app/views/projects/blob/_upload.html.haml::javascript
+app/views/projects/blob/edit.html.haml::javascript
+app/views/projects/blob/new.html.haml::javascript
+app/views/projects/branches/new.html.haml::javascript
+app/views/projects/builds/show.html.haml::javascript
+app/views/projects/commit/_change.html.haml::javascript
+app/views/projects/commit/_commit_box.html.haml::javascript
+app/views/projects/commits/show.html.haml::javascript
+app/views/projects/compare/_form.html.haml::javascript
+app/views/projects/find_file/show.html.haml::javascript
+app/views/projects/graphs/ci/_build_times.haml::javascript
+app/views/projects/graphs/ci/_builds.haml:  :javascript
+app/views/projects/graphs/commits.html.haml::javascript
+app/views/projects/graphs/languages.html.haml::javascript
+app/views/projects/graphs/show.html.haml::javascript
+app/views/projects/imports/show.html.haml:    :javascript
+app/views/projects/issues/_form.html.haml::javascript
+app/views/projects/labels/_label.html.haml:    :javascript
+app/views/projects/merge_requests/_form.html.haml::javascript
+app/views/projects/merge_requests/_new_compare.html.haml::javascript
+app/views/projects/merge_requests/_new_submit.html.haml::javascript
+app/views/projects/merge_requests/_new_submit.html.haml::javascript
+app/views/projects/merge_requests/_show.html.haml::javascript
+app/views/projects/merge_requests/show/_how_to_merge.html.haml::javascript
+app/views/projects/merge_requests/widget/_show.html.haml::javascript
+app/views/projects/merge_requests/widget/open/_accept.html.haml:  :javascript
+app/views/projects/merge_requests/widget/open/_check.html.haml::javascript
+app/views/projects/new.html.haml::javascript
+app/views/projects/notes/_notes_with_form.html.haml::javascript
+app/views/projects/pipelines/new.html.haml::javascript
+app/views/projects/project_members/_team.html.haml::javascript
+app/views/projects/protected_branches/_dropdown.html.haml::javascript
+app/views/projects/tags/new.html.haml::javascript
+app/views/projects/tree/_tree_content.html.haml::javascript
+app/views/shared/_clone_panel.html.haml::javascript
+app/views/shared/_new_project_item_select.html.haml:  :javascript
+app/views/shared/issuable/_filter.html.haml::javascript
+app/views/shared/issuable/_participants.html.haml::javascript
+app/views/shared/issuable/_sidebar.html.haml:    :javascript
+app/views/shared/projects/_list.html.haml::javascript
+app/views/shared/snippets/_form.html.haml::javascript
+app/views/u2f/_authenticate.html.haml::javascript
+app/views/u2f/_register.html.haml::javascript
+app/views/users/calendar.html.haml::javascript
+app/views/users/show.html.haml::javascript
+```
+
+Some MRs that remove inline JS, for reference:
+
+- !4394
+- !4914 
+- !5003 
+- !5283 
+- !5284 
+
+Some resources for replacing inline scripts:
+- [Using Piwik without inline scripts](http://piwik.org/faq/general/faq_20904/)
+- [Removing Inline Javascript (for CSP)](https://oreoshake.github.io/csp/2013/01/13/removing-inline-js-for-csp.html)
+- [Content Security Policy on the GitHub Blog](https://github.com/blog/1477-content-security-policy)
+
+cc: @lbennett @timothyandrew @jschatz1

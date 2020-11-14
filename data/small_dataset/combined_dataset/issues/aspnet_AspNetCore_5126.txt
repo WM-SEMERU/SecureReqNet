@@ -1,0 +1,188 @@
+converting asp.net to asp.net core issue on onredirecttoidentityprovider
+
+
+recently we have migrated our project from asp.net to asp.net core, the project was working fine in asp.net, We have followed the migration document of Microsoft for migrating "asp.net to asp.net core" and modified accordingly, unfortunately, OnRedirectToIdentityProvider method in startup class is not working on challenge call (from the controller). It would be great if someone helps me to figure out where my code is wrong. I have been looping on the same issue for a while. thanks in advance.
+StartUp.cs
+public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            //Add a strongly-typed options class to DI
+            services.Configure<AuthOptions>(Configuration.GetSection("Authentication"));
+
+
+
+            services.AddAuthentication(opt => {
+                opt.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+
+            })
+            .AddCookie("MiddleWareCookie")
+                .AddOpenIdConnect(options => Configuration.Bind("Authentication", options));
+
+            services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            {
+
+                options.Authority = Configuration["Authentication:Authority"];
+                options.ClientId= Configuration["Authentication:ClientId"];
+                options.ClientSecret= Configuration["Authentication:ClientSecret"];
+
+
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    // Instead of using the default validation (validating against a single issuer value, as we do in
+                    // line of business apps), we inject our own multitenant validation logic
+                    ValidateIssuer = false,
+
+                    // If the app is meant to be accessed by entire organizations, add your issuer validation logic here.
+                    //IssuerValidator = (issuer, securityToken, validationParameters) => {
+                    //    if (myIssuerValidationLogic(issuer)) return issuer;
+                    //}
+                };
+
+                options.Events = new OpenIdConnectEvents
+                {
+
+                    OnRedirectToIdentityProvider = (context) =>
+                    {
+                        object obj = null;
+                        var request = context.Request;
+
+                        if (context.HttpContext.Items.TryGetValue("Authority", out obj))
+                        {
+                            string authority = obj as string;
+                            if (authority != null)
+                            {
+                                context.ProtocolMessage.IssuerAddress = authority;
+                            }
+                        }
+                        //string appBaseUrl = context.Request.Scheme + "://" + context.Request.Host + context.Request.PathBase;
+                        string appBaseUrl = @"https://localhost:44359/";//UriHelper.BuildAbsolute(request.Scheme, request.Host, request.PathBase);
+                        Debug.WriteLine($"appBaseUrl: {appBaseUrl}");
+                        context.ProtocolMessage.PostLogoutRedirectUri = appBaseUrl;
+                        context.ProtocolMessage.Prompt = "select_account";
+                        context.ProtocolMessage.Resource =  Configuration["Authentication:AzureResourceManagerIdentifier"];
+                        return Task.FromResult(0);
+                    },
+
+                    OnAuthorizationCodeReceived = async (context) =>
+                    {
+                        var request = context.HttpContext.Request;
+                        var currentUri = UriHelper.BuildAbsolute(request.Scheme, request.Host, request.PathBase, request.Path);
+                        var credential = new ClientCredential(context.Options.ClientId, context.Options.ClientSecret);
+                        string tenantId = context.Principal.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+
+                        //Comment
+                        Debug.WriteLine($"tenantID: {tenantId}");
+                        // Revisit
+                        string signedInUserUniqueName = context.Principal.FindFirst(ClaimTypes.Name).Value.Split('#')[context.Principal.FindFirst(ClaimTypes.Name).Value.Split('#').Length - 1];
+                        //Comment
+                        Debug.WriteLine($"tenantID: {signedInUserUniqueName}");
+
+                        var tokenCache = new ADALTokenCache(signedInUserUniqueName);
+                        tokenCache.Clear();
+
+                        // revisit
+                        AuthenticationContext authContext = new AuthenticationContext(string.Format("https://login.microsoftonline.com/{0}", tenantId), tokenCache);
+                        // var items = authContext.TokenCache.ReadItems().ToList();
+
+                        // revisit
+                        AuthenticationResult result = await authContext.AcquireTokenByAuthorizationCodeAsync(
+                             context.ProtocolMessage.Code, new Uri(currentUri), credential);
+
+                        //Tell the OIDC middleware we got the tokens, it doesn't need to do anything
+                        context.HandleCodeRedemption(result.AccessToken, result.IdToken);
+
+                    },
+
+                    OnTokenValidated = (context) => {
+                           string issuer = context.Principal.FindFirst("iss").Value;
+                        if (issuer != null)
+                        {
+                            if (!issuer.StartsWith("https://sts.windows.net/"))
+                                throw new SecurityTokenValidationException();
+                        }
+
+
+                        return Task.FromResult(0);
+
+                    },
+
+                    OnTicketReceived = context =>
+                    {
+                        // If your authentication logic is based on users then add your logic here
+                        return Task.CompletedTask;
+                    },
+                    OnAuthenticationFailed = context =>
+                    {
+                        context.Response.Redirect("/Error");
+                        context.HandleResponse(); // Suppress the exception
+                        return Task.CompletedTask;
+                    },
+                    // If your application needs to do authenticate single users, add your user validation below.
+                    //OnTokenValidated = context =>
+                    //{
+                    //    return myUserValidationLogic(context.Ticket.Principal);
+                    //}
+                };
+            });
+
+            services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseAuthentication();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+    }
+Subscription Contoller Method
+HttpContext.Items.Add("Authority", string.Format(_authOptions.Authority + "OAuth2/Authorize", _directoryId));
+
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict["prompt"] = "select_account";
+
+                var userIdentity = new ClaimsIdentity(User.Claims, "login");
+
+                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+                await HttpContext.AuthenticateAsync("MiddleWareCookie");

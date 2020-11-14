@@ -1,0 +1,37 @@
+Microsoft Security Advisory CVE-2018-8292 - .NET Core Information Disclosure Vulnerability
+
+
+Microsoft Security Advisory CVE-2018-8292
+.NET Core Information Disclosure Vulnerability
+Executive Summary
+Microsoft is releasing this security advisory to provide information about a vulnerability in .NET Core and PowerShell Core 6.0. This advisory also provides guidance on what developers can do to update their applications to remove this vulnerability.
+Microsoft is aware of a security feature bypass vulnerability that exists when .NET Core when HTTP authentication information is inadvertently exposed in an outbound request that encounters an HTTP redirect. An attacker who successfully exploited this vulnerability could use the information to further compromise the web application.  The PowerShell cmdlets Invoke-WebRequest and Invoke-RestMethod are not affected.
+System administrators running PowerShell Core applications are advised to migrate to PowerShell Core 6.1.
+Discussion
+Please use PowerShell/PowerShell#7981 for discussion of this advisory.
+Please use dotnet/corefx#32730 for discussion of the .NET CoreFx aspects this advisory.
+Affected Software
+The vulnerability affects PowerShell Core prior to version 6.1.0
+Advisory FAQ
+How do I know if I am affected?
+If all of the following are true:
+
+Run pwsh -v (if, you cannot launch PowerShell Core using pwsh you are affected).
+If the reported version is any version before 6.1.0, you are affected.
+You are using .NET Core HTTPClient directly.
+
+How do I update to an unaffected version?
+Follow the instructions at Get PowerShell to install the latest version of PowerShell Core.
+Other Information
+Reporting Security Issues
+If you have found a potential security issue in PowerShell Core, please email details to secure@microsoft.com.
+Support
+You can ask questions about this issue on GitHub in the PowerShell organization. This is located at https://github.com/PowerShell/. The Announcements repo (https://github.com/PowerShell/Announcements) will contain this bulletin as an issue and will include a link to a discussion issue where you can ask questions.
+What if the update breaks my script or module?
+You can uninstall the newer version of PowerShell Core and install the previous version of PowerShell Core. This should be treated as a temporary measure. Therefore, the script or module should be updated to work with the patched version of PowerShell Core.
+External Links
+CVE-2018-8292
+Revisions
+V1.0 (Oct 9, 2018): Advisory published.
+Version 1.0
+Last Updated 2018-01-24

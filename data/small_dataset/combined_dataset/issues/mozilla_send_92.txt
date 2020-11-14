@@ -1,0 +1,6 @@
+Ensure IP is anonymized in Google Analytics
+
+
+
+
+

@@ -1,0 +1,11 @@
+AMBARI-24951. New CLI option and question to populate existing 'ambari.ldap.attributes.user.group_member_attr' Ambari configuration property
+
+
+What changes were proposed in this pull request?
+A new question - with its CLI option - has been added to support LDAP integration in Ambari by populating an existing LDAP configuration property called ambari.ldap.attributes.user.group_member_attr
+How was this patch tested?
+In addition to unit test updates I executed several manual tests (with and without the --dap-user-group-member-attr CLI option). The CLI tool behaved as expected in all cases and the new data has been saved in the DB.
+For example:
+ambari-server setup-ldap --ambari-admin-username=admin --ambari-admin-password=admin --ldap-url=ad-nano.qe.hortonworks.com:333 --ldap-secondary-url=: --ldap-user-class=user --ldap-user-attr=sAMAccountName --ldap-group-class=group --ldap-group-attr=cn --ldap-member-attr=member --ldap-dn=distinguishedName --ldap-base-dn=CN=Users,DC=hwqe,DC=hortonworks,DC=com --ldap-bind-anonym=false --ldap-manager-dn=cn=manager,cn=Users,dc=hwqe,dc=hortonworks,dc=com --ldap-manager-password=TestUser123 --ldap-referral=follow --ldap-sync-username-collisions-behavior=convert --ldap-force-lowercase-usernames=false --ldap-pagination-enabled=false --ldap-ssl=false --ldap-force-setup --ldap-enabled-ambari=true --ldap-manage-services=true --ldap-enabled-services=* --ldap-user-group-member-attr=myMemberOf
+
+

@@ -1,0 +1,6 @@
+Change Key Server to Transparency Model
+
+
+From evn@google.com on June 18, 2014 21:35:26
+Tracking bug for Key Server
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=81

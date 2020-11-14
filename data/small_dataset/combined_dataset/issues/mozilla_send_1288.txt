@@ -1,0 +1,10 @@
+Replace title with Firefox Send logo
+
+
+Before:
+
+
+After:
+
+
+--Suriyaa

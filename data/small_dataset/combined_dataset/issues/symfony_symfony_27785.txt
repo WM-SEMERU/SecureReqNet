@@ -1,0 +1,32 @@
+No referer to redirect back in Event Subscriber for url with method POST
+
+
+Description
+I was trying to create my own kind a middleware to verify CSRF token using event subscriber for onKernelRequest request. I noticed that, in that event we have no referer to redirect user back when he submits POST form.
+Example
+UserController.php on line 110:
+Request {#18 ▼
+  +headers: HeaderBag {#25 ▼
+    #headers: array:13 [▼
+      "cookie" => array:1 [▶]
+      "accept-language" => array:1 [▶]
+      "accept-encoding" => array:1 [▶]
+      "referer" => array:1 [▶]
+
+in subscriber
+  +headers: HeaderBag {#25 ▼
+    #headers: array:12 [▼
+      "cookie" => array:1 [▶]
+      "accept-language" => array:1 [▶]
+      "accept-encoding" => array:1 [▶]
+      "dnt" => array:1 [▶]
+      "accept" => array:1 [▶]
+      "user-agent" => array:1 [▶]
+
+no referer for that event.
+Tried
+  KernelEvents::FINISH_REQUEST  => [  // or ::REQUEST
+                ['onKernelRequest', 0],
+            ],
+
+no header or server referer, do not know yet how to redirect user back from POST url to GET url with form.

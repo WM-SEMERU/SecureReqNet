@@ -1,0 +1,6 @@
+ObjectPoolProvider removed from the default set of dependencies added in the WebHostBuilder
+
+
+As part of making ASP.NET Core more pay for play, we moved the ObjectPoolProvider out of the main set of dependencies to the specific components that were using them.
+If you were relying on the ObjectPoolProvider being available by default, you should add them to your dependencies via the IServiceCollection.
+For discussion, please use aspnet/AspNetCore#5944

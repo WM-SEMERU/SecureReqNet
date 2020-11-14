@@ -1,0 +1,4 @@
+Document support for thread-local storage within enclaves.
+
+
+Fixes #1536

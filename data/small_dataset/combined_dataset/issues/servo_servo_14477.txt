@@ -1,0 +1,4 @@
+Implement domain and path checks from https-cookie-alone-01
+
+
+https://www.ietf.org/id/draft-ietf-httpbis-cookie-alone-01.txt defines some steps to choose when cookies are valid choices to be evicted by a newer cookie. #14445 implemented some parts of this specification (specifically, ensuring that insecure cookies cannot evict secure cookies), but we still need to implement the more specific domain and path-matching checks.

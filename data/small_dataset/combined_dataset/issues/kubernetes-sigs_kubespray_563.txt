@@ -1,0 +1,10 @@
+Elevate individual tasks to super user only as needed
+
+
+I was going to give kargo a try for rolling a kubernetes cluster but it got stuck at:
+TASK [adduser : User | Create User Group] **************************************
+fatal: [k8s-etcd-3]: FAILED! => {"changed": false, "failed": true, "msg": "groupadd: Permission denied.\ngroupadd: cannot lock /etc/group; try again later.\n", "name": "kube-cert"}
+fatal: [k8s-etcd-2]: FAILED! => {"changed": false, "failed": true, "msg": "groupadd: Permission denied.\ngroupadd: cannot lock /etc/group; try again later.\n", "name": "kube-cert"}
+fatal: [k8s-etcd-1]: FAILED! => {"changed": false, "failed": true, "msg": "groupadd: Permission denied.\ngroupadd: cannot lock /etc/group; try again later.\n", "name": "kube-cert"}
+
+I checked in the ansible files and it seemed that the task had no become: true annotation which seemed odd given it requires super user permissions. I asked about this and was told that people using kargo normally add the become on the command line. But that would mean running all tasks as a super user. This seems wrong and instead only tasks requiring super user privileges should become a super user.

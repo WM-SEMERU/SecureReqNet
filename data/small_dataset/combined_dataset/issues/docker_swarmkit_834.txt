@@ -1,0 +1,10 @@
+Dispatcher can create nodes in session registration
+
+
+Dispatcher is currently creating nodes if they don't exist:
+    err := d.store.Update(func(tx store.Tx) error {
+                [...]
+        return store.CreateNode(tx, node)
+    })
+We should probably constrain node creation to the CA,
+/cc @diogomonica

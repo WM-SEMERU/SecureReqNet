@@ -1,0 +1,7 @@
+In Druid 0.12 there is no endpoint for OPTIONS queries. Thus it is impossible to run CORS queries.
+
+
+We receive such HTTP query errors (403 return code):
+Request did not have an authorization check performed.: {class=io.druid.server.security.PreResponseAuthorizationCheckFilter, uri=/druid/v2/, method=OPTIONS)
+While running CORS HTTP POST query, there is a pre-flight request which is of OPTION type.
+Is is missing @options endpoint in QueryResource class

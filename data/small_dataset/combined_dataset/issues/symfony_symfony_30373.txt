@@ -1,0 +1,13 @@
+ichrusciel/api-test-case not compatible with phpunit bridge
+
+
+Symfony version(s) affected:4.2
+Description
+After require of api-test case I got this error :
+PHP Fatal error:  Class Symfony\Bridge\PhpUnit\Legacy\TestRunnerForV7 may not inherit from final class (PHPUnit\TextUI\TestRunner) in /srv/api/vendor/symfony/phpunit-bridge/Legacy/TestRunnerForV7.php on line 22
+
+How to reproduce
+New flex install
+composer require --dev phpunit
+composer require --dev lchrusciel/api-test-case
+Launch a test that extend api test case

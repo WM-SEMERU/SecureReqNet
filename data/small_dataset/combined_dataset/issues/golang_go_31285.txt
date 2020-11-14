@@ -1,0 +1,64 @@
+x/tools/imports: permission denied causes non-deterministic updating of imports
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.11.4 linux/amd64
+
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/home/ubuntu/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/ubuntu/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/local/go"
+GOTMPDIR=""
+GOTOOLDIR="/usr/local/go/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build277105160=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+
+Have a project with one directory with code with a missing import, this import is vendored.
+Have another directory that is owned by root (non-readable by the current user)
+Run imports.Process
+
+What did you expect to see?
+Consistently see the import added to the file
+What did you see instead?
+The import is sometime added and sometimes not added.
+What I think is happening
+The problem appears to be that addExternalCandidates sometimes sees the package in the vendor dir and sometimes doesn't.
+https://github.com/golang/tools/blob/d996c1aa53b10c3c47e1764d087a569bb6c32ed1/imports/fix.go#L682
+I think it's because it calls gopathResolver.scan to find a list of all packages
+https://github.com/golang/tools/blob/d996c1aa53b10c3c47e1764d087a569bb6c32ed1/imports/fix.go#L910
+and scan will quit upon the first error it encounters because it uses fastwalk.Walk https://github.com/golang/tools/blob/923d25813098b2ffdf1b4bb7ee4ec425fef796a9/internal/fastwalk/fastwalk.go#L195
+Because it quits on the first error, if it reads the vendor dir with the wanted import first, then the import will be there, and if it hits the dir it can't read first, then it will exit without the import.
+I think we should always walk the entire tree and walk around unreadable directories rather than aborting the entire walk at that point.
+I can see 2 options:
+
+Change behavior to gathering errors and keep walking the entire tree
+Add configuration options to the walker that allows for multiple walk behaviors (abort on first error, or gather errors)
+
+I'm happy to help with making this change as well.
+Related Issue(s)
+This issue appears similar to #16890 but it seems like that question is more targetted towards what log messages are printed, here I'm more concerned about the actual behavior (which dirs are scanned).

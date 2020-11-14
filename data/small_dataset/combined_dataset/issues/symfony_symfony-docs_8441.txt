@@ -1,0 +1,5 @@
+New argon2i password encoder
+
+
+See symfony/symfony#21604 (3.4)
+Can be documented around https://symfony.com/doc/current/reference/configuration/security.html#using-the-pbkdf2-encoder-security-and-speed

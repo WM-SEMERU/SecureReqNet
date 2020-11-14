@@ -1,0 +1,7 @@
+Project highlight doesn't work with request params
+
+
+http://localhost:3000/view/project/samm/observed
+
+http://localhost:3000/view/project/samm/observed?level=1
+

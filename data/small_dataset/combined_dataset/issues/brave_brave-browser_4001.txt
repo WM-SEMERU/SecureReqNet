@@ -1,0 +1,13 @@
+Weird "dirt" over a PDF file view
+
+
+Description
+Near the bottom of the page 278 of chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/http://www.mathematics21.org/binaries/volume-1.pdf there is something looking like dirt. I attach the image
+.
+I also attach a copy of the PDF file volume-1.pdf because it is sometimes updated on the server.
+Actual result:
+Dirt.
+Expected result:
+No dirt.
+Brave version (brave://version info)
+Version 0.59.35 Chromium: 72.0.3626.81 (Official Build) (64-bit)

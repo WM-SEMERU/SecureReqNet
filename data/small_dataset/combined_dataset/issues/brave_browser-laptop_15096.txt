@@ -1,0 +1,49 @@
+wp images being blocked on https://www.infowars.com/
+
+
+Description
+This one was reported from the community:
+
+https://community.brave.com/t/why-is-the-live-stream-button-of-infowars-not-visible/30348
+
+It looks like the following images are now being blocked:
+https://www.infowars.com/wp-content/uploads/2018/08/DownloadFreeInfowarsOfficial-hero-385.png
+https://www.infowars.com/wp-content/themes/infowars-sitegoals/images/logo.png
+https://www.infowars.com/wp-content/themes/infowars-sitegoals/images/mlogo.png
+https://www.infowars.com/wp-content/themes/infowars-sitegoals/images/backing.png
+https://www.infowars.com/wp-content/themes/infowars-sitegoals/images/footer-logo.png
+https://www.infowars.com/wp-content/themes/infowars-sitegoals/images/play.png
+https://www.infowars.com/wp-content/uploads/2018/08/robot.png
+https://www.infowars.com/wp-content/themes/infowars-sitegoals/images/alex.png
+
+This was working on brave-core a few versions ago but now has the same behaviour as b-l. I'm assuming there was an update to one of our lists that might have regressed this. Those images shouldn't be blocked.
+Steps to Reproduce
+
+download & install the latest b-l (used 0.23.79 51b4905)
+visit https://www.infowars.com/
+
+You'll notice that the top banner is missing several images.
+Actual result:
+
+
+Expected result:
+
+Reproduces how often:
+100% reproducible using the above STR.
+Brave Version
+about:brave info:
+ Brave: 0.23.79 
+V8: 6.8.275.24 
+rev: 51b49051a779f0db94fbcfd0df5faca781299ea0 
+Muon: 8.0.7 
+OS Release: 17.7.0 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 68.0.3440.84
+
+Reproducible on current live release:
+Yes, currently reproducible under 0.23.79 51b4905  which is the latest release.
+Additional Information

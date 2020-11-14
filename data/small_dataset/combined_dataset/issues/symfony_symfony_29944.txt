@@ -1,0 +1,46 @@
+[DI] Overriding services autowired by name under _defaults bind not working
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#28326
+
+
+License
+MIT
+
+
+
+This is an implementation of ideas and suggestions of @nicolas-grekas and @GuilhemN.

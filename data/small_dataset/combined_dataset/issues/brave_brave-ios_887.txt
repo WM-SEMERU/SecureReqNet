@@ -1,0 +1,33 @@
+security issues with URP logic
+
+
+cc @bbondy @jumde
+there are 2 security improvements we should make to the URP logic:
+
+
+in 
+
+
+brave-ios/BraveShared/Analytics/UserReferralProgram.swift
+
+
+         Line 191
+      in
+      9a239cd
+
+
+
+
+
+
+         service.fetchCustomHeaders() { headers, error in 
+
+
+
+
+, custom headers fetched from the server should only be accepted if the header name is X-Brave-Partner; otherwise log/throw an error. This prevents an attacker who controls the Brave endpoint from being able to set any headers other than X-Brave-Partner.
+
+
+for Coinbase, which uses cookies instead of headers, you should do some additional validation before inserting the cookie(s) into the cookie store (https://github.com/brave/brave-ios/pull/823/files#diff-60f6d7911cf19ceb7bcfcde55f9bc740R240): (a) validate that the cookie is being inserted only for coinbase.com, otherwise throw an error; (b) validate that the cookie name is __Secure-X-Brave-Partner.
+
+

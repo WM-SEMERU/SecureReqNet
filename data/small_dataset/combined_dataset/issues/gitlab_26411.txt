@@ -1,0 +1,34 @@
+A user contacted us via the security email address to report the following issue:
+
+>>>
+Hello Gitlab Security team,
+
+I'm writing because I noticed an issue this morning while working on my 
+wife's blog which rapidly turned into a full blown me drafting a POC of 
+a vulnerability in the restructuredtext parser on of gitlab.
+
+The issue is that the .. raw:: html directive is parsed fully in your 
+system's .rst parser, which means that an attacker can embed raw html 
+into the dispayed output to users. This includes inline JS. The POC is 
+dormant as it has an invalid user ID, however if a valid one were 
+supplied it would make that user a master in the 1st project of any user 
+unfortunate enough to display it.
+
+You can imagine what could happen if this were made the README of a 
+project. It could easily be used as a worm allowing an attacker to 
+slowly take control of more repositories as users visited them.
+
+I have attached my POC so that you can validate the issue yourselves in
+a PRIVATE repository so that things don't rapidly spiral out of hand.
+
+I believe in the tool that you are using to parse the .. raw:: directive 
+can be disabled. This should solve the security issue immediately.
+
+I would like to mention at this time that I would like to be publicly 
+acknowledged for this research and disclosure once it is resolved and 
+publicized
+
+Thank you.
+>>>
+
+

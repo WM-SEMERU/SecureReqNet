@@ -1,0 +1,16 @@
+On https://gitlab.com/gitlab-org/gitlab-recipes I see in the header of the page (I'm logged in in gitlab.com):
+
+GitLab.org / GitLab Community Edition
+
+Under the *GitLab.org* there is link to
+
+https://gitlab.com/groups/gitlab-org
+
+When I click this link I get a 
+```
+404
+The page you were looking for doesn't exist.
+You may have mistyped the address or the page may have moved.
+```
+
+I expected to get some kind of a summary page of atleast the public projects of that group.

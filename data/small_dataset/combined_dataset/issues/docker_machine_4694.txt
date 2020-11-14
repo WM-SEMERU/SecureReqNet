@@ -1,0 +1,5 @@
+docker-machine scp does not use an internal, tested implementation
+
+
+There are a vast number of issues related to ssh connectivity problems with VMs, most of them created by VirtualBox. I suspect quite a few of them can be attributed to the fact that docker-machine transparently uses whatever local ssh client is in the path. As this note, explains, docker-machine will default to its own, tested, ssh client if it cannot find an ssh client in the path. I have removed the default /usr/bin/ssh client on Ubuntu 18 and error messages related to ssh connectivity problems during creation of a VirtualBox VM have disappeared.
+Unfortunately, docker-machine does not have its own internal version of scp. If the standard /usr/bin/scp version shipped with Ubuntu 18 is in the path, it will happily complain that it cannot find /usr/bin/scp. An internal, tested version of scp which uses the internal, tested version of ssh might help.

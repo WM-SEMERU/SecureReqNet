@@ -1,0 +1,16 @@
+Secrets rotation and Secrets semantics
+
+
+It would be nice to be able to rotate secrets while the pod is still running.  This issue is to discuss how that might work.
+Some things to think about:
+
+Can we attach a new volume to a running container?  I don't think so.
+Is the content of a secret mutable after creation?
+What happens if you delete a secret that is in use by running pods?  I guess they keep running, but then new instances can't be created from the same template?
+What happens if you modify the data in a pod (if that is allowed) or if you delete a secret and then create a new one with the same name?   Does kubelet notice that and update the volume of a running pod?
+Given that the tmpfs is readonly bind mounted, if the kubelet could modify the data, how consistently would the pod see the changes?
+If the kubelet does modify volume contents, should it do so in a way that is atomic (that is, make a second file tree, and then flip a hard link over once the change is complete?  Does that require a minimum number of path components to separate the bind mount root from the flippable hard link?
+If the above, then we should document that clients need to not keep secrets files open indefinitely.
+If containers keep files open after files on the tmpfs are deleted, the memory charges should migrate to the container (@vmarmol or @dchen1107 or @thockin might know better)
+Is the behavior different for different secrets types?
+

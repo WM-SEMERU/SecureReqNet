@@ -1,0 +1,11 @@
+After update my gitlab instance to 6.8.1 the ldap login stopped to work.  
+When I try to login, I saw the error: Could not authorize you from LDAP because "No such address or other socket error." (http://i.imgur.com/Rbze7PI.png)  
+
+
+Here the rake env:info and check: http://paste.ubuntu.com/7398134/
+
+
+The rake gitlab:ldap:check --trace: http://paste.ubuntu.com/7398270/
+
+
+Let me know if I can provide other specific logs.

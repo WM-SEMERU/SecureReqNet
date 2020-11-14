@@ -1,0 +1,83 @@
+After the update to 7.0 the rake task gitlab:check reports this:
+
+```
+ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+Instance method "lock!" is already defined in ActiveRecord::Base, use generic helper instead or set StateMachine::Machine.ignore_method_conflicts = true.
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.6 ? ... OK (1.9.6)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ...
+Mathijs / Ticketsale ... ok
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: FAILED. code: 502
+gitlab-shell self-check failed
+  Try fixing it:
+  Make sure GitLab is running;
+  Check the gitlab-shell configuration file:
+  sudo -u git -H editor /home/git/gitlab-shell/config.yml
+  Please fix the error above and rerun the checks.
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ...
+Mathijs / Ticketsale ... yes
+Projects have satellites? ...
+Mathijs / Ticketsale ... yes
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.9.1)
+
+Checking GitLab ... Finished
+```
+
+The troublemaker:
+
+```
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: FAILED. code: 502
+gitlab-shell self-check failed
+  Try fixing it:
+  Make sure GitLab is running;
+  Check the gitlab-shell configuration file:
+  sudo -u git -H editor /home/git/gitlab-shell/config.yml
+  Please fix the error above and rerun the checks.
+```
+
+Config file worked on 6.9

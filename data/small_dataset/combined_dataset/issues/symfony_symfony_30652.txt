@@ -1,0 +1,51 @@
+Fixing a bug where messenger:consume could send message to wrong bus
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+arguably, yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30631
+
+
+License
+MIT
+
+
+Doc PR
+Not needed
+
+
+
+This fixes #30631, where you can run messener:consume and accidentally sent received messages into the wrong bus.
+The fix (done via middleware) is to attach a "bus name" to the Envelope and use it when the message is received to find that bus.

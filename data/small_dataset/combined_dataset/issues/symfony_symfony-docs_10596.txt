@@ -1,0 +1,4 @@
+[Security] The logout_on_user_change firewall option is deprecated
+
+
+Since symfony/symfony#24364

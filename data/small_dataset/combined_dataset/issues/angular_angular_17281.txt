@@ -1,0 +1,11 @@
+fix(http): don't add XSRF tokens to absolute URLs
+
+
+Adding XSRF tokens to all external URLs is broken behavior:
+
+It is unreasonable to expect a third party server would validate
+a token from another domain.
+It leaks the token to domains which may not be secure.
+It breaks CORS for origins which don't allow the X-XSRF-TOKEN header.
+
+Fixes #15052

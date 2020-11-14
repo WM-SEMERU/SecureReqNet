@@ -1,0 +1,4 @@
+Pronouncable passwords not random enough?
+
+
+When using the password generator for pronounceable passwords with 10 chars it occurred to me that, except for uppercase/lowercase, words repeat themselves astonishingly often. Are the generated pws truly random, or are they generated from a fixed seed? Was testing the desktop application.

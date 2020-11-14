@@ -1,0 +1,6 @@
+Implement an IP blacklist and whitelist
+
+
+We need an IP and URL blacklist to prevent scans from happening on IP ranges and domains that are invalid. For example localhost.local, 127.0.0.1 or 10.10.0.2.
+It is important that we also resolve a target URL to its IP before we run a scan. Otherwise people could submit valid looking domains like foo.bar.com which actually simply are pointing to an invalid IP address.
+Ideally this list lives in a configuration file that is shared by backend and frontend. For example something like /etc/minion/global.json.

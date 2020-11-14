@@ -1,0 +1,5 @@
+Asset helper broken when using use_forward in the firewall
+
+
+When using use_forward in the firewall, the forwarded request only contains the path, but not the base url (neither the host and the port). Because of this, the asset helper is broken as it does not add the base path.
+Note that the routing works to add the needed path as it is in the container scope and s has been initialized in the master request.

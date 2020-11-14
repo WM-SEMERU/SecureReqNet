@@ -1,0 +1,25 @@
+certain exponents cause generateKeyPair to hang
+
+
+
+Version: 11.13.0 and also tested 10.15.0
+Platform: Darwin calvin 18.2.0 Darwin Kernel Version 18.2.0: Thu Dec 20 20:46:53 PST 2018; root:xnu-4903.241.1~1/RELEASE_X86_64 x86_64
+Subsystem: crypto
+
+certain exponents cause  crypto.generateKeyPair to hang
+try running
+const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+  modulusLength: 1024,
+  publicExponent: 3,
+  publicKeyEncoding: {
+    type: 'spki',
+    format: 'pem'
+  },
+  privateKeyEncoding: {
+    type: 'pkcs8',
+    format: 'pem'
+  }
+});
+you'd expect it to eventually do something at least error, but it just hangs as do exponents 5 and 17, in fact the only one that seems to work is 0x10001.
+This isn't a speed thing since I can generate a key like this in browser crypto and in pure javascript pretty easily.
+looking at the tests it looks like 0x10001 is the only key being tested against

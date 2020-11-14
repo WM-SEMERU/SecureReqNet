@@ -1,0 +1,24 @@
+'#### Security report
+
+This issue serves as a way to communicate this report from (`security@gitlab.com`) to the development team. Please close if this is not a valid report.
+
+__________
+
+```
+I just created a project export of a private project on my CE instance. 
+I would expect the corresponding .tar.gz file to not be readable to arbitrary users 
+on the server, but it looks like it is:
+
+alech@git:~$ tar tzvf /var/opt/gitlab/gitlab-rails/shared/tmp/project_exports/test/test/2016-09-28_16-39-379_test_test_export.tar.gz 
+drwxr-xr-x git/git 0 2016-09-28 16:39 ./ 
+-rw-r--r-- git/git 10393 2016-09-28 16:39 ./project.json 
+-rw-r--r-- git/git 809 2016-09-28 16:39 ./project.bundle 
+-rw-r--r-- git/git 5 2016-09-28 16:39 ./VERSION
+
+I'd suggest using the same pattern as in Backup::Manager.pack (Kernel.system with a tar_system_options 
+hash with specific file permissions) to avoid this information leakage.
+```
+
+https://gitlab.zendesk.com/agent/tickets/41133
+
+//cc @jameslopez @jacobvosmaer-gitlab

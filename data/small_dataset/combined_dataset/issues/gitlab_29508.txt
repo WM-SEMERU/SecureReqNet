@@ -1,0 +1,5 @@
+'When fighting abuse it would be very helpful if an admin could query the API for more detailed information about a snippet, issue, or comment, such as the source IP used to create it. This would make it easier to correlate actions across the instance and multiple abuse accounts. 
+
+For example an admin could query for an abusive snippet, gather the source IP, and then query for all other content created from that IP.
+
+@stanhu @DouweM @ernstvn

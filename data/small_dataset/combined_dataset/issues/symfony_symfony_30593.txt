@@ -1,0 +1,46 @@
+Fixed usage of TranslatorInterface in form extension (fixes #30591)
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30591
+
+
+License
+MIT
+
+
+
+This PR replaces the fixed usage of the deprecated TranslatorInterface in the form extension with a soft one accepting either the old or the new interface.

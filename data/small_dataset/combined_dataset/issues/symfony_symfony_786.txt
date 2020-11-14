@@ -1,0 +1,20 @@
+[2.2][Security] concurrent sessions
+
+
+an implementation of the Spring concurrent sessions in the Security Component, now using Doctrine DBAL. Can be configured like:
+security:
+    ...
+    session_registry:
+        connection: default
+        tables:
+            session_information: cs_session_information
+
+    firewalls:
+        ...
+        secured_area:
+            ...
+            session_concurrency:
+                max_sessions: 5
+                expiration_url: /expired
+
+to init, run the init:concurrent-session command, which will create a DBAL implementation of the Symfony\Component\Security\Http\Session\SessionRegistryStorageInterface. You can also provide a custom implementation.

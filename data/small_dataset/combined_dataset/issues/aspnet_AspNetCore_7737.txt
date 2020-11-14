@@ -1,0 +1,19 @@
+Session is not invalidated on server side after logout
+
+
+We did a security audit with a pentest company and will be informed that the applications logout procedure is insufficient. They criticized that when you click on Logout, the cookie .AspNetCore.Identity.Application gets deleted on client-side, but the server-side session stays intact. They tested this by setting the original auth-cookie value manually after logout and got response from the server like being logged in.
+To Reproduce
+Used version of ASP.NET Core: 2.2.
+Code of the logout function:
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> LogOff()
+{
+	await _signInManager.SignOutAsync();
+	HttpContext.Session.Clear();
+	_logger.LogInformation(4, "User logged out.");
+
+	return RedirectToAction("Index", "Home");
+}
+
+So what I am doing wrong and what is the correct way to logout?

@@ -1,0 +1,9 @@
+SSVM uses the guest network to mount NFS SS instead of the management network
+
+
+Hi,
+4.11.2 + KVM, ADV +SG zone.
+One management network + one guest network  - no dedicated sstorage network, public IPv4 everywhere.
+I am having a hard time mounting the FreeNAS NFS share, turns out the SSVM uses the guest network to access the NFS server (as shown by "ip ro get").
+Obviously, I can't add the guest network to the NFS ACL, any client VM would be able to mount the share.
+Ideas?

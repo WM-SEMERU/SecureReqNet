@@ -1,0 +1,7 @@
+Add TLS support to kubemark
+
+
+Since #70144 was merged, GCE is encrypting communication between etcd and apiserver. However, Kubemark was still using plain communication.
+That is one of the reasons for the different between those two.
+One of the hypothesis is that it may also contribute to the #75833 regression.
+@mborsz @wenjiaswe

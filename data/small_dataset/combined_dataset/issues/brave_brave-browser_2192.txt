@@ -1,0 +1,6 @@
+Show full url like in Chrome
+
+
+Description
+Everytime I click on the URL, I have to click another time so it shows the full URL with https://.
+This is so annoying! Chrome removed it few months ago, and Brave should as well.

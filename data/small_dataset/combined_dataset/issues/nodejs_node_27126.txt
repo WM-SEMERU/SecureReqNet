@@ -1,0 +1,10 @@
+doc: remove outdated link
+
+
+The community maintained material hasn't been updated for almost five years, corresponds to Node 0.11, and is no longer accurate. This commit removes the references.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+

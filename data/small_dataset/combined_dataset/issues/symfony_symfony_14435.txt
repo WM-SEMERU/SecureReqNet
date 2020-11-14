@@ -1,0 +1,8 @@
+Retrieve the current firewall name for a Request
+
+
+I am trying to determine the current firewall name for a Request (application has multiple firewalls). Is this possible?
+I can see a map is creating in SecurityExtension.php
+However, I can't use this map as it is only available to the Firewall which doesn't expose a way to get the map. Secondly, from what I can see, the firewall name isn't stored anywhere for me to retrieve this as everything references services.
+I can see that a ProviderKey() is available for some tokens (e.g UsernamePasswordToken). However, this method is not on the TokenInterface so I cannot rely on it.
+Basically I want to add a generic EventListener for Authentication successes/failures. It needs to store the firewall name so it can be determined which firewall a user was trying to login to.

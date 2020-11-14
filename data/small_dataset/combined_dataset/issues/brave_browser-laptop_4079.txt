@@ -1,0 +1,30 @@
+Window.onbeforeunload not working in Brave
+
+
+Did you search for similar issues before submitting this one?
+No
+Describe the issue you encountered:
+Create a webpage with the following js :
+window.onbeforeunload = function(e) {
+  var dialogText = 'Dialog text here';
+  e.returnValue = dialogText;
+  return dialogText;
+};
+
+If you try to navigate you are stuck in the page with no alert or nothing. In FF and Chrome it works ok, giving you an alert according to https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload
+Note that the following code does not work on jsfiddle for some reason it has to be on a regular web page.
+Expected behavior:
+Brave should show an alert.
+
+Platform (Win7, 8, 10? macOS? Linux distro?):
+All
+Brave Version:
+0.12.1
+Steps to reproduce:
+
+Open https://jsfiddle.net/L5grdj3a/
+Close the window
+You don't get alert as you should.
+
+
+

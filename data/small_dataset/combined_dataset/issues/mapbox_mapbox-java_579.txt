@@ -1,0 +1,20 @@
+MapboxDirectionsMatrix.Builder gives null values for sources and destinations in HTTP request
+
+
+Platform: Java
+Mapbox Services version: 2.2.5
+Hi, I'm using the MapboxDirectionsMatrix.Builder like so:
+MapboxDirectionsMatrix.Builder builder = new MapboxDirectionsMatrix.Builder<>()
+        .setClientAppName(applicationName)
+        .setAccessToken(accessToken)
+        .setProfile(profile)
+        .setCoordinates(coordinates)
+        .setSources(sources)
+        .setDestinations(destinations);
+
+Let's assume for a moment that sources = new int[] {0} and destinations = new int[]{1,2}. When I call builder.getDestinations(), I get null;null instead of 1;2. The same goes for using builder.getSources(). This also reflects in the actual HTTP call, so I am unable to call this endpoint via the Java API.
+Expected behavior
+Should properly convert given the destination indexes for use in the request. For example:
+builder.setDestinations(1,2) should give me a destinations=1;2 parameter in the request.
+Actual behavior
+builder.setDestinations(1,2) gives me a destinations=null;null parameter in the request.

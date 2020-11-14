@@ -1,0 +1,21 @@
+Enforce multiple authentication schemes
+
+
+Is your feature request related to a problem? Please describe.
+A clear and concise description of what the problem is.
+Hi team,
+My issue is about authentication. I am trying to enforce two authentication schemes, My assumption is that the current behavior is that if you have more than one authentication scheme setup the framework will execute both and if any passes then the user will be authenticated.
+Is there a way to enforce both so if any of them fails then the authentication process fails?
+services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme = SecurityConstants.CustomAuthenticationScheme;
+    options.DefaultChallengeScheme = SecurityConstants.CustomAuthenticationScheme; }) 
+    .AddScheme<AuthenticationSchemeOptions, CustomAuthenticationHandler>(SecurityConstants.CustomAuthenticationScheme,
+options => options. = "Bearer") 
+    .AddIdentityServerAuthentication();
+Just to be more clear, I've got a custom authentication scheme and identity server, if any of these fails I want to fail authentication. In short I would like that my action methods marked with [Authorize] and the default policy being RequiresAuthenticatedUser return 401 when authentication fails
+Describe the solution you'd like
+It would be great if the DenyAnonymousAuthorizationRequirement can only verify that there is an authenticated user for the policy scheme
+Describe alternatives you've considered
+A clear and concise description of any alternative solutions or features you've considered.
+Additional context
+Add any other context or screenshots about the feature request here.

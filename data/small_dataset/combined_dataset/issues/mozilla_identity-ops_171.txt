@@ -1,0 +1,12 @@
+Deploy Persona Gmail Bridge 0.9.9 or 0.9.10 to Stage
+
+
+Hey @relud,
+A persona-gmail-bridge update is available that moves us to Node 0.10, fixes a user-visible error during authentication, and upgrades all of the dependencies to their latest (Express 4, etc.)
+Please deploy one of the following tags to stage:
+
+0.9.9: mozilla/persona-gmail-bridge@3a3a1ac
+0.9.10: mozilla/persona-gmail-bridge@a50ea65
+
+The only difference is that 0.9.10 renames everything from sideshow or browserid-bridge-gmail to persona-gmail-bridge, which will require a bunch updates to the Chef scripts in this repo. The RPM prefix, package name, and many file paths changed.
+If going through those changes aren't awesome for you right now, then I'm totally happy with 0.9.9.

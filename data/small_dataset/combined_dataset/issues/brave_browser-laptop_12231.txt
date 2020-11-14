@@ -1,0 +1,47 @@
+An uncaught exception occurred in the main process Uncaught Exception: ReferenceError: cb is not define
+
+
+Description
+When clicking on the expired, wrong.host, self-signed tests under https://badssl.com/, you'll get the following exception via the console:
+An uncaught exception occurred in the main process Uncaught Exception:
+ReferenceError: cb is not defined
+    at App.app.on (/Applications/Brave.app/Contents/Resources/app.asar/app/index.js:144:7)
+    at emitMany (events.js:132:20)
+    at App.emit (events.js:204:7)
+
+Steps to Reproduce
+
+launch 0.19.109 which has C63
+load https://badssl.com/
+click on expired under the Certificate tests (you'll get an exception in the console)
+click on wrong.host under the Certificate tests (you'll get an exception in the console)
+click on self-signed under the Certificate tests (you'll get an exception in the console)
+
+Actual result:
+Clicking on any of the above tests under https://badssl.com/ will produce the following exception:
+An uncaught exception occurred in the main process Uncaught Exception:
+ReferenceError: cb is not defined
+    at App.app.on (/Applications/Brave.app/Contents/Resources/app.asar/app/index.js:144:7)
+    at emitMany (events.js:132:20)
+    at App.emit (events.js:204:7)
+
+Expected result:
+Page loads without receiving any exceptions.
+Reproduces how often:
+100% reproducible using the above STR.
+Brave Version
+about:brave info:
+
+Brave: 0.19.109
+rev: 9c674b5
+Muon: 4.5.23
+libchromiumcontent: 63.0.3239.70
+
+Reproducible on current live release:
+Not reproducible under 0.19.105 which is the current release.
+Additional Information
+
+macOS 10.13.1 x64 - Reproducible
+Ubuntu 17.10 x64 - Reproducible
+Win 10 x64 - Reproduced by @srirambv
+

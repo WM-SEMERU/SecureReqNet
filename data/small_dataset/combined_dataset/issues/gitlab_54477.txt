@@ -1,0 +1,41 @@
+'## Description
+
+During implementation of https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2639 we discovered that `Encryptor` / `attr_encrypted` requires 32 byte salt and 12 byte IV to encrypt data stored in the database.
+
+In order to provide salt / IV we created following code:
+
+```ruby
+AES256_GCM_OPTIONS = { 
+  algorithm: 'aes-256-gcm',
+  key: Settings.attr_encrypted_db_key_base_truncated,
+  iv: Settings.attr_encrypted_db_key_base_truncated[0..11]
+}.freeze
+```
+
+or 
+
+```ruby
+attr_encrypted :token,
+               mode:      :per_attribute_iv,
+               algorithm: 'aes-256-gcm',
+               key:       Settings.attr_encrypted_db_key_base_truncated
+```
+
+in various places.
+
+`encrypted_db_key_base_truncated` is implemented as
+
+```ruby
+def attr_encrypted_db_key_base_truncated
+  Gitlab::Application.secrets.db_key_base[0..31]
+end
+```
+
+it means that if database key secret is using multi-byte UTF-8 characters encryption is going to fail, because 
+
+```ruby
+('❤' * 100)[0..31].bytesize
+=> 96
+```
+
+/cc @nick.thomas @ifarkas @godfat @stanhu

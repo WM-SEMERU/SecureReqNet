@@ -1,0 +1,8 @@
+Added ability to load brokerpaks from local FS
+
+
+The broker will now check /usr/share/gcp-service-broker/builtin-brokerpaks
+on startup if GSB_COMPATIBILITY_ENABLE_BUILTIN_BROKERPAKS is set.
+This allows us to bundle brokerpaks with the Docker image so users don't
+have to download and install builtin paks and/or they can extend with
+custom paks.

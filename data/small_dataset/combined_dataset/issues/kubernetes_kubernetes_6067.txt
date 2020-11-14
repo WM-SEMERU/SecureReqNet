@@ -1,0 +1,10 @@
+Secure etcd for all distros.  Etcd-in-Pod for apiserver.
+
+
+On all salt distros except redhat, etcd appears to use public IP for the client port (4001).
+(There is still some possible cleanup to do in cluster/saltbase/salt/kube-apiserver/default to hardcode this.  See zmerlyn's comment.)
+On some non-salt distros,  it accepts clients on the public address of the master node.
+Some people may want this since they are running flanneld too.
+I suggest that we solve this by running an apiserver-only etcd instance in a pod with the apiserver (the way we do for skydns).  @ArtfulCoder is working on this.  Then etcd will be secure because it is on the localhost of the Pod's netns.
+On CoreOS/flannel-based distros, there will be multiple un-related etcd server-pools.  It is up to the user or the distro author to secure these etcds.  Examples here are libvirt-coreos, rackspace.
+Once we move to replicated apiserver, we can setup TLS credentials for the peer-to-peer communication between the etcd-in-a-pods by generating certs and setting flags per example 3 in https://github.com/coreos/etcd/blob/master/Documentation/security.md

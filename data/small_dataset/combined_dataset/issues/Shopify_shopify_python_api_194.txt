@@ -1,0 +1,4 @@
+Add constant time fallback
+
+
+See https://hackerone.com/reports/224096.

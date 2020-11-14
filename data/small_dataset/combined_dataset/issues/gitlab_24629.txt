@@ -1,0 +1,7 @@
+'/cc @connorshea @smcgivern
+
+TODO:
+- [x] Create **new** images on our [container registry](https://gitlab.com/gitlab-org/gitlab-build-images/)
+- [x] Create a MR on gitlab-ce to use this image and update [`.ruby-version`](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/.ruby-version)
+- [x] Update omnibus (probably a small patch)
+- [ ] Think of what @zj forgot in this list

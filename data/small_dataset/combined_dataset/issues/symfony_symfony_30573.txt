@@ -1,0 +1,18 @@
+Cache: RedisAdapter doesn't support AWS ElastiCache with secure connection
+
+
+Symfony version(s) affected: 4.2
+Description
+It's impossible to connect to AWS Elasticache using https://github.com/nrk/predis that supports rediss schema: http://www.iana.org/assignments/uri-schemes/prov/rediss
+As a result you get an exception "Unsupported DSN: rediss://{aws-elasticache-uri}"
+How to reproduce
+You need to set up cache in framework.yml like this:
+cache:
+        app: cache.adapter.redis
+        default_redis_provider: 'rediss://{aws-elasticache-uri}'
+
+As client you need to set up Predis\Client
+On init app will throw InvalidArgumentException.
+Possible Solution
+Add rediss dsn support here: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/AbstractAdapter.php#L135
+And here: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Traits/RedisTrait.php#L83

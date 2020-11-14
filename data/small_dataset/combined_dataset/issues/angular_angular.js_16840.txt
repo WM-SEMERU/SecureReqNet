@@ -1,0 +1,19 @@
+fix($locale): use the exact plural rule for French
+
+
+
+Get the right category for negative numbers
+Avoid uneeded assignation and conversion
+
+What is the current behavior? (You can also link to an open issue here)
+-1, -0.5, -1.5 are considered plural in French
+What is the new behavior (if this is a feature change)?
+-1, -0.5, -1.5 are considered singular in French (as it should)
+Does this PR introduce a breaking change?
+No
+Please check if the PR fulfills these requirements
+
+ The commit message follows our guidelines
+ Fix/Feature: Docs have been added/updated
+ Fix/Feature: Tests have been added; existing tests pass
+

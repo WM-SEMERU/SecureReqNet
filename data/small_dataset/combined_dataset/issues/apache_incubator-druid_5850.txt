@@ -1,0 +1,7 @@
+Fix Zip Slip vulnerability
+
+
+This PR addresses the "Zip Slip" security vulnerability, which allows an attacker to write to arbitrary output paths using a malicious zip file, described here: https://snyk.io/research/zip-slip-vulnerability.
+In Druid's case, I don't believe this is easily exploitable, since the attacker would need to gain access to a cluster's deep storage to write a malicious zip file that would be extracted by the affected code paths.
+Credits to the Snyk Security Research Team for reporting this vulnerability.
+The PR includes a sample .zip file provided by Snyk for testing that writes to /tmp/evil.txt if the exploit is triggered.

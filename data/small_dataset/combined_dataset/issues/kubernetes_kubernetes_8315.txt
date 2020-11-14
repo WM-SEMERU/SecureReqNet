@@ -1,0 +1,7 @@
+Wrong certificates in k8s cluster
+
+
+After syncing today I get the following errors in kubelet logs:
+E0515 10:42:54.160745    3462 reflector.go:130] Failed to list *api.Pod: Get https://10.240.81.1/api/v1beta3/pods?fieldSelector=spec.host%3De2e-test-filipg-master: x509: certificate is valid for 104.155.29.206, not 10.240.81.1
+I see a similar error for (almost) all requests.
+@lavalamp This could be related to #8071

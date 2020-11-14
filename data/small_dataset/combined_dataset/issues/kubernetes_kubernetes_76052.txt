@@ -1,0 +1,34 @@
+test: partially decouple from cmd/kubeadm
+
+
+What this PR does / why we need it:
+test: partially decouple from cmd/kubeadm
+The test package imports cmd/kubeadm, which is far from ideal.
+There are a couple of reasons for the import:
+
+Marshaling of Ingress from api/extensions/v1beta1.
+
+To fix that include a local function in e2e/manifest/manifest.go
+that does that same as the kubeadm MarshalToYaml.
+
+Using PKI helper function in apimachinery and auth tests.
+
+To fix that include a new file under test/utils/pki_helpers.go
+that only contains the required helpers instead of including the whole
+kubeadm pkiutil package.
+There is another related problem:
+e2e_node/e2e_node_suite_test.go includes:
+k8s.io/kubernetes/cmd/kubeadm/app/util/system
+But this has to be done in a follow up.
+Which issue(s) this PR fixes:
+xref #75601
+Special notes for your reviewer:
+NONE
+Does this PR introduce a user-facing change?:
+NONE
+
+/assign @timothysc @oomichi
+@kubernetes/sig-auth-pr-reviews
+@kubernetes/sig-api-machinery-pr-reviews
+/kind cleanup
+/priority important-longterm

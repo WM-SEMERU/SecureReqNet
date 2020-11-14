@@ -1,0 +1,65 @@
+Delimiting lines have reduced or disappeared since version 6.2.0
+
+
+Running the following command (as an example) :
+gci C:\Windows\System32 -Filter win*.exe -Depth 1 -ErrorAction SilentlyContinue | ft Name,Length -GroupBy Directory
+Returns delimiting lines between the grouped-by object and the property headers on version 6.1.3 (and Desktop Edition 5.1.x as well) :
+Directory: C:\Windows\System32
+Name                                  Length
+
+WinBioDataModelOOBE.exe                60928
+Windows.Media.BackgroundPlayback.exe   13312
+Windows.WARP.JITService.exe            32768
+WindowsActionDialog.exe                60928
+WindowsUpdateElevatedInstaller.exe     47104
+wininit.exe                           388376
+winload.exe                          1468952
+winlogon.exe                          779776
+winresume.exe                        1179680
+winrs.exe                              50176
+winrshost.exe                          28672
+WinSAT.exe                           2800128
+winver.exe                             58880
+Directory: C:\Windows\System32\Boot
+Name           Length
+
+winload.exe   1468952
+winresume.exe 1179680
+Directory: C:\Windows\System32\oobe
+Name          Length
+
+windeploy.exe 177664
+Directory: C:\Windows\System32\wbem
+Name        Length
+
+WinMgmt.exe  82432
+While grouped-by object and property headers are stuck together on version 6.2.0 as delimiting lines have disappared :
+Directory: C:\Windows\System32
+Name                                  Length
+
+WinBioDataModelOOBE.exe                60928
+Windows.Media.BackgroundPlayback.exe   13312
+Windows.WARP.JITService.exe            32768
+WindowsActionDialog.exe                60928
+WindowsUpdateElevatedInstaller.exe     47104
+wininit.exe                           388376
+winload.exe                          1468952
+winlogon.exe                          779776
+winresume.exe                        1179680
+winrs.exe                              50176
+winrshost.exe                          28672
+WinSAT.exe                           2800128
+winver.exe                             58880
+Directory: C:\Windows\System32\Boot
+Name           Length
+
+winload.exe   1468952
+winresume.exe 1179680
+Directory: C:\Windows\System32\oobe
+Name          Length
+
+windeploy.exe 177664
+Directory: C:\Windows\System32\wbem
+Name        Length
+
+WinMgmt.exe  82432

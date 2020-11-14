@@ -1,0 +1,3 @@
+Especially for private projects, things like Build Logs or super secret images shouldn't be indexed.
+
+Adding `Disallow: */uploads/*`to the robots.txt should be enough.

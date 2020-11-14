@@ -1,0 +1,6 @@
+REQUEST: Rename Slack channel: #ksonnet -> #jsonnet
+
+
+The "ksonnet" project is shutting down.  Some parts of the project (notably kubecfg) live on, as does the emergent jsonnet<->kubernetes community that use this channel.
+To better reflect its focus, can we rename #ksonnet to #jsonnet ?
+(Thanks in advance)

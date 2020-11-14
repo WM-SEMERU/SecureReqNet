@@ -1,0 +1,40 @@
+proposal: x/crypto: deprecate unused, legacy and problematic packages
+
+
+x/crypto is meant to follow the same philosophy as the rest of the Go cryptography standard libraries: safe, useful subsets of widely used and robust primitives and protocols. Some packages in x/crypto don't clear that bar anymore, and I propose we freeze and deprecate (but not remove) them.
+The intended outcomes are
+
+reducing the maintenance burden, redirecting resources towards more useful work
+avoiding confusion for users who consider inclusion in x/crypto to be an endorsement
+encouraging community maintained replacements where needed
+
+All open and future issues and CLs that are not security relevant will be closed linking to this issue.
+/cc @agl with whom we discussed this at RWC, and @golang/proposal-review for approval
+Why
+There are different reasons for deprecating different packages, and I give a short explanation for each of them below, but here's a summary.
+
+Some protocols simply don't have a common enough subset, with each user needing something different from it. The result is that our package is not useful as-is to anyone, and forks proliferate more than if we didn't have an x/crypto package at all.
+Some packages simply can't reach the bar of safe-by-default (anymore) because the underlying protocol or primitive is broken.
+Some packages require a maintainer that has deep knowledge of the many relevant specs and the state of the ecosystem. While it makes sense for the Go team to allocate the resources for, say, TLS and X.509, it doesn't for others.
+A few packages are simply not used enough to justify the maintenance effort, and their inclusion in x/crypto is confusing to users.
+
+What packages
+
+blowfish/ — '90s cipher fundamentally broken due to its block size, its main use is as a bcrypt/ internal and it has no optimized implementation
+bn256/ — a broken elliptic curve that does not provide 128 bits of security anymore, with a community fork (github.com/cloudflare/bn256)
+cast5/ — another '90s cipher, only used in PGP
+md4/ — ancient broken hash function, only useful as target practice for learning how to generate hash collisions on a laptop (which is very fun!)
+openpgp/
+
+the protocol predates modern cryptography engineering, which is still causing severe vulnerabilities, and any new project should rely on alternative modern solutions
+the ecosystem never solved its major UX and key management issues
+most importantly, this implementation is aging and incomplete because the specification is sprawling and there is no common subset to target; apparently everyone who's relying on it made their own fork to add features or fix issues, which is a much worse outcome than not having a golang.org/x/crypto package at all
+
+
+otr/ — a messaging security protocol from 2000's, mostly obsoleted by the Signal double ratchet and other messaging protocols like OMEMO and MLS, and a very rarely used package
+ripemd160/ — a hash function from the '90s only used by Bitcoin, with no optimized implementation
+tea/, xtea/ — ancient block ciphers, apparently used by one single package in the ecosystem
+twofish/ — AES finalist, not used in any popular protocol, with no advantages over AES
+xts/ — a block mode that should only ever be used for full disk encryption, which unsurprisingly no one is implementing in Go, and I honestly didn't even know it was in here
+
+I was also hoping to kill pkcs12/ because it's a legacy file format that relies on primitives even worse than the ones listed above, and the package only does decoding while a better fork on GitHub also does encoding, but it has way too many users so that's only been frozen instead.

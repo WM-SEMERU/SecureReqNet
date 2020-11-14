@@ -1,0 +1,4 @@
+Allow max rows and max segments for time-ordered scans to be overridden using the scan query JSON spec
+
+
+Fixes #7397.  Details are in the proposal.

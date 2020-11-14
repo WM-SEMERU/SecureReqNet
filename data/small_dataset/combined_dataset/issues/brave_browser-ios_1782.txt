@@ -1,0 +1,37 @@
+Browser crash after sync
+
+
+Description:
+Browser crash after sync
+Devices
+
+Device 1: iPhone 7+ (iOS 12) Sync chain created on this device
+Device 2: iPhone 6+ (iOS 12) Crashing device
+
+Steps to Reproduce
+Scenario 1
+
+Create bookmarks on device1 before enabling Sync chain
+Add device 2 to sync chain via QR code scan
+Edit bookmarks on device 1, just reordering is enough
+On device 2, load one of the bookmarks which was reordered in device 1
+Wait for few seconds, browser crash on device 2
+
+Scenario 2
+
+Create bookmarks on device1 before enabling Sync chain
+Add device 2 to sync chain via QR code scan
+Edit bookmarks on device 1, just reordering is enough
+Keep device 1 on  edit mode for a few mins (not sure if this makes any difference)
+On device 2 on the same tab load bookmarks that are sync'd (hope that doesn't crash like in scenario 1)
+Open bookmark manager in device 2 and keep the app in that state for a few mins, try tapping on tab to close bookmark manager, browser crashes on device 2
+
+Actual result:
+Browser crash after sync
+Expected result:
+Should not crash
+Reproduces how often: [Easily reproduced/Intermittent issue]
+Found scenario 2 while retesting for scenario 1 so should be fairly easy
+Brave Version:
+Sync build
+Additional Information

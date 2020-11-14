@@ -1,0 +1,54 @@
+[HttpClient] Add ScopingHttpClient::forBaseUri() + tweak MockHttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This allows creating scoped HTTP clients in one line:
+$client = ScopingHttpClient::forBaseUri($client, 'http://example.com');
+$client now resolves relative URLs using the provided base URI.
+If one also adds default options as 3rd argument, these will be applied conditionally when a URL matching the base URI is requested.
+This PR also tweaks MockHttpClient to make it return MockResponse on its own when no constructor argument is provided, easing tests a bit.

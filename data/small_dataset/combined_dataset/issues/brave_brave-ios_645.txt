@@ -1,0 +1,21 @@
+Old (closed) private tabs are reopening after V1.7 upgrade
+
+
+Description:
+Since upgrading to V1.7, some users are reporting that their old private tabs are reopening.
+Steps to Reproduce (difficult to reproduce)
+
+Have an old install of Brave V1.x installed on an iOS device
+Create some private tabs, and close them
+Upgrade to V1.7
+
+Actual result:
+as above
+Expected result:
+V1.7 should upgrade as normal, private tabs should not be re opened
+Reproduces how often:
+Hard to say, users are reporting it since the upgrade to V1.7
+Brave Version:
+V1.7
+Device details:
+We need user input here and have requested it via the various support channels

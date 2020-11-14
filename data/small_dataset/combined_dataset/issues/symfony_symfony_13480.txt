@@ -1,0 +1,5 @@
+[Security] Authentication providers are not typehinted
+
+
+It seems that authentication providers are added through an array in the AuthenticationProviderManager, but are not checked on implementation of the AuthenticationProviderInterface.
+This means that any call to supports and authenticate might fail. As providers can only be added through the constructor, it's trivial to add a check on the instance and thrown InvalidArgumentException if not correct.

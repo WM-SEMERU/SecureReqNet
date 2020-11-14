@@ -1,0 +1,11 @@
+[Proposal] Auto Refresh SSL Certs
+
+
+Motivation
+Whenever SSL certs expire a restart is required to load fresh certs.
+Proposed changes
+
+Add property druid.server.https.cert.autoRefresh and druid.server.https.cert.autoRefreshPeriod
+Create class CertificateWatcher which watches for changes in druid.server.https.keyStorePath
+Once keystore is changed, Jetty does hot reload https://www.eclipse.org/jetty/javadoc/9.4.14.v20181114/org/eclipse/jetty/util/ssl/SslContextFactory.html#reload-java.util.function.Consumer-
+

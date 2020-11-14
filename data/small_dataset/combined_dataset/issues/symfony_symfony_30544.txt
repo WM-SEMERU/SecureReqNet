@@ -1,0 +1,13 @@
+class_alias not working
+
+
+Symfony version(s) affected: 3.4.x & php 7.3
+Description
+Upgrading symfony from 2.8 to 3.4 it ocurs:
+Compile Error: Declaration of Assetic\Extension\Twig\AsseticNode::compile(Twig_Compiler $compiler) must be compatible with T
+wig\Node\Node::compile(Twig\Compiler $compiler)
+I think that it is about class_alias in twig
+How to reproduce
+You need upgrade to Symfony 3.4
+Possible Solution
+If add class_alias from twig in app_dev.php it work

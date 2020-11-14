@@ -1,0 +1,63 @@
+[PropertyInfo] Add accessor and mutator extractor interface and implementation on reflection
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30248, partially: #22190, #18016, #5013, #9336, #5219,
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+This PR brings accessor / mutator extraction on the PropertyInfo component,
+There is no link to existing code, as IMO it should be in another PR as this will add a dependency on property access to the property info component and not sure this is something wanted (although, it will reduce a lot of code base on the property access component as a lot of code seems to be duplicated)
+Code is extracted from #30248 also there is some new features (that can be removed if not wanted)
+
+Allow extracting private accessor / mutator (will do a new PR that improve private extraction on reflection latter)
+Allow extracting static accessor / mutators
+Allow extracting constructor mutators
+
+Current implementation try to be as close as the PropertyAccess implementation and i did not reuse some methods already available in the class as there is some differences in implementation, but maybe it will be a good time to make this consistent (Looking forward to your input) ?
+Things that should be done in a new PR:
+
+Linking property info to property access to remove a lot of duplicate code
+Add a new system that allow adding Virtual Property based on this extractor
+

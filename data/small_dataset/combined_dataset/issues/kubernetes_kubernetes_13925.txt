@@ -1,0 +1,11 @@
+Track which user created resources
+
+
+Adds creationUserName which records the creating user in the resource
+for use in audit scenarios. Set by the system automatically to the user
+name returned by the authentication plugin. Clients must assume that the
+name value may be machine-readable and therefore is not guaranteed to be
+a pretty name.
+Fixes #13306
+
+This change is 

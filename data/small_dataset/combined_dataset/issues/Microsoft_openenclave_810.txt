@@ -1,0 +1,10 @@
+Verify that encryption samples are using MBEDTLS_RSA_PKCS_V21 for RSA padding
+
+
+From Ilhan Gurel in the Azure Advisors group:
+
+If I may also add one more comment about the use of mbedtls_rsa_pkcs1_encrypt() in "openenclave/samples/attestation/enc/crypto.cpp". I don't see any place where RSA padding for encryption is set to MBEDTLS_RSA_PKCS_V21. Possibly defaulting to MBEDTLS_RSA_PKCS_V15 and that is not good (please see Bleichenbacher attack). RSA OAEP padding is supposed to be used for RSA encryption/decryption.
+
+
+My concern is that people may start copying and pasting sample codes, thus heading towards some issues.. Could you please check the sample code and fix the issue if my observation is correct?
+

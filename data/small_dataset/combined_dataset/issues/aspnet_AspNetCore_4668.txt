@@ -1,0 +1,5 @@
+IClaimsTransformation "runs on AuthorizeAsync success"
+
+
+The current action of IClaimsTransformation provides non-deterministic identity types on IPrincipal. For example, in the simple scenario where cookies are enabled, IClaimsTransformation does not get run if no cookies are present. In previous versions this transform could be relied upon to permit casting identity to a custom type. In Core 2.0 code breaks, and distributing null checks throughout code is necessary again, defeating the purpose of the transformation.
+I'd just like to point out that this is an issue commonly seen on and off in various previous versions of Microsoft's identity, and from my perspective at this point seems to be a serious regression.

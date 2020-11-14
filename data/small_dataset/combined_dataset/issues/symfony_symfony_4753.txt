@@ -1,0 +1,5 @@
+Firewall - add info which firewall and acl has been hit
+
+
+Could you add information in the debug toolbar which firewall has been hit during the request and which acl has been invoked ?
+I am having  a problem when debugging it and I think this will be helpfull during development.

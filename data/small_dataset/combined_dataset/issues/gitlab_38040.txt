@@ -1,0 +1,9 @@
+'I believe we bumped ruby to 2.3.5 (https://www.ruby-lang.org/en/news/2017/09/14/ruby-2-3-5-released/) in GitLab 9.5.5. We should:
+
+- [x] Create **new** images on our [container registry](https://gitlab.com/gitlab-org/gitlab-build-images/): https://gitlab.com/gitlab-org/gitlab-build-images/merge_requests/57
+- [x] Create a MR on gitlab-ce to use this image and update [`.ruby-version`](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/.ruby-version): !15099
+- [x] Update omnibus (already shipped in https://gitlab.com/gitlab-org/omnibus-gitlab/merge_requests/1930)
+- [x] Update GDK: https://gitlab.com/gitlab-org/gitlab-development-kit/merge_requests/378
+- [x] Update source documentation
+
+/cc: @zj, @DouweM

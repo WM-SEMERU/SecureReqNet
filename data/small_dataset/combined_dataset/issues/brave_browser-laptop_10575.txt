@@ -1,0 +1,14 @@
+Do not install executables to user AppData directories.
+
+
+#432
+Thank you for making a new web browser. Brave looks promising.
+However, it does not honor the security model of the Windows platform. Therefore, it will not even run on my system.
+TLDR;
+Install Brave.exe to %ProgramFiles% and not to %AppData%.
+Overview:
+The Windows security model (see section 10) works on the principle that a user can only execute programs from directories they cannot write to. This prevents EXEs, DLLs,  etc. from doing things they should not because they are executing with user level permissions AFTER an installation procedure (as admin) has put them in safe, non-writeable (to users) locations. It should be noted that many people run an insecure installation of Windows. This should not be encouraged by your team.
+Execute vs Read:
+When a user executes a program from a read only location, the executable cannot be exploited or changed to do continuous harm. An exploited Brave.exe, for example, that has been commandeered to download EXEs and DLLs behind the scenes, will only be able to write to user directories while in memory. Those same directories won't allow execution. Thus an exploited Brave.exe is mitigated greatly.
+Conclusion:
+The only thing you should be storing in %AppData% is data, not executables. Thank you for your attention to this matter.

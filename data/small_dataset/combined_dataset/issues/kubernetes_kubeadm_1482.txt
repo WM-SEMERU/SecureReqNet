@@ -1,0 +1,9 @@
+add kinder get artifacts command
+
+
+This PR adds the new kinder get artifacts that allows to retrive Kubernetes build artifacts from different sources
+This is a useful feature and also an initial step for implementing kinder build node-variant from build artifacts, that is a piece of the puzzle for getting E2E tests on kubeadm upgrades
+/kind feature
+/priority important-longterm
+/assign @neolit123
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

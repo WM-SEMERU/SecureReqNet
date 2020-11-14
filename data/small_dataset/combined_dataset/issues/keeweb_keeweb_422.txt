@@ -1,0 +1,5 @@
+Feature Request: Auto-Lock on OS lock
+
+
+Hi
+Could you add an option for immediately locking KeeWeb if Windows (or other OS) is being locked?

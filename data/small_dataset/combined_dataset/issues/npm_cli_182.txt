@@ -1,0 +1,4 @@
+Warn the user that it is uninstalling npm-install.sh
+
+
+The user does not know if it is uninstall npm-install.sh so I made it say that it is uninstalling npm-install.sh.

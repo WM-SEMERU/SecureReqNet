@@ -1,0 +1,72 @@
+[DX] Provide access to $token in classes that extend AbstractVoter
+
+
+Since $token is already passed to the vote() function of AbstractVoter, it would be great if $token could be defined in the AbstractVoter class as a protected variable, thus enabling classes that extend it to gain access to the token in the isGranted() function.
+Currently the Symfony Best Practises book suggests creating Voters and invoking the getRoles() function on the User object. However, this will not work in the case of role hierarchies, since getRoles() will not return the full hierarchy. To get the full hierarchy, we need access to the $token object, and from there we can then work out the full role hierarchy in the isGranted function.
+Of course, we would also need to inject the container into the voter in order to get access to the full list of roles, but that's easy enough to do from the developer's perspective.
+The result of this would be the ability to perform access control based on a combination of the user's role and some property on the object which is being voted on. For example, all ROLE_ADMIN users are allowed to view all objects, but ROLE_USER users are only allowed to view objects whose $office attribute matches the office that the user is assigned to.
+Of course, even better would be to provide the full role hierarchy for the user in classes that extend AbstractVoter, but that might be taking it a step too far, since not all devs will be interested in the full role hierarchy.
+An implementation of such a voter would be as follows:
+<?php
+
+namespace Acme\FooBundle\Security;
+
+use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Role\RoleHierarchy;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+abstract class CustomVoter extends AbstractVoter
+{
+    const CREATE    = 'create';
+    const READ      = 'read';
+    const UPDATE    = 'update';
+    const DELETE    = 'delete';
+
+    private $roleHierarchy;
+
+    function __construct(ContainerInterface $container)
+    {
+        $hierarchy = $container->getParameter('security.role_hierarchy.roles');
+        $this->roleHierarchy = new RoleHierarchy($hierarchy);
+    }
+
+    protected function getSupportedAttributes()
+    {
+        return array(self::CREATE, self::READ, self::UPDATE, self::DELETE);
+    }
+
+    protected function isGranted($attribute, $object, $user = null)
+    {
+        $reachableRoles = $this->roleHierarchy->getReachableRoles($this->roles);
+        $roles = array();
+        foreach ($reachableRoles as $reachableRole)
+        {
+            $roles[] = $reachableRole->getRole();
+        }
+
+        if (!$user instanceof UserInterface)
+        {
+            return false;
+        }
+
+        if ($attribute == self::READ)
+        {
+            # Users are allowed to view their own objects
+            if (in_array('ROLE_USER', $roles) && $user->getOffice() == $object->getOffice())
+            {
+                return true;
+            }
+
+            # Administrators are allowed to view all objects for all offices.
+            if (in_array('ROLE_ADMIN', $roles))
+            {
+                return true;
+            }
+
+        }
+
+        # Return false for everything else
+        return false;
+    }
+}

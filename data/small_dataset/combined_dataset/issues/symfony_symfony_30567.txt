@@ -1,0 +1,49 @@
+[HttpClient] exceptions carry response
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30502
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

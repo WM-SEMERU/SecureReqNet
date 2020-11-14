@@ -1,0 +1,50 @@
+[Mime] Add the component
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#28832 #21985 makes #15460 trivial
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#10886
+
+
+
+This has been on my todo-list for X years :)

@@ -1,0 +1,32 @@
+Brave doesn't appear on Windows Start menu
+
+
+I did a search via a popular search engine but cannot find this issue. There are seemingly related issues such as #6484 and #2061. I learnt from #2061 that Brave installs into %userprofile%\AppData\Local. Otherwise, as a normal user, I wouldn't had been able to know where to launch Brave.
+When installing Brave via BraveSetup-x64.exe downloaded from the Brave website, the completed installation launches Brave immediately. This is fine. However, Brave does not appear on the Start menu. A normal user would not be able to re-launch Brave if it isn't set as default after the first launch. I had to create a start menu shortcut manually (it still doesn't appear on the application list).
+Steps to Reproduce
+
+Install Brave
+Browser through Start menu applications
+
+Actual result:
+
+Expected result:
+That Brave will appear on the list on the left, instead of having to create a shortcut manually in the section on the right.
+Reproduces how often:
+100%
+Brave Version
+Brave: 0.23.105
+V8: 6.8.275.24
+rev: 9a46f8f
+Muon: 8.0.9
+OS Release: 10.0.17134
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+Yes
+Additional Information
+This may be due to corporate device policy, but I am not sure.

@@ -1,0 +1,15 @@
+App devs can use EDL to generate Open Enclave stubs for host-enclave interface
+
+
+This story tracks addressing user pain points such as #176 with a solution for automatic code generation and parameter marshaling based on a formal interface definition.
+In addition to the dev user experience benefits, this also allows us to provide better security as it takes the problem of ensuring that pointer boundary checks, TOCTOU checks and spectre mitigations are handled automatically for the app dev, which has proven very difficult to get right.
+While the oegen prototype currently exists with its own simplified interface definition language (IDL), there is a desire to support Intel's Enclave Definition Language (EDL) because:
+
+It reduces friction for porting Intel SGX SDK apps to Open Enclave
+It allows us to reuse existing investments in OSS Edger8r tool to enable this scenario faster
+
+This is currently being investigate in conjunction with Intel and if we have mutual commitment to this story, we will deprecate oegen, which also closes issues such as:
+
+OEGEN IDL should only take compiler-independent type definitions #245
+OEGEN does not support wchar_t #283
+

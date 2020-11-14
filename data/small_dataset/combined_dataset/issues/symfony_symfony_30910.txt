@@ -1,0 +1,51 @@
+Add a `yaml` env var processor
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11321
+
+
+
+This adds a new yaml processor, just along the lines of the json one.
+#EUFOSSA

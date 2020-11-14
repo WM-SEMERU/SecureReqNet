@@ -1,0 +1,5 @@
+Run ZAP proxy baseline scan against every deployment to Digital ocean
+
+
+Start with this one and then evolve it into more custom scans
+Check if these scans show up in logs

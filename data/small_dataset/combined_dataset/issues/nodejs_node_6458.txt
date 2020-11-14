@@ -1,0 +1,21 @@
+OpenSSL upgrades: May 3rd
+
+
+As per https://mta.openssl.org/pipermail/openssl-announce/2016-April/000069.html we are in for another batch of Node.js updates around the 3rd.
+
+The OpenSSL project team would like to announce the forthcoming release of
+OpenSSL versions 1.0.2h, 1.0.1t.
+These releases will be made available on 3rd May 2016 between approximately
+1200-1500 UTC.  They will fix several security defects with maximum severity
+"high".
+
+As per the security policy:
+
+HIGH Severity. This includes issues that are of a lower risk than critical, perhaps due to affecting less common configurations, or which are less likely to be exploitable. These issues will be kept private and will trigger a new release of all supported versions. We will attempt to keep the time these issues are private to a minimum; our aim would be no longer than a month where this is something under our control
+
+The last couple of OpenSSL upgrades have been the same severity level and we have had mixed impact from them across our release lines. Node.js v0.10, v0.12, v4, v5 and v6 will all be impacted by this (yes we'll still be updating v5) but the impact could range between none and high for us and we won't know until the release.
+As has been our established practice, we will be putting out new releases regardless of impact but we will also be putting out an impact assessment for our release lines prior to cutting the releases. We will not be committing to a time-frame for release but _estimate_ between 24 and 48 hours after we get our hands on the OpenSSL releases. With an impact assessment somewhere within the 24 hour mark.
+I'll prepare an announcement for nodejs-sec and nodejs.org asap and it'll be roughly a copy of what we've used in the past for these.
+Also, I spoke to one of the OpenSSL maintainers at Collab Summit a couple of months ago and specifically queried their release process, both in terms of frequency and also lead-time. Basically the story is that the lead time isn't going to improve, we'll just have to accept that we react to these, and the frequency is not fixed but we can probably expect roughly the frequency that we've been experiencing this year—a release every one or two months.
+Even though I'd love better scheduling and much more lead time from them than we get, my take-away is that the OpenSSL project is in very good hands these days. Code quality is improving, processes are solidifying, investment has increased and there are multiple full-timers on the project now. I have a much higher level of confidence in the project than was warranted a couple of years ago.
+/ @nodejs/security

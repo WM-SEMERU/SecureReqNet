@@ -1,0 +1,4 @@
+Remove special case around `void fn()` and `example_args.h` header
+
+
+There's an edge case where an arguments header will not be generated if the only EDL functions are of the form void fn(). This is bad, let's just generate an empty header so that we gurantee a header is always generated.

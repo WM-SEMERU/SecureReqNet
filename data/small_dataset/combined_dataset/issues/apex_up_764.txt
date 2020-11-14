@@ -1,0 +1,16 @@
+Unable to login
+
+
+Prerequisites
+
+ I am running the latest version. (up upgrade)
+ I searched to see if the issue already exists.
+ I inspected the verbose debug output with the -v, --verbose flag.
+ Are you an Up Pro subscriber?
+
+Description
+Could not login after clicking confirmation link.
+Steps to Reproduce
+I'm trying to login to get Pro subscription. After running up team login, I receive confirmation email. Sign in page shows that I'm successfully logged in, but terminal waits for confirmation and fails with:
+Error: login: requesting: Post https://teams.apex.sh/login: read tcp 192.168.0.106:52060->13.32.56.33:443: read: operation timed out
+

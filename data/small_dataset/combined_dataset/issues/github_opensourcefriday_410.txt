@@ -1,0 +1,142 @@
+Bump rubocop from 0.66.0 to 0.67.2
+
+
+Bumps rubocop from 0.66.0 to 0.67.2.
+
+Release notes
+Sourced from rubocop's releases.
+
+RuboCop 0.67.2
+Bug fixes
+
+#6882: Fix an error for Rails/RedundantAllowNil when not using both allow_nil and allow_blank. (@​koic)
+
+RuboCop 0.67.1
+Changes
+
+#6881: Set default PreferredName to e for Naming/RescuedExceptionsVariableName. (@​koic)
+
+RuboCop 0.67
+New features
+
+#5184: Add new multiline element line break cops. (@​maxh)
+Add new cop Rails/ActiveRecordOverride that checks for overriding Active Record methods instead of using callbacks. (@​elebow)
+Add new cop Rails/RedundantAllowNil that checks for cases when allow_blank makes allow_nil unnecessary in model validations. (@​elebow)
+Add new Naming/RescuedExceptionsVariableName cop. (@​AdrienSldy)
+
+Bug fixes
+
+#6761: Make Naming/UncommunicativeMethodParamName account for param names prefixed with underscores. (@​thomthom)
+#6855: Fix an exception in Rails/RedundantReceiverInWithOptions when the body is empty. (@​ericsullivan)
+#6856: Fix auto-correction for Style/BlockComments when the file is missing a trailing blank line. (@​ericsullivan)
+#6858: Fix an incorrect auto-correct for Lint/ToJSON when there are no to_json arguments. (@​koic)
+#6865: Fix deactivated StyleGuideBaseURL for Layout/ClassStructure. (@​aeroastro)
+#6868: Fix Rails/LinkToBlank auto-correct bug when using symbol for target. (@​r7kamura)
+#6869: Fix false positive for Rails/LinkToBlank when rel is a symbol value. (@​r7kamura)
+Add IncludedMacros param to default rubocop config for Style/MethodCallWithArgsParentheses. (@​maxh)
+#6785: Do not register an offense for Rails/Present or Rails/Blank in an unless else context when Style/UnlessElse is enabled. ([@​rrosenblum][])
+
+Changes
+
+#6854: Mark Rails/LexicallyScopedActionFilter as unsafe and document risks. ([@​urbanautomaton][])
+#5977: Warn for Performance Cops. (@​koic)
+#6637: Move LstripRstrip from Performance to Style department and rename it to Strip. ([@​anuja-joshi][])
+#6875: Mention block form of Struct.new in  Style/StructInheritance. ([@​XrXr][])
+#6871: Move Performance/RedundantSortBy, Performance/UnneededSort and Performance/Sample to the Style department. ([@​bbatsov][])
+
+ ... (truncated)
+
+
+
+Changelog
+Sourced from rubocop's changelog.
+
+0.67.2 (2019-04-05)
+Bug fixes
+
+#6882: Fix an error for Rails/RedundantAllowNil when not using both allow_nil and allow_blank. (@​koic)
+
+0.67.1 (2019-04-04)
+Changes
+
+#6881: Set default PreferredName to e for Naming/RescuedExceptionsVariableName. (@​koic)
+
+0.67.0 (2019-04-04)
+New features
+
+#5184: Add new multiline element line break cops. (@​maxh)
+Add new cop Rails/ActiveRecordOverride that checks for overriding Active Record methods instead of using callbacks. (@​elebow)
+Add new cop Rails/RedundantAllowNil that checks for cases when allow_blank makes allow_nil unnecessary in model validations. (@​elebow)
+Add new Naming/RescuedExceptionsVariableName cop. (@​AdrienSldy)
+
+Bug fixes
+
+#6761: Make Naming/UncommunicativeMethodParamName account for param names prefixed with underscores. (@​thomthom)
+#6855: Fix an exception in Rails/RedundantReceiverInWithOptions when the body is empty. (@​ericsullivan)
+#6856: Fix auto-correction for Style/BlockComments when the file is missing a trailing blank line. (@​ericsullivan)
+#6858: Fix an incorrect auto-correct for Lint/ToJSON when there are no to_json arguments. (@​koic)
+#6865: Fix deactivated StyleGuideBaseURL for Layout/ClassStructure. (@​aeroastro)
+#6868: Fix Rails/LinkToBlank auto-correct bug when using symbol for target. (@​r7kamura)
+#6869: Fix false positive for Rails/LinkToBlank when rel is a symbol value. (@​r7kamura)
+Add IncludedMacros param to default rubocop config for Style/MethodCallWithArgsParentheses. (@​maxh)
+#6785: Do not register an offense for Rails/Present or Rails/Blank in an unless else context when Style/UnlessElse is enabled. ([@​rrosenblum][])
+
+Changes
+
+#6854: Mark Rails/LexicallyScopedActionFilter as unsafe and document risks. ([@​urbanautomaton][])
+#5977: Warn for Performance Cops. (@​koic)
+#6637: Move LstripRstrip from Performance to Style department and rename it to Strip. ([@​anuja-joshi][])
+#6875: Mention block form of Struct.new in  Style/StructInheritance. ([@​XrXr][])
+#6871: Move Performance/RedundantSortBy, Performance/UnneededSort and Performance/Sample to the Style department. ([@​bbatsov][])
+
+
+
+
+Commits
+
+9c2950a Cut 0.67.2
+f7559c1 Fix a typo
+a09f62b [Fix #6882] Fix an error for Rails/RedundantAllowNil
+01918a1 Cut 0.67.1
+d0677d7 Set default PreferredName to e for Naming/RescuedExceptionsVariableName
+1d0e480 Cut 0.67
+2513212 Fix the manual
+f0959e8 Add new Naming/RescuedExceptionsVariableName cop
+b05bb15 [Fix #6785] Make Rails/Blank and Rails/Present aware of Style/UnlessElse
+93b1fc1 Update a bit of cop metadata
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot squash and merge will squash and merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge and block automerging
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

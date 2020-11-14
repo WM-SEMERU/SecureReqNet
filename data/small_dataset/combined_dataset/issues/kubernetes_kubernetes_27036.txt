@@ -1,0 +1,6 @@
+Filter seccomp profile path from malicious .. and /
+
+
+Without this patch with localhost/<some-releative-path> as seccomp profile one can load any file on the host, e.g. localhost/../../../../dev/mem which is not healthy for the kubelet.
+/cc @jfrazelle
+Unit tests depend on #26710.

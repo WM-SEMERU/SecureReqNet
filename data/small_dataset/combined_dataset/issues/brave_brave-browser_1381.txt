@@ -1,0 +1,9 @@
+Block Scripts and Fingerprinting Protection not working when open a guest/tor window multiple times
+
+
+Test plan
+See #1381 (comment)
+
+POC: http://peltate-worth.000webhostapp.com/world.html
+Version:
+0.55.10 Chromium: 70.0.3538.22 (Official Build) beta (64-bit)

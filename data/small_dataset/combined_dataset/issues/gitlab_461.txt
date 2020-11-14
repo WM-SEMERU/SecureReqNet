@@ -1,0 +1,1 @@
+I created a **gitlab** project from a public **github** project (importing it from an existing repository) and I would like to get github project new versions: is it possible from gitlab? is it possible from command line?

@@ -1,0 +1,2 @@
+When u login with a user then log out and with out close browswer  and enter with another user returns "Access denied for your LDAP account."
+if u close a open the browser then u can enter whit the other user

@@ -1,0 +1,13 @@
+initSES failing for Chrome Beta 44
+
+
+On Mac OSX 10.10.4
+trying to initialize caja with the following configuration:
+  'cajaServer': this.server_.toString(),
+  'debug': true,
+  'maxAcceptableSeverity': 'NOT_OCAP_SAFE',
+  'mitigateGotchas': false
+
+but SES instantiation fails and returns the attached report in the console:
+
+value of this.server_ is pointing to a hosted version of caja on our servers. The server is the Git hashed version v6000-23-gff10d92

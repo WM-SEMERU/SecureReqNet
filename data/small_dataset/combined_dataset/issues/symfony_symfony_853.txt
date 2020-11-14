@@ -1,0 +1,9 @@
+[Security] ACL: Ancestors relations regeneration problem
+
+
+Hi all,
+A couple of days ago I had an issue with the security component. Suddenly, after update some permissions I had this exception:
+"Not all parent ids were populated. This implies an integrity problem."
+I tried to track down the issue and finally I think I've found the problem. Method MutableAclProvider::regenerateAncestorRelations doesn't handle the update of the ancestors for the Acl's children. So, if some parent Acl was changed, it will not update relations between this new ancestor and the actual Acl's children. This causes the exception described before.
+Looking at the master version of Symfony, the problem seems to be still there.
+Thanks.

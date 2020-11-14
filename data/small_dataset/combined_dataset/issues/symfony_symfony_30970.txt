@@ -1,0 +1,76 @@
+[Messenger][WIP] Adding failed transport support
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+TODO
+
+
+Fixed tickets
+None
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11236
+
+
+
+This adds "failure" transport support for messenger, so that messages that fail on all their retries can be collected in one spot and retried later if wanted:
+framework:
+    messenger:
+        failure_transport: failed
+
+        transports:
+            async:
+                dsn: 'amqp://'
+            failed:
+                dsn: 'doctrine://default?queue_name=failed'
+
+        routing:
+            'App\Message\SmsNotification': async
+In this setup, SmsNotification would be retried 3 times on the async transport (current behavior) and then finally sent to the failed transport. The failed transport could be consumed like a normal transport, but it should usually be consumed with a new command: messenger:failed:retry, which interactively asks if you want to retry/reject a message:
+
+As a bonus, the implementation re-uses the Worker class, which validates the extensibility of the system 🎆 .
+TODO:
+
+ Finish messenger:failed:retry to retry by id
+ Add messenger:failed:remove command to remove 1 or all
+ Add messenger:failed:show command to show 1 or all
+ Tests
+ Possible WorkerFactory to avoid Worker instantiation duplication
+ deprecation/BC problem with args to SendersLocator
+ update CHANGELOG
+
+Cheers!

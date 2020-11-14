@@ -1,0 +1,37 @@
+[Security] Symfony does not redirect xhr to target path after login.
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+2.8
+
+
+
+The Firewall/ExceptionListener does not set the target path for xhr. This was introduced in 9ee74ea (long ago).
+I would like to do authentication via xhr. Is there any reason against reverting this?
+I dont see any reason for the current behavior, especially because symfony still intercepts and redirects xhr. Only the target path is ommited, and the redirect after login falls back to the default path.
+Or may be it could be made configurable.

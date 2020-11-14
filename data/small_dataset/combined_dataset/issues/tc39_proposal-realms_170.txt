@@ -1,0 +1,5 @@
+Reflect.construct can cause cross-realm leakage of Date and Promise constructors
+
+
+This is a security problem now in the shim, to be described. With a likely fix to be described.
+This is also a spec bug that should be fixed as the Realms spec proposal advances.

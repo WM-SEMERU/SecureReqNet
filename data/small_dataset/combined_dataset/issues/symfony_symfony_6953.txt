@@ -1,0 +1,4 @@
+[Security] How can a session contain a non-authenticated token and still be AUTHENTICATED_FULLY
+
+
+Am I missing something here? Bug or feature?

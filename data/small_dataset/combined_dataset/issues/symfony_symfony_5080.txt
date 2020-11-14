@@ -1,0 +1,12 @@
+[@Secure feature] redirect response should use _format from parent request
+
+
+Suggestion.
+Redirect response to login route should use _format parameter from parent request when this parameter is part of the login route.
+http://pastebin.com/80UXXnpr
+I could use this workaround, or create special listener class, but I'm sure it should be done by symfony itself.
+// workaround for every route which uses non default format
+if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+             $pars = $this->getRequest()->attributes->get('_route_params');
+             return new RedirectResponse($this->generateUrl('login', array('_format' => $pars['_format'])));
+         }

@@ -1,0 +1,4 @@
+Need to sanitize input shown in error messages
+
+
+Many error messages include something from the request. We should be making sure those included pieces have been sanitized to make sure we don't have any XSS vulnerabilities.

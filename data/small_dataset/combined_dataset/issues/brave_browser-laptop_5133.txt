@@ -1,0 +1,11 @@
+Add test for #4906
+
+
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+
+requires brave/muon#80
+Auditors: @bridiver

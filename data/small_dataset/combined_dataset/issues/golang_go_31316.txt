@@ -1,0 +1,37 @@
+syscall: GetStartupInfo on Windows checks nonexistent return code
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.1 linux/amd64
+
+(cross compiling to Windows amd64)
+Does this issue reproduce with the latest release?
+The relevant code has not changed lately.
+What did you do?
+    var si syscall.StartupInfo
+    err := syscall.GetStartupInfo(&si)
+    if err != nil {
+            fatal("GetStartupInfo: %v\n", err)
+    }
+
+What did you expect to see?
+err should always be nil, because according to https://technet.microsoft.com/en-us/ms683230(v=vs.90), "The Unicode version (GetStartupInfoW) does not fail."
+What did you see instead?
+Under some circumstances (eg. starting from cmd.exe), GetStartupInfo returns syscall.EINVAL.  Under other circumstances (eg. starting from WSL's bash), it succeeds.
+The implementation of GetStartupInfo() is:
+func GetStartupInfo(startupInfo *StartupInfo) (err error) {
+        r1, _, e1 := Syscall(procGetStartupInfoW.Addr(), 1, uintptr(unsafe.Pointer(startupInfo)), 0, 0)
+        if r1 == 0 {
+                if e1 != 0 {
+                        err = errnoErr(e1)
+                } else {
+                        err = EINVAL
+                }
+        }
+        return
+}
+
+So EINVAL should only happen if r1==0 && e1==0.  As far as I can tell, GetStartupInfoW() is never supposed to return any value, so checking r1 is not the right thing to do here.
+Indeed, if I copy this function but disable the error check, the StartupInfo struct seems to be filled correctly even in the error case.  So I think the correct fix is to simply stop checking the return code.
+If you want to be paranoid, you could verify that StartupInfo.Cb is set to a nonzero value after the syscall finishes.

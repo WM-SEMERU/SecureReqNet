@@ -1,0 +1,49 @@
+[Security] do not mock a deprecated interface
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#22797 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

@@ -1,0 +1,35 @@
+Diff unfolding appears to have some issues.
+
+It is working on here but not on the live demo. Nor on our local version.
+
+My browser reports the following:
+
+``` js
+Uncaught ReferenceError: Diff is not defined
+e.initPageScripts
+e 
+(anonymous function)
+(anonymous function)
+ot.event.dispatch
+g.handle
+ot.event.trigger
+(anonymous function)
+ot.extend.each
+ot.fn.ot.each
+ot.fn.extend.trigger
+e.turbo.onLoad
+u 
+h.fireWith
+ot.extend.ready
+a
+```
+
+Here is some JS from the vicinity of the reported error:
+
+`new Milestone;break;case"projects:issues:new":GitLab.GfmAutoComplete.setup();break;case"projects:merge_requests:new":GitLab.GfmAutoComplete.setup(),new Diff;break;case"projects:merge_requests:show":new Diff;break;case"projects:merge_requests:diffs":new Diff;`
+
+Which I believe to be from this file:
+
+`app/assets/javascripts/dispatcher.js.coffee`
+
+I'm not a web developer so I'm probably pretty useless at helping here. I would also not like to mess too much with our production GitLab server but if you would like me to pull out any diagnostic info let me know.

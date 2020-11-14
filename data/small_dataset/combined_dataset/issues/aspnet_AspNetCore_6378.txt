@@ -1,0 +1,6 @@
+Check iss in odic sign-out
+
+
+#4676
+I added the same check that sid have for iss.
+As stated in here https://openid.net/specs/openid-connect-frontchannel-1_0.html#ExampleFrontchannel OpenId Providers can decide whether to send sid and iss or not. So do we need to have this option in OpenIdConnectOptions?

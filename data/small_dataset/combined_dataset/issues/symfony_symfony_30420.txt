@@ -1,0 +1,13 @@
+The LogicException in WebTestCase.php is not correct.
+
+
+Symfony version(s) affected: 4.2
+Description
+In the WebTestCase class there is an error with the LogicException that is being thrown. The message is hardcoded to "You cannot create the client used in functional tests if the BrowserKit component is not available. Try running "composer require symfony/browser-kit".".
+This error can however also occur if the browser-kit is installed.
+How to reproduce
+Go to vendor/symfony/framework-bundle/Test/WebTestCase.php and look at the try catch in the createClient() function.
+Possible Solution
+Change the message
+Additional context
+For me this error occured when I didn't have my phpunit configured in phpstorm.

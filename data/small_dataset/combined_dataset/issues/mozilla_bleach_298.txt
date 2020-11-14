@@ -1,0 +1,63 @@
+Should bleach sanitize certain python escape characters?
+
+
+doing an audit and updating some tests, I decided to put bleach through some of python's escape characters.
+
+https://docs.python.org/2/reference/lexical_analysis.html#string-literals
+https://docs.python.org/3.6/reference/lexical_analysis.html#string-and-bytes-literals
+
+These were largely left as-is, and probably should be sanitized:
+
+bell
+vertical tab
+backspace
+formfeed
+
+there is also the \N{name} (unicode decode swap), and \ooo (octal), and \xhh (hex) ways to drop in some of these chars as well.
+questionable
+Bell \a
+>>> print(bleach.clean("a\ac"))
+ac
+>>> print(bleach.clean("a\ac")).__repr__()
+u'a\x07c'
+
+Vertical Tab \v
+>>> print(bleach.clean("a\vc"))
+a
+ c
+>>> print(bleach.clean("a\vc")).__repr__()
+u'a\x0bc'
+
+Backspace \b
+>>> print(bleach.clean("a\bc"))
+c
+>>> print(bleach.clean("a\bc")).__repr__()
+u'a\x08c'
+
+Formfeed \f
+>>> print(bleach.clean("a\fc"))
+c
+>>> print(bleach.clean("a\fc")).__repr__()
+u'a\x0cc'
+
+ok
+Carriage Return	\r
+>>> print(bleach.clean("a\rc"))
+a
+c
+>>> print(bleach.clean("a\rc")).__repr__()
+u'a\nc'
+
+Line Feed \n
+>>> print(bleach.clean("a\nc"))
+a
+c
+>>> print(bleach.clean("a\nc")).__repr__()
+u'a\nc'
+
+Tab \n
+>>> print(bleach.clean("a\tc"))
+a	c
+>>> print(bleach.clean("a\tc")).__repr__()
+u'a\tc'
+

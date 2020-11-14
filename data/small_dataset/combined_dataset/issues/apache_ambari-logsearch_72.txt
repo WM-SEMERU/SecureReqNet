@@ -1,0 +1,8 @@
+[AMBARI-25147] [Log Search UI] Update the development readme
+
+
+What changes were proposed in this pull request?
+Updating the development docs for the UI.
+How was this patch tested?
+N/A
+Please review Ambari Contributing Guide before opening a pull request.

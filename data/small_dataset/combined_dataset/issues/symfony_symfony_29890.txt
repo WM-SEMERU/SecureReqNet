@@ -1,0 +1,26 @@
+Decorator: Service "…" must implement interface "Symfony\Component\EventDispatcher\EventSubscriberInterface".
+
+
+Symfony version(s) affected: 3.4.21
+Description
+I'm getting the error message reporting a decorator service to be required to implement EventSubscriberInterface. It seems this happens, as the decorated service is affected by \Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass.
+How to reproduce
+Assumption: All services are private.
+
+Create a service.
+Create a service decorating the service from 1 and make this one an event subscriber.
+Create a service decorating the service from 2, but don't make it an event subscriber itself.
+Create another service decorating the service from 3, but don't make it an event subscriber itself.
+
+Illustration:
+<?php
+
+$baseService = new Service1();
+$eventSubscriber = new Service2($baseService); // implements the EventSubscriberInterface, highest decoration_priority
+$someDecorator = new Service3($eventSubscriber);
+$errorReportingService = new Service4($someDecorator);
+
+$service = $errorReportingService; // The resulting service in the container.
+The error is reported for the $errorReportingService. Implementing the interface would resolve the reported error, but it doesn't actually solve the root cause. The original subscriber is not triggered at all, as it is not registered with its related event dispatcher at all.
+Possible Solution
+I guess—I didn't dive into it too much. The example is somewhat the produced code. The RegisterListenersPass should register the original service that got tagged, not the resulting service, which may be a completely different class using mechanism like decorators.

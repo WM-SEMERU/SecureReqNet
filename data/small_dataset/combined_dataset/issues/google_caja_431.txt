@@ -1,0 +1,6 @@
+Image proxy may proxy scripts
+
+
+Original issue 431 created by jasvir on 2008-06-09T20:07:47.000Z:
+The image proxy may proxy images which end up being interpreted by some
+browsers as scripts.  Ensure that the proxy checks images are in fact images.

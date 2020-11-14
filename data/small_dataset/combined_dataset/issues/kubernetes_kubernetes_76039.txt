@@ -1,0 +1,15 @@
+Finish saving test results on failure
+
+
+The conformance image should be saving its results
+regardless of the results of the tests. However,
+with errexit set, when ginkgo gets test failures
+it exits 1 which prevents saving the results
+for Sonobuoy to pick up.
+Fixes: #76036
+/kind bug
+Special notes for your reviewer:
+Currently working on building this image and testing it works as expected.
+Does this PR introduce a user-facing change?:
+Ensures the conformance test image saves results before exiting when ginkgo returns non-zero value.
+

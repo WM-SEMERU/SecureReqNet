@@ -1,0 +1,33 @@
+'### Summary
+
+Wiki page appear in search results even though wiki permission is set to _Only team members_. 
+
+### Steps to reproduce
+
+- Create project with wiki pages.
+- Change wiki permission to _Only team members_.
+- Change project visibility to _public_.
+- Search the project as an unauthorized user (or internal user who isn't part from the project group) e.g. http://localhost:3000/search?project_id=[project_id]&scope=wiki_blobs&search=a
+
+### What is the current *bug* behavior?
+
+Show the content of wiki pages that matches the searched query.
+
+Though opening the wiki pages directly result in: Access denied.
+
+### What is the expected *correct* behavior?
+
+Not to show wiki pages.
+
+### Relevant logs and/or screenshots
+
+Project settings:
+
+![Screen_Shot_2017-04-19_at_6.28.16_PM](/uploads/4be0e9438189498e5759ade460b6ab57/Screen_Shot_2017-04-19_at_6.28.16_PM.png)
+
+Result page:
+
+![Screen_Shot_2017-04-19_at_6.27.33_PM](/uploads/52dc6a7ba1cc6b2b272c7084050659d9/Screen_Shot_2017-04-19_at_6.27.33_PM.png)
+
+
+Same issue when the project visibility is _internal_ and a user outside the project group search.

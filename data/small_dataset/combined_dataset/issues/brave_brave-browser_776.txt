@@ -1,0 +1,12 @@
+Allow private tabs to use different sessions (partitions)
+
+
+Carried over from brave/browser-laptop#597
+Tabs in a private window (either by default or via configuration) should use a different partition
+Steps to reproduce
+
+Open a new private window
+Visit https://trac.torproject.org/projects/tor and login
+Open a new private tab and visit Visit https://trac.torproject.org/projects/tor
+Notice this new tab shows you as logged in (from account in step 2)
+

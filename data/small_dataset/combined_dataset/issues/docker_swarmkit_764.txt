@@ -1,0 +1,6 @@
+Root Key in Raft should have the option to be encrypted
+
+
+
+No description provided.
+

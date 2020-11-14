@@ -1,0 +1,9 @@
+# [API] AutoRange type
+
+
+This pull-request is linked to:
+
+engine: For docker collector patch, contains more information about why and how
+cli: For the docker-compose.yml parsing and $ docker container stats format
+
+This PR contains the necessary change to the api to enable autorange functionality.

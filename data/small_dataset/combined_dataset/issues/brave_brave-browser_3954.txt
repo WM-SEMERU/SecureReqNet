@@ -1,0 +1,34 @@
+Sync UI thread hangs
+
+
+Description
+A quite rare situation which I could see during work on brave/sync#290 on 0.64.x master . After re-basing master to 0.65.x I could not see the issue .
+Because I had not figured the reason, created the issue.
+Steps to Reproduce
+
+Adjust computer time 15 minutes forward
+Get empty profile
+Run Brave browser
+brave://sync, Start a new Sync Chain
+Cancel
+Close browser
+Repeat pt3 for several times
+
+Actual result:
+Sometimes UI hangs, and does not response on mouse and keyboards.
+Expected result:
+No hung.
+Reproduces how often:
+Intermittent issue
+Brave version (brave://version info)
+Saw it on master 0.64.x, and could not repsoduce after migration to 0.65.x
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+Is the issue reproducible on the latest version of Chrome?
+
+Additional Information

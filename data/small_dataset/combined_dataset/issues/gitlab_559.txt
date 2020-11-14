@@ -1,0 +1,3 @@
+The side by side diff should be exactly like the inline view only side-by-side.
+
+The result of the current view makes a tiny commit to a big file look gigantic...

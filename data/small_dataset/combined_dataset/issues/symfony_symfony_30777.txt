@@ -1,0 +1,33 @@
+How to make Twig template display fancy Bootstrap 3 radio buttons correctly?
+
+
+I am running Symfony 4.2 and trying to create two Bootstrap 3 radio buttons.  Here is the HTML for what I want to create:
+<div class="btn-group btn-group-justified" data-toggle="buttons">
+    <label class="btn btn-lg btn-default">
+        <input type="radio" name="inquiry[flexDates]" value="yes">YES
+    </label>
+    <label class="btn btn-lg btn-default">
+        <input type="radio" name="inquiry[flexDates]" value="no">NO
+    </label>
+</div>
+
+This is my form builder code:
+$builder
+    ->add('flexDates', ChoiceType::class, [
+        'choices' => [
+            'Yes' => 'yes',
+            'No'  => 'no',
+         ],
+         'required' => false,
+         'empty_data' => '',
+         'expanded' => true,  // these two options (expanded = true and
+         'multiple' => false, // multiple = false) make it a radio button
+     ])
+
+I have the Bootstrap 3 theme (bootstrap_3_layout.html.twig) installed and have tried various combinations of form_row(), form_label() and form_widget().  I've set attr and label_attr in several different ways,
+but I cannot figure out how to generate the HTML above.  There always seem to be extra <div>s or HTML that causes it to display incorrectly.
+The HTML is part of a hard-coded form that has been working fine and I'm trying to convert it to a Twig template.  Converting all the other fields was simple, but I've wasted nearly a day just trying to duplicate the radio buttons.
+It seems like it should be easy, but how to do this is not clear from any of the documentation or examples I've been able to find.
+I've tried creating my own block widget, but I can't figure out how to make the <label> include the <input> (instead of before or after).  In order to make things work, the label must wrap around the input.
+There is a {% block checkbox_radio_label %} defined in the bootstrap_3_layout.html.twig file that is close to what I need, but I cannot get it to work.  It uses {{ widget|raw }}, but Symfony gives me a variable "widget" does not exist error when I try to use it.
+So far, the information at https://symfony.com/doc/current/form/form_customization.html has been more confusing than helpful.  I've been using Twig for years and have been able to do almost anything else, but this problem has me stumped.  I know I could write my own custom filter, but it seems like there should be an easier way.

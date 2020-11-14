@@ -1,0 +1,51 @@
+[SecurityBundle] Cache contexts per request in FirewallMap
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#19819 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+From @HeahDude in #19819 (comment), I propose to store and retrieve Context objects per Request using SplObjectStorage.
+At the moment, contexts are consumed by the Symfony\Components\Security\Http\Firewall class only, but they could be indirectly by end users if #19490 and/or #19819 come to be merged.

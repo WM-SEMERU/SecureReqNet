@@ -1,0 +1,10 @@
+[Console] There is no way to non-interactively change answer of QuestionHelper
+
+
+$output->writeln(
+    (int) (new QuestionHelper())->ask(
+         $input, $output, new ConfirmationQuestion('yes or no?', false)
+    )
+);
+I expect running this as yes | ./bin/console foo will output 1, but outputs 0. Problem is QuestionHelper slaps there always default value when it detects noninteractive mode.
+Maybe non interactive mode detection could be improved, since yes command clearly interacts with application.

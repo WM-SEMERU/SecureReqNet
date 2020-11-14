@@ -1,0 +1,6 @@
+Release official npm package for caja JS
+
+
+There are a whole bunch of unmaintained versions of caja's javascript on npm and bower. We'd love to see releases go out with appropriate versions. 😄
+The big reason I want to have this available is for offline use in desktop (electron) applications.
+/cc @jdfreder

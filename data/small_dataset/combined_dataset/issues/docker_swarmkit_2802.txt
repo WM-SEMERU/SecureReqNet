@@ -1,0 +1,24 @@
+Use custom gRPC dialer to override default proxy dialer
+
+
+Signed-off-by: Dani Louca dani.louca@docker.com
+- What I did
+Followed the same logic as in #2419 to use a custom grpc dialer and prevent the use of default dialer which picks up the proxy env variable when a manager is joining the cluster.
+The affected method dial is only used when manager is joining the cluster  and part of checkHealth which is also called on join.
+- How to test it
+
+Follow the link to configure 2 nodes (not part of swarm cluster) to use HTTP Proxy https://docs.docker.com/config/daemon/systemd/#httphttps-proxy
+Enable swarm on node 1 , docker swarm init
+Join node 2 as manager
+
+Actual Result:
+[centos@esc-1003-1 ~]$ docker swarm join --token SWMTKN-1-2v3cay35o2yavb2bqge6wvyhg6esdn47g82ydi534npgcd4cym-4rmvy3uo2acmbenjvmf8tkx52 10.10.13.91:2377
+Error response from daemon: manager stopped: can't initialize raft node: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: Error while dialing dial tcp: lookup proxy.example.com on 10.10.0.2:53: no such host"
+
+Expected Result (with this PR):
+Node joins successfully
+[root@esc-1003-1 ~]# docker swarm join --token SWMTKN-1-2v3cay35o2yavb2bqge6wvyhg6esdn47g82ydi534npgcd4cym-4rmvy3uo2acmbenjvmf8tkx52 10.10.13.91:2377
+This node joined a swarm as a manager.
+
+- Description for the changelog
+Fix manager node join when HTTP_PROXY, HTTPS_PROXY, or NO_PROXY are used

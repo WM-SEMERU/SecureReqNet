@@ -1,0 +1,4 @@
+Simplified some docs about getProjectDir
+
+
+Related to #11286, this simplifies things a bit and removes repeated contents.

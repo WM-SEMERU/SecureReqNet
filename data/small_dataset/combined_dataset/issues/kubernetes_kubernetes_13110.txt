@@ -1,0 +1,51 @@
+Clean up: stop making pre-service-account tokens.
+
+
+Currently, a cluster created with salt gets a bunch of secrets automatically created.
+You can see them here:
+$ kubectl get secrets --namespace=kube-system
+NAME                              TYPE                                  DATA
+default-token-flvj5               kubernetes.io/service-account-token   2
+token-admin                       Opaque                                1
+token-kube-proxy                  Opaque                                1
+token-kubelet                     Opaque                                1
+token-system-controller-manager   Opaque                                1
+token-system-dns                  Opaque                                1
+token-system-logging              Opaque                                1
+token-system-monitoring           Opaque                                1
+token-system-scheduler            Opaque                                1
+
+Ignore default-token-flvj5, which is fine.
+The others (token-*) were added to the cluster turnup process prior to the existence of service accounts.  The intent was to have different accounts for each component that accesses the apiserver, to allow for giving them least privilege.  However, this has yet to be implemented, and if we did implement it today, we'd use custom service accounts for each component, which would generate their own tokens.  So, we wouldn't do it this way.
+It looks like approximately nothing in github.com/kubernetes/kubernetes or github.com/kubernetes/contrib is referencing the token-* secrets.  So, we can remove the code that creates them.
+The code that creates the secrets is here:
+
+
+
+kubernetes/cluster/saltbase/salt/kube-addons/kube-addons.sh
+
+
+         Line 190
+      in
+      185b5af
+
+
+
+
+
+
+ while read line; do 
+
+
+
+
+
+We also don't need to put most of those tokens in the known-tokens.csv file.
+That happens in these places:
+
+AWS
+GCE
+Rackspace
+Vagrant
+
+We still want the kubelet and kube-proxy tokens in that file, but we don't need those to become API tokens.

@@ -1,0 +1,9 @@
+[2.1] AuthenticationException enhancements
+
+
+There are two enhancements which could be made to the AuthenticationException:
+
+add a getMessageKey(), getMessageData() which could be used by the translation component as the exception message itself cannot be safely displayed to the user
+change the signature of the constructor to match that of \Exception and pass $extraInformation via a setter
+
+@lsmith77, do you still plan to work on this?

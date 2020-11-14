@@ -1,0 +1,4 @@
+WIP - Inline properties for tests
+
+
+This is a precursor to #3840. It just inlines all test properties and consolidates, where there's already a shared superclass.

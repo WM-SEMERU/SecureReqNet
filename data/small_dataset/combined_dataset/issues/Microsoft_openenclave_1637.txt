@@ -1,0 +1,4 @@
+Add a link to globals.html on api docs mainpage
+
+
+This would help user quickly navigate to the supported APIs.

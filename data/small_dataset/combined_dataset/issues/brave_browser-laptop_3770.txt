@@ -1,0 +1,33 @@
+Mixed-content lock control should be able to re-lock and reload the page like Firefox.
+
+
+Did you search for similar issues before submitting this one?
+Yes
+Describe the issue you encountered:
+When testing #3443 it was discovered that re-locking the page exhibits counterintuitive behavior. It merely displays the unlocked status rather than re-locking.
+Expected behavior:
+If a user clicks on a closed lock, it should open. If a user clicks on an open lock, it should close.
+
+Platform (Win7, 8, 10? macOS? Linux distro?):
+Tested on OS X
+Brave Version:
+0.12.0
+Steps to reproduce:
+
+Visit https://forgetfulbc.blogspot.com/2016/08/lastweek-t3.html
+Click on the blue lock in the URL bar
+Attempt to click on it a second time
+
+
+Screenshot if needed:
+Chrome:
+
+
+Firefox:
+
+Brave:
+
+
+Any related issues:
+#3443
+

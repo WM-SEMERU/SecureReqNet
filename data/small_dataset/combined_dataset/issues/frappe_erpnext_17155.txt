@@ -1,0 +1,8 @@
+Possible to chose serial no which is already on delivery note
+
+
+Hi,
+I think we have encountered a bug on the delivery note.
+When issuing a Delivery note for a serialized item the dropdown menu is showing serial Nos of the item that has already been delivered.
+Please check this problem.
+Best regards!

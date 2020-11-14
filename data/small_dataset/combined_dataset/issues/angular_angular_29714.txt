@@ -1,0 +1,41 @@
+docs: update release info to be current today wrto release schedule and examples
+
+
+PR Checklist
+Please check if your PR fulfills the following requirements:
+
+ The commit message follows our guidelines: https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+PR Type
+What kind of change does this PR introduce?
+
+ Bugfix
+ Feature
+ Code style update (formatting, local variables)
+ Refactoring (no functional changes, no api changes)
+ Build related changes
+ CI related changes
+ Documentation content changes
+ angular.io application / infrastructure changes
+ Other... Please describe:
+
+What is the current behavior?
+Angular Versioning and Releases document was last updated in Sept 2018. It's now out of date in two ways:
+
+The release schedule includes the boilerplate months of "March/April" for version 8 and "September/October" for version 9.
+The release number examples still use version 5. Not incorrect, just feels old.
+
+Issue Number: N/A
+What is the new behavior?
+
+Update release schedule
+Change examples to be more relevant for current day
+
+Does this PR introduce a breaking change?
+
+ Yes
+ No
+
+Other information

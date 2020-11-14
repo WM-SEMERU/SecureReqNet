@@ -1,0 +1,57 @@
+[Mime] added Headers::toArray()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+That helps when using the Mime component to create a form submission HTTP body (where you need to merge the headers of the MIME body with the HTTP headers):
+$body->getPreparedHeaders()->toArray();
+
+vs
+
+foreach ($body->getPreparedHeaders()->getAll() as $header) {
+      $headers[] = $header->toString();
+}

@@ -1,0 +1,38 @@
+### Summary
+
+It appears that users who can read a project are allowed to create labels on it through either of the API's issuable creation end-points (quite possibly update as well).
+
+I encountered this bug while working on !6701
+
+### Steps to reproduce
+
+1. Authenticate with API using any user's private token (one without access to target public project).
+2. Attempt to read issues on a public project (/project/:id/issues) - this works as expected.
+3. Create an issue, and specify labels as a comma-separated list.
+4. API response contains a new issue without labels.
+5. However, checking the labels list for the public project now shows new labels specified in the POST.
+
+I've replicated this on gitlab.com, and on the latest `master` branch.
+
+https://gitlab.com/harigopal/geektrust-lengaburu/labels
+
+I created those labels by calling the Issue endpoint from a new account that doesn't have any special access to the repo.
+
+Related issue: https://gitlab.com/harigopal/geektrust-lengaburu/issues/1 
+
+The labels didn't get assigned to the issue, but they were created nonetheless. I think it'll be possible to spam any number of labels into a project this way. 
+
+### Expected behavior
+
+The labels suggested by the non-member should not be created.
+
+### Actual behavior
+
+The labels are created.
+
+### Possible fixes
+
+https://gitlab.com/harigopal/gitlab-ce/commits/labels-api-bug
+
+I've included a spec for the bug and a possible fix.
+

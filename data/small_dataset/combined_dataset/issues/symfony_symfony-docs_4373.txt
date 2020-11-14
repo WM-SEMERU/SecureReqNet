@@ -1,0 +1,14 @@
+Document Security Events
+
+
+See the SecurityEvents class for these 2:
+
+security.interactive_login
+security.switch_user
+
+And AuthenticationEvents for these 2:
+
+security.authentication.success
+security.authentication.failure
+
+We should at least have a mention of them somewhere and when you would use them. This relates partially to #802. I've also never been clear on security.interactive_login, it's name and PHPDoc suggests that there are other, non-interactive ways to login, and so that a listener to this would not cover all login cases.  I'm not sure what that includes/doesn't include.

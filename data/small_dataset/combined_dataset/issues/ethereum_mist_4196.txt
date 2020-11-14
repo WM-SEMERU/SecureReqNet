@@ -1,0 +1,14 @@
+Hacked or System Error ?
+
+
+hi can anyone help me first i have an issue syncing ethereum wallet and now after looking up my wallet on etherscan i can see 4.5 ether has been sent out to another address (not mine or by me) and that address has only made one transaction that is still holding the same amount of ether so if it was a hack you would think it would be gone ?
+
+
+
+ I've asked for help in the Mist Gitter before filing this issue.
+
+Version: `0.0.0`
+OS & Version: windows/linux/osx
+Node version: `geth 0.0.0`
+Number of blocks synchronized: 0
+

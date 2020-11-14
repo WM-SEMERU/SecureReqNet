@@ -1,0 +1,4 @@
+Setup stylelint
+
+
+It would be good to setup style-lint to ensure that style is not overly specified as this will help keep things consistent and easy to maintain in the future.

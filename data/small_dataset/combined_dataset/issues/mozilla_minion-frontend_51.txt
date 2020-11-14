@@ -1,0 +1,4 @@
+/api/scan/<minion_scan_id> does not check ownership
+
+
+This is pretty much a duplicate to #46  since they both use the same api, except #46 is specified to extract issues.

@@ -1,0 +1,5 @@
+Fix up github-based stack urls like we fix up code.google stack urls
+
+
+Original issue 1965 created by erights on 2015-04-12T00:48:24.000Z:
+useHTMLLogger.js, when presenting a stack in html, fixes up the urls for code.google source urls so that they actually take you to a page with the correct line highlighted. It would be nice for it to do so for github as well, when the stack url points into the rawgit service.

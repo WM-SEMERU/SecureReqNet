@@ -1,0 +1,58 @@
+[Validator] Improve Bulgarian translations.
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4 
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+none   
+
+
+License
+MIT
+
+
+Doc PR
+none 
+
+
+
+This pull request is an improvement on top of #30227 and improves translations in the following ways:
+
+Make consistent how This word is translated.
+Make consistent how This value is translated.
+Fix capitalization rules for abbreviations.
+Change email to имейл (this is a word in the official Bulgarian dictionary).
+Removes unnecessary words in brackets.
+
+Feel free to comment and criticize I'm not a professional translator.

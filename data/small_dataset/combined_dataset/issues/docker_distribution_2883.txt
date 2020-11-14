@@ -1,0 +1,41 @@
+Docker API inconsistent results (ENV variables resolves under different conditions) under /services
+
+
+When doing an inspect from cmdline
+docker service inspect id
+you get
+                "Healthcheck": {
+                    "Test": [
+                        "CMD-SHELL",
+                        "mysqladmin -uroot -p${MYSQL_ROOT_PASSWORD} -h 127.0.0.1 status"
+                    ],
+                    "Interval": 15000000000,
+                    "Timeout": 30000000000,
+                    "Retries": 3
+                },
+
+same as http://docker_url:2375/services/id
+                "Healthcheck": {
+                    "Test": [
+                        "CMD-SHELL",
+                        "mysqladmin -uroot -p${MYSQL_ROOT_PASSWORD} -h 127.0.0.1 status"
+                    ],
+                    "Interval": 15000000000,
+                    "Timeout": 30000000000,
+                    "Retries": 3
+                },
+
+but when you do a plain http://docker_url:2375/services
+you get
+                "Healthcheck": {
+                    "Test": [
+                        "CMD-SHELL",
+                        "mysqladmin -uroot -pSupersecret -h 127.0.0.1 status"
+                    ],
+                    "Interval": 15000000000,
+                    "Timeout": 30000000000,
+                    "Retries": 3
+                },
+
+With ENV   "MYSQL_ROOT_PASSWORD=Supersecret"
+Is this resolving of variables expected behaviour when querying all services?

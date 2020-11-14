@@ -1,0 +1,171 @@
+Summary: On pages with multiple dropzones, clicking the "selecting them" text can trigger multiple file upload dialogs from the browser.
+
+Steps to reproduce:
+
+1. vagrant destroy && vagrant up && vagrant ssh
+2. Load a page with multiple dropzones, such as [this one](http://localhost:3000/gitlabhq/testme/commit/5937ac0a7beb003549fc5fd26fc247adbce4a52e) from the vagrant development cookbook reciple
+3. Note the "Attach images (JPG, PNG, GIF) by dragging & dropping or selecting them" text beneath the text area
+4. Click on "selecting them" to spawn a file upload dialog
+
+Expected behavior: A single file upload dialog should show up, letting you either choose a file to upload or cancel the request.
+
+Observed behavior: Depending on browser, this will either spawn two file selection dialogs at the same time, or one after the other.
+
+Relevant logs and/or screenshots: N/A
+
+Output of checks:
+
+Health check:
+
+```
+Checking Environment ...
+
+Git configured for vagrant user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.6 ? ... OK (1.9.6)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by vagrant:vagrant? ... yes
+Repo base access is drwxrws---? ... no
+  Try fixing it:
+  sudo chmod -R ug+rwX,o-rwx /gitlab/repositories/
+  sudo chmod -R ug-s /gitlab/repositories/
+  find /gitlab/repositories/ -type d -print0 | sudo xargs -0 chmod g+s
+  For more information see:
+  doc/install/installation.md in section "GitLab Shell"
+  Please fix the error above and rerun the checks.
+Satellites access is drwxr-x---? ... no
+  Try fixing it:
+  sudo chmod u+rwx,g=rx,o-rwx /gitlab/gitlab-satellites
+  For more information see:
+  doc/install/installation.md in section "GitLab"
+  Please fix the error above and rerun the checks.
+update hook up-to-date? ... yes
+update hooks in repos are links: ...
+Documentcloud / Underscore ... ok
+Diaspora / Diaspora ... repository is empty
+Diaspora / Diaspora Project Site ... ok
+Diaspora / Diaspora Client ... ok
+Brightbox / Brightbox Cli ... ok
+Brightbox / Puppet ... ok
+Gitlabhq / Gitlabhq ... repository is empty
+Gitlabhq / Gitlab Ci ... ok
+Gitlabhq / Gitlab Recipes ... ok
+Gitlabhq / Gitlab Shell ... ok
+Gitlabhq / Grack ... ok
+Gitlabhq / Testme ... ok
+Twitter / Flight ... ok
+Twitter / Typeahead.Js ... ok
+H5bp / Html5 Boilerplate ... ok
+H5bp / Mobile Boilerplate ... ok
+Running /gitlab/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files:
+	/gitlab/repositories: OK
+	/home/vagrant/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.6.17
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ...
+Documentcloud / Underscore ... yes
+Diaspora / Diaspora ... yes
+Diaspora / Diaspora Project Site ... yes
+Diaspora / Diaspora Client ... yes
+Brightbox / Brightbox Cli ... yes
+Brightbox / Puppet ... yes
+Gitlabhq / Gitlabhq ... yes
+Gitlabhq / Gitlab Ci ... yes
+Gitlabhq / Gitlab Recipes ... yes
+Gitlabhq / Gitlab Shell ... yes
+Gitlabhq / Grack ... yes
+Gitlabhq / Testme ... yes
+Twitter / Flight ... yes
+Twitter / Typeahead.Js ... yes
+H5bp / Html5 Boilerplate ... yes
+H5bp / Mobile Boilerplate ... yes
+Projects have satellites? ...
+Documentcloud / Underscore ... yes
+Diaspora / Diaspora ... can't create, repository is empty
+Diaspora / Diaspora Project Site ... yes
+Diaspora / Diaspora Client ... yes
+Brightbox / Brightbox Cli ... yes
+Brightbox / Puppet ... yes
+Gitlabhq / Gitlabhq ... can't create, repository is empty
+Gitlabhq / Gitlab Ci ... yes
+Gitlabhq / Gitlab Recipes ... yes
+Gitlabhq / Gitlab Shell ... yes
+Gitlabhq / Grack ... yes
+Gitlabhq / Testme ... yes
+Twitter / Flight ... yes
+Twitter / Typeahead.Js ... yes
+H5bp / Html5 Boilerplate ... yes
+H5bp / Mobile Boilerplate ... yes
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/local/bin/git"
+Git version >= 1.7.10 ? ... yes (2.0.0)
+
+Checking GitLab ... Finished
+```
+
+System Info:
+
+```
+System information
+System:		Ubuntu 12.04
+Current User:	vagrant
+Using RVM:	no
+Ruby Version:	2.1.2p95
+Gem Version:	2.3.0
+Bundler Version:1.6.3
+Rake Version:	10.3.2
+Sidekiq Version:2.17.0
+
+GitLab information
+Version:	7.1.0.pre
+Revision:	9879c42
+Directory:	/gitlab/gitlab
+DB Adapter:	postgresql
+URL:		http://localhost:3000
+HTTP Clone URL:	http://localhost:3000/some-project.git
+SSH Clone URL:	ssh://vagrant@localhost:2222/some-project.git
+Using LDAP:	no
+Using Omniauth:	no
+
+GitLab Shell
+Version:	1.9.6
+Repositories:	/gitlab/repositories/
+Hooks:		/gitlab/gitlab-shell/hooks/
+Git:		/usr/local/bin/git
+```

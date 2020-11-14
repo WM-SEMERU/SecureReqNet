@@ -1,0 +1,4 @@
+Get-Credential does not work for smart cards with multiple certificates.
+
+
+The Get-Credential cmdlet only shows the first certificate listed on the smart card in the dialog. This makes it impossible to use cards with multiple certificates.

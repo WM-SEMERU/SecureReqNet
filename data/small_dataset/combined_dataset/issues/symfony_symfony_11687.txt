@@ -1,0 +1,4 @@
+Extend AbstractFactory for easy extending
+
+
+by this way, it is possible to use the hole abstract class and just override the 4 last getter functions. it will this class more reuseable!

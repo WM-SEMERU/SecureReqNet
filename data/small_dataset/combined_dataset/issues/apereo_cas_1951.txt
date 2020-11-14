@@ -1,0 +1,8 @@
+Update WebSDK2.3
+
+
+
+urlencode iframe.src to protect against unexpected requests to the server
+add option to pass callback to duo_form.onSubmit
+
+Duo tested and approved. Cheers!

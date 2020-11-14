@@ -1,0 +1,47 @@
+[SecurityBundle] fix wrong view behavior in WebDebugToolbar when username of token is empty
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Sometimes the username of the authentication token is empty but the user is authenticated.
+In that case the WebDebugToolbar displayed the user is not authenticated - what was wrong.

@@ -1,0 +1,33 @@
+'While debugging https://gitlab.com/gitlab-org/gitlab-ce/issues/21871#note_15242055, I discovered that you can actually do the following things via the API:
+
+- share a project with a group that doesn't exist: `POST /api/v3/projects/9/share?group_id=42&group_access=30` => this ends-up generating errors like the one described in #21871 and can be solved by actually checking that the group exists, as we do in `app/controllers/projects/group_links_controller.rb`.
+- share a project with a group you cannot see (i.e. a private group): `POST /api/v3/projects/9/share?group_id=<PRIVATE GROUP ID>&group_access=30` => this leaks at least the group's name and owner:
+
+![Screen_Shot_2016-10-05_at_16.16.47](/uploads/f203370423bc8cd1529cb71f4ff72f75/Screen_Shot_2016-10-05_at_16.16.47.png)
+
+![Screen_Shot_2016-10-05_at_16.16.59](/uploads/91f9e71c3e4d104437aaf34040801316/Screen_Shot_2016-10-05_at_16.16.59.png)
+
+![Screen_Shot_2016-10-05_at_16.18.04](/uploads/59a373598cc8aeb44a3f4601cd51c7ca/Screen_Shot_2016-10-05_at_16.18.04.png)
+
+The fix is quite simple, we should do as we do in the controller.
+
+Replace:
+
+```ruby
+link = user_project.project_group_links.new(attrs)
+```
+
+by:
+
+```ruby
+group = Group.find(params[:link_group_id])
+return render_404 unless can?(current_user, :read_group, group)
+
+user_project.project_group_links.create(
+  group: group,
+  group_access: params[:group_access],
+  expires_at: params[:expires_at]
+)
+```
+
+/cc @stanhu @briann @markglenfletcher

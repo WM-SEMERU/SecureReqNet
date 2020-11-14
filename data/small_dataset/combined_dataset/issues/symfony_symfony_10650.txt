@@ -1,0 +1,86 @@
+Multi-providers not function properly
+
+
+I have created two providers for authentication purpose in security.yml file. Now I have an issue that whenever I am testing admin login, it is functioning proper. But at frontend side, it throws following error:
+"$user must be an instanceof UserInterface, an object implementing a __toString method, or a primitive string"
+In debugging, it get admin table query.
+Here for your reference, I have copy security.yml file.
+    security:
+         encoders:
+             Acme\Bundle\AdminBundle\Entity\Admin:
+                  algorithm: md5
+         Acme\Bundle\UserBundle\Entity\User: plaintext
+         Acme\Bundle\UserBundle\Entity\Customer: plaintext
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        chain_provider:
+            chain:
+                providers: [admin_db, user_db]
+        admin_db:
+            id: acme_admin.admin_provider
+        user_db:
+            id: acme_user.user_provider
+
+    firewalls:
+        backend:
+            pattern: ^/admin/
+            form_login:
+                provider: admin_db
+                check_path: /admin/login-check
+                login_path: AcmeAdminBundle_login
+                always_use_default_target_path : true
+                default_target_path: AcmeAdminBundle_dashboard
+                use_forward: true
+            logout:
+                path: AcmeAdminBundle_logout
+                target: AcmeAdminBundle_login
+            security: true
+
+        # index_firewall:
+            # pattern:  ^/index$
+            # security: true
+        login:
+            pattern:  ^/(login|create|thank-you)$
+            security: false
+
+        secured_area:
+            # currentally whole domain is proctected
+            pattern:    ^/
+            # used custome user provider
+            provider: user_db
+            form_login:
+                check_path: acme_user_bundle_login_check
+                login_path: acme_user_bundle_login
+                # form element name used for authentication
+                username_parameter: logintype[email]
+                password_parameter: logintype[password]
+                # default redirected to home page.
+                default_target_path: acme_home_page_bundle_index_home_page_culture
+                use_referer: true
+            logout:
+                path:   acme_user_bundle_logout
+                target:  acme_home_page_bundle_index_home_page_culture
+            anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login-check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/en/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fr/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login-check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+Here you can see that two provides define:
+providers:
+        chain_provider:
+            chain:
+                providers: [admin_db, user_db]
+        admin_db:
+            id: acme_admin.admin_provider
+        user_db:
+            id: acme_user.user_provider
+My question is where am I wrong in configuration??

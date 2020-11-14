@@ -1,0 +1,12 @@
+Stylesheets can contain ]]>
+
+
+Original issue 605 created by zestyping on 2008-06-13T18:19:00.000Z:
+Cajoling this:
+<style>
+div[id=']]>/*'] { color: #f00; }
+</style>
+produces a stylesheet containing the magic string ]]>, which might
+cause problems on IE because the stylesheet is emitted in an innerHTML
+attribte (see domita.js:960).
+Requires further investigation.

@@ -1,0 +1,52 @@
+[issue 45] Add nsp security check
+
+
+(+) 5 vulnerabilities found
+
+│               │ Regular Expression Denial of Service
+│ Name          │ hawk
+│ Installed     │ 3.1.2
+│ Vulnerable    │ <4.1.1
+│ Patched       │ >=4.1.1
+│ Path          │ vault@0.0.5 > babel-cli@6.4.5 > request@2.67.0 > hawk@3.1.2
+│ More Info     │ https://nodesecurity.io/advisories/77
+
+│               │ Regular Expression Denial of Service
+│ Name          │ hawk
+│ Installed     │ 3.1.2
+│ Vulnerable    │ <4.1.1
+│ Patched       │ >=4.1.1
+│ Path          │ vault@0.0.5 > request@2.67.0 > hawk@3.1.2
+│ More Info     │ https://nodesecurity.io/advisories/77
+
+│               │ Denial-of-Service Extended Event Loop Blocking
+│ Name          │ qs
+│ Installed     │ 0.6.6
+│ Vulnerable    │ <1.0.0
+│ Patched       │ >= 1.x
+│ Path          │ vault@0.0.5 > bitgo@0.11.64 > chain-node@0.0.17 > request@2.36.0 > qs@0.6.6
+│ More Info     │ https://nodesecurity.io/advisories/28
+
+
+│               │ Denial-of-Service Memory Exhaustion
+│ Name          │ qs
+│ Installed     │ 0.6.6
+│ Vulnerable    │ <1.0.0
+│ Patched       │ >= 1.x
+│ Path          │ vault@0.0.5 > bitgo@0.11.64 > chain-node@0.0.17 > request@2.36.0 > qs@0.6.6
+│ More Info     │ https://nodesecurity.io/advisories/29
+
+│               │ Regular Expression Denial of Service
+│ Name          │ hawk
+│ Installed     │ 1.0.0
+│ Vulnerable    │ <4.1.1
+│ Patched       │ >=4.1.1
+│ Path          │ vault@0.0.5 > bitgo@0.11.64 > chain-node@0.0.17 > request@2.36.0 > hawk@1.0.0
+│ More Info     │ https://nodesecurity.io/advisories/77
+
+Unfortunately, I don't recommend adding an exception for any of these packages. We should try to find a solution. The best course of action is probably to notify the maintainers (that aren't already aware).
+Tracking issues:
+BitGo #20
+chain-node #27
+request #2020
+Closes #45

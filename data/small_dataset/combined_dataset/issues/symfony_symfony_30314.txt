@@ -1,0 +1,60 @@
+[RFC][Serializer] Better handling of built in types
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2 - probably should be master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+not yet
+
+
+
+There are a few changes, that all sort of go together. I'm quite interested to see what thoughts people have about this.
+The biggest change is to add a test that serializes, and then deserializes some data and checks the results are the same. It tries to cover all the potential data types. The other changes help to make this test pass.
+There is a new denormalizer, that handles 'built in' data types, such as 'string', 'int'. This gives a few nice improvements
+
+we can now ask the deserailizer for 'string', 'int' and 'string[]'
+removes logic for handling 'string[]' etc from ObjectNormalizer as it can now just ask the serializer for this.
+
+Changed Csv encoder to encode false bools as 0, instead of '', this is a BC change, because the output has changed, but seems a) more correct/useful b) makes the decoding back to bool simpler
+Changed Xml and CSV decoders to return empty values as null instead of '' (empty string), again, this seems more 'correct' and produces less problems where we have a field expecting say 'int' and it gets a string assigned.
+Now the only unclear case is decoding of what should be an empty string, and the builtindenormalizer handles this where it can. I do this by adding to the context if a field should be nullable, and converting null to '' for fields that are non-nullable.
+There is one more, maybe more contorversial change - Currently deserializer only allows arrays with int keys, this happens because PropertyInfo always marks arrays as having int keys, but obviously php and json and yaml and have these situations, (the long story is that i was trying to deserialize packagists api which has structure { "packagename" : {"version": {package: name, etc... }, "version2": {...}}). So I removed the 'key' type from PropertyInfo, and now it allows keys of both ints and strings, doesnt appear to break any tests.

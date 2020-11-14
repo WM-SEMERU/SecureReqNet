@@ -1,0 +1,18 @@
+Fix HPA unit test deadlock on small machines.
+
+
+/sig autoscaling
+/kind bug
+/kind failing-test
+What this PR does / why we need it:
+HPA unit tests deadlock when running on small machines (e.g. 1 core).  Repro steps:
+export GOMAXPROCS=1
+go test ./pkg/controller/podautoscaler -count 1 -timeout 60s
+
+The deadlock occurs because the processed channel has a buffer of 100 and many reactors are taking a test case lock, pushing a string onto the channel, and then releasing the lock.  Only the first string is taken from the channel before verifying the results of the test.  The verifyResults method attempts to take a test case lock as well.  If enough events happen before verifying the results then one of the reactors will block trying to push onto processed channel while holding the lock.  The verifyResults method will wait indefinitely for the lock because no other goroutine is reading from the processed channel.
+This change releases the lock in the reactors before pushing onto the processed channel.  It is not necessary to hold the lock.
+Output from go-deadlock: https://gist.github.com/josephburnett/21af67553e42670173fd6bc8300ca5cd
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+

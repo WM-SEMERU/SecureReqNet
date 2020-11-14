@@ -1,0 +1,30 @@
+Issue with sharing sites
+
+
+Description:
+When sharing a site, the correct URL is sometimes not being shared.
+Twitter works fine, but Amazon does not
+Steps to Reproduce
+
+Open Brave, navigate to amazon.com
+Open the share sheet
+Try to email the link
+
+https://bravesoftware.slack.com/files/UCLMABWMS/FHRLFFDFY/rpreplay_final1554501784.mp4
+Actual result: 
+The URL is file:///private/var/mobile/Containers/Data/Application/8610FA20-BF86-460D-BE92-474FF05BCBB2/tmp/TempDocs/rb.txt
+Expected result:
+www.amazon.com
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Easy on Amazon
+Brave Version: 
+1.9.1
+Device details: 
+Xs on 12.2
+Website problems only:
+
+did you check with Brave Shields down?
+did you check in Safari/Firefox (WkWebView-based browsers)?
+No
+
+Additional Information

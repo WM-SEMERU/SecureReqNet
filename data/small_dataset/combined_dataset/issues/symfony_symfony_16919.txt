@@ -1,0 +1,8 @@
+Routing schemes https 302
+
+
+Hi,
+More of a query than an issue, is there any reason then defining https as the scheme for the route the redirect from http > https is a 302 temp redirect?
+Having troubles with SEO where it isn't removing the http links as they aren't marked as perm redirects.
+Thanks,
+Harry

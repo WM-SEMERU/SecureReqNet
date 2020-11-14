@@ -1,0 +1,64 @@
+Our current use of `attr_encrypted` does not match best practice. Not only does this reduce the security of the secrets we keep, but support for them may be removed at any time: https://github.com/attr-encrypted/attr_encrypted#deprecations
+
+Here are the sites:
+
+```
+app/models/user.rb:  attr_encrypted :otp_secret,
+app/models/user.rb-    key:       Gitlab::Application.secrets.otp_key_base,
+app/models/user.rb-    mode:      :per_attribute_iv_and_salt,
+app/models/user.rb-    insecure_mode: true,
+app/models/user.rb-    algorithm: 'aes-256-cbc'
+
+app/models/project_import_data.rb:  attr_encrypted :credentials,
+app/models/project_import_data.rb-                 key: Gitlab::Application.secrets.db_key_base,
+app/models/project_import_data.rb-                 marshal: true,
+app/models/project_import_data.rb-                 encode: true,
+app/models/project_import_data.rb-                 mode: :per_attribute_iv_and_salt,
+app/models/project_import_data.rb-                 insecure_mode: true,
+app/models/project_import_data.rb-                 algorithm: 'aes-256-cbc'
+
+app/models/pages_domain.rb:  attr_encrypted :key,
+app/models/pages_domain.rb-    mode: :per_attribute_iv_and_salt,
+app/models/pages_domain.rb-    insecure_mode: true,
+app/models/pages_domain.rb-    key: Gitlab::Application.secrets.db_key_base,
+app/models/pages_domain.rb-    algorithm: 'aes-256-cbc'
+
+app/models/ci/variable.rb:    attr_encrypted :value,
+app/models/ci/variable.rb-       mode: :per_attribute_iv_and_salt,
+app/models/ci/variable.rb-       insecure_mode: true,
+app/models/ci/variable.rb-       key: Gitlab::Application.secrets.db_key_base,
+app/models/ci/variable.rb-       algorithm: 'aes-256-cbc'
+```
+
+EE also has:
+
+```
+app/models/remote_mirror.rb:  attr_encrypted :credentials,
+app/models/remote_mirror.rb-                 key: Gitlab::Application.secrets.db_key_base,
+app/models/remote_mirror.rb-                 marshal: true,
+app/models/remote_mirror.rb-                 encode: true,
+app/models/remote_mirror.rb-                 mode: :per_attribute_iv_and_salt,
+app/models/remote_mirror.rb-                 insecure_mode: true,
+app/models/remote_mirror.rb-                 algorithm: 'aes-256-cbc'
+
+app/models/geo_node.rb:  attr_encrypted :secret_access_key,
+app/models/geo_node.rb-                 key: Gitlab::Application.secrets.db_key_base,
+app/models/geo_node.rb-                 algorithm: 'aes-256-gcm',
+app/models/geo_node.rb-                 mode: :per_attribute_iv,
+app/models/geo_node.rb-                 encode: true
+
+```
+
+There are three problems here (except in `geo_node`, which gets it all right):
+
+* Use of `insecure_mode: true`, which permits the encryption key to be shorter than required
+* Use of `per_attribute_iv_and_salt` instead of `per_attribute_iv`
+* Use of `algorithm: aes-256-cbc` instead of `aes-256-gcm`
+
+To resolve these issues, we need to introduce a means to update the secrets so they are compatible with `per_attribute_iv` and `aes-256-gcm`. Ideally, this would be done without an offline maintenance window.
+
+We also need administrators to be able to rotate `db_key_base` and `otp_key_base`, in case they're too short. We should detect this eventuality and issue a prominent warning to affected administrators at least 1 release before disabling `insecure_mode`.
+
+I've put them together as this is the sort of data migration we'd ideally do all at once. 
+
+/cc @briann @DouweM

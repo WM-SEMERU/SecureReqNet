@@ -1,0 +1,5 @@
+Servo does not do TLS hostname verification
+
+
+Servo is built on hyper, which does not yet do TLS hostname verification. I believe without this TLS is essentially insecure.
+@sfackler is working on this problem now, which will be solved by a combination of https://github.com/sfackler/rust-openssl-verify to add verification for OpenSSL and https://github.com/sfackler/rust-native-tls which is a platform-specific TLS backend that uses the native stacks on OS X and Windows (and also does hostname verification).

@@ -1,0 +1,39 @@
+/druid/coordinator/v1/datasources authorization error
+
+
+Some other APIs use the same helper methods and may be affected too.
+Error log:
+2017-09-26T20:20:18,740 WARN [qtp1115349385-90] org.eclipse.jetty.server.HttpChannel - //localhost:8081/druid/coordinator/v1/datasources
+io.druid.java.util.common.ISE: Request did not have an authorization check performed.
+        at io.druid.server.security.PreResponseAuthorizationCheckFilter.handleAuthorizationCheckError(PreResponseAuthorizationCheckFilter.java:156) ~[druid-server-0.11.0-SNAPSHOT.jar:0.11.0-SNAPSH
+OT]
+        at io.druid.server.security.PreResponseAuthorizationCheckFilter.doFilter(PreResponseAuthorizationCheckFilter.java:91) ~[druid-server-0.11.0-SNAPSHOT.jar:0.11.0-SNAPSHOT]
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1759) ~[jetty-servlet-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at io.druid.server.security.AllowAllAuthenticator$1.doFilter(AllowAllAuthenticator.java:83) ~[druid-server-0.11.0-SNAPSHOT.jar:0.11.0-SNAPSHOT]
+        at io.druid.server.security.AuthenticationWrappingFilter.doFilter(AuthenticationWrappingFilter.java:60) ~[druid-server-0.11.0-SNAPSHOT.jar:0.11.0-SNAPSHOT]
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1759) ~[jetty-servlet-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at io.druid.server.security.SecuritySanityCheckFilter.doFilter(SecuritySanityCheckFilter.java:86) ~[druid-server-0.11.0-SNAPSHOT.jar:0.11.0-SNAPSHOT]
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1759) ~[jetty-servlet-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:582) ~[jetty-servlet-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:224) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1180) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:512) ~[jetty-servlet-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1112) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.handler.gzip.GzipHandler.handle(GzipHandler.java:493) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:134) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.Server.handle(Server.java:534) ~[jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:320) [jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:251) [jetty-server-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:283) [jetty-io-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:108) [jetty-io-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.io.SelectChannelEndPoint$2.run(SelectChannelEndPoint.java:93) [jetty-io-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.util.thread.strategy.ExecuteProduceConsume.executeProduceConsume(ExecuteProduceConsume.java:303) [jetty-util-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.util.thread.strategy.ExecuteProduceConsume.produceConsume(ExecuteProduceConsume.java:148) [jetty-util-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.util.thread.strategy.ExecuteProduceConsume.run(ExecuteProduceConsume.java:136) [jetty-util-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671) [jetty-util-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589) [jetty-util-9.3.19.v20170502.jar:9.3.19.v20170502]
+        at java.lang.Thread.run(Thread.java:745) [?:1.8.0_101]
+

@@ -1,0 +1,55 @@
+[Finder] Throw a dedicated exception for non-existing directory
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes [1]
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no [2]
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30723
+
+
+License
+MIT
+
+
+Doc PR
+N/A [3]
+
+
+
+Makes Finder::in() throw a DirectoryNotFoundException instead of an InvalidArgumentException if one of the directories is not found.
+This behavior is more consistent with the AccessDeniedException for files which are unreadable due to insufficient permissions.
+To keep backward compatibility, the new exception class inherits from InvalidArgumentException.
+[1] A valid, but non-existent directory name is IMHO not an invalid argument
+[2] However, it may be semantically better to extend from RuntimeException,  This would require a deprecation.
+[3] Possible exceptions are currently not explained at https://symfony.com/doc/current/components/finder.html

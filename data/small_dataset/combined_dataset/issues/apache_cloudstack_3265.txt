@@ -1,0 +1,17 @@
+Upload template fails
+
+
+I am trying to upload a qcow2.bz2 template from the UI, it fails without any feedback.
+In the logs I am seeing this, where this in particular seems key:
+"Coudn't find ssvm for url https://10.0.84.254/upload/320001ac-6176-4240-8cdd-c7863435157e"
+Indeed, that URL returns 404.
+2019-04-05 17:07:59,721 DEBUG [c.c.a.ApiServlet] (qtp788117692-18:ctx-fcaa8183) (logid:0b24442e) ===START===  10.10.192.198 -- GET  command=getUploadParamsForTemplate&response=json&name=CentOS7&displayText=CentOS7&zoneid=412b7660-0ca0-4038-9b18-3c380644d96a&format=QCOW2&isextractable=false&passwordEnabled=true&isdynamicallyscalable=false&osTypeId=6d7ff3d2-5537-11e9-9a90-00163ea182ae&hypervisor=KVM&ispublic=true&requireshvm=true&isfeatured=true&isrouting=false&=1554480479557
+2019-04-05 17:07:59,723 DEBUG [c.c.a.ApiServer] (qtp788117692-18:ctx-fcaa8183 ctx-febdebea) (logid:0b24442e) CIDRs from which account 'Acct[76e57fb4-5537-11e9-9a90-00163ea182ae-admin]' is allowed to perform API calls: 0.0.0.0/0,::/0
+2019-04-05 17:07:59,733 DEBUG [o.a.c.s.i.TemplateDataFactoryImpl] (qtp788117692-18:ctx-fcaa8183 ctx-febdebea) (logid:0b24442e) template 211 is not in store:2, type:Image
+2019-04-05 17:07:59,734 DEBUG [o.a.c.s.i.TemplateDataFactoryImpl] (qtp788117692-18:ctx-fcaa8183 ctx-febdebea) (logid:0b24442e) template 211 is already in store:2, type:Image
+2019-04-05 17:07:59,736 DEBUG [c.c.r.ResourceLimitManagerImpl] (qtp788117692-18:ctx-fcaa8183 ctx-febdebea) (logid:0b24442e) Updating resource Type = template count for Account = 2 Operation = increasing Amount = 1
+2019-04-05 17:07:59,753 DEBUG [c.c.a.ApiServlet] (qtp788117692-18:ctx-fcaa8183 ctx-febdebea) (logid:0b24442e) ===END===  10.10.192.198 -- GET  command=getUploadParamsForTemplate&response=json&name=CentOS7&displayText=CentOS7&zoneid=412b7660-0ca0-4038-9b18-3c380644d96a&format=QCOW2&isextractable=false&passwordEnabled=true&isdynamicallyscalable=false&osTypeId=6d7ff3d2-5537-11e9-9a90-00163ea182ae&hypervisor=KVM&ispublic=true&requireshvm=true&isfeatured=true&isrouting=false&=1554480479557
+2019-04-05 17:08:00,504 DEBUG [o.a.c.s.e.DefaultEndPointSelector] (Upload-Monitor-1:ctx-bebd6e47) (logid:4b103900) Coudn't find ssvm for urlhttps://10.0.84.254/upload/320001ac-6176-4240-8cdd-c7863435157e
+2019-04-05 17:08:00,506 DEBUG [c.c.h.o.r.Ovm3HypervisorGuru] (Upload-Monitor-1:ctx-bebd6e47) (logid:4b103900) getCommandHostDelegation: class org.apache.cloudstack.storage.command.UploadStatusCommand
+2019-04-05 17:08:00,506 DEBUG [c.c.h.XenServerGuru] (Upload-Monitor-1:ctx-bebd6e47) (logid:4b103900) We are returning the default host to execute commands because the command is not of Copy type.
+2019-04-05 17:08:00,507 DEBUG [c.c.a.t.Request] (Upload-Monitor-1:ctx-bebd6e47) (logid:4b103900) Seq 10-4061120963981344860: Sending  { Cmd , MgmtId: 95540052654, via: 10(s-74-VM), Ver: v1, Flags: 100011, [{"org.apache.cloudstack.storage.command.UploadStatusCommand":{"entityUuid":"320001ac-6176-4240-8cdd-c7863435157e","entityType":"Template","wait":0}}] }

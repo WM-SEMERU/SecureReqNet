@@ -1,0 +1,36 @@
+perf(ivy): ngcc - exit early if the targeted package has been compiled
+
+
+This is a quick fix for webpack but there are more optimisations to be achieved on the
+first time run by replacing the TS module resolver for the initial walk of the tree.
+Previously we always walked the whole folder tree looking for
+entry-points before we tested whether a target package had been
+processed already. This could take >10secs!
+This commit does a quick check of the target package before doing
+the full walk which brings down the execution time for ngcc in this
+case dramatically.
+$ time ./node_modules/.bin/ivy-ngcc -t @angular/common/http/testing
+Compiling @angular/core : fesm2015 as esm2015
+Compiling @angular/core : fesm5 as esm5
+Compiling @angular/core : esm2015 as esm2015
+Compiling @angular/core : esm5 as esm5
+Compiling @angular/common/http : fesm2015 as esm2015
+Compiling @angular/common/http : fesm5 as esm5
+Compiling @angular/common/http : esm2015 as esm2015
+Compiling @angular/common/http : esm5 as esm5
+Compiling @angular/common/http/testing : fesm2015 as esm2015
+Compiling @angular/common/http/testing : fesm5 as esm5
+Compiling @angular/common/http/testing : esm2015 as esm2015
+Compiling @angular/common/http/testing : esm5 as esm5
+
+real	0m19.766s
+user	0m28.533s
+sys	0m2.262s
+
+$ time ./node_modules/.bin/ivy-ngcc -t @angular/common/http/testing
+The target entry-point has already been processed
+
+real	0m0.666s
+user	0m0.605s
+sys	0m0.113s
+

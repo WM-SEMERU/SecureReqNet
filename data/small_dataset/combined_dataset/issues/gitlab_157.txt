@@ -1,0 +1,126 @@
+I use a cron job to generate gitlab CE backups using rake, piping standard output into /dev/null:
+
+```
+0 3,13 * * * cd /home/git/gitlab && PATH=/usr/local/bin:/usr/bin:/bin bundle exec rake gitlab:backup:create RAILS_ENV=production > /dev/null
+```
+
+This allows me to get email alerts when there is an error, because stderr is still captured by the cron service. Unfortunately I'm still getting an email every time this cron job runs because of the following warning: 
+
+```
+WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.9.1
+```
+I applied the approach in [this post](http://www.42.mach7x.com/2013/10/18/warning-nokogiri-was-built-against-libxml-version-2-9-0-but-has-dynamically-loaded-2-9-1/#sthash.x50v61XR.dpuf). I now have nokogiri 1.6.1 installed: 
+
+```
+ncgalopp@immersive:/home/git/gitlab$ sudo gem list nokogiri
+
+*** LOCAL GEMS ***
+
+nokogiri (1.6.1)
+```
+
+However, gitlab still seems to be using 1.5.10: 
+
+```
+ncgalopp@immersive:/home/git/gitlab$ sudo -u git -H bundle install --without development test postgres --deployment
+Using rake (10.1.1) 
+...
+Using nokogiri (1.5.10) 
+...
+```
+
+How do I make gitlab use an upgraded version of nokogiri?
+
+**Output of checks:**
+```
+ncgalopp@immersive:/home/git/gitlab$ sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
+WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.9.1
+
+System information
+System:		Ubuntu 13.10
+Current User:	git
+Using RVM:	no
+Ruby Version:	1.9.3p194
+Gem Version:	1.8.23
+Bundler Version:1.3.5
+Rake Version:	10.1.1
+
+GitLab information
+Version:	6.7.2
+Revision:	dbbf4ea
+Directory:	/home/git/gitlab
+DB Adapter:	mysql2
+URL:		http://immersive.jf.intel.com:7070
+HTTP Clone URL:	http://immersive.jf.intel.com:7070/some-project.git
+SSH Clone URL:	git@immersive.jf.intel.com:some-project.git
+Using LDAP:	no
+Using Omniauth:	no
+
+GitLab Shell
+Version:	1.9.1
+Repositories:	/home/git/repositories/
+Hooks:		/home/git/gitlab-shell/hooks/
+Git:		/usr/bin/git
+
+ncgalopp@immersive:/home/git/gitlab$ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.9.1
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.1 ? ... OK (1.9.1)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ... 
+[removed]
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files: 
+	/home/git/repositories: OK
+	/home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.6.13
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ... 
+[removed]
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.8.3)
+
+Checking GitLab ... Finished
+```

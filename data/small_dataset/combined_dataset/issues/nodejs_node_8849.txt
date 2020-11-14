@@ -1,0 +1,14 @@
+[CVE-2016-5180] ares_create_query: avoid single-byte buffer overwrite
+
+
+Checklist
+
+ make -j8 test (UNIX), or vcbuild test nosign (Windows) passes
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+bundled c-ares
+Description of change
+Avoid single-byte buffer overwrite when the name ends with an escaped dot.
+CVE-2016-5180
+Bug: https://c-ares.haxx.se/adv_20160929.html

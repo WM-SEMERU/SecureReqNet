@@ -1,0 +1,5 @@
+Fix style tests
+
+
+This fixes the style tests so they're more explicit and less
+composed-on-the-fly which makes them harder to verify.

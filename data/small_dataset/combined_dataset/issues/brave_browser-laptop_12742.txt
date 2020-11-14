@@ -1,0 +1,15 @@
+page security state for passive mixed content is incorrect
+
+
+STR:
+
+go to mixed.badssl.com
+click on urlbar lock icon
+it shows this message:
+
+
+Expected behavior:
+It should show this message instead:
+
+Not currently reproducible on the released version (0.19.x)
+maybe related to https://github.com/brave/muon/pull/377/files#diff-faaead3da8a3aa51eff1331507a67934R331

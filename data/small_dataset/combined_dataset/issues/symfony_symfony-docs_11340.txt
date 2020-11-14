@@ -1,0 +1,5 @@
+[HttpKernel] Document `trace_level` and `trace_header` config options in `HttpCache`
+
+
+Here's a small addition for symfony/symfony#30964.
+#FOSSHackathon

@@ -1,0 +1,4 @@
+Empty modified lar fix
+
+
+This PR fixes some modified lar issues. It will only flag lines ending in | when we're not parsing the data coming out of cassandra.

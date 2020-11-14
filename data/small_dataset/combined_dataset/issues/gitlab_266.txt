@@ -1,0 +1,7 @@
+I can't clone or push via SSH after upgrading CE to 6.8.1 and shell to 1.9.3  I have SSH Key setup as before and rake task don't show any errors for GitLab, GitLab-Shell, or SSH.
+
+Current error reads:
+
+    ssh: connect to host domain.example port 22: Bad file number
+    fatal: Cloud not read from remote repository.
+    Please make sure you have the correct access rights and the repository exists.

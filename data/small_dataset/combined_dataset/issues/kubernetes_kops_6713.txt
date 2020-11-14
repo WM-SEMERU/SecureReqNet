@@ -1,0 +1,5 @@
+Update dashboard instructions for accessing the dashboard addon
+
+
+We might as well just reference the official instructions rather than duplicating them here.
+/area documentation

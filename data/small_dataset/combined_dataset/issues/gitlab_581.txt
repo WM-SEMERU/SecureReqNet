@@ -1,0 +1,5 @@
+Hello! Tell me please, can I get some info from API without using private key?
+
+Example: List of public projects of one user. I want to show at my site links to all plugins of some forum users for all unregistered users (this is public info and they can see it by direct link to repository) Real task is similar, but idea, that users, who not registered in gitlab wants to see via api public info.
+
+Can I config my installed GitLab, or send special request to api to get this info?

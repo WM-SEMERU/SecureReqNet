@@ -1,0 +1,1 @@
+Please add an option to "favorite" or "watch" a repository, so that the repo is shown on your dashboard, and ideally you are notified of updates.

@@ -1,0 +1,47 @@
+Uninstall doesn't provide prompt to delete profile folder
+
+
+Description
+Uninstall doesn't provide prompt to delete profile folder
+Steps to Reproduce
+
+Upgrade to 0.62.50
+Go to apps settings and uninstall Brave
+No option to remove profile data is shown during uninstall process
+
+Actual result:
+There is no prompt to remove profile folder. Just silently removes the install
+Expected result:
+
+Reproduces how often:
+Easy
+Brave version (brave://version info)
+
+
+
+Brave
+0.62.50 Chromium: 73.0.3683.86 (Official Build) (64-bit)
+
+
+
+
+Revision
+f9b0bec6063ea50ce2b71f5b9abbae7beee319a6-refs/branch-heads/3683@{#858}
+
+
+OS
+Windows 10 OS Build 17763.379
+
+
+
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+Is the issue reproducible on the latest version of Chrome?
+
+Additional Information
+Reproduced by @kjozwiak and @rebron

@@ -1,0 +1,9 @@
+JEA role capabilities cannot be discovered if placed in a versioned module folder
+
+
+
+Note: Ported from bug 11787772
+
+If a PowerShell Session Configuration file references one or more role capability files in the RoleDefinitions field and those role capability files are stored in versioned module folders (e.g. C:\Program Files\WindowsPowerShell\Modules\MyModuleName\1.0.0\RoleCapabilities\MyRole.psrc), PowerShell will be unable to find those role capability files and may fail to establish the PSSession.
+The current workaround is to move the "RoleCapabilities" folder up one level so that it is under the main module folder, not a versioned subfolder, however this is not ideal for customers downloading modules that are already set up this way from the PowerShell Gallery or other repository. Customers on Windows 10 1703 or higher can also use the "RoleCapabilityFiles" parameter in the "RoleDefinitions" hashtable to explicitly select the role capability file to load, regardless of whether it is nested in a versioned folder or not.
+This issue is filed to request that JEA search versioned subfolders in modules for role capability files to maintain compatibility with the PowerShell Gallery best practices.

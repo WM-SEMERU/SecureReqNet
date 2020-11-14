@@ -1,0 +1,4 @@
+Sessions don't timeout with two factor authentication
+
+
+Since I turned on two factor authentication, sessions do not timeout when logged in with Chrome on Windows 10 and Firefox on Ubuntu 16.04.  Chrome on my android phone timeouts correctly.  These are the only browsers I have tried.  Session Expiry is set to 01:00.

@@ -1,0 +1,39 @@
+Provide configuration option enforcing AuthSession cookies' "Secure" attribute in couch_httpd_auth
+
+
+Expected Behavior
+I propose adding a new configuration option to couch_httpd_auth to unconditionally enforce the Secure attribute for AuthSession cookies created via /_session API.
+The new option would be Boolean, with a default value of false.
+Enabling this option would force inclusion of the Secure cookie attribute for all set-cookie authentication response headers, with no respect to configuration elsewhere (e.g. in [ssl]).
+Current Behavior
+CouchDB only adds the Secure attribute to set-cookie response headers when CouchDB's built-in SSL is enabled.
+For stacks with SSL-terminating reverse-proxies or load-balancers (i.e. secure setups not utilizing CouchDB's built-in SSL on the backend), this is a potential user authentication security vulnerability as the absence of the Secure cookie attribute allows browsers to transmit AuthSession cookies in clear text over insecure connections.
+Possible Solution
+In default.ini:
+[couch_httpd_auth]
+; alternative option names: cookies_always_secure, secure_cookies_only 
+force_secure_cookies = false ; default setting
+
+Excusing my unfamiliarity with Erlang...
+In /src/couch/src/couch_httpd_auth.erl:
+cookie_scheme(#httpd{mochi_req=MochiReq}) ->
+    [{http_only, true}] ++
+    % Check the configuration value here, first.
+    % If configured as true, assign [{secure, true}] and return
+    % Else, continue to case below
+    case MochiReq:get(scheme) of
+        http -> [];
+        https -> [{secure, true}]
+    end.
+Steps to Reproduce (for bugs)
+N/A
+Context
+IMO there's also a good argument for defaulting this option to true:
+If AuthSession cookies are Secure by default, frontend developers will see errors in the browser when attempting to transmit the cookie insecurely, and must actively change the configuration to allow transmission over http. Conversely, browsers happily send AuthSession cookies in the clear if no Secure attribute is present, which can easily go unnoticed 🙈
+Your Environment
+
+Version used: 2.2.0
+Browser Name and version: All
+Operating System and version (desktop or mobile): All
+Link to your project: N/A
+

@@ -1,0 +1,4 @@
+[Security] Deprecate returning stringish objects from Security::getUser
+
+
+symfony/symfony#27943

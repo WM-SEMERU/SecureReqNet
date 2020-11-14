@@ -1,0 +1,27 @@
+HPA not scaling down after pods failed to start
+
+
+What happened:
+HPA is not scaling down with 0% usage after pods failed to start (while having high usage) due to insufficient cpu
+What you expected to happen:
+HPA scaling down
+How to reproduce it (as minimally and precisely as possible):
+
+Use simple cluster and the php-apache example
+Asign more CPU/MaxPods than possible
+Do the test until some pods cant start due to insufficient cpu
+Wait
+
+Anything else we need to know?:
+Environment:
+
+Kubernetes version (use kubectl version): 1.14.0
+OS (e.g: cat /etc/os-release): Ubuntu 18.04 LTS
+Others: VirtualBox VM
+
+I waited around 20 minutes now and still not downscaled.
+If you need more information please let me know.
+
+
+
+

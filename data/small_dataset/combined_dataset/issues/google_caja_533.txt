@@ -1,0 +1,12 @@
+Prevent abuse of browser issues that let modules tell whether you've visited another site
+
+
+Original issue 533 created by collin.jackson on 2008-06-12T00:10:07.000Z:
+Modules can exploit the browser features described in the various dependent bugs of
+<https://bugzilla.mozilla.org/show_bug.cgi?id=412525> to find out what sites you've been to and
+can also time the cache to find out what images and other resources other modules are loading.
+These communication channels allow covert communication between modules and leak private
+information. It might be worth trying to rewrite modules to prevent these channels.
+To prevent visited links from leaking your history, it's not sufficient to block getComputedStyle --
+the site load images and may be able to trigger other observable side effects using the :visited CSS
+selector.

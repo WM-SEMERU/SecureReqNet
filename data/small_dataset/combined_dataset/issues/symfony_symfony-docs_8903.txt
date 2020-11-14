@@ -1,0 +1,4 @@
+Update authentication-guard-methods.png
+
+
+I think the diagram displayed on this page should be updated to display the call to the method supports introduced in Symfony 3.4.

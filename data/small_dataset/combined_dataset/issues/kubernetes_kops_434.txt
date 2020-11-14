@@ -1,0 +1,7 @@
+Kops doesn't fail when it does not have access to the Route53 zone
+
+
+Hello,
+I created a K8s cluster with kops. Following the README, I created a R53 zone, but in another AWS account. kops was happy to continue and did not report any problem. It took me a while to understand that in fact kops should have created automatically some entries in the zone.
+So, I think kops should throw some errors here. Also, the doc should explicit what the R53 zone is used for, what entries should be created, etc.
+Thanks for the work!

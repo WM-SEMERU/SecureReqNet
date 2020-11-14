@@ -1,0 +1,11 @@
+Validate mbedTLS configuration options in enclave context
+
+
+Extension of #32. Once basic crypto testing is enabled, we also need to validate that several configuration options enabled for mbedTLS are appropriate in the enclave context. This includes:
+
+ mbedTLS should be seeding its entropy pool from hardware instructions such as rdseed; currently both MBEDTLS_ENTROPY_C and MBEDTLS_NO_PLATFORM_ENTROPY are enabled.
+ MBEDTLS_HAVE_TIME is enabled based on host-controlled time implementation, but MBEDTLS_HAVE_TIME_DATE is disabled. We should have a consistent story here.
+ MBEDTLS_THREADING_C is disabled but enclaves support multithreaded use, so that behavior needs to be tested, likely with MBEDTLS_THREADING_PTHREAD.
+ Test options such as MBEDTLS_CERTS_C and MBEDTLS_DEBUG_C need to be disable for non-debug builds. Also need to evaluate the performance impact of enabling MBEDTLS_SELF_TEST by default.
+ Review if default constants used in module configurations are appropriate.
+

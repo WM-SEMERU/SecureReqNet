@@ -1,0 +1,5 @@
+Argon2i encoder can validate BCrypt encoded passwords and vice versa
+
+
+Argon2iPasswordEncoder and BCryptPasswordEncoder both validate passwords using the password_verify() function without checking the hash type first. As the function can infer the type from the given hash, this means both encoders are able to validate any hash whose type can be infered.
+In other words, Argon2iPasswordEncoder can validate BCrypt encoded passwords and BCryptPasswordEncoder can validate Argon2i encoded passwords. IMO this is not a bug but it's not really expected either. WDYT?

@@ -1,0 +1,44 @@
+[Security] SimpleAuthenticationProvider is lacking a user-checker
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+2.7 or 2.8
+
+
+
+
+2.8 introduced custom user-checkers, but 2.7 already misses the injection. Would have to check which version to add it to.
+
+This issue is coming from symfony/symfony-docs#9338. The SimpleAuthenticationProvider does not have a user-checker, unlike all other providers (except for anonymous). This means that the developer has to manually inject a user-checker in their SimpleAuthenticatorInterface implementation. Additionally this means that the configured user-checker is not passed, which causes different behavior.
+Fixing this is quite simple, make sure the factory adds it as argument in the provider and call the methods at the right now. I'd consider this a bug fix (while it's also a "new" feature). In theory it should be 100% backwards compatible, code and behavioral wise. There are 2 scenarios where I foresee an issue:
+
+A custom user-checker was defined for this firewall, but never used (or a second custom was injected as shown by the PR in docs).
+No user-checker was defined, but the user implements the AdvancedUserInterface and was never checked before
+
+In both scenarios, making the default (or configured) user-checker function properly, could add extra checks to the authentication process, which would narrow down whether or not a user can successfully authenticate. However, I consider this a bug despite being a behavioral change.
+If the developer has added the user-checker manually in the implementation, it will still be executed, this will keep working. If the same user-checker is configured in the firewall, it will still be executed, albeit at a different location, changing the flow slightly.

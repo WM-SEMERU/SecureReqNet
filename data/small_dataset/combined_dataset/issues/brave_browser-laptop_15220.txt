@@ -1,0 +1,33 @@
+Popup window doesn't close automatically in social media share actions!
+
+
+Description
+When using social media icons to share a page. The share get done, but like in other browsers the window doesn't close. Instead the Brave browser reloads the window and keeps it open. This doesn't happen in Chrome, Firefox or Opera.
+Steps to Reproduce
+
+Example, go to : https://www.socialsuriname.com/listing/cherics-special-event-facility.html
+Click on the Facebook or Twitter social media share.
+Follow steps to share and then you will see the windows stays open.
+
+Actual result:
+Popup windows stays open after the share action.
+Expected result:
+Popup should close automatically after the share action.
+Reproduces how often:
+100% everytime.
+Brave Version
+about:brave info:
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 10.0.17134
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+Latest Brave version.
+Additional Information

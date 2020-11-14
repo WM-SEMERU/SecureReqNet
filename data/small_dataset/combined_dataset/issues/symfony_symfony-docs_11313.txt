@@ -1,0 +1,4 @@
+Add documentation for the `require` env processor
+
+
+Documentation for symfony/symfony#30897, discussed on the FOSSHackathon.

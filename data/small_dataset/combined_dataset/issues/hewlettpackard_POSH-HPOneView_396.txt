@@ -1,0 +1,48 @@
+ConvertTo-HPOVPowerShellScript for SPT and JBODs creation not working as expected
+
+
+Tests performed with the latest HPOV PowerShell library, SPT and ConvertTo-HPOVPowerShellScript cmdlet.
+*SPT is configured with two JBODs (on SAS Mezz 1 storage controller in HBA mode),  UEFI optimized boot mode, BIOS setting to max power performance, 4 connections)
+Two things are not working:
+
+In the generate PowerShell  at the very end row in the New-HPOVServerProfileTemplate parameters:
+
+
+is generated parameter name –BootSettings instead of BiosSetting
+are missing “-ManageBoot $manageboot -BootMode $biosBootMode”, despite that  both variables $manageboot and $biosBootMode are correctly defined and assign the right values to them in the first part of the generated script
+
+Here details:
+Generated and not working:
+------------ Attributes for advanced settings
+New-HPOVServerProfileTemplate -Name $name -Description $description -ServerProfileDescription $spdescription  -ServerHardwareType $sht -EnclosureGroup $eg -Affinity $affinity -Connections $connections -LocalStorage -StorageController $controllers -BootOrder $bootOrder -Bios -BootSettings $biosSettings -HideUnusedFlexNics $true
+Manually modified to work (in red are the modification in green are the additions):
+----------- Attributes for advanced settings
+New-HPOVServerProfileTemplate -Name $name -Description $description -ServerProfileDescription $spdescription  -ServerHardwareType $sht -EnclosureGroup $eg -Affinity $affinity -Connections $connections -LocalStorage -StorageController $controllers -ManageBoot $manageboot -BootMode $biosBootMode -BootOrder $bootOrder -Bios -BiosSettings $biosSettings -HideUnusedFlexNics $true
+Note: I did the above modification in the generated script and created successfully an SPT but hit a second issue (decripbed bellow)
+
+Wrong disk number in one of the JBODs
+
+
+The two JBODs (“Capacity” and “Cache”) in the existing (original) SPT contains respectively 3 and 2 disks but in the SPT created with the auto generated script the both JBODs (“Capacity” and “Cache”)  are with 2 disk each
+
+Attached (Test_scripts.zip)
+
+Json from the original SPT:  “existing_SPT.json”
+Automatically Generated PowerShell from the original SPT:  “test_original_generated_and_not_working.ps1”
+Automatically Generated PowerShell from the original SPT with the above described manual modification:  “test_modified_and_working.ps1”
+Json from the SPT created with the modified auto generated script:  “created_from_generated_and_modified_script_SPT.json”
+
+Version Information
+HPE OneView version: 4.10.01-0348545
+HPE OV POSH version: 4.10.1954.1523
+PowerShell:
+$PSVersionTable
+Name                           Value
+PSVersion                      4.0
+WSManStackVersion              3.0
+SerializationVersion           1.1.0.1
+CLRVersion                     4.0.30319.42000
+BuildVersion                   6.3.9600.18968
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}
+PSRemotingProtocolVersion      2.2
+Test_scripts.zip

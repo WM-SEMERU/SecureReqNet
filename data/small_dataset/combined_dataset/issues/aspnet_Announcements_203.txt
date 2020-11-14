@@ -1,0 +1,178 @@
+Microsoft Security Advisory 3181759 : Vulnerabilities in ASP.NET Core View Components Could Allow Elevation of Privilege
+
+
+Microsoft Security Advisory 3181759
+Vulnerabilities in ASP.NET Core View Components Could Allow Elevation of Privilege
+Executive Summary
+Microsoft is releasing this security advisory to provide information about a vulnerability in the public versions of ASP.NET Core MVC 1.0.0. This advisory also provides guidance on what developers can do to help ensure that their applications are updated correctly.
+Microsoft is aware of a security vulnerability in the public version of ASP.NET Core MVC 1.0.0 where View Components could receive incorrect information, including details of the current authenticated user. If a View Component depends on the vulnerable code and makes decisions based on the current user, the decisions the View Component makes could be incorrect and lead to Elevation of Privilege, depending upon the decisions made.
+Discussion
+Please see aspnet/Mvc#5271 for discussion of this advisory.
+Mitigating Factors
+A View Component must use the User property exposed by the ViewComponent class and make decisions or change output based upon the contents of the User property. Third party code may also include view components which act in such a way. Microsoft encourages all developers to update their packages, regardless of whether they utilize View Components, or the User property within in to protect against future use either by themselves, or by third party software.
+Affected Software
+A Microsoft ASP.NET Core project is affected by the vulnerability if it uses any of the following affected package versions.
+Affected Packages and Versions
+
+
+
+Package Name
+Package Version
+
+
+
+
+Microsoft.AspNetCore.Mvc
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Abstractions
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.ApiExplorer
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Core
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Cors
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.DataAnnotations
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Formatters.Json
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Formatters.Xml
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Localization
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Razor
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.Razor.Host
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.TagHelpers
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.ViewFeatures
+1.0.0
+
+
+Microsoft.AspNetCore.Mvc.WebApiCompatShim
+1.0.0
+
+
+
+Advisory FAQ
+How do I know if I am affected?
+ASP.NET Core has two different types of dependencies, direct and transitive. If your project has a direct or transitive dependency on any of the affected packages listed above you may be affected.
+Direct Dependencies
+Direct dependencies are dependencies where you specifically add a package to your project. For example, if you add the Microsoft.AspNetCore.Mvc package to your project then you have taken a direct dependency on Microsoft.AspNetCore.Mvc.
+Direct dependencies are discoverable by reviewing your project.json file.
+Transitive Dependencies
+Transitive dependencies occur when you add a package to your project which in turn relies on another package. For example, if you add the Microsoft.AspNetCore.Authentication package to your project it depends on the Microsoft.AspNetCore.Http package (amongst others). Your project is said to have a direct dependency on Microsoft.AspNetCore.Authentication and a transitive dependency on the Microsoft.AspNetCore.Http package.
+Transitive dependencies are reviewable in the Visual Studio Solution Explorer window, which also supports search, or by reviewing the project.lock.json file contained in the root directory of your project. This file is the authoritative list of packages used by your project.
+How do I fix my affected application?
+You will need to fix both direct dependencies and review and fix any transitive dependencies. Version 1.0.1 of each of the vulnerable packages contains the fixes needed to secure your application.
+Fixing Direct Dependencies
+Open your project.json file in your editor. Look for the dependencies section. An example section is shown below;
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0",
+      "type": "platform"
+    },
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
+  }
+In this example we have three direct dependencies, Microsoft.NetCore.App, Microsoft.AspNetCore.Server.Kestrel and Microsoft.AspNetCore.Mvc.
+Microsoft.NetCore.App is the platform the application is targeted against and can be ignored. The other packages expose their version is to the right of the package name, in our example our non-platform packages are version 1.0.0.
+Review your direct dependencies against the list of vulnerable packages contained in the Affected Packages and Versions section at the start of this advisory.
+For each vulnerable package you have a direct dependency on change the version number in your editor to be 1.0.1. After updating all the vulnerable package versions save your project.json file.
+The dependencies section in our example project.json would now look as follows.
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0",
+      "type": "platform"
+    },
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.1",
+  }
+If you are using Visual Studio and save your updated project.json file the new versions will be restored by Visual Studio. You can see the restore results by opening the Output Window (Ctrl+Alt+O) and change the "Show output from" drop down to Package Manager.
+If you are not using Visual Studio open a command line and change to your project directory. Execute the dotnet restore command to restore your new dependencies.
+Once you have addressed all your direct dependencies you must move on to reviewing your transitive dependencies.
+Reviewing Transitive Dependencies
+There are two ways to view transitive dependencies. You can use Visual Studio's Solution Explorer, or by reviewing your project.lock.json file.
+Using Visual Studio Solution Explorer
+If you want to use Solution Explorer open your project in Visual Studio, then press Ctrl+; to activate the search in Solution Explorer. Search for each of the package names listed contained in the Affected Packages and Versions section at the start of this advisory and make a note of any vulnerable packages you find.
+For example, searching for Microsoft.AspNetCore.Mvc in an example project which contains a package which takes a dependency on Microsoft.AspNetCore.Mvc shows the following results;
+
+Figure 1: Searching in Visual Studio
+The search results appear as a tree. In these results you can see we have found references. The first entry under the References heading refers to the target framework your application is using. This will be .NETCoreApp, .NETStandard or .NET-Framework-vX.Y.Z (where X.Y.Z is an actual version number) depending on how you configured your application. Underneath your target framework will be the list of packages you have directly taken a dependency on. In this example the application takes a dependency on VulnerablePackage. VulnerablePackage in turn has leaf nodes which list its dependencies and their versions. In this case the package takes a dependency on a vulnerable version of Microsoft.AspNetCore.Mvc and others.
+Manually reviewing project.lock.json
+Open the project.lock.json file in your editor. It is suggested you use an editor which understands json and allows you to collapse and expand nodes to review this file; both Visual Studio and Visual Studio Code provide this functionality.
+If you are using Visual Studio the project.lock.json file is "underneath" the project.json file. Click the right pointing triangle, ▷, to the left of the project.json file to expand the solution tree to expose the project.lock.json file. Figure 2 below shows a project with the project.json file expanded to show the project.lock.json file.
+
+Figure 2: project.lock.json file location
+Search the project.lock.json files for the vulnerable packages listed in the Affected Packages and Versions section at the top of the file. For each package you should take the package name, add a / then append the version number. For example Microsoft.AspNetCore.Mvc version 1.0.0 is represented in the project.lock.json file as "Microsoft.AspNetCore.Mvc/1.0.0". Make a note of each package name from the vulnerable version table you find.
+Fixing transitive dependencies
+You may now have a list of affected packages. If you haven't found any transient packages this means none of your dependencies in turn depend on a vulnerable package, or you have already fixed the problem by updating the direct dependencies.
+If your transitive dependency review has produced a list of vulnerable packages you must add a direct dependency an updated version of each vulnerable package to your project.json to override the transitive dependency. Open your project.json and find the dependencies section. For example;
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0",
+      "type": "platform"
+    },
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "VulnerablePackage": "1.0.0-*"
+  }
+The results of our transitive package search showed us that VulnerablePackage depends on Microsoft.AspNet.Mvc version 1.0.0. To fix this you must add a direct dependency by adding it to the project.json file. You do this by adding a new line to the dependencies section, referring the fixed version. For example, to pull in the fixed version of Microsoft.AspNet.Mvc, version 1.0.1 you edit the project.json file as follows;
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0",
+      "type": "platform"
+    },
+    "Microsoft.AspNetCore.Mvc": "1.0.1",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "VulnerablePackage": "1.0.0-*"
+  }
+Once you have added direct dependencies to the fixed packages save your project.json file.
+If you are using Visual Studio once you save your updated project.json file the new versions will be restored by Visual Studio. You can see the restore results by opening the Output Window (Ctrl+Alt+O) and change the "Show output from" drop down to Package Manager.
+If you are not using Visual Studio open a command line and change to your project directory. Execute the dotnet restore command to restore your new dependencies.
+You may wish to check for transitive dependencies again to ensure you have fixed them all.
+Rebuilding your application
+Finally rebuild your application, test it as you would do normally and redeploy using your favored deployment mechanism.
+Suggested Actions
+Update the ASP.NET Core Templates
+
+"Microsoft .NET Core 1.0.1 – VS 2015 Tooling Preview 2" updates the ASP.NET Core templates to use the fixed packages.
+
+To download this preview see the Tools section of the .NET Downloads page.
+Other Information
+Support
+
+Questions about this update can be asked in link discussion issue
+Customers in the United States and Canada can receive technical support from Security Support. For more information, see Microsoft Help and Support.
+International customers can receive support from their local Microsoft subsidiaries. For more information, see International Support.
+Microsoft TechNet Security provides additional information about security in Microsoft products.
+
+Disclaimer
+The information provided in this advisory is provided "as is" without warranty of any kind. Microsoft disclaims all warranties, either express or implied, including the warranties of merchantability and fitness for a particular purpose. In no event shall Microsoft Corporation or its suppliers be liable for any damages whatsoever including direct, indirect, incidental, consequential, loss of business profits or special damages, even if Microsoft Corporation or its suppliers have been advised of the possibility of such damages. Some states do not allow the exclusion or limitation of liability for consequential or incidental damages so the foregoing limitation may not apply.
+Revisions
+V1.0 (September 13, 2016): Advisory published.
+KB3181749 on TechNet

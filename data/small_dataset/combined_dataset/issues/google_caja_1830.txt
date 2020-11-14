@@ -1,0 +1,12 @@
+Need to stop calling WeakMap as a function
+
+
+Original issue 1832 created by kpreid.switchb.org on 2013-08-06T21:28:33.000Z:
+ES6 is expected to require 'new WeakMap()' rather than 'WeakMap()'. This restriction is already in Chrome Canary.
+https://code.google.com/p/v8/issues/detail?id=2819
+https://github.com/rwldrn/tc39-notes/blob/master/es6/2013-07/july-25.md#anti-pattern-to-call-a-constructor-without-new
+We should:
+
+Remove all occurrences of 'WeakMap()' from our own code. To support this, I propose making it a warning if our emulated WeakMap is so invoked.
+Stop exposing a WeakMap emulation which permits this, so that autoswitching doesn't break things. I propose making it an error some time after making it a warning.
+

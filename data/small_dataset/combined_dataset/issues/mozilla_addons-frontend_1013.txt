@@ -1,0 +1,4 @@
+Do not include the auth tokens in HTML from the server
+
+
+We currently set the JWT in the state and it gets serialised to the page. We should instead read from the cookie and on the client to avoid including the sensitive token in the page.

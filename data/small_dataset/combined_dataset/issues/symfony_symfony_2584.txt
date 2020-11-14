@@ -1,0 +1,5 @@
+[Security] access_controls vs access_control
+
+
+Hi,
+As of today, access control rules are defined under the access_control key in security.yml file. But this section allows to define more than one access control rules so it should be renamed access_controls for consistency. This is already the case for other sections like providers, encoders and firewalls.

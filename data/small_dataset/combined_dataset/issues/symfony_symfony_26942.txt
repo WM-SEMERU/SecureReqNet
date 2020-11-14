@@ -1,0 +1,53 @@
+GuardAuthenticationProvider::authenticate does not follow interface specification
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.0.8
+
+
+
+If the authenticate method in GuardAuthenticationProvider does not find a GuardAuthenticator for the token passed to the function it falls through to the end of the function:
+    public function authenticate(TokenInterface $token)
+    {
+        ....
+
+        // no matching authenticator found - but there will be multiple GuardAuthenticationProvider
+        // instances that will be checked if you have multiple firewalls.
+    }
+There is no return statement so implicitly null is returned. However, the AuthenticationManagerInterface that is implemented by this class states the return value should be "An authenticated TokenInterface instance, never null"
+  /**
+     * Attempts to authenticate a TokenInterface object.
+     *
+     * @param TokenInterface $token The TokenInterface instance to authenticate
+     *
+     * @return TokenInterface An authenticated TokenInterface instance, never null
+     *
+     * @throws AuthenticationException if the authentication fails
+     */
+    public function authenticate(TokenInterface $token);
+I ran into this when using the scheb/two-factor-bundle that uses this interface and assumes null is never returned.

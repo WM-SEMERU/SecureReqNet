@@ -1,0 +1,22 @@
+Logged out users still appear logged in when navigating out of and back into AMO frontend
+
+
+STR:
+
+Load AMO - https://addons.mozilla.org/en-US/firefox/
+Log in
+Log out
+Click on Developer Hub in the header
+Go back to AMO
+
+Actual result:
+The user still appears to be logged in. Navigation through pages that require a logged in state is possible (see user collections page)
+Expected result:
+User is logged out
+Notes:
+
+I've checked this scenario with a clean profile and the issue can be reproduced as well
+the logged out state is set after the page is reloaded
+reproduced on all AMO servers with FF61, Win10x64
+
+

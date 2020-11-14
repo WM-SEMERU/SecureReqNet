@@ -1,0 +1,4 @@
+Stop using heredocs
+
+
+Because we want to get serious about linting our code, heredocs are a no-no from here on out. In order to get away from heredocs, we should probably write a way for dinobuildr to natively write LaunchAgents and LaunchDaemons since those make up the bulk of our heredocs.

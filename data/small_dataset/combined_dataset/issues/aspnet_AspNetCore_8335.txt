@@ -1,0 +1,40 @@
+AspNetCore.WsFederation get signin-wsfed redirect to HTTP when original request is HTTPS
+
+
+Describe the bug
+An aspnetcore 2.1 website hosted in a Docker container on port HTTP, along with the use of an nginx reverse proxy exposing HTTPS 443 only.
+The website is accessed from the outside on HTTPS, it redirects to an STS website on HTTPS, which redirects to the /signin-wsfed on HTTPS.
+However, the response location from the /signin-wsfed is HTTP.
+Expected behavior
+The response location is preserved as HTTPS, considering the request POST URL is.
+Additional context
+Here is the request:
+POST https://core-mydocker.####/signin-wsfed HTTP/1.1
+Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, */*
+Referer: https://sts-mydocker.####/Pages/Email/Default.aspx?wtrealm=https%3a%2f%2fcore-mydocker.####%2f&wa=wsignin1.0&wreply=https%3a%2f%2fcore-mydocker.####%2fsignin-wsfed&wctx=#####
+Accept-Language: fr-FR,fr;q=0.8,en-GB;q=0.6,en;q=0.4,ja;q=0.2
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.2; WOW64; Trident/7.0)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: core-mydocker.####
+Content-Length: 10612
+Connection: Keep-Alive
+Cache-Control: no-cache
+
+and the response:
+HTTP/1.1 302 Found
+Server: nginx/1.12.2
+Date: Thu, 21 Feb 2019 09:39:34 GMT
+Content-Length: 0
+Connection: keep-alive
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Location: http://core-mydocker.####/Authenticate
+Set-Cookie: .AspNetCore.Correlation.WsFederation.######=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; HTTPOnly; Securesignin-wsfed; httponly
+Set-Cookie: FedAuth=#######=/; HTTPOnly; Secure; httponly
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://mydocker.####
+
+HTTP being inacessible from the outside, this provokes an error.
+Note: Tested as well on aspnetcore 2.2.2, same issue.

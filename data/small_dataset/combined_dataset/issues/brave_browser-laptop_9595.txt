@@ -1,0 +1,26 @@
+fix noscript allow-once for selective scripts
+
+
+fix #9150
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+
+Test Plan:
+1. block scripts globally
+2. go to twitter.com
+3. click the noscript icon, make sure only 'twitter.com' is checked, click 'allow once'
+4. close the tab
+5. open twitter.com in a new tab
+3. click the noscript icon. 'twitter.com' should appear in the list.
+Reviewer Checklist:
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

@@ -1,0 +1,11 @@
+[fips] Remove the GOFIPS env var check
+
+
+#2246 added FIPS support by checking the environment variable GOFIPS.  This has several drawbacks:
+
+The tests set the GOFIPS env var, and unset them.  When tests run in parallel, this can cause flakiness, which we've seen some of in CI
+We won't be able to test to make sure we reject mixed clusters if we require FIPS compliance (see #2544)
+
+Better if we can inject a boolean for FIPSness.
+This changes everywhere that used to use keyutils specifically to check for FIPSness now has to take a keyutils.Formatter object which provides the same interface as keyutils used to, and this changes everywhere that called encryption.Defaults to pass whether FIPS is required.
+Note that this does not pass the FIPS bool through from node to the raft storage - there's more work that needs to be done there, and this PR is really big already, so I'll do it in a separate PR.

@@ -1,0 +1,7 @@
+This is a vulnerability reported by the Madison Gurkha external blackbox test. This _has to_ have been recently introduced as it's trivial to exploit and something I know myself and others have tested previously.
+
+Proof-of-concept:
+
+While editing a user profile, intercept the form submission using a tool like BurpSuite. Change the "user[name]" field to `Appel<script>alert("XSS via name in profile")</script>`. Now when anyone tries to add a user to their project or assign an issue the script will execute.
+
+I'd like to include a patch for this in the existing security release issue, as this is trivial to exploit.

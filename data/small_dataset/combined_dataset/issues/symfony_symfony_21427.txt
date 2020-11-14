@@ -1,0 +1,34 @@
+Request in AuthenticationFailureEvent
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+all
+
+
+
+AuthenticationFailureEvent should contain current request, similar to InteractiveLoginEvent. Feature to log invalid logins is often requested.

@@ -1,0 +1,137 @@
+kube-dns seems not work as expected
+
+
+What happened:
+Services can only be resolved IP address by fully-qualified name
+What you expected to happen:
+Service can be resolved correctly
+How to reproduce it (as minimally and precisely as possible):
+following is what my environment looks like:
+$ k get pods --all-namespaces
+default       job-system-7f866c7987-ft8xs                      2/2     Running   0          21m
+kube-system   coredns-fb8b8dccf-2d96m                          1/1     Running   0          154m
+kube-system   coredns-fb8b8dccf-vrxl8                          1/1     Running   0          154m
+kube-system   etcd-watsng-u1804-kvm-14-13                      1/1     Running   0          153m
+kube-system   kube-apiserver-watsng-u1804-kvm-14-13            1/1     Running   0          153m
+kube-system   kube-controller-manager-watsng-u1804-kvm-14-13   1/1     Running   0          153m
+kube-system   kube-proxy-qlcz9                                 1/1     Running   0          154m
+kube-system   kube-scheduler-watsng-u1804-kvm-14-13            1/1     Running   0          153m
+kube-system   weave-net-g2csb                                  2/2     Running   0          153m
+
+$ k cluster-info
+Kubernetes master is running at https://10.138.14.13:6443
+KubeDNS is running at https://10.138.14.13:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+$ k get svc
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
+job-system   NodePort    10.107.3.11   <none>        80:30123/TCP   23m
+kubernetes   ClusterIP   10.96.0.1     <none>        443/TCP        156m
+
+$ k get pods
+NAME                          READY   STATUS    RESTARTS   AGE
+job-system-7f866c7987-ft8xs   2/2     Running   0          23m
+
+$ k get ep
+NAME         ENDPOINTS           AGE
+job-system   10.32.0.4:8080      57m
+kubernetes   10.138.14.13:6443   3h10m
+
+
+When I debuging my service accord to this page: https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/, I ran nslookup in Node:
+$ nslookup job-system 10.96.0.10
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+** server can't find job-system: SERVFAIL
+
+$ nslookup job-system.default 10.96.0.10
+ Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+** server can't find job-system.default: NXDOMAIN
+
+$ nslookup job-system.default.svc.cluster.local 10.96.0.10
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	job-system.default.svc.cluster.local
+Address: 10.107.3.11
+
+$ k exec job-system-7f866c7987-ft8xs -- cat /etc/resolv.conf
+nameserver 10.96.0.10
+search default.svc.cluster.local svc.cluster.local cluster.local
+options ndots:5
+
+And also the kubernetes.default is same with my own service, only can be resolved by fully-qualified name.
+Anything else we need to know?:
+logs of kube-proxy
+
+W0408 07:25:43.919580       1 server_others.go:295] Flag proxy-mode="" unknown, assuming iptables proxy
+I0408 07:25:43.935695       1 server_others.go:148] Using iptables Proxier.
+W0408 07:25:43.935907       1 proxier.go:319] clusterCIDR not specified, unable to distinguish between internal and external traffic
+I0408 07:25:43.936022       1 server_others.go:178] Tearing down inactive rules.
+I0408 07:25:44.474512       1 server.go:555] Version: v1.14.0
+I0408 07:25:44.485626       1 conntrack.go:100] Set sysctl 'net/netfilter/nf_conntrack_max' to 786432
+I0408 07:25:44.485675       1 conntrack.go:52] Setting nf_conntrack_max to 786432
+I0408 07:25:44.499667       1 conntrack.go:83] Setting conntrack hashsize to 196608
+I0408 07:25:44.522417       1 conntrack.go:100] Set sysctl 'net/netfilter/nf_conntrack_tcp_timeout_established' to 86400
+I0408 07:25:44.522518       1 conntrack.go:100] Set sysctl 'net/netfilter/nf_conntrack_tcp_timeout_close_wait' to 3600
+I0408 07:25:44.522711       1 config.go:202] Starting service config controller
+I0408 07:25:44.522730       1 config.go:102] Starting endpoints config controller
+I0408 07:25:44.522769       1 controller_utils.go:1027] Waiting for caches to sync for service config controller
+I0408 07:25:44.522786       1 controller_utils.go:1027] Waiting for caches to sync for endpoints config controller
+I0408 07:25:44.623036       1 controller_utils.go:1034] Caches are synced for endpoints config controller
+I0408 07:25:44.623125       1 controller_utils.go:1034] Caches are synced for service config controller
+
+One of the coredns pod raises an Error:
+
+$ k logs coredns-fb8b8dccf-2d96m -nkube-system
+.:53
+2019-04-08T07:30:57.632Z [INFO] CoreDNS-1.3.1
+2019-04-08T07:30:57.632Z [INFO] linux/amd64, go1.11.4, 6b56a9c
+CoreDNS-1.3.1
+linux/amd64, go1.11.4, 6b56a9c
+2019-04-08T07:30:57.632Z [INFO] plugin/reload: Running configuration MD5 = 599b9eb76b8c147408aed6a0bbe0f669
+2019-04-08T07:31:03.633Z [ERROR] plugin/errors: 2 2386294879477061812.8548486381391418481. HINFO: read udp 10.32.0.3:51276->172.23.0.8:53: i/o timeout
+
+And another not have this error
+
+$ k logs coredns-fb8b8dccf-vrxl8 -nkube-system
+.:53
+2019-04-08T07:30:55.269Z [INFO] CoreDNS-1.3.1
+2019-04-08T07:30:55.270Z [INFO] linux/amd64, go1.11.4, 6b56a9c
+CoreDNS-1.3.1
+linux/amd64, go1.11.4, 6b56a9c
+2019-04-08T07:30:55.270Z [INFO] plugin/reload: Running configuration MD5 = 599b9eb76b8c147408aed6a0bbe0f669
+**Environment**:
+- Kubernetes version (use `kubectl version`):
+
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:45:25Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+- Cloud provider or hardware configuration: 
+hardware
+- OS (e.g: `cat /etc/os-release`):
+
+NAME="Ubuntu"
+VERSION="18.04.2 LTS (Bionic Beaver)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 18.04.2 LTS"
+VERSION_ID="18.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=bionic
+UBUNTU_CODENAME=bionic
+- Kernel (e.g. `uname -a`):
+
+Linux k8s 4.15.0-47-generic #50-Ubuntu SMP Wed Mar 13 10:44:52 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+- Install tools:
+- Others:
+
+
+I an newer of k8s, appreciate for any help!
+

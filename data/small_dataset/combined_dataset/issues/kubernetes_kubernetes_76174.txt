@@ -1,0 +1,13 @@
+Mark slow storage e2es
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Mark storage tests that take > 2 mins as slow
+Which issue(s) this PR fixes:
+Fixes #76170
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+

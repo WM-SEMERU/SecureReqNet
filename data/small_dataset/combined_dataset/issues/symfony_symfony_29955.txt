@@ -1,0 +1,50 @@
+[Security] use final annotation to allow mocking the class
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29946
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+When the class was initially marked as final, it did only contain constants. Since #24337 the Security class also contains useful shortcut methods so allowing developers to mock the class in tests looks reasonable to me.

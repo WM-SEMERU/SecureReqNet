@@ -1,0 +1,100 @@
+Form Login does not redirect correctly to the login path
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+yes
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.0
+
+
+
+I run into this weird issue today after upgrading from 3.1 to 3.3. My admin backend is /backend, when the user is not logged in he/she should be redirected to /backend/login. After the upgrade, the user is no longer redirected but 403 Access Denied Exception is thrown instead.
+My current security settings:
+firewalls:
+	backend:
+	    pattern: ^/([\w\d\-_]+/)?backend/
+	    provider: acme_account_user_provider
+	    form_login:
+	        login_path:  acme.account.backend.account.login # this is /backend/login
+	        check_path:  acme.account.backend.account.check # this is /backend/login_check
+	#                default_target_path: /backend/
+	        failure_path: /backend/login/
+	        success_handler: acme.security.authentication.handler.success
+	        failure_handler: acme.security.authentication.handler.failure
+	        use_referer: true
+	        username_parameter: 'acme_security[_username]'
+	        password_parameter: 'acme_security[_password]'
+	        csrf_parameter: 'acme_security[_token]' # define csrf form name
+	        csrf_token_generator: security.csrf.token_manager # to check csrf if define csrf_provider
+	        # always_use_default_target_path: true
+	#                default_target_path: /backend/dashboard
+	#                failure_path: /backend/login
+	    remember_me:
+	        secret: "%secret%"
+	        remember_me_parameter: 'acme_security[_remember_me]'
+	    logout:
+	        path:   /backend/logout
+	        target: /backend/login
+	    security: true
+	    anonymous: true
+	    entry_point: acme.account.security.entry_point.login
+
+access_control:
+    - { path: '^/([\w\d\-_]+/)?backend/login',        role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: '^/([\w\d\-_]+/)?backend/login_check',  role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: '^/([\w\d\-_]+/)?backend/resetting',    role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: '^/([\w\d\-_]+/)?backend',              role: ROLE_ACME_DEFAULT_ADMIN }
+
+Stack trace:
+
+Symfony\Component\Security\Core\Exception\AccessDeniedException:
+Access Denied.
+at vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/AccessListener.php:70
+at Symfony\Component\Security\Http\Firewall\AccessListener->handle(object(GetResponseEvent))
+(vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall.php:69)
+at Symfony\Component\Security\Http\Firewall->onKernelRequest(object(GetResponseEvent))
+(vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/EventListener/FirewallListener.php:49)
+at Symfony\Bundle\SecurityBundle\EventListener\FirewallListener->onKernelRequest(object(GetResponseEvent))
+(local/cache/dev/nileadDevDebugProjectContainer.php:3321)
+at nileadDevDebugProjectContainer->{closure}(object(GetResponseEvent), 'kernel.request', object(TraceableEventDispatcher))
+at call_user_func(object(Closure), object(GetResponseEvent), 'kernel.request', object(TraceableEventDispatcher))
+(vendor/symfony/symfony/src/Symfony/Component/EventDispatcher/Debug/WrappedListener.php:112)
+at Symfony\Component\EventDispatcher\Debug\WrappedListener->__invoke(object(GetResponseEvent), 'kernel.request', object(ContainerAwareEventDispatcher))
+at call_user_func(object(WrappedListener), object(GetResponseEvent), 'kernel.request', object(ContainerAwareEventDispatcher))
+(vendor/symfony/symfony/src/Symfony/Component/EventDispatcher/EventDispatcher.php:174)
+at Symfony\Component\EventDispatcher\EventDispatcher->doDispatch(array(object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener)), 'kernel.request', object(GetResponseEvent))
+(vendor/symfony/symfony/src/Symfony/Component/EventDispatcher/EventDispatcher.php:43)
+at Symfony\Component\EventDispatcher\EventDispatcher->dispatch('kernel.request', object(GetResponseEvent))
+(vendor/symfony/symfony/src/Symfony/Component/EventDispatcher/Debug/TraceableEventDispatcher.php:146)
+at Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher->dispatch('kernel.request', object(GetResponseEvent))
+(vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php:129)
+at Symfony\Component\HttpKernel\HttpKernel->handleRaw(object(Request), 1)
+(vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php:68)
+at Symfony\Component\HttpKernel\HttpKernel->handle(object(Request), 1, true)
+(vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php:171)
+at Symfony\Component\HttpKernel\Kernel->handle(object(Request))
+(web/app_dev.php:27)
+

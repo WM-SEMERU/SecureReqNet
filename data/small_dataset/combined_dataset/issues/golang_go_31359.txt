@@ -1,0 +1,117 @@
+x/tools/cmd/gopls: CodeAction returns no edits
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.2 linux/amd64
+$ go list -m golang.org/x/tools
+golang.org/x/tools v0.0.0-20190408220357-e5b8258f4918
+
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN="/home/myitcv/gostuff/src/github.com/myitcv/govim/cmd/govim/.bin"
+GOCACHE="/home/myitcv/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/myitcv/gostuff"
+GOPROXY=""
+GORACE=""
+GOROOT="/home/myitcv/gos"
+GOTMPDIR=""
+GOTOOLDIR="/home/myitcv/gos/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD="/home/myitcv/gostuff/src/github.com/myitcv/govim/go.mod"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build585627113=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+The change in https://go-review.googlesource.com/c/tools/+/170997 appears to have stopped CodeAction returning any results to the client, i.e. no edits are returned for a badly formatted document.
+Test case is: https://github.com/myitcv/govim/blob/049c3d51c5b8bc80aea8d79516f4fc6faf728b4a/cmd/govim/testdata/format_on_save.txt
+Which leads to the following sequence of events:
+Sequence of events2019-04-09T09:02:56.675940: gopls.Initialize() call; params:
+2019-04-09T09:02:56.675940: &protocol.InitializeParams{
+2019-04-09T09:02:56.675940:     InnerInitializeParams: protocol.InnerInitializeParams{
+2019-04-09T09:02:56.675940:         ProcessID:             0,
+2019-04-09T09:02:56.675940:         RootPath:              "",
+2019-04-09T09:02:56.675940:         RootURI:               "file:///tmp/go-test-script082203924/script-format_on_save",
+2019-04-09T09:02:56.675940:         Capabilities:          {},
+2019-04-09T09:02:56.675940:         InitializationOptions: nil,
+2019-04-09T09:02:56.675940:         Trace:                 "",
+2019-04-09T09:02:56.675940:     },
+2019-04-09T09:02:56.675940:     WorkspaceFoldersInitializeParams: protocol.WorkspaceFoldersInitializeParams{},
+2019-04-09T09:02:56.675940: }
+2019-04-09T09:02:56.680080: gopls.Initialize() return; err: ; res:
+2019-04-09T09:02:56.680080: &protocol.InitializeResult{
+2019-04-09T09:02:56.680080:     Capabilities: protocol.ServerCapabilities{
+2019-04-09T09:02:56.680080:         InnerServerCapabilities: protocol.InnerServerCapabilities{
+2019-04-09T09:02:56.680080:             TextDocumentSync: map[string]interface {}{
+2019-04-09T09:02:56.680080:                 "openClose": bool(true),
+2019-04-09T09:02:56.680080:                 "change":    float64(1),
+2019-04-09T09:02:56.680080:             },
+2019-04-09T09:02:56.680080:             HoverProvider:      true,
+2019-04-09T09:02:56.680080:             CompletionProvider: &protocol.CompletionOptions{
+2019-04-09T09:02:56.680080:                 TriggerCharacters:   {"."},
+2019-04-09T09:02:56.680080:                 AllCommitCharacters: nil,
+2019-04-09T09:02:56.680080:                 ResolveProvider:     false,
+2019-04-09T09:02:56.680080:             },
+2019-04-09T09:02:56.680080:             SignatureHelpProvider: &protocol.SignatureHelpOptions{
+2019-04-09T09:02:56.680080:                 TriggerCharacters: {"(", ","},
+2019-04-09T09:02:56.680080:             },
+2019-04-09T09:02:56.680080:             DefinitionProvider:               true,
+2019-04-09T09:02:56.680080:             ReferencesProvider:               false,
+2019-04-09T09:02:56.680080:             DocumentHighlightProvider:        true,
+2019-04-09T09:02:56.680080:             DocumentSymbolProvider:           true,
+2019-04-09T09:02:56.680080:             WorkspaceSymbolProvider:          false,
+2019-04-09T09:02:56.680080:             CodeActionProvider:               true,
+2019-04-09T09:02:56.680080:             CodeLensProvider:                 (*protocol.CodeLensOptions)(nil),
+2019-04-09T09:02:56.680080:             DocumentFormattingProvider:       true,
+2019-04-09T09:02:56.680080:             DocumentRangeFormattingProvider:  true,
+2019-04-09T09:02:56.680080:             DocumentOnTypeFormattingProvider: (*struct { FirstTriggerCharacter string "json:\"firstTriggerCharacter\""; MoreTriggerCharacter []string "json:\"moreTriggerCharacter,omitempty\"" })(nil),
+2019-04-09T09:02:56.680080:             RenameProvider:                   false,
+2019-04-09T09:02:56.680080:             DocumentLinkProvider:             (*protocol.DocumentLinkOptions)(nil),
+2019-04-09T09:02:56.680080:             ExecuteCommandProvider:           (*protocol.ExecuteCommandOptions)(nil),
+2019-04-09T09:02:56.680080:             Experimental:                     nil,
+2019-04-09T09:02:56.680080:         },
+2019-04-09T09:02:56.680080:         ImplementationServerCapabilities:   protocol.ImplementationServerCapabilities{},
+2019-04-09T09:02:56.680080:         TypeDefinitionServerCapabilities:   protocol.TypeDefinitionServerCapabilities{TypeDefinitionProvider:true},
+2019-04-09T09:02:56.680080:         WorkspaceFoldersServerCapabilities: protocol.WorkspaceFoldersServerCapabilities{},
+2019-04-09T09:02:56.680080:         ColorServerCapabilities:            protocol.ColorServerCapabilities{},
+2019-04-09T09:02:56.680080:         FoldingRangeServerCapabilities:     protocol.FoldingRangeServerCapabilities{},
+2019-04-09T09:02:56.680080:         DeclarationServerCapabilities:      protocol.DeclarationServerCapabilities{},
+2019-04-09T09:02:56.680080:         SelectionRangeServerCapabilities:   protocol.SelectionRangeServerCapabilities{},
+2019-04-09T09:02:56.680080:     },
+2019-04-09T09:02:56.680080:     Custom: {},
+2019-04-09T09:02:56.680080: }
+2019-04-09T09:02:56.698326: gopls.DidOpen() call; params:
+2019-04-09T09:02:56.698326: &protocol.DidOpenTextDocumentParams{
+2019-04-09T09:02:56.698326:     TextDocument: protocol.TextDocumentItem{URI:"file:///tmp/go-test-script082203924/script-format_on_save/file.go", LanguageID:"", Version:0, Text:"package blah\n\nconst ( x = 5\ny = os.PathSeparator\n )"},
+2019-04-09T09:02:56.698326: }
+2019-04-09T09:02:56.698421: gopls.DidOpen() return; err: 
+2019-04-09T09:02:56.704242: gopls.CodeAction() call; params:
+2019-04-09T09:02:56.704242: &protocol.CodeActionParams{
+2019-04-09T09:02:56.704242:     TextDocument: protocol.TextDocumentIdentifier{URI:"file:///tmp/go-test-script082203924/script-format_on_save/file.go"},
+2019-04-09T09:02:56.704242:     Range:        protocol.Range{},
+2019-04-09T09:02:56.704242:     Context:      protocol.CodeActionContext{},
+2019-04-09T09:02:56.704242: }
+2019-04-09T09:02:56.750207: gopls.CodeAction() return; err: ; res:
+2019-04-09T09:02:56.750207: []protocol.CodeAction(nil)
+
+What did you expect to see?
+The CodeAction return some edits.
+What did you see instead?
+No edits.
+cc @stamblerre @ianthehat

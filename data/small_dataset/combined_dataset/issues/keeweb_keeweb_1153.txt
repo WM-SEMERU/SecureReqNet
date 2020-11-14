@@ -1,0 +1,4 @@
+Fixed missing preparation for filter on autotype
+
+
+Fixes #1152

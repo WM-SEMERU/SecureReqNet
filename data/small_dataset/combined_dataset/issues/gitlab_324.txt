@@ -1,0 +1,7 @@
+When I access an issue and I am not logged in, no user-uploaded images are shown in UI.
+
+*How to reproduce:*
+Access for example https://gitlab.com/gitlab-org/gitlab-ce/issues/322 in an anonymous browser window. You will not see any images.
+
+*Probable cause:*
+Request for image redirects to sign in page. (for example https://gitlab.com/files/note/126039/gitlab-mr-number.png)

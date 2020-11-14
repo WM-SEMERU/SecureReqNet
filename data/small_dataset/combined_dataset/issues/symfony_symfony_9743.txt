@@ -1,0 +1,10 @@
+[EncoderFactory] merge FOSAdvancedEncoder funtionality
+
+
+I was going to write a PR for FOSAdvancedEncoder for the new encoders (bcrypt, pbkdf2) and I noticed it's pretty much a duplicate of the core EncoderFactory. it seems a waste to maintain a separate bundle for this simple functionality.
+My suggestion is to add this small feature to the core EncoderFactory.
+
+Does anybody else think the same?
+I need an idea how to build the new config so it won't have BC issues
+
+Use case: different encoder (or bcrypt cost) for user/admin

@@ -1,0 +1,24 @@
+Upgraded from 6.0 to 7.0 as per the instructions. Now users can't access the profile page and update ssh keys. Nothing in the nginx error logs.
+
+production.log has this:
+```
+Started GET "/profile" for 127.0.0.1 at 2014-06-27 09:10:52 -0400
+Processing by ProfilesController#show as HTML
+Mysql2::Error: Table 'gitlabhq_production.emails' doesn't exist: SHOW FULL FIELDS FROM `emails`
+Completed 500 Internal Server Error in 76ms
+
+ActionView::Template::Error (Mysql2::Error: Table 'gitlabhq_production.emails' doesn't exist: SHOW FULL FIELDS FROM `emails`):
+     7:   = nav_link(controller: :emails) do
+     8:     = link_to profile_emails_path do
+     9:       Emails
+    10:       %span.count= current_user.emails.count + 1
+    11:   - unless current_user.ldap_user?
+    12:     = nav_link(controller: :passwords) do
+    13:       = link_to "Password", edit_profile_password_path
+  app/views/layouts/nav/_profile.html.haml:10:in `block (2 levels) in _app_views_layouts_nav__profile_html_haml___370225370097489873_34269760'
+  app/helpers/application_helper.rb:260:in `link_to'
+  app/views/layouts/nav/_profile.html.haml:8:in `block in _app_views_layouts_nav__profile_html_haml___370225370097489873_34269760'
+  app/helpers/tab_helper.rb:69:in `nav_link'
+  app/views/layouts/nav/_profile.html.haml:7:in `_app_views_layouts_nav__profile_html_haml___370225370097489873_34269760'
+  app/views/layouts/profile.html.haml:9:in `_app_views_layouts_profile_html_haml___1660170016656024882_37047000'
+```

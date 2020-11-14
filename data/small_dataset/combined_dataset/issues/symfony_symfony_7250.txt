@@ -1,0 +1,25 @@
+[SecurityBundle] Configuration definition allows for `access_control` or `rules` key
+
+
+In making some changes to symfony I noticed this line of code (see it in context):
+    private function addAccessControlSection(ArrayNodeDefinition $rootNode)
+    {
+        $rootNode
+            ->fixXmlConfig('rule', 'access_control')
+
+According to the docs, this defines "access_control" as the plural of "rule".  Sure enough, this is a valid security.yml file:
+security:
+    # ... 
+    rule:
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: "127.0.0.1" }
+        - { path: ^/, roles: ROLE_NO_ACCESS }
+
+Is this purposeful?  I think that one of the following should be done:
+
+Add a comment to explain this usage of fixXmlConfig
+Add a method called defineSynonym that has the same implementation as fixXmlConfig.  This would make the usage semantically correct and help with misunderstandings like #2823 .
+Delete the line (not backwards compatible)
+
+I just noticed that the same thing happens on line 129 of that file.
+As a reader of this code without having just read the docs for fixXmlConfig, I would assume that fixXmlConfig(a, b) would be equivalent to fixXmlConfig(a); fixXmlConfig(b) because the words rule and access_control have no clear relation.
+I'm willing to do a pull request if you guys are interested in this.

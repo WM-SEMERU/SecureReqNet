@@ -1,0 +1,23 @@
+### Problem to solve
+
+Users are able to upload known insecure or otherwise shared SSH keys.  This results in unintended access across users and projects.
+
+### Further details
+
+Recently, `User A` uploaded a known bad key, which resulted in allowing access by other users to `User A`s repository due the shared private key being present in the environment of the other users.  Protecting the integrity of user data is priority of GitLab and especially on GitLab.com.
+
+Previous internal GitLab discussion: https://gitlab.com/gitlab-com/gl-infra/infrastructure/issues/5229
+
+I am creating a new issue here that can be made public.
+
+### Proposal
+
+For an MVC, create a hardcoded list of public SSH keys that users will be prevented from using, starting with list like that provided by https://github.com/rapid7/ssh-badkeys.
+
+### What does success look like, and how can we measure that?
+
+When trying to upload a known bad public key, user is shown a similar message to when another user has already associated the key with their account.
+
+### Links / references
+
+I am assigning ~S3 / ~P3 as this affects the integrity of user repositories.

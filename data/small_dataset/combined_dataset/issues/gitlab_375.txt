@@ -1,0 +1,5 @@
+v7.0.0.rc1 must have lower precedence than v7.0.0 (see http://semver.org/).
+
+Also, according to Semver, pre-release version data should be separated from the main version by a hyphen, not by another dot (v7.0.0-rc1).
+
+Example from Semver: 1.0.0-alpha < 1.0.0-alpha.1 < 1.0.0-alpha.beta < 1.0.0-beta < 1.0.0-beta.2 < 1.0.0-beta.11 < 1.0.0-rc.1 < 1.0.0

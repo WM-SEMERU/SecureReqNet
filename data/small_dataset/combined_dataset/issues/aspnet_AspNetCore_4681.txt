@@ -1,0 +1,6 @@
+Add OIDC test coverage
+
+
+OIDC does not have sufficient test coverage. Many tests were removed or disabled due to breaking changes or redesigns. Check our coverage and fill in the gaps.
+Note there are some pseudo-functional tests in MusicStore that could be moved here.
+Related: aspnet/Security#349 - Move OIDC tests to their own project.

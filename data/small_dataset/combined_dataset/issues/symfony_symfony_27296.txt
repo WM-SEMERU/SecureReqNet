@@ -1,0 +1,39 @@
+RoleHierarchyVoter memory exhausted
+
+
+Symfony version(s) affected: 4.0.9
+Description
+Hi, fatal error is thrown when calling {% if is_granted('ROLE_GALLERY_ADMIN') %} in twig template
+PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 262144 bytes) in /code/vendor/symfony/security/Core/Authorization/Voter/RoleHierarchyVoter.php on line 39
+
+This is happening when I check for any role - which user has no assigned.
+security:
+    session_fixation_strategy: migrate
+    always_authenticate_before_granting: false
+    erase_credentials: true
+
+    role_hierarchy:
+        ROLE_WEB_ADMIN:
+            - ROLE_ARTICLE_ADMIN
+            - ROLE_SECTION_ADMIN
+
+        ROLE_ARTICLE_ADMIN:
+            - ROLE_ADMIN
+
+        ROLE_SECTION_ADMIN:
+            - ROLE_ADMIN
+
+        ROLE_GALLERY_ADMIN:
+            - ROLE_ADMIN
+
+        ROLE_ADMIN:
+           - ROLE_USER
+
+        ROLE_SUPER_ADMIN:
+            - ROLE_ALLOWED_TO_SWITCH
+            - ROLE_ADMIN
+            - ROLE_ARTICLE_ADMIN
+            - ROLE_SECTION_ADMIN
+            - ROLE_GALLERY_ADMIN
+
+Any idea why this is happening?

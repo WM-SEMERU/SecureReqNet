@@ -1,0 +1,13 @@
+Dockershim doesn't consider seccomp profile root?
+
+
+While auditing absolute/relative path behavior in the Kubelet, I came across this: https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/dockershim/helpers_linux.go#L61-L66
+	if !strings.HasPrefix(seccompProfile, "localhost/") {
+		return nil, fmt.Errorf("unknown seccomp profile option: %s", seccompProfile)
+	}
+
+	fname := strings.TrimPrefix(seccompProfile, "localhost/") // by pod annotation validation, name is a valid subpath
+	file, err := ioutil.ReadFile(filepath.FromSlash(fname))
+
+It looks like it just ignores the root directory altogether, and reads relative to the Kubelet's CWD.
+/cc @tallclair @yujuhong @feiskyer

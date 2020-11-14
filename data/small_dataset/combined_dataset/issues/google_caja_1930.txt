@@ -1,0 +1,6 @@
+SES calls "new WeakMap(true)" which is incorrect ES6 and no longer works on Canary
+
+
+Original issue 1932 created by erights@google.com on 2014-08-15T15:09:17.000Z:
+If "new WeakMap" is called with an argument, ES6 demands that the argument be iterable. Chrome Canary now enforces that. However, SES's ejectorsGuardsTrademarks.js calls "new WeakMap(true)" in two places, in accordance with an early and long dead proposal for WeakMaps (also implemented at one time by our shim) that the argument be an optional flag that, if set to true, would be a hint that the weak association should be optimized to use key lifetime rather than map lifetime.
+The attached screenshot shows what currently happens loading the SES initialization test on Chrome Canary.

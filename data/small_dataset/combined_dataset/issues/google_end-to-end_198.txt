@@ -1,0 +1,4 @@
+Incorrect rollover error for counter mode
+
+
+Ctr mode throws an error if after incrementing the nonce it becomes zero.  This is for the purpose of preventing reuse of nonces but only does so if the nonce had started at 0. It has the effect of limiting the amount of blocks that can be encrypted to (2^32) - nonce. Xoring the counter to nonce would solve the issue, though the error might not be needed as since most other modes have much lower safe limits (due to birthday problem) limiting the amount of data that is encrypted is already something that must be handled higher up.

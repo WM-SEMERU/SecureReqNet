@@ -1,0 +1,4 @@
+[hackerone] windows file picker tor issue
+
+
+https://hackerone.com/bugs?subject=brave&report_id=506906

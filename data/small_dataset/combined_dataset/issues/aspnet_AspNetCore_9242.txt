@@ -1,0 +1,121 @@
+ASP.NET core 2.2: what is the expected behaviour of ChallengeResult when there are multiple authentication schemes configured ?
+
+
+Hi,
+we are trying to understand what is the expected handling of a ChallengeResult when there are multiple authentication schemes registered.
+We need to handle such a scenario because we have an ASP.NET core 2.2 app exposing some action methods (we use the MVC middleware) that must be used by an angularjs SPA which relies on cookies authentication and some third parties applications which use an authentication mechanism based on the Authorization HTTP request header. Please notice that the involved action methods are the same for both the users, this means that each one of them must allow authentication using both the cookie and the custom scheme based on  Authorization HTTP request header. We know that probably this is not an optimal design but we cannot  modify the overall architecture.
+This documentation seems to confirm that what we would like to achieve is entirely possible using ASP.NET core 2.2. Unfortunately, the cookie authentication used by the UI app and the custom authentication used by the third parties must behave differently in case of an authentication challenge and their expected behaviors are not compatible with each other: the UI app should redirect the user to a login form, while a thir party application expects a raw 401 status code response. The documentation linked above does not offer a clear explanation of the ChallengeResult handling, so we decided to experiment with a test application.
+We created two fake authentication handlers:
+public class FooAuthenticationHandler : IAuthenticationHandler
+  {
+    private HttpContext _context;
+
+    public Task<AuthenticateResult> AuthenticateAsync()
+    {
+      return Task.FromResult(AuthenticateResult.Fail("Foo failed"));
+    }
+
+    public Task ChallengeAsync(AuthenticationProperties properties)
+    {
+      _context.Response.StatusCode = StatusCodes.Status403Forbidden;
+      return Task.CompletedTask;
+    }
+
+    public Task ForbidAsync(AuthenticationProperties properties)
+    {
+      return Task.CompletedTask;
+    }
+
+    public Task InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+    {
+      _context = context;
+      return Task.CompletedTask;
+    }
+  }
+
+public class BarAuthenticationHandler : IAuthenticationHandler
+  {
+    private HttpContext _context;
+
+    public Task<AuthenticateResult> AuthenticateAsync()
+    {
+      return Task.FromResult(AuthenticateResult.Fail("Bar failed"));
+    }
+
+    public Task ChallengeAsync(AuthenticationProperties properties)
+    {
+      _context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+      return Task.CompletedTask;
+    }
+
+    public Task ForbidAsync(AuthenticationProperties properties)
+    {
+      return Task.CompletedTask;
+    }
+
+    public Task InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+    {
+      _context = context;
+      return Task.CompletedTask;
+    }
+  }
+
+We registered the authentication schemas inside ConfigureServices method as follows:
+public void ConfigureServices(IServiceCollection services)
+    {
+      services
+        .AddMvc()
+        .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+      services.AddAuthentication(options => 
+      {
+        options.DefaultChallengeScheme = "Bar";
+        options.AddScheme<FooAuthenticationHandler>("Foo", "Foo scheme");
+        options.AddScheme<BarAuthenticationHandler>("Bar", "Bar scheme");
+      });
+    }
+
+This is our middleware pipeline:
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+      if (env.IsDevelopment())
+      {
+        app.UseDeveloperExceptionPage();
+      }
+      else
+      {
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
+      }
+
+      app.UseHttpsRedirection();
+
+      app.UseAuthentication();
+
+      app.UseMvc();
+    }
+
+and finally we created a controller with an action method requiring authentication:
+[Route("api/[controller]")]
+  [ApiController]
+  public class ValuesController : ControllerBase
+  {
+    // GET api/values/5
+    [HttpGet("{id}")]
+    [Authorize(AuthenticationSchemes = "Foo,Bar")]
+    public ActionResult<string> Get(int id)
+    {
+      return "value";
+    }
+  }
+
+We noticed that:
+
+both the FooAuthenticationHandler and BarAuthenticationHandler are called to handle the ChallengeResult
+the order is FooAuthenticationHandler before BarAuthenticationHandler and depends on the Authorize attribute (if you swap the authentication schemes inside the Authorize attribute then BarAuthenticationHandler is called first)
+the caller gets a raw 500 status code response, but this only depends on the order in which the authorization handlers are called
+the call to options.DefaultChallengeScheme = "Bar"; matters if and only if inside the [Authorize] attribute the property AuthenticationSchemes is not set. If you do so, only the  BarAuthenticationHandler is called and FooAuthenticationHandler never gets a chance to authenticate the request or handle an authentication challenge.
+
+So, the question basically is: when you have such a scenario, how are you expected to handle the possible "incompatibility" of different authentication schemes regarding ChallengeResult handling since they get both called ?
+In our opinion is fine that both have a chance to authenticate the request, but we would like to know if it is possible to decide which one should handle the authentication challenge.
+Thanks for helping !

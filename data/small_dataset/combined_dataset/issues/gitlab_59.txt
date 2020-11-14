@@ -1,0 +1,3 @@
+Git Lab repos automatically render Markdown files, such as `README.md`, into HTML with clickable links.
+
+Git Lab snippets forget to do this, rendering Markdown as literal text with no syntax highlighting or clickable links.

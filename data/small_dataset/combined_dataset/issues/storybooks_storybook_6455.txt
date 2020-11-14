@@ -1,0 +1,27 @@
+[Snyk] Fix for 2 vulnerable dependencies
+
+
+Description
+This PR fixes one or more vulnerable packages in the npm dependencies of this project.
+See the Snyk test report for more details.
+Snyk Project: storybooks/storybook:docs/package.json
+Snyk Organization: storybook
+Changes included in this PR
+
+Changes to the following files to upgrade the vulnerable dependencies to a fixed version:
+
+docs/package.json
+
+
+
+Vulnerabilities that will be fixed
+With an upgrade:
+
+SNYK-JS-JSYAML-174129 - potentially breaking change
+SNYK-JS-MARKED-174116
+
+You can read more about Snyk's upgrade and patch logic in Snyk's documentation.
+Check the changes in this PR to ensure they won't cause issues with your project.
+Stay secure,
+The Snyk team
+Note: You are seeing this because you or someone else with access to this repository has authorised Snyk to open Fix PRs. To review the settings for this Snyk project please go to the project settings page.

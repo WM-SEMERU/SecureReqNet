@@ -1,0 +1,5 @@
+If a full name of a user contains an XSS payload, e.g. `eve <img src=x onerror=alert(2)&lt;img src=x onerror=alert(1)&gt;` and that name is referenced via `@`, e.g. from an issue or comment, the XSS payload is executed.
+
+This is a regression of https://gitlab.com/gitlab-org/gitlab-ce/issues/52830. I observed this behavior in 11.4.3 CE and EE.
+
+cc @smcgivern @kushalpandya

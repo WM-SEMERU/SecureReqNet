@@ -1,0 +1,23 @@
+JEA transcripts are hard to read and not user-friendly
+
+
+
+Note: Ported from bug 9318376
+
+JEA transcripts, unlike regular PowerShell session transcripts, output all of the session information unformatted. That means that auditors trying to read a JEA transcript have to parse together the output to understand what command a user invoked rather than just seeing exactly what the user ran. The request is to try and simplify the JEA transcript format so that it is similar to the standard transcript format.
+Example of a standard transcript file for someone who ran Get-Service Dns:
+PS C:\Users\Administrator> Get-Service Dns
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  dns                DNS Server
+
+Example of a JEA transcript for the same command:
+PS>CommandInvocation(Get-Service): "Get-Service"
+>> ParameterBinding(Get-Service): name="Name"; value="Dns"
+>> CommandInvocation(Out-Default): "Out-Default"
+>> ParameterBinding(Out-Default): name="InputObject"; value="Dns"
+
+
+Running  Dns                DNS Server
+

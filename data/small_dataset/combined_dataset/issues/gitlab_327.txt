@@ -1,0 +1,2 @@
+Currently it is not possible to create new folders with the web editor.
+It github this can be done by simply typing an "/" and it will create a new folder.

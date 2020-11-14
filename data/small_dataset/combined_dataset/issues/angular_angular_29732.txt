@@ -1,0 +1,52 @@
+No way to set global options on HttpClient ( { observe: 'response' } )
+
+
+🐞 bug report
+Affected Package
+
+ The issue is caused by package @angular/....
+HttpClient / HttpInterceptor
+Is this a regression?
+
+ Yes, the previous version in which this bug was not present was: ....
+Description
+ A clear and concise description of the problem...
+There doesn't seem to be a way to set global options for an HttpClient. The only close option I see is configuring an HttpInterceptor and set the options within each request.
+const req = _request.clone(<Update Object>);
+It doesn't look like the update object is aware of the HttpClient options such as { observe: 'response }
+clone(update: {
+        headers?: HttpHeaders;
+        reportProgress?: boolean;
+        params?: HttpParams;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+        body?: T | null;
+        method?: string;
+        url?: string;
+        setHeaders?: {
+            [name: string]: string | string[];
+        };
+        setParams?: {
+            [param: string]: string;
+        };
+    }): HttpRequest<T>;
+
+🔬 Minimal Reproduction
+
+ https://stackblitz.com/...
+
+🔥 Exception or Error
+
+
+
+
+
+🌍  Your Environment
+Angular Version:
+
+
+
+
+
+Anything else relevant?
+I'm not clear if there is some other way to handle this as my use case is to simply get the Http Response Code from the response. Of course, I can configure the { observe: 'response' } on every call, but that is error prone (someone would eventually not add it).

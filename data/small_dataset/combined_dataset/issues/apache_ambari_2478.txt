@@ -1,0 +1,5 @@
+AMBARI-24781 - Ambari setup-ldap: change group member default for IPA
+
+
+What changes were proposed in this pull request?
+same as #2463

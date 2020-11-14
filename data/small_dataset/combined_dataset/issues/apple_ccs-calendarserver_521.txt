@@ -1,0 +1,4 @@
+Wikipedia update
+
+
+Please update the line about “Calendar and Contact Server” at https://en.wikipedia.org/wiki/Comparison_of_CalDAV_and_CardDAV_implementations#Server_implementations with the supported protocols.

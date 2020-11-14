@@ -1,0 +1,10 @@
+ngSanitize-ed content fetches external resources (img[src])
+
+
+For some applications like email clients, it's important that the interaction with the sanitized content is not signaled via external http requests.
+The sanitizer today doesn't take this requirement into account and allows external content to be fetched.
+We should do one of:
+
+implement a mode where the external resources are stripped from the sanitized content
+document this behavior and point to alternative more fully-featured sanitizers that are more suitable for these applications
+

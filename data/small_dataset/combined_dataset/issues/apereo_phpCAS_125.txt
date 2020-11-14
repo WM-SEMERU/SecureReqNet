@@ -1,0 +1,4 @@
+URL Encode ticket parameter when presented for validation.
+
+
+Since the ticket is under control of the user, it should be URL encoded when presented for validation as a precaution.

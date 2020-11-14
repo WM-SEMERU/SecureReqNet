@@ -1,0 +1,45 @@
+several performance issues with muon based on C69
+
+
+Test plan
+
+Launch Brave on macOS
+Resize the window a bunch. Try to do it fast and ensure that behavior matches our existing live version (0.23.107)
+Try loading a lot of tabs and bookmarks (as @LaurenWags describes in #15202 (comment)) and quit / relaunch. Performance should match 0.23.107
+
+Description
+There seems to be a few performance issues with muon that includes C69. So far we've noticed the following area's that seem a bit slower/jankier compared to the current 0.23.107 6f2fc65 build which is based on 68.0.3440.84:
+
+window resizing
+application launch time
+detaching tabs from a window
+
+Steps to Reproduce
+
+install 0.23.107 6f2fc65 and resize the window several times (note the performance)
+install 0.23.206 80a5ac1 and resize the window several times (note the performance)
+
+You'll notice a big difference in performance between 0.23.107 and 0.23.206 when it comes to resizing windows.
+Actual result:
+Resizing windows on 0.23.206 80a5ac1 is a lot slower/jankier compared to 0.23.107 6f2fc65 which feels a lot more snappier. Definitely seems like the performance has decreased with 0.23.206 80a5ac1.
+Expected result:
+Resizing windows on 0.23.206 80a5ac1 should be as performant as 0.23.107 6f2fc65.
+Reproduces how often:
+100% reproducible using the above STR.
+Brave Version
+about:brave info:
+Brave: 0.23.206 
+V8: 6.9.427.22 
+rev: 80a5ac134e251a9cb3565023e2447d6d7b4487a7 
+Muon: 8.1.5 
+OS Release: 17.7.0 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 69.0.3497.92
+
+Reproducible on current live release:
+No, not reproducible under 0.23.107 6f2fc65 which is currently the released version based on C68.
+Additional Information

@@ -1,0 +1,41 @@
+'### Problem to solve
+
+A GitLab admin currently has the ability to reset a user's password from the UI or the API, but the email that is sent out is the same as if it was initiated from the account.
+
+In a security remediation scenario, where an administrator needs to reset the password of a suspected compromised user account, the text of the email should indicate that the action was initiated by an admin.
+
+### Intended users
+
+- Sidney (Systems Administrator)
+- Sam (Security Analyst)
+
+
+### Further details
+
+Adjusting the text 
+
+### Proposal
+
+Change the text sent out when the password is reset by the admin to read:
+
+```
+An administrator has changed the password for your GitLab account on http://localhost:3001.
+
+Please contact your administrator with any questions. 
+```
+
+Further work would be to allow the admin to specify an additional message to be included in the email.
+
+### Permissions and Security
+
+Only Admin users should be allowed to reset a user's password or force a password change.
+
+### Documentation
+
+The documentation should be updated to indicate that an email is generated when a password change is done by an admin.
+
+### What does success look like, and how can we measure that?
+
+While remediating credential stuffing attacks that are successful due to password reuse, resetting the affected account passwords must be done along with a notification email.  Because the timing of the additional notification email and the delay in sending out bulk message, a number of support issues are filed.  The number of support tickets should decrease after this change is made.
+
+### Links / references

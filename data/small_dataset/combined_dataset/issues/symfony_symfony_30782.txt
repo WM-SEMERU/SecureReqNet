@@ -1,0 +1,59 @@
+ClassNotFoundException: Attempted to load class "TwigBundle"
+
+
+Symfony version(s) affected: 4.2.4
+Description
+When create project using composer for just skeleton and later you also require symfony/profiler-pack for dev only, it has dependency on TwigBundle.
+But in config/Bundles.php you get following:
+return [
+    Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
+    Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
+    Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
+];
+Web profiler is required for for dev and test only, but twig is required for all. The problems arises when you want to deploy this application with composer install --no-dev
+.
+.
+.
+  - Installing symfony/cache (v4.2.4): Loading from cache
+  - Installing symfony/framework-bundle (v4.2.4): Loading from cache
+  - Installing symfony/yaml (v4.2.4): Loading from cache
+Generating autoload files
+Executing script cache:clear [KO]
+ [KO]
+Script cache:clear returned with error code 255
+!!  
+!!  Fatal error: Uncaught Symfony\Component\Debug\Exception\ClassNotFoundException: Attempted to load class "TwigBundle" from namespace "Symfony\Bundle\TwigBundle".
+!!  Did you forget a "use" statement for another namespace? in /home/arslvsec/public_html/eresnote/src/Kernel.php:23
+!!  Stack trace:
+!!  #0 /home/arslvsec/public_html/eresnote/vendor/symfony/http-kernel/Kernel.php(424): App\Kernel->registerBundles()
+!!  #1 /home/arslvsec/public_html/eresnote/vendor/symfony/http-kernel/Kernel.php(130): Symfony\Component\HttpKernel\Kernel->initializeBundles()
+!!  #2 /home/arslvsec/public_html/eresnote/vendor/symfony/framework-bundle/Console/Application.php(65): Symfony\Component\HttpKernel\Kernel->boot()
+!!  #3 /home/arslvsec/public_html/eresnote/vendor/symfony/console/Application.php(145): Symfony\Bundle\FrameworkBundle\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+!!  #4 /home/arslvsec/public_html/eresnote/bin/console(38): Symfony\Component\Console\Application->run(Objec in /home/arslvsec/public_html/eresnote/src/Kernel.php on line 23
+!!  
+Script @auto-scripts was called via post-install-cmd
+
+
+How to reproduce
+
+
+create project in current directory
+composer create-project symfony/skeleton .
+
+
+add profiler
+composer require --dev symfony/profiler-pack
+
+
+Now, you have to deploy it for production. You can use different folder or different server. Make it ready for deployment for production by changing the .env file for APP_ENV=prod
+
+
+finally, perform
+ composer install --no-dev
+
+
+You will get the above error for twig dependency.
+Possible Solution
+I can't guide you the solution but one thing I want to mention is this is going to be complicated. Because in website-skelton, you need need TwigBundle for all, but in skeleton, you need it for dev and test only if required with profiler.
+Additional context
+I faced this problem yesterday while deploying my application. And now, I tried to reproduce this bug and I was able to reproduce it. Here is stakeoverflow thread of this problem that was solved by manually editing config/bundles.php for TwigBundle for dev and test only and then moving twig.yaml files to appropriate folders.

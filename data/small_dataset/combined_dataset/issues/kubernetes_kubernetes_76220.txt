@@ -1,0 +1,11 @@
+garbagecollector: use the generic informer factory
+
+
+As part of work while doing resource quota controller, I added a
+new GenericInformerFactory inside ControllerContext. Basically it
+is a proxy for typed informer factory and dynamic informer factory.
+It can give us both dynamic informers along with typed informers.
+/kind cleanup
+/sig api-machinery
+NONE
+

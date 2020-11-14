@@ -1,0 +1,5 @@
+Pure java project
+
+
+This project initially contained multiple Android related examples and code. We moved away from that to create java only libraries, tests and examples. Recently noticed that we are still using Android tooling under the hood (eg. android gradle tooling). This should be removed and will allow us to move to a higher Gradle version (this for example to fix issues as google/auto#706 (comment)).
+cc @osana @zugaldia

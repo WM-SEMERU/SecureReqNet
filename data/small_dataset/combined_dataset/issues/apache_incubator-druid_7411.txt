@@ -1,0 +1,232 @@
+[materialized view] Too many Hadoop jobs doing the same thing
+
+
+Affected Version
+0.13.0-incubating
+Description
+I have created this MV specification:
+{
+  "type": "derivativeDataSource",
+  "baseDataSource": "the-base-data-source",
+  "dimensionsSpec": {
+    "dimensions": [
+		...
+    ],
+    "dimensionExclusions": []
+  },
+  "metricsSpec": [
+    ...
+  ],
+  "tuningConfig": {
+    "type": "hadoop",
+    "workingPath": null,
+    "version": "2019-03-20T06:44:16.593Z",
+    "partitionsSpec": {
+      "type": "hashed",
+      "targetPartitionSize": -1,
+      "maxPartitionSize": -1,
+      "assumeGrouped": false,
+      "numShards": -1,
+      "partitionDimensions": []
+    },
+    "shardSpecs": {},
+    "indexSpec": {
+      "bitmap": {
+        "type": "concise"
+      },
+      "dimensionCompression": "lz4",
+      "metricCompression": "lz4",
+      "longEncoding": "longs"
+    },
+    "maxRowsInMemory": 1000000,
+    "maxBytesInMemory": 0,
+    "leaveIntermediate": false,
+    "cleanupOnFailure": true,
+    "overwriteFiles": false,
+    "ignoreInvalidRows": false,
+    "jobProperties": {
+      "fs.s3.impl": "org.apache.hadoop.fs.s3native.NativeS3FileSystem",
+      "fs.s3n.impl": "org.apache.hadoop.fs.s3native.NativeS3FileSystem",
+      "io.compression.codecs": "org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.BZip2Codec,org.apache.hadoop.io.compress.SnappyCodec",
+      "mapreduce.job.classloader": "true",
+      "mapreduce.job.queuename": "mv"
+    },
+    "combineText": false,
+    "useCombiner": false,
+    "buildV9Directly": true,
+    "numBackgroundPersistThreads": 0,
+    "forceExtendableShardSpecs": false,
+    "useExplicitVersion": false,
+    "allowedHadoopPrefix": [],
+    "logParseExceptions": false,
+    "maxParseExceptions": 0
+  },
+  "dataSource": "the-data-source",
+  "hadoopCoordinates": null,
+  "hadoopDependencyCoordinates": [
+    "org.apache.hadoop:hadoop-client:2.7.3"
+  ],
+  "classpathPrefix": null,
+  "context": {
+    "maxTaskCount": 1,
+    "minDataLagMs": 172800000
+  },
+  "suspended": false
+}
+
+for a data source like this one:
+{
+  "type": "kafka",
+  "dataSchema": {
+    "dataSource": "the-data-source",
+    "parser": {
+      "type": "string",
+      "parseSpec": {
+        "format": "json",
+        "timestampSpec": {
+          "column": "timestamp",
+          "format": "auto"
+        },
+        "dimensionsSpec": {
+          "dimensions": [],
+          "dimensionExclusions": [
+            ...
+          ],
+          "spatialDimensions": []
+        }
+      }
+    },
+    "metricsSpec": [
+      ...
+    ],
+    "granularitySpec": {
+      "type": "uniform",
+      "segmentGranularity": "HOUR",
+      "queryGranularity": "HOUR",
+      "rollup": true,
+      "intervals": null
+    },
+    "transformSpec": {
+      "filter": null,
+      "transforms": []
+    }
+  },
+  "tuningConfig": {
+    "type": "kafka",
+    "maxRowsInMemory": 40000,
+    "maxBytesInMemory": 0,
+    "maxRowsPerSegment": 5000000,
+    "maxTotalRows": null,
+    "intermediatePersistPeriod": "PT10M",
+    "basePersistDirectory": "/mnt/druid/tmp/1554352333133-0",
+    "maxPendingPersists": 0,
+    "indexSpec": {
+      "bitmap": {
+        "type": "concise"
+      },
+      "dimensionCompression": "lz4",
+      "metricCompression": "lz4",
+      "longEncoding": "longs"
+    },
+    "buildV9Directly": true,
+    "reportParseExceptions": false,
+    "handoffConditionTimeout": 0,
+    "resetOffsetAutomatically": true,
+    "segmentWriteOutMediumFactory": null,
+    "workerThreads": null,
+    "chatThreads": null,
+    "chatRetries": 20,
+    "httpTimeout": "PT60S",
+    "shutdownTimeout": "PT180S",
+    "offsetFetchPeriod": "PT30S",
+    "intermediateHandoffPeriod": "P2147483647D",
+    "logParseExceptions": false,
+    "maxParseExceptions": 2147483647,
+    "maxSavedParseExceptions": 0
+  },
+  "ioConfig": {
+    "topic": "the-topic",
+    "replicas": 1,
+    "taskCount": 4,
+    "taskDuration": "PT3960S",
+    "consumerProperties": {
+      "bootstrap.servers": "kafka-test-broker.host.com:9092",
+      "group.id": "IngestionDruid",
+      "auto.offset.reset": "latest",
+      "max.partition.fetch.bytes": 4000000
+    },
+    "startDelay": "PT0S",
+    "period": "PT30S",
+    "useEarliestOffset": false,
+    "completionTimeout": "PT1800S",
+    "lateMessageRejectionPeriod": null,
+    "earlyMessageRejectionPeriod": null,
+    "skipOffsetGaps": false
+  },
+  "context": null,
+  "suspended": false
+}
+
+and, once the view was created, there is a Hadoop job (started every ~30 seconds and having a duration of ~30 seconds), which does some repetitive work:
+http://druid:8090/druid/indexer/v1/task/index_materialized_view_test_2019-04-04T00%3A01%3A56.850Z/log
+	Segment 0/1 for dataSource[the-base-data-source] has identifier[the-base-data-source_2019-03-12T11:00:00.000Z_2019-03-12T12:00:00.000Z_2019-03-14T13:06:36.212Z], interval[2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z]
+
+	2019-04-04T00:02:14,093 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Running job: job_1553777733785_5208
+	2019-04-04T00:02:22,211 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5208 running in uber mode : false
+	2019-04-04T00:02:22,212 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 0% reduce 0%
+	2019-04-04T00:02:37,511 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 23% reduce 0%
+	2019-04-04T00:02:40,533 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 50% reduce 0%
+	2019-04-04T00:02:42,562 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 0%
+	2019-04-04T00:02:55,631 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 71%
+	2019-04-04T00:02:58,646 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 90%
+	2019-04-04T00:03:01,660 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 100%
+	2019-04-04T00:03:02,673 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5208 completed successfully
+
+http://druid:8090/druid/indexer/v1/task/index_materialized_view_test_2019-04-04T00%3A03%3A56.874Z/log
+	Segment 0/1 for dataSource[the-base-data-source] has identifier[the-base-data-source_2019-03-12T11:00:00.000Z_2019-03-12T12:00:00.000Z_2019-03-14T13:06:36.212Z], interval[2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z]
+
+	2019-04-04T00:04:14,150 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Running job: job_1553777733785_5211
+	2019-04-04T00:04:21,254 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5211 running in uber mode : false
+	2019-04-04T00:04:21,255 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 0% reduce 0%
+	2019-04-04T00:04:36,697 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 20% reduce 0%
+	2019-04-04T00:04:39,714 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 46% reduce 0%
+	2019-04-04T00:04:42,748 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 0%
+	2019-04-04T00:04:54,802 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 69%
+	2019-04-04T00:04:57,815 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 82%
+	2019-04-04T00:05:00,827 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 97%
+	2019-04-04T00:05:02,836 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 100%
+	2019-04-04T00:05:03,847 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5211 completed successfully
+
+http://druid:8090/druid/indexer/v1/task/index_materialized_view_test_2019-04-04T00%3A05%3A56.898Z/log
+	Segment 0/1 for dataSource[the-base-data-source] has identifier[the-base-data-source_2019-03-12T11:00:00.000Z_2019-03-12T12:00:00.000Z_2019-03-14T13:06:36.212Z], interval[2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z]
+
+	2019-04-04T00:06:13,814 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Running job: job_1553777733785_5214
+	2019-04-04T00:06:20,947 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5214 running in uber mode : false
+	2019-04-04T00:06:20,948 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 0% reduce 0%
+	2019-04-04T00:06:36,844 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 19% reduce 0%
+	2019-04-04T00:06:39,866 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 43% reduce 0%
+	2019-04-04T00:06:42,904 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 0%
+	2019-04-04T00:06:54,967 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 68%
+	2019-04-04T00:06:57,984 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 83%
+	2019-04-04T00:07:00,998 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 100%
+	2019-04-04T00:07:03,016 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5214 completed successfully
+
+
+http://druid:8090/druid/indexer/v1/task/index_materialized_view_test_2019-04-04T00%3A07%3A56.930Z/log
+	Segment 0/1 for dataSource[the-base-data-source] has identifier[the-base-data-source_2019-03-12T11:00:00.000Z_2019-03-12T12:00:00.000Z_2019-03-14T13:06:36.212Z], interval[2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z]	
+		
+	2019-04-04T00:08:14,401 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Running job: job_1553777733785_5217
+	2019-04-04T00:08:22,494 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5217 running in uber mode : false
+	2019-04-04T00:08:22,495 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 0% reduce 0%
+	2019-04-04T00:08:37,777 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 18% reduce 0%
+	2019-04-04T00:08:40,794 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 41% reduce 0%
+	2019-04-04T00:08:43,811 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 67% reduce 0%
+	2019-04-04T00:08:44,826 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 0%
+	2019-04-04T00:08:56,885 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 74%
+	2019-04-04T00:08:59,899 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 93%
+	2019-04-04T00:09:02,915 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job -  map 100% reduce 100%
+	2019-04-04T00:09:02,924 INFO [task-runner-0-priority-0] org.apache.hadoop.mapreduce.Job - Job job_1553777733785_5217 completed successfully
+
+Is this the right behavior of the MV Supervisor? I don't remember having these kind of jobs for other materialized views.
+@zhangxinyu1: Can I have your help, please?
+Thank you!

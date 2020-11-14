@@ -1,0 +1,14 @@
+[Finder] InvalidArgumentException for non-existing directory
+
+
+Symfony version(s) affected: all supported versions
+Description
+Finder::in() throws an InvalidArgumentException when one of the directories is not found. However, a valid directory name for a directory which does not exist is IMHO a normal case for the Finder and not an invalid argument. Therefore, non-existing directories should throw an dedicated Exception of the Finder component instead of the generic InvalidArgumentException.
+This would also simplify catching such exceptions.
+How to reproduce
+require_once('vendor/autoload.php');
+$f = new Symfony\Component\Finder\Finder();
+$f->directories()->in('no');
+Throws InvalidArgumentException although the argument is a valid directory name. A dedicated exception which can be specifically caught would be more useful and improve DX.
+Possible Solution
+Create a dedicated DirectoryNotFoundException, which extends InvalidArgumentException for BC. Later it would probably make more sense to extend RuntimeException instead.

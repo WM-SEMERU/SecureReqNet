@@ -1,0 +1,43 @@
+Make brave unusable to encourage updating
+
+
+This PR replaces the newtab page with the notice to update Brave and
+makes the urlbar unusable.
+Test plan:
+
+Launch Brave without brave-core installed
+You should see a notice to update brave.
+Clicking on it should download Brave.
+The urlbar should not be usable.
+With brave-core now installed, launch the old Brave again.
+Now you should see a notice to launch the newer Brave installation.
+The urlbar should still be unusable.
+
+Test plan for disabling tab restoration:
+
+Open previous version of muon brave and open some tabs/windows
+Update to this version
+You should not see any of your tabs/windows restored
+
+Screenshot:
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+Reviewer Checklist:
+
+ Request a security/privacy review as needed if one was not already requested.
+
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

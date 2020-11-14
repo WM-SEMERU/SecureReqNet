@@ -1,0 +1,9 @@
+'- Types: Cross-Site Scripting (XSS)
+- Link:  https://hackerone.com/reports/185093
+- Date:  2016-11-25 15:09:02 +0000
+- By:    @krisbogdanov
+
+Details:
+Discussion section of Merge requests screen renders code coming from repo instead of properly handling it as text only. Please, refer to screenshot attached for example. Instead of actual input fields and submit button that should be the block of code for a form and input field. Git lab should not be rendering user code. Please, perform output encoding and test this with an image for example. If an img tag tries to render, this will be really bad!
+
+Let me know if you need the actual code snippet that triggered the issue.

@@ -1,0 +1,7 @@
+Add two new subprojects to SIG AWS
+
+
+
+Edited sigs.yaml with changes
+Built docs with make generate
+

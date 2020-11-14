@@ -1,0 +1,56 @@
+[HttpKernel] Add a "short" trace header format, make header configurable
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11340
+
+
+
+This pull requests adds the first usage of array_key_first to the Symfony code base. Additionally, it makes it possible to configure the HttpCache to also add a "trace" header in production.
+The HttpCache is a convenient, low-barrier yet performant way of accelerating the application. By having the "trace" information returned as a header in production as well, you can write it to server log files. For example, with Apache you can use %{X-Symfony-Cache}o in the LogFormat directive to log response headers.
+With the information in the log files, you can easily process it from logfile processing/system metrics tools to find out about cache performance, efficiency and the URLs that might need extra cache tweaking.
+
+The "short" format will only output information for the main request to avoid leaking internal URLs for ESI subrequests. I also chose a concise format like stale/valid/store because that's much easier to parse out of logfiles (no whitespace, no need for quotes etc.).
+If you're not comfortable with having Symfony in the header name that way, the header name can be changed through a configuration setting as well.
+#FOSSHackathon

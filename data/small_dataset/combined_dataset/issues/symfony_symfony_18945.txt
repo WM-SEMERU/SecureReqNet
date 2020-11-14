@@ -1,0 +1,49 @@
+[Security] LdapUserProvider: add missing argument type doc
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.1
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

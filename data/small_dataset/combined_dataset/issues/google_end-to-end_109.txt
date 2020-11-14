@@ -1,0 +1,19 @@
+Extension architecture and access to key material
+
+
+From noloa...@gmail.com on June 16, 2014 05:41:09
+Is this report about the crypto library or the extension?
+This comments on the high level architecture. The comments are based on "" and "" from https://code.google.com/p/end-to-end/.
+What is the security bug?
+The browser and the plugi-in has access to the key material. It does not matter that its encrypted in memory until needed.
+How would someone exploit it?
+In the past, government has requested back doors to be inserted into code like this. For example, HushMail backdoored their applet to allow the US to spy on HushMails customers. (What's more interesting is how the long arm of the US reached into Canada with only cooperation, and not a warrant or lawful request).
+Since most users likely will not build their own extension from sources, its probably a good bet the users will be using a pre-compiled or pre-assembeled version of extension. That puts this extension in the same jeopardy as HushMail's applet.
+What should be done?
+Decompose this extension into two programs. Have the first interact with the browser and user, and have the second handle the key material and crypto operations. When a message needs signing or decrypting, have the browser component make an call to the encryption component.
+Here, the second encryption component should be built by another organization. In fact, it does not even need to be built - its already available. Just make programs like OpenPGP (or other compatible suite) a requirement. Offer to install a compatible suite if not available when the extension is installed.
+Under this architecture, the browser component never sees the key material and cannot egress it or backdoor the system. The best the backdoor could do is egress the user's password. But the enemy (the US government or the UK government, et al) would need to engage a user to use to obtain the encrypted key and use the egressed password. In this case, the attacker looses stealth and surprise.
+The two-part architecture also means the key material is not egressed when Chrome or the extension crashes. I image folks like the NSA and GCHQ are probably trolling crash reports for private key to recover them. Keeping the password protected key and the password in memory means there's no effective security on the key.
+Since the attacker (1) cannot obtain the keys through legal maneuvers, (2) cannot obtain the keys and passwords through crash reports, and (3) cannot maintain stealth and surprise, the architecture minimizes the extension as a target and helps restore transparency.
+And its not like these are far fetched (mis)use cases. We've already seen them happen. They are probably the tip of the iceberg. And its great that Google is trying to improve the situation.
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=72

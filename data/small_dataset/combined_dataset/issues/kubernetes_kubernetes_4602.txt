@@ -1,0 +1,19 @@
+Kubelet secret volume plugin should store data in tmpfs
+
+
+Per #4126 the kubelet secret volume plugin should store data in a tmpfs.  In feedback on #4126, @erictune raised the question of whether the secret volume plugin or the kubelet should handle creating the tmpfs.
+Personally I had been in favor of having the kubelet create this and share it via a new method on the kubelet/volume.Host interface, like so:
+type Host interface {
+  // other methods omitted
+  GetVolatileStorageDir() string
+}
+My reasoning was that the kubelet will need volatile storage for its own secrets (ie, secrets associated with a ServiceAccount that affect kubelet behaviors like docker pull), so we could just create a single filesystem and subdivide it for the volume plugin and kubelet both to use.  One advantage to this approach is that cluster operators could size the single volume easily without having to make projections about the relative amount of secret data consumed by pods in volumes versus associated with service accounts associated with pods.
+I'm not longer sure this is the best way.  Also, service accounts haven't landed yet, so it's arguable that we shouldn't worry about storage for this flavor of secret yet.
+An alternative would be:
+
+Make the secret volume plugin to manage its own tmpfs for now
+Defer decision about kubelet-scoped secrets until service accounts land; at that time we could:
+Make a single tmpfs that is used for both kubelet-scoped and pod-scoped secrets
+Make a separate tmpfs for kubelet-scoped secrets
+
+Creating this issue to get some discussion on this matter before I begin the changes for tmpfs in the volume plugin.

@@ -1,0 +1,15 @@
+Switch: use Tor for background requests where possible
+
+
+There's a lot of plumbing needed behind the scenes to make Brave tick. A lot of this background work is mostly-invisible to the user. At the very least, the user isn't sitting there waiting for it to happen. Running those services over Tor would be a great way to further-protect user privacy and deliver on our mission of can't-be-evil rather than don't-be-evil.
+As we saw in brave/browser-laptop#14603, there are some users for whom running Tor is undesirable, no matter what. Even with an administrative policy option for disabling Tor completely, it makes sense to be cautious in the deployment of this feature. Perhaps an off-by-default setting which controls all the background services, including those invented later? Once we get confident with it, we could potentially consider this as part of an onboarding or "privacy assistant" flow.
+It's worth considering configuring Brave-operated endpoints as onion services. Because of the anonymity provided by Tor, there's little risk to having those endpoints run on third-party infrastructure. Indeed, infrastructure operated this way has little risk of ever accidentally accumulating IP addresses in logs since that information is never disclosed. Single onion services seem like a good fit for this infrastructure. Alec Muffett's Enterprise Onion Toolkit might also be useful. Note though, that this issue is about the browser work — the devops work should be tracked elsewhere when we need it.
+Because Tor isn't an option for everyone, we probably can't ever deprecate our clearweb versions of these services. But we can work to provide the best possible experience for those who have the feature enabled — and work to ensure that most users learn about it and have the opportunity to turn turn it on.
+Some specific services which we should consider torifying:
+
+ ledger/rewards services
+ update checks
+ update downloads
+ analytics
+ sync
+

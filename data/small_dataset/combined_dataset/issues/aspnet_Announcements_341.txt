@@ -1,0 +1,28 @@
+Newtonsoft.Json types replaced in Microsoft.AspNetCore.Authentication APIs
+
+
+As part of the ongoing effort to remove Newtonsoft.Json from the shared framework these types have now been replaced on the Authentication APIs.
+Basic usage of these Authentication packages should be unaffected. Only users who have derived from the OAuth package or that had implemented advanced claim manipulation should be affected. A detailed list of affected APIs is given below.
+Affected packages:
+
+Microsoft.AspNetCore.Authentication.OAuth
+Microsoft.AspNetCore.Authentication.OpenIdConnect
+Microsoft.AspNetCore.Authentication.Facebook
+Microsoft.AspNetCore.Authentication.Google
+Microsoft.AspNetCore.Authentication.Twitter
+Microsoft.AspNetCore.Authentication.MicrosoftAccount
+
+Also, all derived implementations of OAuth such as those from aspnet-contrib.
+For derived OAuth implementations the most common change is to replace JObject.Parse with JsonDocument.Parse in the CreateTicketAsync override as shown here. Note JsonDocument is IDisposable.
+Affected APIs:
+
+ClaimAction.Run(JObject userData, ClaimsIdentity identity, string issuer) becomes ClaimAction.Run(JsonElement userData, ClaimsIdentity identity, string issuer). All derived implementations of ClaimAction are similarly affected.
+MapCustomJson(this ClaimActionCollection collection, string claimType, Func<JObject, string> resolver) becomes MapCustomJson(this ClaimActionCollection collection, string claimType, Func<JsonElement, string> resolver)
+MapCustomJson(this ClaimActionCollection collection, string claimType, string valueType, Func<JObject, string> resolver) becomes MapCustomJson(this ClaimActionCollection collection, string claimType, string valueType, Func<JsonElement, string> resolver)
+OAuthCreatingTicketContext has had one old constructor removed and the other replaced JObject with JsonElement. The User property and RunClaimActions method have been updated to match.
+OAuthTokenResponse.Success now takes a JsonDocument instead of JObject. The Response property has been updated to match. OAuthTokenResponse is now disposable and will be disposed by OAuthHandler. Derived OAuth implementations overriding ExchangeCodeAsync do not need to dispose of the JsonDocument or OAuthTokenResponse.
+UserInformationReceivedContext.User changed from JObject to JsonDocument.
+TwitterCreatingTicketContext.User changed from JObject to JsonElement.
+TwitterHandler.CreateTicketAsync changed from taking JObject to JsonElement.
+
+See aspnet/AspNetCore#7289 for discussion. See aspnet/AspNetCore#7105 for details of the change.

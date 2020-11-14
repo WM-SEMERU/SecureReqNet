@@ -1,0 +1,51 @@
+I've just tried to use GitLab Upgrader for the 1st time, but it failed quite early cause I forgot to specify the https_proxy env variable.
+
+The problem is that when I try to re-execute the upgrader it exits immediately complaining
+
+```
+GitLab 6 upgrade tool
+Your version is 6.5.1
+Latest available version for GitLab 6 is 6.5.1
+You use latest GitLab version
+```
+I guess the previous upgrader run successfully updated the latest gitlab contents, BUT it didn't actually run the various migration tasks.
+
+Follows the output of the 1st upgrader execution
+
+```
+sudo -u git -H ruby script/upgrade.rb
+GitLab 6 upgrade tool
+Your version is 6.4.3
+Latest available version for GitLab 6 is 6.5.1
+Newer GitLab version is available
+Do you want to upgrade (yes/no)? yes
+Stash changed files
+ -> git stash
+Saved working directory and index state WIP on 6-4-stable: 3173626 Disable SSL peer verification for all webhooks
+HEAD is now at 3173626 Disable SSL peer verification for all webhooks
+ -> OK
+Get latest code
+ -> git fetch
+ -> OK
+Switch to new version
+ -> git checkout v6.5.1
+Note: checking out 'v6.5.1'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 6f6f158... Version 6.5.1
+ -> OK
+Install gems
+ -> bundle
+Fetching source index from https://rubygems.org/
+Could not fetch specs from https://rubygems.org/
+ -> FAILED
+Failed to upgrade. Try to repeat task or proceed with upgrade manually 
+```

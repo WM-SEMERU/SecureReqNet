@@ -1,0 +1,32 @@
+OnInit() called twice
+
+
+Describe the bug
+The OnInit()-event is called twice / handler runs twice
+To Reproduce
+Steps to reproduce the behavior:
+
+
+Visual Studio 2019; create new project using Razor components template
+
+
+In MainLayout.razor add the following to the end of the file:
+`@functions{      protected override void OnInit()
+{
+base.OnInit();
+Console.WriteLine("OnInit called");
+}
+}`
+
+
+Place a breakpoint on the Console.WriteLine-call in OnInit()
+
+
+Debug and see in Output -> ASP.NET Core Web Server:
+The breakpoint will be hit twice! From what I've read it should only be hit once at the initialization of the component
+
+
+Expected behavior
+OnInit() should only be called once
+Additional context
+Visual Studio Enterprise 2019 Version 16.0.0 on Windows 10, 1809

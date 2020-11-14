@@ -1,0 +1,7 @@
+Brave Icon Missing from Snap Install on Ubuntu 16.04.5
+
+
+I just installed Brave on Ubuntu 16.04.5 using this command:
+sudo snap install brave
+Instead of having an Orange Lion icon/launcher, it just has this icon instead:
+

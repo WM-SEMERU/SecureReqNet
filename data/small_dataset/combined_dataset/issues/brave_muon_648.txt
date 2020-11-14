@@ -1,0 +1,5 @@
+Update incognito session initialization
+
+
+With https://chromium.googlesource.com/chromium/src/+/f623bafe9c5b8cbd1d63c4d7c9b69de172552df5, the values being registered in a session were changed from an exclusion (ex: which values to NOT put in OverlayUserPrefStore) to an inclusion (ex: which values to PERSIST, even in an incognito profile)
+Fixes brave/browser-laptop#15191

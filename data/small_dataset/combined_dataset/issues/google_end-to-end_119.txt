@@ -1,0 +1,33 @@
+Broken IDEA
+
+
+From tha...@google.com on June 19, 2014 06:11:55
+Is this report about the crypto library or the extension?
+The crypto library.
+What is the security bug?
+From pbsd in https://news.ycombinator.com/item?id=7914129:
+For one thing, the IDEA implementation seems to be incorrect. In IDEA, multiplication is defined as multiplication modulo 2^16 + 1, where 0 means 2^16 [3]. However, looking at the multiplication function:
+https://code.google.com/p/end-to-end/source/browse/javascrip...
+When x == 0 but y != 0, the result of the modular multiplication is always 0, when it should not be. The correct code would be (in glorious C syntax, everything unsigned and 32-bit):
+if(x != 0) {
+if(y != 0) {
+return x_y % 65537; // result fits in 32 bits
+}
+else return 65537 - x; // or 1 - x mod 2^16
+} else return 65537 - y; // or 1 - y mod 2^16
+Of course, even if correct this code is still vulnerable to timing attacks (under contrived conditions) [1]. This can be worked around using a little bitwise magic:
+t0 = 65537 - x;
+t1 = 65537 - y;
+t2 = x_y % 65537;
+b0 = -(1 ^ ((x | -x) >> 31)); // 0xfff..ff if x == 0
+b1 = -(1 ^ ((y | -y) >> 31)); // 0xfff..ff if y == 0
+b2 = ~(b0 | b1); // 0xfff..fff if !(x == 0 && y == 0)
+return (t0&b1) | (t1&b0) | (t2&b2);
+Additionally, the modular inversion seems to be needlessly complicated by using Euclid's algorithm (and I'm not sure it's correct either: it seems not to respect the "0 means 2^16" rule). Use the usual a^(p-2) mod p inversion trick, using an optimal addition chain [2], to make it simpler, constant-time, and possibly faster.
+None of this is Javascript's fault, for what it's worth. But I certainly don't expect Javascript to make it any easier to write correct code, much by the contrary.
+[1] https://www.schneier.com/paper-side-channel2.pdf
+[2] http://wwwhomes.uni-bielefeld.de/cgi-bin/cgiwrap/achim/script_lookup_ac?para=FIXED
+[3] http://www.isiweb.ee.ethz.ch/papers/arch/xlai-mass-inspec-1991-2.pdf
+How would someone exploit it?
+The IDEA implementation may leak side-channel timing information.
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=82

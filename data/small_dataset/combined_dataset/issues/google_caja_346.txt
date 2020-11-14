@@ -1,0 +1,28 @@
+Caja still does not encapsulate supposedly protected properties
+
+
+Original issue 346 created by erights on 2008-06-01T00:43:39.000Z:
+<script type="text/javascript">
+function EncapsulatedObject(o) {
+this.myO_ = o;
+this.publiclyWritableField = null;
+}
+caja.def(EncapsulatedObject,Object,{
+toString: function(){return "friend";}
+});
+var eo = new EncapsulatedObject(3469);
+function Attacker(){}
+caja.def(Attacker,Object,{
+toString: function(){return "foe";},
+attack: function(){return this.myO_;}
+});
+var p = Attacker.prototype.attack;
+eo.publiclyWritableField = p;
+eo.publiclyWritableField();
+</script>
+in the testbed applet prints 3469. I don't understand the problem yet, but
+at least a contributory vulnerability for my mistaken whitelisting (from
+long ago) of Function.prototype. However, by itself, this shouldn't have
+caused the problem. For some reason, Attacker.prototype.attack seems to
+provide direct access to the unattached attack method, rather than
+attaching it to the prototype.

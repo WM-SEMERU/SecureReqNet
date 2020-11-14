@@ -1,0 +1,78 @@
+[FrameworkBundle] Add a controller to send simple HTTP responses
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+todo
+
+
+
+This PR adds a new built-in controller, similar to TemplateController and RedirectController, allowing to send simple HTTP response without having to write a custom controller:
+# config/routes.yaml
+login:
+  path: /my-page
+  controller: Symfony\Bundle\FrameworkBundle\Controller\SimpleController
+  defaults:
+    content: 'A simple web page'
+This is especially useful when dealing with the security system, here is a fully working example of a JSON-based login endpoint:
+# config/routes.yaml
+login:
+  path: /login
+  methods: POST
+  controller: Symfony\Bundle\FrameworkBundle\Controller\SimpleController
+  defaults:
+    content: '{"status": "success"}'
+    _format: json
+    private: true
+# config/packages/security.yaml
+security:
+    firewalls:
+        main:
+            anonymous: true
+            json_login:
+                check_path: /login
+It can also be useful for the following use cases:
+
+Health check URL for Kubernetes / Nagios / whatever returning a 200 OK and a predefined string
+Secret URL returning a token proving you're the owner of a domain (Google Analytics validation for instance)
+

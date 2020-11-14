@@ -1,0 +1,4 @@
+[Secure Tools] use `base64_encode()` to get url friendly string
+
+
+base64 includes / character which makes url containing generated string invalid

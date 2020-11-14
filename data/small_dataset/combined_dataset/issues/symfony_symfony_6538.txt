@@ -1,0 +1,18 @@
+Check if a route is accessible for a ROLE or a list of ROLE
+
+
+Hello,
+Do you know if it's possible to check if a ROLE can access to a route depending on the configuration of the firewall.
+I would like to create a controller to redirect to a route automatically but only if the user have a ROLE allowed to access the route.
+for example, if I have the following configuration:
+ access_control:
+        - { path: ^/secured/activities, roles: ROLE_CLIENT }
+        - { path: ^/secured/client/user, roles: ROLE_ADMINISTRATOR }
+From a controller I would like to be able to check like this:
+$targetPath = $request->getSession()->get('_security.target_path');
+
+if ($this->securityContext->isGrantedForRoute('ROLE_ADMINISTRATOR', $targetPath) {
+    return new RedirectResponse($targetPath);
+}
+isGrantedRoute doesn't exists, but it's just to show the thing I would like to do. I would like to be able to do that because, I have a login form and I would like to redirect on same the path the user was before he loose it's session, but depending on it's rights, we can't redirect on this path. I created an ExceptionListener like this: http://symfony.com/doc/master/cookbook/security/target_path.html to set the last route in session.
+For example if the user connects with ROLE_ADMINISTRATOR, and access to /secured/client/user, wait 30 min, loose the session and reconnect with ROLE_CLIENT, we must not redirect him on /secured/client/user.

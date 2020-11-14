@@ -1,0 +1,56 @@
+opening local files via DnD creates `about:blank` tabs rather than opening the file
+
+
+Test plan
+See #15204
+Description
+Opening files via dragging and dropping in the tab bar opens about:blank tabs rather than opening the files. We've also received similar complaints from the community:
+
+https://www.reddit.com/r/brave_browser/comments/9bgsot/v023105_for_desktop_has_been_released/e55r5sj
+
+I'm assuming this is another regression from the about:blank security issue that we added into the 0.23.104 release which has caused several about:blank regressions.
+Steps to Reproduce
+
+ensure that you have a .html or a .txt file saved locally
+install & launch either 0.23.206 80a5ac1 or 0.23.107 6f2fc65.
+once brave has launched, load any random website in a tab
+drop the local file you have saved on top of the above tab and you'll notice that instead of opening the local file, it creates a about:blank tab
+
+Actual result:
+macOS Example:
+
+Windows 10 x64 Example:
+
+Expected result:
+DnD files into the tab area should be opening the files rather than creating about:blank tabs.
+Reproduces how often:
+It's 100% reproducible on macOS but not always reproducible on Win.
+Brave Version
+about:brave info:
+Brave: 0.23.206 
+V8: 6.9.427.22 
+rev: 80a5ac134e251a9cb3565023e2447d6d7b4487a7 
+Muon: 8.1.5 
+OS Release: 17.7.0 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 69.0.3497.92
+
+Reproducible on current live release:
+Yes, currently reproducible on the following build which is the current live version:
+Brave: 0.23.107 
+V8: 6.8.275.24 
+rev: 6f2fc65b3c7db0b260ad154fbef5919902495387 
+Muon: 8.0.10 
+OS Release: 17.7.0 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 68.0.3440.84
+
+Additional Information

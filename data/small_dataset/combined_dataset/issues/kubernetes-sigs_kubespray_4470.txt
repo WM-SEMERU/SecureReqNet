@@ -1,0 +1,5 @@
+Fix CoreDNS upstream servers bogus jinja filters
+
+
+Fixes bug introduced in #4390
+See #4390 (comment)

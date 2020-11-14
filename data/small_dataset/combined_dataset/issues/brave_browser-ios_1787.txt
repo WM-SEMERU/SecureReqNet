@@ -1,0 +1,25 @@
+Bookmarked tabs are lost between app launch
+
+
+Description:
+Bookmarked tabs are lost between app launch
+Steps to Reproduce
+
+Visit a few sites in new tabs and add as bookmark
+Enable Sync on the device
+Remove app from memory
+Wait for 10sec before launching app, all tabs are lost
+
+Note: If you don't have all the bookmarked tabs open then it wont reproduce. If you have non-bookmarked tabs then it wont reproduce
+Actual result:
+https://drive.google.com/open?id=1n19wAqqqCVTcOx2euDwnFWUI7mH3TgVe
+Expected result:
+Should retain all tabs
+Reproduces how often: [Easily reproduced/Intermittent issue]
+Easy
+Brave Version:
+1.6.6(18.10.25.15)
+Device details:
+All device on iOS 12
+Additional Information
+Issue reproduced on iOS 12 by @kjozwiak

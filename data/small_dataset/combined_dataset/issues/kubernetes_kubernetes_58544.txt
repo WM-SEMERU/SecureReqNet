@@ -1,0 +1,12 @@
+oidc authentication: switch to v2 of coreos/go-oidc
+
+
+Switch to v2 of coreos/go-oidc, which uses square/go-jose to verify tokens and supports more signing algorithms.
+Most of this PR removes dependencies used by the older version of github.com/coreos/go-oidc, and updates vendor files.
+This PR has been tested against tokens issued by Okta, Google, and CoreOS's dex.
+Closes #57806
+kube-apiserver: the OpenID Connect authenticator can now verify ID Tokens signed with JOSE algorithms other than RS256 through the --oidc-signing-algs flag.
+kube-apiserver: the OpenID Connect authenticator no longer accepts tokens from the Google v3 token APIs, users must switch to the "https://www.googleapis.com/oauth2/v4/token" endpoint.
+
+cc @rithujohn191 @liggitt
+cc @kubernetes/sig-auth-pr-reviews

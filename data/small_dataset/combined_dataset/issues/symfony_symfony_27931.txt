@@ -1,0 +1,49 @@
+[SecurityBundle] fix tests
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#27878
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

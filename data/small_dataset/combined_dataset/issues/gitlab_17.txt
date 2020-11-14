@@ -1,0 +1,1 @@
+Hi! I want you to add a new language highlight (Jade). It will very cool:)

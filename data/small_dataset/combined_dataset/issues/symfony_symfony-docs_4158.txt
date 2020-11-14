@@ -1,0 +1,11 @@
+[DX] Fix the documentation about the Symfony security
+
+
+If you read this DX issue regarding the security roles, you can read one of the usual awesome replies by @stof: symfony/symfony#11728 (comment)
+You'll see that the Security chapter and cookbooks need some serious improvements. Given that we are talking about Security, I think that this should be a high priority issue.
+For now, this is the roadmap of changes to make:
+
+ Never mention that IS_AUTHENTICATED_* are roles. They are not.
+ Better explain the differences between roles, strings, expressions, ACL permissions maps, etc.
+ ...
+

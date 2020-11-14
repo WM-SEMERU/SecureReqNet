@@ -1,0 +1,4 @@
+Optional CSRF protection for the logout listener should be documented
+
+
+see symfony/symfony#3006

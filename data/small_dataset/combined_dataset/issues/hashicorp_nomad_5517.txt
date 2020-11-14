@@ -1,0 +1,49 @@
+Failed to find docker auth for repo
+
+
+Nomad version
+Nomad v0.9.0-rc2 (6a838b8)
+Operating system and Environment details
+CentOS 7.6.
+AWS EC2 m5.xlarge.
+Issue
+Mailing list: https://groups.google.com/forum/#!topic/nomad-tool/4VP1T6pZ1P0
+I am trying 0.9-rc2 on a test cluster that has been running 0.8.7 without issues for some time.
+The client nodes use the docker driver and AWS ECR cred helper successfully on 0.8.7. All allocs failed on 0.9-rc2.
+Recent Events:
+Time                  Type                   Description
+2019-04-04T16:33:52Z  Killing                Sent interrupt
+2019-04-04T16:33:52Z  Not Restarting         Error was unrecoverable
+2019-04-04T16:33:52Z  Driver Failure         Failed to find docker auth for repo "https://XXXX.dkr.ecr.us-west-2.amazonaws.com/foo/bar": Failed to parse named repo "https://XXXX.dkr.ecr.us-west-2.amazonaws.com/foo/bar": invalid reference format
+2019-04-04T16:33:52Z  Downloading Artifacts  Client is downloading artifacts
+2019-04-04T16:33:51Z  Task Setup             Building Task Directory
+2019-04-04T16:33:51Z  Received               Task received by client
+
+I have not updated the nomad client stanza to use the new plugin syntax yet (still using the client.options settings). We are using docker-credential-ecr-login cred helper from AWS.
+The docker config.json on the client instance looks like this:
+{
+    "credHelpers": {
+        "XXXX.dkr.ecr.us-west-2.amazonaws.com": "ecr-login"
+    },
+    "credsStore": ""
+}
+
+Reproduction steps
+
+
+Create a service job that uses the docker driver and an image on AWS ECR. For the image directive in the task, use a path to the image like https://XXXX.dkr.ecr.us-west-2.amazonaws.com/foo/bar. The client node should be configured as shown with the above config.json and the docker credential helper.
+
+
+Launch the job in a cluster with 0.8.7. The task will download the image and run correctly.
+
+
+Launch the job in a cluster with 0.9.0-rc2. The task will fail to download the image with an error message similar to Failed to parse named repo .....
+
+
+Remove the https:// prefix from the image directive in the job file for the task.
+
+
+Launch the job in a cluster with 0.9.0-rc2. The task will download the image and run correctly. Note: This was actually tested by draining the 0.8.7 nodes onto 0.9.0-rc2 nodes.
+
+
+The docs for image do indicate The image may include a tag or custom URL and should include https:// if required.

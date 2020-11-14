@@ -1,0 +1,28 @@
+'I'm trying to create a MR for my branch `jkrb-upgrade` to `master` on the www-gitlab-com repository:
+https://gitlab.com/gitlab-com/www-gitlab-com/commits/jkrb-upgrade
+
+
+When doing the compary, I get a 500 with this error:
+
+```bash
+==> /var/log/gitlab/gitlab-rails/production.log <==
+Completed 500 Internal Server Error in 1821ms
+
+ActionView::Template::Error (wrong argument type nil (expected String)):
+    1: - file = project.repository.blob_at(@commit.id, diff.new_path)
+    2: - file = project.repository.blob_at(@commit.parent_id, diff.old_path) unless file
+    3: - return unless file
+    4: .diff-file{id: "diff-#{i}"}
+    5:   .diff-header{id: "file-path-#{hexdigest(diff.new_path || diff.old_path)}"}
+  app/models/repository.rb:147:in `method_missing'
+  app/models/repository.rb:157:in `blob_at'
+  app/views/projects/commits/_diff_file.html.haml:2:in `_app_views_projects_commits__diff_file_html_haml___3421199603822831128_118942540'
+  app/views/projects/commits/_diffs.html.haml:16:in `block in _app_views_projects_commits__diffs_html_haml__3074074592860157044_117848340'
+  app/views/projects/commits/_diffs.html.haml:15:in `each'
+  app/views/projects/commits/_diffs.html.haml:15:in `each_with_index'
+  app/views/projects/commits/_diffs.html.haml:15:in `_app_views_projects_commits__diffs_html_haml__3074074592860157044_117848340'
+  app/views/projects/merge_requests/_new_submit.html.haml:73:in `_app_views_projects_merge_requests__new_submit_html_haml___4422374833229452212_24065960'
+  app/views/projects/merge_requests/new.html.haml:2:in `_app_views_projects_merge_requests_new_html_haml___27725508865897982_27816960'
+```
+
+It doesn't happen with other branches / MRs

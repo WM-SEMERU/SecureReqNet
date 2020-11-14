@@ -1,0 +1,10 @@
+Revert "[Distroless] Convert the GCE manifests for master containers."
+
+
+Reverts #75624
+This PR broke log rotation in scalability tests e.g.:
+https://gcsweb.k8s.io/gcs/kubernetes-jenkins/logs/ci-kubernetes-e2e-gce-scale-performance/1114075638949482502/artifacts/gce-scale-cluster-master/
+there is only one 'kube-apiserver.log' and no 'kube-apiserver.log.gz*'.
+The issue is that klog's --log-file truncates file after reaching 1.8GiB of data so there is no way to find data older than 1.8GiB.
+See https://github.com/kubernetes/klog/blob/master/klog_file.go#L104
+/cc @wojtek-t

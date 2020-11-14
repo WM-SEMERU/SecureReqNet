@@ -1,0 +1,4 @@
+oesgx tool needs update to its README.md file
+
+
+The oesgx tool was changed to now output more information than just SGX version it supports (like EPC size). The documentation here should explain everything it can potentially output: https://github.com/Microsoft/openenclave/tree/master/tools/oesgx

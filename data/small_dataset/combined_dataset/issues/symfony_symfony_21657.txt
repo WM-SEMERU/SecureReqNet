@@ -1,0 +1,44 @@
+[Security] : Voter class '$subject' variable and @Security annotation 'user' object cause problem
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+yes
+
+
+RFC?
+no
+
+
+Symfony version
+3.2.2
+
+
+
+The parameter user is overritten in the UserVoter class.
+Normal scenario :
+The $subject variable in the Voter class must return the user object passed in parameter in the controller action by the @Security annotation.
+Take a look at this screenshots to have further idea.
+User controller edit action
+
+UserVoter Class
+
+Dump Result: The 2 variables $subject and $user show the same connected user
+
+

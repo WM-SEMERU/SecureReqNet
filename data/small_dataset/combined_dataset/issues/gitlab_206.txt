@@ -1,0 +1,31 @@
+Hi, 
+
+I got a 500 Error when i want to create an issue on any project without created repository.
+
+Here is my log file :
+```
+Started GET "/GROUP_NAME/PROJECT_NAME/issues/new?issue%5Bassignee_id%5D=&issue%5Bmilestone_id%5D=" for XX.XXX.XXX.XXX at 2014-04-14 11:10:39 +0200
+Processing by Projects::IssuesController#new as HTML
+Parameters: {"issue"=>{"assignee_id"=>"", "milestone_id"=>""}, "project_id"=>"GROUP_NAME/PROJECT_NAME"}
+Rendered projects/issues/_form.html.haml (3.0ms)
+Rendered projects/issues/new.html.haml within layouts/projects (3.3ms)
+Completed 500 Internal Server Error in 44ms
+ActionView::Template::Error (undefined method `sha' for nil:NilClass):
+1: %div.issue-form-holder
+2: %h3.page-title= @issue.new_record? ? "New Issue" : "Edit Issue ##{@issue.iid}"
+3: %hr
+4: - if @repository.contribution_guide && !@issue.persisted?
+5: - contribution_guide_url = project_blob_path(@project, tree_join(@repository.root_ref, @repository.contribution_guide.name))
+6: .alert.alert-info.col-sm-10.col-sm-offset-2
+7: ="Please review the <strong>#{link_to "guidelines for contribution", contribution_guide_url}</strong> to this repository.".html_safe
+app/models/repository.rb:183:in `tree'
+app/models/repository.rb:173:in `block in contribution_guide'
+app/models/repository.rb:172:in `contribution_guide'
+app/views/projects/issues/_form.html.haml:4:in `_app_views_projects_issues__form_html_haml__2979281086393822172_70202816685220'
+app/views/projects/issues/new.html.haml:1:in `_app_views_projects_issues_new_html_haml___3403577343788779615_70202816658300'
+app/controllers/projects/issues_controller.rb:46:in `new'
+app/controllers/application_controller.rb:58:in `set_current_user_for_thread'
+```
+(Group Name, Project Name and Public IP obfuscated)
+
+I was on 6.7.2, upgraded to 6.7.4 but still the same.

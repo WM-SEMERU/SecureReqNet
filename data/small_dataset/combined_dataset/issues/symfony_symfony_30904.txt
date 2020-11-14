@@ -1,0 +1,55 @@
+[Serializer] provide new ObjectPropertyListExtractorInterface
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+related to #30818
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+EUFOSSA Hackathon
+As discussed with @joelwurtz this adds a new ObjectPropertyListExtractorInterface and a default implementation.
+See #30818
+
+A new interface will be provided ObjectPropertyListExtractorInterface (name can change), that allow getting attributes based on an object. A default implementation will be provided that use the PropertyListExtractorInterface and a class resolver, as the latter one only rely on class name, it may be important to have this distinction (this will allow features that rely on a specific value of the object to get the current property list, like exclusion policy)
+

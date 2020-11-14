@@ -1,0 +1,5 @@
+ExternalIP can be abused in some network configurations
+
+
+Depending on the cluster network configuration, it's possible for an admin to not realize that service externalIP can be used to trick nodes into diverting incoming traffic to a service under a different user's control.  As an example, an SDN implementation that delivers packets over the SDN onto a node doesn't have the same iptables conditions as our existing externalIP checks, which means that packets routed from pods to nodes (for a node port or service fronting pods using hostNetwork) will accept the external IP rule.
+We should give the administrator control over which externalIPs are allowed to be set or whether externalIP can be set at all.  Using one or more CIDR ranges is sufficient (admin can choose 0.0.0.0/0).   In the future, we probably want to have externalIPs be not directly settable by end cluster users, since they have the potential to allow any cluster user to masquerade as any other service that is also using externalIP

@@ -1,0 +1,94 @@
+[DI] Fix FactoryReturnTypePassTest on PHP 5
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+One of my PRs failed a Travis CI test on PHP 5 due to a syntax error resulting from loading a class with return type declarations:
+https://travis-ci.org/symfony/symfony/jobs/482202091#L2865-L2867
+Since FactoryReturnTypePass works only PHP 7
+
+
+
+symfony/src/Symfony/Component/DependencyInjection/Compiler/FactoryReturnTypePass.php
+
+
+        Lines 38 to 43
+      in
+      aca3d2c
+
+
+
+
+
+
+  public function process(ContainerBuilder $container) 
+
+
+
+     { 
+
+
+
+  // works only since php 7.0 and hhvm 3.11 
+
+
+
+  if (!method_exists(\ReflectionMethod::class, 'getReturnType')) { 
+
+
+
+  return; 
+
+
+
+         } 
+
+
+
+
+
+I modified FactoryReturnTypePassTest accordingly.

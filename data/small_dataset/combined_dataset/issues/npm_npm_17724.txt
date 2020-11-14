@@ -1,0 +1,14 @@
+Potential attack vector through npx?
+
+
+I'm opening this issue because:
+
+ npm is crashing.
+ npm is producing an incorrect install.
+ npm is doing something I don't understand.
+ Other:
+
+I just read this article about npm@5.2.0 and npx.
+if I understand correctly, using eg npx create-react-app my-project will install create-react-app, execute it, and uninstall it, once it's finished.
+Isn't this a potential attack vector? If somebody created a package like create-recat-app (note the typo), people mistyping dependencies might download malicious programs that are then immediately executed. Especially beginners might even enter sudo credentials, if a program asks for them.
+I'm not sure this is actually a problem, just something that came to mind. But maybe you already thought of this.

@@ -1,0 +1,4 @@
+feat(token): return the uid from the /token endpoint
+
+
+Fixes https://github.com/mozilla/fxa-auth-server/pull/2985/files#r268891903

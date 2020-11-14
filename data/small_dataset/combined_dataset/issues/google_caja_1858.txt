@@ -1,0 +1,6 @@
+Converting a string with unpaired surrogates to UTF-8 results in an invalid string
+
+
+Original issue 1860 created by metaweta on 2013-09-10T17:26:07.000Z:
+https://code.google.com/p/v8/issues/detail?id=2875
+This may have implications around eval.

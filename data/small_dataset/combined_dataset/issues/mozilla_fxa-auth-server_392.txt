@@ -1,0 +1,17 @@
+Notify users (via email) of many unsuccessful FxA login attempts and other security events (password reset, account deletion, password change, etc)
+
+
+Per #222 (comment)
+
+
+notify users by email if there was an unsuccessful login attempt (I had about 12 failed GitHub login attempts but never knew there was even a problem because of the vast number of computers involved). Email could include links to report suspicious activity via a form or just a simple link at the bottom saying "This was not me, report login".
+
+
+Related to: #391
+Actions which should trigger an email to the user:
+
+new Sync device added
+password successfully changed (which includes change and reset)
+account has been successfully deleted
+account is locked out (#801)
+

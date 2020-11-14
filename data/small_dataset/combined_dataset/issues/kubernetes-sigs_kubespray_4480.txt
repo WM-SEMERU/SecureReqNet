@@ -1,0 +1,4 @@
+[WIP] Add HAProxy as internal kube-api loadbalancer
+
+
+Add the option to use HAProxy for internal loadbalancer towards kube-apiserver on nodes.

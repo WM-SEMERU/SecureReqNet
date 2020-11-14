@@ -1,0 +1,5 @@
+Brave is insecure by using an outdated version of Chromium
+
+
+Brave is based on Electron, which is based on an outdated version of Chromium 47 and has quite a few security holes unfixed. The security holes were published in http://googlechromereleases.blogspot.com/search/label/Stable%20updates
+Search for all the security bugs fixed by Chromium 48. Some of them are marked as high or even critical.

@@ -1,0 +1,4 @@
+[wip] Allow using guids in add-on urls
+
+
+Fix #11154.

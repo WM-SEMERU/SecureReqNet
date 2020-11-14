@@ -1,0 +1,8 @@
+cancelAnimationFrame failing on Chrome
+
+
+Original issue 1864 created by kpreid.switchb.org on 2013-10-09T21:31:14.000Z:
+test-domado-events testRequestAnimationFrame fails apparently due to the callback that is supposed to be canceled executing anyway.
+Caja r5612
+Chrome 30.0.1599.69
+Does not occur on Firefox or Safari.

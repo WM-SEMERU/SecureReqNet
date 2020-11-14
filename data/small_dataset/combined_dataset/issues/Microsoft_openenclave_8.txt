@@ -1,0 +1,6 @@
+Double-check all host-pointers are outside of the enclave
+
+
+To prevent corruption by a malicious or buggy host, all pointers handed from the host need to be verified to be outside enclave memory and sanitized.
+Double-check all pointers handed from the host are checked as of today.
+Create design/coding principles to help developers handling safe host data exchange.

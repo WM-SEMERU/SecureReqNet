@@ -1,0 +1,33 @@
+Audit the overflow checks in WebGL
+
+
+
+
+
+servo/components/script/dom/webglrenderingcontext.rs
+
+
+        Lines 2045 to 2047
+      in
+      ff17af0
+
+
+
+
+
+
+ // WebGL Spec: check buffer overflows, must be a valid multiple of the size. 
+
+
+
+ let val = offset as u64 + (count as u64 * type_size as u64); 
+
+
+
+ if val > array_buffer.capacity() as u64 { 
+
+
+
+
+
+This can actually overflow, which is unfortunate for an overflow check.

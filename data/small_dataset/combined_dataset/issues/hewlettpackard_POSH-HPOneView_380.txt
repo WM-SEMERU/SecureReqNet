@@ -1,0 +1,96 @@
+Connecting to an appliance using ssh forwarded ports.
+
+
+Using 4.10 module to connect to an appliance inside a remote lab.
+Was hoping to be able to ssh in using a forwarded port (localhost:8080 -> synergy-demo-410:443)
+But cannot get past the certificate checks. Any way to overide the strict checking mode?
+Supply values for the following parameters:
+Hostname: localhost:8080
+UserName: Administrator
+VERBOSE: [HPOneView.Utilities.Net.RestClient] URI: https://localhost:8080/rest/version
+VERBOSE: [HPOneView.Utilities.Net.RestClient] Method: GET
+VERBOSE: [HPOneView.Utilities.Net.RestClient] XApiVersion: 800
+VERBOSE: [HPOneVIew.PKI.SslValidator]::SslValidation() Enforcing TLS1, TLS1.1 and TLS1.2 only for [System.Net.ServicePointManager.SecurityProtocol].
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Starting callback verification.
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Certificate:  [Subject]
+  CN=synergy-demo-410.lab.net, O=Hewlett Packard Enterprise, L=Palo Alto, S=California, C=US
+
+[Issuer]
+  CN=synergy-demo-410.lab.net, O=Hewlett Packard Enterprise, L=Palo Alto, S=California, C=US
+
+[Serial Number]
+  2DCE
+
+[Not Before]
+  2018-10-26 10:05:33
+
+[Not After]
+  2028-10-26 10:05:33
+
+[Thumbprint]
+  844A8E3A4F794C2B7F35B49522C9F94DA73DE3FE
+
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Host: 'localhost'
+VERBOSE: [HPOneView.PKI.SslValidator]::IsTrustedHost() Looking for 'localhost' within TrustedHosts dictionary.
+VERBOSE: [HPOneView.PKI.SslValidator]::IsTrustedHost() In TrustedHosts dictionary: 'False'
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Cert has chain errors.
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Processing 'UntrustedRoot' chain status.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Init parse SAN from certificate.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Certificate contains Subject Alternative Names. Parsing.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'synergy-demo-410.lab.net' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'synergy-demo-410' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding '10.0.1.78' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding '10.0.1.78' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'fe80:0000:0000:0000:07e1:006b:b60e:67d8' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'fe80::7e1:6b:b60e:67d8' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding '[fe80::7e1:6b:b60e:67d8]' to collection.
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() SAN contains host: False
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() The hostname used to connect does not match the Subject or SAN of the provided ho
+st certificate. Throw error.
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Starting callback verification.
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Certificate:  [Subject]
+  CN=synergy-demo-410.lab.net, O=Hewlett Packard Enterprise, L=Palo Alto, S=California, C=US
+
+[Issuer]
+  CN=synergy-demo-410.lab.net, O=Hewlett Packard Enterprise, L=Palo Alto, S=California, C=US
+
+[Serial Number]
+  2DCE
+
+[Not Before]
+  2018-10-26 10:05:33
+
+[Not After]
+  2028-10-26 10:05:33
+
+[Thumbprint]
+  844A8E3A4F794C2B7F35B49522C9F94DA73DE3FE
+
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Host: 'localhost'
+VERBOSE: [HPOneView.PKI.SslValidator]::IsTrustedHost() Looking for 'localhost' within TrustedHosts dictionary.
+VERBOSE: [HPOneView.PKI.SslValidator]::IsTrustedHost() In TrustedHosts dictionary: 'False'
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Cert has chain errors.
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() Processing 'UntrustedRoot' chain status.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Init parse SAN from certificate.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Certificate contains Subject Alternative Names. Parsing.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'synergy-demo-410.lab.net' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'synergy-demo-410' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding '10.0.1.78' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding '10.0.1.78' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'fe80:0000:0000:0000:07e1:006b:b60e:67d8' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding 'fe80::7e1:6b:b60e:67d8' to collection.
+[DEBUG]: [HPOneView.PKI.SslValidator]::ParseSubjectAlternativeName() Adding '[fe80::7e1:6b:b60e:67d8]' to collection.
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() SAN contains host: False
+VERBOSE: [HPOneView.PKI.SslValidator]::CertificateValidationCallBack() The hostname used to connect does not match the Subject or SAN of the provided ho
+st certificate. Throw error.
+VERBOSE: [HPOneView.Library.ConnectedSessionsList]::RemoveConnection() Removing host localhost:8080 from collection.
+VERBOSE: [HPOneView.Library.ConnectedSessionsList]::RemoveConnection() Calling to remove host localhost:8080 from TrustedHost collection.
+VERBOSE: [HPOneView.PKI.SslValidator]::RemoveTrustedHost() Host localhost:8080 does not exist in TrustedHosts collection.
+Connect-HPOVMgmt : Unable to connect to 'localhost:8080' appliance.  The hostname used to connect does not match the Subject or SAN of the provided hos
+t certificate.
+At line:1 char:1
++ Connect-HPOVMgmt
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (Hostname:String) [Connect-HPOVMgmt], ApplianceTransportException
+    + FullyQualifiedErrorId : HostnameAndCertDoNotMatch,Connect-HPOVMgmt
+  

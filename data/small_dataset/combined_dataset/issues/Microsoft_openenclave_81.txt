@@ -1,0 +1,5 @@
+App devs can use GCC stack protectors to guard against stack overflows
+
+
+Currently OpenEnclave stubs out __stack_chk_fail in libc, effectively disabling stack checks. Could these be supported?
+This requires additional investigation to determine the feasibility of supporting this.

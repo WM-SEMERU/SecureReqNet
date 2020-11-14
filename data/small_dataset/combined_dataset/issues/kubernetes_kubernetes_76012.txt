@@ -1,0 +1,5 @@
+Start running Probes in scalability tests
+
+
+Probes are supposed to be simple jobs running inside kubernetes cluster measuring SLIs that could not be measured through other means.
+An example of a SLI that could be measured via Probe is the In Cluster Network Latency SLI.

@@ -1,0 +1,16 @@
+New-HPOVLdapGroup -- "No roles provided for enterprise group to role assignment."
+
+
+Please fill in as much information as possible to help resolve your issue.
+Expected Behavior
+Adding a role to AD group relation.
+Actual Behavior
+Doesn't seem to use whatever is inputed as the -Roles argument.
+"roles" is empty in the Send-HPOVrequest no matter what I send to -Roles.
+details: No roles provided for enterprise group to role assignment
+errorcode: AUTHN_LOGINDOMAIN_GROUP_ROLE_MAPPING_FOR_DOMAIN_EMPTY_ROLES_ERROR
+Steps to reproduce
+New-HPOVLdapGroup
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion): 2.0.526.0
+HPE OneView Appliance Version:  2.00.07

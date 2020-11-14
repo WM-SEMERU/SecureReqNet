@@ -1,0 +1,57 @@
+[WIP][FrameworkBundle][HttpKernel] Provide intuitive error message when a controller fails because it's not registered as a service
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4 
+
+
+Bug fix?
+no
+
+
+New feature?
+yes/no? 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#27787, symfony/symfony-docs#7988 
+
+
+License
+MIT
+
+
+Doc PR
+none 
+
+
+
+Create a very late controller argument value resolver to throw an intuitive error message when controller fails because it is not registered as a service.
+I would like to resolve with the community the following questions:
+
+Should this pull request target the 3.4 branch or the master branch because its kind of a new feature.
+I don't like the name of the resolver ControllerNotRegisteredAsServiceValueResolver but couldn't come up with more proper name (its too long obviously). Can someone come up with shorter proper name for the resolver?
+Is the exception message not too long too and is it clear enough what is the problem?
+
+In the current state the pull request is ready to be merged only if everyone is okay with the name of the resolver and the message it provides.

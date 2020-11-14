@@ -1,0 +1,7 @@
+kube-dns-autoscaler: Add node watch to permissions
+
+
+We had to bump the channel version to 1.14.11-kops.1, even though it's
+still 1.14.10, because we didn't have the kops suffix yet.  A little
+awkward now, but will get better once kube-dns is updated!
+Fix #6711

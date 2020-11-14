@@ -1,0 +1,4 @@
+Do not use anon auth that comes with hyperkube 1.5.0 defaults
+
+
+The --anonymous-auth=true (the default) + --authorization-mode=AlwaysAllow is the new default. The guide says: Thou shalt set --anonymous-auth=false flag on your kube-apiserver.

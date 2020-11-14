@@ -1,0 +1,4 @@
+staticanalysis/bot: Add scope for monitoring & restart
+
+
+I manually added it to the staging hook to test it: it works !

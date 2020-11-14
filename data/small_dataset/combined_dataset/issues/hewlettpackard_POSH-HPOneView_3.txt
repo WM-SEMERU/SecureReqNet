@@ -1,0 +1,225 @@
+User with specialized roles can not connect with powershell
+
+
+Hello,
+We have a simple script that performs backup of the appliance, using an user which has a specialized role: Backup administrator. After upgrading to version 1.10 of the module it does not work anymore, because that user can not connect via powershell. When we change the role to "Read Only" it works.
+Here is an output from the command:
+[CONNECT-HPOVMGMT] Checking X-API Version
+[SEND-HPOVREQUEST] BEGIN
+[SEND-HPOVREQUEST] Requested URI: /rest/version
+[SEND-HPOVREQUEST] We have reached the URI Whitelist condition block
+[SEND-HPOVREQUEST] Unauth request allowed.
+[SEND-HPOVREQUEST] PROCESS
+[RESTCLIENT] Building new [System.Net.HttpWebRequest] object for GET https://XXXXXXXXXXXXXX/rest/version
+[SEND-HPOVREQUEST] Request: GET https://XXXXXXXXXXXXXX/rest/version
+[SEND-HPOVREQUEST] Request Header 1: Content-Type = application/json
+[SEND-HPOVREQUEST] Request Header 2: Accept = application/json
+[SEND-HPOVREQUEST] Request Header 3: X-API-Version = 101
+[SEND-HPOVREQUEST] Request Header 4: accept-language = en_US
+[SEND-HPOVREQUEST] Request Header 5: accept-encoding = gzip, deflate
+[SEND-HPOVREQUEST] [System.Net.HttpWebRequest] object details:
+AllowAutoRedirect                    : True
+AllowWriteStreamBuffering            : True
+AllowReadStreamBuffering             : False
+HaveResponse                         : False
+KeepAlive                            : True
+Pipelined                            : True
+PreAuthenticate                      : False
+UnsafeAuthenticatedConnectionSharing : False
+SendChunked                          : False
+AutomaticDecompression               : GZip, Deflate
+MaximumResponseHeadersLength         : 64
+ClientCertificates                   : {}
+CookieContainer                      :
+SupportsCookieContainer              : True
+RequestUri                           : https://XXXXXXXXXXXXXX/rest/version
+ContentLength                        : -1
+Timeout                              : 10000
+ReadWriteTimeout                     : 300000
+Address                              : https://XXXXXXXXXXXXXX/rest/version
+ContinueDelegate                     :
+ServicePoint                         : System.Net.ServicePoint
+Host                                 : XXXXXXXXXXXXXX
+MaximumAutomaticRedirections         : 50
+Method                               : GET
+Credentials                          :
+UseDefaultCredentials                : False
+ConnectionGroupName                  :
+Proxy                                : System.Net.WebRequest+WebProxyWrapper
+ProtocolVersion                      : 1.1
+ContentType                          : application/json
+MediaType                            :
+TransferEncoding                     :
+Connection                           :
+Accept                               : application/json
+Referer                              :
+UserAgent                            :
+Expect                               :
+IfModifiedSince                      : 1/1/0001 12:00:00 AM
+Date                                 : 1/1/0001 12:00:00 AM
+CachePolicy                          : Level:BypassCache
+AuthenticationLevel                  : MutualAuthRequested
+ImpersonationLevel                   : Delegation
+[SEND-HPOVREQUEST] Response Status: 200 OK
+[SEND-HPOVREQUEST] Response Header 1: Vary = Accept-Encoding
+[SEND-HPOVREQUEST] Response Header 2: Content-Encoding =
+[SEND-HPOVREQUEST] Response Header 3: Keep-Alive = timeout=15, max=100
+[SEND-HPOVREQUEST] Response Header 4: Connection = Keep-Alive
+[SEND-HPOVREQUEST] Response Header 5: Content-Length = 53
+[SEND-HPOVREQUEST] Response Header 6: Cache-Control = no-cache
+[SEND-HPOVREQUEST] Response Header 7: Content-Type = application/json;charset=UTF-8
+[SEND-HPOVREQUEST] Response Header 8: Date = Sat, 13 Dec 2014 10:43:55 GMT
+[SEND-HPOVREQUEST] Response Header 9: Via = 1.1 XXXXXXXXXXXXXX
+[SEND-HPOVREQUEST] Response:
+minimumVersion : 1
+currentVersion : 101
+[SEND-HPOVREQUEST] Manual Pagination: False
+[SEND-HPOVREQUEST] END
+[CONNECT-HPOVMGMT] Appliance returned: 101
+[CONNECT-HPOVMGMT] Sending auth request
+[SEND-HPOVREQUEST] BEGIN
+[SEND-HPOVREQUEST] Requested URI: /rest/login-sessions
+[SEND-HPOVREQUEST] PROCESS
+[RESTCLIENT] Building new [System.Net.HttpWebRequest] object for POST https://XXXXXXXXXXXXXX/rest/login-sessions
+[SEND-HPOVREQUEST] Body object found. Converting to JSON.
+[SEND-HPOVREQUEST] Request Body: {"userName":"COBA_HP_BACKUP","password":"XXXXXXXXX","authLoginDomain":"LOCAL"}
+[SEND-HPOVREQUEST] Request: POST https://XXXXXXXXXXXXXX/rest/login-sessions
+[SEND-HPOVREQUEST] Request Header 1: Content-Type = application/json
+[SEND-HPOVREQUEST] Request Header 2: Accept = application/json
+[SEND-HPOVREQUEST] Request Header 3: X-API-Version = 101
+[SEND-HPOVREQUEST] Request Header 4: accept-language = en_US
+[SEND-HPOVREQUEST] Request Header 5: accept-encoding = gzip, deflate
+[SEND-HPOVREQUEST] Request Header 6: Host = XXXXXXXXXXXXXX
+[SEND-HPOVREQUEST] [System.Net.HttpWebRequest] object details:
+AllowAutoRedirect                    : True
+AllowWriteStreamBuffering            : True
+AllowReadStreamBuffering             : False
+HaveResponse                         : False
+KeepAlive                            : True
+Pipelined                            : True
+PreAuthenticate                      : False
+UnsafeAuthenticatedConnectionSharing : False
+SendChunked                          : False
+AutomaticDecompression               : GZip, Deflate
+MaximumResponseHeadersLength         : 64
+ClientCertificates                   : {}
+CookieContainer                      :
+SupportsCookieContainer              : True
+RequestUri                           : https://XXXXXXXXXXXXXX/rest/login-sessions
+ContentLength                        : 79
+Timeout                              : 10000
+ReadWriteTimeout                     : 300000
+Address                              : https://XXXXXXXXXXXXXX/rest/login-sessions
+ContinueDelegate                     :
+ServicePoint                         : System.Net.ServicePoint
+Host                                 : XXXXXXXXXXXXXX
+MaximumAutomaticRedirections         : 50
+Method                               : POST
+Credentials                          :
+UseDefaultCredentials                : False
+ConnectionGroupName                  :
+Proxy                                : System.Net.WebRequest+WebProxyWrapper
+ProtocolVersion                      : 1.1
+ContentType                          : application/json
+MediaType                            :
+TransferEncoding                     :
+Connection                           :
+Accept                               : application/json
+Referer                              :
+UserAgent                            :
+Expect                               :
+IfModifiedSince                      : 1/1/0001 12:00:00 AM
+Date                                 : 1/1/0001 12:00:00 AM
+CachePolicy                          : Level:BypassCache
+AuthenticationLevel                  : MutualAuthRequested
+ImpersonationLevel                   : Delegation
+[SEND-HPOVREQUEST] Response Status: 200 OK
+[SEND-HPOVREQUEST] Response Header 1: Vary = Accept-Encoding
+[SEND-HPOVREQUEST] Response Header 2: Content-Encoding =
+[SEND-HPOVREQUEST] Response Header 3: Transfer-Encoding = chunked
+[SEND-HPOVREQUEST] Response Header 4: Cache-Control = no-cache
+[SEND-HPOVREQUEST] Response Header 5: Content-Type = application/json;charset=UTF-8
+[SEND-HPOVREQUEST] Response Header 6: Date = Sat, 13 Dec 2014 10:43:55 GMT
+[SEND-HPOVREQUEST] Response Header 7: Via = 1.1 XXXXXXXXXXXXXX
+[SEND-HPOVREQUEST] Response:
+partnerData :
+sessionID   : t-RihtYeyUWajsqf8Z5aklzJV4zNF900
+[SEND-HPOVREQUEST] Manual Pagination: False
+[SEND-HPOVREQUEST] END
+[CONNECT-HPOVMGMT] RESP: @{partnerData=; sessionID=t-RihtYeyUWajsqf8Z5aklzJV4zNF900}
+[CONNECT-HPOVMGMT] Session token received: t-RihtYeyUWajsqf8Z5aklzJV4zNF900
+[CONNECT-HPOVMGMT] Setting PromptApplianceHostname to: XXXXXXXXXXXXXX
+[CONNECT-HPOVMGMT] Getting list of supported roles from appliance.
+[SEND-HPOVREQUEST] BEGIN
+[SEND-HPOVREQUEST] Requested URI: /rest/roles
+[SEND-HPOVREQUEST] PROCESS
+[RESTCLIENT] Building new [System.Net.HttpWebRequest] object for GET https://XXXXXXXXXXXXXX/rest/roles
+[SEND-HPOVREQUEST] Request: GET https://XXXXXXXXXXXXXX/rest/roles
+[SEND-HPOVREQUEST] Request Header 1: Content-Type = application/json
+[SEND-HPOVREQUEST] Request Header 2: Accept = application/json
+[SEND-HPOVREQUEST] Request Header 3: X-API-Version = 101
+[SEND-HPOVREQUEST] Request Header 4: accept-language = en_US
+[SEND-HPOVREQUEST] Request Header 5: accept-encoding = gzip, deflate
+[SEND-HPOVREQUEST] Request Header 6: auth = t-RihtYeyUWajsqf8Z5aklzJV4zNF900
+[SEND-HPOVREQUEST] [System.Net.HttpWebRequest] object details:
+AllowAutoRedirect                    : True
+AllowWriteStreamBuffering            : True
+AllowReadStreamBuffering             : False
+HaveResponse                         : False
+KeepAlive                            : True
+Pipelined                            : True
+PreAuthenticate                      : False
+UnsafeAuthenticatedConnectionSharing : False
+SendChunked                          : False
+AutomaticDecompression               : GZip, Deflate
+MaximumResponseHeadersLength         : 64
+ClientCertificates                   : {}
+CookieContainer                      :
+SupportsCookieContainer              : True
+RequestUri                           : https://XXXXXXXXXXXXXX/rest/roles
+ContentLength                        : -1
+Timeout                              : 10000
+ReadWriteTimeout                     : 300000
+Address                              : https://XXXXXXXXXXXXXX/rest/roles
+ContinueDelegate                     :
+ServicePoint                         : System.Net.ServicePoint
+Host                                 : XXXXXXXXXXXXXX
+MaximumAutomaticRedirections         : 50
+Method                               : GET
+Credentials                          :
+UseDefaultCredentials                : False
+ConnectionGroupName                  :
+Proxy                                : System.Net.WebRequest+WebProxyWrapper
+ProtocolVersion                      : 1.1
+ContentType                          : application/json
+MediaType                            :
+TransferEncoding                     :
+Connection                           :
+Accept                               : application/json
+Referer                              :
+UserAgent                            :
+Expect                               :
+IfModifiedSince                      : 1/1/0001 12:00:00 AM
+Date                                 : 1/1/0001 12:00:00 AM
+CachePolicy                          : Level:BypassCache
+AuthenticationLevel                  : MutualAuthRequested
+ImpersonationLevel                   : Delegation
+[SEND-HPOVREQUEST] Net.WebException Error caught
+[SEND-HPOVREQUEST] ERROR RESPONSE:
+details            : User not authorized for this operation.
+errorSource        :
+nestedErrors       : {}
+recommendedActions : {Please verify your credentials and re-authenticate before attempting the operation again.}
+data               :
+errorCode          : AUTHORIZATION
+message            : Authorization error: User not authorized for this operation.
+[SEND-HPOVREQUEST] Response Status: HTTP_401 Unauthorized
+[SEND-HPOVREQUEST] Response Header: Vary = 1.1 XXXXXXXXXXXXXX
+[SEND-HPOVREQUEST] Response Header: Content-Encoding =
+[SEND-HPOVREQUEST] Response Header: Content-Length =
+[SEND-HPOVREQUEST] Response Header: Cache-Control =
+[SEND-HPOVREQUEST] Response Header: Content-Type =
+[SEND-HPOVREQUEST] Response Header: Date =
+[SEND-HPOVREQUEST] Response Header: Via =
+[SEND-HPOVREQUEST] HTTP 401 error caught.  User session is no longer valid.
+[NEW-ERRORRECORD] Building ErrorRecord object

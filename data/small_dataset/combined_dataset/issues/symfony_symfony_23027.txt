@@ -1,0 +1,50 @@
+[Security] Added tests to check referer URL with a login_path route name
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+maybe?
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+Related to #19026

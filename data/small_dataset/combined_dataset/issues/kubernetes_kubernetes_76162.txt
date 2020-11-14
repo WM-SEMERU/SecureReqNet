@@ -1,0 +1,12 @@
+Bump gengo to avoid large errors in verify logs
+
+
+The verify build logs are extremely large right now - almost 164MB for https://prow.k8s.io/view/gcs/kubernetes-jenkins/pr-logs/pull/76090/pull-kubernetes-verify/1113710201975869449. 😱
+@Katharine looked into this (slack thread) and found that it was because of kubernetes/gengo#132, which printed an incredibly large error to the log (this line was around 155MB alone).
+This PR bumps gengo to kubernetes/gengo@f8a0810, which fixes the issue.
+Edit: the raw verify log for this PR is now 5.45MB as compared to 164.38MB before.
+/cc @sttts @liggitt @Katharine @BenTheElder @dims
+/kind bug
+Does this PR introduce a user-facing change?:
+NONE
+

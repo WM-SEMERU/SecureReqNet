@@ -1,0 +1,5 @@
+End of an Era
+
+
+This is it. This removes all our source code from this repro as part of the migration to npm.community.
+The diff is largely code removal, but you can see the new README.md rendered.

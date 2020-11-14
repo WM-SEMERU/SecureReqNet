@@ -1,0 +1,35 @@
+Page contents disappear while scrolling
+
+
+Description
+The contents of the page disappears after scrolling past a certain point.
+Steps to Reproduce
+
+Open https://www.inc.com/brian-de-haaff/3-ways-remote-workers-outperform-office-workers.html
+Scroll down the page.
+
+Actual result:
+
+Expected result:
+The page should not disappear.
+Reproduces how often:
+Perfectly reproducible.
+Brave version (brave://version info)
+Brave | 0.62.51 Chromium: 73.0.3683.103 (Official Build) (64-bit)
+Revision | e82a658d8159cabbd4938c1660f9bb00b4a82a23-refs/branch-heads/3683@{#902}
+OS | Linux
+
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+
+Yes.
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+
+Yes. If I unblock ads and trackers it works fine.
+
+Is the issue reproducible on the latest version of Chrome?
+
+No.

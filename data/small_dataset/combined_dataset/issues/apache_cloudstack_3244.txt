@@ -1,0 +1,25 @@
+[WIP DO NOT MERGE] ui: instance settings visibility
+
+
+Description
+Problem: Instance settings tab is visible only for stopped VMs but hidden otherwise. This creates confusion as users may not know that VMs need to be stopped to access settings page. Some VM details need to be read-only for the user.
+Root Cause: The UI Code hides the settings tab for VMs that are not in stopped state. Instance setting tab should always be visible, but only changeable when VM is stopped. Required instance details are not read-only for the user.
+Solution: The settings tab is now always visible for VMs. If VM is not in the stopped state, no interactions are allowed in the settings tab view by greying out its content and a popup is shown to advise users for stopping the VM. VM details can be made read-only in UI for the user using “user.vm.readonly.ui.details” which accepts a comma-separated list of details. For user, read-only details will be shown in the settings tab in UI but the action button for them will be disabled and greyed out. Admin can still update such details.
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+Snapshot when VM is stopped.
+
+Snapshot when VM is not stopped but Settings tab is clicked and Popup appears
+
+When popup is dismissed
+
+VM setting/detail made read-only
+
+How Has This Been Tested?

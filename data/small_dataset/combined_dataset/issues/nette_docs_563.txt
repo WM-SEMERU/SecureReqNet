@@ -1,0 +1,4 @@
+Security: enhancements [ref #260]
+
+
+This PR improves access-control page.

@@ -1,0 +1,6 @@
+Redact Vault.Token from AgentSelf response.
+
+
+If Config.Vault.Token is defined, /v1/agent/self will return the string
+<redacted>. If the token is not set, This endpoint will continue to
+return the empty string.

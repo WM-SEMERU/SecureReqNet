@@ -1,0 +1,7 @@
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/initializers/kubeclient.rb#L18
+
+(`max_redirects: 0` option)
+
+## Proposal
+
+Once upstream is merged, update Kubeclient gem in our Gemfile and replace the monkey-patch with the upstream version

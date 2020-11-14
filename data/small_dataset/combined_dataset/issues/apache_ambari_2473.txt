@@ -1,0 +1,7 @@
+AMBARI-24789. LogFeeder: fix CVE-2018-11771 - upgrade commons-compress lib
+
+
+What changes were proposed in this pull request?
+commons-compress - upgrade to the latest version to fix CVE-2018-11771
+How was this patch tested?
+will see the UT results

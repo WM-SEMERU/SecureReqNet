@@ -1,0 +1,5 @@
+Mitigate DOS potential of API
+
+
+This API does a bunch of scrypting and stuff, we should do what we can to avoid this becoming a DOS vector.
+Semi-relevant: http://arstechnica.com/security/2013/09/long-passwords-are-good-but-too-much-length-can-be-bad-for-security/

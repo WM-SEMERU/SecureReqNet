@@ -1,0 +1,7 @@
+automatically rotate credentials on services
+
+
+
+db credentials
+aws credentials
+

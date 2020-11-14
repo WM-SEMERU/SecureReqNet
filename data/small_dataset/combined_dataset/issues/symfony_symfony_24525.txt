@@ -1,0 +1,35 @@
+[Security] logout remember_me user that has changed
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes?
+
+
+Feature request?
+yes?
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.4.0
+
+
+
+With #23882, a session token is logged out when the user has changed but not if you have a remember me token. When visiting a page when logged in after your account has changed, you lose the session token but fallback to an authenticated RememberMeToken.
+Thoughts on how we can fix this?

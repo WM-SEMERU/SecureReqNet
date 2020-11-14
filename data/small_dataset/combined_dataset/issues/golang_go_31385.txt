@@ -1,0 +1,22 @@
+Compiling on different OS
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.1 windows/amd64
+
+Does this issue reproduce with the latest release?
+Yes.
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+set GOARCH=amd64
+set GOOS=windows
+
+What did you do?
+I want to implement a http server with tcp socket.
+https://play.golang.org/p/lx-AJvpdkdH
+What did you expect to see?
+Visit "http://localhost:10000" with browser and receive the correct response.
+What did you see instead?
+When I build the program on Windows, the browser shows "This site can’t be reached. The connection was reset."
+When I build the same program on Linux, the browser can show me the correct response "Hello world!".

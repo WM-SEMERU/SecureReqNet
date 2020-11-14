@@ -1,0 +1,3 @@
+After the update to 6.8 it's not possible to login via ldap anymore if you don't have a set uid: `Could not authorize you from LDAP because "(ldap) account must provide a dn, uid and email address".`
+
+The attributes dn and email are set in ldap, but uid not (since we don't need it). We use CN as uid. And that's what we configured in the LDAP config.

@@ -1,0 +1,8 @@
+Disable WebUSB API
+
+
+The desktop browser disabled WebUSB API because of security bugs
+I don't necessarily agree with that, but the API on android should be consistent with api on desktop. Currently, webusb is broken on desktop and will be disabled, but works great on android brave.
+Also, because brave webUSB was not remotely kill-switched like Chrome's one was, the issue with U2F is still present on mobile brave.
+See
+brave/browser-laptop#13374

@@ -1,0 +1,13 @@
+Added `README` and a flag for Map ID
+
+
+Documented the steps to get this running to add clarity for (myself and) others.
+Checklist
+
+ I have updated the CHANGELOG.
+
+Adjust the draft version number according to semantic versioning rules.
+
+
+ I have updated documentation accordingly.
+

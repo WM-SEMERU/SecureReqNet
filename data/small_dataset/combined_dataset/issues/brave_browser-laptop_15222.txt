@@ -1,0 +1,40 @@
+File menu pops up issue
+
+
+Description
+Issue is reported by community.
+https://community.brave.com/t/navigation-issue-menu-pops-out/32813
+When user enters any website in the URL bar, after hitting ctrl+enter a File menu pops up automatically.
+Steps to Reproduce
+
+Launch Brave
+Press Alt+D shortcut key.
+Verify that the focus goes into the address bar, also File menu options pops up
+Enter a website e.g: cnet.com in the address bar
+Click on Ctrl+Enter
+
+Actual result:
+Upon clicking Ctrl+Enter, the File menu pops up automatically
+
+Expected result:
+File menu should not display
+Reproduces how often:
+Always
+Brave Version
+0.24.0
+about:brave info:
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 10.0.17134
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+Yes
+Additional Information
+Issue is reported by community

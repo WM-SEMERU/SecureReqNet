@@ -1,0 +1,59 @@
+Differentiate specification versions for projects and extensions
+
+
+To indicate compatibility to components of the UI5 Tooling as well as thirdparty, everything that has a ui5.yaml shall define a "compatibility version". Currently this is the specification version. While this is already sufficient to indicate the compatibility of projects to other projects as well as to the UI5 CLI, it might cause inconvenience in cases where breaking changes are introduced that only affect some of the things that have a ui5.yaml.
+E.g. a breaking change might only affect project configurations and not extension configurations. But since they both share the same specification version ranges, extensions would need to be treated as incompatible as well. (this is technically not necessary but doing otherwise would make it very complicated to figure out the compatibility of things to each other based on specification version and kind + type information.
+Current and Expected Behavior
+A finer granularity of specification versions should be introduced.
+Currently there is only a single compatibility version that can be defined:
+specVersion: "1.0".
+A first level of granularity would be to include the kind information:
+specVersion: "/project/1.1"
+specVersion: "/extension/2.0"
+(this schema is inspired by the Kubernetes API versioning)
+An additional level of granularity could be achieved by also including the type information:
+specVersion: "/project/application/1.1"
+specVersion: "/project/library/1.2"
+specVersion: "/extension/task/2.2"
+specVersion: "/extension/project-shim/1.0"
+
+I am highly in favor for adding just one level by moving the kind information into the specVersion.
+Just like for the kind attribute, we could default a missing kind information to "project".
+This means a migration could look like this:
+Application - Old:
+specVersion: "1.0"
+// defaults to "kind: project"
+type: library
+metadata:
+  name: my.library
+Application - New:
+specVersion: "1.0" // defaults to ""/project/1.0""
+type: library
+metadata:
+  name: my.library
+Application - New (valid alternative):
+specVersion: "/project/1.0" // kind *must not* be specified
+type: library
+metadata:
+  name: my.library
+Extension - Old:
+specVersion: "1.0"
+kind: extension // kind *must* be specified
+type: task
+metadata:
+  name: myCustomTask
+Extension - New:
+specVersion: "/extension/1.0" // kind *must not* be specified
+type: task
+metadata:
+  name: myCustomTask
+Note that all old configurations are still valid. With the next specification version the kind property can be deprecated, therefore enforcing the new configuration.
+Affected components (if known)
+
+ ui5-builder
+ ui5-server
+ ui5-cli
+ ui5-fs
+ ui5-project
+ ui5-logger
+

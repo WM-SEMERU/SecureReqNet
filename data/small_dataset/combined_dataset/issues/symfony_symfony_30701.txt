@@ -1,0 +1,98 @@
+[Console/Table] Colspan is removed on Tableoutput, if Content is loonger then ColumnMaxwith and ColumnMaxwith is ignored, if formated Content is too long
+
+
+Symfony version(s) affected: v4.2.4
+Description
+In the project useragent-parser-comparison we compare the results of different useragent parsers. To show the differences we use the table helper from symfony console.
+Because the useragents and the differences may be very long, the table rows often need 2 or 3 lines in the console output.
+To make the result better readable I want to limit the column width.
+The result is, that the colspan is ignored, if the content is longer than set column max length. Also the cell content does not break correctly into a new line, if the content is formatted.
+How to reproduce
+the used command (in the original code, the table is filled dynamically)
+class Analyze extends Command
+{
+    protected function configure(): void
+    {
+        $this->setName('analyze')
+            ->setDescription('Analyzes the data from test runs')
+            ->setHelp('');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $table = new Table($output);
+        $table->setColumnWidth(0, 50);
+        $table->setColumnMaxWidth(0, 50);
+        $table->setColumnWidth(1, 50);
+        $table->setColumnMaxWidth(1, 50);
+        $table->setColumnWidth(2, 50);
+        $table->setColumnMaxWidth(2, 50);
+        $table->setStyle('box');
+        $table->setHeaders([
+            [new TableCell('UserAgent', ['colspan' => 3])],
+            [new TableCell('Browser'), new TableCell('Platform'), new TableCell('Device')],
+        ]);
+
+        $rows = [];
+
+        $rows[] = [new TableCell('Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en; rv:1.8.1.11) Gecko/20071128 Camino/1.5.4', ['colspan' => 3])];
+        $rows[] = [
+            new TableCell('name: <fg=white;bg=green>camino</> <fg=white;bg=red>mozilla50macintoshuintelmacosxenrv18111gecko</> version: <fg=white;bg=green>1.5</> <fg=white;bg=red>20071128</> '),
+            new TableCell(''),
+            new TableCell(''),
+        ];
+        $rows[] = new TableSeparator();
+
+        $rows[] = [new TableCell('Mozilla/5.0 (X11; Linux i686; rv:7.0.1) Gecko/20111106 IceCat/7.0.1', ['colspan' => 3])];
+        $rows[] = [
+            new TableCell('name: <fg=white;bg=green>firefox</> <fg=white;bg=red>mozilla50x11linuxi686rv701gecko</> version: <fg=white;bg=green>7.0</> <fg=white;bg=red>20111106</> '),
+            new TableCell(''),
+            new TableCell(''),
+        ];
+        $rows[] = new TableSeparator();
+
+        $rows[] = [new TableCell('Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)', ['colspan' => 3])];
+        $rows[] = [
+            new TableCell('name: <fg=white;bg=green>yandexbot</> <fg=white;bg=red>mozilla50compatibleyandexbot</> version: <fg=white;bg=green>3.0</> <fg=white;bg=red>3.0;</> '),
+            new TableCell(''),
+            new TableCell(''),
+        ];
+        $rows[] = new TableSeparator();
+
+        $rows[] = [new TableCell('Googlebot-Video/1.0', ['colspan' => 3])];
+        $rows[] = [
+            new TableCell('name: <fg=white;bg=green>googlebotvideo</> <fg=white;bg=red>googlebot</> '),
+            new TableCell(''),
+            new TableCell(''),
+        ];
+
+        $table->setRows($rows);
+        $table->render();
+
+        return 0;
+    }
+}
+the result is:
+┌────────────────────────────────────────────────────┬────────────────────────────────────────────────────┬────────────────────────────────────────────────────┐
+│ UserAgent                                                                                                                                                    │
+┌────────────────────────────────────────────────────┬────────────────────────────────────────────────────┬────────────────────────────────────────────────────┐
+│ Browser                                            │ Platform                                           │ Device                                             │
+├────────────────────────────────────────────────────┼────────────────────────────────────────────────────┼────────────────────────────────────────────────────┤
+│ Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en; rv: │                                                    │                                                    │
+│ 1.8.1.11) Gecko/20071128 Camino/1.5.4              │                                                    │                                                    │
+│ name: camino mozilla50macintoshuintelmacosxenrv18111gecko versi │                                                    │                                                    │
+│ on: 1.5 20071128                                   │                                                    │                                                    │
+├────────────────────────────────────────────────────┼────────────────────────────────────────────────────┼────────────────────────────────────────────────────┤
+│ Mozilla/5.0 (X11; Linux i686; rv:7.0.1) Gecko/2011 │                                                    │                                                    │
+│ 1106 IceCat/7.0.1                                  │                                                    │                                                    │
+│ name: firefox mozilla50x11linuxi686rv701gecko version: 7.0 20111106  │                                                    │                                                    │
+├────────────────────────────────────────────────────┼────────────────────────────────────────────────────┼────────────────────────────────────────────────────┤
+│ Mozilla/5.0 (compatible; YandexBot/3.0; +http://ya │                                                    │                                                    │
+│ ndex.com/bots)                                     │                                                    │                                                    │
+│ name: yandexbot mozilla50compatibleyandexbot version: 3.0 3.0;  │                                                    │                                                    │
+├────────────────────────────────────────────────────┼────────────────────────────────────────────────────┼────────────────────────────────────────────────────┤
+│ Googlebot-Video/1.0                                                                                                                                          │
+│ name: googlebotvideo googlebot                     │                                                    │                                                    │
+└────────────────────────────────────────────────────┴────────────────────────────────────────────────────┴────────────────────────────────────────────────────┘
+the output as image to show the colors:
+

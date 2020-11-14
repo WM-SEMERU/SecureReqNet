@@ -1,0 +1,1 @@
+I Found it can't create a Label to an issue in Form on GitLab 7.2

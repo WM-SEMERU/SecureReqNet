@@ -1,0 +1,55 @@
+[SecurityBundle] Allow for custom logout request matcher
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes/no
+
+
+Fixed tickets
+#22473
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+So you can do something like
+logout:
+  path: ~
+  request_matcher: my_logout_matcher
+and bypass path-matching, or combine it with a custom check afterwards.
+Should go after #22574 and #22584

@@ -1,0 +1,6 @@
+'I am an administrator in GitLab and can fork project. One of our developers can't. All GitLab shell checks (rake gitlab:env:check & rake gitlab:gitlab_shell:check & rake gitlab:app:check) just run fine. When the developer tries to fork the repository he gets the following error:
+
+Fork Error!
+
+You tried to fork 'namespace' / 'repo' but failed for the following reason:
+- Fork transaction failed.

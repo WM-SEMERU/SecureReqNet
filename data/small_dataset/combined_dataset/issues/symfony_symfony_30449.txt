@@ -1,0 +1,8 @@
+[WebProfilerBundle] ajax icon remains in red after success call
+
+
+Symfony version(s) affected: 3.0, 4.0
+Description
+When interacting with the UI and producing a ajax call that results in error, the ajax icon changes to red. After fixing the error and producing another ajax call which results in success (without refreshing the whole page), the toolbar icon remains in red, instead of changing to grey.
+Possible Solution
+Change the toolbar icon depending on the last request.

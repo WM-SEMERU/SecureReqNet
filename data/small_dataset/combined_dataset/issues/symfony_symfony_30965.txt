@@ -1,0 +1,54 @@
+Prepare for the new serialization mechanism
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+#eufossa
+Should I maybe split this component by component ?
+https://wiki.php.net/rfc/custom_object_serialization has been accepted.
+Best viewed in "split" mode.
+This work is kind of required for #30304 so we don't trigger 30 deprecations from our own code base.

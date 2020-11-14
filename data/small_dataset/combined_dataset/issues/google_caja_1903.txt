@@ -1,0 +1,12 @@
+Attributes object doesn't support the 'in' operator correctly
+
+
+Original issue 1905 created by metaweta on 2014-03-17T22:12:46.000Z:
+<div id="foo">bar</div>
+<script>
+var attrs = document.getElementById("foo").attributes;
+console.log(attrs.length); // 1
+console.log(''+attrs[0]); // domado attribute object
+console.log(0 in attrs); // false, should be true
+</script>
+​

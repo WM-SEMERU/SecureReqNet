@@ -1,0 +1,34 @@
+Bookmark Manager Not Listing Bookmarks
+
+
+Description
+After successfully importing bookmarks from Firefox, they were all viable in the Bookmark Manager and I was actively re-arranging them, cleaning them up, creating new folders, deleting old folders etc., but at some point all of the bookmarks in the bookmark manager disappeared i.e. they were no longer visible (see screenshot attached).
+
+I opened up the Developer Tools pane and noticed the attached errors in the Console tab:
+
+Developer Console Brave Bookmarks Manager Errors.txt
+Steps to Reproduce
+I cannot reproduce this problem because I cannot get the browser back to the state that it was in when I first downloaded it and imported my bookmarks from Firefox. I have tried re-installing Brave browser but the issue remains.
+I did have issues importing everything from Firefox and in the end I was only able to import bookmarks i.e. no history, cookies etc.. I think the issue about import failures has been raised before. I did have Sync enabled though which was mentioned elsewhere. And I was seeing duplicate folders possibly because Sync was enabled. It is now disabled.
+Actual result:
+No previously imported and saved bookmarks are visible/accessible in the Bookmark Manager.
+Expected result:
+Previously imported and saved bookmarks should be visible/accessible in the Bookmark Manager.
+Reproduces how often:
+Ongoing. Does not self-resolve. Does not reoccur because original state of Brave browser cannot be easily re-instated.
+Brave Version
+about:brave info:
+Brave: 0.25.2
+V8: 6.9.427.23
+rev: 8ea2a9c
+Muon: 8.1.8
+OS Release: 17.7.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+This is occurring in the live version. I updated Brave to the version above today (10 Oct 2018).
+Additional Information

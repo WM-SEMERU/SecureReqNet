@@ -1,0 +1,12 @@
+[Messenger][RFC] Generic TransportConfig stamp
+
+
+This relates to #30540, where we're pushing forward the last details to make Messenger really shine.
+I think that a few transport-related options should be universally supported by all/whatever transports Symfony offers. For example:
+
+message priority
+number of retries
+delivery delay
+
+The idea is to identify a few "features" that are typically standard in a transport (e.g. AMQP), and them create a TransportConfiguration stamp that allows you to configure those on a message-by-message basis. We would then work to make sure all transports support at least these features (or, if it's not possible/unreasonable, document which transports support which features, at least).
+Thoughts?

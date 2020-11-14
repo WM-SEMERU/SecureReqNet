@@ -1,0 +1,43 @@
+Code review: mikesamuel/caja-masked  (34 added, 0 removed, 4 changed)
+
+
+Original issue 326 created by mikesamuel on 2008-05-30T00:50:37.000Z:
+gvn review mikesamuel/caja-masked
+*mikesamuel/caja-masked@1499 | mikesamuel | 2008-05-29 16:49:36 -0800 (Thu,
+29 May 2008)
+Description:
+Issue 301:  Need to prevent shadowing of caja.def
+Because the cajoler has special exemptions for calls to caja.def, in effect
+relying on it, but does not currently prohibit shadowing caja, as a result
+Caja's object encapsulation is easily thwarted. Caja does not yet have any
+encapsulation of protected object properties. The following code run in the
+Caja testbed applet prints 3469.
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+function EncapsulatedObject(o) {
+  this.myO_ = o;
+  this.publiclyWritableField = null;
+}
+var eo = new EncapsulatedObject(3469);
+
+function attacker() {
+  var caja = { def: function(sub, sup, methods) {
+    return methods.opener;
+  }};
+  var canOpener = caja.def(attacker, Object, {
+    opener: function() {
+      return this.myO_;
+    }
+  });
+  eo.publiclyWritableField = canOpener;
+  return eo.publiclyWritableField();
+}
+attacker();  
+&lt;/script&gt;
+
+Modified rules to not apply unless caja is global in the current scope.
+Affected Paths:
+M
+//trunk/src/java/com/google/caja/parser/quasiliteral/DefaultCajaRewriter.java
+M
+//trunk/src/javatests/com/google/caja/parser/quasiliteral/DefaultCajaRewriterTest.java

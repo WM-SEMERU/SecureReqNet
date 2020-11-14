@@ -1,0 +1,5 @@
+Issue 322 - Add license to python distributable
+
+
+Fixes #322
+The table license is included in the NPM distro but not the Python distro.

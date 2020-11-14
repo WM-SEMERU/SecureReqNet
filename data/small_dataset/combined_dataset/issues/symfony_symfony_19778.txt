@@ -1,0 +1,70 @@
+[Security] Fixed roles serialization on token from user object
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#14274
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR fixes the serialization of tokens when using Role objects provided from the user. Indeed, there were actually a reference issue that can causes fatal errors like the following one:
+FatalErrorException in RoleHierarchy.php line 43:
+Error: Call to a member function getRole() on string
+
+Here is a small code example to reproduce and its output:
+$user = new Symfony\Component\Security\Core\User\User('name', 'password', [
+    new Symfony\Component\Security\Core\Role\Role('name')
+]);
+$token = new Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, 'password', 'providerKey', $user->getRoles());
+
+$serialized = serialize($token);
+$unserialized = unserialize($serialized);
+
+var_dump($unserialized->getRoles());
+Before:
+array(1) { [0]=> bool(true) }
+
+After:
+array(1) { [0]=> object(Symfony\Component\Security\Core\Role\Role)#15 (1) {["role":"Symfony\Component\Security\Core\Role\Role":private]=> string(4) "name" } }
+
+Thank you

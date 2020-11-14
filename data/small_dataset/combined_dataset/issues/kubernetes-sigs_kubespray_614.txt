@@ -1,0 +1,5 @@
+Drop capabilities for etcd/kube services/k8s apps Kargo runs in containers
+
+
+See http://rhelblog.redhat.com/2016/10/17/secure-your-containers-with-this-one-weird-trick/
+The consequent of dropped caps is that etcd service units and k8s apps must launch unprivileged containers under their own users instead of the root. And permissions to certs/state dirs must be as well adjusted to become shared.

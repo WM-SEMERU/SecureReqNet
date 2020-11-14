@@ -1,0 +1,55 @@
+claim button still visible but blank after claiming grant
+
+
+Description
+Once I claimed my UGP grant, I had a few meetings and left Brave opened. When I returned, I noticed that there was still a Claim button visible which was blank. Clicking on the button would launch the CAPTCHA but I couldn't claim anymore BAT as I've already received some from this particular grant. When clicking the blank button and completing the CAPCHA, I get the following:
+<<< PUT https://ledger-staging.mercury.basicattentiontoken.org/v2/grants/6e69024b-be17-4779-bca7-13b6dad92b4e
+<<< content-type: application/json; charset=utf-8
+<<< user-agent: Brave/0.23.102 Chrome/68.0.3440.84 Muon/8.0.8 macOS x64
+<<< accept-encoding:
+<<<
+<<< {
+<<<   "captchaResponse": {
+<<<     "x": 525,
+<<<     "y": 51
+<<<   }
+<<< }
+[ response for PUT https://ledger-staging.mercury.basicattentiontoken.org/v2/grants/6e69024b-be17-4779-bca7-13b6dad92b4e ]
+>>> HTTP/1.1 400
+>>> cache-control: no-cache
+>>> connection: keep-alive
+>>> content-length: 175
+>>> content-type: application/json; charset=utf-8
+>>> date: Mon, 20 Aug 2018 15:16:04 GMT
+>>> server: Cowboy
+>>> vary: accept-encoding
+>>> via: 1.1 vegur
+>>>
+>>> {"statusCode":400,"error":"Bad Request","message":"child \"promotionId\" fails because [\"promotionId\" is required]","validation":{"source":"payload","keys":["promotionId"]}}
+Problem claiming promotion Error: HTTP response 400 for PUT /v2/grants/6e69024b-be17-4779-bca7-13b6dad92b4e
+
+Steps to Reproduce
+N/A - Still trying to find some STR. Ran into this while I was having several 1:1's. Left Brave opened after accepting a grant and noticed that the claim button was still there.
+Actual result:
+
+Expected result:
+Once a grant has been accepted and received, the Claim button should be removed from the UI.
+Reproduces how often:
+I've only ran into this once so far and don't have any reliable STR. Still attempting to gather more information.
+Brave Version
+about:brave info:
+Brave: 0.23.102 
+V8: 6.8.275.24 
+rev: 43eb6673e6601527129f3f9f96aade08d15bc671 
+Muon: 8.0.8 
+OS Release: 17.7.0 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 68.0.3440.84
+
+Reproducible on current live release:
+Haven't seen this happen one the live release. However, UGP has been disabled so there's no way of checking. We haven't received any reports of the above happening from the community either.
+Additional Information

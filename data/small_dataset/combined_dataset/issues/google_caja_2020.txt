@@ -1,0 +1,5 @@
+Support Blob URLs and window.URL API
+
+
+Currently, Caja does not support the window.URL API and hence using the Blob as a URL as described here is not possible.
+Please add support for it if possible. Are there any risks associated with it?

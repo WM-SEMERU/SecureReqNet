@@ -1,0 +1,8 @@
+enable SSL certificate pinning for important Brave domains
+
+
+Test plan
+See #12190 (comment)
+Original issue description
+we should mitigate against TLS MITM attacks by using certificate pinning / expect-CT for important domains in browser-laptop (Brave update server, Brave extensions update server, ledger servers, etc.). this may be doable by simply adding to https://chromium.googlesource.com/chromium/src/net/+/master/http/transport_security_state_static.json
+cc @jumde

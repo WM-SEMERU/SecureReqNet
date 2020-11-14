@@ -1,0 +1,11 @@
+access_control plugin
+
+
+The access_control plugin covers some common use-cases related
+to providing access control to the objects stored in CDN cache.
+The authentication and authorization are to be performed only by the
+application (origin) using any Identity Management or Directory services.
+The CDN is to be concerned only with the access approval (the
+function of actually granting or rejecting access) to the objects
+in its own caches based on an access token provided by the application
+(origin). It is assumed that the origin will perform its own access control.

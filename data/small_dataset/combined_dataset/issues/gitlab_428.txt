@@ -1,0 +1,2 @@
+I commited from 2 account with the same email but different initials (Novikov Roman and Roman Novikov, confuse by mistake)
+![1](https://gitlab.com/uploads/gitlab-org/gitlab-ce/b3e2da5121/1.png)

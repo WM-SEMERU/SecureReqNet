@@ -1,0 +1,4 @@
+Provide full secret rotation
+
+
+We should provide a way to rotate all our secrets: usernames, tokens, CA key, SSH key.

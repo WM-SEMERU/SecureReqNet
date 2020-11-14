@@ -1,0 +1,6 @@
+Correct GitHub handle for Quinton Hoole
+
+
+Ref: kubernetes/org#693
+Replaces quinton-hoole-2 with quinton-hoole
+/cc @quinton-hoole

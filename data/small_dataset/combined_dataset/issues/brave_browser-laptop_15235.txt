@@ -1,0 +1,15 @@
+Alt+left/right_arrow_key opens menu bar every time on Fedora Workstation 28
+
+
+Description
+The (alt+left/right_arrow_key) that is used to navigate to the back/front page, the menu bar opens up every time. This dose not happen in Windows.
+Steps to Reproduce
+
+I use Fedora 28 Workstation with the latest version of Brave installed as of today.
+Open brave and go to any webpage.
+Try to navigate back using the alt+left_arrow_key and see the menu bar pop up.
+
+Actual result:
+Menu bar gets displayed every time in Linux but not in Windows.
+Expected result:
+I use the latest Brave update as of posting of this issue.

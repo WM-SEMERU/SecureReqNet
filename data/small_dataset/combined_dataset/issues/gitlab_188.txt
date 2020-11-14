@@ -1,0 +1,4 @@
+I have that message when I push a commit that contains medium size files.
+
+That appear that is an nginx configuration issue:
+http://www.jamescoyle.net/how-to/1331-gitlab-error-fatal-the-remote-end-hung-up-unexpectedly-again

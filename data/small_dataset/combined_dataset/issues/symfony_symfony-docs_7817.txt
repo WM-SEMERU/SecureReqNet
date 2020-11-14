@@ -1,0 +1,5 @@
+CSRF token validation in Controller is confusing
+
+
+http://symfony.com/doc/current/controller/csrf_token_validation.html
+In the example code the $submittedToken variable does not exist. I'd send a pull request but I don't know what the correct code should be here. I assume there are multiple ways - but there should be some example where to create the token, how to pass it to the action and how to get it these.

@@ -1,0 +1,4 @@
+doc: add missing step to npm release process
+
+
+won't work without this extra make

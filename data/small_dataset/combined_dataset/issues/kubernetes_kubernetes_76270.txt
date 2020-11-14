@@ -1,0 +1,12 @@
+Add type alias for DirectCodecFactory -> WithoutConversionCodecFactory
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Adds a type alias for the legacy DirectCodecFactory type to ease client transitions
+Which issue(s) this PR fixes:
+xref #76098 (review)
+Does this PR introduce a user-facing change?:
+NONE
+

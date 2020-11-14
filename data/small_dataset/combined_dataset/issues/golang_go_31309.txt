@@ -1,0 +1,37 @@
+encoding/json: add sample fuzz test for prototype of "fuzzing as a first class citizen"
+
+
+Summary
+In #30719 and #30979, dvyukov/go-fuzz compatible fuzz functions were landed in:
+
+the standard library in src/image/png/fuzz.go
+golang.org/x in golang.org/x/image/tiff/fuzz.go
+
+That was done primarily to help with the exploration requested by the core Go team in discussion of the #19109 proposal to "make fuzzing a first class citizen" (in addition to other benefits).
+The follow-up suggestion here is to add a Fuzz function to the standard library encoding/json package.
+The starting point most likely should be the Fuzz function in https://github.com/dvyukov/go-fuzz-corpus/blob/master/json/json.go.
+This is a particularly interesting example given the Fuzz function there is a bit more complex than the first two samples landed, and hopefully there is some value especially given @mvdan has recently been landing a nice series of performance-related changes to encoding/json.
+There would be no corpus checked in for now. (The approach to the corpus is being discussed elsewhere, e.g., #31215).
+Background
+See the "Background" section of #30719 or #19109 (comment).
+Additional Details
+Following the pattern set by #30719 and https://golang.org/cl/167097, the following are likely true for how to proceed here:
+
+The build tag should be // +build gofuzz
+The name of the files should be fuzz.go
+The license header should be the Go standard library license. @dvyukov might need to make a similar statement as he made in CL 167097.
+In general, even for Fuzz functions guarded by a build tag, new dependencies should be avoided, especially with the introduction of modules.
+
+For reference, here is a gist showing the diff between dvyukov/go-fuzz-corpus/tiff/tiff.go and the final form as merged into x/image/tiff.
+Two issues that likely would need to be resolved prior to merging into the standard library:
+
+
+The current dvyukov/go-fuzz-corpus json fuzzing function has a dependency on github.com/dvyukov/go-fuzz-corpus/fuzz for fuzz.DeepEqual. This dependency would need to be eliminated. An initial solution might be (a) eliminating that round-trip test for now, or (b) the longer term solution might be open coding the comparison (e.g., comment from @dvyukov in #30979 (comment)) or perhaps rely on an existing comparison function in an existing _test.go or similar, or some other solution.
+
+
+The current dvyukov/go-fuzz-corpus json fuzzing function can trigger a false positive when round-tripping through Unmarshal/Marshal in the presence of duplicate keys (e.g., see comments from @josharian in google/oss-fuzz#2188 (comment) or dvyukov/go-fuzz-corpus#3). An initial solution might be (a) temporarily eliminating that round-trip test, or (b) perhaps scan the serialized JSON for duplicate keys to avoid the false positive, or other possible longer term solutions.
+
+
+Happy to be corrected if any of the above is different than how people would like to proceed here.
+Finally, @mvdan, I don't want to put you on the spot, but in other discussions you had expressed some interest in this. Are you still interested? And of course no worries if too busy with other things.
+CC @dvyukov @josharian @FiloSottile @acln0

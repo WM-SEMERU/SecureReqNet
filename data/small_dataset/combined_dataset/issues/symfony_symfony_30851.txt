@@ -1,0 +1,53 @@
+[HttpKernel][Debug] Get exception content according to request format
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#25905
+
+
+License
+MIT
+
+
+
+Mainly for API-based apps that don't require TwigBundle to get the correct exception response according to the request format (aka _format attribute).
+
+Let me know if this classify as a bugfix for 4.2, but IMHO this was never supported without TwigBundle, hence master branch.
+
+ Hide trace info for non-debug mode
+ Update according to RFC https://tools.ietf.org/html/rfc7807 (JSON, XML)
+
+throw new NotFoundHttpException('Resource not found.', null, 0, ['Content-Type' => 'application/problem+json']);

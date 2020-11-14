@@ -1,0 +1,5 @@
+[Cache] Show how to list all available pools
+
+
+This is documentation for symfony/symfony#31021
+This will fix #9782

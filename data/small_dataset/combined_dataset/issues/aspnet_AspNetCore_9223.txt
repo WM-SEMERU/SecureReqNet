@@ -1,0 +1,11 @@
+Pipelines in ASP.NET Core 3.0
+
+
+
+Delete our Stream -> Pipe wrappers.
+Remove IResponseBodyPipeFeature and HttpResponse.BodyPipe.
+Remove IRequestBodyPipeFeature and HttpRequest.BodyPipe.
+Change FormReader to use down-cast mechanism and fall back to corefx wrappers.
+Implement a down-cast mechanism and ensure Kestrel can expose it's pipes.
+
+cc @davidfowl

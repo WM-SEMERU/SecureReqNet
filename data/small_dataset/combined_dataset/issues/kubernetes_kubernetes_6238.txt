@@ -1,0 +1,5 @@
+EmptyDir volume tmpfs mounts should have the correct selinux context set
+
+
+Tmpfs mounts done by the EmptyDir volume plugin will by default receive a different security context than the kubelet root dir.  This results in AVC denials on reads from the container's selinux context while selinux is enforcing.  We should change the EmptyDir volume plugin to set the rootcontext option of the mount based on the selinux context of the kubelet rootdir.
+Eventually this will touch the security context work.

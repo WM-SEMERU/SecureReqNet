@@ -1,0 +1,20 @@
+Include security options in the container created event
+
+
+New container creation events look like:
+Created container with docker id /k8s_bar2.a4; Security:[seccomp=sub/subtest(md5:07c9bcb4db631f7ca191d6e0bca49f76)]
+
+Created container with docker id /k8s_bar2.a4; Security:[seccomp=unconfined apparmor=foo-profile]
+
+The goal is to provide enough information to confirm that the requseted security constraints were honored.
+For #31284
+/cc @dchen1107 @thockin @jfrazelle @pweil- @pmorie
+
+Justification for v1.4:
+
+Risk: low. This appends some additional information to a human readable message. A bug here would probably not break any functionality
+Roll-back: I don't anticipate any more changes to this area of the code. No functionality depends on this change.
+Cost of not including: Users don't get any (positive) confirmation that the AppArmor or Seccomp profile they requested were actually enabled.
+
+
+This change is 

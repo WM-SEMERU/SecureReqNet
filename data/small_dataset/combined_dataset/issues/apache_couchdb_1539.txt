@@ -1,0 +1,5 @@
+Multi-tenancy support
+
+
+Cloudant has this. Would be great if open source CouchDB had this too.
+Depends on #1504 .

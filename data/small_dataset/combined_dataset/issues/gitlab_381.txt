@@ -1,0 +1,9 @@
+This feature request it's two folded:
+
+a) Either improve the UI for assigning the same deployment key to several projects at once, or to several groups.
+
+b) Decoupling the from a single project. 
+
+In buildout projects is common to have several dozens of projects being deployed to staging servers in order to test integration between all components.  
+
+Having to manually assign the same deployment key to each project is teadious.  Allowing to have group-level keys would be very useful in this cases.  Alternatively, the UI for the assignment of the same deployment key to several projects is also a solution to this.

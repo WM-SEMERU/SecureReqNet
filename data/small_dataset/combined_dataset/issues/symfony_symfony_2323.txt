@@ -1,0 +1,10 @@
+[Security] HttpUtils does not support absolute URL's
+
+
+The documentation for HttpUtils states that the $path parameter may be:
+
+A path (an absolute path (/foo), an absolute URL (http://...), or a route name (foo))
+
+Internally, the method only supports absolute paths (if the first character is a /) or a route comparison. Should the method be enhanced to support absolute URL's? If not, we should at least change the documentation.
+For an absolute URL check, I suppose we could scan the string for a protocol ://, unless it makes more sense to just check for /^https?:\/\// match.
+Either way, I'm willing to make the fix (adding support or doc change). Just want to collect some feedback before proceeding.

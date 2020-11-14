@@ -1,0 +1,7 @@
+Enforce idle timeout in proxy transport
+
+
+Description
+We recently found a bug on a client side that affected this function:
+https://github.com/gravitational/teleport/blob/master/lib/reversetunnel/agent.go#L225
+In essense, clients to reverse tunnel were leaking connections never closing them. Techincally this is a fault of a client, however we should limit the number of client connections opened via this function and terminate the connections that are idle longer than some reasonable default, e.g. (10-15 minutes of inactivity), otherwise client bugs will lead to denial of service of the reverse tunnel.

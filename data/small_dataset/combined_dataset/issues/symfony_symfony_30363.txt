@@ -1,0 +1,46 @@
+Fixed the DebugClassLoader compatibility with eval()'d code on Darwin
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30362
+
+
+License
+MIT
+
+
+
+When a class is defined in an eval() block, the reported file name is file_name.php(123) : eval()'d code, which prevents DebugClassLoader::darwinRealpath() from locating/normalizing the file name, and triggers a notice.

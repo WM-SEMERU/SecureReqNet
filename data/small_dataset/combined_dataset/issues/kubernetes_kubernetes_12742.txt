@@ -1,0 +1,13 @@
+encrypt secrets when in etcd.
+
+
+We should limit access to secrets when in etcd.
+Initially discussed in #11937.
+Although we discourage it, people seem to want to build their own clusters where etcd is used by both Apiserver and by other components, to store configuration.  Secrets want to have Kubernetes access controls on them, and not to be widely readable.  Other types of configuration wants to be widely readable.
+We could do this in a couple of ways:
+
+use etcd ACLs to limit access to the etcd keys that hold secrets.
+encrypt some or all of the secret data when stored.
+
+@liggitt @pmorie
+thoughts?

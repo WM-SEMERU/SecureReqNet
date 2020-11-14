@@ -1,0 +1,24 @@
+OpenSSL releases: February 26th 2019
+
+
+https://mta.openssl.org/pipermail/openssl-announce/2019-February/000145.html
+
+The OpenSSL project team would like to announce the forthcoming release of OpenSSL versions 1.1.1b and 1.0.2r. There will be no new 1.1.0 release at this time.
+These releases will be made available on 26th February 2019 between approximately 1300-1700 UTC.
+OpenSSL 1.0.2r is a security-fix release. The highest severity issue fixed in this release is MODERATE: https://www.openssl.org/policies/secpolicy.html#moderate
+OpenSSL 1.1.1b is a bug-fix release.
+
+From https://www.openssl.org/policies/secpolicy.html#moderate:
+
+MODERATE Severity. This includes issues like crashes in client applications, flaws in protocols that are less commonly used (such as DTLS), and local flaws. These will in general be kept private until the next release, and that release will be scheduled so that it can roll up several such flaws at one time.
+
+We have had releases like this in the past that fix things that don't impact Node.js at all since there is a lot of old cruft in OpenSSL that we don't touch. We won't know until the 26th.
+The impact would be:
+
+Node.js 6: impacted by 1.0.2 security release
+Node.js 8: impacted by 1.0.2 security release
+Node.js 10: not impacted (uses 1.1.0)
+Node.js 11: impacted by 1.1.1 bugfix release
+
+Our normal process is to allow up to 48 hours to assess and potentially release after one of these. However, as we have often done, we may be using this as an opportunity to get some security fixes. Either way, we'll get an announcement out to nodejs.org and nodejs-sec.
+@nodejs/crypto @nodejs/security

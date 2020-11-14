@@ -1,0 +1,15 @@
+Role-based authorization [Authorize (Roles = "Admin")] does not work when upgrading to ASP.NET Core 2.2
+
+
+[Authorize (Roles = "Admin")] does not work when upgrading to ASP.net core 2.2
+this is controller:
+
+this is database: [AspNetUsers]
+
+this is database: [AspNetRoles]
+
+this is database: [AspNetUserRoles]
+
+This is the result of the run after I login use chris@neo.org
+
+This works on asp.net core 2.1, but it doesn't work when I upgraded to asp.net core 2.2

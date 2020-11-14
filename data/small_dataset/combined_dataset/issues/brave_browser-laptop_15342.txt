@@ -1,0 +1,21 @@
+Error when play video at brighteon.com
+
+
+Description
+Can not play video at brighteon.com with default settings. I got this error:
+An unanticipated problem was encountered, check back soon and try again
+Error Code: MEDIA_ERR_UNKNOWN
+Session ID: 2018-12-27:27c824ca5e92877bd686a35e Player Element ID:player
+I have to turn off shields then it can play without problem. The video is hosted at Brightcove.com. Please help to look into this issue.
+Thank you,
+George
+Steps to Reproduce
+Please add a series of steps to reproduce the problem. See https://stackoverflow.com/help/mcve for in depth information on how to create a minimal, complete, and verifiable example.
+
+Open Brave
+Visit https://www.brighteon.com/
+Click any video then the error shows.
+
+What version of Brave are you using?
+Version 0.58.18 Chromium: 71.0.3578.98 (Official Build) (64-bit)
+

@@ -1,0 +1,22 @@
+security: bind HTTP and HTTPS to different ports
+
+
+Use Case
+There are use cases where having HTTP and HTTPS with http_verify_clients simultaneously available is useful, for example:
+ELB Health Checks
+via @weargoggles  on #2587 (comment)
+ELB can run its health check with a different port and protocol to the one it uses as the backend. So:
+
+Consul is configured to have both HTTP and HTTPS ports
+ELB is just speaking TCP for the incoming connections
+the health check is HTTP, and the firewall is configured so that only the load balancer can access Consul's insecure HTTP port
+
+I want to be able to do the same thing in Nomad; forward TCP connections (leaving TLS to Nomad) based on the health determined by a plain HTTP check.
+I am using Consul to bootstrap and advertise. The configuration in the Consul health check you mention works perfectly for me, and it would work even if the 'skip verification' option was not set, because the certificates I'm using are valid. Perhaps that should be configurable; but I don't know that it can be controlled by verify_https_client because it's Consul being configured there.
+Cons
+The obvious con is that the HTTP port must be secured using external tooling and the network must be trusted for any use over HTTP.
+Alternative: Allow subset of operations for unauthenticated clients
+https_verify_clients could request but not require client certificates and allow a subset of operations (perhaps only a healthcheck endpoint) for requests without certificates.
+While this is technically the best solution it introduces extra security checks throughout our API and may add complexity to eventual ACLs.
+Implementation
+TBD

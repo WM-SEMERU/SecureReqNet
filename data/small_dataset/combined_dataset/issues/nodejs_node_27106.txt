@@ -1,0 +1,86 @@
+readable.push always returning false after reaching highWaterMark for the first time
+
+
+According to the documentation and multiple posts regarding Readable streams, .push will return false once highWaterMark is reached, at that moment _read should be stopped.
+The issue I'm facing, and I'm doubting whether I misunderstood something or there's an actual bug, probably the former, is that after 16384 bytes are pushed, and .push returns false for the first time, all remaining calls to .push are returning false (9983616 in total).
+const { Readable } = require('stream');
+
+const writeStream = fs.createWriteStream('./bigFile.txt');
+
+let readCalls = 0;
+class CustomReader extends Readable {
+  constructor(opt) {
+    super(opt);
+    this._max = 1e7;
+    this._index = 0;
+  }
+
+  _read(size) {
+    readCalls++;
+
+    while (this._index < this._max) {
+      this._index++
+
+      if (this._index >= this._max)
+        return this.push(null);
+
+      if (!this.push('a'))
+        return;
+    }
+  }
+}
+
+console.time('read');
+new CustomReader().pipe(writeStream)
+   .on('finish', () => {
+      console.log(readCalls);
+      console.timeEnd('read');
+   });
+In that example, I expect: readCalls to be ~610 (1e7 / 16384), but instead is 9983616.
+Also I expect it to run in almost the same time than the following script using .write
+(async() => {
+  console.time('write');
+ 
+  const file = fs.createWriteStream('./test.dat');
+  for (let i = 0; i < 1e7; i++) {
+    if (!file.write('a')) {
+      await new Promise(resolve => file.once('drain', resolve));
+    }
+  }
+
+  console.timeEnd('write');
+})();
+But it's taking twice the time, which is logical since _read is being called a lot more times than it should.
+If I completely ignore the return value from .push and only depend on size argument, the Stream work as expected.
+class CustomReader extends Readable {
+  constructor(opt) {
+    super(opt);
+    this._max = 1e7;
+    this._index = 0;
+  }
+
+  _read(size) {
+    readCounter++;
+
+    const stop = Math.min(this._index + size, this._max);
+    while (this._index < stop) {
+
+      this._index++
+        if (this._index >= this._max)
+          return this.push(null);
+
+      if (!this.push('a')) {
+        // ignore
+        // return;
+      }
+    }
+  }
+}
+
+// readCounter = 611
+So the question is, after .push returns false, besides from stopping the _read function, should I wait for a specific event or do an extra check inside _read? If not, is this the expected behaviour?
+
+Version: 10.15.3 / 8.15.0
+Platform: Ubuntu 18:04
+Subsystem:
+

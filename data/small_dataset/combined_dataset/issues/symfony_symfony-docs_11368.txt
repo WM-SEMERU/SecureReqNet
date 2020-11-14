@@ -1,0 +1,4 @@
+[Security][SecurityBundle] Document the new SodiumPasswordEncoder
+
+
+See symfony/symfony#31019 (waiting code merge).

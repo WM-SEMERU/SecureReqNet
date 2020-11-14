@@ -1,0 +1,32 @@
+Save password notification always shown for default password manager
+
+
+Description
+Save password notification is always shown for the default password manager
+Steps to Reproduce
+
+Login to a site
+Select any option (Allow, Deny, Never For This Site)
+Log out of site
+Log into same site
+
+Actual result:
+Prompt appears again
+Expected result:
+Brave should respect the selected option
+Reproduces how often:
+100%
+Brave Version
+Brave: 0.23.104
+V8: 6.8.275.24
+rev: b454a4a
+Muon: 8.0.8
+OS Release: 17.7.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+Yes

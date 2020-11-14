@@ -1,0 +1,131 @@
+crypto/rand: warn about very slow (60-second) /dev/urandom reads
+
+
+What version of Go are you using (go version)?
+go version go1.9.2 linux/amd64
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+This issue shows itself on linux/arm
+What did you do?
+Compile this program and run it on a linux/arm server.
+What did you expect to see?
+If it works it should produce output similar to this
+go version devel +0ba4eba864 Mon Nov 6 08:37:30 2017 +0000
+Status: 401: 401 Unauthorized
+Body:
+{
+  "code": "missing_auth_token",
+  "message": "Missing authorization token",
+  "status": 401
+}
+
+What did you see instead?
+However when compiled with go1.9 or go-tip it hangs indefinitely on some ARM servers.  It works fine with go-1.8.
+This issue came up as part of ncw/rclone#1794
+I haven't managed to replicate the hang on my raspberry Pi 3, but both @HptmHavoc and @freespace have on scaleway arm servers using different kernels.
+I'm not 100% sure what is going on but it is clearly a regression.
+
+From the above @freespace wrote:
+$ time ./b2get-go-tip
+go version devel +0ba4eba864 Mon Nov 6 08:37:30 2017 +0000
+^C
+
+real    0m7.447s
+user    0m0.020s
+sys     0m0.010s
+steve@mercury:~/tmp/b2get
+$ time ./b2get-go1.9.2
+go version go1.9.2
+^C
+
+real    0m10.927s
+user    0m0.030s
+sys     0m0.010s
+steve@mercury:~/tmp/b2get
+$ time ./b2get-go1.8.3
+go version go1.8.3
+Status: 401: 401 Unauthorized
+Body:
+{
+  "code": "missing_auth_token",
+  "message": "Missing authorization token",
+  "status": 401
+}
+real    0m0.842s
+user    0m0.230s
+sys     0m0.010s
+
+$ uname -a
+Linux mercury 4.5.7-std-4 #1 SMP Tue Jul 12 11:00:06 UTC 2016 armv7l GNU/Linux
+
+$ cat /proc/cpuinfo | head -20
+processor       : 0
+model name      : ARMv7 Processor rev 2 (v7l)
+BogoMIPS        : 50.00
+Features        : half thumb fastmult vfp edsp thumbee vfpv3 tls idiva idivt vfpd32 lpae
+CPU implementer : 0x56
+CPU architecture: 7
+CPU variant     : 0x2
+CPU part        : 0x584
+CPU revision    : 2
+
+...
+<snip>
+...
+Hardware        : Marvell Armada 370/XP (Device Tree)
+Revision        : 0000
+Serial          : 0000000000000000
+
+Mine is a scaleway arm server.
+
+And from the above @HptmHavoc wrote:
+Here pretty much the same, also a scaleway arm server.
+time ./b2get-go-tip 
+go version devel +0ba4eba864 Mon Nov 6 08:37:30 2017 +0000
+^CCommand terminated by signal 2
+real	0m 34.52s
+user	0m 0.00s
+sys	0m 0.01s
+
+time ./b2get-go1.9.2 
+go version go1.9.2
+^CCommand terminated by signal 2
+real	3m 2.82s
+user	0m 0.02s
+sys	0m 0.00s
+
+time ./b2get-go1.8.3 
+go version go1.8.3
+Status: 401: 401 Unauthorized
+Body:
+{
+  "code": "missing_auth_token",
+  "message": "Missing authorization token",
+  "status": 401
+}real	0m 0.78s
+user	0m 0.16s
+sys	0m 0.01s
+
+$ uname -a
+Linux scw-553c2c 4.4.96-mainline-rev1 #1 SMP Thu Nov 2 11:27:34 UTC 2017 armv7l Linux
+
+$ cat /proc/cpuinfo | head -20
+processor	: 0
+model name	: ARMv7 Processor rev 2 (v7l)
+BogoMIPS	: 50.00
+Features	: half thumb fastmult vfp edsp thumbee vfpv3 tls idiva idivt vfpd32 lpae 
+CPU implementer	: 0x56
+CPU architecture: 7
+CPU variant	: 0x2
+CPU part	: 0x584
+CPU revision	: 2
+
+...
+<snip>
+...
+
+Hardware	: Marvell Armada 370/XP (Device Tree)
+Revision	: 0000
+Serial		: 0000000000000000
+

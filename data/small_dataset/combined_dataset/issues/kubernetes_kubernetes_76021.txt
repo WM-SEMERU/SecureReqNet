@@ -1,0 +1,12 @@
+Fix create secret generic paths examples
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+The example in kubectl create secret is misleading and does not work. Due to the fact that we're passing key=value pair bash does not expands ~ to user path, whereas $HOME does work. I've decided to make the path more generic like with the other examples.
+Special notes for your reviewer:
+/assign @mfojtik
+Does this PR introduce a user-facing change?:
+NONE
+

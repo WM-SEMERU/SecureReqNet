@@ -1,0 +1,53 @@
+[HttpClient] yield a last chunk for completed responses also
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+When a response completed, streaming it again yields no chunks right now.
+This PR makes it yield a LastChunk - or an ErrorChunk when applicable.
+The reasoning for the previous behavior was that streams should yield only activity from the network.
+But this looks more complex to use in practice. The proposed behavior is simpler to reason about I think.

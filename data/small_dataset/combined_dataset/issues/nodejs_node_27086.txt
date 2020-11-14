@@ -1,0 +1,14 @@
+stream: remove TODO and add a description instead
+
+
+After looking into this it turned out that these two errors are
+sanity checks that should not be reached. It is unfortunate that
+we assigned error codes for these but changing it into an assertion
+seems to be a hassle for readable-streams.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

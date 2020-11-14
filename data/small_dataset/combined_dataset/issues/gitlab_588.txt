@@ -1,0 +1,38 @@
+See the issue in attached image. I've been having this issue since (more or less) version 6.5, and now it still exists in version 7.2.1. My OS is CentOS 6.5 and environment is as follows.
+
+```
+    [deprecated] I18n.enforce_available_locales will default to true in the future. 
+    If you really want to skip validation of your locale you can set 
+    I18n.enforce_available_locales = false to avoid this message.
+
+    System information
+    System:
+    Current User:       git
+    Using RVM:          no
+    Ruby Version:       2.1.0p0
+    Gem Version:        2.2.0
+    Bundler Version:    1.5.2
+    Rake Version:       10.3.2
+    Sidekiq Version:    2.17.0
+
+    GitLab information
+    Version:            7.2.1
+    Revision:           ff1633f
+    Directory:          /home/git/gitlab
+    DB Adapter:         mysql2
+    URL:		
+    HTTP Clone URL:
+    SSH Clone URL:	
+    Using LDAP:	        no
+    Using Omniauth:     no
+
+    GitLab Shell
+    Version:            1.9.7
+    Repositories:       /home/git/repositories/
+    Hooks:              /home/git/gitlab-shell/hooks/
+    Git:                /usr/bin/git
+```
+
+I see similar issues but they are all marked as resolved, but I still have this problem.
+
+![issue](https://gitlab.com/uploads/gitlab-org/gitlab-ce/94e62ed36b/issue.png)

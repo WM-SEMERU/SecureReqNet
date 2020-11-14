@@ -1,0 +1,47 @@
+Step to reproduce:
+* Create a sample git repository
+* Create a file modified.txt:
+```
+This line has been added
+This line will be modified
+This line will be deleted
+```
+
+* commit to master&push to origin.
+```
+git add modified.txt
+git commit -am "add lines to modify"
+git push
+```
+
+* Create a branch: `git checkout -b modifications1`
+* Modify modified.txt:
+
+```
+This line has been added
+This line has been modified
+
+```
+
+* Commit, push and create merge request
+
+```
+git add modified.txt 
+git commit -am "modify the file"
+git push origin modifications1
+```
+
+See an example merge request here:https://gitlab.com/miscreant/side-by-side-diff-test/merge_requests/1/diffs?view=parallel
+
+Expected Output: The added/modified line should be shown in the side-by-side diff
+
+Actual Output: The modified line is not shown at all.
+
+Inline Diff:
+![Selection_017](https://gitlab.com/uploads/gitlab-org/gitlab-ce/e232fee7cc/Selection_017.png)
+
+Side-by-side Diff:
+![Selection_018](https://gitlab.com/uploads/gitlab-org/gitlab-ce/f0da4e8a92/Selection_018.png)
+
+GitLab version:
+![Selection_016](https://gitlab.com/uploads/gitlab-org/gitlab-ce/902ca4cb30/Selection_016.png)

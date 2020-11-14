@@ -1,0 +1,40 @@
+kubeadm: use unique CA cert DNs for etcd and front-proxy
+
+
+What this PR does / why we need it:
+Users have reported that the subject DNs for etcd and control
+plane components in CA certs are the same. This causes a problem
+if one wants to distinguish them.
+Make the following changes:
+
+Add some new constants for the default CommonName and
+Organization for certs, and also for etcd and front-proxy CA cert
+CommonNames.
+When creating the root CA cert use the default CommonName.
+When creating the etcd CA and the front-proxy CA cert use the new
+appropriate constants.
+Add a new helper function in pkiutil that generates a CA from
+a Config struct - NewCertificateAuthorityFromConfig().
+Make NewCertificateAuthority() use default constants.
+Set the default cert organization to certs, if it wasn't
+set already to something specific.
+Whenever NodesGroup or MastersGroup are used for organization, also
+use the default cert organization.
+Add unit test for NewCertificateAuthorityFromConfig().
+
+Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):
+Fixes kubernetes/kubeadm#946
+Special notes for your reviewer:
+
+while this fixes the above issue, it also always adds a default organization to certs (default is k8s.io).
+let me know if went a bit overboard with that.
+
+Release note:
+kubeadm: use unique CA cert DNs for etcd and front-proxy and always add k8s.io as organization
+
+/cc @detiber @stealthybox @NeilW
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews
+/kind bug
+/area security
+/area kubeadm
+/area etcd

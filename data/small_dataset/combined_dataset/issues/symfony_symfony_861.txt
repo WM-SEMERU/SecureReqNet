@@ -1,0 +1,26 @@
+[Firewall] No routing and locale support
+
+
+Simple use-case:
+#app/config/routing.yml
+
+languageselector:
+    pattern:      /
+
+frontpage:
+    pattern:      /{_locale}
+    requirements: { _locale: en|fr|de, _scheme: http }
+and
+#app/config/security.yml
+    firewalls:
+        public:
+           ...
+            form_login:
+                check_path: ?
+                login_path: ?
+                default_target_path: ?
+            logout:
+                path: ?
+                target: ?
+The backrouting is very limited. Neither will work for the ? placeholder: /{_locale}, frontpage, /{_locale}/login.
+I'm new to Symfony maybe im missing something but my general understanding from the docs was that routing is the main component that all other should rely on. This seems like a serious limitation for localized sites as I need to route the user through the languageselector route to get him back to the frontpage (or any localized page).

@@ -1,0 +1,17 @@
+Caja Playground "Policy" tab has tiny text box
+
+
+Original issue 1960 created by naesten on 2015-03-22T18:39:08.000Z:
+What steps will reproduce the problem?
+
+Go to the Caja Playground
+Pick an example
+Switch to the Policy tab
+
+What is the expected output? What do you see instead?
+I expect the text box to use the available space, but instead it's really tiny.
+On what browser and OS?
+Mozilla/5.0 (X11; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0 Iceweasel/31.5.0
+In particular, iceweasel 31.5.0esr-1~deb7u1 on Debian wheezy.
+Please use labels and text to provide additional information.
+How am I supposed to use labels exactly? (I suspect I'd need additional permissions to do that. Probably not much point in trying to make this work this close to google code EOL, though.)

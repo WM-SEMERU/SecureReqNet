@@ -1,0 +1,15 @@
+Add default paths for WPT tests
+
+
+Set the following default configs for WPT tests.
+--host-key-path=tests\wpt\web-platform-tests\tools\certs\web-platform.test.key
+--host-cert-path=tests\wpt\web-platform-tests\tools\certs\web-platform.test.pem
+--ssl-type=pregenerated
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #23133
+
+
+This change is 

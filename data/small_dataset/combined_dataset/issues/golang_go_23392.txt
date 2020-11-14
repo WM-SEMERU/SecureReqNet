@@ -1,0 +1,5 @@
+net/url: Parse accepts invalid userinfo strings
+
+
+@adamdecaf reported that net/url.Parse accepts URLs with userinfo components containing just about anything (newlines and random non-ASCII Unicode).
+This could be a security problem if people use the resulting URL.User.Username & Password without further validation.

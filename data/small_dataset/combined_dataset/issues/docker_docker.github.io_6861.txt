@@ -1,0 +1,8 @@
+Update seccomp.md
+
+
+Fix #6854
+Signed-off-by: Nicolas V Castet nvcastet@us.ibm.com
+Proposed changes
+Unreleased project version (optional)
+Related issues (optional)

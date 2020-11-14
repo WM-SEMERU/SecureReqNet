@@ -1,0 +1,6 @@
+Add ability to control the threshold for the observed colors
+
+
+
+at the moment they are controlled by this css (which also need refactoring)
+

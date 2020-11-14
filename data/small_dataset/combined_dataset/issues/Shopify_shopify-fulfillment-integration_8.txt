@@ -1,0 +1,7 @@
+Enable CLA bot
+
+
+👋 We are enabling the Contributor License Agreement (CLA) bot for all Shopify open source repositories. The CLA bot automates signing of CLAs for all people who are not part of the Shopify organization. All people external to Shopify contributing code are required to sign a CLA. Members of Shopify do not need to sign and the check will automatically pass.
+The check looks like this:
+
+If it fails, the GitHub check will direct contributors to https://cla.shopify.com. Once they have signed and when the GitHub check is rerun, the check will pass.

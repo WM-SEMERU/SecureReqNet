@@ -1,0 +1,7 @@
+I'm getting the following error (or is it a warning) when upgrading 6.9 to 7.0 and doing db migration:
+
+```bash
+sudo -u git -H bundle exec rake db:migrate RAILS_ENV=production
+
+Instance method “lock!” is already defined in ActiveRecord::Base, use generic helper instead or set StateMachine::Machine.ignore_method_conflicts = true.
+```

@@ -1,0 +1,49 @@
+[Security] Load the user before pre/post auth checks when needed
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+n/a
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26775
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

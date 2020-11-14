@@ -1,0 +1,4 @@
+Handling AccessDeniedException in a subrequest
+
+
+See http://trac.symfony-project.org/ticket/9734 for details

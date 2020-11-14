@@ -1,0 +1,9 @@
+With transition from fastly proxies to python redirector update the whitelisted URLs
+
+
+Description
+We recently transitioned from using fastly proxies to redirector (https://github.com/brave/redirector/blob/master/redirector/__init__.py#L30) hosted on heroku. Update URL whitelist accordingly.
+Steps to Reproduce
+
+npm run test-security should pass
+

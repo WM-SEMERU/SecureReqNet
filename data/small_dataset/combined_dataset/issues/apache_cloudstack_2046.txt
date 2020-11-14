@@ -1,0 +1,14 @@
+CLOUDSTACK-7958: Add configuration for limit to CIDRs for Admin API calls
+
+
+The global setting 'management.admin.cidr' is set to 0.0.0.0/0,::/0
+by default preserve the current behavior and thus allow API calls
+for Admin accounts from all IPv4 and IPv6 subnets.
+Users can set it to a comma-separated list of IPv4/IPv6 subnets to
+restrict API calls for Admin accounts to certain parts of their network(s).
+This is to improve Security. Should a attacker steal the Access/Secret key
+of a Admin account he/she still needs to be in a subnet from where Admin accounts
+are allowed to perform API calls.
+This is a good security measure for APIs which are connected to the public internet.
+This PR also includes a commit to cleanup and improve NetUtils.
+No existing methods have been altered. That has been verified by adding additional Unit Tests for this.

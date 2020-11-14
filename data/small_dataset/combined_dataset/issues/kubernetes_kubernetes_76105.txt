@@ -1,0 +1,36 @@
+PSP RunAsGroup Doc is incorrect
+
+
+What happened: Followed the documentation on PSP RunAsGroup rules to limit group Id's to non-superuser (root) using the MustRunAsNonRoot rule. The creation attempt failed with:
+The PodSecurityPolicy \"ibm-restricted-psp\" is invalid: spec.runAsGroup.rule: Unsupported value: \"MustRunAsNonRoot\": supported values: \"MustRunAs\", \"RunAsAny\", \"MayRunAs\"" 
+
+From PSP yaml:
+  runAsGroup:
+    rule: 'MustRunAsNonRoot'
+
+What you expected to happen: Successfully create a new PSP for non-superuser (root) group privileges using available rule values (which actually seems to be MustRunAs, MayRunAs, RunAsAny according the the api code)
+How to reproduce it (as minimally and precisely as possible): Attempt to create a PSP with a RunAsGroup rule set to MustRunAsNonRoot
+Anything else we need to know?: I don't think so
+Environment:
+
+Kubernetes version (use kubectl version): v1.14.0, looks to affect v1.13, and v1.12 doc as well
+Cloud provider or hardware configuration: IBM Cloud
+OS (e.g: cat /etc/os-release):
+
+NAME="Ubuntu"
+VERSION="16.04.5 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.5 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+
+
+Kernel (e.g. uname -a): Linux verify-cluster 4.4.0-116-generic #140-Ubuntu SMP Mon Feb 12 21:23:04 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+Install tools:
+Others:
+

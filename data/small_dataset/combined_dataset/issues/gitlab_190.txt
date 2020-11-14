@@ -1,0 +1,5 @@
+Hi, I have installed gitlab ce 6.7.3 on centos 6.5 and im getting the following error on the U on the Admin area logs tab for sidekiq.log : 
+
+tail: cannot open `/opt/gitlab/embedded/service/gitlab-rails/log/sidekiq.log' for reading: No such file or directory
+
+I used the standard all in one rpm omnibus installer and the install went fine. I created this file manually and refresh and as expected the error goes away. I suspect this file should be put in by some recipe even if empty?

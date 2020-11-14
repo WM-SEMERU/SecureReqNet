@@ -1,0 +1,12 @@
+Adding flexibility for the authority and audience to support Azure AD v2.0
+
+
+Adding flexibility for the authority and audience  (to enable the Azur…e AD v2.0 endpoint)
+Summary of the changes (Less than 80 chars)
+
+Improving the XML comments for AzureADOptions (to help for Azure AD v2.0 and sovereign cloud support)
+Adding the notion of Authority which is now computed from the Instance and ClientId, so that AzureAD v2.0 can be supported (Authority would therefore be https://{Instance}/{TenantId}/v2.0)
+Adding the notion of Audience for Web APIs so that it can be set (for instance to api://{tenantId} in v2.0)
+
+Addresses requests for supporting Azure AD v2.0 (Microsoft identity platform for developers)
+This is similar to aspnet/AADIntegration#49, but without breaking changes. This will enable supporting Azure AD v2.0 naturally (from the templates)

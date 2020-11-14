@@ -1,0 +1,6 @@
+Making projects using Symfony page searchable
+
+
+I was looking at the page https://symfony.com/projects, and it would be good if there was a search feature on the page. I notice when you go into a project, it has the components in Symfony that are used, so would be nice to have an option to tick the ones you want and see projects using all of them.
+It would also be nice to have a feature of projects that only use Symfony components, or something along the lines of if it was built on skeleton or website-skeleton or something, as well as if it is opensource.
+If this was done, it would mean when I want to do a Symfony project, I could search for opensource projects on the skeleton I am using and see how they do certain things etc which would be very useful. Any chance of a feature anything like this?

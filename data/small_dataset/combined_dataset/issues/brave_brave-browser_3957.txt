@@ -1,0 +1,209 @@
+Youtube crash on some video
+
+
+Description
+There is a YT video which causes crash on current master / nightly / dev builds on Linux/Windows/MacOS.
+Steps to Reproduce
+
+Open video https://www.youtube.com/watch?v=CZDCOKKR28g
+Start play, if it hadn't started
+
+Actual result:
+
+Browser crashes
+
+Expected result:
+
+No crash
+
+Reproduces how often:
+Easily
+Brave version (brave://version info)
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+reproducible on nightly / dev
+Not reproducible on beta/stable
+
+Additional Information
+Stack
+[8947:8947:0401/185603.744655:WARNING:render_frame_host_impl.cc(486)] InterfaceRequest was dropped, the document is no longer active: content.mojom.RendererAudioOutputStreamFactory
+[8947:8947:0401/185603.744798:WARNING:render_frame_host_impl.cc(486)] InterfaceRequest was dropped, the document is no longer active: resource_coordinator.mojom.FrameCoordinationUnit
+[8947:8947:0401/185604.172772:INFO:CONSOLE(0)] "Access to XMLHttpRequest at 'https://googleads.g.doubleclick.net/pagead/lopri?lact=-1&ytdevicever=ytdevicever_2.20190321&client=ca-pub-6219811747049371&correlator=10456749815159582484&ad_block=3&host=ca-yt-host-pub-6780164099767189&loeid=23780129,23757411,23784539,23733598,23782758,9471239,23798891,23801235,23800270,23804498,23794531,23800468,23803486,23804630,23801081,23804088,23800948,23804059,23792957,23720702,9477942&num_ads=1&video_doc_id=yt_CZDCOKKR28g&ad_type=text&channel=PyvWatchInRelated%2BPyvWatchNoAdX%2BPyvYTWatch%2BYtLoPri%2Bafv_user_id_PSqdZbnqlGqbT9GjihThwQ%2Bafv_user_www98lt%2Bnon_lpw%2Bpw%2Byt_cid_25384226%2Byt_mpvid_tvsGpGQiLcuNIhyO%2Byt_no_ap%2Bytdevice_1%2Bytdevicever_2.20190321&hl=en&url=http%3A%2F%2Fwww.youtube.com%2Fvideo%2FCZDCOKKR28g&output=js&ea=0&eae=2&adk=511001906&pyv=1&top=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCZDCOKKR28g%26app%3Ddesktop&loc=EMPTY&dbp=ChZyTkhKRkJxS09CU1hVNEVNLWNRMzh3EAEgASgAOAI&isw=0&ish=0&yt_pt=APb3F2_DXhI3eWyRGnVMSqQ7hcX3zeffjX2RvSYt_03ddbT0-kIgetLv1kziCdNqBNWNvc_IzlcRTaRi2RaonzesjK1Hkh26RzWT0rWieRhS6JSYjmE4-nHxFxOrQQYqLgxL2KNYwHzoT9XkS-ixkmlX_K69dktetk83rj8Z2YTkzqaPKNg-_HGHwkLDO1bVcYSbNiOEHwatpgopprNKT8kHTr8BvXYBO9PhgpymCg&pucrd=APb3F2_Tp8uBJK2cZQMmCPsC1XEat7ZcL0kI4oltGbl8GLcJG_tphsSYnBx8lK0jvtRkwbgMt_MVQLGIACGQ&dt=1554134160390&flash=0&frm=0&u_tz=180&u_his=2&u_java=false&u_h=1200&u_w=1920&u_ah=1176&u_aw=1855&u_cd=24&u_nplug=0&u_nmime=0&bc=15&bih=1075&biw=904&brdim=75%2C34%2C75%2C34%2C1855%2C24%2C912%2C1156%2C904%2C1075&vis=1&wgl=true&dff=times%20new%20roman&dfs=16&ppjl=u&rsz=%7C%7Cn%7C&dssz=38&icsg=67105023&mdo=0&mso=0&iag=0&lact=7147' from origin 'https://www.youtube.com' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute.", source: https://www.youtube.com/watch?v=CZDCOKKR28g (0)
+[8947:8947:0401/185604.549375:INFO:CONSOLE(0)] "The resource https://r6---sn-3tp8nu5g-3c2d.googlevideo.com/generate_204?conn2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", source:  (0)
+[8947:8947:0401/185604.550549:INFO:CONSOLE(0)] "The resource https://r6---sn-3tp8nu5g-3c2d.googlevideo.com/generate_204 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", source:  (0)
+[1:1:0401/185607.026442:ERROR:paint_controller.cc(438)] Visual rect changed in a cached subsequence: "LayoutBlockFlow (positioned) DIV class='ytp-progress-bar-padding'" old="0,-11 832x17" new="0,-11 817x17"
+[9013:9013:0401/185607.544223:VERBOSE1:bat_get_media.cc(68)] Media Id: CZDCOKKR28g
+[9013:9013:0401/185607.544291:VERBOSE1:bat_get_media.cc(73)] Media key: youtube_CZDCOKKR28g
+[9013:9013:0401/185607.544356:VERBOSE1:bat_get_media.cc(89)] Media duration: 9
+[8947:8959:0401/185607.571721:ERROR:brave_static_redirect_network_delegate_helper.cc(134)] URL not allowed from system network delegate: https://www.youtube.com/oembed?format=json&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCZDCOKKR28g
+[9013:9013:0401/185607.737264:VERBOSE1:ledger_impl.cc(1020)] 
+[ RESPONSE - getPublisherFromMediaPropsCallback ]
+> time: 1554134167
+> result: Failure
+> response: Unauthorized> headers alt-svc: quic=":443"; ma=2592000; v="46,44,43,39"
+> headers cache-control: no-cache
+> headers content-length: 12
+> headers content-type: text/html; charset=utf-8
+> headers date: Mon, 01 Apr 2019 15:56:07 GMT
+> headers expires: Tue, 27 Apr 1971 19:44:06 EST
+> headers p3p: CP="This is not a P3P policy! See http://support.google.com/accounts/answer/151657?hl=uk for more info."
+> headers server: YouTube Frontend Proxy
+> headers status: 401
+> headers strict-transport-security: max-age=31536000
+> headers x-content-type-options: nosniff
+> headers x-xss-protection: 1; mode=block
+[ END RESPONSE ]
+[8947:8947:0401/185607.737993:FATAL:url_fetcher_core.cc(106)] Check failed: original_url_.is_valid(). 
+#0 0x7f314dad5311 base::debug::CollectStackTrace()
+#1 0x7f314d91d59d base::debug::StackTrace::StackTrace()
+#2 0x7f314d91d555 base::debug::StackTrace::StackTrace()
+#3 0x7f314d95c3a3 logging::LogMessage::~LogMessage()
+#4 0x7f314bae3ce0 net::URLFetcherCore::URLFetcherCore()
+#5 0x7f314baee968 net::URLFetcherImpl::URLFetcherImpl()
+#6 0x7f314bae3149 net::URLFetcher::Create()
+#7 0x7f314bae3094 net::URLFetcher::Create()
+#8 0x7f314bae3008 net::URLFetcher::Create()
+#9 0x5564ae5b085d brave_rewards::RewardsServiceImpl::LoadURL()
+#10 0x5564ae70c1dd bat_ledger::LedgerClientMojoProxy::LoadURL()
+#11 0x5564ae743bfb bat_ledger::mojom::BatLedgerClientStubDispatch::AcceptWithResponder()
+#12 0x5564ae5bc73d bat_ledger::mojom::BatLedgerClientStub<>::AcceptWithResponder()
+#13 0x7f314dd9c6d1 mojo::InterfaceEndpointClient::HandleValidatedMessage()
+#14 0x7f314dd9c3a1 mojo::InterfaceEndpointClient::HandleIncomingMessageThunk::Accept()
+#15 0x7f314dd9b10b mojo::FilterChain::Accept()
+#16 0x7f314dd9e3e5 mojo::InterfaceEndpointClient::HandleIncomingMessage()
+#17 0x7f314dda7eab mojo::internal::MultiplexRouter::ProcessIncomingMessage()
+#18 0x7f314dda750e mojo::internal::MultiplexRouter::Accept()
+#19 0x7f314dd9b10b mojo::FilterChain::Accept()
+#20 0x7f314dd8a911 mojo::Connector::DispatchMessage()
+#21 0x7f314dd8baa5 mojo::Connector::ReadAllAvailableMessages()
+#22 0x7f314dd8b685 mojo::Connector::OnHandleReadyInternal()
+#23 0x7f314dd8b4db mojo::Connector::OnWatcherHandleReady()
+#24 0x7f314dd93044 base::internal::FunctorTraits<>::Invoke<>()
+#25 0x7f314dd92fa6 base::internal::InvokeHelper<>::MakeItSo<>()
+#26 0x7f314dd92f37 _ZN4base8internal7InvokerINS0_9BindStateIMN4mojo9ConnectorEFvjEJNS0_17UnretainedWrapperIS4_EEEEEFvjEE7RunImplIRKS6_RKNSt4__Cr5tupleIJS8_EEEJLm0EEEEvOT_OT0_NSF_16integer_sequenceImJXspT1_EEEEOj
+#27 0x7f314dd92e5b base::internal::Invoker<>::Run()
+#28 0x7f314dd85bd0 _ZNKR4base17RepeatingCallbackIFvjEE3RunEj
+#29 0x7f314dd8edcf mojo::SimpleWatcher::DiscardReadyState()
+#30 0x7f314dd8f07c base::internal::FunctorTraits<>::Invoke<>()
+#31 0x7f314dd8f00c base::internal::InvokeHelper<>::MakeItSo<>()
+#32 0x7f314dd8ef9c _ZN4base8internal7InvokerINS0_9BindStateIPFvRKNS_17RepeatingCallbackIFvjEEEjRKN4mojo18HandleSignalsStateEEJS5_EEEFvjSB_EE7RunImplIRKSD_RKNSt4__Cr5tupleIJS5_EEEJLm0EEEEvOT_OT0_NSK_16integer_sequenceImJXspT1_EEEEOjSB_
+#33 0x7f314dd8eeb0 base::internal::Invoker<>::Run()
+#34 0x7f314dd1ce96 _ZNKR4base17RepeatingCallbackIFvjRKN4mojo18HandleSignalsStateEEE3RunEjS4_
+#35 0x7f314dd1c649 mojo::SimpleWatcher::OnHandleReady()
+#36 0x7f314dd1d6d1 base::internal::FunctorTraits<>::Invoke<>()
+#37 0x7f314dd1d5c9 base::internal::InvokeHelper<>::MakeItSo<>()
+#38 0x7f314dd1d515 _ZN4base8internal7InvokerINS0_9BindStateIMN4mojo13SimpleWatcherEFvijRKNS3_18HandleSignalsStateEEJNS_7WeakPtrIS4_EEijS5_EEEFvvEE7RunImplIRKS9_RKNSt4__Cr5tupleIJSB_ijS5_EEEJLm0ELm1ELm2ELm3EEEEvOT_OT0_NSI_16integer_sequenceImJXspT1_EEEE
+#39 0x7f314dd1d39c base::internal::Invoker<>::Run()
+#40 0x7f314d8f3d4e _ZNO4base12OnceCallbackIFvvEE3RunEv
+#41 0x7f314d91e74b base::debug::TaskAnnotator::RunTask()
+#42 0x7f314d97653a base::MessageLoopImpl::RunTask()
+#43 0x7f314d976828 base::MessageLoopImpl::DeferOrRunPendingTask()
+#44 0x7f314d977106 base::MessageLoopImpl::DoWork()
+#45 0x7f314d97bc9c base::MessagePumpGlib::HandleDispatch()
+#46 0x7f314d97c3f1 base::(anonymous namespace)::WorkSourceDispatch()
+#47 0x7f312b26e197 g_main_context_dispatch
+#48 0x7f312b26e3f0 <unknown>
+#49 0x7f312b26e49c g_main_context_iteration
+#50 0x7f314d97bd8f base::MessagePumpGlib::Run()
+#51 0x7f314d975d8f base::MessageLoopImpl::Run()
+#52 0x7f314d9cf511 base::RunLoop::Run()
+#53 0x5564af33ac45 ChromeBrowserMainParts::MainMessageLoopRun()
+#54 0x7f3148758a7b content::BrowserMainLoop::RunMainMessageLoopParts()
+#55 0x7f314875eece content::BrowserMainRunnerImpl::Run()
+#56 0x7f3148753faa content::BrowserMain()
+#57 0x7f3149b6fc0b content::RunBrowserProcessMain()
+#58 0x7f3149b71060 content::ContentMainRunnerImpl::RunServiceManager()
+#59 0x7f3149b70aac content::ContentMainRunnerImpl::Run()
+#60 0x7f3149b6e349 content::ContentServiceManagerMainDelegate::RunEmbedderProcess()
+#61 0x7f3126b8773d service_manager::Main()
+#62 0x7f3149b6f703 content::ContentMain()
+#63 0x5564ad6e8246 ChromeMain
+#64 0x5564ad6e8152 main
+#65 0x7f3129747830 __libc_start_main
+#66 0x5564ad6e802a _start
+
+Received signal 6
+#0 0x7f314dad5311 base::debug::CollectStackTrace()
+#1 0x7f314d91d59d base::debug::StackTrace::StackTrace()
+#2 0x7f314d91d555 base::debug::StackTrace::StackTrace()
+#3 0x7f314dad4dca base::debug::(anonymous namespace)::StackDumpSignalHandler()
+#4 0x7f312bcdc390 <unknown>
+#5 0x7f312975c428 gsignal
+#6 0x7f312975e02a abort
+#7 0x7f314dad4576 base::debug::(anonymous namespace)::DebugBreak()
+#8 0x7f314dad4558 base::debug::BreakDebugger()
+#9 0x7f314d95c86d logging::LogMessage::~LogMessage()
+#10 0x7f314bae3ce0 net::URLFetcherCore::URLFetcherCore()
+#11 0x7f314baee968 net::URLFetcherImpl::URLFetcherImpl()
+#12 0x7f314bae3149 net::URLFetcher::Create()
+#13 0x7f314bae3094 net::URLFetcher::Create()
+#14 0x7f314bae3008 net::URLFetcher::Create()
+#15 0x5564ae5b085d brave_rewards::RewardsServiceImpl::LoadURL()
+#16 0x5564ae70c1dd bat_ledger::LedgerClientMojoProxy::LoadURL()
+#17 0x5564ae743bfb bat_ledger::mojom::BatLedgerClientStubDispatch::AcceptWithResponder()
+#18 0x5564ae5bc73d bat_ledger::mojom::BatLedgerClientStub<>::AcceptWithResponder()
+#19 0x7f314dd9c6d1 mojo::InterfaceEndpointClient::HandleValidatedMessage()
+#20 0x7f314dd9c3a1 mojo::InterfaceEndpointClient::HandleIncomingMessageThunk::Accept()
+#21 0x7f314dd9b10b mojo::FilterChain::Accept()
+#22 0x7f314dd9e3e5 mojo::InterfaceEndpointClient::HandleIncomingMessage()
+#23 0x7f314dda7eab mojo::internal::MultiplexRouter::ProcessIncomingMessage()
+#24 0x7f314dda750e mojo::internal::MultiplexRouter::Accept()
+#25 0x7f314dd9b10b mojo::FilterChain::Accept()
+#26 0x7f314dd8a911 mojo::Connector::DispatchMessage()
+#27 0x7f314dd8baa5 mojo::Connector::ReadAllAvailableMessages()
+#28 0x7f314dd8b685 mojo::Connector::OnHandleReadyInternal()
+#29 0x7f314dd8b4db mojo::Connector::OnWatcherHandleReady()
+#30 0x7f314dd93044 base::internal::FunctorTraits<>::Invoke<>()
+#31 0x7f314dd92fa6 base::internal::InvokeHelper<>::MakeItSo<>()
+#32 0x7f314dd92f37 _ZN4base8internal7InvokerINS0_9BindStateIMN4mojo9ConnectorEFvjEJNS0_17UnretainedWrapperIS4_EEEEEFvjEE7RunImplIRKS6_RKNSt4__Cr5tupleIJS8_EEEJLm0EEEEvOT_OT0_NSF_16integer_sequenceImJXspT1_EEEEOj
+#33 0x7f314dd92e5b base::internal::Invoker<>::Run()
+#34 0x7f314dd85bd0 _ZNKR4base17RepeatingCallbackIFvjEE3RunEj
+#35 0x7f314dd8edcf mojo::SimpleWatcher::DiscardReadyState()
+#36 0x7f314dd8f07c base::internal::FunctorTraits<>::Invoke<>()
+#37 0x7f314dd8f00c base::internal::InvokeHelper<>::MakeItSo<>()
+#38 0x7f314dd8ef9c _ZN4base8internal7InvokerINS0_9BindStateIPFvRKNS_17RepeatingCallbackIFvjEEEjRKN4mojo18HandleSignalsStateEEJS5_EEEFvjSB_EE7RunImplIRKSD_RKNSt4__Cr5tupleIJS5_EEEJLm0EEEEvOT_OT0_NSK_16integer_sequenceImJXspT1_EEEEOjSB_
+#39 0x7f314dd8eeb0 base::internal::Invoker<>::Run()
+#40 0x7f314dd1ce96 _ZNKR4base17RepeatingCallbackIFvjRKN4mojo18HandleSignalsStateEEE3RunEjS4_
+#41 0x7f314dd1c649 mojo::SimpleWatcher::OnHandleReady()
+#42 0x7f314dd1d6d1 base::internal::FunctorTraits<>::Invoke<>()
+#43 0x7f314dd1d5c9 base::internal::InvokeHelper<>::MakeItSo<>()
+#44 0x7f314dd1d515 _ZN4base8internal7InvokerINS0_9BindStateIMN4mojo13SimpleWatcherEFvijRKNS3_18HandleSignalsStateEEJNS_7WeakPtrIS4_EEijS5_EEEFvvEE7RunImplIRKS9_RKNSt4__Cr5tupleIJSB_ijS5_EEEJLm0ELm1ELm2ELm3EEEEvOT_OT0_NSI_16integer_sequenceImJXspT1_EEEE
+#45 0x7f314dd1d39c base::internal::Invoker<>::Run()
+#46 0x7f314d8f3d4e _ZNO4base12OnceCallbackIFvvEE3RunEv
+#47 0x7f314d91e74b base::debug::TaskAnnotator::RunTask()
+#48 0x7f314d97653a base::MessageLoopImpl::RunTask()
+#49 0x7f314d976828 base::MessageLoopImpl::DeferOrRunPendingTask()
+#50 0x7f314d977106 base::MessageLoopImpl::DoWork()
+#51 0x7f314d97bc9c base::MessagePumpGlib::HandleDispatch()
+#52 0x7f314d97c3f1 base::(anonymous namespace)::WorkSourceDispatch()
+#53 0x7f312b26e197 g_main_context_dispatch
+#54 0x7f312b26e3f0 <unknown>
+#55 0x7f312b26e49c g_main_context_iteration
+#56 0x7f314d97bd8f base::MessagePumpGlib::Run()
+#57 0x7f314d975d8f base::MessageLoopImpl::Run()
+#58 0x7f314d9cf511 base::RunLoop::Run()
+#59 0x5564af33ac45 ChromeBrowserMainParts::MainMessageLoopRun()
+#60 0x7f3148758a7b content::BrowserMainLoop::RunMainMessageLoopParts()
+#61 0x7f314875eece content::BrowserMainRunnerImpl::Run()
+#62 0x7f3148753faa content::BrowserMain()
+#63 0x7f3149b6fc0b content::RunBrowserProcessMain()
+#64 0x7f3149b71060 content::ContentMainRunnerImpl::RunServiceManager()
+#65 0x7f3149b70aac content::ContentMainRunnerImpl::Run()
+#66 0x7f3149b6e349 content::ContentServiceManagerMainDelegate::RunEmbedderProcess()
+#67 0x7f3126b8773d service_manager::Main()
+#68 0x7f3149b6f703 content::ContentMain()
+#69 0x5564ad6e8246 ChromeMain
+#70 0x5564ad6e8152 main
+#71 0x7f3129747830 __libc_start_main
+#72 0x5564ad6e802a _start
+  r8: 00007ffc57c4d001  r9: 00007f311a724c40 r10: 0000000000000008 r11: 0000000000000206
+ r12: 00000a47f5c1d4d0 r13: 00000a47f5e90dc0 r14: 00000a47f5b34340 r15: 00007f314d97c3d0
+  di: 00000000000022f3  si: 00000000000022f3  bp: 00007ffc57c4d5f0  bx: 0000000000000000
+  dx: 0000000000000006  ax: 0000000000000000  cx: 00007f312975c428  sp: 00007ffc57c4d4b8
+  ip: 00007f312975c428 efl: 0000000000000206 cgf: 002b000000000033 erf: 0000000000000000
+ trp: 0000000000000000 msk: 0000000000000000 cr2: 0000000000000000
+[end of stack trace]
+Calling _exit(1). Core file will not be generated.
+
+

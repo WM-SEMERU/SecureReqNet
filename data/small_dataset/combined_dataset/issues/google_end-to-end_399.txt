@@ -1,0 +1,4 @@
+Add support for ES6 in the transpiler.  This allows usage of ES6 feat…
+
+
+…ures.

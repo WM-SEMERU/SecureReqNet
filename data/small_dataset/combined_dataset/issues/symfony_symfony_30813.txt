@@ -1,0 +1,86 @@
+New PHPUnit assertions for the WebTestCase
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+replaces #29990
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+While reviewing #29990, and working on some tests, I realized that we could do better by adding PHPUnit constraint classes in various components that are then used in WebTextCase.
+Before
+<?php
+
+namespace App\Tests;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class DefaultControllerTest extends WebTestCase
+{
+    public function testSomething()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/test');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Hello World', $crawler->filter('h1')->text());
+    }
+}
+After
+<?php
+
+namespace App\Tests;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class DefaultControllerTest extends WebTestCase
+{
+    public function testSomething()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/test');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Hello World');
+    }
+}

@@ -1,0 +1,169 @@
+[Security] Bump moment from 2.18.1 to 2.22.2 in /docs
+
+
+Bumps moment from 2.18.1 to 2.22.2. This update includes security fixes.
+
+Vulnerabilities fixed
+Sourced from The GitHub Vulnerability Alert Database.
+
+CVE-2017-18214
+See https://nvd.nist.gov/vuln/detail/CVE-2017-18214.
+Affected versions: < 2.19.3
+
+
+
+Changelog
+Sourced from moment's changelog.
+
+2.22.2 See full changelog
+
+
+Release May 31, 2018
+
+
+#4564 [bugfix] Avoid using trim()
+
+
+#4453 [bugfix] Treat periods as periods, not regex-anything period, for weekday parsing in strict mode.
+
+
+Minor locale improvements (pa-in, be, az)
+
+
+2.22.1 See full changelog
+
+
+Release Apr 14, 2018
+
+
+#4495 [bugfix] Added HTML5_FMT to moment.d.ts
+
+
+Minor locale improvements
+
+
+QUnit upgrade and coveralls reporting
+
+
+2.22.0 See full changelog
+
+
+Release Mar 30, 2018
+
+
+#4423 [new locale] Added Mongolian locale mn
+
+
+Various locale improvements
+
+
+Minor misc changes
+
+
+2.21.0 See full changelog
+
+
+Release Mar 2, 2018
+
+
+#4391 [bugfix] Fix #4390: use offset properly in toISOString
+
+
+#4310 [bugfix] Fix #3883 lazy load parentLocale in defineLocale, fallback to global if missing
+
+
+#4085 [misc] Print console warning when setting non-existent locales
+
+
+#4371 [misc] fix deprecated rollup options
+
+
+New locales: ug-cn, en-il, tg
+
+
+Various locale improvements
+
+
+2.20.1 See changelog
+
+
+Release Dec 18, 2017
+
+
+#4359 [locale] Fix Arabic locale for months (again)
+
+
+#4357 [misc] Add optional parameter keepOffset to toISOString
+
+
+2.20.0 See full changelog
+
+
+Release Dec 16, 2017
+
+
+#4312 [bugfix] Fix #4251: Avoid RFC2822 in utc() test
+
+
+#4240 [bugfix] Fix incorrect strict parsing with full-width parentheses
+
+
+#4341 [feature] Prevent toISOString converting to UTC (issue #1751)
+
+
+#4154 [feature] add format constants to support output to HTML5 input type formats (see #3928)
+
+
+ ... (truncated)
+
+
+
+Commits
+
+2e2a5b3 Build 2.22.2
+e79be41 Bump version to 2.22.2
+7fdc23f Update changelog for 2.22.2
+12cf027 [misc] Fix grunt devDep to 3.5.2 (#4648)
+398d994 [misc] Typo in test (#4610)
+a831fc7 [bugfix] Avoid using trim() (#4564)
+ad49bd6 [locale] Fix #4568: Insert punjabi for "next" (#4583)
+245e5fc [misc] Fix "the the" typo in test (#4578)
+508f9ce [locale] Fix wrong calendar() output in 'be' localisation (#4528)
+aba77ec [locale] az: Fix typo in seconds (#4527)
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+Note: This repo was added to Dependabot recently, so you'll receive a maximum of 5 PRs for your first few update runs. Once an update run creates fewer than 5 PRs we'll remove that limit.
+You can always request more updates by clicking Bump now in your Dependabot dashboard.
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

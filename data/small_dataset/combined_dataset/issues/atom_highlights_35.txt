@@ -1,0 +1,9 @@
+Highlights can get into infinite loop, leaking memory under Linux
+
+
+Note that this does not happen under OSX. I suspect node-oniguruma handles Unicode differently somehow.
+To reproduce:
+
+Create breaks.js or breaks.rb (for example), with the bytes 0x27 0xc3 0xbc 0x27 (base64 J8O8Jw==), which looks like 'ü'.
+Call the highlights command line utility on it. It never returns and its memory usage grows over time.
+

@@ -1,0 +1,13 @@
+Support unknown attribute selectors in querySelector
+
+
+Original issue 1833 created by bruant.d on 2013-08-07T12:52:06.000Z:
+What steps will reproduce the problem?
+
+Try document.body.querySelector('menu li[data-model="companies"]');
+
+What is the expected output?
+=> an element (or null if not present in document)
+What do you see instead?
+In the Firefox Aurora console:
+"Erroneous or unsupported selector syntax: menu li[data-model="companies"] @ https://ssl.gstatic.com/caja/5503m/ses-single-frame.opt.js?debug=1:1352"

@@ -1,0 +1,10 @@
+[ACL RoleSecurityIdentity] check if instance of Role
+
+
+Constructor of  Symfony\Component\Security\Acl\Domain\RoleSecurityIdentity
+currently it check if the argument is instance of Symfony\Component\Security\Core\Role\Role by
+if ($role instanceof Role)
+Maybe it should be changed to
+if ($role instanceof RoleInterface)
+Because if we use another Role class which implements RoleInterface
+it dosen't work when we check access, it will throw a NoAceFoundException when vote

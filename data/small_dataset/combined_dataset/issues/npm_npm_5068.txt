@@ -1,0 +1,13 @@
+logging in
+
+
+Doing a PUT to clobber the _users doc every time you auth on a new computer?  Requiring manual config file edits after a password change?  Storing the password in a config file?  One login that is expected to work on all registries?
+Clownshoes.  We can do better.
+Here's an idea for a next step that'll get us closer to reasonableness.  (Ssh key-based login will come in a later iteration.)
+Split up the adduser command into three: adduser, login, and logout.
+If the _users doc exists, then adduser doesn't create it, but will instead call login.  If it doesn't exist, then adduser will create it, and then log in as that user.
+login will prompt for username and password, POST to /_session, and get an AuthToken.  Subsequent requests to the server will send that AuthToken in the cookie header.  Take note of the expiration.  (May require change to couch-login module to be smarter about this.)
+When the token is expired, stubbornly refuse to use it, and instead require that the user re-login.
+logout send a DELETE request to /_session to ensure it's entirely gone, and then delete the token.
+If any request ever returns a result indicating that the auth is invalid, then delete the token.
+npm login --force will provide the option to save your username and password, unencrypted, if you type some kind of yes i am sure confirmation or something.

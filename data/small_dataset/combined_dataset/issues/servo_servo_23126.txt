@@ -1,0 +1,11 @@
+Fix various Windows dependency issues
+
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #23125 and fix #23104
+ There are tests for these changes
+
+
+This change is 

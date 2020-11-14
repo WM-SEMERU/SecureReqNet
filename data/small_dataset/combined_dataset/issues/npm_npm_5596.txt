@@ -1,0 +1,11 @@
+Security issue: npm to install executables as user 'nobody'
+
+
+It is a security issue of large proportion that npm -g installs executables as user 'nobody'. The 'nobody' user should not have write access to any files on a system let alone a whole bunch of libraries and executables. And especially not when those files are intended to be relied upon in the main runnings of the server.
+The proper way to do it, would be
+
+for npm to register a user 'npm' upon installation, and use this user during build and install, or
+for npm to build files as 'nobody' in a temporary location, and install built files with ownership 'root', then delete all files owned by 'nobody', or better still
+combine the two, have npm build as 'npm' but install as 'root'
+
+Having files owned by 'nobody' is like saying to an intruder: "We won't give you root access, but don't worry, you can write to all our crucial files anyway. Enjoy!"

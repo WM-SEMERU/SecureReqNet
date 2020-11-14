@@ -1,0 +1,64 @@
+[WIP] [Security] Fix #2172 User switching is not available for pre-authenticated users (oldest open bug!)
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+maybe
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no (!)
+
+
+Fixed tickets
+#2172
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+TODO
+
+ gather feedback for my changes
+ fix the test according to feedback
+
+For my first PR, I tried to fix the Symfony's oldest still open bug (2011!)
+New tests have been added to reproduce the bug and are now passing.
+To be reviewed carefully as it deals with security.
+From my understanding, the problem comes from the AbstractPreAuthenticatedListener that is not stateless: whenever a token is passed, it has to preauthenticate again.
+Problem, even if another type of token is passed (like a UsernamePasswordToken), it still tries to authenticate it and as it failed it creates a new one with the current user.
+This behaviour doesn't work when switching user because the new artificial user token is automatically replaced by the current preauthenticated token.
+So the patch bypass this check if (and only if) a token is already there (given by context), it is already correctly authenticated, and it is of another class than PreAuthenticatedToken (to limit risks of BC break).
+Problem: this new behaviour breaks (by design) the following test:
+Symfony\Component\Security\Http\Tests\Firewall\AbstractPreAuthenticatedListenerTest::testHandleWhenAuthenticationFailsWithDifferentToken
+To be discussed: is this new behaviour correct (it may fix other bugs), or is there potential security issues? Should it be considered as a BC break?

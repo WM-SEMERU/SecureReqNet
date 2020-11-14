@@ -1,0 +1,20 @@
+Remaining work for using tokens instead of basic auth
+
+
+#2328 is about having a flow for issuing new tokens and new users.
+In addition to that, we also need to just be able to accept a bearer token for the "admin" user, rather than basic auth.  Not sure that #2328 is planning to encompass that, and at any rate @jlowdermilk may be interested in getting something going with bearer tokens before that PR lands.
+So, here is what I recall needed to be done:
+
+there is already a function called get-admin-token in master/cluster/gce/util.sh that generates a token.  Not sure what calls that if anything.  But it looks good to use.
+In kube-up in that file, it calls get-passwd to get or generates a password, and makes a htpasswd file.  We don't need that anymore.  .  We need to call get-admin-token in place of get-passwd and stick that into a file somewhere that the apiserver can read.
+cluster/saltbase/salt/kube-apiserver/default is where we tell the apiserver where the token file is.  That should be fine as is.
+cluster/gce/templates/create-dynamic-salt-files.sh is where we generate the token for the kubelet and stick it into the tokens file, which is just a csv file.  We'd want to have, at a minimim, one line for the kubelet token and another line for the admin token, in that file  So you need to work out how to get both in there, and the kubelet one to the kubelet and the admin one to the user.
+currently, the apiserver sits behind the nginx proxy.  Nginx doesn't support bearer tokens, afaics, and anyhow we want the apiserver to handle the token so it can map the token to a user and apply policies.   And we want apiserver to terminate SSL because that is how the code is currently written to work.  so:
+
+we need to get rid of nginx altogether
+change the apiserver so that it serves on port 443, with authentication enabled.  That means setting --auth_port to 443 instead of 6443 in cluster/saltbase/salt/kube-apiserver/default.  You will then have to change the kubelets so that they talk to port 443 instead of  6443.
+Ideally, we do the same for AWS and Azure kube-ups too, and ask someone to test them.
+
+
+
+@jlowdermilk FYI

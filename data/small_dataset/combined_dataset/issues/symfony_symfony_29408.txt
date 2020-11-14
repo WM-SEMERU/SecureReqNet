@@ -1,0 +1,42 @@
+[Security] getTargetPath of TargetPathTrait must return string or null
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes (possible bug)
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Since the return type is string the default return value must be also string.

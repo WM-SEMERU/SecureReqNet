@@ -1,0 +1,16 @@
+Improve the way exceptions are listed in the error page
+
+
+Description
+The order in which multiple exceptions are displayed in the error page is sometimes confusing.
+Example
+If you make a mistake in the config/services.yaml file of the Symfony Demo app, you see this:
+
+There is a perfect exception message that tells you exactly what happened ... but it's "buried" so low, that you probably won't see it.
+If we reverse the order of exceptions in this case, the error page would be much better.
+The above has happened to me several times with different errors ... but the opposite too: sometimes the current order is the best order. So:
+
+Should we reverse the order of exceptions in the error page in all cases?
+Is this a matter of tweaking some but not all exceptions?
+
+Thanks!

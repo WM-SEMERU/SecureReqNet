@@ -1,0 +1,91 @@
+Guard autowires UserProviderService based on types
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.2
+
+
+
+I am using Guard as Authentication System and get this deprecation note since version 3.3.2.
+Autowiring services based on the types they implement is deprecated since Symfony 3.3 and won't be supported in version 4.0. You should rename (or alias) the "security.user.provider.concrete.user_provider" service to "Symfony\Component\Security\Core\User\UserProviderInterface" instead.
+My security.vml looks like this:
+encoders:
+    AppBundle\Entity\User:
+        algorithm: bcrypt
+
+providers:
+    user_provider:
+        entity:
+            class: AppBundle:User
+            #property: username
+            manager_name: default
+
+firewalls:
+    dev:
+        pattern: ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+
+    backend:
+        pattern: ^/backend/
+        anonymous: ~
+        guard:
+            authenticators:
+                - AppBundle\Security\BackendLoginAuthenticator
+        logout:
+            path: backend_logout
+            target: backend_login
+        form_login:
+            login_path: backend_login
+            check_path: backend_login_check
+            default_target_path: backend_home
+        remember_me:
+            secret: "%secret%"
+            name: RMSIEFSNAPP
+            lifetime: 31536000 # 1 year in seconds
+            path: /backend/
+        switch_user: ~
+
+And AppBundle\Security\BackendLoginAuthenticator is configured in service.yml like this:
+(If I ommit this and the service is autowired - same deprecation message)
+AppBundle\Security\BackendLoginAuthenticator:
+    arguments:
+        $encoder: "@security.password_encoder"
+        $router: "@router"
+        $csrfTokenManager: "@security.csrf.token_manager"
+        $em: "@doctrine.orm.entity_manager"
+
+Is something wrong or missing in my configuration or is there a way to get rid of this deprecation message?
+The message is triggered in Symfony\Component\DependencyInjection\Compiler\AutowirePass.php:344
+This is written in appDevDebugProjectContainer.xml:
+<service id="security.user.provider.concrete.user_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+  <argument type="service" id="doctrine"/>
+  <argument>AppBundle:User</argument>
+  <argument>null</argument>
+  <argument>default</argument>
+</service>
+

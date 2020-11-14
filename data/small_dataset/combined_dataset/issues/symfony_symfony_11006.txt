@@ -1,0 +1,6 @@
+[Security] Adding providerKey to AnonymousToken
+
+
+I apologize if this is covered elsewhere. I couldn't find any mention in articles, docs or issues. Is there a specific reason why AnonymousToken doesn't get the providerKey while all other AbstractToken subclasses do?
+I am trying, programatically, to determine which firewall emitted an AnonymousToken and saw that it was not stored in the token.
+I can create a PR to add it. I just wasn't sure if there was a security issue related to it so figured I'd ask first.

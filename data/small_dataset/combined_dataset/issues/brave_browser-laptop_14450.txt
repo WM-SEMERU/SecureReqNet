@@ -1,0 +1,10 @@
+npm audit shows warnings (run npm audit fix)
+
+
+there's some packages with npm-detected security issues:
+found 31 vulnerabilities (5 low, 19 moderate, 6 high, 1 critical) in 15716 scanned packages
+  run `npm audit fix` to fix 6 of them.
+  12 vulnerabilities require semver-major dependency updates.
+  13 vulnerabilities require manual review. See the full report for details.
+
+we should get the low-hanging fruit by running npm audit fix at the least

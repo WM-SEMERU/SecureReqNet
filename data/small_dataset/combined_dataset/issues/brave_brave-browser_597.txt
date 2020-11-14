@@ -1,0 +1,5 @@
+Address Bar Spoofing in Brave-Core
+
+
+brave/internal#393
+brave/internal#394

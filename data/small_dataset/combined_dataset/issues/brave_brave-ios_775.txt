@@ -1,0 +1,23 @@
+Device is not removed from Sync when other device deletes it
+
+
+Description:
+Steps to Reproduce
+
+Join device A and device B
+On device B remove device A
+Open Sync settings on device A
+
+Actual result: 
+Sync settings are showing with only device B presented, sync chain is not removed from the device(A)
+Expected result:
+Device should be removed from Sync chain
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Brave Version: 
+Device details: 
+Website problems only:
+
+did you check with Brave Shields down?
+did you check in Safari/Firefox (WkWebView-based browsers)?
+
+Additional Information

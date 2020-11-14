@@ -1,0 +1,4 @@
+[SecurityBundle] RoleHierarchyInterface now can be autowired
+
+
+symfony/symfony#26639

@@ -1,0 +1,33 @@
+I made some changes in the current version of GitLab. When I create a new project, the repo is automatically initialized. A .json is coppied in it at creation. Then I have a new page, like project_name/new_page where I have some form with data (added by project creation).
+
+When I want to edit that data, I want to update my JSON file. HOW?
+In the update_product of projects_controller I have this: (it works)
+
+::Products::UpdateService.new(@project.product, current_user, params).execute
+
+But I want also to update the .json file with this data.
+
+I tried with this:
+
+file_path = File.join(@path, 'product.json')
+params[:content] = "test"
+Files::UpdateService.new(@project, current_user, params, @ref, file_path).execute
+
+I added this line at the begining:
+
+require_relative "../services/files/base_service"
+
+but I thing it still fails to know that @ref and @path is.
+
+I tried with this too:
+
+edit_file_action = Gitlab::Satellite::EditFileAction.new(current_user, @project, @ref, file_path)
+created_successfully = edit_file_action.commit!(
+params[:content] = 'test',
+params[:commit_message] = 'test',
+params[:encoding] = 'text'
+)
+
+How to make the correct @ref and @path visible to the projects_controller?
+
+Log: TypeError - no implicit conversion of nil into String: ...

@@ -1,0 +1,29 @@
+Capability leak: v8 bug causes SES to leak the global object.
+
+
+Original issue 1789 created by erights on 2013-07-03T04:29:36.000Z:
+See https://code.google.com/p/v8/issues/detail?id=2758
+Text of original report of https://code.google.com/p/v8/issues/detail?id=2758 follows. These are tested in a bare JS environment. But the same attacks work from confined SES code.
+Originally reported to me by tung tran <tunghack@gmail.com>. Please put him and me and the cajadores on the cc list for this bug.
+Various built-in functions leak the global object. We have yet to do the testing to accumulate a full list. Note that all the cases tested so far work correctly on FF and Safari.
+This bug make all current deployments of SES (and of Caja in ES5 mode) insecure on Chrome/v8. Please keep this bug private until Caja has deployed a SES which detects and repairs (by monkey patching) this bug.
+> (1,[].concat)()[0] === window
+true
+> (1,[].push)('foo')
+1
+> window[0]
+"foo"
+> (1,[].pop)()
+"foo"
+Whereas valueOf works correctly, even if it does have a misleading error message, since it is undefined that it is failing to convert to object.
+> (1,{}.valueOf)()
+TypeError: Cannot convert null to object
+Curiously, using .call to pass undefined explicitly does not provoke this buggy behavior:
+> [].concat.call(void 0)
+TypeError: Array.prototype.concat called on null or undefined
+> [].push.call(void 0, 'bar')
+TypeError: Array.prototype.push called on null or undefined
+> [].pop.call(void 0)
+TypeError: Array.prototype.pop called on null or undefined
+> ({}).valueOf.call(void 0)
+TypeError: Cannot convert null to object

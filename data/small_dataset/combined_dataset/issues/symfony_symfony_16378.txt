@@ -1,0 +1,114 @@
+[Security] Improvement/Evolution: several firewalls with the same pattern
+
+
+Hello!
+Context:
+I am currently working on a site where some features are only available to authenticated members. So I have the following firewall configuration:
+# app/config/security.yml:
+
+    security:
+        encoders:
+            members:
+                class:              VE\ProjectBundle\Model\Member
+                algorithm:          sha1
+                iterations:         1
+                encode_as_base64:   false
+        providers:
+            members:
+                propel:
+                    class:      VE\ProjectBundle\Model\Member
+                    property:   email
+        firewalls:
+            member_area:
+                pattern:    ^/
+                provider:   members
+                anonymous:  ~
+                form_login:
+                    login_path:             /member
+                    check_path:             /member/validate-login
+                    username_parameter:     email
+                    password_parameter:     password
+                    default_target_path:    /member
+                logout:
+                    path:   /member/logout
+                    target: /member
+                    invalidate_session: false
+I also have an administration area accessible to the URL "/administration" and which the following configuration:
+# app/config/security.yml:
+
+    security:
+        encoders:
+            administrators:
+                class:              VE\AdministrationBundle\Model\Administrator
+                algorithm:          sha1
+                iterations:         1
+                encode_as_base64:   false
+        providers:
+            administrators:
+                propel:
+                    class:      VE\AdministrationBundle\Model\Administrator
+                    property:   email
+        firewalls:
+            administration_area:
+                pattern:    ^/administration
+                provider:   administrators
+                anonymous:  ~
+                form_login:
+                    login_path:             /administration/administrator/login
+                    check_path:             /administration/administrator/validate-login
+                    username_parameter:     email
+                    password_parameter:     password
+                    default_target_path:    /administration
+                    csrf_parameter:         _token
+                logout:
+                    path:   /administration/administrator/logout
+                    target: /administration
+                    invalidate_session: false
+        access_control:
+            administration_administrator_login:
+                path: ^/administration/administrator/login
+                roles: IS_AUTHENTICATED_ANONYMOUSLY
+            administration:
+                path: ^/administration
+                roles: ROLE_ADMIN
+Problem:
+I want to show in the global template of the site (behind the firewall "member_area") a link to return to the administration when the visitor is authenticated to the firewall "administration_area". In fact, I try to do something more complex, but I simplified the problem to be more clear.
+/src/VE/ProjectBundle/Resources/views/globalTemplate.html.twig:
+    {% if app.user and is_granted('ROLE_ADMIN') %}
+        <a href="#">Return to administration</a>
+    {% endif %}
+Except that the pattern of the firewall is "/administration", the firewall "administration_area" is not active for the URL "/home" for example. In addition, if "app.user" is defined, it will contain an object "Member" and not an object "Administrator".
+Change the pattern of the firewall "administration_area" to "^/" does not solve anything because the firewall "member_area" is executed before.
+Changing the order of firewalls in the configuration ask the opposite problem. If "app.user" is defined, it will contain an object "Administrator" and not an object "Member".
+Share the same context between the two firewalls appears not to be either a solution because we have not a single object "User". I want absolutely to have two separate entities (Member and Administrator).
+Potential solution:
+I suggest here a solution or rather an idea based on the existing. There maybe/probably better to do.
+The idea is to have multiple firewalls for the same pattern.
+# app/config/security.yml:
+
+    security:
+        firewalls:
+            member_area:
+                pattern:    ^/
+            administration_area:
+                pattern:    ^/
+On the side of a controller, you could do this:
+/src/VE/ProjectBundle/Controller/ShowPageController.php:
+    if ($this->getUser('member_area') && $this->isGranted('editProfile', null, 'member_area')) {
+        // Can edit his profile
+    }
+
+    if ($this->getUser('administration_area') && $this->isGranted('ROLE_ADMIN', null, 'administration_area')) {
+        // Is admin authenticated
+    }
+The side of a Twig template, we could do this:
+/src/VE/ProjectBundle/Resources/views/globalTemplate.html.twig:
+    {% if app.firewalls.member_area.user and is_granted('editProfile', null, null, 'member_area') %}
+        <a href="#">Edit my profile</a>
+    {% endif %}
+
+    {% if app.firewalls.administrator_area.user and is_granted('ROLE_ADMIN', null, null, 'administration_area') %}
+        <a href="#">Return to administration</a>
+    {% endif %}
+What do you think of this proposal?
+Thank you!

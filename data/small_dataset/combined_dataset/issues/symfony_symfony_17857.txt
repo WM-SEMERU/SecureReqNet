@@ -1,0 +1,39 @@
+"Encoder" is a Misnomer which Leads to Confusion
+
+
+Referring to: https://github.com/symfony/symfony/tree/master/src/Symfony/Component/Security/Core/Encoder
+I saw this thread on StackOverflow, wherein the author is confused about actual cryptography terminology. It seems their confusion is stemming from the naming convention that Symfony uses.
+I'd like to refer to my blog post about cryptography terms and concepts (which has been informally peer-reviewed by crypto experts for both semantic and colloquial accuracy and even-more-informally peer-reviewed by neophytes for digestibility).
+
+Cryptography
+
+Keyless
+
+Cryptographic hash functions
+
+
+Secret-Key
+
+Secret-Key Encryption (e.g. block ciphers, stream ciphers)
+Secret-Key Authentication (e.g. HMAC)
+Password Hashing
+
+
+Public-Key
+
+Key Agreement
+Public-Key Encryption
+Public-Key Authentication - Digital Signatures (e.g. RSA, DSA, ECDSA, EdDSA)
+
+
+
+
+Not Cryptography
+
+Compression
+Encoding
+
+
+
+This might be something that has to be punted to Symfony 4 (assuming Symfony follows semver), but the average Symfony developer's understanding of the correct cryptography terminology would greatly improve if Symfony changed its vocabulary.
+This is just something to consider.

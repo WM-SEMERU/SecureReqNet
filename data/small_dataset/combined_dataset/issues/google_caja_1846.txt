@@ -1,0 +1,23 @@
+Scanner can enter an infinite loop due to infinite fresh objects(Chrome 30)
+
+
+Original issue 1848 created by kpreid.switchb.org on 2013-08-23T18:43:13.000Z:
+Felix writes:
+r5574 es5 scanner infinite loop on Chrome 30 (beta)
+It complains:
+Object<CONSTRUCT>(dummyFunction).get arguments<THIS>() thrown .get
+stack<PLAIN>() thrown .get stack<PLAIN>() thrown .get stack<PLAIN>()
+thrown .get stack<PLAIN>() thrown .get stack<PLAIN>() thrown .get
+stack<PLAIN>() thrown .get stack<PLAIN>() thrown
+TypeError: Cannot read property '0' of undefined
+Problem: Properties are writable: prototype
+| Path:     Object<CONSTRUCT>(dummyFunction).get arguments<THIS>()
+thrown .get stack<PLAIN>() thrown .get stack<PLAIN>() thrown .get
+stack<PLAIN>() thrown .get stack<PLAIN>() thrown .get stack<PLAIN>()
+thrown .get stack<PLAIN>() thrown .get stack
+| Program:  Object.getOwnPropertyDescriptor(thrown(Object.getOwnPropertyDescriptor(thrown(Object.getOwnPropertyDescriptor(thrown(Object.getOwnPropertyDescriptor(thrown(Object.getOwnPropertyDescriptor(thrown(Object.getOwnPropertyDescriptor(thrown(Object.getOwnPropertyDescriptor(thrown(Object.getOwnPropertyDescriptor(window.Object.call(...),
+"arguments").get, ...), "stack").get, ...), "stack").get, ...),
+"stack").get, ...), "stack").get, ...), "stack").get, ...),
+"stack").get, ...), "stack").get
+| toString: function () { [native code] }
+and keeps getting deeper without bound

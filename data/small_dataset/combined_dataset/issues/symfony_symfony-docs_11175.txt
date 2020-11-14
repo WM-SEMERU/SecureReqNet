@@ -1,0 +1,4 @@
+remove space before self closing xml tag
+
+
+@wouterj this one is following your comment

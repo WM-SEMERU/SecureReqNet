@@ -1,0 +1,4 @@
+Support authGSSServerWrap/Unwrap() ?
+
+
+Now it has authGSSClientWrap/Unwarp(). We need a couple of new method for the server states. Thanks!

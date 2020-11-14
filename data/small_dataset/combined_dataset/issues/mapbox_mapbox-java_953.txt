@@ -1,0 +1,4 @@
+removed AutoValue from geoJson
+
+
+address #710

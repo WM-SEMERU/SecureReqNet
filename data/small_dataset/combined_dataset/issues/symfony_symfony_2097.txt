@@ -1,0 +1,5 @@
+Added missing method to HTTP Digest entry point
+
+
+I added getKey() and getRealmName() to DigestAuthenticationEntryPoint because of this error:
+Fatal error: Call to undefined method Symfony\Component\Security\Http\EntryPoint\DigestAuthenticationEntryPoint::getKey() in /.../vendor/symfony/src/Symfony/Component/Security/Http/Firewall/DigestAuthenticationListener.php on line 79

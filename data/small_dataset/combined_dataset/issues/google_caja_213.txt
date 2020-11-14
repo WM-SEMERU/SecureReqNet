@@ -1,0 +1,11 @@
+Add check that expansion has fired on all nodes
+
+
+Original issue 213 created by ihab.awad on 2008-04-23T22:49:31.000Z:
+Implement the following algorithm around the JS rewriter to make sure that
+we did not simply miss calling expand(...) on some subtree:
+Mark all tree nodes with UNEXPANDED.
+Apply rules
+Rule.expand removes UNEXPANDED from its return value.
+ParseTreeNodes.clone does not clone UNEXPANDED.
+Walk tree making sure no nodes are UNEXPANDED

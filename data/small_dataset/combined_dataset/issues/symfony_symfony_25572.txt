@@ -1,0 +1,27 @@
+Redirection loop after validate redirect targets - Logging in to a different domain
+
+
+
+
+
+Q
+A
+
+
+
+
+Feature request?
+yes
+
+
+Symfony version
+3.2.13 and never
+
+
+
+After this change: 52b06f1#diff-76577aed100434c043a441fee636edad
+I have a problem with redirection to a login page that is under a different domain.
+Regex detects a different domain in login path and sets up a cookie domain redirection.
+The result is a redirection loop.
+The problem would be solved by adding a trusted domain for login page.
+I understand that it increases security but in some situations it is a breaking change.

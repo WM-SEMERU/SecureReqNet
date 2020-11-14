@@ -1,0 +1,40 @@
+Actually starting to use the deallocator to clean up services
+
+
+- What I did
+This patch allows users to choose to make removals of services and networks
+asynchronous, which means that they only get deleted once all the containers
+belonging to them or using them are safely shut down.
+- How I did it
+A previous patch (#2759) introduced a
+new component, the deallocator, responsible for cleaning up services and
+service-level resources. This patch is actually starting to make use of that
+component.
+Since the deallocator used to rely on the reaper deleting the tasks belonging
+to services that had been marked for removal, a previous version of this patch
+was modifying the task reaper quite heavily to also keep track of such services
+(needed since otherwise the reaper would fail to clean up all of them, instead
+keeping some for history tracking purposes). However, it soon appeared that
+this was not the best approach:
+
+this creates a hidden coupling between the reaper and the deallocator
+it's also not the best user experience to suddenly remove all of a service's
+task history while shutting down, for not apparent reason to the user
+
+For these reasons, this patch instead amends the deallocator to also look at tasks status when keeping track of how many alive tasks remain to a service.
+Part of this test was already reviewed in
+#2778, which subsequently got reverted
+following the discussion in moby/moby#38525.
+The main difference between this PR and #2778 is that asynchronous removal is
+an opt-in behaviour here instead of changing the existing behaviour.
+- How to test it
+Updated tests.
+- Description for the changelog
+Services & networks can be deleted asynchronously, in which case the request
+for their removal simply marks them for removal, and they are then actually
+deleted only when all their tasks are actually shut down.
+Signed-off-by: Jean Rouge rougej+github@gmail.com
+- What I did
+- How I did it
+- How to test it
+- Description for the changelog

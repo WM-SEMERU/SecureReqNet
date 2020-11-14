@@ -1,0 +1,40 @@
+'### Summary
+
+Pipeline section is available to unauthorized users.
+
+You can see pipeline jobs list even if you can't access to each job.
+
+### Steps to reproduce
+
+Make some project settings like this:
+
+![image](/uploads/569292e305bdb167d27778f4eef7f7af/image.png)
+
+Then go to the project as a non-member or not logged in user.
+
+### Example Project
+
+Any project present on gitlab.com
+
+### What is the current *bug* behavior?
+
+The pipeline section is shown and accessible.
+
+### What is the expected *correct* behavior?
+
+The pipeline section should not be shown at all and should not be accessible.
+
+Or, if you really want to keep this, the branch name, commit description and another sensitive stuff should be hidden.
+
+### Relevant logs and/or screenshots
+
+N/A
+
+### Output of checks
+
+This bug happens on GitLab.com
+
+### Merge Requests on dev.gitlab.org
+
+- CE: https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2305
+- Port to EE: https://dev.gitlab.org/gitlab/gitlab-ee/merge_requests/584

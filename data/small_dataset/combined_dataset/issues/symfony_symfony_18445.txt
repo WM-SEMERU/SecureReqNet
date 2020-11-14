@@ -1,0 +1,16 @@
+[Symfony 2.8] A fatal error occurs when remove my User class file
+
+
+configuration:
+    # security.yml
+    providers:
+        my_user:
+            id: some_service_id
+
+    # service.yml
+    some_service_id:
+        class: MyUserClass
+I sign in with an account and remove the MyUserClass file, then an error occurs:
+Catchable Fatal Error: Object of class __PHP_Incomplete_Class could not be converted to string
+
+Sorry for my bad english.

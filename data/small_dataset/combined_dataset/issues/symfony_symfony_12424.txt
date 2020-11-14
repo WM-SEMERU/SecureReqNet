@@ -1,0 +1,46 @@
+[Command] New command to help newbies to setup project permissions (acl)
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+no
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+Implementing "Setting up Permissions" instruction from docs http://symfony.com/doc/master/book/installation.html#configuration-and-setup

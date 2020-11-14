@@ -1,0 +1,16 @@
+Downloaded files on macOS should be quarantined by default
+
+
+https://hackerone.com/bugs?report_id=313440
+Test:
+
+Open - https://nodejs.org/dist/v8.9.4/node-v8.9.4.pkg
+Run -
+
+
+$ xattr ~/Downloads/node-v8.9.4.pkg
+com.apple.metadata:kMDItemWhereFroms
+com.apple.quarantine
+
+Quarantine flag should be enabled for the file
+fix brave/browser-laptop#13088

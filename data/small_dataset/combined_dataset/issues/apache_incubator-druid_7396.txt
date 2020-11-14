@@ -1,0 +1,4 @@
+Rename DataSegment to SegmentInfo
+
+
+If anything, the current class Segment should be called DataSegment and vice versa because DataSegment doesn't contain any data. We may either flip the names, or, I think better, leave Segment and rename DataSegment to SegmentInfo.

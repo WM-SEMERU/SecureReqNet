@@ -1,0 +1,9 @@
+[Blazor] Update feeds listed in the templates
+
+
+The feeds that should be listed:
+
+https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json
+https://dotnetfeed.blob.core.windows.net/aspnet-aspnetcore/index.json
+Blazor-dev (MyGet feed)
+

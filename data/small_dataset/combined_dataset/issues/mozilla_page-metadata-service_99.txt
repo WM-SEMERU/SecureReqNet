@@ -1,0 +1,6 @@
+Use Node Cluster to fork requests to child processes
+
+
+We should use a cluster/fork architecture to isolate the handling of individual requests.  This allows us to more effectively distribute workload which improves resource utilization and performance.  It also moves the processing of individual requests into isolated memory spaces to reduce the likelihood of memory scraping/injection compromising the data of other requesting parties.
+See:
+https://nodejs.org/api/cluster.html

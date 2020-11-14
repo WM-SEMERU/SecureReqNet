@@ -1,0 +1,5 @@
+Fix proto capitalization
+
+
+A previous change (#2771) just a few commits before this accidentally introduced a proto field "Config" which was capitalizad. This lower-cases it, bringing it in line with the rest of the proto definitions. This would create an API incompatibility, but the errant revision has not shipped upstream yet, and so this change is acceptable.
+Signed-off-by: Drew Erny drew.erny@docker.com

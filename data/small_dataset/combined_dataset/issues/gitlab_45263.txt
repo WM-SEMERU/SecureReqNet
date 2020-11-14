@@ -1,0 +1,11 @@
+### Problem
+The problem is there's currently not a perfect or boring solution for mitigating both BREACH and HEIST while using compression. This is in response to https://gitlab.com/gitlab-org/gitlab-ce/issues/33719.
+
+### Proposal
+For a first step, I propose that we add the same-site attribute to all cookies which are set. Ideally this should be for both self-hosted and gitlab.com.
+
+### Links / references
+https://caniuse.com/#feat=same-site-cookie-attribute<br>
+https://www.sjoerdlangkemper.nl/2016/11/07/current-state-of-breach-attack/<br>
+https://www.blackhat.com/docs/us-16/materials/us-16-VanGoethem-HEIST-HTTP-Encrypted-Information-Can-Be-Stolen-Through-TCP-Windows-wp.pdf<br>
+https://www.blackhat.com/docs/asia-16/materials/asia-16-Karakostas-Practical-New-Developments-In-The-BREACH-Attack-wp.pdf

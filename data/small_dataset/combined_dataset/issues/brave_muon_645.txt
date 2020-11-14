@@ -1,0 +1,17 @@
+Trying to address surface synchronization patch
+
+
+Trying to address brave/browser-laptop#15025
+Removing these patches from browser_plugin.cc:
+
+bbf2817
+416dc9c
+
+Most of the above patches have already been removed (after single webview) from browser_plugin.cc
+Chromium 68 has a few patches related to surface synchronization, such as this:
+https://chromium.googlesource.com/chromium/src/+/98d76dade64f938d939b7930e1de5460b564c2e2%5E%21/
+The above Muon patches were to solve brave/browser-laptop#13982
+I compiled this change in release mode + ran with 25 tabs (switching tabs with mouse/keyboard). I quit, relaunched, etc. Also turned off tab preview + used debug menu to manually discard tabs and switch back to them. Didn't notice any of the webviews get locked
+Not sure if this solves the problem, but this patch might not be needed anymore
+Auditors:
+@bridiver, @petemill

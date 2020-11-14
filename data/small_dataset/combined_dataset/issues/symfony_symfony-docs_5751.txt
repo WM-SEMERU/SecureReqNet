@@ -1,0 +1,13 @@
+SecurityBundle logout.target is not needed / not documented?
+
+
+I was mislead by the SecurityBundle Full Default Configuration, showing the option
+security:
+    firewalls:
+        somename:
+            logout:
+                target: /
+which I interpreted as path or route-name, to which will be redirected on logout.
+I got a solution at http://stackoverflow.com/questions/32902400/symfony-logout-target-never-applied, it's working great. But somebody with deeper knowledge than me should document this configuration option or probably remove it, if it's no longer in use?
+Regard
+Jones

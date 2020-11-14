@@ -1,0 +1,7 @@
+On-screen keyboard
+
+
+Hi,
+When using unsecure systems to read my self hoster password DB, I'm a bit concerned by keyloggers.
+I know that no counter mesure would  fully protect me, but this would be a start.
+I know about the windows On-Screen Keyboard but it's not really practical to use.

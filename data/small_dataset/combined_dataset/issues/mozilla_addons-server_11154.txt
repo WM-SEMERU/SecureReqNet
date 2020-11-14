@@ -1,0 +1,13 @@
+Allow accessing reviewer and django admin add-ons page using add-on id
+
+
+Admins constantly have to convert between the add-on ID (guid) and the AMO ID.
+Could we add url handlers for the following urls?
+/reviewers/review/<guid>
+/reviewers/review-listed/<guid>
+/reviewers/review-unlisted/<guid>
+/reviewers/review-content/<guid>
+/admin/models/addons/addon/<guid>
+/admin/addon/manage/<guid>
+
+Should we also add a handler for the public pages /firefox/addon/<guid> ?

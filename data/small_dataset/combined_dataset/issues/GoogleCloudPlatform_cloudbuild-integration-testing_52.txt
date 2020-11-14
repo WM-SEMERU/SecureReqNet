@@ -1,0 +1,12 @@
+failing connection test on v0.1.1
+
+
+Fixes issue #50
+
+ added instructions to add firewall rule
+
+Clean up
+
+ separated gke vs gke-per-test instructions
+ fixed typo
+

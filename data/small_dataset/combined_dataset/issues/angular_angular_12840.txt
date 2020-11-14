@@ -1,0 +1,33 @@
+Allow customizing SAFE_URL_PATTERN in url_sanitizer.ts
+
+
+I'm submitting a ...  (check one with "x")
+[ ] bug report => search github for a similar issue or PR before submitting
+[x] feature request
+[ ] support request => Please do not submit support request here, instead see https://github.com/angular/angular/blob/master/CONTRIBUTING.md#question
+
+Current behavior
+It is not possible to customize which URLs are considered safe.
+Expected behavior
+A user could customize the REGEX used to match safe urls.
+Minimal reproduction of the problem with instructions
+N/A
+What is the motivation / use case for changing the behavior?
+When you are using ionic 2, Android will usually return URLs that begin with content://. Then you have to explicitly call bypassSecurityTrustUrl to be able to show them. In Angular 1 you could customize this by injecting $compileProvider and calling: $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);. But there's no convenience alternative for angular 2.
+Please tell us about your environment:
+N/A
+
+
+Angular version: 2.0.X
+2.2.0-rc.0
+
+
+Browser: all
+
+
+Language: all
+
+
+Node (for AoT issues): node --version =   7.1.0
+
+

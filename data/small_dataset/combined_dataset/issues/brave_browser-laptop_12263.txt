@@ -1,0 +1,14 @@
+Update Brave CSPs
+
+
+Test plan
+#12268 (comment)
+
+They haven't been updated in a while and might include hosts that are no longer used.
+in app/extensions/brave/index-dev.html:
+default-src 'none'; form-action http://localhost:*; script-src 'self' http://localhost:*; connect-src 'self' https://s3.amazonaws.com/adblock-data/ https://s3.amazonaws.com/safe-browsing-data/ https://s3.amazonaws.com/tracking-protection-data/ https://s3.amazonaws.com/https-everywhere-data/ http://localhost:* ws://localhost:* https://suggestqueries.google.com https://ac.duckduckgo.com https://completion.amazon.com https://search.yahoo.com https://api.bing.com https://www.startpage.com https://infogalactic.com https://api.qwant.com https://ac.ecosia.org https://searx.me https://www.findx.com https://brave-download.global.ssl.fastly.net https://brave-laptop-updates.global.ssl.fastly.net https://brave-download.global.ssl.fastly.net https://laptop-updates-pre.brave.com https://brave-laptop-updates-pre.brave.com; style-src 'unsafe-inline'; font-src 'self' http://localhost:*; img-src 'self' * data: file: chrome-extension:; object-src 'self'; plugin-types application/browser-plugin
+
+in app/extensions/brave/index.html:
+default-src 'none'; form-action http://localhost:*; script-src 'self'; img-src * data: file: chrome-extension:; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://s3.amazonaws.com/adblock-data/ https://s3.amazonaws.com/safe-browsing-data/ https://s3.amazonaws.com/tracking-protection-data/ https://s3.amazonaws.com/https-everywhere-data/ https://suggestqueries.google.com https://ac.duckduckgo.com https://completion.amazon.com https://search.yahoo.com https://api.bing.com https://www.startpage.com https://infogalactic.com https://api.qwant.com https://ac.ecosia.org https://searx.me https://www.findx.com https://brave-download.global.ssl.fastly.net https://brave-laptop-updates.global.ssl.fastly.net https://laptop-updates-pre.brave.com https://brave-laptop-updates-pre.brave.com; object-src 'self'; plugin-types application/browser-plugin
+
+Related: #11889 #12190

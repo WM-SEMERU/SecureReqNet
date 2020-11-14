@@ -1,0 +1,4 @@
+Add ability to diff two teams
+
+
+Useful for the cases where there is a need to merge two mappings or to do more detailed comparisons between teams

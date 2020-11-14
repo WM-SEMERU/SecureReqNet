@@ -1,0 +1,8 @@
+UseAuthorization middleware
+
+
+UseAuthentication runs in the pipeline and automatically applies the default authentication handler. There is no corrilary for authorization. This would be useful for scenarios like authorized static files:
+aspnet/AuthSamples#28.
+UseAuthorization should have parameters that mimic the Authorize attribute. Failing any parameters, it should run the default policy (which is hard to do yourself https://github.com/aspnet/Security/issues/1733).
+Here's the minimal AuthN code you have to write today and it doesn't run any policy:
+https://github.com/aspnet/AuthSamples/blob/c7bb6607307072f6e098d0e4a2c9fa7e6d017916/samples/StaticFilesAuth/Startup.cs#L120-L134

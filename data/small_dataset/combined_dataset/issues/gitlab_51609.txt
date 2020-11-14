@@ -1,0 +1,40 @@
+### Summary
+
+Email addresses that start with numbers are interpreted as user ids and not emails, causing unintended users to be added to projects.
+
+I'm assigning ~security ~S3 ~P3 since it results in users adding unintended individuals to private projects.
+
+Originally reported here: 
+https://twitter.com/amine_hakkou/status/1041813378484903936?s=21
+
+### Steps to reproduce
+
+* Add an email of the form `<number>test@example.com` in the Add Member interface, where number is a valid user id.  For example `1test@example.com`.
+* The text entry with populate with `Add <*> by email`
+* Select add user.
+* The user with the specified id will be added to the project instead.
+
+### Example Project
+
+Any project seems to work.
+
+### What is the current *bug* behavior?
+
+A user is added by id and not email.
+
+### What is the expected *correct* behavior?
+
+User is invited by email.
+
+### Relevant logs and/or screenshots
+
+![add_by_email](/uploads/e6b12558f66a78197eb4f467924ae02d/add_by_email.gif)![user_id_not_email](/uploads/2dbfcf0bfa84cec81830ed00e47bc3e4/user_id_not_email.gif)
+
+![user_id_not_email](/uploads/adcd595135b2809cc3cf7f6a5041209b/user_id_not_email.gif)
+
+
+### Output of checks
+
+This bug happens on GitLab.com.
+
+### Possible fixes

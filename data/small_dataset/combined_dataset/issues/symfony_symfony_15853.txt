@@ -1,0 +1,11 @@
+2.8 Web Debug Toolbar Error with no logout firewall key
+
+
+When using the new 2.8 web debug toolbar, the Collector/security.html.twig template uses the logout_path() Twig function to print the logout key. But, if you don't have a logout key configured, this will fail with something like:
+
+An exception has been thrown during the rendering of a template
+("No LogoutListener found for firewall key "main".") in @Security/Collector/security.html.twig
+at line 39.
+
+I don't know if we can detect whether there is a logout listener in the firewall or not, so we may need to remove this link.
+/cc @javiereguiluz

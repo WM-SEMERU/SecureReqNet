@@ -1,0 +1,36 @@
+Panopticlick score improvements
+
+
+Did you search for similar issues before submitting this one?
+Yes.
+Describe the issue you encountered:
+This came in from community.brave.com https://community.brave.com/t/eff-panopticlick-and-brave/157 but apparently the EFF offers a cool online tool to check your browsers privacy and despite having fingerprint detection turned on and Do Not Track we are "failing" those checks on the EFF's site.
+Expected behavior:
+We should pass all tests with DNT and Fingerprint Detection turned on.
+
+
+Platform (Win7, 8, 10? macOS? Linux distro?):
+macOS
+
+
+Brave Version:
+0.12.15
+
+
+Steps to reproduce:
+
+Open Brave
+Turn on Shields > Fingerprint Protection
+Go to Preferences > Security and turn on Do Not Track header
+Go to https://panopticlick.eff.org/
+See our score (screenshot below)
+
+
+
+Screenshot if needed:
+
+
+
+
+Any related issues:
+

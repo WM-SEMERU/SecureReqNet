@@ -1,0 +1,4 @@
+fix: Default variant Based on
+
+
+https://frappe.erpnext.com/desk#Form/Issue/WN-SUP41840

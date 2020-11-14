@@ -1,0 +1,5 @@
+Start work on a security guidelines document
+
+
+Part of the coding guidelines document includes a section for "Security Considerations".  This section contain only general guidelines and reference a more detailed document.
+This work item is to create that more detailed security guidelines document.

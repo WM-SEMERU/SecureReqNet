@@ -1,0 +1,4 @@
+proposal: crypto/ecdsa: should provide an ASN1/DER verification routine
+
+
+The crypto.Signer implementation provided by crypto.ecdsa encodes its signature into bytes using the ASN.1 format that's used by TLS, but it doesn't provide a matching verification routine that takes a []byte instead of a pair of big.Ints. It's straightforward to implement one, and both crypto.tls and crypto.x509 have done so, but it seems silly to make every consumer independently implement a standardized signature format.

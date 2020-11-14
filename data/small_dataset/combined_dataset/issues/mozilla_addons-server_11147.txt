@@ -1,0 +1,38 @@
+git-storage download response does not send any content
+
+
+See also: #11118 (comment)
+
+The fix for #11118 works in local dev (I tried it and it worked) but it does not work in -dev:
+$ http --header https://addons-dev.allizom.org/en-US/reviewers/download-git-file/1532144/manifest.json/
+HTTP/1.1 301 Moved Permanently
+Connection: keep-alive
+Content-Length: 178
+Content-Security-Policy: default-src 'none'; report-uri /__cspreport__
+Content-Type: text/html
+Date: Thu, 04 Apr 2019 14:36:52 GMT
+Location: https://reviewers.addons-dev.allizom.org/en-US/reviewers/download-git-file/1532144/manifest.json/
+Server: nginx
+
+No response is received when trying to fetch the URL given in the Location header above:
+$ http https://reviewers.addons-dev.allizom.org/en-US/reviewers/download-git-file/1532144/manifest.json/ Cookie:'<my cookie>'
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Disposition: attachment; filename="manifest.json"
+Content-Encoding: gzip
+Content-Length: 25
+Content-Security-Policy: connect-src 'self' https://sentry.prod.mozaws.net https://addons.cdn.mozilla.net https://addons-dev-cdn.allizom.org; default-src 'self'; img-src 'self' data: blob: https://ssl.google-analytics.com https://addons.cdn.mozilla.net https://static.addons.mozilla.net https://sentry.prod.mozaws.net https://addons-dev-cdn.allizom.org; form-action 'self' https://developer.mozilla.org; base-uri 'self' https://addons.mozilla.org https://addons-dev.allizom.org; font-src 'self' https://addons.cdn.mozilla.net https://addons-dev-cdn.allizom.org; frame-src 'self' https://www.google.com/recaptcha/; child-src 'self' https://www.google.com/recaptcha/; media-src https://videos.cdn.mozilla.net; style-src 'self' 'unsafe-inline' https://addons.cdn.mozilla.net https://addons-dev-cdn.allizom.org; object-src 'none'; script-src https://ssl.google-analytics.com/ga.js https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://addons.cdn.mozilla.net https://addons-dev-cdn.allizom.org; report-uri /__cspreport__
+Content-Type: application/json
+Date: Thu, 04 Apr 2019 14:39:23 GMT
+Public-Key-Pins: max-age=5184000; includeSubDomains; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="
+Server: nginx
+Strict-Transport-Security: max-age=31536000
+Vary: Accept-Encoding
+Vary: User-Agent
+X-AMO-Request-ID: af72b0b7ac6a4106b726ccd604b4b355
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+
+
+It's worth mentioning that in local dev, the URL given in the API response does not contain a redirect, it directly serves the content of the file.

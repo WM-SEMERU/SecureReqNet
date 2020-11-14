@@ -1,0 +1,20 @@
+Support `kubeadm join` with a pre-existing client certificate
+
+
+Is this a request for help?
+No.
+Is this a BUG REPORT or FEATURE REQUEST?
+FEATURE REQUEST
+Detail
+I'd like to use kubeadm join with a pre-existing client certificate (no token/TLSBootstrap).
+We've got a environment where interacting with the master to setup a bootstrap token and feeding that to the new node is impractical/sub-optimal (security boundaries, provisioning latency, machine orchestration tooling, privileged credential practices, etc)
+We currently generate our cluster CA & worker node client certificates externally and lay those down during system provisioning. (So far, it's been a pretty smooth approach)
+On the master we run kubeadm init, which will detect and use our existing CA files.  On worker nodes, we lay down a suitable /etc/kubernetes/kubelet.conf with the externally generated node certificate. (This approach also allows us to add workers at a later date without having to interact with the master - our deployment tooling has the original CA keys and creates a suitable client-certificate externally)
+I've noticed kubeadm join appears to be doing an increasing amount of "extrajoin" configuration (e.g. CRISocket, DynamicKubeletConfig) and imagine that this is will only increase in the future.
+I feel that our manual kubelet.conf approach will become faulty or high maintenance if we must mimic a set of increasing requirements performed by kubeadm join.
+Would it make sense to support:
+a) Exposing kubeadm join phases via kubeadm alpha phase style commands
+b) Use of existing on-disk kubelet.conf during kubeadm join (akin to CA files during kubeadm init).
+c) Explicitly providomg node CA/client certificate "credentials" to kubeadm join
+Or is our external certificate generation approach doomed for other reasons? (And we should start making other plans)
+I hope I've explained that clearly.

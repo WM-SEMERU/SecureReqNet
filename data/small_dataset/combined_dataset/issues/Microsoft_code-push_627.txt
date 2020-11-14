@@ -1,0 +1,6 @@
+Internal Server Error
+
+
+Hey,
+I'm getting [Error]  Internal Server Error in cli.
+code-push-cli version:  v2.1.9

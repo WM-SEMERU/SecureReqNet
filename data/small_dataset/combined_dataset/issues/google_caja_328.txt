@@ -1,0 +1,7 @@
+Code review: benlaurie/issue-308-fix-part1/
+
+
+Original issue 328 created by ben@links.org on 2008-05-30T15:04:11.000Z:
+Please review pending change:
+http://google-caja.googlecode.com/svn/changes/benlaurie/issue-308-fix-part1/
+Step 1: distinguish between grants and fastpath memos.

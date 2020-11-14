@@ -1,0 +1,63 @@
+[DI] Fix dumping Doctrine-like service graphs (bis)
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30091
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Same as #30046, with same comment: I'm unable to provide a reproducer for this, the required service reference graph is too crazy.
+This change produces the following diff in the generated getDoctrine_Orm_DefaultEntityManagerService.php file:
+37a38,42
+> $d = ($this->services['doctrine.orm.default_entity_listener_resolver'] ?? $this->load('getDoctrine_Orm_DefaultEntityListenerResolverService.php'));
+> 
+> if (isset($this->services['doctrine.orm.default_entity_manager'])) {
+>     return $this->services['doctrine.orm.default_entity_manager'];
+> }
+51c56
+< $a->setEntityListenerResolver(($this->services['doctrine.orm.default_entity_listener_resolver'] ?? $this->load('getDoctrine_Orm_DefaultEntityListenerResolverService.php')));
+---
+> $a->setEntityListenerResolver($d);
+@ro0NL if you're up to reducing your reproducer at https://github.com/ro0NL/sf to a simpler one that we could add to the test suite, that'd be awesome!
+If not, could you please rename it eg https://github.com/ro0NL/symfony-issue-30091 and keep it around?

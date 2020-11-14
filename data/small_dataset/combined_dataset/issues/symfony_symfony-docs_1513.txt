@@ -1,0 +1,11 @@
+Incomplete documentation on "How to create a custom Authentication Provider"
+
+
+Hello I am experiencing troubles implementing a custom Authentication Provider following the cookbook post,
+http://symfony.com/doc/master/cookbook/security/custom_authentication_provider.html
+The problem is in the class WsseProvider, method validateDigest is ment to check the passwords only if the
+password is not encoded in the database, but they would normally have kind of encoding like sha512
+for example.
+So there is no info that this example is ment for unencoded passwords, which is quite confusing, and perhaps the code in the example should be showing any encoding rather than plain passwords... (yes I am stuck there too)..
+Other thing is that $this->cacheDir.'/'.$nonce can contain unallowed characters which could lead to failed file creation.
+I think this string should pass sanitizing method first.

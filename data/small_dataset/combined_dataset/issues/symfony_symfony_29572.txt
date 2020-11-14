@@ -1,0 +1,75 @@
+[Security] JSON login is not working in fos_rest
+
+
+Symfony version(s) affected: 4.1.*
+Description
+I have created the fos rest api in symfony4 and when we accessing the api http://127.0.0.1:8000/v1/api/userauthverify , it will not properly respond for json_login, but it will perfectly responds for html priorities. Let me know anything i have missed out?
+Please find the below code:
+fos_rest.yaml
+fos_rest:
+    param_fetcher_listener:  true
+    allowed_methods_listener:  true
+    routing_loader: 
+        include_format: false
+                
+    body_listener: true
+    
+    format_listener:
+        rules:
+            - { path: ^/api, prefer_extension: false, fallback_format: json, priorities: [ json ] }
+            - { path: ^/v1, prefer_extension: false, fallback_format: json, priorities: [ json ] }
+            - { path: ^/, prefer_extension: false, fallback_format: html, priorities: [ html ] }
+    
+    versioning:
+        enabled: true
+        default_version: v1
+        
+    view:
+        view_response_listener:  true
+
+sensio_framework_extra:
+    view: { annotations: false }
+
+security.yaml
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: sha512
+
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            id: App\Security\UserProvider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        userAuthenticationVerify:
+            pattern:  ^/v1/api/userauthverify
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /v1/api/userauthverify
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            provider: app_user_provider
+
+        api:
+            pattern:   ^/v1/api
+            stateless: true
+            anonymous: false
+            lexik_jwt: ~ 
+            guard:
+               authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+      
+    access_control:
+        - { path: ^/v1/api/userAuthenticationVerify, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/v1/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+How to reproduce
+When we changing the priorities as html, will get the jwt token properly, but change to json will not get it.
+        - { path: ^/v1, prefer_extension: false, fallback_format: json, **priorities**: [ html ] }
+

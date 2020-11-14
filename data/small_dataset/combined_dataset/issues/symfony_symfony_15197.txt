@@ -1,0 +1,9 @@
+Security bug? on HttpException
+
+
+I recently upgraded my version of Symfony from 2.3 to 2.7.
+On my project I have a sidebar, which show the login and, if the user is logged, their user panel, with his avatar, his nickname and a couple of options like edit profile.
+I have installed FOSUserBundle for it.
+When Symfony2 launch an 404, 500, 401... exception error, randomly, the avatar and nickname displayed on the control panel, modified, showing data of another user.
+In version 2.3 I had this never occurred.
+It may be a bug¿

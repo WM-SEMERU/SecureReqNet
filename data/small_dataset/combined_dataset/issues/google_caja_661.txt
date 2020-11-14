@@ -1,0 +1,10 @@
+DefaultCajaRewriter should not use 'instanceof'
+
+
+Original issue 661 created by ihab.awad on 2008-07-29T00:24:26.000Z:
+The current DefaultCajaRewriter uses 'instanceof' to check the class of
+nodes it is accepting. This means that any subclasses pass through
+unnoticed. Hence anyone can write subclasses upstream of the rewriter and
+tunnel through stuff that renders to any strange weirdness.
+DefaultCajaRewriter and all similar TCB code should be checking for exact
+class matches on its inputs, not 'instanceof'.

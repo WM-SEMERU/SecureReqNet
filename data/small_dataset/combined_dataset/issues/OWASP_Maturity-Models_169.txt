@@ -1,0 +1,12 @@
+Data_Team.team_Path DoS when using non-existing team names
+
+
+Here is the test that shows the problem
+    using new Data_Team(), ->
+      for i in [1..40]
+        (@.team_Path('bsimm', 'team-A')).assert_File_Exists()           # using 'team-A' for team         
+      (Date.now() - start).assert_In_Between 50, 100                    # fast when team exists
+      for i in [1..40]
+        assert_Is_Null @.team_Path('bsimm', 'aaaa')                     # using 'aaaa' for team             
+      console.log (Date.now() - start)                    
+      (Date.now() - start).assert_In_Between 400, 900                   # slow when it doesn't

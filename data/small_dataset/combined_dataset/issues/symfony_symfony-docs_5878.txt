@@ -1,0 +1,6 @@
+main or default firewall ?
+
+
+https://github.com/symfony/symfony-standard/blob/2.8/app/config/security.yml#L16
+http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+maybe the docs are out of date and default changed to main ?

@@ -1,0 +1,6 @@
+SES correctly rejects Edge 20.10240.16384.0 as unsafe
+
+
+The problem is that builtins have a .caller property that reveals their caller. This property cannot be repaired by SES. See the attached screenshot.
+
+Microsoft is aware of this problem and is working on fixing it.

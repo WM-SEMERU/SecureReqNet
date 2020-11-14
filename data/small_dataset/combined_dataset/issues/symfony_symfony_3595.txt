@@ -1,0 +1,4 @@
+Random value function
+
+
+Can we move the PersistentTokenBasedRememberMeServices::generateRandomValue() method and make it global accessible?

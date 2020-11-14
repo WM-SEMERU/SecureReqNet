@@ -1,0 +1,33 @@
+'The following issue was reported via ~HackerOne.
+
+It appears that `MergeRequestsController` is using similar permissions to issues that should not be granted to `Guest` users.
+
+
+---
+
+Details:
+**Summary:** 
+Hello,
+
+As per this document https://gitlab.com/help/user/permissions , A user with `Guest` role in a group can not see list of merge requests. However, it is still visible to them if they navigate to root of Group merge requests which i think is a bug!
+
+
+**Description:** 
+When user is assigned with `Guest` Role in a group, they can not see list of merge request as per documentation. It is true that they can not see the list of merge request if they navigate to projects.
+
+But it is still visible to them at the root url of group's merge requests list
+
+`https://gitlab.com/groups/<GroupName>/-/merge_requests?scope=all&utf8=%E2%9C%93&state=all`
+
+## Steps To Reproduce:
+1. A user with `Guest` roles can directly navigate to `https://gitlab.com/groups/<GroupName>/-/merge_requests?scope=all&utf8=%E2%9C%93&state=all`
+
+2. They shall see list of merge requests names and created by names which should not be visible to them
+
+
+Regards,
+Ashish
+
+## Impact
+
+Guest can see list of merge requests

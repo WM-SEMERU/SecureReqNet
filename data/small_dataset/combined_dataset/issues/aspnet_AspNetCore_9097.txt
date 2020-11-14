@@ -1,0 +1,25 @@
+NuGet "Microsoft.AspNetCore.App" upgrade "Blocked by project"
+
+
+Describe the bug
+I'm not sure what .NET Core MVC version I am actually on.
+In my project, NuGet shows this:
+
+How do I make sure I am on the latest 2.2.3 version?
+The csproj has this:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>
+
+Thank you

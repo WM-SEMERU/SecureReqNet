@@ -1,0 +1,47 @@
+[Mailer] fixed roundrobin test one dead which should recover
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+WIP    
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+The Test testSendOneDeadButRecover is not checking the recovery part of its job. I fixed that by adding more send calls and added another test so that both recoveries (within retry period and not within retry period) are covered.
+The RoundRobinTransport had a bug where the transport is dead but not yet in the retryPeriod. In that case the transport would not have been added back to the stack and thus got lost. Fixed that but that required an additional check if all transports are dead to prevent an infinite loop.

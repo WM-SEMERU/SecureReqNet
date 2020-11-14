@@ -1,0 +1,41 @@
+https://hackerone.com/reports/299525
+
+Jobert from HackerOne has identified a cross-site scripting (XSS) vulnerability in the CI job output. Below are the details for this finding:
+
+There's a stored Cross-Site Scripting (XSS) vulnerability in the CI job output. The CI job output is publicly accessible when the project itself is public. This increases the severity of the vulnerability. To reproduce, create a new project on a GitLab instance. Then create two files, as shown below. For the sake of the example, let's assume the project can be found at [http://gitlab/root/test].
+
+***File: test*** (containing the JS payload)
+
+```
+section_end:1:2<script>alert(document.domain);</script>
+```
+
+***File: .gitlab-ci.yml***
+
+```
+image: alpine:latest
+
+pages:
+  stage: deploy
+  script:
+  - cat test
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+```
+
+Then, push the files to the repository and go to job overview page at [http://gitlab/root/test/-/jobs]. Click on the first job and wait until the job is finished. When it is, the JavaScript payload stored in the `test` file will be executed. This seems to be caused by the parser that sees the `section_end` expression as start of the line. I haven't actually figured out where the injection itself is caused, but I started looking at it because of `Gitlab::Ci::Ansi2Html` class, specifically line 194 (constructing some HTML without sanitization). Perhaps that's a starting point for the engineers to look at.
+
+Interestingly enough, the payload isn't executed when it is outputted to the console with a simple `echo` command. Again, not sure why, but perhaps it's useful information in order to get to the root cause of the problem.
+
+Here's additional proof to show that the XSS payload is executed:
+
+![image](/uploads/0a905150e8aa5bfb96c8861bca9f6a31/image.png)
+
+***Impact***
+
+The JavaScript is executed on the GitLab instance's domain, giving the attacker access to the signed in user's API tokens. These tokens can be used to further escalate an attack.
+
+![Screen_Shot_2017-12-19_at_10.40.45_PM](/uploads/a52c9c935ee8e0e3b805a6010f414c4f/Screen_Shot_2017-12-19_at_10.40.45_PM.png)

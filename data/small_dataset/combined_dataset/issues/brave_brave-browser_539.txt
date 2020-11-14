@@ -1,0 +1,11 @@
+Smart Tracking Protection [overall feature]
+
+
+We should intelligently block unexpected tracking by avoiding state from origins the user isn't trying to visit. Safari has a similar feature: https://webkit.org/blog/8311/intelligent-tracking-prevention-2-0/
+Replaces brave/browser-laptop#10983
+
+Here are the sub-tasks for this project so far:
+
+ #802
+ #803
+

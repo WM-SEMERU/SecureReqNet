@@ -1,0 +1,71 @@
+Bookmarks display out fo the screen
+
+
+Description
+Bookmarks inside folders always display to the right side in bookmark toolbar. So if they are too close to the edge of the screen, bookmarks will be displayed out of the screen.
+Steps to Reproduce
+
+In the bookmarks toolbar, add folders until it almost reaches the right side of the screen
+Create a folder inside the furthest folder to the right
+Create another folder inside the created folder. It will be displayed out of the screen.
+
+Actual result:
+https://i.imgur.com/4sytq8c.png
+Expected result:
+It's expected that everything is displayed inside the screen.
+Reproduces how often:
+Happens every time.
+Brave Version
+Kubuntu 18.04.1 LTS
+
+
+
+Brave
+0.23.79
+
+
+
+
+V8
+6.8.275.24
+
+
+rev
+51b4905
+
+
+Muon
+8.0.7
+
+
+OS Release
+4.15.0-30-generic
+
+
+Update Channel
+Release
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Linux
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Additional Information
+Just add a screen limit check and, if reached, display the bookmarks to the left side instead.

@@ -1,0 +1,37 @@
+We received a [HackerOne report](https://hackerone.com/reports/214034) that the "Todos" page contains an open redirect. Details are below:
+
+>>>
+POC:
+
+$GITLAB_INSTANCE = gitlab.com
+
+Visit:
+
+https://$GITLAB_INSTANCE/dashboard/todos?page=99999999&host=www.google.com
+
+Bug is in Dashboard::TodosController line 10
+
+Likey
+Same bug in Projects::IssuesController line 32
+and other places in the codebase where you redirect_to params.merge(..)
+>>>
+
+>>>
+Note, maybe dashboard requires you to be logged in, but maybe more seriously issues controller doesn't.
+>>>
+
+Another almost identical [HackerOne report](https://hackerone.com/reports/215970):
+
+>>>
+While experimenting with Repository Import functionality on a fresh GitLab 9.0 CE install, I noticed that the continue[to] parameter can be used to perform an Open Redirect through the inclusion of a double-slash prefix.
+
+## Proof of Concept
+
+The following Proof of Concept URL enables a malicious actor to execute this redirect against any user – as long as they have permissions to view a certain repository.
+
+`http://<instance>/<user>/<repository>/import?continue[to]=//google.com`
+
+## Observation
+
+I first noticed the continue[to] parameter while receiving the You're not allowed to make changes to this project directly message – demonstrating that edit-level access to the repository in question is not required.
+>>>

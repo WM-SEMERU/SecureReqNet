@@ -1,0 +1,50 @@
+[DoctrineBridge][Security][Validator] do not validate empty values
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#23319
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Nearly all validators operating on scalar values (except for some special constraints) do ignore empty values. If you want to forbid them, you have to use the NotBlank constraint instead.

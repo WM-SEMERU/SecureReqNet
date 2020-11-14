@@ -1,0 +1,4 @@
+Add About page
+
+
+We should have a page that explains who founded Agones, works on it, why we made it, etc.

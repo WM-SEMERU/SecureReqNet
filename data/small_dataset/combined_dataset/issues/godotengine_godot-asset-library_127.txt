@@ -1,0 +1,8 @@
+All URLs should be enforced to HTTPS
+
+
+Currently we don't enforce HTTPS URLs in the edit form, and we end up with a bad report regarding our secure connection:
+
+(typically due to images served over HTTP)
+We should enforce HTTPS to prevent that.
+BTW, we should also enforce using godotengine.org/asset-library over HTTPS, at least when accessing the login interface.

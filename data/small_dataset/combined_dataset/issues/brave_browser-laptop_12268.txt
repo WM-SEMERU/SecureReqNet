@@ -1,0 +1,33 @@
+Remove unnecessary hosts from Brave index*.html CSP
+
+
+Removes all search provider autocomplete hosts and the following hosts from the connect-src directive:  https://s3.amazonaws.com/adblock-data/ https://s3.amazonaws.com/safe-browsing-data/ https://s3.amazonaws.com/tracking-protection-data/ https://s3.amazonaws.com/https-everywhere-data/ https://brave-download.global.ssl.fastly.net https://brave-laptop-updates.global.ssl.fastly.net https://laptop-updates-pre.brave.com https://brave-laptop-updates-pre.brave.com
+These are not necessary to whitelist in CSP since they are only connected to from the main process, not the renderer process.
+fix #12263
+Test Plan:
+
+automated test passes
+Delete httpse.json, *.dat, and Extensions/jdbefljfgobbmcidnmpjamcbhnbphjnb/ in your brave APP_DATA directory (ex: /Users/yan/Library/Application Support/Brave)
+Build a package if not running from a pre-packaged version of brave: CHANNEL=dev npm run build-package
+Open the packaged version of Brave
+Click 'Check for updates' from the file menu. It should show that no updates are available instead of an error.
+Make sure opening a PDF works
+Make sure HTTPS Everywhere works using https://https-everywhere.badssl.com/
+Go to settings -> turn on Autocomplete search term as you type. Type some words in the URL bar and you should see the query autocompleted.
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+
+Test Plan:
+Reviewer Checklist:
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

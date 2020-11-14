@@ -1,0 +1,4 @@
+Deprecate auto picking the first provider
+
+
+This fixes #8446.

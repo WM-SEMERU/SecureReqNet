@@ -1,0 +1,35 @@
+Question regarding Antimalware Scan Interface
+
+
+I've been looking through the documentation on AMSI, and noticed that it supports several types of clean / dirty results (https://msdn.microsoft.com/en-us/library/windows/desktop/dn889584(v=vs.85).aspx) :
+typedef enum AMSI_RESULT { 
+  AMSI_RESULT_CLEAN                   = 0,
+  AMSI_RESULT_NOT_DETECTED            = 1,
+  AMSI_RESULT_BLOCKED_BY_ADMIN_START  = 16384,
+  AMSI_RESULT_BLOCKED_BY_ADMIN_END    = 20479,
+  AMSI_RESULT_DETECTED                = 32768
+} AMSI_RESULT;
+
+However, when I looked through the PowerShell source code, I noticed that it's only concerned with AMSI_RESULT_DETECTED:
+
+
+
+PowerShell/src/System.Management.Automation/engine/runtime/CompiledScriptBlock.cs
+
+
+         Line 203
+      in
+      532044f
+
+
+
+
+
+
+ if (AmsiUtils.ScanContent(scriptExtent.Text, scriptExtent.File) == AmsiUtils.AmsiNativeMethods.AMSI_RESULT.AMSI_RESULT_DETECTED) 
+
+
+
+
+
+Should PowerShell also take action when it get something in the "BLOCKED_BY_ADMIN" result range?

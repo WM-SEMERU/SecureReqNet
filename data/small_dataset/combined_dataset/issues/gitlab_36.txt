@@ -1,0 +1,9 @@
+Go to admin area -> edit your admin user while logged in -> save changes
+
+```
+Mysql2::Error: Column 'admin' cannot be null: UPDATE `users` SET `admin` = NULL, `projects_limit` = 1000, `updated_at` = '2014-01-27 06:59:10' WHERE `users`.`id` = 1
+Completed 500 Internal Server Error in 31ms
+ActiveRecord::StatementInvalid (Mysql2::Error: Column 'admin' cannot be null: UPDATE `users` SET `admin` = NULL, `projects_limit` = 1000, `updated_at` = '2014-01-27 06:59:10' WHERE `users`.`id` = 1):
+```
+
+Error occurs from admin checkbox being disabled without hidden input to pass value on form.

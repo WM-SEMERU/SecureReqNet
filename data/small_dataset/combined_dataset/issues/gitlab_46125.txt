@@ -1,0 +1,4 @@
+'As described by @mikegreiling in https://gitlab.com/gitlab-org/gitlab-ce/issues/25955:
+
+- if the URL is an admin page `/admin/foo` we should either return a `403` response or offer a login prompt (or both!)...  there is no reason to hide this page as a 404 because anyone we are not hiding the fact that `/admin/foo` is an actual page in the same way that we may want to hide a private repository or group namespace behind a 404.
+- if the URL is accessible only be those with escalated privileges (like `/gitlab-org/gitlab-ce/edit`, `/groups/gitlab-org/edit`, `/gitlab-org/gitlab-ce/protected_branches`, etc.) we should likewise show a `403` with an optional login prompt or a link to log in.  As with above we have no reason to obscure the fact that these pages exist.

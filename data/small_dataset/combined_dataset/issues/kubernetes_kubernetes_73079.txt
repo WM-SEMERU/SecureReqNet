@@ -1,0 +1,46 @@
+Complete evaluation of potential bug bounty vendors
+
+
+This issue is an update on the process for vendor evaluation and selection for a Kubernetes bug bounty program. This program is a work in progress. The bug bounty is not currently active. If you currently have a bug to submit, follow instructions at https://kubernetes.io/docs/reference/issues-security/security/.
+Kubernetes Bug Bounty Program vendor evaluation
+Goal
+To create a vulnerability rewards program (“bug bounty”) for Kubernetes. This is to help:
+
+Attract security researchers to get more eyes on the code, shake out security bugs, and put money behind K8s security guarantees
+Simplify K8s’ security team’s security bug triage and response
+Allow all contributors to participate in improving K8s’ security, while remaining independent of any single K8s contributor
+
+This should NOT replace or interfere with existing vendor-specific bug bounty programs for their deployments of Kubernetes, e.g., if a bug is in Google’s specific deployment of Kubernetes in Google Kubernetes Engine, it should be reported to/ routed to the Google Vulnerability Rewards Program.
+Scope
+An initial scope for the bug bounty is defined by the Kubernetes Product Security Team in community/contributors/guide/bug-bounty.md.
+Process
+
+An initial discussion with the CNCF in April 2018 suggested there was interest in pursuing a bug bounty program for Kubernetes, funded by the CNCF.
+After initial identification of vendors and preliminary discussions, the vendors were invited to have an initial meeting on Oct 19 2018, to understand the scope of the proposal.
+They were invited to submit proposals, and any follow-up questions, e.g., on the existing processes of the Kubernetes Product Security Team (PST) by Nov 1 2018.
+Vendors presented their proposals to the PST for evaluation on Nov 20 2018.
+As a follow-up to these proposals, the PST decided to evaluate the vendor platforms directly. They were given trial accounts and tested these out the week of Nov 26 2018.
+As a result of these evaluations, the Kubernetes PST recommended a preferred vendor.
+
+Eligible vendors
+The following vendors were approached for proposals:
+
+Bugcrowd
+HackerOne
+
+Both submitted and presented their proposals.
+Evaluation
+Criteria were not directly shared with the vendors, but included:
+
+Hosting: e.g., Can this be hosted on an agnostic platform, like Kubernetes.io? How many researchers are in the vendor’s existing pool?
+Relevant experience: e.g., Does the vendor have any experience with open source bug bounty programs? Does the vendor have any experience with Kubernetes?
+Program definition: e.g., Can the vendor help define the scope of the bug bounty program?
+Triage: e.g., How quickly will priority reports be validated and triaged? Can reports be easily routed to other organizations if they do not refer to Kubernetes core?
+Integration with existing vulnerability response process: e.g., Can there be security team members from different organizations on call? Does the vendor platform integrate directly with Github, which is part of the PST’s current process?
+Disclosure policy: e.g., Does the vendor disclose reports by default?
+Rewards: e.g., Can the vendor use a custom rewards structure? Can swag rewards be provided?
+Price: e.g., What is the annual cost to run the platform?
+
+Recommendation
+After significant evaluation, the Kubernetes Product Security Team (PST) would be content with either vendor, HackerOne or Bugcrowd, hosting a Kubernetes vulnerability rewards program.
+HackerOne is preferred due to: its tighter integration with Github, simple vulnerability report disclosure, automated response flows, automated CVSS scoring, and simpler fulfillment of swag rewards.

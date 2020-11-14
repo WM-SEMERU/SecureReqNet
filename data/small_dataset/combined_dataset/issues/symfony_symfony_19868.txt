@@ -1,0 +1,51 @@
+[Security] Optimize RoleHierarchy's buildRoleMap method
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+no
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+I have an issue with a large role hierarchy(~150 roles). Optimized it a little bit
+

@@ -1,0 +1,6 @@
+Add param to roundabout exits
+
+
+Since 3.0 of Mapbox Java likely won't get merged into Master until another ~month, we need a more immediate fix for handling the roundabout_exits=true which will be introduced into the Directions API in the near future.
+Specific to Java, this needs to be accessible in the builder of the MapboxDirections class and also added in the Call interface.
+cc: @ericrwolfe

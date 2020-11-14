@@ -1,0 +1,39 @@
+handling of webrtc fingerprinting changed
+
+
+Found when testing #3626
+Handling of webrtc blocking changed from 0.60.x. Not sure if this is expected.
+webrtc blocking is now more aggressive.
+Steps to Reproduce
+
+Clean profile
+Open https://diafygi.github.io/webrtc-ips/
+
+Actual result:
+From 0.61.49
+
+Expected result:
+From 0.60.48
+
+Reproduces how often:
+Easily reproduced
+Brave version (brave://version info)
+
+
+
+Brave
+0.61.49 Chromium: 73.0.3683.67 (Official Build) (64-bit)
+
+
+
+
+Revision
+a83fd4f3207ae83412d329a9ca1239dd1e068345-refs/branch-heads/3683@{#760}
+
+
+OS
+Windows 7 Service Pack 1 Build 7601.24312
+
+
+
+cc @brave/legacy_qa

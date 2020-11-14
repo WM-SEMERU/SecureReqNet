@@ -1,0 +1,5 @@
+prevent disallowed secret refs from leaking via the downward API
+
+
+ServiceAccountAdmission has an option to LimitSecretReferences, but the env var ValueFrom that allows a secret ref doesn't get restricted.  This plugs the hole.
+@kubernetes/kube-iam @kubernetes/rh-cluster-infra Security problem for 1.2.

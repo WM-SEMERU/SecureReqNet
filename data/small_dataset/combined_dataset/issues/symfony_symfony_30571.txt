@@ -1,0 +1,25 @@
+[DI] Autowiring failures failing fatally with __toString exception
+
+
+Symfony version(s) affected: I believe master branch only
+Description
+Autowiring failures give this exception:
+
+Error: Method class@anonymous::__toString() must not throw an exception, caught Symfony\Component\DependencyInjection\Exception\AutowiringFailedException:
+
+How to reproduce
+In a standard project, try to autowiring using an interface that doesn't exist - e.g.
+<?php
+
+namespace App\MessageHandler;
+
+use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface;
+
+class FooHandler
+{
+    public function __construct(ArgumentMetadataFactoryInterface $foo)
+    {
+    }
+}
+Possible Solution
+I believe this is just an edge-case/bug from #29108

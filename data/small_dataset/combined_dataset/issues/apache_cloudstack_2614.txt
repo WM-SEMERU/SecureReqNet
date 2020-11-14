@@ -1,0 +1,31 @@
+WIP perform config drive creation on primary storage (CLOUDSTACK-10290)
+
+
+Description
+The present configdrive generation happens on secondary storage, which is also used in public facing functionality. For those that wnat it can be processed on primary storage. This will be optional for now as using localstorage will complicate things when migrating.
+First phase is factoring out the config drive creation code into a separate project (done)
+next it will be made available to the host agent (KVM only)
+finally the decision to look for a primary storage to do the processing on will be implemented on the basis of a global setting.
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+GitHub Issue/PRs
+Screenshots (if appropriate):
+How Has This Been Tested?
+this is tested manually in a kvm env with a custom network offering that has everything in the VR except userdata. An isolated network created has been created using this offering. Finally a VM was succesfully deployed in this network.
+Checklist:
+
+ I have read the CONTRIBUTING document.
+ My code follows the code style of this project.
+ My change requires a change to the documentation.
+ I have updated the documentation accordingly.
+Testing
+ I have added tests to cover my changes.
+ All relevant new and existing integration tests have passed.
+ A full integration testsuite with all test that can run on my environment has passed.
+

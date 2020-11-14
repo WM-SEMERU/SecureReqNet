@@ -1,0 +1,19 @@
+Atom 1.13.1 ia32 / apm 1.14.1 installs with insecure node.js 4.4.5
+
+
+Description
+Atom 1.13.1 ia32 / apm 1.14.1 installs on Windows with insecure node.js 4.4.5.
+See https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V4.md#2016-10-18-version-461-argon-lts-rvagg
+It also causes reports in desktop vulnerability scanners like Secunia PSI. https://secunia.com/vulnerability_scanning/personal/
+Steps to Reproduce
+
+Install Atom 1.13.1 on Windows.
+Check version of %LocalAppData%\atom\app-1.13.1\resources\app\apm\bin\node.exe
+
+Expected behavior: Atom/apm ships with secure Node.js version.
+Actual behavior: Atom/apm ships with insecure Node.js version 4.4.5.
+Reproduces how often: Always
+Versions
+Windows 8
+Atom 1.13.1
+apm 1.14.1

@@ -1,0 +1,36 @@
+[Mailer][RFC] KernelTestCase Assertion send messages
+
+
+Description
+For functional tests it's sometimes necessary assert if some emails were "sent", for example a password reset or user registration email.
+Currently there is no standard way to handle these assertions, for Swiftmailer in the past I used the profiler information but this required the profiler is actually enabled during testing. And it was less than optimal.
+Now with the introduction of the Mailer component and improvements of the WebTestCase #30813 I propose the following assertions for email handling:
+
+assertNoEmailsSent()
+assertEmailWasSent($messageAssertion)
+
+Example
+$messageAssertion = new EmailAssertion(['john@example.com'])
+    ->from('me@example.com')
+    ->matchFrom('/me@example\.com/')
+
+    ->subject('Your order was shipped')
+    ->matchSubject('/Your order #\d+ shipped/s')
+
+    ->text('Some text message')
+    ->matchText('/Some text message/')
+
+    //->hasAttachment('body', '/filename/', /* 'type' */)
+    //->hasAttachmentFromPatch('source/file/path/image.jpg', '/filename/', /* 'type' */ )
+
+    // priority, bcc, cc
+;
+
+$this->assertEmailWasSent($messageAssertion);
+Alternative (automatically detect if arguments are an regex):
+assertEmailSent(['recipient list (including bcc, cc)'], 'subject', 'text', 'html');
+Much lighter but also more arguments to remember.
+
+While the assertion is a bit verbose it's not possible to safely have multiple separate assertions as a priority assertion might match for one message but should match for another message instead.
+I don't think it makes sense add assertions for all possible information of a message though, the Mime Email class also allows attaching additional parts but this is more of an advanced use-case that would be fitted using a unit test for this specific usage.
+The main focus of this proposal is assert if a message with some expected information was sent during the request cycle, message bus handling or Command handling.

@@ -1,0 +1,46 @@
+Release 4.4.0
+
+
+Includes
+
+
+Add waypointIndices to MapboxDirections, update MapboxMapMaptching to have waypointIndices instead of waypoints
+#959,
+#961,
+#962,
+#963
+
+
+Add Interceptor and EventListener to MapboxDirections #958
+
+
+Directions Refresh new implementation #955
+
+
+Update gradle tools versions #954
+
+
+Add getting mapmatching through POST method #948
+Release checklist @osana
+
+ If there's a new SNAPSHOT version, then update this repo's README.md file
+ Change version name to 4.4.0 in gradle.properties (removing -SNAPSHOT)
+ Publish new release version artifact to Maven Central
+ Change version name back to having -SNAPSHOT at the end
+ Update CHANGELOG.md
+ Tag v new release version in GitHub
+ Update dependencies in the Maps SDK
+
+Post-release @langsmith
+
+ Update Javadoc for the Mapbox Java docs section in /android-docs repo
+ Update the demo app
+ Update version # in config files in /help @langsmith
+ After updating the demo app: Update android-docs
+ Update the constants.js file in android-docs repo so that implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:x.x.x' line is updated in the Gradle section of the MAS overview page
+ run git submodule update --remote examples/maps to pull in updated example code
+ Update version # in Studio Preview
+
+/cc: @mapbox/android
+
+

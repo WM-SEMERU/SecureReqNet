@@ -1,0 +1,18 @@
+Unable to push images to s3 in ireland region
+
+
+container launch successfully without any error. But when try to push image it give 503 error. Can anyone plz tell if I am mistaking something here or region eu-west-1 is not support by docker-registry:2
+docker run \
+       -e "REGISTRY_STORAGE=s3" \
+        -e "REGISTRY_STORAGE_S3_BUCKET=mybucket" \
+        -e "REGISTRY_STORAGE_S3_REGION=eu-west-1" \
+        -e "REGISTRY_STORAGE_S3_STORAGE_PATH=/docker_repo" \
+        -e "SEARCH_BACKEND=sqlalchemy" \
+        -p 5000:5000 \
+        registry:2
+
+command to push image:
+docker image push 127.0.0.1:5000/myimage
+docker version 1.18 ce.
+error: received unexpected HTTP status: 503 Service Unavailable
+not using -e "REGISTRY_STORAGE_S3_ACCESSKEY=******"   -e "REGISTRY_STORAGE_S3_SECRETKEY=******"  because default aws profile has s3 access,

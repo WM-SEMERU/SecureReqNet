@@ -1,0 +1,32 @@
+Reorganize rel='noopener'
+
+
+Follow-up to #10290
+Also:
+
+Add rel='noopener' to brave.com (as the site also may be hacked, which of course should not happen)
+Fix a typo on https://github.com/brave/browser-laptop/pull/10290/files#diff-53c54a977fb4fffd2f7da96ec29f0c71R18
+Always rel='noopener' first, target='_blank' second on the same line (to make it easy to search it with regex)
+
+Auditors:
+Test Plan:
+
+Search your repo for target='_blank'
+Make sure external anchor links with target='_blank' have rel='noopener'
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+
+Test Plan:
+Reviewer Checklist:
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

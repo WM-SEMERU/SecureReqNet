@@ -1,0 +1,9 @@
+New-HPOVLdap Question
+
+
+Hi everyone -- I'm hoping this is an easy answer. I've gotten everything working for LDAP/AD authentication via a script (ex.):
+New-HPOVLdap -name domain.com -AD -rootdn 'dc=domain,dc=com' -SearchContext "$OU1+$OU2" -servers @($ServerA,$ServerB) -Username $GetUserPass.UserName -Password $GetUserPass.Password | Out-Null
+But I'd love to have the default directory switched to domain.com via script, but I don't see any options in the New-HPOVLdap command to set the default directory from local to domain.com
+Any thoughts?
+Thanks,
+Todd

@@ -1,0 +1,5 @@
+Detailed AMQP dependency
+
+
+Installing the Serializer bundle is not sufficient, you must also have the AMQP PHP extension.
+Both the Serializer bundle and the AMQP PHP extension are required by the amqp-pack.

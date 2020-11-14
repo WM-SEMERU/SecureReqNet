@@ -1,0 +1,15 @@
+Added hints about receiving feedback
+
+
+relates to symfony/diversity#23
+Changes made:
+
+define and use the term PR rather than patch
+added hint to first check existing issues/PR
+added hints and relevant links about receiving feedback
+several other minor changes
+
+todo:
+
+ rename file to PR.rst and add entry to the redirect map
+

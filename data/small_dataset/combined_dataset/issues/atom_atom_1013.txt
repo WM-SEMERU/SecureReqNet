@@ -1,0 +1,9 @@
+Add some security precautions to package installation
+
+
+
+ When installing a package, display a warning dialog that describes how packages have the capability of being malicious.
+ Link GitHub identities closely with packages (will be easy because everything in the package store will be hosted on GitHub.)
+ Ability to flag package as malicious and convey this message to users who have installed package.
+ Possibly Log I/O, shelling, keychain access, etc... so people can see what is going on without their knowledge.
+

@@ -1,0 +1,4 @@
+sig-cluster-lifecycle: update list of chairs
+
+
+/assign @justinsb @timothysc

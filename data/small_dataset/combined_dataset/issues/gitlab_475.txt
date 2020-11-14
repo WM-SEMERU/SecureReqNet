@@ -1,0 +1,2 @@
+Just a small cosmetic issue:
+If `signin_enabled` is set to false, and OmniAuth and a strategy are enabled, the login form will say "No authentication methods configured." even though there's a button to log in via OmniAuth right below it.

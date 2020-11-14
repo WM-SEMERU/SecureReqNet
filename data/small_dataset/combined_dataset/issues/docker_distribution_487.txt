@@ -1,0 +1,62 @@
+Support JSONP on API
+
+
+I'd really like to see some jsonp support for the docker registry API. This would allow making queries cross domain from clients without needing a same-domain proxy. This would help with building different UIs that are just fancy single page apps.
+I looked into doing this, and it seems the way that HTTP responses are formed are a bit all over the place. The most logical place was to modify serveJSON to handle JSONP support, but there are many other places where responses are returned as well without going through this.
+For proper JSONP, we can't blindly accept all callback arguments, so we do something like this in python:
+VALID_CALLBACK_RE = re.compile(r'^[$a-z_][0-9a-z_\.\[\]]*$', re.I)
+
+# Reserved words list from http://javascript.about.com/library/blreserved.htm
+JSONP_RESERVED_WORDS = frozenset((
+    'abstract', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class',
+    'const', 'continue', 'debugger', 'default', 'delete', 'do', 'double',
+    'else', 'enum', 'export', 'extends', 'false', 'final', 'finally', 'float',
+    'for', 'function', 'goto', 'if', 'implements', 'import', 'in', 'instanceof',
+    'int', 'interface', 'long', 'native', 'new', 'null', 'package', 'private',
+    'protected', 'public', 'return', 'short', 'static', 'super', 'switch',
+    'synchronized', 'this', 'throw', 'throws', 'transient', 'true', 'try',
+    'typeof', 'var', 'void', 'volatile', 'while', 'with',
+))
+
+
+def is_valid_callback_name(callback_name):
+    if not callback_name:
+        return False
+
+    # Callbacks longer than 50 characters are suspicious.
+    # There isn't a legit reason for a callback longer.
+    # The length is arbitrary too.
+    # It's technically possible to construct malicious payloads using
+    # only ascii characters, so we just block this.
+    if len(callback_name) > 50:
+        return False
+
+    if callback_name in JSONP_RESERVED_WORDS:
+        return False
+
+    if not VALID_CALLBACK_RE.match(callback_name):
+        return False
+
+    return True
+
+
+class JsonResponder(Responder):
+    "Implements a JSON response-type with an optional callback"
+    def __init__(self, request, content, callback=None, **kwargs):
+        kwargs['mimetype'] = kwargs.pop('mimetype', 'application/json')
+        if callback and not is_valid_callback_name(callback):
+            return super(JsonResponder, self).__init__(request, '', status=400)
+        content = json.dumps(content)
+        if callback:
+            kwargs['mimetype'] = 'application/javascript'
+            # We prefix JSONP responses with a dummy comment to prevent people from injecting malicious content
+            # See: http://phabricator.local.disqus.net/T4348 & http://graph.facebook.com/?callback=foo
+            content = '/**/ %s(%s);' % (callback, content)
+        super(JsonResponder, self).__init__(request, content, **kwargs)
+So a few things to point out that need to be accommodated:
+
+Sanitize the callback value to prevent injecting in malicious content.
+Prefix the output with /**/
+Content-Type must be application/javascript when jsonp
+
+I'd be happy to help implement, just not super familiar with the codebase and couldn't find the best way to start injecting this logic that covered everything.

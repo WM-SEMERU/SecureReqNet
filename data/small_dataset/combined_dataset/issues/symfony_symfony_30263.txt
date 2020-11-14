@@ -1,0 +1,33 @@
+404 sometimes ignored
+
+
+Symfony version(s) affected: 3.4
+Description
+Some url are correctly handled to 404 error, some (having a dot at the end) doesn't.
+How to reproduce
+
+extend fosuser. The login path is /login
+handle error page on production: https://symfony.com/doc/3.4/controller/error_pages.html
+
+Now the cases:
+
+
+app_dev.php/login: HTTP200, page displayed : as expected
+
+
+app_dev.php/login1: HTTP404, profiler details : as expected
+
+
+app_dev.php/login.: HTTP404, profiler details : as expected
+
+
+app.php/login: HTTP200, page displayed : as expected
+
+
+app.php/login1: HTTP404, custom error page is displayed : as expected
+
+
+app.php/login.: HTTP404, default error page is displayed : expecting the custom error page
+
+
+Let me know if any additional stuff may help you?

@@ -1,0 +1,33 @@
+InvokePermission not automatically added to Lambda when triggered via Cloudwatch Rule
+
+
+Trying wire up an EventRule as an input/trigger to a Lambda function but the permission to allow Cloudwatch to invoke the Lambda is not being added automatically.
+e.g. would expect the following to add the permission automatically but doesn't
+       const lambdaFunction = new lambda.Lambda(this, 'lambdaFunction', {
+            code: new lambda.LambdaS3Code(bucket, 'lambda-cloudwatch-triggered.zip'),
+            runtime: lambda.LambdaRuntime.NodeJS810,
+            handler: 'index.handler',
+            functionName: 'my-cdk-lambda-function'
+        });
+
+        const rule = new events.EventRule(this, 'Rule', {
+            scheduleExpression: 'cron(0 0 * * ? *)',
+        });
+        rule.addTarget(lambdaFunction);
+
+Have to add this code in to get the permission added:
+        lambdaFunction.addPermission('allowCloudWatchInvocation', {
+            principal: new ServicePrincipal('events.amazonaws.com'),
+            sourceArn: rule.ruleArn
+        });
+
+Output from cdk synth shows this:
+    lambdaFunctionInvokedByCloudWatchB3D0554C:
+        Type: 'AWS::Lambda::Permission'
+        Properties:
+            Action: 'lambda:InvokeFunction'
+            FunctionName:
+                Ref: lambdaFunction940E68AD
+            Principal: events.amazonaws.com
+
+@eladb suspected in a gitter chat this was because the sourceArn is missing.

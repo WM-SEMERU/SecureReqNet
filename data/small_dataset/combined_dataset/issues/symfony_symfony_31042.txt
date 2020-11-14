@@ -1,0 +1,50 @@
+Improve test coverage from #30997
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes (test enhancement against change on master)
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+enhancement for #30997
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+Test coverage added in #30997 did a good job of validating previous behaviour, but didn't adequately cover the new callback logic. Added coverage for new methods on the Question object.

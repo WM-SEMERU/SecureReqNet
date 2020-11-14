@@ -1,0 +1,50 @@
+[Security][SecurityBundle] Remove the HTTP digest auth
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master 
+
+
+Bug fix?
+no
+
+
+New feature?
+yes 
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#24325, #24335 
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+To be merged once #24335 is merged up from 3.4 to master.

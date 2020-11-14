@@ -1,0 +1,6 @@
+Razor expression statement completion disappears when typing quickly in Visual Studio
+
+
+Using Visual Studio 16.1.0 Preview 1.0 [28804.136.d16.1] (Internal Dogfooding Preview)
+See GIF below for capture. Repro was simply creating a new Razor Components app, opening Host.cshtml, then attempting to type a Razor expression that calls Html.RenderComponentAsync.
+

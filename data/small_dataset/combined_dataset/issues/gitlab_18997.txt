@@ -1,0 +1,13 @@
+From: https://gitlab.zendesk.com/agent/tickets/27733
+
+This one sounds pretty bad:
+
+```
+I was playing around with the public section of our Gitlab install a bit, and noticed there's a pretty serious unintended information disclosure happening in snippets. We have multiple snippets set to internal/private, but anything set to "internal" can be found by the public search without even logging in. Example: https://gitlab.com/search?&snippets=true&scope=&search=password works without me logging into gitlab, and it finds some internal snippets there too(including some actual password configs :/). 
+Thanks in advance for looking into this.
+
+Greetings, 
+Teun Beijers
+```
+
+/cc: @DouweM, @rspeicher 

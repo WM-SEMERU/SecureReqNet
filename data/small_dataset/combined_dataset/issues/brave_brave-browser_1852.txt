@@ -1,0 +1,4 @@
+mitigate TLS session resumption tracking
+
+
+since https://arxiv.org/abs/1810.07304 came out, many people are concerned about the possibility of advertisers tracking people using TLS session resumption data. brave should consider invalidating TLS session resumption tickets periodically to mitigate this.

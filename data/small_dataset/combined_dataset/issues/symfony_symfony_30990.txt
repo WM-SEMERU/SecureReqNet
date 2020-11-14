@@ -1,0 +1,51 @@
+Allow env processor to resolve `::`
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.3
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+The env processor resolve to null when no fallback are provided. ie. env(default::NOT_EXISTS)
+Issue is that the regexp does not allow such pattern. thus made the feature unusable.

@@ -1,0 +1,5 @@
+Proof of concept: https://gitlab.com/snippets/1718557
+
+This user's username is: `</br><h1>HACKED BY TALAOHU28</h1></br><img src="http://progress28.web.id/abc.jpg"></br><h1>I WANT TO BACK FREE</h1></br><img src="http://progress28.web.id/H.png"></br><img src="http://progress28.web.id/A.png"></br><img src="http://progress28.web.id/C.png"></br><img src="http://progress28.web.id/K.png"></br><img src="http://progress28.web.id/E.png"></br><img src="http://progress28.web.id/D.png">` and we seem to happily display that unescaped after loading discussions on snippets.
+
+~~Unsure if this is truly limited to ~"snippets"~~

@@ -1,0 +1,9 @@
+Improve `kubectl auth can-i` command by warning users when they try access resource out of scope
+
+
+/kind feature
+What this PR does / why we need it:
+kubectl auth can-i command would not hint user when they try to access some resource out of scope. For example, try get namespace inside default namespace.It would be reject by api-server but kubectl auth can-i get namespace --namespace=default would give a yes. After this patch, a warning info would be given.
+Fixes #75970
+improve `kubectl auth can-i` command by warning users when they try access resource out of scope
+

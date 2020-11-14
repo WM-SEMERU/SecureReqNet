@@ -1,0 +1,16 @@
+Users are able to delete teams
+
+
+Due to #130  feature (ability to delete teams)
+Here is the test that proves it
+ it 'delete', ->
+    using api_Team, ->
+      team_Name = @.data_Team.new_Team project
+      req = params : project : project , team : team_Name
+      res = send: (data)-> data.status.assert_Is 'Team Deleted'
+      api_Team.delete(req, res)
+
+  it 'delete (no project)', ->
+    req = params : null
+    res = send: (data)-> data.error.assert_Is 'Team deletion failed'
+    api_Team.delete(req, res)

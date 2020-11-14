@@ -1,0 +1,4 @@
+Disable builtins only for enclave code in our build
+
+
+This was an outstanding TODO.

@@ -1,0 +1,4 @@
+Team logos are not working
+
+
+I have the latest prod build and I am unable to create the teams. I am getting error 'Please select the logo for the team' to continue, but I am unable to save any logo. The teams have to self-register and are only able to use custom logos. Any work around?

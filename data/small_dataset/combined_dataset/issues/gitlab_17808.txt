@@ -1,0 +1,25 @@
+'The entire gitlab instance can be crashed on machines with less than ~10GB memory by committing large binary files and then cloning the affected repository, which results in a Denial of Service problem.
+
+Detailed steps to reproduce:
+
+1. Set up gitlab and create a repo where you have write access
+1. Commit a large binary file (250mb or more) without using LFS and push it, e.g. a compressed video or a compressed tarball
+3. Clone the repo again from gitlab --> observe 3-4GB or even more excessive memory use from git on the server running inside gitlab, which can risk an out of memory on lower spec servers
+
+------
+## Old outdated info (archived, ignore unless for historical reasons):
+### Summary
+Enabling LFS and the recommended option nginx['client_max_body_size'] opens up Denial Of Service vulnerability due to memory exhaustion which can bring down servers.
+
+### Steps to reproduce
+The gitlab LFS guides recommend using an option like nginx['client_max_body_size']= '250m'; to enable support of large files (without which LFS is quite pointless, no?).
+
+However, this causes an undocumented severe Denial Of Service vector because git pushes that contain such large objects **not** pushed into the LFS storage will also be permitted, resulting in git-pack-objects consuming up to as much as 3-4 GB of memory for ~250MB objects which can easily take down the entire server.
+
+1. Use the docker omnibus image
+2. Put nginx['client_max_body_size']= '250m';  into GITLAB_OMNIBUS_CONFIG
+3. Make a new repository and commit multiple files of sizes approaching 300MB
+4. Push from your computer to the server. You'll notice memory usage instantly explodes from ~1.1GB to a dangerous 3-4GB
+
+### Expected behavior
+Pushes with large files/objects will be always rejected unless either they are enabled by the gitlab administrator or they are an LFS storage upload (where they don't cause memory issues). EDIT: fixed expected behavior

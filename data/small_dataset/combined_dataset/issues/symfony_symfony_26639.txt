@@ -1,0 +1,52 @@
+[SecurityBundle] Added an alias from RoleHierarchyInterface to security.role_hierarchy
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+I don't know
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+It's needed for autowirering
+
+Note: I'm not sure if this is a bug fix or a new feature.

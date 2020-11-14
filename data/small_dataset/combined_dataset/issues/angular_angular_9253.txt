@@ -1,0 +1,39 @@
+Interpolation breaks sanitization
+
+
+After updating to RC2 a component I was using to create iframes is throwing a security exception in Chrome.
+Current behavior
+browser_adapter.ts:74EXCEPTION: Error in http://localhost:4200/app/+legacy-iframe/legacy-iframe.component.js class LegacyIframeComponent - inline template:0:8BrowserDomAdapter.logError @ browser_adapter.ts:74BrowserDomAdapter.logGroup @ browser_adapter.ts:85ExceptionHandler.call @ exception_handler.ts:50(anonymous function) @ application_ref.ts:313schedulerFn @ async.ts:140SafeSubscriber.__tryOrUnsub @ Subscriber.ts:240SafeSubscriber.next @ Subscriber.ts:192Subscriber._next @ Subscriber.ts:133Subscriber.next @ Subscriber.ts:93Subject._finalNext @ Subject.ts:154Subject._next @ Subject.ts:144Subject.next @ Subject.ts:90EventEmitter.emit @ async.ts:125NgZone._zoneImpl.ng_zone_impl_1.NgZoneImpl.onError @ ng_zone.ts:134NgZoneImpl.inner.inner.fork.onHandleError @ ng_zone_impl.ts:87ZoneDelegate.handleError @ zone.js:327Zone.runTask @ zone.js:259drainMicroTaskQueue @ zone.js:474ZoneTask.invoke @ zone.js:426
+browser_adapter.ts:74ORIGINAL EXCEPTION: Error: unsafe value used in a resource URL contextBrowserDomAdapter.logError @ browser_adapter.ts:74ExceptionHandler.call @ exception_handler.ts:62(anonymous function) @ application_ref.ts:313schedulerFn @ async.ts:140SafeSubscriber.__tryOrUnsub @ Subscriber.ts:240SafeSubscriber.next @ Subscriber.ts:192Subscriber._next @ Subscriber.ts:133Subscriber.next @ Subscriber.ts:93Subject._finalNext @ Subject.ts:154Subject._next @ Subject.ts:144Subject.next @ Subject.ts:90EventEmitter.emit @ async.ts:125NgZone._zoneImpl.ng_zone_impl_1.NgZoneImpl.onError @ ng_zone.ts:134NgZoneImpl.inner.inner.fork.onHandleError @ ng_zone_impl.ts:87ZoneDelegate.handleError @ zone.js:327Zone.runTask @ zone.js:259drainMicroTaskQueue @ zone.js:474ZoneTask.invoke @ zone.js:426
+browser_adapter.ts:74ORIGINAL STACKTRACE:BrowserDomAdapter.logError @ browser_adapter.ts:74ExceptionHandler.call @ exception_handler.ts:66(anonymous function) @ application_ref.ts:313schedulerFn @ async.ts:140SafeSubscriber.__tryOrUnsub @ Subscriber.ts:240SafeSubscriber.next @ Subscriber.ts:192Subscriber._next @ Subscriber.ts:133Subscriber.next @ Subscriber.ts:93Subject._finalNext @ Subject.ts:154Subject._next @ Subject.ts:144Subject.next @ Subject.ts:90EventEmitter.emit @ async.ts:125NgZone._zoneImpl.ng_zone_impl_1.NgZoneImpl.onError @ ng_zone.ts:134NgZoneImpl.inner.inner.fork.onHandleError @ ng_zone_impl.ts:87ZoneDelegate.handleError @ zone.js:327Zone.runTask @ zone.js:259drainMicroTaskQueue @ zone.js:474ZoneTask.invoke @ zone.js:426
+browser_adapter.ts:74Error: unsafe value used in a resource URL context
+    at DomSanitizationServiceImpl.sanitize (dom_sanitization_service.ts:126)
+    at DebugAppView._View_LegacyIframeComponent0.detectChangesInternal (LegacyIframeComponent.template.js:32)
+    at DebugAppView.AppView.detectChanges (view.ts:255)
+    at DebugAppView.detectChanges (view.ts:372)
+    at DebugAppView.AppView.detectViewChildrenChanges (view.ts:283)
+    at DebugAppView._View_LegacyIframeComponent_Host0.detectChangesInternal (LegacyIframeComponent_Host.template.js:30)
+    at DebugAppView.AppView.detectChanges (view.ts:255)
+    at DebugAppView.detectChanges (view.ts:372)
+    at DebugAppView.AppView.detectContentChildrenChanges (view.ts:275)
+    at DebugAppView._View_VspNg2AppComponent0.detectChangesInternal (VspNg2AppComponent.template.js:322)
+
+It did not originally have the "register as safe" call (when I was still using RC1, which worked), but I found similar solutions referenced that would be the correct way to do it. Doesn't change anything though, and the URL is far from suspicious right now.
+import { Component } from '@angular/core';
+import {DomSanitizationService, SafeResourceUrl} from '@angular/platform-browser';
+
+@Component({
+  moduleId: module.id,
+  selector: 'legacy-iframe',
+  template: '<iframe src="{{ url }}"></iframe>'
+})
+export class LegacyIframeComponent {
+  public url:SafeResourceUrl;
+
+  constructor(private sanitationService:DomSanitizationService) {
+    this.url = sanitationService.bypassSecurityTrustResourceUrl('/foo');
+  }
+}
+
+
+I'd also be content with a workaround for now, like disabling the security altogether..

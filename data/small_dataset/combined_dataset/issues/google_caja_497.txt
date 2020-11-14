@@ -1,0 +1,12 @@
+<input> element leaks pointer to parent <form> node
+
+
+Original issue 497 created by collin.jackson on 2008-06-11T17:14:02.000Z:
+What steps will reproduce the problem?
+Two Caja modules inside the same form tag can access each other's DOM using the "form" property
+of input elements in side the Caja module.
+What is the expected output?
+Maybe we should provide guidance to containers not to do this. Or maybe we could verify that the
+form tag is inside the module where the input element resides.
+What do you see instead?
+Full access between modules using the form tag.

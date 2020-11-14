@@ -1,0 +1,47 @@
+[Console] Terminal::getWidth() may repeatedly shell out to stty in some cases
+
+
+Symfony version(s) affected: v3.4.24 is where we originally noticed it, but the problematic code exists in master.
+Description
+There's an expectation that the code (new Terminal())->getWidth() would only shell out to stty in initDimensions()/getSttyColumns() once, since it is supposed to cache the result in self::$width. However, if shelling out to stty fails for whatever reason (there are other tickets in the bug tracker about how stty isn't available, my specific case is in our Jenkins CI system when run under docker), then nothing will be cached in self::$width, so future calls to getWidth() will attempt to shell out again.
+This has become an issue for us when our CI process has low memory available, and upon trying to proc_open, the kernel doesn't think it has enough memory to fork and fails.
+My expectation is that symfony will shell out to stty once, and if that doesn't work, it won't keep trying each time it's asked for the width.
+Our downstream ticket is https://phabricator.wikimedia.org/T219114#5084302. I've also submitted a PR to work around this issue in phan: phan/phan#2634.
+How to reproduce
+
+Find an environment where $COLUMNS is not set (I used the dash shell), stty isn't available or intentionally hack the code so that shelling out to will fail.
+Call (new Terminal())->getWidth() multiple times, and observe that it attempts to shell out each time.
+
+$ git diff
+diff --git a/src/Symfony/Component/Console/Terminal.php b/src/Symfony/Component/Console/Terminal.php
+index 456cca11ca..a767bdd3c7 100644
+--- a/src/Symfony/Component/Console/Terminal.php
++++ b/src/Symfony/Component/Console/Terminal.php
+@@ -124,7 +124,8 @@ class Terminal
+             2 => ['pipe', 'w'],
+         ];
+ 
+-        $process = proc_open('stty -a | grep columns', $descriptorspec, $pipes, null, null, ['suppress_errors' => true]);
++       echo "shelling out\n";
++        $process = proc_open('sttydoesnotexist -a | grep columns', $descriptorspec, $pipes, null, null, ['suppress_errors' => true]);
+         if (\is_resource($process)) {
+             $info = stream_get_contents($pipes[1]);
+             fclose($pipes[1]);
+
+$ cat test.php
+<?php
+require_once 'vendor/autoload.php';
+use Symfony\Component\Console\Terminal;
+echo (new Terminal())->getWidth();
+echo "\n";
+echo (new Terminal())->getWidth();
+echo "\n";
+
+$ php test.php
+shelling out
+80
+shelling out
+80
+
+Possible Solution
+If shelling out fails, then initDimensions() should have a final fallback that sets self::$width and self::$height to the hardcoded constants.

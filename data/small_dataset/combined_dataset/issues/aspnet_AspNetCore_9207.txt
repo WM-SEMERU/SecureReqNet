@@ -1,0 +1,4 @@
+Remove AddRazorSupportForMvc from MVC templates
+
+
+Follow up to #6392. The property is specified in the WebSDK and is no longer required to be specified in the project template.

@@ -1,0 +1,10 @@
+[SecurityBundle] Add configuration aliases "csrf_token_generator" and "csrf_token_id" for "csrf_provider" and "intention"
+
+
+In #6554, the names "intention" and "csrfProvider" were changed to "csrfTokenId" and "csrfTokenGenerator". This is not yet reflected in the SecurityBundle configuration, which still contains the configuration values "intention" and "csrf_provider".
+Corresponding aliases "csrf_token_id" and "csrf_token_generator" should be created.
+TODO
+
+ The documentation needs to be checked for references to the configuration of the application secret. Remarks that the secret is used for CSRF protection need to be removed.
+ Add aliases "csrf_token_generator" and "csrf_token_id" for "csrf_provider" and "intention" in the SecurityBundle configuration
+

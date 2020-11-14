@@ -1,0 +1,18 @@
+Tooltip Support [Sponsored, Feb 1 Target]
+
+
+Some requirements:
+
+Ability to display tooltips when hovering over cells.
+Tooltip data will be provided as an additional property in the table
+Each tooltip string will be matched with a cell via a row ID and a column ID so that the tooltips remain associated with the cells when filtering and sorting.
+Tooltip strings will be rendered as plain text or as Markdown. For security reasons, raw HTML will not be supported. For architectural reasons, users will not be able to pass arbitrary Dash components as tooltips. Markdown strings will enable bolded text, italics, line breaks, headers, and tables.
+Tooltips will be styleable via external CSS.
+The position of the tooltip will be automatically determined so that it:
+
+Doesn’t block the cell
+Isn’t hidden
+
+
+Users will not necessarily be able to mouse over the tooltip itself to select text or click on links. Doing so would prevent the tooltip from disappearing, a potentially confusing experience.
+

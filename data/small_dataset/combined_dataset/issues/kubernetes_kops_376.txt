@@ -1,0 +1,9 @@
+IAM review
+
+
+We should further review the IAM profile to see if we can lock it down further:
+
+can we prevent even listing other clusters in the same bucket without breaking discovery?
+EC2 permissions
+Volume restrictions
+

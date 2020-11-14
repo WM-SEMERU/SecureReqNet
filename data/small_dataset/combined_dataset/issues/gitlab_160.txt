@@ -1,0 +1,5 @@
+The [API docs for the users](http://api.gitlab.org/users.html) shows sample output for retrieving SSH keys. But they don't show the "created_at" data value or the date time format for that given value.
+
+To test, simply make an API call to ````GET /user/keys```` and you'll see the extra data value.
+
+The API should be updated to include the missing information.

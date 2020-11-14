@@ -1,0 +1,4 @@
+Sort by ratings by default on SearchTools page
+
+
+Fixes #7682

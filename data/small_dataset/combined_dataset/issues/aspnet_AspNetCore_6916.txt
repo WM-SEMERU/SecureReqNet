@@ -1,0 +1,4 @@
+Add RequireAuthorization method for default policy
+
+
+Addresses #6897

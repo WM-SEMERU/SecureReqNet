@@ -1,0 +1,1 @@
+I had to change the hostname of the app so i modified the /etc/gitlab/gitlab.rb eternal_url params. When I ran gitlab-ctl reconfigure it reset the backup and oauth settings to default in /var/opt/gitlab/gitlab-rails/etc/gitlab.yml

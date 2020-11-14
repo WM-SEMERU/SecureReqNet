@@ -1,0 +1,8 @@
+AMBARI-25155. Backport knox trusted proxy support for ambari for 2.6 (amagyar)
+
+
+What changes were proposed in this pull request?
+Backport of #2682 #2702 #2665 #2683
+How was this patch tested?
+Manually with
+ curl -k -i -u sam:sam-password -X GET https://localhost:8443/gateway/default/ambari/api/v1/users

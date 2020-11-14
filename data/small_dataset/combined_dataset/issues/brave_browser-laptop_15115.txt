@@ -1,0 +1,39 @@
+After latest release, LastPass extension can't connect to service - MacOS
+
+
+Description
+After the latest release, LastPass extension can no longer reach its service, so cannot login nor fill forms.
+Steps to Reproduce
+
+Open Brave, and last pass is not logged in
+Click on LastPass icon
+Login modal appears.  Fill it in and click Login
+LastPass Icon turns yellow
+Click on LastPass Icon and you'll see the error message
+
+Actual result:
+
+
+
+
+Expected result:
+LastPass should be able to reach its service
+Reproduces how often:
+100%
+Brave Version
+about:brave info:
+Brave: 0.23.104
+V8: 6.8.275.24
+rev: b454a4a
+Muon: 8.0.8
+OS Release: 17.5.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+Yes
+Additional Information
+MacOS High Sierra Version 10.13.4

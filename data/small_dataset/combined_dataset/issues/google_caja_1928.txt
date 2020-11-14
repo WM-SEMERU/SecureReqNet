@@ -1,0 +1,10 @@
+the source code window don't show thw code
+
+
+Original issue 1930 created by darioluisponisio on 2014-08-14T16:30:30.000Z:
+Google Caja. Copyright (C) 2011, Google Inc. Rev 5687 built on 2014-06-05 12:03:11.
+1.Can't open no example. Can't paste no code
+2.Can't switch to "Autodetect mode". Alwys fall to "ES5 Mode (Experimental)"
+3.
+What is the expected output? What do you see instead?
+Please provide any additional information below.

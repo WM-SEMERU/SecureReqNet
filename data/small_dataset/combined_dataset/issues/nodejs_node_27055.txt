@@ -1,0 +1,30 @@
+vm: filename option to vm.runInNewContext() ignored
+
+
+This should work according to the docs but currently doesn't:
+require('vm').runInNewContext(`throw Error('boom')`, {filename: 'boom.js'})
+It shows up as evalmachine.<anonymous> instead of boom.js.
+Confirmed with master and all release lines. It's apparently not a recent regression.
+Regression test:
+diff --git a/test/parallel/test-vm-run-in-new-context.js b/test/parallel/test-vm-run-in-new-context.js
+index 51577668cf..6c8cc921a7 100644
+--- a/test/parallel/test-vm-run-in-new-context.js
++++ b/test/parallel/test-vm-run-in-new-context.js
+@@ -72,14 +72,13 @@ global.gc();
+ fn();
+ // Should not crash
+ 
+-{
++for (const cb of [(code, filename) => vm.runInNewContext(code, {}, filename),
++                  (code, filename) => vm.runInNewContext(code, { filename })]) {
+   // Verify that providing a custom filename as a string argument works.
+   const code = 'throw new Error("foo");';
+   const file = 'test_file.vm';
+ 
+-  assert.throws(() => {
+-    vm.runInNewContext(code, {}, file);
+-  }, (err) => {
++  assert.throws(() => cb(code, file), (err) => {
+     const lines = err.stack.split('\n');
+ 
+     assert.strictEqual(lines[0].trim(), `${file}:1`);

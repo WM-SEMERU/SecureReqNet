@@ -1,0 +1,1 @@
+Currently, it seems that @mentions are only triggering email notifications in issues, not in merge requests or code comments. Please enable this feature. 

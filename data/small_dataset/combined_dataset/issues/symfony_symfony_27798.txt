@@ -1,0 +1,50 @@
+[Security] Use AuthenticationTrustResolver in SimplePreAuthenticationListener
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes (minor)
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Minor, but would be consistent with how ContextListener checks for anonymous tokens.

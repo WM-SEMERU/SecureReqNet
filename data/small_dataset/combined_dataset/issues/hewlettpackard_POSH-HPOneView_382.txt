@@ -1,0 +1,31 @@
+Cannot Disable "Manage boot mode" with New-HPOVServerProfileTemplate
+
+
+Expected Behavior
+How to disable "Manage boot mode" when creating a Server Profile Template.
+The desired outcome is to create an "empty" Server Profile Template with no settings. This is almost possible except for the Manage boot mode (under Boot Settings).
+When using the -ManageBoot switch to disable this, it complains that you cannot use this with other parameters that I have not specified. I tried specifying the other parameters to Unmanaged, but still no luck.
+Using OneView, I can edit the template after it has been created, and un-check Manage boot mode and save the template, so this is not a restriction from OneView.
+Actual Behavior
+Command line:
+PS C:\> $Task = New-HPOVServerProfileTemplate -Name TEST01 -ServerHardwareType "SY 480 Gen10 1" -EnclosureGroup "EG Eng Lab01" -ManageBoot $false
+(I also tried -ManageBoot:$false and the same error)
+Error message:
+New-HPOVServerProfileTemplate : The specification of boot mode and boot order settings are not allowed if the manage
+boot mode feature is disabled.
+At line:1 char:1
++ New-HPOVServerProfileTemplate -Name TEST01 -ServerHardwareType "SY 48 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (AsyncronousTask:String) [New-HPOVServerProfileTemplate], ServerProfil
+   eTemplateResourceException
+    + FullyQualifiedErrorId : InvalidOperation,New-HPOVServerProfileTemplate
+Steps to reproduce
+I used -verbose but the results were too much to put here. It seems to me that using the -ManageBoot parameter, causes other default parameters to be automatically set and thus triggers a conflict of parameter usage. Hopefully the example above can be used to reproduce the issue.
+Version Information
+PowerShell        5.1.14409.1018
+OneView version   4.10.03.364293.00
+REST POSH Version 4.10.1821.1567
+FormatPx          1.1.3.15
+SnippetPx         1.0.6.19
+PackageManagement 1.2.2
+PowerShellGet     2.0.1

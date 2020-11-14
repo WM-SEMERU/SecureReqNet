@@ -1,0 +1,26 @@
+On FF35, non-extensible objects can be extended
+
+
+Original issue 1954 created by erights on 2015-02-15T17:13:28.000Z:
+This is reported at https://bugzilla.mozilla.org/show_bug.cgi?id=1125389 as a non-disclosed bug I was given permission to see and share in a limited manner.  It was fixed on 1/29/2015 and propagated back through FF36. It will not be propagated back to FF35, so it remains vulnerable.
+Comment 6 shows a case that will demonstrate the bug in the FF35 browser:
+function Obj() {
+this.x = 0;
+Object.preventExtensions(this);
+}
+var i = 0;
+function test() {
+var A = new Obj();
+while (true) {
+i++;
+if (Object.isExtensible(A)) {
+throw new Error("Shouldn't get here");
+}
+}
+A.length1 = X;
+}
+try {
+test();
+} catch (e) {
+console.log(e, 'iterations: ' + i);
+}

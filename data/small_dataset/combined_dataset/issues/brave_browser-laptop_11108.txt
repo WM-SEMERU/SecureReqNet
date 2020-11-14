@@ -1,0 +1,9 @@
+visiting about:preferences#search should not set cookies
+
+
+Test plan
+#12698 (comment)
+
+i noticed that opening about:preferences#search causes cookies to be set for various sites, probably because Brave is making requests to load their favicons:
+
+we should not load the favicons remotely

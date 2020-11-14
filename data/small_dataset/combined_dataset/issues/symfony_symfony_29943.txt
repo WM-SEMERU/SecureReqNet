@@ -1,0 +1,14 @@
+[WebProfiler] Add help link in WebProfiler
+
+
+Description
+The first reflex for Symfony newcomers or developers when they get an error is to copy/past the Exception and search on (Documention, Google, Stackoverflow, Slack...)
+The idea is to create these links in the webprofiler, under an Help section. All link will be displayed in the profiler and in the panel. If there is an exception an other link will contains the error as a query.
+https://google.com/search?`q=TheErrorMessage
+https://stackoverflow.com/search?`q=TheErrorMessage
+You can try it here https://github.com/ismail1432/help-profiler-sandbox
+just clone the repo, launch the webserver and you will get an error and see my proposition
+I'm ready to develop the feature if the community is Ok :-)
+Exemple
+
+

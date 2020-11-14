@@ -1,0 +1,10 @@
+HealthInformation - Ambiguity in TimeToLive allowed values
+
+
+From HealthInformation.TimeToLive's remarks (emphasis mine):
+
+When clients report periodically, they should send reports with higher frequency
+than time to live. If clients report on transition, they can set the time to
+live to infinite.
+
+Based on this, I expect the property to accept a value of System.Threading.Timeout.InfiniteTimeSpan, which evaluates to a TimeSpan of -1 milliseconds. Instead, the property throws an ArgumentException claiming the TimeSpan must be greater than 0.

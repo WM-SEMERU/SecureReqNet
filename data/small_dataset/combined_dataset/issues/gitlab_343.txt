@@ -1,0 +1,37 @@
+'It's possible to check publicly if a private repository with a certain name exists.
+
+### Steps to reproduce
+
+- try to push to existing/non-existing repository via HTTP/HTTPS
+
+#### Initialize repository
+```
+# initialize repository
+git init test
+cd test
+touch foo
+git add foo
+git commit -m "Add foo"
+```
+
+#### Push to existing repository
+```
+# push via HTTPS
+git push https://gitlab.com/gitlab-org/gitlab-ce.git master
+Username for 'https://gitlab.com':
+```
+Repository exists. The output is the same for existing private repositories.
+
+#### Push to non-existing repository
+```
+git push https://gitlab.com/gitlab-org/non-existing.git master
+remote: Not Found
+fatal: repository 'https://gitlab.com/gitlab-org/non-existing.git/' not found
+```
+Repository doesn't exist, user is not asked for login data.
+
+### Possible fixes
+
+- check user authentication _before_ checking repository status
+
+Tested with GitLab 6.9.1 and currently installed version at GitLab.com.

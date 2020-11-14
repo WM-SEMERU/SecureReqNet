@@ -1,0 +1,4 @@
+What is the required VS2017 version?
+
+
+The only indication of what VS version is compatible with WinObjC is #2884 (comment). The required version should be very prominently displayed in the readme. A VS installation is very long and painful on a slower machine or internet connection.

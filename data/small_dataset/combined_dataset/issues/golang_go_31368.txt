@@ -1,0 +1,6 @@
+x/tools: fastwalk broken on darwin
+
+
+It seems directory reading is still broken on Darwin:
+https://build.golang.org/log/e557926884d68397b4c4decd157f5947a6d0dff0
+Bunch of fastwalk-related failures.

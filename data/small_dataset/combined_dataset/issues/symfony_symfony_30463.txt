@@ -1,0 +1,35 @@
+[FramworkBundle][Messenger] Not possible to overwrite transport options
+
+
+Symfony version(s) affected: 4.2.x
+Description
+It is not possible to overwrite transport options for different environments. As the option config node is an aray node, the config values are deep merged resulting in array that can not be resolved by the OptionResolver.
+How to reproduce
+overwrite transport options for a specific environment e.g. test:
+# in framework.yaml
+framework
+    messenger:
+        transports:
+            default:
+                options:
+                    receiveTimeout: 1000
+# in test/framework.yaml
+framework
+    messenger:
+        transports:
+            default:
+                options:
+                    receiveTimeout: 200
+Possible Solution
+add performNoDeepMerging() to the array node solves the problem for me, but i don't know if that has any downsides or if the root cause of the problem is something else.
+Maybe there are more config nodes this problem applies to.
+Additional context
+Log looks like this:
+Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException : The option "0" does not exist. Defined options are: "delayStrategy", "deliveryDelay", "priority", "queue", "receiveTimeout", "timeToLive", "topic".
+ /app/vendor/symfony/options-resolver/OptionsResolver.php:747
+
+The passed Options array looks like:
+[
+    'receiveTimeout' => 1000,
+    0 => 200
+]

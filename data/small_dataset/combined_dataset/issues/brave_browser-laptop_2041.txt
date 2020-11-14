@@ -1,0 +1,7 @@
+ipcRenderer events are not received inside iframes
+
+
+messages sent by this.webview.send are not received by brave-default.js running inside an iframe. as a result, ads are not replaced in https://zyan.scripts.mit.edu/brave/slashdot.html and fingerprinting protection will not always work inside iframes.
+i would expect the top-level instance of brave-default.js to forward the messages onto subframes.
+blocks #313 somewhat, but can be worked around
+cc @bridiver

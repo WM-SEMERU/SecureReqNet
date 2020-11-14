@@ -1,0 +1,21 @@
+Taming membrane may leak host references if host makes use of taming-frame-defined objects
+
+
+Original issue 1654 created by kpreid.switchb.org on 2013-02-16T00:35:22.000Z:
+The taming membrane's tame() says, as of r5293:
+if (tameByFeral.has(f)) { return tameByFeral.get(f); }
+if (privilegedAccess.isDefinedInCajaFrame(f)) { return f; }
+
+That is, objects defined in the taming frame are not copied or proxied, but merely transferred. This punctures the membrane in the event that feral code performs the following steps:
+
+Acquire a reference to a DefinedInCajaFrame object. (Note that this category includes various objects exposed by the Caja API such as GuestManager, and any incidental arrays, records, etc. returned by those interfaces.)
+Cause said object to contain a reference to a feral object (such as by assigning a property).
+Pass said object to the guest via the taming membrane.
+
+Note that an innocent host may perform steps 2 and 3 with the assumption that the taming membrane will, as it usually does, provide the guest with a tamed view of said reference; I claim that it is surprising that if the object happens to originate from the taming frame there arises a vulnerability.
+Note that this risk applies only to objects which
+• do not have a tame twin (else the first condition in the quoted code applies)
+• and are DefinedInCajaFrame.
+For example, when the taming frame untames an object such as a Date, it makes a copy (which belongs to the taming frame and so meets the second condition) and then makes it the feral twin of the guest's date (which makes it safe due to the first condition).
+Ihab and I have discussed this issue, and the best option we currently see is to remove the second condition, so that objects do not live on both sides of the membrane even if they are defined in the taming frame, and see if anything breaks. (Unfortunately, it is possible that what breaks is users of Caja, but as established above, they were doing something with unobvious risks. In the case where the object is a builtin (as defined by copyBuiltin), the taming will work as before except that the object is copied.
+Another solution, which we might want to implement for other reasons, is to ensure that the only objects exposed to feral code are those which are registered in the taming membrane (satisfying the first condition). However, this would still make the second condition apparently unnecessary.

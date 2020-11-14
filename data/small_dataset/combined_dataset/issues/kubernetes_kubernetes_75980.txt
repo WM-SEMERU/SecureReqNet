@@ -1,0 +1,38 @@
+pvc_protection_controller queries local cache instead of apiserver(s)
+
+
+What happened:
+After studying https://github.com/kubernetes/community/blob/master/contributors/design-proposals/storage/postpone-pvc-deletion-if-used-in-a-pod.md I thought of an optimization and checked the current implementation to see if it is there.  Instead I found that the current implementation makes a critical mistake: it only checks the local cache and never the live apiserver(s) (see 
+
+
+kubernetes/pkg/controller/volume/pvcprotection/pvc_protection_controller.go
+
+
+         Line 212
+      in
+      255a73f
+
+
+
+
+
+
+ pods, err := c.podLister.Pods(pvc.Namespace).List(labels.Everything()) 
+
+
+
+
+).  Following is a scenario in which the current implememtation allows the removal of a PVC while it is in use by a Pod.  Start in a state where the PVC exists, has the finalizer, and is bound.  Next a Pod API object is created.  Then the Pod is scheduled and the relevant kubelet is notified and begins work on that Pod.  That kubelet queries an apiserver, which queries the etcd cluster holding PVC objects (which may or may not be the same as the etcd cluster holding Pod objects), and finds out that the PVC exists and is not being deleted.  The kubelet finishes creating and starting the Pod.  Then some client requests deletion of the PVC.  Its DeletionTimestamp is set.  Then the pvc_protection_controller is notified about this change to the PVC.  Note that I did not say that the pvc_protection_controller has by now been notified about the creation or scheduling of the Pod.  This is possible, because we have no guarantee about ordering of notifications about different Kinds of objects.  The pvc_protection_controller queries its Pod informer's local cache of Pod information and does not find the new Pod.  The pvc_protection_controller then removes the Finalizer from the PVC, and soon the PVC API object is removed.
+What you expected to happen:
+I expected to see that https://github.com/kubernetes/kubernetes/blob/master/pkg/controller/volume/pvcprotection/pvc_protection_controller.go follows the community design doc or includes an optimization to avoid the apiserver check if the local cache shows usage of the PVC.
+How to reproduce it (as minimally and precisely as possible):
+Anything else we need to know?:
+Environment:
+
+Kubernetes version (use kubectl version):
+Cloud provider or hardware configuration:
+OS (e.g: cat /etc/os-release):
+Kernel (e.g. uname -a):
+Install tools:
+Others:
+

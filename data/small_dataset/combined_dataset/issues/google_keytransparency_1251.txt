@@ -1,0 +1,4 @@
+Explicitly support EntryUpdate Atomicity
+
+
+In some cases, it would be very nice if we could ensure that multiple EntryUpdates would always be merged into the same MapRevision. The current API implicitly supports this by always merging things created in BatchUpdateUsers together, but this is not a good API if large numbers of updates were supplied to the batch API.

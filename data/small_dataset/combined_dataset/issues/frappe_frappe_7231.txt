@@ -1,0 +1,4 @@
+fix: Set croniter version to 0.3.28
+
+
+Please read the Pull Request Checklist to ensure you have everything that is needed to get your contribution merged.

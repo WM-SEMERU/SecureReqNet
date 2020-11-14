@@ -1,0 +1,10 @@
+Unable to retrieve or update shard-sync _local documents
+
+
+Using CouchDB 2.3.0:
+According to the docs here - https://docs.couchdb.org/en/stable/api/local.html
+It states that we can use the key/id to retrieve and update _local documents.
+When I call for /{db}/_local_docs I get two sets of documents returned, one is view related (key contains "purge-mrview") the other type of document contains "shard-sync"
+The first type of document containing "purge-mrview" can be retrieved via their id value, but the second type always return 404.
+Is there any way to obtain and modify these local documents? (the ones with "shard-sync" in the key)
+(I am interested in modifying these documents to work around the problem documented here - #1987

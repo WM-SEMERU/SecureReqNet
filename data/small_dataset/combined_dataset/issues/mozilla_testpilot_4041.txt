@@ -1,0 +1,4 @@
+Fix invalid HTML in nl locale
+
+
+Fix #4040

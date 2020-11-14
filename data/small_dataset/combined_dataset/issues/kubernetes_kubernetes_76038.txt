@@ -1,0 +1,16 @@
+patch-reset
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+When we reset cluster, the program does not automatically delete it ($HOME/.kube/config).
+We should prompt the user how to check
+Which issue(s) this PR fixes:
+Fixes kubeadm issue
+Special notes for your reviewer:
+NONE
+Does this PR introduce a user-facing change?:
+NONE
+NONE
+

@@ -1,0 +1,4 @@
+deps: cordova-simulate@0.6.1
+
+
+AB#345

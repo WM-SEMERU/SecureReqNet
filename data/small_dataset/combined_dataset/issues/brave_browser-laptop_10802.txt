@@ -1,0 +1,5 @@
+backup ECC key seed instead of priv key passphrase
+
+
+brought up by @evq during security confab today. when we switch from BTC to BAT wallets, it seems more efficient/secure to present the ECC seed for the wallet keypair to the user for backup instead of presenting a passphrase which is used to encrypt the private key.
+cc @mrose17

@@ -1,0 +1,13 @@
+ValidatorInterface::validate($formType) stopped working with symfony/form:4.2.3
+
+
+Symfony version(s) affected: 4.2.*
+Description
+After updating the form component to version 4.2.3, the method ValidatorInterface::validate($formType) stopped returning any violations when it contains an invalid value object.
+How to reproduce
+This is the common code between the two versions
+https://github.com/Loupax/broken_validation/blob/master/src/Controller/DefaultController.php
+Please note how we don't actually submit the form. This is done on purpose.
+You can switch between the following branches for a working an broken example
+https://github.com/Loupax/broken_validation/blob/working_example/composer.json#L14
+https://github.com/Loupax/broken_validation/blob/broken_example/composer.json#L14

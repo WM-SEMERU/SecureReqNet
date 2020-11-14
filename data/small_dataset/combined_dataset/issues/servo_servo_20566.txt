@@ -1,0 +1,24 @@
+Introduce imprecision in timers for timing attack mitigation
+
+
+cc @asajeffrey
+Servo can already run in multiprocess mode, but we need to think about:
+a) how to keep SM up-to-date,
+b) a security audit to make sure that sensitive data is in appropriate processes, and
+c) what mitigations are needed even when running in multiprocess (e.g. process throttling).
+See w3c/hr-time#56 for more discussion
+Per discussion with Tom R:
+Insecure clamping/jitter implementation in SpiderMonkey (off by
+default): https://searchfox.org/mozilla-central/source/js/src/jsdate.cpp#1308
+How to set/enable it: JS::SetTimeResolutionUsec
+https://searchfox.org/mozilla-central/source/js/src/jsdate.cpp#419
+Good for testing; not good for security.
+For 'production' use:
+You'll want to duplicate
+https://searchfox.org/mozilla-central/source/toolkit/components/resistfingerprinting/nsRFPService.cpp#316
+and
+https://searchfox.org/mozilla-central/source/toolkit/components/resistfingerprinting/nsRFPService.cpp#476
+and
+https://searchfox.org/mozilla-central/source/toolkit/components/resistfingerprinting/nsRFPService.cpp#569
+And then call
+https://searchfox.org/mozilla-central/source/js/src/jsdate.cpp#413

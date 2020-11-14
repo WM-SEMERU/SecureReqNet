@@ -1,0 +1,133 @@
+Cluster Create Error KOPS 1.11.x or 1.12.0 to K8s 1.11.x or 1.12.x
+
+
+1. What kops version are you running? The command kops version, will display
+this information.
+KOPS 1.11.1 or 1.12.0 (Alpha)
+2. What Kubernetes version are you running? kubectl version will print the
+version if a cluster is running or provide the Kubernetes version specified as
+a kops flag.
+1.11.x or 1.12.7
+3. What cloud provider are you using?
+AWS
+4. What commands did you run?  What is the simplest way to reproduce this issue?
+Create cluster  using kops command
+kops create --state=s3://state-mys3-bucket -f config.yaml 
+
+kops create --state=s3://state-mys3-bucket -f instancegroup/master-us-east-1d.yaml
+
+kops create --state=s3://state-mys3-bucket -f instancegroup/nodes.yaml 
+
+kops update cluster myclustername  --state=s3://state-mys3-bucket --yes
+
+5. What happened after the commands executed?
+Cluster not coming up. throws below error
+Mar 30 14:42:46 ip-10-137-0-136.ec2.internal docker[2019]: See '/usr/bin/docker run --help'.
+Mar 30 14:42:46 ip-10-137-0-136.ec2.internal systemd[1]: protokube.service: main process exited, code=exited, status=125/n/a
+Mar 30 14:42:46 ip-10-137-0-136.ec2.internal systemd[1]: Unit protokube.service entered failed state.
+Mar 30 14:42:46 ip-10-137-0-136.ec2.internal systemd[1]: protokube.service failed.
+Mar 30 14:42:47 ip-10-137-0-136.ec2.internal nodeup[1338]: I0330 14:42:47.062500    1338 executor.go:103] Tasks: 90 done / 90 total; 0 can run
+Mar 30 14:42:47 ip-10-137-0-136.ec2.internal nodeup[1338]: I0330 14:42:47.062528    1338 context.go:91] deleting temp dir: "/tmp/deploy321654707"
+Mar 30 14:42:47 ip-10-137-0-136.ec2.internal nodeup[1338]: success
+Mar 30 14:42:47 ip-10-137-0-136.ec2.internal systemd[1]: Started Run kops bootstrap (nodeup).```
+
+```Mar 30 14:42:49 ip-10-137-0-136.ec2.internal docker[2084]: I0330 14:42:49.658919    2133 channels.go:49] Error: error querying kubernetes version: Get https://127.0.0.1/version?timeout=32s: dial tcp 127.0.0.1:443: connect: connection refused
+
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.478765    2176 reflector.go:125] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://127.0.0.1/api/v1/pods?fieldSelector=spec.nodeName%3Dip-10-137-0-136.ec2.internal&limit=500&resourceVersion=0: dial tcp 127.0.0.1:443: connect: connection refused
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.479878    2176 reflector.go:125] k8s.io/kubernetes/pkg/kubelet/kubelet.go:442: Failed to list *v1.Service: Get https://127.0.0.1/api/v1/services?limit=500&resourceVersion=0: dial tcp 127.0.0.1:443: connect: connection refused
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.481000    2176 reflector.go:125] k8s.io/kubernetes/pkg/kubelet/kubelet.go:451: Failed to list *v1.Node: Get https://127.0.0.1/api/v1/nodes?fieldSelector=metadata.name%3Dip-10-137-0-136.ec2.internal&limit=500&resourceVersion=0: dial tcp 127.0.0.1:443: connect: connection refused
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.484826    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.585011    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.685190    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.785391    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.885569    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:16 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:16.985755    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:17 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:17.085945    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:17 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:17.186136    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:17 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:17.286328    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+Mar 30 15:07:17 ip-10-137-0-136.ec2.internal kubelet[2176]: E0330 15:07:17.386596    2176 kubelet.go:2236] node "ip-10-137-0-136.ec2.internal" not found
+
+6. What did you expect to happen?
+Cluster should come up
+**7. Please provide your cluster manifest. Execute
+apiVersion: kops/v1alpha2
+kind: Cluster
+metadata:
+name: k8s-mycluster-name
+spec:
+api:
+  loadBalancer:
+    type: Internal
+authorization:
+  rbac: {}
+channel: stable
+cloudProvider: aws
+configBase: s3://state.my-s3-bucket/k8s-mycluster-name
+dnsZone: mydns-name
+kubeDNS:
+  provider: CoreDNS
+etcdClusters:
+- etcdMembers:
+  - instanceGroup: master-us-east-1d
+    name: d
+  - instanceGroup: master-us-east-1e
+    name: e
+  - instanceGroup: master-us-east-1f
+    name: f
+  name: main
+  enableEtcdTLS: true
+  version: 3.0.17
+- etcdMembers:
+  - instanceGroup: master-us-east-1d
+    name: d
+  - instanceGroup: master-us-east-1e
+    name: e
+  - instanceGroup: master-us-east-1f
+    name: f
+  name: events
+  enableEtcdTLS: true
+  version: 3.0.17
+kubeAPIServer:
+  enableBootstrapTokenAuth: true
+  authorizationMode: Node,RBAC
+  authorizationRbacSuperUser: admin
+  runtimeConfig:
+    rbac.authorization.k8s.io/v1alpha1: "true"
+kubernetesApiAccess:
+- myIPs
+kubernetesVersion: 1.12.7
+masterInternalName: api.internal.k8s-mycluster-name
+masterPublicName: api.k8s-mycluster-name
+networkCIDR: 10.137.0.0/20
+networkID: vpc-01e216dc88384b568
+networking:
+  calico: {}
+nonMasqueradeCIDR: 100.64.0.0/10
+sshAccess:
+- sshIP
+subnets:
+- cidr: 10.137.0.0/24
+  id: subnet-085c35652a63c369a
+  name: us-east-1d
+  type: Private
+  zone: us-east-1d
+- cidr: 10.137.1.0/24
+  id: subnet-0b58c83249fa06efc
+  name: us-east-1e
+  type: Private
+  zone: us-east-1e
+- cidr: 10.137.2.0/24
+  id: subnet-016fb5e397629bd99
+  name: us-east-1f
+  type: Private
+  zone: us-east-1f
+topology:
+  api:
+    loadBalancer:
+      type: Internal
+  masters: private
+  nodes: private
+
+8. Please run the commands with most verbose logging by adding the -v 10 flag.
+Paste the logs into this report, or in a gist and provide the gist link here.
+9. Anything else do we need to know?

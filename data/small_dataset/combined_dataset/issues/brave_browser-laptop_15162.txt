@@ -1,0 +1,59 @@
+opening tabs, PT, session tabs opens `about:blank` when there's no Win/Tabs opened
+
+
+Test plan
+See #15194
+Description
+When opening any type of tabs or new windows via the File Menu on macOS when there's nothing else opened but Brave is still the active application, you'll get about:blank rather than about:newtab pages. Assuming it's because of either #15045 or #15047.
+Steps to Reproduce
+
+open brave via macOS and close all windows (keep brave as the active application)
+select File -> New Tab and you'll get about:blank
+
+Can reproduce the above using:
+
+File -> New Private Tab
+File -> New Private Tab with Tor
+File -> New Session Tab
+
+Actual result:
+Opening about:blank pages rather than about:newtab pages.
+Expected result:
+Should be opening about:newtab and not about:blank
+Reproduces how often:
+100% reproducible using the above STR mentioned above.
+Brave Version
+about:brave info:
+Brave: 0.23.204 
+V8: 6.9.427.19 
+rev: a9a7e9ce52e4b35041e0245544298b7431ba7d9c 
+Muon: 8.1.3 
+OS Release: 17.7.0 
+Update Channel: Beta 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 69.0.3497.81
+
+Reproducible on current live release:
+Yes, currently reproducible under the following build which is the current live build:
+Brave: 0.23.105 
+V8: 6.8.275.24 
+rev: 9a46f8f5cb22a9daf2af21989aed25911aa6f839 
+Muon: 8.0.9 
+OS Release: 17.7.0 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 68.0.3440.84
+
+Additional Information
+
+0.23.105 9a46f8f <-- Reproducible
+0.23.104 b454a4a <-- Reproducible
+0.23.79 51b4905 <-- Couldn't reproduce
+
+Reproduced by @LaurenWags as well.

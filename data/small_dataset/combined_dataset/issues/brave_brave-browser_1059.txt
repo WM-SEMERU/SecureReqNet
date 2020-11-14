@@ -1,0 +1,16 @@
+Ability to set a retention policy for clearing data
+
+
+Related to brave/browser-laptop#7890
+Description
+While #492
+captures clearing on exit, users should be able to go further and set a retention policy for history / cookies / etc.
+For example, maybe user can choose to clear after:
+
+3 days
+1 week
+1 month
+custom
+
+Safari offers an option like this:
+

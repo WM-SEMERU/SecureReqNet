@@ -1,0 +1,37 @@
+```
+Link:          https://hackerone.com/reports/406299
+By:            @ngalog
+```
+Details:
+Hi Gitlab Security,
+
+I notice the mirroring repositories function allow user to specify ssh, http, https, git scheme to fetch repo.
+
+The SSRF fix seems didn't apply here, I confirm I can make gitlab.com make a request to GCP endpoints and make it resolve to 169.254.169.152
+
+The following screenshots shows the error message when gitlab.com try to connect with GCP different ports
+
+
+GCP port 80 is open
+![Screen_Shot_2018-09-06_at_6.59.14_PM](/uploads/0abb85d6d45dbf3482f3cec1b9415c5d/Screen_Shot_2018-09-06_at_6.59.14_PM.png)
+
+GCP port 443 closed
+![Screen_Shot_2018-09-06_at_6.59.30_PM](/uploads/79d966ecbc5531204b43f846df7db055/Screen_Shot_2018-09-06_at_6.59.30_PM.png)
+
+GCP port 80 not found 
+![Screen_Shot_2018-09-06_at_6.59.39_PM](/uploads/b6c80ce8145b391cc2ac846ecd64957e/Screen_Shot_2018-09-06_at_6.59.39_PM.png)
+
+Internal host port 22 is open, and verification is wrong
+![Screen_Shot_2018-09-06_at_6.59.48_PM](/uploads/0c1bc5047095736603a729cde1f89069/Screen_Shot_2018-09-06_at_6.59.48_PM.png)
+
+Steps to reproduce
+
+Visit `https://gitlab.com/{userid}/{project_id}/settings/repository`
+Enter following payload to the url as git repository url
+
+`ssh://metadata.google.internal:80/hihihi`
+`ssh://metadata.google.internal/hihihi`
+
+## Impact
+
+SSRF to internal host and GCP

@@ -1,0 +1,12 @@
+InvalidArgumentException when refreshing browser while user not in database
+
+
+I am developing a site using Symfony 2.0.6.
+When I load my fixtures into the database, the fixture loader deletes all users and recreates them.
+The problem is when a user is logged in at the time, as is common during development.
+It returns an InvalidArgumentException with the text "$user must be an instanceof of UserInterface, an object implementing a __toString method, or a primitive string" and nothing I do, short of clearing my cookies, will clear the error.
+I have tracked down the bug to Symfony\Bridge\Doctrine\Security\User\EntityUserProvider
+It returns null on the refreshUser method when there is not a user matching in the database.
+Subsequently, Symfony\Component\Security\Http\Firewall\ContextListener::refreshUser doesn't handle null being returned from the provider and calls $token->setUser(null).
+This results in Symfony\Component\Security\Core\Authentication\Token\AbstractToken::setUser is being called with null which results in the exception being thrown.
+Also, as a side note, in the throwing of the InvalidArgumentException, "$user" is not interpreted because of the use of single quotes.  Looking through the method, it seems as the Exception was put in place as an after thought because it later checks for nulls but alas never gets to that point.

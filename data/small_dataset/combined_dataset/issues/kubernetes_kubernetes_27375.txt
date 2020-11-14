@@ -1,0 +1,10 @@
+security concerns creating an https ingress on GCE
+
+
+Proposal
+Allow specifying an existing gcloud TLS cert (via annotations) in the ingress resource.
+Security Concern
+My current understanding of kubernetes secrets on GCE is that they are stored plaintext in etcd. Using a different secret backend (e.g. keywhiz) seems out of your control on a hosted kubernetes like  GCE.
+Requiring the use of a secret resource in the ingress as the only way to create an https LB frontend and proxy is too constraining. As an alternative, if you've already created a gcloud compute ssl-certificate, allowing it to be specified as the TLS cert to use for the ingress's LB cert.
+Current bug
+If you set the annotation kubernetes.io/ingress.allowHTTP: "false" without the spec.tls.secretName doesn't create an https forwarding (presumably because a GLB frontend requires a tls cert)

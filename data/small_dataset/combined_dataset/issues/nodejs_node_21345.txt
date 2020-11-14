@@ -1,0 +1,37 @@
+deps: float 0c27d793 from openssl (ECDSA blinding)
+
+
+This came up during #21282, another security patch on upstream OpenSSL pending 1.1.0i release that's probably worth patching. Not critical and looks pretty academic but there's potential for a proper hole here and a POC is being released in a couple of weeks that might prove useful to an attacker.
+Note that even though OpenSSL says this:
+
+Since this attack is a localhost side channel only no CVE is assigned.
+
+The original reporter expands with this:
+
+The most common scenario is when the attacker and victim are both running in a cloud computing environment and their virtual machines are assigned to share the same physical host. In this hypothetical, an attacker could use a cross-VM side-channel attack to, for example, steal SSH server keys or TLS private keys.
+
+If that's true for OpenSSL specifically then I don't think I'd call this a "localhost" side channel. But whatever.
+There's a 1.0.2 variant patch for this too, I'll open PRs for 8 and 6.
+Ref: https://www.nccgroup.trust/us/our-research/technical-advisory-return-of-the-hidden-number-problem/
+Upstream: openssl/openssl@0c27d79
+Original commit message:
+Add blinding to an ECDSA signature
+
+Keegan Ryan (NCC Group) has demonstrated a side channel attack on an
+ECDSA signature operation. During signing the signer calculates:
+
+s:= k^-1 * (m + r * priv_key) mod order
+
+The addition operation above provides a sufficient signal for a
+flush+reload attack to derive the private key given sufficient signature
+operations.
+
+As a mitigation (based on a suggestion from Keegan) we add blinding to
+the operation so that:
+
+s := k^-1 * blind^-1 (blind * m + blind * r * priv_key) mod order
+
+Since this attack is a localhost side channel only no CVE is assigned.
+
+Reviewed-by: Rich Salz <rsalz@openssl.org>
+

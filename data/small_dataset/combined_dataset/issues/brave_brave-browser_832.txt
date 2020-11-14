@@ -1,0 +1,14 @@
+Consider adding less elevated read only extension permissions
+
+
+MetaMask would like this:
+Somehow allow us to remove the read-and-modify-all-websites permission
+- Maybe a CSP policy that permits a script w/ a given hash to __.
+- subscribe to page window.postMessage from extension background
+- allow webpage to open a socket to some protocol? (like connect external but not
+tied to a specific extension)
+- Using the Permissions API to provide an API?
+- Allow `connectExternal` in extension manifest to point to `*`
+- Any other conceivable WebExtension permission for “providing an API to sites
+
+CC @diracdeltas

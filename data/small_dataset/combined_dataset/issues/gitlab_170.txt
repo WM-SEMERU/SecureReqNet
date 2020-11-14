@@ -1,0 +1,1 @@
+Architecture and backup links broken on this https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/structure.md page.

@@ -1,0 +1,78 @@
+[Framework] ProxyController to fetch a remote URL using the HttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... (todo)
+
+
+
+Reverse proxy is a convenient feature of most web servers (Apache, nginx). While these solutions are very powerful and stable, it can be easier to configure the rules in the PHP code directly.
+This is identical to "Redirection without custom controller" except that instead of returning a redirect response, the contents is directly fetched.
+If necessary, HTTP cache can be specified in the http_client configuration.
+Use cases:
+
+Exposing a file from a remote server (robots.txt, ads.txt)
+Loading an ESI/SSI from a remote server
+
+Usage:
+# config/routes/proxy.yaml
+
+humans:
+    path: /humans.txt
+    controller: Symfony\Bundle\FrameworkBundle\Controller\ProxyController
+    methods: [GET]
+    defaults:
+        url: https://robots-txt.org/humans.txt
+        options:
+            timeout: 1
+        extraResponseHeaders:
+            Cache-Control: max-age=3600, public
+Example in symfony-demo : symfony/demo@master...GromNaN:proxycontroller
+Feature not supported yet:
+
+Error handling : what happens when the remote server does not return a 200 or timeouts ?
+Pass headers from the request to the remote request and from the remote response to the response (Auth, Cookies).
+Allow dynamic url using path placeholders.
+The responseHeaders option could be a more generic feature on routing to add cache control config to any route.
+

@@ -1,0 +1,7 @@
+All server logs are exposed via API
+
+
+The endpoints /api/v1/logs/list and /api/v1/logs/file/:index expose all server side logs
+This is by design (at the moment), so risk is to be accepted (once there is a test that confirms it)
+
+

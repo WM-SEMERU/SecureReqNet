@@ -1,0 +1,11 @@
+Disable bundle by environment
+
+
+Description
+A bundle will be registered (or not) in the kernel depending of the configuration written in the  bundles.php. The Kernel will look if the configuration contains the key corresponding to the loaded environment or if an "all" key is defined. All those keys have a "true" value by default.
+It can be misleading while trying to disable a bundle as we cannot set the value to "false" because the Kernel only look if the key is defined or not regardless of its value
+It could be great to allow us to set the key to false
+Example
+Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true, 'prod' => false]
+Currently enable the bundle in prod as the Kernel only looks if the key exists. So the bundle is loaded even in production but it's not trivial, it could be great that a false value leads to the same behavior as if the key was not there
+I can make a PR for that. I only want to make sure that it's something interesting for the community

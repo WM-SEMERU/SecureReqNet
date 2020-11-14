@@ -1,0 +1,4 @@
+Add draft of ecosystem triage guidelines
+
+
+This document aims at getting all members (present and future) of the Ecosystem Triage Team to a (hopefully) consistent practice of vulnerability triage.

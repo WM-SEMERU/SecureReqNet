@@ -1,0 +1,9 @@
+low sev sec issue in lodash
+
+
+
+Known low severity security vulnerability detected in lodash < 4.17.11 defined in package-lock.json.
+--
+package-lock.json update suggested: lodash ~> 4.17.11.
+
+

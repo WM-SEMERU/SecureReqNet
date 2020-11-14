@@ -1,0 +1,6 @@
+[hackerone] clicking link in endless loop freezes entire browser
+
+
+From: brave/browser-laptop#6597
+clicking a non-navigable link in an endless loop causes the entire browser to freeze and possibly crash. PoC: http://a6280724.000webhostapp.com/sssss.html
+https://hackerone.com/reports/196893

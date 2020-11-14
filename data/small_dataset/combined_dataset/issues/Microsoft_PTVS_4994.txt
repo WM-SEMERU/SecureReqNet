@@ -1,0 +1,46 @@
+Change LoadLibrary calls to LoadLibraryEx
+
+
+
+
+
+PTVS/Python/Product/Attacher/NativeMethods.cs
+
+
+         Line 112
+      in
+      1d04f01
+
+
+
+
+
+
+ IntPtr kernel = LoadLibrary("kernel32.dll"); 
+
+
+
+
+
+
+
+
+PTVS/Python/Product/VsPyProf/PythonApi.cpp
+
+
+         Line 42
+      in
+      1d04f01
+
+
+
+
+
+
+ HMODULE vsPerf = LoadLibrary(buffer); 
+
+
+
+
+
+They should both use LoadLibaryEx with LOAD_LIBRARY_SEARCH_SYSTEM32

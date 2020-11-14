@@ -1,0 +1,26 @@
+ArrayStoreException when obtaining Authorizations from Cache
+
+
+BLUF: In the security branch, DataStoreImpl.getSessionAuthorizations(...) attempts  to coerce a Collection<? extends GrantedAuthority> into String[] in order to generate a new Accumulo Authorizations object - this causes an ArrayStoreException to be thrown. Neato.
+19:47:21.565 [nioEventLoopGroup-4-1] WARN  io.netty.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle
+the exception.
+java.lang.ArrayStoreException
+        at java.lang.System.arraycopy(Native Method) ~[?:1.8.0_60]
+        at java.util.ArrayList.toArray(ArrayList.java:408) ~[?:1.8.0_60]
+        at java.util.Collections$UnmodifiableCollection.toArray(Collections.java:1034) ~[?:1.8.0_60]
+        at timely.store.DataStoreImpl.getSessionAuthorizations(DataStoreImpl.java:705) ~[timely-server-0.0.1-SNAPSHOT.jar:?]
+
+See: 4aceb35?diff=unified#diff-28feaa1f6547a2ebf0bc6de046ef40cdR696
+ Collection<? extends GrantedAuthority> authorities = AuthCache.getAuthorizations(sessionId);
+ return new Authorizations(authorities.toArray(new String[authorities.size()]));
+
+The fix is pretty normal, but highly lame:
+final Collection<? extends GrantedAuthority> authorities = AuthCache.getAuthorizations(sessionId);
+final String[] authStrings = new String[authorities.size()];
+int pos = 0;
+for (GrantedAuthority a : authorities) {
+ authStrings[pos++] = a.getAuthority();
+}
+return new Authorizations(authStrings);
+
+There must be some fancy Java 8 lambda way of iterating with an index that I haven't figured out.

@@ -1,0 +1,29 @@
+Fingerprinting protections bypassable via window.open
+
+
+Description
+Similar to #11683, fingerprinting protections can be bypassed by opening up a new window with window.open grabbing the references to the blocked fingerprinting methods off the window object before the extension / content script / document_start extension hook fires in the new window's context.
+This vulnerability is less serious than #11683, since the user has to have granted to page the ability to open popup windows.  But once the user does, the page can escalate that privilege to fingerprint the user.
+Steps to Reproduce
+// This will be a reference to a function that blocks the page's finger printing attempt.
+let blockedGetImageData = CanvasRenderingContext2D.prototype.getImageData;
+
+let newWindow = window.open("//" + window.location.hostname);
+
+// If the user has allowed the page to open popup windows, `notBlockedGetImageData`
+// will be a referenced to the original, DOM provided methods, that is not blocked
+let notBlockedGetImageData = newWindow.CanvasRenderingContext2D.prototype.getImageData;
+
+Actual result:
+notBlockedGetImageData in the above example is a reference to the original CanvasRenderingContext2D.prototype.getImageData method.
+Expected result:
+notBlockedGetImageData in the above example should be a reference to the extension injected blocking function / proxy object.
+Reproduces how often:
+100% of the time
+Brave Version
+about:brave info:
+d4b94c6 (and also master)
+Reproducible on current live release:
+yes
+Additional Information
+This would be fixed by #12045 too.  A shorter term fix could be done similar to   ###11683

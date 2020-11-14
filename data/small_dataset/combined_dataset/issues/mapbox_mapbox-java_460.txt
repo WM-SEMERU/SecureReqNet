@@ -1,0 +1,5 @@
+Document correct units for LegAnnotation.speed
+
+
+The speed is measured in meters per second, not kilometers per hour.
+/cc @cammace @miccolis

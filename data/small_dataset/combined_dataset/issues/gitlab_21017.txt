@@ -1,0 +1,10 @@
+'- Title:	XSS On meta tags in profile page
+- Types:	Cross-Site Scripting (XSS), Unvalidated / Open Redirect
+- Link:	https://hackerone.com/reports/159984
+- Date:	2016-08-17 03:37:30 -0500
+- By:		plazmaz
+
+## Details:
+
+The profile page (https://gitlab.com/u/<user>) does not properly sanitize quotation marks, allowing for injection of attributes into the meta tags. This allows for redirection to phishing sites and other various nefarious things. I've managed to get my [profile page](https://gitlab.com/u/Plazmaz) to redirect to Bing by setting my bio to 
+`0;url=http://www.bing.com" http-equiv="refresh`

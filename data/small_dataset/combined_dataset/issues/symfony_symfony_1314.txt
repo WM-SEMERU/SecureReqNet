@@ -1,0 +1,4 @@
+[2.1] Add a PRNG
+
+
+Every application commonly needs random tokens, the Security component should provide facilities to generate cryptographically strong random numbers consistently.

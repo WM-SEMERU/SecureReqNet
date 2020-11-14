@@ -1,0 +1,6 @@
+invoke-webrequest support socks5
+
+
+Hello,
+As you probably know or not, Telegram app are blocked on the territory of the Russian Federation, it would be great to add support for socks5 to invoke-webrequest, this will greatly help Russian users)
+P. S sorry for my bad english/ from Russian with love)

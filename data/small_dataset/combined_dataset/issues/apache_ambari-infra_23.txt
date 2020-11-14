@@ -1,0 +1,20 @@
+AMBARI-24987 - Infra Manager: parse logs by Logsearch
+
+
+What changes were proposed in this pull request?
+
+Change the rolling file appenders log entry pattern: log date-time to ISO8601 format, log java file and line number
+Eliminate log4j 1 dependencies and use log4j-1.2-api for 3rd party components which are depends on log4j 1
+Add 'log4j-web' to eliminate warning
+
+2018-12-04 15:52:10,943 main INFO Log4j appears to be running in a Servlet environment, but there's no log4j-web module available. If you want better web container support, please add the log4j-web JAR to your web archive or server lib directory.
+
+Since this log entry is in a different format it caused Logfeeder to stop parsing infra manager logs.
+How was this patch tested?
+UTs and ITs passed
+Manually:
+
+Deploy Ambari and a cluster: Zookeeper, Infra Solr, Logsearch, Infra Manager
+Start all components
+Login to Logsearch Portal and search for Infra Manager logs
+

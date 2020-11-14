@@ -1,0 +1,50 @@
+[HttpKernel] Fix HttpKernel Debug requirement
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+The LoggerDataCollector is using the SilencedErrorContext class that doesn't exists before Symfony 3.2

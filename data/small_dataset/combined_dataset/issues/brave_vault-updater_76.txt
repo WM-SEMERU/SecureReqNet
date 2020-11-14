@@ -1,0 +1,5 @@
+'npm audit' shows a lot of security issues
+
+
+appears to be mostly due to outdated deps.
+please update deps until it shows 0 security issues

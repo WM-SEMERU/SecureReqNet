@@ -1,0 +1,28 @@
+PDF Issues when trying to open pdf from weareworship.com
+
+
+Troubleshooting checklist
+There's a good chance the bug you're about to report is fixed in the new version of Brave
+
+Download latest version of Brave from https://brave.com/download/
+Import your data by navigating to brave://settings/importData
+
+If you'd like to continue for this old version, please check the applicable items:
+
+ Yes I did try the new version
+ I believe this issue is critical for users (security issue, bug that prevents folks from using the software)
+ I've read the FAQs and Common Issues section on community.brave.com (https://community.brave.com/c/common-issues)
+
+Description
+Steps to Reproduce
+
+
+
+
+
+What version of Brave are you using?
+
+Using Brave, navigate to about:brave
+Under "Version information", you'll see the version (ex: 0.25.2)
+Click the clipboard icon to copy the product details and paste here
+

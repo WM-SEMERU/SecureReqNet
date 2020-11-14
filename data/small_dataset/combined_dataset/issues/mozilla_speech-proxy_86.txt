@@ -1,0 +1,9 @@
+Set protected status on production branch
+
+
+Hello! This is your neighborhood secops team looking out for you!
+The production branch on this repository is not protected against force pushes. This setting is recommended as part of Mozilla's Guidelines for a Sensitive Repository.
+Anyone with admin permissions for this repository can correct the setting using this URL.
+If you have any questions, or believe this issue was opened in error, please contact us and mention SOGH001-0 and this repository.
+Thank you for your prompt attention to this issue.
+--Firefox Operations Security team

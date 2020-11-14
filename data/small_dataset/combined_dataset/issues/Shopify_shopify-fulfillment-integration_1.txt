@@ -1,0 +1,6 @@
+Security issue
+
+
+@kevinhughes27
+/cc @Shopify/apps @Shopify/security
+Please see: Shopify/security-incidents#19

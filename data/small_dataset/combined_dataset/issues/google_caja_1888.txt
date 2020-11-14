@@ -1,0 +1,9 @@
+Implement ErrorEvent interface for guest errors
+
+
+Original issue 1890 created by james.keane@wishabi.com on 2014-02-11T16:57:11.000Z:
+There has been recent progress in changing the 'onerror' event handler to receive extra parameters describing the error.
+The specification can be found: http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#runtime-script-errors
+And progress (for chromium) at https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/Li61lfcbWws
+Although I haven't found any implementing browsers, I did notice that chrome as of version 34, sends 4 arguments to window.onerror (message, scriptUri, lineNo, colNo, errorObject).
+I have included a patch that adds the colNo, and errorObject parameter to onerror calls.

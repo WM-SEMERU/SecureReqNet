@@ -1,0 +1,6 @@
+Update the Blazor VSIX icon to match the Blazor templates
+
+
+
+No description provided.
+

@@ -1,0 +1,35 @@
+[Security] Decoupling password from UserInterface
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.x
+
+
+
+I think we should decouple password from UserInterface (having a PasswordInterface for example) in order to be able to use them with the password encoding system. Currently, you need to pass a whole UserInterface for encoding password, while a simple password/salt is enough.
+This would be usefull to implement some system where you manager password history. Right now, you need the "PasswordHistory" object to implement UserInterface in order to be used with the PasswordEncoder. But having a username or roles into a PasswordHistory object doesn't make any sense...

@@ -1,0 +1,5 @@
+Added directions POST support
+
+
+This PR adds support for POST requests to the directions API.
+Closes #957

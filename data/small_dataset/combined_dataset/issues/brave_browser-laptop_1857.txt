@@ -1,0 +1,24 @@
+Password Settings should show password strength indicator instead of password length
+
+
+Did you search for similar issues before submitting this one?
+Yes
+Describe the issue you encountered:
+Brave's password manager shows all saved user/passwords for each site using asterisks. However, the actual number of asterisks is the actual length of the real password.
+Expected behavior:
+The password field should either not be shown OR password should be a fixed # of asterisks (so people standing behind a user don't know the exact number of chars for a password).
+
+Platform (Win7, 8, 10? OS X? Linux distro?):
+All versions
+Brave Version:
+All versions
+Steps to reproduce:
+
+Make sure you have some user/passwords saved
+Go to about:passwords
+Notice that the hidden passwords have the same number of asterisks as the actual password.
+
+
+Screenshot if needed:
+Any related issues:
+

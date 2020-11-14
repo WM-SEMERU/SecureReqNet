@@ -1,0 +1,5 @@
+Security audit
+
+
+We had one of these for 2.0, and I doubt it's slipped @fabpot's mind, but since the dev mailing list moved here, I thought it'd be worth having an issue open for this.
+I think there's significant interest in having Symfony security audited again. Who does it and how we do that is totally up for discussion, but as an example, I'm certain I wouldn't be the only one happy to pay into a bounty pool or fund for an agency like SektionEins (who did the audit for Symfony 2.0, though my understanding is that they wouldn't be able to do this again).

@@ -1,0 +1,5 @@
+"ls -q" includes error messages in output
+
+
+this should produce a list of machine names. however it includes error messages as well. This means the output cannot be piped into another command e.g. to remove machines.
+docker-machine ls -q -filter state=error

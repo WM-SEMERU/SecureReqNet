@@ -1,0 +1,42 @@
+[SecurityBundle] Add json login ldap
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Add a simple from_login_ldap on firewall types to let authenticate with ldap with json API

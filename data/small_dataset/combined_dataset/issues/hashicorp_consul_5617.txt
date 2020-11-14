@@ -1,0 +1,32 @@
+Secure ACL Introduction for Kubernetes
+
+
+This is a rollup of the PR series adding support for secure ACL introduction for applications running under Kubernetes.
+Overall remaining work:
+
+ ACL Token Expiration (#5353)
+
+ website updates
+
+ HTTP API has new optional field on create, and new response field
+ token create CLI has a new argument; token read has new response field
+
+
+ UI updates (read/write ExpirationTime field)
+ Changelog
+
+
+ ACL Tokens + Service Identities (#5390)
+
+ website updates
+
+ HTTP API has new optional list field on create/update, and new response list field
+ token create/update CLI has a new argument; token read has new response list field
+ ACL System OR Connect pages should mention how these work
+
+
+ UI updates (read/write ServiceIdentities field)
+ Changelog
+
+
+

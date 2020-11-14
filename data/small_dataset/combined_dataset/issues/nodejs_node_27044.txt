@@ -1,0 +1,13 @@
+fs: improve mode and flags validation
+
+
+This fixes a bug in fs.promises.access as it accepted strings as
+mode. It should have only accepted numbers. It will now always
+validate the flags and the mode argument in an consistent way.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

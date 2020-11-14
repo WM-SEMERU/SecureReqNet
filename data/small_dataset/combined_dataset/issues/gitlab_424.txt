@@ -1,0 +1,16 @@
+Hi, 
+
+I tried to upgrade to 7.0-stable version, and have a new problem :
+
+When I tried to create a new repository, got this error :
+
+```
+Issues enabled is not included in the list
+```
+
+I revert to 6.9 and the same error message happened with this version.
+Any idea / help ?
+
+Don't hesitate to ask me some details about my installation !
+
+Thank's in advance,

@@ -1,0 +1,16 @@
+Add XRFrame.getPose()
+
+
+I think I've figured out the model of poses, waiting on Nell for confirmation.
+Basically, getViewerPose(p) is equivalent to getPose(source=viewerSpace, relative_to=p)
+The eye-level space, for example, is stationary and stuck to the origin. The position-disabled and identity spaces somewhat counterintuitively follow you around (and appear to be stationary from getViewerPose() but not getPose().
+The incorrect mental model kinda "works" when looking at only getViewerPose(), but we need to figure it out for getPose().
+Todo (may add to this PR, but probably not)
+
+implement XRSession.viewerSpace
+implement position-disabled
+implement floor-level (hard to test without a 6dof device)
+
+r? @asajeffrey
+
+This change is 

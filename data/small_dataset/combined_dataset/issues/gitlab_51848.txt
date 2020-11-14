@@ -1,0 +1,15 @@
+https://gitlab.com/dashboard/groups 'Your Groups' page currently shows groups the user is not a member of, e.g. GitLab employees see something like this:
+
+![image](/uploads/53771aa916ccf3c7c773c76c51762df4/image.png)
+
+I am not a 'member' of any of the groups in that screenshot. These groups are shown because they contain a project that was shared with a group that the user is a member of (in this case the `GitLab.com` group which I am a member of and is off the bottom of the screenshot).
+
+This is confusing for the uninitiated user. What are these groups? Why are they showing on my 'Your Groups' dashboard? If I go to the `all-the-things' group that is listed as one of my groups I see it has just one member:
+
+![image](/uploads/a92f631340affd8a8d4f7e6876b55784/image.png)
+
+So if that group has only one member and it's not me, why is it showing in my groups?
+
+It's because a project in that group was shared with `GitLab.com` group that I am a member of. I can see that project with this search: https://gitlab.com/groups/gitlab-com/-/shared?utf8=%E2%9C%93&filter=kitchen - so I can find the shared projects from the Group that I am a member of.
+
+Please hide these 'phantom' groups from the 'Your Groups' dashboard.

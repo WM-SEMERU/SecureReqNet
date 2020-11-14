@@ -1,0 +1,54 @@
+[HttpFoundation][Proposal] Add a new EmptyResponse
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+todo if accepted
+
+
+
+Hello,
+please note, that this PR is a proposal.
+Working on an API, I recently needed to return multiple times a new Response() with no body and a 204 (HTTP no content) code.
+I'm wordering If adding this new EmptyResponse that would be a shortcut of new Response(null, Reponse::HTTP_NO_CONTENT) would be useful or no.
+Please let me know what do you think.

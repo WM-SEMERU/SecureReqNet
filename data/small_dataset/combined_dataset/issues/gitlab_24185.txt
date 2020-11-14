@@ -1,0 +1,15 @@
+### Summary
+
+A ~customer reported that they integrate GitLab with TeamCity and their TeamCity server is quite slow. This heavily affects the performance of their GitLab server.
+
+The reason for that is: we synchronously (because Ruby :smile: ) make an HTTP call (https://gitlab.com/gitlab-org/gitlab-ce/blob/b2bbac8850a18ccc65880dc5c300d0b6d39ab258/app/models/project_services/teamcity_service.rb#L65) to check the build status in TeamCity (https://gitlab.com/gitlab-org/gitlab-ce/blob/e4c05de75ccec1b0d64a7a994f05d54bffc903e5/app/controllers/projects/merge_requests_controller.rb#L402).
+
+
+We don't set any timeout for this request. [HTTParty does not have a default timeout](https://github.com/jnunemaker/httparty/issues/351), so I believe that the timeout being used is 60 seconds (from `Net::HTTP`). By opening multiple browser tabs on MR page it's quite easy to keep all Unicorn processes busy.
+
+In fact, it's also a security threat for GitLab.com.
+
+### Possible fixes
+
+1. (easy) Add more strict default timeout for HTTParty.
+2. (more advanced) http://martinfowler.com/bliki/CircuitBreaker.html

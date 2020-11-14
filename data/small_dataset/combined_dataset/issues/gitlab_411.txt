@@ -1,0 +1,10 @@
+This is the error I see:
+
+```
+ActiveRecord::StatementInvalid (Mysql2::Error: Data too long for column 'description' at row 1: UPDATE `issues` SET `description` = '...', `updated_at` = '2014-07-10 17:02:40' WHERE `issues`.`id` = 93):
+  app/services/issues/update_service.rb:13:in `execute'
+  app/controllers/projects/issues_controller.rb:77:in `update'
+  app/controllers/application_controller.rb:59:in `set_current_user_for_thread'
+```
+
+It should give some type of informative error message instead of just bombing out into a 5xx error.

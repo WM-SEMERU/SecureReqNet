@@ -1,0 +1,20 @@
+Alerts Appear When Brave is Locked
+
+
+Description:
+Brave may reveal some information about the user's browsing session even when the browser is locked, requiring a pin. In one scenario, a JavaScript alert is able to appear above the pin pad.
+Steps to Reproduce
+Schedule a JavaScript alert, and promptly lock your browser.
+setTimeout(window.alert.bind(null, 'Hello'), 1000)
+Actual result:
+
+Expected result:
+When the browser is locked, no information about the user's session should ever be exposed.
+Reproduces how often:
+100%
+Brave Version:
+TBD
+Device details:
+TBD
+Additional Information
+Reported on Twitter by @gortok: https://twitter.com/gortok/status/955973968741261320

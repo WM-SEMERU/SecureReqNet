@@ -1,0 +1,5 @@
+Verify JWT before file upload has completed
+
+
+This is disturbing: #2802
+It implies that our code to check the JWT signature of any request happens after the entire request body has been written to the socket. Is there a way to verify the JWT signature when the request is first received, before the entire request body has been written?

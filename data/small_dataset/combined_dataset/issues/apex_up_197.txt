@@ -1,0 +1,4 @@
+Warn on deploy of a directory which does not look like an app/site
+
+
+Don't want to deploy a bunch of random stuff, bail or confirm.

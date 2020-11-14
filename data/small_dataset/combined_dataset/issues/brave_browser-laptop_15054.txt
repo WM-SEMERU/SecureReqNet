@@ -1,0 +1,42 @@
+Claim my free tokens button is not responding quickly
+
+
+Description
+Due to delay in Response, click on Claim my free tokens is not responding immediately. After sometimes it keeps opening the catcha pop ups continuously
+Description
+Claim my free tokens button is not responding quickly
+Steps to Reproduce
+
+Launch Brave with clean profile from CLI
+Make the payment switch ON
+Select Claim my free token option from the notification
+Click on Claim my free tokens
+Observe the Captcha pop up
+Close the Captcha pop up
+Click on Claim my free tokens
+
+Actual result:
+Click on Claim my free tokens button is not responding immediately. There is a delay in server response.
+
+Expected result:
+Claim my free tokens button should respond quickly
+Reproduces how often:
+Always
+Brave Version
+0.23.102
+about:brave info:
+Brave: 0.23.102
+V8: 6.8.275.24
+rev: 43eb667
+Muon: 8.0.8
+OS Release: 10.0.17134
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+NA
+Additional Information
+cc: @kjozwiak @LaurenWags @srirambv @btlechowski

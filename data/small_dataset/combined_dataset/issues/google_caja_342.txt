@@ -1,0 +1,6 @@
+Cannot declare a 'final' class in Caja
+
+
+Original issue 342 created by ihab.awad on 2008-05-31T00:42:25.000Z:
+Caja provides no way for a programmer to declare a class 'final', i.e.,
+make it impossible to be subclassed.

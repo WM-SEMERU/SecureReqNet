@@ -1,0 +1,16 @@
+By modifying the `from_merge_request` parameter, an attacker can enumerate private project names.
+
+This was discovered by @DouweM during a technical interview.
+
+## Steps to reproduce:
+
+1. As an attacker, view any merge request to which you have access.
+1. Go to **Changes** and click **Edit** for any file.
+1. Note the `from_merge_request_id` parameter uses the `id` field value, not the `iid`.
+1. Using a tool like [Burp Suite](https://portswigger.net/burp/), intercept your network traffic and hit **Commit Changes**.
+1. In Burp Suite, change the `from_merge_request_id` parameter to any other integer and forward the request.
+1. You'll receive a redirect response from the server containing the path to a project's merge request. Depending on the integer used above you may not have access to this project.
+
+Offending lines: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/controllers/projects/blob_controller.rb#L129 and https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/controllers/projects/blob_controller.rb#L43-45
+
+We should be using `project.merge_requests.find(...)` at the very least, and using only internal IDs if possible.

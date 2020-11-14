@@ -1,0 +1,52 @@
+ChainUserProvider: match UserProvider to Authenticator?
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+2.8.0 - 3.2.2
+
+
+
+In my application, I have several authentication mechanisms and each one has it's own UserProvider. The security.yml looks like this:
+security:
+    providers:
+        chain_provider:
+            chain:
+                providers: [provider1, provider2]
+        provider1: ...
+        provider2: ...
+
+    firewalls:
+        main:
+            guard:
+                authenticators:
+                    - authenticator1
+                    - authenticator2
+                entry_point: authenticator1
+Now, as far as I understand, ChainUserProvider::loadUserByUsername lets each chained provider try to load a user with the provided credentials until one user is found or all providers have tried unsuccessfully. I.e. provider1 will eventually try to load a user with the credentials provided by authenticator2. If user1's credentials for authenticator1 are the same as user2's credentials for authenticator2, user2 would be logged in as user1 due to the order of the chained user providers. I think this should be prevented.
+My idea to work around that problem was to tie providers to authenticators, so that a provider would only accept credentials from it's corresponding authenticator(s). If loadUserByUsername would not only have one parameter for the username, but a second one for the calling authenticator, I could've implemented that check in this method.
+Makes sense? Is there a already a better way to tie the both of them? Or am I missing another concept here?

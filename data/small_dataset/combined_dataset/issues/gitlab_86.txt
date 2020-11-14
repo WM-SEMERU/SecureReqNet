@@ -1,0 +1,59 @@
+I am currently installing gitlab on an arm machine (ubuntu 13.10)
+
+I have used the installation guide from:
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/installation.md
+
+But I always get this error, if I run the following command:
+
+sudo -u git -H bundle install --deployment --without development test mysql aws
+
+Error:
+
+Using state_machine (1.2.0)
+
+Gem::Installer::ExtensionBuildError: ERROR: Failed to build gem native extension.
+
+    /usr/local/bin/ruby extconf.rb 
+checking for main() in -lpthread... yes
+creating Makefile
+
+make "DESTDIR="
+compiling heap.cc
+compiling date.cc
+compiling object.cc
+compiling init.cc
+compiling constraints.cc
+compiling external.cc
+compiling constants.cc
+compiling signature.cc
+compiling locker.cc
+compiling rr.cc
+compiling handles.cc
+compiling value.cc
+compiling string.cc
+compiling accessor.cc
+compiling context.cc
+compiling message.cc
+compiling gc.cc
+compiling array.cc
+compiling template.cc
+compiling function.cc
+compiling backref.cc
+compiling trycatch.cc
+compiling script.cc
+compiling v8.cc
+compiling invocation.cc
+compiling stack.cc
+compiling primitive.cc
+compiling exception.cc
+linking shared-object v8/init.so
+/usr/bin/ld: /home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/libv8-3.16.14.3/vendor/v8/out/arm.release/obj.target/tools/gyp/libv8_base.a(api.o): relocation R_ARM_THM_MOVW_ABS_NC against `_ZN2v88internal7Isolate12isolate_key_E' can not be used when making a shared object; recompile with -fPIC
+/home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/libv8-3.16.14.3/vendor/v8/out/arm.release/obj.target/tools/gyp/libv8_base.a: error adding symbols: Bad value
+collect2: error: ld returned 1 exit status
+make: *** [init.so] Error 1
+
+
+Gem files will remain installed in /home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/therubyracer-0.12.0 for inspection.
+Results logged to /home/git/gitlab/vendor/bundle/ruby/2.0.0/gems/therubyracer-0.12.0/ext/v8/gem_make.out
+An error occurred while installing therubyracer (0.12.0), and Bundler cannot continue.
+Make sure that `gem install therubyracer -v '0.12.0'` succeeds before bundling.

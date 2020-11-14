@@ -1,0 +1,9 @@
+document.querySelector throwing when selecting elements with a given attribute
+
+
+Original issue 1903 created by metaweta on 2014-03-13T22:29:18.000Z:
+<div attr="foo">hello</div>
+<script>
+alert(document.querySelector("[attr]").innerText);
+</script>
+​

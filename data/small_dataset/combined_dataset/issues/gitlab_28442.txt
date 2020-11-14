@@ -1,0 +1,5 @@
+A request came in from a customer who wanted to use GitLab in a high-security environment and did not feel that private tokens satisfied their security requirements (expiration, strength, monitoring, etc.). 
+
+It would be great to have the option to disable private tokens across an instance, for non-admin users or admin users, or make them read-only.
+
+Disabling tokens would have the effect of disabling the API. Some users are willing to accept that trade-off.

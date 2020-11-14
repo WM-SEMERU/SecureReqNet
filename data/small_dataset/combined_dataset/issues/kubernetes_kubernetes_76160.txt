@@ -1,0 +1,29 @@
+enforce the interface relationship between ServicePort and BaseServiceInfo
+
+
+Currently the BaseServiceInfo struct implements the ServicePort interface, but
+only uses that interface sometimes. All the elements of BaseServiceInfo are exported
+and sometimes the interface is used to access them and othertimes not
+I extended the ServicePort interface so that all relevent values can be accessed through
+it and unexported all the elements of BaseServiceInfo
+What type of PR is this?
+
+Uncomment only one  /kind <> line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+/kind api-change
+/kind bug
+
+/kind cleanup
+
+/kind design
+/kind documentation
+/kind failing-test
+/kind feature
+/kind flake
+
+What this PR does / why we need it:
+Which issue(s) this PR fixes:
+Fixes #
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+

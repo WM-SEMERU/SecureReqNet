@@ -1,0 +1,9 @@
+Allow post and basic client authentication mode for OIDC
+
+
+Summary of the changes
+
+Added a new parameter ClientAuthenticationMode in OpenIdConnectOptions to allow to specify the client authentication mode (Basic or Post) https://tools.ietf.org/html/rfc6749#section-2.3.1
+By default it's Post so no breaking change
+
+Addresses aspnet/Security#1792

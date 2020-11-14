@@ -1,0 +1,22 @@
+## How to generate the scenario
+
+* A repository with a text file, (myfile.txt) at commitID=1
+* clone the repo, make a change to myfile.txt, commit, now at commitID=2
+* Go to the Gitlab web interface and start editing myfile.txt, make a change but don't commit yet...
+* Push commitID=2 to the server from your clone
+* Complete your web edit by clicking 'commit you changes'. Now repo is at commitID=3
+
+## Result
+
+The changes in commitID=2 are overwritten by the state of the edited file from the web editor, as if the lines added in commit ID=2 were deleted in commitID=3. This is not in line with git-like behaviour.
+
+## Expected behaviour
+
+The web interface gives you the typical git error when pushing to a remote which is ahead of the local repository:
+
+    Updates were rejected because the tip of your current branch is behind its remote counterpart
+
+## Possible enhancements to avoid user loss of information
+
+* Simple - After the commit is rejected, the user is given to option to save the file locally.
+* Better - A fetch + merge is done by gitlab and the merge state of the file is shown to the user, who must accept, or edit the merged state and complete a 4th commit. Leaving the project at Commit ID = 4

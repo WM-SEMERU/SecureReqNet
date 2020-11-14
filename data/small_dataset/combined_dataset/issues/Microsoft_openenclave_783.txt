@@ -1,0 +1,5 @@
+Replace hard-coded certificates in tests with certificates that get generated on-demand
+
+
+There are plenty of certificates hard-coded into source files (like in tests/crypto/rsa_tests.c) and checked in (like tests/crypto_crls_cert_chains/data/RootCA1.key.pem).
+These certificates should ideally be generated on demand instead, as it is considered bad practice to store certificates in source control.  This should also apply to all private keys that are checked in as well.

@@ -1,0 +1,12 @@
+Open Enclave reviewers trust that obvious security issues are tracked and fixed
+
+
+This story tracks that known security issues that don't fall into larger security stories are triaged appropriately against the public preview bar. These are the currently known subset of issues that will need to be fixed for public preview:
+
+ #8 Double-check all host pointers are outside of the enclave
+ #215 Deprecate unsafe CRT functions
+
+These items currently require more investigation or have a longer time horizon to address than public preview:
+
+#81 Support GCC stack protectors: __stack_chk_fail
+

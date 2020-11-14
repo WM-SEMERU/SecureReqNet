@@ -1,0 +1,45 @@
+### Description
+
+The GitLab API has two sets of CORS configuration:
+
+```ruby
+    # Allow access to GitLab API from other domains
+    config.middleware.insert_before Warden::Manager, Rack::Cors do
+      allow do
+        origins Gitlab.config.gitlab.url
+        resource '/api/*',
+          credentials: true,
+          headers: :any,
+          methods: :any,
+          expose: ['Link', 'X-Total', 'X-Total-Pages', 'X-Per-Page', 'X-Page', 'X-Next-Page', 'X-Prev-Page']
+      end
+
+      # Cross-origin requests must not have the session cookie available
+      allow do
+        origins '*'
+        resource '/api/*',
+          credentials: false,
+          headers: :any,
+          methods: :any,
+          expose: ['Link', 'X-Total', 'X-Total-Pages', 'X-Per-Page', 'X-Page', 'X-Next-Page', 'X-Prev-Page']
+      end
+    end
+```
+
+This is fine in general - same-origin requests can use credentials, whereas cross-origin requests cannot. However, some setups may desire to disable cross-origin requests entirely, as discussed in https://gitlab.com/gitlab-org/gitlab-pages/issues/66 - the short version is that it can prevent dog-leg exfiltration of data that **doesn't** need credentials from firewalled instances.
+
+### Proposal
+
+Add a `gitlab.yml` or `application_settings` field (I'd suggest the former) called "disable cross-origin requests". When checked, the second `allow` block should not be executed.
+
+### Links / references
+
+### Documentation blurb
+
+(Write the start of the documentation of this feature here, include:
+
+1. Why should someone use it; what's the underlying problem.
+2. What is the solution.
+3. How does someone use this
+
+During implementation, this can then be copied and used as a starter for the documentation.)

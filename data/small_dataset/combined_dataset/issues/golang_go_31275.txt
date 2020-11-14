@@ -1,0 +1,27 @@
+cmd/compile: unexpected prove/BCE regressions when building encoding/json
+
+
+$ go version
+go version devel +f947c4dcfe Fri Apr 5 00:52:55 2019 +0000 linux/amd64
+$ go1 version
+go version go1.12.1 linux/amd64
+$ cd tip/src/encoding/json
+$ go1 build -gcflags='-d=ssa/check_bce/debug=1' &>before
+$ go build -gcflags='-d=ssa/check_bce/debug=1' &>after
+$ diff before after
+1c1
+< # std/encoding/json
+---
+> # encoding/json
+49a50
+> ./encode.go:728:19: Found IsSliceInBounds
+91a93
+> ./scanner.go:151:29: Found IsSliceInBounds
+100a103
+> ./stream.go:386:35: Found IsSliceInBounds
+101a105
+> ./stream.go:405:35: Found IsSliceInBounds
+
+So it seems like BCE is actually getting worse in 1.13 for this particular package. It has over a hundred bounds checks, a dozen of which are in hot decode functions, so I'd like for the number to go down, not up :)
+I used encoding/json from the master version on both cases, to make the comparison fair and simple.
+/cc @zdjones @aclements @rasky @josharian

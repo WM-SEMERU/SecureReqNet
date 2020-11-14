@@ -1,0 +1,4 @@
+Private Tabs should be removed when user leaves private mode
+
+
+At the moment private tabs remain in memory even if a user goes back to regular mode.

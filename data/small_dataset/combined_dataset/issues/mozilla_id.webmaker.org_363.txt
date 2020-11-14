@@ -1,0 +1,4 @@
+add isSecure flag to crumb cookie config
+
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=1194434

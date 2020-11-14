@@ -1,0 +1,5 @@
+test: fix test-repl-require-after-write
+
+
+Currently, the test creates a file in the cwd and doesn't clean it up.
+Use a temporary directory instead.

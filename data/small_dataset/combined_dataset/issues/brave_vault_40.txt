@@ -1,0 +1,14 @@
+nonce tolerance is 100 minutes instead of 10 minutes as indicated in comment
+
+
+in controllers/helper.js:
+    // NB: 10 minutes is temporary
+    if (diff > (6000 * 1000)) return boom.badData('header.nonce is untimely: ' + JSON.stringify(header.nonce))
+  } else {
+    if (header) return boom.badData('user entry is not cryptographically-enabled')
+
+    return null    // no user entry credentials, no data signature
+  }
+
+6000 seconds is 100 minutes, not 10 minutes. please add a test for this!
+Please fix before open sourcing.

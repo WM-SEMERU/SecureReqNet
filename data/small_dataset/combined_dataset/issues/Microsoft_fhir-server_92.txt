@@ -1,0 +1,4 @@
+Limit exposure of backend technologies used
+
+
+Currently the /health/check endpoint returns the message, "Successfully connected to CosmosDB."  We should not expose the backend technology used for data storage.

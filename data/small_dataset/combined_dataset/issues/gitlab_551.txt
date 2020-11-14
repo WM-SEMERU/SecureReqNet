@@ -1,0 +1,5 @@
+Simplecov had an issue with exit codes where it would return a success code even if the previous tests failed. See https://github.com/colszowka/simplecov/issues/281
+
+This has been fixed in 0.9.0 with this pull request https://github.com/colszowka/simplecov/pull/303
+
+We are running the gitlab-ce tests on jenkins, which is where we were seeing that ruby exceptions in the spinach tests weren't failing our builds.

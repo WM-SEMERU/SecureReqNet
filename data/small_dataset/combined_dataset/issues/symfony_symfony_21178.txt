@@ -1,0 +1,51 @@
+[Security] Add strategy resolvers
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#15130 (kind of)
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR is a way to be able to use a specific strategy (in the AccessDecisionManager) for particular attributes / object / token. Cf #15130 for more discussion about this.
+I know the idea in the issue was rejected but this implementation is different and time have passed since then, so maybe there will be a new look on this.

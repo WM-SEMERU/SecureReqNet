@@ -1,0 +1,29 @@
+Enhance stack trace for nested eval info available on both v8 and FF30
+
+
+Original issue 1908 created by erights on 2014-03-27T22:45:59.000Z:
+From: https://mail.mozilla.org/pipermail/es-discuss/2014-March/036797.html
+Cool. I will fix the debug.js adaptor
+a) to fix the bug Boris reported,
+b) to map the FF nested format to the v8 nested format, and
+c) to preserve this information from the v8 API so that it appears correctly on v8 as well.
+This will require extending the Causeway stack trace format (an encoding of stack trace info into JSON), which looks like it should be straightforward. Thanks!
+Once extended in this way, would it be useful to standardize the Causeway stack trace representation, so others can avoid trying to parse the stack trace strings with regexps?
+On Thu, Mar 27, 2014 at 3:09 PM, Christian Plesner Hansen <c7n@p5r.org> wrote:
+Yes: https://code.google.com/p/v8/wiki/JavaScriptStackTraceApi
+c
+On Thu, Mar 27, 2014, at 03:06 PM, Mark Miller wrote:
+I wasn't aware that v8 does that. Is this format documented anywhere?
+On Thu, Mar 27, 2014 at 2:23 PM, Christian Plesner Hansen <c7n@p5r.org> wrote:
+>     js> try { eval("eval('FAIL')"); } catch (x) { print(x.stack); }
+>     @typein line 2 > eval line 1 > eval:1:1
+>     @typein line 2 > eval:1:1
+>     @typein:2:7
+I'm unclear on what the problem is with nested evals -- you get
+essentially the same information from v8:
+js> try { eval("eval('FAIL')"); } catch (x) { console.log(x.stack); }
+ReferenceError: FAIL is not defined
+at eval (eval at <anonymous> (eval at <anonymous> (repl:1:7)),
+<anonymous>:1:1)
+at eval (eval at <anonymous> (repl:1:7), <anonymous>:1:1)
+at repl:1:7

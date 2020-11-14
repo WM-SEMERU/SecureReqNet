@@ -1,0 +1,20 @@
+refactor(injection): Add service name to injection error message
+
+
+When injection fails due to invalid key in injection array, then the error message does not name the component about to be instantiated.
+None.
+What kind of change does this PR introduce? (Bug fix, feature, docs update, ...)
+Improve error message. Assist project debugging.
+What is the current behavior? (You can also link to an open issue here)
+Error message does not provide all relevant detail information.
+What is the new behavior (if this is a feature change)?
+Error message names the affacted component.
+Does this PR introduce a breaking change?
+No.
+Please check if the PR fulfills these requirements
+
+ The commit message follows our guidelines
+ Fix/Feature: Docs have been added/updated
+ Fix/Feature: Tests have been added; existing tests pass
+
+Other information:

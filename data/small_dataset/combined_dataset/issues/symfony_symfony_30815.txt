@@ -1,0 +1,52 @@
+[Process] Added more detail to the exception when the CWD is invalid
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+
+When using panther with "special" directory structure, the message is
+not really usefull. Let's add the CWD to the exception

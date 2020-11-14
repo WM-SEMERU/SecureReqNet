@@ -1,0 +1,16 @@
+Redesign CouchDB security system
+
+
+@janl:
+
+
+closed by default
+more fine-grained permissions
+more options for delegated authentication
+
+Our security system is slowly grown and not coherently designed. We should start over. I have many ideas and opinions, but they are out of scope for this. I think everybody here agrees that we can do better. This very likely will not include per-document ACLs as per the often stated issues with that approach in our data model.
+
+@davisp:
+
+Big +1 on this. The auth stuff in our code base is hard to follow and difficult to hold in my brain. Taking a step back to redesign from the ground up would be super awesome.
+

@@ -1,0 +1,5 @@
+Net api servers bind to all configured network interface IPs by default (insecure)
+
+
+The HTTP server is bound to IPs on all configured interfaces by default. This can lead to unintentional data leaks.
+Changing the default binding address to be localhost and ::1 for IPv4 and IPv6, respectively, increases default security which can be overridden by providing a host address in the parameters.

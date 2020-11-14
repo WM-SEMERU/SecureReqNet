@@ -1,0 +1,5 @@
+[CI] Discard old Bors Jenkins builds
+
+
+This allows us to reduce the Jenkins server cluttering.
+Signed-off-by: Ionut Balutoiu ibalutoiu@cloudbasesolutions.com

@@ -1,0 +1,6 @@
+Failed Authorization Policy Details in Logs
+
+
+Would it be possible to have a feature where instead of the DefaultAuthorizationService logging a message saying Authorization Failed it gave a little more context to the failure.
+Maybe something like saying Authorization Failed for Policy: "Policy Name" or Authorization Failed for Role: "Role Name" etc.
+When you're building a complex application you can easily have many Authorize conditions being applied and it can be quite derived to find out what specifically failed.

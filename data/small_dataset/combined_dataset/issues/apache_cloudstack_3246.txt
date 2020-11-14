@@ -1,0 +1,19 @@
+[WIP DO NOT MERGE] server: allow disk offering selection for volume from snapshot
+
+
+Description
+Problem: Volume created from a snapshot does not show its disk offering.
+Root Cause: The volume created from a snapshot of a root disk does not have a disk offering therefore the disk offering of the created volume from the snapshot is empty.
+Solution: Refactored createVolume API and extended UI to allow user to select disk offering while creating volumes using a root disk volume snapshot. For creating volumes using data disk volume snapshot, disk offering given by snapshot will be assigned. Disk offering selection in UI form volume creation from snapshot is depicted in screenshot below.
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+
+How Has This Been Tested?
+From UI

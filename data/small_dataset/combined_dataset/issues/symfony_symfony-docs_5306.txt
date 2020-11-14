@@ -1,0 +1,4 @@
+[2.8] Ability to inject security.access.decision_manager into voters
+
+
+See symfony/symfony#14733. The security.access.decision_manager can now be injected into voters, so we can document in the cookbook about custom voters how you could, for example, call isGranted('ROLE_ADMIN') from inside a custom voter without needing to do something like inject the container.

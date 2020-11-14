@@ -1,0 +1,48 @@
+Twig_Error_Runtime - Variable "Form" does not exist.
+
+
+Symfony version(s) affected: 4.2.4
+Description
+Twig_Error_Runtime - Variable "Form" does not exist.
+Hello,
+I use Symfony 4.2.4, and I have the following error :
+- Variable "Form" does not exist.
+Twig_Error_Runtime
+in vendor/symfony/twig-bridge/Resources/views/Form/form_div_layout.html.twig (line 347)
+{%- do form.setMethodRendered() **-%}**
+in var/cache/dev/twig/6f/6f18241d25b6882d1238f581950b158053c651eb52b0625ec6e799aec85a4aed.php->{closure} (line 1428)
+in vendor/twig/twig/lib/Twig/Template.php->block_form_start (line 189)
+in vendor/symfony/twig-bridge/Form/TwigRendererEngine.php->displayBlock (line 58)
+in vendor/symfony/form/FormRenderer.php->renderBlock (line 115)
+in var/cache/dev/twig/7e/7e77548e33b3610583a3fab566c2fc6f03bd644d11976fd07dac7590ea3af5e7.php->renderBlock (line 75)
+in vendor/twig/twig/lib/Twig/Template.php->block_body (line 189)
+in var/cache/dev/twig/e5/e5967f1c7198a3327428a368fc0273ac878e1a623f2a2ec06393721635131585.php->displayBlock (line 101)
+in vendor/twig/twig/lib/Twig/Template.php->doDisplay (line 386)
+in vendor/twig/twig/lib/Twig/Template.php->displayWithErrorHandling (line 363)
+in var/cache/dev/twig/7e/7e77548e33b3610583a3fab566c2fc6f03bd644d11976fd07dac7590ea3af5e7.php->display (line 35)
+in vendor/twig/twig/lib/Twig/Template.php->doDisplay (line 386)
+in vendor/twig/twig/lib/Twig/Template.php->displayWithErrorHandling (line 363)
+in vendor/twig/twig/lib/Twig/Template.php->display (line 371)
+in vendor/twig/twig/lib/Twig/Environment.php->render (line 289)
+in vendor/symfony/framework-bundle/Controller/ControllerTrait.php->render (line 229)
+AbstractController->render('task.html.twig', array('pipo' => object(FormView)))
+in src/Controller/TaskController.php (line 39)
+**return $this->render('task.html.twig', ['form' => $form->createView()]);**
+in vendor/symfony/http-kernel/HttpKernel.php->create (line 150)
+in vendor/symfony/http-kernel/HttpKernel.php->handleRaw (line 67)
+in vendor/symfony/http-kernel/Kernel.php->handle (line 198)
+Kernel->handle(object(Request))
+in public/index.php (line 25)
+
+My twig file :
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Créer une tâche
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'style': 'width:100%;'}}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

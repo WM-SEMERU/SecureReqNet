@@ -1,0 +1,6 @@
+add namespace, to be able to reuse class in following examples
+
+
+
+No description provided.
+

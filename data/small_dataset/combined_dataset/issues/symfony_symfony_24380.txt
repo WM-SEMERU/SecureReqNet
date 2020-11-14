@@ -1,0 +1,51 @@
+[SecurityBundle] Remove auto picking the first provider
+
+
+when no provider is explicitly configured on a firewall
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master 
+
+
+Bug fix?
+no
+
+
+New feature?
+yes 
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#24378 
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+After #24378

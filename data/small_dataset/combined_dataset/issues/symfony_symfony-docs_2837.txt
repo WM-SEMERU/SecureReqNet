@@ -1,0 +1,13 @@
+Firewall & Security Context error
+
+
+In components/security/firewall.rst, in the Firewall and Security Context section, there are (at least) two errors:
+
+
+use Symfony\Component\Security\SecurityContext should be Symfony\Component\Security\Core\SecurityContext
+
+
+new SecurityContext() fails; it is missing two required parameters. If this is intentional, then some documentation should be provided to that effect.
+
+
+An alternative (and possibly more useful) solution might be to suggest getting the security context from the container (e.g. saying $container->get('security.context')).

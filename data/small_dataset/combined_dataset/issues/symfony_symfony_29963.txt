@@ -1,0 +1,21 @@
+Native PO and MO pluralization
+
+
+The PO translation file format and MO translation file format natively support pluralization, making it easy to translate pluralizable strings using tools such as Poedit.
+The PoFileLoader and MoFileLoader support the native pluralization.
+The PoFileDumper and MoFileDumper, however, do not support the native pluralization. It would be really nice if this could be implemented.
+The PO format is:
+msgid untranslated-string-singular
+msgid_plural untranslated-string-plural
+msgstr[0] translated-string-case-0
+...
+msgstr[N] translated-string-case-n
+
+For example:
+msgid "found %d fatal error"
+msgid_plural "found %d fatal errors"
+msgstr[0] "s'ha trobat %d error fatal"
+msgstr[1] "s'han trobat %d errors fatals"
+
+This works very well when the untranslated language only has two pluralization forms (singular and plural). The translated language can have more complex rules. I don't think the native pluralization can be used when the untranslated language has complex pluralization rules, or when using Explicit Interval Pluralization.
+Note: It seems that the Qt format also support pluralization natively (numerusform). The QtFileDumper does not support this, and it doesn't seem that QtFileLoader does either.

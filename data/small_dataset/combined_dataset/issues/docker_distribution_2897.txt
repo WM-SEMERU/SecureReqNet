@@ -1,0 +1,10 @@
+Cleanup storage cache metrics
+
+
+Split request and hit metrics into separate metrics, rather than using
+labels. This avoids duplication of data and makes metric math easier.
+
+Hit ratio: registry_storage_cache_hits_total / registry_storage_cache_requests_total
+Miss ratio: 1 - (registry_storage_cache_hits_total / registry_storage_cache_requests_total
+Misses: registry_storage_cache_requests_total - registry_storage_cache_hits_total
+

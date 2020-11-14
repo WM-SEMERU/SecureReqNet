@@ -1,0 +1,32 @@
+brave://example gets stuck in a loading loop
+
+
+Description
+Chrome has "chrome://history/" so I assumed brave would have "brave://history/" (it doesn't). This is fine, but when I go to brave://history it just keeps loading and loading. Not a big deal but still a bit strange.
+Steps to Reproduce
+
+Copy and paste brave://example in to the brave browser
+
+Actual result:
+Never ending loading.
+Expected result:
+Not really sure, should probably treat it as a search? Eg. on Chrome if you go to "chromeee://history" it'll treat it as a search query.
+Reproduces how often:
+100%
+Brave Version
+about:brave info:
+Brave | 0.24.0
+V8 | 6.9.427.23
+rev | f657f15
+Muon | 8.1.6
+OS Release | 10.0.16299
+Update Channel | Release
+OS Architecture | x64
+OS Platform | Microsoft Windows
+Node.js | 7.9.0
+Brave Sync | v1.4.2
+libchromiumcontent | 69.0.3497.100
+Reproducible on current live release:
+I assume so but not 100%.
+Additional Information
+N/A

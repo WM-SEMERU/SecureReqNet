@@ -1,0 +1,30 @@
+[SecurityBundle] Display firewall in debug bar even if not authenticated
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Before:
+
+After:
+
+I will take any input to improve the result, I feel it not optimal.

@@ -1,0 +1,8 @@
+test: fix this scope bug in test-stream2-writable.js
+
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ commit message follows commit guidelines
+

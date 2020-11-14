@@ -1,0 +1,15 @@
+@storybook/addon-storyshots: NPM Audit warning - braces >= 2.3.1
+
+
+When running NPM / yarn audit throws Regular Expression Denial of Service.
+In yarn this is a bit worse because it fails with process code 1 and thus CI.
+The following path of dependencies depicts the root origin of the error:
+@storybook/addon-storyshots > jest-specific-snapshot >  jest-snapshot > jest-message-util > micromatch > braces
+
+Most libraries have gotten rid of this vulnerability from braces.
+Steps to reproduce
+Install latest @storybook/framework and @storybook/addon-storyshots and run NPM audit.
+Please specify which version of Storybook and optionally any affected addons that you're running
+Affected platforms
+I'm on macOS but I don't see why it would be different in another OS.
+

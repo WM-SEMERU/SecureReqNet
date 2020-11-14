@@ -1,0 +1,10 @@
+Code cleanup for Token Create, pubkey hash and print join command
+
+
+Token create is implemented in three different points:
+
+kubeadm init
+kubeadm token *
+kubeadm phase bootstrap-token create
+
+There is room form cleaning up the code moving common code in a package; the same applies to the generation of pubkey hash and to the generation of the join command to be used for joining nodes.

@@ -1,0 +1,9 @@
+Use the ".. deprecated::" directive for deprecations
+
+
+Refs #11154
+Todo:
+
+ We need no ensure the correct html markup
+ @symfony/docs-team please review the new documentation about "how/when to use this new directive"
+

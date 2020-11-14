@@ -1,0 +1,40 @@
+[DependencyInjection] Cannot set a service to public through autoconfigure unless _defaults are set
+
+
+Symfony version(s) affected
+
+v4.2.3.2
+v4.1.9.1
+v4.0.7
+v3.4.7
+v3.3.9
+
+
+Affected versions of symfony/skeleton (basically all of them) rather than symfony/dependency-injection - have not tested individual versions of the Dependency Injection component.
+
+Probably not noticed in previous versions because public: false was in _defaults when creating a project from certain versions.
+Description
+When autoconfiguring a service via the interface it implements, the visibility (public true/false) cannot be changed unless services._defaults.public: false has been set.
+How to reproduce
+
+Create a project from the latest version of symfony/skeleton (zanbaldwin/symfony@ae5de65). Current version is v4.2.3.2 at the time of this issue.
+Setup container configuration (zanbaldwin/symfony@2cfe163).
+
+Create App\MyInterface.
+Create App\MyService which implements App\MyInterface.
+Autoconfigure the interface in App\Kernel::build() with $container->registerForAutoconfiguration(MyInterface::class)->setPublic(true);
+
+
+View service using bin/console debug:container MyService and note that Public is set to no.
+
+However:
+
+Modify config/services.yaml and add a default value of public (zanbaldwin/symfony@76ec173):
+services:
+    _defaults:
+        public: false
+
+Rerun command bin/console debug:container MyService to see that Public is now set to yes.
+
+Additional context
+See branch zanbaldwin/symfony@bug/service-visibility-autoconfigure for bug reproduced in minimal amount of steps (2 commits not including installing Symfony).

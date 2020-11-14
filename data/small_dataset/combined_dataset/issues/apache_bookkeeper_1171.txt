@@ -1,0 +1,5 @@
+Enforce zkAcls on initNewCluster
+
+
+Descriptions of the changes in this PR:
+initNewCluster was introduced #979. The new command doesn't honor to zookeeper acls settings. This change is to change those zookeeper calls to use zkAcls.

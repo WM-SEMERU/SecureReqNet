@@ -1,0 +1,50 @@
+Fix misleading TokenInterface docblock 2.3
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+I've found the docblock for TokenInterface::getUser misleading. By reading it I've written something like:
+$username = (string) $token->getUser();
+This actually doesn't work, since UserInterface doesn't implements __toString and I have some instance of AdvancedUser (coming from InMemory provider).
+If the token always return a UserInterface or string, then my fix is ok.
+[fix my PR #12596]

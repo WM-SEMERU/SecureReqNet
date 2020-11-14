@@ -1,0 +1,8 @@
+build node variant from k8s builds
+
+
+This PR implements kinder build node-variant from build artifacts, that is an important piece of the puzzle for getting E2E tests on kubeadm upgrades
+/kind feature
+/priority important-longterm
+/assign @neolit123
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

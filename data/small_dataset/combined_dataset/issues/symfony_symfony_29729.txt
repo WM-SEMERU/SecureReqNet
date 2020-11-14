@@ -1,0 +1,28 @@
+[Security] Use remember_me with json_login
+
+
+Description
+When using json_login authentication method, there is a boolean remember_me config key but this one is ignored for now. It would be wonderfull to be able to enable this feature, thus use it by passing a remember_me key in the body of the request.
+Actual config:
+security:
+    firewalls:
+        main:
+            json_login:
+                remember_me: true
+            stateless: false
+Example
+POST /login HTTP/1.1
+Host: 127.0.0.1:8000
+Content-Type: application/json
+cache-control: no-cache
+{
+	"username": "...",
+	"password": "...",
+	"remember_me": true
+}
+Remember_me key could be set as username and password:
+security:
+    firewalls:
+        main:
+            json_login:
+                remember_me_path: remember_me

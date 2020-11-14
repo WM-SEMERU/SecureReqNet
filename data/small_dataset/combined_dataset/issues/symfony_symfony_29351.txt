@@ -1,0 +1,37 @@
+Unrecognized options "memory_cost, time_cost, threads" under "security.encoders.Symfony\Component\Security\Core\User\User"
+
+
+Symfony version(s) affected: during update to 4.1.8
+Description of the problem including expected versus actual behavior:
+tried to composer update my project and I had the message : Unrecognized options "memory_cost, time_cost, threads" under "security.encoders.FOS\UserBundle\Model\UserInterface" (my security.encoders config was on FOS\UserBundle\Model\UserInterface I then changed it to Symfony\Component\Security\Core\User\User)
+Now I have an excpetion on my app with the message  : Unrecognized options "memory_cost, time_cost, threads" under "security.encoders.Symfony\Component\Security\Core\User\User"
+Steps to reproduce:
+
+composer update
+"global" exception on my app
+
+Provide logs (if relevant):
+During update, I got this error message
+Executing script cache:clear [KO]
+ [KO]
+Script cache:clear returned with error code 1
+!!  PHP Warning:  Module 'mongodb' already loaded in Unknown on line 0
+!!
+!!  In ArrayNode.php line 307:
+!!
+!!    Unrecognized options "memory_cost, time_cost, threads" under "security.enco
+!!    ders.FOS\UserBundle\Model\UserInterface"
+!!
+!!
+!!
+Script @auto-scripts was called via post-update-cmd
+
+I guess it's related to my password encoding config with argon2i (my config is the same as the docs)
+security:
+  encoders:
+    Symfony\Component\Security\Core\User\User:
+      algorithm: argon2i
+      memory_cost:          16384 # Amount in KiB. 16 MiB
+      time_cost:            2 # Number of iterations
+      threads:              4 # Number of parallel threads
+

@@ -1,0 +1,53 @@
+Lazy load modules based on variables in path
+
+
+🚀 feature request
+Relevant Package
+I hope this feature request is for the @angular/router
+Description
+I don't know if this is already there in Angular, but I couldn't find any in the docs (or internet).
+I think it's nice to have an option to specify routes like this:
+app-routing.module.ts
+import { Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: 'theme-builder/:themeId',
+    loadChildren:
+      'src/app/theme-builders/{{themeId}}-builder.module#BuilderModule'
+  }
+]
+So that the angular can load the corresponding module. For large applications, sometimes we may not be able to specify every possible loadChildren paths. Sometimes these variables in the path are coming from a database - and it may also have a corresponding loadChildren. But specifying all these combinations hard-coded in the app doesn't feel like a scalable solution.
+For clarity, the above code sample can be a replacement for:
+const routes: Routes = [
+  {
+    path: 'theme-builder/theme-1',
+    loadChildren:
+      'src/app/theme-builders/theme-1-builder.module#BuilderModule'
+  },
+  {
+    path: 'theme-builder/theme-2',
+    loadChildren:
+      'src/app/theme-builders/theme-2-builder.module#BuilderModule'
+  },
+  ...
+]
+Describe the solution you'd like
+I'm aware of the AOT. I think I can specify these individual lazy loaded modules in the angular.josn to compile them ahead of time.
+{
+  "architect":{
+    "build":{
+      "options":{
+        "lazyModules": [
+          "src/app/theme-builders/theme-1-builder.module",
+          "src/app/theme-builders/theme-2-builder.module"
+          ...
+          // or even better a glob pattern
+        ]
+      }
+    }
+  }
+}
+
+Describe alternatives you've considered
+I came across this nice article. But it seems to be more complex and doesn't support in-module-routing (I think).

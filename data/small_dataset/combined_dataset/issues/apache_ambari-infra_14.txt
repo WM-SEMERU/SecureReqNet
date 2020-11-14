@@ -1,0 +1,15 @@
+AMBARI-24878 - Infra Manager: kerberos support
+
+
+What changes were proposed in this pull request?
+Infra Manager was not able to export documents from solr and save them to hdfs in a kerberized cluster
+How was this patch tested?
+ITs passed
+Manually:
+
+Deploy Ambari and a cluster: zookeeper, infra-solr, logsearch, hdfs, infra-manager
+Kerberize the cluster
+Enable archiving for service_logs and set the destination to hdfs on Ambari UI, Infra Manager config
+Run archiving of service_logs using infra managers rest api
+check hdfs for archived service logs
+

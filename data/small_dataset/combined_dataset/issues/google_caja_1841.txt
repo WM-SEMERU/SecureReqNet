@@ -1,0 +1,8 @@
+Caja ignores CSS :disabled pseudo class
+
+
+Original issue 1843 created by bruant.d on 2013-08-18T13:55:10.000Z:
+The attached file shows the :disabled pseudo-class in action.
+Apparently, Caja ignores it.
+Note that there are other such CSS pseudo classes that may be affected.
+http://www.w3.org/TR/css3-selectors/#UIstates

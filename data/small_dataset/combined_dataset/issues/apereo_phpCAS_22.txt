@@ -1,0 +1,6 @@
+Default PGT Session Save Path and Debug log should be moved
+
+
+The default path for the storage of these files is currently /tmp. Since both the PGT and debug log contain security relevant info they should be moved to 'session_save_path'. This should normally be a secure directory.
+If anyone still wants to move it somewhere else, they are free to do so.
+@adamfranco  Any objections?

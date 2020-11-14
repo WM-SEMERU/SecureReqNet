@@ -1,0 +1,157 @@
+cmd/go: [modules + integration] go mod buildrequires, list the build requirements of a set of unpacked modules
+
+
+This report is part of a series focused at making Go modules work in integrator workflows. It’s being filled at the request of @mdempsky in golang-dev. It is informed both by the results of this golang-dev discussion, and by trying to make things work with Go module tooling as it exists today (experiment¹).
+Please do not dismiss it or mark it as duplicate of another vaguely similar issue without making sure you’ve read and understood the golang-dev discussion. A lot of work went into identifying problems points precisely.
+Needed feature
+Go needs an official go mod buildrequires command that processes a set of unpacked Go modules and returns the list of other Go modules that need to be present for this set to be processed by the rest of the go toolchain.
+This kind of analysis is required to populate build environments in CI/CD systems accurately, either to complete the set with other modules, or make sure it is self-hosting before a CI/CD run.
+go mod buildrequires could be implemented as a go mod graph mode, via specific option flags, or as a separate subcommand.
+Constrains
+
+the output should be a machine-readable list of:
+
+module path,
+minimal version,
+excluded versions
+
+
+that basically means:
+
+process the require, exclude and replace of all the go.mod files in the set,
+remove modules already provided by the set,
+consolidate constrains:
+
+bump minimal versions to something compatible with each go.mod individual requirements
+warn if a module in the set does not meet the constrains specified by other modules in the set
+deduplicate exclusions
+
+
+
+
+the feature should also be exposed as a function in the official Go API, returning a go object (map, list, struct…)
+the input set may be defined as one or several lists of of go.mod filesystem paths (as produced by go mod discover in issue #31299), one or several directory paths (similar to the directory paths defined in issue #31299), or a mix of both
+the output should be either be pre-filtered, or be easily filterable, without further go tooling invocations, by:
+
+GOOS (only return results for this GOOS),
+GOOS+GOARCH (only return results for this GOOS and GOARCH), or
+complete build context (GOOS+specific build flag set)
+
+
+the output should be either be pre-filtered, or be easily filterable, without further go tooling invocations, by direct and indirect requirements
+the output should be either be pre-filtered, or be easily filterable, without further go tooling invocations, by:
+
+code build requirements (modules needed to build the code)
+compiler test requirements (modules needed to run tests, that only require the compiler)
+integration test requirements (modules needed to run tests, that require more than just the compiler to run, and may not be satisfied by the average CI/CD system):
+
+internet access,
+root access
+some specific software instance
+some credentials, etc
+
+
+
+
+the command should also take user-provided versioning info as input, either to fill in blanks when info files are not present, or to override them (both strategies could arguably be valid)
+the command should work in secure no-internet-download mode. In that mode it should probably restricts its processing to direct dependencies and the dependencies available in configured goproxy sources (#31304)
+
+¹ The experimental code is probably horrible. That's not the point. Most of its functions are generic and should have been provided by generic Go tooling in the first place.
+Motivation
+
+
+the Go modules design allows the splitting of projects in multiple modules and nested submodules. Therefore, the CI/CD integration unit for Go, is now a source state that may contain a variable number of coordinated Go modules. The go toolchain should not assume that the inputs/outputs of a CI/CD run are a single module declared in a single go.mod file.
+
+
+robust CI/CD systems will cut internet access during a run to ensure the reproducibility and security of run results. A CI/CD build environment needs to be populated with all the code the run needs, before the run starts. Later go get calls won’t work.
+
+
+populating a CI/CD build environment with more code, than the strict minimum the run will need, gets prohibitively expensive in run time, for busy build farms with a huge list of jobs to run. Therefore the build requirement list needs to be as cut down as possible, allowing to remove:
+
+the requirements unneeded on a particular GOOS/GOARCH,
+the requirements of integration tests (if running them is not part of the scheduled CI/CD job)
+the requirements of plain tests (ditto)
+the requirements of example code (anything with example in the file or directory name)
+
+
+
+missing modules, identified by the go mod buildrequires call, will typically be populated from the organisation baseline. Because parts of this baseline can be shared between organisation projects, it won't be mirrored in each project VCS in a vendor directory.
+
+
+missing module population will make use of recent CI/CD improvements, driven by the needs of Rust, Go and Python ³
+
+
+adding new modules to the organisation baseline is a lot of work². It requires
+
+assigning a curating team,
+sifting between forks to identify the actual current project upstream,
+sifting between VCS mirrors to find the root VCS,
+legal analysis,
+test result analysis,
+writing the corresponding recipe for the CI/CD system
+etc.
+
+
+
+therefore, there was violent disbelief and rejection among consulted integrators⁴, of any Go module setup, that forced them to process new modules just because the corresponding imports exists in module parts they have no use for:
+
+dependencies of GOOS/GOARCH-specific code, when this GOOS/GOARCH is not part of the organisation targets
+dependencies of upstream integration tests, that have no chance to ever run in our CI/CD setup, because they use elements not available in it (typically, direct internet calls or root access)
+dependencies of example code, that will never be used in production, and typically does not compile because its upstream is not keeping it up to date
+their GOPATH/vendor experience of third party code has made them extremely sensible to this kind of spurious import, and the amount of work it represents.
+
+
+
+²  Initial import represents the bulk of the work, keeping the module updated once imported is a lot more reasonable.
+³
+
+rpm-software-management/rpm#104
+rpm-software-management/rpm#593
+rpm-software-management/mock#245
+those changes will help the CI/CD system leverage a go mod buildrequires to its maximum effect
+they are not strictly necessary to make use of go mod buildrequires
+
+⁴ Sometimes, interrupting before the end of the presentation of Go module changes
+Detailed Context
+The current Go module design and implementation targets small Go projects. Those projects consume raw unchanged third party projects, and rely blindly on the QA done by those other projects. Their only needs are to download those projects, check they’ve not been tampered with (via notaries),  regularly check for updates.
+Small project code supply chain:
+third party code
+        ↓
+direct or proxied
+download,
+without changes
+(upstream integrity checks required)
+        ↓
+use in project without checks
+(blind third party trust)
+
+Big integration projects, however, can not afford this direct pipeline.
+Big integration projects can be:
+
+Linux distributions
+huge software projects like Kubernetes (as noted by @thockin)
+
+There is too much third party code in play. Every member of the team can not be expected to master all the third party parts. All the third party projects may not be up to the project QA standards. Expecting all of them to deal timely with issues all the time (and thus being able to use them unchanged) is unrealistic. Continuous internet downloads make CI/CD prohibitively expensive, unreliable and unreproducible.
+Therefore any big integration project will have to give up on direct internet third party code use. It will work from a baseline of third party code. This baseline will receive small last-mile fixes to deal with the problems encountered while integrating a large mass of third-party code, and mask the lag of getting all those fixes accepted by the original third party projects. This baseline will be broken up in individual components to allow different teams to take ownership the curation of different parts of the third party codebase. And, because all this is a huge amount of work, the organisation managing the project will want to share it with its other projects.
+Big project code supply chain:
+third party code
+        ↓
+direct or proxied
+download
+without changes
+(upstream integrity checks required)
+        ↓
+curating 
+– checking,
+– fixing, 
+– removing unneeded/broken/dead parts
+(upstream integrity checks voided)
+        ↓
+curated baseline
+        ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓ ↓
+use in project A … use in project N
+(no other third party code or internet download checks permitted)
+
+The aim of this report series is to make Go module tooling integration-friendly, helping big integration projects to constitute and manage their baselines, and consume the result in all their sub-projects.
+For historical reasons baselines have been created in GOPATH/vendor mode so far. But, there is no reason for this mode to persist. All the code management wins produced by modules in the direct download case, are also desirable in the integration/baseline case.
+Therefore, there is a tooling need to convert the existing GOPATH/vendor baselines of third party code into  baselines of Go modules.

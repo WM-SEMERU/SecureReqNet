@@ -1,0 +1,6 @@
+proxy CWS signatures through our server for Brave extensions or all extensions
+
+
+(follow-up from brave/brave-core#674 (review))
+For the one extension which is installed from the go-updater for now (PDFJS), we disable CWS signature checking. Eventually there should be some way that these extensions also get the security benefits of CWS signature verification/
+Based on https://cs.chromium.org/chromium/src/chrome/browser/extensions/install_verifier.h?q=install_verifier.h&sq=package:chromium&g=0&l=30-35, it seems maybe easier to use the proxy to verify the entire set of installed extensions vs just the subset which are not CWS-managed.

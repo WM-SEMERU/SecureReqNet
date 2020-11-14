@@ -1,0 +1,14 @@
+Limit response compression based on response size
+
+
+Is your feature request related to a problem? Please describe.
+I am using the AddResponseCompression available in ASP.NET Core.
+The issue I am facing now is, even if the response size is too small, the response is being compressed. Is it possible to limit compression based on the response size?
+Describe the solution you'd like
+Add a parameter to the AddResponseCompression, namely Size (similar to EnableForHttps) which stops compression if the response size is less than the specified Size value.
+Describe alternatives you've considered
+A clear and concise description of any alternative solutions or features you've considered.
+Additional context
+We were using the below package earlier,
+https://github.com/azzlack/Microsoft.AspNet.WebApi.MessageHandlers.Compression
+They seem to have the ability to pass in a value, based on which it halts the compression process.

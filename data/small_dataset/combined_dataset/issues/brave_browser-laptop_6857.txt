@@ -1,0 +1,13 @@
+Add cancel option for Basic Auth Login
+
+
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+
+Auditors: @luixxiul
+Fix #6855
+Test Plan
+#6855 (comment)

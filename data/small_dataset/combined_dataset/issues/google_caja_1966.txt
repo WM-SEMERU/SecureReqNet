@@ -1,0 +1,5 @@
+SES needs to patch ES6 *Error [[Prototype]]
+
+
+ES6 specifies that EvalError, RangeError, etc. have a [[Prototype]] of Error, as opposed to Function.prototype.
+This is newly implemented, observed in Chrome 44.0.2398.0 dev and Chrome 45.0.2405.0 canary. This causes SES initialization to fail, since the non-whitelisted unsafe Error object is detected.

@@ -1,0 +1,4 @@
+Show Docker as the preferred way to build docs locally
+
+
+Something like this was proposed in a pull request that now I can't find ... so let's add it anyways to simplify the local setup.

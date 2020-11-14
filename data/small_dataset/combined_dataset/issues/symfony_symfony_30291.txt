@@ -1,0 +1,22 @@
+MariaDB with Symfony 3.4
+
+
+Symfony version(s) affected: 3.4.22
+Description
+Trying to implement the server_version config of Doctrine DBAL as explained in the doc : If you are running a MariaDB database, you must prefix the server_version value with mariadb- (e.g. server_version: mariadb-10.2.12). (here)
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     '%database_host%'
+        port:     '%database_port%'
+        dbname:   '%database_name%'
+        user:     '%database_user%'
+        password: '%database_password%'
+        charset:  UTF8
+        server_version: 'mariadb-10.1.38'
+
+Getting this error
+Invalid platform version "mariadb-10.1.38" specified. The platform version has to be specified in the format: "<major_version>.<minor_version>.<patch_version>".
+Possible Solution
+Shall we upgrade to doctrine/dbal v2.7? It is armless for the rest of the project?
+If yes, can I just do a composer require doctrine/dbal:2.7?

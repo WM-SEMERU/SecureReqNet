@@ -1,0 +1,9 @@
+Use modal component from our Brave design system for sync error message
+
+
+Description
+Currently, an error message shown on sync init has this styling:
+
+Update the styling of the modal with our Brave design system component and make it clear it's an error. This is a followup issue to brave/brave-core#2155
+Design
+

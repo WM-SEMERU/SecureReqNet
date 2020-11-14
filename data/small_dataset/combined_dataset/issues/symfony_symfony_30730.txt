@@ -1,0 +1,54 @@
+[PropertyInfo] Add class extractor interface and collection implementation
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+This add support for extracting a list of classes given a specific domain.
+This is something that is done in ApiPltaform here : https://github.com/api-platform/core/blob/master/src/Metadata/Resource/ResourceNameCollection.php
+Also there could be implementation for Doctrine and others domain in their corresponding Bridge / Bundle.
+This is a first step towards restricting property info for specific domain, like each domain would get its own property info extractor configuration (one accept private / protected / public property / one only accept specific annotation / ...) So we can correctly use the correct extractor given a specific domain / class.
+This can also be used in the future as a way to warmup / refresh cache of extraction metadatas for a domain. Since we got a registry we can put a specific watcher on each class of this domain and refresh it when it change or warmup on deployment.

@@ -1,0 +1,4 @@
+Blank View when running app using npm
+
+
+Blank View when running npm run dev the application runs without errors.  I can see the application with the top menu (Maturity Models, Projects, API), but the view below just show a number (e.g. 29).  Is there a step I'm missing to see the information here?

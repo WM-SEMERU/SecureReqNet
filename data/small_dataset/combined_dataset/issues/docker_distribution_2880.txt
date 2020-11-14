@@ -1,0 +1,45 @@
+Docker registry: token signed by untrusted key
+
+
+I've a problem with creating a token. I'm not sure that my fingerprint calculation is valid.
+Can anyone verify that my kid calculation is valid?
+openssl x509 -in certificate.pem -outform der \
+  | openssl dgst -sha256 | sed "s,.*= ,,g" \
+  | head -c30 \
+  | python -c "import base64; import sys; import re; print(':'.join(re.findall('.{1,4}', base64.b32encode(sys.stdin.readline()))))"
+MRRD:EMJV:GYYT:GMZU:G42D:CNLD:MNSD:IMZQ:MY2W:GZBW:GY2W:GYTF
+
+I used the following self signed certificate for certificate.pem
+-----BEGIN CERTIFICATE-----
+MIIFVzCCAz+gAwIBAgIJAM7GKBCo0fFHMA0GCSqGSIb3DQEBCwUAMEIxCzAJBgNV
+BAYTAlhYMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQg
+Q29tcGFueSBMdGQwHhcNMTkwMzEyMTYwNjI2WhcNMTkwNDExMTYwNjI2WjBCMQsw
+CQYDVQQGEwJYWDEVMBMGA1UEBwwMRGVmYXVsdCBDaXR5MRwwGgYDVQQKDBNEZWZh
+dWx0IENvbXBhbnkgTHRkMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA
+42WF4ORkklHa8V1iT8n56HCVCyAhBVxStuMW5kheBf/UeeLfAejJZgnsgWhHYFkB
+uNwaIcz37cjkZoaMeXFQAHOxCogdJIBCCZyEptP8foOEzGwEolJmgdRJg9Ex6zju
+pkSYehzTHe+t0nE62QjWLy+vXBDGJv7zN089OuKVlPjmD5tM4b6GIvsi+Cgnx484
+1Xqxflzh0YZ7K+0xn1Afdy1hBDpkmQn5q4b7G/ewx7BZhOfT6+Xi1l7ylXZJ+F2/
+/xskG2wR4t3nOCv0ieStY/W7i79SE39LK7ybtZ2aGzsynSSNRPsM6yI+OxvxJlUR
+r6NKkA1bG1pQ3rQd0K/WuFFXHWNwXSSNc7DXKjuRfXRgi78LN+CL1CrF8LzFq487
+dHd1EDy/1aB3wHJabjSvJnAjl1QVX3DcrvxfQ6Kog/OOk20MaCBan0mvwL3gX6i6
+qduj4YCRFAVHPndQBgqqGiWwuMRldtwFFN/xfMw/ViyJMRCZSjsfj7+mgJFpVHVE
+0nV0lKPAeAaFpvT3PL8BET0/+1e1nScHqLZoKCb7cpseOJBdK+yjz/YTP4HzqolR
+o/K39XbuZK0lidklKJpCH4wldr3ES+VS48KL/ddl2MbG85SpU+PgOBJBln8ZwdT+
+W/LlsfqtGRjgZ5hDq4UPb4DJ6wGlQhdNmZB87gFj0BUCAwEAAaNQME4wHQYDVR0O
+BBYEFOEEjBPPTDJ1bm0fIB/KL53XNIfoMB8GA1UdIwQYMBaAFOEEjBPPTDJ1bm0f
+IB/KL53XNIfoMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADggIBAFg1dLU6
+cII1Y4L87ad8WYabO6qfuqCo1GEIYLOV+y+QvmwTjM2fSKbMvyem1hg8xlW5Tspk
+DMKGNMWjbinVn7Vpt99iwGRaFL3PrXfESPlkCF4tNgsVXfF5mGk0dpt/o9bQRglT
+/6tSca2YBynfSN7Mib9cwjd2Tz37LrgSM3pbFVzu9gqL9nsMiFgv7tkMb93v4kir
+PusnenhOWnfY9pFZ5IeZBpnCv6yHaVfKGBCQVtfVM/XipRBdLgLF7T6kjg6TwEJ8
+HNj+OSNdcDrIFSMBtreWq7tJ0J5Wym9+uyFTRydyeiARCfRD5lsqT+gxWBd/fCND
+vKxbEL0bxMZBqRzIxw2PPy37ksQbXVH7Qzgl1pKg0CWMucNeRsmfmBRZl5BIMTsV
+yB7P85ofKu/hZyT8udLaxLMvR7bT2fXKpD5YVnNNwNJlL7wWMsxxztaPQu/igRMo
+mk97R5Q/hBVXvvQoUwB2zqYPXFJVpgICnrBoWFS+lvl7DVbdfwhzb/nTS0ptgim9
+dB9c835Px+KyLfWd5v/FZ3L89sThwwtuEquLzaQRvwZ/nlTx6q10l3JXn5X8iRXV
+ujP8aJL+l/fJrRZHbkjSiE7p7zBJ7OAdy4knYC40zjMgSb23jL54jRpvBa+fv1mc
+35tvhSGoHG4b/yR/Ubarh8lFCbNegpbm1H6t
+-----END CERTIFICATE-----
+
+See: https://docs.docker.com/registry/spec/auth/jwt/

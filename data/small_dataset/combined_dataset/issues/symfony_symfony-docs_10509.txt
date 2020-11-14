@@ -1,0 +1,4 @@
+Mentioned user_checkers in the main security config reference
+
+
+This fixes #7259.

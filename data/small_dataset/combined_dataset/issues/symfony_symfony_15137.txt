@@ -1,0 +1,45 @@
+[Security] Initialize SwitchUserEvent::targetUser on attemptExitUser
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#14931
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

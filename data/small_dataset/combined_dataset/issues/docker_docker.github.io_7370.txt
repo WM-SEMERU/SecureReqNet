@@ -1,0 +1,9 @@
+After docker install traffic can not cross existing bridges
+
+
+File: network/iptables.md
+Real server running latest debian KVM/QEMU connecting VMs to br0.
+Install docker, traffic not longer allowed thru bridge.
+Please add something besides "Don't change dockers iptables rules, add your own...
+dockers iptables assumptions during install caused the issue someone should document it.
+Just my 2 cents. May be the wrong place, but I was only looking for documentation on the docker iptables rules so that I customize them so that they don't mess with my existing system.

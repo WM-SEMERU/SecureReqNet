@@ -1,0 +1,31 @@
+### Summary
+
+If repository is not accessible on file system, GL outputs full path to repository
+
+
+### Steps to reproduce
+
+if repository is not accessible on FS
+
+1. try `git push origin some-branch` and you will get
+
+```
+marat@marat-i5:~/Development/GITLAB/gitlab-prometheus$ git push origin alertmanager-slack 
+fatal: '<SOME PATH>/gitlab-cookbooks/gitlab-prometheus.git' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+
+2. same output from [UI](https://gitlab.com/gitlab-org/gitlab-ce/issues/22999#note_16486627)
+
+### Expected behavior
+
+Path to repo shouldn't be shown
+
+### Actual behavior
+
+Path to repo shown
+
+/cc @briann @pcarranza

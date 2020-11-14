@@ -1,0 +1,4 @@
+Let's make some Security docs more concise
+
+
+This was pointed out by a person on Twitter: https://twitter.com/ryabenko_pro/status/1011661651786043393

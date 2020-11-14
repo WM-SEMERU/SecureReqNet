@@ -1,0 +1,17 @@
+(event || window.event) problematic in inline event-handlers
+
+
+Original issue 486 created by mikesamuel on 2008-06-11T01:00:51.000Z:
+The (window.event || event) idiom is used by inline event handlers to get
+access to the current event across browsers.
+Firefox interprets inline event handlers with the current boilerplate
+(function (event) {
+...
+}).call(/* target of the current event /, / current event */);
+IE puts the event at window.event and has different boilerplate
+with (/* target of current event */) {
+...
+}
+Since IE does with, the free names "event" and "window" might be part of
+the target node.
+Specifically, does "iframe" have a "window" member.

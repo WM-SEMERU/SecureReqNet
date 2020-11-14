@@ -1,0 +1,44 @@
+about warnings caused by building
+
+
+I thought we have already banned any commit caused warning?
+Since servo/etc/ci/buildbot_steps.yml sets  RUSTFLAGS: -Dwarnings
+I got the following when running ./mach build -d with the latest code
+warning: unnecessary path disambiguator
+   --> components/config/prefs.rs:140:51
+    |
+140 |         accessor_type = crate::pref_util::Accessor::<Prefs, crate::pref_util::PrefValue>,
+    |                                                   ^^ try removing `::`
+
+Copied from recent Travis log:
+171.31s$ ./mach test-unit
+   Compiling size_of_test v0.0.1 (/home/travis/build/servo/servo/components/size_of_test)
+   Compiling script_plugins_tests v0.0.1 (/home/travis/build/servo/servo/tests/unit/script_plugins)
+   Compiling servo_remutex v0.0.1 (/home/travis/build/servo/servo/components/remutex)
+   Compiling deny_public_fields_tests v0.0.1 (/home/travis/build/servo/servo/tests/unit/deny_public_fields)
+   Compiling selectors v0.21.0 (/home/travis/build/servo/servo/components/selectors)
+   Compiling malloc_size_of_tests v0.0.1 (/home/travis/build/servo/servo/tests/unit/malloc_size_of)
+   Compiling msg v0.0.1 (/home/travis/build/servo/servo/components/msg)
+   Compiling background_hang_monitor v0.0.1 (/home/travis/build/servo/servo/components/background_hang_monitor)
+   Compiling std_test_override v0.0.1 (/home/travis/build/servo/servo/components/std_test_override)
+   Compiling profile_tests v0.0.1 (/home/travis/build/servo/servo/tests/unit/profile)
+   Compiling gfx v0.0.1 (/home/travis/build/servo/servo/components/gfx)
+   Compiling net_traits v0.0.1 (/home/travis/build/servo/servo/components/net_traits)
+   Compiling servo_config v0.0.1 (/home/travis/build/servo/servo/components/config)
+warning: unnecessary path disambiguator
+   --> components/config/prefs.rs:140:51
+    |
+140 |         accessor_type = crate::pref_util::Accessor::<Prefs, crate::pref_util::PrefValue>,
+    |                                                   ^^ try removing `::`
+   Compiling net v0.0.1 (/home/travis/build/servo/servo/components/net)
+   Compiling style_tests v0.0.1 (/home/travis/build/servo/servo/tests/unit/style)
+warning: unnecessary path disambiguator
+   --> components/config/tests/prefs.rs:314:33
+    |
+314 |         accessor_type = Accessor::<TestPrefs, PrefValue>,
+    |                                 ^^ try removing `::`
+   Compiling script_tests v0.0.1 (/home/travis/build/servo/servo/tests/unit/script)
+   Compiling metrics_tests v0.0.1 (/home/travis/build/servo/servo/tests/unit/metrics)
+   Compiling layout v0.0.1 (/home/travis/build/servo/servo/components/layout)
+    Finished dev [unoptimized + debuginfo] target(s) in 2m 00s
+

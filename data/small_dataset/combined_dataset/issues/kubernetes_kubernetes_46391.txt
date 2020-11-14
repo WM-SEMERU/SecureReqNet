@@ -1,0 +1,12 @@
+Upstream go security issue with crypto/elliptic
+
+
+Yesterday, the golang team released go 1.7.6 and go 1.8.2 to address a security issue involving the crypto/elliptic package. There is currently no known exploit, but as we have dependencies on this package in kubernetes, we should upgrade the versions of go we are using.
+Details are here:
+golang/go#20040
+As we are updating master/1.7 to use go 1.8.3 (#45216 (comment)), I don't think we need any specific action there. However, we should probably update 1.5 and 1.6 to use go 1.7.6.
+The kubernetes security team is aware of this issue, and is okay with a public issue on it as details are already public.
+/kind bug
+/area security
+/priority important-soon
+cc @timstclair @kubernetes/kubernetes-release-managers @luxas @ixdy @wojtek-t

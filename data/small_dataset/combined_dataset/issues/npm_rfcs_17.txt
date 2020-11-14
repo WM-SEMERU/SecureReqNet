@@ -1,0 +1,5 @@
+[WIP] rfc: allow token exclusion for write 2fa
+
+
+i still have work to do to shape this proposal out completely, but thought there is enough here to open up for early feedback.
+for reference, this is a continuation of the conversation started here

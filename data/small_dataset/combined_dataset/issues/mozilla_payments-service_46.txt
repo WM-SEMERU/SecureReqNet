@@ -1,0 +1,8 @@
+Provide CSRF protection
+
+
+Currently we're not doing anything around CSRF on the API.
+This means that an attacker could carry out a CSRF attack by making requests (GET/POST etx) on the user's behalf when they are signed in to the payments-service.
+For example Jane could create a form on her site that has a form that gets submitted onload when she tricks Bob into visiting it. Theoretically this would mean that Jane could get Bob to subscribe to/pay for things he didn't want.
+The standard way Django et all mitigate this is by requiring a token that is in the user's session to be sent with every request. If they don't match you get a 403.
+Let's think about how we want to implement something so we have something ready for when we start to go beyond sandboxing.

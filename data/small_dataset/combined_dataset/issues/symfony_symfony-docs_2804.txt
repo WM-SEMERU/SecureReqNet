@@ -1,0 +1,4 @@
+[Security] Provide complete list of build-in Roles
+
+
+Currently no complete list of build-in user roles is available neither in the codebase nor in documentation.

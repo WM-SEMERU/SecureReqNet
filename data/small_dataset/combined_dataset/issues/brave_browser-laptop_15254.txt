@@ -1,0 +1,4 @@
+[hackerone] #416346 JS DoS issue
+
+
+https://hackerone.com/bugs?report_id=416346

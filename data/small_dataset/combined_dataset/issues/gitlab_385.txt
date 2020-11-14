@@ -1,0 +1,1 @@
+My user's profile images aren't showing up after upgrading to 7.0.

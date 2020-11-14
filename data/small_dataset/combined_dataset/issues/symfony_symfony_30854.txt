@@ -1,0 +1,15 @@
+[DI] Bug with services declared in separated file
+
+
+Symfony version(s) affected: 4.2.4 (not tested on previous versions)
+Description
+Services declared in a separate file imported in services.yaml are not initialized correctly.
+It looks like the autowire: false is not taken into account? 🤔
+How to reproduce
+See relevant commit in this dedicated repository:
+odolbeau/symfony_dic_bug@97d7106
+I have the following error:
+Circular reference detected for service "App\Storage\CacheStorage", path: "App\Storage\CacheStorage -> App\Storage\CacheStorage".
+
+If you move the configuration from custom_services.yaml to services.yaml & remove the imports at the beginning of the file, it works as expected.
+If you remove the imports at the beginning of the services.yaml and include custom_services.yaml from the Kernel (method: configureContainer) it works as expected as well.

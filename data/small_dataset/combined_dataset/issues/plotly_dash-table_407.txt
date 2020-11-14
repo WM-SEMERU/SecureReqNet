@@ -1,0 +1,8 @@
+filtering syntax documentation
+
+
+Is there a documentation for data-table filtering. For example, how to filter rows containing (or not containing) a substring? Thanks.
+So far I found from dash user guide are
+-- Enter eq "Asia" in the "continent" column
+-- Enter > num(5000) in the "gdpPercap" column
+-- Enter < num(80) in the lifeExp column

@@ -1,0 +1,9 @@
+asSimpleFunc() shouldn't allow attached methods.
+
+
+Original issue 415 created by erights on 2008-06-09T01:08:39.000Z:
+If foo is an attached method, asSimpleFunc(foo) will return foo rather than
+failing. This cannot cause the attached method to be successfully called
+when it shouldn't be, but it violates the notion of a simple-function. An
+attached method can still sense and react to its "this" binding, which a
+simple-function shouldn't be able to do.

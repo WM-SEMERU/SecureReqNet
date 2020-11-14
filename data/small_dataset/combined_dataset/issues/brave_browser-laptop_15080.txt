@@ -1,0 +1,6 @@
+Windows install now launches the notifier installer
+
+
+Windows install now launches the notifier installer (used for the Brave Ads testing)
+Auditors: @mrose17
+Before reviewing/approving/merging, let's meet up and I can give a demo 😄 👍

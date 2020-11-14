@@ -1,0 +1,41 @@
+npm ERR! cb() never called! when trying to install mern-cli globally
+
+
+I'm opening this issue because:
+
+ npm is crashing.
+ npm is producing an incorrect install.
+ npm is doing something I don't understand.
+ npm is producing incorrect or undesirable behavior.
+ Other (see below for feature requests):
+
+What's going wrong?
+I try to install mern-cli globally by running sudo npm install -g mern-cli. npm produces an Unhandled rejection Error and states npm ERR! cb() never called!
+How can the CLI team reproduce the problem?
+Run sudo npm install -g mern-cli.
+Gist
+supporting information:
+
+npm -v prints: 6.1.0
+node -v prints: v10.6.0
+npm config get registry prints: https://registry.npmjs.org/
+Windows, OS X/macOS, or Linux?: Linux
+Network issues:
+
+Geographic location where npm was run: Gnosjo, Sweden
+ I use a proxy to connect to the npm registry.
+ I use a proxy to connect to the web.
+ I use a proxy when downloading Git repos.
+ I access the npm registry via a VPN
+ I don't use a proxy, but have limited or unreliable internet access.
+
+
+Container:
+
+ I develop using Vagrant on Windows.
+ I develop using Vagrant on OS X or Linux.
+ I develop / deploy using Docker.
+ I deploy to a PaaS (Triton, Heroku).
+
+
+

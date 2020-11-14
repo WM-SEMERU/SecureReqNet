@@ -1,0 +1,25 @@
+[e2e] decouple the aggregated clientset from the e2e testing framework
+
+
+What this PR does / why we need it:
+
+EXPERIMENTAL / awaiting feedback
+/hold
+
+Remove usage of the aggregated clientset in the e2e testing framework
+itself. We have one test that consumes the clientset in the suite
+and it's in test/e2e/apimachinery/aggregator.go, which was recently
+promoted to conformance in 8101b86.
+This test now obtains a local copy of the aggregated clientset.
+Which issue(s) this PR fixes:
+xref #75601
+Special notes for your reviewer:
+depends on: #75616
+(in tide queue ATM)
+Does this PR introduce a user-facing change?:
+NONE
+
+/assign @timothysc
+/cc @oomichi @andrewsykim
+/kind cleanup
+/priority important-longterm

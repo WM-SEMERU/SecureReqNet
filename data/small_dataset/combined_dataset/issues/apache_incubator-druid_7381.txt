@@ -1,0 +1,8 @@
+Add documentation for Druid native query in SQL view of web console
+
+
+
+Add documentation for Druid native query in SQL view of web console
+New picture added to documentation
+
+

@@ -1,0 +1,56 @@
+Angular Elements attributes always deserialize to strings
+
+
+🐞 bug report
+Affected Package
+@angular/elements
+Is this a regression?
+no
+Description
+I searched all issues related to angular elements but couldn't find anything else related to that. The problem is that all attributes seem to be deserialized as strings into the property of an Angular Elements. This means that people can't declaratively set a property on an Angular Element if it has any of the following type:
+
+boolean
+number
+object
+array
+
+I feel like those attributes should be automatically deserialized to the proper type
+Furthermore the boolean attributes presence don't follow the HTML specs in the sense that setting a boolean attribute on an angular element like this:
+<my-comp is-beautiful></my-comp>
+
+will see the isBeautiful property be evaluated to false, when it should be true. Setting a value to it (is-beautiful="true") makes it truthy but also a string. This part of the issue is likely related to #14761 (but arguably angular elements are talking to the outside world and should follow HTML spec as opposed to angular components)
+🔬 Minimal Reproduction
+stackblitz exposing an element with various attributes types and how setting them impact the value/type of the property of the angular component
+https://stackblitz.com/edit/angular7-elements-attributes-types?file=src%2Findex.html
+🌍  Your Environment
+Angular Version:
+
+Angular CLI: 7.3.7
+Node: 10.11.0
+OS: darwin x64
+Angular: 7.2.11
+... common, compiler, compiler-cli, core, elements, forms, http
+... language-service, platform-browser, platform-browser-dynamic
+... router
+
+Package                            Version
+------------------------------------------------------------
+@angular-devkit/architect          0.10.7
+@angular-devkit/build-angular      0.10.7
+@angular-devkit/build-ng-packagr   0.13.7
+@angular-devkit/build-optimizer    0.10.7
+@angular-devkit/build-webpack      0.10.7
+@angular-devkit/core               7.0.7
+@angular-devkit/schematics         7.3.7
+@angular/cli                       7.3.7
+@ngtools/webpack                   7.0.7
+@schematics/angular                7.3.7
+@schematics/update                 0.13.7
+rxjs                               6.4.0
+typescript                         3.1.6
+webpack                            4.29.6
+
+Anything else relevant?
+I can see the object and array (complex) types being controversial and arguably not allowing to auto deserialize those, even though it would be a nice feature. However I feel like the boolean and number type should be handled better and not set as string by angular when an attribute value changes.
+What is Angular's position regarding attribute deserialization of angular elements in general?
+Could we get a callback for handling custom deserialization? Should angular at least try to cast "primitive" types (number/boolean)?

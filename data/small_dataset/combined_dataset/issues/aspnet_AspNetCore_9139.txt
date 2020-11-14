@@ -1,0 +1,39 @@
+ANCM/IIS forces chunking for responses containing a Content-Length header
+
+
+For obscure reasons, ANCM or IIS seems to force chunking even if the Content-Length header is returned (with the appropriate value):
+HTTP/1.1 200 OK
+Transfer-Encoding: chunked
+Content-Type: text/html;charset=UTF-8
+Vary: Accept-Encoding
+Server: Kestrel
+X-Powered-By: ASP.NET
+Date: Thu, 05 Jan 2017 20:01:23 GMT
+
+public void Configure(IApplicationBuilder app) {
+    app.UseDeveloperExceptionPage();
+
+    app.Run(context => {
+        var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+
+        var document = @"<!doctype html>
+<html>
+<body>
+<strong>Hello world</strong>
+</body>
+</html>";
+
+        context.Response.ContentLength = encoding.GetByteCount(document);
+        context.Response.ContentType = "text/html;charset=UTF-8";
+
+        return context.Response.WriteAsync(document, encoding, context.RequestAborted);
+    });
+}
+When using Kestrel without IIS, chunking is not used (as expected):
+HTTP/1.1 200 OK
+Date: Thu, 05 Jan 2017 20:06:01 GMT
+Content-Length: 79
+Content-Type: text/html;charset=UTF-8
+Server: Kestrel
+
+@Tratcher is that the intended behavior?

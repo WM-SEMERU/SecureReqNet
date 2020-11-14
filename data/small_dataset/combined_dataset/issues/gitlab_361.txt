@@ -1,0 +1,1 @@
+I would to propose that wikis in GitLab should support _Sidebar.md

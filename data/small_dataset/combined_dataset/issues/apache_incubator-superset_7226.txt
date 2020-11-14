@@ -1,0 +1,19 @@
+fix: add check for polygon tooltips
+
+
+SUMMARY
+I removed a small check for polygon tooltips. Adding this check back in.
+TEST PLAN
+Tested manually
+ADDITIONAL INFORMATION
+[ ] Has associated issue:
+[ ] Changes UI
+[ ] Requires DB Migration. Confirm DB Migration upgrade and downgrade tested.
+[ ] Introduces new feature or API
+[ ] Removes existing feature or API
+[x] Fixes bug
+[ ] Refactors code
+[ ] Adds test(s)
+
+REVIEWERS
+@xtinec

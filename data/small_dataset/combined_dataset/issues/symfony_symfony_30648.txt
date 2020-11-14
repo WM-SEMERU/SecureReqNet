@@ -1,0 +1,51 @@
+Debug finalized config in debug:config
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30637
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Re-processing the extension config in debug:config causes a lot of steps to be ignored, basically everything in ValidateEnvPlaceholdersPass.
+As such we trigger a misleading error when this command is invoked.

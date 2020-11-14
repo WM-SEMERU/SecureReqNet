@@ -1,0 +1,22 @@
+security-release-process: nominate Joel Smith as full time member
+
+
+Nomination email sent to kubernetes-security-discuss
+https://groups.google.com/forum/#!forum/kubernetes-security-discuss
+I want to nominate Joel Smith to join the Product Security Committee as
+a full member. He has been an associate member since December 4th 2018
+and in that role over the last three months he has helped on a number of
+tasks including:
+
+Evaluation of the Kubernetes Security Audit vendors
+Review of publicly handled CSI logging bug
+Documentation moves for Security Committee formation
+
+Further, Joel joined as an associate member based on his experience as
+part of the OpenShift Online Security team which is a hosted
+Kubernetes-base product.
+Our process for accepting this nomination is lazy consensus and I will
+close the round of consensus on March 15th, 2019 to leave time for any
+comments or question. If the nomination is accepted Joel will take on
+the full responsibilities of a Security Committee member and take on a
+weekly rotation for security@kubernetes.io on-call rotation.

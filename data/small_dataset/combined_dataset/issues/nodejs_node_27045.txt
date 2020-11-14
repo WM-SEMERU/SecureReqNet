@@ -1,0 +1,17 @@
+buffer: use stricter range checks
+
+
+This adds support to use offset and length arguments above uint32
+and it validates the input to make sure the arguments do not overflow.
+Before, if the input would overflow, it would cause the write to be
+performt in the wrong spot / result in unexpected behavior.
+Instead, just use a strict number validation.
+Fixes: #27043
+CITGM https://ci.nodejs.org/view/Node.js-citgm/job/citgm-smoker/1790/
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

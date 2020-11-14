@@ -1,0 +1,4 @@
+Fix language support assumptions in the CMake package
+
+
+The CMake package checks if the Spectre mitigation flags are supported by the compilers, but to do so it uses a pair of modules that only work in the CMake languages if C and CXX are enabled. This commit makes these checks more robust by not assuming either language is enabled, and only checking if possible. If either check passes (instead of both), the Spectre mitigations will be applied.

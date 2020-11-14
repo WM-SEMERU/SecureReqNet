@@ -1,0 +1,9 @@
+[SecurityBundle] Skip tests that are known to hang
+
+
+Bug fix: yes
+Feature addition: no
+Backwards compatibility break: no
+Symfony2 tests pass: yes
+Fixes the following tickets: #2287
+After finding the cause of the hanging tests on Windows (thanks!), @beberlei skipped one of the hanging tests from #2287 in #2478. This one fixes the other two so that #2287 can be closed.

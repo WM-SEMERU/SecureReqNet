@@ -1,0 +1,4 @@
+Add listener autoconfiguration
+
+
+Document the autoconfiguration for eventListener: symfony/symfony#30760

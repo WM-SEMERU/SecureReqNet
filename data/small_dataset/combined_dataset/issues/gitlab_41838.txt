@@ -1,0 +1,47 @@
+The `milestone_select.js` located in `app/assets/javascripts/milestone_select.js` suffers from a stored XSS issue in the `renderRow`-function. The issue is that the `data-milestone-id`-attribute is containing the name of the milestone, but is not sanitized properly:
+
+The issue is currently on line #98:
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/assets/javascripts/milestone_select.js#L98
+ 
+```javascript
+        renderRow: milestone => `
+          <li data-milestone-id="${milestone.name}">
+            <a href='#' class='dropdown-menu-milestone-link'>
+              ${_.escape(milestone.title)}
+            </a>
+          </li>
+        `,
+```
+
+As you see, the title is escaped but the name is not, but they are the same really:
+
+![Screen_Shot_2018-01-08_at_21.30.20](/uploads/b81223c50c1acf69d663e7e0958c1a74/Screen_Shot_2018-01-08_at_21.30.20.png)
+
+Now, this is not possible to do with normal angle-brackets, however, due to the passing of data, using HTML-entities for the payload will trigger this issue when creating a Milestone with the following name:
+
+```
+'">&lt;img src=x onerror=alert(document.domain)&gt;
+```
+
+This seems to be some form of issue with it server side, as the `milestones.json` actually contains escaped real angle-bracket characters:
+
+```
+"name":"'\"\u003e\u003cimg src=x onerror=alert(document.domain)\u003e"
+```
+
+### PoC
+
+1. Create a new milestone at: `/project-name/milestones`
+2.  Name the milestone:
+    ```
+    '">&lt;img src=x onerror=alert(document.domain)&gt;
+    ``` ![Screen_Shot_2018-01-08_at_20.38.36](/uploads/02c2e340e48d5a954b6966cce471d8e7/Screen_Shot_2018-01-08_at_20.38.36.png)
+3. Save, now go to `/project-name/issues`, press `New issue`
+4. Click on the Milestone-selector: ![Screen_Shot_2018-01-08_at_20.38.46](/uploads/a817a229676c9293366fe142f61eb0e3/Screen_Shot_2018-01-08_at_20.38.46.png) the javascript will trigger: ![Screen_Shot_2018-01-08_at_20.39.27](/uploads/5a5f0d957147cd5541e8f6d14fde71bf/Screen_Shot_2018-01-08_at_20.39.27.png) ![Screen_Shot_2018-01-08_at_20.39.35](/uploads/06cdf20484c28c6e2eb889f8a0b2dc0a/Screen_Shot_2018-01-08_at_20.39.35.png)
+
+This happens on every place where the milestone-selector exists, it's all over the app.
+
+
+## Impact
+
+The stored XSS is triggering for anyone, also triggering on `gitlab.com`, and it can trigger on public repos. You could easily build a PoC that would modify the email address of the current user stealing their CSRF-token as soon as the script triggers.

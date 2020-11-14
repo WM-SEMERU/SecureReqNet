@@ -1,0 +1,6 @@
+/srv/kubernetes/basic_auth.csv and /srv/kubernetes/known_tokens.csv on the master are world-readable
+
+
+
+
+

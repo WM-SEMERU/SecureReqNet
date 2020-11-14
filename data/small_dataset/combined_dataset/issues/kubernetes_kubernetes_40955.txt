@@ -1,0 +1,6 @@
+Hyperkube image contains vulnerable rootfs components
+
+
+Currently the hyperkube image ships with binary components and libraries with outstanding CVE's. See quay.io's scan of a hyperkube image based on the upstream build scripts: https://quay.io/repository/coreos/hyperkube/image/a1884bc04b88ddb1f27b3e3e862c330e8056179b55eae89c69bae9c30d84b876?tab=vulnerabilities
+Clearly, a vulnerability in a rootfs component does not quite equate to a vulnerability in a hyperkube binary running inside this rootfs. The Hyperkube component would need to shell out to the binary (possibly via a volume plugin) using attacker controlled input. The problem is that this makes it difficult to assess if any of these vulnerabilities should be taken seriously, and it also makes it difficult to fix if the current debian base image doesn't have a patched version available upon rebuild.
+Long-term i'm not sure the best way to fix this, but parring down the amount of the components in the rootfs where possible would probably fix a few of these warnings.

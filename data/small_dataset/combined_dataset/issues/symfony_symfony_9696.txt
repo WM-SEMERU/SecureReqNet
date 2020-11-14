@@ -1,0 +1,47 @@
+[Security] added test for ExpressionVoter.php
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+none
+
+
+
+Added the missing test for ExpressioneVoter,
+Fixed small docblock.

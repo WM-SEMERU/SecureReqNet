@@ -1,0 +1,9 @@
+Add input validation on the proof
+
+
+After entering huge value in proof field, the page kept the status "saving data ....". I am not sure if the value was rejected on the server side and didn't update the page status or if the huge value caused some crash.
+link:
+http://138.68.145.52/view/samm/team-E/table
+key:
+SM.3.A
+It would be beneficial to add validation on this field and show the proper message to the user.

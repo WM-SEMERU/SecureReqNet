@@ -1,0 +1,4 @@
+Rename build task to build:dev
+
+
+Rename build task to build:dev to avoid issues with the new Heroku nodejs buildpack

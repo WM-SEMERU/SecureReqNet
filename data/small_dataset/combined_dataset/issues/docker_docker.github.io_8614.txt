@@ -1,0 +1,14 @@
+Unable to run tests from docker image by providing an environment variable for pytest
+
+
+I built a docker image and tried to run pytest, I am getting the following error :
+docker run docker-whale
+============================= test session starts ==============================
+platform linux2 -- Python 2.7.16, pytest-4.4.0, py-1.8.0, pluggy-0.9.0
+rootdir: /app
+========================= no tests ran in 0.00 seconds =========================
+ERROR: file not found: --env preview
+My dockerFile:
+CMD ["pytest" , "--env preview" , "fe/tests/US/MyCom/MyPageTests/" , "-m preview"]
+Is this happening due to conflict between docker "env" variable and my pytest "env" environment variable? If so, what is the work-around?
+The same command works fine if I ssh into the docker container and run it.

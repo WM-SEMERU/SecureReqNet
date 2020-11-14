@@ -1,0 +1,27 @@
+[SecurityBundle][DX] Extract the ACL to its own bundle
+
+
+Maybe I'm over thinking this a bit and this can be dropped, but I feel like it is the right thing to suggest.
+What does the cookbook say?
+First I'd like you to read the following snippets I got from the cookbook:
+
+Using ACL's isn't trivial, and for simpler use cases, it may be overkill.
+
+It uses doctrine by default but isn't required by default.
+
+The ACL system requires a connection from either Doctrine DBAL (usable by default) or Doctrine MongoDB (usable with MongoDBAclBundle). However, that does not mean that you have to use Doctrine ORM or ODM for mapping your domain objects. You can use whatever mapper you like for your objects, be it Doctrine ORM, MongoDB ODM, Propel, raw SQL, etc. The choice is yours.
+
+Complexity for new users
+Whenever I see questions coming by on #symfony related to the ACL, 99% of the time I recommend them to use custom voters as it's far easier to use and implement and covers 99% of their use-cases.
+Someone that wants to implement the ACL needs to have understanding of Commands, the Security Component, the database layer - which is doctrine by default - and (ACLs in general)[http://symfony.com/doc/current/cookbook/security/acl.html#creating-an-acl-and-adding-an-ace].
+So it's not used very frequently, it's got a dependency on doctrine but can work with others and sits in the core, while things such as the monolog-bundle or assetics-bundle are required to be added manually.
+What would be the benefits of extracting it?
+I've composed a small list of things I noticed.
+
+The Core\Util has a ClassUtils that is based on the doctrine ClassUtils, but only used in the ACL, the form uses the doctrine variant. Fixed
+It would reduce complexity and size of the SecurityBundle, the ACL config would be moved to its own part.
+The DoctrineBridge can provide the implementation required for the Doctrine ACL part, which
+Means that doctrine is not longer a semi-hard dependency of the Security Component.
+As the Security Component is rather big, extracting this away would increase maintainability for both packages.
+The acl-bundle would not be included in the standard-edition, the ACL might just scare them off when it comes to working on the security part of their app. I know I've spend some time on this part and it was just too complex to even consider using it for my migration project (sf1 to sf2). Fixed as you have to install symfony/security-acl now explicitly.
+

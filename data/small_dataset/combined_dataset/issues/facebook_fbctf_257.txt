@@ -1,0 +1,4 @@
+Add enum to controllers and scripts for session requirements
+
+
+It looks like ANYONE_ON_THE_INTERNET | LOGGED_IN_WEB | ADMIN_WEB | CLI_ONLY might be suitable

@@ -1,0 +1,8 @@
+Template grammar issue in comment for auth options
+
+
+Here:
+https://github.com/aspnet/AspNetCore/blob/master/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/Startup.cs#L107
+                    // If your application needs to do authenticate single users, add your user validation below.
+Should probably be:
+                    // If your application needs to authenticate single users, add your user validation below.

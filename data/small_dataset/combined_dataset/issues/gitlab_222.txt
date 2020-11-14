@@ -1,0 +1,107 @@
+'Since upgrade to 6.8 I can no longer download archives from the repo.
+The files in /home/hit/gitlab/tmp/repositories/myrepo.git/ grow to a specific size (different for each project but the same each time) and then stop.
+The generated tar.gz archives are not valid and cannot be used:
+gzip: stdin: unexpected end of file
+
+It seems the worker that generates the archive hangs as in the error log there is
+E, [2014-04-23T10:45:35.285671 #116957] ERROR -- : worker=1 PID:116973 timeout (31s > 30s), killing
+
+It does not help raising the timeout of unicorn to something higher (e. g. 120) - the archive file will always stop at the same size as before and the timeout occurs long after this size has been reached.
+
+It happens on multiple installations of gitlab I use since update to 6.8 from 6.7 (it worked fine before), so it seems not to be related to the servers.
+
+It happens with zip archives, too. Just tested this. Repository size doesn't seem to matter. Just had a repo failing to generate tar.gz from master that has only a few php files in it - no binary.
+
+Servers all use the same OS, debian wheezy.
+
+```
+System information
+System:         Debian 7.4
+Current User:   git
+Using RVM:      no
+Ruby Version:   1.9.3p194
+Gem Version:    1.8.23                                                                                                                                    
+Bundler Version:1.3.5                                                                                                                                     
+Rake Version:   10.1.1                                                                                                                                    
+Sidekiq Version:2.17.0                                                                                                                                    
+                                                                                                                                                          
+GitLab information                                                                                                                                        
+Version:        6.8.0                                                                                                                                     
+Revision:       a0c3643                                                                                                                                   
+Directory:      /home/git/gitlab                                                                                                                          
+DB Adapter:     mysql2                                                                                                                                    
+URL:            http://mydomain.net
+HTTP Clone URL: http://mydomain.net/some-project.git
+SSH Clone URL:  git@mydomain.net:some-project.git
+Using LDAP:     no
+Using Omniauth: no
+
+GitLab Shell
+Version:        1.9.3
+Repositories:   /home/git/repositories/
+Hooks:          /home/git/gitlab-shell/hooks/
+Git:            /usr/bin/git
+
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.1 ? ... OK (1.9.3)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ... 
+-> all repos say "ok" here
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files: 
+        /home/git/repositories: OK
+        /home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.4.14
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ... 
+ -> all repositories say "yes" here
+Projects have satellites? ... 
+ -> all repositories say "yes" here
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.7.10)
+
+Checking GitLab ... Finished
+```

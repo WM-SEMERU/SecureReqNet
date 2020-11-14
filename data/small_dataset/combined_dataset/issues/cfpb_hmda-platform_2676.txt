@@ -1,0 +1,33 @@
+Document source data and methodology for geographic datasets
+
+
+Validation and aggregation of the HMDA LAR data require certain geographic data. This geographic data is a crosswalk between the following:
+
+state
+MSA/MD
+county
+census tract
+names of the above geographies
+
+Data Sources:
+
+FFIEC Census Flat File
+OMB delineation files
+OMB delineation bulletins
+Census API
+
+Discussion:
+The HMDA Platform currently uses geography information that is current through 12/31/2017. This version of the data is used so that all data collected during the 2018 calendar year will have homogenous geographic reference data.
+All data except the geography names can be pulled from the FFIEC Census Flat File. While this creates a dependency on a non-Census data product, the use of the FFIEC Census File is still required to obtain FFIEC Estimated Median Family Income.
+Geographic Data Clients:
+
+Validity edits checking correct mapping of MSA to state, MSA to county, county to tract
+Test file geographic data selection for use in testing Platform edits
+Aggregate and Disclosure reports for aggregation of data to specified geographic levels
+UI client for populating lists of nested geography
+
+Requirements:
+
+Create a complete list of data sources used to assemble the required geographic data
+Draft a methodology for how these data are assembled and cleaned
+

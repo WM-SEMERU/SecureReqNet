@@ -1,0 +1,9 @@
+[Frontend] Add section for using JSX with Vue.js
+
+
+Hi :)
+This PR add a new section for using JSX with Vue.js:
+Encore.useVueLoader(() => {}, {
+    useJsx: true
+});
+We should not merge it before symfony/webpack-encore#553 is merged.

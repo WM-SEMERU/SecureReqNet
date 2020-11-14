@@ -1,0 +1,7 @@
+Make TestServer IAsyncDisposable
+
+
+
+This should make it a bit more maintainable than it is today (having to call server.StopAsync before Dispose calls it synchronously)
+
+PS: This is only for the InMemoryTests

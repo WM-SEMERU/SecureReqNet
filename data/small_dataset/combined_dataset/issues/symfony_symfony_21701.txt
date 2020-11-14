@@ -1,0 +1,52 @@
+circular reference on security.access.decision_manager
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes (possibly)
+
+
+Feature request?
+no
+
+
+BC Break report?
+unsure
+
+
+RFC?
+no
+
+
+Symfony version
+2.8.15
+
+
+
+While creating a custom voter as per these instructions I'm getting the following error when trying to inject the decision manager service:
+with public in the service declaration: true
+
+Circular reference detected for service "security.access.decision_manager", path: "security.access.decision_manager".
+
+with public in the service declaration: false
+
+Circular reference detected for service "security.access.decision_manager", path: "cache_warmer -> twig -> security.authorization_checker -> security.access.decision_manager".
+
+according to the docs, this should only not work < 2.8?  However, when I then tried injecting the container, and pull out the authorization.checker service inside the voter, and I get a similar circular reference error, even though the docs say this is the workaround.
+So, I'm not sure if the docs are wrong, I've missed something, or this is a bug?
+service declaration
+app.form_config.voter:
+        class: AppBundle\Services\voters\ConfigAccessVoter
+        arguments: ["@security.access.decision_manager"]
+        tags:
+            - { name: security.voter }
+        public: false
+

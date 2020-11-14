@@ -1,0 +1,28 @@
+Presearch in the list of search engines
+
+
+Description
+I want use https://presearch.org/ as standard search because it pay me 0.25 for each search.
+Steps to Reproduce
+I would like to search in the address bar and that my search had the search as search pattern
+
+Write the subject to be searched
+Start the search using https://www.presearch.org/search?term=%s as standard
+Receive the results and earn 0.25 PRE
+
+Actual result:
+I cannot add new search engines into brave search list
+Expected result:
+To be allowed to use presearch
+Brave Version
+Brave: 0.23.105
+V8: 6.8.275.24
+rev: 0.23.105dev
+Muon: 8.0.9
+OS Release: 4.14.67-1-MANJARO
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84

@@ -1,0 +1,4 @@
+Integrate NSP security checks into build scripts
+
+
+@bbondy @yan this adds the NSP security checks into both the OSx and win64 build scripts. Tested build on both platforms.

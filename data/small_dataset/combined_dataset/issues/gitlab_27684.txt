@@ -1,0 +1,5 @@
+We're collaborating with a very large and strategic organization and this issue is feedback they had sent me as part of their evaluation of GitLab,. This issue is part of their feedback during their evaluation.
+
+Reported issue: Images attached to issues, merge requests or comments do not require authentication to be viewed if someone knows the direct URL. This is a potential security hole. 
+
+Reference: https://docs.gitlab.com/ce/security/user_file_uploads.html

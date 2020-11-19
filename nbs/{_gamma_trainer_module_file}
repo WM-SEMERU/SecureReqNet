@@ -9,6 +9,7 @@ import tensorflow_transform as tft
 
 from tfx.components.trainer.executor import TrainerFnArgs
 from tfx.components.trainer.fn_args_utils import DataAccessor
+from keras.layers import Flatten
 from keras.models import Sequential
 from keras.layers import Dense
 from tfx_bsl.tfxio import dataset_options
@@ -67,51 +68,22 @@ def _input_fn(file_pattern: List[Text],
       tf_transform_output.transformed_metadata.schema)
 
 
-def _build_keras_model(hidden_units: List[int] = None) -> tf.keras.Model:
-  """Creates a DNN Keras model for classifying taxi data.
+def _build_keras_model() -> tf.keras.Model:
+    model = tf.keras.Sequential()
+    model.add(tf.keras.layers.Embedding(18000, 64, input_length=618))
+    # The model will take as input an integer matrix of size (batch,
+    # input_length), and the largest integer (i.e. word index) in the input
+    # should be no larger than 999 (vocabulary size).
+    # Now model.output_shape is (None, 618, 64), where `None` is the batch
+    # dimension.
+    model.add(Flatten())
+    model.add(Dense(16,activation="relu"))
+    model.add(Dense(8,activation="relu"))
+    model.add(Dense(1, activation='softmax'))    
+    model.compile('rmsprop', 'mse')
 
-  Args:
-    hidden_units: [int], the layer sizes of the DNN (input layer first).
 
-  Returns:
-    A keras Model.
-  """
-
-  categorical_columns = [
-      tf.feature_column.categorical_column_with_identity(
-          key, num_buckets=_VOCAB_SIZE + _OOV_SIZE, default_value=0)
-      for key in _transformed_names(_VOCAB_FEATURE_KEYS)
-  ]
-  indicator_column = [
-      tf.feature_column.indicator_column(categorical_column)
-      for categorical_column in categorical_columns
-  ]
-
-  # TODO(b/139668410) replace with premade wide_and_deep keras model
-  wide_columns=indicator_column,
-  dnn_hidden_units=hidden_units or [100, 70, 50, 25]
-    
-  input_layers = {
-      colname: tf.keras.layers.Input(name=colname, shape=(), dtype=tf.float32)
-      for colname in _transformed_names(_VOCAB_FEATURE_KEYS)
-  }
-
-  output = tf.keras.layers.Dense(
-      1, activation='softmax')
-
-  model = Sequential()
-  model.add(tf.keras.layers.Embedding(18010, 40, input_length=618))
-  #model.add(Flatten())
-  #model.add(Dense(8, activation='relu'))
-  model.add(Dense(1, activation='softmax'))
-  #model.compile(
-      #loss='binary_crossentropy',
-      #optimizer=tf.keras.optimizers.Adam(lr=0.001),
-      #metrics=[tf.keras.metrics.BinaryAccuracy()])
-  model.compile('rmsprop', 'mse')
-  model.summary(print_fn=absl.logging.info)
-    
-  return model
+    return model
 
 
 # TFX Trainer will call this function.
@@ -133,12 +105,7 @@ def run_fn(fn_args: TrainerFnArgs):
   eval_dataset = _input_fn(fn_args.eval_files, fn_args.data_accessor, 
                            tf_transform_output, 40)
 
-  model = _build_keras_model(
-      # Construct layers sizes with exponetial decay
-      hidden_units=[
-          max(2, int(first_dnn_layer_size * dnn_decay_factor**i))
-          for i in range(num_dnn_layers)
-      ])
+  model = _build_keras_model()
 
   tensorboard_callback = tf.keras.callbacks.TensorBoard(
       log_dir=fn_args.model_run_dir, update_freq='batch')
@@ -159,4 +126,3 @@ def run_fn(fn_args: TrainerFnArgs):
                                             name='examples')),
   }
   model.save(fn_args.serving_model_dir, save_format='tf', signatures=signatures)
-

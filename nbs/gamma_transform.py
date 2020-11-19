@@ -4,11 +4,32 @@ import tensorflow_transform as tft
 
 import gamma_constants
 
+sequence_length = 618
+key = "sentence"
+
 _VOCAB_FEATURE_KEYS = gamma_constants.VOCAB_FEATURE_KEYS
 _VOCAB_SIZE = gamma_constants.VOCAB_SIZE
 _OOV_SIZE = gamma_constants.OOV_SIZE
 _LABEL_KEY = gamma_constants.LABEL_KEY
 _transformed_name = gamma_constants.transformed_name
+
+def tokenize(sentences):
+    sentences = tf.strings.lower(sentences)
+    sentences = tf.strings.regex_replace(sentences, r" '| '|^'|'$", " ")
+        
+    term = '0123456789'
+    for item in term:
+        sentences = tf.strings.regex_replace(sentences, item, "")
+        
+    start_tokens = tf.fill([tf.shape(sentences)[0], 1], "<START>")
+    tokens = tf.strings.split(sentences)[:, :sequence_length]
+    end_tokens = tf.fill([tf.shape(sentences)[0], 1], "<END>")
+    tokens = tf.concat([start_tokens, tokens, end_tokens], axis=1)
+    tokens = tokens[:, :sequence_length]
+    tokens = tokens.to_tensor(default_value="<PAD>")
+    pad = sequence_length - tf.shape(tokens)[1]
+    tokens = tf.pad(tokens, [[0, 0], [0, pad]], constant_values="<PAD>")
+    return tf.reshape(tokens, [-1, sequence_length])
 
 
 def preprocessing_fn(inputs):
@@ -20,16 +41,22 @@ def preprocessing_fn(inputs):
   """
   outputs = {}
 
-  for key in _VOCAB_FEATURE_KEYS:
+  #for key in _VOCAB_FEATURE_KEYS:
     # Build a vocabulary for this feature.
-    outputs[_transformed_name(key)] = tft.compute_and_apply_vocabulary(
-        _fill_in_missing(inputs[key]),
-        top_k=_VOCAB_SIZE,
-        num_oov_buckets=_OOV_SIZE)
+    #outputs[_transformed_name(key)] = tft.compute_and_apply_vocabulary(
+        #_fill_in_missing(inputs[key]),
+        #top_k=_VOCAB_SIZE,
+        #num_oov_buckets=_OOV_SIZE)
 
   
-  tips = _fill_in_missing(inputs[_LABEL_KEY])
-  outputs[_transformed_name(_LABEL_KEY)] = tips
+  tokens = tokenize(_fill_in_missing(inputs["sentence"]))
+  #Build a vocabulary for this feature.
+  outputs[_transformed_name(key)] = tft.compute_and_apply_vocabulary(
+    tokens,
+    top_k=_VOCAB_SIZE,
+    num_oov_buckets=_OOV_SIZE,
+  )
+  outputs[_transformed_name(_LABEL_KEY)] = _fill_in_missing(inputs[_LABEL_KEY])
 
   return outputs
 

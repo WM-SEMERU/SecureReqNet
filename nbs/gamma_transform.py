@@ -1,7 +1,7 @@
 
 import tensorflow as tf
 import tensorflow_transform as tft
-
+import nltk
 import gamma_constants
 
 sequence_length = 618
@@ -13,14 +13,27 @@ _OOV_SIZE = gamma_constants.OOV_SIZE
 _LABEL_KEY = gamma_constants.LABEL_KEY
 _transformed_name = gamma_constants.transformed_name
 
-def tokenize(sentences):
+def process_sentence(sentences):
     sentences = tf.strings.lower(sentences)
     sentences = tf.strings.regex_replace(sentences, r" '| '|^'|'$", " ")
-        
-    term = '0123456789'
-    for item in term:
+    sentences = tf.strings.regex_replace(sentences,"\n","")
+    nums = '0123456789'
+    for item in nums:
         sentences = tf.strings.regex_replace(sentences, item, "")
-        
+    for item in '"#$%&,-/:;<=>@_`|~:'+ "'":
+        sentences = tf.strings.regex_replace(sentences,item,"")
+    for item in "()*+?[][]{}^\!":
+        sentences = tf.strings.regex_replace(sentences,"\\" + item,"")
+    sentences = tf.strings.regex_replace(sentences,"\\.","")
+    
+    stop_words = nltk.corpus.stopwords.words('english')
+    for word in stop_words:
+        sentences = tf.strings.regex_replace(sentences,r"\\b"+word+"\\b","")
+    sentences = tf.strings.strip(sentences)
+    return sentences
+
+def tokenize(sentences):
+    sentences = process_sentence(sentences)
     start_tokens = tf.fill([tf.shape(sentences)[0], 1], "<START>")
     tokens = tf.strings.split(sentences)[:, :sequence_length]
     end_tokens = tf.fill([tf.shape(sentences)[0], 1], "<END>")
@@ -40,7 +53,7 @@ def preprocessing_fn(inputs):
     Map from string feature key to transformed feature operations.
   """
   outputs = {}
-
+  #outputs["senteces_processed"] = process_sentence(_fill_in_missing(inputs["sentence"]))
   #for key in _VOCAB_FEATURE_KEYS:
     # Build a vocabulary for this feature.
     #outputs[_transformed_name(key)] = tft.compute_and_apply_vocabulary(
@@ -57,7 +70,7 @@ def preprocessing_fn(inputs):
     num_oov_buckets=_OOV_SIZE,
   )
   outputs[_transformed_name(_LABEL_KEY)] = _fill_in_missing(inputs[_LABEL_KEY])
-
+  tft.vocabulary(tokens, vocab_filename="sentence_key")
   return outputs
 
 

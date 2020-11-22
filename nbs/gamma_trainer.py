@@ -12,14 +12,18 @@ from tfx.components.trainer.fn_args_utils import DataAccessor
 from keras.models import Sequential
 from keras.layers import Dense
 from tfx_bsl.tfxio import dataset_options
+from tensorflow.keras import layers
+from tensorflow.keras.layers.experimental.preprocessing import TextVectorization
 
 import gamma_constants
 
+key = "sentence"
 _VOCAB_FEATURE_KEYS = gamma_constants.VOCAB_FEATURE_KEYS
 _VOCAB_SIZE = gamma_constants.VOCAB_SIZE
 _OOV_SIZE = gamma_constants.OOV_SIZE
 _LABEL_KEY = gamma_constants.LABEL_KEY
 _transformed_name = gamma_constants.transformed_name
+
 
 
 def _transformed_names(keys):
@@ -67,7 +71,7 @@ def _input_fn(file_pattern: List[Text],
       tf_transform_output.transformed_metadata.schema)
 
 
-def _build_keras_model(hidden_units: List[int] = None) -> tf.keras.Model:
+def _build_keras_model(train_ds):
   """Creates a DNN Keras model for classifying taxi data.
 
   Args:
@@ -76,39 +80,31 @@ def _build_keras_model(hidden_units: List[int] = None) -> tf.keras.Model:
   Returns:
     A keras Model.
   """
+  vocab_size = 18000
+  sequence_length = 618
 
-  categorical_columns = [
-      tf.feature_column.categorical_column_with_identity(
-          key, num_buckets=_VOCAB_SIZE + _OOV_SIZE, default_value=0)
-      for key in _transformed_names(_VOCAB_FEATURE_KEYS)
-  ]
-  indicator_column = [
-      tf.feature_column.indicator_column(categorical_column)
-      for categorical_column in categorical_columns
-  ]
+    # Use the text vectorization layer to normalize, split, and map strings to 
+    # integers. Note that the layer uses the custom standardization defined above. 
+    # Set maximum_sequence length as all samples are not of the same length.
+  #vectorize_layer = TextVectorization(
+        #max_tokens=vocab_size,
+        #output_mode='int',
+        #output_sequence_length=sequence_length)
 
-  # TODO(b/139668410) replace with premade wide_and_deep keras model
-  wide_columns=indicator_column,
-  dnn_hidden_units=hidden_units or [100, 70, 50, 25]
-    
-  input_layers = {
-      colname: tf.keras.layers.Input(name=colname, shape=(), dtype=tf.float32)
-      for colname in _transformed_names(_VOCAB_FEATURE_KEYS)
-  }
-
-  output = tf.keras.layers.Dense(
-      1, activation='softmax')
+# Make a text-only dataset (no labels) and call adapt to build the vocabulary.
+  #text_ds = train_ds.map(lambda x, y: x)
+  #vectorize_layer.adapt(text_ds)
 
   model = Sequential()
-  model.add(tf.keras.layers.Embedding(18010, 40, input_length=618))
-  #model.add(Flatten())
-  #model.add(Dense(8, activation='relu'))
+  model.add(tf.keras.layers.Embedding(190010, 40, input_length=618,mask_zero=True))
+  model.add(layers.GlobalAveragePooling1D())
+
+  model.add(Dense(16, activation='relu'))
+  model.add(Dense(8, activation='relu'))
   model.add(Dense(1, activation='softmax'))
-  #model.compile(
-      #loss='binary_crossentropy',
-      #optimizer=tf.keras.optimizers.Adam(lr=0.001),
-      #metrics=[tf.keras.metrics.BinaryAccuracy()])
-  model.compile('rmsprop', 'mse')
+  model.compile(optimizer='adam',
+              loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+              metrics=['accuracy'])
   model.summary(print_fn=absl.logging.info)
     
   return model
@@ -121,24 +117,24 @@ def run_fn(fn_args: TrainerFnArgs):
   Args:
     fn_args: Holds args used to train the model as name/value pairs.
   """
-  # Number of nodes in the first layer of the DNN
-  first_dnn_layer_size = 100
-  num_dnn_layers = 4
-  dnn_decay_factor = 0.7
+
 
   tf_transform_output = tft.TFTransformOutput(fn_args.transform_output)
 
+  print("\n\nTHISHERE")
+  one_hot_columns = [
+      tf.feature_column.categorical_column_with_vocabulary_file(
+          key=key,
+          vocabulary_file=tf_transform_output.vocabulary_file_by_name(
+              vocab_filename="sentence_key"))]
+  print(one_hot_columns)
+    
   train_dataset = _input_fn(fn_args.train_files, fn_args.data_accessor, 
                             tf_transform_output, 40)
   eval_dataset = _input_fn(fn_args.eval_files, fn_args.data_accessor, 
                            tf_transform_output, 40)
 
-  model = _build_keras_model(
-      # Construct layers sizes with exponetial decay
-      hidden_units=[
-          max(2, int(first_dnn_layer_size * dnn_decay_factor**i))
-          for i in range(num_dnn_layers)
-      ])
+  model = _build_keras_model(train_dataset)
 
   tensorboard_callback = tf.keras.callbacks.TensorBoard(
       log_dir=fn_args.model_run_dir, update_freq='batch')
@@ -147,7 +143,9 @@ def run_fn(fn_args: TrainerFnArgs):
       steps_per_epoch=fn_args.train_steps,
       validation_data=eval_dataset,
       validation_steps=fn_args.eval_steps,
-      callbacks=[tensorboard_callback])
+      shuffle=True,
+      workers=10,
+      callbacks=[tensorboard_callback], verbose=0)
 
   signatures = {
       'serving_default':

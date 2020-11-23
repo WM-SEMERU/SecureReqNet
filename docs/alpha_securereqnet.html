@@ -196,7 +196,7 @@ nb_path: "nbs/02_alpha_securereqnet.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dynamic_Dataset</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># I&#39;m not sure this needs to be False. RC</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dynamic_Dataset</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span> 
 </pre></div>
 
     </div>
@@ -230,43 +230,6 @@ nb_path: "nbs/02_alpha_securereqnet.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>11612
-104510
-(&#39;(1,0)&#39;, b&#39;Strip style attributes from HTML tags in add-on description\n\n\nThe old addons-server code stripped all HTML tag attributes (with some exceptions). This would strip out any style attributes. Even though we\&#39;re using a dom-purify on addons-frontend, it doesn\&#39;t strip style attributes. I don\&#39;t know how serious it is because I can\&#39;t think of a real XSS. However, there may be a possibility by crafting an add-on that has something like this in the description:\n&lt;b style=&#34;background-image: url(javascript:alert(document.cookie))&#34;&gt;placeholder&lt;/b&gt;&#39;)
-(&#39;(1,0)&#39;, b&#39;The currently used Rails version, in the stable branch, is insecure\n\nYou should update the Gemfile.lock to hotfix this.\n\nhttp://weblog.rubyonrails.org/2014/2/18/Rails_3_2_17_4_0_3_and_4_1_0_beta2_have_been_released/&#39;)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for elem in test:</span>
 <span class="c1">#    print(elem[0])</span>
 </pre></div>
@@ -285,8 +248,7 @@ nb_path: "nbs/02_alpha_securereqnet.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Adds nltk folder to the repository and is needed if the user doesn&#39;t have them already</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
 </pre></div>
 

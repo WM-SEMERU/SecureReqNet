@@ -109,8 +109,9 @@ def create_alpha():
 # Cell
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 from tensorflow.keras.callbacks import EarlyStopping
+from os import path
 
-def fit_model(corpora_train_x,train_y,criticality_network,save_model=True,save_history=True,path=''):
+def fit_model(corpora_train_x,target_train_y,criticality_network,save_model=True,save_history=True,file_path='',model_name=""):
     '''
     Fits a securereqnet model to the data
 
@@ -120,8 +121,12 @@ def fit_model(corpora_train_x,train_y,criticality_network,save_model=True,save_h
 
     @param save_history (bool): Saves the history to the path
 
-    @param path (string): Path to where the model and/or history will be saved to
+    @param file_path (string): Path to where the model and/or history will be saved to
+
+    @param model_name (string): Name to save the model as
     '''
+
+    filepath = path.join(file_path, model_name + ".hdf5")
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=100)
     mc = ModelCheckpoint(filepath, monitor='val_accuracy', mode='max', verbose=1, save_best_only=True)
     callbacks_list = [es,mc]
@@ -142,7 +147,6 @@ def fit_model(corpora_train_x,train_y,criticality_network,save_model=True,save_h
     # The folder alex-adapted-res-003 doesn't exist yet in the repository. RC created 08_test in the root folder
     # manually
     if(save_model):
-        filepath = path+"/best_model.hdf5"
         criticality_network.save(filepath)
 
     # filepath changed from: 'alex-adapted-res-003/history_training.csv' for testing

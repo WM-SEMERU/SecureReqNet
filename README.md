@@ -15,6 +15,9 @@ https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq
 ### Or serve your own version:
 https://colab.research.google.com/drive/1pb_QQOm0jA0SwejgqxBXKBhkuM42al4k 
 
+### For model interpretability:
+https://colab.research.google.com/drive/1C4D4Wvv0xW8UfoFNLM-7Bc2NxP0AISvB
+
 ### Research and Components Roadmap
 - [x] Using Shallow Neural Network to predict security relatedness on issues (or requirements) 
 - [x] Using Deep Neural Network to predict security relatedness on issues (or requirements)
@@ -180,3 +183,13 @@ Wikipedia | 10000 | - | - | - |
 
 - Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
 - Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)
+
+## Serving
+For more detail, check out the deployment documentation and the deployment colab.
+This image shows what the securereqnet package provides in terms of deployment onto your server.
+
+![example_serving](https://raw.githubusercontent.com/rmclanton/SecureReqNet/master/images/securereqnet%20serving.png)
+
+Here is what our production environment looks like for CSCI 435 project deployment
+
+![our_prod_environment](https://raw.githubusercontent.com/rmclanton/SecureReqNet/master/images/Our%20Prod%20Environment.png)

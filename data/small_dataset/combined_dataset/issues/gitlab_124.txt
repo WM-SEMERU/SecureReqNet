@@ -1,0 +1,7 @@
+I've received conflicting feedback on how useful this is, but I figured I'd mention it anyway. BitBucket project overview pages show your README.md very prominently. GitHub also shows your README, but sticks it beneath a file listing. GitLab's overview doesn't show it at all - it just has the activity stream.
+
+The activity stream is really useful for contributors and developers, but less so for random people trying to grab source code and make sense of it. As a compromise, we capped the activity stream to a smaller size and displayed the README immediately below it:
+
+https://gist.github.com/anonymous/9407550
+
+It's not a great compromise though.

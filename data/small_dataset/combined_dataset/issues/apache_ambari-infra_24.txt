@@ -1,0 +1,10 @@
+AMBARI-25067. Upgrade Solr version to 7.6.0 from 7.5.0
+
+
+What changes were proposed in this pull request?
+
+Upgrade Solr version to 7.6.0 (some bugfixes + key feature: split shards into more than 2 shards, see: http://lucene.apache.org/solr/7_6_0/changes/Changes.html#v7.6.0)
+create a build.xml, that contains common ant tasks for debian & rpm package build
+
+How was this patch tested?
+i could build a new docker image, and that is started properly

@@ -1,0 +1,57 @@
+Firewall option "logout_on_user_change" is in fact global
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes?
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.4.0
+
+
+
+... which means that the value defined on last firewall will be global. The problem comes from here:
+
+https://github.com/symfony/symfony/blob/3.4/src/Symfony/Bundle/SecurityBundle/DependencyInjection/SecurityExtension.php#L260
+https://github.com/symfony/symfony/blob/3.4/src/Symfony/Bundle/SecurityBundle/DependencyInjection/SecurityExtension.php#L274
+https://github.com/symfony/symfony/blob/3.4/src/Symfony/Bundle/SecurityBundle/DependencyInjection/SecurityExtension.php#L283
+
+The problem is that while the option is under each firewall in configuration in fact it's applied to global context listener. This gets even more confusing when looking at deprecation message:
+
+Not setting "logout_on_user_change" to true on firewall "xyz" is deprecated as of 3.4, it will always be true in 4.0.
+
+Consider the following example:
+security:
+    firewalls:
+        fw1:
+            logout_on_user_change: true
+        fw2:
+            logout_on_user_change: false # Or omitted
+End result - old, depreciated behaviour everywhere. The resulting container:
+$this->services['security.context_listener.0'] = $instance = new \Symfony\Component\Security\Http\Firewall\ContextListener(...);
+
+$instance->setLogoutOnUserChange(true);
+$instance->setLogoutOnUserChange(false);
+
+return $instance;

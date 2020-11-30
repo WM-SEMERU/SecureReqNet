@@ -1,0 +1,7 @@
+Consider moving AMO API session auth to cookies
+
+
+addons-frontend uses a JWT for logins but recently, in #4590 , we had to tie the JWT ID to a database table to implement log out we had to store a copy of the JWT in a cookie so it can be deleted on log out.
+As this helpful flowcart illustrates, this means we have essentially reinvented session cookies.
+The danger with sticking with JWTs is that they have a poor security track record and are still a relatively new technology. Session cookies are battle tested. If we don't benefit from the JWT part, maybe we should switch? It will probably make the code a lot simpler.
+There could be some cross-origin considerations since it's sometimes convenient to develop addons-frontend locally against a hosted dev API so I don't know if that makes traditional session cookies more difficult or not.

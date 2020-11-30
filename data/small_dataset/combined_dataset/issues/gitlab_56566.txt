@@ -1,0 +1,20 @@
+As I mentioned in another issue, we're seeing daily issues of people getting Error 500s because either they lost or changed their `gitlab-secrets.json` and encrypted columns no longer work. We should add some better internal checking and error handling around that, but I'm wondering if we should stop using `attr_encrypted` altogether until we have a better way to manage secrets at scale for a number of reasons:
+
+1. We see lots of application errors due to secret management issues. Just a few examples (search for `OpenSSL::Cipher::CipherError` and `GitLab`):
+
+   * https://gitlab.com/gitlab-org/gitlab-ce/issues/56403
+   * https://gitlab.com/gitlab-com/gl-infra/infrastructure/issues/4163
+   * https://gitlab.com/gitlab-org/gitlab-ce/issues/56171
+   * https://gitlab.com/gitlab-org/gitlab-ce/issues/56565.
+
+2. Rotating the encryption key is difficult and error-prone. For millions of rows, I don't think we can reset secrets in a reasonable timeframe even with background migrations.
+
+3. It's led to a number of tricky bugs (e.g. https://gitlab.com/gitlab-org/gitlab-ce/issues/54477, https://gitlab.com/gitlab-org/gitlab-ce/issues/53763#note_119184401).
+
+Instead, I wonder if we need to consider these guidelines:
+
+1. Where possible, store a one-way hash (and salted version) of the secrets. This works for passwords etc. but not so much for import usernames and tokens.
+2. We ship Vault (https://gitlab.com/gitlab-org/gitlab-ce/issues/40720) and make this the default way to store/retrieve encrypted secrets. Vault supports PostgreSQL as a backend (https://www.vaultproject.io/docs/configuration/storage/postgresql.html), so even though we'd be introducing another moving piece, we wouldn't need a new storage mechanism.
+3. If Vault isn't practical or suitable, store the secret as a base64-encoded value in a separate table. Don't encrypt the values there.
+
+Thoughts, @jeremy @ayufan @estrike @jritchey @smcgivern @nick.thomas @DouweM @marin @dblessing?

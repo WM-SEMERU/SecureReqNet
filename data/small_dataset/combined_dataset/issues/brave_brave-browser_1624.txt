@@ -1,0 +1,5 @@
+rewards ui has high free after use crash potential
+
+
+https://github.com/brave/brave-core/blob/master/browser/ui/webui/brave_rewards_ui.cc#L430
+RewardsService always outlives rewards_ui so we should be using WeakPtr here. Also prefer BindOnce

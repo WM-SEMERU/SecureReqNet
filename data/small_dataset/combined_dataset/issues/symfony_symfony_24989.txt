@@ -1,0 +1,106 @@
+AbstractGuardAuthenticator has no way to pass request control to the Controller
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+v4.0.0-BETA4
+
+
+
+I'm trying to create a custom GuardAuthenticator in order to authenticate an app behind a login form.
+The problem I'm having is that there doesn't seem to be a way to give control of the request to the controller. The docs say that if the onAuthenticationSuccess method returns null, control gets passed to the controller, but the implementation doesn't match.
+Here is my current authenticator:
+<?php
+namespace App\Security\Authenticator;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+
+class AppAuthenticator extends AbstractGuardAuthenticator
+{
+    public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
+    {
+        return new RedirectResponse('/login');
+    }
+
+    public function supports(Request $request): bool
+    {
+        return true;
+    }
+
+    public function getCredentials(Request $request): array
+    {
+        return [
+            'username' => $request->request->get('username', $request->getSession()->get('username')),
+            'password' => $request->request->get('password'),
+        ];
+    }
+
+    public function getUser($credentials, UserProviderInterface $userProvider): LdapUser
+    {
+        return $userProvider->loadUserByUsername($credentials['username']);
+    }
+
+    // Just let everyone in for now
+    public function checkCredentials($credentials, UserInterface $user): bool
+    {
+           return true;
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): RedirectResponse
+    {
+        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+        return new RedirectResponse('/login');
+    }
+
+    // Of course this doesn't work because onAuthenticationSuccess gets run on every request
+    // and returning null causes it to throw an exception.
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
+    {
+        if($request->getPathInfo() === $this->router->generate('login')) {
+            $request->getSession()->set('username', $request->request->get('username'));
+
+            $url = $this->router->generate('dashboard');
+            return new RedirectResponse($url);
+        }
+        return null;
+    }
+
+    public function supportsRememberMe(): bool
+    {
+        return false;
+    }
+}
+

@@ -1,0 +1,5 @@
+I am, unfortunately, not enough of a Rubyist to look at this myself so apologies for asking for something without a PR
+
+It would be awesome if the slack integration posted a message when Merge Requests were created (and completed). For us this would let the team know that a merge request was there and whoever is free can jump in to review it. 
+
+It looks like the code that would need to change is in https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/models/project_services/slack_message.rb on line 34 in def message

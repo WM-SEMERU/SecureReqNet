@@ -1,0 +1,36 @@
+fix(forms): type NG_VALUE_ACCESSOR injection token correctly
+
+
+fixes #29351
+PR Checklist
+Please check if your PR fulfills the following requirements:
+
+ The commit message follows our guidelines: https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+PR Type
+What kind of change does this PR introduce?
+
+ Bugfix
+ Feature
+ Code style update (formatting, local variables)
+ Refactoring (no functional changes, no api changes)
+ Build related changes
+ CI related changes
+ Documentation content changes
+ angular.io application / infrastructure changes
+ Other... Please describe:
+
+What is the current behavior?
+NG_VALUE_ACCESSOR is typed ControlValueAccessor. This conflicts with it being used as multi: true when injecting it programmatically through Injector#get as the function is typed to return a single ControlValueAccessor, even though it should be an array of them.
+Issue Number: #29351
+What is the new behavior?
+The injection token is now typed ControlValueAccessor[].
+Does this PR introduce a breaking change?
+
+ Yes
+ No
+
+Other information
+I have not added any tests for this as it's purely a type information. This cannot be tested in an assertion kind of test, the only possibility would be a nop Injector#get call and making sure the TS compiler doesn't complain. This isn't a functional test, though, and I doubt we generally test that types are correct, so it seems unnecessary.

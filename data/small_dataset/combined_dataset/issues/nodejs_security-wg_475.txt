@@ -1,0 +1,5 @@
+How can we utilize funding for the ecosystem bug bounty program?
+
+
+Coinbase has kindly offered to support the Node.js ecosystem bug bounty program with a cash donation. We hashed out several ad-hoc ideas in an e-mail thread but we feel the issue warrants a wider discussion by the entire team.
+/cc @lirantal @vdeturckheim @reedloden

@@ -1,0 +1,107 @@
+Creating Logical disk with New-HPOVServerProfile fails with an error
+
+
+Please fill in as much information as possible to help resolve your issue.
+I am trying to create a server Profile and apply it to a server, but I am not sure how to use a Logical Disk, whenever i create a logical it is throwing an error.
+Expected Behavior
+it should crate a logical disk and attach it to the server profile.
+Actual Behavior
+Steps to reproduce
+if (-not (get-module HPOneView.400))
+{
+	import-Module HPOneView.400
+}
+if (-not $connectedsessions)
+{
+	$appliance='10.41.240.57'
+	$username='Administrator'
+	$Password='Password@123'
+	$ApplianceConnection=Connect-HPOVMgmt -Hostname $appliance -Username $username -Password $password
+}
+Get-HPOVServer -Name "C7000U7U31*" -OutVariable encl
+$totalcount = $encl.Count
+write "totalCount :$totalcount"
+$storagePool='HOS_RAID5_10K'
+$storagesystem = Get-HPOVStorageSystem -Name 'P7400_N19U22'
+$count=1
+$myenclosure = Get-HPOVEnclosure -Name "C7000U7U31"
+$myhardware = Get-HPOVServerHardwareType
+write "Enclosure : $myenclosure"
+write "Hardware type: $myhardware"
+    foreach($element in $encl.name)
+    {
+        if($count -lt 10)
+        {
+            $profileName="HOS8-U7U31-B0"+"$count"
+        }
+        elseif($count -ge 10)
+        {
+            $profileName="HOS8-U7U31-B"+"$count"
+        }
+        #$profileName = "HOS8-U7U31-B01"
+        write "Profile: $profileName"
+        write "Element: $element"
+        $server = Get-HPOVServer -Name "C7000U7U31, bay $count" -NoProfile
+        if ($count -eq 1)
+        {
+            $con1=Get-HPOVNetworkSet -Name "hos8_bond0" | New-HPOVServerProfileConnection -Name "hos8_bond0" -ConnectionID 1 -ConnectionType Ethernet
+            $con2=Get-HPOVNetworkSet -Name "hos8_bond0" | New-HPOVServerProfileConnection -Name "hos8_bond1" -ConnectionID 2 -ConnectionType Ethernet
+            $con3=Get-HPOVNetwork -Name "SAN_A" | New-HPOVServerProfileConnection -Name "SAN_A" -ConnectionID 3 -ConnectionType FibreChannel
+            $con4=Get-HPOVNetwork -Name "SAN_B" | New-HPOVServerProfileConnection -Name "SAN_B" -ConnectionID 4 -ConnectionType FibreChannel
+            
+        }
+        else
+        {
+            $con1=Get-HPOVNetworkSet -Name "hos8_bond0" | New-HPOVServerProfileConnection -Name "hos8_bond0" -ConnectionID 1 -ConnectionType Ethernet -Bootable -Priority Primary
+            $con2=Get-HPOVNetworkSet -Name "hos8_bond0" | New-HPOVServerProfileConnection -Name "hos8_bond1" -ConnectionID 2 -ConnectionType Ethernet
+            $con3=Get-HPOVNetwork -Name "SAN_A" | New-HPOVServerProfileConnection -Name "SAN_A" -ConnectionID 3 -ConnectionType FibreChannel
+            $con4=Get-HPOVNetwork -Name "SAN_B" | New-HPOVServerProfileConnection -Name "SAN_B" -ConnectionID 4 -ConnectionType FibreChannel
+        }
+        write "connection 1: $con1"
+        write "connection 2: $con2"
+        write "connection 3: $con3"
+        write "connection 4: $con4"
+        $conlist= ($con1, $con2, $con3, $con4)
+        $vol1=($profileName+"-VOL1")
+        $vol2=($profileName+"-VOL2")
+        $vol3=($profileName+"-VOL3")
+        $vol4=($profileName+"-VOL4")
+        New-HPOVStorageVolume -Name $vol1 -StoragePool $storagepool -ApplianceConnection $appliance -Capacity 1024 -ProvisioningType Thin -StorageSystem $storagesystem
+        New-HPOVStorageVolume -Name $vol2 -StoragePool $storagepool -ApplianceConnection $appliance -Capacity 1024 -ProvisioningType Thin -StorageSystem $storagesystem
+        New-HPOVStorageVolume -Name $vol3 -StoragePool $storagepool -ApplianceConnection $appliance -Capacity 1024 -ProvisioningType Thin -StorageSystem $storagesystem
+        New-HPOVStorageVolume -Name $vol4 -StoragePool $storagepool -ApplianceConnection $appliance -Capacity 1024 -ProvisioningType Thin -StorageSystem $storagesystem
+        $volume1 = Get-HPOVStorageVolume -Name $vol1 | New-HPOVServerProfileAttachVolume -volumeid 0
+        $volume2 = Get-HPOVStorageVolume -Name $vol2 | New-HPOVServerProfileAttachVolume -volumeid 1
+        $volume3 = Get-HPOVStorageVolume -Name $vol3 | New-HPOVServerProfileAttachVolume -volumeid 2
+        $volume4 = Get-HPOVStorageVolume -Name $vol4 | New-HPOVServerProfileAttachVolume -volumeid 3
+        $attachvolumes=@($volume1,$volume2,$volume3,$volume4)
+        $bootorder = @("HardDisk","PXE")
+        $localdisk = New-HPOVServerProfileLogicalDisk -Name "Raid1" -RAID RAID1 -NumberofDrives 2 -DriveType SAS -Bootable:$True -Verbose
+        $mydisk = @($localdisk)
+        write "Local Disk : $Localdisk "
+        New-HPOVServerProfile -name $profileName -AssignmentType Server -Server $server -Connections $conlist -LocalStorage @($mydisk) -SanStorage -HostOStype RHEL -StorageVolume $attachvolumes -ManageBoot -BootMode BIOS -BootOrder $bootorder -Confirm:$false -Verbose | Wait-HPOVTaskComplete
+        $count = $count + 1
+        write "Current Count : $count"
+        Start-Sleep 150
+    }
+
+Version Information
+$PSVersionTable
+Name                           Value
+
+PSVersion                      4.0
+WSManStackVersion              3.0
+SerializationVersion           1.1.0.1
+CLRVersion                     4.0.30319.33440
+BuildVersion                   6.3.9600.16384
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}
+PSRemotingProtocolVersion      2.2
+PS C:\Users\Administrator> Get-HPOVVersion
+10.41.240.57                                                LibraryVersion                                              Path
+
+ApplianceVersion: 4.00.07.330056.00                         4.0.1630.2612                                               C:\Program Files\WindowsPowerShell\Modules\HPOneView.400
+PS C:\Users\Administrator> Get-HPOVVersion -ApplianceVer
+10.41.240.57                                                LibraryVersion                                              Path
+
+ApplianceVersion: 4.00.07.330056.00                         4.0.1630.2612                                               C:\Program Files\WindowsPowerShell\Modules\HPOneView.400
+

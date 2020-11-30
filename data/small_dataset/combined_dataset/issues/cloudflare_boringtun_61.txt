@@ -1,0 +1,19 @@
+Send a queued data packet when a Handshake response packet is received
+
+
+Right now when a Handshake response is received (in reply to an Initiation message), a Keep-Alive message is sent. Instead it should try to send a queued message when available (which is what others implementations do).
+Relevant code in src/noise/handshake.rs:
+            2 => {
+                self.log(Verbosity::Debug, "Received handhsake_response");
+                let mut handshake = self.handshake.lock();
+                match handshake.receive_handshake_response(src) {
+                    Ok(session) => {
+                        let keepalive_packet = session.format_packet_data(&[], dst);
+                        let index = session.local_index();
+                        *self.sessions[index % N_SESSIONS].write() = Some(session);
+                        // Make session the current session
+                        self.current.store(index, Ordering::SeqCst);
+                        self.timer_tick_session_established(true); // New session established, we are the initiator
+                        self.timer_tick(TimerName::TimeLastPacketReceived);
+                        TunnResult::WriteToNetwork(keepalive_packet) // Send a keepalive as a response
+                    }

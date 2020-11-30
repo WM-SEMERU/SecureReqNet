@@ -1,0 +1,14 @@
+OpenSSL upgrades: March 1st 2016  [1.0.2g, 1.0.1s]
+
+
+@nodejs/security
+
+OpenSSL versions 1.0.2g, 1.0.1s.
+These releases will be made available on 1st March 2016 between approximately
+1300-1700 UTC.  They will fix several security defects with maximum severity
+"high".
+Please see the following page for further details of severity levels:
+https://www.openssl.org/policies/secpolicy.html
+
+https://mta.openssl.org/pipermail/openssl-announce/2016-February/000063.html
+Same severity level as the January 28th releases, FYI. Impacting 0.10, 0.12, 4 and 5.

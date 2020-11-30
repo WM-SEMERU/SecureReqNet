@@ -1,0 +1,15 @@
+Host can't see Function.prototype.length of guest functions.
+
+
+Original issue 1928 created by max99x on 2014-08-01T18:23:49.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+v5678, Chrome 36, Linux, SES mode
+What steps will reproduce the problem?
+
+In the host define an API method f = function(g) {alert(g.length);}
+In the client, define function h = function(a, b) {}
+In the client, call f(h).
+
+What is the expected output? What do you see instead?
+I expect "2" to be displayed, as that is the number of arguments declared by the client function, and it's what happens if you perform a similar call purely in the host. In reality, "1" gets displayed, since when the client function is passed through Caja, it gets wrapped in a function that declares a single unused parameter and forwards all arguments using the "arguments" object to the wrapped function.
+Please provide any additional information below.

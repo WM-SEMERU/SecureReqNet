@@ -1,0 +1,4 @@
+[issue 3] ensure that x is a string for `new Buffer(x)`
+
+
+fix #3

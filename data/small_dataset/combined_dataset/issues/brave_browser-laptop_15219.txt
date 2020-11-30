@@ -1,0 +1,36 @@
+navigator.clipboard.readText() silently fails
+
+
+Steps to Reproduce
+
+Copy some text into clipboard
+Go to https://jsfiddle.net/hpy02no3/2/
+Press Try it
+
+Actual result:
+Nothing happens
+Expected result:
+A prompt is shown asking if user wants to allow clipboard usage, just like in Chrome.
+The text from clipboard is shown
+Reproduces how often:
+always
+Brave Version
+about:brave info:
+Brave: 0.24.0 
+V8: 6.9.427.23 
+rev: f657f15bf7e0e0c50a2b854c6b05edb59bfc556c 
+Muon: 8.1.6 
+OS Release: 6.1.7601 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: Microsoft Windows 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 69.0.3497.100
+
+Reproducible on current live release:
+yes, Brave: 0.24.0.
+Additional Information
+Works on Chrome 69.0.3497.100 (Official Build) (64-bit)
+Reported through community:
+https://community.brave.com/t/navigator-clipboard-readtext-not-working/32697/3

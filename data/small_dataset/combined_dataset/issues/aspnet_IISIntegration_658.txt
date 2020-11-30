@@ -1,0 +1,46 @@
+Microsoft Security Advisory CVE-2018-0808: ASP.NET Core Denial Of Service Vulnerability
+
+
+Microsoft Security Advisory CVE-2018-0808: ASP.NET Core Denial Of Service Vulnerability
+Executive Summary
+Microsoft is releasing this security advisory to provide information about a vulnerability in public ASP.NET Core 1.0, 1.1 and 2.0. This advisory also provides guidance on what developers can do to update their applications correctly.
+Microsoft is aware of a security vulnerability in all public versions of ASP.NET Core where, if an application is hosted behind Internet Information Server (IIS) a remote unauthenticated attacker can use a specially crafted request can cause a Denial of Service.
+Announcement
+The original announcement can be found at aspnet/Announcements#294
+Mitigation Factors
+Any site hosted behind a different proxy, such as nginx or an application hosted in Azure, which uses Application Request Routing (ARR) as a proxy is not affected.
+Affected Software
+The vulnerabilities affect any Microsoft ASP.NET Core project if it is hosted behind an IIS server running AspNetCoreModule (ANCM) prior to 7.1.1990.0.
+Advisory FAQ
+How do I know if I am affected?
+Open a PowerShell prompt and run the following command
+(Get-Item $env:SystemDrive\Windows\System32\inetsrv\aspnetcore.dll).VersionInfo
+or use the Windows file properties dialog to check the version on C:\Windows\System32\inetsrv\aspnetcore.dll, where C: is your OS install drive.
+If the file version is less than 7.1.1990.0 you are affected.
+How do I fix the issue?
+Install the latest version of the ASP.NET Core Hosting Bundle
+(You need only install a single version, i.e. installing Version 2.0 will protect Version 1.0/1.1 .NET Core applications and vice versa. Choose the one that corresponds to the highest runtime version on your server).
+
+Hosting Bundle for ASP.NET Core 1.0/1.1
+Hosting Bundle for ASP.NET Core 2.0
+
+Then restart IIS by running
+net stop was /y
+net start w3svc
+
+from an elevated command line.
+Other Information
+Reporting Security Issues
+If you have found a potential security issue in .NET Core, please email details to secure@microsoft.com. Reports may qualify for the .NET Core Bug Bounty. Details of the .NET Core Bug Bounty including Terms and Conditions are at https://aka.ms/corebounty.
+Support
+You can ask questions about this issue on GitHub in the .NET Core or ASP.NET Core organizations. These are located at https://github.com/dotnet/ and https://github.com/aspnet/. The Announcements repo for each product (https://github.com/dotnet/Announcements and https://github.com/aspnet/Announcements) will contain this bulletin as an issue and will include a link to a discussion issue where you can ask questions.
+Disclaimer
+The information provided in this advisory is provided "as is" without warranty of any kind. Microsoft disclaims all warranties, either express or implied, including the warranties of merchantability and fitness for a particular purpose. In no event shall Microsoft Corporation or its suppliers be liable for any damages whatsoever including direct, indirect, incidental, consequential, loss of business profits or special damages, even if Microsoft Corporation or its suppliers have been advised of the possibility of such damages. Some states do not allow the exclusion or limitation of liability for consequential or incidental damages so the foregoing limitation may not apply.
+Acknowledgements
+Andrei Gorlov
+External Links
+CVE-2018-0808
+Revisions
+V1.0 (Mar 13, 2018): Advisory published.
+Version 1.0
+Last Updated 2018-03-13

@@ -1,0 +1,37 @@
+New-HPOVUser with Capital A Administrator
+
+
+Actual Behavior
+The help for New-HPOVUser
+-Roles 
+An array list of roles to assign the user to.  Allowed values are:
+        * Infrastructure Administrator
+        * Read Only
+        * Backup Administrator
+        * Network Administrator
+        * Server Administrator
+        * Storage Administrator
+
+Has capital 'A' for the work administrator
+This causes an error.
+The roles are:
+PS> $ConnectedSessions[0].ApplianceSecurityRoles
+Infrastructure administrator
+Read only
+Backup administrator
+Hardware setup
+Network administrator
+Server administrator
+Storage administrator
+Software administrator
+NOTE the lower case 'a'
+Secondly the help does not document Software Administrator
+Steps to reproduce
+PS> New-HPOVUser -UserName Bug -Roles "Server Administrator" -Password 12345678
+New-HPOVUser : Unable to find role: Server Administrator to assign to user: Bug. Supply a valid or different value.
+At line:1 char:1
+New-HPOVUser -UserName Bug -Roles "Server Administrator" -Password 12 ...
+CategoryInfo          : InvalidOperation: (Send-HPOVRequest:String) [New-HPOVUser], InvalidOperationException
+FullyQualifiedErrorId : InvalidAuthOperation,New-HPOVUser
+Version Information
+3.0.1210.3013

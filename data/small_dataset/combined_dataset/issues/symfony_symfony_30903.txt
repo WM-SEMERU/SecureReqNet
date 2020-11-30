@@ -1,0 +1,50 @@
+[Messenger] Uses the `SerializerStamp` when deserializing the envelope
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29970
+
+
+License
+MIT
+
+
+Doc PR
+ø
+
+
+
+Uses the SerializerStamp when decoding the message.

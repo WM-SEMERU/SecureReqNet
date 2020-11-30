@@ -1,0 +1,12 @@
+src: port bootstrap/cache.js to C++
+
+
+This allows us to query the categories of modules in C++
+so we can implement the code cache generator in C++ that
+does not depend on a Node.js binary.
+Ref: #21563
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ commit message follows commit guidelines
+

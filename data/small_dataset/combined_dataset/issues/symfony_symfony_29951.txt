@@ -1,0 +1,26 @@
+Error in PostAuthenticationGuardToken::serialize because of bug in PHP 7.3
+
+
+Symfony version(s) affected: 2.8.0-4.2.2 (ONLY with PHP 7.3+)
+Description
+A bug in PHP7.3 (https://bugs.php.net/bug.php?id=77302) which was also discussed in #29459 creates an issue where an object (sometimes?) cannot be serialized twice.
+This is what happens in PostAuthenticationGuardToken::serialize / PostAuthenticationGuardToken::unserialize:
+    public function serialize()
+    {
+        $serialized = serialize(array($this->providerKey, parent::serialize()));
+
+        return $serialized;
+    }
+
+    public function unserialize($serialized)
+    {
+        list($this->providerKey, $parentStr) = unserialize($serialized);
+
+        parent::unserialize($parentStr);
+    }
+
+Which results in an error Notice: unserialize(): Error at offset x of y bytes when using symfony guard.
+How to reproduce
+See https://bugs.php.net/bug.php?id=77302
+Possible solution
+I don't know how to fix this without a BC break. Since it's basically a PHP bug only affecting some users I also don't know how to proceed.

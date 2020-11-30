@@ -1,0 +1,4 @@
+committee-product-security: add joel smith
+
+
+Finalize the changes here in the community repo: kubernetes/security#3

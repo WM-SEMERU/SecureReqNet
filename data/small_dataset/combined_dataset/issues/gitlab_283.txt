@@ -1,0 +1,12 @@
+Hello,
+
+I juste created an instance of gitlab. As I wanted it to be fully private (i.e. no public projects, only internal / private ones), I set the parameter `restricted_visibility_levels` to `[ "public" ]` :
+
+    restricted_visibility_levels: [ "public" ]
+
+Testing it as a non-admin user, I can see that during the project creation, the corresponding button is disabled.
+However, if I submit the form with the corresponding value `project_visibility_level_20=20` (for example, modifying the HTML on the client side with HTML Inspector of my browser), the project is created with the "public" visibility level.
+
+I think this setting should be enforced server-side.
+
+I don't think it is a big issue, as only logged-in users will be concerned - but still it's better if this setting is properly enforced.

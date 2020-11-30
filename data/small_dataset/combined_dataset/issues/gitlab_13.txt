@@ -1,0 +1,1 @@
+All our users use 'google' as OpenID authentificator. But to access CI password should be provided. In old GitLab versions it was easy to change own password by visiting profile page but in new versions current password should be provided. What what the current password is? There is a link to reset the password but it adds a lot of moves to be done to access CI.

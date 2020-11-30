@@ -1,0 +1,4 @@
+Considering the deprecation of object roles
+
+
+The RoleInterface has already been deprecated in symfony/symfony#20801. symfony/symfony#20824 also suggests to deprecate the Role class entirely. I think we should wait until that issue is resolved before updating the documentation accordingly.

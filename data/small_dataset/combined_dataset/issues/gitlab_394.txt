@@ -1,0 +1,5 @@
+I think it could be better if tags will are ordered by date instead of name.
+
+I've noted that actually for Gitlab tags, there is `v7.0.0.rc1` tag before ` v7.0.0`.
+
+What do you think about it?

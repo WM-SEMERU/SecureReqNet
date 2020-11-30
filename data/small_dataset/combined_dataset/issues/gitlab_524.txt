@@ -1,0 +1,29 @@
+Hello, after updating to 7.2.0, when trying to view Explore page, I get error 500 message.
+
+Gitlab 7.2.0, CentOS 6.5.
+
+Production.log:
+```
+Started GET "/explore" for 127.0.0.1 at 2014-08-25 10:12:50 +0700
+Processing by Explore::ProjectsController#trending as HTML
+PG::Error: ERROR:  column "projects.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT  projects.*, count(notes.id) as ncount FROM "projects...
+                ^
+: SELECT  projects.*, count(notes.id) as ncount FROM "projects" INNER JOIN "notes" ON "notes"."project_id" = "projects"."id" WHERE (projects.id IN (9,14,8,4,15,
+Completed 500 Internal Server Error in 22ms
+
+ActionView::Template::Error (PG::Error: ERROR:  column "projects.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT  projects.*, count(notes.id) as ncount FROM "projects...
+                ^
+: SELECT  projects.*, count(notes.id) as ncount FROM "projects" INNER JOIN "notes" ON "notes"."project_id" = "projects"."id" WHERE (projects.id IN (9,14,8,4,15,
+     5:   %hr
+     6:   .public-projects
+     7:     %ul.bordered-list
+     8:       = render @trending_projects
+     9:
+    10:   .center
+    11:     = link_to 'Show all projects', explore_projects_path, class: 'btn btn-primary'
+  app/views/explore/projects/trending.html.haml:8:in `_app_views_explore_projects_trending_html_haml___2032078195491206481_70291594938500'
+
+
+```

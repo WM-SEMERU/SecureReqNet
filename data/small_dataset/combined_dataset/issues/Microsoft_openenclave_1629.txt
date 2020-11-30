@@ -1,0 +1,4 @@
+Remove __oe_assert_fail from doxygen docs, fix for #1626
+
+
+Fix #1626

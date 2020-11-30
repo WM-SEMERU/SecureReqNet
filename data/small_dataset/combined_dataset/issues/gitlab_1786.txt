@@ -1,0 +1,5 @@
+The docker images provided in this repo doesn't assure that private host keys are generated. The host keys are the same in all executed containers of these base images.
+
+This an important security issue and have to be fixed.
+
+Due to this major security issue in this containers, the docker option should be removed from official supported installation methods. gitlab-com/www-gitlab-com@1e03297b4433b737802a1bc4f996c56db0d78dad/source/installation/index.html

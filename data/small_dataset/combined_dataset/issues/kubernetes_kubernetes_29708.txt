@@ -1,0 +1,6 @@
+Generic way to grant users access to databases
+
+
+Currently databases like mysql have several ways to lock access: source ip, user/password, ssl etc. There's a lot of confusion about how to do this on various platforms. Some people use cloudsql and setup a service accout proxy, or run a petset mysql and whiltelist ips/hostnames, just grant root access to 0.0.0.0 etc.
+We should figure out what works best cross platform and come up with good documentation.
+@kubernetes/sig-apps @smarterclayton are secrets sufficient? I know cloudsql has some twists that  @apelisse and @girishkalele were debugging, maybe there're others?

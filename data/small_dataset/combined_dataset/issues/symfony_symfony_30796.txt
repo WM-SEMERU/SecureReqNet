@@ -1,0 +1,49 @@
+[Console] non interactive confirmation question
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30726
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

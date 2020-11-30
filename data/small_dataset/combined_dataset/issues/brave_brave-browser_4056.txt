@@ -1,0 +1,52 @@
+🌑Dark theme persists in UI after switching back to Light🌕
+
+
+Description
+Having enabled 🌑dark theme and gone back to using the 🌕light theme, some elements of the UI remain themed dark🌑 - settings dropdown, permissions alert box (notifications, location, etc) - while the address bar and tabs have the proper 🌕light theme.
+Steps to Reproduce
+
+Switch to dark theme 🌑
+Switch back to light theme 🌕
+
+Actual result:
+
+Expected result:
+Consistent theme throughout the UI (either all dark or all light)
+Reproduces how often:
+Happens every time on my laptop and not at all on my desktop (quite weird because I installed the same version of the Beta, from scratch, on both machines.
+Brave version (brave://version info)
+
+
+
+Brave
+0.63.34 Chromium: 74.0.3729.40 (Official Build) beta (64-bit)
+
+
+
+
+Revision
+278d6a0d856d8314f36fb9a68b6e1d85cd0d14e7-refs/branch-heads/3729@{#470}
+
+
+OS
+Windows 10 OS Build 17763.379
+
+
+JavaScript
+V8 7.4.288.13
+
+
+
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+It is happening on the Beta for me
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+No
+Is the issue reproducible on the latest version of Chrome?
+Chrome does not have a dark theme
+
+Additional Information

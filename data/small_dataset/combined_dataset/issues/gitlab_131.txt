@@ -1,0 +1,150 @@
+Dear, 
+
+I have a error in my gitlab instalation, anyone can help me?
+I think the error is that the welcome message to the user git on ssh should not be this "Welcome to Ubuntu 13.10 (GNU / Linux 3.11.0-12-generic x86_64) ..." but I can not say what should be.
+
+Info:
+My SSH keys are added.
+
+## In my repository:
+```
+$ git remote add origin ssh://git@gitlab.XXXXX.XX:2222/root/luver-bootstrap.git
+$ git push origin master
+fatal: protocol error: bad line length character: Welc
+```
+
+## Debug:
+```
+$ ssh -vT git@gitlab.XXXXX.XX -p 2222
+OpenSSH_6.2p2 Ubuntu-6ubuntu0.1, OpenSSL 1.0.1e 11 Feb 2013
+debug1: Reading configuration data /etc/ssh/ssh_config
+debug1: /etc/ssh/ssh_config line 19: Applying options for *
+debug1: Connecting to gitlab.XXXXX.XXX [162.XXX.XXX.XX] port 2222.
+debug1: Connection established.
+debug1: permanently_set_uid: 0/0
+debug1: identity file /root/.ssh/id_rsa type 1
+debug1: Checking blacklist file /usr/share/ssh/blacklist.RSA-2048
+debug1: Checking blacklist file /etc/ssh/blacklist.RSA-2048
+debug1: identity file /root/.ssh/id_rsa-cert type -1
+debug1: identity file /root/.ssh/id_dsa type -1
+debug1: identity file /root/.ssh/id_dsa-cert type -1
+debug1: identity file /root/.ssh/id_ecdsa type -1
+debug1: identity file /root/.ssh/id_ecdsa-cert type -1
+debug1: Enabling compatibility mode for protocol 2.0
+debug1: Local version string SSH-2.0-OpenSSH_6.2p2 Ubuntu-6ubuntu0.1
+debug1: Remote protocol version 2.0, remote software version OpenSSH_6.2p2 Ubuntu-6ubuntu0.1
+debug1: match: OpenSSH_6.2p2 Ubuntu-6ubuntu0.1 pat OpenSSH*
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: server->client aes128-ctr hmac-md5-etm@openssh.com none
+debug1: kex: client->server aes128-ctr hmac-md5-etm@openssh.com none
+debug1: sending SSH2_MSG_KEX_ECDH_INIT
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ECDSA 77:cf:16:00:2e:39:3d:ef:c8:f5:e7:6c:80:ef:3a:e7
+debug1: Host '[gitlab.XXXXX.XX]:2222' is known and matches the ECDSA host key.
+debug1: Found key in /root/.ssh/known_hosts:1
+debug1: ssh_ecdsa_verify: signature correct
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: Roaming not allowed by server
+debug1: SSH2_MSG_SERVICE_REQUEST sent
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering RSA public key: /root/.ssh/id_rsa
+debug1: Server accepts key: pkalg ssh-rsa blen 279
+debug1: read PEM private key done: type RSA
+debug1: Authentication succeeded (publickey).
+Authenticated to gitlab.XXXXX.XX ([162.XXX.XXX.XX]:2222).
+debug1: channel 0: new [client-session]
+debug1: Requesting no-more-sessions@openssh.com
+debug1: Entering interactive session.
+debug1: Remote: Forced command.
+debug1: Remote: Port forwarding disabled.
+debug1: Remote: X11 forwarding disabled.
+debug1: Remote: Agent forwarding disabled.
+debug1: Remote: Pty allocation disabled.
+debug1: Remote: Forced command.
+debug1: Remote: Port forwarding disabled.
+debug1: Remote: X11 forwarding disabled.
+debug1: Remote: Agent forwarding disabled.
+debug1: Remote: Pty allocation disabled.
+debug1: Sending environment.
+debug1: Sending env LANG = en_US.UTF-8
+Welcome to Ubuntu 13.10 (GNU/Linux 3.11.0-12-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+debug1: client_input_channel_req: channel 0 rtype exit-status reply 0
+debug1: client_input_channel_req: channel 0 rtype eow@openssh.com reply 0
+debug1: channel 0: free: client-session, nchannels 1
+Transferred: sent 3248, received 3064 bytes, in 0.1 seconds
+Bytes per second: sent 24439.8, received 23055.3
+debug1: Exit status 254
+```
+
+## GitLab check
+$ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+
+```
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.7.9 ? ... OK (1.8.0)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ...
+Administrator / Luver Bootstrap ... repository is empty
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files:
+        /home/git/repositories: OK
+        /home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.6.13
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ...
+Administrator / Luver Bootstrap ... yes
+Projects have satellites? ...
+Administrator / Luver Bootstrap ... can't create, repository is empty
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.8.3)
+
+Checking GitLab ... Finished
+```

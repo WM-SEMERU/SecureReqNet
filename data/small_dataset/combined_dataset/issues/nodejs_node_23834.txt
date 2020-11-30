@@ -1,0 +1,12 @@
+Integrity checks via policy
+
+
+This is an initial effort to introduce integrity checks into code loading paths for Node.js . It is meant to cover the requirements of Subresource Integrity Checks as laid out previously. I have left the generation of manifests outside of the scope of Node.js for this PR and think this is the minimal viable way to introduce integrity checks in a sufficient manner.
+There have been concerns about using absolute paths for file integrity, but I have not found a suitable alternative as of yet and feel that this matches Subresource Integrity where location is related to integrity. A separate mechanism for location-less integrity could be introduced falling more under the style of script-src and is not under the scope of this PR. In particular I lay out why I find starting with location based integrity more conservative and less likely to introduce the same surface as location less with a couple examples.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

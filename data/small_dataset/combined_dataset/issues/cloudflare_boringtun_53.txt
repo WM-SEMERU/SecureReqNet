@@ -1,0 +1,5 @@
+Loosen precision of timestamp in initiation message
+
+
+Right now the timestamp field of the initiation message is too precise due (TimeStamper::stamp). It should be truncated to avoid acting as a time oracle which could aid in other attacks.
+The Linux kernel implementation choses to truncate the value based on the possible number of initiations per second, see WireGuard/WireGuard@c62836e.

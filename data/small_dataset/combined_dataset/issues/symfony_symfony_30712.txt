@@ -1,0 +1,14 @@
+[RFC][DX][Form] Use the default EventDispatcher for form events
+
+
+It can be quite confusing that one cannot configure an event listener or subscriber in services.yaml that listens to form events. I wonder why we do not use the default EventDispatcher instance for dispatching form events? Of course this only applies when forms are build using the FormFactory registered in the FrameworkBundle.
+Two reasons why I believe form events should be dispatched using the default EventDispatcher instance:
+1. Uniformity/DX
+After learning how the Symfony event and form systems work a developer might assume the following works:
+services:
+    App\EventListener\FormPreSubmitListener:
+        tags:
+            - { name: kernel.event_listener, event: form.pre_submit }
+2. Promote decoupled code
+The observer pattern is all about decoupling code. However, right now there is no clear way to add EventListeners or -Subscriber to form classes without coupling the form class to the event listener. A workaround might be to create a form type extension which adds event subscribers but this results in quite some boilerplate code (See: https://stackoverflow.com/a/48157630/3492835) and also inexperienced developers might feel more comfortable coupling the EventSubscribers to the form classes.
+What do you think?

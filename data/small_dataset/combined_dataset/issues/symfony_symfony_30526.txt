@@ -1,0 +1,30 @@
+readability-fix: Formatting constructors for readability
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+np
+
+
+BC breaks?
+no
+
+
+
+A couple of minor updates for readability purposes, that I implemented locally while working on a new skeleton project.

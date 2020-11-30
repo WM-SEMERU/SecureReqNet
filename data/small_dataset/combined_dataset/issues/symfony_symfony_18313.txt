@@ -1,0 +1,7 @@
+[Security][CSRF] Add Double Submit Cookies as CSRF prevention strategy
+
+
+From the discussion in #18115 :
+we should add the Double Submit Cookies CSRF prevention strategy as described by
+https://www.owasp.org/index.php/CSRF_Prevention_Cheat_Sheet#Double_Submit_Cookies
+If doable, this should be the default CSRF prevention strategy used in symfony SE

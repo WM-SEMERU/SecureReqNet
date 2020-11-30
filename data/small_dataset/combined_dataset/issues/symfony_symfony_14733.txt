@@ -1,0 +1,46 @@
+[Security] Add setVoters() on AccessDecisionManager
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+partially #12360
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Alternative for #14550

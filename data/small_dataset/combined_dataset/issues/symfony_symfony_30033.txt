@@ -1,0 +1,16 @@
+Twig icon in profiler is active even without templates rendered
+
+
+Symfony version(s) affected: 4.2.2
+Description
+A couple of images should explain the problem.
+This is profiler I see:
+
+Then, I click on Twig icon and I get this:
+
+So, the Twig icon is active (e.g. not in gray) even when profiled request rendered no templates.
+This is inconsistent with other profiler icons, that are grey when no info is collected and active otherwise.
+How to reproduce
+Just call a route in your application when Twig is not involved, e.g. an action returning a JsonResponse.
+Possible Solution
+Likely some check is missing.

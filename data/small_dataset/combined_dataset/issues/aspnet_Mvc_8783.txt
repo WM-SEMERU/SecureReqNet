@@ -1,0 +1,20 @@
+Open API Analyzers behave different from VSCode -> VSforMac -> VS17
+
+
+Is this a Bug or Feature request?:
+Bug
+Steps to reproduce (preferably a link to a GitHub repo with a repro project):
+create a new WebAPI project, add Open API Analyzers and open it on VSCode, VSforMac, VS17
+Description of the problem:
+VS17 give expected behavior of the feature which are squiggles line and Quick fixes options.
+VSforMac give you only warning messages but not Quick fixes options.
+VSCode give you none.
+Version of Microsoft.AspNetCore.Mvc or Microsoft.AspNetCore.App or Microsoft.AspNetCore.All:
+netcoreapp2.2
+
+
+
+
+
+
+

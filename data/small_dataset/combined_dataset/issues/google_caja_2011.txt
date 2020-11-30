@@ -1,0 +1,6 @@
+Fix issue with arguments.caller and whitelist Array.from
+
+
+
+
+

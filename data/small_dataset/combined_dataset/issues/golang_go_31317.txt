@@ -1,0 +1,64 @@
+fmt.Println cause memory escape
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.11.4 darwin/amd64
+
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/hg/4yk5n5f551z8v950nxkq9bf80000gn/T/go-build076297954=/tmp/go-build -gno-record-gcc-switches -fno-common"
+
+What did you do?
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	for i := 0; i < 5; i++ {
+        m := i
+        fmt.Println("outer: ", m)
+        go func(j int) {
+            k := j
+            fmt.Println("innter", k)
+        }(i)
+	}
+
+	time.Sleep(1 * time.Second)
+    s := "Done"
+	fmt.Println(s)
+}
+
+% go build --gcflags '-m -l'  x.go
+# command-line-arguments
+./x.go:11:21: "outer: " escapes to heap
+./x.go:11:21: m escapes to heap
+./x.go:12:12: func literal escapes to heap
+./x.go:12:12: func literal escapes to heap
+./x.go:20:13: s escapes to heap
+./x.go:14:25: "innter" escapes to heap
+./x.go:14:25: k escapes to heap
+./x.go:11:20: main ... argument does not escape
+./x.go:20:13: main ... argument does not escape
+./x.go:14:24: main.func1 ... argument does not escape
+
+As we can see, the const strings,  the variable j are allocated on heap, but they can be alloced on stack,  by a easy manually check.
+What did you expect to see?
+the golang library funciton fmt.Println should not cause memory escape.
+What did you see instead?
+parameters passed into fmt.Println escaped to heap.

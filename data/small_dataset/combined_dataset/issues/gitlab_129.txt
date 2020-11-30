@@ -1,0 +1,12 @@
+We have super project that have submodules, in gitlab it's impossible jump directly to subroject as link is incorrect, example
+Main project: git@localhost:group/main.git
+In this project we have submodule that is pointing to project: git@localhost:group/sub1.git
+
+In directory browser we have see this folder as submodule, but when clicking to browse, we have bad link:
+http://localhost/group/main/tree/submodule_init/services/git@localhost:group/sub1.git
+
+Than create 404 error, also clicking by this link we must be pointed to correct commit that we have pointed out submodule. 
+
+
+As I understand link must be something like this:
+http://localhost/group/sub1/tree/{commit}

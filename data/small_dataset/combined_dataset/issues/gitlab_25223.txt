@@ -1,0 +1,5 @@
+When snippets feature visibility is set to `Disabled` or `Only team members` it is still possible for any user to access them through the API.
+
+Other places `SnippetsFinder` is used also have this problem so the snippets appear in `/explore/snippets` too.
+
+Also check `Snippet.accessible_to` used in `Search::SnippetService`.

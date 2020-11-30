@@ -1,0 +1,6 @@
+ACL UserSecurityIdentity::fromAccount passing proxy class
+
+
+Sometimes it's necessary to create UserSecurityIdentity, using fromAccount-method and passing proxy of your User-class (e.g. when you get user-object from relation of another doctrine2-Entity).
+fromAccount-method is taking class name by get_class(), and for proxy it isn't correctly
+May be it's better to use get_parent_class() if proxy-class-object was passed

@@ -1,0 +1,15 @@
+doc: require two-factor authentication
+
+
+Collaborators have elevated privileges. The CTC now requires
+Collaborator accounts to have two-factor authentication. This changes
+wording in the onboarding documentation to make it clear that two-factor
+authentication is required and not merely recommended.
+/cc @nodejs/ctc
+Checklist
+
+ documentation is changed or added
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+doc

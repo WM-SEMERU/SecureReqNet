@@ -1,0 +1,10 @@
+Send initial account notification emails
+
+
+
+reset password
+change password
+add new sync device
+
+More context: https://id.etherpad.mozilla.org/fxa-activity-notifications
+Link to https://github.com/mozilla/fxa-auth-mailer/issues/24

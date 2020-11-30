@@ -1,0 +1,46 @@
+[Form] Avoid a form type extension appears many times in debug:form
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30394 
+
+
+License
+MIT
+
+
+
+This PR fixes #30394. Avoid a form type extension appears many times in debug:form command. This is caused by new 4.2 feature getExtendedTypes().

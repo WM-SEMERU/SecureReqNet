@@ -1,0 +1,40 @@
+Kops 1.6 with Kubernetes 1.5 and RBAC
+
+
+Background:
+
+Existing deployments using Kops 1.5.2 and Kubernetes 1.5 and RBAC
+
+I was able to upgrade my kops client to kops 1.6-alpha-1 and deployed Kubernetes 1.6.1, but when attempting to use the upgraded kops 1.6-alpha-1 client to deploy a Kubernetes 1.5 cluster CNI on the minion nodes fails with weave.
+Weave Pods
+2017/04/10 18:06:13 error contacting APIServer: Get https://x.x.x.:443/api/v1/nodes: dial tcp x.x.x.x1:443: i/o timeout; trying with fallback: http://localhost:8080
+2017/04/10 18:06:13 Could not get peers: Get http://localhost:8080/api/v1/nodes: dial tcp [::1]:8080: getsockopt: connection refused
+Failed to get peers
+
+Kube-proxy
+I0410 17:15:03.026097       7 iptables.go:176] Could not connect to D-Bus system bus: dial unix /var/run/dbus/system_bus_socket: connect: no such file or directory
+I0410 17:15:03.026137       7 server.go:168] setting OOM scores is unsupported in this build
+E0410 17:15:33.029263       7 server.go:421] Can't get Node "ip-x-x-x-x", assuming iptables proxy, err: Get https://api.internal.harmless-gnat.dev.io/api/v1/nodes/
+ip-x-x-x-x: dial tcp x.x.x.x:443: i/o timeout
+I0410 17:15:33.030412       7 server.go:215] Using iptables Proxier.
+W0410 17:16:03.030749       7 server.go:468] Failed to retrieve node info: Get https://api.internal.harmless-gnat.dev.io/api/v1/nodes/ip-x-x-x-x: dial tcp 203.0.11
+3.123:443: i/o timeout
+W0410 17:16:03.030826       7 proxier.go:249] invalid nodeIP, initialize kube-proxy with 127.0.0.1 as nodeIP
+I0410 17:16:03.030847       7 server.go:227] Tearing down userspace rules.
+I0410 17:16:03.031162       7 healthcheck.go:119] Initializing kube-proxy health checker
+I0410 17:16:03.039932       7 conntrack.go:81] Set sysctl 'net/netfilter/nf_conntrack_max' to 262144
+I0410 17:16:03.040245       7 conntrack.go:66] Setting conntrack hashsize to 65536
+I0410 17:16:03.040558       7 conntrack.go:81] Set sysctl 'net/netfilter/nf_conntrack_tcp_timeout_established' to 86400
+I0410 17:16:03.040593       7 conntrack.go:81] Set sysctl 'net/netfilter/nf_conntrack_tcp_timeout_close_wait' to 3600
+E0410 17:16:33.040508       7 reflector.go:188] pkg/proxy/config/api.go:33: Failed to list *api.Endpoints: Get https://api.internal.harmless-gnat.dev.io/api/v1/endpoint
+s?resourceVersion=0: dial tcp x.x.x.x:443: i/o timeout
+E0410 17:16:33.040594       7 reflector.go:188] pkg/proxy/config/api.go:30: Failed to list *api.Service: Get https://api.internal.harmless-gnat.dev.io/api/v1/services?r
+esourceVersion=0: dial tcp x.x.x.x:443: i/o timeout
+I0410 17:16:33.040840       7 proxier.go:819] Not syncing iptables until Services and Endpoints have been received from master
+E0410 17:16:33.041090       7 event.go:208] Unable to write event: 'Post https://api.internal.harmless-gnat.dev.io/api/v1/namespaces/default/events: dial tcp 203.0.113.
+123:443: i/o timeout' (may retry after sleeping)
+E0410 17:16:34.123356       7 reflector.go:188] pkg/proxy/config/api.go:33: Failed to list *api.Endpoints: the server does not allow access to the requested resource (get endpoi
+nts)
+E0410 17:16:34.123750       7 reflector.go:188] pkg/proxy/config/api.go:30: Failed to list *api.Service: the server does not allow access to the requested resource (get services
+)```
+

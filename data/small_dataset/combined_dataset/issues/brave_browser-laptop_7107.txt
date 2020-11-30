@@ -1,0 +1,81 @@
+Rework alert/confirm to be tab-modal (instead of application-modal)
+
+
+Test Plan
+Testing alert
+
+Visit http://jsbin.com/fiyojusahu/edit?html,output
+In the output area, click the Click me to test an alert button
+Confirm the alert works as expected
+
+Testing confirm
+
+Visit http://jsbin.com/sadunogefu/edit?html,output
+In the output area, click the Click me to test a confirm button
+Confirm the confirm works as expected (try clicking OK and also cancel)
+
+Testing import
+
+Have a bookmarks file (.html) or other browser history which can be imported
+Launch Brave and go to Preferences > General
+Click import, choose appropriate settings (based on what you have in step 1)
+Click OK to start import process
+When done, you should see a tab-specific modal letting you know it's complete
+
+Testing import (Firefox)
+
+Have Firefox installed and open
+Launch Brave and go to Preferences > General
+Click import, choose Firefox
+Click OK to start import process
+You should see warning alert
+
+Issue specific tests
+#3794 - Hard to exit/close Brave when site spams you with message box / alerts
+#2755 - prevent js alert spoofing attacks
+#6901 - alert() popups should appear below tabs
+#7213 - Brave crashed on macOS 10.12.3 via.window.open()
+#7280 - Invalid sync code alert needs proper heading
+Automated tests
+# unit tests
+npm run unittest -- --grep="MessageBox component unit tests"
+npm run unittest -- --grep="tabMessageBoxState unit tests"
+npm run unittest -- --grep="tabMessageBox unit tests"
+npm run unittest -- --grep="tabState unit tests"
+npm run unittest -- --grep="Main component unit tests"
+npm run unittest -- --grep="NavigationBar component unit tests"
+npm run unittest -- --grep="UrlBar component unit tests"
+npm run unittest -- --grep="UrlBarIcon component unit tests"
+
+# webdriver tests
+npm run uitest -- --grep="MessageBox component tests"
+Description
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+
+Rework alert/confirm to be tab-modal (instead of application-modal)
+Message box:
+
+shows an on/off switch for "Prevent this page from creating additional dialogs". Fixes #3794
+does not include Brave logo; shows origin; does not need to show "switch to tab" because it's already bound to tab. Fixes #2755
+is shown BELOW tabs now. Fixes #6901
+
+Other changes include:
+
+Removed "An embedded page at " from source message (shown on every message)
+Rename showMessageBox/hideMessageBox/clearMessageBoxes actions to showNotification/hideNotification/clearNotification
+Converted most styles to Aphrodite
+
+Auditors: @bridiver, @diracdeltas
+Folks who may also be interested: @bbondy, @darkdh
+Special note
+Electron recently received a PR to implement an optional checkbox in electron.dialog.showMessageBox... but this is a better choice for us because it's tab-modal (you can switch tabs while the alert is up, etc).
+Screenshots
+
+
+
+
+cc: @ayumi

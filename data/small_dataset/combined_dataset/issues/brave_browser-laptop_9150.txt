@@ -1,0 +1,44 @@
+"Allow this time" on NoScript dialog keeps allowing scripts even after reopening the tab
+
+
+Test plan
+#9595 (comment)
+
+Describe the issue you encountered: "Allow this time" on NoScript dialog keeps allowing scripts even after reopening the tab
+
+
+Brave Version (revision SHA): 0.15.310
+
+
+Steps to reproduce:
+
+Clear your brave profle
+Open https://github.com
+Open Shields panel
+Block scripts
+Make sure there are 3 scripts blocked
+Close the panel
+Click noscript icon on the URL bar
+Uncheck assets-cdn.github.com (to allow github.com only)
+Click Allow this time
+Make sure there are 2 scripts blocked
+Close the panel
+Reopen the tab
+
+
+
+Actual result: there are 2 scripts blocked
+
+
+Expected result: there should be 3 scripts blocked
+
+
+Extra QA steps:
+1.
+2.
+3.
+
+
+Any related issues: #9505
+
+

@@ -1,0 +1,30 @@
+I got admin message 'udpate asap' for current installation of GitLab v8.17.6.  
+But there are no 8.17.7 available (like it was for 8.17.5).  
+
+gitlab-ce.x86_64                         8.17.6-ce.0.el7                 gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.0-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.1-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.2-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.3-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.4-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.5-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.6-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.0.7-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.1.0-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.1.1-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.1.2-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.1.3-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.1.4-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.1.7-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.2.0-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.2.1-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.2.2-ce.0.el7                  gitlab_gitlab-ce    
+gitlab-ce.x86_64                         9.2.5-ce.0.el7                  gitlab_gitlab-ce    
+
+We do not plan migration to version 9 since it is not good enough yet from point of view of UI.  
+So we want to stick with 8 version for now.  
+But the message means that we have to update due to some security issues.  
+
+I have reviewed changes in changelog here: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CHANGELOG.md  
+And it does not contain any security fixes (at least it looks so).  
+Does it mean that 8.17.6 version got 'update asap' message by mistake and it still should be 'update available'?  

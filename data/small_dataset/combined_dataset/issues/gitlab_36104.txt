@@ -1,0 +1,39 @@
+'From external security tests, https://gitlab.com/gitlab-com/infrastructure/issues/2438:
+
+- Effort: Low
+- Impact: Info
+- Location: Markdown
+
+#### Details
+
+It was found that the Markdown sanitizer allows to create HTML `<img>` elements that are applied with a `name` attribute. The `name` attribute can be used to "clobber" existing native properties and methods on the document DOM object. As a result, an image can for example overwrite the method `document.getElementById()` with the image itself and cause the website to fail as this method is needed by various libraries and JS features.
+
+The following HTML will "clobber" the methods `document.getElementById()` and `document.getElementsByTagName()`:
+
+```
+<img name="getElementById" src="">
+<img name="getElementsByTagName" src="">
+```
+
+Once this MD has been submitted, the Gitlab website will start throwing JavaScript errors.
+
+```
+16:12:26.888 TypeError: t.getElementsByTagName is not a function[Learn
+More] common.a208e8b828f4e7f4759b.bundle.js:24:427
+16:12:34.298 TypeError: document.getElementById is not a
+function[Learn More]  common.a208e8b828f4e7f4759b.bundle.js:1:22116
+```
+
+While no exploitable issue has yet been found, it is recommended to mitigate the issue nevertheless.
+
+#### Reproduction Steps
+
+- Create an MD file in any repository
+- Add the HTML above and open the file 
+- Observe the website throw JavaScript errors
+
+Please note that, if e.g. the KaTeX rendering plugin is used, it will not work anymore.
+
+#### Recommendation
+
+The `name` attribute should not be allowed for any HTML element.

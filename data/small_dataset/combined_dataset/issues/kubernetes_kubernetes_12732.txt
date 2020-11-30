@@ -1,0 +1,8 @@
+Keys/certificates generation for services
+
+
+It is normal for services within a cluster to require TLS & hence keys/certificates are required. Managing this is normally manual & time-consuming. I'd like to be able to generate keys/certificates on (authenticated) request & provide these to the relevant pods via secrets. This a common problem in a microservice architecture - great blog post on it here.
+I have a working prototype building on top of cfssl. The basic idea is to watch secrets as they are added & if annotated correctly to update the sceret with generated keys & signed certificates via a cfssl pod (cfssl is bound to localhost so no external connectivity). These are then mounted inside pods that require them in the normal way.
+Obviously this is very insecure at the moment as there is no idea of authorization, or of revocation, or of ... well anything other than simply usability. I am not advocating the approach I currently have, just explaining what I've done so far to start discussion.
+This is related to some other issues around secret/token generation such as #11070 & #8866, but separate IMO, perhaps just a special case, but one that justifies it's own discussion.
+/cc @liggitt @erictune

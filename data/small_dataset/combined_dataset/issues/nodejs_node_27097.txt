@@ -1,0 +1,40 @@
+Piping w/ spawn is broken in Node 11
+
+
+
+Version: 11.13
+Platform: OSX
+Subsystem: child_process
+
+Ref #18016, ping @elibarzilay and @gireeshpunathil
+It seems that Node 11's behavior changed compared to Node 10, and pipes are now automatically closed after being used as output stream from a process. I think this is a bug, because it makes it impossible to use the same pipe as output from two different processes (which would be the case if I was to implement (foo; bar) | cat - both foo and bar would write into the cat process).
+Additionally, it causes previously working code to "randomly" throw internal exceptions. The random part is likely caused by a race condition, since perl throws consistently while rev doesn't cause problems. The exception is as such:
+const {spawn} = require(`child_process`);
+
+const p2 = spawn(`perl`, [`-ne`, `print uc`], {
+  stdio: [`pipe`, process.stdout, process.stderr],
+});
+
+const p1 = spawn(`node`, [`-p`, `"hello world"`], {
+  stdio: [process.stdin, p2.stdin, process.stderr],
+});
+
+p1.on(`exit`, code => {
+  p2.stdin.end();
+});
+❯ [mael-mbp?] /Users/mael ❯ node test
+
+HELLO WORLD
+internal/validators.js:130
+    throw new ERR_INVALID_ARG_TYPE(name, 'number', value);
+    ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "err" argument must be of type number. Received type undefined
+    at validateNumber (internal/validators.js:130:11)
+    at Object.getSystemErrorName (util.js:231:3)
+    at errnoException (internal/errors.js:383:21)
+    at Socket._final (net.js:371:25)
+    at callFinal (_stream_writable.js:617:10)
+    at processTicksAndRejections (internal/process/task_queues.js:81:17)
+
+As you can see the code executed fine (HELLO WORLD got printed), but during cleanup an internal assertion failed and Node crashed.

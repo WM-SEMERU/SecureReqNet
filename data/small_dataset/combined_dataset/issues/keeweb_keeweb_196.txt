@@ -1,0 +1,8 @@
+The OS X distribution should be signed
+
+
+Hello,
+The OS X distribution should be signed by an Apple-identified developer ID.
+See here: https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/DistributingApplicationsOutside/DistributingApplicationsOutside.html
+Not doing this means that when trying to open the app OS X will complain about the executable not being signed and OS X will refuse to open it. You then have to force it open by pressing Shift, a little known trick for common users.
+This has utility outside of fixing this slight inconvenience. By downloading a signed binary, I can trust that it is from you. I personally pay attention to such errors and now that I've seen the binary isn't signed, I began wondering - can I trust the website, can I trust the connection I used for downloading the app, what if this is malware? Now I'm afraid running it, especially since I'm the kind of guy that doesn't have antivirus software installed (since I'm also the kind of guy that always installs stuff from trustworthy sources).

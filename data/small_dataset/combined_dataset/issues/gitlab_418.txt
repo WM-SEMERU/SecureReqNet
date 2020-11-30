@@ -1,0 +1,8 @@
+Version: GitLab 7.0.0 de9bf7d
+Correctly checked (sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production SANITIZE=true)
+
+This issue started after upgrade to 7.0 and affects only the network tab, commits are correctly attributed to the user in any other area of the application.
+
+The user has two email addresses registered in his profile, commits affected by the issue are pushed using secondary address.
+
+

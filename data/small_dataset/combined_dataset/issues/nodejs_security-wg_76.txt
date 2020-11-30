@@ -1,0 +1,6 @@
+add triage team members
+
+
+Following #73
+@nodejs/security-wg please +1 or -1 this. I'd like to have this merged in order to invite members to the team. Once this is done, we will need to spread the word and handle the few issues already reported on HackerOne.
+cc @sam-github @cjihrig @bengl @sam-github @brycebaril

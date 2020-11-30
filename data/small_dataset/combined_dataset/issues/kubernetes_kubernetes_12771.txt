@@ -1,0 +1,5 @@
+JSONPath output needs a quote operator to safely generate arguments
+
+
+Since we're likely to want to use JSONPath output with bash, we need to have a way to ensure that output can be safely escaped for use with scripting.  Go templates support quoting and encoding, but we have no JSONPath equivalent.
+E.g. oc get -o jsonpath -t 'echo {.metadata.annotations[foo]}' could contain spaces and thus makes it difficult to safely encode.  The strconv.Quote function is an effective tool in this space.

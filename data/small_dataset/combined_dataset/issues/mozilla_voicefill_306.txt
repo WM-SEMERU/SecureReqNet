@@ -1,0 +1,7 @@
+permanently allo microphone use
+
+
+Hello!
+Voicefill works very well for me! As a French guy, I talk in French and it works wonderfully.
+But (!), each time I want to use it it asks me to authorize the use of my computer microphone. Is tehre a way to permanently the microphone access?
+Thanks

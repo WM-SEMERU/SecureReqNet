@@ -1,0 +1,34 @@
+Torrent Viewer extension icon not shown
+
+
+Have you searched for similar issues? Yes
+Description
+After updating from 0.22.x to 0.23.x the Torrent Viewer icon not shown anymore
+even after update to newer 0.23.x problem still there
+Steps to Reproduce
+
+Go to Settings.
+From left panel click Extensions
+Torrent Viewer extension icon not there!
+
+Actual result:
+Icon not shown
+Expected result:
+It must show an icon for Torrent Viewer extension
+Brave Version
+Brave: 0.23.79
+V8: 6.8.275.24
+rev: 51b4905
+Muon: 8.0.7
+OS Release: 10.0.14393
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Additional Information
+The icon address is
+file:///C:/Users/User/AppData/Local/Brave/app-0.22.727/resources/extensions/torrent/img/webtorrent-128.png
+and it must be (as I have Brave 0.23.79)
+file:///C:/Users/User/AppData/Local/Brave/app-0.23.79/resources/extensions/torrent/img/webtorrent-128.png

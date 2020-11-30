@@ -1,0 +1,52 @@
+[SecurityBundle] Prevent auto-registration of UserPasswordEncoderCommand
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#22855
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Always registers the command as a service even if no encoders are configured so that it is not auto-registered via reflection.
+Prevents an irrelevant deprecation when no encoders are configured and, if a day the per-convention command registration is removed, ensures that the command always exists (leading to an exception saying that you have no configured encoder, better than nothing).
+ping @ogizanagi

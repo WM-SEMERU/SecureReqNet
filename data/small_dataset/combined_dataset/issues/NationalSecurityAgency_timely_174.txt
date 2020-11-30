@@ -1,0 +1,4 @@
+Update lodash dependency to 4.17.11
+
+
+Update dependency due to https://nvd.nist.gov/vuln/detail/CVE-2018-3721

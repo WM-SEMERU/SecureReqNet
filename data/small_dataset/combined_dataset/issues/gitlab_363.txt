@@ -1,0 +1,36 @@
+'Hello.
+
+I installed gitlab using the omnibus package on Debian 7.
+
+To successfully run the backup task, I had to install bundle, rake and then run the "bundle install" command.
+
+Apparently (as said on twitter), it's not normal to run "bundle install" when using omnibus package.
+
+I recreated the issue on a VM, and here are the steps to reproduce it from a clean/fresh Debian 7 installation :
+- Download the package : wget https://downloads-packages.s3.amazonaws.com/debian-7.5/gitlab_6.9.2-omnibus.2-1_amd64.deb
+- Install it : dpkg -i gitlab_6.9.2-omnibus.2-1_amd64.deb
+- Configure GitLab : gitlab-ctl reconfigure
+
+So far, no problem, then I logged to the gitlab web interface, set the root password, and created some dummy projects with their repositories.
+
+I used this documentation to configure the backups (I just adapted the paths to reflect the current installation) : https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md
+
+So first launch :
+- su - git
+- cd /opt/gitlab/embedded/service/gitlab-rails/ && HOME=/var/opt/gitlab PATH=/usr/local/bin:/usr/bin:/bin bundle exec rake gitlab:backup:create RAILS_ENV=production
+-- Error : -su: 3: bundle: not found
+- So I installed bundle with the debian package (aptitude install bundler) and re-run the same command :
+-- Error : bundler: command not found: rake
+- Same way, I installed rake using "aptitude install rake" and re-run the same command :
+-- Error : Could not find rake-10.3.1 in any of the sources. Run `bundle install` to install missing gems.
+- So I ran bundle install as the root user (with PWD=/opt/gitlab/embedded/service/gitlab-rails/).
+
+After some minutes and 2 libs installed (libpq-dev and libicu-dev), the "bundle install" command was successful.
+
+Then, back with the user "git", the command "cd /opt/gitlab/embedded/service/gitlab-rails/ && HOME=/var/opt/gitlab PATH=/usr/local/bin:/usr/bin:/bin bundle exec rake gitlab:backup:create RAILS_ENV=production" went well and correctly performed the backup.
+
+As it's not normal to launch "bundle install" with omnibus packages, I open this issue. Maybe the problem comes from the bunch of human cells located between the keyboard and the chair (so me :)), in this case, I would know how to correctly perform backups without "bundle install". If there's any issue with GitLab omnibus packages, I would be happy to help this project by openning this issue.
+
+As far, I didn't tested GitLab 7, I will wait a bit before switching the production environment from GitLab 6.9.2 to 7.0.
+
+Thanks.

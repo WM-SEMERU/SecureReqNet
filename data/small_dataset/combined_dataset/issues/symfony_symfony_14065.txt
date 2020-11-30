@@ -1,0 +1,12 @@
+[Security] Cannot modify token attributes when impersonating an user
+
+
+I have an authentication success listener that adds a required attribute to the authenticated token, but I cannot use the switch user feature, because there is no way to add this attribute to the switched user token.
+When the SwitchUserFirewall is triggered, it creates a new UsernamePasswordToken with a least the ROLE_PREVIOUS_ADMIN so it creates a new authenticated token, but no security.authentication.success is dispatched, and my listener do not add the required attribute.
+Then, a security.switch_user event is dispatched, with a reference to the Request and to the User, but there is no reference to the created token, so there is no way to add the token attribute here.
+So, I see two different solutions here:
+
+Dispatch a security.authentication.success when the new authenticated UsernamePasswordToken is created (Not sure if this is BC)
+Add a third optional parameter to the SwitchUserEvent constructor to reference the token.
+
+I can submit a PR with the preferred option.

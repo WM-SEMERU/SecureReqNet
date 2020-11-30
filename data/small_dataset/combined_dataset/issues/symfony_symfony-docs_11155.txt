@@ -1,0 +1,61 @@
+Repository as service
+
+
+Hi,
+As in usage of repository classes the Internet is full of blog posts that often say "Do not dependency inject Entity Manager anywhere", "Entity Manager closed", "This happens if your entity uses multiple Entity Managers" so on. There are many examples and many people are confused as a result. All people want is to create a repository (but how exactly) and inject it to wherever they need it - e.g. a Service class.
+I think it is worth putting some kind of example (the best practise) in the Doc and explain why repository should be done that particular way. To me the example should encourage people from decoupling themselves from the Doctrine and composition is more ideal than the inheritance etc.
+If no action will be taken in the Doc, could please someone show us an example here? Or maybe vote on one the examples below please. I believe @Ocramius 's input here would add a great value!
+Thanks
+Examples I've seen -
+1
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
+class HelloRepository extends ServiceEntityRepository
+{
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, Hello::class);
+    }
+}
+
+2
+use Doctrine\ORM\EntityManagerInterface;
+
+class HelloRepository
+{
+    private $entityManager;
+    private $objectRepository;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+        $this->objectRepository = $this->entityManager->getRepository(Hello::class);
+    }
+}
+
+3
+use Doctrine\ORM\EntityRepository;
+ 
+class HelloRepository
+{
+    private $entityRepository;
+ 
+    public function __construct(EntityRepository $entityRepository)
+    {
+        $this->entityRepository = $entityRepository;
+    }
+}
+
+4
+use Doctrine\Common\Persistence\ManagerRegistry;
+
+class HelloRepository
+{
+    private $managerRegistry;
+
+    public function __construct(ManagerRegistry $managerRegistry)
+    {
+        $this->managerRegistry = $managerRegistry;
+    }
+}

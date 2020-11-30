@@ -1,0 +1,6 @@
+fix: incorrect auto POS profile selected in the sales invoice
+
+
+
+
+

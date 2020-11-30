@@ -1,0 +1,51 @@
+[Validator] Fix annotation default for @Count and @Length
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+is it worth mentioning?
+
+
+
+Count and Length constraints allow to pass the exact value as the constructor argument when used in code.
+new Length(5);
+// is same as
+new Length(['min' => 5, 'max' => 5]);
+At the same time when using them as annotations, @Assert\Length(5) throws The options "" do not exist in constraint Symfony\\Component\\Validator\\Constraints\\Length (fix for ugly exception is proposed in #30737). This happens because annotation's default value is passed as value. Since Length does not have a default option, value is replaced with ''.
+This PR fixes this inconsistency.

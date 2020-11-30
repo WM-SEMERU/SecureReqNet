@@ -1,0 +1,40 @@
+default ublock-unbreak doesn't exist
+
+
+Just seeing the default lists:
+adBlockLists [ { uuid: '67F880F5-7602-4042-8A3D-01481FD7437A',
+    listURL: 'https://easylist.to/easylist/easylist.txt',
+    title: 'EasyList',
+    supportURL: 'https://easylist.to/',
+    componentID: '',
+    base64PublicKey: '' },
+  { uuid: '48010209-AD34-4DF5-A80C-3D2A7C3920C0',
+    listURL: 'https://easylist.to/easylist/easyprivacy.txt',
+    title: 'EasyPrivacy',
+    supportURL: 'https://easylist.to/',
+    componentID: '',
+    base64PublicKey: '' },
+  { uuid: '200392E7-9A0F-40DF-86EB-6AF7E4071322',
+    listURL:
+     'https://raw.githubusercontent.com/brave/adblock-lists/master/ublock-unbreak.txt',
+    title: 'uBlock Unbreak',
+    supportURL: 'https://github.com/gorhill/uBlock',
+    componentID: '',
+    base64PublicKey: '' },
+  { uuid: '2FBEB0BC-E2E1-4170-BAA9-05E76AAB5BA5',
+    listURL:
+     'https://raw.githubusercontent.com/brave/adblock-lists/master/brave-unbreak.txt',
+    title: 'Brave Unblock',
+    supportURL: 'https://github.com/brave/adblock-lists',
+    componentID: '',
+    base64PublicKey: '' },
+  { uuid: 'BCDF774A-7845-4121-B7EB-77EB66CEDF84',
+    listURL:
+     'https://raw.githubusercontent.com/brave/adblock-lists/master/coin-miners.txt',
+    title: 'NoCoin Filter List',
+    supportURL: 'https://github.com/brave/adblock-lists',
+    componentID: '',
+    base64PublicKey: '' } ]
+
+The URL https://raw.githubusercontent.com/brave/adblock-lists/master/ublock-unbreak.txt is no more accessible, but I didn't see the reference on the code.
+Maybe the last release never has been released? 🤔

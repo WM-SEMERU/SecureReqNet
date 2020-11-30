@@ -1,0 +1,46 @@
+[Security][Guard] GuardAuthenticationProvider::authenticate cannot return null
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26942
+
+
+License
+MIT
+
+
+
+Authenticate method in GuardAuthenticationProvider returned null when the token does not originate from any of the guard authenticators. This check was not done in the supports method. According to the interface authenticate cannot return null. This patch copies theguard authenticator checks to the supports method.

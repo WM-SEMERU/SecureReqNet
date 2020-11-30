@@ -1,0 +1,14 @@
+Fix security issue
+
+
+Test Plan
+Case 1:
+
+#14664 (comment)
+
+Case 2:
+
+https://docs.google.com/document/d/1wHVtO0MPMvTLCU3jBwMRgjTcsEBmrIP3NyegHBBr3ak/
+
+Original Issue
+Ask @darkdh for details

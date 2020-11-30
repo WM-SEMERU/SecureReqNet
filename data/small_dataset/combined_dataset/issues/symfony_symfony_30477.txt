@@ -1,0 +1,52 @@
+[Translator] Prefer non-empty fallback translation over empty one
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+I'm currently dealing with XLIFF, so can't say for other formats. But Symfony considers <target /> there as valid translation. Even though XLIFF standard has no mention what should happen in such case, translation tools like Crowdin treat this as untranslated unit, so these empty tags are widespread way to mark unit as untranslated.
+Result of this behaviour is that Symfony does not fallback to real, non-empty translation, which is unfortunate. This patch is compromise which should work for all other formats too.
+Kinda related: XLIFF export should be with empty targets

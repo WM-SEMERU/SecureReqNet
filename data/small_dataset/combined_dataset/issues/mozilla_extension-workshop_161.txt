@@ -1,0 +1,5 @@
+Review the assets directory for JS/CSS that should be consumed as packages
+
+
+There's some libs in the assets directory that might be available as deps. If this is the case let's switch them to external dependencies so we can benefit from updates.
+For cases where these aren't external dependencies let's file upstream bugs to ask the maintainers to package their code where possible.

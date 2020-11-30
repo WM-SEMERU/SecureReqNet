@@ -1,0 +1,14 @@
+Rename StreamPipeReaderOptions to StreamPipeReaderAdapterOptions
+
+
+Description
+Changes the name of StreamPipeReaderOptions to StreamPipeReaderAdapterOptions to avoid a name collision with System.IO.Pipelines.
+Reason for change
+Builds will fail without this change, saying that there is a nameconflict on StreamPipeReaderOptions.
+What commit caused this failure
+dotnet/corefx@dc965e1 caused this name conflict and upgrading dependencies caught it.
+Why wasn't it caught earlier?
+Upgrading dependencies takes too long and no one was on top of this earlier.
+Any concerns of breaking changes?
+This is a breaking change, but the type was unused and will be removed within the timeframe of preview4 to preview5.
+cc @Eilon @DamianEdwards

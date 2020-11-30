@@ -1,0 +1,5 @@
+Document logout success_handler configuration
+
+
+The Security docs tell how to control what happens after logging out, but the security configuration reference is missing documentation on the logout success_handler.
+Partially related to #4258

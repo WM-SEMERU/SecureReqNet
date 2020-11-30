@@ -1,0 +1,18 @@
+[BrowserKit] BC-break since Client has been renamed to Browser
+
+
+Symfony version(s) affected: 4.3.x-dev
+Description
+Since #30541 the inheritance hierarchy of \Symfony\Component\BrowserKit\Client has changed. Notably the test.client no longer is an instance of \Symfony\Component\BrowserKit\Client.
+This breaks breaks at least https://github.com/FriendsOfBehat/SymfonyExtension and https://github.com/minkphp/MinkBrowserKitDriver and most probably other bundles using test.client.
+How to reproduce
+On Symfony 4.2 the following test case succeeds, on the master (4.3) branch this fails:
+class TestClientTest extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase {
+    public function testIsAClient()
+    {
+        $browser = static::createClient();
+        $this->assertInstanceOf(\Symfony\Component\BrowserKit\Client::class, $browser);
+    }
+}
+Possible Solution
+Use a class_alias solution as described in #30541.

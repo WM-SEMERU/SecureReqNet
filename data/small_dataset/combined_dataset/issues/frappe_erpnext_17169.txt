@@ -1,0 +1,11 @@
+feat: Production plan enhancements
+
+
+Provision to make work orders for the exploded items
+
+Provision to change material request type
+
+Provision to set warehouse for material request items
+
+Projected quantity
+

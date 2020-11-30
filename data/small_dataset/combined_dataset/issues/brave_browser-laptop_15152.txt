@@ -1,0 +1,7 @@
+Update channel so link doesn't break on non-dev
+
+
+The link in the about section for release notes breaks in the beta version.
+
+Just need to add channel to the end, not sure if formatted channel is the same.
+Not able to test change because when running from source all I get is white screen on Ubuntu 16.04.

@@ -1,0 +1,5 @@
+Patch against eclipse attack
+
+
+Check whether EthereumJ is affected and in what aspects: https://bitcoinmagazine.com/articles/researchers-explore-eclipse-attacks-ethereum-blockchain/
+Geth patch: https://github.com/ethereum/go-ethereum/milestone/62?closed=1

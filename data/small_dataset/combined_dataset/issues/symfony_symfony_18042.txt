@@ -1,0 +1,7 @@
+[Security] $attributes can be anything, but RoleVoter assumes strings
+
+
+There are no limitations on the $attributes voted on, but the RoleVoter assumes the attributes are strings. The ExpressionVoter for example expects Expression(s) as attributes. The only reason the RoleVoter does not warn on the "blind" strpos, is because Expression has a __toString method.
+So currently, one cant use classes (Permission) as attributes that dont implement __toString.
+I dont know if any other voter blindly expects string attributes -- this has to be checked.
+Either the VoterInterface contract should be changed to indicate the use of "stringable" attributes or the RoleVoter needs to take non stringable attributes into account.

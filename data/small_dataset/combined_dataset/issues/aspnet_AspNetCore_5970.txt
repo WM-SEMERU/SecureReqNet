@@ -1,0 +1,22 @@
+How to set up redirect uri for oauth authorization using on docker when running containers behind IIS reverse proxy
+
+
+From @yamac-kurtulus on Monday, 10 December 2018 17:41:47
+Hello everyone,
+We are building a web application with dotnet core running inside docker containers. We have put the app behind IIS on WS2016 which is used as reverse proxy. The requests incoming to our URL (let's call it www.myurl.com) are forwarded to the related docker container using the container name as the hostname with the help of url rewrite module(in our case, let's call it "web"). This setup works up to here.
+However, a few days ago we needed to add Facebook oauth authorization support to register to the system and a problem appeared. We setup our authorization as the following:
+    ...
+    services.AddAuthentication().AddFacebook(o =>
+    {
+        o.CallbackPath = new PathString("/account/facebookreturn");
+        o.AppId = appSettings.FacebookLogin.AppId;
+        o.AppSecret = appSettings.FacebookLogin.AppSecret;
+    })
+    ...
+Our facebook authentication challenge then redirects user to facebook oauth page with the following redirect uri:
+https://www.facebook.com/v2.12/dialog/oauth......redirect_uri=http%3A%2F%2Fweb%2Faccount%2Ffacebookreturn&state=....
+As you see the redirect_uri has the container name / hostname of the docker container whereas it should actually be "www.myurl.com".
+We tried several solutions such as using x-forwarded headers. Using UseIISIntegration() and UseUrls did not seem to work either. What are we missing here? I am not much experienced with IIS and web headers, so it could be fairly obvious, and I appreciate the help.
+Some issues I have stumbled upon and related, but had no luck applying the fixes: #2043,  aspnet/Security#1508
+aspnet/AspNetCore.Docs#2384
+Copied from original issue: dotnet/core#2127

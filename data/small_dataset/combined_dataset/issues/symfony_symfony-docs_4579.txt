@@ -1,0 +1,30 @@
+[Cookbook][Security] How to Create a Custom Form Password Authenticator
+
+
+In the page https://github.com/symfony/symfony-docs/blob/master/cookbook/security/custom_password_authenticator.rst the next code leads to endless loop:
+$passwordValid = $this->encoder->isPasswordValid($user, $token->getCredentials());
+because after the validation was successfull credentials being cleard, so the $token->getCredentials() will be null.
+It would be better to use same logic then in https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/DaoAuthenticationProvider.php#L54 (or the whole DaoAuthenticationProvider)
+    public function __construct(EncoderFactoryInterface $encoderFactory, UserCheckerInterface $userChecker)
+    {
+        $this->encoderFactory = $encoderFactory;
+        $this->userChecker = $userChecker;
+    }
+
+    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
+    {
+        $provider = new DaoAuthenticationProvider($userProvider, $this->userChecker, $providerKey, $this->encoderFactory);
+        $authenticatedToken = $provider->authenticate($token);
+
+        $currentHour = date('G');
+        if ($currentHour < 14 || $currentHour > 16) {
+            throw new AuthenticationException(
+                'You can only log in between 2 and 4!',
+                100
+            );
+        }
+
+        return $authenticatedToken;
+    }
+I can make a pull request if this direction is correct.
+(Maybe DaoAuthenticationProvider should renamed to UserProviderBasedAuthenticationProvider or something similar)

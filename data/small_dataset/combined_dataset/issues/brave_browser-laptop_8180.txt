@@ -1,0 +1,57 @@
+Context menu for page can access details for another tab (in this case, LastPass credentials)
+
+
+Test plan
+#8363 (comment)
+
+
+
+Did you search for similar issues before submitting this one?
+Yes
+
+
+Describe the issue you encountered:
+When attempting to use LastPass in a private tab, the credentials available in the context menu are those from the most recently visited non-private tab.
+
+
+Platform (Win7, 8, 10? macOS? Linux distro?): Windows 10
+
+
+Brave Version (revision SHA): 10539c2
+
+
+Steps to reproduce:
+
+Navigate in a public tab to a site that uses LastPass credentials
+Navigate in a private tab to another site, and check LastPass in context menu
+LastPass will offer the credentials for the public site
+
+
+
+Actual result:
+Our context menus are confused about which site the user is on.
+
+
+Expected result:
+Our context menus are aware of where the user is, and will not offer credentials for any other domain.
+
+
+Will the steps above reproduce in a fresh profile? If not what other info can be added?
+N/A
+
+
+Is this an issue in the currently released version?
+N/A
+
+
+Can this issue be consistently reproduced?
+Yes
+
+
+Screenshot if needed:
+
+
+
+Any related issues:
+
+

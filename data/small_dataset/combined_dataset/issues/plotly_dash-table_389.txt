@@ -1,0 +1,6 @@
+Configurable client side search bar?
+
+
+Is there an option to add a user-friendly client-side search bar? It would be nice to have an option to just add an input field that searches all columns for whatever string is typed in (without having to type eq "example" on the certain column).  Shiny for R has this ability built in to its data tables.  I think this would be great if it were part of the normal functionality.
+It seems like the only way to do this currently is to add an extra input field and then manually filter the results through a callback (I'm not sure if that would happen on the client or server)?
+Also, for the paging option, it would be great if there were page numbers by default.  Currently you only have the option to go Next and Back (one by one), without knowing where you are exactly.

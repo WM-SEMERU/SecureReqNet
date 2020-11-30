@@ -1,0 +1,12 @@
+Deal with new user which reuses an old username (use urn:uuid GUID-based URIs)
+
+
+@wsanchez originally submitted this as ticket:159
+
+3/13/07 11:39 AM Wilfredo Sanchez: Deal with new user which reuses an old username
+When we delete a user from OD, the server behaves correctly, and re-enabling the user works fine. But replacing a user with a new user using the same username doesn't do some necessary things:
+
+Delete (or archive) the old user's calendar data
+Remove the old user from existing ACEs on the server
+
+Removing a user from ACEs may be tough since it means crawling the whole resource tree and cleaning house. Using UUID-based principal URIs solves this more cheaply, allowing us to do housekeeping of that sort separately.

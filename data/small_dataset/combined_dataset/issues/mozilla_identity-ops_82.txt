@@ -1,0 +1,6 @@
+Determine what monitoring and performance data can be shared with whom
+
+
+Work with Alina Hua and fill out
+https://bugzilla.mozilla.org/form.moz-project-review
+To determine what opsview and graphite data can be revealed to mozillians, the public, etc.

@@ -1,0 +1,11 @@
+[Security] Custom RememberMeServices "template"
+
+
+I'd like to create a custom RememberMeServicesInterface implementation, extending AbstractRememberMeServices.
+The problem is that RememberMeFactory chooses between 2 hardcoded implementations ("templates") and I would have to override one of them.
+That would be wrong because it would be:
+
+bad naming (why would I "reuse" i.e. "simplehash" template if my implementation is different?),
+not possible to use overridden implementation anymore.
+
+How about a new config key in remember_me (how about just template?), so that I could point to a custom implementation? I can make a PR.

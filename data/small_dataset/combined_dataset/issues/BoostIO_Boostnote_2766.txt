@@ -1,0 +1,27 @@
+Existing security issues
+
+
+⚠️ Here are the existing security issues we detected on your default branch:
+
+Hard-Coded Secrets (1)
+
+/dictionaries/de_DE/de_DE.dic:2180
+
+More info on how to fix Hard-Coded Secrets in General.
+
+
+
+Insecure Use of Regular Expressions (2)
+
+/browser/components/CodeEditor.js:803
+/gruntfile.js:320
+
+More info on how to fix Insecure Use of Regular Expressions in Javascript.
+
+
+
+Insecure Use of Language/Framework API (1)
+
+/browser/components/CodeEditor.js:1019
+
+More info on how to fix Insecure Use of Language/Framework API in Javascript.

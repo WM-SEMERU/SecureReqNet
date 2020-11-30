@@ -1,0 +1,39 @@
+Unrecognized option "login_check" under "security.firewalls.main.form_login_ldap"
+
+
+Hello everyone,
+I'm using v3.1.1 and trying to work with the LDAP component.  I'm trying to use the form_login_ldap firewall configuration.
+When I set up form_login_ldap and hit refresh I get
+Unrecognized option "login_check" under "security.firewalls.main.form_login_ldap"
+
+This is my related configuration, and it seems that everything is in place
+security:
+    providers:
+        admin.personel:
+            ldap:
+                service: ldap
+                base_dn: '%ldap.base_dn%'
+                search_dn: '%ldap.search_dn%'
+                search_password: '%ldap.search_password%'
+                default_roles: ROLE_USER
+                uid_key: 'UserPrincipalName'
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        public:
+          anonymous: ~
+          pattern: ^/(login|login_check)$
+        main:
+            pattern: ^/
+            anonymous: ~
+            provider: admin.personel
+            form_login_ldap:
+              login_path: login
+              login_check: login_check
+              service: 'ldap'
+              dn_string: '{username}'
+
+Thank you

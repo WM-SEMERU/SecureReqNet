@@ -1,0 +1,17 @@
+Improve error checking paths during startup
+
+
+In src/main.rs, there are some code paths that ignore errors. Among the possibly problematic ones are:
+
+When run as root, any failure to change user/group IDs will not result in a fatal error. This might might increase the risk of running with unnecessary privileged. (btw, the option name is misspelled, #43 was incomplete.)
+
+    if !matches.is_present("disable-drop-priviliges") {
+        drop_privileges().ok();
+    }
+
+When running backgrounded (without --foreground), any errors will result in the application being foregrounded anyway. This may be contrary to user expectations.
+
+        match daemonize.start() {
+            Ok(_) => println!("Success, daemonized"),
+            Err(e) => eprintln!("Error, {}", e),
+        }

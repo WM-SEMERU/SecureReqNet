@@ -1,0 +1,5 @@
+Tokens should be stripped from `kubeadm-config` config map
+
+
+This isn't part of the persistent config for a cluster but rather a point in time thing for init.  For clarity and security this should be stripped out of the configmap.
+/cc @luxas @mattmoyer

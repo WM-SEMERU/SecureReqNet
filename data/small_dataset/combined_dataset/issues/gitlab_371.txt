@@ -1,0 +1,1 @@
+According to the changelog of v7.0 it should now be possible for users with the "Master" permission to create projects in a group. Moving a project to a group seems to work with that permission, but it looks like that "New project" page is missing the "Namespace" dropdown menu to create a project directly in that group.

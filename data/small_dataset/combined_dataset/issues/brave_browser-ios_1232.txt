@@ -1,0 +1,25 @@
+Always ask for Pin when enabling Browser Lock for the first time (and after fresh install)
+
+
+Description:
+ Enabling browser pin switch doesnt ask pin until app restart
+Steps to Reproduce
+Scenario 1
+
+Clean install beta build
+Enable browser pin, doesnt ask for setting up pin
+Remove app from memory, relaunch, asks for pin
+Entering pin sets the pin but doesnt ask for confirmation
+
+Scenario 2
+
+Clean install beta build
+Enable browser pin, doesnt ask for setting up pin
+Tap on set pin
+Asks to enter current pin which is not set
+Entering random pin shows set new pin page
+
+Brave Version:
+1.5(17.09.29.18)
+Additional Information
+#1171 #1166

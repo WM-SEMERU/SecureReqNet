@@ -1,0 +1,47 @@
+[Security] [Ldap] [Easy-Pick] Limit ldap component version for branch 3.0
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+no
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+As the Ldap component will introduce BC changes for version 3.1 of Symfony, this PR limits the version to use in composer dependencies. This way, we can ensure that running composer update won't try to install the 3.1 Ldap component with version 2.8 or 3.0 of the Security component, Security Core component and SecurityBundle.
+The required version will be changed in PR #17577, so version 3.1 of Symfony actually uses only version 3.1 onwards of the Ldap component.

@@ -1,0 +1,14 @@
+[RFC][Proof PR] use "deprecated" and "versionchanged" directives
+
+
+I have a small proposal regarding the versionadded directives. We are using this directive for new stuff, deprecated stuff and we are using it for example for new/changed stuff regarding other librariers (for example Swiftmailer, Webpack, Twig etc.)
+If I read this correct, RST supports the following directives out of the box: .. versionadded:: (for sure), .. versionchanged:: and  .. deprecated:::
+https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html?highlight=versionadded
+
+My proposal: use versionadded only for new Symfony stuff, use versionchanged as versionadded, but only for external libs/projects and do not use versionadded for deprecations anymore, lets use the deprecated directive.
+This PR shows, that the build is 💚 , the only thing left is to check the final markup, if it fits the Symfony website style.
+
+ .. deprecated:: -> #11178
+ .. versionchanged::
+
+What do you think?

@@ -1,0 +1,78 @@
+unable to access after login
+
+
+After creating user and login , i got this error
+You must configure the check path to be handled by the firewall using form_login in                     your security firewall configuration.
+searched to solve this but couldn't not. help please...
+here is my security.yml file
+              security:
+              #    providers:
+              #        in_memory:
+              #            memory: ~
+
+                  firewalls:
+                      dev:
+                          pattern: ^/(_(profiler|wdt)|css|images|js)/
+                          security: false
+
+                      default:
+                          anonymous: ~
+
+                      main:
+                          pattern: ^/
+                          form_login:
+                               provider: fos_userbundle
+                               csrf_provider: form.csrf_provider
+                          logout:       true
+                          anonymous:    true
+
+                  encoders:
+                          FOS\UserBundle\Model\UserInterface: sha512
+
+                  role_hierarchy:
+                          ROLE_ADMIN:       ROLE_USER
+                          ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+                  providers:
+                          fos_userbundle:
+                              id: fos_user.user_provider.username
+
+                  access_control:
+                          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+                          - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+                          - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+                          - { path: ^/admin/, role: ROLE_ADMIN }
+
+
+here is routing.yml
+          swaam_patient:
+              resource: "@swaamPatientBundle/Resources/config/routing.yml"
+              prefix:   /
+          admin:
+              resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+              prefix: /admin
+
+          _sonata_admin:
+              resource: .
+              type: sonata_admin
+              prefix: /admin
+
+          fos_user_security:
+              resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+          fos_user_profile:
+              resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+              prefix: /profile
+
+          fos_user_register:
+              resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+              prefix: /register
+
+          fos_user_resetting:
+              resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+              prefix: /resetting
+
+          fos_user_change_password:
+              resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+              prefix: /profile
+

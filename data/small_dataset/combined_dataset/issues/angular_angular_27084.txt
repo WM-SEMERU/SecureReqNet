@@ -1,0 +1,39 @@
+fix(core): fix HTML Sanitizer breaking Safari 10.1
+
+
+We create an inert element with a data URI via XHR that will throw an error
+unless the content security policy allows it. To prevent crashing the app this
+commit wraps this in a try/catch.
+Relevant issue: cure53/DOMPurify#215
+PR Checklist
+Please check if your PR fulfills the following requirements:
+
+ The commit message follows our guidelines: https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+PR Type
+What kind of change does this PR introduce?
+
+ Bugfix
+ Feature
+ Code style update (formatting, local variables)
+ Refactoring (no functional changes, no api changes)
+ Build related changes
+ CI related changes
+ Documentation content changes
+ angular.io application / infrastructure changes
+ Other... Please describe:
+
+What is the current behavior?
+Breaks in Safari 10.1 if CSP does not accept connect data.
+Issue Number: N/A
+What is the new behavior?
+Does not break Safari 10.1
+Does this PR introduce a breaking change?
+
+ Yes
+ No
+
+Other information
+cure53/DOMPurify#215

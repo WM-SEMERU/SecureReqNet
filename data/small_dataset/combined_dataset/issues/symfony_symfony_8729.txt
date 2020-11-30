@@ -1,0 +1,8 @@
+Bypassing the firewall using the app.php file?
+
+
+Hi,
+I was testing the security component and after adding a firewall in the /test section, it works as expected, asking user for login.
+But when accessing /app.php/test or /app_dev.php/test user is not asked to enter login/password and firewall is bypassed.
+Checking inside the controller if user is logged fixes the problem.
+Thanks!! :)

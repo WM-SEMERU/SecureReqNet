@@ -1,0 +1,4 @@
+Skip running PropEr's own unit tests
+
+
+We skip mochiweb, snappy and others already.

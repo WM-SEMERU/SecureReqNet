@@ -1,0 +1,55 @@
+cmd/go: mod verify changes go.mod
+
+
+$ go version
+go version go1.12 linux/amd64
+
+Does this issue reproduce with the latest release?
+Yes.
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/home/jsha/.cache/go-build"
+GOEXE=""
+GOFLAGS="-mod=vendor"
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/jsha/gopkg"
+GOPROXY=""
+GORACE=""
+GOROOT="/home/jsha/go1.12"
+GOTMPDIR=""
+GOTOOLDIR="/home/jsha/go1.12/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD="/home/jsha/go.mod"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build911932552=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+
+Checked out https://github.com/letsencrypt/boulder/
+Ran go mod init to create a go.mod file.
+Committed the go.mod file (git commit go.mod -m 'Use modules')
+Ran go mod verify
+Ran git diff
+
+What did you expect to see?
+No output.
+What did you see instead?
+Several lines changed.
+Specifically, what happened here is that Boulder depends on a number of packages. Some of those packages have opted into modules, and have their own dependencies listed in go.mod.
+For instance, as of right now, Boulder has golang.org/x/crypto vendored at 0709b304 using godep. go mod init correctly picks up that version and puts it in go.mod. Boulder also depends on challtestsrv v1.0.2. challtestsrv v1.0.2 has a go.mod that depends on golang.org/x/crypto 505ab145 (which is later than 0709b304). Running go mod verify changes Boulder's go.mod to depend on 505ab145.
+It seems like go mod verify is performing the minimal version selection algorithm and updating go.mod. I would expect that go mod verify doesn't change anything, based on the documentation, which says:
+
+Verify checks that the dependencies of the current module, which are stored in a local downloaded source cache, have not been modified since being downloaded. If all the modules are unmodified, verify prints "all modules verified." Otherwise it reports which modules have been changed and causes 'go mod' to exit with a non-zero status.
+

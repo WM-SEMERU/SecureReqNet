@@ -1,0 +1,4 @@
+CLOUDSTACK-9891 no password log for copy user in ssvm setup
+
+
+reported by Marcus Sorensen

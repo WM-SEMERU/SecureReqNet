@@ -1,0 +1,9 @@
+remove PIA
+
+
+Test plan
+See #14774
+
+we decided to not use PIA anymore
+are there infrastructure changes needed for this or is it just a matter of changing the endpoints in browser-laptop? @evq @mrose17
+related: #12923

@@ -1,0 +1,55 @@
+Enforce 2FA on publish
+
+
+In light of the growing compromises of NPM packages and malicious actors trying to mass compromise, I’ve drafted a proposal to enforce 2FA on attempted publish of a package:
+Outline
+Although two factor authentication is not bulletproof, it offers a more significant challenge for a malicious actor to compromise a package. It would require a few changes to the structure of how packages are published, mainly a look up to see...
+
+
+Is the package I am attempting to publish have a restriction that requires you to use 2FA to publish?
+
+
+If the answer to #1 is yes, what is your two factor authentication token?
+
+
+Pros and Cons
+There are some reasonable cons that could be present, if implemented:
+
+
+Deployment over CI/CD May need to be altered to use one-time pass codes, it would require a master token, a child token. The child token would ask the master (in this case, NPM with a key pair) to sign a random token, the token would then be considered a deployment key and granted one-time access only
+
+
+The time to deploy could be increased by a minute or two, however, this doubles as a pro, because the time it takes is merely having you verify a 2FA token to publish
+
+
+There are also some pros, they are in short order:
+
+
+Publishing would effectively always require a 2FA token, and a person capable of verifying a device with phone number, and entering said code
+
+
+Deployments could effectively be signed by the deploying author, based on their 2FA success
+
+
+After n number of failures to authenticate, flag the package / notify all maintainers of attempter access and failure, giving the maintainers a head start
+
+
+Goals
+A few overall goals:
+
+
+Reduce the capability of malicious actors to compromise packages and make it time consuming to pull off an attack successfully
+
+
+Ablility to restrict by package that all maintainers must have two factor authentication enabled
+
+
+CI/CD can be achieved with signed tokens in place of 2FA with reasonable protections against malicious actors
+
+
+As previously noted, it allows the maintainer(s) to have a head start with notifications of possible breaches/attempted breaches
+
+
+Foot notes
+It’s not bulletproof, but it’ll deter most brute force-only attackers as it’ll now require a bigger workaround to get access, and most will not be inclined to attack due to the nature of the system. This does not prevent malicious actors with time to attack, only gives them a harder time to succeed.
+What are your thoughts?

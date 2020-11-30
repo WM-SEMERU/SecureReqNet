@@ -1,0 +1,216 @@
+Crash type 2 in 0.23.79
+
+
+Brave.exe!content::TouchSelectionControllerClientAura::~TouchSelectionControllerClientAura() [touch_selection_controller_client_aura.cc : 145 + 0x6]
+    rax = 0x0000000000000050   rdx = 0x000001d7a7afaaf0
+    rcx = 0x000001d7a5f64e70   rbx = 0x000001d7a7afaaf0
+    rsi = 0x000000123d94d4f8   rdi = 0x000000123d94d518
+     r8 = 0x000001d7a7afab70    r9 = 0x000000000000012c
+    r10 = 0x000001d7a6237ca0   r11 = 0x0000000000000000
+    r12 = 0x000001d7a7cf2908   r13 = 0x000001d7a7cef160
+    r14 = 0x000001d7a7afab70   r15 = 0x000001d7a7afaae0
+    Found by: given as instruction pointer in context
+ 1  Brave.exe!base::internal::WeakPtrBase::reset() [weak_ptr.h : 157 + 0x15]
+ 2  Brave.exe!content::TouchSelectionControllerClientAura::~TouchSelectionControllerClientAura [touch_selection_controller_client_aura.cc : 143 + 0x5]
+ 3  Brave.exe!content::RenderWidgetHostImpl::ViewDestroyed() [render_widget_host_impl.cc : 1012 + 0x8]
+ 4  Brave.exe!content::RenderWidgetHostViewAura::~RenderWidgetHostViewAura() [render_widget_host_view_aura.cc : 1878 + 0x1f]
+ 5  Brave.exe!aura::Window::RemoveChild(aura::Window *) [window.cc : 412 + 0x15]
+ 6  Brave.exe!content::RenderWidgetHostViewAura::~RenderWidgetHostViewAura [render_widget_host_view_aura.cc : 1872 + 0x5]
+ 7  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::~Iter() [observer_list.h : 131 + 0x5]
+ 8  Brave.exe!aura::Window::~Window() [window.cc : 130 + 0xc]
+ 9  Brave.exe!RtlUnwindEx + 0x6421
+10  Brave.exe!malloc [allocator_shim_override_ucrt_symbols_win.h : 53 + 0x21]
+11  Brave.exe!RtlUnwindEx + 0x17e328
+12  Brave.exe!aura::Window::~Window [window.cc : 82 + 0x5]
+13  Brave.exe!RtlUnwindEx + 0x17e328
+14  Brave.exe!content::RenderWidgetHostImpl::Destroy(bool) [render_widget_host_impl.cc : 1986 + 0x9]
+15  Brave.exe!content::RenderViewHostImpl::ShutdownAndDestroy() [render_view_host_impl.cc : 791 + 0x13]
+16  Brave.exe!std::_Hash<std::_Umap_traits<std::pair<int,int>,content::RenderFrameHostImpl *,std::_Uhash_compare<std::pair<int,int>,base_hash::hash<std::pair<int,int> >,std::equal_to<std::pair<int,int> > >,std::allocator<std::pair<const std::pair<int,int>,content::RenderFrameHostImpl *> >,0> >::erase [xhash : 621 + 0xd]
+17  Brave.exe!std::_Hash<std::_Umap_traits<std::pair<int,int>,content::RenderFrameHostImpl *,std::_Uhash_compare<std::pair<int,int>,base_hash::hash<std::pair<int,int> >,std::equal_to<std::pair<int,int> > >,std::allocator<std::pair<const std::pair<int,int>,content::RenderFrameHostImpl *> >,0> >::equal_range [xhash : 699 + 0xf]
+18  Brave.exe!content::FrameTree::ReleaseRenderViewHostRef(content::RenderViewHostImpl *) [frame_tree.cc : 405 + 0x5]
+19  Brave.exe!RtlUnwindEx + 0xfe3858
+20  Brave.exe!content::RenderFrameHostImpl::~RenderFrameHostImpl() [render_frame_host_impl.cc : 695 + 0x22]
+21  Brave.exe!RtlUnwindEx + 0x186140
+22  Brave.exe!std::_Tree<std::_Tmap_traits<base::trace_event::TraceLog::AsyncEnabledStateObserver *,base::trace_event::TraceLog::RegisteredAsyncObserver,std::less<base::trace_event::TraceLog::AsyncEnabledStateObserver *>,std::allocator<std::pair<base::trace_event::TraceLog::AsyncEnabledStateObserver *const,base::trace_event::TraceLog::RegisteredAsyncObserver> >,0> >::erase [xtree : 1391 + 0xd]
+23  ntdll.dll + 0x1265b
+24  ntdll.dll + 0x10428
+25  Brave.exe!content::RenderFrameHostImpl::~RenderFrameHostImpl [render_frame_host_impl.cc : 629 + 0x5]
+26  Brave.exe!content::RenderFrameHostManager::~RenderFrameHostManager() [render_frame_host_manager.cc : 86 + 0x1e]
+27  Brave.exe!catalog::mojom::Entry::~Entry() [websocket.mojom.cc : 45 + 0x9]
+28  Brave.exe!content::FrameTreeNode::~FrameTreeNode() [frame_tree_node.cc : 171 + 0x9]
+29  ntdll.dll + 0x10428
+30  Brave.exe!content::FrameTree::~FrameTree() [frame_tree.cc : 119 + 0x11]
+31  Brave.exe!content::WebContentsImpl::WebContentsTreeNode::~WebContentsTreeNode() [web_contents_impl.cc : 408 + 0x8]
+32  Brave.exe!content::WebContentsImpl::~WebContentsImpl() [web_contents_impl.cc : 650 + 0x15]
+33  Brave.exe!RtlUnwindEx + 0xfe7950
+34  Brave.exe!content::WebContentsImpl::~WebContentsImpl [web_contents_impl.cc : 556 + 0x5]
+35  Brave.exe!atom::api::Window::OnWindowClosed() [atom_api_window.cc : 182 + 0x9]
+36  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::is_end() [observer_list.h : 204 + 0xe]
+37  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::Iter(base::ObserverList<BrowserListObserver,0,1> const *) [observer_list.h : 122 + 0x8]
+38  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::operator==(base::ObserverList<BrowserListObserver,0,1>::Iter const &) [observer_list.h : 151 + 0x35]
+39  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::begin() [observer_list.h : 220 + 0xd]
+40  Brave.exe!atom::NativeWindow::NotifyWindowClosed() [native_window.cc : 451 + 0x6]
+41  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::EnsureValidIndex() [observer_list.h : 195 + 0x5]
+42  Brave.exe!views::Widget::OnNativeWidgetDestroyed() [widget.cc : 1094 + 0x10]
+43  Brave.exe!RtlUnwindEx + 0x23ed50
+44  Brave.exe!views::DesktopWindowTreeHostWin::~DesktopWindowTreeHostWin() [desktop_window_tree_host_win.cc : 95 + 0x5d]
+45  Brave.exe!views::DesktopNativeWidgetAura::OnHostClosed() [desktop_native_widget_aura.cc : 323 + 0xd]
+46  Brave.exe!views::HWNDMessageHandler::OnWndProc(unsigned int,unsigned __int64,__int64) [hwnd_message_handler.cc : 952 + 0xd]
+47  Brave.exe!base::win::WrappedWindowProc<&gfx::WindowImpl::WndProc(HWND__ *,unsigned int,unsigned __int64,__int64)>(HWND__ *,unsigned int,unsigned __int64,__int64) [wrapped_window_proc.h : 76 + 0x5]
+48  USER32.dll + 0x16cc1
+49  USER32.dll + 0x16b37
+50  Brave.exe!gfx::ClassRegistrar::RetrieveClassAtom(gfx::ClassInfo const &) [window_impl.cc : 138 + 0x2]
+51  USER32.dll + 0x1699c
+52  Brave.exe!gfx::ClassRegistrar::RetrieveClassAtom(gfx::ClassInfo const &) [window_impl.cc : 138 + 0x2]
+53  USER32.dll + 0x24bd4
+54  USER32.dll + 0x256b8
+55  Brave.exe!gfx::ClassRegistrar::RetrieveClassAtom(gfx::ClassInfo const &) [window_impl.cc : 138 + 0x2]
+56  USER32.dll + 0x83070
+57  ntdll.dll + 0x9dbc4
+58  USER32.dll + 0x83070
+59  win32u.dll + 0x23c4
+60  ntdll.dll + 0x9dbc4
+61  win32u.dll + 0x23c4
+62  win32u.dll + 0x23c4
+63  Brave.exe!gfx::ClassRegistrar::RetrieveClassAtom(gfx::ClassInfo const &) [window_impl.cc : 138 + 0x2]
+64  ntdll.dll + 0x99da0
+65  Brave.exe!views::Widget::CloseNow() [widget.cc : 602 + 0xd]
+66  Brave.exe!RtlUnwindEx + 0xfa0e40
+67  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::is_end() [observer_list.h : 204 + 0xe]
+68  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::EnsureValidIndex() [observer_list.h : 195 + 0x5]
+69  Brave.exe!atom::NativeWindow::CloseContents(content::WebContents *) [native_window.cc : 419 + 0x9]
+70  Brave.exe!RtlUnwindEx + 0xfa0e40
+71  Brave.exe!RtlUnwindEx + 0xfa0e40
+72  Brave.exe!IPC::MessageT<ViewHostMsg_ClosePage_ACK_Meta,std::tuple<>,void>::Dispatch<content::RenderViewHostImpl,content::RenderViewHostImpl,void,void (content::RenderViewHostImpl::*)()> [ipc_message_templates.h : 146 + 0xc]
+73  Brave.exe!atom::AtomContentClient::SetActiveURL(GURL const &,std::basic_string<char,std::char_traits<char>,std::allocator<char> >) [atom_content_client.cc : 78 + 0xa2]
+74  Brave.exe!url::Origin::Serialize() [origin.cc : 87 + 0xb]
+75  Brave.exe!content::ScopedActiveURL::ScopedActiveURL(content::FrameTreeNode *) [scoped_active_url.cc : 37 + 0x6d]
+76  Brave.exe!IPC::ChannelProxy::Context::OnMessageReceivedNoFilter(IPC::Message const &) [ipc_channel_proxy.cc : 128 + 0x21]
+77  Brave.exe!content::RenderViewHostImpl::OnMessageReceived(IPC::Message const &) [render_view_host_impl.cc : 769 + 0x2c]
+78  Brave.exe + 0x1214676
+79  Brave.exe!viz::DisplayScheduler::ScheduleBeginFrameDeadline() [display_scheduler.cc : 474 + 0x24]
+80  Brave.exe + 0x1375dee
+81  Brave.exe!base::`anonymous namespace'::QPCNow [time_win.cc : 511 + 0x87]
+82  Brave.exe!content::RenderWidgetHostImpl::OnMessageReceived(IPC::Message const &) [render_widget_host_impl.cc : 612 + 0x11]
+83  Brave.exe + 0x121028c
+84  Brave.exe!content::FlingScheduler::ProgressFlingOnBeginFrameIfneeded(base::TimeTicks) [fling_scheduler.cc : 58 + 0xc]
+85  ntdll.dll + 0x10428
+86  Brave.exe!base::`anonymous namespace'::QPCNow [time_win.cc : 511 + 0x87]
+87  Brave.exe!base::IDMap<CastTransportIPC *,int>::Lookup [id_map.h : 124 + 0xd]
+88  Brave.exe!RtlUnwindEx + 0x1876e0
+89  Brave.exe!content::RenderProcessHostImpl::OnMessageReceived(IPC::Message const &) [render_process_host_impl.cc : 3066 + 0xb]
+90  Brave.exe!base::debug::GlobalActivityTracker::ScopedThreadActivity::ScopedThreadActivity(void const *,void const *,base::debug::Activity::Type,base::debug::ActivityData const &,bool) [activity_tracker.cc : 1201 + 0xf1]
+91  ntdll.dll + 0x10428
+92  Brave.exe!RtlUnwindEx + 0x46b718
+93  Brave.exe!IPC::ChannelProxy::Context::OnDispatchMessage(IPC::Message const &) [ipc_channel_proxy.cc : 320 + 0xc]
+94  Brave.exe!RtlUnwindEx + 0x46f998
+95  Brave.exe!base::ThreadLocalStorage::Slot::Get() [thread_local_storage.cc : 362 + 0xc]
+96  Brave.exe!base::allocator::InsertAllocatorDispatch(base::allocator::AllocatorDispatch *) [allocator_shim.cc : 112 + 0xf]
+97  Brave.exe!base::debug::TaskAnnotator::RunTask(char const *,base::PendingTask *) [task_annotator.cc : 101 + 0x1e]
+98  Brave.exe!IPC::ChannelProxy::Context::OnMessageReceivedNoFilter(IPC::Message const &) [ipc_channel_proxy.cc : 128 + 0x21]
+99  Brave.exe!RtlUnwindEx + 0x241858
+100  Brave.exe!base::internal::WeakReferenceOwner::GetRef() [weak_ptr.cc : 56 + 0x2e]
+101  Brave.exe!malloc [allocator_shim_override_ucrt_symbols_win.h : 53 + 0x21]
+102  Brave.exe!base::SupportsWeakPtr<base::ObserverList<BrowserListObserver,0,1> >::AsWeakPtr() [weak_ptr.h : 341 + 0x15]
+103  Brave.exe!base::ObserverList<BrowserListObserver,0,1>::Iter::is_end() [observer_list.h : 204 + 0xe]
+104  Brave.exe!IPC::ChannelProxy::Context::OnMessageReceivedNoFilter(IPC::Message const &) [ipc_channel_proxy.cc : 128 + 0x21]
+105  Brave.exe!mojo::SimpleWatcher::Context::Notify(unsigned int,MojoHandleSignalsState,unsigned int) [simple_watcher.cc : 107 + 0x21]
+106  Brave.exe!RtlUnwindEx + 0x241858
+107  Brave.exe!IPC::ChannelProxy::Context::OnMessageReceivedNoFilter(IPC::Message const &) [ipc_channel_proxy.cc : 128 + 0x21]
+108  Brave.exe!base::MessageLoop::RunTask(base::PendingTask *) [message_loop.cc : 319 + 0x8]
+109  Brave.exe!base::PendingTask::operator=(base::PendingTask &&) [pending_task.cc : 23 + 0x11]
+110  Brave.exe!base::debug::ScopedLockAcquireActivity::ScopedLockAcquireActivity(void const *,base::internal::LockImpl const *) [activity_tracker.cc : 1793 + 0xbc]
+111  USER32.dll + 0x304b0
+112  Brave.exe!std::priority_queue<base::PendingTask,std::vector<base::PendingTask,std::allocator<base::PendingTask> >,std::less<base::PendingTask> >::push(base::PendingTask &&) [queue : 330 + 0x10]
+113  Brave.exe!base::circular_deque<base::PendingTask>::ShrinkCapacityIfNecessary() [circular_deque.h : 982 + 0xd]
+114  USER32.dll + 0x304b0
+115  Brave.exe!base::MessageLoop::DoWork() [message_loop.cc : 373 + 0x10]
+116  USER32.dll + 0x7600
+117  Brave.exe!RtlUnwindEx + 0x241882
+118  Brave.exe!RtlUnwindEx + 0x241858
+119  Brave.exe!IPC::ChannelProxy::Context::OnMessageReceivedNoFilter(IPC::Message const &) [ipc_channel_proxy.cc : 128 + 0x21]
+120  Brave.exe!mojo::SimpleWatcher::Context::Notify(unsigned int,MojoHandleSignalsState,unsigned int) [simple_watcher.cc : 107 + 0x21]
+121  USER32.dll + 0x185c5
+122  USER32.dll + 0x20b40
+123  Brave.exe!base::MessagePumpForUI::ProcessMessageHelper(tagMSG const &) [message_pump_win.cc : 381 + 0x10]
+124  Brave.exe!RtlUnwindEx + 0xfa0de0
+125  Brave.exe!RtlUnwindEx + 0x241882
+126  Brave.exe!RtlUnwindEx + 0x241858
+127  Brave.exe!IPC::ChannelProxy::Context::OnMessageReceivedNoFilter(IPC::Message const &) [ipc_channel_proxy.cc : 128 + 0x21]
+128  Brave.exe!mojo::SimpleWatcher::Context::Notify(unsigned int,MojoHandleSignalsState,unsigned int) [simple_watcher.cc : 107 + 0x21]
+129  USER32.dll + 0x185c5
+130  USER32.dll + 0x184c0
+131  USER32.dll + 0x20b40
+132  Brave.exe!base::MessagePumpForUI::DoRunLoop() [message_pump_win.cc : 177 + 0x9]
+133  Brave.exe!base::MessagePumpWin::Run(base::MessagePump::Delegate *) [message_pump_win.cc : 56 + 0x9]
+134  Brave.exe!RtlUnwindEx + 0x236890
+135  Brave.exe!base::ThreadLocalStorage::Slot::Get() [thread_local_storage.cc : 362 + 0xc]
+136  Brave.exe!RtlUnwindEx + 0xfece00
+137  Brave.exe!base::RunLoop::Run() [run_loop.cc : 102 + 0x6]
+138  Brave.exe!content::BrowserMainLoop::MainMessageLoopRun() [browser_main_loop.cc : 1508 + 0x8]
+139  Brave.exe!RtlUnwindEx + 0xfa0c10
+140  Brave.exe!content::BrowserMainLoop::RunMainMessageLoopParts() [browser_main_loop.cc : 981 + 0x8]
+141  Brave.exe!malloc [allocator_shim_override_ucrt_symbols_win.h : 53 + 0x21]
+142  Brave.exe!content::BrowserMainRunnerImpl::Run() [browser_main_runner_impl.cc : 169 + 0x5]
+143  Brave.exe!content::BrowserMain(content::MainFunctionParams const &,std::unique_ptr<content::BrowserProcessSubThread,std::default_delete<content::BrowserProcessSubThread> >) [browser_main.cc : 51 + 0x9]
+144  Brave.exe!std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Construct<const wchar_t *> [xstring : 2017 + 0x5]
+145  Brave.exe!std::basic_string<char,std::char_traits<char>,pool_allocator<char> >::_Equal(char const * const) [xstring : 3481 + 0x8]
+146  Brave.exe!RtlUnwindEx + 0xfce1b0
+147  Brave.exe!Init_thread_notify [thread_safe_statics.cpp : 15732480 + 0x5]
+148  Brave.exe!content::RunBrowserProcessMain(content::MainFunctionParams const &,content::ContentMainDelegate *,std::unique_ptr<content::BrowserProcessSubThread,std::default_delete<content::BrowserProcessSubThread> >) [content_main_runner_impl.cc : 620 + 0x8]
+149  Brave.exe!RtlUnwindEx + 0x55a0
+150  Brave.exe!content::ContentMainRunnerImpl::Run() [content_main_runner_impl.cc : 964 + 0xe]
+151  Brave.exe!RtlUnwindEx + 0x55a0
+152  Brave.exe!RtlUnwindEx + 0x55a0
+153  Brave.exe!service_manager::Main(service_manager::MainParams const &) [main.cc : 459 + 0x9]
+154  ntdll.dll + 0x1265b
+155  KERNELBASE.dll + 0x241000
+156  Brave.exe!RtlUnwindEx + 0x35ca2f
+157  ntdll.dll + 0x12b55
+158  Brave.exe!std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Reallocate_grow_by<`lambda at C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.12.25827\include\xstring:2373:4',unsigned long long,char> [xstring : 3653 + 0x1d]
+159  Brave.exe!RtlUnwindEx + 0xfe7aa8
+160  Brave.exe!RtlUnwindEx + 0x46f998
+161  Brave.exe!RtlUnwindEx + 0x55a0
+162  Brave.exe!RtlUnwindEx + 0x46f998
+163  Brave.exe!malloc [allocator_shim_override_ucrt_symbols_win.h : 53 + 0x21]
+164  Brave.exe!dmg_fp::lshift [dtoa.cc : 1018 + 0xd]
+165  Brave.exe!operator new(unsigned __int64) [new_scalar.cpp : 34 + 0x8]
+166  Brave.exe!content::ContentMainRunnerImpl::Create() [content_main_runner_impl.cc : 670 + 0x2a]
+167  Brave.exe!RtlUnwindEx + 0x55a0
+168  Brave.exe!content::ContentMain(content::ContentMainParams const &) [content_main.cc : 19 + 0x8]
+169  Brave.exe!base::win::internal::ScopedHandleVerifier::CloseHandle(void *) [scoped_handle_verifier.cc : 137 + 0xa]
+170  Brave.exe!RtlUnwindEx + 0x235300
+171  Brave.exe!wWinMain [atom_main.cc : 219 + 0x8]
+172  Brave.exe!RtlUnwindEx + 0x55a0
+173  Brave.exe!RtlUnwindEx + 0x55a0
+174  Brave.exe!RtlUnwindEx + 0x55c2
+175  Brave.exe!RtlUnwindEx + 0x55b6
+176  Brave.exe!RtlUnwindEx + 0x55a0
+177  ntdll.dll + 0x10428
+178  ntdll.dll + 0x10428
+179  Brave.exe!RtlUnwindEx + 0x7c27d8
+180  Brave.exe!RtlUnwindEx + 0x1009350
+181  Brave.exe!std::bad_alloc::bad_alloc(std::bad_alloc const &) + 0x2c
+182  Brave.exe!RtlUnwindEx + 0x1009350
+183  Brave.exe!RtlUnwindEx + 0xf70770
+184  Brave.exe + 0x47b0898
+185  Brave.exe!RtlUnwindEx + 0x5d90
+186  Brave.exe!RtlUnwindEx + 0x1e2a70
+187  ntdll.dll + 0x1265b
+188  Brave.exe!recalloc_base [recalloc.cpp : 40 + 0x11]
+189  Brave.exe!__crt_seh_guarded_call<int>::operator()<<lambda_8369fcb7c4df1e85de37618bd2b85f07>,<lambda_a10e4b102d4a2c3aac6f4f48bbdf488f> & __ptr64,<lambda_5b7707bd6d7a0c4713179f36c7fd995d> > [internal_shared.h : 208 + 0x7]
+190  Brave.exe!__crt_seh_guarded_call<int>::operator()<<lambda_8369fcb7c4df1e85de37618bd2b85f07>,<lambda_a10e4b102d4a2c3aac6f4f48bbdf488f> & __ptr64,<lambda_5b7707bd6d7a0c4713179f36c7fd995d> > [internal_shared.h : 208 + 0x7]
+191  Brave.exe!register_onexit_function [onexit.cpp : 84 + 0x30]
+192  Brave.exe + 0x4864f70
+193  Brave.exe!onexit [utility.cpp : 261 + 0x8]
+194  Brave.exe!RtlUnwindEx + 0x1163350
+195  Brave.exe!_scrt_get_show_window_mode [utility_desktop.cpp : 24 + 0xb]
+196  Brave.exe!onexit [utility.cpp : 261 + 0x8]
+197  Brave.exe!RtlUnwindEx + 0x1163350
+198  Brave.exe + 0x4864f70
+199  Brave.exe!__scrt_common_main_seh [exe_common.inl : 283 + 0x21]
+200  KERNEL32.DLL + 0x13034
+201  ntdll.dll + 0x71431
+
+Full crash dump available here:
+dump2.txt

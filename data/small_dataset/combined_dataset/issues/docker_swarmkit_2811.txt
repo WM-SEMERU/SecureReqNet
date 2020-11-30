@@ -1,0 +1,5 @@
+Fix make check
+
+
+gometalinter dropped support for gosimple, which is deprecated anyway and has been subsumed by staticcheck. This commit removes gosimple from our list of enabled linters (as it's no longer valid).
+This PR is needed or CI will fail every time.

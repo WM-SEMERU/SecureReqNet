@@ -1,0 +1,82 @@
+[Messenger] Add a redis stream transport
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+NOT YET
+
+
+Fixed tickets
+#28681
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11341
+
+
+
+As discussed in #28681 this will refractor @soyuka implementation of redis using the redis stream features so we don't need to handle parking the messages ourself and redis is doing it for us.
+Some interesting links about streams:
+
+https://redis.io/topics/streams-intro
+https://brandur.org/redis-streams
+
++-----------R
+|    GET    | -> XREADGROUP
++-----------+
+      |
+      | handleMessage
+      V
++-----------+  No
+|  failed?  |---------------------------+
++-----------+                           |
+      |                                 |
+      | Yes                             |
+      V                                 |
++-----------+  No                       |
+|   retry?  |---------------------------+
++-----------+                           |
+      |                                 |
+      | Yes                             |
+      V                                 V
++-----------R                     +-----------R
+|   REJECT  | -> XDEL             |    ACK    | -> XACK
++-----------+                     +-----------+
+
+GET: Will use XREADGROUP to read the one  message from the stream
+REJECT: Reject will just remove the message with XDEL from the stream as adding it back to the stream is handled by symfony worker itself
+ACK: Will use the XACK Method to ack the message for the specific group
+The sender will still be simple by calling the XADD redis function.
+#EU-FOSSA

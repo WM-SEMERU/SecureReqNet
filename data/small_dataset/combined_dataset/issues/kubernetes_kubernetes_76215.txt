@@ -1,0 +1,177 @@
+Update vendored dependencies
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Builds on #76197
+Updates most dependencies to the maximal preferred version among all our transitive dependencies that require them (found by running hack/lint-dependencies.sh). In many cases, this bumped from random commits to an actual tagged release.
+The following dependencies were not updated to maximal preferred version in this PR:
+
+protobuf generation dependencies (github.com/gogo/protobuf, github.com/golang/protobuf) - changes generated proto files, needs more review
+github.com/onsi/ginkgo - pulls in unwanted dependencies (gopkg.in/fsnotify.v1, github.com/hpcloud/tail), needs more review
+prometheus dependencies (github.com/prometheus/client_model, github.com/prometheus/procfs), prometheus deps don't agree on a version, will look in standalone PR for instrumentation review
+golang/x/... dependencies (bumped to go1.12 release branches, not latest)
+
+The vast majority of the vendor changes (128008 of the 132550 insertions(+), 38243 of the 40827 deletions(-)) are:
+
+golang.org/x/sys changes when bumping to go1.12 levels: 86092 insertions(+), 14077 deletions(-)
+golang.org/x/text changes when bumping to go1.12 levels: 21376 insertions(+), 19371 deletions(-)
+gonum.org when bumping to the maximal preferred version (which is important for downstream consumers to be able to compile without adding a replace directive pinning to the version we are using): 20540 insertions(+), 4795 deletions(-)
+
+Added/removed vendored packages:
+$ git diff master -U0 -- vendor/modules.txt
+diff --git a/vendor/modules.txt b/vendor/modules.txt
+index 8002a3da37c..690f913e54f 100644
+--- a/vendor/modules.txt
++++ b/vendor/modules.txt
+@@ -63 +63 @@ github.com/Nvveen/Gotty
+-# github.com/PuerkitoBio/purell v1.1.0 => github.com/PuerkitoBio/purell v1.0.0
++# github.com/PuerkitoBio/purell v1.1.0 => github.com/PuerkitoBio/purell v1.1.0
+@@ -65 +65 @@ github.com/PuerkitoBio/purell
+-# github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 => github.com/PuerkitoBio/urlesc v0.0.0-20160726150825-5bd2802263f2
++# github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 => github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578
+@@ -131 +131 @@ github.com/bazelbuild/bazel-gazelle/internal/wspace
+-# github.com/bazelbuild/buildtools v0.0.0-20180226164855-80c7f0d45d7e => github.com/bazelbuild/buildtools v0.0.0-20171220125010-1a9c38e0df93
++# github.com/bazelbuild/buildtools v0.0.0-20180226164855-80c7f0d45d7e => github.com/bazelbuild/buildtools v0.0.0-20180226164855-80c7f0d45d7e
+@@ -141 +141 @@ github.com/bazelbuild/buildtools/wspace
+-# github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973 => github.com/beorn7/perks v0.0.0-20160229213445-3ac7bf7a47d1
++# github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973 => github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973
+@@ -345 +345 @@ github.com/daaku/go.zipexe
+-# github.com/davecgh/go-spew v1.1.1 => github.com/davecgh/go-spew v0.0.0-20170626231645-782f4967f2dc
++# github.com/davecgh/go-spew v1.1.1 => github.com/davecgh/go-spew v1.1.1
+@@ -385 +385 @@ github.com/docker/go-connections/tlsconfig
+-# github.com/docker/go-units v0.3.3 => github.com/docker/go-units v0.0.0-20170127094116-9e638d38cf69
++# github.com/docker/go-units v0.3.3 => github.com/docker/go-units v0.3.3
+@@ -532 +532 @@ github.com/google/gofuzz
+-# github.com/google/uuid v0.0.0-20171113160352-8c31c18f31ed => github.com/google/uuid v0.0.0-20171113160352-8c31c18f31ed
++# github.com/google/uuid v1.0.0 => github.com/google/uuid v1.0.0
+@@ -604 +604 @@ github.com/inconshreveable/mousetrap
+-# github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af => github.com/jmespath/go-jmespath v0.0.0-20160202185014-0b12d6b521d8
++# github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af => github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
+@@ -627,0 +628,2 @@ github.com/kisielk/sqlstruct
++# github.com/konsorten/go-windows-terminal-sequences v1.0.1 => github.com/konsorten/go-windows-terminal-sequences v1.0.1
++github.com/konsorten/go-windows-terminal-sequences
+@@ -647 +649 @@ github.com/magiconair/properties
+-# github.com/mailru/easyjson v0.0.0-20180823135443-60711f1a8329 => github.com/mailru/easyjson v0.0.0-20170624190925-2f5df55504eb
++# github.com/mailru/easyjson v0.0.0-20180823135443-60711f1a8329 => github.com/mailru/easyjson v0.0.0-20180823135443-60711f1a8329
+@@ -684 +686 @@ github.com/mitchellh/go-wordwrap
+-# github.com/mitchellh/mapstructure v1.1.2 => github.com/mitchellh/mapstructure v0.0.0-20170307201123-53818660ed49
++# github.com/mitchellh/mapstructure v1.1.2 => github.com/mitchellh/mapstructure v1.1.2
+@@ -768 +770 @@ github.com/opencontainers/selinux/go-selinux/label
+-# github.com/pborman/uuid v1.2.0 => github.com/pborman/uuid v0.0.0-20150603214016-ca53cad383ca
++# github.com/pborman/uuid v1.2.0 => github.com/pborman/uuid v1.2.0
+@@ -778 +780 @@ github.com/pkg/sftp
+-# github.com/pmezard/go-difflib v1.0.0 => github.com/pmezard/go-difflib v0.0.0-20181226105442-5d4384ee4fb2
++# github.com/pmezard/go-difflib v1.0.0 => github.com/pmezard/go-difflib v1.0.0
+@@ -818 +820 @@ github.com/sigma/go-inotify
+-# github.com/sirupsen/logrus v1.2.0 => github.com/sirupsen/logrus v0.0.0-20170822132746-89742aefa4b2
++# github.com/sirupsen/logrus v1.2.0 => github.com/sirupsen/logrus v1.2.0
+@@ -842 +844 @@ github.com/storageos/go-api/types
+-# github.com/stretchr/objx v0.0.0-20150928122152-1a9d0bb9f541 => github.com/stretchr/objx v0.0.0-20150928122152-1a9d0bb9f541
++# github.com/stretchr/objx v0.1.1 => github.com/stretchr/objx v0.1.1
+@@ -844 +846 @@ github.com/stretchr/objx
+-# github.com/stretchr/testify v1.2.2 => github.com/stretchr/testify v0.0.0-20180319223459-c679ae2cc0cb
++# github.com/stretchr/testify v1.2.2 => github.com/stretchr/testify v1.2.2
+@@ -912 +914 @@ go.uber.org/zap/zapcore
+-# golang.org/x/crypto v0.0.0-20180808211826-de0752318171 => golang.org/x/crypto v0.0.0-20180808211826-de0752318171
++# golang.org/x/crypto v0.0.0-20181025213731-e84da0312774 => golang.org/x/crypto v0.0.0-20181025213731-e84da0312774
+@@ -954 +956 @@ golang.org/x/oauth2/jwt
+-# golang.org/x/sys v0.0.0-20181116152217-5ac8a444bdc5 => golang.org/x/sys v0.0.0-20171031081856-95c657629925
++# golang.org/x/sys v0.0.0-20190312061237-fead79001313 => golang.org/x/sys v0.0.0-20190209173611-3b5209105503
+@@ -959,2 +961 @@ golang.org/x/sys/windows/svc
+-# golang.org/x/text v0.3.0 => golang.org/x/text v0.0.0-20170810154203-b19bf474d317
+-golang.org/x/text/cases
++# golang.org/x/text v0.3.1-0.20181227161524-e6919f6577db => golang.org/x/text v0.3.1-0.20181227161524-e6919f6577db
+@@ -971 +972,2 @@ golang.org/x/text/encoding/unicode
+-golang.org/x/text/internal
++golang.org/x/text/internal/language
++golang.org/x/text/internal/language/compact
+@@ -977 +978,0 @@ golang.org/x/text/secure/bidirule
+-golang.org/x/text/secure/precis
+@@ -984 +985 @@ golang.org/x/time/rate
+-# golang.org/x/tools v0.0.0-20190328211700-ab21143f2384 => golang.org/x/tools v0.0.0-20190205050122-7f7074d5bcfd
++# golang.org/x/tools v0.0.0-20190328211700-ab21143f2384 => golang.org/x/tools v0.0.0-20190313210603-aa82965741a9
+@@ -999 +1000 @@ golang.org/x/tools/internal/semver
+-# gonum.org/v1/gonum v0.0.0-20190331200053-3d26580ed485 => gonum.org/v1/gonum v0.0.0-20180726124543-cebdade430cc
++# gonum.org/v1/gonum v0.0.0-20190331200053-3d26580ed485 => gonum.org/v1/gonum v0.0.0-20190331200053-3d26580ed485
+@@ -1001,0 +1003 @@ gonum.org/v1/gonum/blas/blas64
++gonum.org/v1/gonum/blas/cblas128
+@@ -1017,0 +1020 @@ gonum.org/v1/gonum/graph/internal/uid
++gonum.org/v1/gonum/graph/iterator
+@@ -1021,0 +1025 @@ gonum.org/v1/gonum/internal/asm/c128
++gonum.org/v1/gonum/internal/asm/c64
+@@ -1023,0 +1028 @@ gonum.org/v1/gonum/internal/asm/f64
++gonum.org/v1/gonum/internal/cmplx64
+Changed LICENSES:
+$ git diff master -- Godeps/LICENSES
+diff --git a/Godeps/LICENSES b/Godeps/LICENSES
+index 17b9120fceb..381986a5b87 100644
+--- a/Godeps/LICENSES
++++ b/Godeps/LICENSES
+@@ -4573,7 +4573,7 @@ ISC License
+ 
+ Copyright (c) 2012-2016 Dave Collins <dave@davec.name>
+ 
+-Permission to use, copy, modify, and distribute this software for any
++Permission to use, copy, modify, and/or distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ 
+@@ -4585,7 +4585,7 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ 
+-= vendor/github.com/davecgh/go-spew/LICENSE 818c0a1d81cfcfdb7ecd58db268bab7e
++= vendor/github.com/davecgh/go-spew/LICENSE c06795ed54b2a35ebeeb543cd3a73e56
+ ================================================================================
+ 
+ 
+@@ -12698,6 +12698,23 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ================================================================================
+ 
+ 
++================================================================================
++= vendor/github.com/konsorten/go-windows-terminal-sequences licensed under: =
++
++(The MIT License)
++
++Copyright (c) 2017 marvin + konsorten GmbH (open-source@konsorten.de)
++
++Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++
++= vendor/github.com/konsorten/go-windows-terminal-sequences/LICENSE 0fa4821e00ed8fa049781716357f27ed
++================================================================================
++
++
+ ================================================================================
+ = vendor/github.com/kr/fs licensed under: =
+ 
+@@ -19012,11 +19029,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ ================================================================================
+ = vendor/github.com/stretchr/objx licensed under: =
+ 
+-objx - by Mat Ryer and Tyler Bunnell
+-
+-The MIT License (MIT)
++The MIT License
+ 
+ Copyright (c) 2014 Stretchr, Inc.
++Copyright (c) 2017-2018 objx contributors
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+@@ -19036,7 +19052,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ 
+-= vendor/github.com/stretchr/objx/LICENSE.md 21e79cfe7201b9b64535bfae0895795b
++= vendor/github.com/stretchr/objx/LICENSE d023fd31d3ca39ec61eec65a91732735
+ ================================================================================
+Does this PR introduce a user-facing change?:
+NONE
+

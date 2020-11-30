@@ -1,0 +1,7 @@
+Add details to the JwtBearer error messages
+
+
+JwtBearer adds error details to the response header for auth failures. Right now those errors are very generic based on exception types. We've asked IdentityModel to give us more details via exception properties.
+aspnet/Security#845 (comment)
+AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet#422
+aspnet/Security#776

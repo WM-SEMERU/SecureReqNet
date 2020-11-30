@@ -1,0 +1,49 @@
+[Form] forward valid numeric values to transform()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30114
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

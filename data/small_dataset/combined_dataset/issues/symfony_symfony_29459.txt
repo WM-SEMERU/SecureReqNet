@@ -1,0 +1,21 @@
+Possible issue with unserialize in PHP 7.3
+
+
+Symfony version(s) affected: 3.4.19
+Description
+Upon upgrading to PHP 7.3, we run into issue with the unserialization of the user/token object when login.
+The error is like this:
+
+Notice: unserialize(): Error at offset 5859 of 13936 byte
+
+The exact error happens in:
+in vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authentication/Token/AbstractToken.php (line 155)
+How to reproduce
+It seems like this is due to the serialized object contains object class inside it.
+Not sure what changed in PHP 7.3 RC6, at first I thought it could be the unserialize now requires allowed_classes option to be set to true explicitly, I tried that by editing Symfony code but it didn't help
+Possible Solution
+Not a clue for now
+Additional context
+Everything was running fine on PHP 7.2 so it must be the changes in 7.3 RC6 that break things.
+I attached here a sample of the string to unserialize:
+https://gist.github.com/yellow1912/43e4009e0384426ccfa017feb0eedcc9

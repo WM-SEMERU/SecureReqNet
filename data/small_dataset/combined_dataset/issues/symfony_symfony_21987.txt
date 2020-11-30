@@ -1,0 +1,189 @@
+Authentication with a second manager
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.2.4
+
+
+
+I created a second manager for my second database. In this base, i create a table which it contains my players. The problem is the symfony don't load users from this database.
+Fosuserbundle allows me to connect on the administration and my custom bundle with the second base allows players to connect on the frontend
+here is an extract of my config.yml :
+`doctrine:
+dbal:
+default_connection: default
+connections:
+    default:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+    seconddb:
+        driver:   pdo_mysql
+        host:     "xx.xx.xx.xx"
+        port:     "3306"
+        dbname:   "acme_test"
+        user:     "acmegamestest"
+        password: "mypassword"
+        charset:  UTF8
+
+orm:
+default_entity_manager: default
+auto_generate_proxy_classes: "%kernel.debug%"
+#naming_strategy: doctrine.orm.naming_strategy.underscore
+entity_managers:
+    default:      
+       connection: default 
+       mappings:
+            acmeAdminBundle: ~
+            acmeBlogBundle: ~
+            gedmo_translatable:
+               type: annotation
+               alias: GedmoTranslatable
+               prefix: Gedmo\Translatable\Entity
+               is_bundle: false
+               # make sure vendor library location is correct
+               dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+    seconddb:
+       connection: seconddb
+       mappings:
+           acmeJoueurBundle: ~ `
+
+and here is an extract of my security.yml :
+`encoders:
+FOS\UserBundle\Model\UserInterface: sha512
+Acme\JoueurBundle\Entity\Players:
+    algorithm: sha512
+    encode_as_base64: false
+
+providers:
+    seconddb:
+        entity:
+            class: Acme\JoueurBundle\Entity\Players
+            property: username    
+            manager_name: seconddb
+    fos_userbundle:
+        id: fos_user.user_provider.username
+
+firewalls:
+    administration:
+        pattern: ^/admin
+        provider: fos_userbundle
+        context: administration
+        form_login:
+            #csrf_provider: security.csrf.token_manager
+            login_path : fos_user_security_login
+            check_path : fos_user_security_check
+            failure_path : null
+            default_target_path : /admin                
+        logout:       
+          path : fos_user_security_logout
+          target : /connexion
+        anonymous: true    
+    frontend:
+        pattern: ^/
+        provider: acme_joueurbundle
+        context: frontend
+        form_login:
+            #csrf_provider: form.csrf_provider
+            login_path : acme_players_login
+            check_path : acme_players_check
+           failure_path : null
+            default_target_path : acme_players_userprofile                      
+        logout:       
+          path : acme_players_logout
+          target : acme_players_login
+        anonymous:    true`
+
+and my entity implements "AdvancedUserInterface, \Serializable" with this function :
+`public function getRoles()
+{
+    return array('ROLE_PLAYERS');
+ }
+
+public function getSalt(){
+
+   return $this->salt;
+}
+
+public function eraseCredentials(){
+
+}
+
+public function isAccountNonExpired()
+{
+     return true;
+}
+
+public function isCredentialsNonExpired()
+{
+     return true;
+}
+
+public function isAccountNonLocked()
+{
+
+    return !$this->banned;
+}
+
+public function isEnabled()
+{
+    return $this->active;
+}
+
+/** @see \Serializable::serialize() */
+public function serialize()
+{
+    return serialize(array(
+        $this->id,
+        $this->username,
+        $this->password,
+        $this->active
+
+    ));
+ }
+
+/** @see \Serializable::unserialize() */
+public function unserialize($serialized)
+ {
+    list (
+       $this->id,
+       $this->username,
+       $this->password,
+       $this->active
+    ) = unserialize($serialized);
+ }`
+
+However when i trying to connect, i get this errors in dump function :
+
+and in the section Doctrine i get this :
+
+Is what you know the solution? Hope you can help me. Thanks

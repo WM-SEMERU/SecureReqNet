@@ -1,0 +1,11 @@
+Broken Link
+
+
+Describe the problem and steps to reproduce it:
+What happened?
+I clicked on famous and the best translation add-on (s3translator) link from its site. The Link not works.
+What did you expect to happen?
+I expect Firefox team to keep add-on alive for us. Without it the web surfacing life become difficult and left users with a force to move on chrome browser.
+Anything else we should know?
+I don't know what happened about s3translator add-on for Firefox. All I know that is very valuable add-on. It was capable of Translating word with just a click while browsing the webpages, without any huge OCR software. It's not a wise choice to let this add-on go.
+https://addons.mozilla.org/addon/s3google-translator/

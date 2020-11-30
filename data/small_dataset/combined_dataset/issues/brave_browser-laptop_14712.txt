@@ -1,0 +1,14 @@
+[hackerone] consider disabling FTP
+
+
+Test plan
+
+Visit https://dlptest.com/ftp-test/
+Click on ftp://ftp.dlptest.com/
+It should not work (no prompt for creds, etc). instead it should prompt to open an external app
+
+Original issue description
+https://hackerone.com/reports/378805
+related:
+https://hackerone.com/bugs?subject=brave&report_id=378809
+https://hackerone.com/reports/378864

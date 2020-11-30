@@ -1,0 +1,50 @@
+Fix heredoc
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+none
+
+
+
+A heredoc was erroneously a nowdoc.

@@ -1,0 +1,15 @@
+Use etcd to store configurations/secrets
+
+
+Currently there is a 'rsync' between nodes or between deploy-host and nodes
+As we want to achieve self-provisioning (aka pull), nodes need to get configuration from somewhere, and as discuted in #320 etcd seems a good place.
+This task as no dependency, we can  switch to this mode (etcd as cluster-configuration datastore) asap.
+Configuration to share:
+Ansible conf
+
+ inventory
+ group_vars
+
+tokens
+
+certs

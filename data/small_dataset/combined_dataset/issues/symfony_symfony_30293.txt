@@ -1,0 +1,5 @@
+Messenger - Use different Serializer
+
+
+Hello
+I have a 2 transports and i need own serializer for each transports. is it possible?  ( one in JSON format, one in XML for example)

@@ -1,0 +1,6 @@
+Fix bug with unicode hostnames in JSON with scannable()
+
+
+
+
+

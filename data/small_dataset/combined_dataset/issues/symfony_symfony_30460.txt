@@ -1,0 +1,7 @@
+[VarDumper] Dump in php log
+
+
+Description
+Hi guys. It is a often use-case for me to send some data in PHP log for debug purposes. dump() is useful, but it prints data straight, therefore you can often crash your layout or get "Headers already sent" error. Just wondering, can we add similar function for sending data in log, for example using error_log?
+Example
+dump_log($var1, $var2, $var3);

@@ -1,0 +1,5 @@
+SameSite default value update
+
+
+According to hapijs/bell#355 (which I found as it links to aspnet/Security#1231) chrome > v65 has fixed their samesite behavior to be in line with other browsers. This should allow SameSite.Strict in a few cases again.
+I haven't tested this but I do think it's important to see if the default security can be increased again.

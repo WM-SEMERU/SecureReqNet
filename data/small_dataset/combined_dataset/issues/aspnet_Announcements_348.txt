@@ -1,0 +1,21 @@
+Some Cookie SameSite defaults changed to None
+
+
+SameSite is an option for cookies that can help mitigate some XSS attacks. Each component that emits cookies need to decide if SameSite is appropriate for their scenarios. When this option was initially introduced inconsistent defaults were used across various AspNetCore APIs that has lead to confusing results. In 3.0.0-preview4 we've better aligned these defaults and made the feature opt-in on a per-component basis.
+Affected APIs:
+
+CookieOptions used with HttpResponse.Cookies.Append has changed its default from SameSiteMode.Lax to SameSiteMode.None.
+CookieBuilder used as a factory for CookieOptions has changed its default from SameSiteMode.Lax to SameSiteMode.None.
+CookiePolicyOptions.MinimumSameSitePolicy has changed its default from SameSiteMode.Lax to SameSiteMode.None.
+
+Note all AspNetCore components that emit cookies override these defaults with settings appropriate for their scenarios and these values have not changed:
+
+Session: Lax
+CookieTempDataProvider: Lax
+Antiforgery: Strict
+CookieAuthentication: Lax
+TwitterAuthentication state cookie: Lax
+RemoteAuthentication correlation cookie (OAuth): None
+OpenIdConnect nonce cookie: None
+
+See aspnet/AspNetCore#8212 for discussion

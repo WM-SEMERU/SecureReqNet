@@ -1,0 +1,7 @@
+Right now the branch title will be `possibly-sensitive-issue-title-123` where 123 is the issue ID.
+
+For confidential issues, it should be a simple `issue-123`.
+
+Of course the commits themselves could still give the vulnerability away, but chances are relatively small people will read every commit and branch, and commits can be carefully named to be technically accurate but not give away that it fixes a vulnerability
+
+cc @zj

@@ -1,0 +1,4 @@
+use UTF-8 instead of utf-8
+
+
+Everywhere else we use UTF-8

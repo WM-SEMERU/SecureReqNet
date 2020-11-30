@@ -1,0 +1,15 @@
+Unable to login with check_path & app.php
+
+
+Hi,
+So i was stuck on a very interesting Access denied, the user is not fully authenticated; redirecting to authentication entry point. debug message when trying to login.
+I was using the console server:start --docroot=web/ and url 127.0.0.1:8000/app.php/login and the security.yml contained:
+security:
+    main:
+      form_login:
+        login_path: /login
+        check_path: /login_check
+When trying to login this just returned me to the login page every time without a message/error.
+After some debugging I figured out that the check_path check in Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener::requiresAuthentication failed because of the /app.php/ in the url.
+To fix this I changed the check_path to the route name and it works great now.
+Hope this helps someone and maybe a message can be added to the debug information that makes clear that the the check_path is invalid or something.

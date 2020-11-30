@@ -1,0 +1,8 @@
+ACL + DoctrineMigrationsBundle
+
+
+The app/console doctrine:migrations:diff generates a migration to drop all the ACL tables.
+Now I'm pretty sure we can safely say that a develop should always check the generated migrations ...
+Nonetheless this behavory can be anoying and is defenatly not intended!
+PS . I'm not really sure where this issue should go but I think this is more related to ACL then the bundle.
+Apart from that I think the ACL has some serious issues with being decoupled while instead it should be strongly integerated into the doctrine bundle.

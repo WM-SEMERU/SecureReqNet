@@ -1,0 +1,20 @@
+Partial reusing ViewData object instead of creating new instance
+
+
+Is your feature request related to a problem? Please describe.
+PageModel.Partial does not behave as expected. Say the current page requires a model of type A, and I try to return Partial("_MyPartial", modelB)(where modelB is a model of type B) from a Post action, the following error occurs:
+System.InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'B', but this ViewDataDictionary instance requires a model item of type 'A'.
+Describe the solution you'd like
+After looking at the code for the Partial method, I have noticed that the error is caused by the method assigning ViewModel.Model to the model parameter. Why does Partial not create a new ViewDataDictionary, like the following:
+var viewData = new ViewDataDictionary<B>(new EmptyModelMetadataProvider(), ModelState)
+{
+    Model = model
+};
+
+return new PartialViewResult
+{
+    ViewName = "_MyPartial",
+    ViewData = viewData
+};
+
+which produces the expected result?

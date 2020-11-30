@@ -1,0 +1,4 @@
+Store EntryUpdate in map leaf
+
+
+In order to verify the correctness of a leaf update, we need to store the policy and it's authorizing signatures in the leaf node.

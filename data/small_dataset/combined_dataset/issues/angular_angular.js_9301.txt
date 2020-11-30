@@ -1,0 +1,4 @@
+fix($parse): Disallow referencing a DOM element on arrays
+
+
+Disallow referencing a DOM element on an array element

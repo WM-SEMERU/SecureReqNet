@@ -1,0 +1,87 @@
+'### Description
+
+`spec/features/security` exists for testing user permissions, such as "admin" can access "GET /profile/keys", but "visitor" can not. However, this test is not fully covering all endpoints and roles. So that, underlying bugs such as !9759 appear occasionally. Also, there is a concern of security for the rest of the endpoints which is not implemented in the folder.
+
+On the other hands,  [`spec/lib/gitlab/import_export/model_configuration_spec.rb`](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/spec/lib/gitlab/import_export/model_configuration_spec.rb) exists for helping developers to handle Import/Export feature when they add a new model. 
+For example, you'll get the following message, if you've added a new model.
+```
+New model(s) <trigger_schedule> have been added, related to Trigger, which is exported by
+the Import/Export feature.
+
+If you think this model should be included in the export, please add it to IMPORT_EXPORT_CONFIG.
+Definitely add it to MODELS_JSON to signal that you've handled this error and to prevent it from showing up in the future.
+
+MODELS_JSON: /builds/dosuken123/gitlab-ce/spec/lib/gitlab/import_export/all_models.yml
+IMPORT_EXPORT_CONFIG: /builds/dosuken123/gitlab-ce/lib/gitlab/import_export/import_export.yml
+```
+
+I think `spec/features/security` can be organized like `import_export/model_configuration_spec.rb`. Spec detects automatically newly added endpoints and make developers handle the endpoint's user permissions.
+
+### Proposal
+
+Step 1: If the developer adds new endpoints, the pipeline gets a warning, for example,
+
+```
+New endpoint(s) <projects/pipelines#stage> have been added, which is exposed to the whole world.
+
+Please update the following files to explicit user permissions for the new endpoint.
+
+- /builds/dosuken123/gitlab-ce/spec/features/security/endpoints_public_project.yml
+- /builds/dosuken123/gitlab-ce/spec/features/security/endpoints_private_project.yml
+- /builds/dosuken123/gitlab-ce/spec/features/security/endpoints_internal_project.yml
+
+Later on, security tests will be executed according to the files.
+```
+
+Step 2: The developer defines user permissions, for example,
+
+```
+# spec/features/security/endpoints_public_project.yml
+
+projects:
+  settings:
+    ci_cd:
+      show:
+        admin: allowed
+        owner: allowed
+        master: allowed
+        developer: denied
+        reporter: denied
+        guest: denied
+        user: denied
+        external: denied
+        visitor: denied
+  pipelines:
+    stage:
+      admin: allowed
+      owner: allowed
+      master: allowed
+      developer: allowed
+      reporter: allowed
+      guest: allowed
+      user: allowed
+      external: allowed
+      visitor: allowed
+
+# spec/features/security/endpoints_private_project.yml
+...
+# spec/features/security/endpoints_internal_project.yml
+...
+```
+
+Step 3: The security tests will be executed according to the files, for example, if the new endpoint fails the test, 
+
+```
+Failures:
+
+  1) Private Project Access GET /:project_path/pipelines/:id/stage should be denied for visitor
+     Failure/Error: it { is_expected.to be_denied_for(:visitor) }
+       expected "/namespace216/gitlabhq/pipelines/20/stage" to be denied for visitor
+     # ./spec/features/security/project/private_access_spec.rb:404:in `block (3 levels) in <top (required)>'
+```
+
+### Concerns
+- This test would be a heavy process. (So that, `spec/features/security` doesn't cover all??)
+- It's possible to fully automate security implementation with YAML file (i.e. Moving authorization coding from controllers to the YAML file), however, it seems not so feasible.
+
+/cc @briann

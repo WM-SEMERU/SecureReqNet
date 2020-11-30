@@ -1,0 +1,100 @@
+Keyboard API fingerprinting
+
+
+Description
+Brave inherits from Chrome implementation of Keyboard API which does not provide any functionality to the user (only Chrome and Opera support it and, to my knowledge, no site actually uses it). However, the API might be used for fingerprinting.
+WICG Keyboard Map Draft mentions that the API can be used for fingerprinting of:
+
+
+Users who use uncommon ASCII layouts (like Dvorak or Colemak)
+Users who use an ASCII layout that doesn’t match the default for the region that they are in. For example, a user in the US with an active UK or French layout.
+
+
+Steps to Reproduce
+
+Verify that "Shields" are on
+Enable a few different keyboards in your OS, e.g. Dvorak (DV):
+Run this in the console and observe the output with different keyboard layouts:
+var keyboard = {}
+navigator.keyboard.getLayoutMap()
+.then(keyboardLayoutMap => {
+  keyboardLayoutMap.forEach((value,key,map) => {keyboard[key] = value})
+  console.log(keyboard)
+})
+
+
+
+Actual result:
+For standard English keyboard:
+{KeyE: "e", KeyD: "d", Minus: "-", KeyH: "h", KeyZ: "z", ...}
+
+For Dvorak keyboard:
+{KeyE: ".", KeyD: "e", Minus: "[", KeyH: "d", KeyZ: ";", ...}
+
+For Colemak keyboard:
+Expected result:
+When Shields are on, either API should be unavailable ()
+Reproduces how often:
+Easily reproduced
+Brave version (brave://version info)
+All versions of Brave based on Chromium 63 and above.
+
+
+
+Brave
+0.61.52 Chromium: 73.0.3683.86 (Official Build) (64-bit)
+
+
+
+
+Revision
+f9b0bec6063ea50ce2b71f5b9abbae7beee319a6-refs/branch-heads/3683@{#858}
+
+
+OS
+Windows 10 OS Build 17763.379
+
+
+
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+Reproducible on Beta build
+
+
+
+
+Brave
+0.62.37 Chromium: 73.0.3683.86 (Official Build) beta (64-bit)
+
+
+
+
+Revision
+f9b0bec6063ea50ce2b71f5b9abbae7beee319a6-refs/branch-heads/3683@{#858}
+
+
+OS
+Windows 10 OS Build 17763.379
+
+
+
+Additional Information
+Compatibility impact is minimal
+Keyboard API was only recently introduced and only in Chrome 68 and Opera 55 (according to MDN). It should be trivial to remove or polyfill. A good candidate for dummy values is provided in the official polyfill:
+https://github.com/WICG/keyboard-map/blob/master/keyboard-polyfill.js
+Note that navigator.keyboard also includes navigator.keyboard.lock defined in Keybard Lock API -- a related API introduced at the same time (and apparently with similarly small adoption).
+WICG Keyboard Map Draft recommendations
+Excerpt from here:
+
+6.1. Privacy Mitigations
+User agents that are concerned about the privacy impact of providing this keyboard mapping information can also consider the following mitigations:
+Having a user prompt to ask for permission whenever a site attempts to use this API.
+Always return a "standard" mapping. Although note that the standard mapping would need to vary for different parts of the world. For example, a user agent that had a "privacy mode" that always returned a US-QWERTY layout mapping would actually be providing more identifying information for users in the UK than the actual mapping would (since most users in the UK do not use a US layout).
+6.2. Privacy Mode
+If a user agent provides an "incognito" or "privacy mode", then this API should act the same as it does outside of "privacy mode". The reason for this is that there is no universal neutral value that can be returned to ensure the user’s privacy.
+User agents may choose to give the user the option to specify what value should be returned when in this mode, although care must be taken to ensure that the user does not get a false sense of security since this value would need to be updated when if they travel outside their home region.
+
+Links
+WICG Keyboard Map Draft
+Edit: Copied full version string; in demo code changed let to var so that you can easily run the same code many times; added a link and fixed list number.

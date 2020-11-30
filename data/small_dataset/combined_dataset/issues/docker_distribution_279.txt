@@ -1,0 +1,10 @@
+TLS review/rehaul
+
+
+TLS use in the engine should be reviewed thoroughly.
+Specifically, we should:
+
+enforce TLS 1.2
+review garant client code
+
+Reviewing TLS settings for the registry itself is probably a good idea as well.

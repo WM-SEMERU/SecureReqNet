@@ -1,0 +1,14 @@
+### Problem to solve
+
+A log of failed and successful logins are currently available in the Admin area, but not available as a metric.
+
+### Proposal
+
+Add support for recording login attempts to [session.rb](app/controllers/sessions_controller.rb).
+
+ * Failures
+ * Successes
+ * 2fa?
+ * API token uses?
+
+### Links / references

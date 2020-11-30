@@ -1,0 +1,4 @@
+Add ability to see 'observed by item'
+
+
+including it's proof

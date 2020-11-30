@@ -1,0 +1,111 @@
+OpenPGP CFB spec deviation
+
+
+From coruus@gmail.com on July 14, 2014 19:17:39
+You aren't quite following the OpenPGP CFB mode spec, despite claiming compliance with it. (You aren't ever doing step 6.) See erratum ID 2243 for a slightly clearer explanation of what the spec expects.
+This is the right thing to do, for the reason given in the first patch enclosed. (And see http://eprint.iacr.org/2005/033)
+Patches enclosed. Patch 2 is provided in case you want resynchronizing mode to be spec-compliant. I recommend rejecting patch 2 and, in preference, removing resynchronizing OpenPGP-CFB mode (at least for encryption, preferably for decryption as well). It is only needed for Tag 9 packets.
+(You really need KATs for this mode; happy to provide, depending on how you want to proceed.)
+Patch 1:
+a. Document the deviation from the spec.
+b. Emit zeros instead of repeating the first two bytes of ciphertext. (There are a few little-used implementations which mistakenly still check those bytes; I suspect that the bytes being zero makes what's happening clearer.) GnuPG doesn't complain about the resulting messages.
+Patch 2: Limit the change to non-resynchronizing mode. Make the implementation of resynchronizing mode encryption spec-compliant; this affects the subsequent ciphertext. (You might want this if compatibility with ancient PGP software is really desired.)
+From 8a310f8f259c689f35559d3db75bb8f3db06e55d Mon Sep 17 00:00:00 2001
+From: David Leon Gil coruus@gmail.com
+Date: Mon, 14 Jul 2014 12:37:31 -0400
+Subject: [PATCH] openpgp/ocfb.js: Document deviation from RFC 4880's
+specification of OpenPGP-CFB; replace first two bytes of ciphertext with
+zeros to make what's going on clearer to implementations that mistakenly
+check these bytes.
+
+javascript/crypto/e2e/openpgp/ocfb.js | 11 ++++++++++-
+1 file changed, 10 insertions(+), 1 deletion(-)
+diff --git a/javascript/crypto/e2e/openpgp/ocfb.js b/javascript/crypto/e2e/openpgp/ocfb.js
+index 5221af8..4aed089 100644
+--- a/javascript/crypto/e2e/openpgp/ocfb.js
++++ b/javascript/crypto/e2e/openpgp/ocfb.js
+@@ -27,6 +27,14 @@ goog.require('e2e.random');
+/**
+
+Implements OpenPGP's variation of CFB mode. Defined in RFC 4880 Section 13.9.
+
+*
+* This implementation deviates from the specification; in particular, step 6 is
+* omitted. Instead, we emit two zero bytes.
+*
+* (This is because the spec's method gives C[0:2] ^ C[16:18] = Encrypt(C[0:16]),
+* revealing two bytes of the underlying keystream. This can be used, as per
+* RFC 4880 Section 14, in the Mister and Zuccherato attack to reveal plaintext.)
+*
+
+
+@param {e2e.cipher.SymmetricCipher} cipher The cipher to use.
+@param {boolean} resync Specifies if we should do the resyncronization step.
+@extends {e2e.ciphermode.CipherMode}
+@@ -53,8 +61,9 @@ goog.inherits(e2e.openpgp.Ocfb, e2e.ciphermode.CipherMode);
+/** @inheritdoc */
+e2e.openpgp.Ocfb.prototype.encrypt = function(data, opt_unused_iv) {
+var rnd = e2e.random.getRandomBytes(this.cipher.blockSize);
+return this.cipher.encrypt(rnd).addCallback(function(ciphertext) {
+
+ciphertext.push(ciphertext[0], ciphertext[1]);
+
+
+ciphertext.push(0, 0);
+var iv;
+if (this.resync) {
+iv = ciphertext.slice(2, this.cipher.blockSize + 2);
+--
+1.9.3 (Apple Git-50)+GitX
+
+
+
+From 9317a84cb6b2ac1585d3fca6f0282742787c7368 Mon Sep 17 00:00:00 2001
+From: David Leon Gil coruus@gmail.com
+Date: Mon, 14 Jul 2014 13:06:25 -0400
+Subject: [PATCH] openpgp/ocfb.js: Changed resynchronizing mode to be
+spec-compliant.
+
+javascript/crypto/e2e/openpgp/ocfb.js | 6 ++++--
+1 file changed, 4 insertions(+), 2 deletions(-)
+diff --git a/javascript/crypto/e2e/openpgp/ocfb.js b/javascript/crypto/e2e/openpgp/ocfb.js
+index 4aed089..193e7f4 100644
+--- a/javascript/crypto/e2e/openpgp/ocfb.js
++++ b/javascript/crypto/e2e/openpgp/ocfb.js
+@@ -29,7 +29,8 @@ goog.require('e2e.random');
+
+Implements OpenPGP's variation of CFB mode. Defined in RFC 4880 Section 13.9.
+
+This implementation deviates from the specification; in particular, step 6 is
+
+* omitted. Instead, we emit two zero bytes.
+
+
+* omitted when operating without resynchronization. Instead, we emit two
+* zero bytes.
+
+
+
+(This is because the spec's method gives C[0:2] ^ C[16:18] = Encrypt(C[0:16]),
+revealing two bytes of the underlying keystream. This can be used, as per
+@@ -63,11 +64,12 @@ e2e.openpgp.Ocfb.prototype.encrypt = function(data, opt_unused_iv) {
+var rnd = e2e.random.getRandomBytes(this.cipher.blockSize);
+
+return this.cipher.encrypt(rnd).addCallback(function(ciphertext) {
+
+ciphertext.push(0, 0);
+var iv;
+if (this.resync) {
+
+
+ciphertext.push(ciphertext[0] ^ rnd[0], ciphertext[1] ^ rnd[1]);
+iv = ciphertext.slice(2, this.cipher.blockSize + 2);
+} else {
+ciphertext.push(0, 0);
+iv = ciphertext.slice();
+}
+return this.cfb.encrypt(data, iv).addCallback(function(cfbData) {
+--
+1.9.3 (Apple Git-50)+GitX
+
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=114

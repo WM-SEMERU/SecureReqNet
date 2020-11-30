@@ -1,0 +1,12 @@
+Policies on Labels and Selectors
+
+
+Suppose there is one namespace with two users.
+
+Trustworthy Tammy is trusted to manage the prod pods.
+Fat-fingered Fred is only trusted to manage the dev pods.  fred is prone to making mistakes.
+
+Tammy makes a service that selects pods with "type=prod".
+Now, say Fred starts some buggy code in pods.  He meant to apply label "type=dev", but by accident he applies "type=prod".  Now user requests are hitting his buggy servers.
+We should have a way to control who can apply and select a certain label-key-value.  ABAC policy could certainly support this.
+This is relatively low priority, since people could use namespaces to separate Fred and Tammy's pods.  But,  in the long run, I think we want to encourage people to put more things in a single namespace.

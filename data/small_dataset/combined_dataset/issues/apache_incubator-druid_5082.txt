@@ -1,0 +1,4 @@
+Automatically insert authenticator/authorizer names into config properties (#5071)
+
+
+Backport of #5071 to 0.11.0

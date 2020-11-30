@@ -1,0 +1,4 @@
+Allow only outbound connections on 80/443
+
+
+We should specifically validate that we are not attempting to establish connections to remote parties on ports other than 80 or 443.  We could do this at the infrastructure level, but we should also make sure to make it clear in the code so that it's obvious that is the behaviour to anyone inspecting the services code.

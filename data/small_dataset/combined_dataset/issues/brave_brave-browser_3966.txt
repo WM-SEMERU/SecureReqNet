@@ -1,0 +1,28 @@
+Webtorrent file doesn't stream when file name is clicked on
+
+
+Description
+Instead of streaming the torrent content in window when clicking on the file name, Brave instead offers to save the file to your device:
+
+When torrent is opened in a new tab (from webtorrent screen), stream content opens in the new tab and will play as intended.
+Steps to Reproduce
+
+Ensure Brave webtorrent ext is enabled in settings
+Start torrent file in webtorrent
+Click on torrent name
+
+Actual result:
+(see above gif)
+Expected result:
+Clicking the file name should start streaming content in new tab rather than offer to download file.
+Reproduces how often:
+Easily
+Brave version (brave://version info)
+v0.61.52
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+Yes
+
+Additional Information
+FWIW, there should be a "play" or "start stream" button here instead of clicking on the file name -- Its not very clear nor is it stated anywhere that this is how to initiate video playback.

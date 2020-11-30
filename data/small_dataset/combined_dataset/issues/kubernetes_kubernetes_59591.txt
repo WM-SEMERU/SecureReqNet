@@ -1,0 +1,16 @@
+Allow limiting adding/removing finalizers
+
+
+/kind feature
+@kubernetes/sig-auth-feature-requests
+@kubernetes/sig-api-machinery-feature-requests
+What happened:
+As a namespace-constrained user, I am able to manually add/remove finalizers added by system components:
+
+garbage collection finalizers
+pv/pvc protection finalizers
+service catalog deprovisioning finalizers
+etc...
+
+What you expected to happen:
+As a cluster admin, I expected to be able to control what finalizers can be added/removed by end users, so they can be relied on by system components and controllers for gating deletion

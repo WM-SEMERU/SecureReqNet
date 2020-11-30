@@ -1,0 +1,35 @@
+1password X support
+
+
+Description
+The 1password extension shipped by default does not work on Linux, because there is no desktop app for 1password for Linux. The best option IMO is to use 1password X, which is a browser-only version (no desktop app required). Besides working on Linux, it also has a better UI than the default one, so all users would benefit.
+Steps to Reproduce
+
+install Brave on Linux
+enable and open the default 1password extension
+stare at the message saying "Couldn’t connect to 1Password"
+be unable to install 1password X manually
+
+Actual result:
+Feel disappointed about the broken workflow.
+Expected result:
+Be able to use 1password conveniently and rejoice.
+Reproduces how often:
+Every time on Linux
+Brave Version
+about:brave info:
+Brave: 0.23.107
+V8: 6.8.275.24
+rev: 6f2fc65
+Muon: 8.0.10
+OS Release: 4.13.0-45-generic
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+I have not tried this, but I see no mention of 1password X anywhere, so probably yes.
+Additional Information
+I spent some time trying to install 1password X manually, but wasn't able to do it. Therefore I have no workaround better than "keep the 1password tab open all the time, and manually copy&paste all the things".

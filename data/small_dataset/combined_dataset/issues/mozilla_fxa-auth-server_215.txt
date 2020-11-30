@@ -1,0 +1,4 @@
+Delegate certificate signing to a separate service
+
+
+For key security and scaling, certificate signing should be a separate service as it is in browserid.

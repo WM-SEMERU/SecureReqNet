@@ -1,0 +1,10 @@
+Clarify security philosophy around update & delete
+
+
+We had some vigorous discussion in the API machinery SIG earlier today about what a system administrator should expect when granting a user update rights on a given object or class of objects.
+My own position is that update is strictly more powerful than delete and you shouldn't give anyone update powers over an object you don't want them to do destructive things to.
+The opposing position is, as @derekwaynecarr put it, update : delete :: paint house : burn house down.
+We discussed whether it's reasonable to expect system admins to understand the exact power update gives you over any particular sort of object; some objects allow more destructive updates than others. We discussed extracting "harmless" field updates into subresources which would be safe, with source code that is easily checkably safe.
+We discussed how our current update validation path appears to be a fertile source of CVEs, and whether or not we should expect that to change in the future.
+We didn't come to clear conclusions on these issues, and whatever we do decide the system's philosophy should be here, we need committers and reviewers to understand it. So I'm opening this issue so we can hopefully come to some agreement.
+The issue that triggered this is the garbage collector: #23656 and also see discussion on its API PR: #23928

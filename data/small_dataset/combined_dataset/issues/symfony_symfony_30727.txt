@@ -1,0 +1,67 @@
+asynchronous message handler can not save the cache
+
+
+Symfony version(s) affected: 4.2.0
+Description
+I dispatch message in a controller function and after asynchronous message been send, handler which receive message from rabbitMQ will handling the message.but when I save a cache in handler,
+and I want to check if exists the cache by the key to decide to send message in this controller again,it can not found any cache which been saved in handler before.
+the code like this
+   // controller
+    public function index(\Swift_Mailer $mailer)
+    {
+        $message = (new SendRegMailRequest())
+            ->setEmail('jack9029@gmail.com');
+        $cache = new FilesystemAdapter('app.cache');
+        if ($cache->hasItem($message->getKey())){
+            throw new HttpException(400,'you can not send validation email in 30 minutes again');
+        }
+        $this->bus->dispatch($message);
+        return $this->render('blog/default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+// message
+final class SendRegMailRequest extends MailerMessage
+{
+    /**
+     * @var string
+     */
+    private $email;
+    private $keyPrefix = 'auth.code.register.validator';
+    private $code;
+   public function getEmail():string
+    {
+        return $this->email;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    public function getKey()
+    {
+        return $this->keyPrefix.'.'.preg_replace("/[^a-z0-9]+/i","-", $this->email);
+    }
+...
+
+and handler
+ public function __construct(\Swift_Mailer $mailer,Templating $templating)
+    {
+        $this->cache = new FilesystemAdapter('app.cache');
+        $this->templating = $templating;
+        parent::__construct($mailer);
+    }
+
+  public function __invoke(SendRegMailRequest $regMail)
+    {
+        $regMail->setMessage($this->templating);
+        $validate = $this->cache->getItem($regMail->getKey());
+        $validate->set($regMail->getCode());
+//        $validate->expiresAt(Carbon::now()->addMinute(30));
+        $this->cache->save($validate);
+       $this->sendMail($regMail);
+    }
+
+Is it a bug,or Is my owner wrong?

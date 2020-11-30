@@ -1,0 +1,34 @@
+[issue 3939] [pulsar-flink]: Allow client authentication from pulsar-flink package
+
+
+Problem:
+pulsar-flink module (aka flink connector) internally uses pulsar-client. Though the pulsar client allows setting tokens in the client builder, the flink connector does not provide a way to pass authentication token to the pulsar client it uses internally.
+Solution:
+Accept authentication information as an input in pulsar-flink module. Pass this authentication information to pulsar-client.
+<--
+Contribution Checklist
+Fixes #3939
+Motivation
+We recently enabled JWT based authentication on our brokers. Though the native pulsar client allows setting tokens in the client builder, the pulsar-flink connector does not provide a way to pass authentication token to the pulsar client initialised internally.
+Modifications
+pulsar-flink takes auth argument and passes it to pulsar client, set new AuthenticationDisabled() to disable.
+Verifying this change
+This change is already covered by existing tests, such as (PulsarAvroTableSinkTest.java
+PulsarJsonTableSinkTest.java).
+Does this pull request potentially affect one of the following parts:
+If yes was chosen, please highlight the changes
+
+Dependencies (does it add or upgrade a dependency): (yes / no)
+The public API: (yes) : changed constructor signatures in pulsar-flink module
+The schema: (no)
+The default values of configurations: (no)
+The wire protocol: (no)
+The rest endpoints: (no)
+The admin cli options: (no)
+Anything that affects deployment: (yes / no / don't know)
+
+Documentation
+
+Does this pull request introduce a new feature? (yes)
+If yes, how is the feature documented? (JavaDocs)
+

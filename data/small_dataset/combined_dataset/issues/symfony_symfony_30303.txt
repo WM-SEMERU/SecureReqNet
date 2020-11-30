@@ -1,0 +1,50 @@
+[Messenger] Added SecurityMiddleware
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+Todo
+
+
+
+The SecurityMiddleware uses the Security AuthorizationChecker to determine if a Message is allowed to pass through. I created this initially for the Park-Manager project but it's generic enough to be part of the Messenger component.

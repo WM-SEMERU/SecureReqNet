@@ -1,0 +1,7 @@
+Turn StrictHostKeyChecking on for SSH
+
+
+If you run something like docker-machine -D ssh dev ls you'll see the actual SSH command we are running behind the scenes:
+$ docker-machine -D ssh dev ls
+DEBU[0000] executing: ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=quiet -p 65069 -i /Users/nathanleclaire/.docker/machines/dev/id_rsa docker@localhost ls
+Some of this looks OK (although we probably don't need the port forward to localhost any more), but instead of turning off strict host key checking (a security feature to prevent MITM attacks) we should probably be automatically adding the host to the user's known_hosts file instead.  The -o StrictHostKeyChecking=no was probably OK for local VMs, but the whole game changes when we're SSHing out to machines on the public internet.

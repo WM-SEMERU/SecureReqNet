@@ -1,0 +1,4 @@
+Prepare the repository as Maps SDK vendor
+
+
+Refs mapbox/mapbox-gl-native#13598.

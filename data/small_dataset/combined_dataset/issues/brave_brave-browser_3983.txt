@@ -1,0 +1,25 @@
+widevine signing fails on ia32 due to incorrect output path
+
+
+ia32 windows build fails during widevine signing:
+07:56:08 [37882/37882] STAMP obj/brave/brave.stamp
+07:56:08 signing win binaries...
+07:56:08 python C:\jenkins\ia32-nightly\src\brave\script\sign_binaries.py --build_dir=C:\jenkins\ia32-nightly\src\out\Release
+07:56:08 generate Widevine sig files...
+07:56:08 python C:\jenkins\ia32-nightly\src\third_party\widevine\scripts\signature_generator.py --input_file=C:\jenkins\ia32-nightly\src\out\Release\brave.exe --flags=1 --certificate=**** --private_key=**** --private_key_passphrase=****
+07:56:09 
+07:56:09 Traceback (most recent call last):
+07:56:09   File "C:\jenkins\ia32-nightly\src\third_party\widevine\scripts\signature_generator.py", line 268, in <module>
+07:56:09     args.flags))
+07:56:09   File "C:\jenkins\ia32-nightly\src\third_party\widevine\scripts\signature_generator.py", line 210, in GenerateSignature
+07:56:09     input_digest = _CalculateSha512(input_path)
+07:56:09   File "C:\jenkins\ia32-nightly\src\third_party\widevine\scripts\signature_generator.py", line 108, in _CalculateSha512
+07:56:09     if _IsMachOFile(input_path):
+07:56:09   File "C:\jenkins\ia32-nightly\src\third_party\widevine\scripts\signature_generator.py", line 97, in _IsMachOFile
+07:56:09     with open(input_path, 'rb') as f:
+07:56:09 IOError: [Errno 2] No such file or directory: 'C:\\jenkins\\ia32-nightly\\src\\out\\Release\\brave.exe'
+07:56:09 
+07:56:09 npm ERR! code ELIFECYCLE
+07:56:09 npm ERR! errno 1
+
+We need to use the correct output path on ia32 which is src/out_86/Release.

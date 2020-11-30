@@ -1,0 +1,14 @@
+offboard Jess Frazelle
+
+
+
+ Add/remove from https://github.com/kubernetes/community/blob/master/sigs.yaml#L2602
+ Add/remove from OpsGenie rotation
+ https://groups.google.com/a/kubernetes.io/forum/#!forum/security owner
+ https://groups.google.com/a/kubernetes.io/forum/#!forum/security-discuss-private owner
+ https://groups.google.com/forum/#!forum/kubernetes-security-discuss owner
+ https://groups.google.com/a/kubernetes.io/forum/#!forum/distributors-announce owner
+ https://github.com/kubernetes-security/security-disclosures/issues access
+ ???
+
+Via #15

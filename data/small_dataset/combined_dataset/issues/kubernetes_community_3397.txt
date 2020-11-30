@@ -1,0 +1,6 @@
+Add Jay to wg-security-audit
+
+
+Jay has been a huge contributor to our WG and I'd like us to consider adding him officially to the organizers list. His participation has been key in helping us get through vendor contract negotiations and reviews, and we expect him to continue to participate as we start the actual audit.
+I'm not sure what other approvals we'll need here, possible from steering?
+cc @aasmall @joelsmith @JayBeale

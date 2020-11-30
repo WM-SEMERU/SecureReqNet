@@ -1,0 +1,10 @@
+Page load failure in security_location_0.sub.htm
+
+
+3:50.02 TEST_START: Thread-TestrunnerManager-1 /html/browsers/history/the-location-interface/security_location_0.sub.htm
+
+3:50.56 PROCESS_OUTPUT: Thread-TestrunnerManager-1 "task 'ScriptTask' failed at 'Failed to load page URL http://www.localhost:8000/, error: unknown error', /Users/travis/build/servo/servo/src/components/script/dom/htmlbuttonelement.rs:53" (pid:23025 command:/Users/travis/build/servo/servo/build/servo --hard-fail http://localhost:8000/html/browsers/history/the-location-interface/security_location_0.sub.htm)
+
+3:50.56 PROCESS_OUTPUT: Thread-TestrunnerManager-1 "Pipeline failed in hard-fail mode. Crashing!" (pid:23025 command:/Users/travis/build/servo/servo/build/servo --hard-fail http://localhost:8000/html/browsers/history/the-location-interface/security_location_0.sub.htm)
+
+I'm not sure what result is expected with the odd URL www.localhost:8000. This deserves investigating what the test is actually trying to do; perhaps we're just too eager to fail everything when something goes wrong.

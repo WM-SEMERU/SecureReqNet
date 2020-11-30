@@ -1,0 +1,5 @@
+Expose Connection Id in SignalR TS Client
+
+
+Fixes #8681
+Last part of the exposing connection id issue.

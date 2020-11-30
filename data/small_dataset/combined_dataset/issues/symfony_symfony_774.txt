@@ -1,0 +1,4 @@
+[Security] Fix for #772
+
+
+This change the check used in the security component as the needed one is knowing if the session is activated (to be able to set a value in it), not if a session cookie exist. It fixes #772

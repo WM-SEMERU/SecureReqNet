@@ -1,0 +1,4 @@
+Feature: Require password immediately after sleep or screen saver begins
+
+
+Configure the the option Require password immediately after sleep or screen saver begins.

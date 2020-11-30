@@ -1,0 +1,4 @@
+[CLOUDSTACK-10230] User should not be able to use removed “Guest OS type”
+
+
+Users are able to change the OS type of VMs to a “Guest OS type” that has been removed. This becomes a security issue when we try to force users to use HVM VMs (Meltdown/Spectre thing). A removed “guest os type” should not be usable by any users in the cloud.

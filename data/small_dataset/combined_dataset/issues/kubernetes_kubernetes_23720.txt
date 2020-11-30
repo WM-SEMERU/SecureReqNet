@@ -1,0 +1,18 @@
+Decouple Group Population from Authentication
+
+
+Upon successful Authentication, authentication plug-ins are responsible creating the user.Info object. Authorization plugins are expected to call that object's GetGroups []string method to determine which groups a user belongs to.
+The main problem with binding authn and groups together in this way is that not every authn method has a well-defined notion of groups, in which cases you'd want some other plug-in to populate groups. The OIDCAuthenitcator is motivating example (for me anyhow): OpenID Connect has well-defined authentication semantics, but there's no standard around group membership.
+In an discussion with @erictune and @sym3tri, we outlined several different possible solutions to the problem:
+
+There is a new method added to user.Info with the signature ExternalGroups() bool; if this flag is true, during the AuthorizationAttribute building phase (before the authz plug in is called), the authz attr builder will call out to some groupifier plug-in which will populate the groups in the Info object, and pass it along to the authz plug-in
+
+
+The advantage to this solution is that Authorizers do no have to worry about group population, so very little needs to change on their end. A disadvantage is that it's rather coarse: The authorizer might only care about a user's membership in a particular group, but instead they have to get all of them (which in a large company might be a sizeable number, and in some cases (for example some LDAP configurations) such enumeration might be disallowed by policy)
+
+A second solution is similar to the first, except that authorizers are responsible for calling out to the groupifier.
+
+
+The advantage here is that Authorizers can ask the groups API which groups they'd like to check the membership of (eg. CheckMembership(user, group) bool) instead of having to ask for them all, since the Authorizer knows what groups it is interested in.
+The disadvantage here is that all authorizers now have to deal with getting groups.
+With either solution, there would have to be a reasonable Groups API defined for plugins, and some reference implementation - An initial implementation could be a file based groups solution. I'd be most interested in a web hook type solution (or, if it's time for that sort of thing, a GRPC based one)

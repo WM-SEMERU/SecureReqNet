@@ -1,0 +1,9 @@
+proposal: crypto/tls: add GetConfigForServer callback to *tls.Config
+
+
+I'd like to be able to dynamically update a *tls.Config's RootCAs field to support changes in root CAs without having to restart the server.
+If I want to update the ClientCAs field, I can easily do this by using the GetConfigForClient hook. Whereas for RootCAs, there is no such callback. Reason being that the ClientCAs field is used by servers and that is the only time GetConfigForClient is called. The RootCAs field is used only by clients.
+My only option would be to create a *tls.Config structure that is protected by a mutex. For dialing, I would lock the mutex, grab the pointer and then unlock and use the Config normally. When the Config needs to be updated, I would clone the *tls.Config, update the cloned Config, lock the mutex, replace the pointer and then unlock.
+I could easily abstract the above away into a function so this isn't a big issue but my code would be significantly more clean and symmetric across server and client if there was a callback to grab the Config for the connection dynamically as a client.
+Of course, my use case is distinct from the use cases that gave rise to the callbacks, where the server/client wants to respond to the server/client dynamically. I just want to update the Config dynamically regardless of who the server/client is. So I suspect my use case may be a misuse of even the GetConfigForClient callback but it is in my opinion still the cleanest solution and makes it really easy to play with third party frameworks that do not expect the *tls.Config to be dynamically updated like gRPC.
+@bradfitz suggested this in #16066 (comment) but it was never implemented.

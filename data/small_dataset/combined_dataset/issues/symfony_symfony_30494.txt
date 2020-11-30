@@ -1,0 +1,53 @@
+[HttpClient] Added TraceableHttpClient and DataCollector
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+That PR adds TraceableHttpClient and the DataCollector.
+Needs #30419 for the  integration of HttpClient in FrameworkBundle.
+Preview:
+

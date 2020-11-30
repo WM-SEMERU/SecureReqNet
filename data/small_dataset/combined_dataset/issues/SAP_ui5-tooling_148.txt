@@ -1,0 +1,130 @@
+11 npm vulnerabilities (5 low, 5 moderate, 1 critical) when install CLI
+
+
+Expected Behavior
+No NPM Audit issue
+Current Behavior
+There are 11 audit issue, and one of them is CRITICIAL.
+Critical        Command Injection
+Package         open
+Patched in      No patch available
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > open
+More info       https://npmjs.com/advisories/663
+Steps to reproduce the issue
+
+NPM install @ui5/cli --save-dev
+NPM audit
+
+Context
+
+UI5 Module Version (output of ui5 --version when using the CLI): 1.2.3
+Node.js Version: 10.15.1
+npm Version: 6.9.0
+OS/Platform: Windows 10
+Browser (if relevant): {...}
+Other information: {...}
+
+Affected components (if known)
+
+ ui5-builder
+ ui5-server
+ ui5-cli
+ ui5-fs
+ ui5-project
+ ui5-logger
+
+Log Output / Stack Trace
+NPM install LOG:
+
+
+@ui5/cli@1.2.3
+added 956 packages from 796 contributors and audited 8396 packages in 224.852s
+found 11 vulnerabilities (5 low, 5 moderate, 1 critical)
+run npm audit fix to fix them, or npm audit for details
+                 === npm audit security report ===
+
+
+                           Manual Review
+       Some vulnerabilities require your attention to resolve
+
+    Visit https://go.npm.me/audit-guide for additional guidance
+
+Critical        Command Injection
+Package         open
+Patched in      No patch available
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > open
+More info       https://npmjs.com/advisories/663
+Moderate        Regular Expression Denial of Service
+Package         mime
+Patched in      >= 1.4.1 < 2.0.0 || >= 2.0.3
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/builder > less-openui5 > less > mime
+More info       https://npmjs.com/advisories/535
+Moderate        Regular Expression Denial of Service
+Package         mime
+Patched in      >= 1.4.1 < 2.0.0 || >= 2.0.3
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/project > @ui5/builder > less-openui5 > less
+> mime
+More info       https://npmjs.com/advisories/535
+Moderate        Regular Expression Denial of Service
+Package         mime
+Patched in      >= 1.4.1 < 2.0.0 || >= 2.0.3
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/server > @ui5/builder > less-openui5 > less
+> mime
+More info       https://npmjs.com/advisories/535
+Moderate        Regular Expression Denial of Service
+Package         mime
+Patched in      >= 1.4.1 < 2.0.0 || >= 2.0.3
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/server > @ui5/project > @ui5/builder >
+less-openui5 > less > mime
+More info       https://npmjs.com/advisories/535
+Moderate        Regular Expression Denial of Service
+Package         mime
+Patched in      >= 1.4.1 < 2.0.0 || >= 2.0.3
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/server > connect-openui5 > less-openui5 >
+less > mime
+More info       https://npmjs.com/advisories/535
+Low             Regular Expression Denial of Service
+Package         clean-css
+Patched in      >=4.1.11
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/builder > less-openui5 > less > clean-css
+More info       https://npmjs.com/advisories/785
+Low             Regular Expression Denial of Service
+Package         clean-css
+Patched in      >=4.1.11
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/project > @ui5/builder > less-openui5 > less
+> clean-css
+More info       https://npmjs.com/advisories/785
+Low             Regular Expression Denial of Service
+Package         clean-css
+Patched in      >=4.1.11
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/server > @ui5/builder > less-openui5 > less
+> clean-css
+More info       https://npmjs.com/advisories/785
+Low             Regular Expression Denial of Service
+Package         clean-css
+Patched in      >=4.1.11
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/server > @ui5/project > @ui5/builder >
+less-openui5 > less > clean-css
+More info       https://npmjs.com/advisories/785
+Low             Regular Expression Denial of Service
+Package         clean-css
+Patched in      >=4.1.11
+Dependency of   @ui5/cli [dev]
+Path            @ui5/cli > @ui5/server > connect-openui5 > less-openui5 >
+less > clean-css
+More info       https://npmjs.com/advisories/785
+
+
+found 11 vulnerabilities (5 low, 5 moderate, 1 critical) in 8396 scanned packages
+11 vulnerabilities require manual review. See the full report for details.

@@ -1,0 +1,17 @@
+src, buffer: add --pending-deprecation flag
+
+
+This PR was split out of #11808 by request of the @nodejs/ctc.
+This adds a new --pending-deprecation command line flag and equivalent NODE_PENDING_DEPRECATION environment variable. These are used to cause
+core to emit pending DeprecationWarnings that are off by default.
+A pending deprecation warning for use of Buffer() and new Buffer() is included. The pending deprecation warning is off by default and is only emitted when the new pending deprecation
+flag is used.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+src, buffer

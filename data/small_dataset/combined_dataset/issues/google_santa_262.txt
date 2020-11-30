@@ -1,0 +1,9 @@
+Possible vnodeID conflicts with APFS
+
+
+Hi,
+When browsing over your Driver Code I noticed that you combine the File System ID with the File ID to one 64 bit Vnode ID.
+This worked fine with HFS/HFS+ since it restricted itself to use only 32bits for the file id. But If I'm not mistaken APFS takes actually advantage of all 64 bits.
+Are you ok with this conflict?
+Best Regards
+Timo

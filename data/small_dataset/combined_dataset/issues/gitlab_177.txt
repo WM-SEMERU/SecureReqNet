@@ -1,0 +1,7 @@
+It seems that signing in via Twitter is currently broken. Twitter doesn't allow sending back a user's email address and GitLab blows up because it expects the email.  
+
+The problem occurs here: https://github.com/dblessing/gitlabhq/blob/master/lib/gitlab/oauth/user.rb#L61
+
+Twitter suggests authenticating the user with Twitter and then asking for the user's email address within the app after the callback. We will need to add this functionality if we want to support Twitter as an omniauth option. We will have to uniquely identify the user based on twitter handle I think.
+
+Twitter is listed as a config option in the gitlab.yml.example file. Gitlab.com also has Twitter sign in enabled, but it's not working :) 

@@ -1,0 +1,45 @@
+[Security][SecurityBundle] Use csrf_token_id instead of deprecated intention
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#16720
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+

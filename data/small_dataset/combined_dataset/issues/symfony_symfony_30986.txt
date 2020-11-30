@@ -1,0 +1,54 @@
+Make tests independent from each other
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Environment variables set in a test need to be restored to their
+previous values or unset if we want to be able to run tests
+independently.
+Credits to @ostrolucky for spotting this issue, I'm available for help when merging this in more recent branch (issues may appear then).
+Created during the EU-FOSSA hackathon

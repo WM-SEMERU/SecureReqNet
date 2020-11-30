@@ -1,0 +1,50 @@
+[FrameworkBundle] Fix Descriptor throwing on non existent parent
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+nelmio/NelmioApiDocBundle#1470 
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+The Descriptor throws an exception when it encounters a class having a non existent parent, see nelmio/NelmioApiDocBundle#1470 for the record.

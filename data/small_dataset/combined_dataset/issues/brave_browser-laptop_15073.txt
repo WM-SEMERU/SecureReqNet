@@ -1,0 +1,27 @@
+unable to solve captcha
+
+
+Test plan
+See #15077
+Description
+Dropping the BAT logo onto the intended target isn't solving the captcha. Did some investigation with @evq and found that the y value is being thrown off by the BAT logo shadow.
+Steps to Reproduce
+
+Launch 0.23.102 with a clean profile and EDGER_ENVIRONMENT=staging LEDGER_VERBOSE=true
+Enable Payments
+Click on Claim button
+Attempt to solve captcha
+
+Actual result:
+Unable to solve captcha unless I take the height of the logo + shadow into account:
+
+Expected result:
+BAT logo shadow should be irrelevant.
+Reproduces how often:
+easily for me on macOS, does not reproduce on macOS for @kjozwiak
+Brave Version
+about:brave info:
+0.23.102
+Reproducible on current live release:
+n/a
+Additional Information

@@ -1,0 +1,6 @@
+Add an option to validate the CA Cert of the master using a hash in `kubeadm join`
+
+
+Proposal: https://docs.google.com/document/d/1SP4P7LJWSA8vUXj27UvKdVEdhpo5Fp0QHNo4TXvLQbw/edit?ts=5971498a
+PR: kubernetes/kubernetes#49520 (comment)
+@mattmoyer will later convert the proposal to markdown and check into git.

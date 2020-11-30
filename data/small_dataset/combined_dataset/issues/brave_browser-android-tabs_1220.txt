@@ -1,0 +1,30 @@
+Do not hide address bar on scroll
+
+
+Description 
+Hiding URL bar on navigation can be used by phishing actors.
+See here: https://www.securitee.org/files/hindsight_ccs2017.pdf (ABB 15-16)
+Steps to Reproduce 
+
+Navigate to reddit.com
+Scroll
+Address bar disappears
+
+Actual result: 
+Disappears
+Expected result:
+Should be visible
+Issue reproduces how often: 
+Easily
+Issue happens on: 
+
+Current Playstore version? Yes
+Beta build? No
+
+Device Details:
+
+Device(Phone, Tablet, Phablet): Pixel 2XL
+Android Version: v9
+
+Brave version:
+1.0.82

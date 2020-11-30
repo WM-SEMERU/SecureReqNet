@@ -1,0 +1,28 @@
+Update calls to Process.Start
+
+
+Unless we're launching the interpreter that the user typed in, we should be making sure to use full paths when launching executable.
+Example of one that needs to be updated:
+
+
+
+PTVS/Python/Product/EnvironmentsList/EnvironmentPathsExtension.xaml.cs
+
+
+         Line 81
+      in
+      1d04f01
+
+
+
+
+
+
+ Process.Start(psi); 
+
+
+
+
+
+We can use Path.Combine(Environment.SystemDirectory, "explorer.exe") to specify the full path.
+Alternative: string filepath= "%WINDIR%\\system32\\explorer.exe"; Environment.ExpandEnvironmentVariables(filepath);

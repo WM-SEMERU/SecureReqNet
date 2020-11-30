@@ -1,0 +1,1 @@
+Please add hightlight support for [NSIS](http://nsis.sourceforge.net/Main_Page) Source files .  :pray:

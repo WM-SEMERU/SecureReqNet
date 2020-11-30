@@ -1,0 +1,6 @@
+Can removal of secrets be prevented when referenced in a Service's PreviousSpec?
+
+
+Currently, the RemoveSecret function will error out when a secret is being referenced by a service's Spec. This is super-useful!
+However, the same is not true when secrets are referenced by a service's PreviousSpec. From what I can tell this can be implemented by modifying serviceIndexerBySecret.FromObject to consider s.PreviousSpec.Task.GetContainer() as well. This could help prevent removed secrets from causing a service rollback to fail.
+Could this behaviour be considered? Not sure if there's a way to opt-in, since it'd be a change in the current behaviour...

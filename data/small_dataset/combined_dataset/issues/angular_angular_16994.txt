@@ -1,0 +1,13 @@
+Binding to the src of an iframe causes the iframe to flicker
+
+
+Binding to the src property of an iframe causes the iframe to reload every time change detection is run, even when the src value has not changed.
+Reproduction: https://plnkr.co/edit/CgLHkprl4jYndqEiY7mX?p=preview
+(enter X1RVYt2QKQE as an example videoId, then type into the unrelated input)
+Happens with all Angular versions <= 4.1 (current version at time of this writing)
+Note from @tbosch:
+
+So the problem is that this.domSanitizer.bypassSecurityTrustResourceUrl returns a new object every time it is invoked.
+If the result is cached, the flickering is gone, see https://plnkr.co/edit/W0gJKmRsGUpzb1QNZqf5?p=preview
+Eventually, we could change our behavior in that bypassSecurityTrustResourceUrl would use an internal cache already.
+

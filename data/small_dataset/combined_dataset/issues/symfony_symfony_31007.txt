@@ -1,0 +1,47 @@
+[RFC][HttpKernel] Make downstream HTTP caches expire on deployments
+
+
+In several projects, we are using Content Delivery Networks in front of Symfony applications. In those cases, most of the controllers are able to send Last-Modified headers along with the responses. Often this is derived from some database information, for example the time a record has last been saved. Also, there is some infrastructure (bundles, annotations) in place to make validation via If-Modified-Since easy.
+But there is one case where we've struggled a few times already: When we deploy a new version of the application, there's nothing that makes sure that "old" responses are no longer served from downstream caches.
+I am not talking about a "grace" period where the s-maxage runs down, but the fact that the downstream cache can successfully re-validate the stale cache entry since my application is not aware of the new deployment (it just looks at the database records). Of course, I do not want to have to deal with deployment timestamps in the controllers either.
+One solution would be to force a cache purge. But that's an annoying task and can be quite slow in CDNs.
+So, one idea I came up with was to add something along the following lines in our AppKernel:
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+
+class AppKernel ...
+{
+    public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
+    {
+        $this->boot();
+
+        if (!$this->getContainer()->hasParameter('project.deployment_ts')) {
+            return parent::handle($request, $type, $catch);
+        }
+
+        $lastDeploymentTimestamp = $this->getContainer()->getParameter('project.deployment_ts');
+
+        $ifModifiedSince = $request->headers->get('if-modified-since');
+        if ($ifModifiedSince !== null && strtotime($ifModifiedSince) < $lastDeploymentTimestamp) {
+            $request->headers->remove('if-modified-since');
+        }
+
+        $response = parent::handle($request, $type, $catch);
+
+        $lastmod = $response->getLastModified();
+        if ($lastmod !== null) {
+            $lastDeployment = new \DateTime('@'.$lastDeploymentTimestamp);
+
+            if ($lastDeployment > $lastmod) {
+                $response->setLastModified($lastDeployment);
+            }
+        }
+
+        return $response;
+    }
+}
+This checks if there is a project.deployment_ts parameter in the DIC which is a unix timestamp. Somehow your deployment tooling has to set or provide this parameter, but that's probably not an issue.
+The code will then make sure that If-Modified-Since conditional requests will return complete 200 responses if the given time is before the current deployment. Also, it will update the Last-Modified header to at least this time.
+I'd love to get feedback on the issue. Have you encountered a similar problem as well? If there is enough support and interest, I would see how this could be fit into the Kernel or the HttpKernel component.
+Update
+Just realized that this has nothing to do with the CDN. It affects any validation-based downstream cache, including browser caches that cannot be PURGEd at all.

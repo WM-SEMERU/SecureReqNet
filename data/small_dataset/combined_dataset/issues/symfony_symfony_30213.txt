@@ -1,0 +1,38 @@
+Add HTML5 Boilerplate to symfony/website-skeleton
+
+
+Description
+The symfony/website-skeleton flex recipe is meant to be used when building a full-blown web app/site with all the bells and whistles. Currently, it includes a very minimal Twig template. Usually when building a web application, there are a lot more configuration that needs to be done to the template to make it conform to current standards and best practices, and to include support for mobile-responsive pages and PWA standards.
+I usually spend a lot of time configuring the templates to include everything necessary for a modern web app. HTML 5 Boilerplate.com/ is a project that includes a lot of sensible default configuration to get started with a modern web app template.
+This RFC aims to get some feedback on including parts of HTML 5 Boilerplate by default when using the symfony/website-skeleton recipe.
+Questions
+If this is a route that the Symfony project are willing to go, there are a couple of questions regarding the implementation
+
+Are there any similar alternative projects that should be considered?
+Where should this code live?
+
+The most sensible approach would be a new flex recipe, something along the lines of symfony/h5bp. This is so that it can only be included in the symfony/website-skeleton recipe and leave the other recipes un-affected (E.G The Twig-bundle recipe doesn't include any changes)
+
+
+ Should the .htaccess file be included?
+
+It adds a lot of optimized config for Apache, but what about other webservers like Nginx? (E.G Magento 2 includes a default nginx config that include some optimizations)
+
+
+ Should the main.css be included by default as part of webpack-encore?
+ Should modernizr be included?
+
+Personally, I don't think jQuery should be included by default, so as not to give preference for one JS framework/library
+
+
+Which other files should be included by default?
+
+ browserconfig.xml (This should include the tile png images as well, customized for Symfony)
+ humans.txt
+ 404.html
+ site.webmanifest
+
+
+
+TL;DR
+Create a new Flex recipe with an updated Twig template to include more default configurations for modern web apps, as well as additional files to easily get started with building a PWA or mobile-responsive site

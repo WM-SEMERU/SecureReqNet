@@ -1,0 +1,50 @@
+[WIP] Adding test for CachingHttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+This is a Work in progress for addition of unit tests on CachingHttpClient

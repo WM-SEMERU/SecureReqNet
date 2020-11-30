@@ -1,0 +1,50 @@
+[SecurityBundle] only pass relevant user provider
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#4498, #12465, #20401, #21737
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+There is no need for the context listener to be aware of all the configured user providers. It must only use the provider for the current firewall (the one identified by the context key passed to the constructor) to refresh the user from the session.

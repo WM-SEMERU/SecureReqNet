@@ -1,0 +1,9 @@
+Self destruct processes
+
+
+We should self destruct a process in either
+
+after a specified timeout (1 hour)
+if parsing fails
+
+This will ensure that we do not accidentally leak sensitive information in the memory state of a process.

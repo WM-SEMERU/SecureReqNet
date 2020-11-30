@@ -1,0 +1,11 @@
+Remove closing audit log file and add error check when writing to audit
+
+
+This picks the order fix from #33164. Additionally I've removed entirely closing the log file, since it didn't make sense where it was. I've also added error checks when actually writing to audit logs.
+@sttts ptal
+1.4 justification:
+Risk: the code only runs if auditing is enabled with an apiserver flag. So the risk is low.
+Rollback: nothing should depend on this
+Cost: the auditing feature is broken because the impersonation filter is applied before and you might not see the proper user when using --as flag. Additionally no errors are logged if writing to audit fails.
+
+This change is 

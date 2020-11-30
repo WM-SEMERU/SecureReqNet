@@ -1,0 +1,6 @@
+Upgrade Chromium 74.0.3729.40 to Chromium 74.0.3729.61
+
+
+QA tests:
+Check branding items
+Check for version bump

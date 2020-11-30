@@ -1,0 +1,10 @@
+ArrayLike proxy handler not compatible with WeakMap emulation
+
+
+Original issue 1725 created by kpreid.switchb.org on 2013-04-30T22:37:54.000Z:
+Now that we have Proxies combined with non-builtin WeakMaps on some platforms (namely Firefox), the Proxy ArrayLike implementation needs to be aware of the WeakMap HIDDEN_NAME, or we need to properly patch Proxy itself to hide HIDDEN_NAME.
+Test case:
+var ArrayLike = cajaVM.makeArrayLike(1);
+var w = new WeakMap();
+w.get(ArrayLike.prototype);  // should return undefined, but dies
+This may be a security risk if there is some way to confuse ArrayLike into revealing HIDDEN_NAME such as in an error message.

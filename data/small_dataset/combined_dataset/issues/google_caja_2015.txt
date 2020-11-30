@@ -1,0 +1,5 @@
+Fix missing comma in whitelist JSON.
+
+
+Fixes issue #2013.
+Tests not run (we need a webdriver update, looks like, and I'll do that separately) but I put the file through a JSON parser to check it.

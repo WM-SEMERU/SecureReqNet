@@ -1,0 +1,22 @@
+security problem node inspect  v6.14.3
+
+
+
+Version: v6.14.3
+Platform: Linux
+Subsystem: Ubuntu 16
+
+run node like this
+➜  ~ $ node --inspect="127.0.0.1:9876" -e "setTimeout(function() { console.log('yes'); }, 30000)"
+Debugger listening on port 9876.
+Warning: This is an experimental feature and could change at any time.
+To start debugging, open the following URL in Chrome:
+    chrome-devtools://devtools/remote/serve_file/@60cd6e859b9f557d2312f5bf532f6aec5f284980/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9876/b41558bd-24a7-4828-ab57-16f7f7f231fa
+
+and run
+➜  ~ $  netstat -lpn
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:9876            0.0.0.0:*               LISTEN      19879/node      
+
+node writes that he listens to 127.0.0.1 and actually listens to 0.0.0.0

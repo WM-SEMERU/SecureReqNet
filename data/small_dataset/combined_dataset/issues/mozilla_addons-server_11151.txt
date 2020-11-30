@@ -1,0 +1,21 @@
+Update botocore to 1.12.129
+
+
+This PR updates botocore from 1.12.128 to 1.12.129.
+
+Changelog
+1.12.129
+========
+
+* api-change:``eks``: Update eks client to latest version
+* api-change:``iam``: Update iam client to latest version
+
+
+
+Links
+
+PyPI: https://pypi.org/project/botocore
+Changelog: https://pyup.io/changelogs/botocore/
+Repo: https://github.com/boto/botocore
+
+

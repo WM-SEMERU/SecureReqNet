@@ -1,0 +1,6 @@
+Only the cluster-info ConfigMap should be exposed in the kube-public namespace
+
+
+Currently it seems like all ConfigMaps in the kube-public namespace are, which is sub-optimal
+This can and should be cherrypicked into the v1.6 and v1.7 releases.
+PR: kubernetes/kubernetes#48050

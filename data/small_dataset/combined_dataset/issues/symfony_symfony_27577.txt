@@ -1,0 +1,23 @@
+[Security] Method "GuardAuthenticationListener::setSessionAuthenticationStrategy()" does not exist
+
+
+Symfony version(s) affected: 2.8.42-dev, 3.4.12-dev
+Description
+Applications configuring a guard authenticator exit with an exception after upgrading to the HEAD of the 2.8/3.4 branch.
+In AbstractRecursivePass.php line 162:
+
+  [Symfony\Component\DependencyInjection\Exception\RuntimeException]
+  Invalid service "security.authentication.listener.guard.main": method "Symfony\Component\Securit
+  y\Guard\Firewall\GuardAuthenticationListener::setSessionAuthenticationStrategy()" does not exist
+  .
+
+How to reproduce
+Just configure any guard authenticator on a new Symfony project.
+
+Reproducer 3.4: https://github.com/derrabus/symfony-standard/tree/3.4-broken-guard
+Reproducer 2.8: https://github.com/derrabus/symfony-standard/tree/2.8-broken-guard
+
+Additional context
+
+
+If you downgrade symfony/symfony to 2.8.41/3.4.11, everything's fine again.

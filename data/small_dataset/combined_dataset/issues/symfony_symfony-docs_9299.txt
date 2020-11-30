@@ -1,0 +1,14 @@
+[Security] Warn about the `plaintext` password encoder.
+
+
+Hello,
+I checked the Security component user guide and found that the plaintext password encoder is the first described in : https://symfony.com/doc/current/security.html
+This is a useful encoder to get started with the in_memory provider but since the security:encode-password has been introduced in Symfony 2.7 and bcrypt is supported by PHP>5.5 (which is the minimum for Symfony 3.0) maybe it's time to change that section a little bit.
+I worked on different Symfony projects and still found that the plaintext password is used in production (and I'm not the only one : https://twitter.com/afilina/status/965625729303146506)… Maybe it's not only a documentation issue but as these guides are the starting point for most users.
+
+Instead of mentioning the plaintext encoder, we must make bcrypt (or argon2i) the default documented encoder ;
+Also we need to explain how to encode the password ;
+Instead of giving bcrypt the second place, we need to move plaintext here, this is a non secure alternative of the bcrypt (which is fully supported without any hard work thanks to the encode command and PHP>5.5).
+
+I think with that changes, the guide will help users starting with a more robust security layer. Also adding some details about password change using the in_memory provider can be nice 😄.
+Though ?

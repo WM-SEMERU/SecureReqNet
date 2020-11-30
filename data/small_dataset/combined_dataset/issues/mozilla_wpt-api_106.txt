@@ -1,0 +1,87 @@
+[Security] Bump requests from 2.19.1 to 2.20.0
+
+
+Bumps requests from 2.19.1 to 2.20.0. This update includes security fixes.
+
+Vulnerabilities fixed
+Sourced from The GitHub Security Advisory Database.
+
+Moderate severity vulnerability that affects requests
+The Requests package through 2.19.1 before 2018-09-14 for Python sends an HTTP Authorization header to an http URI upon receiving a same-hostname https-to-http redirect, which makes it easier for remote attackers to discover credentials by sniffing the network.
+Affected versions: <= 2.19.1
+
+
+
+Changelog
+Sourced from requests's changelog.
+
+2.20.0 (2018-10-18)
+Bugfixes
+
+Content-Type header parsing is now case-insensitive (e.g.
+charset=utf8 v Charset=utf8).
+Fixed exception leak where certain redirect urls would raise
+uncaught urllib3 exceptions.
+Requests removes Authorization header from requests redirected
+from https to http on the same hostname. (CVE-2018-18074)
+should_bypass_proxies now handles URIs without hostnames (e.g.
+files).
+
+Dependencies
+
+Requests now supports urllib3 v1.24.
+
+Deprecations
+
+Requests has officially stopped support for Python 2.6.
+
+
+
+
+Commits
+
+bd84045 v2.20.0
+7fd9267 remove final remnants from 2.6
+6ae8a21 Add myself to AUTHORS
+89ab030 Use comprehensions whenever possible
+2c6a842 Merge pull request #4827 from webmaven/patch-1
+30be889 CVE URLs update: www sub-subdomain no longer valid
+a6cd380 Merge pull request #4765 from requests/encapsulate_urllib3_exc
+bbdbcc8 wrap url parsing exceptions from urllib3's PoolManager
+ff0c325 Merge pull request #4805 from jdufresne/https
+b0ad249 Prefer https:// for URLs throughout project
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

@@ -1,0 +1,48 @@
+InvalidOperationException - Operations that change non-concurrent collections must have exclusive acces
+
+
+Hi,
+During testing of our microservices, we, from time to time, stumble upon the following error.
+We're using asp.net core 2.2.0, and are using a custom authorization Middleware piece that populates the policies. Basically, we have currently three policies:
+Two that validate an incoming id (something like tenant id), and one that validates a policy annotation of a controller action with the users allowed policies. The latter is currently not completely implemented and just returns true as we haven't finished this development yet.
+After a restart of the service fabric nodes, the issue goes away until eventually it pops up again, totally random.
+The mentioned line in our custom Middleware:
+public class StoreContextIdMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public StoreContextIdMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+        public async Task Invoke(HttpContext context, IHeaderContextId contextId)
+        {
+            try
+            {
+                contextId.TenantId = context.Request.Headers.FirstOrDefault(x => x.Key == "zf-tuuid").Value.ToString();
+                contextId.OrganisationId =
+                    context.Request.Headers.FirstOrDefault(x => x.Key == "zf-ouuid").Value.ToString();
+            }
+            catch (Exception)
+            {
+            }
+
+            await _next.Invoke(context);
+        }
+The Stacktrace:
+System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.
+   at System.Collections.Generic.Dictionary`2.FindEntry(TKey key)
+   at System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)
+   at Microsoft.AspNetCore.Authorization.AuthorizationOptions.GetPolicy(String name)
+   at ZFH.Common.Authorization.AuthorizationPolicyProvider.GetPolicyAsync(String policyName)
+   at Microsoft.AspNetCore.Authorization.AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider policyProvider, IEnumerable`1 authorizeData)
+   at Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter.GetEffectivePolicyAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at ZFH.Common.Authorization.StoreContextIdMiddleware.Invoke(HttpContext context, IHeaderContextId contextId)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+

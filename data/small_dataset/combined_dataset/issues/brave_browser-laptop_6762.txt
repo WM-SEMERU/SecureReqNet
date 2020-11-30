@@ -1,0 +1,10 @@
+Protect Users from Typos leading to Malicious Domains
+
+
+Describe the issue you encountered:
+Typing news.bbco.co.uk into Brave leads you to phishing sites and other deceptive resources.
+Expected behavior:
+Brave protects users from unintentionally going to malicious domains.
+Brave Version (revision SHA): 0.13.0
+Original Report: https://twitter.com/kaihendry/status/822226091926573056
+cc @bradleyrichter

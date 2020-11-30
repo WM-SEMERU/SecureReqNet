@@ -1,0 +1,50 @@
+[FrameworkBundle] Rename WebTestAssertions -> WebTestAssertionsTrait
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30813 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Renamed according to the Symfony coding standards.

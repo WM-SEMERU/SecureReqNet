@@ -1,0 +1,59 @@
+[VarDumper] Fixed search bar
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Continuation of #28854, replaces #29176
+initial:
+
+ctrl f:
+
+scroll:
+
+tested in chrome+ff
+cc @ogizanagi
+ref https://caniuse.com/#feat=css-sticky

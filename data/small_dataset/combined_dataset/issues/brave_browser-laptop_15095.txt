@@ -1,0 +1,6 @@
+sync(-staging).brave.com certificate upgrade
+
+
+This issue will track any issues that happen as a result of upgrading the SSL certificate for sync.brave.com. The current certificate is set to expire in early September, so it needs to be upgraded.
+Terraform resources have been modified to allow easy upgrading in the future, although since this is the first use of such a system there might be something unexpected that happens.
+sync-staging.brave.com has been set up and tested to ensure that the upgrade goes smoothly.

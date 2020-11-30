@@ -1,0 +1,4 @@
+Remove insecure auth flag from deployed server
+
+
+after the hackathon it isn't needed anymore

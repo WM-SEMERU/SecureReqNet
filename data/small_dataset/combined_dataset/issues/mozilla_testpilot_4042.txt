@@ -1,0 +1,54 @@
+Incorrect title/alt values for multi-word study names
+
+
+You just need to hover over the experiment names in the eolMessageFour block:
+
+<a data-l10n-name="colorLink" title={-exp-color}>{-exp-color}</a>,
+I believe the problem is that we don't have any quotes around the title= bit, so instead of title="Firefox Color", we're ending up with title="Firefox". OK, I don't know why that last part is true. I don't even see the strings in view-source, and both Firefox and Chrome devtools give the same title="Firefox" where I was expecting <a ... title=Firefox Color> where the "Color" would just be some orphaned data arg.
+Anyways... not sure it's worth fixing. Yeah, sucks for a11y, but we'd have to change for every locale. But then, that should be pretty easy for somebody to quickly do locally and push to Git outside of updating 20+ locales in Pontoon manually.
+
+
+
+testpilot/locales/en-US/app.ftl
+
+
+        Lines 299 to 305
+      in
+      9c663ab
+
+
+
+
+
+
+ eolMessageFour = 
+
+
+
+     Other experiments like 
+
+
+
+     <a data-l10n-name="colorLink" title={-exp-color}>{-exp-color}</a>, 
+
+
+
+     <a data-l10n-name="sideViewLink" title={-exp-side-view}>{-exp-side-view}</a>, 
+
+
+
+     <a data-l10n-name="notesLink" title={-exp-notes}>{ -exp-notes}</a>, 
+
+
+
+     <a data-l10n-name="priceWiseLink" title={-exp-price-wise}>{-exp-price-wise}</a>, and 
+
+
+
+     <a data-l10n-name="emailTabsLink" title={-exp-email-tabs}>{-exp-email-tabs}</a> 
+
+
+
+
+
+/cc @flodolo for his $0.03.

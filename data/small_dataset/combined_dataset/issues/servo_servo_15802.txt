@@ -1,0 +1,5 @@
+investigate similar origin resource groups and cookies
+
+
+see discussion in #servo here: http://logs.glob.uno/?c=mozilla%23servo&s=2+Mar+2017&e=2+Mar+2017#c622930
+cc: @asajeffrey

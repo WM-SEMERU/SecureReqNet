@@ -1,0 +1,50 @@
+[SecurityBundle] Deprecate switch_user.stateless config node
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#8447
+
+
+
+unused since 4.0.

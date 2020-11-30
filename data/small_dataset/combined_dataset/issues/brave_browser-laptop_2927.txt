@@ -1,0 +1,4 @@
+Consider using Google Safe Browsing or PhishTank API
+
+
+See brave/brave-ios #309. This issue is for tracking purposes.

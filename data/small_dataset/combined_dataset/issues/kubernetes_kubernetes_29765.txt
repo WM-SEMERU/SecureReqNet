@@ -1,0 +1,11 @@
+How to enforce policies with version skew?
+
+
+Example use case:
+
+I specify an AppArmor profile to run my pod with. I'm expecting the pod to be attacked, so I want to guarantee it won't run without the AppArmor profile applied.
+
+As long as the Kubelet is running a version with AppArmor support, it can be loaded up with all the validation to ensure that the pod will only run with the profile enforced. However, if the Kubelet is running an older version, it will happily ignore the AppArmor field.
+Do we have any existing mechanisms to address this issue? I know a savvy user could add an AppArmor label to nodes that support it and an AppArmor NodeSelector to each Pod, but unless we automatically add the NodeSelector, it would not honor the PodSecurityPolicy, and is vulnerable to error.
+I propose adding a MinKubeletVersion field to Pods (or optionally, the PodSecurityContext) that is enforced by the scheduler (and the Kubelet as a fallback). Features that must be enforced would increase that version as needed (but never decrease). This would still be vulnerable if the kubectl client supported this feature (or a direct REST request was sent) and the master did not, but at least in that case the options would be missing with get pod or describe pod (or enforce it in kubectl directly).
+/cc @lavalamp @kubernetes/sig-scheduling @kubernetes/sig-node @sttts

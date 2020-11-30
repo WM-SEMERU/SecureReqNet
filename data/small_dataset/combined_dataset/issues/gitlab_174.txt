@@ -1,0 +1,13 @@
+There are two references for a milestone in an issue. In the picture below the green one points to the correct link, the red one is wrong.
+
+![milestone_bug](https://gitlab.com/uploads/gitlab-org/gitlab-ce/c98a75fbd2/milestone_bug.png)
+
+## Reproduce it
+
+1. Go to my test repo https://gitlab.com/axil/playground/issues
+2. Go to issue 1 and see that the milestone is correctly set.
+3. Go to issue 2 which has the same milestone as issue 1, the milestone link is wrong.
+4. Milestone link for issue 3 is wrong as well.
+
+
+

@@ -1,0 +1,7 @@
+Failed github-push decision task appears on servo-try for each successful merge
+
+
+When there is a successful homu merge, servo-auto shows the results of the homu tests; servo-master shows the results of the docs upload, and servo-try shows a decision task with a lot of commits that always fails because the git commit isn't available:
+fatal: Could not parse object '4cf39a696d1c98f1b88a65c1bd955baa52f1997e'.
+
+I'm assuming this is because when homu merges, it force pushes to the try branch with the new results of the auto branch. It's not clear to me why this results in a git failure, though.

@@ -1,0 +1,5 @@
+[WIP] Add telemetry overview section
+
+
+In the process of taking this Monitoring and Alerting document and adding it into an Overview section of the telemetry docs.
+Still updating some of the information from the document. WIP

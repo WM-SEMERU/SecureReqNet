@@ -1,0 +1,36 @@
+Chrome web store extensions not updating in RC 0.55.18
+
+
+Description
+Extensions installed from the chrome web store do not update.
+Steps to Reproduce
+
+install an extension at some time in the past (you might need a time machine for this, but if you have installed extensions in the past, you might not)
+try to update the extension to the latest version (in the extensions window with developer switch turned on you can click the update button).
+
+Actual result:
+the browser shows a message that says "extensions updated" but the extensions are not updated to the latest version available on the chrome web store.
+Expected result:
+extensions updated to the latest version.
+Reproduces how often:
+always.
+Brave version (brave://version info)
+Brave | 0.55.18 Chromium: 70.0.3538.67 (Official Build) (64-bit)
+Revision | 9ab0cfab84ded083718d3a4ff830726efd38869f-refs/branch-heads/3538@{#1002}
+OS | Mac OS X
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+yes - same on beta and dev
+Does it reproduce on browser-laptop?
+muon? No extensions there
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+no
+Is the issue reproducible on the latest version of Chrome?
+no
+
+Additional Information
+here is a pastebin example for the net-internals transaction of trying to update a particular extension (krypton authenticator). When i installed it, the current version was 1.0.9 and that is the version that i still have in brave. The current version as of this issue date on the chrome web store is 1.0.14.

@@ -1,0 +1,17 @@
+Require user permissions before using accelerometer api
+
+
+Steps to Reproduce
+
+Navigate to http://www.albertosarullo.com/demos/accelerometer/
+
+Actual result: 
+Accelerometer is accessed without user permissions
+Expected result:
+Access to accelerometer api should request user permissions
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Easily
+Brave Version: 
+1.9.1
+Device details: 
+iPhone SE

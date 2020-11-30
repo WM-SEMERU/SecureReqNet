@@ -1,0 +1,41 @@
+[Security] Fix exception when use_referer option is true and referer is not set or empty
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+

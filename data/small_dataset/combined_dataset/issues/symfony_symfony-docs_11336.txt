@@ -1,0 +1,4 @@
+Fix a typo for the range of allowed attack complexity score values
+
+
+#eufossa

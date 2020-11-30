@@ -1,0 +1,6 @@
+Authorize PSP usage for pods without service accounts
+
+
+Fixes #43459
+PodSecurityPolicy authorization is correctly enforced by the PodSecurityPolicy admission plugin.
+

@@ -1,0 +1,46 @@
+Fix getSetMethodNormalizer to correctly ignore the attributes specified in "ignored_attributes"
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30453
+
+
+License
+MIT
+
+
+
+The GetSetMethodNormalizer class correctly ignores the attributes specified in "ignored_attributes"

@@ -1,0 +1,10 @@
+Typo in SimpleFormAuthenticationListener
+
+
+The check https://github.com/symfony/security/blob/baa22f665a7ea04c2bfb4d6236a2020a25979f10/Http/Firewall/SimpleFormAuthenticationListener.php#L100 should be one of
+if (!\is_string($username))
+// or
+if (!\is_string($username) && !(\is_object($username) && !\method_exists($username, '__toString')))
+
+As currently written, the second condition will always be false.
+Noticed this while looking into an opcache optimization bug caused by this piece of code :)

@@ -1,0 +1,9 @@
+eth wallet sec review issues
+
+
+
+add rpcvhosts whitelist
+filtering issue: https://github.com/brave/browser-laptop/pull/14734/files#r209091856
+(not security but still a review issue that wasn't resolved): https://github.com/brave/browser-laptop/pull/14734/files#diff-2be38b3d97f35cd818780bac4be979c4R721
+
+also get final security sign off from either @evq or @riastradh-brave

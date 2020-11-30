@@ -1,0 +1,24 @@
+Find All References for model type not showing up after scaffolding Razor Pages
+
+
+.NET Core 2.2 SDK: 2.2.202
+VS2019
+WebApplication2.zip
+Repro steps:
+
+Open the attached project
+Right click on the Pages/Products folder and select Add -> Razor Page
+Scaffold Razor Pages using Entity Framework (CRUD)
+Specify the Product model type and the existing data context
+Example the CodeLens annotations on the Product class
+
+Actual result:
+Razor references for the Product type in Razor files don't show up.
+
+Expect result:
+
+
+Workaround:
+
+Close and reopen the solution
+

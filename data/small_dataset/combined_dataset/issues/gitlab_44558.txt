@@ -1,0 +1,7 @@
+Addressed by security (not merged yet) issue on dev.gitlab: https://dev.gitlab.org/gitlab/gitlabhq/issues/2777
+
+I recently received an email notification about a moved project, one which I do not have permission to view.
+
+I am unsure why this was sent to me, as I don't believe I was a member of the project.  Accessing the link produces a 404, which tells me either it has since been deleted, or I am no longer a member (if I ever was in the first place).
+
+![Screen_Shot_2018-03-22_at_4.19.27_PM](/uploads/e6c85941a5d62aabd60aba8f025efec7/Screen_Shot_2018-03-22_at_4.19.27_PM.png)

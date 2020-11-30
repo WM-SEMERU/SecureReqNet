@@ -1,0 +1,9 @@
+Adding automatic TLS certificate rotation
+
+
+
+Added a new MutableTransportCredential to atomically load a new config without breaking current connections
+Added a RenewTLSConfig method that can be called and will send new remote configs to a channel
+Changed manager and agent to auto-renew their TLS certificates every 30 seconds for now
+
+I'm missing all the tests.

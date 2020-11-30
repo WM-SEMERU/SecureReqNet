@@ -1,0 +1,6 @@
+Internationalized routes in translation files
+
+
+Hello,
+It seems to be possible to translate routes only from routes configurations files.
+Is there any reason that this was not implemented to be part of the translator so routes could be translated into translation files (including xliff)?

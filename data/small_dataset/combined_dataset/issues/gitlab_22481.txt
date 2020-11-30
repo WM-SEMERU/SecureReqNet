@@ -1,0 +1,28 @@
+### Summary
+
+Setting visibility of issues on a public repository to "Only team members" does not fully hide the issues if the repository is in a group, since they will be visible on the group page (which is public).
+
+Example:
+
+Repository with issues not visible:
+https://gitlab.com/kada-development/SmsServer-app
+
+Group page, issues are visible (although not accessable):
+https://gitlab.com/groups/kada-development/issues
+
+### Steps to reproduce
+
+1. Set issues visibility to "Team members only" in  a group owned repository
+2. Go to the (public) page for the group owning the repository.
+
+### Expected behavior
+
+Issues are not visible
+
+### Actual behavior
+
+Issues are visible
+
+### Possible fixes
+
+(If you can, link to the line of code that might be responsible for the problem)

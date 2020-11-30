@@ -1,0 +1,21 @@
+[PhpUnitBridge] PHPUnit 8 incompatibility
+
+
+Symfony version(s) affected: 4.2.x (but probably all PHP<7.0 compatible versions too)
+Description
+Using the symfony/testpack, symfony/phpunit-bridge and setting the phpunit version on 8.0. When creating a test which extends Symfony\Bundle\FrameworkBundle\Test\KernelTestCase it will throw the following error:
+PHP Fatal error:  Declaration of Symfony\Bundle\FrameworkBundle\Test\KernelTestCase::tearDown() must be compatible with PHPUnit\Framework\TestCase::tearDown(): void in /projects/phpunit-8/vendor/symfony/framework-bundle/Test/KernelTestCase.php on line 24
+
+How to reproduce
+https://github.com/evertharmeling/symfony-phpunit-8
+Using the 'reproducer' project:
+
+Run composer install in project root.
+Run vendor/bin/simple-phpunit in project root.
+
+Possible Solution
+
+Restricting the phpunit/phpunit version to <8.0
+
+Additional context
+Somewhat related #14736. Because this could solve for support on phpunit >=8.0

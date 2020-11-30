@@ -1,0 +1,52 @@
+[TwigBridge] rename parent_form() to form_parent()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11049
+
+
+
+We got some feedback on the blog post that form_parent() would be better
+for consistency with all the existing form_*() functions. I think that
+user has a point about that.

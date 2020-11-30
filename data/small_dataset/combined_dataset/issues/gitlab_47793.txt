@@ -1,0 +1,46 @@
+```         
+Link:          https://hackerone.com/reports/365079
+By:            @fransrosen
+```
+
+Hi,
+
+Inside the Web IDE, the branch-name is not sanitized when committing a file to it. This means, changing a file then pressing "Commit" twice, will open the Commit-view inside the Web IDE, with the branch name rendered as HTML, triggering javascript when opened.
+
+The following flow is needed to simulate:
+
+```
+git init
+echo "hej" > test
+git remote add origin git://gitlab-repo
+git checkout -b '<img/src='x'/onerror=alert(document.domain)>'
+git add .
+git commit -m "test"
+git push origin '<img/src='x'/onerror=alert(document.domain)>'
+```
+
+Then go to the file in the branch named `<img/src='x'/onerror=alert(document.domain)>` in GitLab. Edit the file using "Web IDE", then edit the file. The commit-button should show up:
+
+![upload1](/uploads/d1233de76979e8d241676abf85ac728d/upload1.png)
+
+Pressing it twice should trigger the javascript due to the branch name not being sanitized:
+
+![upload2](/uploads/86fcacf9f09fbb535b3a05bbac38d807/upload2.png)
+![upload3](/uploads/8ccc243aec123ed8dd38a9b04b003fc9/upload3.png)
+
+### PoC
+
+Here's a video showing the scenario:
+
+![GitlabWebIDEXSS](/uploads/915693f6ea63226ecc0e0e99959d4e84/GitlabWebIDEXSS.mp4)
+
+### Mitigation
+
+Properly sanitize the branch name in the Commit-popup.
+
+## Impact
+
+The stored XSS is triggering for anyone, also triggering on gitlab.com, and it can trigger on public repos. You could easily build a PoC that would modify the email address of the current user or stealing their CSRF-token as soon as the script triggers, or try stealing information about the user's other private repositories.
+
+Regards,
+Frans Rosén

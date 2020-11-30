@@ -1,0 +1,14 @@
+Clarify form_login versus simple_form
+
+
+From this discussion: #4606 (comment)
+There, I say:
+
+Is the only difference between form_login and simple_form the fact that simple_form requires the authenticator key?
+If that's true, the we could potentially have an addendum/note to this chapter that says something like:
+
+If you have a form login, but need to do something custom to check the username
+and password validity (e.g. call out to an API or have a third field - e.g. accessKey
+in your login form) then you can use the very similar simple_form with a custom
+authentication [link to custom_password_authenticator.rst].
+We just need to clarify if my assumption above is correct. And if so, add the given note (and maybe also clarify in the custom_password_authenticator.rst entry that simple_form has identical configuration to login_form, except for the authenticator key.

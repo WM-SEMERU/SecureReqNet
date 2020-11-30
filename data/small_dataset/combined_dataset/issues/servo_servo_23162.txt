@@ -1,0 +1,12 @@
+Review WPT sync PRs automatically
+
+
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #23113
+ These changes do not require tests because it's about infrastructure
+
+
+This change is 

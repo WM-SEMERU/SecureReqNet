@@ -1,0 +1,21 @@
+Switch to pointer to policy rule, visit and short circuit during authorization
+
+
+Ref #40015
+
+Switches policy rule helper methods to work with pointers
+Switches authorization to use a short-circuiting visitor
+
+Best-case, authorization short-circuits early and avoids accumulating rules it never needs to check
+Worst-case (a forbidden request), it still checks all the applicable rules, but requires less allocation to do so
+$ go test ./plugin/pkg/auth/authorizer/rbac/... -bench=. -benchmem -run Bench
+on master:
+BenchmarkAuthorize/allow_list_pods-8           300000   4373 ns/op  3840 B/op  26 allocs/op
+BenchmarkAuthorize/allow_update_pods/status-8  300000   5121 ns/op  3840 B/op  26 allocs/op
+BenchmarkAuthorize/forbid_educate_dolphins-8   300000   4706 ns/op  3840 B/op  26 allocs/op
+
+with short-circuiting and policy rule pointer changes:
+BenchmarkAuthorize/allow_list_pods-8           2000000  930 ns/op   64 B/op    2 allocs/op
+BenchmarkAuthorize/allow_update_pods/status-8  1000000  1656 ns/op  64 B/op    2 allocs/op
+BenchmarkAuthorize/forbid_educate_dolphins-8   500000   3395 ns/op  1488 B/op  25 allocs/op
+

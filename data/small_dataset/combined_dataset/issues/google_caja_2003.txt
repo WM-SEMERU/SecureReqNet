@@ -1,0 +1,9 @@
+Allow "," in element id
+
+
+This is a minimal fix to allow "," in the element id.
+Caja probably needs a story with a more comprehensive change, as it's already more permissive than then HTML4 specification.
+HTML 4.01 specified that ID tokens must begin with a letter ([A-Za-z]) and may be followed by any number of letters, digits ([0-9]), hyphens (-), underscores (_), colons (:), and periods (.).
+http://www.w3.org/TR/html401/types.html#type-name
+HTML5 got rid of those restrictions on the id attribute. Now class and id attributes are now very similar.  The only requirements left — apart from being unique in the document — are that the value must contain at least one character (can’t be empty), and that it can’t contain any space characters.
+https://html.spec.whatwg.org/multipage/dom.html#classes

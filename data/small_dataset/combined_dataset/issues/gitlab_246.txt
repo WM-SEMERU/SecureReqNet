@@ -1,0 +1,3 @@
+If there are existing Merge Requests still pending when the Merge Request feature if turned off for a project, those MR will still show up in reports like https://gitlab/groups/groupname/merge_requests?project_id=&scope=all&state=opened
+
+When you click the link they will 404. The MR should either get closed automatically (not desirable) or be filtered from these views (better).

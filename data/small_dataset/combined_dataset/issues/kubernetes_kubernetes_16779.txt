@@ -1,0 +1,7 @@
+How to _not_ create a service account?
+
+
+Is it possible to launch a pod without a service account, or with a null service account?
+I've tried creating a serviceAccount and deleting the secret (it is recreated).  I've tried creating a secret without the token line (it is recreated).  Not specifying a serviceAccount means the 'default' serviceAccount is used.
+As far as I can tell, every pod created gets full access to the k8s API.  While I know that RBAC are the correct long-term solution here, I think denying a pod all access to the k8s API is a common enough use case that we should be able to support it without telling people to wait for RBAC.
+The best I have found is to create the serviceaccount, figure out the randomly named secret, download the secret, modify the token to be 123 (base 64 encoded), and then replace the secret.  But that is very hacky indeed.

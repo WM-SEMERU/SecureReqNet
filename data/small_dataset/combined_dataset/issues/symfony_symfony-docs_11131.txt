@@ -1,0 +1,4 @@
+use terminal instead of bash
+
+
+the most code blocks use terminal

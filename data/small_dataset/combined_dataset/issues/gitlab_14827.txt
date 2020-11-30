@@ -1,0 +1,3 @@
+On Github you can see if all the members of a team or org has 2FA enabled.
+
+I think it'd be a nice feature to add for group owners/master to be able to review that members have 2FA enabled.

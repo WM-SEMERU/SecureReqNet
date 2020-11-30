@@ -1,0 +1,13 @@
+proposal: x/crypto/scrypt: make API match x/crypto/bcrypt
+
+
+Summary: The x/crypto/scrypt package has a very simple API that puts the onus of figuring out salt generation and sensible N/r/p values on the package user. We should attempt to mirror the bcrypt packages' API and provide sensible defaults.
+Details:
+
+Add a GenerateFromPassword function that generates output in the form N$r$p$salt$dk (noting that there is no 'standard' for scrypt here)
+Add a CompareHashAndPassword function
+Add a Cost function that can return the cost of a given output (i.e. for determining whether to upgrade or not)
+Provide sensible default params that provide reasonable values of N, r, p and document why/when you may wish to change them.
+Potentially provide a way to automatically determine values of N, r, p given memory (MB) and time (ms) constraints.
+
+Note that I've done most of this work in https://godoc.org/github.com/elithrar/simple-scrypt and would seek to bring most of this in.

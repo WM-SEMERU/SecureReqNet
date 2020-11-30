@@ -1,0 +1,7 @@
+fix($compile) : Add base#href to the list of RESOURCE_URL context attrs
+
+
+This will put the same security constraints to bindings on base#ref as on iframes or script srcs, since it changes the behavior of relative URLs across the page. Currently, they don't have a $sce context. Also, it's more generally a good idea in Angular itself, as since #15144 and its fix #15145 we'll consider that baseURI as a trusted origin.
+Does this PR introduce a breaking change?
+Yup: something like <base href="{{myUrl}}"/> will send myUrl to the $sce's RESOURCE_URL checks. By default, it will break if myUrl isn't same-origin. Also, concatenation in trusted contexts is disabled: "/{{myPathComponent}}/something" won't work at all.
+This follows the discussion in #15537 and the initial issue in #15144, fixed in #15145.

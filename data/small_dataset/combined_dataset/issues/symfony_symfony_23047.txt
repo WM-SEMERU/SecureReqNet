@@ -1,0 +1,51 @@
+[Security] explain that a role can be an instance of Role
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Only mentioning the RoleInterface seems to be confusing as it is
+deprecated since Symfony 3.3.

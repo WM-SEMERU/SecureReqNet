@@ -1,0 +1,30 @@
+WebDAV sync
+
+
+Describe the bug
+I cannot sync the Webdav to my KeeWeb client. So, I installed a CentOS 7 server with apache.
+I am trying to make a WebDAV with the keys in it along with a web client of KeeWeb. I followerd every steps of the WebDav kiki and I get the same error again and again, no matter what...
+I'm not very experienced, I don't have all of the ropes yet, thank you for your help ! :)
+To Reproduce
+Expected behavior
+Be able to sync
+Screenshots
+
+Kdbx File
+Brand New kdbx database.
+Logs
+`172.19.16.203 - - [15/Mar/2019:15:30:28 +0100] "PUT /webdav/.New.kdbx.1552660228195 HTTP/1.1" 405 251
+172.19.16.203 - - [15/Mar/2019:15:30:42 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:30:42 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:30:42 +0100] "PUT /webdav/.New.kdbx.1552660242289 HTTP/1.1" 405 251
+172.19.16.203 - - [15/Mar/2019:15:30:42 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:30:42 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:30:42 +0100] "PUT /webdav/.New.kdbx.1552660242982 HTTP/1.1" 405 251
+172.19.16.203 - - [15/Mar/2019:15:30:43 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:30:43 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:30:43 +0100] "PUT /webdav/.New.kdbx.1552660243364 HTTP/1.1" 405 251
+172.19.16.203 - - [15/Mar/2019:15:33:02 +0100] "GET / HTTP/1.1" 200 1355679
+172.19.16.203 - - [15/Mar/2019:15:33:04 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:33:05 +0100] "HEAD /webdav/New.kdbx HTTP/1.1" 200 -
+172.19.16.203 - - [15/Mar/2019:15:33:05 +0100] "PUT /webdav/.New.kdbx.1552660385031 HTTP/1.1" 405 251
+`

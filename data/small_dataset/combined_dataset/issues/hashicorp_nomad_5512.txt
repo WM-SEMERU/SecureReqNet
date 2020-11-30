@@ -1,0 +1,5 @@
+alloc-lifecycle: nomad alloc stop
+
+
+This command will be used to signal a specific alloc to shut down. When the allocation has been shut down, it will then be rescheduled. By default, this command will then enter an interactive monitoring mode to watch for the replacement allocation and to monitor the restart period. This will then allow an operator to continue inspecting the new job, without polling nomad status by hand.
+It depends on #5500.

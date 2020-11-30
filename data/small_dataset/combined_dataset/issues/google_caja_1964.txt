@@ -1,0 +1,10 @@
+test server should be more locked down
+
+
+Original issue 1966 created by kpreid@google.com on 2015-04-14T16:56:46.000Z:
+The web server started by 'ant runtests' / 'ant brserve' permits more than it needs to:
+
+It allows access from the network. Localhost would be a better default.
+It serves all files in the project root, hence including .svn or .git. In the event that network access is permitted, hiding .git would prevent reading history information which could include undisclosed draft security patches and such.
+
+(Of course, if the server is accessible then the current files it's serving show the current work as well, but VCS data is more slurpable.)

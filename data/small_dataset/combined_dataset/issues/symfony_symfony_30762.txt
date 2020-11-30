@@ -1,0 +1,17 @@
+xliff-file with duplicate key - let error say what file is affected
+
+
+Symfony version(s) affected: 3.4.23
+Description
+If you work with various translation xliff-files and one of these has a duplicate key, the error message doesn't say what file is affected:
+Invalid resource provided: "1.2"; Errors: [ERROR 1877] Element '{urn:oasis:names:tc:xliff:document:1.2}trans-unit': Duplicate key-sequence ['76'] in key identity-constraint '{urn:oasis:names:tc:xliff:document:1.2}K_unit_id'. (in /var/www/tickeos/web/ - line 314, column 0)
+How to reproduce
+
+use Symfony\Component\Translation\TranslatorInterface trans()
+include a xliff-file with duplicate keys e.g.
+<trans-unit id="76">...</trans-unit><trans-unit id="76">...</trans-unit>
+
+Possible Solution
+
+error says what file is affected
+

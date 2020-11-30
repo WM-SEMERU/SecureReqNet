@@ -1,0 +1,19 @@
+Fix PSP update validation
+
+
+Issues fixed:
+
+apparmor annotations were not being validated
+sysctl annotations were not being validated
+ValidateObjectMetaUpdate parameters were reversed
+
+/cc @sttts
+
+1.4 justification:
+
+Risk: If I did something wrong, valid updates could be rejected or invalid updates accepted.
+Rollback: Nothing should depend on this behavior
+Cost: As it stands, the PSP can be updated to an invalid state. The cost of this is relatively low, but a bad user experience.
+
+
+This change is 

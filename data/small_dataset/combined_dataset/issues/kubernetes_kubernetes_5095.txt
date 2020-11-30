@@ -1,0 +1,8 @@
+Allow setting some "safe" per-container sysctls
+
+
+A GCE ContainerVM used on IRC asked how to set SOMAXCONN within his container.
+That is not possible in an unprivileged container because /proc/sys is not writeable.
+If the user tries to set containerManifest.containers[i].privileged=true then a validation error occurs.
+I can't tell if that validation error is occuring only at the kubelet or also at some layer of the containerVM system.  At any rate, the user would at least need to set --allow_privileged=true on the kubelet.  Not sure if that is possible with ContainerVM.
+For kubernetes, we would not want the user to have to set a blanket allow_privileged on kubelet and apiserver just to tune this parameter.

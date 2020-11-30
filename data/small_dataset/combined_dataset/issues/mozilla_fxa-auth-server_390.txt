@@ -1,0 +1,9 @@
+Add ability to force users to change possibly compromised password
+
+
+Per #222 (comment)
+
+
+have the ability to force a user to change a possibly compromised password. Similar to how Facebook asked users to change passwords if their account was involved in the Adobe password breach.
+
+

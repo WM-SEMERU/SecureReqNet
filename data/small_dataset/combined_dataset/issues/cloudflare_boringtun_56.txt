@@ -1,0 +1,20 @@
+Do not panic when adding peers with duplicate public keys
+
+
+As an API user, I would appreciate an error rather than killing the whole application:
+    fn update_peer(
+        &mut self,
+        pub_key: X25519PublicKey,
+        remove: bool,
+        _replace_ips: bool,
+        endpoint: Option<SocketAddr>,
+        allowed_ips: Vec<AllowedIP>,
+        keepalive: Option<u16>,
+        preshared_key: Option<[u8; 32]>,
+    ) {
+// ...
+        // Update an existing peer
+        if self.peers.get(&pub_key).is_some() {
+            // We already have a peer, we need to merge the existing config into the newly created one
+            panic!("Modifying existing peers is not yet supported. Remove and add again instead.");
+        }

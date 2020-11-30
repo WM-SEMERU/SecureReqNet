@@ -1,0 +1,5 @@
+[Mailer] Set ESMTP Socket Stream Timeout
+
+
+Description
+There isn't a way--that I could see--to set the SocketStream's timeout when using the ESMTP Transport.  Some mail servers have delays for spam prevention purposes and one of my clients Exchange servers requires a 30 second delay for any emails to an external address.  This causes it to timeout every time.

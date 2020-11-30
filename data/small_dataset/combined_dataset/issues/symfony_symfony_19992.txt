@@ -1,0 +1,11 @@
+Consider adding SAML support for the security component
+
+
+Context
+SAML (Security Assertion Markup Language) is an XML-based, open-standard data format for exchanging authentication and authorization data between parties, in particular, between an identity provider and a service provider.
+Problem
+SAML is increasingly popular among companies, academic institutions and other high-profile entities which are the target of Symfony. For example, providing SAML support is one of the big new features recently announced by GitHub (details)
+Symfony Security doesn't provide support for SAML, but other comparable projects do: Django through djangosaml2 and Spring through Spring Security SAML.
+Solution
+Not so long ago we added support for LDAP, so adding new big security features is something that Symfony is open to do.
+If you think this doesn't belong to Symfony Core, then I'd say it doesn't belong either to a third-party project, because it's too important and too critical to do it right. So, maybe Symfony could create some pseudo-official projects (second-party projects?) to provide features that don't belong to core but are considered important.

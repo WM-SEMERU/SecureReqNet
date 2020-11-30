@@ -1,0 +1,14 @@
+AMBARI-24746. Upgrade Solr version to 7.5.0
+
+
+What changes were proposed in this pull request?
+upgrade solr version to the newest one: 7.5.0 (from 7.4.0)
+fixes CVEs:
+CVE-2017-7657
+CVE-2017-7658
+CVE-2017-7656
+CVE-2017-9735
+CVE-2018-12536
+How was this patch tested?
+7.5.0 is already used on master, so it verified it exists in hwx repo, I will expecting that will work here as well.
+Please review @g-boros

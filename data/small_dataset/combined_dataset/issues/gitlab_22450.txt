@@ -1,0 +1,48 @@
+### Summary
+
+The API has a very expansive CORS policy set in config/application.rb:
+
+```ruby
+    # Allow access to GitLab API from other domains
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '/api/*',
+          headers: :any,
+          methods: :any,
+          expose: ['Link']
+      end
+    end
+```
+
+Combined with the rails session cookie, this is a SEVERE  vulnerability. Mea culpa.
+
+### Steps to reproduce
+
+Pop this javascript on website somewhere and visit it while signed into gitlab:
+```javascript
+var c = new XMLHttpRequest()
+c.withCredentials = true;
+
+c.onreadystatechange = function() {
+        console.log(this);
+        console.log(c);
+}
+c.open("GET", "https://gitlab.com/api/v3/projects/owned");
+
+c.send();
+```
+
+### Expected behavior
+
+Should be denied by CORS
+
+### Actual behavior
+
+200 response and data leak
+
+### Fix
+
+Set `Origin: <%= gitlab_external_url %>` or so.
+
+/cc @stanhu @rymai  @DouweM

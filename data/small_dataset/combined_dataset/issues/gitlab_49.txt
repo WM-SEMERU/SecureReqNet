@@ -1,0 +1,5 @@
+On wiki pages images can be added with 
+```
+![name][imagefile]
+```
+I have set the ENV['RAILS_RELATIVE_URL_ROOT'] and config.relative_url_root but in Wiki pages this is missing on image URLs

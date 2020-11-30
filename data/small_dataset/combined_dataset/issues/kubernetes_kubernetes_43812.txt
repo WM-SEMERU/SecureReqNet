@@ -1,0 +1,11 @@
+SecurityContextDeny Admission Controller could be refactored
+
+
+I found that SecurityContextDeny could be improved:
+
+stale comment on Admit() function can be fixed (should also mention SupplementalGroups and FSGroup fields)
+we can extract function for checking PodSecurityContext
+we can extract function for checking SecurityContext
+
+After extracting functions Admit() method will be shorter and easy to read, without duplicated code and verbose details.
+CC @pweil-

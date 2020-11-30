@@ -1,0 +1,5 @@
+Mixed content warning on playground
+
+
+Original issue 1354 created by erights@google.com on 2011-05-14T19:53:54.000Z:
+See attached png.

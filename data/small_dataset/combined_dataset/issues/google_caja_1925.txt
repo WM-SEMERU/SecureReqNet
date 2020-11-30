@@ -1,0 +1,32 @@
+Row and column structre of bootstrap not rendered
+
+
+Original issue 1927 created by tarun090290 on 2014-07-31T09:58:36.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+Latest version of Caja is being used, Browser is Google Chrome, OS is Windows 7.
+What steps will reproduce the problem?
+
+In code.gs call to an HTML file is madde by HTMLService as follows:
+return HtmlService.createTemplateFromFile('fileName').evaluate().setSandboxMode(HtmlService.SandboxMode.NATIVE);
+CSS used is Bootstrap.min.css (Bootstrap V3)
+Row and column structure of a normal bootstrap page applied as
+<div class="container">
+<div class="row clearfix" >
+<div class="col-md-12 column">
+<p>
+text text
+</p>
+</div>
+<div class="col-md-2">
+<p>
+text text
+</p>
+</div>
+</div>
+</div>
+
+What is the expected output? What do you see instead?
+Expected output is that the contents of the two <p>...</p> should be adjacent to each other with the row and column structure of the bootstrap properly rendered.
+Actual Output is that the row and column structure of the bootstrap is NOT RENDERED and the contents of the <p>...</p> appear one below the other.
+Please provide any additional information below.
+A simple HTML file with some images and text

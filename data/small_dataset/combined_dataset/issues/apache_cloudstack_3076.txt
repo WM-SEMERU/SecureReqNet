@@ -1,0 +1,18 @@
+security: increase keystore setup/import timeout
+
+
+This increases and uses a default 15mins timeout for VR scripts and for
+KVM agent increases timeout from 60s to 5mins. The timeout can
+specifically occur when keystore does not get enough entropy from CPU
+and script gets killed due to timeout. This is a very specific corner
+case and generally should not happen on baremetal/prod environment, but
+sometimes seen in nested/test environments.
+/cc @PaulAngus @dagsonstebo
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+

@@ -1,0 +1,22 @@
+[Validator] Get good values
+
+
+Description
+When validate an array with the All Constraints  There is no native way to get good values. I propose to add a method to get them
+Example
+$uuids = [
+'a4f24386-ba58-41d6-a439-565866a52155', //good
+'a4f24386-ba58', //wrong
+'z4f12345-ba58-41d6-a439-565866a09876' //good
+];
+
+ $uuidViolations = $validator->validate($uuids, [new All(new Uuid())]);
+
+ $goodUuid = $validator->saneValue(); 
+
+$goodUuid contains [
+'a4f24386-ba58-41d6-a439-565866a52155', 
+'z4f12345-ba58-41d6-a439-565866a09876'
+]; 
+or Object like ConstraintViolation but ConstraintValid or something like this...
+WDYT ?

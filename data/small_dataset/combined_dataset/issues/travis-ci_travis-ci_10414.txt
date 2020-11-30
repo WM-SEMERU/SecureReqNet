@@ -1,0 +1,42 @@
+Cannot use nix support on OSX
+
+
+I am trying to combine language: nix and nix: 2.2.1 with os: osx, but the nix installer fails:
+$ export NIX_CURL_FLAGS=-sS
+0.46s$ wget --retry-connrefused --waitretry=1 -O /tmp/nix-install https://nixos.org/releases/nix/nix-2.2.1/install
+--2019-04-06 12:37:44--  https://nixos.org/releases/nix/nix-2.2.1/install
+Resolving nixos.org (nixos.org)... 54.217.220.47
+Connecting to nixos.org (nixos.org)|54.217.220.47|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2476 (2.4K) [text/plain]
+Saving to: ‘/tmp/nix-install’
+     0K ..                                                    100% 69.4M=0s
+2019-04-06 12:37:45 (69.4 MB/s) - ‘/tmp/nix-install’ saved [2476/2476]
+30.05s$ yes | sh /tmp/nix-install
+downloading Nix 2.2.1 binary tarball for x86_64-darwin from 'https://nixos.org/releases/nix/nix-2.2.1/nix-2.2.1-x86_64-darwin.tar.bz2' to '/var/folders/nz/vv4_9tw56nv9k3tkvyszvwg80000gn/T/nix-binary-tarball-unpack.XXXXXXXXXX.yHmMTWj5'...
+Note: a multi-user installation is possible. See https://nixos.org/nix/manual/#sect-multi-user-installation
+performing a single-user installation of Nix...
+directory /nix does not exist; creating it by running 'mkdir -m 0755 /nix && chown travis /nix' using sudo
+copying Nix to /nix/store...................................
+initialising Nix database...
+Nix: creating /Users/travis/.nix-profile
+installing 'nix-2.2.1'
+building '/nix/store/51rcrm2hazifzms7iiwswhajmvidkbh8-user-environment.drv'...
+created 7 symlinks in user environment
+installing 'nss-cacert-3.40.1'
+building '/nix/store/9fhls7hrmwh4zrs3ipw55jkb669fyjc2-user-environment.drv'...
+created 9 symlinks in user environment
+unpacking channels...
+created 2 symlinks in user environment
+modifying /Users/travis/.bash_profile...
+Installation finished!  To ensure that the necessary environment
+variables are set, either log in again, or type
+  . /Users/travis/.nix-profile/etc/profile.d/nix.sh
+in your shell.
+0.01s$ source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+/Users/travis/.travis/functions: line 104: /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh: No such file or directory
+The command "source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" failed and exited with 1 during .
+
+https://travis-ci.org/entropia/tip-toi-reveng/jobs/516560935
+Is this expected to work?
+(CC’ing  @domenkozar, @garbas, @matthewbauer, and @grahamc. as requested by https://docs.travis-ci.com/user/languages/nix/)

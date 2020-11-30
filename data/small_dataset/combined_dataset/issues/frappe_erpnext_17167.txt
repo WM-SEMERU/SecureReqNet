@@ -1,0 +1,37 @@
+fix: testcase for item variant
+
+
+https://travis-ci.com/frappe/erpnext/jobs/191085213
+Traceback (most recent call last):
+  File "/home/travis/frappe-bench/apps/erpnext/erpnext/controllers/tests/test_item_variant.py", line 16, in test_tables_in_template_copied_to_variant
+    variant = make_item_variant()
+  File "/home/travis/frappe-bench/apps/erpnext/erpnext/controllers/tests/test_item_variant.py", line 49, in make_item_variant
+    variant.save()
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 260, in save
+    return self._save(*args, **kwargs)
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 283, in _save
+    self.insert()
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 222, in insert
+    self.run_before_save_methods()
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 876, in run_before_save_methods
+    self.run_method("validate")
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 772, in run_method
+    out = Document.hook(fn)(self, *args, **kwargs)
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 1048, in composer
+    return composed(self, method, *args, **kwargs)
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 1031, in runner
+    add_to_return_value(self, fn(self, *args, **kwargs))
+  File "/home/travis/frappe-bench/apps/frappe/frappe/model/document.py", line 766, in <lambda>
+    fn = lambda self, *args, **kwargs: getattr(self, method)(*args, **kwargs)
+  File "/home/travis/frappe-bench/apps/erpnext/erpnext/stock/doctype/item/item.py", line 128, in validate
+    self.validate_stock_for_has_batch_and_has_serial()
+  File "/home/travis/frappe-bench/apps/erpnext/erpnext/stock/doctype/item/item.py", line 788, in validate_stock_for_has_batch_and_has_serial
+    frappe.throw(_("Cannot change {0} as Stock Transaction for Item {1} exist.".format(value, self.name)))
+  File "/home/travis/frappe-bench/apps/frappe/frappe/__init__.py", line 355, in throw
+    msgprint(msg, raise_exception=exc, title=title, indicator='red')
+  File "/home/travis/frappe-bench/apps/frappe/frappe/__init__.py", line 341, in msgprint
+    _raise_exception()
+  File "/home/travis/frappe-bench/apps/frappe/frappe/__init__.py", line 314, in _raise_exception
+    raise raise_exception(msg)
+ValidationError: Cannot change has_batch_no as Stock Transaction for Item _Test Variant Item-S exist.
+

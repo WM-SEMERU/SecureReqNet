@@ -1,0 +1,77 @@
+AuthorizeAttribute ignores specified scheme
+
+
+MVC website using cookie authentication.  'Identity' is provided by external service so no in-app store.  Not using jwt bearer tokens of any sort.  My eventual goal is to use the cookie policy scheme along with a custom policy for a claim value, but currently I can't even get a simple [Authorize] attribute to work.
+Controller is decorated with:
+[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)] 
+An exception occurs when accessing this controller:
+
+No authentication handler is registered for the scheme 'Bearer'. The registered schemes are: Cookies.
+
+ASP.NET Core 2.2
+Startup.cs Sorry, mark-down seems to be broken
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+     app.UseCookiePolicy();
+     app.UseAuthentication();
+
+     app.UseMvc(routes =>
+     {
+          routes.MapRoute(
+               name: "default",
+               template: "{controller=Home}/{action=Index}/{id?}");
+     });
+}
+
+public void ConfigureServices(IServiceCollection services)
+{
+     services.Configure<CookiePolicyOptions>(options =>
+     {
+          options.CheckConsentNeeded = context => false;
+          options.MinimumSameSitePolicy = SameSiteMode.None;
+     });
+
+     services.AddAuthentication(options =>
+     {
+          options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+          options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+          options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+          options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+          options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+          options.DefaultForbidScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+     })
+     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+     {
+          options.Cookie.HttpOnly = true;
+          options.Cookie.Expiration = TimeSpan.FromMinutes(10);
+          options.SlidingExpiration = true;
+          options.LoginPath = "/Auth/Login/";
+          options.LogoutPath = "/Auth/Logoff/";
+     });
+
+     services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+}
+And as mentioned earlier, any Controller decorated with:
+[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+And produces an exception containing message:
+
+No authentication handler is registered for the scheme 'Bearer'. The registered schemes are: Cookies.
+
+Expected behavior:
+[Authorize] utilizes the scheme specified: 'Cookies'
+For now, I suppose I'll try my own Authorize attribute and hopefully figure out how to authenticate the cookie value, doubt I can call base.* since it will ignore my policy all-the-same, but I guess I'll find out.
+
+Update
+I suppose I can't blame the Authorize attribute after all.  I should mention this issue occurs on a Controller other than HomeController.  As well, I have now removed the Authorize attribute entirely and still receive this 'Bearer' message.
+Furthermore, I removed all authentication registration of sorts in Startup, and even decorated this Controller with [AllowAnonymous].  At this point, I receive a message:
+
+No authentication handlers are registered.
+
+So something seems to be registering all non-Home routes with an Auth requirement, and I wasn't aware such a thing existed.  I'm not registering any global filters.
+
+Update
+The name of said Controller in testing is 'ClientsController'.  I change the name, and voila, Auth requirement is removed.  Is 'Clients' somehow a reserved Controller name? Very strange.
+
+Final Update
+A reference assembly containing a registered 'Clients' route utilized AuthBearer was at fault here.
+The Auth Scheme is working just fine for my purposes now.

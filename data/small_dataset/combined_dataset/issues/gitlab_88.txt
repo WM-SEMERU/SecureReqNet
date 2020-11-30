@@ -1,0 +1,43 @@
+I upgraded to latest GitLab v6.6.1 and now Wiki page throws 500 error for repositories which are empty, but have wiki pages with relative links. This used to work fine in v6.4, maybe worked in v6.5 too but not sure about that.
+
+To reproduce, just create new project, open wiki and create page with `[t](t)`, when saving it will throw error.
+
+Here's log
+
+```
+Started GET "/davispuh/repo/wikis/home" for 111.111.111.111 at 2014-02-24 16:20:07 +0000
+Processing by Projects::WikisController#show as HTML
+Parameters: {"project_id"=>"davispuh/repo", "id"=>"home"}
+Rendered projects/wikis/_new.html.haml (0.6ms)
+Rendered projects/wikis/_nav.html.haml (2.3ms)
+Rendered projects/wikis/_main_links.html.haml (0.8ms)
+Rendered projects/wikis/show.html.haml within layouts/projects (5.8ms)
+Completed 500 Internal Server Error in 32ms
+ActionView::Template::Error (undefined method `sha' for nil:NilClass):
+12: .wiki-holder
+13: .wiki
+14: = preserve do
+15: = render_wiki_content(@wiki)
+16:
+17: %hr
+18:
+app/helpers/gitlab_markdown_helper.rb:189:in `current_sha'
+app/helpers/gitlab_markdown_helper.rb:170:in `file_exists?'
+app/helpers/gitlab_markdown_helper.rb:147:in `relative_file_path'
+app/helpers/gitlab_markdown_helper.rb:127:in `rebuild_path'
+app/helpers/gitlab_markdown_helper.rb:74:in `block in create_relative_links'
+app/helpers/gitlab_markdown_helper.rb:72:in `each'
+app/helpers/gitlab_markdown_helper.rb:72:in `create_relative_links'
+lib/redcarpet/render/gitlab_html.rb:50:in `preprocess'
+app/helpers/gitlab_markdown_helper.rb:52:in `render'
+app/helpers/gitlab_markdown_helper.rb:52:in `markdown'
+app/helpers/gitlab_markdown_helper.rb:57:in `render_wiki_content'
+app/views/projects/wikis/show.html.haml:15:in `block in _app_views_projects_wikis_show_html_haml___1691105957256709181_43499020'
+app/views/projects/wikis/show.html.haml:14:in `_app_views_projects_wikis_show_html_haml___1691105957256709181_43499020'
+app/controllers/projects/wikis_controller.rb:15:in `show'
+app/controllers/application_controller.rb:57:in `set_current_user_for_thread'
+```
+
+
+
+It seems that `@repository` refers to project repo, rather than Wiki repo in [app/helpers/gitlab_markdown_helper.rb#L189](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/helpers/gitlab_markdown_helper.rb#L189)

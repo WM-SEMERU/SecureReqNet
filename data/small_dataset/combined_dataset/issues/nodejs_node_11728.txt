@@ -1,0 +1,7 @@
+C-Ares version update for buffer overflow vulnerability fix?
+
+
+I was wondering if there were any plans for Node.js to update the C-Ares version from 1.10.0 to 1.12.0 so as to take into account the fix for the buffer overflow vulnerability (CVE-2016-5180)?
+CVE-2016-5180: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5180
+C-Ares Advisory: https://c-ares.haxx.se/adv_20160929.html
+C-Ares Patch: https://c-ares.haxx.se/CVE-2016-5180.patch

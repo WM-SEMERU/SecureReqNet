@@ -1,0 +1,377 @@
+Notice: Undefined offset: 0 when unserializing User
+
+
+Symfony version(s) affected: 3.4.23
+Description
+I built up the basic form authentication system with an User object implementing AdvancedUserInterface, EquatableInterface and \Serialisable. I configured the firewall like another project (working well) I did but I get this error every time I try to login:
+Symfony\Component\Debug\Exception\ContextErrorException:
+Notice: Undefined offset: 0
+
+  at src\OneDayCoreBundle\Document\User.php:399
+  at OneDayCoreBundle\Document\User->unserialize('a:8:{s:2:&quot;id&quot;;s:24:&quot;5c9a4b9935710d5f70007d25&quot;;s:5:&quot;email&quot;;s:15:&quot;cypou54@live.fr&quot;;s:8:&quot;password&quot;;s:60:&quot;$2y$10$780b169a1a0ae34f5280cuLMJl8QecuqkGOgouUewr52G4f4.tdAu&quot;;s:4:&quot;salt&quot;;s:44:&quot;780b169a1a0ae34f5280c162c0d5b78985a2b9fef406&quot;;s:7:&quot;enabled&quot;;b:1;s:17:&quot;accountNonExpired&quot;;b:1;s:16:&quot;accountNonLocked&quot;;b:1;s:21:&quot;credentialsNonExpired&quot;;b:1;}')
+  at unserialize('a:3:{i:0;N;i:1;s:4:&quot;main&quot;;i:2;a:4:{i:0;C:30:&quot;OneDayCoreBundle\\Document\\User&quot;:336:{a:8:{s:2:&quot;id&quot;;s:24:&quot;5c9a4b9935710d5f70007d25&quot;;s:5:&quot;email&quot;;s:15:&quot;cypou54@live.fr&quot;;s:8:&quot;password&quot;;s:60:&quot;$2y$10$780b169a1a0ae34f5280cuLMJl8QecuqkGOgouUewr52G4f4.tdAu&quot;;s:4:&quot;salt&quot;;s:44:&quot;780b169a1a0ae34f5280c162c0d5b78985a2b9fef406&quot;;s:7:&quot;enabled&quot;;b:1;s:17:&quot;accountNonExpired&quot;;b:1;s:16:&quot;accountNonLocked&quot;;b:1;s:21:&quot;credentialsNonExpired&quot;;b:1;}}i:1;b:1;i:2;a:1:{i:0;O:41:&quot;Symfony\\Component\\Security\\Core\\Role\\Role&quot;:1:{s:47:&quot;' . &quot;\0&quot; . 'Symfony\\Component\\Security\\Core\\Role\\Role' . &quot;\0&quot; . 'role&quot;;s:9:&quot;ROLE_USER&quot;;}}i:3;a:0:{}}}')
+     (vendor\symfony\symfony\src\Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken.php:104)
+  at Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken->unserialize('a:3:{i:0;N;i:1;s:4:&quot;main&quot;;i:2;a:4:{i:0;C:30:&quot;OneDayCoreBundle\\Document\\User&quot;:336:{a:8:{s:2:&quot;id&quot;;s:24:&quot;5c9a4b9935710d5f70007d25&quot;;s:5:&quot;email&quot;;s:15:&quot;cypou54@live.fr&quot;;s:8:&quot;password&quot;;s:60:&quot;$2y$10$780b169a1a0ae34f5280cuLMJl8QecuqkGOgouUewr52G4f4.tdAu&quot;;s:4:&quot;salt&quot;;s:44:&quot;780b169a1a0ae34f5280c162c0d5b78985a2b9fef406&quot;;s:7:&quot;enabled&quot;;b:1;s:17:&quot;accountNonExpired&quot;;b:1;s:16:&quot;accountNonLocked&quot;;b:1;s:21:&quot;credentialsNonExpired&quot;;b:1;}}i:1;b:1;i:2;a:1:{i:0;O:41:&quot;Symfony\\Component\\Security\\Core\\Role\\Role&quot;:1:{s:47:&quot;' . &quot;\0&quot; . 'Symfony\\Component\\Security\\Core\\Role\\Role' . &quot;\0&quot; . 'role&quot;;s:9:&quot;ROLE_USER&quot;;}}i:3;a:0:{}}}')
+  at unserialize('C:74:&quot;Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken&quot;:577:{a:3:{i:0;N;i:1;s:4:&quot;main&quot;;i:2;a:4:{i:0;C:30:&quot;OneDayCoreBundle\\Document\\User&quot;:336:{a:8:{s:2:&quot;id&quot;;s:24:&quot;5c9a4b9935710d5f70007d25&quot;;s:5:&quot;email&quot;;s:15:&quot;cypou54@live.fr&quot;;s:8:&quot;password&quot;;s:60:&quot;$2y$10$780b169a1a0ae34f5280cuLMJl8QecuqkGOgouUewr52G4f4.tdAu&quot;;s:4:&quot;salt&quot;;s:44:&quot;780b169a1a0ae34f5280c162c0d5b78985a2b9fef406&quot;;s:7:&quot;enabled&quot;;b:1;s:17:&quot;accountNonExpired&quot;;b:1;s:16:&quot;accountNonLocked&quot;;b:1;s:21:&quot;credentialsNonExpired&quot;;b:1;}}i:1;b:1;i:2;a:1:{i:0;O:41:&quot;Symfony\\Component\\Security\\Core\\Role\\Role&quot;:1:{s:47:&quot;' . &quot;\0&quot; . 'Symfony\\Component\\Security\\Core\\Role\\Role' . &quot;\0&quot; . 'role&quot;;s:9:&quot;ROLE_USER&quot;;}}i:3;a:0:{}}}}')
+     (vendor\symfony\symfony\src\Symfony\Component\Security\Http\Firewall\ContextListener.php:246)
+  at Symfony\Component\Security\Http\Firewall\ContextListener->safelyUnserialize('C:74:&quot;Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken&quot;:577:{a:3:{i:0;N;i:1;s:4:&quot;main&quot;;i:2;a:4:{i:0;C:30:&quot;OneDayCoreBundle\\Document\\User&quot;:336:{a:8:{s:2:&quot;id&quot;;s:24:&quot;5c9a4b9935710d5f70007d25&quot;;s:5:&quot;email&quot;;s:15:&quot;cypou54@live.fr&quot;;s:8:&quot;password&quot;;s:60:&quot;$2y$10$780b169a1a0ae34f5280cuLMJl8QecuqkGOgouUewr52G4f4.tdAu&quot;;s:4:&quot;salt&quot;;s:44:&quot;780b169a1a0ae34f5280c162c0d5b78985a2b9fef406&quot;;s:7:&quot;enabled&quot;;b:1;s:17:&quot;accountNonExpired&quot;;b:1;s:16:&quot;accountNonLocked&quot;;b:1;s:21:&quot;credentialsNonExpired&quot;;b:1;}}i:1;b:1;i:2;a:1:{i:0;O:41:&quot;Symfony\\Component\\Security\\Core\\Role\\Role&quot;:1:{s:47:&quot;' . &quot;\0&quot; . 'Symfony\\Component\\Security\\Core\\Role\\Role' . &quot;\0&quot; . 'role&quot;;s:9:&quot;ROLE_USER&quot;;}}i:3;a:0:{}}}}')
+     (vendor\symfony\symfony\src\Symfony\Component\Security\Http\Firewall\ContextListener.php:95)
+  at Symfony\Component\Security\Http\Firewall\ContextListener->handle(object(GetResponseEvent))
+     (vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle\Debug\WrappedListener.php:46)
+  at Symfony\Bundle\SecurityBundle\Debug\WrappedListener->handle(object(GetResponseEvent))
+     (vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener.php:35)
+  at Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener->handleRequest(object(GetResponseEvent), object(Generator))
+     (vendor\symfony\symfony\src\Symfony\Component\Security\Http\Firewall.php:84)
+  at Symfony\Component\Security\Http\Firewall->onKernelRequest(object(GetResponseEvent))
+     (vendor\symfony\symfony\src\Symfony\Bundle\SecurityBundle\EventListener\FirewallListener.php:48)
+  at Symfony\Bundle\SecurityBundle\EventListener\FirewallListener->onKernelRequest(object(GetResponseEvent), 'kernel.request', object(TraceableEventDispatcher))
+     (vendor\symfony\symfony\src\Symfony\Component\EventDispatcher\Debug\WrappedListener.php:115)
+  at Symfony\Component\EventDispatcher\Debug\WrappedListener->__invoke(object(GetResponseEvent), 'kernel.request', object(TraceableEventDispatcher))
+     (vendor\symfony\symfony\src\Symfony\Component\EventDispatcher\EventDispatcher.php:212)
+  at Symfony\Component\EventDispatcher\EventDispatcher->doDispatch(array(object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener), object(WrappedListener)), 'kernel.request', object(GetResponseEvent))
+     (vendor\symfony\symfony\src\Symfony\Component\EventDispatcher\EventDispatcher.php:44)
+  at Symfony\Component\EventDispatcher\EventDispatcher->dispatch('kernel.request', object(GetResponseEvent))
+     (vendor\symfony\symfony\src\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher.php:143)
+  at Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher->dispatch('kernel.request', object(GetResponseEvent))
+     (vendor\symfony\symfony\src\Symfony\Component\HttpKernel\HttpKernel.php:127)
+  at Symfony\Component\HttpKernel\HttpKernel->handleRaw(object(Request), 1)
+     (vendor\symfony\symfony\src\Symfony\Component\HttpKernel\HttpKernel.php:68)
+  at Symfony\Component\HttpKernel\HttpKernel->handle(object(Request), 1, true)
+     (vendor\symfony\symfony\src\Symfony\Component\HttpKernel\Kernel.php:200)
+  at Symfony\Component\HttpKernel\Kernel->handle(object(Request))
+     (web\app_dev.php:29)
+
+How to reproduce
+Here is my User object:
+<?php
+
+namespace OneDayCoreBundle\Document;
+
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Class User
+ * @package OneDayCoreBundle\Document
+ *
+ * @MongoDB\Document(repositoryClass="OneDayCoreBundle\Repository\UserRepository")
+ */
+class User implements AdvancedUserInterface, EquatableInterface, \Serializable
+{
+    /**
+     * @MongoDB\Id
+     */
+    private $id;
+
+    /**
+     * @var string
+     * @MongoDB\Field(type="string", nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $email;
+
+    /**
+     * @var array
+     * @MongoDB\Collection
+     */
+    private $roles = ['ROLE_USER'];
+
+    /**
+     * @var string
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     */
+    private $password;
+
+    /**
+     * @var string
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     */
+    private $salt;
+
+    /**
+     * @var bool
+     * @MongoDB\Field(type="boolean")
+     */
+    private $accountNonExpired = true;
+
+    /**
+     * @var bool
+     * @MongoDB\Field(type="boolean")
+     */
+    private $accountNonLocked = true;
+
+    /**
+     * @var bool
+     * @MongoDB\Field(type="boolean")
+     */
+    private $credentialsNonExpired = true;
+
+    /**
+     * @var bool
+     * @MongoDB\Field(type="boolean")
+     */
+    private $enabled = true;
+
+    /**
+     * @var string
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     */
+    private $firstname;
+
+    /**
+     * @var string
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     */
+    private $lastname;
+
+    /**
+     * @var \DateTime
+     * @MongoDB\Date
+     * @Assert\NotBlank()
+     */
+    private $birthdate;
+
+    /***
+     * @var string
+     * @MongoDB\Field(type="string")
+     */
+    private $profilePic = 'default.jpg';
+
+    /**
+     * @var string
+     * @MongoDB\Field(type="string")
+     */
+    private $bannerPic = 'default.jpg';
+
+    /**
+     * @var \DateTime
+     * @MongoDB\Date
+     * @Assert\NotBlank()
+     */
+    private $registred;
+
+    /**
+     * Checks whether the user's account has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw an AccountExpiredException and prevent login.
+     *
+     * @return bool true if the user's account is non expired, false otherwise
+     *
+     * @see AccountExpiredException
+     */
+    public function isAccountNonExpired()
+    {
+        return $this -> accountNonExpired;
+    }
+
+    /**
+     * Checks whether the user is locked.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a LockedException and prevent login.
+     *
+     * @return bool true if the user is not locked, false otherwise
+     *
+     * @see LockedException
+     */
+    public function isAccountNonLocked()
+    {
+        return $this -> accountNonLocked;
+    }
+
+    /**
+     * Checks whether the user's credentials (password) has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a CredentialsExpiredException and prevent login.
+     *
+     * @return bool true if the user's credentials are non expired, false otherwise
+     *
+     * @see CredentialsExpiredException
+     */
+    public function isCredentialsNonExpired()
+    {
+        return $this -> credentialsNonExpired;
+    }
+
+    /**
+     * Checks whether the user is enabled.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a DisabledException and prevent login.
+     *
+     * @return bool true if the user is enabled, false otherwise
+     *
+     * @see DisabledException
+     */
+    public function isEnabled()
+    {
+        return $this -> enabled;
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return \serialize(array(
+            'id' => $this->id,
+            'email' => $this->email,
+            'password' => $this->password,
+            'salt' => $this->salt,
+            'enabled' => $this->enabled,
+            'accountNonExpired' => $this->accountNonExpired,
+            'accountNonLocked' => $this->accountNonLocked,
+            'credentialsNonExpired' => $this->credentialsNonExpired
+        ));
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this -> id,
+            $this -> email,
+            $this -> password,
+            $this -> salt,
+            $this -> enabled,
+            $this -> accountNonLocked,
+            $this -> accountNonExpired,
+            $this -> credentialsNonExpired
+            ) = \unserialize($serialized);
+    }
+
+    /**
+     * The equality comparison should neither be done by referential equality
+     * nor by comparing identities (i.e. getId() === getId()).
+     *
+     * However, you do not need to compare every attribute, but only those that
+     * are relevant for assessing whether re-authentication is required.
+     *
+     * Also implementation should consider that $user instance may implement
+     * the extended user interface `AdvancedUserInterface`.
+     *
+     * @param UserInterface $user
+     * @return bool
+     */
+    public function isEqualTo(UserInterface $user)
+    {
+        if ($user instanceof User){
+            //checking roles are the same
+            $isEqual = count($this -> getRoles()) == count($user -> getRoles());
+            if ($isEqual){
+                foreach ($this -> getRoles() as $role){
+                    $isEqual = $isEqual && in_array($role,$user -> getRoles());
+                }
+            }
+            return $isEqual;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return ['ROLE_USER'];
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return array (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return $this -> roles;
+    }
+
+    /**
+     * Returns the password used to authenticate the user.
+     *
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return string The password
+     */
+    public function getPassword()
+    {
+        return $this -> password;
+    }
+
+    /**
+     * @param mixed $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return $this -> salt;
+    }
+
+    /**
+     * @param mixed $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+        return $this;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this -> email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    // And a lot of getters and setters
+}

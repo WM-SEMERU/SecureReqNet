@@ -1,0 +1,7 @@
+Symfony versions
+
+
+Hi, I would like to know why this page does not refer to the correct version: https://symfony.com/versions.json (for 3.4 it displays 3.4.23 instead of 3.4.24)
+Also, can it be possible to have this version on the roadmap detail?https://symfony.com/roadmap/3.4.json adding a new json entry full_version for exemple?
+https://symfony.com/blog/symfony-3-4-24-released was released one week ago
+Many thanks,

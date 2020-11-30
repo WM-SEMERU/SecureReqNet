@@ -1,0 +1,27 @@
+'This is a useful security improvement, that I recommend gets integrated into gitlab. It protects users, in the event that their passwords get stolen from other sites, etc. I found a good gem for this: http://rubydoc.info/github/mdp/rotp/master/frames, however, given that it appears Gitlab uses Devise for auth, we should probably use this plugin: https://github.com/wmlele/devise-otp
+
+I intend to submit a Merge Request for this, so I'll outline my design for the system here (in case anyone has feedback/wants to help):
+
+### OTP Strategy
+I'm going with time-based (TOTP). Its requires no storage implications, per-user (other than a 32bit secret key). Time-based keys are very common, Google uses this strategy to protect GMail/Apps customers.
+
+### Database Augmentation
+**NOTE:** Given the existence of devise-otp, this may no longer be necessary.
+
+I will add new table, with a foreign key reference to a `user_id` column,  and `totp_secret` column. The existence of a row implies that this feature is enabled for a user. This table could be enhanced further down the road to support other types of otp strategies, if need be. This would also make future data migrations, in the event of further enhancement, easier to manage.
+
+### UI Augmentation
+#### User Account Settings
+We'll add a simple checkbox that a user must toggle to enable this feature. Once the checkbox is toggled, a modal will appear, displaying a QR code that the user will then scan with their mobile device, to start generating OTP codes. There will also be a box for the user to provide a newly generated OTP code to verify the service is working properly, for their account. Users will also need the ability to also reset the secret, in case they lose their phone etc.
+
+#### Admin Settings
+We'll need to allow admins to toggle if this feature is enabled, for a given user account. Assumed use case would be to contact an admin to disable OTP codes so you can log back in, re-enable it, and setup a new secret for yourself.
+
+#### Sign In
+Once the user has provided a proper username/password pair, if the flag is enabled, they will be redirected to a page that asks them to enter an OTP code, before they can proceed into the protected areas of the site.
+
+------
+
+**QUESTION: What would be the best course of action to manage the scenario where a user has lost their phone, and can no longer regenerate OTP codes to access their account? How can we let them back in to reset their OTP secret?** So far, my assumption is that the user would contact their gitlab administrators and they would disable OTP for them. However, one potential issue with this is that the attacker, who may have the user's password, may also have access to their e-mail. This would allow them to ask the administrator to disable OTP, and gain access to their data. Likely the verification protocol for admins should be org-specific, and not in scope of this work. Unsure how gitlab cloud staff wants to manage this, for their users. 
+
+**UPDATE:** Its worth noting that using devise-otp provides a list of emergency HTOP recovery tokens that can be used, if we expose that functionality.

@@ -1,0 +1,8 @@
+Secrets Management
+
+
+Provide a secure way for users to create, update, manage and distribute secrets.
+Right now, the best place to put a database password is as an environment variable which is far from ideal.
+We should design a system allowing users to manage secrets, store and encrypt them at rest and distribute them securely (e.g. a secret must never touch a disk unencrypted).
+Even though it's out of scope for SwarmKit, we should also think about other parts of the system such as build.
+Related to this topic: Config management and distribution.

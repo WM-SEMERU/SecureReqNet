@@ -1,0 +1,49 @@
+Crash type 3 in 0.23.79
+
+
+Test plan
+Checks that can be done BEFORE releasing
+
+On Windows, launch Brave and open up 10-20 tabs (brave.com, basicattentiontoken.org, google.com, duckduckgo.com, etc)
+Minimize, maximize, and restore the window at random intervals (while browsing and switching between tabs)
+Make the window not full screen and resize it. Switch tabs and resize it again. Try this a fair amount
+Verify that no tabs crash, the browser doesn't crash, and that no reports are added to chrome://crashes
+
+Checks that can be done AFTER releasing
+
+Login to stats.brave.com
+Go to Top Crash Reasons and look for 0.23.105 with the error viz::ClientLayerTreeFrameSink::SubmitCompositorFrame(viz::CompositorFrame)
+You shouldn't see any of these errors
+
+0  Brave.exe!viz::ClientLayerTreeFrameSink::SubmitCompositorFrame(viz::CompositorFrame) [client_layer_tree_frame_sink.cc : 132 + 0x0]
+    rax = 0x000001fc027fc8e0   rdx = 0x00000084568feae0
+    rcx = 0x000000000000039d   rbx = 0x0000000000000014
+    rsi = 0x000001fc0062ea70   rdi = 0x000001fc0062ea70
+    rbp = 0x00000084568fe720   rsp = 0x00000084568fe6a0
+     r8 = 0x0000000000000001    r9 = 0x0000000000000010
+    r10 = 0x000001fc022d5850   r11 = 0x0000000000000001
+    r12 = 0x000001fc021ecfa0   r13 = 0x00000084568fef90
+    r14 = 0x00000084568feae0   r15 = 0x00000084568ff100
+    rip = 0x00007ff7a872f54f
+    Found by: given as instruction pointer in context
+ 1  ntdll.dll + 0x12b55
+ 2  Brave.exe!base::internal::flat_tree<std::pair<ui::LatencyComponentType,long long>,std::pair<std::pair<ui::LatencyComponentType,long long>,ui::LatencyInfo::LatencyComponent>,base::internal::GetKeyFromValuePairFirst<std::pair<ui::LatencyComponentType,long long>,ui::LatencyInfo::LatencyComponent>,std::less<void> >::find<std::pair<ui::LatencyComponentType,long long> > [flat_tree.h : 854 + 0x25]
+ 3  ntdll.dll + 0x10428
+ 4  Brave.exe!base::win::RegKey::RegDelRecurse(HKEY__ *,std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> > const &,unsigned long) [registry.cc : 484 + 0x54]
+ 5  Brave.exe!viz::TransferableResource::TransferableResource(viz::TransferableResource const &) [transferable_resource.cc : 13 + 0xd]
+ 6  ntdll.dll + 0x10428
+ 7  Brave.exe!std::vector<viz::TransferableResource,std::allocator<viz::TransferableResource> >::emplace_back<const viz::TransferableResource &> [vector : 939 + 0xb]
+ 8  Brave.exe!std::vector<viz::TransferableResource,std::allocator<viz::TransferableResource> >::_Change_array(viz::TransferableResource * const,unsigned __int64,unsigned __int64) [vector : 1991 + 0x6b]
+ 9  Brave.exe!std::vector<base::HistogramBase *,std::allocator<base::HistogramBase *> >::_Reallocate_exactly [vector : 1552 + 0x12]
+10  Brave.exe!base::debug::ScopedLockAcquireActivity::ScopedLockAcquireActivity(void const *,base::internal::LockImpl const *) [activity_tracker.cc : 1793 + 0xbc]
+11  Brave.exe!RtlUnwindEx + 0xff0b60
+12  Brave.exe!base::SampleVectorBase::Accumulate(int,int) [sample_vector.cc : 66 + 0xd]
+13  Brave.exe!operator new(unsigned __int64) [new_scalar.cpp : 34 + 0x8]
+14  Brave.exe!viz::CompositorFrameMetadata::CompositorFrameMetadata(viz::CompositorFrameMetadata &&) [compositor_frame_metadata.cc : 12 + 0x44]
+15  Brave.exe!base::HistogramBase::FindAndRunCallback(int) [histogram_base.cc : 173 + 0x17]
+16  Brave.exe!RtlUnwindEx + 0x1c6a67
+17  Brave.exe!cc::LayerTreeHostImpl::DrawLayers(cc::LayerTreeHostImpl::FrameData *) [layer_tree_host_impl.cc : 2083 + 0x27]
+18  Brave.exe!cc::PictureLayerImpl::AppendQuads(viz::RenderPass *,cc::AppendQuadsData *) [picture_layer_impl.cc : 579 + 0x15]
+
+Full crash dump available here:
+dump3.txt

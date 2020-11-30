@@ -1,0 +1,5 @@
+[hackerone] https://hackerone.com/reports/196753
+
+
+https://hackerone.com/reports/196753
+should be an easy fix since it was already done for the homepage button

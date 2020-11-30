@@ -1,0 +1,26 @@
+Raise notice when controller or service is defined with a starting back slash
+
+
+Description
+When in routing the controller is defined with starting back slash and the corresponding service is declared without a starting back slash, the service cannot found because the name of the service does not match exactly with the name of the controller.
+If the controller does not have a custom constructor, it still works, because the service is not found the controller is instantiated without DI.
+IMO, a notice should be raised to inform the user that using a starting back slash should be avoided.
+Example
+routing.yaml
+test:
+    path: /test
+    controller: \MyBundle\Controller\Test::index
+
+services.yaml
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  MyBundle\Controller\Test:
+    arguments:
+      - '%kernel.environment%'
+    tags:
+      - controller.service_arguments
+

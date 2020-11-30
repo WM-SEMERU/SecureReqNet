@@ -1,0 +1,14 @@
+Update local copy of google-collection classes to 1.0 RC1
+
+
+From mcculls on April 28, 2009 13:00:49
+Guice now contains a local copy of google-collection classes, taken back in
+February (I can't tell exactly which level was taken).
+The local google-collection classes should be updated to the 1.0 RC1 level
+when possible, as this version contains various fixes - including some that
+allow Guice to run on the Google App Engine.
+I'm attaching a diff of the necessary changes - although it'll be much
+easier for the Guice team to just use the 'copy.sh' script from trunk.
+Attachment: gist
+   UPDATE_COLLECTIONS_20090412.txt
+Original issue: http://code.google.com/p/google-guice/issues/detail?id=364

@@ -1,0 +1,5 @@
+Revert "Use new Fedora queue (#9178)"
+
+
+This reverts commit 5fb1ac2.
+Apparently the fedora 28 queue may be working again and the script we run doesn't work on docker images. Still investigating if we can update our script.

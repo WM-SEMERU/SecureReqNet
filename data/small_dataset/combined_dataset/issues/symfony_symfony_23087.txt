@@ -1,0 +1,37 @@
+[LDAP] searchDn and searchPassword should/could be optional
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.0 (but previous versions too)
+
+
+
+I'm using the LDAP component to authenticate users in my application.
+According to the docs I need a read only user to query the LDAP server, but I think this should/could be optional.
+For the moment I customized the LdapUserProvider class, so the supplied username and password are used to authenticate (bind) to the LDAP server.
+Is this a scenario that should be supported by the component? If so, I could work on a PR for this.

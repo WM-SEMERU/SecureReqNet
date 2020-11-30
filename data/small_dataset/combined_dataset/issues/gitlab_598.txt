@@ -1,0 +1,214 @@
+* __Summary:__ HTTP 500 error on wiki after upgrade to 7.3
+* __Steps to reproduce:__ Upgrade GitLab from 7.2.2 to 7.3, using manual instructions. No problems on upgrade. 
+* __Expected behavior:__ Open the project wiki.
+* __Observed behavior:__ an http 500 error. __This don't happen if the wiki repo is empty.__
+* __Relevant logs:__
+  * on production.log:
+
+```
+Started GET "/dsv/collaborative-crm/wikis/home" for 127.0.0.1 at 2014-09-22 14:39:06 -0300
+Processing by Projects::WikisController#show as HTML
+  Parameters: {"project_id"=>"dsv/collaborative-crm", "id"=>"home"}
+Completed 500 Internal Server Error in 11126ms
+
+ActionView::Template::Error (Grit::Git::GitTimeout):
+    17: %hr
+    18:
+    19: .wiki-last-edit-by
+    20:   Last edited by #{commit_author_link(@page.commit, avatar: true, size: 16)} #{time_ago_with_tooltip(@page.commit.created_at)}
+  app/models/wiki_page.rb:97:in `versions'
+  app/models/wiki_page.rb:101:in `commit'
+  app/views/projects/wikis/show.html.haml:20:in `_app_views_projects_wikis_show_html_haml___386111963861425584_69902257347460'
+  app/controllers/projects/wikis_controller.rb:17:in `show'
+
+
+Started GET "/dsv/collaborative-crm/wikis/home" for 127.0.0.1 at 2014-09-22 14:39:17 -0300
+Processing by Projects::WikisController#show as HTML
+  Parameters: {"project_id"=>"dsv/collaborative-crm", "id"=>"home"}
+Completed 500 Internal Server Error in 10223ms
+
+ActionView::Template::Error (Grit::Git::GitTimeout):
+    17: %hr
+    18:
+    19: .wiki-last-edit-by
+    20:   Last edited by #{commit_author_link(@page.commit, avatar: true, size: 16)} #{time_ago_with_tooltip(@page.commit.created_at)}
+  app/models/wiki_page.rb:97:in `versions'
+  app/models/wiki_page.rb:101:in `commit'
+  app/views/projects/wikis/show.html.haml:20:in `_app_views_projects_wikis_show_html_haml___386111963861425584_69902255350360'
+  app/controllers/projects/wikis_controller.rb:17:in `show'
+```
+
+* __Output of checks:__
+
+```
+[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 2.0.0 ? ... OK (2.0.0)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+hooks directories in repos are links: ...
+4/4 ... ok
+4/6 ... ok
+4/10 ... ok
+4/12 ... ok
+4/17 ... ok
+4/19 ... ok
+4/20 ... ok
+4/22 ... ok
+4/23 ... ok
+17/24 ... ok
+17/25 ... ok
+3/27 ... ok
+17/28 ... ok
+19/29 ... repository is empty
+4/30 ... ok
+4/31 ... ok
+3/32 ... ok
+3/33 ... ok
+3/37 ... ok
+2/38 ... ok
+17/39 ... ok
+4/41 ... ok
+11/42 ... ok
+4/44 ... ok
+4/45 ... ok
+2/47 ... ok
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files:
+	/home/git/repositories: OK
+	/home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.6.13
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ...
+4/4 ... yes
+4/6 ... yes
+4/10 ... yes
+4/12 ... yes
+4/17 ... yes
+4/19 ... yes
+4/20 ... yes
+4/22 ... yes
+4/23 ... yes
+17/24 ... yes
+17/25 ... yes
+3/27 ... yes
+17/28 ... yes
+19/29 ... yes
+4/30 ... yes
+4/31 ... yes
+3/32 ... yes
+3/33 ... yes
+3/37 ... yes
+2/38 ... yes
+17/39 ... yes
+4/41 ... yes
+11/42 ... yes
+4/44 ... yes
+4/45 ... yes
+2/47 ... yes
+Projects have satellites? ...
+4/4 ... yes
+4/6 ... yes
+4/10 ... yes
+4/12 ... yes
+4/17 ... yes
+4/19 ... yes
+4/20 ... yes
+4/22 ... yes
+4/23 ... yes
+17/24 ... yes
+17/25 ... yes
+3/27 ... yes
+17/28 ... yes
+19/29 ... yes
+4/30 ... yes
+4/31 ... yes
+3/32 ... yes
+3/33 ... yes
+3/37 ... yes
+2/38 ... yes
+17/39 ... yes
+4/41 ... yes
+11/42 ... yes
+4/44 ... yes
+4/45 ... yes
+2/47 ... yes
+Redis version >= 2.0.0? ... yes
+Ruby version >= 2.0.0 ? ... yes (2.1.2)
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.8.3)
+
+Checking GitLab ... Finished
+```
+
+* __Version of GitLab you are running:__ GitLab 7.3.0 a04f0e5
+* __Describe your setup:__
+
+```
+System information
+System:		Ubuntu 13.10
+Current User:	git
+Using RVM:	no
+Ruby Version:	2.1.2p95
+Gem Version:	2.2.2
+Bundler Version:1.6.4
+Rake Version:	10.3.2
+Sidekiq Version:2.17.0
+
+GitLab information
+Version:	7.3.0
+Revision:	a04f0e5
+Directory:	/home/git/gitlab
+DB Adapter:	postgresql
+URL:		http://git.syonet.com
+HTTP Clone URL:	http://git.syonet.com/some-project.git
+SSH Clone URL:	git@git.syonet.com:some-project.git
+Using LDAP:	no
+Using Omniauth:	no
+
+GitLab Shell
+Version:	2.0.0
+Repositories:	/home/git/repositories/
+Hooks:		/home/git/gitlab-shell/hooks/
+Git:		/usr/bin/git
+```

@@ -1,0 +1,73 @@
+Encoder password return TRUE even if password equel to NULL
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Symfony version
+4.0.6
+
+
+
+...
+ public function __construct(
+        SessionInterface $session,
+        EntityManagerInterface $entityManager,
+        Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface $encoder)
+    {
+...
+//user with password 'admin'
+$user = $userProvider->loadUserByUsername($token->getUsername());
+ $passwordValid = $this->encoder->isPasswordValid($user, $token->getCredentials());
+        dump($passwordValid);
+        dump($this->encoder->isPasswordValid($user, null));
+        dump($this->encoder->isPasswordValid($user, 'admin'));
+...
+
+// we check real passed password
+PasswordAuthenticator.php on line 84:
+false
+// if no password provided
+PasswordAuthenticator.php on line 85:
+true
+// if real password
+PasswordAuthenticator.php on line 85:
+false
+
+If i pass there real password, it returns FALSE.
+Also tried with EncoderFactoryInterface
+  $encoder = $this->encoderFactory->getEncoder($user);
+        $isValid =  $encoder->isPasswordValid(
+            $user->getPassword(),
+            'admin',
+            $user->getSalt()
+        );
+// false
+
+security.yaml
+security:
+...
+    encoders:
+      App\Domain\User\Entity\User:
+        algorithm: 'bcrypt'
+...
+
+in user variable valid User
+User {#5259 ▼
+  -uuid: "7beb4138-1efa-493d-9924-b489905ac394"
+  -email: "admin@email.com"
+  -password: "kXgAB5qtZEMC9GHEPP9MS9miDlFFcMYH1wRjwwwdx3Vyf7xHmyNExxSAc42dkNKKfgHj9mkCOntUL0bdIOSnJA=="
+  -salt: "some_rand_string"
+  #plainPassword: null
+}
+

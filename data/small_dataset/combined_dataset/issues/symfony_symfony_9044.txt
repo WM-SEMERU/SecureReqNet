@@ -1,0 +1,45 @@
+[Security] [SecurityBundle] more intuitive simple authenticator names
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#8268
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

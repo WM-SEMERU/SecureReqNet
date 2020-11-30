@@ -1,0 +1,5 @@
+Automated cherry pick of #76111: Fix empty array expansion error in cluster/gce/util.sh
+
+
+Cherry pick of #76111 on release-1.14.
+#76111: Fix empty array expansion error in cluster/gce/util.sh

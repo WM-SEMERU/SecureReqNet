@@ -1,0 +1,11 @@
+Add Mozilla Code of Conduct
+
+
+Fixes #272
+As of January 1 2019, Mozilla requires that all GitHub projects include this CODE_OF_CONDUCT.md file in the project root. The file has two parts:
+
+Required Text - All text under the headings Community Participation Guidelines and How to Report, are required, and should not be altered.
+Optional Text - The Project Specific Etiquette heading provides a space to speak more specifically about ways people can work effectively and inclusively together. Some examples of those can be found on the Firefox Debugger project, and Common Voice. (The optional part is commented out in the raw template file, and will not be visible until you modify and uncomment that part.)
+
+If you have any questions about this file, or Code of Conduct policies and procedures, please see Mozilla-GitHub-Standards or email Mozilla-GitHub-Standards+CoC@mozilla.com.
+(Message COC002)

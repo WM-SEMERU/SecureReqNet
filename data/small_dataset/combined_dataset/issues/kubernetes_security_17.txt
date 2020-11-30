@@ -1,0 +1,14 @@
+document the things the security committee owns
+
+
+This list is roughly right:
+
+  product-security-committee in https://github.com/kubernetes/community/blob/master/sigs.yaml
+ Kubernetes OpsGenie rotation https://app.opsgenie.com/teams/dashboard/633ac733-665f-4d62-871e-cbc011f37037
+ https://groups.google.com/a/kubernetes.io/forum/#!forum/security owner
+ https://groups.google.com/a/kubernetes.io/forum/#!forum/security-discuss-private owner
+ https://groups.google.com/forum/#!forum/kubernetes-security-discuss owner
+ https://groups.google.com/a/kubernetes.io/forum/#!forum/distributors-announce owner
+ https://github.com/kubernetes-security/security-disclosures/issues access
+ ???
+

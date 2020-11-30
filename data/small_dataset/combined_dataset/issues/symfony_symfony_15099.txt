@@ -1,0 +1,21 @@
+Inconsistency between FrameworkBundle and Security component
+
+
+There is inconsistency between:
+Symfony\Bundle\FrameworkBundle\Controller\Controller
+protected function denyAccessUnlessGranted($attributes, $object = null, $message = 'Access Denied.')
+{
+    if (!$this->isGranted($attributes, $object)) {
+        throw $this->createAccessDeniedException($message);
+    }
+}
+
+and
+Symfony\Component\Security\Core\Exception\AccessDeniedException
+public function __construct($message = 'Access Denied', \Exception $previous = null)
+{
+    parent::__construct($message, 403, $previous);
+}
+
+Difference is really small (.), but in our case it breaks our Twig if statement (not displaying default message at 403 page) when moving to controller's method instead of manually throwing exception. Of course I can fix our if, but I think those messages should be identical.
+I propose introducing constant in AccessDeniedException which should be used as default value in constructor and also in denyAccessUnlessGranted().

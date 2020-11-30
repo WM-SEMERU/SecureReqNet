@@ -1,0 +1,6 @@
+[Security] introduce target_forward: true option to prevent redirect on success login
+
+
+There are nice failure_forward: false and use_forward: false options that allow me exactly what I want - to have forwards instead of redirects. But I also want to have something like target_forward or success_forward option that will allow me to use forward instead of redirect.
+Its convenient to have redirect after login on the site, but when you send an ajax request probably you don't want a redirect, but just want to have a success respond.
+Does anyone think that we need it? If so I can help to implement it.

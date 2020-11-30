@@ -1,0 +1,20 @@
+Give HTTP a scarier (more obvious) icon
+
+
+Did you search for similar issues before submitting this one?
+yes
+Describe the issue you encountered:
+The icon for regular HTTP in the url bar was recently changed from blue to gray with the following: #2160
+If users are visiting a site using HTTP, it would be great if it was painfully obvious they are not on a secure site (even if https everywhere is used behind the scenes).
+Expected behavior:
+The icon should not be a lock. I personally believe change is too subtle for many folks to notice. The gray helps for sure, but it would be better to see a different icon.
+Here's an example with an icon I think is appropriate:
+
+two good candidates I saw are:
+fa-exclamation-triangle (pictured)
+fa-times-circle
+cc: @bradleyrichter @diracdeltas @luixxiul
+
+Any related issues:
+#1576
+

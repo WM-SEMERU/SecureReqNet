@@ -1,0 +1,11 @@
+AMBARI-25173. Regenerate keytab skips some keytabs on repaired host (…
+
+
+…dlysnichenko)
+What changes were proposed in this pull request?
+Looks like AMBARI-24319  added this bug when trying to fix another bug. The mentioned bugfix addressed the situation when we regenerate keytabs for some service, and accidentally regenerate referenced shared keytabs. As a result, other services that are using these shared keytabs are facing issue with authentication.
+Existing implementation never regenerates referenced keytabs. Since code only goes through "services" at kerberosDescriptor, and never descends into "identities", entries at "identities" are never regenerated.
+Current patch will check if a request is "regenerate_keytabs=all", and in this case, it would add entries from "identities" to a list of keytabs that are regenerated
+How was this patch tested?
+unit tests, manual  check on a live cluster
+NOTE: Current patch intersects with changes from #2802 . I've rebased against these changes, and am currently checking if the patch still works

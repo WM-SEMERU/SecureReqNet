@@ -1,0 +1,31 @@
+Shortcuts aren't working with non-English keyboard (macOS)
+
+
+Description
+I'm on macOS and keyboard shortcuts (such as Cmd+T) are only working when the keyboard layout is English.
+Steps to Reproduce
+
+Switch to non-English keyboard layout (e.g. Russian)
+Press Cmd+T
+
+Actual result:
+Nothing happens.
+Expected result:
+New tab should be opened.
+Reproduces how often:
+Always.
+Brave Version
+about:brave info:
+Brave: 0.23.105
+V8: 6.8.275.24
+rev: 9a46f8f
+Muon: 8.0.9
+OS Release: 17.7.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Additional Information
+Chrome and Firefox don't have this issue (well, they had in the past, but fixed it long time ago).

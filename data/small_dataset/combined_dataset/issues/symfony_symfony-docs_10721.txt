@@ -1,0 +1,7 @@
+A new security.yaml file for testing HTTP Auth seems incompatible with the default architecture
+
+
+Version: Symfony 4.2
+According to the documentation, I should be able to create a new firewal in security.yaml under config/packages/test/
+https://symfony.com/doc/current/testing/http_authentication.html
+Since I get Symfony\Component\Config\Definition\Exception\InvalidConfigurationException: You are not allowed to define new elements for path "security.firewalls". Please define all elements for this path in one config file.; does it mean that I should migrate my existing security.yaml under prod/dev ?

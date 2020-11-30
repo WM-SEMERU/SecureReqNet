@@ -1,0 +1,5 @@
+Feature Request: Export Data Button
+
+
+Similar to how you can save plotly graphs to PNGs from a button it would be useful to be able to provide a button that saves the data in a table as a csv or excel file. It would be nice if it took in to account of filtering done either via either the frontend or backend.
+I don't have any particular opinion on how this should be implemented, e.g. purely JavaScript client side (therefore more magical), or via a callback that the Dash developer must provide an actual file (therefore more customizable).

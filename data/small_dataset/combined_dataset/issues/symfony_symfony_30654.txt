@@ -1,0 +1,66 @@
+[HttpClient] Add a ScopingHttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR is a follow up of #30592 by @XuruDragon, with two main differences:
+
+I think ScopingHttpClient might be a better name for what is called a ConditionalHttpClient there,
+the FrameworkBundle part is removed so that it can be submitted separately later on.
+
+With a ScopingHttpClient, you can add some default options conditionally based on the requested URL and a regexp that it should match. This allows building clients that add e.g. credentials based on the requested scheme/host/path.
+When the requested URL is a relative one, a default index can be provided - whose corresponding default options (the base_uri one especially) will be used to turn it into an absolute URL.
+Regexps are anchored on their left side.
+E.g. this defines a client that will send some github token when a request is made to the corresponding API, and will not send those credentials if any other host is requested, while also turning relative URLs to github ones:
+$client = HttpClient::create();
+$githubClient = new ScopingClient($client, [
+    'http://api\.github\.com/' => [
+        'base_uri' => 'http://api.github.com/',
+        'headers' => ['Authorization: token '.$githubToken],
+    ],
+], 'http://api\.github\.com/');
+Of course, it's possible to define several regexps as keys so that one can create a client that is authenticated against several hosts/paths.

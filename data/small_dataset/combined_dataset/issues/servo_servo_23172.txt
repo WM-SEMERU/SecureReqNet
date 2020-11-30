@@ -1,0 +1,16 @@
+Add webdriver command Get Timeouts
+
+
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #___ (GitHub issue number if applicable)
+
+
+
+ There are tests for these changes OR
+ These changes do not require tests because ___
+
+
+This change is 

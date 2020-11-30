@@ -1,0 +1,61 @@
+crypto/x509: Go does not load root CA from System keychain on macOS
+
+
+Disclaimer: I'm new to Go, so please excuse my general lack of knowledge.
+The issue I'm experiencing seems to be related to and/or the same as #14514. It may be related to #24652 and/or #27958, but I'm not sure.
+My company uses an internal root CA that is installed into the System keychain on my work Mac. All the browsers on my system trust this root correctly, and I have no trouble connecting to internal sites with certificates signed by this root.
+I'm working on a Go program that needs to connect to an API that's served with a certificate signed by this internal root CA. I'm not doing anything fancy to configure my HTTP client:
+client := &http.Client{Timeout: time.Second * 10}
+When I try to make a request to the API, I get the following error: x509: certificate signed by unknown authority.
+All the issues I could find that seem to be similar to what I'm experiencing are closed, but the issue is clearly still present. I did find some links to the go-rootcerts package, which does solve the problem when I configure my client like this:
+tlsConfig := &tls.Config{}
+rootcerts.ConfigureTLS(tlsConfig, &rootcerts.Config{})
+transport := &http.Transport{TLSClientConfig: tlsConfig}
+client := &http.Client{Timeout: time.Second * 10, Transport: transport}
+Obviously, having to include this just so I can develop locally is not ideal.
+I have tried opening the certificate in Keychain Access and toggling the trust settings as suggested in this comment, but that didn't change anything.
+What version of Go are you using (go version)?
+go version go1.11.1 darwin/amd64
+Does this issue reproduce with the latest release?
+Yes.
+What operating system and processor architecture are you using (go env)?
+macOS 10.13.6
+$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/Users/arothman/Library/Caches/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/Users/arothman/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/local/Cellar/go/1.11.1/libexec"
+GOTMPDIR=""
+GOTOOLDIR="/usr/local/Cellar/go/1.11.1/libexec/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+CXX="clang++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/qv/sgn2l7z54zl46vgwrg7qbsp80000gp/T/go-build126370609=/tmp/go-build -gno-record-gcc-switches -fno-common"
+
+What did you do?
+Sorry for the lack of runnable program, but I don't think it would be helpful as the issue is somewhat specific to my system/environment.
+
+Create a basic net/http client.
+Attempt a request to an API secured by a certificate signed by a root CA in the machine's System keychain.
+😭
+
+What did you expect to see?
+Successful request/response.
+What did you see instead?
+x509: certificate signed by unknown authority

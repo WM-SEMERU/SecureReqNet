@@ -1,0 +1,5 @@
+HTTP Digest authentication is deprecated
+
+
+see symfony/symfony#24335
+We should IMO just not mention this authentication method anymore.

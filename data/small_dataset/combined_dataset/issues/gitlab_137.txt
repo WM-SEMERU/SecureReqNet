@@ -1,0 +1,5 @@
+I would like the ability to add comment to a specific line number of file that is part of merge request via the api. 
+
+The use case I personally see is an automated system that builds the merge request (something like jenkins) and then runs a static code analysis, and then leaves comments on the specific line numbers of the files in the merge request. For instance with sonar you can do an incremental code analysis that will give you just the new issues it found, with the necessary information to identify the file, and the specific line number. 
+
+This would in turn help automate portions of the code review process, since before another dev even looks at the code, the submitter would see potential issues that they can then fix and push changes for.

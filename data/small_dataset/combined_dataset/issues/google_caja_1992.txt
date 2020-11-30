@@ -1,0 +1,5 @@
+Throwing errors in console about depreciation
+
+
+Look I'm not sure what this is exactly, but it's loading on my page(It appears to be part of base.js from youtube?), and it's throwing this error:
+SVG's SMIL animations (< animate >, < set >, etc.) are deprecated and will be removed. Please use CSS animations or Web animations instead.

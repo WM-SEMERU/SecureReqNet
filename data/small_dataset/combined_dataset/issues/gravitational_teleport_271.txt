@@ -1,0 +1,15 @@
+Proposal for server spin-up and spin-down
+
+
+Symmetric key material is to be stored encrypted in the database under each participating auth server's public key. This raises the question of how each server is to know which public keys are valid.
+When a new server first spins up, it authenticates itself to an existing auth server. To authenticate as a new auth server requires the highest level of authorization supported by the auth server API. During this authentication, the two servers may exchange public keys.
+The existing auth server will then write a signed note in the backend data store. The note will have the following form: (signer public key, transcript hash, "validate", new public key, signature). The signature will cover the hash, the literal string, and the new public key. The transcript hash will be a hash of all prior such notes in the data store.
+The new auth server, upon connecting to the data store, will consume the entire transcript to build a set of valid public keys. They will be able to bootstrap from one to another using the public key obtained from the existing auth server.
+Participating auth servers will monitor the transcript for changes to add new public keys to their sets.
+An auth server may spin down itself (or another) by appending a note to the transcript of the form: (public key, transcript hash, "repudiate", public key, signature).
+It may take some effort to keep symmetric keys available to all participating servers. Maybe when a server detects that another has been added they should check to ensure that all symmetric key material has been encrypted under the new server's public key and take care of it if not.
+Some considerations:
+
+If the total number of public keys is never expected to grow very large, it may be simpler only to post messages of the form: (signing key, transcript hash, {valid keys}, signature). In other words, encode the full set of valid keys in each message.
+It's worth considering whether this scheme adds undue complexity to the system. If the total number of servers is low, and if the set of servers is not expected to change often, it may make more sense simply to restart each server in the event of a change and communicate key material via other channels.
+

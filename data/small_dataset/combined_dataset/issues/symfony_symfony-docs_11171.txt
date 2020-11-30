@@ -1,0 +1,4 @@
+promote AbstractController in 4.2 branch
+
+
+Follow up of @javiereguiluz's #11165

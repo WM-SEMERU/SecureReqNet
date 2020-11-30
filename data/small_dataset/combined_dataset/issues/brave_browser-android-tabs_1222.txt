@@ -1,0 +1,28 @@
+External links should request user confirmation
+
+
+Description 
+Third party apps can be opened from Brave without user confirmation
+Steps to Reproduce 
+
+Navigate to: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_link_mailto
+Click Send Mail
+
+Actual result: 
+Mail opens without user confirmation
+Expected result:
+All URLs opening external apps should request user confirmation
+Issue reproduces how often: 
+Easily
+Issue happens on: 
+
+Current Playstore version? Yes
+Beta build? No
+
+Device Details:
+
+Device(Phone, Tablet, Phablet): Pixel 2XL
+Android Version: 9.0
+
+Brave version:
+1.0.82

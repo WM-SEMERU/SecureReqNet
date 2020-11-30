@@ -1,0 +1,15 @@
+Add kms encryption key as argument for cdk bootstrap
+
+
+The cdk bootstrap command creates the following resource in CloudFormation:
+  StagingBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: Private
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+
+I have not seen any option to specify the KMS key to be used. Is there a way to do so?
+Cheers!

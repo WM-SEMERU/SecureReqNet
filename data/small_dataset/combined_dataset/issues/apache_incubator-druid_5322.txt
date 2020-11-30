@@ -1,0 +1,8 @@
+Remove Escalator jetty http client escalation method
+
+
+The jetty HttpClient used in the Router should not have any "internal system user" escalation applied to it, as the proxy requests sent by the router should be sent with the same credentials in the original requests that the Router receives.
+This did not occur in practice with the existing druid-basic-security extension because its implementation added an AuthenticationStore to the jetty HttpClient, which is only used when the client receives an authentication challenge (see https://www.eclipse.org/jetty/documentation/9.4.x/http-client-authentication.html). The challenge does not occur when using HTTP basic auth with the Router because ProxyServlet copies the original request's headers into the proxy request and the original request must have had valid HTTP basic auth credentials to be accepted by the Router, bypassing the need for the authentication challenge.
+However, any Escalator implementations that function by unconditionally adding credential headers to outgoing requests could incorrectly attach the privileged internal system user's credentials.
+The escalated client was also being used for query cancellations sent by the Router, which is incorrect behavior as these cancellation requests should use the credentials of the requester, not the privileged internal system user.
+This PR removes the unnecessary/incorrect createEscalatedJettyClient method from the Escalator interface, fixes the broadcastClient such that it copies the headers of the original request, and also fixes a crash in AuthorizerMapperModule when the authorizers list is null.

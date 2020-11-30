@@ -1,0 +1,6 @@
+Support attention for Vimeo
+
+
+Support capturing attention for Vimeo as a platform.
+Replicate YT functionality; including support for unverified Vimeo publishers to be treated the same way as unverified publishers elsewhere on other channels.
+cc @NejcZdovc

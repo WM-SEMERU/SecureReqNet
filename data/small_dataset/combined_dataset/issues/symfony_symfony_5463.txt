@@ -1,0 +1,68 @@
+Symofny 2.1 remember_me cookie
+
+
+In symfony 2.1 I created firewall that reads users from database by email field in my entity not username (Symfony default entity provider where class is my user entity class and property is set to email)
+providers:
+    entity:
+        class:               SecurityBundle:User
+        property:            email
+The problem here is that
+Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices::processAutoLoginCookie(array $cookieParts, Request $request)
+trys to find user by eamil with username value
+protected function processAutoLoginCookie(array $cookieParts, Request $request)
+{
+    if (count($cookieParts) !== 4) {
+        throw new AuthenticationException('The cookie is invalid.');
+    }
+
+    list($class, $username, $expires, $hash) = $cookieParts;
+    if (false === $username = base64_decode($username, true)) {
+        throw new AuthenticationException('$username contains a character from outside the base64 alphabet.');
+    }
+    try {
+        // this is the problem
+        $user = $this->getUserProvider($class)->loadUserByUsername($username); // <- this is the problem
+    } catch (\Exception $ex) {
+        if (!$ex instanceof AuthenticationException) {
+            $ex = new AuthenticationException($ex->getMessage(), null, $ex->getCode(), $ex);
+        }
+
+        throw $ex;
+    }
+
+    if (!$user instanceof UserInterface) {
+        throw new \RuntimeException(sprintf('The UserProviderInterface implementation must return an instance of UserInterface, but returned "%s".', get_class($user)));
+    }
+
+    if (true !== $this->compareHashes($hash, $this->generateCookieHash($class, $username, $expires, $user->getPassword()))) {
+        throw new AuthenticationException('The cookie\'s hash is invalid.');
+    }
+
+    if ($expires < time()) {
+        throw new AuthenticationException('The cookie has expired.');
+    }
+
+    return $user;
+}
+because the function
+Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices::onLoginSuccess(Request $request, Response $response, TokenInterface $token)
+save username in cookie instead email:
+protected function onLoginSuccess(Request $request, Response $response, TokenInterface $token)
+{
+    $user = $token->getUser();
+    $expires = time() + $this->options['lifetime'];
+    // this is the problem
+    $value = $this->generateCookieValue(get_class($user), $user->getUsername(), $expires, $user->getPassword()); // <- this is the problem
+
+    $response->headers->setCookie(
+        new Cookie(
+            $this->options['name'],
+            $value,
+            $expires,
+            $this->options['path'],
+            $this->options['domain'],
+            $this->options['secure'],
+            $this->options['httponly']
+        )
+    );
+}

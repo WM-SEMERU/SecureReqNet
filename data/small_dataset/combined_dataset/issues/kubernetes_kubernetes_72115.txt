@@ -1,0 +1,11 @@
+Investigate defaulting anonymous discovery requests to disallowed
+
+
+Specifically, the system:discovery and system:basic-user rolebindings
+From CVE-2018-1002105 post-mortem
+/area security
+/area apiserver
+/priority important-longterm
+/kind cleanup
+/sig api-machinery
+/sig auth

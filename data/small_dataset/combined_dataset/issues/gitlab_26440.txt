@@ -1,0 +1,49 @@
+From a cursory scan, it sounds like we might be able to roll this in 8.15.4?
+
+```
+> From: Edward Thomson<ethomson@edwardthomson.com>
+>
+> Since you build a product on top of libgit2, I wanted to reach out and
+> let you know that we have a libgit2 security release planned for
+> Monday, January 9, 2016.  On Monday, we will be providing two
+> releases:
+>
+> - libgit2 0.25.1, which is API-compatible with the current stable release 0.25.0
+> - libgit2 0.24.6, which is API-compatible with the 0.24 maintenance releases
+>
+> Please keep this information confidential until our official
+> announcement on that date.
+>
+> These two releases are intended to be drop-in replacements if you are
+> using the current stable or maintenance builds, and will provide fixes
+> for two security issues:
+>
+> 1. When users provide a custom TLS certificate validation callback on
+> Unix platforms, the flag passed to the callback about whether the
+> platform's TLS library considers the certificate valid is always
+> `true`.  If the user does trust this value they are susceptible to a
+> man-in-the-middle attack from a rogue Git server.
+>
+> We have requested a CVE for this vulnerability.
+>
+> Users who do not provide a custom TLS certificate validation callback
+> are not affected.  Users who provide a custom callback but ignore the
+> `valid` flag are not affected.  Users who use the WinHTTP transport
+> (which is the default on Windows) are not affected.
+>
+> 2. The libgit2 network client's smart protocol parsing functionality
+> has limitations when parsing packets from a Git server that contain
+> malformed data.  A rogue Git server could produce intentionally
+> malformed data and cause a denial of service attack against users
+> performing a fetch or push operation.
+>
+> We will also be providing updated Rugged and LibGit2Sharp versions.
+>
+> We encourage users to update to the latest version(s) of libgit2
+> whenever possible.
+>
+> Sincerely,
+> The libgit2 contributors
+```
+
+/cc: @rymai, @DouweM, @rspeicher, @jacobvosmaer-gitlab, @briann

@@ -1,0 +1,16 @@
+When I comment out  the 'uid' line in my gitlab.yml ldap config and add a 'user_filter' line, login attempts result in a 500 error. We just upgraded from 6.6 to 6.7
+
+Here is the relevant bit from production.log:
+
+```
+Started POST "/users/auth/ldap/callback" for 127.0.0.1 at 2014-04-03 10:26:18 -0500
+ArgumentError (uid or filter MUST be provided):
+vendor/bundle/ruby/2.0.0/gems/gitlab_omniauth-ldap-1.0.4/lib/omniauth-ldap/adaptor.rb:38:in `validate'
+vendor/bundle/ruby/2.0.0/gems/gitlab_omniauth-ldap-1.0.4/lib/omniauth-ldap/adaptor.rb:41:in `initialize'
+vendor/bundle/ruby/2.0.0/gems/gitlab_omniauth-ldap-1.0.4/lib/omniauth/strategies/ldap.rb:38:in `new'
+vendor/bundle/ruby/2.0.0/gems/gitlab_omniauth-ldap-1.0.4/lib/omniauth/strategies/ldap.rb:38:in `callback_phase'
+vendor/bundle/ruby/2.0.0/gems/omniauth-1.1.4/lib/omniauth/strategy.rb:226:in `callback_call'
+vendor/bundle/ruby/2.0.0/gems/omniauth-1.1.4/lib/omniauth/strategy.rb:182:in `call!'
+vendor/bundle/ruby/2.0.0/gems/omniauth-1.1.4/lib/omniauth/strategy.rb:164:in `call'
+...
+```

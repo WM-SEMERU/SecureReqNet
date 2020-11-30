@@ -1,0 +1,89 @@
+gopls returns ToUTF16Column: point is missing offset on `textDocument/rangeFormatting``
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.1 linux/amd64
+
+Does this issue reproduce with the latest release?
+Yes.
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/home/bstaletic/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/bstaletic/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/lib/go"
+GOTMPDIR=""
+GOTOOLDIR="/usr/lib/go/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build434682588=/tmp/go-build -gno-record-gcc-switches"
+
+What did you do?
+Whenever I try to execute a textDocument/rangeFormatting request, gopls responds with Request failed: 0: ToUTF16Column: point is missing offset
+What did you expect to see?
+Properly formatted part of file.
+What did you see instead?
+The exception above and this in the gopls log:
+[Trace - 4:17:20 PM] Sending request 'initialize - (1)'.
+Params: {"capabilities": {"textDocument": {"completion": {"completionItemKind": {"valueSet": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]}}}}, "initializationOptions": {}, "processId": 16204, "rootPath": "/home/bstaletic/.vim/pack/bundle/start/YouCompleteMe/third_party/ycmd/ycmd/tests/go/go_module", "rootUri": "file:///home/bstaletic/.vim/pack/bundle/start/YouCompleteMe/third_party/ycmd/ycmd/tests/go/go_module"}
+
+
+[Trace - 4:17:20 PM] Received response 'initialize - (1)' in 2ms.
+Params: {"capabilities":{"textDocumentSync":{"openClose":true,"change":1},"hoverProvider":true,"completionProvider":{"triggerCharacters":["."]},"signatureHelpProvider":{"triggerCharacters":["(",","]},"definitionProvider":true,"documentHighlightProvider":true,"documentSymbolProvider":true,"codeActionProvider":true,"documentFormattingProvider":true,"documentRangeFormattingProvider":true,"typeDefinitionProvider":true},"custom":null}
+
+
+[Trace - 4:17:20 PM] Sending notification 'initialized'.
+Params: {}
+
+
+[Trace - 4:17:20 PM] Sending notification 'workspace/didChangeConfiguration'.
+Params: {"settings": {}}
+
+
+[Trace - 4:17:20 PM] Received notification 'window/logMessage'.
+Params: {"type":1,"message":"method \"DidChangeConfiguration\" not yet implemented"}
+
+
+[Trace - 4:17:20 PM] Sending notification 'textDocument/didOpen'.
+Params: {"textDocument": {"languageId": "go", "text": "// Package td is dummy data for gocode completion test.\npackage td\n\nimport (\n\t\"log\"\n)\n\nfunc Hello() {\n\tlog.Log\n}\n", "uri": "file:///home/bstaletic/.vim/pack/bundle/start/YouCompleteMe/third_party/ycmd/ycmd/tests/go/go_module/td/test.go", "version": 1}}
+
+
+[Trace - 4:17:21 PM] Received notification 'textDocument/publishDiagnostics'.
+Params: {"uri":"file:///home/bstaletic/.vim/pack/bundle/start/YouCompleteMe/third_party/ycmd/ycmd/tests/go/go_module/td/test.go","diagnostics":[{"range":{"start":{"line":8,"character":5},"end":{"line":8,"character":8}},"severity":1,"source":"LSP","message":"Log not declared by package log"}]}
+
+
+[Trace - 4:17:21 PM] Received notification 'textDocument/publishDiagnostics'.
+Params: {"uri":"file:///home/bstaletic/.vim/pack/bundle/start/YouCompleteMe/third_party/ycmd/ycmd/tests/go/go_module/td/test2.go","diagnostics":[]}
+
+
+[Trace - 4:17:31 PM] Sending request 'textDocument/rangeFormatting - (2)'.
+Params: {"options": {"insertSpaces": false, "tabSize": 8}, "range": {"end": {"character": 0, "line": 6}, "start": {"character": 0, "line": 3}}, "textDocument": {"uri": "file:///home/bstaletic/.vim/pack/bundle/start/YouCompleteMe/third_party/ycmd/ycmd/tests/go/go_module/td/test.go"}}
+
+
+[Error - 4:17:31 PM] send textDocument/rangeFormatting"2" ToUTF16Column: point is missing offset
+
+
+[Trace - 4:21:13 PM] Sending request 'textDocument/rangeFormatting - (3)'.
+Params: {"options": {"insertSpaces": false, "tabSize": 8}, "range": {"end": {"character": 0, "line": 6}, "start": {"character": 0, "line": 3}}, "textDocument": {"uri": "file:///home/bstaletic/.vim/pack/bundle/start/YouCompleteMe/third_party/ycmd/ycmd/tests/go/go_module/td/test.go"}}
+
+
+[Error - 4:21:13 PM] send textDocument/rangeFormatting"3" ToUTF16Column: point is missing offset
+

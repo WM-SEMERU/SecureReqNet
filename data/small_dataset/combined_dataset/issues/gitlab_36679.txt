@@ -1,0 +1,30 @@
+'### Summary
+
+Gitlab provides several access levels and configuration options when creating a repository. There are various settings you can make like “access to repository” or “access to Wiki”. However some of this settings do not have the effect you would expect and internal information is exposed.
+
+I'd like to create a project that has only its issue tracker open to the public (actually “internal” not public). All other information of the project should be restricted to the team's members.
+
+### Steps to reproduce
+
+1. Create a public/internal project here on Gitlab.com
+2. Set security settings as follows:
+
+![Selection_080](/uploads/51ed6a7581ceefef84231eb50fac3fcf/Selection_080.png)
+
+3. Access repository as guest (not logged in) and/or non-member (logged in but no explicit access to project)
+
+### Example Project
+
+https://gitlab.com/mburtscher/test-project
+
+### What is the current *bug* behavior?
+
+1. Logged in user may [see the wiki's start page on the projects homepage](https://gitlab.com/mburtscher/test-project) even if he [is not allowed to see the wiki's start page on the wiki context](https://gitlab.com/mburtscher/test-project/wikis/home).
+
+### What is the expected *correct* behavior?
+
+1. No access to wiki at all. This is basically the case but the wiki “home” page is displayed on the project's homepage for logged in users.
+
+### Possible fixes
+
+- Do not show wiki's “home” page on homepage of project if user does not have access to wiki.

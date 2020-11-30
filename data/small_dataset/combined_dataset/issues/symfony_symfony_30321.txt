@@ -1,0 +1,21 @@
+Doctrine cache used on symfony clear cache or assets install
+
+
+Symfony version(s) affected: 3.4
+Description
+When using doctrine cache (metadata + query), the clearCache and installAssets use the doctrine cache.
+The problem is that when we remove a column of an entity, the composer install use the doctrine cache, and throw an error :
+
+Property App\Bundle\Entity\Entity::$attribute does not exist.
+
+So we need to clear the doctrine cache but I need my vendors to do so... Why does symfony use the doctrine cache when we clear the symfony cache... ? And also why doctrine needs doctrine cache on the installAssets command ?
+How to reproduce
+
+Install a project with doctrine cache in redis by exemple
+Create an entity with attributes
+Generate metadata doctrine cache of this entity
+Remove an attribute of the entity
+Clear cache, asset install or composer install your app
+
+Possible Solution
+Don't use doctrine cache when clearing the cache or generate assets ?

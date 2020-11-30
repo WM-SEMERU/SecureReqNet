@@ -1,0 +1,5 @@
+Ensure/verify that data expires
+
+
+This issue is to ensure that data expires after 24 hours, no matter if a client is involved or not (meaning, the server enforces this).  This issue may be possible to just close, but can you explain how expiration happens right now?
+Similar question:  When someone downloads a file, is the file immediately removed from s3, or after the download is completed, or is it marked for deletion later, or...?

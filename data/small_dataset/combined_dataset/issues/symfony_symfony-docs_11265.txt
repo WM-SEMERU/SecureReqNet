@@ -1,0 +1,5 @@
+[Security][DX]: add diff-result of what Maker Bundle did
+
+
+Security page (https://symfony.com/doc/current/security.html) should contain not only the instructions for using Maker, but also the diff-result of what Maker Bundle did (see #11026).
+(Creating a separate issue as suggested in #11026 (comment))

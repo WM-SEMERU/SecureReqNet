@@ -1,0 +1,19 @@
+DebugClassLoader doesn't support Amphp typed callables
+
+
+Symfony version(s) affected: 4.2.2
+Description
+When using Symfony 4.2.2 and Amphp 2.1.1 I'm getting these deprecation notices:
+14:26:52 INFO      [php] User Deprecated: The "Amp\Loop\NativeDriver::onSignal()" method will require a new "callable (string $watcherId" argument in the next major version of its parent class "Amp\Loop\Driver", not defining it is deprecated. ["exception" => ErrorException { …}]
+14:26:52 INFO      [php] User Deprecated: The "Amp\Coroutine::onResolve()" method will require a new "callable(\Throwable|null $reason" argument in the next major version of its parent class "Amp\Promise", not defining it is deprecated. ["exception" => ErrorException { …}]
+14:26:52 INFO      [php] User Deprecated: The "Amp\Internal\PrivatePromise::onResolve()" method will require a new "callable(\Throwable|null $reason" argument in the next major version of its parent class "Amp\Promise", not defining it is deprecated. ["exception" => ErrorException { …}]
+14:26:52 INFO      [php] User Deprecated: The "Amp\Success::onResolve()" method will require a new "callable(\Throwable|null $reason" argument in the next major version of its parent class "Amp\Promise", not defining it is deprecated. ["exception" => ErrorException { …}]
+14:26:52 INFO      [php] User Deprecated: The "Amp\Failure::onResolve()" method will require a new "callable(\Throwable|null $reason" argument in the next major version of its parent class "Amp\Promise", not defining it is deprecated. ["exception" => ErrorException { …}]
+
+I think this is caused because symfony doesn't understand this:
+* @param callable(\Throwable|null $reason, $value) $onResolved `$reason` shall be `null` on
+*     success, `$value` shall be `null` on failure.
+
+https://github.com/amphp/amp/blob/master/lib/Promise.php#L24
+Additional context
+I first added the issue here: amphp/amp#257 they forwarded it to symfony

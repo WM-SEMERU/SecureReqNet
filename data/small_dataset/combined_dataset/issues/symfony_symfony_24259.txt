@@ -1,0 +1,41 @@
+[security-csrf]
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.9
+
+
+
+Apologies in advance if this is just operator error but I don't think the security.csrf.token_generator service is being defined.  It used to be defined in the Framework bundle and I don't think it got moved to the Security bundle during the recent cleanup.
+composer create-project "symfony/skeleton:^3.3" sec339
+cd sec339
+composer require console
+composer require security-bundle
+bin/console debug:container --show-private security # No csrf services
+
+I think it is just a question of moving the security_csrf.xml from the old FrameworkBundle to the new SecurityBundle.

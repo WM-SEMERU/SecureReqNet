@@ -1,0 +1,29 @@
+Slicer -- min and max issues (Need indexes?)
+
+
+In Python version:
+Code:
+import dash_core_components as dcc
+
+dcc.RangeSlider(
+    marks={i: 'Label {}'.format(i) for i in range(-5, 7)},
+    min=-5,
+    max=6,
+    value=[-3, 4]
+)
+
+Result:
+
+In R version:
+Code:
+library(dashCoreComponents)
+
+dccRangeSlider(
+    marks=c(paste("Label", -5:6)),
+    min=-5,
+    max=6,
+    value=list(-3, 4)
+)
+
+Result:
+

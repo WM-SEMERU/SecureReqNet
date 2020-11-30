@@ -1,0 +1,80 @@
+Bump boto3 from 1.9.83 to 1.9.86
+
+
+Bumps boto3 from 1.9.83 to 1.9.86.
+
+Changelog
+Sourced from boto3's changelog.
+
+1.9.86
+
+api-change:devicefarm: [botocore] Update devicefarm client to latest version
+api-change:codecommit: [botocore] Update codecommit client to latest version
+api-change:medialive: [botocore] Update medialive client to latest version
+api-change:mediaconnect: [botocore] Update mediaconnect client to latest version
+
+1.9.85
+
+api-change:logs: [botocore] Update logs client to latest version
+api-change:elbv2: [botocore] Update elbv2 client to latest version
+api-change:rds: [botocore] Update rds client to latest version
+api-change:codebuild: [botocore] Update codebuild client to latest version
+api-change:sms-voice: [botocore] Update sms-voice client to latest version
+api-change:ecr: [botocore] Update ecr client to latest version
+
+1.9.84
+
+api-change:worklink: [botocore] Update worklink client to latest version
+api-change:apigatewaymanagementapi: [botocore] Update apigatewaymanagementapi client to latest version
+api-change:acm-pca: [botocore] Update acm-pca client to latest version
+
+
+
+
+Commits
+
+dc5aa23 Merge branch 'release-1.9.86'
+9a56e4a Bumping version to 1.9.86
+f2c6124 Call super in boto3's service documenter
+ba1f64b Add changelog entries from botocore
+383f923 Merge branch 'release-1.9.85'
+f4250b8 Merge branch 'release-1.9.85' into develop
+6625355 Bumping version to 1.9.85
+a63a55c Add changelog entries from botocore
+c640634 Merge branch 'release-1.9.84'
+3291d38 Merge branch 'release-1.9.84' into develop
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

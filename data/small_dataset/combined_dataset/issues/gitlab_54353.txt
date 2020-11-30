@@ -1,0 +1,32 @@
+**[HackerOne report #440185](https://hackerone.com/reports/440185)** by xanbanx on 2018-11-13:
+
+According to the documentation on user permissions (https://docs.gitlab.com/ee/user/permissions.html), guest users of private projects are not allowed to see the commit status.
+
+However, there are some places, where this is not enforced. In particular, guest users have access to the last commit status of the default branch and can see whether it is currently green, building, or failing. Furthermore, the link of the commit status leaks the corresponding commit SHA.
+
+## Steps To Reproduce:
+
+1. Create a private project with CI running and at least one commit (assume username creator-user for the remaining report)
+2. Add a guest user to the project (named guest-user for the remaining report)
+3. Login is the guest user and visit  `https://mygitlab.com/dashboard/projects`
+
+The project dashboard now shows the created project as part of the list. On the right, the commit status is shown as well, although the user only has guest user access.
+
+This is also reproducible on other links:
+https://mygitlab.com/users/guest-user/contributed  (if you have contributed to the project)
+https://mygitlab.com/creator-user
+
+There may be additional links showing the commit status as well. Please see also the attached screenshots showing the commit status.
+
+## Impact
+
+Guest users see private information of the commit status.
+
+## Attachments
+**Warning:** Attachments received through HackerOne, please exercise caution!
+* [Screenshot_20181113_201215.png](https://h1.sec.gitlab.net/a/440185/375066/Screenshot_20181113_201215.png)
+* [Screenshot_20181113_201232.png](https://h1.sec.gitlab.net/a/440185/375065/Screenshot_20181113_201232.png)
+
+## Development issue
+
+https://dev.gitlab.org/gitlab/gitlabhq/issues/2785

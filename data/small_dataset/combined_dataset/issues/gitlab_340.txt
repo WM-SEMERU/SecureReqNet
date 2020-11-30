@@ -1,0 +1,7 @@
+For closed source projects (and therefore private repositories) it may be beneficial to have a public issue list (and maybe also a public wiki) where everyone can report bugs and request new features.
+
+Thus having separate access rules for:
+
+* source
+* wiki
+* issue list

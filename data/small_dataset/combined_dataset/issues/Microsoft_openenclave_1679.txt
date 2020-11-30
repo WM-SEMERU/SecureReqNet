@@ -1,0 +1,5 @@
+Factor out scripts/deploy-docs from Packaging.Jenkinsfile
+
+
+This logic is moved as part of a separate individual Jenkins job: OpenEnclave-Deploy-Docs.
+Fixes #1665

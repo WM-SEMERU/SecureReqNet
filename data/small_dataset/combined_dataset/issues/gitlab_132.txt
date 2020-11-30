@@ -1,0 +1,71 @@
+I have a project that contains several submodules, each of them referring to an internal project. Up until recently, it worked fine, even having links in the webview to these submodules. However, now when viewing the main project, I am getting an internal server error.
+
+`production.log` reports:
+
+    Started GET "/system/global-system-configuration/tree/master" for 127.0.0.1 at 2014-03-16 10:14:35 +0100
+    Processing by Projects::TreeController#show as HTML
+      Parameters: {"project_id"=>"system/global-system-configuration", "id"=>"master"}
+      Rendered shared/_ref_switcher.html.haml (2.5ms)
+      Rendered projects/repositories/_download_archive.html.haml (2.5ms)
+      Rendered projects/tree/_spinner.html.haml (0.1ms)
+      Rendered projects/tree/_spinner.html.haml (0.1ms)
+      Rendered projects/tree/_spinner.html.haml (0.1ms)
+      Rendered projects/tree/_blob_item.html.haml (3.1ms)
+      Rendered projects/tree/_submodule_item.html.haml (15.9ms)
+      Rendered projects/tree/_tree.html.haml (22.0ms)
+      Rendered projects/tree/show.html.haml within layouts/projects (28.2ms)
+    Completed 500 Internal Server Error in 413ms
+
+    ActionView::Template::Error (wrong number of arguments (0 for 1)):
+        1: - tree, commit = submodule_links(submodule_item)
+        2: %tr{ class: "tree-item" }
+        3:   %td.tree-item-file-name
+        4:     = image_tag "submodule.png"
+      app/models/repository.rb:151:in `method_missing'
+      app/models/repository.rb:199:in `submodule_url_for'
+      app/helpers/submodule_helper.rb:6:in `submodule_links'
+      app/views/projects/tree/_submodule_item.html.haml:1:in `_app_views_projects_tree__submodule_item_html_haml___418511544_120015780'
+      app/helpers/tree_helper.rb:19:in `render_tree'
+      app/views/projects/tree/_tree.html.haml:45:in `_app_views_projects_tree__tree_html_haml___1072029254_119873780'
+      app/views/projects/tree/show.html.haml:6:in `_app_views_projects_tree_show_html_haml___619434665_119761010'
+      app/controllers/projects/tree_controller.rb:6:in `show'
+      app/controllers/application_controller.rb:57:in `set_current_user_for_thread'
+
+The following is reported by `bundle exec rake gitlab:env:info RAILS_ENV=production`:
+
+    System information
+    System:		Arch Linux
+    Current User:	git
+    Using RVM:	yes
+    RVM Version:	1.20.11
+    Ruby Version:	1.9.3p429
+    Gem Version:	1.8.25
+    Bundler Version:1.3.5
+    Rake Version:	10.1.1
+
+    GitLab information
+    Version:	6.6.0
+    Revision:	490f99d
+    Directory:	/home/git/gitlab
+    DB Adapter:	postgresql
+    URL:		https://git.inexplicity.de
+    HTTP Clone URL:	https://git.inexplicity.de/some-project.git
+    SSH Clone URL:	git@git.inexplicity.de:some-project.git
+    Using LDAP:	no
+    Using Omniauth:	no
+
+    GitLab Shell
+    Version:	1.8.0
+    Repositories:	/home/git/repositories/
+    Hooks:		/home/git/gitlab-shell/hooks/
+    Git:		/usr/bin/git
+
+The `check` part also seems okay although the output is extremely short (and is missing lots of information from before):
+
+    Checking Environment ...
+
+    Git configured for git user? ... yes
+
+    Checking Environment ... Finished
+
+If I could provide additional information, please let me know.

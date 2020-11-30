@@ -1,0 +1,49 @@
+[Security] Call logout handlers even if token is null
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#7104
+
+
+License
+MIT
+
+
+
+My previous attempt to fix #7104 without any BC break was quite ugly so here we are.
+As said before the logout handlers are currently not invoked if the security token is null. Problem is, the firewall listeners registration order only allows ContextListener to set a token before LogoutListener. This means any stateless firewall cannot benefit from the logout option, which is quite ironic as we have a CookieClearingLogoutHandler.
+None of the Symfony logout handlers use logout's $token parameter so I thought about removing it but in the meantime I just allowed it to be null in order to mitigate possible BC breaks.
+I really would like this to be fixed with Symfony 4!

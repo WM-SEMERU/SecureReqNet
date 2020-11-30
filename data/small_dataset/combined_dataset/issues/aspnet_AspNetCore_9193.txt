@@ -1,0 +1,75 @@
+Renaming folder containing project from csproj name breaks compilation
+
+
+Describe the bug
+If the blazor folder is renamed to something not matching the project name, strange compilation errors come up.
+To Reproduce
+Steps to reproduce the behavior:
+
+Create new Blazor solution
+Build, it works.
+Close solution, rename folder csproj is in to something (e.g. web)
+Open sln, remove existing project and relink to new location.
+Clean and rebuild.
+Errors
+
+1>obj\Debug\netstandard2.0\RazorDeclaration\App.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\_ViewImports.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Shared\MainLayout.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Shared\NavMenu.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Shared\SurveyPrompt.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\Counter.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\FetchData.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\Index.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\_ViewImports.cshtml.g.cs(22,30,22,36): error CS0234: The type or namespace name 'Shared' does not exist in the namespace 'RenameBlazorFolder' (are you missing an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\Counter.cshtml.g.cs(23,69,23,79): error CS0246: The type or namespace name 'MainLayout' could not be found (are you missing a using directive or an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\FetchData.cshtml.g.cs(23,69,23,79): error CS0246: The type or namespace name 'MainLayout' could not be found (are you missing a using directive or an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\Index.cshtml.g.cs(23,69,23,79): error CS0246: The type or namespace name 'MainLayout' could not be found (are you missing a using directive or an assembly reference?)
+1>obj\Debug\netstandard2.0\RazorDeclaration\Pages\_ViewImports.cshtml.g.cs(23,69,23,79): error CS0246: The type or namespace name 'MainLayout' could not be found (are you missing a using directive or an assembly reference?)
+
+Full Build Log: https://gist.github.com/chamons/f144aaa161636e09fdf5963dc3b46950
+I've attached example projects here.
+BeforeMove.zip
+AfterMove.zip
+Expected behavior
+The folder containing the csproj should not affect compilation by being named differently.
+Screenshots
+If applicable, add screenshots to help explain your problem.
+Additional context
+Add any other context about the problem here.
+Include the output of dotnet --info
+dotnet --info
+.NET Core SDK (reflecting any global.json):
+ Version:   3.0.100-preview3-010431
+ Commit:    d72abce213
+
+Runtime Environment:
+ OS Name:     Windows
+ OS Version:  10.0.17134
+ OS Platform: Windows
+ RID:         win10-x64
+ Base Path:   C:\Program Files\dotnet\sdk\3.0.100-preview3-010431\
+
+Host (useful for support):
+  Version: 3.0.0-preview3-27503-5
+  Commit:  3844df9537
+
+.NET Core SDKs installed:
+  2.1.502 [C:\Program Files\dotnet\sdk]
+  2.1.602 [C:\Program Files\dotnet\sdk]
+  3.0.100-preview3-010431 [C:\Program Files\dotnet\sdk]
+
+.NET Core runtimes installed:
+  Microsoft.AspNetCore.All 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+  Microsoft.AspNetCore.All 2.1.9 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+  Microsoft.AspNetCore.App 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 2.1.9 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 3.0.0-preview3-19153-02 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 2.1.9 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 3.0.0-preview3-27503-5 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.WindowsDesktop.App 3.0.0-preview3-27504-2 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+
+To install additional .NET Core runtimes or SDKs:
+  https://aka.ms/dotnet-download
+

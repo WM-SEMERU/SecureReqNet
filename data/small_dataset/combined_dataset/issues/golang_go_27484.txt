@@ -1,0 +1,15 @@
+proposal: crypto/tls: add support for AES-CCM
+
+
+Hi! I am working in a project that requires AES-CCM cipher suite within TLS. I know that crypto/tls aims to support a limited safe subset of TLS. But since TLS 1.3 will only support the following cipher suites:
+TLS_AES_128_GCM_SHA256
+TLS_AES_256_GCM_SHA384
+TLS_CHACHA20_POLY1305_SHA256
+TLS_AES_128_CCM_SHA256
+TLS_AES_128_CCM_8_SHA256
+Reducing that list from 5 to only 3 choices seems pretty unfair.
+I've seen some working golang AES-CCM implementations around github. Is there any specific reason why this cipher suite is not included?
+Thanks!
+Update:
+Another option could be to port the code from BoringSSL: https://github.com/google/boringssl/blob/master/crypto/cipher_extra/e_aesccm.c
+/cc @FiloSottile @agl

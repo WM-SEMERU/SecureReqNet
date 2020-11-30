@@ -1,0 +1,50 @@
+[Intl] Update the ICU data to 64.1
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes, including the intl-data group
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+http://site.icu-project.org/download/64

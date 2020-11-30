@@ -1,0 +1,4 @@
+"Remember me" not working properly
+
+
+As I already wrote on Stack Overflow, "remember me" functionality doesn't seem to work at all. I tried it in Beta5 and RC1, and both seem to have the same result - user is logged out when he restarts browser, while having session lifetime set to 0.

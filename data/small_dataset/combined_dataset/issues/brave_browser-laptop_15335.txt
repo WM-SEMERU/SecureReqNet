@@ -1,0 +1,15 @@
+Website can track between normal and private mode
+
+
+Description
+Normal mode shares data with private mode that is accessible by websites (and thus tracking)
+Steps to Reproduce
+
+Go to https://www.nothingprivate.ml/
+Fill in random name
+Open https://www.nothingprivate.ml/ in private window
+It knows what your name is.
+
+What version of Brave are you using?
+Version 0.57.18 Chromium: 71.0.3578.80 (Official Build) (64-bit)
+(minor note, about:brave doesn't work anymore. see issue template)

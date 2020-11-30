@@ -1,0 +1,16 @@
+Add benchmarks for auth infrastructure and hot paths
+
+
+One area we haven't tried to benchmark yet is AuthN and AuthZ.
+High priority as these happen on most requests:
+
+AuthenticationMiddleware, handler resolution, etc..
+Authorization policies
+Cookie Auth, decrypting, deserializing, and verifying
+Jwt bearer auth, deserializing, and verifying
+
+Low priority, these only happen on a small percentage of requests:
+
+Cookie creation and refresh, seralizing, encrypting
+OAuth and OIDC challenges and logins
+

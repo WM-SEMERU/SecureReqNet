@@ -1,0 +1,42 @@
+[Workflow] Remove deprecated usage
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features / 3.4 up to 4.2 for bug fixes 
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+yes/no 
+
+
+Tests pass?
+yes    
+
+
+License
+MIT
+
+
+
+This is a little improvement suggestion because string usage is deprecated while it's still the default value. null is also deprecated but is required for BC.

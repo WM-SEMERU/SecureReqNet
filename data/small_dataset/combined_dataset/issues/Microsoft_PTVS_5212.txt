@@ -1,0 +1,5 @@
+Remove Cloud Service templates
+
+
+Fix #5178
+I also removed leftover unused Kinect and Pyvot shared readme files that I forgot to remove back when I removed those project templates.

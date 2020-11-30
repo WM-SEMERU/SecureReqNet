@@ -1,0 +1,13 @@
+feat: return early when found scheduler error
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Return from parrelel work early when we found scheduler error in generic scheudler
+Related to #75635
+Which issue(s) this PR fixes:
+Fixes #75635
+Does this PR introduce a user-facing change?:
+NONE
+

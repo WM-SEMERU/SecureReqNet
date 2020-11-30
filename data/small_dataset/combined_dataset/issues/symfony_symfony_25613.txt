@@ -1,0 +1,36 @@
+Security component should explain when logout user
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes/no
+
+
+Symfony version
+4.0.2
+
+
+
+ContextListener (https://github.com/symfony/security/blob/master/Http/Firewall/ContextListener.php#L176) should give a reason why the token is cleaned, I think something in the session like _security.logout_reason.
+So the application could handle this kind of logout more user friendly by displaying a message "You have been disconnected because you have changed your password".
+Also, that could help developers to setup properly the security (by reading https://symfony.com/doc/current/security/entity_provider.html until the end ^^).

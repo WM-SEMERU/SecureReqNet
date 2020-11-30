@@ -1,0 +1,5 @@
+new security rule: detect-unsafe-regex
+
+
+Check if the regex is evil or not using the safe-regex module
+https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-unsafe-regex.js

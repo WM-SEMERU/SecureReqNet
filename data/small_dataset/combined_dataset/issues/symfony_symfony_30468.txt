@@ -1,0 +1,49 @@
+[Workflow] Added support for many inital places
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30080
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

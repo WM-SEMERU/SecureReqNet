@@ -1,0 +1,9 @@
+When run the command (read the official tutorial) 
+
+```sudo -u git -H bundle install --deployment --without development test postgres aws```
+
+A Gemfile syntax error abort the command:
+
+Gemfile syntax error:
+/home/git/gitlab/Gemfile:19: syntax error, unexpected ':', expecting $end
+gem "mysql2", group: :mysql

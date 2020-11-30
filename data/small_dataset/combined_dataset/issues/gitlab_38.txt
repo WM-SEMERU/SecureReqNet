@@ -1,0 +1,1 @@
+Would be very appreciate if gitlab could support more than one openid at the same time, instead of only one.

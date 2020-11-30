@@ -1,0 +1,67 @@
+Impersonation with Guard
+
+
+Impersonation as described in http://symfony.com/doc/current/security/impersonating_user.html does not work if you use GuardAuthenticator.
+The relevant parts of my security.yml
+security:
+    ....
+    firewalls:
+        ...
+        admin:
+            pattern: ^/admin/
+            anonymous: ~
+            guard:
+                authenticators:
+                    - app.admin_login_authenticator
+            logout: ...
+            remember_me: ...
+        client:
+            pattern: ^/client/
+            anonymous: ~
+            switch_user: true
+            guard:
+                authenticators:
+                    - app.client_login_authenticator
+            logout: ...
+            remember_me: ...
+
+    access_control:
+        - { path: "^/admin/login.html", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/client/login.html", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/admin/", roles: [ROLE_ADMIN] }
+        - { path: "^/client/", roles: [ROLE_CLIENT] }
+    role_hierarchy:
+        ROLE_ADMIN:  [ROLE_CLIENT, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_CLIENT: []
+relevant methods in the client authenticatory class are:
+public function getCredentials(Request $request)
+    {
+        if ($request->getPathInfo() != '/kunden/login_check' || !$request->isMethod('POST')) {
+            return null;
+        }
+        $csrfToken = $request->get('_csrf_token');
+        $intention = 'authenticate'; // whatever value used in the template
+        if (false === $this->csrfTokenManager->isTokenValid(new CsrfToken($intention, $csrfToken))) {
+            throw new InvalidCsrfTokenException('Invalid CSRF token.');
+        }
+        $username = $request->request->get('_username');
+        $request->getSession()->set(Security::LAST_USERNAME, $username);
+        $password = $request->request->get('_password');
+        return array(
+            'username' => $username,
+            'password' => $password,
+        );
+
+    }
+
+
+    public function checkCredentials($credentials, UserInterface $user)
+    {
+        $plainPassword = $credentials['password'];
+        if (!$this->encoder->isPasswordValid($user, $plainPassword)) {
+            throw new BadCredentialsException();
+        }
+        return true;
+    }
+I can see, that getCredentials always returns null when someone trys to visit a apge in the client firewall as an impersonated admin. Also checkCredentials would not work that way. My question would be: Is there an easy way to leverage impersonation here or do I have to do this manually in the authenticator methods, and if so, how could this be accomplished?
+Sorry, if you think that question is inappropriate to be asked at github. I have found this (4 month old) question at stackoverflow, but still not answered (Only answer more like a workaraound). Also documention lacks this topic. I hope I have not overlooked something here.

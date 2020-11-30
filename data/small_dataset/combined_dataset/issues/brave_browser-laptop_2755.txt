@@ -1,0 +1,36 @@
+prevent js alert spoofing attacks
+
+
+Test Plan
+
+Visit http://jsbin.com/fiyojusahu/edit?html,output
+In the output area, click the Click me to test an alert button
+Observe that the alert:
+
+
+does not show the Brave logo
+shows the domain it originated from
+is only shown on this tab; you can switch tabs without a problem. There is no question which tab created this alert.
+
+
+Click OK to close alert
+Open http://jsbin.com/sadunogefu/edit?html,output in a new tab
+In the output area, click the Click me to test a confirm button
+Observe that the confirm:
+
+
+does not show the Brave logo
+shows the domain it originated from
+is only shown on this tab; you can switch tabs without a problem. There is no question which tab created this confirm.
+
+
+Click cancel to close confirm
+
+original issue text
+if you open https://jsfiddle.net/s4oab7yn/ and then switch to another tab, the alert shows looks like it's coming from the currently-active tab instead of the tab it's actually from.
+two mitigations:
+
+ the message box should display its origin
+ add a button in the message box to switch to the tab that it originated from
+ also mentioned in #4992 - remove the Brave logo from the alert box
+

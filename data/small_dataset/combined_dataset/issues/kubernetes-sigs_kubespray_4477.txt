@@ -1,0 +1,6 @@
+Add etcd role dependency on kube user to avoid etcd role failure when running scale.yml (fixes #3240)
+
+
+
+No description provided.
+

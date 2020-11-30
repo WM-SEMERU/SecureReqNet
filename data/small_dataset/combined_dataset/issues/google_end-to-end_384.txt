@@ -1,0 +1,5 @@
+Revert "Add support for parsing e2email recovery codes"
+
+
+Reverts #380
+Breaks the build

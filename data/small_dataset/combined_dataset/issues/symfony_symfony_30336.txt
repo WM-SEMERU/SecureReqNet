@@ -1,0 +1,21 @@
+[HttpFoundation] The ability to add a new elements to an array without key
+
+
+Description
+Adds a new array element without setting the key. Equivalent to $array[] = 'Stuff I wanted to add';.
+Example
+<?php
+
+// Init
+$session->set('array', []);
+
+# How I currently add stuff:
+$array = $session->get('array');
+$array[] = 'Something';
+$session->set('array', $array);
+
+# What I wanted it to be:
+$session->add('array', 'Something');
+# OR
+$session->set('array[]', 'Something');
+

@@ -1,0 +1,5 @@
+Support real ssl certs for api server
+
+
+It would be nice to be able to provide real certificates for the api server.
+Another option would be to support letsencrypt.

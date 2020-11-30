@@ -1,0 +1,4 @@
+Update the aws-iam-authenticator docs to be more clear for both new a…
+
+
+Update the aws-iam-authenticator docs to be more clear for both new and existing clusters.

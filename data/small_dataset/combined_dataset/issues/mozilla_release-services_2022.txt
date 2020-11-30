@@ -1,0 +1,4 @@
+bugbug/*: Update dependencies
+
+
+I've updated the dependencies manually.

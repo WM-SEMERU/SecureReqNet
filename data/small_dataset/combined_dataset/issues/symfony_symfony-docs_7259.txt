@@ -1,0 +1,4 @@
+Is user_checker missing from the Security configuration defaults docs
+
+
+I'm looking at this page https://github.com/symfony/symfony-docs/edit/3.2/reference/configuration/security.rst and wondering if user_checker is missing, if it's meant to missing, or if I'm just missing it.

@@ -1,0 +1,47 @@
+[Doctrine Bridge] Doctrine Extractor - Support for Custom Types
+
+
+Affected version: symfony/doctrine-bridge v3.4.18
+Description
+When using Serializer to denormalize a payload back into entity, the properties with custom types are not supported by Doctrine Extractor and there is no way to register them.
+\Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor::getTypes()
+            switch ($typeOfField) {
+                case DBALType::DATE:
+                case DBALType::DATETIME:
+                case DBALType::DATETIMETZ:
+                case 'vardatetime':
+                case DBALType::TIME:
+                    return array(new Type(Type::BUILTIN_TYPE_OBJECT, $nullable, 'DateTime'));
+
+                case 'date_immutable':
+                case 'datetime_immutable':
+                case 'datetimetz_immutable':
+                case 'time_immutable':
+                    return array(new Type(Type::BUILTIN_TYPE_OBJECT, $nullable, 'DateTimeImmutable'));
+
+                case 'dateinterval':
+                    return array(new Type(Type::BUILTIN_TYPE_OBJECT, $nullable, 'DateInterval'));
+
+                case DBALType::TARRAY:
+                    return array(new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true));
+
+                case DBALType::SIMPLE_ARRAY:
+                    return array(new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true, new Type(Type::BUILTIN_TYPE_INT), new Type(Type::BUILTIN_TYPE_STRING)));
+
+                case DBALType::JSON_ARRAY:
+                    return array(new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true));
+
+                default:
+                    $builtinType = $this->getPhpType($typeOfField);
+
+                    return $builtinType ? array(new Type($builtinType, $nullable)) : null;
+            }
+
+Example
+In my example, I have a custom type "datetimeutc". It works the same way as a "datetime", but converts actual value to a UTC time zone when converting to/from date/string. It is registered in app/config/config.yml as follows:
+doctrine:
+    dbal:
+        types:
+            datetimeutc: Foo\Bar\Doctrine\DateTimeUtc\Type\DateTimeUtc
+
+Example input value: "2019-01-10T19:20:21.000Z" It works fine by the 'DateTime', the problem is when $typeOfField is datetimeutc, it never gets to this case.

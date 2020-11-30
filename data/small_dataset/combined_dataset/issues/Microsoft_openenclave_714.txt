@@ -1,0 +1,11 @@
+Scrub code for potential integer overflows
+
+
+PR #690 fixed integer overflow bugs for memory allocations, which is required for SDL, but there are other places that should be fixed:
+
+Anything with strlen(X) + Y
+Any bounds checking on untrusted data: like offset + size < MAX\
+Rounding functions like in utils.h.
+str.h and mem.h have a lot of overflow cases.
+The loader like create.c has a lot of math that can overflow.
+

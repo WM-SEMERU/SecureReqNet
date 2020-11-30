@@ -1,0 +1,7 @@
+[Validator] Added documentation for Traverse constraint
+
+
+versionadded:: 2.5
+
+    The traverse constraint has been added in Symfony 2.5
+x)

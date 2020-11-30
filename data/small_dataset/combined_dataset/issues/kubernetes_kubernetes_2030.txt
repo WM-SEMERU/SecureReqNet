@@ -1,0 +1,90 @@
+Secret distribution in docker/k8s
+
+
+One missing piece of both guidelines and k8s is a way to distribute secrets.
+There are multiple ways to go about it and I want to start the discussion not only to suggest a guideline for secret distribution, but to make it easier to be integrated into k8s. We could start by discussion the various ways and including them for usage in the documentation so that these "best practices" are available and furthermore work great with k8s. As a second step we should try to find one common way of doing it, integrate  it into k8s to make it as seamless as possible.
+There are two issues with secret distribution I find discussable. Sure there are many more as secret distribution is one of the huge problems. Not think about the perfect solution yet, but a start to make it easier for people to start using k8s or use it as reference for their docker installations.
+The first issue concerns PWs and credentials for services. For example database PWs, AWS credentials etc..
+The second kind of problems arise with key/file distribution. The issues come with multiple secret files, which need to be distributed. Mainly keys for de/encryption, ssl keys, vpn/ssh keys etc..
+Option 1: ENV
+Pros:
+
+Easy to use and implement
+
+Cons:
+
+Leakage of ENVs in various places -> seed secret needs to be shared anyway
+Files/keys can't be distributed (correct me, if there is a way)
+
+Option 2: LDAP
+Pros:
+
+Central control of credentials and secret files
+Could be used with ssh auth against LDAP for hosts
+Most environments run LDAP already
+Finegrained control of secrets -> easily create one account per service/app
+
+Cons:
+
+Seed secret needed (username + pw for LDAP)
+Relies on a central ldap service to retrieve runtime files (SPOF)
+Custom logic to retrieve secrets from LDAP
+Reliance on LDAP in all environments
+No versioning (no rollback etc.)
+
+Option 3a: Data Volume Container
+Pros:
+
+Versioned
+Easy to distribute -> use docker registry
+Easy to link to other containers
+
+Cons:
+
+Leakage of secrets -> worst case to public docker registry
+Security need for intermediary services between build and runtime
+
+Option 3b: Data Volume Container (encrypted)
+Pros:
+
+Versioned
+Easy to distribute -> use docker registry
+Easy to link to other containers
+Throw away mentality due to encryption -> "unreadable" without seed secret
+Can be switched with unencrypted containers in test/dev environments
+Could be build in a separate "closed down" build environment
+
+Cons:
+
+Needs seed secret
+Adds a dependency on decryption and seed secret distribution
+
+Option 4a: etcd/consul
+Pros:
+
+Distributed -> no SPOF
+etcd already running with k8s
+
+Cons:
+
+No ACL yet -> will change (layer could be added from k8s for now)
+Access to etcd of k8s could be a security risk -> separate etcd service?
+No versioning
+Issues with bigger files in a key/value store
+
+Option 4b: etcd/consul (encrypted via crypt)
+Pros:
+
+Distributed -> no SPOF
+Seed secret needed to have access to files/secrets stored
+etcd already running with k8s
+
+Cons:
+
+No ACL yet -> will change (layer could be added from k8s for now)
+Access to etcd of k8s could be a security risk -> separate etcd service?
+No versioning
+Issues with bigger files in a key/value store
+
+My favourite method would be to use encrypted Data Volume Containers. (Option 3b) This fits best with the modularity and reproducability of docker and makes it easy to switch out secret distribution later on. For example encrypted Volumes could be based on Ceph volumes instead of docker containers
+I'm looking forward for your input.

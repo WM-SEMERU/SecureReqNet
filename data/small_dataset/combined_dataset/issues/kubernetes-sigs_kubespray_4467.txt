@@ -1,0 +1,14 @@
+Using multus with more than one CNI
+
+
+BUG REPORT or I miss something (choose one):
+When using multus - the kubespray framework deploy the network-plugin and then pass it to multus to use as the default CNI.
+There are some cases where a pod might need,  say, 3 networks, each from a different CNI.
+For example: flannel for the first, macvlan for some storage network and calico for another use.
+In that case adding these CNI to the multus CRD is not enough cause these extra CNI might need some kind of deployment (Daemonset etc...)
+I see at least three options to address this issue:
+
+I overlooked something and the solution is there
+bake all other CNI configuration into multus daemonset yaml
+add role similar to network-plugin, say, extra-multus-network-plugin
+

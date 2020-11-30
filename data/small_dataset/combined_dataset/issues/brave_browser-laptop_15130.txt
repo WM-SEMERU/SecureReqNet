@@ -1,0 +1,33 @@
+Return focus to the active tab's content area after dismissal of notifications and/or message boxes
+
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist. (It did, #8742)
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed. (I don't have permission)
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.) (Not needed)
+
+Test Plan:
+
+
+For notifications
+Open a new instance of Brave. Go to google.com and searched for something, e.g. "Brave". In my case, I got a notification asking me if I wanted Google to remember my location. I dismissed the notification. To test focus, hit the down arrow key, and the page should scroll through results when it didn't before.
+
+
+For text boxes
+Open the console with Opt+Cmd+I (on Mac). type `alert("hello");" into the console. Dismiss the popup, then try the same "down arrow key" test used above.
+
+
+Reviewer Checklist:
+
+ Request a security/privacy review as needed if one was not already requested.
+
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

@@ -1,0 +1,10 @@
+simple_preauth and anonymous
+
+
+I have a firewall configuration like below. The anonymous statement does not work when using simple_preauth. I'm not sure if that is intended behavior?
+        secured_area:
+            pattern:    ^/(.+)
+            stateless: true
+            anonymous: ~
+            simple_preauth:
+                authenticator: apikey_authenticator

@@ -1,0 +1,6 @@
+⬆️ fuzzy-finder@1.12.1
+
+
+This version includes a fix for the build flakiness happening due to timeouts in the fuzzy-finder specs.
+
+List of changes between fuzzy-finder@1.12.0 and fuzzy-finder@1.12.1: atom/fuzzy-finder@v1.12.0...v1.12.1

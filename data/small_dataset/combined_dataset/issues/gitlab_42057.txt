@@ -1,0 +1,42 @@
+Link:          https://hackerone.com/reports/303405
+By:            @fransrosen
+
+When creating an application as a user in a GitLab-instance, any user on the same instance can authorize the application. This means the Authorize-page can be shown for anyone with the content from the application one user has created.
+
+When adding Callback-urls for an application, there's no validation for the protocol (most likely because it can be used for more than `http(s)`. The problem is that it now allows you to set a callback to 
+
+```
+javascript://%250aalert(document.domain)
+```
+
+which is a valid URI to trigger the alert (since `//` means a comment in javascript and `%250a` is a URL-encoded new line.
+
+So, creating an application as a regular user with the following info:
+
+**Name**: Totally Legit App
+**Redirect URI**: `javascript://%0aalert(document.domain)`
+
+And then using the APP-id you get, creating the following URL (with your instance domain as prefix):
+
+```
+/oauth/authorize?client_id=[APP-ID]&redirect_uri=javascript://%250aalert(document.domain)&response_type=code&state=A
+```
+
+you will see this:
+
+![Screen_Shot_2018-01-09_at_02.23.04](/uploads/bc63c9d5d48ebceffad5a3659e7c7db3/Screen_Shot_2018-01-09_at_02.23.04.png)
+
+Clicking in this case on `Totally Legit App` will trigger the javascript:
+
+![Screen_Shot_2018-01-09_at_02.23.46](/uploads/8df45577f17453f5072eaea4914bb134/Screen_Shot_2018-01-09_at_02.23.46.png)
+
+### Mitigation
+
+The proper mitigation to this is to prevent `data`, `vbscript` and `javascript` as protocols (make sure you check the protocol case-insensitive).
+
+Regards,
+Frans
+
+## Impact
+
+Even though this is per definition a stored XSS, it seems like the `redirect_uri` is forced to be in the URL with exact match, which gives away that there's something running and also converts a bit into a reflected XSS (since you cannot hide the payload). However, it actually doesn't trigger the XSS-auditor in Chrome, so the payload will still work for all browsers without any bypass.

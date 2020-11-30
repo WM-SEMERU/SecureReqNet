@@ -1,0 +1,9 @@
+[WDT][DX] Add timestamp to XHRs panel
+
+
+The problem
+A picture is worth a thousand words:
+
+Who can tell me which request is the newest one? ;)
+Solution
+What about a column which shows a timestamp (HH:MM:SS) of the request? This should be pretty simple to add.

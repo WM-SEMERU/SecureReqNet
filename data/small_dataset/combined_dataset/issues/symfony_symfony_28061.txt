@@ -1,0 +1,51 @@
+[Security] add port in access_control
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26071
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#10359
+
+
+
+Add port in access_control
+Please Squash this P.R.

@@ -1,0 +1,5 @@
+Request for adding a new API that does a combination of the current oe_verify_report functionality and validating a set of caller provided CA list.
+
+
+This is a request from CoCo, whose nodes vote on the acceptance of a new node joining an existing CoCo instance. With this new API, it would simplify their implementation. This is a request for a convenient API
+Potentially, we could provide a separate API (eg. oe_verify_report_ex) that returns cert_chain from the remote report and leave business logics to CoCo's implementation.

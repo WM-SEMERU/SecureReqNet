@@ -1,0 +1,36 @@
+Brave browser won't run in sandbox mode on Debian 9 Stretch
+
+
+Description
+If I try running Brave without the sandbox mode, I get the following error:
+No usable sandbox! Update your kernel or see https://chromium.googlesource.com/chromium/src/+/master/docs/linux_suid_sandbox_development.md for more information on developing with the SUID sandbox. If you want to live dangerously and need an immediate workaround, you can try using --no-sandbox.
+Brave does indeed work with --no-sandbox mode albeit with a much less safe security mode. Also updating the kernel doesn't solve the problem.
+Steps to Reproduce
+
+Open up Konsole
+Type "Brave"
+That's it
+
+Actual result:
+No usable sandbox! Update your kernel or see https://chromium.googlesource.com/chromium/src/+/master/docs/linux_suid_sandbox_development.md for more information on developing with the SUID sandbox. If you want to live dangerously and need an immediate workaround, you can try using --no-sandbox.
+Expected result:
+Actually being about to use this web browser
+Reproduces how often:
+100%
+Brave Version
+about:brave info:
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 4.9.0-6-amd64
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+I'm not using the live build. I following the github installation instructions for Debian using the apt update and apt install commands.
+Additional Information
+No.

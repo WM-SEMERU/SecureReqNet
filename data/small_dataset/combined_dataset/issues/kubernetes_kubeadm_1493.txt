@@ -1,0 +1,41 @@
+Can not set --cert-dir on init phase kubelet-start
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+Versions
+kubeadm version (use kubeadm version):
+[root@nixos:/etc]# kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.5", GitCommit:"2166946f41b36dea2c4626f90a77706f426cdea2", GitTreeState:"archive", BuildDate:"1970-01-01T00:00:01Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Environment:
+
+Kubernetes version (use kubectl version):
+
+[root@nixos:/etc]# kubectl version
+Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.5", GitCommit:"2166946f41b36dea2c4626f90a77706f426cdea2", GitTreeState:"archive", BuildDate:"1970-01-01T00:00:01Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+
+
+
+Cloud provider or hardware configuration: bare metal
+OS (e.g. from /etc/os-release): NixOS
+Kernel (e.g. uname -a): 4.14
+
+What happened?
+kubeadm init supports an option --cert-dir
+      --cert-dir string                      The path where to save and store the certificates. (default "/etc/kubernetes/pki")
+
+When I run kubeadm init --cert-dir /run/secrets/pki  it generates the certs succesfully, but kubelet fails to start because config.yaml contains /etc/kubernetes/pki/ca.crt
+Apr 07 21:50:24 nixos kubelet[5910]: F0407 21:50:24.301424    5910 server.go:244] unable to load client CA file /etc/kubernetes/pki/ca.crt: open /etc/kubernetes/pki/ca.crt: no such file or directory
+Apr 07 21:50:24 nixos systemd[1]: kubelet.service: Main process exited, code=exited, status=255/n/a
+Apr 07 21:50:24 nixos systemd[1]: kubelet.service: Failed with result 'exit-code'.
+
+
+What you expected to happen?
+I expected kubelet to pick up the new certs locaiton
+How to reproduce it (as minimally and precisely as possible)?
+kubeadm init --cert-dir /run/secrets/pki
+

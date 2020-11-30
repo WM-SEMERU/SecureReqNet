@@ -1,0 +1,43 @@
+Permission / Access Control on list view
+
+
+Forwarding issue to Github for tracking. It was found that access control applies only for internal screens and not for list view. Hence details on sales order / purchase order etc are viewed by all inspite of bringing access control on them. Please address this issue at the earliest.
+Thanks,
+Vikram
+---------- Forwarded message ----------
+From: ERPNext Support support@erpnext.com
+Date: Wed, Feb 4, 2015 at 4:47 PM
+Subject: [WN-SUP11212] Field level access control
+To: vikram.narayan@agrilife.in
+Vikram,
+Sorry was our list views are not permission controlled. Please post this issue on Github.
+https://github.com/frappe/erpnext/issues
+Thanks and Regards,
+Umair Sayyed
+www.erpnext.com
+-----In response to-----
+Please reply above this line or remove it if you are replying below it
+HI Umair,
+This has worked once and have been able to restrict the various users from
+viewing prices. However in the basic screen wherein for example all the
+purchase orders are listed, the PO amount are coming up even though the
+user does not have access inside.
+E.g.: PO00229 is showing the amount here in below screenshot even though it
+does not show the same in the detailed screen. How can this be controlled?
+[image: Inline image 1]
+[image: Inline image 2]
+Thanks,
+Vikram
+On Thu, Jan 29, 2015 at 4:46 PM, ERPNext Support
+wrote:
+
+Hello Vikram,
+You can use Perm Level functionality for field level permissions.
+https://erpnext.com/kb/setup/managing-perm-level
+For permission to report, they will atleast need "Read" permission. The
+idea is if they can read/access transaction details in the report, then why
+not in transaction directly. Its one and the same thing.
+Thanks and Regards,
+Umair Sayyed
+www.erpnext.com
+

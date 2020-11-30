@@ -1,0 +1,59 @@
+[Console] ArrayInput: ensure option accept value
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4 up to 4.2 for bug fixes
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+I dont think so
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29967
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+edit: Definition & reproduction here.
+In short: the CommandTester does not validate options set to mode InputOption::VALUE_NONE.
+
+When using the CLI, an ArgvInput holds and validates arguments to pass to the command.
+When using the CommandTester, an ArrayInput is used to hold and validate the parameters.
+ArrayInput does not perform the check regarding if the long options accept values or not. (unlike ArgvInput here)
+
+Adding this validation like the ArgvInput handles it will lead to BC breaks because, as the testsuite is showing, a lot of people are testing commands with inputs containing things like "--no-interaction" => true (though options like no-interaction are set to mode InputOption::VALUE_NONE..)
+To solve this & avoid bc breaks I propose to allow true (with null) as the only valid values for options set to InputOption::VALUE_NONE.
+It implies to handle verbose option as an exception, since it's defined with mode VALUE_NONE to allow commands like bin/console -vv bar or bin/console --verbose=2 bar.

@@ -1,0 +1,70 @@
+[RFC][Security] Deprecate AdvancedUserInterface
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.4.0
+
+
+
+Currently the AdvancedUserInterface is not used internally other than:
+
+In the UserChecker
+Equals check in the AbstractToken::hasUserChanged
+An almost useless reference in a comment of the EquatableInterface
+The InMemory user uses it
+
+User Checker
+One of the reasons I added the feature for custom user-checkers, was to avoid using the AdvancedUserInterface, as it does not adhere to my business rules (needed different checks). With this customization, the checks it performs are no longer needed to be in the core, as developers can easily define this now.
+AbstractToken::hasUserChanged
+Can implement the EquatableInterface and add your own logic. I think this is a good practice to do in the first place. The method also compares the salt and password, which would always fail if you don't store the password in the session during refreshing.
+EquatableInterface comment
+
+Also implementation should consider that $user instance may implement the extended user interface AdvancedUserInterface.
+
+So if your User implements the interface, you will still have to do the manual checks, which makes the check in the abstract token obsolete.
+InMemory user provider
+Probably most often added via the security config. It's easy to use for a bunch of things, especially when you have only 1 or 2 users that can manage content. However, it's 10x easier to comment or remove a user from this list, than using one of those flags to prevent a log in. If the idea is that a user could still be found but not logged in, this feature should be contained to this particular user object and not use the AdvancedUserInterface.
+Method naming
+isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired naming is not ideal. I would expect isAccountExpired, isAccountLocked, areCredentialsExpired. https://www.refactoring.com/catalog/removeDoubleNegative.html
+However, I'm of opinion that renaming doesn't really solve the issue of trying to introduce certain business logic into the framework.
+RFC
+I propose to completely deprecate the AdvancedUserInterface in 3.4 and remove it with 4.0 as it no longer serves a purpose. This would mean the following actions:
+
+Currently user checkers are documented, but this bit of documentation would have to be updated to explain integration with user checkers.
+Add deprecations when loading the AdvancedUserInterface
+Optionally add deprecations run-time in the abstract token and user checker (Listed, but I don't think needed)
+Add user user-checker checks for the in-memory user to keep behavior the same without deprecations for this particular case
+
+For 4.0 the following actions would be taken:
+
+Remove the checks in the abstract token
+Remove the interface check in the UserChecker and only register it on the in memory user
+Remove the reference to AdvancedUserInterface in the EquatableInterface
+Remove the AdvancedUserInterface
+Remove interface implementation of the in memory user (functionality can be kept)
+

@@ -1,0 +1,4 @@
+require curated iam roles where possible
+
+
+any service binding that can use a curated role should use a curated role.

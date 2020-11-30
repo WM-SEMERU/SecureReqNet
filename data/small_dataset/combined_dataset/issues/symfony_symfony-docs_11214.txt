@@ -1,0 +1,18 @@
+[Workflow] Document Guards
+
+
+Needed to close #8499.
+To include
+
+What is a guard
+Why you would use a guard
+Guards as classes (event subscribers)
+Guards as ExpressionLanguage expressions (guard: in YAML config)
+Available parameters
+
+subject etc
+
+
+
+Existing online resources
+https://codereviewvideos.com/course/symfony-workflow-component-tutorial/video/workflow-guards-part-1 has an excellent series (written for Symfony 3.3)

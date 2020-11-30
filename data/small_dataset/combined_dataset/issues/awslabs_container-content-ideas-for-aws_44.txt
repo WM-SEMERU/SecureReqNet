@@ -1,0 +1,4 @@
+Best practices for running Spring Boot applications on ECS and EKS
+
+
+https://spring.io/guides/gs/spring-boot-docker/

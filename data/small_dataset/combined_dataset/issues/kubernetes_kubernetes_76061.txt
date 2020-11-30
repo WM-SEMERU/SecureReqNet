@@ -1,0 +1,10 @@
+test/e2e/network: Honor --dns-domain in more places
+
+
+Try to finish what commit 4c8a65a started; that is, do not assume
+cluster.local is a constant base domain, when it is configurable.
+This makes DNS e2e tests pass with --dns-domain, which was only being honored
+for some tests, not all. I hope I understood the purpose of this flag correctly.
+Signed-off-by: Tobias Wolf towolf@gmail.com
+What type of PR is this?
+/kind failing-test

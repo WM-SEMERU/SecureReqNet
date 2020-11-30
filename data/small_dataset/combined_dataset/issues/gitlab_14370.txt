@@ -1,0 +1,3 @@
+When trying to "Destroy" (should use the word revoke) an application's API access, it leads to a 404 and doesn't remove the applications access to the API.
+
+I am talking about here on gitlab.com (maybe this should be a different repository)?

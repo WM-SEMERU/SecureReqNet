@@ -1,0 +1,38 @@
+OpenSocial taming.js isn't secure
+
+
+Original issue 1096 created by erights on 2009-08-07T18:47:07.000Z:
+While we don't know of anyone whose security currently depends on
+<http://svn.apache.org/repos/asf/incubator/shindig/trunk/features/src/main/javascript/features/caja/taming.js>,
+I am first disclosing this somewhat privately because we don't know who
+might be. Unfortunately, we thus have no ability to responsibly disclose to
+these unknown possible users. Given that the only people who could benefit
+from early disclosure can only be reached if we disclose openly, should we?
+taming.js looks like it has several problems. At least:
+
+
+Several property names ending in single underbar, especially "super_",
+look like they should have been hidden. I suspect these date from when a
+single underbar hid properties in the Original-Caja language. This can be
+trivially fixed by renaming these to end in wonderbar (triple underbar)
+instead.
+
+
+None of this taming should have made use of $v. The taming should all be
+at the Cajita level but compatible with Valija, by calling back function
+arguments with
+___.callPub(callback, 'call', [...])
+
+
+That works whether callback is a (Cajita) simple function or a (Valija)
+disfunction.
+
+The taming is done by replacing members of 'gadgets' and 'opensocial' in
+place and then exporting those. Since these are records, this amounts to a
+blcklisting approach, since all mentionable properties of records are
+implicitly accessible. Instead, the exported 'gadgets' and 'opensocial'
+should be membrane-like records of wrappers wrapping the unmodified members
+of the original records.
+Several of the new methods unnecessarily mention "this", likely opening
+up further holes, though I haven't tried to identify any concrete ones yet.
+

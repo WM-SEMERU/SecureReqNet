@@ -1,0 +1,61 @@
+[WIP][Messenger] Multiple queue support + prioritization
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+WIP
+
+
+Deprecations?
+no
+
+
+Tests pass?
+not yet
+
+
+Fixed tickets
+Part of #30558
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+Messenger is currently missing an idea of "prioritizing" messages on the queue. Inspired by Laravel, this adds the ability to add different messages to different "queues" and then process those queues in order.
+First, put your messages into whatever "queues" you want, which sort of act like "categories":
+$bus->dispatch(new Envelope($message), new QueueNameStamp('low')));
+$bus->dispatch(new Envelope($message), new QueueNameStamp('high')));
+And when consuming, say which queues you want to consume and in which order:
+./bin/console messenger:consume -vv --queues=high,low
+All messages will be processed from high before going to low. I chose this approach, versus just putting everything in one queue with a priority (also possible) because it allows you to create multiple workers, each which work on only 1 (or several) queues. For example, you could have 5 workers working on the high queue and one working on low.
+TODO:
+
+Tests
+Implementation in Worker & Receiver is a mess
+

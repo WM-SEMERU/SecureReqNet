@@ -1,0 +1,10 @@
+Update -dev and local dev when EW gets a -dev env (if any)
+
+
+Depending on mozilla/extension-workshop#131, we might need to update the Extension Workshop URL value in the config. EW will get a -dev env, so let's update our config!
+We want to change the value of extensionWorkshopUrl in the following files:
+
+config/dev-amo.js
+config/development-amo.js
+
+The new value should be: https://extensionworkshop-dev.allizom.org

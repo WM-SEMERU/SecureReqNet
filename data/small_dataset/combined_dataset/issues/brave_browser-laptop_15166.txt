@@ -1,0 +1,22 @@
+Legitimate video skipped on CNET
+
+
+Description
+Brave seems to skip the first CNET video, regardless of whether the site is set for autoplay or not or Brave has ad blocking enabled or not.
+Steps to Reproduce
+
+Open https://www.cnet.com/news/t-mobile-will-deploy-blazing-5g-this-year-but-you-cant-use-it-yet/
+Play video to lower right of screen
+
+Actual result:
+The first few seconds of the first video are shown, then it skips to the next video in the CNET sequence. If ad blocking is disabled, the ad shows but the video still only shows the first few seconds.
+Expected result:
+First video shows.
+Reproduces how often:
+100% for me
+Brave Version
+about:brave info:
+Version 0.55.1 Chromium: 70.0.3528.4 (Official Build) dev (64-bit)
+(By the way about:brave doesn't work on Brave Core)
+Reproducible on current live release:
+Yes

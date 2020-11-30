@@ -1,0 +1,9 @@
+Invalid kube-dns to CoreDNS translation
+
+
+Kube-dns now accepts service name for stubdomain and nameserver, while CoreDNS does not support this feature.
+As a result, a user having service name in stubdomains/nameserver in their kube-dns ConfigMap while migrating to CoreDNS will result in an invalid CoreDNS Config, resulting in a broken k8s cluster.
+/kind bug
+/area upgrades
+/priority important-soon
+/assign

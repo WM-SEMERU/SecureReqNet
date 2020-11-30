@@ -1,0 +1,12 @@
+fingerprinting protection should be done in C++ instead of js content script
+
+
+follow-up to #11784
+as @snyderp showed above, blocking DOM methods in a JS content script is a flawed approach because there are sneaky ways to get references to the methods. it would be better to disable the DOM methods in chromium/muon.
+the basic functionality in app/extensions/brave/content/scripts/blockCanvasFingerprinting.js should be migrated into Muon. basically if fingerprinting protection is enabled, then:
+
+detect when a blacklisted DOM method/object is invoked
+send a message to the browser reporting what was blocked (and preferably the origin of the script that invoked it)
+replace the blacklisted DOM method/object with a proxy that yields itself or simply block it
+
+cc @bridiver

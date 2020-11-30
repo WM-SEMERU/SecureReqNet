@@ -1,0 +1,20 @@
+fix($compile): turn link[href] into a RESOURCE_URL context.
+
+
+What kind of change does this PR introduce? (Bug fix, feature, docs update, ...)
+Bug fix.
+What is the current behavior? (You can also link to an open issue here)
+There's no $sce context for link[href], meaning a  tag will have no $sce protection (might have link sanitization though, I'm not sure of that). That's fine for several rel types, but at least stylesheet and import can run script in your origin, which corresponds to a RESOURCE_URL context.
+What is the new behavior (if this is a feature change)?
+Turn it into a RESOURCE_URL context. Note that this is an overcorrection, sadly, but the security level of this attribute depends on the rel attribute, and I don't know if we can make context-aware decisions in this type of situation.
+RESOURCE_URLs are allowed to be interpolated if the value is $sce-blessed, or for plain strings if they're from the same origin.
+Angular2 is being fixed to do the same with https://github.com/angular/angular/pull/8869/files#diff-5ffbf51559339aaa2db503c37cc3a658R60.
+Does this PR introduce a breaking change?
+Most apps keep the default whitelist, so it will break apps with dynamically-set link[href]s pointing to other origins.
+Please check if the PR fulfills these requirements
+
+ The commit message follows our guidelines: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit-message-format
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+No comprehensive list of contexts in the docs to update, they just say the $sce.RESOURCE_URL type is "For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application. Examples include ... ".

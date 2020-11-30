@@ -1,0 +1,7 @@
+Admin & User account
+
+
+I would found love if KeeWeb can have an admin & user password,
+You can share the admin password and this grants write privileges.
+In case of you share the user password only read privileges are available !
+I hope use this feature for my Google drive keeweb !

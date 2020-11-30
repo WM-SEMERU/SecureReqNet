@@ -1,0 +1,6 @@
+Open preferences by Command-Comma (,) leads to unlock database
+
+
+Open preferences by Command-Comma (,) and then "Return to app" leads to unlock desktop app with no password.
+OS X El Capitan 10.11.3
+KeeWeb v1.0.2

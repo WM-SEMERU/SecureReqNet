@@ -1,0 +1,11 @@
+Fix event type in expand controller
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Currently event type is always a warning because err is always set. Set it to normal if no error happened.
+NONE
+
+/sig storage
+/assign @gnufied

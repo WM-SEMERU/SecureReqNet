@@ -1,0 +1,9 @@
+MySQL Group Replication Secure Socket Layer Support (SSL)
+
+
+The MySQL Operator does not currently support SSL by default for Group Repliation.
+We should document how to configure SSL for Group Replication and (potentially?) implement it by default using self signed certs.
+Reference
+
+https://dev.mysql.com/doc/refman/8.0/en/group-replication-secure-socket-layer-support-ssl.html
+

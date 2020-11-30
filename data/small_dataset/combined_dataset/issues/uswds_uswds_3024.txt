@@ -1,0 +1,18 @@
+Public Sans: "j" has larger dot (tittle) than "i"
+
+
+Description
+In the Public Sans font, the lowercase "j" has a taller dot than the lowercase "i".
+I can think of no good reason for this.  It looks sloppy and seems like a design or rendering error.
+Steps to reproduce the issue
+Using Chrome 73 on Mac OS 10.10, visit the Public Sans site and select one of the weights at the top of the page to view samples.  I can see that the "j" has a noticeably larger dot than the "i" in weights 100, 200, 300, 400, 500, 600, 700, and 800.  I can't tell if it has a larger dot in 900.
+
+
+
+
+
+
+
+
+Or, download Public Sans Regular as a TTF and see that the "j" has a larger dot than the "i" when rendered by Font Book on Mac OS 10.10:
+

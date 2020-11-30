@@ -1,0 +1,4 @@
+Remove the google auth patch quirk
+
+
+#6710 Cleanup from the patch that removes the quirk switch and the now unused and outdated GoogleHelper API.

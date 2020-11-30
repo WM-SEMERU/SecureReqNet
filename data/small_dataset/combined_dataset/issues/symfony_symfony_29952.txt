@@ -1,0 +1,28 @@
+[Lock] SemaphoreStore : sem_remove() produces a warning
+
+
+Symfony version(s) affected: 3.4.20 / PHP 7.2.5
+Description
+As stated in #27357 (comment), when I use the LockableTrait in command :
+protected function execute(InputInterface $input, OutputInterface $output): int
+{
+    if (!$this->lock()) {
+        $output->writeln('The command is already running in another process.');
+    
+        return 0;
+    }
+
+    // ...
+
+    $this->release();
+}
+A warning is emitted :
+
+Warning: sem_remove(): failed for SysV sempphore 140713294922928: Operation not permitted {"exception":"[object] (ErrorException(code: 0): Warning: sem_remove(): failed for SysV sempphore 140713294922928: Operation not permitted at /path/vendor/symfony/symfony/src/Symfony/Component/Lock/Store/SemaphoreStore.php:113
+
+The command is executed by a cronjob under an user and Unix group different of those of webserver.
+How to reproduce
+Pre-prod and prod are impacted but I don't know how to reproduce exactly.
+Possible Solution
+As the warning seems to be non-blocking, I suggest to silence the call to sem_remove() as done with @sem_acquire().
+Let me know if I can make the PR.

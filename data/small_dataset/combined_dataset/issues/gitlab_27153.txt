@@ -1,0 +1,13 @@
+https://hackerone.com/reports/200693
+
+## Steps to Reproduce
+
+* Create a new GitLab project
+* Initialise the project by creating a README file
+* Set the file title to README.rdoc
+* Paste the below Payload into the file
+* Commit the file to the project and click on the "XSS" link
+
+Proof of Concept Payload
+
+`XSS[JaVaScriPt:alert(1)] <-- click to test`

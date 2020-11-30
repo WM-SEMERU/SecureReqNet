@@ -1,0 +1,49 @@
+Windows Authentication - Double Hop Issue
+
+
+We have Micro Services being developed on Service Fabric platform that are deployed on stand alone local cluster. We have a website, that is configured to use windows authentication and then the logged in User is impersonated to fetch SSRS reports. We have used HttpSys to build the web host. And we are facing double hop issue when website is accessed from any server other than app box itself.
+Code looks like below for stateless service :
+protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
+{
+	return new ServiceInstanceListener[]
+	{
+		new ServiceInstanceListener(serviceContext =>
+			new HttpSysCommunicationListener(serviceContext, "ServiceEndpoint", (url, listener) =>
+			{
+				return new WebHostBuilder()
+					.UseHttpSys(
+						options =>
+						{
+							options.Authentication.Schemes = AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM;
+							options.Authentication.AllowAnonymous = false;
+						}
+					)
+					.ConfigureServices(
+						services => services
+							.AddSingleton<StatelessServiceContext>(serviceContext))
+					.UseContentRoot(Directory.GetCurrentDirectory())
+					.UseStartup<Startup>()
+					.UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)
+					.UseUrls(url)
+					.Build();
+			}))
+	};
+}
+
+In Startup.cs:
+public void ConfigureServices(IServiceCollection services)
+{
+	services.AddAuthenticationCore(options =>
+	{
+		options.DefaultScheme = HttpSysDefaults.AuthenticationScheme;
+	});
+}
+
+We have tried everything. All the SPNs are properly created. We already have a legacy Silverlight website which is working alright and works on same basis of windows authentication and impersonate user to fetch SSRS reports.
+Just to verify if issue is with how service fabric creates services, I created stand alone DotNet core  website using HttpSys self host server. Still same issue.
+I tried to find online, but there is no documentation or any other person that have faced similar issue.
+Any help is appreciated.
+The exception we get is:
+
+The HTTP request is unauthorized with client authentication scheme 'Ntlm'. The authentication header received from the server was 'NTLM'.
+

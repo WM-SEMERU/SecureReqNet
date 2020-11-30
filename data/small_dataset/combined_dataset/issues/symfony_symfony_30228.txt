@@ -1,0 +1,26 @@
+[4.1.7][Form] EntityType with choice_value not working if multiple set to true
+
+
+Symfony version(s) affected: 4.1.7
+Description
+Overriding an EntityType value with choice_value works if multiple => false
+    $builder->add('vlan', EntityType::class, [
+            'class' => ConfigVlan::class,
+            'label' => 'Vlan',  
+           'choice_value' => 'name', 
+           'required' => false
+      ])
+
+works fine and result name in value html attribute :
+
+Adding multiple => true to the same EntityType :
+$builder->add('vlan', EntityType::class, [
+            'class' => ConfigVlan::class,
+            'label' => 'Vlan',  
+            'choice_value' => 'name', 
+            'multiple' => true,
+            'required' => false
+      ])
+
+Returning Id instead name !
+

@@ -1,0 +1,49 @@
+[2.1][Security] Custom AuthenticationSuccessHandler
+
+
+I have an application with a custom authentication success handler. I want the users to be redirected to the place they intended to go before arriving in the login page.
+I have tried to set the use_referer option to true but it seems that it does not do anything and when debugging I realized that the option was always set to false. Then, I realized that I was not redirected properly because of the provider key that was always null. and I had to set it in my service configuration file.
+So my question are, have I done something wrong when creating the custom authentication handler? Is it normal to do that? Is it like a problem in the documentation which is not up to date?
+Here is my custom authentication handler:
+<?php
+
+namespace Divosea\UserBundle\EventListener;
+
+use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler,
+    Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\Security\Core\Authentication\Token\TokenInterface,
+    Symfony\Component\HttpFoundation\JsonResponse;
+
+class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
+{
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token)
+    {
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(array('status' => true));
+        }
+
+        return parent::onAuthenticationSuccess($request, $token);
+    }
+}
+
+Here is a snippet of my config.yml file:
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                check_path: /login-check
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                success_handler: my.authentication_success_handler
+Here is the authentication handler :
+parameters:
+    my.authentication_success_handler.class: Divosea\UserBundle\EventListener\AuthenticationSuccessHandler
+
+services:
+    my.authentication_success_handler:
+        class: %my.authentication_success_handler.class%
+        arguments: [ @security.http_utils, [] ]
+        calls:
+            - [ setProviderKey, ["main"] ]
+
+Thanks in advance

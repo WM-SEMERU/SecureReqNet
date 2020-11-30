@@ -1,0 +1,5 @@
+Firefox 40 Nightly moved the error.stack property where debug.js was not finding it
+
+
+Original issue 1964 created by erights on 2015-04-12T00:39:41.000Z:
+On Firefox 40 Nightly, the .stack property on error objects is now a not-so-magical accessor property inherited from Error.prototype. Of course, Error.prototype.stack is not on our whitelist so it was deleted. This results in debug.js (and thus useHTMLLogger.js) presenting FF40 Nightly as a platform without accessible error stacks.

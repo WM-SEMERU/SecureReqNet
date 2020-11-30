@@ -1,0 +1,11 @@
+apiserver: add validating admission tests
+
+
+Follow-up of #54484
+This includes tests
+
+in endpoint tests,
+in generic registry,
+in patch handler,
+in admission chain.
+

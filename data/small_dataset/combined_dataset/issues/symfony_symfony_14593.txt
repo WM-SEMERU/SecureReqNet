@@ -1,0 +1,46 @@
+[Security][Firewall] Avoid redirection to XHR URIs
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+If security.firewalls.main.form_login.always_use_default_target_path is false, an user could be redirected to an URL called by an AJAX request after the login.

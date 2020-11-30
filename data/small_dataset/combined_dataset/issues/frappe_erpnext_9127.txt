@@ -1,0 +1,7 @@
+File/Attachment Permissions Security Role
+
+
+Linked with - #9102 - and - #9116 - would like to see a new permissions role added to role permissions manager for documents.
+See - https://discuss.erpnext.com/t/default-file-setting-to-private/23698/8 - for more information as well.
+The premise is to give more security options to attachments that are placed on various document types.  For example on the item document type, when you place a product image on there the admin could set that to public automatically. However for more sensitive documents, such as an employee document, attachments might be at a higher permissions level - say a 1 - so that an HR Manager role would be the one to see those attachments along with any other sensitive data fields. That way you could open up the employee database to a bigger audience and allow your employees to see more employee data (with employee role), but give that granular security to attachments.
+Lots of use cases for this. Please consider it.

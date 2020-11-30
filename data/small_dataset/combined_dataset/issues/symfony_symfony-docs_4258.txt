@@ -1,0 +1,5 @@
+Success/failure handlers are not documented
+
+
+Working on fixing symfony/symfony#10417, I wanted to update the documentation but there is no documentation for custom success/failure handlers for the firewall configuration. The success_handler and success_failure configuration settings are mentioned in configuration examples, but there is no explanation whatsoever.
+I think we need to document them, but only as of Symfony 2.6 as they are less useful before. So, we need to document them in a new cookbook entry, based on the changes done in symfony/symfony#11993.

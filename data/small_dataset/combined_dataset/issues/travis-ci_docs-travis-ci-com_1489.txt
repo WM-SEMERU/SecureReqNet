@@ -1,0 +1,6 @@
+Mention secured env vars and forks on security best practices page
+
+
+The security best practices page could use a section about forks, and how secured env variables will not be present in pull request builds from forks.
+This is a question that has come up a few times in support. Having a section on the page to link to would be really helpful.
+Thanks!

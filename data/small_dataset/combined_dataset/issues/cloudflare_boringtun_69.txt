@@ -1,0 +1,51 @@
+Unable to run BoringTun in Docker
+
+
+I'm trying to use BoringTun in a Docker container in order to provide a low-overhead skyhook-style VPN in a container scheduler.
+My Docker compose looks like this:
+---
+version: '3'
+services:
+  missioncontrol:
+    build: .
+    image: naftulikay/missioncontrol:latest
+    container_name: missioncontrol
+    privileged: true
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.rp_filter=2
+    cap_add:
+      - net_admin
+    ports:
+      - '51820:51820'
+I'm using Ubuntu 18.04 as a base image and I'm installing the WireGuard PPA and the wireguard and wireguard-tools packages.
+Within this container, if I run boringtun --foreground wgnet0, I get the following output:
+root@bf45d7330b3d:/# boringtun --foreground --verbosity debug wgnet0
+Socket("no such file or directory")
+
+If I try to wg-quick, I get the following output:
+root@bf45d7330b3d:/# WG_QUICK_USERSPACE_IMPLEMENTATION=boringtun wg-quick up wgnet0
+[#] ip link add wgnet0 type wireguard
+RTNETLINK answers: Operation not supported
+[!] Missing WireGuard kernel module. Falling back to slow userspace implementation.
+[#] boringtun wgnet0
+boringtun failed to start
+[#] wg setconf wgnet0 /dev/fd/63
+Unable to modify interface: Protocol not supported
+Unable to access interface: Protocol not supported
+[#] ip link delete dev wgnet0
+Cannot find device "wgnet0"
+
+/etc/wireguard/wgnet0.conf does in fact exist:
+[Interface]
+Address = 0.0.0.0/0
+SaveConfig = true
+ListenPort = 51820
+
+PostUp   = iptables -A FORWARD -i wgnet0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wgnet0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+PrivateKey = REDACTED
+
+I am running these commands as root and as you can see, I'm adding the NET_ADMIN capability so it should be able to do things properly.
+Do I need a kernel module in order to setup the interface? I had assumed that since this was a userspace implementation, I wouldn't need to insert modules into the kernel.

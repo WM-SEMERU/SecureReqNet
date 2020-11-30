@@ -1,0 +1,11 @@
+App devs trust default mbedtls library options in Open Enclave
+
+
+This story tracks due diligence and review tasks necessary for ensuring that the options that Open Enclave builds mbedtls are safe by default for a general user. This includes:
+
+ #242 Update mbedtls_hardware_poll to use RDSEED
+ #256 Remove support for arbitrary EC curves in mbedtls security
+ #383 Evaluate use of MBEDTLS_THREADING_C & MBEDTLS_THREADING_PTHREAD flags
+ #384 Review mbedtls module configuration options
+
+This also has a dependency on #251 to ensure that we upgrade to the latest version of mbedtls.

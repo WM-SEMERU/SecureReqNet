@@ -1,0 +1,7 @@
+Disable navigator.battery API
+
+
+Test Plan
+See brave/brave-core#114
+navigator.battery API can be used for tracking users.
+

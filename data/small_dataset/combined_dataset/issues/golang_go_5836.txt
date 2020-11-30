@@ -1,0 +1,21 @@
+encoding/json: U+2028 and U+2029 generate invalid JavaScript
+
+
+The basic problem is that U+2028 and U+2029 are invalid in a JavaScript string literal,
+which means you must encode them as the six-character literals like "\u2028"
+when generating JSON.  This post discusses further how JSON is not a subset of
+JavaScript:
+https://medium.com/joys-of-javascript/42a28471221d
+
+This code snippet demonstrates the problem.  When I paste the printed snippet into
+Chrome's JavaScript console I get an invalid token error.
+http://play.golang.org/p/cs_I0Az8cI
+
+PS: it's not really's Go's problem that the (valid) JSON it generates is not parseable
+as JavaScript.  But encoding/json already does some not-required-by-JSON encoding (the
+way it HTML-escaping angle brackets), so it seems silly to not encode these rare
+characters as well; might as well do them as part of HTML-escaping.
+
+
+$ go version
+go version devel +7e6f9b9091c4 Wed Jun 19 09:44:40 2013 -0700 linux/amd64

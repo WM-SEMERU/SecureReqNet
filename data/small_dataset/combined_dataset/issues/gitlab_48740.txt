@@ -1,0 +1,14 @@
+### Overview
+
+Once a user's logged in, they're free to go to Settings (`/profile/`) and to change settings on any tab without reauthenticating. Since some of these settings are sensitive and destructive, we should ask the user to reauth if they haven't for a while if they attempt to modify a setting.
+
+### Proposal
+
+If a user hasn't entered their password for a reasonable length of time (30 minutes?), prompt the user to enter it when attempting to modify any user settings. Viewing pages is fine, modifying should require a password. This should apply to:
+
+* Modifying your avatar
+* Updating profile settings
+* Changing 2FA, username, deleting account
+* Revoking application access, PATs, SSH/GPG keys
+
+Etc.

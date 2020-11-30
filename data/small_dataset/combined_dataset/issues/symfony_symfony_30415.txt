@@ -1,0 +1,17 @@
+[Console] Corrupt output
+
+
+First i'm sorry if an issue already exist i made research but i have found nothing about this. (And the problem is so strange that I didn't really know what to type to find something similar)
+Symfony version(s) affected: 4.2.3
+Description
+Sometime when i use the symfony console, the output is completly corrupt like this :
+
+How to reproduce
+I don't found a way to reproduce the bug any time, for now is very random.
+Additional context
+I already have this bug on this console :
+
+hyper.is
+Default windows console
+Powershell console
+

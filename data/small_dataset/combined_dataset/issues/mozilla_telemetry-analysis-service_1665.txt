@@ -1,0 +1,104 @@
+Bump boto3 from 1.9.82 to 1.9.128
+
+
+Bumps boto3 from 1.9.82 to 1.9.128.
+
+Changelog
+Sourced from boto3's changelog.
+
+1.9.128
+
+api-change:batch: [botocore] Update batch client to latest version
+api-change:comprehend: [botocore] Update comprehend client to latest version
+
+1.9.127
+
+api-change:securityhub: [botocore] Update securityhub client to latest version
+api-change:ec2: [botocore] Update ec2 client to latest version
+api-change:acm: [botocore] Update acm client to latest version
+
+1.9.126
+
+api-change:emr: [botocore] Update emr client to latest version
+api-change:ssm: [botocore] Update ssm client to latest version
+
+1.9.125
+
+api-change:comprehend: [botocore] Update comprehend client to latest version
+api-change:cloudwatch: [botocore] Update cloudwatch client to latest version
+api-change:greengrass: [botocore] Update greengrass client to latest version
+
+1.9.124
+
+api-change:servicecatalog: [botocore] Update servicecatalog client to latest version
+api-change:medialive: [botocore] Update medialive client to latest version
+api-change:pinpoint-email: [botocore] Update pinpoint-email client to latest version
+api-change:workspaces: [botocore] Update workspaces client to latest version
+
+1.9.123
+
+api-change:ec2: [botocore] Update ec2 client to latest version
+api-change:appmesh: [botocore] Update appmesh client to latest version
+api-change:ecs: [botocore] Update ecs client to latest version
+api-change:elbv2: [botocore] Update elbv2 client to latest version
+api-change:transfer: [botocore] Update transfer client to latest version
+api-change:storagegateway: [botocore] Update storagegateway client to latest version
+api-change:s3: [botocore] Update s3 client to latest version
+
+1.9.122
+
+api-change:workmail: [botocore] Update workmail client to latest version
+api-change:glue: [botocore] Update glue client to latest version
+
+ ... (truncated)
+
+
+
+Commits
+
+891c7f2 Merge branch 'release-1.9.128'
+c1096e9 Bumping version to 1.9.128
+97f2129 Add changelog entries from botocore
+cbf4939 Merge pull request #1924 from boto/revert-1921-doc_examples
+d319e74 Revert "Reorganize S3 examples. General cleanup."
+a532748 Merge branch 'release-1.9.127'
+c132607 Merge branch 'release-1.9.127' into develop
+06b20b6 Bumping version to 1.9.127
+00bbc00 Add changelog entries from botocore
+20f931d Merge pull request #1921 from SCalwas/doc_examples
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot squash and merge will squash and merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge and block automerging
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

@@ -1,0 +1,13 @@
+High severity vulnerability affecting this repo
+
+
+Hi there,
+We noticed that your repo has a high severity vulnerability:
+
+Regular Expression Denial of Service
+Affected package: minimatch <=3.0.1
+
+Here is the test report for this repo. 
+If you’d like to fix this vulnerability, Snyk lets you generate a pull request that recommends the best upgrade path - there’s a link to fix this vulnerability on the test report.
+Stay secure :-)
+Snyk Community

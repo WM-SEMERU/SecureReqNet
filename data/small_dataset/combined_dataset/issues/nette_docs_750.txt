@@ -1,0 +1,4 @@
+Configuration: removed typo.
+
+
+Removed typo. I think it's the skipped translation from Czech to English.

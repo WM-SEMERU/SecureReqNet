@@ -1,0 +1,25 @@
+Add a test to prove that using textContent with initialState doesn't result in XSS
+
+
+We discussed this on Video. Seems that textContent un-escaping any escapes is what we want because it should be escaped by React on the way in. We should however add a simple test to prove this.
+See 
+
+
+addons-frontend/src/core/client/base.js
+
+
+         Line 17
+      in
+      89aa3a5
+
+
+
+
+
+
+ initialState = JSON.parse(initialStateContainer.textContent); 
+
+
+
+
+

@@ -1,0 +1,50 @@
+[WIP][Workflow] Changed initial_places to initial_marking, added property instead of type
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30656
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11211
+
+
+
+ping @lyrixx

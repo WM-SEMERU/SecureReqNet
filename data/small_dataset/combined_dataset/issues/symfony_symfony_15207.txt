@@ -1,0 +1,7 @@
+[Security] Rename provider key
+
+
+As also explained in #15141 , provider key is a very confusing term in the Security component. A lot of people (including me a week ago) don't know what this property does and what value it should have.
+I think renaming this property and adding better PHPdocs can improve things a lot on this subject. However, finding a good name is not easy. This is were I need feedback (and other suggestions).
+In short: The provider key is used to group a set of authentication providers. In the full stack framework, this means you can have multiple firewall (each firewall having its own group of authentication providers). Being authenticated for one firewall doesn't mean you are authenticated for the other.
+My suggestions: context (consistent with the name of the firewall config); provider group.

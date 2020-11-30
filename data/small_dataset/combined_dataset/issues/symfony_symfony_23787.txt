@@ -1,0 +1,37 @@
+[SecurityBundle] LogoutUrlHelper not found
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.6
+
+
+
+After updating my symfony/flex installation, the securityBundle throw this exception for the LogoutUrlHelper class who's not found in the vendor
+
+All the configuration is functional.
+Any idea ?

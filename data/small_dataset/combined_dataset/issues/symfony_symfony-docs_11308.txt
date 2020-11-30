@@ -1,0 +1,5 @@
+Remove references to github repositories.
+
+
+Fixes #11295 for #EUFOSSA
+See also PRs #11307 for 4.2 and #11306 for 3.4 for remaining references.

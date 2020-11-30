@@ -1,0 +1,15 @@
+[deck.gl] some values on map not shaded
+
+
+We have seen the issue where the legend is an integer type (ie. last bucket is values of 15-27) But the actual value on the chart is a float and is beyond the last bucket values (ie. in this case it was 27.56), the point/value is not rendered.
+Need to make sure legend is in float as well (or is the same type as the metric being plotted)
+Make sure these boxes are checked before submitting your issue - thank you!
+
+ I have checked the superset logs for python stacktraces and included it here as text if there are any.
+ I have reproduced the issue with at least the latest released version of superset.
+ I have checked the issue tracker for the same issue and I haven't found one similar.
+
+Superset version
+Expected results
+Actual results
+Steps to reproduce

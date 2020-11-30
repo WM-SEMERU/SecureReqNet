@@ -1,0 +1,9 @@
+Java Client - Prevent printing authentication data in INFO logs.
+
+
+Motivation
+Currently, we print auth data in info logs - roleToken, private key info etc.
+Modifications
+Print ClientConfiguration without authentication field.
+Result
+We will no longer print sensitive info.

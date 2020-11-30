@@ -1,0 +1,47 @@
+[Security][Encoder] hash_equals throws an error if $password1 is null
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Its possible to pass null as $password1. the hash_equals function throws an error:
+hash_equals(): Expected known_string to be a string, null given.

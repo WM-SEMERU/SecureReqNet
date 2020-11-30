@@ -1,0 +1,4 @@
+Updated map matching to use a POST request if the url for a GET request is larger than the maximum allowed size
+
+
+Updated map matching to use same logic as the directions API to automatically use a post request when the size of the url exceeds the maximum for a get request.

@@ -1,0 +1,6 @@
+Block access to link-local addresses from containers by default
+
+
+GCE and AWS expose local metadata servers on a link-local address (169.254.169.254). This compromises isolation of containers from hosts and from the cluster. As with host ports, host networking, host paths, etc., we shouldn't expose these addresses by default. Authorization should be required.
+Sadly, Google API clients apparently require metadata access currently, as reported in #8512.
+cc @thockin @erictune @evandbrown

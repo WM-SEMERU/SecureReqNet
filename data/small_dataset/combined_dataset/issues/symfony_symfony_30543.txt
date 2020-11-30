@@ -1,0 +1,11 @@
+Serializer and symfony cache
+
+
+Symfony version(s) affected: 4.2.3
+Description
+Deserializing json into dto object (contains embedded objects) using the hardwired serializer service works perfectly the first time then on subsequent requests returns
+Could not denormalize object of type App\\Dto\\Delivery, no supporting normalizer found.  
+Possible Solution
+clearing var/cache/dev/* fixes the problem (until it caches again)
+Additional context
+DTO contains other embedded DTOs with symfony validator annotations

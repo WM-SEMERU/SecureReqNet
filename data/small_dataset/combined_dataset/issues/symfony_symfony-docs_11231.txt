@@ -1,0 +1,4 @@
+Documented the deprecation of the Templating component
+
+
+Documents symfony/symfony#21035 but there are some things I'm not sure about. Please, review.

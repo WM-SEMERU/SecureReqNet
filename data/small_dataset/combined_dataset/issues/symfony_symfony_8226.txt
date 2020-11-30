@@ -1,0 +1,28 @@
+Combining x509 authentication and form login doesn't work
+
+
+I've tried enabling x509 authentication and form login at the same time for a project and ran into some issues. First a bit of background:
+The idea is to enable the x509 and form_login options in security.yml, combined with a SSLVerifyClient optional directive for apache. The configuration in security.yml is straightforward:
+security:
+  firewalls:
+    main:
+      pattern: .*
+      form_login:
+        [...]
+      x509: true
+
+Once this configuration is enabled, form login doesn't work anymore. No errors, no anything, it just keeps going to the login page.
+Debugging through the code, the first piece of code that comes up is Symfony\Component\Security\Http\Firewall\X509AuthenticationListener::getPreAuthenticatedData. The method checks whether the userKey (normally SSL_CLIENT_S_DN_Email) is present and throws an exception if it's missing. Obviously, using the optional method I mentioned above won't ever work. So, I decided to remove that block and change the return line to include a default value for userKey, effectively giving "nothing" to the AbstractPreAuthenticatedListener. Still, no luck.
+Next up, AbstractPreAuthenticatedListener::handle. This method checks whether a token is actually present (either its own token or a token from another listener). However, it only skips the following process if it's a PreAuthenticatedToken and it actually contains meaningful values:
+if (null !== $token = $this->securityContext->getToken()) {
+    if ($token instanceof PreAuthenticatedToken && $this->providerKey == $token->getProviderKey() && $token->isAuthenticated() && $token->getUsername() === $user) {
+        return;
+    }
+}
+So, if the form login has written its UsernamePasswordToken and authenticated it, the method will just go ahead, create a new PreAuthenticatedToken and try to authenticate with it (which won't work since we've just given it an empty username in the absence of a valid certificate). In case of an authentication failure, the AuthenticationProviderManager throws an exception, which is caught in the AbstractPreAuthenticationListener. This exception will actually remove any token from the securityContext, even if that token is not a PreAuthenticatedToken but belongs to another provider. So, we're back to where we were before: we're redirected back to the login form even though we've provided valid credentials.
+In my opinion, there are two bugs:
+
+The X509AuthenticationListener shouldn't throw an exception if no credentials are given but instead just silently fail and let the authentication request pass to the next provider in line.
+In case of an AuthenticationException the AbstractPreAuthenticatedListener should only remove the token from the securityContext if it's a PreAuthenticatedToken. If it's a different token, it should be left alone since a different provider will take care of it.
+
+Now, I would just make these changes and create a pull request, but considering that we're dealing with the security component here I'd rather have a few people look over there and provide their feedback. Once we've established a course of action I'd be more than happy to provide the code and PR to fix the issue (if it actually is a bug).

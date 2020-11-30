@@ -1,0 +1,5 @@
+hub.togetherjs.com should not be available over http
+
+
+https only.
+Redirects aren't that important because WebSockets can't be redirected.  We could just do it through the elastic load balancer.

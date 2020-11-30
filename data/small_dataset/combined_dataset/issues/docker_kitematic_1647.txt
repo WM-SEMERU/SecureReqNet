@@ -1,0 +1,52 @@
+Codesign verification fails on OS X 10.9.5 and 10.10.5
+
+
+Expected behavior
+Codesign verification would pass on all supported OS X versions
+Actual behavior
+Codesign verification does not pass on 10.9.5 or 10.10.5 but passes on 10.11.4
+10.9.5 or 10.10.5
+Running codesign
+codesign --verify --verbose=4 Kitematic\ \(Beta\).app/
+--prepared:/path/to/Kitematic (Beta).app/Contents/Frameworks/Electron   Framework.framework/Versions/Current/.
+--validated: /path/to/Kitematic (Beta).app/Contents/Frameworks/Electron Framework.framework/Versions/Current/.
+Kitematic (Beta).app/: invalid signature (code or signature have been modified)
+In subcomponent: /path/to/Kitematic (Beta).app/Contents/Frameworks/Kitematic (Beta) Helper EH.app
+
+Running spctlto mimic Gatekeeper
+spctl -a -t exec -vv Kitematic\ \(Beta\).app/
+Kitematic (Beta).app/: invalid signature (code or signature have been modified)
+
+10.11.4
+Running codesign
+codesign --verify --verbose=4 Kitematic\ \(Beta\).app/
+--prepared:/path/to/Kitematic (Beta).app/Contents/Frameworks/Kitematic (Beta) Helper NP.app
+--validated:/path/to/Kitematic (Beta).app/Contents/Frameworks/Kitematic (Beta) Helper NP.app
+--prepared:/path/to/Kitematic (Beta).app/Contents/Frameworks/Kitematic (Beta) Helper EH.app
+--validated:/path/to/Kitematic (Beta).app/Contents/Frameworks/Kitematic (Beta) Helper EH.app
+--prepared:/path/to/Kitematic (Beta).app/Contents/Frameworks/Electron Framework.framework/Versions/Current/.
+--validated:/path/to/Kitematic (Beta).app/Contents/Frameworks/Electron Framework.framework/Versions/Current/.
+--prepared:/path/to/Kitematic (Beta).app/Contents/Frameworks/Kitematic (Beta) Helper.app
+--validated:/path/to/Kitematic (Beta).app/Contents/Frameworks/Kitematic (Beta) Helper.app
+--prepared:/Users/pettinen/.Trash/Kitematic (Beta).app/Contents/Frameworks/Mantle.framework/Versions/Current/.
+--validated:/path/to/Kitematic (Beta).app/Contents/Frameworks/Mantle.framework/Versions/Current/.
+--prepared:/path/to/Kitematic (Beta).app/Contents/Frameworks/Squirrel.framework/Versions/Current/.
+--validated:/path/to/Kitematic (Beta).app/Contents/Frameworks/Squirrel.framework/Versions/Current/.
+--prepared:/path/to/Kitematic (Beta).app/Contents/Frameworks/ReactiveCocoa.framework/Versions/Current/.
+--validated:/path/to/Kitematic (Beta).app/Contents/Frameworks/ReactiveCocoa.framework/Versions/Current/.
+Kitematic (Beta).app/: valid on disk
+Kitematic (Beta).app/: satisfies its Designated Requirement
+
+Running spctl
+spctl -a -t exec -vv Kitematic\ \(Beta\).app/
+Kitematic (Beta).app/: accepted
+source=Developer ID
+origin=Developer ID Application: Docker Inc (9BNSXJN65R)
+
+Information about the Issue
+This is probably related to Apple changing their certificate in mid-February 2016. See https://developer.apple.com/support/certificates/expiration/ for further details.
+Steps to reproduce the behavior
+
+Download Kitematic 0.10.2 (or 0.10.1) and extract the app
+run codesign --verify --verbose=4 Kitematic (Beta).app on 10.9.5/10.10.5/10.10.4
+

@@ -1,0 +1,9 @@
+Fixes reversed owner relation in error msg from garbage collector
+
+
+/kind bug
+/sig api-machinery
+/cc @liggitt @caesarxuchao
+Does this PR introduce a user-facing change?:
+NONE
+

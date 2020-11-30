@@ -1,0 +1,26 @@
+Getting an 500 Error when viewing folders with submodules in it.
+
+pushed submodule -> try to view the submodule -> 500 Error
+
+**Gitlab Application Check:**
+Passed
+**Gitlab Version:**
+Version:        6.6.0.pre
+Revision:       c86553c
+
+**The logs report:**
+```ActionView::Template::Error (wrong number of arguments (0 for 1)):
+1: - tree, commit = submodule_links(submodule_item)
+2: %tr{ class: "tree-item" }
+3: %td.tree-item-file-name
+4: = image_tag "submodule.png"
+app/models/repository.rb:151:in 'method_missing'
+app/models/repository.rb:199:in 'submodule_url_for'
+app/helpers/submodule_helper.rb:6:in 'submodule_links'
+app/views/projects/tree/_submodule_item.html.haml:1:in '_app_views_projects_tree__submodule_item_html_haml__182211812__566774478'
+app/helpers/tree_helper.rb:19:in 'render_tree'
+app/views/projects/tree/_tree.html.haml:45:in '_app_views_projects_tree__tree_html_haml___262085045__576859648'
+app/views/projects/tree/show.html.haml:6:in '_app_views_projects_tree_show_html_haml___460813203__576454508'
+app/controllers/projects/tree_controller.rb:6:in 'show'
+app/controllers/application_controller.rb:57:in 'set_current_user_for_thread'
+```

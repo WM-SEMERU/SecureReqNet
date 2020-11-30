@@ -1,0 +1,14 @@
+[Security] The TokenBasedRememberMeServices does not call eraseCredentials, so the cookie will always mismatch
+
+
+Tested with Symfony 3.2-BETA1
+Since the RememberMeTokenService doesn't call the AuthenticatenManager, the User gets loaded without a call to eraseCredentials(). Since the remember me token was set with erased credentials, the cookie hash always mismatches:
+Reproduce:
+Use a User with an eraseCredentials method.
+1: Authenticate as user with rememberme settings
+https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/AuthenticationProviderManager.php#L95
+2: close browser and reopen url
+In https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/RememberMe/TokenBasedRememberMeServices.php#L56 the hash from the code (without password) is checked against a new generated hash (with password), this fails now.
+Adding a $user->eraseCredentials() above seems to fix the bug.
+Not sure if the actual eraseCredentials should go into https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/RememberMeAuthenticationProvider.php since it's called after the "mismatch"
+Maybe the https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/RememberMe/PersistentTokenBasedRememberMeServices.php is also affected, there's also no eraseCredentials() call

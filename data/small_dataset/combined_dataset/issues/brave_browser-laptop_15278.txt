@@ -1,0 +1,25 @@
+403 Forbidden Error for Helium's Brave Repository
+
+
+Description
+Unable to install Brave on Bunsen Labs (Helium) as the repository comes back with a 403 Forbidden error
+Steps to Reproduce
+
+Fresh install Bunsen Labs Helium (https://www.bunsenlabs.org/installation.html)
+Open terminal
+input: "sudo echo"
+input: "curl https://s3-us-west-2.amazonaws.com/brave-apt/keys.asc | sudo apt-key add -"
+input: "echo "deb [arch=amd64] https://s3-us-west-2.amazonaws.com/brave-apt lsb_release -sc main" | sudo tee -a /etc/apt/sources.list.d/brave-lsb_release -sc.list"
+input: "sudo apt update"
+
+Actual result:
+i.imgur.com/30r4yYm.png
+Expected result:
+A successful installation of Brave
+Reproduces how often:
+100%
+Brave Version
+Reproducible on current live release:
+Yes
+Additional Information
+I don't know too much about Linux or code, so please bear with me

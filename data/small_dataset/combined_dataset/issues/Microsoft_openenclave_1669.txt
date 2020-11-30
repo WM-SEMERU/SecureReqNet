@@ -1,0 +1,5 @@
+Fix cmake uninitialized variables
+
+
+This commit solves CMake --warn-unitialized warnings
+Fixed typos

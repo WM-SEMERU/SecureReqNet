@@ -1,0 +1,23 @@
+UsernamePasswordToken problem with Doctrine Proxies
+
+
+symfony:2.3.3 / doctrine/common:2.3.0 / doctrine/dbal:2.3.4 / doctrine/bundle:v1.2.0 / doctrine/orm:2.3.4
+My Situation:
+I'm trying to authenticate user from remote (like oauth but simple, with a token)
+I have a Doctrine Entity called RemoteLoginToken that stores hashes to perform a login.
+Entity\RemoteLoginToken has property (Foreign Key) to Entity\User (symfony auth)
+$oRemoteLoginToken->getUser() //should return Entity\User
+
+So, to log in this user in Symfony:
+$oUser = $oRemoteLoginToken->getUser();
+$token = new UsernamePasswordToken($oUser, null, 'fire', $oUser->getRoles());
+$this->get("security.context")->setToken($token);
+The bug:
+Class UsernamePasswordToken accepts username string or Entity\User class
+Doctrine proxy the class to
+$oRemoteLoginToken->getUser() //return Proxies\__CG__\MyBundle\Entity\User
+For any unknown reason then throws:
+//Symfony\Component\Security\Core\Authentication\Token\AbstractToken:94
+throw new \InvalidArgumentException('$user must be an instanceof UserInterface, an object implementing a __toString method, or a primitive string.');
+Taking into account that the proxy class implement Entity\User interfaces and the comparation ($oRemoteLoginToken->getUser() instanceof Entity\User) is true.
+I have no ways to leave my RemoteLoginToken getUser to ORM\ManyToOne User (FK)

@@ -1,0 +1,12 @@
+Hi.
+
+I try to change the assignee from multiples issues.
+So, I check all issues, and I select "Unassigned".
+When I click to "Update Issues", the page is refreshed, and nothing changed. 
+
+I use GitLab 6.8.2 bfdcbc5
+
+Can someone reproduce this bug?
+Need more informations?
+
+Thanks.

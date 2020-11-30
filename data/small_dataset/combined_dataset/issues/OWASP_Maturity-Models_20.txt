@@ -1,0 +1,48 @@
+Data_Files.set_File_Data - DoS via filename
+
+
+As seen in #19 the set_File_Data: (filename, file_Contents) method does not check the size (and contents) of  the filename and file_Contents variables.
+The problem is that they are strings, which means that they can be huge:
+
+http://appsandsecurity.blogspot.co.uk/2013/05/should-string-be-abstract-class.html
+http://1raindrop.typepad.com/1_raindrop/2013/04/security-140-conversation-with-john-wilander.html
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+http://stackoverflow.com/questions/2219526/how-many-bytes-in-a-javascript-string
+http://stackoverflow.com/questions/24153996/is-there-a-limit-on-the-size-of-a-string-in-json-with-node-js
+
+And since those values are used to on the name and contents of files written on disk, in addition to possible probs in the Node Heap, this function can be used to fill up the disk
+Here is the test for this issue which proves that we can create large files and also detects some weird behaviours on the file name size (which is different in wallaby, mocha and travis)
+  it.only 'Issue 20 - Data_Files.set_File_Data - DoS via filename and file_Contents', ->
+    using new Data_Files(), ->
+      create_File = (file_Size, content_Size, should_Work)=>
+        file_Name     = file_Size   .random_String()
+        file_Contents = content_Size.random_String()
+        file_Path     = @.data_Path .path_Combine(file_Name)
+
+        file_Path.assert_File_Not_Exists()                    # confirm file doesn't exist
+
+        @.set_File_Data file_Name, file_Contents              # PAYLOAD: create file
+
+        if should_Work                                        # if it should work
+          file_Path.assert_File_Exists()                      #   confirm file exists
+          file_Path.file_Delete().assert_Is_True()            #   delete temp file
+          file_Path.assert_File_Not_Exists()
+        else                                                  # if not
+          file_Path.assert_File_Not_Exists()                  #   confirm creation failed
+
+
+      # testing multiple file sizes
+      create_File 10 ,10 , true
+      create_File 100,10 , true
+      create_File 156,10 , true
+      #create_File 157,10 , false                              # interesting in wallaby, after 156 chars it doesn't work
+      #create_File 208,10 , false                              #             in mocha, it's after 208
+      create_File 512,10 , false                               #             in travis the number is really higher (not sure about the exact one)
+
+      # testing multiple file contents
+      create_File 10 ,10 , true                                # 10 bytes
+      create_File 10 ,100 , true                               # 100 bytes
+      create_File 10 ,10000 , true                             # 10 Kb
+      create_File 10 ,1000000 , true                           # 1 Mb
+      create_File 10 ,10000000 , true                          # 10 Mb - will work and take about 250 ms
+      create_File 10 ,100000000 , true                         # 100 Mb - will work and take about 2 secs

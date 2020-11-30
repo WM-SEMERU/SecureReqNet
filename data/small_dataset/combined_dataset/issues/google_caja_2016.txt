@@ -1,0 +1,5 @@
+Add "geo", "tel", and "sms" uri schemes
+
+
+Allowing these three would bring Caja into the modern era of mobile web usage.
+Please consider it.

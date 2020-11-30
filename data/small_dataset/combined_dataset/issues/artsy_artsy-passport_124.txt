@@ -1,0 +1,4 @@
+@mzikherman => Use explicit referer instead of on the request
+
+
+Mimics sign_up_intent to pass in the referer directly instead of getting it from req. I kept the places where we set a Referer like here to ensure we can use both up until we flip the switch in Gravity.

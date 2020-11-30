@@ -1,0 +1,8 @@
+CLOUDSTACK-9977: Enhance SSL protocol used by Console Proxy
+
+
+Current SSL protocol and ciphers used in SystemVMs are not the recommended. One can verify this with tests such as the one from SSL Labs (https://www.ssllabs.com/ssltest/). The grade was capped to C because of SSL ciphers and protocol. The grade was capped to B because it was allowed to use Diffie-Hellman keys with size lesser than 2048 bits. This commit changes the grade from C to A-.
+The following image shows the test result before any changes.
+
+After including the changes from this commit the test result was A-.
+

@@ -1,0 +1,42 @@
+Warming: lambda runtime node 6.10 to be EOL by AWS
+
+
+Prerequisites
+
+ I am running the latest version. (up upgrade)
+ I searched to see if the issue already exists.
+ I inspected the verbose debug output with the -v, --verbose flag.
+ Are you an Up Pro subscriber?
+
+Description
+I got an email today from AWS that they will be EOL-ing node 6.10 for Lambda in the next month(s). When I looked through my lambdas to see what was running Node 6.10, most of them were Up Warming functions.
+I tried disabling and re-enabling warming after running up upgrade to see if the latest up would use Node 8.10, but the warming functions were deployed again with Node 6.10.
+Presumably these functions will continue working after the EOL, but new warming functions won't be able to be deployed with 6.10 on April 30, 2019.
+Here's the note from AWS:
+
+Hello,
+Your AWS Account currently has one or more Lambda functions using the node.js 6.10 runtime. The Node Foundation has previously published that node.js 6.x "Boron" will be declared End-of-Life (EOL) on April 2019 [1], and will stop receiving bug fixes, security updates, or performance improvements. Per the AWS Lambda runtime support policy [2], language runtimes that have reached their EOL are deprecated in AWS Lambda.
+Invokes for functions configured to run on node.js 6.10 will continue to work normally, however the ability to create new Lambda functions configured to use the node.js 6.10 runtime will be disabled on April 30 2019. Code updates to existing functions using node.js 6.10 will be disabled 30 days later on May 30 2019
+We encourage you to update your node.js 6.10 functions to a newer version of the Node runtime (node.js 8.10) so that you continue to benefit from important security, performance, and functionality enhancements offered by more recent releases. The newer node.js 8.10 version has improved ECMAScript support, along with other language and API improvements. The AWS Lambda programming model [3] for node.js 8.10 maintains backwards compatibility with previous versions to simplify portability. We recommend that you test your Lambda function to validate its behavior on the newer version of Node.js.
+Should you have any questions or concerns please contact AWS Support [4].
+[1] Node Foundation’s announcement of EOL: https://nodejs.org/en/blog/release/v6.9.0/
+[2] AWS Lambda runtime support policy: https://docs.aws.amazon.com/lambda/latest/dg/runtime-support-policy.html
+[3] Using the AWS Lambda node.js 8.10 runtime: https://aws.amazon.com/blogs/compute/node-js-8-10-runtime-now-available-in-aws-lambda/
+[4] AWS Support: https://aws.amazon.com/support
+Sincerely,
+Amazon Web Services
+
+Steps to Reproduce
+
+Enable warming in my up stack:
+
+      "lambda": {
+        "warm": true,
+        "warm_count": 5,
+        "warm_rate": "15m"
+      }
+
+
+Run up stack plan and up stack apply
+Inspect AWS console and see that the Warming lambdas are still running 6.10
+

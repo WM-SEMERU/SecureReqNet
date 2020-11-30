@@ -1,0 +1,4 @@
+[Backport] Fix coordinator->overlord proxy auth failure
+
+
+Backport of #5039 to 0.11.0

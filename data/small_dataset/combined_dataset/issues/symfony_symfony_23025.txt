@@ -1,0 +1,35 @@
+[Security] Make Role::$role protected
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.4
+
+
+
+Since Symfony\Component\Security\Core\Role\RoleInterface is deprecated, there is no possibility to create a Role entity anymore. Symfony\Component\Security\Core\Role\Role::$role is private and extending the Role class doesn't allow to add mapping to that property.
+I suggest making $role protected. If I am not mistaken this won't break existing child classes.

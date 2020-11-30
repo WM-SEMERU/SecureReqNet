@@ -1,0 +1,42 @@
+Caja strips out multiple CSS pseudo-selectors, if present
+
+
+Original issue 1873 created by dlazin@google.com on 2013-11-21T18:39:06.000Z:
+If a CSS selector uses more than one pseudo-class or pseudo-element, Caja strips out all but the last one.
+I believe the following CSS is valid (http://stackoverflow.com/questions/493232/multiple-css-pseudo-classes and http://www.thecssninja.com/css/custom-inputs-using-css suggest that it is):
+input[type="radio"]:focus {
+background: url(//ssl.gstatic.com/ui/v1/radiobutton/unchecked_focused.png) -3px -3px;
+}
+input[type="radio"]:checked {
+background: url(//ssl.gstatic.com/ui/v1/radiobutton/checked.png) -3px -3px;
+}
+input[type="radio"]:focus:checked {
+background: url(//ssl.gstatic.com/ui/v1/radiobutton/checked_focused.png) -3px -3px;
+}
+However, Caja strips the last selector down to input[type="radio"]:checked, which makes it override the selector above it.
+Thanks!
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+I believe 5609m2, in Google Apps Script, running on Chrome/Linux.
+What steps will reproduce the problem?
+input[type="radio"]:focus {
+background: url(//ssl.gstatic.com/ui/v1/radiobutton/unchecked_focused.png) -3px -3px;
+}
+input[type="radio"]:checked {
+background: url(//ssl.gstatic.com/ui/v1/radiobutton/checked.png) -3px -3px;
+}
+input[type="radio"]:focus:checked {
+background: url(//ssl.gstatic.com/ui/v1/radiobutton/checked_focused.png) -3px -3px;
+}
+What is the expected output? What do you see instead?
+Expected:
+As input, plus the .caja-guest-0___ ancestor selector and other minor rewrites (like addition of quotation marks around the URL and https:). In particular, the last selector should maintain the two consecutive pseudo-classes.
+Reality:
+.caja-guest-0___ input[type="radio"]:focus {
+background: url("https://ssl.gstatic.com/ui/v1/radiobutton/unchecked_focused.png") -3px -3px;
+}
+.caja-guest-0___ input[type="radio"]:checked {
+background: url("https://ssl.gstatic.com/ui/v1/radiobutton/checked.png") -3px -3px;
+}
+.caja-guest-0___ input[type="radio"]:checked {
+background: url("https://ssl.gstatic.com/ui/v1/radiobutton/checked_focused.png") -3px -3px;
+}

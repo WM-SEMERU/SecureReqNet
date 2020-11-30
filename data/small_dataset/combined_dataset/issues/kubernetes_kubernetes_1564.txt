@@ -1,0 +1,6 @@
+Enforce namespace unique constraints
+
+
+This is the update to actually enable namespace support.
+At the moment, I pass a namespace as a query parameter in order to support namespace scoping on the v1beta urls.  Once v1beta3 lands, I will modify to pass namespace in the path.  Note the client libraries were modified to make this easy to do, so should be a trivial change once ready.
+I broke the commits into logical sections to improve readability.

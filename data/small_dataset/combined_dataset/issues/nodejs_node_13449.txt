@@ -1,0 +1,101 @@
+CVE-2012-5568 (slowloris) - clarify that node is not affected
+
+
+
+Version: all
+Platform: all
+Subsystem: security
+
+This is not an issue as such, but opened to provide some insights on the vulnerability,  ratify any questions, clarifications on this topic, and to establish that the reported vulnerability does not affect node.js - in the context of #13415 - which was closed due to incomprehensible discription and locked due to non-converging engagement.
+slowloris is a type of denial or servcie attack on web servers through custom crafted clients by opening connections to the victim and sending a partial request, slowly - and thereby engaging the server resources in a dragging manner, causing DOS weakness.
+server: a typical http end point:
+var http = require('http')
+var server = http.createServer(function(req, res) {
+  res.end('hello slow world!')
+})
+server.listen(25000)
+
+client: a non-http end point, manually crafting an http message - but slowly and incrementally:
+const net = require('net')
+const input = 'GET / HTTP/1.1\r\nHost: localhost:25000\r\nAccept: */*\r\n\r\n'
+let count = 0
+const client = net.createConnection({port: 25000}, () => {
+ 
+  var interval = setInterval(function() {
+    client.write(input[count++])
+    if(count === input.length) {
+      clearTimeout(interval); 
+      console.log('request complete.')
+    }
+  }, 100)
+})
+client.on('data', (data) => {
+  console.log(data.toString())
+  client.end()
+})
+The experiment showed that there is no difference in the responsiveness of the server to other clients - for obvious reasons as the slow engagement of the client is not going to block anyting in the server - with the event-driven model, server only responds to the byte(s) as and when they reach it, otherwise it serves the rest of the clients.
+I stressed the system with 100 slow clients and ran apache benchmark - saw no DOS indications. The general response is poor in the slow client cases, but it is because of the overall increase in the concurrent clients, not due to the attempted attack.
+When 100 concurrent DOSsy clients are running:
+Server Software:        
+Server Hostname:        localhost
+Server Port:            25000
+
+Document Path:          /
+Document Length:        17 bytes
+
+Concurrency Level:      100
+Time taken for tests:   28.305 seconds
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      920000 bytes
+HTML transferred:       170000 bytes
+Requests per second:    353.30 [#/sec] (mean)
+Time per request:       283.049 [ms] (mean)
+Time per request:       2.830 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.74 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        3  113  64.7    105    1461
+Processing:     9  167  70.2    154     559
+Waiting:        5  126  55.3    118     531
+Total:         51  279  99.3    282    1680
+
+When no DOSy clients are running:
+Server Hostname:        localhost
+Server Port:            25000
+
+Document Path:          /
+Document Length:        17 bytes
+
+Concurrency Level:      100
+Time taken for tests:   8.734 seconds
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      920000 bytes
+HTML transferred:       170000 bytes
+Requests per second:    1144.90 [#/sec] (mean)
+Time per request:       87.344 [ms] (mean)
+Time per request:       0.873 [ms] (mean, across all concurrent requests)
+Transfer rate:          102.86 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        2   44  45.7     43    1279
+Processing:     5   42  17.1     43     110
+Waiting:        5   42  17.2     43     109
+Total:         16   86  53.1     89    1353
+
+Percentage of the requests served within a certain time (ms)
+  50%     89
+  66%     99
+  75%    108
+  80%    112
+  90%    125
+  95%    138
+  98%    154
+  99%    174
+ 100%   1353 (longest request)
+
+
+Please keep it open for some time for any questions / insights / discussions - thanks.

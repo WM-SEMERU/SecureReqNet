@@ -1,0 +1,4 @@
+private-distributors-list: add Gravitational
+
+
+Replaces kubernetes/sig-release#514

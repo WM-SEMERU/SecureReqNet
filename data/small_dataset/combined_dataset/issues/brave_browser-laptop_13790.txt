@@ -1,0 +1,25 @@
+Flash Plugin settings are not respected if flash is installed
+
+
+Repro Steps:
+
+Instal Flash Player.
+Verify that flash player is disabled in about:preferences#plugins
+Navigate to: https://helpx.adobe.com/flash-player.html
+
+Working animation in #5 indicates that flash plugin works.
+
+
+ 
+Brave: 0.22.13 
+V8: 6.5.254.41 
+rev: a8cfb160479f1d00d0769368eb440030182bb83b 
+Muon: 5.1.2 
+OS Release: 17.4.0 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: macOS 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 65.0.3325.181
+

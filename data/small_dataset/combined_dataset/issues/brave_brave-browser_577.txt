@@ -1,0 +1,11 @@
+[Win] Update Process Mitigation Policy flags
+
+
+Enable:
+
+EnableForceRelocateImages
+RaiseExceptionOnInvalidHandleReference
+HandleExceptionsPermanentlyEnabled
+DisallowWin32kSystemCalls
+DisableExtensionPoints
+

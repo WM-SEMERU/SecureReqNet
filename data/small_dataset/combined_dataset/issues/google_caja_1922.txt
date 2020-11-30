@@ -1,0 +1,15 @@
+In google script jquery mobile design doesn't render the design?
+
+
+Original issue 1924 created by patelneel1994 on 2014-07-10T02:49:33.000Z:
+Please provide any additional information below.
+This problem is not related to the browser.
+http://stackoverflow.com/questions/24624016/google-script-not-showing-jquery-layouts-when-uploaded-to-google-script-html
+Google script doesn't show jquery layouts.
+What steps will reproduce the problem?
+1.Which makes the html look without any  design.
+2.It doesn't apply any designs to the page.
+3.
+What is the expected output? What do you see instead?
+It should look nice for jquery mobile design.
+Please use labels and text to provide additional information.

@@ -1,0 +1,31 @@
+[TwigBundle] Default overriden bundle path should be processed in a compiler pass
+
+
+Symfony version(s) affected: 4.2
+Description
+
+I use EasyAdmin bundle for admin interfaces.
+I also use an extension bundle alterphp/EasyAdminExtensionBundle that overrides all templates by adding its templates path to EasyAdmin namespace in a compiler pass.
+Above this stack, I use another company-owned admin-bundle that also overrides EasyAdmin templates by adding its path to EasyAdmin namespace in a compiler pass.
+
+The problem is that default overriden bundle path (`templates/bundles/EasyAdminBundle) comes "under" my 2 3rd party bundles overrides :
+
+How to reproduce
+In a symfony project with loaded EsayAdmin bundle for example, add the following CompilerPass to add the path of your choice in the EasyAdmin Twig namespace :
+class TwigPathPass implements CompilerPassInterface
+{
+    public function process(ContainerBuilder $container)
+    {
+        $twigLoaderFilesystemId = $container->getAlias('twig.loader')->__toString();
+        $twigLoaderFilesystemDefinition = $container->getDefinition($twigLoaderFilesystemId);
+
+        $twigLoaderFilesystemDefinition->addMethodCall('prependPath', array('templates/foo/bar', 'EasyAdmin'));
+        }
+    }
+}
+
+When dumping the paths for EasyAdmin namespaces, you can see that default overriden bundle path comes between original bundle path and your custom overriding path. This default overriden bundle path should, IMHO, comes above all third party bundles possible overrides.
+dump($this->get('twig')->getLoader()->getPaths('EasyAdmin'));
+
+Possible Solution
+I think that processing this default overriden bundle path in a late compiler pass might resolve this problem.

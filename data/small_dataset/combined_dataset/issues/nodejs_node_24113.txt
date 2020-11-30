@@ -1,0 +1,17 @@
+tools,win: refactor install_tools.bat
+
+
+
+Ask for credentials upfront (just for an opaque token)
+Try to -DisableReboots
+
+Refs: #22645
+Refs: #23838
+Refs: nodejs/security-wg#439
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

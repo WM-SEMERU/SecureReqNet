@@ -1,0 +1,7 @@
+cmd/go: directory traversal in "go get" via curly braces in import paths
+
+
+go get downloads and builds source code. It is not supposed to allow arbitrary filesystem writes.
+The go get command is vulnerable to directory traversal when executed with the import path of a malicious Go package which contains curly braces (both { and } characters). Specifically, it is only vulnerable in GOPATH mode, but not in module mode (the distinction is documented at https://golang.org/cmd/go/#hdr-Module_aware_go_get). The attacker can cause an arbitrary filesystem write, which can lead to code execution.
+Thanks to ztz of Tencent Security Platform for discovering and reporting this issue.
+This issue is CVE-2018-16874.

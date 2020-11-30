@@ -1,0 +1,90 @@
+Install-HPOVApplianceCertificate - Illegal characters in path
+
+
+Please fill in as much information as possible to help resolve your issue.
+Expected Behavior
+Read the base64 signed SSL certificate and install it on the appliance, and wait for the task to complete.
+Actual Behavior
+
+Trows exception calling "OpenText"
+Wait-HPOVTaskComplete trows message about not connected to OneView (even it is connected)
+On second try it trows message about "Test-Path: Illegal characters in path." but it actually import the Certificate to OneView
+
+Steps to reproduce
+Just used example from this script with a bit modification
+#Read the signed SSL certificate private key and install it on the appliance, and wait for the task to complete.
+#$cert = Get-Content -Path "C:\Temp\ilo_zertifikate\cert\bl01-syn01.crt"
+$cert = Get-Content -Path "C:\Temp\ilo_zertifikate\cert\bl01-syn01.crt" -Raw
+$TaskToMonitor = Install-HPOVApplianceCertificate -Path $cert -Async
+$TaskToMonitor | Wait-HPOVTaskComplete
+
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion or $PSLibraryVersion): 4.10.1954.1523
+HPE OneView Appliance Version (Get-HPOVVersion -ApplianceVer):  4.10.04.370820.00
+Output from $PSVersionTable on your Windows Host:
+Name                           Value                                                                                                                                                                            
+----                           -----                                                                                                                                                                            
+PSVersion                      5.1.14409.1005                                                                                                                                                                   
+PSEdition                      Desktop                                                                                                                                                                          
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}                                                                                                                                                          
+BuildVersion                   10.0.14409.1005                                                                                                                                                                  
+CLRVersion                     4.0.30319.42000                                                                                                                                                                  
+WSManStackVersion              3.0                                                                                                                                                                              
+PSRemotingProtocolVersion      2.3                                                                                                                                                                              
+SerializationVersion           1.1.0.1     
+Console log output
+PS C:\Scripte> $ConnectedSessions
+
+ConnectionID Name                      UserName      AuthLoginDomain Default
+------------ ----                      --------      --------------- -------
+1            bl01-syn01.domain.local Administrator local           True   
+
+
+
+PS C:\Scripte> $cert = Get-Content -Path "C:\Temp\ilo_zertifikate\cert\bl01-syn01.crt"
+$TaskToMonitor = Install-HPOVApplianceCertificate -Path $cert -Async
+$TaskToMonitor | Wait-HPOVTaskComplete
+Install-HPOVApplianceCertificate : Exception calling "OpenText" with "1" argument(s): "The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and 
+the directory name must be less than 248 characters."
+At line:2 char:18
++ $TaskToMonitor = Install-HPOVApplianceCertificate -Path $cert -Async
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Install-HPOVApplianceCertificate], MethodInvocationException
+    + FullyQualifiedErrorId : PathTooLongException,Install-HPOVApplianceCertificate
+ 
+Wait-HPOVTaskComplete : No valid session ID found for ''.  The call to '/rest/tasks/B66D4E92-6A8C-4B53-A617-4A457A22242F' requires authentication.  Please use Connect-HPOVMgmt to connect and authenticate to 
+an appliance.
+At line:3 char:18
++ $TaskToMonitor | Wait-HPOVTaskComplete
++                  ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : AuthenticationError: (Send-HPOVRequest:String) [Wait-HPOVTaskComplete], AuthSessionException
+    + FullyQualifiedErrorId : NoAuthSession,Wait-HPOVTaskComplete
+ 
+
+PS C:\Scripte> $cert = Get-Content -Path "C:\Temp\ilo_zertifikate\cert\bl01-syn01.crt" -Raw
+$TaskToMonitor = Install-HPOVApplianceCertificate -Path $cert -Async
+$TaskToMonitor | Wait-HPOVTaskComplete
+Test-Path : Illegal characters in path.
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\4.10.1954.1523\HPOneView.410.psm1:15739 char:28
++         'Path is valid: {0}' -f (Test-Path $Path) | Write-Verbose
++                                  ~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (C:\Scripte...TIFICATE-----
+:String) [Test-Path], ArgumentException
+    + FullyQualifiedErrorId : ItemExistsArgumentError,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+Test-Path : Illegal characters in path.
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\4.10.1954.1523\HPOneView.410.psm1:15741 char:8
++         if ((Test-Path $Path) -or $Path -Is [System.IO.FileInfo])
++              ~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (C:\Scripte...TIFICATE-----
+:String) [Test-Path], ArgumentException
+    + FullyQualifiedErrorId : ItemExistsArgumentError,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+
+Appliance                 Name                                     Owner         Created             Duration TaskState PercentComplete
+---------                 ----                                     -----         -------             -------- --------- ---------------
+bl01-syn01.domain.local Certificate Import Signed Configuration. Administrator 28.03.2019 16:32:41 00:01:14 Completed 100            
+
+
+
+PS C:\Scripte>

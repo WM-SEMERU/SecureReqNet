@@ -1,0 +1,4 @@
+[hackerone] #397213 - Mixed active content
+
+
+https://hackerone.com/bugs?report_id=397213

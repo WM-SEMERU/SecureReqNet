@@ -1,0 +1,5 @@
+Token Storage DB
+
+
+A postgresql db for storing tokens.
+tokens are going to be salted with an in-memory secret known only to the process, hashed, and then stored. This way an attacker must do twice the work to compromise accounts, and we can invalidate all tokens in the wild by simply changing the secret.

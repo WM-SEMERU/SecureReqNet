@@ -1,0 +1,49 @@
+Volume snapshot listing failing when originating primary pool removed
+
+
+ISSUE TYPE
+
+Bug Report
+
+COMPONENT NAME
+
+Volume snapshots in ACS4.11.2
+
+CLOUDSTACK VERSION
+
+ACS 4.11.2
+
+CONFIGURATION
+
+Any incorporating volume snapshots
+
+OS / ENVIRONMENT
+
+N/A
+
+SUMMARY
+
+Volume snapshot present as far as CloudStack and Secondary storage goes
+Original primary storage pool ID has been removed
+listSnapshots will fail with:
+Error: (HTTP 530, error code 9999)
+
+2019-04-05 14:08:18,176 ERROR [c.c.a.ApiServer] (qtp788117692-312:ctx-6993074e ctx-97c28410) (logid:b9e936a0) unhandled exception executing api command: [Ljava.lang.String;@3ab4697e
+java.lang.NullPointerException
+STEPS TO REPRODUCE
+
+As above, take volume snapshot, then delete original primary storage pool.
+Confirm the snapshot has two entries in cloud.snapshot_store_ref - one for primary and one for image.
+Ensure the primary pool is marked as deleted.
+Do a listSnapshots API call against the snapshot and observe above errors.
+Now change the snapshot_store_ref entry for primary for the snapshot in question to a non-deleted primary pool.
+Do the listSnapshots API call again and observe this working.
+
+EXPECTED RESULTS
+
+listSnapshots returning results
+
+ACTUAL RESULTS
+
+Error as above.
+

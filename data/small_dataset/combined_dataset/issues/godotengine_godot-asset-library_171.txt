@@ -1,0 +1,5 @@
+Add the LGPL to the list of possible asset licenses
+
+
+We should move to SPDX identifiers for the GPL/LGPL/AGPL eventually, but that will likely require a database migration.
+This closes #170.

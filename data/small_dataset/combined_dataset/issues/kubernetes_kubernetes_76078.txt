@@ -1,0 +1,7 @@
+Allow to specify a Tenant Domain Name/ID for the OpenStack cloud provider
+
+
+This commit adds a possibility to specify a domain name/id for a tenant other than the default one.
+/kind feature
+Allow to specify a domain name/id for a tenant other than the default one for the OpenStack cloud provider.
+

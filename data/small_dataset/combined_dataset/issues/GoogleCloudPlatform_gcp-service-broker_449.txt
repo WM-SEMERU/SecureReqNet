@@ -1,0 +1,5 @@
+added health and liveness checks
+
+
+Fixes #448
+I also refactored the serve command as part of this to simplify it and add docs serving from the root.

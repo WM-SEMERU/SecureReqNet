@@ -1,0 +1,4 @@
+[issue-2] use native PRNG when applicable
+
+
+fix #2

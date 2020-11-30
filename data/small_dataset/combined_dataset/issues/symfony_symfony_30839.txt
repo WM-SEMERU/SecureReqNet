@@ -1,0 +1,54 @@
+Skip Glob brace test when GLOB_BRACE is unavailable
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+From PHP.net:
+
+Note: The GLOB_BRACE flag is not available on some non GNU systems, like Solaris.
+
+This means running the testsuite in e.g. a php-alpine container fails atm. This test should be skipped in these environments.

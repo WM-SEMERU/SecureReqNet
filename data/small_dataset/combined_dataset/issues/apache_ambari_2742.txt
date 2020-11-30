@@ -1,0 +1,66 @@
+[WIP] AMBARI-25043. Sensitive Ambari configuration values are encrypted in Ambari Server DB
+
+
+What changes were proposed in this pull request?
+Ambari configuration value types are defined in org.apache.ambari.server.configuration.AmbariServerConfigurationKey. Sensitive properties have property type of org.apache.ambari.server.configuration.ConfigurationPropertyType#PASSWORD.
+Using this information, if this feature is enabled, the Ambari server should encrypt sensitive values before storing them in theambari_configuration table in the Ambari DB.
+The Ambari server should encrypt sensitive configuration values if the following has been met:
+
+A master key has been setup using the ambari-server setup-security CLI (using option # 2 - Encrypt passwords stored in ambari.properties file)
+The Ambari server configuration property named security.server.encrypt_sensitive_data is set to true
+
+WIP: the API still return the encrypted form; I'm not sure if this needs to be changed...
+How was this patch tested?
+Updated unit tests and they passed:
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 24:50 min
+[INFO] Finished at: 2018-12-21T14:31:01+01:00
+[INFO] Final Memory: 103M/1814M
+[INFO] ------------------------------------------------------------------------
+
+In addition to uni tests the following steps have been done to check if everything works as expected:
+
+installed the latest Ambari and replaced the setupSecurity.py and the generated JAR then restarted the server and the agents
+configured LDAP by running ambari-server setup-ldap (some attributes are changed in the below sample such as server name, etc...)
+checked the database: the manager password was stored in encrypted form
+synced LDAP users successfully
+
+[root@c7401 ~]# ambari-server setup-ldap --ambari-admin-username=admin --ambari-admin-password=admin --ldap-url=TEST_LDAP_SERVER --ldap-user-class=user --ldap-user-attr=sAMAccountName --ldap-group-class=group --ldap-group-attr=cn --ldap-member-attr=member --ldap-dn=distinguishedName --ldap-base-dn=TEST_BASE_DN --ldap-bind-anonym=false --ldap-manager-dn=cn=manager,cn=Users,dc=TEST_DC,dc=hortonworks,dc=com --ldap-manager-password=TEST_PASSWORD --ldap-referral=follow --ldap-sync-username-collisions-behavior=convert --ldap-force-lowercase-usernames=false --ldap-pagination-enabled=false --ldap-ssl=false --ldap-force-setup --ldap-save-settings --ldap-enabled-ambari=true --ldap-manage-services=true --ldap-enabled-services=* --ldap-user-group-member-attr=myMemberOf
+Using python  /usr/bin/python
+
+Fetching LDAP configuration from DB.
+====================
+Review Settings
+====================
+...
+Saving LDAP properties...
+Saving LDAP properties finished
+Ambari Server 'setup-ldap' completed successfully.
+
+
+[root@c7401 ~]# ambari-server sync-ldap --all --ldap-sync-admin-name admin --ldap-sync-admin-password admin
+Using python  /usr/bin/python
+Syncing with LDAP...
+
+Fetching LDAP configuration from DB.
+Syncing all.................
+
+Completed LDAP Sync.
+Summary:
+  memberships:
+    removed = 0
+    created = 9
+  users:
+    skipped = 0
+    removed = 0
+    updated = 0
+    created = 1006
+  groups:
+    updated = 0
+    removed = 0
+    created = 22
+
+Ambari Server 'sync-ldap' completed successfully.
+

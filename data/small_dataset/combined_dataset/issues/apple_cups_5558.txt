@@ -1,0 +1,4 @@
+Fix handling of OctetString in get_options() function
+
+
+The OctetString option was handled as if they have IPP_TAG_NAME tag, though it stores its data in unknown.data instead of string.text and also stores length instead of '\0' end symbol.

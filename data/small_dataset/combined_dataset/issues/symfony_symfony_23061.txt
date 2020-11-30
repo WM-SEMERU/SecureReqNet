@@ -1,0 +1,60 @@
+[Security] Fix exclusion of login_path in determineTargetUrl
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#... 
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+This would fix problem in scenario when:
+in security.yml default_target_path is set to some route
+user uses login form without referer
+currently he would be incorrectly redirected to login page
+after this fix he would be redirected to default_target_path value
+generateUri always returns absolute URL (with host),
+while parse_url($targetUrl, PHP_URL_PATH) is only returning path (without host)
+so entire statement will always evaluate to true, and never to false:
+parse_url($targetUrl, PHP_URL_PATH) !== $this->httpUtils->generateUri($request, $this->options['login_path'])
+
+Worked correctly in 3.2, broken by commit: bafa8e2

@@ -1,0 +1,61 @@
+[ISSUE 3763] - Implementing Function authorization
+
+
+Motivation
+This PR relates to the discussing in #3763
+Modifications
+
+
+Added an new AuthAction "functions".
+
+
+A role needs to be granted that action for it to be allowed to execute any operation on functions.
+
+
+When creating a function, the role also needs to be allowed produce and consume on the namespace as well.
+
+
+Added tests for the whole auth workflow in functions
+
+
+Currently the following endpoints are not secured:
+
+
+ @POST
+    @ApiOperation(
+            value = "Uploads Pulsar Function file data",
+            hidden = true
+    )
+    @Path("/upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public void uploadFunction(final @FormDataParam("data") InputStream uploadedInputStream,
+                               final @FormDataParam("path") String path) {
+        functions.uploadFunction(uploadedInputStream, path);
+    }
+
+    @GET
+    @ApiOperation(
+            value = "Downloads Pulsar Function file data",
+            hidden = true
+    )
+    @Path("/download")
+    public StreamingOutput downloadFunction(final @QueryParam("path") String path) {
+        return functions.downloadFunction(path);
+    }
+
+    @GET
+    @ApiOperation(
+            value = "Fetches a list of supported Pulsar IO connectors currently running in cluster mode",
+            response = List.class
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 403, message = "The requester doesn't have admin permissions"),
+            @ApiResponse(code = 400, message = "Invalid request"),
+            @ApiResponse(code = 408, message = "Request timeout")
+    })
+    @Path("/connectors")
+    public List<ConnectorDefinition> getConnectorsList() throws IOException {
+        return functions.getListOfConnectors();
+    }
+
+Not exactly sure what we should do about them in the context of authorization, but we should have a strategy since downloading someone else's packages may be a security concern.

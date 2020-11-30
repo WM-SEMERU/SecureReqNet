@@ -1,0 +1,22 @@
+Dropbox OAUTH with security fob does not work on desktop
+
+
+Describe the bug
+Unable to link Dropbox account top the desktop application.
+OAUTH window just closes after logging in without prompting for Security token, or authenticator app/SMS OTP.
+To Reproduce
+On a fresh install
+Steps to reproduce the behavior:
+
+Go to 'More'
+Click on 'Dropbox'
+Fill out the login details in the popup window and submit
+popup window just closes
+
+Expected behavior
+Login to dropbox by prompting for a 2FA mechanism (similar to google drive)
+Logs
+[DEBUG] 2019-03-16T13:37:18.051Z [storage-dropbox] List
+[DEBUG] 2019-03-16T13:37:18.052Z [storage-dropbox] OAuth: popup opened
+[DEBUG] 2019-03-16T13:38:01.519Z [popup-notifier] did-fail-load {"sender":{"history":["https://www.dropbox.com/oauth2/authorize?client_id=eor7hvv6u6oslq9&scope=&response_type=token&redirect_uri=https%3A%2F%2Fapp.keeweb.info"],"currentIndex":0,"pendingIndex":-1,"inPageIndex":-1,"_events":{"will-navigate":[null,null]},"_eventsCount":23,"_maxListeners":0,"browserWindowOptions":{"show":false,"webPreferences":{"nodeIntegration":false,"webSecurity":false,"allowDisplayingInsecureContent":true,"allowRunningInsecureContent":true},"width":600,"height":400,"y":480.5,"x":772}}} -20 ERR_BLOCKED_BY_CLIENT chrome-extension://kmendfapggjehodndflmmgagdbamhnfd/u2f-comms.html false
+[ERROR] 2019-03-16T13:38:01.850Z [storage-dropbox] OAuth error popup closed

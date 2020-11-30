@@ -1,0 +1,8 @@
+Regression: mixed content site showing up as insecure
+
+
+test plan:
+
+go to https://mixed.badssl.com/
+it should show up as secure, not insecure
+

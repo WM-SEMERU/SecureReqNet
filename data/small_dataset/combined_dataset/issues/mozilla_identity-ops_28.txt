@@ -1,0 +1,9 @@
+Enable individual user accounts and lock down root in AWS
+
+
+Here are some keys
+https://github.com/mozilla/identity-pubkeys
+And here's how infra does it
+svn.mozilla.org/sysadmins/puppet/trunk/bin/generateusers
+https://mana.mozilla.org/wiki/display/SYSADMIN/LDAP+implementation
+cron driven extracting data from ldap and rendering puppet manifests with it

@@ -1,0 +1,4 @@
+Move to clang
+
+
+As discussed before, it would be great if OpenEnclave could be compiled with clang, as this would facilitate the implementation of compiler-based defenses. This is in particular important with regard to the recent Spectre attacks and other side channel vulnerabilits. Currently, compiling with clang does not seem to work.

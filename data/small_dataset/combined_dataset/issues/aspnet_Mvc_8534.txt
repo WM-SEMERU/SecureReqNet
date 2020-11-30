@@ -1,0 +1,5 @@
+Reinvestigate API surface for all absolute URI generating functions.
+
+
+CVE-2018-0787 was caused by the trust of host headers and the default stance of listening on any host header. The fix is either reconfiguration of a server, which may not be possible for some users, or middleware which remains a sample. Neither of these options are discoverable.
+A more comprehensive approach is needed, potentially one where host headers are specified in config and built into the routing table. An investigation should take place into the best way to introduce a breaking change around absolute URI generation and the discoverability of the security settings necessary.

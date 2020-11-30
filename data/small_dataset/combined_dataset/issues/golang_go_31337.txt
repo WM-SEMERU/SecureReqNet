@@ -1,0 +1,36 @@
+net/rpc: How to judge whether the client is shutdown？
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.12.1 windows/amd64
+
+Does this issue reproduce with the latest release?
+yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+set GOARCH=amd64
+set GOBIN=
+set GOCACHE=C:\Users\admin\AppData\Local\go-build
+set GOEXE=.exe
+set GOFLAGS=
+set GOHOSTARCH=amd64
+set GOHOSTOS=windows
+set GOOS=windows
+set GOPATH=C:\code\gopath
+set GOPROXY=direct
+set GORACE=
+set GOROOT=C:\app\Go
+set GOTMPDIR=
+set GOTOOLDIR=C:\app\Go\pkg\tool\windows_amd64
+set GCCGO=gccgo
+set CC=gcc
+set CXX=g++
+set CGO_ENABLED=1
+set GOMOD=C:\code\gopath\local\rawrpcdemo\rawrpc-webService\go.mod
+set CGO_CFLAGS=-g -O2
+
+What did you do?
+Create an RPC client and server, start the server first, then start the client, and then restart the server, the client's RPC client will appear "connection is shut down" error, just a string. I need to determine if the connection is disconnected, but I can't get the'shutdown'field in Client.
+What did you expect to see?
+What did you see instead?

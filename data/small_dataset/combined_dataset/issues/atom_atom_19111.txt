@@ -1,0 +1,36 @@
+Uncaught Error: ENOENT: no such file or directory, lstat '~/Desktop\test_image.jpg'
+
+
+[Enter steps to reproduce:]
+
+...
+...
+
+Atom: 1.35.1 x64
+Electron: 2.0.18
+OS: Microsoft Windows 10 Home Single Language
+Thrown From: Atom Core
+Stack Trace
+Uncaught Error: ENOENT: no such file or directory, lstat 'C:\Users\Sowmya Baddam\Desktop\test_image.jpg'
+At fs.js:1661
+
+Error: ENOENT: no such file or directory, lstat 'C:\Users\Sowmya Baddam\Desktop\test_image.jpg'
+    at Proxy.realpathSync (fs.js:1661:15)
+    at Proxy.fs.realpathSync (ELECTRON_ASAR.js:336:29)
+    at TreeView.t.exports.TreeView.moveEntry (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:14:912504)
+    at TreeView.t.exports.TreeView.onDrop (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:14:918388)
+    at HTMLDivElement.<anonymous> (~/AppData/Local/atom/app-1.35.1/resources/app/static/<embedded>:14:893098)
+
+Commands
+     -4:51.4.0 tree-view:remove-project-folder (div.header.list-item.project-root-header)
+     -4:23.8.0 tree-view:add-file (div.header.list-item)
+ 35x -4:20.1.0 core:backspace (input.hidden-input)
+     -4:14.9.0 core:confirm (input.hidden-input)
+  6x -3:39.3.0 tree-view:remove (span.name.icon.icon-file-directory)
+     -2:17.3.0 tree-view:add-file (span.name.icon.icon-file-directory)
+ 22x -2:15.8.0 core:backspace (input.hidden-input)
+     -2:11.5.0 core:confirm (input.hidden-input)
+
+Non-Core Packages
+
+

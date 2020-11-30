@@ -1,0 +1,12 @@
+Remove V3 public keys support
+
+
+From coruus@gmail.com on August 02, 2014 21:14:21
+This patch removes support for V3 public keys from E2E.
+Some stats to justify:
+Out of the 3,682,199 primary keys in the SKS keyservers with any creation date, only 185,572 are V3 keys.
+Out of the 879,754 primary keys in the SKS keyservers with a creation date of 2010 or later, only 1,465 are V3 public keys.
+Out of the 298,376 primary keys in the SKS keyservers with a creation date of 2013, only 184 are V3 keys.
+So: No one has a legitimate use for them. They have known weaknesses (particularly w.r.t. the key ID, which is trivially spoofable). Conclusion: The only users of this code will be attackers, and you won't get bug reports from them.
+Attachment: remove-v3-keys.patch
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=125

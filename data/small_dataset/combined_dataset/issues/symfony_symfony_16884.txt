@@ -1,0 +1,6 @@
+[3.0] [Security] Security component depends on random_bytes function, which was introduced in PHP 7.0
+
+
+https://github.com/symfony/security/blob/master/Csrf/TokenGenerator/UriSafeTokenGenerator.php#L48
+I have polyfill-php70 installed. It does not help.
+

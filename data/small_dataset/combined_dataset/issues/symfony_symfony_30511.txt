@@ -1,0 +1,50 @@
+[Process] fix using argument $php of new PhpProcess()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+The current logic makes no sense. 3.4 is fine.

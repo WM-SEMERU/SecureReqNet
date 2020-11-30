@@ -1,0 +1,46 @@
+Service Account Key Rotation
+
+
+A user asked how to rotate service account keys.
+discussion thread
+Currently, user restarts controller manager with new keypair and then restarts all pods.
+User pointed out problems with that procedure:
+
+you cannot restart pod instantly
+until a pod is restarted, it is basically broken when assuming it requires access to the API.  (KubeDNS in particular is a problem)
+many pods are restarted which actually don't have to be restarted as they don't access the API
+
+For problem 2, I suggested the following improved procedure:
+
+Cluster is started with keypair 1
+
+kube-apiserver -service-account-key-file=pub-1
+kube-controller-mgr --service-account-private-key-file=priv-1.
+
+
+time passes.  service account tokens are generated with first keypair
+it is time to rotate.  generate new key pair, pub-2 and priv-2
+run with both keypairs
+
+Accept both: kube-apiserver -service-account-key-file=pub-1,pub-2
+Generate new: kube-controller-mgr --service-account-private-key-file=priv-2
+
+
+for each service account, delete all token secrets and references to them.  Token controller will make new ones, and the new ones will use the new key.
+restart pods at a leisurely pace.
+stop accepting old tokens
+
+kube-apiserver -service-account-key-file=pub-1
+kube-controller-mgr --service-account-private-key-file=priv-1
+
+
+
+What is missing is that -service-account-key-file only accepts a single public key.  Code deeper in the token authenticator appears to handle a list of keys.
+For problem 3:
+Action items:
+
+ make the flag take a list
+ close #16779 so that it can be explicit which pods do not need (and so do not have) a service account token.
+ document rotation procedure, mentioning how to find and to skip pods without a token.
+ e2e test where keys are rotated
+

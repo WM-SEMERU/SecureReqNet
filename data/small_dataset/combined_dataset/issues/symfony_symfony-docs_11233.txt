@@ -1,0 +1,5 @@
+[DependencyInjection] Added a ReverseContainer
+
+
+See: symfony/symfony#30334
+Not sure if we must document this or if it has enough use cases for regular apps.

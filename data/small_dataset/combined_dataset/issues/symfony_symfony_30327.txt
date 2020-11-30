@@ -1,0 +1,52 @@
+[HttpKernel] Fix possible infinite loop of exceptions
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+I ran into an issue in the enqueue library which copied this part of code from Symfony. I'm now starting to understand what the problem is and it should most likely be fixed in Symfony as well.
+I didn't actually run into it in Symfony itself but it seems at least hypothetically possible. Imagine if here $e is somehow the same (===) as $exception. The code below will then find the last exception in the getPrevious() chain and assigns $exception as the previous. However in the off chance that $exception is actually $e (the first exception in the chain) then it creates an infinite loop of exceptions which is not good for monolog and exception handlers.
+What do you think?

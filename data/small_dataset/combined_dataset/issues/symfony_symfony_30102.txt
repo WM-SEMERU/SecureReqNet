@@ -1,0 +1,50 @@
+[Workflow] Graphviz dumper escape not always a string
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+The escape function takes a string as parameter but it can be a bool (see findTransitions method in same class). In this PR I allow any type in escape and does escaping only for string.

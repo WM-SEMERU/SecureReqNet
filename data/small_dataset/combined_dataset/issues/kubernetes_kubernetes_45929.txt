@@ -1,0 +1,7 @@
+NodeRestriction admission plugin
+
+
+Adds an optional NodeRestriction admission plugin that limits identifiable kubelets to mutating their own Node object, and Pod objects bound to their node.
+This is the admission portion of https://github.com/kubernetes/community/blob/master/contributors/design-proposals/kubelet-authorizer.md and kubernetes/enhancements#279
+The `NodeRestriction` admission plugin limits the `Node` and `Pod` objects a kubelet can modify. In order to be limited by this admission plugin, kubelets must use credentials in the `system:nodes` group, with a username in the form `system:node:<nodeName>`. Such kubelets will only be allowed to modify their own `Node` API object, and only modify `Pod` API objects that are bound to their node.
+

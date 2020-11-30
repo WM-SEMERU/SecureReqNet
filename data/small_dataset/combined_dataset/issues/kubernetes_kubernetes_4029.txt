@@ -1,0 +1,12 @@
+Kubernetes pod and namespace security model
+
+
+This proposed update to docs/design/security.md includes proposals
+on how to ensure containers have consistent Linux security behavior
+across nodes, how containers authenticate and authorize to the master
+and other components, and how secret data could be distributed to
+pods to allow that authentication.
+References concepts from #3910, #2030, and #2297 as well as upstream issues
+around the Docker vault and Docker secrets.
+Pulled together to frame the discussion from #3910 as a cross Kubernetes
+concept as per @erictune

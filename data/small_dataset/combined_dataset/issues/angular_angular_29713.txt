@@ -1,0 +1,22 @@
+refactor(core): static-query schematic should check templates
+
+
+Queries can technically be also accessed within component templates
+e.g.
+<my-comp [binding]="myQuery"></my-comp>
+In that case the query with the property "myQuery" is accessed
+statically and needs to be marked with static: true. There are
+other edge cases that need to be handled as the template property
+read doesn't necessarily resolve to the actual query property.
+For example:
+<foo #myQuery></foo>
+<my-comp [binding]="myQuery"></my-comp>
+In this scenario the binding doesn't refer to the actual query
+because the template reference variable takes precedence. The
+query doesn't need to be marked with "static: true" this time.
+This commit ensures that the static-query migration schematic
+now handles this cases properly. Also template property reads
+that access queries from within a <ng-template> are ignored
+as these can't access the query before the view has been initialized.
+Note: Blocked on #29688
+Resolves FW-1216

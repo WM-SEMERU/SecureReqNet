@@ -1,0 +1,12 @@
+Better user impersonation implementation
+
+
+The current user implementation feature suffers from several issues:
+
+it is triggered by passing a _switch_user query parameter to any URL (and redirects back to it), meaning it uses a GET request to change the state of the auth. This causes issues with browsers preloading pages when auto-completing based on the history as the preloading would switch user (this used to be the case in Chrome. I haven't checked recently). Using a POST request does not work, as it would require all routes to accept POST request in addition to GET
+it does not support CSRF protection
+it relies on a special role object to store the old token (forbidding to deprecate using role objects in favor of simple strings), while we already have a better mechanism to store it in token attributes
+
+The lack of CSRF protection was reported to the security team, but we decided than it was not considered as a security issue as such user impersonation is an admin-only feature due to the way it works, and so tricking an admin into switching to someone else would reduce their access. So this will be implemented as a normal feature in a next version.
+The plans here are to provide a new user impersonation feature, and deprecate the old one.
+The new one would work by submitting a request to a dedicated endpoint (which would accept POST request in the route definition, similar to what happens today for the login check route) before redirecting to a target page. This new system would support optional CSRF protection (similar to what we do for form_login)

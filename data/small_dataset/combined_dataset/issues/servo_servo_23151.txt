@@ -1,0 +1,16 @@
+Intermittent failure in /fetch/api/basic/keepalive.html
+
+
+{
+    "status": "FAIL", 
+    "group": "default", 
+    "message": "assert_equals: expected (string) \"on\" but got (object) null", 
+    "stack": "@http://web-platform.test:8000/fetch/api/basic/keepalive.html:27:3\nasync*Test.prototype.step@http://web-platform.test:8000/resources/testharness.js:1587:20\npromise_test/tests.promise_tests</<@http://web-platform.test:8000/resources/testharness.js:591:31\npromise_test/tests.promise_tests<@http://web-platform.test:8000/resources/testharness.js:590:20\n", 
+    "subtest": "Fetch API: keepalive handling", 
+    "test": "/fetch/api/basic/keepalive.html", 
+    "line": 49667, 
+    "action": "test_result", 
+    "expected": "PASS"
+}
+
+

@@ -1,0 +1,29 @@
+renamed conformance test for should allow activeDeadlineSeconds to be updated
+
+
+What type of PR is this?
+
+Uncomment only one  /kind <> line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+/kind api-change
+/kind bug
+
+/kind cleanup
+
+/kind design
+/kind documentation
+/kind failing-test
+/kind feature
+/kind flake
+
+What this PR does / why we need it:
+the conformance test name should allow activeDeadlineSeconds to be updated [NodeConformance] is not reflecting the actual meaning of the test case. so changed the test name to should allow activeDeadlineSeconds to be updated and pod must terminate with the status DeadlineExceeded
+Which issue(s) this PR fixes:
+Fixes #
+Special notes for your reviewer:
+changed a conformance test case title form should allow activeDeadlineSeconds to be updated [NodeConformance] to should allow activeDeadlineSeconds to be updated and pod must terminated with the status DeadlineExceeded [NodeConformance] based on the test coverage
+Does this PR introduce a user-facing change?:
+NONE
+
+/area testing
+/area conformance
+@spiffxp @brahmaroutu @kubernetes/cncf-conformance-wg

@@ -1,0 +1,23 @@
+AMBARI-24781 - Ambari setup-ldap: change group member default for IPA
+
+
+What changes were proposed in this pull request?
+
+Change the default value of "Group member attribute" for IPA to "member"
+Remove --ldap-use-generic-defaults option and add --ldap-type option to choose the default values for missing options in cli mode instead.
+
+How was this patch tested?
+Run python tests in ambari-server
+mvn test -DskipSurefireTests
+Manual tests:
+
+Install Ambari and replace the affected .py files.
+start ambari server
+Run ambari-server setup-ldap
+check whether the ldap config properties are saved to the database table ambari_configuration
+Restart ambari server
+Run ambari-server sync-ldap
+Log into the ambari server web UI using one of the users stored in ldap
+Check that the users in Ambari are associated to any group
+
+Use a one line command to to setup-ldap by passing all the ldap properties using cli options.

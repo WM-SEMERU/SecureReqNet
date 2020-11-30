@@ -1,0 +1,46 @@
+[Validator] Add the missing translations for the Arabic (ar) locale
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30149 
+
+
+License
+MIT
+
+
+
+This PR addresses the issue #30149, adding the missing translations.

@@ -1,0 +1,4 @@
+Restrict firewall to a specific request by IP
+
+
+In the project I'm working on I'm trying to restrict a firewall to a specific IP address/range. The ACL can already do this, and the firewall seems to support only host and pattern options. It would be cool if ip and ips options (same as access_control) could be added. This can be done using a custom request matcher, but I should duplicate all the logic of the host and pattern matching too if I want to use a combination of both

@@ -1,0 +1,5 @@
+Look into simplifying string event handler logic
+
+
+Original issue 1865 created by kpreid.switchb.org on 2013-10-21T19:34:53.000Z:
+With the removal of ES5/3 and the cajoler (r5611), it is always the case that HTML is being processed on the client side and with eval available. Therefore, there is no need to have special cases for pre-compiled or "simple" event handlers, which may allow simplifying Domado. Look into this.

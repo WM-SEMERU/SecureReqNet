@@ -1,0 +1,27 @@
+Tapping on Brave Rewards system notification yields no action
+
+
+Steps to reproduce 
+
+clean install Brave
+Get Brave Rewards system notification
+Tap on that notification
+
+Actual result 
+Nothing happens. Usually tapping on a notification yields an action.
+
+In order to perform notification action, I need to expand it and press Zacznij (which translates to Begin), then chrome://rewards is opened in Brave
+
+Expected result
+chrome://rewards is opened in Brave on tap
+Issue reproduces how often 
+Easily reproduced
+Device details
+
+Install type (ARM, x86):ARM
+Device (Phone, Tablet, Phablet): Samsung s7
+Android version: 8.0.0
+
+Brave version
+Reproduced on Samsung s7, Android 8.0.0, BraveMonoarm v1.0.90-rc.2
+cc @brave/legacy_qa @samartnik @SergeyZhukovsky

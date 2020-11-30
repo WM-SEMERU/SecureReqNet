@@ -1,0 +1,6 @@
+'removeProperty' missing on CSSStyleDeclaration
+
+
+Original issue 1943 created by james.keane@wishabi.com on 2014-10-28T20:26:50.000Z:
+CSSStyleDeclaration should have a 'removeProperty' method, ss of DOM level 2: http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleDeclaration
+Patch included.

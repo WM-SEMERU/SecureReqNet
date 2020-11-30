@@ -1,0 +1,55 @@
+[Form] add more values to `false_values` of CheckboxType
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.1
+
+
+Bug fix?
+not sure
+
+
+New feature?
+not sure
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Ref: #13589
+When consuming a Symfony Form through an API, like manually calling the URL with form data in the URL (e.g.: ?my_checkbox=false or ?my_checkbox=off), it does not work because it interpret those values as true.
+We already encountered this issue on 2/3 projects and I'm probably sure we are not the only one.
+To prevent this, I think it would be nice to add more false values to the CheckboxType type.
+What do you think about it?
+Thanks

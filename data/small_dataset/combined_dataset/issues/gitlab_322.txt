@@ -1,0 +1,6 @@
+I have two projects in GitLab. One has Wiki and Snippets enabled, another doesn't. So header looks busier on second. Because of this, I can't always see number of pending merge requests. 
+I believe, this is UI bug.
+
+![screenshot](https://gitlab.com/files/note/126039/gitlab-mr-number.png)
+
+Number of merge requests for both project is 1 at the moment I took these screenshots.

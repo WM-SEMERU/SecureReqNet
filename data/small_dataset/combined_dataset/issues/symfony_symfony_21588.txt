@@ -1,0 +1,57 @@
+[Security] fixes LDAP bind authentication using wrong username
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+I'm trying to set up LDAP authentication where users can log in using their e-mail address, which should get resolved to the 'uid' field in the directory. After this the authentication should be based on this uid. I'm working against '389 directory server' as set up by a Kolab install. This does not seem to allow binding based on e.g. the mail field of a user.
+The LDAP user provider is able to resolve the user. This is the (redacted) provider config I'm using:
+    providers:
+        kolab:
+            ldap:
+                service: ldap
+                base_dn: 'ou=People,dc=example,dc=com'
+                search_dn: "%ldap_search_dn%"
+                search_password: "%ldap_search_password%"
+                default_roles: ROLE_ADMIN
+                uid_key: uid
+                filter: '(&(|(objectclass=inetorgperson))(|(mailPrimaryAddress={username})(mail={username})))'
+
+I noticed the User object created by the LdapUserProvider is correctly set the the uid field of the user.
+However, the LDAP Bind Authentication Provider does not use the username as provided by the user provider. Instead it uses the username as submitted in the token when binding. This means users cannot login.
+The fix is to use $user->getUsername() instead of $token->getUsername() in checkAuthentication(). This way the resolved username is used and the authentication works correctly.

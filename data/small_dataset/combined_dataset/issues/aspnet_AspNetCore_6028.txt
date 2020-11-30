@@ -1,0 +1,8 @@
+Issuer validation problem
+
+
+Hello!
+Azure AD B2C produces JWT with issuer "https://sts.windows.net/{TENANT_ID}/', however JwtBearerHandler takes issuer from Open ID metadata endpoint (https://login.microsoftonline.com/{TENANT_ID}/v2.0/.well-known/openid-configuration), as I see, which is "https://login.microsoftonline.com/{TENANT_ID}/v2.0".
+Is there a way to override thsi behavior? Add some custom issuer validatior or add "sts.windows.net" to the list of valid issuers?
+I see that inside AzureADB2CAuthenticationBuilderExtensions.AddAzureADB2CBearer JwtBearerOptionsConfiguration is used. Is it possible to add some injection point or extend AzureADB2COptions to add valid issuers to the list?
+Thank you!

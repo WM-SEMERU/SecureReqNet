@@ -1,0 +1,4 @@
+Update aspnetapp samples to use bootstrap >= 3.4.1
+
+
+This is to address a vulnerability in the current version (3.0.0) being referenced.

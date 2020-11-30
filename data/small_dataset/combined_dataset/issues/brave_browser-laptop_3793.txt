@@ -1,0 +1,13 @@
+whitelisted mixed content pages incorrectly showing as secure in private browsing mode
+
+
+to repro:
+
+go to https://mixed-script.badssl.com/ in a regular browsing session and allow mixed content
+open a private tab and go to the same URL
+
+expected behavior:
+the private tab shows the unlocked icon
+actual behavior:
+the private tab shows the locked icon even though insecure scripts are loaded
+cc @darkdh

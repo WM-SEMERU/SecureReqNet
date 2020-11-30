@@ -1,0 +1,54 @@
+Extension manifest.json homepage_url should default to Chrome Web Store URL
+
+
+Description
+In Chrome, if an extension does not specify the homepage_url field in the manifest.json, it defaults to the Chrome Web Store URL so right clicking the extension icon allows you to quickly navigate to it.
+From the documentation:
+
+If you distribute your extension using the Chrome Web Store, the homepage URL defaults to the extension's own page.
+
+Steps to Reproduce
+
+Install this extension (shameless self-promotion): https://chrome.google.com/webstore/detail/xtab/amddgdnlkmohapieeekfknakgdnpbleb
+Right click the extension icon
+
+Actual result:
+Notice that the link to the item is grayed out:
+
+Expected result:
+It should be clickable (in Chrome):
+
+Reproduces how often:
+Every time
+Brave version (brave://version info)
+
+
+
+Key
+Value
+
+
+
+
+Brave
+0.61.52 Chromium: 73.0.3683.86 (Official Build) (64-bit)
+
+
+Revision
+f9b0bec6063ea50ce2b71f5b9abbae7beee319a6-refs/branch-heads/3683@{#858}
+
+
+OS
+Mac OS X
+
+
+
+Reproducible on current release:
+Unsure
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields? No
+Is the issue reproducible on the latest version of Chrome? No
+
+Additional Information
+This is tangentially related to #3248

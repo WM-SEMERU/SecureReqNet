@@ -1,0 +1,51 @@
+[Validator] Improve constraint default option check
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Any constraint without default option used as annotation with unnamed first argument (for example, @Assert\Collection(1)) throws an exception with an ugly message The options "" do not exist in constraint Collection.
+This PR makes constraint check the default option in the annotation case in the same way it checks it in the "real" code case. So the exception will be No default option is configured for constraint Collection.

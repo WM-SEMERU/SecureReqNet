@@ -1,0 +1,10 @@
+Feature Request: npm install Should Only Install Exact Versions Unless Explicitly Overridden
+
+
+What's the feature?
+IMO npm install should only install exact packages unless explicitly told not to via a flag e.g. --allow-package-upgrades.
+What problem is the feature intended to solve?
+
+Would make CI builds repeatable by default
+Would make it impossible to accidentally, silently upgrade to a compromised package e.g. #21202
+

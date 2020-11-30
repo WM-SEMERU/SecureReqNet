@@ -1,0 +1,50 @@
+Fix type hints for email attachments
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+createDataPart() must return a DataPart instance, so attachPart() must only accept DataPart instances and getAttachments() is guaranteed to return an array of DataPart instances.

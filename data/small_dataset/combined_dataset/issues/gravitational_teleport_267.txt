@@ -1,0 +1,5 @@
+Add security notice on deployments of teleport
+
+
+To avoid privilege escalation by a user SSHing into the machine with auth server, administrators must make sure that keys in /var/lib/teleport are not accessible to un-privileged users, otherwise anyone can ssh in and upgrade themselves to be root.
+We can simply address this in the docs with a label "security" note.

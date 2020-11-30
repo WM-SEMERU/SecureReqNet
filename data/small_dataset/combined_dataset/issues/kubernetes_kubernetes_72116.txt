@@ -1,0 +1,10 @@
+Investigate adding per-request binding or assertions to apiserver proxy
+
+
+Investigate adding per-request binding or assertions that would let backends verify a particular request was intentionally forwarded from the apiserver proxy
+From CVE-2018-1002105 post-mortem
+/area security
+/area apiserver
+/priority important-longterm
+/kind cleanup
+/sig api-machinery

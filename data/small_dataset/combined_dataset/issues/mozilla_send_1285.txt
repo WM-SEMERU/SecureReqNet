@@ -1,0 +1,5 @@
+Dev server not updating
+
+
+We have a new locale (zgh), with translations, but I don't see the content on the DEV server
+https://github.com/mozilla/send/blob/87f947c31d2431efb012bb553c2006395853c65f/public/locales/zgh/send.ftl

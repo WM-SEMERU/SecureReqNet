@@ -1,0 +1,53 @@
+[automated] Merge branch 'release/3.0-preview4' => 'master'
+
+
+I detected changes in the release/3.0-preview4 branch which have not been merged yet to master. I'm a robot and am configured to help you automatically keep master up to date, so I've opened this PR.
+This PR merges commits made on release/3.0-preview4 by the following committers:
+
+@anurse
+
+Instructions for merging from UI
+This PR will not be auto-merged. When pull request checks pass, complete this PR by creating a merge commit, not a squash or rebase commit.
+
+If this repo does not allow creating merge commits from the GitHub UI, use command line instructions.
+Instructions for merging via command line
+Run these commands to merge this pull request from the command line.
+git fetch
+git checkout release/3.0-preview4
+git pull --ff-only
+git checkout master
+git pull --ff-only
+git merge --no-ff release/3.0-preview4
+
+# If there are merge conflicts, resolve them and then run git merge --continue to complete the merge
+# Pushing the changes to the PR branch will re-trigger PR validation.
+git push https://github.com/dotnet-maestro-bot/AspNetCore HEAD:merge/release/3.0-preview4-to-master
+
+or if you are using SSH
+git push git@github.com:dotnet-maestro-bot/AspNetCore HEAD:merge/release/3.0-preview4-to-master
+
+
+After PR checks are complete push the branch
+git push
+
+Instructions for resolving conflicts
+⚠️ If there are merge conflicts, you will need to resolve them manually before merging. You can do this using GitHub or using the command line.
+Instructions for updating this pull request
+Contributors to this repo have permission update this pull request by pushing to the branch 'merge/release/3.0-preview4-to-master'. This can be done to resolve conflicts or make other changes to this pull request before it is merged.
+git checkout -b merge/release/3.0-preview4-to-master master
+git pull https://github.com/dotnet-maestro-bot/AspNetCore merge/release/3.0-preview4-to-master
+(make changes)
+git commit -m "Updated PR with my changes"
+git push https://github.com/dotnet-maestro-bot/AspNetCore merge/release/3.0-preview4-to-master
+
+
+or if you are using SSH
+git checkout -b merge/release/3.0-preview4-to-master master
+git pull git@github.com:dotnet-maestro-bot/AspNetCore merge/release/3.0-preview4-to-master
+(make changes)
+git commit -m "Updated PR with my changes"
+git push git@github.com:dotnet-maestro-bot/AspNetCore merge/release/3.0-preview4-to-master
+
+
+Contact .NET Core Engineering if you have questions or issues.
+Also, if this PR was generated incorrectly, help us fix it. See https://github.com/dotnet/arcade/blob/master/scripts/GitHubMergeBranches.ps1.

@@ -1,0 +1,36 @@
+Namespace storage does not remove OrphanFinalizer during cascade deletion
+
+
+What happened:
+I created a namespace foo with orphan finalizer, and then tried to delete it:
+$ cat ns.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: foo
+  finalizers:
+  - orphan
+$ kubectl create -f ns.yaml
+namespace/foo edited
+$ kubectl delete ns foo
+namespace "foo" deleted
+The namespace can be deleted, and the orphan finalizer is removed by garbage collection controller:
+...
+I0401 19:09:56.510632   77981 graph_builder.go:578] GraphBuilder process object: v1/Namespace, namespace , name foo, uid c396b742-9be5-4d5b-b86a-4614853e9516, event type update
+I0401 19:09:56.510672   77981 graph_builder.go:540] add [v1/Namespace, namespace: , name: foo, uid: c396b742-9be5-4d5b-b86a-4614853e9516] to the attemptToOrphan
+I0401 19:09:56.510744   77981 garbagecollector.go:570] successfully updated all dependents of owner [v1/Namespace, namespace: , name: foo, uid: c396b742-9be5-4d5b-b86a-4614853e9516]
+
+What you expected to happen:
+Since kubectl species propagationPolicy: Background, it is not an orphaning operation, the finalizer should be removed in namespace store.
+How to reproduce it (as minimally and precisely as possible):
+Same as what I observed:
+
+create a namespace.
+add orphan finalizer.
+run kubectl delete.
+
+Anything else we need to know?:
+Environment:
+
+Kubernetes version (use kubectl version): HEAD
+

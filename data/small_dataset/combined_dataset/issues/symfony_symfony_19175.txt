@@ -1,0 +1,12 @@
+[Security][Guard] Per authenticator configuration via security factory
+
+
+This is first a question, since there is no real documentation for this component yet.
+In Guard, the end user can use several authenticators per firewall, that is something nice.
+The problem is that we can't define any extra configuration per authenticator.
+I mean that we don't have any alternative to the classic SecurityListenerFactor but per authenticator.
+Does providing this feature (extra configuration per authenticator) can be envisaged?
+If it is, I can work on.
+Otherwise, is there any alternative?
+For a real use case, please see lexik/LexikJWTAuthenticationBundle#184 (comment) and the (very light) code that comes with.
+ping @weaverryan What do you think?

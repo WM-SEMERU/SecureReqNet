@@ -1,0 +1,6 @@
+OE samples readme files should be updated to reflect the newly added CMake support
+
+
+
+
+

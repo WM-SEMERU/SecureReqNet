@@ -1,0 +1,11 @@
+Make SQL statements more explicit & closer to their use
+
+
+
+ I have updated the CHANGELOG.
+
+Adjust the draft version number according to semantic versioning rules.
+
+
+ I have updated documentation accordingly.
+

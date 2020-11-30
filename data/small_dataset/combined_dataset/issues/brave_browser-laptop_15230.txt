@@ -1,0 +1,15 @@
+Resolves issue 15229
+
+
+Resolves #15229
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+[] Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+Visit www.qwant.com and lite.qwant.com. Confirm that no extension/addon is offered.

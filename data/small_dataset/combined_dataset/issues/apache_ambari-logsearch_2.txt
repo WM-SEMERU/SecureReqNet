@@ -1,0 +1,26 @@
+[AMBARI-24656] [Log Search UI] Handle the 401 and the 403 response status at login
+
+
+What changes were proposed in this pull request?
+This big change root reason is to avoid current and future circular dependencies.
+With this change we start to implement actions/reducers/effects and the plan is to do it step by step removing the heavy load from the services.
+Main changes:
+
+Adding Chrome Launcher to be able to run Chrome on dev env in order to get more detailed error messages
+Adding Auth state/reducers/actions/effects in order to have clear statuses for all the possible case during the authentication.
+Removing the state handling from the AuthService
+Reload the page on logout event or an 401 response (to be sure that all the data wiped out)
+Show timeout notification on 403 response
+There is a fix for the dropdown buttons to use unique IDs in order to be able to work multiple instances on the same page.
+Changing the login form in order to use auth messages instead of the single "not authorised one"
+Changing the notification titles optional
+Changing some private properties to public to prepare the templates to upgrade
+Some small formatting changes where I touched a file.
+Some of the unit tests have been rewritten since the code that was tested by those was changed.
+
+How was this patch tested?
+It was tested manually and by unit tests:
+PhantomJS 2.1.1 (Mac OS X 0.0.0): Executed 269 of 269 SUCCESS (9.135 secs / 9.044 secs)
+✨  Done in 34.96s.
+
+Please review Ambari Contributing Guide before opening a pull request.

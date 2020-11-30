@@ -1,0 +1,5 @@
+change querystring values to a postform
+
+
+After #2, I noticed that proxies and your ISP while they might not be able to inspect your traffic they can cache your URLs https://www.eff.org/deeplinks/2017/03/five-creepy-things-your-isp-could-do-if-congress-repeals-fccs-privacy-protections.
+Passing in secrets in the query string is a security flaw. The proper way is to make a post form so send the secrets url-encoded and set the body content-Type to "application/x-www-form-urlencoded".

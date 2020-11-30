@@ -1,0 +1,75 @@
+Segment Loading on historical node startup
+
+
+Motivation
+The first query for a given datasource after historical node startup tends to take a very long time.  Subsequent queries are faster.  This will add predictability to the system by making sure the first query is just as fast (if it can be) as the rest after historical node startup.
+Proposed changes
+Modify the CLIHistorical startup OR add an extension
+The module is virtually the same either route, but it only gets loaded in the conf/historical/runtime.properties file if added as an extension, otherwise the CLIHistorical binding process binds this as a module as a LazySingleton.  This module or extension will be disabled by default so as to not screw up any currently held beliefs about Druid's operations.
+The module/extension will have an injected SegmentManager (which has a SegmentLoader).
+The way I'm envisioning this is that there could be an interface that looks something like this:
+interface SegmentCacheWarmupStrategy {
+   public Collection<SegmentId> filterSegments(DataSource source, Collection<SegmentId> inputs);
+}
+
+
+Simply put: this is method is called by the Segment Warming module/extension when it is loaded (in a single background thread).  The SegmentIds are grouped by DataSource for the filterSegments call.  All classes that implement this receive Properties from the config file.
+Various implementations could be added, for instance:
+
+Dumbly add as many segments until/while x% of memory is utilized / free
+Pre-load as many segments as possible starting from newest (now) and going backwards in time (then).
+Pre-load as many segments as possible starting from the oldest (then) and going forward in time (now).
+Chain strategy (use multiple strategies together, in a specific order, e.g. filterA("s", filterB("s", filterC("s", ...))))
+Custom segment warming strategy per table or per business need (added to class path by end user)
+
+I propose that it is started with the first point about blindly loading segments until x% of memory is utilized / free.  I also propose that we implement the filter start from now and going back in time.
+All configurations for warming strategies shall support a default strategy if there isn't one in a configuration file.  They may default to no strategy and no Segment Warming procedure shall take place.
+Pursuant to these suggestions, I favor the following configuration properties:
+Strategy: Naive fill x% or Naive fill up to x%:
+
+Configurable per DataSource for %ages.
+Optional ordered preference given to DataSources
+Optional default configuration for unanticipated DataSources
+
+Strategy: From Now until ...:
+
+Configurable per DataSource
+Specifies a time period or interval to use for loading segments by metadata attached to them
+Optional default configuration for unanticipated DataSources
+
+Strategy: Chained:
+
+Configurable per DataSource.  There will be an order of the implementations being called.
+Uses the previously mentioned configurations for other strategies.
+
+It should be possible to use the Segment Warmer to use multiple different strategies for all DataSources, but only one Strategy (or chained) per DataSource.
+An optional default strategy could be provided for unanticipated data sources, or left blank.  The default could be that there might not be any cache warming unless explicitly enabled for unanticipated DataSources.
+There will be no emitted metrics.  Configuration parameters would be done in the runtime.properties file for the historical nodes only.  There are no query specs/ingestion specs or SQL language concerns.
+Rationale
+A startup query could be run from some sort of crontab-like environment or on historical node startup, but it could get unruly since we really care about segments being loaded, not beating the cluster to death with queries where we pass data around and perform computation between nodes.  Synchronizing this outside of Druid might be difficult and other customers may end up eventually writing this their own method.  Let's grab the bull by the horns now so that implementations of this can be contributed back to the community and be closer to the Druid ecosystem than some other customers' business infrastructure.
+Operational impact
+
+Depending on the route chosen (module v.s. extension), CLIHistorical may need to be modified.
+It's probable the a Zookeeper lock may take place so that only one historical node is dictating which segments get loaded at startup.  It's also probable that we let them fight it out and do a real quick scan to see which segments are already loaded or not.  I want to punt this decision to the committee.
+This will be disabled by default but only enabled in the historical config file runtime.properties.
+It's probable that this solution could be similar to a "Replication Storm" commonly known with other databases, except it would be a "Startup Storm."
+I'm proposing that this remain disabled by default but still be allowed into the project, so no one should be impacted by the change unless they specifically opt-in.
+There is no migration path.  Simply edit some configuration files.  Underlying data formats, queries, etc. are unchanged.
+There should be no effect on doing a rolling downgrade except to return to previously-known slow first queries after historical node startup.
+There would be an impact on rolling upgrades, which could have an effect similar to "Replication Storm."
+
+Test plan (optional)
+
+Unit tests for the interface implementations
+Unit tests for the Segment Warming module/extension
+Integration test between the Segment Warming module/extension and an anonymous instantiation of the interface.
+Actual QA testing done on testing clusters to assess impact of: rolling restarts, whole cluster restarts, and single node restarts.
+Assess performance impact on different types of deep storages.
+
+Future work
+
+Formulate different Warming Strategies than the ones I could think of.
+Eventually move from extensions-contrib to extensions (may not be needed if CLIHistorical is to be modified).
+Evaluate ways to prevent/alleviate/mitigate "Startup Storm."
+
+Thank you for your time

@@ -1,0 +1,55 @@
+Fix dark themed componnents
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+yes/no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Small follow up of #30860
+
+see #29194 (comment)
+
+
+see #29194 (comment)

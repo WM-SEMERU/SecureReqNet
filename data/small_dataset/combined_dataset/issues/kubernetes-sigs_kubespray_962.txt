@@ -1,0 +1,35 @@
+Configure Docker to run with User Namespaces
+
+
+This is feature request.
+There are various attacks possible on Docker and K8s environments. One such category of attacks is related to Linux kernel resource sharing scheme and namespaces.
+User Namespaces greatly improve Docker and K8s deployment security mapping 'host' PID to a  different 'container' PID. In other words when User Namespaces are in play process PIDs executed within Docker runtime never overlap with Linux host PIDs providing expected separation.
+More information:
+https://success.docker.com/Datacenter/Apply/Introduction_to_User_Namespaces_in_Docker_Engine
+Enabling user namespaces on Ubuntu 16.04:
+
+
+Create PID mapping:
+adduser dockremap
+echo dockremap:500000:65536 > /etc/subuid
+echo dockremap:500000:65536 > /etc/subgid
+
+
+Override default Docker startup options:
+cat << 'EOF' >> /etc/systemd/system/docker.service.d/userns-remap.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd --userns-remap=default -H fd:// $DOCKER_OPTS
+EOF
+
+
+Restart Docker daemon:
+systemctl restart docker.service
+
+
+Verify that mapping is being applied:
+ps xauw | grep dockerd
+
+
+Environment:
+Ubuntu 16.04

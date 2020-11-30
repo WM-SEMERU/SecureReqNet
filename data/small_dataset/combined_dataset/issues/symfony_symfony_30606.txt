@@ -1,0 +1,50 @@
+[Validator] allow brackets in the optional query string
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30603
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Add the allowBrackets option from the Url constraint to allow brackets in the optional query string.

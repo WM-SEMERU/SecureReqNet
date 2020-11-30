@@ -1,0 +1,63 @@
+Link:          https://hackerone.com/reports/303388
+By:            @fransrosen
+
+When a user creates a new project, the project gets the user's current name as namespace-prefix of the project. What was interesting is that even though the user changes its name, the old namespace is still saved on the repo, these are two repos for the same user:
+
+![Screen_Shot_2018-01-09_at_00.17.36](/uploads/cb8c8d9e5a8f33076ca96f5d7424babf/Screen_Shot_2018-01-09_at_00.17.36.png)
+
+Now, this is not relevant to the issue, but actually makes the exploitation easier, since you don't need to keep the payload in your name for it to trigger, you can just change it back to a legit name afterwards, since it's the namespace causing the issue.
+
+The issue seems to be in the project selector inside the issue-view when selecting `Move issue`:
+
+![Screen_Shot_2018-01-09_at_00.21.13](/uploads/055e428bd65b5179274ab4df4bf06de3/Screen_Shot_2018-01-09_at_00.21.13.png)
+
+The issue here seems to be a complete lack of sanitization at all of the `name_with_namespace`-value, since nothing needs to be using HTML-entities or anything, just using a simple XSS-poc payload like this:
+
+```
+<img src=x onerror=alert(document.domain)>
+```
+
+The code which is causing this is here:
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/assets/javascripts/sidebar/lib/sidebar_move_issue.js#L44
+
+```js
+      renderRow: project => `
+        <li>
+          <a href="#" class="js-move-issue-dropdown-item">
+            ${project.name_with_namespace}
+          </a>
+        </li>
+      `,
+```
+
+As you see, no escape happens here at all.
+
+### PoC
+
+1. Go to `/profile` and change your name to:
+
+```
+<img src=x onerror=alert(document.domain)>
+```
+
+2. Save, and create a new project, name it `test`.
+
+3. Now, go back to `/profile` and set your name to something else, in my case I set `frans`.
+
+4. Create a new project, `poc`
+
+5. Create a new issue in the new project. Go to the issue page and click `Move issue`. The javascript from the first project's namespace should trigger the javascript.
+
+PoC-movie:
+![GitlabXSS2](/uploads/41b1fe2aa5c6529bfb9c42baa67ae000/GitlabXSS2.mp4)
+
+![Screen_Shot_2018-01-09_at_00.28.07](/uploads/0d69306257fe17e163d0f432595c6de6/Screen_Shot_2018-01-09_at_00.28.07.png)
+
+(PS. Don't be scared of the amount of XSS-reports I send in, you're doing great and it's not that easy to find these at all, I've been doing this for some time so I know where to look)
+
+Regards,
+Frans
+
+## Impact
+
+The stored XSS is triggering for anyone, also triggering on gitlab.com, and it can trigger on public repos. You could easily build a PoC that would modify the email address of the current user stealing their CSRF-token as soon as the script triggers, or stealing information about private repositories.

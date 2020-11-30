@@ -1,0 +1,50 @@
+[Security] Making the component more flexible
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+yes/no (not sure yet)
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+none, yet.
+
+
+
+This is the initial beginning to refactor a large part of the Security component. As purposed by @wouterj I start the initial refactoring. (cc: @nicolas-grekas)

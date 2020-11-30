@@ -1,0 +1,6 @@
+prevent browser-level self-xss
+
+
+If you open the webpage console on Facebook, it says:
+
+we should do the same for the browser-level console (cmd+shift+j).

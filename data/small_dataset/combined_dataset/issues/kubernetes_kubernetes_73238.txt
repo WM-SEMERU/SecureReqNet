@@ -1,0 +1,26 @@
+Tracking issue: Update to go1.11.5 and 1.10.8
+
+
+The go team has released go1.11.5 and 1.10.8 with a security fix.
+https://groups.google.com/d/msg/golang-announce/mVeX35iXuSw/Flp8FX7QEAAJ
+
+We have just released Go 1.11.5 and Go 1.10.8 to address a recently reported security issue. We recommend that all users update to one of these releases (if you’re not sure which, choose Go 1.11.5).
+This DoS vulnerability in the crypto/elliptic implementations of the P-521 and P-384 elliptic curves may let an attacker craft inputs that consume excessive amounts of CPU.
+These inputs might be delivered via TLS handshakes, X.509 certificates, JWT tokens, ECDH shares or ECDSA signatures. In some cases, if an ECDH private key is reused more than once, the attack can also lead to key recovery.
+The issue is CVE-2019-6486 and Go issue golang/go#29903. See the Go issue for more details.
+
+We should kick off upgrades of both the kubernetes build system, and our CI, as soon as possible.
+
+Status:
+
+ test-infra (kubernetes/test-infra#10957)
+ master/1.14 (#73326)
+ 1.13 (#73376)
+ 1.12 (#73329)
+ 1.11 (#73379)
+
+
+cc: @ixdy @kubernetes/sig-testing @kubernetes/sig-release @kubernetes/product-security-team
+/area security
+/sig release
+/priority critical-urgent

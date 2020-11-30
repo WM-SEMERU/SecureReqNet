@@ -1,0 +1,6 @@
+Expose exit numbers on route steps
+
+
+LegStep should have a property corresponding to the exits property that was implemented in Project-OSRM/osrm-backend#4215. This property contains the exit number of the exit at the route step’s maneuver.
+/ref mapbox/MapboxDirections.swift#146
+/cc @cammace

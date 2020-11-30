@@ -1,0 +1,17 @@
+Java code can swallow nondeterministic exceptions, potentially leaving the thrower in an inconsistent state
+
+
+Original issue 461 created by tyler.close on 2008-06-10T17:43:56.000Z:
+What steps will reproduce the problem?
+
+Create a Caja input program that causes the parser to eat up enough of
+its Java invocation stack that a StackOverflowError is cause inside the
+implementation of the method called on line 396.
+The called object is left in an inconsistent state because assignment
+operations are not executed.
+The finally block on line 397 eats the VirtuallyMachineError by instead
+throwing the RuntimeException held in the ex variable.
+
+What is the expected output? What do you see instead?
+It's possible a particular Caja program could put the Caja transformer into
+an inconsistent state, leading to incorrect output.

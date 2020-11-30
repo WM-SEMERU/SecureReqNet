@@ -1,0 +1,81 @@
+CA test failure: TestNodeCertificateWithEmptyPolicies
+
+
+Just encountered this one running the tests locally:
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:35986: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:35986: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:35986: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:35986: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-manager." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:45741: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:45741: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:45741: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="Failed to dial 127.0.0.1:45741: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:34-07:00" level=info msg="grpc: Server.Serve failed to create ServerTransport:  connection error: desc = \"transport: write tcp 127.0.0.1:45741->127.0.0.1:50046: write: broken pipe\"" 
+time="2016-06-13T13:00:35-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:35-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:35-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:35-07:00" level=info msg="Failed to dial 127.0.0.1:43013: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:35-07:00" level=info msg="Failed to dial 127.0.0.1:43013: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:35-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-worker." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-worker." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:41415: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:41415: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:41415: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:41415: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:35690: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:35690: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:35690: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:37-07:00" level=info msg="Failed to dial 127.0.0.1:35690: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:39618: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:39618: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:37343: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:37343: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:37343: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:37343: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="grpc: Server.Serve failed to create ServerTransport:  connection error: desc = \"transport: write tcp 127.0.0.1:37343->127.0.0.1:53184: write: broken pipe\"" 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:33599: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:33599: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:33599: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:33599: grpc: the client connection is closing; please retry." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-worker." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-manager." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-06-13T13:00:38-07:00" level=warning msg="node does not exist" method=issueRenewCertificate node.id=2kgl8r976bhwz 
+time="2016-06-13T13:00:38-07:00" level=info msg="Renewing TLS Certificate." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Waiting for TLS certificate to be issued..." 
+time="2016-06-13T13:00:38-07:00" level=info msg="Downloaded new TLS credentials with role: swarm-manager." 
+time="2016-06-13T13:00:38-07:00" level=error msg="failed to sign CSR" error="{\"code\":9002,\"message\":\"CSR Decode failed\"}" method="(*Server).signNodeCert" module=ca node.id=33z6keksatwpj 
+time="2016-06-13T13:00:38-07:00" level=info msg="Failed to dial 127.0.0.1:42466: grpc: the client connection is closing; please retry." 
+--- FAIL: TestNodeCertificateWithEmptyPolicies (0.04s)
+        Error Trace:    server_test.go:212
+    Error:      Received unexpected error "rpc error: code = 10 desc = CA signer is stopped"
+
+panic: runtime error: invalid memory address or nil pointer dereference [recovered]
+    panic: runtime error: invalid memory address or nil pointer dereference
+[signal 0xb code=0x1 addr=0x8 pc=0x4d5161]
+
+goroutine 987 [running]:
+panic(0xe903a0, 0xc820010160)
+    /usr/lib/go/src/runtime/panic.go:481 +0x3ff
+testing.tRunner.func1(0xc82039a090)
+    /usr/lib/go/src/testing/testing.go:467 +0x22a
+panic(0xe903a0, 0xc820010160)
+    /usr/lib/go/src/runtime/panic.go:443 +0x521
+github.com/docker/swarmkit/ca_test.TestNodeCertificateWithEmptyPolicies(0xc82039a090)
+    /home/abronan/go/src/github.com/docker/swarmkit/ca/server_test.go:213 +0x741
+testing.tRunner(0xc82039a090, 0x142ffc0)
+    /usr/lib/go/src/testing/testing.go:473 +0xdd
+created by testing.RunTests
+    /usr/lib/go/src/testing/testing.go:582 +0xae3
+FAIL    github.com/docker/swarmkit/ca   7.835s
+
+/cc @diogomonica

@@ -1,0 +1,49 @@
+[Security] Notify that symfony/expression-language is not installed if ExpressionLanguage is used
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features / 3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#25742
+
+
+License
+MIT
+
+
+Doc PR
+not requested
+
+
+

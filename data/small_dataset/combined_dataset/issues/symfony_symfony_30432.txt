@@ -1,0 +1,14 @@
+OptionsResolver error message with string[] as allowedTypes
+
+
+Symfony version(s) affected: 3.4, maybe other versions too (not tested)
+Description
+Error message when allowedTypes is an array contains [] but should not:
+The option "testme" with value array is expected to be of type "string[]", but one of the elements is of type "integer[]".
+It should be:
+The option "testme" with value array is expected to be of type "string[]", but one of the elements is of type "integer".
+How to reproduce
+$resolver = (new OptionsResolver())
+    ->setDefault('testme', [])
+    ->setAllowedTypes('testme', ['string[]'])
+    ->resolve(['testme' => ['test', 12]]);

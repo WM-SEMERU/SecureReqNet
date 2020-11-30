@@ -1,0 +1,7 @@
+Move GameServer to Unheathy when Pod Deleted
+
+
+There was only implementation of GameServer's being moved to Unhealthy on very specific Pod events (container crash, being unschedulable), but never on Pod removal as a whole.
+Also it was locked down to specific states, which made it very fragile.
+Reworked this so that any of the above now triggers a GameServer being moved to an Unhealthy state.
+Closes #678

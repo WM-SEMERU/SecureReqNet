@@ -1,0 +1,16 @@
+Evaluate libcxx test support for LLVM v8.0.0
+
+
+Spinning this out from PR #1497 to track the additional work required to analyze the newly corrected set of tests in tests.unsupported:
+
+ Execute all tests.unsupported and bucket by:
+
+New successes
+Build failures
+Test failures
+
+
+ Document the reasons for tests remaining in tests.unsupported.
+ Determine a common criteria for eliminating tests for consideration (e.g. requires C++17/20)
+ Update LibcxxSupported.md for any shifts in the feature set that is supported on update to LLVM 8.0.0.
+

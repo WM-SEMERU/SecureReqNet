@@ -1,0 +1,6 @@
+Select all rows?
+
+
+I don't think its possible to select all rows in the table / filtered view.
+Is this something that can be added?
+Thanks! And thanks for all your work on the project - excited to see how it develops

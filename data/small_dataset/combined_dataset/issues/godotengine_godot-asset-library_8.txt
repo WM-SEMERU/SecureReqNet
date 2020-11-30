@@ -1,0 +1,5 @@
+Add CSRF protection
+
+
+It seems that you use some Slim framework, and according to their webpage this can be simply enabled - http://www.slimframework.com/docs/features/csrf.html
+More about CSRF attack - https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)

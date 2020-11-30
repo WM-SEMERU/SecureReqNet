@@ -1,0 +1,39 @@
+[DX] Define a default encoder for in-memory users
+
+
+Context
+A fresh new Symfony app has the following security configuration (no encoder is defined):
+security:
+
+    providers:
+        in_memory:
+            memory: ~
+
+    firewalls:
+        # ...
+Problem
+If you add some in memory users:
+security:
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin: { password: 1234 }
+
+    firewalls:
+        # ...
+You'll see the following error:
+No encoder has been configured for account "Symfony\Component\Security\Core\User\User".
+
+Then you must define the encoder for that "strange" user class provided by Symfony:
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+        in_memory:
+            memory:
+                # ...
+Solution
+Symfony could define plaintext as the default encoder of the in-memory users. This shouldn't be a security issue because developers will always define later the appropriate algorithm for them. But this is a minor DX improvement because it avoids this strange initial error.

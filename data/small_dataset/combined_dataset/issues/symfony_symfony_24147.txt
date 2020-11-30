@@ -1,0 +1,34 @@
+Remove anything related to security ACL
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+4.0
+
+
+
+As Fabien said in this comment it's time to remove anything related to security ACLs from Symfony and move it to https://github.com/symfony/acl-bundle. Symfony 4.0 is our last chance to do this in several years.

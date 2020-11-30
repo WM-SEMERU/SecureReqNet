@@ -1,0 +1,18 @@
+Enable PEM format X.509 certs
+
+
+FEATURE REQUEST
+
+
+Please describe the feature you are requesting.
+Currently Bookkeeper only supports JKS key store and trust stores. Another widely used file format is PEM for certificates and certificate chains. Without in-build support in bookkeeper, an external tool is necessary to convert PEM files to key stores.
+
+
+Indicate the importance of this issue to you (blocker, must-have, should-have, nice-to-have). Are you currently using any workarounds to address this issue?
+should-have.
+
+
+Provide any additional detail on your proposed use case for this feature.
+Support for PEM file formats in addition to JKS file formats.
+
+

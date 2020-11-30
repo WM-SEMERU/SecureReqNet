@@ -1,0 +1,13 @@
+### Description
+
+Various caches in the GitLab codebase use mutable keys. This means that when we, e.g., rename a project, we have to expire every cache item for that project. Further, if a project is given the old name before the cache expiry happens (only really an issue in ~Geo), there *may* be security or correctness implications.
+
+### Proposal
+
+Consider app/models/repository.rb and lib/repository_cache.rb. We cache lots of values in redis under keys like `<type>:<full_path>:<project_id>` when we could just use `<type>:<project_id>` (TODO: check how project repository vs. wiki repository cache is selected. Surely we don't have a conflict here. Surely?)
+
+It's possible that a subset of caches will still need to be flushed on rename, but even in those cases, the situation would be improved as there's be no chance of the cache being incorrectly applied to the wrong resource before flushing happened.
+
+I'm leaving this confidential for now, as I've not looked into how much an issue this might be for ~Geo. Would it allow people to access restricted repository files on project rename, even when hashed storage is enabled, for instance? 
+
+### Links / references

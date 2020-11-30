@@ -1,0 +1,5 @@
+I know Gitlab assumes a SELinux-enabled system, but those of us who are trying to install Gitlab CE inside a docker container actually have no choice. 
+
+Even though SELinux is enabled on the host, docker containers always "fell like" SELinux is disabled - actually it is enabled, but the container "can't ask, can't tell", because all SELinux commands behave as if SELinux is disabled.
+
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Resource_Management_and_Linux_Containers_Guide/sec-Secure_Containers_with_SELinux.html

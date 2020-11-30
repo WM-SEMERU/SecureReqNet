@@ -1,0 +1,25 @@
+In version 6.9 slack integration does not work and returns error 500:
+
+    Started GET "/group/project/services/slack/test" for 127.0.0.1 at 2014-05-23 19:47:29 +0200
+    Processing by Projects::ServicesController#test as HTML
+      Parameters: {"project_id"=>"group/project", "id"=>"slack"}
+    Completed 500 Internal Server Error in 538ms
+
+    OpenSSL::SSL::SSLError (hostname does not match the server certificate):
+      app/models/project_services/slack_service.rb:57:in `execute'
+      app/controllers/projects/services_controller.rb:29:in `test'
+      app/controllers/application_controller.rb:59:in `set_current_user_for_thread'
+
+
+    Started GET "/group/project/services/slack/test" for 127.0.0.1 at 2014-05-23 19:47:29 +0200
+    Processing by Projects::ServicesController#test as HTML
+      Parameters: {"project_id"=>"group/project", "id"=>"slack"}
+    Completed 500 Internal Server Error in 375ms
+
+    OpenSSL::SSL::SSLError (hostname does not match the server certificate):
+      app/models/project_services/slack_service.rb:57:in `execute'
+      app/controllers/projects/services_controller.rb:29:in `test'
+      app/controllers/application_controller.rb:59:in `set_current_user_for_thread'
+
+Skipping SSL verification in slack notifies (by adding `http.verify_mode = OpenSSL::SSL::VERIFY_NONE` in slack-notifier/http_post.rb) results in no error, but no notification is sent.
+Using github integration via Web hooks works

@@ -1,0 +1,53 @@
+[HttpClient] add ResponseInterface::toArray()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+I'd like we discuss adding a toArray() method to ResponseInterface.
+JSON responses are so common when doing server-side requests that this may help remove boilerplate - especially the logic dealing with errors.
+WDYT?
+(about flags, I don't think we should make them configurable: if one really needs to deal with custom flags, there's always ResponseInterface::getContent() - but it should be very rare.).

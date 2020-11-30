@@ -1,0 +1,30 @@
+New-HPOVServerProfile -ServerProfileTemplate
+
+
+Expected Behavior
+Create new server profile from server profile template.
+Actual Behavior
+New-HPOVServerProfile : Cannot determine the scope for a created resource. The user session is authorized to create the resource in multiple scopes. Retry the operation, specifying the desired resource sc
+ope. 
+At line:1 char:1
++ New-HPOVServerProfile -Name $ovSPName -ServerProfileTemplate $ovSPT - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (Send-HPOVRequest:String) [New-HPOVServerProfile], InvalidOperationException
+    + FullyQualifiedErrorId : InvalidOperation,New-HPOVServerProfile
+Steps to reproduce
+$ovSPName = 'sp001'
+$ovServer = Get-HPOVServer -Name 's001'
+$ovSPT = Get-HPOVServerProfileTemplate -Name 'spt01'
+
+New-HPOVServerProfile -Name $ovSPName -ServerProfileTemplate $ovSPT
+Version Information
+LibraryVersion 4.10.1889.2173
+ApplianceVersion 4.10.04.370820.00
+PSVersion                            5.1.14393.1613
+PSEdition                             Desktop
+PSCompatibleVersions        {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                         10.0.14393.1613
+CLRVersion                           4.0.30319.42000
+WSManStackVersion             3.0
+PSRemotingProtocolVersion 2.3
+SerializationVersion               1.1.0.1

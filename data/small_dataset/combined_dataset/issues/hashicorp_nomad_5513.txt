@@ -1,0 +1,9 @@
+Plugin Agent Fingerprint Override
+
+
+Nomad version
+Nomad v0.9.0-rc1 (7c00ab4)
+Issue
+While developing the nomad-driver-triton plugin (https://github.com/smithx10/nomad-driver-triton) I've stumbled upon the need to over-ride the Nomad Agents Fingerprinter.   The triton plugin runs instances that are remote from the agent,  and I'd like a method in the plugin that will return the agent's fingerprint.  I imagine I'd query the Triton API to get Tenant Limits and populate the fingerprinter.  For the time being,  I've hacked around this issue by making every allocation very small.
+Reproduction steps
+N/A.

@@ -1,0 +1,54 @@
+[Serializer] Instantiator - Add an interface and default implementation to instantiate objects
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Related to #30818, Replace #30925
+This add a new interface and default implementation to instantiate objects
+OBJECT_TO_POPULATE was not keep here, as i don't think it should be the responsability of an instantiator to handle that. And if we want to have this responsability we can always add a new implementation with a decoration system.
+I try to look at var exporter instantiator also and unfortunetaly @nicolas-grekas i cannot use this, since the behavior of this component is to not use the constructor, in the serializer we want to use it, or at least it used to do that and we cannot change this behavior.
+But we can use var exporter implementation in a future PR (will not be the default however just another way of doing it) here if someone does not want to call the constructor.

@@ -1,0 +1,19 @@
+Update mbedtls_hardware_poll to use RDSEED
+
+
+OE currently provides entropy to mbedtls for seeding its CSPRNG using only requested length via the RDRAND instruction. This is suboptimal as RDRAND itself is implemented as CSPRNG to stretch hardware provided entropy. In order to provide the required true bits of entropy requested, we should:
+
+ Check for the availability of RDSEED instruction using CPUID.
+
+ If it is available, use RDSEED to provide the requested bits of entropy
+ If not, we should condense entropy to the required bits by hashing multiple RDRAND invocations.
+
+Section 4.2.6 of https://software.intel.com/en-us/articles/intel-digital-random-number-generator-drng-software-implementation-guide has an example using AES CBC-MAC
+Per the document above, reading 512 x 128-bit values (8192 bytes) of RDRAND forces it to reseed. Reading 3 windows of this (8192 * 3) provides enough entropy to be hashed down into a single 512-bit value (64 bytes). The hashing can also be done with SHA-512.
+This needs to be repeated for requests for > 64 bytes of entropy
+
+
+ We should fail up front if neither RDSEED nor RDRAND are supported, much like we do for AESNI (see #216)
+
+
+

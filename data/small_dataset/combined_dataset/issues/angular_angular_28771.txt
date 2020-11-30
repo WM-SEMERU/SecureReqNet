@@ -1,0 +1,18 @@
+NPM audit failure - @angular/compiler-cli v7.2.5
+
+
+=== npm audit security report ===
+                             Manual Review                                  
+
+         Some vulnerabilities require your attention to resolve             
+
+                                                                            
+
+      Visit https://go.npm.me/audit-guide for additional guidance           
+
+Low             Regular Expression Denial of Service
+Package         braces
+Patched in      >=2.3.1
+Dependency of   @angular/compiler-cli [dev]
+Path            @angular/compiler-cli > chokidar > anymatch > micromatch > braces
+More info       https://nodesecurity.io/advisories/786

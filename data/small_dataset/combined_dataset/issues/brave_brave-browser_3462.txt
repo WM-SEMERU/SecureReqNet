@@ -1,0 +1,6 @@
+URL check in bat_get_media.cc is not strict enough
+
+
+https://github.com/brave/brave-core/blob/194e5db6b091490576ce8bd191004cd12dc5c7d6/vendor/bat-native-ledger/src/bat_get_media.cc#L46
+i assume url.find(".ttvnw.net/v1/segment/") is trying to match subdomains of ttvnw.net, but it would actually match arbitrary domains like this: https://example.com/something.ttvnw.net/v1/segment/ because . is valid in URL paths.
+cc @SergeyZhukovsky @jasonrsadler

@@ -1,0 +1,5 @@
+Issue 12304: Updating UPDATE_HOST to point to brave.com cname
+
+
+fix #12304
+Testing Notes: Geo logs for brave stats are captured using fastly. After this change download and update requests will go through brave domains which should go through fastly.net. Verify if stats is working correctly.

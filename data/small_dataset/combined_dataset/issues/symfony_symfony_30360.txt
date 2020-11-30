@@ -1,0 +1,48 @@
+Moves default and user-configured overridden bundle path registration to a CompilerPass
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30359
+
+
+License
+MIT
+
+
+
+If #30359 is indeed considered as bug or problem, this PR is a solution to solve it.
+TwigBundle default overriden bundle paths are defined too early in the bundle definition process. They are now configured in a CompilerPass that allows 3rd party bundles to override any Twig namespace and let the user have its own project overrides.
+According to @yceruto request, I also moved the user-configured paths to the compiler pass.

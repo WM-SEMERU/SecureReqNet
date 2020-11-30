@@ -1,0 +1,18 @@
+AddJwtBearer not configured properly when using custom DI causing socket IO errors
+
+
+On request of @Tratcher copied from AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet#1078
+For .net core 2.1.x and 2.2.x
+When using the AddJwtBearer extension with custom DI such as Unity, the "options" lambda is called on every request instead of just startup.. According to @Tratcher this is not the expected behaviour. Eventually, in my web app, this causes two subsequent issues:
+
+Socket exhaustion on HTTP Client when using the default settings for ConfigurationManager causing web site instability and performance issues
+Continued invoking of the .well-known/openid-configuration endpoint incurring additional load on the host of that service
+
+When using the inbuilt DI this problem does not occur.
+The Unity team investigated this error and discovered a difference in behaviour between the resolution tree between Unity and the default DI - as identified  AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet#1078 (comment).
+They then ran the same test app with the latest compiled branch from https://github.com/aspnet/Extensions and found the error did not occur therefore they believe the issue is in the .net code itself and closed their issue. Unity team investigations are found at unitycontainer/microsoft-dependency-injection#34
+Therefore it appears that there is a difference in the way the AddJwtBearer logic handles dependencies in the 2.1 and 2.2 versions that is not in the 3.0 versions.
+To Reproduce
+A test app is available at https://github.com/grahambunce/unityinjectionjwtbearer configured to use Unity but it can be changed to use default DI via minor commenting out of one line.
+Expected behavior
+In the 2.1 (LTS) and 2.2 versions the AddJwtBearer lambda should only be called on startup instead of on each api request

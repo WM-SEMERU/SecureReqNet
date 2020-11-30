@@ -1,0 +1,2 @@
+As found in https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/9362#note_25211070 by @innerwhisper
+We need to add `rel="noopener noreferrer”` to all `target: ‘_blank’` as it poses a security risk

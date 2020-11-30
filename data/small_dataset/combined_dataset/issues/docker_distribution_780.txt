@@ -1,0 +1,7 @@
+Automatically generate a HTTP secret if none is provided
+
+
+Log a warning if the registry generates its own secret.
+Update configuration doc, and remove the default secret from the
+development config file.
+@stevvooe PTAL

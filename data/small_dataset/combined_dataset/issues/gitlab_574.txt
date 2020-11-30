@@ -1,0 +1,196 @@
+After doing a fresh install on my server, and successfully creating a new project from the front end, i'm trying to push to repository and i fail consistently. After some debugging i found the following in the production.log. I can see that the repository folder is empty no matter what. Nothing is created in there.
+
+```ruby
+NoMethodError (undefined method `tag_names' for nil:NilClass):
+  /home/git/gitlab/app/models/repository.rb:105:in `block in tag_names'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/cache.rb:296:in `block in fetch'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/cache.rb:587:in `block in save_block_result_to_cache'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/cache.rb:548:in `instrument'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/cache.rb:586:in `save_block_result_to_cache'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/cache.rb:296:in `fetch'
+  /home/git/gitlab/app/models/repository.rb:104:in `tag_names'
+  /home/git/gitlab/lib/gitlab/git_access.rb:56:in `push_allowed?'
+  /home/git/gitlab/lib/gitlab/git_access.rb:27:in `allowed?'
+  /home/git/gitlab/lib/api/internal.rb:33:in `block (2 levels) in <class:Internal>'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/endpoint.rb:31:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/endpoint.rb:31:in `block in generate_api_method'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/endpoint.rb:401:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/endpoint.rb:401:in `run'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/endpoint.rb:154:in `block in call!'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/base.rb:24:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/base.rb:24:in `call!'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/base.rb:18:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/base.rb:24:in `call!'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/base.rb:18:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/error.rb:26:in `block in call!'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/error.rb:25:in `catch'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/error.rb:25:in `call!'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/middleware/base.rb:18:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/builder.rb:138:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/endpoint.rb:155:in `call!'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/endpoint.rb:145:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-mount-0.8.3/lib/rack/mount/route_set.rb:152:in `block in call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:96:in `block in recognize'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:68:in `optimized_each'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:95:in `recognize'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-mount-0.8.3/lib/rack/mount/route_set.rb:141:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/api.rb:525:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/api.rb:42:in `call!'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/grape-0.6.1/lib/grape/api.rb:38:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/journey/router.rb:71:in `block in call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/journey/router.rb:59:in `each'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/journey/router.rb:59:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/routing/route_set.rb:676:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/request_store-1.0.5/lib/request_store/middleware.rb:9:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-cors-0.2.9/lib/rack/cors.rb:54:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-attack-2.3.0/lib/rack/attack.rb:63:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/warden-1.2.3/lib/warden/manager.rb:35:in `block in call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/warden-1.2.3/lib/warden/manager.rb:34:in `catch'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/warden-1.2.3/lib/warden/manager.rb:34:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/etag.rb:23:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/conditionalget.rb:25:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/head.rb:11:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/flash.rb:254:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/session/abstract/id.rb:225:in `context'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/session/abstract/id.rb:220:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.1/lib/active_record/query_cache.rb:36:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activerecord-4.1.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/callbacks.rb:82:in `run_callbacks'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.1/lib/rails/rack/logger.rb:38:in `call_app'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.1/lib/rails/rack/logger.rb:20:in `block in call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/tagged_logging.rb:26:in `tagged'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/activesupport-4.1.1/lib/active_support/tagged_logging.rb:68:in `tagged'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.1/lib/rails/rack/logger.rb:20:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/runtime.rb:17:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/lock.rb:17:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/sendfile.rb:112:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.1/lib/rails/engine.rb:514:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.1/lib/rails/application.rb:144:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.1/lib/rails/railtie.rb:194:in `public_send'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/railties-4.1.1/lib/rails/railtie.rb:194:in `method_missing'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/builder.rb:138:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/urlmap.rb:65:in `block in call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/urlmap.rb:50:in `each'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/rack-1.5.2/lib/rack/urlmap.rb:50:in `call'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:552:in `process_client'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-worker-killer-0.4.2/lib/unicorn/worker_killer.rb:51:in `process_client'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:632:in `worker_loop'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:500:in `spawn_missing_workers'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:142:in `start'
+  /home/git/gitlab/vendor/bundle/ruby/2.1.0/gems/unicorn-4.6.3/bin/unicorn_rails:209:in `<top (required)>'
+  /usr/local/bin/unicorn_rails:23:in `load'
+  /usr/local/bin/unicorn_rails:23:in `<main>'
+```
+
+My SSH settings are fine, the Gitlab installation is good and i've tried every single thing i found on the web. Any ideas? I know some users are still dealing with similar issues. Any workarounds? Here are some log outputs.
+
+```ruby
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.7 ? ... OK (1.9.7)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ... 
+1/17 ... repository is empty
+1/18 ... repository is empty
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files: 
+	/home/git/repositories/: OK
+	/home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.2.12
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ... 
+1/17 ... yes
+1/18 ... yes
+Projects have satellites? ... 
+1/17 ... can't create, repository is empty
+1/18 ... can't create, repository is empty
+Redis version >= 2.0.0? ... yes
+Ruby version >= 2.0.0 ? ... yes (2.1.2)
+Your git bin path is "/usr/local/bin/git"
+Git version >= 1.7.10 ? ... yes (2.0.0)
+
+Checking GitLab ... Finished
+```
+
+and my setup:
+
+```ruby
+System information
+System:		Ubuntu 12.04
+Current User:	git
+Using RVM:	no
+Ruby Version:	2.1.2p95
+Gem Version:	2.2.2
+Bundler Version:1.7.2
+Rake Version:	10.3.2
+Sidekiq Version:2.17.0
+
+GitLab information
+Version:	7.2.1
+Revision:	ff1633f
+Directory:	/home/git/gitlab
+DB Adapter:	postgresql
+URL:		http://git.georgestefanis.com
+HTTP Clone URL:	http://git.georgestefanis.com/some-project.git
+SSH Clone URL:	git@git.georgestefanis.com:some-project.git
+Using LDAP:	no
+Using Omniauth:	no
+
+GitLab Shell
+Version:	1.9.7
+Repositories:	/home/git/repositories/
+Hooks:		/home/git/gitlab-shell/hooks/
+Git:		/usr/local/bin/git
+```

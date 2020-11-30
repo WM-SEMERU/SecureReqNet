@@ -1,0 +1,30 @@
+[Cache] ProxyAdapter & TagAwareAdapter don't work together
+
+
+Symfony version(s) affected: 3.4 until master
+Description
+When wrapping an adapter inside a ProxyAdapter its impossible to use it within a TagAwareAdapter.
+How to reproduce
+$cache = new \Symfony\Component\Cache\Adapter\TagAwareAdapter(
+    new \Symfony\Component\Cache\Adapter\ProxyAdapter(
+        new \Symfony\Component\Cache\Adapter\ArrayAdapter()
+    )
+);
+
+$item = $cache->getItem('foo');
+$item->tag(['tag1', 'tag2']);
+$item->set(true);
+$cache->save($item);
+
+var_dump($cache->getItem('foo')->get());
+==>
+array(2) {
+  ["tag1"]=>
+  int(0)
+  ["tag2"]=>
+  int(0)
+}
+
+So the actual value of the cache item is replaced by its tags.
+@nicolas-grekas I tried to have a look and it seems to be related with the mysterious $innerItem of a CacheItem. If you could shed some light on this $innerItem and why it exists I might understand the logic and can fix it somehow 😊
+https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/TagAwareAdapter.php#L54

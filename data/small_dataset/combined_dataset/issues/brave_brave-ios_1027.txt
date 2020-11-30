@@ -1,0 +1,40 @@
+Fix #1002: Update dependencies for Xcode 10.2
+
+
+Fix #1002
+This change updates the dependencies so that Brave can be built with Xcode 10.2. I have confirmed that, with this change, Brave now compiles without errors on my machine with Xcode 10.2 and works fine on an iPhone with iOS 12.2.
+Specific changes:
+
+All dependencies are updated to the latest version that both 1) compiles with Xcode 10.2 and 2) uses Swift 4.x.
+None of the dependencies have been updated to versions that use Swift 5, so Brave can still be built with Xcode 10.1.
+Some dependencies have not been updated in a long time, so I switched to forks of them that are still being updated.
+Travis CI now uses Xcode 10.2. Removed the --no-ri --no-rdoc options on the gem update statement because they have been replaced by --no-document (see bundler/bundler/pull/6624). Travis CI was failing because the options have been removed.
+Carthage now uses Swift 4.2 (this is also included in PR #1004).
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ My patch or PR title has a standard commit message that looks like Fix #123: This fixes the shattered coffee cup! (or No Bug: <message> if no relevant ticket)
+ Unit Tests are updated to cover new or changed functionality
+ User-facing strings use NSLocalizableString()
+ New files have MPL-2.0 license header.
+
+Test Plan:
+No QA needed.
+Screenshots:
+Not applicable.
+Reviewer Checklist:
+
+ PR is linked to an issue via Zenhub.
+ Issues are assigned to at least one epic.
+ Issues include necessary QA labels:
+
+ QA/(Yes|No)
+ release-notes/(include|exclude)
+ bug / enhancement
+
+
+ Necessary security reviews have taken place.
+ Adequate test coverage exists to prevent regressions.
+ Adequate test plan exists for QA to validate (if applicable)
+

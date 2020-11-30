@@ -1,0 +1,7 @@
+[Security][RFC] Exception thrown on call to isGranted without token
+
+
+Years back there was a feature request regarding the AuthenticationCredentialsNotFoundException that was thrown when is_granted was used in Twig without an existing token. The workaround was to check for the token first, which was later fixed in PR #15953.
+However instead of not throwing the exception at all the fix was Twig specific by catching the exception. Now we have inconsistent behaviour of is_granted in Twig and isGranted of the AuthorizationChecker.
+Can't we just remove the line that throws the exception and return false instead? One, because the return type is a boolean and two because the method name is an "isser" and suggests a boolean return type instead. Exceptions are not expected to be thrown in this case, or is that just me?
+I would gladly provide a PR but I want your thoughts on this why the exception gets thrown in the first place.

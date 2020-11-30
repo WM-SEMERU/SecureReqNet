@@ -1,0 +1,10 @@
+refactor: remove unused function and add comments in rc util
+
+
+What type of PR is this?*
+/kind cleanup
+What this PR does / why we need it:
+#76206
+Does this PR introduce a user-facing change?:
+NONE
+

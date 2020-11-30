@@ -1,0 +1,16 @@
+Remove the need to pre-distribute auth API certificates
+
+
+Description
+Currently to avoid MITM-attack when adding new nodes to a cluster, a user must export the cluster's auth API HTTPS certificate via tctl auth export --type=tls and save it into /var/lib/teleport/ca.cert on every node, see this
+Problem
+It's annoying and inconvenient.
+Proposal
+@klizhentas has developed a plan to avoid doing this. It's based on changing the way how invitation tokens are generated:
+
+The auth server computes a secure hash of it's private key and uses it as a prefix for an invitation token.
+The new node, prior to offering its join token, requests the hash from the auth server.
+Node decides to trust the auth server only if the hash matches what's in the token
+
+Questions
+How would this work with static tokens?

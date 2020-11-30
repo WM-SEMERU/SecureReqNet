@@ -1,0 +1,5 @@
+Remove GitHub references
+
+
+Fixes #11295 for #EUFOSSA
+See also #11306 aimed at 3.4 for the remaining references.

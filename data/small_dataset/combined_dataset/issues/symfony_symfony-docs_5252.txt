@@ -1,0 +1,22 @@
+Update "How to Authenticate Users with API Keys"
+
+
+While reading How to Authenticate Users with API Keys cookbook few ideas just came into my mind.
+Is there any reason why this cookbook suggests to [manually] inject custom user provider (ApiKeyUserProvider) into authenticator service (ApiKeyAuthenticator)? Using this solution I see two minor issues that can be solved another way. First, we need to inject another service... Second, $userProvider argument of ApiKeyAuthenticator :: authenticateToken() method is left unused.
+If I'm right, we can achieve the same goal by eliminating injection and additiong few lines to security.yml:
+security:
+    providers:
+        # ...
+        api_key_user_provider: # This on is already registered, but not used
+            id: api_key_user_provider
+    firewalls:
+        secured_area:
+            pattern: ^/admin
+            stateless: false
+            simple_preauth:
+                authenticator: apikey_authenticator
+            provider: api_key_user_provider # Shouldn't we set provider here instead of injecting it?
+If we inject ApiKeyUserProvider manually, then there is no reason to register it as provider or even implement UserProviderInterface.
+What do you think?
+
+Also in few places ApiKeyAuthentication should be renamed to ApiKeyAuthenticator.

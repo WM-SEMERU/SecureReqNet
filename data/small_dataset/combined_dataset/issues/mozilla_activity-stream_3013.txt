@@ -1,0 +1,5 @@
+Make Activity Stream unprivileged: ensure about:newtab document runs with null principal
+
+
+Also see https://bugzilla.mozilla.org/show_bug.cgi?id=1385306
+"After giving Activity Stream URI_SAFE_FOR_UNSTRUSTED_CONTENT in Bug 1021667, to make Activity Stream fully unprivileged we need to set the principal to be null."

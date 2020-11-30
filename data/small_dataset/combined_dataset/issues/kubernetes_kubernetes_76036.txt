@@ -1,0 +1,24 @@
+Conformance image doesn't save results on failure
+
+
+https://github.com/kubernetes/kubernetes/blame/master/cluster/images/conformance/run_e2e.sh#L16
+What happened:
+Running Sonobuoy with the upstream conformance image hangs if there are failures. Ginkgo returns a status code of 1 when the failure happens leading to the script to exit before saving the results. This leaves the sonobuoy worker just waiting for results.
+What you expected to happen:
+The results should be saved regardless of whether or not the ginkgo tests pass or fail.
+How to reproduce it (as minimally and precisely as possible):
+Running the tests with an invalid regexp will cause the framework to panic:
+sonobuoy run --e2e-focus="\\" --wait
+
+You can watch the output of sonobuoy status to see that sonobuoy still thinks the plugin is running and the worker is still waiting for results.
+Anything else we need to know?:
+Its not out of the question that sonobuoy should be able to figure out the error state and report it, but the results should be reported as well; this is the same error condition you get when you get 1 test fail out fo 100.
+Proposed solution:
+The most simple solution is to remove the set -o errexit from the script; is there a particular reason it is there?
+The original script here https://github.com/heptio/kube-conformance/blob/master/run_e2e.sh does not have that set.
+Environment:
+
+Kubernetes version (use kubectl version): 1.14.0
+Cloud provider or hardware configuration: KIND
+Install tools: Sonobuoy 0.14.0
+

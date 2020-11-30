@@ -1,0 +1,9 @@
+Nomad UI requires direct client access
+
+
+Nomad version
+0.7.0
+Issue
+The Nomad web UI, when attempting to view a particular client as in the ui/nodes/<node ID> UI endpoint, attempts to reach-out to that client directly on port 4646.
+Expected Behavior
+Although running the Nomad CLI also attempts to reach-out directly to nodes, I would expect that the server (via the UI) would be intended to be treated as a proxy, so to speak, for accessing information like this on clients.  I.e. I would expect that direct access to all Nomad client API endpoints from all human clients shouldn't be a requirement from a network perspective.

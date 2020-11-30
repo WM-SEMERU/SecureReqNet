@@ -1,0 +1,4 @@
+Start Over Error
+
+
+I am using the current version of the FBCTF.   The older version from last didn't seem to have this problem.   When the system is under a mild load (12 users) after about 15 minutes of play all users start to experience a "Start Over" error.   The problem progressively gets worse until all users / players can not clear the Start Over error.   Any advice?   I can't recreate it with a single user on my personal network.

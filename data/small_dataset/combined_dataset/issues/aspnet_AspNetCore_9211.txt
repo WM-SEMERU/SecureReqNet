@@ -1,0 +1,4 @@
+Fix folder version for global module to only have 3 numbers
+
+
+Same change as #9175, but to master.

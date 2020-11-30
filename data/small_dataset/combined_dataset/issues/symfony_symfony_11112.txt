@@ -1,0 +1,38 @@
+[Security] Using form_login FormLoginFactory is called even if a custom factory is used
+
+
+In my company we use a custom user bundle that provides a custom user entity, user provider, authentication provider, security factory and voter.
+Our solutions relies on routes and some other behaviours offered by form_login (login, login_ckeck, logout and default target path), but basically all the rest is custom.
+Debugging the login procedure I found out that more calls than expected were made to the repository which load the user data.
+Most surprisingly I found that these extra calls were made by FormLoginFactory which shouldn't be called at all given that we use our custom solution.
+Debugging further it came out that FormLoginFactory is activated when form_login is present in the security configuration. Now this is already quite confusing, but the most confusing part is that removing form_login, routes, default path and all the rest works flawless and the only thing that gets disable is FormLoginFactory.
+I don't know how to interpreter this. Is a bug? Is there something out of place in our solution?
+This is our security.yml
+security:
+    encoders:
+        Infinity\Bundle\UserBundle\Security\User\InfinityUser:
+            algorithm: plaintext
+            encode_as_base64: false
+
+    providers:
+        aclapi:
+            id: infinity_user.infinity_user_provider
+
+    access_decision_manager:
+        strategy: unanimous
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        secure_area:
+            pattern: ^/
+            anonymous: ~
+            infinity_auth: true
+            form_login: ~
+            logout: ~
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: [IS_AUTHENTICATED_REMEMBERED] }

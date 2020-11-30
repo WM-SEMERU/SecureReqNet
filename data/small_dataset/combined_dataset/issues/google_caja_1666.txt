@@ -1,0 +1,9 @@
+Report <input>.size=garbage throws wrong-frame exception
+
+
+Original issue 1666 created by kpreid.switchb.org on 2013-02-28T18:22:20.000Z:
+In Chrome versions at least including 25.0.1364.99 (release) and 27.0.1423.0 (canary), and not including WebKit nightly r144186, executing
+document.createElement('input').size = {};
+will throw a DOMException from the code's frame, not the document's frame. This behavior appears to be unique to the 'size' property.
+No specific action is necessary as the fix for issue 1607, combined with r5305, will protect us because the exception will be caught by the taming membrane and tamed. If r5305 had not occurred, we would have a problem, since the taming membrane would pass the exception through and SES does not defend DOMException (since it is not reachable from the whitelisted environment).
+However, this is a Chrome bug and so should be reported once we have deployed the issue 1607 fix.

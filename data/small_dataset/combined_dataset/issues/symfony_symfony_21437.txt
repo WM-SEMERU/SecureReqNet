@@ -1,0 +1,42 @@
+[Security] Use IteratorArgument for voters
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Use an IteratorArgument for injecting voters into the AccessDecisionManager.

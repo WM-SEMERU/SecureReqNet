@@ -1,0 +1,360 @@
+"kubeadm" cannot pull the image when using the proxy, but it can be properly pulled by using "docker" in the container.
+
+
+Is this a request for help?
+If yes, you should use our troubleshooting guide and community support channels, see http://kubernetes.io/docs/troubleshooting/.
+If no, delete this section and continue on.
+What keywords did you search in kubeadm issues before filing this one?
+If you have found any duplicates, you should instead reply there and close this page.
+If you have not found any duplicates, delete this section and continue on.
+Is this a BUG REPORT or FEATURE REQUEST?
+Choose one: BUG REPORT or FEATURE REQUEST
+Versions
+kubeadm version (use kubeadm version):
+$ kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-02-28T13:35:32Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Environment:
+
+Kubernetes version (use kubectl version):
+
+fengxiangdeMacBook-Pro% kubectl version
+Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.1", GitCommit:"eec55b9ba98609a46fee712359c7b5b365bdd920", GitTreeState:"clean", BuildDate:"2018-12-13T19:44:19Z", GoVersion:"go1.11.2", Compiler:"gc", Platform:"darwin/amd64"}
+The connection to the server 192.168.64.5:8443 was refused - did you specify the right host or port?
+
+
+Cloud provider or hardware configuration: none
+
+
+OS (e.g. from /etc/os-release):
+
+
+  Model Name:	MacBook Pro
+  Model Identifier:	MacBookPro11,5
+  Processor Name:	Intel Core i7
+  Processor Speed:	2.5 GHz
+  Number of Processors:	1
+  Total Number of Cores:	4
+  L2 Cache (per Core):	256 KB
+  L3 Cache:	6 MB
+  Memory:	16 GB
+
+Kernel (e.g. uname -a):
+
+fengxiangdeMacBook-Pro% uname -a
+Darwin fengxiangdeMacBook-Pro.local 18.2.0 Darwin Kernel Version 18.2.0: Thu Dec 20 20:46:53 PST 2018; root:xnu-4903.241.1~1/RELEASE_X86_64 x86_64 i386 MacBookPro11,5 Darwin
+
+Others: none
+
+What happened?
+Kubeadm can't pull the image, the following log appears
+fengxiangdeMacBook-Pro% minikube start -p efengx\
+ --logtostderr --v=3\
+ --memory=4096 --cpus=4\
+ --vm-driver hyperkit\
+ --extra-config=apiserver.authorization-mode=RBAC\
+ --registry-mirror=https://registry.docker-cn.com\
+ --extra-config=kubelet.PodsPerCore=5\
+ --docker-env NO_PROXY=127.0.0.1/24\
+ --docker-env HTTP_PROXY=http://192.168.0.104:1087\
+ --docker-env HTTPS_PROXY=http://192.168.0.104:1087
+W0323 20:39:48.487675   11938 root.go:145] Error reading config file at /Users/ofengx/.minikube/config/config.json: open /Users/ofengx/.minikube/config/config.json: no such file or directory
+I0323 20:39:48.487810   11938 notify.go:121] Checking for updates...
+😄  minikube v0.35.0 on darwin (amd64)
+I0323 20:39:51.037801   11938 start.go:582] Saving config:
+{
+    "MachineConfig": {
+        "MinikubeISO": "https://storage.googleapis.com/minikube/iso/minikube-v0.35.0.iso",
+        "Memory": 4096,
+        "CPUs": 4,
+        "DiskSize": 20000,
+        "VMDriver": "hyperkit",
+        "ContainerRuntime": "docker",
+        "HyperkitVpnKitSock": "",
+        "HyperkitVSockPorts": [],
+        "XhyveDiskDriver": "ahci-hd",
+        "DockerEnv": [
+            "NO_PROXY=127.0.0.1/24",
+            "HTTP_PROXY=http://192.168.0.104:1087",
+            "HTTPS_PROXY=http://192.168.0.104:1087"
+        ],
+        "InsecureRegistry": null,
+        "RegistryMirror": [
+            "https://registry.docker-cn.com"
+        ],
+        "HostOnlyCIDR": "192.168.99.1/24",
+        "HypervVirtualSwitch": "",
+        "KvmNetwork": "default",
+        "DockerOpt": null,
+        "DisableDriverMounts": false,
+        "NFSShare": [],
+        "NFSSharesRoot": "/nfsshares",
+        "UUID": "",
+        "GPU": false,
+        "NoVTXCheck": false
+    },
+    "KubernetesConfig": {
+        "KubernetesVersion": "v1.13.4",
+        "NodeIP": "",
+        "NodePort": 8443,
+        "NodeName": "minikube",
+        "APIServerName": "minikubeCA",
+        "APIServerNames": null,
+        "APIServerIPs": null,
+        "DNSDomain": "cluster.local",
+        "ContainerRuntime": "docker",
+        "CRISocket": "",
+        "NetworkPlugin": "",
+        "FeatureGates": "",
+        "ServiceCIDR": "10.96.0.0/12",
+        "ExtraOptions": [
+            {
+                "Component": "apiserver",
+                "Key": "authorization-mode",
+                "Value": "RBAC"
+            },
+            {
+                "Component": "kubelet",
+                "Key": "PodsPerCore",
+                "Value": "5"
+            }
+        ],
+        "ShouldLoadCachedImages": false,
+        "EnableDefaultCNI": false
+    }
+}
+I0323 20:39:51.039686   11938 cluster.go:70] Machine does not exist... provisioning new machine
+I0323 20:39:51.039709   11938 cluster.go:71] Provisioning machine with config: {MinikubeISO:https://storage.googleapis.com/minikube/iso/minikube-v0.35.0.iso Memory:4096 CPUs:4 DiskSize:20000 VMDriver:hyperkit ContainerRuntime:docker HyperkitVpnKitSock: HyperkitVSockPorts:[] XhyveDiskDriver:ahci-hd DockerEnv:[NO_PROXY=127.0.0.1/24 HTTP_PROXY=http://192.168.0.104:1087 HTTPS_PROXY=http://192.168.0.104:1087] InsecureRegistry:[] RegistryMirror:[https://registry.docker-cn.com] HostOnlyCIDR:192.168.99.1/24 HypervVirtualSwitch: KvmNetwork:default Downloader:{} DockerOpt:[] DisableDriverMounts:false NFSShare:[] NFSSharesRoot:/nfsshares UUID: GPU:false NoVTXCheck:false}
+🔥  Creating hyperkit VM (CPUs=4, Memory=4096MB, Disk=20000MB) ...
+I0323 20:39:51.040476   11938 downloader.go:56] Not caching ISO, using https://storage.googleapis.com/minikube/iso/minikube-v0.35.0.iso
+Running pre-create checks...
+Creating machine...
+(efengx) Downloading /Users/ofengx/.minikube/cache/boot2docker.iso from file:///Users/ofengx/.minikube/cache/iso/minikube-v0.35.0.iso...
+(efengx) /dev/disk2                                             /Users/ofengx/.minikube/machines/efengx/b2d-image
+(efengx) "disk2" ejected.
+(efengx) Using UUID c05776da-4d68-11e9-b992-a0999b193f0d
+(efengx) Generated MAC fe:f6:e9:1e:2d:58
+(efengx) Starting with cmdline: loglevel=3 user=docker console=ttyS0 console=tty0 noembed nomodeset norestore waitusb=10 systemd.legacy_systemd_cgroup_controller=yes base host=efengx
+Waiting for machine to be running, this may take a few minutes...
+Detecting operating system of created instance...
+Waiting for SSH to be available...
+Detecting the provisioner...
+Provisioning with buildroot...
+I0323 20:40:24.208260   11938 ssh_runner.go:101] SSH: sudo rm -f /etc/docker/ca.pem
+I0323 20:40:24.213342   11938 ssh_runner.go:101] SSH: sudo mkdir -p /etc/docker
+I0323 20:40:24.222097   11938 ssh_runner.go:101] SSH: sudo rm -f /etc/docker/server.pem
+I0323 20:40:24.226393   11938 ssh_runner.go:101] SSH: sudo mkdir -p /etc/docker
+I0323 20:40:24.235564   11938 ssh_runner.go:101] SSH: sudo rm -f /etc/docker/server-key.pem
+I0323 20:40:24.240069   11938 ssh_runner.go:101] SSH: sudo mkdir -p /etc/docker
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+📶  "efengx" IP address is 192.168.64.5
+I0323 20:40:24.619997   11938 start.go:582] Saving config:
+{
+    "MachineConfig": {
+        "MinikubeISO": "https://storage.googleapis.com/minikube/iso/minikube-v0.35.0.iso",
+        "Memory": 4096,
+        "CPUs": 4,
+        "DiskSize": 20000,
+        "VMDriver": "hyperkit",
+        "ContainerRuntime": "docker",
+        "HyperkitVpnKitSock": "",
+        "HyperkitVSockPorts": [],
+        "XhyveDiskDriver": "ahci-hd",
+        "DockerEnv": [
+            "NO_PROXY=127.0.0.1/24",
+            "HTTP_PROXY=http://192.168.0.104:1087",
+            "HTTPS_PROXY=http://192.168.0.104:1087"
+        ],
+        "InsecureRegistry": null,
+        "RegistryMirror": [
+            "https://registry.docker-cn.com"
+        ],
+        "HostOnlyCIDR": "192.168.99.1/24",
+        "HypervVirtualSwitch": "",
+        "KvmNetwork": "default",
+        "DockerOpt": null,
+        "DisableDriverMounts": false,
+        "NFSShare": [],
+        "NFSSharesRoot": "/nfsshares",
+        "UUID": "",
+        "GPU": false,
+        "NoVTXCheck": false
+    },
+    "KubernetesConfig": {
+        "KubernetesVersion": "v1.13.4",
+        "NodeIP": "192.168.64.5",
+        "NodePort": 8443,
+        "NodeName": "minikube",
+        "APIServerName": "minikubeCA",
+        "APIServerNames": null,
+        "APIServerIPs": null,
+        "DNSDomain": "cluster.local",
+        "ContainerRuntime": "docker",
+        "CRISocket": "",
+        "NetworkPlugin": "",
+        "FeatureGates": "",
+        "ServiceCIDR": "10.96.0.0/12",
+        "ExtraOptions": [
+            {
+                "Component": "apiserver",
+                "Key": "authorization-mode",
+                "Value": "RBAC"
+            },
+            {
+                "Component": "kubelet",
+                "Key": "PodsPerCore",
+                "Value": "5"
+            }
+        ],
+        "ShouldLoadCachedImages": false,
+        "EnableDefaultCNI": false
+    }
+}
+🐳  Configuring Docker as the container runtime ...
+    ▪ env NO_PROXY=127.0.0.1/24
+    ▪ env HTTP_PROXY=http://192.168.0.104:1087
+    ▪ env HTTPS_PROXY=http://192.168.0.104:1087
+I0323 20:40:24.634308   11938 ssh_runner.go:101] SSH: systemctl is-active --quiet service containerd
+I0323 20:40:24.641436   11938 ssh_runner.go:101] SSH: sudo systemctl stop containerd
+I0323 20:40:24.652253   11938 ssh_runner.go:101] SSH: systemctl is-active --quiet service containerd
+I0323 20:40:24.658109   11938 ssh_runner.go:101] SSH: systemctl is-active --quiet service crio
+I0323 20:40:24.663968   11938 ssh_runner.go:101] SSH: sudo systemctl stop crio
+I0323 20:40:24.693787   11938 ssh_runner.go:101] SSH: systemctl is-active --quiet service crio
+I0323 20:40:24.699705   11938 ssh_runner.go:101] SSH: systemctl is-active --quiet service rkt-api
+I0323 20:40:24.705918   11938 ssh_runner.go:101] SSH: sudo systemctl stop rkt-api
+I0323 20:40:24.716047   11938 ssh_runner.go:101] SSH: sudo systemctl stop rkt-metadata
+I0323 20:40:24.727468   11938 ssh_runner.go:101] SSH: systemctl is-active --quiet service rkt-api
+I0323 20:40:24.733428   11938 ssh_runner.go:101] SSH: sudo systemctl restart docker
+✨  Preparing Kubernetes environment ...
+    ▪ apiserver.authorization-mode=RBAC
+    ▪ kubelet.PodsPerCore=5
+I0323 20:40:25.125247   11938 kubeadm.go:394] kubelet v1.13.4 config:
+
+[Unit]
+Wants=docker.socket
+
+[Service]
+ExecStart=
+ExecStart=/usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --allow-privileged=true --cluster-domain=cluster.local --cgroup-driver=cgroupfs --PodsPerCore=5 --container-runtime=docker --fail-swap-on=false --kubeconfig=/etc/kubernetes/kubelet.conf --hostname-override=minikube --pod-manifest-path=/etc/kubernetes/manifests --cluster-dns=10.96.0.10 --authorization-mode=Webhook --client-ca-file=/var/lib/minikube/certs/ca.crt 
+
+[Install]
+I0323 20:40:25.125470   11938 ssh_runner.go:101] SSH: sudo rm -f /usr/bin/kubelet
+I0323 20:40:25.125475   11938 ssh_runner.go:101] SSH: sudo rm -f /usr/bin/kubeadm
+I0323 20:40:25.131291   11938 ssh_runner.go:101] SSH: sudo mkdir -p /usr/bin
+I0323 20:40:25.131693   11938 ssh_runner.go:101] SSH: sudo mkdir -p /usr/bin
+I0323 20:40:26.519061   11938 ssh_runner.go:101] SSH: sudo rm -f /lib/systemd/system/kubelet.service
+I0323 20:40:26.523575   11938 ssh_runner.go:101] SSH: sudo mkdir -p /lib/systemd/system
+I0323 20:40:26.532934   11938 ssh_runner.go:101] SSH: sudo rm -f /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+I0323 20:40:26.537271   11938 ssh_runner.go:101] SSH: sudo mkdir -p /etc/systemd/system/kubelet.service.d
+I0323 20:40:26.545886   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/kubeadm.yaml
+I0323 20:40:26.550256   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib
+I0323 20:40:26.559266   11938 ssh_runner.go:101] SSH: sudo rm -f /etc/kubernetes/addons/storage-provisioner.yaml
+I0323 20:40:26.564183   11938 ssh_runner.go:101] SSH: sudo mkdir -p /etc/kubernetes/addons
+I0323 20:40:26.573312   11938 ssh_runner.go:101] SSH: sudo rm -f /etc/kubernetes/manifests/addon-manager.yaml
+I0323 20:40:26.578863   11938 ssh_runner.go:101] SSH: sudo mkdir -p /etc/kubernetes/manifests/
+I0323 20:40:26.588640   11938 ssh_runner.go:101] SSH: sudo rm -f /etc/kubernetes/addons/storageclass.yaml
+I0323 20:40:26.593119   11938 ssh_runner.go:101] SSH: sudo mkdir -p /etc/kubernetes/addons
+I0323 20:40:26.602915   11938 ssh_runner.go:101] SSH: 
+sudo systemctl daemon-reload &&
+sudo systemctl enable kubelet &&
+sudo systemctl start kubelet
+I0323 20:40:26.663357   11938 utils.go:224] ! Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /usr/lib/systemd/system/kubelet.service.
+I0323 20:40:26.716223   11938 certs.go:47] Setting up certificates for IP: 192.168.64.5
+I0323 20:40:26.726603   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/ca.crt
+I0323 20:40:26.732554   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.741844   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/ca.key
+I0323 20:40:26.746630   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.757610   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/apiserver.crt
+I0323 20:40:26.763102   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.774383   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/apiserver.key
+I0323 20:40:26.778781   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.791091   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/proxy-client-ca.crt
+I0323 20:40:26.796606   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.807940   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/proxy-client-ca.key
+I0323 20:40:26.813243   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.823670   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/proxy-client.crt
+I0323 20:40:26.827799   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.838484   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/certs/proxy-client.key
+I0323 20:40:26.842857   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube/certs/
+I0323 20:40:26.852404   11938 ssh_runner.go:101] SSH: sudo rm -f /var/lib/minikube/kubeconfig
+I0323 20:40:26.857098   11938 ssh_runner.go:101] SSH: sudo mkdir -p /var/lib/minikube
+I0323 20:40:26.867164   11938 config.go:125] Using kubeconfig:  /Users/ofengx/.kube/config
+🚜  Pulling images required by Kubernetes v1.13.4 ...
+I0323 20:40:26.868502   11938 ssh_runner.go:101] SSH: sudo kubeadm config images pull --config /var/lib/kubeadm.yaml
+I0323 20:50:06.983699   11938 utils.go:224] > [config/images] Pulled k8s.gcr.io/kube-apiserver:v1.13.4
+I0323 20:50:20.273603   11938 utils.go:224] ! failed to pull image "k8s.gcr.io/kube-controller-manager:v1.13.4": output: Error response from daemon: Get https://k8s.gcr.io/v2/kube-controller-manager/manifests/v1.13.4: net/http: TLS handshake timeout
+I0323 20:50:20.273631   11938 utils.go:224] ! , error: exit status 1
+❌  Unable to pull images, which may be OK: running cmd: sudo kubeadm config images pull --config /var/lib/kubeadm.yaml: command failed: sudo kubeadm config images pull --config /var/lib/kubeadm.yaml
+stdout: [config/images] Pulled k8s.gcr.io/kube-apiserver:v1.13.4
+
+stderr: failed to pull image "k8s.gcr.io/kube-controller-manager:v1.13.4": output: Error response from daemon: Get https://k8s.gcr.io/v2/kube-controller-manager/manifests/v1.13.4: net/http: TLS handshake timeout
+, error: exit status 1
+: Process exited with status 1
+🚀  Launching Kubernetes v1.13.4 using kubeadm ... 
+I0323 20:50:20.275161   11938 ssh_runner.go:137] Run with output: 
+sudo /usr/bin/kubeadm init --config /var/lib/kubeadm.yaml --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests --ignore-preflight-errors=DirAvailable--data-minikube --ignore-preflight-errors=Port-10250 --ignore-preflight-errors=FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml --ignore-preflight-errors=FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml --ignore-preflight-errors=FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml --ignore-preflight-errors=FileAvailable--etc-kubernetes-manifests-etcd.yaml --ignore-preflight-errors=Swap --ignore-preflight-errors=CRI 
+
+I0323 20:50:20.304856   11938 utils.go:224] > [init] Using Kubernetes version: v1.13.4
+I0323 20:50:20.304886   11938 utils.go:224] > [preflight] Running pre-flight checks
+I0323 20:50:20.397809   11938 utils.go:224] !   [WARNING Service-Docker]: docker service is not enabled, please run 'systemctl enable docker.service'
+I0323 20:50:20.397836   11938 utils.go:224] !   [WARNING Swap]: running with swap on is not supported. Please disable swap
+I0323 20:50:20.416897   11938 utils.go:224] !   [WARNING Hostname]: hostname "minikube" could not be reached
+I0323 20:50:20.416924   11938 utils.go:224] !   [WARNING Hostname]: hostname "minikube": lookup minikube on 192.168.64.1:53: no such host
+I0323 20:50:20.489482   11938 utils.go:224] > [preflight] Pulling images required for setting up a Kubernetes cluster
+I0323 20:50:20.489514   11938 utils.go:224] > [preflight] This might take a minute or two, depending on the speed of your internet connection
+I0323 20:50:20.489527   11938 utils.go:224] > [preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+Use docker to pull normally
+$ sudo kubeadm config images list --config /var/lib/kubeadm.yaml
+k8s.gcr.io/kube-apiserver:v1.13.4
+k8s.gcr.io/kube-controller-manager:v1.13.4
+k8s.gcr.io/kube-scheduler:v1.13.4
+k8s.gcr.io/kube-proxy:v1.13.4
+k8s.gcr.io/pause:3.1
+k8s.gcr.io/etcd:3.2.24
+k8s.gcr.io/coredns:1.2.6
+$ docker pull k8s.gcr.io/kube-apiserver:v1.13.4
+v1.13.4: Pulling from kube-apiserver
+Digest: sha256:9f3c39082ceea4979edabf1c981a54c0b3e32da5243c242beffa556241e81ae5
+Status: Image is up to date for k8s.gcr.io/kube-apiserver:v1.13.4
+$ docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-apiserver   v1.13.4             fc3801f0fc54        3 weeks ago         181MB
+$ docker pull k8s.gcr.io/kube-controller-manager:v1.13.4
+v1.13.4: Pulling from kube-controller-manager
+73e3e9d78c61: Already exists 
+39e16f0f87fa: Pull complete 
+Digest: sha256:84477c0a8d0f8db87f12856d7b97c2784856caf3bc46bc9dd73f5ac219bc9d06
+Status: Image is up to date for k8s.gcr.io/kube-controller-manager:v1.13.4
+$ docker info  | grep -i proxy
+HTTP Proxy: http://192.168.0.104:1087
+HTTPS Proxy: http://192.168.0.104:1087
+No Proxy: 127.0.0.1/24
+$ docker pull k8s.gcr.io/kube-scheduler:v1.13.4
+v1.13.4: Pulling from kube-scheduler
+73e3e9d78c61: Already exists 
+1a875e158006: Pull complete 
+Digest: sha256:e7b2f9b1dcfa03b0e43b891979075d62086fe14e169de081f9c23db378f5b2f7
+Status: Image is up to date for k8s.gcr.io/kube-scheduler:v1.13.4
+$ docker pull k8s.gcr.io/kube-proxy:v1.13.4
+v1.13.4: Pulling from kube-proxy
+73e3e9d78c61: Already exists 
+0c440f353724: Pull complete 
+17ae2caf8e8d: Pull complete 
+Digest: sha256:e57fd7593e2bdc161e41b8922e5fba6dbdab790608fc8671721eb26fbabd3090
+Status: Image is up to date for k8s.gcr.io/kube-proxy:v1.13.4
+$ docker pull k8s.gcr.io/pause:3.1
+3.1: Pulling from pause
+67ddbfb20a22: Pull complete 
+Digest: sha256:f78411e19d84a252e53bff71a4407a5686c46983a2c2eeed83929b888179acea
+Status: Image is up to date for k8s.gcr.io/pause:3.1
+$ kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-02-28T13:35:32Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+$ docker pull k8s.gcr.io/etcd:3.2.24
+3.2.24: Pulling from etcd
+What you expected to happen?
+I don't want to manually enter ssh to pull the image every time.
+How to reproduce it (as minimally and precisely as possible)?
+Use a proxy to install minikube in China
+Anything else we need to know?
+If there are other things I want to know, I can leave a message and I will provide more information.

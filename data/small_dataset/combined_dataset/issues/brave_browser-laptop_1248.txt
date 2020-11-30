@@ -1,0 +1,20 @@
+Improving Visibility to Dev Tools of HTTPS Cert Security Status, Secure TLS Connection, and Secure Resources
+
+
+So in Chrome, When you click on the green lock (github.com used as an example) and click the details link you are directed to the Security Tab in ChromeDevTools:
+
+Details Link:
+
+
+2. Security Tab in ChromeDevTools: 
+Here's what happens when you view the Dev Tools Security Tab in Brave:
+
+Observe the Cert Bubble that Doesn't Contain a Details Link which Leads to Dev Tools Security Tab:
+
+Note that in Brave there is no visibility into the Security Status of the Site's Cert. There is no visibility into the Secure TLS Connection and that the Site is using a 'strong protocol version and cipher suite' like Chrome displays. Nor is there any visibility in Dev Tools to Verify that Secure Resources 'are all served securely'. 
+
+Unknowns worth mentioning:
+
+@diracdeltas  mentions in #1057 that there should be a way to view Raw TLS Certificate. I am not sure how Electron might prevent or need to be modified in order for details of a Site's Certificate Information should be visible to the DevTools window. @bbondy  or others please let me know if anything I have written here is non-sensical or needs clarification!
+
+Update: Apparently this is a error with Electron. Filed at the following Issue: electron/electron#5022

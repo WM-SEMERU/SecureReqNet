@@ -1,0 +1,17 @@
+I Can't get Ytel or MyCallCloud to work for work on Brave
+
+
+Description
+Steps to Reproduce
+
+
+
+
+
+Actual result:
+Expected result:
+Reproduces how often:
+Brave Version
+about:brave info:
+Reproducible on current live release:
+Additional Information

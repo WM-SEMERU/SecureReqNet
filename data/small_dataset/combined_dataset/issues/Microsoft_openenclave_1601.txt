@@ -1,0 +1,4 @@
+Host Windows enclave/exit assembly code needs to handle Spectre mitigation
+
+
+The host Windows enclave/exit assembly code needs to handle Spectre mitigation, similar to the Linux Windows enclave/exit assembly.

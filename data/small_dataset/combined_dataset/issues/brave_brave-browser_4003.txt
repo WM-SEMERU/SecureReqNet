@@ -1,0 +1,4 @@
+Move internals out of ui folder
+
+
+Currently in we have internals folder inside components/brave_rewards/resources/ui folder, which actually represents rewards settings page. So we have page inside the page where this pages are different. We should split them and move internals in this folder components/brave_rewards/resources

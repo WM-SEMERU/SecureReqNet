@@ -1,0 +1,12 @@
+Delete only unscheduled pods in DaemonSetController if node doesn't exist anymore
+
+
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+PR fixes bug introduced in #73401. Behaviour is changed so DaemonSetController deletes pods for non-existing nodes only if PodGCController can't remove them (pods that haven't been scheduled before node was deleted). Previously DaemonSetController stop processing DaemonSet for 5 minutes after node removal, see #75836.
+Which issue(s) this PR fixes:
+Fixes #75836
+Does this PR introduce a user-facing change?:
+Fixes bug in DaemonSetController causing it to stop processing some DaemonSets for 5 minutes after node removal.
+

@@ -1,0 +1,10 @@
+Implement site ownership verification
+
+
+There are three options to verify ownership (quote stefan from IRC)
+1) /somerandomfile.txt
+2) a DNS TXT record on www.foo.com
+3) A header like X-Minion-Site-Ownership
+
+The first step is a module that does each individual verification.
+Asssuming an unique code is generated and we need to check such code exist in either option.

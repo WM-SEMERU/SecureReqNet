@@ -1,0 +1,7 @@
+AMBARI-25230 improve fast-hdfs tool exception handling (benyoka)
+
+
+What changes were proposed in this pull request?
+Same as #2915 but for the 2.7 line.
+How was this patch tested?
+Tested manually, both happy- and exception paths.

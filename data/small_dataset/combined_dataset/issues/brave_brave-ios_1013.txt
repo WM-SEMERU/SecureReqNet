@@ -1,0 +1,23 @@
+Sync on iPhone does not update after initially being added to a chain
+
+
+Description:
+I had a sync chain in place from Mac -> Android
+I added my iPhone.
+Mac -> Had bookmarks already
+iPhone -> Had bookmarks already
+On first sync, all synced fine.
+I deleted a bunch of Bookmarks and Folders on my iPhone.
+That did not Sync, nothing.
+Bookmarks on Mac
+
+Bookmarks on iPhone
+
+Expected result:
+Bookmarks should sync quickly
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+I only try this once
+Brave Version: 
+1.9 (19.03.27.19)
+Device details: 
+12.2

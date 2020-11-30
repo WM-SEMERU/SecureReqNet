@@ -1,0 +1,71 @@
+[FrameworkBundle] Add integration of http-client component
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR adds the integration of the HttpClient component on FrameworkBundle.
+By default, two services are provided, one implementing SFC-HttpClient, and another PSR18:
+
+
+http_client + its autowiring alias for Symfony\Contracts\HttpClient\HttpClientInterface)
+This service is automatically set to the best HTTP client available with the configuration given under the framework.http_client key.
+
+
+psr18.http_client + its autowiring alias for Psr\Http\Client\ClientInterface). To make it work, one needs to provide autowiring aliases for ResponseFactoryInterface and StreamFactoryInterface, which are provided by the recipe for nyholm/psr7 (but could be overriden by apps when using something else).
+
+
+one can also configure the default options, and "scoped" clients. For example:
+
+
+http_client:
+    default_options:
+        capath: '...'
+    clients:
+        github_client:
+            default_options:
+                base_uri: 'https://api.github.com'
+This definition create a github_client service implementing SFC-HttpClient and a psr18.github_client one implementing PSR18, +2 corresponding named autowiring aliases: HttpClientInterface $githubClient,  and ClientInterface $githubClient.

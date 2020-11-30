@@ -1,0 +1,27 @@
+proposal: x/crypto/ssh: new callbacks to Config and error type
+
+
+What version of Go are you using (go version)?
+1.9.4 (but it doesn't matter, this isn't in the stdlib yet)
+Does this issue reproduce with the latest release?
+Yes.
+What operating system and processor architecture are you using (go env)?
+Doesn't matter.
+What did you do?
+I'm trying to get more info from SSH servers, and the API of x/crypto/ssh is not very friendly.
+
+I can only list acceptable crypto algorithms, not find out which the remote end support. One reason for wanting this is that I want to check all host keys, but the HostKeyCallback is only called for the negotiated one. The error message includes all algorithms remote end supports, but it's not programmatically extractable.
+No good way to reject host key and know that's why Dial failed.
+
+What did you expect to see?
+
+Config.Remote{Ciphers,KeyExchanges,MACs} callbacks
+Being able to identify the error returned by ClientConfig.HostKeyCallback so that I know it failed because I wanted it to.
+
+What did you see instead?
+API with deficiencies.
+Suggested improvements
+
+Add Remote{Ciphers,KeyExchanges,MACs} callbacks to type Config
+Add type HostKeyError, wrapping the error returned from the callback.
+

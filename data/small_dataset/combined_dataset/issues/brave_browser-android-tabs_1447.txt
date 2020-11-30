@@ -1,0 +1,38 @@
+Auto-Contribute switch is OFF, when enable rewards from Hamburger menu
+
+
+Description 
+Auto-Contribution switch is OFF by default, when enable rewards from Hamburger menu
+Steps to reproduce 
+
+Clean profile 1.0.90 rc3
+Enable Brave Rewards through Hamburger menu
+Verify the Auto-contribute switch in brave://rewards page
+Auto-contribute switch is in OFF state
+
+Actual result 
+The Auto-contribute switch is in OFF state when Rewards is enabled from Hamburger menu
+Expected result
+The switch should be turned ON when Rewards is enabled from Hamburger menu or BR panel
+Issue reproduces how often 
+Always
+Issue happens on 
+
+Current Play Store version? No
+Beta build? Yes
+
+Device details
+
+Install type (ARM, x86): ARM
+Device (Phone, Tablet, Phablet): Samsung Galaxy J3
+Android version: 5.1.1
+
+Brave version
+1.0.90 rc3
+Website problems only
+
+Does the issue resolve itself when disabling Brave Shields? NA
+Is the issue reproducible on the latest version of Chrome? NA
+
+Additional information
+@brave/legacy_qa @SergeyZhukovsky

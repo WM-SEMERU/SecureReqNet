@@ -1,0 +1,4 @@
+Make IISExpress not depend on jscript.
+
+
+Same change as #8707 except targeting master

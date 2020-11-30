@@ -1,0 +1,4 @@
+Added mailing list for wg-audit; extended RFP deadline for wg-audit
+
+
+The wg-audit team elected to extend the RFP deadline. This PR also publishes our mailing list.

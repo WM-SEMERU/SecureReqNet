@@ -1,0 +1,23 @@
+Sanitize: Allow for custom RegExp
+
+
+I'm submitting a ...  (check one with "x")
+[ ] bug report => search github for a similar issue or PR before submitting
+[x] feature request
+[ ] support request => Please do not submit support request here, instead see https://github.com/angular/angular/blob/master/CONTRIBUTING.md#question
+
+Current behavior
+Using vulnerable features like setting a url in a style attribute such as background-image, with custom values that by extension are safe, get rejected because of the Sanitizer detects them as unsafe.
+Expected/desired behavior
+We should have a way to edit the Sanitizer's RegExp, so we can use our own Sanity checks.
+What is the motivation / use case for changing the behavior?
+Although it opens a new vulnerability for non-experienced devs if they change the approved-by-everyone safe RegExp for a vulnerable one, it gives more responsability to the developer.
+Imagine one simple case: for [style.background-image], we want to provide a placeholder image just in case the URL we want to show is not available / gets a load error.
+The current sanitizer's RegExp is: /^url\(([^)]+)\)$/. This RegExp allows for a single url value, such as:
+<div [style.background-image]="'url(' + myImage + ')'"></div>
+
+But that RegExp prevents us from using:
+<div [style.background-image]="'url(' + myImage + '), url(./path/to/placeholder.png)'"></div>
+
+Although if the first one is safe, then the second one should be safe as well.
+I was thinking about submiting an Issue + PR for changing that RegExp for one that fits this need, but then I thought... Maybe it'd be better if the API allowed to set custom RegExp for sanitizer checks.

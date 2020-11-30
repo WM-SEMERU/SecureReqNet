@@ -1,0 +1,8 @@
+Add UsersUnsubscribe page
+
+
+Supports #7656
+
+We want to add a new page for the unsubscribe feature. This issue is about creating a new route + a simple component for that. It should look similar to the old page:
+
+It will NOT unsubscribe the user. It's a pure UI (and basic) component.

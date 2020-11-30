@@ -1,0 +1,33 @@
+Decoupling the providers part of the SecurityBundle
+
+
+Hi there,
+Symfony2 provides two security providers: entity and in_memory. These two providers are generic and configurable in the security configuration section.
+But these two providers are hardcoded IMO (see: SecurityExtension.php#L478) and we cannot add our owns custom generic security providers. I know we can add our own providers by adding a service id but it's not generic.
+The problem is we cannot provide a model provider (like the entity one) for Propel. The PropelBundle provides a ModelUserProvider which does the same job than the EntityProvider class. But to add a new provider, we have to write another class with a service.
+E.g.:
+Service id: my.user.provider with the following class:
+<?php
+// ...
+
+class MyUserProvider extends ModelUserProvider
+{
+    public function __construct()
+    {
+        parent::__construct('My\Bundle\Model\User', 'username');
+    }
+}
+And the security configuration:
+security:
+    providers:
+        my_user_provider:
+            id: my.user.provider
+Instead of just:
+security:
+    providers:
+        my_user_provider:
+            model: { class: 'My\Bundle\Model\User', property: 'username' }
+BTW this is the same problem for Doctrine2 ODM & co.
+That's why it could be better to add a tag or something else to register custom generic providers. I know it will be hard to check the configuration except if we introduce a new Interface. The most part of generic providers will need a class and a property. To just provide entity is not fair for other O*Ms.
+Regards,
+William

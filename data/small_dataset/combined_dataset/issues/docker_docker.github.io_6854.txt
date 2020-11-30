@@ -1,0 +1,6 @@
+Update `name_to_handle_at` syscall capability gate to `CAP_DAC_READ_SEARCH`
+
+
+As mentioned by @justincormack  in issue moby/moby#37242:
+name_to_handle_at syscall capability needed to be updated to "Already gated by CAP_DAC_READ_SEARCH."
+File: engine/security/seccomp.md

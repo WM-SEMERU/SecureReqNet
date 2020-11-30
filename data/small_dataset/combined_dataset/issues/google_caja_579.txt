@@ -1,0 +1,22 @@
+Need another form of DOM attenuation: this node doesn't communicate info from the user to event handlers
+
+
+Original issue 579 created by erights on 2008-06-13T00:17:13.000Z:
+Reported by David Wagner.
+Say gadget A shared a read-only attenuation of dom node D with gadget B. B
+inserts D into its own tree. User clicks on D in its rendering in B,
+triggering event handlers previously posted on or within D. All so far is
+as it should be.
+However, there are hazards and opportunities here. The hazards are:
+
+A may not have realized that user actions within gadget B may now
+trigger A's handlers.
+B may not realize that accepting and inserting D into his own tree
+provides A's handlers ui events from the user's interactions within B.
+
+Say that we have a form of attentuation, like the sensory (transitively
+read-only) attenuation we currently support. Perhaps it's an additional
+flag. Perhaps it's an additional implication of the flag we've already got.
+A can now guard against hazard # 1 by providing an attenuated D to B.
+B can now guard againts hazard # 2 by inserting into its own tree an
+attenuation of the D it receives from A.

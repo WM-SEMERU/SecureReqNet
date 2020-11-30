@@ -1,0 +1,24 @@
+Brave connects to clientservices.googleapis.com on start
+
+
+Description
+test-security fails with this error:
+14:35:25 NETWORK AUDIT FAIL: https://clientservices.googleapis.com/uma/v2
+14:35:25 NETWORK AUDIT FAIL: https://clientservices.googleapis.com/uma/v2
+
+Steps to Reproduce
+
+Run npm run test-security on master
+
+Actual result:
+Connects to clientservices.googleapis.com
+Expected result:
+Should not connect to clientservices.googleapis.com
+Reproduces how often:
+Easily
+Brave version (brave://version info)
+master
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?  No
+

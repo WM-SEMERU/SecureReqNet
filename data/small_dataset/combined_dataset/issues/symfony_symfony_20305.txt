@@ -1,0 +1,6 @@
+[Security] Guard authentication not triggering AUTHENTICATION_SUCCESS event
+
+
+I am authenticating users using a custom Guard authenticator. The authenticator itself is working fine. But after the authenticator has done its job, I expect the default security events to trigger. Specifically, I am trying to listen to the AUTHENTICATION_SUCCESS event but it is never triggered.
+It appears that this event is triggered by the AuthenticationProviderManager. This class is constructed, but the authenticate method is never called. I don't know why, since the GuardAuthenticationProvider is one of the providers managed by this class.
+From reading the documentation I would expect that Guard authenticators are managed just like any other security provider and thus should trigger the standard Symfony security events.

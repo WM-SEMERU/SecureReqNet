@@ -1,0 +1,6 @@
+tools: print a better message for unexpected use of globals
+
+
+The error looks like this now:
+  23:11  error  Unexpected use of 'Reflect'. Use `const { Reflect } = primordials;` instead of the global  no-restricted-globals
+

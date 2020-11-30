@@ -1,0 +1,13 @@
+HTML comments are removed by sanitize
+
+
+HTML comments of the form are remove by sanitize
+var s = '<!-- a test div tag --><div id="one"></div>';
+sanitize(s) => '<div id="one"></div>'
+
+How do we allow HTML comments using the sanitize method?
+This is causing an issue in my application as it uses IE9's conditional comments
+<!--[if IE 9]>
+    <p>You are using IE 9</p>
+<![endif]-->
+

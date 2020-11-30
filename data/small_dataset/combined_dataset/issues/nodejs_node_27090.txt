@@ -1,0 +1,13 @@
+test: fix test-worker-memory.js for large cpu #s
+
+
+This test consistently failed on a system with a
+large number of cores (~120). Cap the number of
+concurrent workers so we'll stay consistently within
+the "slack" allowed with respect to rss.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ commit message follows commit guidelines
+

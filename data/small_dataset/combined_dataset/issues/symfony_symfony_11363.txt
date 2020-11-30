@@ -1,0 +1,12 @@
+symfony/security-acl: newly created ACL are putted incomplete into cache
+
+
+putInCache gets only called once:
+https://github.com/symfony/security-acl/blob/master/Dbal/AclProvider.php#L192
+This code as example:
+       $acl = $aclProvider->createAcl($objectIdentity);
+       $acl->insertObjectAce($sid, $mask, 0 , true);
+       $aclProvider->updateAcl($acl);
+
+Leads into an imcomplete ACL in the cache where no ACE's are attached. Flushing the ACL Cache or explicit removing of the ACL from the cache solves the problem but seems unnecessary.
+fixing updateAcl method seems more feasible where the entry in the cache gets updated as well.

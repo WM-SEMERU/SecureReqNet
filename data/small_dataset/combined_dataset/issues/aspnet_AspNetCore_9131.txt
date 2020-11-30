@@ -1,0 +1,4 @@
+Safe utf8 string conversion
+
+
+Saw this, thought @blowdart might like it

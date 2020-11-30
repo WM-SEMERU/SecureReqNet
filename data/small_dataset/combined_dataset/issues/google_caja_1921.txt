@@ -1,0 +1,14 @@
+Protect Caja JSONP responses against “Rosetta Flash” vulnerability
+
+
+Original issue 1923 created by kpreid@google.com on 2014-07-09T23:14:03.000Z:
+Any domain (origin) containing the cajoling service or proxy service is vulnerable.
+Introduction to the vulnerability:
+http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/
+We should apply these known mitigations:
+
+Add a fixed prefix (such as comment) to the JSONP response, before the user-supplied callback.
+Responses should have Content-Disposition:attachment.
+Responses should have X-Content-Type-Options: nosniff
+
+This must be done separately on trunk and es53 branches, because on trunk the ProxyServlet has been refactored to remove the more general cajoling service mechanisms.

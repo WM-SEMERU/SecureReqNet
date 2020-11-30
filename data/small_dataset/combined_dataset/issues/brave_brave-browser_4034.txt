@@ -1,0 +1,5 @@
+Upgrade Chromium 74.0.3729.40 to Chromium 74.0.3729.61
+
+
+Fixes #4033
+Related: brave/brave-core#2172

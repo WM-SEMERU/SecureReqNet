@@ -1,0 +1,19 @@
+network: Offerings do not have to have Security Grouping enabled
+
+
+Description
+Offerings can co-exist where on does provide Security Grouping in the
+network, but other guest Networks have no Security Grouping.
+In V(X)LAN isolation environments the L2 separation is handled by V(X)LAN
+and protection between Instances is handled by Security Grouping.
+There are multiple scenarios possible where one network has Security Grouping
+enabled because that is required in that network.
+In the other network, but in the same zone it could be a choice to have
+Security Grouping disabled and allow all traffic to flow.
+Types of changes
+
+ Enhancement (improves an existing feature and functionality)
+
+How Has This Been Tested?
+Tested on a Local KVM cloud where VXLAN isolation was being used.
+Observed that VMs deployed in the first network have SG enabled and in a other network have it disabled.

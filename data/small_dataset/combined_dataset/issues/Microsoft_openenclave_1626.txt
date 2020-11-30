@@ -1,0 +1,5 @@
+Remove __oe_assert_fail from doxygen generated documentation
+
+
+@anitagov says
+We need to remove the doxygen comments for the internal function __oe_assert_fail from enclave.h as it is internal and used by the assert macros.

@@ -1,0 +1,27 @@
+[Validator] Fix a repeated error code in a Constraint class
+
+
+IMPORTANT: this issue is reserved for new contributors, because we want to give the opportunity to people who want to contribute to Symfony but never found the right first issue to fix.
+If you want to work on this issue, add a comment to assign it to yourself and let others know that this is already taken. Thanks!
+
+Context
+Each Symfony Validator Constraint class define several errors. Each error is defined as a constant whose value is an arbitrary UUID code.
+Bug description
+In Symfony 3.4 there is a bug because the TOO_HIGH_ERROR constant has the same value in two different constraints: LessThan and LessThanOrEqual.
+Solution
+One of the two classes must be updated to change the value of the TOO_HIGH_ERROR constant. You can pick any arbitrary UUID value for the new constant value.
+You must do the change in the Symfony 3.4 branch and we'll merge it later automatically in all the other branches.
+Details
+You have two ways to make this contribution:
+1) Use the GitHub web interface to edit the constraint class and make the pull request.
+
+It's recommended if you don't have any experience using Git in the terminal.
+We prefer if you don't use this method ... because it's limited and you won't learn much from it.
+
+2) Use your own editor to edit the constraint class and use the Git commands in the terminal to make the pull request.
+
+It's the most common way to contribute to Symfony.
+You need to download Symfony's code to your computer and follow the steps explained in this contribution guide
+
+
+If you need any help solving this bug, you can ask its assigned mentor: Javier Eguiluz via Symfony Slack private messages or via email (javier.eguiluz@symfony.com).

@@ -1,0 +1,19 @@
+hello all
+First, let me start off by saying that this will probably not be a bug, rather something missing in the upgrade notes, or something I messed up myself. 
+I am running apache2 on Ubuntu 13.10.
+I recently upgraded from gitlab 6.3 to 6.4 and then 6.5. Upgrade went smootly, 
+`sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production` gives no error whatsoever.
+
+However, when launching the website, none of the css styles load. Looking at the error log I get 
+``` [Fri Feb 07 12:08:48.082620 2014] [authz_core:error] [pid 6781] [client 192.168.0.240:36384] AH01630: client denied by server configuration: /home/git/gitlab/public/assets/application-6b1758f92513ba536692bfcc7fd10b12.js, referer: https://git.luzzato.com/ ``` and other so the same kind.
+
+So I followed the troubleshooting notes, and checked that www-data was part of the git group. 
+I then checked that all file permissions were corect in the assets folder and had group read from the root to the file. 
+I also regenerated the asset folder to make sure that I hadn't damaged them by removing the folder, and then doing 
+``` sudo -u git -H bundle exec rake assets:clean RAILS_ENV=production
+sudo -u git -H bundle exec rake assets:precompile RAILS_ENV=production
+```
+Files were correctly created but issue remains. 
+I have the same apache .conf file as sugested in the recipees, and have had to change the document root from   `DocumentRoot /home/git/gitlab/public` to `DocumentRoot /home/git/gitlab/` for the css to load, but of course now all avatars, and comment attached pictures, will not show. 
+
+If anyone has any ideas about this I would appreciate it. Additional logs, conf files etc available on request

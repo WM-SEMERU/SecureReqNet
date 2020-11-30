@@ -1,0 +1,1 @@
+The URL for notes within the dashboard atom feed point back to the dashboard atom feed instead of actually linking to the note itself.

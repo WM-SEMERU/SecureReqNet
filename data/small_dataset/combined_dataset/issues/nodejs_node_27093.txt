@@ -1,0 +1,28 @@
+Exception when trying to parse new URL('http://40000000000')
+
+
+
+Version: 10.12.0
+Platform: Windows 10 64bits
+Subsystem:
+
+Node refuses to parse http://40000000000 as being a valid URL. It fails with Invalid URL: http://40000000000.
+However, in my understanding, this url should not be considered wrong according to the latest RFC defining what should be considered as being a valid domain.
+RFC-1123 states:
+
+The syntax of a legal Internet host name was specified in RFC-952 [DNS:4]. One aspect of host name syntax is hereby changed: the restriction on the first character is relaxed to allow either a letter or a digit.
+More http://www.faqs.org/rfcs/rfc1123.html
+
+With RFC-952 stating:
+
+<domainname> ::= <hname>
+<hname> ::= <name>*["."<name>]
+<name>  ::= <let>[*[<let-or-digit-or-hyphen>]<let-or-digit>]
+More http://www.faqs.org/rfcs/rfc952.html
+
+In my understanding of the specs above, 40000000000 should be a valid host.
+In addition to that:
+
+ping 40000000000 does work in Windows (I can override the host in /etc/host)
+curl is able to make a request to the "domain" http://40000000000 (if defined in /etc/host)
+

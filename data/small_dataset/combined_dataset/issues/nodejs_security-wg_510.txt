@@ -1,0 +1,5 @@
+Attendance in the upcoming Collaborator Summit in May?
+
+
+Any of us is expected to make an appearance on the upcoming Node.js Collaborator Summit in May? (I unfortunately can't make it due to extensive travel already planned for me but will plan  for the one in Node+JS Interactive)
+Follow-ing up on nodejs/summit#155 we could take more active part in the conversation and such. There are quite a few open things that we can push forward from the issue queue list.

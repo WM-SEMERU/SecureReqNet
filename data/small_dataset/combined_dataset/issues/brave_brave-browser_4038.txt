@@ -1,0 +1,24 @@
+ccccccjegebkunvvjrkurkcgegducndjjernnlgkrhbl
+
+
+Description
+Steps to Reproduce
+
+
+
+
+
+Actual result:
+Expected result:
+Reproduces how often:
+Brave version (brave://version info)
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+Is the issue reproducible on the latest version of Chrome?
+
+Additional Information

@@ -1,0 +1,13 @@
+Fix golint failures: DefaultUrlScheme -> DefaultURLScheme
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Fix golint failures: DefaultUrlScheme -> DefaultURLScheme
+Which issue(s) this PR fixes:
+Ref #68026
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+

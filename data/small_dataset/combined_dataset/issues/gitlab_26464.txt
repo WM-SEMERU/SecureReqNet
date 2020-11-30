@@ -1,0 +1,11 @@
+### Description
+
+Two-Factor Authentication is just a bit boring, but necessary for security on admin account.
+
+### Proposal
+
+Why not make the process simpler? Last pass authenticator is implementing a way to send push notification to device which can approve without need to type 6 git code. It's wonderful.
+
+### Links / references
+
+https://blog.lastpass.com/2016/03/lastpass-authenticator-makes-two-factor-easy.html/

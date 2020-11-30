@@ -1,0 +1,4 @@
+Go through all projects and clear out crufty localized strings
+
+
+Before we let localizers loose on all our payments projects (https://bugzilla.mozilla.org/show_bug.cgi?id=1173423) it would be nice to spend some time and remove any gettext() calls that use obvious test strings that won't need localizing. Otherwise it will just create a lot of useless work for our volunteers.

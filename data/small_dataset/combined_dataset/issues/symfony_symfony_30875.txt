@@ -1,0 +1,7 @@
+[mailer] S/MIME Support
+
+
+Description
+It would be great if the symfony/mailer component supported S/MIME.
+Example
+SwiftMailer currently supports it, to provide an example: https://swiftmailer.symfony.com/docs/messages.html#signed-encrypted-message

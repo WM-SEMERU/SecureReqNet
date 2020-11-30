@@ -1,0 +1,6 @@
+difficult to examine domado elements in debugger
+
+
+Original issue 1834 created by felix8a on 2013-08-07T18:01:49.000Z:
+If I'm in a debugger stopped in guest code, it's difficult to examine element values because they're all opaque TameElement objects. I'd like some easy way to get at the real element from the domado element.
+(and for debugging domado itself, it would be helpful to get at the TameElement's privates, but for debugging guest code just getting at the real element is usually sufficient.)

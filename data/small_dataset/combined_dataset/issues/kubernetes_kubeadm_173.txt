@@ -1,0 +1,6 @@
+In the future, TLS Bootstrapping should be delegated to the kubelet
+
+
+As decided in a SIG meeting, in v1.7 we might delegate the TLS bootstrapping to the kubelet itself, instead of letting kubeadm do it.
+This assumes the experimental TLS bootstrapping flag on kubelet is turned into something that we can rely on.
+cc @philips @aaronlevy @ethernetdan @vishh @mikedanese @pires

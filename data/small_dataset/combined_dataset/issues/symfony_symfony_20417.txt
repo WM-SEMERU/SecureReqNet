@@ -1,0 +1,51 @@
+[SecurityBundle] Rename FirewallContext#getContext()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+As pointed out in #19398 (comment), the name of this method is misleading.
+Because a public service using this class is created for each defined firewall, I suggest to change it to FirewallContext#getListeners(), deprecating the current getContext() for removing it in 4.0.

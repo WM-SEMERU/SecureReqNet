@@ -1,0 +1,10 @@
+use iOS Universal Links instead of brave:// scheme
+
+
+from https://www.securetheorem.com/app/1/issues/007755:
+
+Any URI scheme defined by the App can be hijacked by another App, if the malicious App registers the same scheme and also gets installed on the device. Specifically, the Apple documentation states the following:
+"If more than one third-party app registers to handle the same URL scheme, there is currently no process for determining which app will be given that scheme."
+Consequently, the rogue App could potentially receive messages sent via URI schemes instead of the real App; such messages could include OAuth tokens, search queries, etc.
+
+Apple's preferred solution is Universal Links: https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html

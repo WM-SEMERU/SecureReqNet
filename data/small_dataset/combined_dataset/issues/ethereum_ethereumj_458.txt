@@ -1,0 +1,29 @@
+Use libsecp256k1?
+
+
+I was looking at:
+
+
+
+ethereumj/ethereumj-core/src/main/java/org/ethereum/crypto/ECKey.java
+
+
+         Line 710
+      in
+      4f80b8d
+
+
+
+
+
+
+ public ECDSASignature doSign(byte[] input) { 
+
+
+
+
+
+I notice that you use SpongyCastle/BouncyCastle's ECDSASigner, which just uses java.math.BigIntegers and is open to timing attacks.
+The BitCoinJ code, which this is forked from, wraps a JNI call to libsecp256k1, which in turn uses constant time arithmetic borrowed from GMP:
+https://github.com/bitcoinj/bitcoinj/blob/master/core/src/main/java/org/bitcoinj/core/ECKey.java#L669
+The current implementation is RFC6979 compliant and since it uses SpongyCastle it may be portable to android... is there any interest in giving this up and backporting the BitCoinJ ECDSA signature algorithm?

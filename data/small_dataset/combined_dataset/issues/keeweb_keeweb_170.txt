@@ -1,0 +1,4 @@
+Database on removable media remains cached in-app
+
+
+I'm using KeeWeb 1.0.4 (a6e7afe) locally on El Capitan, no key file or online sync. My database (with a passphrase) is on a removable encrypted drive, but it remains cached in the desktop app even when the drive is removed. This is very surprising behavior for a security app! There doesn't seem to be a way to disable this caching or easily locate where it exists on my (unencrypted) boot drive. At the very least there should be a warning to the user. Where else is KeeWeb caching my data that I'm not aware?

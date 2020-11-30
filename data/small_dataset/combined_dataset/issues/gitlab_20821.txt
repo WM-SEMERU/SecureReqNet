@@ -1,0 +1,7 @@
+'Fix security issues so we could enable imports to not only admin users
+
+- [x] Prevent claiming associated model IDs via import - https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/1985
+- [ ] ~~Sanity check uploads to prevent symlinks being saved there - https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/1984~~ - Don't think this is needed https://gitlab.com/gitlab-org/gitlab-ce/issues/20802#note_13823950
+- [x] Add specs for export's project.json file to ensure no sensitive information is leaked https://gitlab.com/gitlab-org/gitlab-ce/issues/20857 https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/1987
+
+Related https://gitlab.com/gitlab-org/gitlab-ce/issues/20802#note_13767783

@@ -1,0 +1,7 @@
+Define health-check endpoints for pingdom / monitoring
+
+
+The idea is: expose an (multiple?) endpoint(s) that does health checks (on the backend / system / whatever / to be defined) so we can hook pingdom or another system into that.
+Need to explore pingdom possibilities first (authentication, custom headers, body processing).
+Then need to decide what we want.
+cc @discordianfish

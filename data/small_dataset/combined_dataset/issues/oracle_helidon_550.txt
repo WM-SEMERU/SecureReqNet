@@ -1,0 +1,6 @@
+Add OpenAPI runtime support to SE
+
+
+Add OpenAPI runtime support to Helidon SE.
+Because SE does not focus on annotations, the OpenAPI support in SE will concentrate on using a static OpenAPI document packaged with the app that describes the app's endpoints.
+See issue #412 (OpenAPI support in general).

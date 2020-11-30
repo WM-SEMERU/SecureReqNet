@@ -1,0 +1,9 @@
+Use Codegen to Generate the Permissions for the Service Role
+
+
+As of #77 we have support for deploying a service role that give the operator assess to create resources, this is to make it so the model files can declare what permissions are necessary for the project.
+spec:
+  iamPolicies:
+    - s3:*
+    #- s3:PutObject
+This would give us the ability to specify these during the model creation in the codegen project this would collect all these policies and regenerate configs/aws-service-operator-role.yaml

@@ -1,0 +1,14 @@
+support azure loadbalancer standard sku (#4150)
+
+
+Add the support of the following property in azure-credential-check.yml
+
+azure_loadbalancer_sku: Sku of Load Balancer and Public IP. Candidate values are: basic and standard.
+azure_exclude_master_from_standard_lb: excludes master nodes from standard load balancer.
+azure_disable_outbound_snat: disables the outbound SNAT for public load balancer rules
+useInstanceMetadata: Use instance metadata service where possible
+azure_primary_availability_set: (Optional) The name of the availability set that should be used as the load balancer backend
+
+fix #4150
+/kind feature
+/sig azure

@@ -1,0 +1,14 @@
+[Validator] Add docs for number constraints
+
+
+Feature PR: symfony/symfony#28637
+
+ Positive
+ PositiveOrZero
+ Negative
+ NegativeOrZero
+
+Todo:
+
+ find a better example for NegativeOrZero constraint
+

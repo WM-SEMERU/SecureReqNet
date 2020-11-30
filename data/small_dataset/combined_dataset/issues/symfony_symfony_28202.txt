@@ -1,0 +1,13 @@
+BCryptPasswordEncoder only creates not reproducible encoded passwords
+
+
+Symfony version(s) affected: 4.1.3
+Found in: symfony/security/Core/Encoder/BCryptPasswordEncoder.php Line 69
+Description
+A password from Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder will never be reproducible because of always using the generated salt by password_hash.
+ if ($salt) { // Ignore $salt, the auto-generated one is always the best }
+How to reproduce
+Generate two passwords in separate request with exact $raw and $salt, it will always result in different encoded passwords.
+Possible Solution
+if ($salt) { $options['salt'] = $salt; }
+Additional context

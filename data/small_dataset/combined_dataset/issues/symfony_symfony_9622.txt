@@ -1,0 +1,47 @@
+[Security] Check account isn't locked before user authentication
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+[no]
+
+
+New feature?
+[no]
+
+
+BC breaks?
+[no]
+
+
+Deprecations?
+[no]
+
+
+Tests pass?
+[yes]
+
+
+Fixed tickets
+#8510
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+I agreed with the point raised in #8510 that if the user's account is locked we should no longer attempt to authenticate them, assuming that account locking in this case is a response to too many failed login attempts. A malicious user should be prevented from authenticating if they are attempting a brute force attack.
+This PR implements the change suggested by @mmucklo in that issue, and updates the UserChecker class' tests appropriately.

@@ -1,0 +1,20 @@
+kubeadm 1.13.5 from official yum repo installs kubelet 1.14.0 as a dependency
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+Versions
+kubeadm version (use kubeadm version):
+1.13.5
+What happened?
+I was updating cluster from 1.13.3 to 1.13.5.  When I do a yum install kubeadm-1.13.5 from official yum repository it wants to install kubelet 1.14.0 as a dependency.
+Updating:
+ kubeadm                         x86_64                  1.13.5-0
+Updating for dependencies:
+ kubelet                         x86_64                  1.14.0-0
+ kubernetes-cni                  x86_64                  0.7.5-0
+
+What you expected to happen?
+kubelet dependency should match kubeadm version at 1.13.5
+How to reproduce it (as minimally and precisely as possible)?
+yum install kubeadm-1.13.5

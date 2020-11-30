@@ -1,0 +1,27 @@
+Show all missing deps when publishing-bot rules has no listed dependencies
+
+
+Before this, if no dependences were listed in rules.yaml but there should have been more than one dep listed, the error message displayed only one missing dep (instead of all of them).
+For #76090
+Before:
+Traceback (most recent call last):
+  File "hack/verify-publishing-bot.py", line 99, in <module>
+    sys.exit(main())
+  File "hack/verify-publishing-bot.py", line 87, in main
+    "destination %s does not have any dependencies (looking for %s)" % (rule["destination"], dep))
+Exception: destination cri-api does not have any dependencies (looking for apimachinery)
+
+After:
+Traceback (most recent call last):
+  File "hack/verify-publishing-bot.py", line 99, in <module>
+    sys.exit(main())
+  File "hack/verify-publishing-bot.py", line 87, in main
+    "destination %s does not have any dependencies (looking for %s)" % (rule["destination"], gomod_dependencies[rule["destination"]]))
+Exception: destination cri-api does not have any dependencies (looking for ['api', 'apimachinery', 'apiserver', 'client-go'])
+
+Also, replace godeps.json with go.mod in the error message.
+/kind cleanup
+/cc @dims @sttts @liggitt
+Does this PR introduce a user-facing change?:
+NONE
+

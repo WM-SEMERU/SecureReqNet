@@ -1,0 +1,10 @@
+As described here:
+
+https://gitlab.slack.com/archives/security/p1477456230000896
+
+Mitigation Steps?
+
+1. Disable reading files that are symlinks
+2. Sanitize the error message
+
+/cc: @briann, @DouweM, @smcgivern, @jameslopez

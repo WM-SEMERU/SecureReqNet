@@ -1,0 +1,9 @@
+javascript urls aren't sanitized
+
+
+Original issue 39 created by metaweta on 2008-01-18T00:42:08.000Z:
+<div id="1"></div>
+<script type="text/javascript">
+document.getElementById("1").innerHTML="<a
+href='javascript:alert(1)'>blah</a>";
+</script>

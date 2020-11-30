@@ -1,0 +1,26 @@
+'### Problem to solve
+
+In %11.4, we started using `db_key_base` to encrypt webhook URLs and tokens. Since we picked `aes-256-gcm` as the algorithm, several people's pre-existing keys were too short:  https://gitlab.com/gitlab-org/gitlab-ce/issues/53659#note_118517554
+
+The solution is nominally to lengthen the key, but since it's used to encrypt a wide range of columns, that isn't really feasible in isolation - and there's no way to gracefully rotate `db_key_base`.
+
+### Further details
+
+More generally, we may wish to rotate `db_key_base` in a range of scenarios, including key compromise or the discovery of hitherto-unknown weaknesses in the existing scheme. Being unable to do so is a bit of a security concern.
+
+We have a key rotation scheme for `otp_key_base` that works by calculating a new value for every row of the column that `otp_key_base` uses. This scheme isn't really usable for `db_key_base` because it's used against a large number of columns
+
+### Proposal
+
+Allow old values for `db_key_base` to be specified in the configuration. When we **encrypt** a column, always use `db_key_base`. However, when we come to **decrypt** a column, use that, and the set of old values, trying each in order until a working key is found.
+
+This allows us to rotate the secret without re-encrypting every column in the database that relies on it. We can then migrate existing data by iterating over every row, re-assigning the values in the encrypted columns, and saving the resulting output.
+
+### What does success look like, and how can we measure that?
+
+Able to change the `db_key_base` without losing access to existing data
+
+### Links / references
+
+
+@jramsay I've marked this one as ~Create but it's one of those that doesn't fit into any devops cycle, really. I think everyone, from Plan to Monitor, has a feature that relies on encrypted database columns. This is coming out of a follow-up to an issue ~Create worked on though.

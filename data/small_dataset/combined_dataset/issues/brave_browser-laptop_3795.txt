@@ -1,0 +1,17 @@
+mixed content site setting from private mode should not apply in regular browsing mode
+
+
+
+Steps to reproduce:
+
+open https://mixed-script.badssl.com/ in a private tab
+click the lock icon and allow mixed content
+open the same page in a regular tab and observe mixed content is still allowed
+
+
+Expected behavior:
+site-specific settings should never leak from private browsing to regular browsing because this opens up ways for a malicious page to figure out what sites have been visited in private browsing mode. leaks in the other direction (from regular into private) are less serious.
+Any related issues:
+#1824
+
+cc @bridiver

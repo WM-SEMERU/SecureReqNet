@@ -1,0 +1,6 @@
+Ask for permission before opening website with third party app.
+
+
+
+No description provided.
+

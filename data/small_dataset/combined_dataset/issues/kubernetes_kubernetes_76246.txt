@@ -1,0 +1,10 @@
+Produce map according to the shorter array in haveOverlap
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+In predicates, we use auxiliary map to check overlap in haveOverlap.
+This PR chooses the shorter array to produce the map which consumes less memory while keeping the time complexity the same.
+NONE
+

@@ -1,0 +1,59 @@
+[Finder] Ignore paths from .gitignore #26714
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26714
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Implementation of feature request #26714
+Finder::ignoreVCS() is great at ignoring file patterns for the files created by popular VCS systems.
+However, it would be great to be able to instruct Finder to actually exclude the paths excluded by .gitignore.
+So if we have .gitignore:
+vendor/
+cache/
+Finder::create()
+->files()
+->ignoreVCS(true) // <--- Ignores .git
+->ignoreVCSIgnored(true); // <--- Ignores vendor/ and cache/

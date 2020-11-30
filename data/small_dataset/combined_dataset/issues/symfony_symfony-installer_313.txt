@@ -1,0 +1,6 @@
+Download speed
+
+
+Apologies, this is not code related but i don't know where to post this elsewhere.
+I just installed the symfony installer. It tooks 20 mins at ~15 KB/sec (I have a ~300Mbs bandwidth). Perhaps you could improve the download speed ?
+

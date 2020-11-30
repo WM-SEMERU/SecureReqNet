@@ -1,0 +1,7 @@
+Originally created by @briann:
+
+Infrastructure issue: https://gitlab.com/gitlab-org/gitlab-ce/issues/26276 (confidential)
+
+During the recent spam invasion we saw a coincidental uptick in traffic to a repo hosting links to streaming sports events. We had 47K+ unique IPs all hitting the same repo using a private token in 24 hours. This caused a huge performance hit on the database.
+
+GitLab needs an automated way to deny access from too many source IPs within a specified time period. Storing last login IPs in redis with a TTL that gets updated with each login in one option.

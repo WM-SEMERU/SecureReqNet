@@ -1,0 +1,13 @@
+Test for XSS in XML
+
+
+The linter should verify that addons XML payloads do not contain XSS
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>1</ShortName>
+<Description>1</Description>
+<Tags>1</Tags>
+<Contact><x:script xmlns:x="http://www.w3.org/1999/xhtml">alert('xss');</x:script></Contact>
+<Url type="text/html" template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=rss"/>
+</OpenSearchDescription>
+Would it be possible to simply refuse <, > in the content of the various fields Contact, Description, ... ?

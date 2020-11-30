@@ -1,0 +1,6 @@
+caja playground seems to be completely broken now
+
+
+I have never tried the caja playground before. Trying it now (navigating firefox on mac to http://caja.appspot.com/, then clicking on the "canvas clock" example on the left), I just get three server error messages (two immediately, then the third after a half second or so), like this:
+
+This has happened several times in a row. It also happens in Safari.

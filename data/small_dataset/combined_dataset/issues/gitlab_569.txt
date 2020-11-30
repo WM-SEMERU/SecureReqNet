@@ -1,0 +1,7 @@
+Hello everyone,
+
+normally GitLab can merge automatically merge requests and will close all related issues.  
+If the user needs to do that manually it seems that the issue won't be closed automatically after merging.
+
+Expected behavior:  
+Manual merge should close all related issues, too.

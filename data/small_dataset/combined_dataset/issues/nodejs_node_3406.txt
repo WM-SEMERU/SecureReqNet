@@ -1,0 +1,4 @@
+remove smaller DH modp's
+
+
+based on the recent paper on new attacks against diffie-hellman it might be a good idea to remove 2 of the well known primes that node comes with from the defaults, namely modp1 and modp2 aka Oakley Group 1 and 2 which are mentioned specifically in the linked paper as being vulnerable to pre computation attacks with academic and state level  resources respectively.

@@ -1,0 +1,6 @@
+[Security] No CSRF in the login form?
+
+
+In the login form of the documentation, there is no CSRF protection.
+I think that forcing an user to login may be a security issue in some cases.
+Any opinion on that?

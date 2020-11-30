@@ -1,0 +1,31 @@
+$routeParams are lost after $http call (Angular bug)
+
+
+Here is a weird bug (which looks like an issue inside Angular)
+When working on the Team-Data api (re #206) I started to have a weird behaviour in one of the tests
+
+(see how the value of $routeParams is lost and how line 17 on Team-Data.coffee is never hit)
+Here is the console.log mess that allowed me to debug it
+
+To confirm that the prob was not in my code and it was in Angular I wrote these two tests
+  fit 'Angular bug $routeParams is lost after API call', ->
+    inject ($routeParams)=>
+      $routeParams.project = 'bsimm'
+      $routeParams.assert_Is project: 'bsimm'           # $routeParams is set
+      call_API 'project_Schema', ['bsimm'], (data)=>    # make request using test API
+        data.config.schema.assert_Is 'bsimm'            # confirm we got data ok
+        $routeParams.assert_Is {}                       # bug: $routeParams data is lost
+
+  fit 'Angular bug $routeParams is lost after $http.get call', ->
+    inject ($routeParams, $http, $httpBackend)=>
+      $routeParams.project = 'bsimm'
+      $routeParams.assert_Is project: 'bsimm'           # $routeParams is set
+      url = '/api/v1/project/schema/bsimm'
+      $http.get url                                     # make request using angular's $http object
+        .then (response)->
+          response.data.config.schema.assert_Is 'bsimm' # confirm we got data  ok
+          $routeParams.assert_Is {}                     # bug: $routeParams data is lost
+
+      $httpBackend.flush()
+note how on the 2nd test I'm using the native $http Angular method where the $routeParams is ok before the call and not ok after the call
+this means that something is going on inside that call (note that at the moment I don't think this will after the current code, due to the way data is retrieved from $routeParams, but that could very easily happen in the future)

@@ -1,0 +1,7 @@
+AMBARI-25226. tproxy-enabled flag is not used by ambari-server setup-trusted-proxy (amagyar)
+
+
+What changes were proposed in this pull request?
+Running ambari-server setup-trusted-proxy --tproxy-enabled=true --tproxy-configuration-file-path tp.json still ask the user interactively to supply inputs.
+How was this patch tested?
+Manually enabling/disabling tproxy via command line

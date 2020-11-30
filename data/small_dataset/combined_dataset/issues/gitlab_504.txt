@@ -1,0 +1,9 @@
+How to reproduce:
+
+1. Open the list of group milestones view (```/groups/<group>/milestones```)
+2. Open a milestone view (```/groups/<group>/milestones/<milestone>?title=<title>```)
+3. The milestone descriptions are not rendered the same way than in ```/<group>/<project>/milestones/<id>``` view
+
+It would seem that the descriptions in group milestones are not parsed by Gitlab markdown parser. 
+
+It bug is present in GitLab 7.1.0 (1ddca46)

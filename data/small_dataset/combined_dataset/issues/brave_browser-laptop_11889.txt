@@ -1,0 +1,4 @@
+restrict origins that brave app proccess can connect to
+
+
+we have CSPs that limit what the Brave main renderer process and what Brave about: pages can connect to, but there is currently nothing that limits the main app process. we should find a way to do this so that PRs like #11727 don't add arbitrary domain connections. also we should never connect to unencrypted origins in the main app process.

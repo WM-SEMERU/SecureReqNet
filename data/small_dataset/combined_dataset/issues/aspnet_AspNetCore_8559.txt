@@ -1,0 +1,34 @@
+.Net Core Cookie Authentication - User Getting Wrong Claims
+
+
+I have a very strange issue with a .net core mvc site, which is hosted in IIS.
+When a user logs in with this code:
+    var claimsIdentity = new ClaimsIdentity(
+                         new List<Claim>() { new Claim(ClaimTypes.Role, "Admin", null), new Claim("Name", userName, null) }, CookieAuthenticationDefaults.AuthenticationScheme);
+    
+                        var authProperties = new AuthenticationProperties
+                        {
+                            AllowRefresh = true,
+                            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30),
+                            IsPersistent = false,
+                        };
+    
+                        HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(claimsIdentity),
+                            authProperties);
+
+The first user logs in with their name being displayed.  However, when another user logs on they get the first users name displayed rather than their own.
+I have tried experimenting with the cookie options all with no success but this is my current configuration:
+ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie(options => {
+                 options.Cookie.HttpOnly = false;
+                 options.LoginPath = "/Account/Login";
+                 options.LogoutPath = "/Account/LogOff";
+                 options.Cookie.IsEssential = true;
+                 options.Cookie.MaxAge = new TimeSpan(0, 2, 0, 0, 0);
+                 options.Cookie.SameSite = SameSiteMode.Strict;
+                 options.Cookie.Name = "SITECODEHERE";
+             });
+
+Any help would be appreciated, as I am sure that I am making a silly mistake somewhere.

@@ -1,0 +1,7 @@
+Final browser-laptop update
+
+
+The final update for browser-laptop
+Fixes #15315
+Test plan
+See brave/brave-browser#1536

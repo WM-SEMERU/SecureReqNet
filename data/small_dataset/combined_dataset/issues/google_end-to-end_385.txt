@@ -1,0 +1,5 @@
+Revert "Add version and checksum to generated backup codes"
+
+
+Reverts #377
+Tests don't pass

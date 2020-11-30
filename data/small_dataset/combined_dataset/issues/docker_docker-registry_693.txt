@@ -1,0 +1,11 @@
+Serve a TLS endpoint if REGISTRY_TLS_VERIFY is set and GUNICORN_OPTS is not
+
+
+If REGISTRY_TLS_VERIFY is set, but GUNICORN_OPTS is not, then serve via a TLS endpoint instead of plain HTTP.
+This is done by setting GUNICORN_OPTS to some default value, expecting the following files to be present:
+
+/ssl/ca.crt
+/ssl/registry.cert
+/ssl/registry.key
+
+Signed-off-by: Tibor Vass teabee89@gmail.com

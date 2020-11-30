@@ -1,0 +1,5 @@
+Add kube-bench to CI tests
+
+
+Heard this on sig-cluster-lifecycle meeting that aquasec put together. It'd be nice if we could add an optional CI test for this so we could run it prior to releases and include the results as part of the release.
+https://github.com/aquasecurity/kube-bench

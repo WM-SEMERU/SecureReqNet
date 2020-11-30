@@ -1,0 +1,84 @@
+Driver: iscsi tests fail due to ISCSIServer errors
+
+
+What happened:
+Executing kube-e2e tests specific to [Driver: iscsi] fails consistently due to ISCSIServer not running. This is because, StartVolumeServer declares ISCSIServer as failed, because a specific log message was not found in the logs.
+The expected log message is:
+Configuration restored from /etc/target/saveconfig.json
+However, log message in my setup is:
+Configuration restored, 1 recoverable errors: Storage Object fileio/block: Cannot set attribute optimal_sectors: [Errno 22] Invalid argument, skipped
+Rootcausing the reason for the recoverable error in my setup, it turns out that the 16K value for optimal_sectors doesnt work well. I changed it to 8k and the container is able to restore the config without any errors.
+Is there any specific reason that https://github.com/kubernetes/kubernetes/blob/master/test/images/volume/iscsi/saveconfig.json#L25 needs to be 16k?
+Another way to fix this would be to ignore the warning by matching https://github.com/kubernetes/kubernetes/blob/master/test/e2e/framework/volume_util.go#L196 to "Configuration restored", instead of "Configuration restored from /etc/target/saveconfig.json"
+What you expected to happen:
+Tests for [Driver: iscsi] to pass successfully.
+How to reproduce it (as minimally and precisely as possible):
+Setup cluster with 3 RHEL 7.5 nodes. Run kube e2e tests with E2E_FOCUS="[Driver: iscsi]". Tests error out due with an error pattern like so:
+Apr  5 03:11:55.406: INFO: stdout: "Warning: Could not load preferences file /root/.targetcli/prefs.bin.\nAll configuration cleared\nConfiguration restored, 1 recoverable errors:\nStorage Object fileio/block: Cannot set attribute optimal_sectors: [Errno 22] Invalid argument, skipped\niscsid: sysfs_init: sysfs_path='/sys'\niscsid: in ctldev_open\niscsid: created NETLINK_ISCSI socket...\niscsid: InitiatorName=iqn.1994-05.com.redhat:eb59fbe2c4c5\niscsid: InitiatorName=iqn.1994-05.com.redhat:eb59fbe2c4c5\niscsid: InitiatorAlias=iscsi-server\niscsid: Max file limits 1048576 1048576\niscsid: current time 30782\niscsid: nothing on pend_list, deactivating alarm\niscsid: reaped pid 21, reap_count now 0\niscsid: current time 30783\niscsid: nothing on pend_list, deactivating alarm\n"
+Apr  5 03:11:57.406: INFO: Running '/usr/local/bin/kubectl --server=https://34.217.83.209:6443 --kubeconfig=/.kube/config logs iscsi-server iscsi-server --namespace=provisioning-1058'
+Apr  5 03:11:57.549: INFO: stderr: ""
+Apr  5 03:11:57.549: INFO: stdout: "Warning: Could not load preferences file /root/.targetcli/prefs.bin.\nAll configuration cleared\nConfiguration restored, 1 recoverable errors:\nStorage Object fileio/block: Cannot set attribute optimal_sectors: [Errno 22] Invalid argument, skipped\niscsid: sysfs_init: sysfs_path='/sys'\niscsid: in ctldev_open\niscsid: created NETLINK_ISCSI socket...\niscsid: InitiatorName=iqn.1994-05.com.redhat:eb59fbe2c4c5\niscsid: InitiatorName=iqn.1994-05.com.redhat:eb59fbe2c4c5\niscsid: InitiatorAlias=iscsi-server\niscsid: Max file limits 1048576 1048576\niscsid: current time 30782\niscsid: nothing on pend_list, deactivating alarm\niscsid: reaped pid 21, reap_count now 0\niscsid: current time 30783\niscsid: nothing on pend_list, deactivating alarm\n"
+Apr  5 03:11:59.549: INFO: Unexpected error occurred: Failed to find "Configuration restored from /etc/target/saveconfig.json", last result: "Warning: Could not load preferences file /root/.targetcli/prefs.bin.
+All configuration cleared
+Configuration restored, 1 recoverable errors:
+Storage Object fileio/block: Cannot set attribute optimal_sectors: [Errno 22] Invalid argument, skipped
+iscsid: sysfs_init: sysfs_path='/sys'
+iscsid: in ctldev_open
+iscsid: created NETLINK_ISCSI socket...
+iscsid: InitiatorName=iqn.1994-05.com.redhat:eb59fbe2c4c5
+iscsid: InitiatorName=iqn.1994-05.com.redhat:eb59fbe2c4c5
+iscsid: InitiatorAlias=iscsi-server
+iscsid: Max file limits 1048576 1048576
+iscsid: current time 30782
+iscsid: nothing on pend_list, deactivating alarm
+iscsid: reaped pid 21, reap_count now 0
+iscsid: current time 30783
+iscsid: nothing on pend_list, deactivating alarm
+
+Anything else we need to know?:
+I collected straces from the iscsi_server container with 8k and 18k optimal sectors. Will upload them soon.
+Environment:
+
+Kubernetes version (use kubectl version):
+
+$ kubectl version
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"14+", GitVersion:"v1.14.0-docker-2", GitCommit:"71e7c2cb4250a28d6a5bfdbc6a7a111e3f25e215", GitTreeState:"clean", BuildDate:"2019-03-26T19:55:37Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+
+
+
+Cloud provider or hardware configuration:
+AWS
+
+
+OS (e.g: cat /etc/os-release):
+
+
+$ more /etc/os-release 
+NAME="Red Hat Enterprise Linux Server"
+VERSION="7.5 (Maipo)"
+ID="rhel"
+ID_LIKE="fedora"
+VARIANT="Server"
+VARIANT_ID="server"
+VERSION_ID="7.5"
+PRETTY_NAME="Red Hat Enterprise Linux Server 7.5 (Maipo)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:7.5:GA:server"
+HOME_URL="https://www.redhat.com/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 7"
+REDHAT_BUGZILLA_PRODUCT_VERSION=7.5
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="7.5"
+
+
+Kernel (e.g. uname -a):
+
+Linux ip-172-31-7-152.us-west-2.compute.internal 3.10.0-862.el7.x86_64 #1 SMP Wed Mar 21 18:14:51 EDT 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Install tools:
+Others:
+

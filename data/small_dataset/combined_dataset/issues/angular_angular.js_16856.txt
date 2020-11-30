@@ -1,0 +1,6 @@
+fix(ngMock): don't clean up if currentSpec is null.
+
+
+In unit tests that use Angular and AngularJS, sometimes an error being thrown during the test and cause this afterEach hook to run twice. If that happens, on the second run cleanup will throw an error, since at that point currentSpec is null. This causes the original error to be hidden by a "TypeError: Cannot read property '$injector' of null while testing" error.
+This makes cleanup safe to call multiple times, working around the issue.
+This fix is needed to resolve an internal issue affecting Angular unit tests. I discussed this with Igor, and he asked me to submit this as a PR. No release is necessary, we just need this in google3.

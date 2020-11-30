@@ -1,0 +1,6 @@
+Use a local socket for tor socks proxy and control channel where available
+
+
+Currently, in browser-laptop, we use a TCP/IP socket on the local interface, say 127.0.0.1:9250, for the tor socks proxy and control channel.  Anyone with access to the local TCP/IP interface can connect to the tor socks proxy.  To reduce the attack surface, we should use a local socket under ~/.config/brave that requires file system permissions to get at, not just TCP/IP.
+This would require teaching Chromium's socks 'URL' abstraction to handle pathnames, not just host:port pairs, as in socks5:///home/riastradh/.config/brave/tor/socks or something where we currently use socks5://127.0.0.1:9050.
+Caveat: I'm not sure this is doable on Windows.  If not, we would have to maintain two code paths, including the slightly more complex one in #649, and it may not be worthwhile to do this in addition to #649.

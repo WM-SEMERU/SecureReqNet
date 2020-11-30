@@ -1,0 +1,4 @@
+[Security] Add target_path_parameter, use_referer, etc options to logout listener
+
+
+We are using crossdomain authentication (site1.com - authentication server, site2.com - dependent site). And after logout from dependent site we fine oneself on authentication server.

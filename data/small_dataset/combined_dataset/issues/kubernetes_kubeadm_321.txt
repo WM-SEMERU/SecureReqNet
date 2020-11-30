@@ -1,0 +1,4 @@
+cAdvisor shouldn't be publicly exposed by default
+
+
+More information in: kubernetes/release#356 and kubernetes/kubernetes#48042

@@ -1,0 +1,9 @@
+Add CA(s) to support Amazon Certificate Manager
+
+
+In #12190 / #401 we pinned certs for Brave domains.
+Several of our services (such as sync.brave.com) use LetsEncrypt currently but the renewal workflow is manual.
+To simplify ops, we're interested in switching some certs to Amazon Certificate Manager.
+To do that we need to add the ACM CAs.
+https://www.amazontrust.com/repository/
+https://aws.amazon.com/blogs/security/how-to-prepare-for-aws-move-to-its-own-certificate-authority/

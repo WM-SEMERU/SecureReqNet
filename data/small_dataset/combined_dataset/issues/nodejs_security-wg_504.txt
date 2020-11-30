@@ -1,0 +1,8 @@
+should there be security-wg presentation at nodeconf.eu?
+
+
+
+conf: https://www.nodeconf.eu/
+call for sessions: https://sessionize.com/nodeconf-eu-2019
+
+@mhdawson suggested a panel discussion or presentation by the WG might be interesting, is anyone interested in putting together such a proposal?

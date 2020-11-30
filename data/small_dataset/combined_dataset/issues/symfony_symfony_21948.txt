@@ -1,0 +1,55 @@
+Json authentication listener tries to authenticate on all routes
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+master
+
+
+
+Json login listener tries to authenticate on all routes on the firewall it is registered on, not just the configured check_path. It even blocks access to routes that are configured to allow anonymous access.
+With this configuration
+security:
+    firewalls:
+        customer:
+            anonymous: ~
+            stateless: true
+            pattern: ^/customerapi
+            provider: my_db_customers
+            guard:
+                authenticators:
+                    - app.token_authenticator
+            json_login:
+                success_handler: app.customer_login_success_handler
+                check_path: customer_login 
+    access_control:
+        - { path: ^/customerapi/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/customerapi/account/create, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+no route starting with ^/customerapi can be accessed without the json format credentials for a valid user.  Error messages in dev.log clearly show it is json authentication listener denying access.
+For example GET request to some route requiring authentication, with proper access token and empty HTTP body results in:
+[2017-03-09 13:51:33] security.INFO: Guard authentication successful! {"token":"[object] (Symfony\\Component\\Security\\Guard\\Token\\PostAuthenticationGuardToken: PostAuthenticationGuardToken(user=\"*******@*****\", authenticated=true, roles=\"ROLE_CUSTOMER\"))","authenticator":"AppBundle\\Security\\CustomerTokenAuthenticator"} [] [2017-03-09 13:51:33] security.DEBUG: Guard authenticator set no success response: request continues. {"authenticator":"AppBundle\\Security\\CustomerTokenAuthenticator"} [] [2017-03-09 13:51:33] security.DEBUG: Remember me skipped: it is not configured for the firewall. {"authenticator":"AppBundle\\Security\\CustomerTokenAuthenticator"} [] [2017-03-09 13:51:33] security.INFO: An AuthenticationException was thrown; redirecting to authentication entry point. {"exception":"[object] (Symfony\\Component\\Security\\Core\\Exception\\BadCredentialsException(code: 0): Invalid JSON. at /home/lanttto/NetBeansProjects/AAh/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/UsernamePasswordJsonAuthenticationListener.php:74)"}
+As far as I undestand from the documentation this is not intended behavior. Seems to lack a check against request path to only act when check_path is requested.

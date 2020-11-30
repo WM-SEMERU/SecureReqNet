@@ -1,0 +1,5 @@
+Persist baseSyncOrder between app launches.
+
+
+Base order was in memory only. This was causing the app to not send new bookmarks after app was relaunched.
+I used get/set to save to user defaults, I didn't want to use old prefs. We might want to use the new preferences logic once this code is ported to 1.7

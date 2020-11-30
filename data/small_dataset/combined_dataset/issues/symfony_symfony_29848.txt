@@ -1,0 +1,51 @@
+[Security][DX] Simplify IS_AUTHENTICATED_* attributes
+
+
+Hello,
+I find IS_AUTHENTICATED_REMEMBERED / IS_AUTHENTICATED_FULLY attributes to poorly convey what they mean and what they do. This issue is here to discuss and propose a few ideas to make authentication checks more explicit and elegant.
+Detailled reasoning
+At the moment, to check if a User is logged to the application by any mean, we should check IS_AUTHENTICATED_REMEMBERED attribute. In my opinion the name is not intuitive, I see no reason for the name to relate to a "remember me" feature we may not have on the application. Also I don't see any reason why "fully authenticated" users inherits IS_AUTHENTICATED_REMEMBERED attribute, it makes finding users who use remember_me less elegant (see example 3).
+In real-world scenarios, developers starting to develop a Symfony application are likely to use IS_AUTHENTICATED_FULLY. But it is making adding the "remember me" feature later harder, since all checks will have to be modified back to IS_AUTHENTICATED_REMEMBERED or users enabling remember me won't be able to access part of the application.
+The same reasoning can be applied to IS_AUTHENTICATED_ANONYMOUSLY, I don't see any reason why fully-fledged users get this attribute.
+Propositions
+Here is a few ideas, some being independent from each other:
+
+add a IS_AUTHENTICATED attribute, which would be granted to any non-anonymously authenticated user, no matter how
+add IS_AUTHENTICATED_REMEMBER_ME attribute, which only authenticated through a remember me mechanism (cookie...) will get - and only them
+either keep IS_AUTHENTICATED_FULLY or rename it to IS_AUTHENTICATED_FRESH (to discuss, I find "fresh" to be more explicit)
+add IS_ANONYMOUS which will be given only to anonymous users
+deprecate IS_AUTHENTICATED_REMEMBERED and IS_AUTHENTICATED_ANONYMOUSLY
+
+Deprecated attributes could be dropped (or not) in Symfony 5, for backward-compatibility.
+Regarding code, AuthenticatedVoter & related tests should be modified, it looks to be relatively easy.
+Code examples
+Checking an user is connected:
+// Before - not having "remember_me" enabled
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_FULLY`)
+
+// Also before - eventually having "remember_me" in the app
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_REMEMBERED`)
+
+// After
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED`)
+Checking an user connected during the same session:
+// Before
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_FULLY`)
+
+// After (tbd)
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_FULLY`)
+Checking an user is connected thanks to "remember_me" feature (cookie...):
+// Before
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_REMEMBERED`)
+ && !$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_FULLY`)
+
+// After (tbd)
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_REMEMBER_ME`)
+Checking for an anonymous user:
+// Before
+$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_ANONYMOUSLY`) 
+ && !$this->get('security.authorization_checker')->isGranted(`IS_AUTHENTICATED_REMEMBERED`)
+
+// After
+$this->get('security.authorization_checker')->isGranted(`IS_ANONYMOUS`)
+Thanks for reading!

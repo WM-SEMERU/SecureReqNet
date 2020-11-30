@@ -1,0 +1,32 @@
+crypto: panic on invalid aliasing in various APIs
+
+
+The cipher.AEAD docs say for Open:
+// Open decrypts and authenticates ciphertext, authenticates the
+// additional data and, if successful, appends the resulting plaintext
+// to dst, returning the updated slice. The nonce must be NonceSize()
+// bytes long and both it and the additional data must match the
+// value passed to Seal.
+//
+// The ciphertext and dst may alias exactly or not at all. To reuse
+// ciphertext's storage for the decrypted output, use ciphertext[:0] as dst.
+
+I just spent a few hours debugging a problem that ended up being a call to cipher.AEAD.Open
+with inexact aliasing that was accepted and implemented "correctly" by one implementation
+of cipher.AEAD (the crypto/aes GCM one) but rejected (as permitted) by a different implementation.
+The docs above give a constraint on the nonce size and on the aliasing.
+The AES-GCM implementation panics if the nonce size is incorrect but
+does nothing if the aliasing is incorrect. I suggest it panic too.
+More generally, I suggest that everywhere we document a restriction
+about the aliasing of input and output buffers we enforce that restriction
+with a check and panic.
+We can add to crypto/subtle
+// PanicOnAlias panics if dst and src point at aliased (overlapping) memory.
+func PanicOnAlias(dst, src []byte)
+
+// PanicOnInexactAlias panics if dst and src point at aliased (overlapping) memory,
+// except in the case where dst and src point to the same starting address.
+func PanicOnInexactAlias(dst, src []byte)
+
+and implement these in a way that inlines.
+/cc @agl

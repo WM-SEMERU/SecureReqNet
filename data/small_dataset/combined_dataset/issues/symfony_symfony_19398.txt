@@ -1,0 +1,53 @@
+[DX][SecurityBundle] Introduce a FirewallConfig class accessible from FirewallContext
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes but it should not have any impact in userland
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#15294
+
+
+License
+MIT
+
+
+Doc PR
+todo
+
+
+
+With this, the FirewallContext class now has a getConfig() method returning a FirewallConfig object representing the firewall configuration.
+Also this adds a getFirewallConfig() method to the FirewallMap class of the SecurityBundle.
+In a next time, this could be useful to display some firewall related informations to the Profiler, as pointed out in #15294.
+Also, it can be useful to be able to access the current firewall configuration from an AuthenticationListener, especially for third party bundles (I can develop on demand).

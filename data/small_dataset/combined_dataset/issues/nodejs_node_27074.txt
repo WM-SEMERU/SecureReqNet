@@ -1,0 +1,13 @@
+buffer: fix custom inspection with extra properties
+
+
+This broke due to a recent change that prevents exposing inspect
+internals. It now relies on the public API instead and should be a
+bit more "robust" due to that (it's still bad but I see no good alternative :D).
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

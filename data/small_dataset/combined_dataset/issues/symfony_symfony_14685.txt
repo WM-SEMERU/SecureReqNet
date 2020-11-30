@@ -1,0 +1,10 @@
+[Security] AbstractAuthenticationListener should dispatch the login failure event instead of invoking onFailure() directly
+
+
+At the moment it invokes the onFailure directly, but according to the whole idea of kernel event system it should dispatch the AuthenticationEvents::AUTHENTICATION_FAILURE (or some other) event instead.
+Then it would be possible to add custom handlers for the authentication events.
+Example of event that you cannot handle with the current implementation: CSRF token mismatch.
+References:
+
+https://github.com/symfony/symfony/blob/2.7/src/Symfony/Component/Security/Http/Firewall/AbstractAuthenticationListener.php#L160
+

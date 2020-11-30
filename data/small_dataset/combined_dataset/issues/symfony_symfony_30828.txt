@@ -1,0 +1,47 @@
+SQLSTATE[HY000]: General error: 1832 Cannot change column 'user_id': used in a foreign key constraint 'FK_2AEFE01     7A76ED395'
+
+
+Symfony version(s) affected: x.y.z
+4.2.3
+Description
+I am getting following error:
+  An exception occurred while executing 'ALTER TABLE micro_post CHANGE user_id user_id INT NOT NULL':                
+                                                                                                                     
+  SQLSTATE[HY000]: General error: 1832 Cannot change column 'user_id': used in a foreign key constraint 'FK_2AEFE01  
+  7A76ED395'  
+
+LONG VERSION
+-> ALTER TABLE micro_post CHANGE user_id user_id INT NOT NULL
+Migration 20190402000548 failed during Execution. Error An exception occurred while executing 'ALTER TABLE micro_post CHANGE user_id user_id INT NOT NULL':
+
+SQLSTATE[HY000]: General error: 1832 Cannot change column 'user_id': used in a foreign key constraint 'FK_2AEFE017A76ED395'
+
+In AbstractMySQLDriver.php line 106:
+                                                                                                                     
+  An exception occurred while executing 'ALTER TABLE micro_post CHANGE user_id user_id INT NOT NULL':                
+                                                                                                                     
+  SQLSTATE[HY000]: General error: 1832 Cannot change column 'user_id': used in a foreign key constraint 'FK_2AEFE01  
+  7A76ED395'                                                                                                         
+                                                                                                                     
+
+In PDOConnection.php line 90:
+                                                                                                                     
+  SQLSTATE[HY000]: General error: 1832 Cannot change column 'user_id': used in a foreign key constraint 'FK_2AEFE01  
+  7A76ED395'                             
+                                                                          
+                    
+In PDOConnection.php line 88:
+                                                                                                                     
+  SQLSTATE[HY000]: General error: 1832 Cannot change column 'user_id': used in a foreign key constraint 'FK_2AEFE01  
+  7A76ED395'        
+
+It happens when I add
+* @ORM\JoinColumn(nullable=false)
+in Post Entity and try to make a migration.
+I have previous migrations in my folder and some data made with Fixtures in a database. And that seems to be the problem (?)
+I've found info that the thing is that foreign key prevent from making changes, as they can make a mess in the structure (but doesn't check that)
+How to reproduce
+Possible Solution
+I had this problem a couple of times. Sometimes I got back to the point of making entity and then I made everything as I want it to be eventually... (but it creates other problems)
+I think that once I just dropped the database, deleted all migrations and filled it again.
+Unfortunately, none of those solutions will work on a big project and what's more important... Even if I make it work - I still don't really understand what is the problem and where this foreign key comes in (I thought I can somehow drop/delete this key in migrations files but there are just SQL statement so... I don't know what am I doing basically)

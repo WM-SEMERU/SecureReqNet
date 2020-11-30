@@ -1,0 +1,11 @@
+make ServiceAccounts easier to work with - post1.0
+
+
+Having spent some time working with service accounts downstream, there are a few enhancements I'd like to see post-1.0
+
+Make it easier to get a valid token for a service account.  The long-lived, but fully revocable aspect of SA tokens makes it desirable to use them for machine accounts, but it is really painful to describe to a user how they can get the SA token outside of a pod.  While I recognize that we'd like everything to be a pod, the world hasn't fully changed yet.
+Make it easier to create a new token for a service account.  Related to the first point, but I'd like to be able to allow a user to create a new token for a single service account without giving them rights to create or get tokens in general.  Currently, there's no way to do that.  Also, it's really hard to describe to someone how to perfectly craft a secret to a token automatically filled in.
+Allow user to rotate a service account token, without granting delete rights to secrets.  Right now, the only way to rotate an SA token is to delete the secret.  The power to delete arbitrary secrets is more significant than the power to rotate an SA token.
+Create separate field for AutomountedSecrets.  The auto-mounting feature for service accounts is really nice, but sometimes I only want to use service accounts for things like pull secrets and I don't want them to handle their credentials out to ever pod they're attached to.  Rather than place the burden on an RC or a Pod to create a conflicting volume mount, I'd like to be able to explicitly choose which secrets get automounted.  This would also allow someone to describe additional secrets that get automounted.
+
+@liggitt @smarterclayton @pmorie

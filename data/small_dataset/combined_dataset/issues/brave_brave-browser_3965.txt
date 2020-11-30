@@ -1,0 +1,13 @@
+WebUI Navigation Bar sub-menu has light-on-light items in dark mode for c74
+
+
+WebUI Navigation Bar sub-menu should be on dark background in dark mode
+C74 only
+Test plan / STR:
+
+Visit Bookmarks Page
+
+Actual:
+
+Expected:
+Dark background

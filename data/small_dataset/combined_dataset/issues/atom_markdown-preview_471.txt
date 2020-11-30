@@ -1,0 +1,31 @@
+Render preview in an Electron web-view
+
+
+Prerequisites
+
+ Put an X between the brackets on this line if you have done all of the following:
+
+Reproduced the problem in Safe Mode: http://flight-manual.atom.io/hacking-atom/sections/debugging/#using-safe-mode
+Followed all applicable steps in the debugging guide: http://flight-manual.atom.io/hacking-atom/sections/debugging/
+Checked the FAQs on the message board for common solutions: https://discuss.atom.io/c/faq
+Checked that your issue isn't already filed: https://github.com/issues?utf8=✓&q=is%3Aissue+user%3Aatom
+Checked that there is not already an Atom package that provides the described functionality: https://atom.io/packages
+
+
+
+Description
+markdown-preview doesn't black- or white-list HTML tags, this can create some scary vulnerabilities because the HTML is rendered in a div rather than a web-view as recommended in atom/atom#1684.
+Steps to Reproduce
+
+Launch Atom in your local atom repository
+Open the README.md
+Press Ctrl+Shift+M to open the Markdown Preview
+Inspect the DOM
+
+Expected behavior: Markdown preview should be rendered within a web-view
+Actual behavior: Markdown preview is rendered within a div
+Versions
+Atom    : 1.17.0-dev-ad3c4d968
+Electron: 1.3.13
+Chrome  : 52.0.2743.82
+Node    : 6.5.0

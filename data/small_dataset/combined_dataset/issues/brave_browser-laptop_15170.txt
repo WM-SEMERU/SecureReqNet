@@ -1,0 +1,24 @@
+Brave blocking dependency on Washington Post
+
+
+Yes
+Description
+Some Washington Post articles lose functionality in Brave. Functionality is returned when ads/tracking are allowed.  cc @lukemulks  for additional info.
+Steps to Reproduce
+
+In Brave or Brave-Dev, go to this Washington Post article
+Make sure Shields are on and Block Ads/Tracking is Enabled
+Try to navigate the article
+
+Actual result:
+Cannot click through slides on article. Pats of layout/elements on page do not display.
+Turning Shields off fixes the issue, as does disabling Block Ads/Tracking
+Expected result:
+Normal browsing of the page
+Reproduces how often:
+100%
+Brave Version
+Both live release (0.23.105) and Dev release (55.2)
+Additional Information
+I've contacted the users about additional information (about:brave, OS). Will edit when user responds. His original message:
+

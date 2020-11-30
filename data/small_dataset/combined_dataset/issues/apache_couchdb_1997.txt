@@ -1,0 +1,21 @@
+Fix #1988 - Validate attachment names at POST /db/doc and GET /db/doc/attachment
+
+
+Overview
+This PR solves the problem described at he issue #1988
+PUT & POST operations for creating documents in a database enforce different validation rules over the attachment names of the new document.
+When a document is created with a PUT operation "_foo.txt" is not accepted as a valid attachment name. If the document is created by a POST operation the "_foo.txt" attachment name is accepted.
+This is an inconsistent behavoiur in the API as not accepted attachment names can be created.
+Another inconsinstency is found in the GET attachment opperation that does not enforce the same attachment name validation rule that the rest of attachment operations DELETE/PUT.
+Testing recommendations
+Tests has been added into attachment_names.js test suite for testing attachment names during POST document creation and GET attachment retrieval.
+make javascript suites="attachment_names"
+
+Related Issues or Pull Requests
+This PR fixes #1988
+Checklist
+
+ Code is written and works correctly;
+ Changes are covered by tests;
+ Documentation reflects the changes;
+

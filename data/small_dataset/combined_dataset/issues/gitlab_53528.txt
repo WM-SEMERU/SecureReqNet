@@ -1,0 +1,16 @@
+**[HackerOne report #433875](https://hackerone.com/reports/433875)** by ngalog on 2018-11-03:
+
+**Summary:**
+In https://docs.gitlab.com/ee/public_access/public_access.html#restricting-the-use-of-public-or-internal-projects, after admin setting this to public, User Profiles are only visible to logged in users. This is true from web interface, however user's activities/projects are still visible to public in API.
+
+## Steps To Reproduce:
+https://dev.gitlab.org/ is a gitlab instance with such configuration, restrict visibility to public, which makes user profile private from public. 
+When you visit the user [gitlab_pushbot](https://dev.gitlab.org/gitlab_pushbot) profile, you are redirected to a new page, which works well to protect user's privacy.
+
+However you can still see such user's personal activities and projects from:
+https://dev.gitlab.org/api/v4/users/145/events
+https://dev.gitlab.org/api/v4/users/145/projects
+
+## Impact
+
+User Activities and Projects Are still Public in API after Restricting the Use of Visibility Levels for Users

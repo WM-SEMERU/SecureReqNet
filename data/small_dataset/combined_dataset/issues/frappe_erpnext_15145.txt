@@ -1,0 +1,5 @@
+SQL Injection in Report View
+
+
+Currenly, I’m in process of implementing in Banking sector :). During the security penetration, security team discover a high security bug in Report View. Here is the log:
+[ Deleted exploitted detail per request from Frappe team]

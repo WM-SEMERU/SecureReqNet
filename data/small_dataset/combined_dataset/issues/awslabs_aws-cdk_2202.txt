@@ -1,0 +1,40 @@
+build(assets): w/a codepipeline .tar.gz fixtures
+
+
+Since CodePipeline does not preserve symlinks, we are working
+around this by tarballing the fixture directory and unpacking
+pre-build.
+
+Pull Request Checklist
+
+ Testing
+
+Unit test added (prefer not to modify an existing test, otherwise, it's probably a breaking change)
+CLI change?: coordinate update of integration tests with team
+cdk-init template change?: coordinated update of integration tests with team
+
+
+ Docs
+
+jsdocs: All public APIs documented
+README: README and/or documentation topic updated
+
+
+ Title and Description
+
+Change type: title prefixed with fix, feat will appear in changelog
+Title: use lower-case and doesn't end with a period
+Breaking?: last paragraph: "BREAKING CHANGE: <describe what changed + link for details>"
+Issues: Indicate issues fixed via: "Fixes #xxx" or "Closes #xxx"
+
+
+ Sensitive Modules (requires 2 PR approvers)
+
+IAM Policy Document (in @aws-cdk/aws-iam)
+EC2 Security Groups and ACLs (in @aws-cdk/aws-ec2)
+Grant APIs (only if not based on official documentation with a reference)
+
+
+
+
+By submitting this pull request, I confirm that my contribution is made under the terms of the Apache-2.0 license.

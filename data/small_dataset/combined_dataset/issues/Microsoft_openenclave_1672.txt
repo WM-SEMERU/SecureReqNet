@@ -1,0 +1,7 @@
+[CI/CD] Testing Docker images should be built serially at the beginning of the Jenkinsfile
+
+
+At the moment, the CI builds the testing Docker images at the beginning of the pipeline stages using this function from the shared library. This workflow applies only to the pipelines stages using Docker containers.
+We have multiple pipeline stages using Docker containers, and they are executed in parallel. When the Docker images are already built, containers use the cached image, and everything is fine.
+The problem appears when the Docker image is initially built. We have two nodes configured with multiple workers. Two or more workers might attempt to build the same image at the same time, and there's the possibility of a race condition.
+It's likely that the transient issues #1624, #1659 might come up due to a race condition described above.

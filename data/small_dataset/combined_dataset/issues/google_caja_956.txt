@@ -1,0 +1,49 @@
+JSONContainer exemption vs Record inheritance
+
+
+Original issue 956 created by erights on 2008-12-09T02:13:50.000Z:
+Currently, when uncajoled code exports a JSON container (a record or an
+array) to cajoled code, it need not explicitly allow access to any of the
+own properties of the JSON container. Instead, cajita.js has explicit
+exemptions for JSON containers. For example, an uncajoled
+cajita.canReadPub({a: 8}, 'a') will return true slowly, and in the process
+will set a_canRead___ so the next time the same test can return true quickly.
+So long as all records inherited directly from Object.prototype, this was a
+nice convenience. However, as part of the Valija revolution, we introduced
+record inheritance. One record can now inherit directly from another
+record. However, we did not revisit that the JSON container exemption was
+only for own properties, and did not apply even to properties inherited
+from another record. To demonstrate the problem, after copying cajita.js
+into a squarefree shell, we have the following session:
+var x = {a: 8};
+
+var y = cajita.beget(x);
+
+cajita.canReadPub(y, 'a');
+false
+
+cajita.canReadPub(x, 'a');
+true
+
+cajita.canReadPub(y, 'a');
+true
+
+The first canReadPub test said no, since 'a' is neither explicitly allowed
+(no a_canRead___ is set) and it is not an own property of y. The second
+test succeeds, since 'a' is an own property of x, and in the process sets
+the a_canRead___ fastpath flag to x, to memoize this decision. The third
+test now succeeds because the fastpath flag is set. The fastpath
+optimization, which should have been unobservable, has leaked.
+I have not marked this Priority-Critical because only uncajoled code can
+create this situation, and we currently do not know of any uncajoled code
+which does. When cajoled code makes JSON containers, all non-numeric
+properties of these containers will have their fastpath flags set at
+construction time, and so they do not need this exemption. The right
+solution -- which also helps prepare us for ES3.1 -- is to remove the
+blanket taming exemption for JSON containers. Instead, we should provide a
+helper taming function which will enumerate and explicitly allow all own
+properties on its argument. Uncajoled code would then need to write, for
+example,
+var x = ___.record({a: 8})
+
+in order to preserve the intended semantics of the first line above.

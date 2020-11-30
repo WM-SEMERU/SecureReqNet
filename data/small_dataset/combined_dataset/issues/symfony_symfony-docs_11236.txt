@@ -1,0 +1,25 @@
+[Messenger][4.3] Tracker for changes
+
+
+A lot of new things have happened in Messenger for 4.3. This is a meta issue to try to track then:
+
+ #10929 New PHP Serializer
+ #11145 LoggingMiddleware is deprecated
+ new event dispatched when sending a message symfony/symfony#30650
+ Better output when you run messenger:consume symfony/symfony#29303
+ Command was renamed/shortened to messenger:consume Done in #11262
+ MessageBus::dispatch() accepts Envelopes are 2nd arg symfony/symfony#30707
+ Envelope 2nd constructor arg changed symfony/symfony#30707
+ Command to setup transports symfony/symfony#29476
+ Retry support - symfony/symfony#30557
+ ReceiverInterface methods changed - symfony/symfony#30557 and symfony/symfony#30708 - also a few behavioral things changed inside them
+ UnrecoverableMessageHandlingException can be thrown in handler to fail and avoid retry - symfony/symfony#30557
+ Ability to dispatch a message from within a message and have it handled in a separate Doctrine transaction symfony/symfony#28849
+ prefetching option symfony/symfony#30671
+ New messenger:stop-workers Command symfony/symfony#30754
+ New way to see size of messages in a transport symfony/symfony#30757
+ New sync transport symfony/symfony#30759
+ Failed message handling symfony/symfony#30970
+ multiple queues support for amqp with routing key - symfony/symfony#30008
+ Allows to register handlers on a specific transport symfony/symfony#30958
+

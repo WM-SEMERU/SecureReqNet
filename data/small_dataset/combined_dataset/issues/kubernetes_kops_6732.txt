@@ -1,0 +1,23 @@
+Fix issue #6700: User Data for launch templates & other terraform issues
+
+
+
+The User Data for launch templates when using terraform was not being base64 encoded. Instead of adding yet another location where we encode the data, we now encode it in buildLaunchTemplateTask so that all the tasks can take advantage of it.
+Terraform doc with base64 encoded user data info: https://www.terraform.io/docs/providers/aws/d/launch_template.html#user_data
+
+This should fix #6700
+
+
+While going through the AWS docs I noticed the docs state that user data in launch templates must be in the MIME multi-part archive format, so I applied a fix for this as well.
+
+
+Fix an issue with launch_template_name vs. launch_template_id in the terraform template.
+
+
+Fix an issue the launch template version not being specified
+
+
+Fix the issue that when a network interface is provided, the security groups must be a part of it.
+
+
+Thanks @granular-ryanbonham for testing and finding issues 3,4 and 5

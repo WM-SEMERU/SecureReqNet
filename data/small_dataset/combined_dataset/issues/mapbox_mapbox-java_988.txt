@@ -1,0 +1,6 @@
+Adding Isochrone API support
+
+
+This pr resolves #905 by adding support for the Mapbox Isochrone API.
+As @zugaldia said in #905 (comment), this isochrone support work is basically the same that was done to add support for the Tilequery API.
+The Mapbox Android demo app has an Isochrone API example (pr is here), but the API is interacted with in that example in a more raw way than using a formal Mapbox Java SDK wrapper.

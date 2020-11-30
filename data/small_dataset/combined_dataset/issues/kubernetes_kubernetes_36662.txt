@@ -1,0 +1,7 @@
+make spdy.roundtripper usable with UpgradeAwareProxyHandler
+
+
+the spdy.RoundTripper was incompatible for use on https connections by the UpgradeAwareProxyHandler because it couldn't find the TLS config.
+This check would get nil https://github.com/kubernetes/kubernetes/blob/master/pkg/util/proxy/dial.go#L48 because it didn't recognize the type which would result in failures later on.  That would cause a failure that ripples out to here: https://github.com/kubernetes/kubernetes/blob/master/pkg/registry/generic/rest/proxy.go#L151 and prevents the proxy from working.
+
+This change is 

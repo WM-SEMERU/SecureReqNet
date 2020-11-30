@@ -1,0 +1,10 @@
+Document best practices about encoders and password validation to avoid DOS attacks
+
+
+See http://symfony.com/blog/cve-2013-5750-security-issue-in-fosuserbundle-login-form
+The documentation should warn about the following:
+
+A password must have a max length validator (and the max value is 4096 as of Symfony 2.4 -- see symfony/symfony#9100).
+As of Symfony 2.4, when creating a custom encoder, $this->checkPasswordLength($raw); must be the first code executed in encodePassword() and isPasswordValid(). For other versions of Symfony, just copy paste the code of the checkPasswordLength() method found in Symfony\Component\Security\Core\Encoder\BasePasswordEncoder.
+
+Not sure where to add these recommendations though.

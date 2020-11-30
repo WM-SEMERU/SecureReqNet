@@ -1,0 +1,5 @@
+Call to /api/admin/invites should not include the sender email
+
+
+The sender email is set on the client side now, which means it can be changed by the user. Instead it should not send a sender at all and let the frontend Python code take this value from the user's Flask session.
+See https://github.com/mozilla/minion-frontend/blob/master/minion/frontend/static/js/minion-admin.js#L170

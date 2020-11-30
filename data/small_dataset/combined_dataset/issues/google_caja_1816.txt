@@ -1,0 +1,5 @@
+++, --, += ignore frozenness under v8
+
+
+Original issue 1818 created by metaweta on 2013-07-19T05:56:49.000Z:
+https://code.google.com/p/v8/issues/detail?id=2779

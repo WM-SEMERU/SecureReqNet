@@ -1,0 +1,20 @@
+Backup/Restore service not coming up with Standalone cluster with GMSA security.
+
+
+Hi #raunakpandya , #aagup
+I still have a problem with the FabricBRSSetup.exe file in the latest release (6.4.644.9590) when activating the backup/restore service.
+When activating on a node, this file crashes on the servers, with a null exception error in main. However, if I swap the faulting file on the node with an older version (e.g from 6.3.187.9494) it will start up the service and activate on the node.
+This was a short term fix though, as when a node is restarted at a later point in time, the cluster replaces the FAbricBRSSetup.exe with the latest version and the error starts again.
+So there is an issue with this file, primarily around the GMSA code. I decompiled the EXE and found some differences, and potentially missing try/catch sections where new code was added between versions.
+This was the old thread on this issue:
+#267 (comment)
+The file FabricBRSSetup.exe errors with this event log entry:
+Application: FabricBRSSetup.exe
+Framework Version: v4.0.30319
+Description: The process was terminated due to an unhandled exception.
+Exception Info: System.NullReferenceException
+   at System.Fabric.BackupRestore.Setup.Program.Main(System.String[])
+
+I am currently having to re-create the cluster to remove backup/restore, until this can be resolved.
+Thank you,
+Darran

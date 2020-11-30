@@ -1,0 +1,4 @@
+aws-iam: Add autoscaling:DescribeTags
+
+
+Latest versions of the cluster-autoscaler can automatically detect the ASG used by the nodes, but it requires that  autoscaling:DescribeTags rights are added to the AWS IAM policy.

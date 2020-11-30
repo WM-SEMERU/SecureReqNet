@@ -1,0 +1,7 @@
+Improvements to cert error clickthrough
+
+
+
+make it more difficult to click through a certificate error
+show a broken lock icon for pages where a cert error has been clicked through
+

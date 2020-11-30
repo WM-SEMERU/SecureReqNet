@@ -1,0 +1,5 @@
+host key rotation routines
+
+
+Description
+Hosts and certificate authorities should be able to rotate keys (manually right now). Implement key rotation feature set. Ideally we would simply introduce new set of keys that will work in pair with existing set of keys, while the existing set will be used to check signatures, the new one will be used to sign new certs. Then the old one will gracefully disappear after TTL.

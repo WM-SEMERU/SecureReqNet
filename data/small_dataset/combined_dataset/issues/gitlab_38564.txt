@@ -1,0 +1,16 @@
+### Summary
+
+I created a "root" parent group and a single subgroup. I was the original and only owner of both. I added approximately 10 owners to the parent group and those permissions filter down to the subgroup and its projects in the expected way. While I administer the service, I am otherwise not in the particular workflow managed by this group, whom I was shepherding into the "merge request lifestyle." I was able to leave the parent group, but I cannot leave the subgroup. I get the message:
+
+"Failed to leave the group. Please make sure you are not the only owner"
+
+But, when I look at the group, all the owners from the parent group are there. I presume the underlying issue to be that there happen to be no other owners defined at this level of the group hierarchy.
+
+### What is the expected *correct* behavior?
+
+I would expect to be able to leave the group because it has other owners.
+
+### Workaround (added 11-27 by @asaba, referenced from discussion below)
+
+1. Explicitly add another user as the owner of the subgroup.
+2. Controls should reappear, allowing other owners to be removed.

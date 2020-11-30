@@ -1,0 +1,29 @@
+Set PKG_CONFIG_PATH automatically when necessary from mach
+
+
+From #23015 , we found PKG_CONFIG_PATH is required for building Servo.
+So, I sent another PR (#23175) to add the README note.
+We should be able to set the env var automatically from mach when there's no existing one.
+We can do it like following line
+
+
+
+servo/python/servo/command_base.py
+
+
+         Line 620
+      in
+      3e81a5a
+
+
+
+
+
+
+ append_to_path_env(path.join(libpath, "pkgconfig"), env, "PKG_CONFIG_PATH") 
+
+
+
+
+
+As @ferjm mentioned in IRC, we only need to set the PKG_CONFIG_PATH environment variable when the pkg-config check fails. So, we can do the check once, then set env var if the check fails. If it still fails, then we will throw the error because it might be related to other issues.

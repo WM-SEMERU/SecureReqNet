@@ -1,0 +1,46 @@
+'### Summary
+
+When deleting a user, we expect repositories on their own namespace to also be deleted, but this is not happening.
+
+### Steps to reproduce
+
+1. Create a repository from a new user using it's own user's namespace.
+1. Check the repository and namespace exists in the configured storage.
+1. Login as admin and remove the user
+1. Wait until the sidekiq job finishes
+1. Check the namespace folder and repository still exists
+
+### What is the current *bug* behavior?
+
+Repositories in user own namepsace and user namespace never gets removed from disk
+
+### What is the expected *correct* behavior?
+
+When removing a user it should delete user's own repository in user's own namespace and the user's own namespace.
+
+### Why it happens?
+
+This was found as part of the review of https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13246. The issue is because of the order in which the removal happens.
+
+Since the introduction of multiple storages, the namespace removal code would cycle through all projects associated with it to determine in which storage locations were used.
+
+When removing a user we first remove associated projects, than the user and then the namespace associated with the user's username. 
+
+Because we will remove the namespace itself later we don't remove the project's repository from disk as we can speedup things by removing the root folder once.
+
+Also because there are dependencies around the namespace, we can't change the order here. In the namespace removal code we ask associated projects for it's `.repository_storage_path` and we use that in an `after_destroy` hook to remove the namespace directory (and whatever is inside it).
+
+As the projects are already removed we always have `nil` as storage locations and therefore we remove none namespace directory.
+
+### Possible fixes
+
+This is very similar to how group's removal works, and the fix is also similar. The `before_destroy` call that is part of the namespace model definition: `prepare_for_destroy` should be called in the DestroyService, before removing the associated projects, so we can store the storage locations which can be used by the `.really_destroy!` method.
+
+### Security release
+
+As we discovered that this also allows a repository to be exploited in under some circumstances, we are going to release fix for `9.5`, `9.4` and `9.3`
+
+- [x] Security MR for `master` - https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2169
+- [x] Security MR for `9.5` - https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2170
+- [x] Security MR for `9.4` - https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2171
+- [x] Security MR for `9.3` - https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2172

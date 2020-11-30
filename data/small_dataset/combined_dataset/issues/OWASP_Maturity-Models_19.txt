@@ -1,0 +1,46 @@
+Data_Files.set_File_Data - Path Traversal
+
+
+Current implementation of Data_Files.set_File_Data (here and below) is vulnerable by design to an Path Traversal attack.
+This will allow any caller to write into files outside the expected data folder
+  set_File_Data: (filename, file_Contents) ->               
+    if not filename or not file_Contents                    
+      return null                                           
+    if typeof file_Contents isnt 'string'    
+      return null
+    file_Path = @.find filename                             
+    if file_Path is null or file_Path.file_Not_Exists()
+      file_Path = @.data_Path.path_Combine filename        
+    file_Path.file_Write file_Contents                       
+    return file_Path
+At the moment this method is not wired to a controller, but that is exactly what will happen next (since the point of this method is to allow the existing BSIMM mappings to be edited
+Here is the test that proves the issue
+describe '_securtiy | A1 - Injection', ->  
+
+  # https://github.com/DinisCruz/BSIMM-Graphs/issues/21
+  it 'Issue 19 - Data_Files.set_File_Data - Path Traversal', ->    
+    using new Data_Files(), ->
+      folder_Name  = 'outside-data-root'
+      file_Name    = 'some-file.txt'
+      file_Content = 'some content'
+      target_Folder = @.data_Path.path_Combine('../' + folder_Name)        # Create target folder
+                                 .folder_Create()
+                                 .assert_Folder_Exists()                   # Confirm it exists
+
+      target_Folder.path_Combine(file_Name)                                # Create target File
+                   .file_Write(file_Content)
+                   .assert_File_Exists()                                   # Confirm it exists
+
+      payload     = "../#{folder_Name}/#{file_Name}"
+      new_Content = 'new - content'
+
+      @.data_Path.path_Combine(payload)
+                 .file_Contents().assert_Is file_Content                   # Confirm original content is there
+
+      @.set_File_Data payload, new_Content
+
+      @.data_Path.path_Combine(payload)
+                 .file_Contents().assert_Is_Not file_Content               # Confirm original content is NOT there
+                                 .assert_Is new_Content                    # Confirm that it has been changed
+
+      target_Folder.folder_Delete_Recursive().assert_Is_True()             # Delete temp folder

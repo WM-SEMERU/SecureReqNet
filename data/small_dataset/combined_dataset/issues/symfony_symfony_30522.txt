@@ -1,0 +1,53 @@
+[framworkbundle] fix search in debug:autowiring command
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2 
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30493
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+When searching for autowiring class :
+If the class not found the command return exception [ERROR] No autowirable classes or interfaces found matching "fake"
+But After adding the option all to the command ( To shwing no aliased services), if someone search for no aliased services without the option all. the command command will return empty result and not exception.
+I suggested if someone adding search argument. the command must return the aliased and no aliased services. I think it would be better to return the aliased and no aliased services for devs.

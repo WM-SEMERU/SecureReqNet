@@ -1,0 +1,42 @@
+kubeadm incorrectly upgrades kubelet.conf for certificate rotation during cluster upgrade
+
+
+NOTE: duplicated from k/k
+kubernetes/kubernetes#71825
+reported by @turchanov
+
+What happened:
+We routinely upgrade our kubernetes cluster to from 1.8->1.9->1.10->1.11->1.12 so that I cannot say when exactly that happend but it is evident that when kubernetes enabled at some point kubelet certificate rotation by default it hasn't patched /etc/kubernetes/kubelet.conf to refer to that "rotatable" certificate (/var/lib/kubelet/pki/kubelet-client-current.pem).
+In out cluster we have two cases:
+
+initial/first node: kubelet.conf  contains BASE64-encoded client-certificate-data/client-key-data
+other nodes: kubelet.conf  refers to an inital certificate that was created at node's join (and when certitificate rotation feature didn't exist), i.e. it refers to kubelet-client.crt/kubelet-client.key
+
+In both cases after base64-encoded or inital certificate expires, a restart of kubelet service fails due to expired certificate although there is a valid "rotated" certificate (kubelet-client-current.pem) in /var/lib/kubelet/pki/.
+As a separate problem (maybe deserving its own separate ticket) in 2nd case kubelet acknowleges existence of "rotated" certificate but nonethelest fails to start:
+[server.go:408] Version: v1.12.3
+[plugins.go:99] No cloud provider specified.
+[bootstrap.go:205] Part of the existing bootstrap client certificate is expired: 2018-12-05 07:50:00 +0000 UTC
+[certificate_store.go:131] Loading cert/key pair from "/var/lib/kubelet/pki/kubelet-client-current.pem".
+[bootstrap.go:235] Failed to connect to apiserver: the server has asked for the client to provide credentials
+
+In the 1st case kubelet just fails without acknowlegement of kubelet-client-current.pem.
+What you expected to happen:
+I expect kubeadm (or kubelet?) to patch kubelet.conf to refer to a "rotatable" certificate (/var/lib/kubelet/pki/kubelet-client-current.pem) when certificate rotation feature is enabled by default (during cluster upgrade procedure?).
+How to reproduce it (as minimally and precisely as possible):
+Anything else we need to know?:
+Environment:
+
+Kubernetes version (use kubectl version):
+
+Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.3", GitCommit:"435f92c719f279a3a67808c80521ea17d5715c66", GitTreeState:"clean", BuildDate:"2018-11-26T12:57:14Z", GoVersion:"go1.10.4", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.3", GitCommit:"435f92c719f279a3a67808c80521ea17d5715c66", GitTreeState:"clean", BuildDate:"2018-11-26T12:46:57Z", GoVersion:"go1.10.4", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration: bare-meta, created by kubeadm
+OS (e.g. from /etc/os-release): RHEL 7.4
+Kernel (e.g. uname -a): 4.9.x
+Install tools: kubeadm
+Others:
+
+

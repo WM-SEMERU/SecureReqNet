@@ -1,0 +1,5 @@
+possibility to change the texts "Previous" and "Next" in "pagination_settings"
+
+
+Please, in the "pagination_settings", would be good the possibility to have two parameters to change the texts "Next" and "Previous", for localization in other languages.
+Thank you.

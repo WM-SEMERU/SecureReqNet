@@ -1,0 +1,12 @@
+Add documentation for form_login handlers
+
+
+In the security reference, under form_login there are success_handler and failure_handler keys which can be set to services. There doesn't seem to by any other documentation about this functionality.
+What needs to be documented:
+
+What interfaces to implement (AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface)
+When these handlers are called (immediately after login success, I assume)
+Whether there is a default (yes), and whether you are replacing this default or adding an additional listener (replacing, I think)
+Basic example of usage
+
+My basic example of usage is to add a cookie to the default redirect response. To do this, I extend the DefaultAuthenticationSuccessHandler, override onAuthenticationSuccess to call the parent and get the response, modify the response, and return it.

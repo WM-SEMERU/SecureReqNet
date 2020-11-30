@@ -1,0 +1,50 @@
+[Security] Added getRoles method
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+/
+
+
+
+Added method getRoles which return an array with all available roles defined roleHierarchy in security configuration file (in roleHierachy section)

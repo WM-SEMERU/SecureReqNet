@@ -1,0 +1,8 @@
+Please review erights/unwhitelist-prototype
+
+
+Original issue 369 created by erights on 2008-06-03T04:02:06.000Z:
+caja.js was inappropriately whitelisting Function and
+Function.prototype, causing bug 346. This CL removes that
+whitelisting, repairs the one line of code that depended on it, and
+tests that an attempt to access a function's prototype now fails.

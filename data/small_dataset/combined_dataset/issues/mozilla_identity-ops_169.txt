@@ -1,0 +1,17 @@
+ver.txt on stage does not match top of deployment branch
+
+
+[0] 11:48 (ttys002) kthiessen@kthiessen-16107:~/Library/github/karlht/persona 758$ git checkout train-2014.07.19
+Already on 'train-2014.07.19'
+[0] 11:49 (ttys002) kthiessen@kthiessen-16107:~/Library/github/karlht/persona 759$ curl -s https://login.anosrep.org/ver.txt
+b48c3ca document changes in train-2014.07.19
+locale svn r130450
+[0] 11:49 (ttys002) kthiessen@kthiessen-16107:~/Library/github/karlht/persona 760$ git log --oneline | head -n 5
+dc417ae Merge pull request #4166 from mozilla/train-2014.07.19-rpm_version
+e7d1007 fix persona rpm spec file for train-2014.07.19 release
+b48c3ca document changes in train-2014.07.19
+298bde6 Merge pull request #4154 from mozilla/issue-4144-broken-primaries
+90774f9 Bump release in specfile to allow testing on stage
+
+If I'm reading this right, this means that there were two commits on this branch (basically, a merge of a pull request) after the rpm was built.   This is mightily confusing, and requires QA to actually pull out those two commits and actually inspect them.
+While it may seem like no big deal to verify that the changes to the rpm spec are no-ops as far as the code is concerned, anyone coming to this six months from now is going to look at the fact that ver.txt does not return the top of the branch and ask, "How do we know what we actually deployed?"

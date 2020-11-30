@@ -1,0 +1,50 @@
+[Validator] Add the missing translations for the Galician (gl) locale
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30165
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Add the missing Galician translations.

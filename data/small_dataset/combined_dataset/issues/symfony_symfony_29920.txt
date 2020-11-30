@@ -1,0 +1,62 @@
+[Debug][DebugClassLoader] Match more cases for final, deprecated and internal classes / methods extends
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Currently, when there is no comment for a tag and another tag after, the detection does not work. Example :
+/**
+ * @final
+ *
+ * @author John
+ */
+class A {
+
+}
+AFAIK, those tags must not be in a specific order. That's why we should try to support more cases because we might miss things to report.
+Also I do not understand why the regex is not the same for the classes and methods detection. I fixed that too.
+I added a lot of cases in the "extends from final class" test and an easy way to add more when needed. Adding them everywhere might be overkill and useless. WDYT ?
+I'm considering this as bug fix.

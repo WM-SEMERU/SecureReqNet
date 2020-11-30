@@ -1,0 +1,57 @@
+'### Summary
+
+As logged to Support by customer:
+
+> A colleague of mine noticed yesterday that on a Gitlab EE 11.2.3-ee
+instance "gitlab.example.net", when logged in with an Admin account and
+clicking the "Sign-in page" button at the bottom of
+"https://gitlab.example.net/admin/appearance", he gets redirected to the
+login page
+"https://gitlab.example.net/admin/appearance/preview_sign_in". After
+logging in again on that page, his credentials would end up in plain
+text in the browser's URL bar.
+
+> Turns out that the login <form> on "https://gitlab.example.net/admin/appearance" lacks the method="POST"
+attribute, which makes the browser fall back to using the GET method. The result is plaintext admin credentials ending up in the browser's URL bar, in the browser's history, and in nginx's access logs on the Gitlab server.
+
+> Fixing that login form is probably trivial, but the fix should also include some form of log file sanitization. On our server, I've simple run 
+
+> ```
+> sed -i '/preview_sign_in/d' /var/log/gitlab/nginx/*.log
+> rm -f /var/log/gitlab/nginx/*.log.gz
+> ```
+
+> and manually configured nginx to respond with an HTTP 500 error page
+when the /admin/appearance/preview_sign_in page is requests, but there's
+probably more elegant ways of cleaning up the logfiles.
+
+### Steps to reproduce
+
+1. Go to `/admin/appearance`
+2. Add signup title / description, click save
+3. Click "Sign-in" at the bottom of page
+4. Log in with credentials
+5. Look at URL in browser bar
+
+### What is the current *bug* behavior?
+
+Credentials shown in plain text
+
+### What is the expected *correct* behavior?
+
+Credentials should be masked
+
+### Relevant logs and/or screenshots
+
+
+#### Results of GitLab environment info
+
+Tested on local installation of 11.2.3
+
+### Possible fixes
+
+
+
+@asaba 
+
+ZD: https://gitlab.zendesk.com/agent/tickets/103805

@@ -1,0 +1,9 @@
+Updating mbedtls#251
+
+
+updated mbedtls package for version 2.7.5
+
+self-test was failing as verbose option is removed from those
+mbedtls_sha256_starts, mbedtls_sha256_update,mbedtls_sha256_finish function usage is deprecated
+from version 2.7.0 onwards those functionalities can be reproduced with alternate functions available in the mbedtls library.
+

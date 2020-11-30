@@ -1,0 +1,4 @@
+GET /plans/<plan_name> does not check ownership
+
+
+This relates to the frontend bug: mozilla/minion-frontend#47

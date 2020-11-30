@@ -1,0 +1,10 @@
+HackerOne report: URL obfuscation
+
+
+https://hackerone.com/reports/175529
+Verified on OS X 0.12.4
+Steps to Reproduce
+1 . go to https://brave.com@example.com/
+2. urlbar makes it look like we are at brave.com when the page displayed is example.com
+Expected behavior
+urlbar should show the actual page location, which is https://example.com/

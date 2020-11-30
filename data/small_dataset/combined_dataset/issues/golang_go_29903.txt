@@ -1,0 +1,6 @@
+crypto/elliptic: CPU DoS vulnerability affecting P-521 and P-384
+
+
+A DoS vulnerability in the crypto/elliptic implementations of the P-521 and P-384 elliptic curves may let an attacker craft inputs that consume excessive amounts of CPU.
+These inputs might be delivered via TLS handshakes, X.509 certificates, JWT tokens, ECDH shares or ECDSA signatures. In some cases, if an ECDH private key is reused more than once, the attack can also lead to key recovery.
+This issue is CVE-2019-6486. It was found and reported by the Wycheproof project.

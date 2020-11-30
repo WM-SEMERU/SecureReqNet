@@ -1,0 +1,26 @@
+Starting a server does not work
+
+
+Symfony version(s) affected: 4.2.*
+Description
+Server does not start in a new Symfony project.
+How to reproduce
+
+$ php -v → PHP 7.3.1 (cli) (built: Jan 10 2019 13:15:37) ( NTS )
+$ composer create-project symfony/website-skeleton server-poc
+$ cd server-poc && bin/console server:start yields:
+
+bin/console server:start -vvv
+10:55:07 DEBUG     [php] Warning: fsockopen(): unable to connect to 127.0.0.1:8001 (Connection refused)
+[
+  "exception" => Symfony\Component\Debug\Exception\SilencedErrorContext {
+    +count: 1
+    -severity: E_WARNING
+    trace: {
+      ./vendor/symfony/web-server-bundle/WebServerConfig.php:139 { …}
+      ./vendor/symfony/web-server-bundle/WebServerConfig.php:54 { …}
+    }
+  }
+]
+
+...and no server is running on port 8001. bin/console server:run works, though

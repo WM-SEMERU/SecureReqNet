@@ -1,0 +1,25 @@
+_gel('foo').bar fails due to firefox 2.x hasOwnProperty bug
+
+
+Original issue 51 created by felix8a on 2008-01-30T17:28:41.000Z:
+the symptom is, something like _gel('foo').bar cajoled in firefox will
+often generate a delayed exception "Illegal operation on WrappedNative
+prototype object" in caja.js hasOwnProp().
+what happens is:
+_gel('foo').bar when cajoled
+calls canReadPub(foo, bar)
+calls isJSONContainer(foo)
+calls directConstructor(foo)
+calls foo.hasOwnProperty('proto')
+proto for any dom node is an XPCNativeWrapper, and that triggers the
+hasOwnProperty bug.
+the bug is here
+https://bugzilla.mozilla.org/show_bug.cgi?id=375344
+it's still broken in firefox 2.0.0.11.
+it should be fixed in the next release of firefox 2.x.
+it's fixed in firefox 3 beta 2.
+caja.js tries to workaround the problem in canCallHasOwnProperty(), but
+that only checks for HTMLDivElement, so it's still possible to get the
+exception with code like this:
+<span id="foo">abc</span>
+<script> _gel('abc').bar; </script>

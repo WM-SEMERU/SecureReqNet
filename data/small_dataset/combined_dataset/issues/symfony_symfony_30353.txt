@@ -1,0 +1,99 @@
+Access control does not work for admin routes when path passed as parameter
+
+
+params
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+  <parameters>
+
+    <parameter id="app.mapping.folder.path" key="app.mapping.folder.path">src/Infrastructure/Mapping</parameter>
+    <parameter id="app.admin_api_prefix" key="app.admin_api_prefix">/admin/secured/api/v1</parameter>
+    <parameter id="app.secured_api_prefix" key="app.secured_api_prefix">/secured/api/v1</parameter>
+    <parameter id="app.public_api_prefix" key="app.public_api_prefix">/api/v1</parameter>
+    <parameter key="router.request_context.host">%env(DB_HOST)%</parameter>
+    <parameter key="router.request_context.scheme">https</parameter>
+
+    <parameter id="app.default_locale" key="app.default_locale">en</parameter>
+    <parameter id="app.secret" key="app.secret">%env(APP_SECRET)%</parameter>
+    <parameter id="app.environment" key="app.environment">%env(APP_ENV)%</parameter>
+    <parameter id="app.is_debug" key="app.is_debug">%env(APP_DEBUG)%</parameter>
+
+    <parameter id="app.database_driver" key="app.database_driver">%env(DB_CONNECTION)%</parameter>
+    <parameter id="app.database_host" key="app.database_host">%env(DB_HOST)%</parameter>
+    <parameter id="app.database_port" key="app.database_port">%env(DB_PORT)%</parameter>
+    <parameter id="app.database_name" key="app.database_name">%env(DB_DATABASE)%</parameter>
+    <parameter id="app.database_user" key="app.database_user">%env(DB_USERNAME)%</parameter>
+    <parameter id="app.database_password" key="app.database_password">%env(DB_PASSWORD)%</parameter>
+
+
+    <parameter id="app.mail_driver" key="app.mail_driver">%env(MAIL_DRIVER)%</parameter>
+    <parameter id="app.mail_host" key="app.mail_host">%env(MAIL_HOST)%</parameter>
+    <parameter id="app.mail_port" key="app.mail_port">%env(MAIL_PORT)%</parameter>
+    <parameter id="app.mail_username" key="app.mail_username">%env(MAIL_USERNAME)%</parameter>
+    <parameter id="app.mail_password" key="app.mail_password">%env(MAIL_PASSWORD)%</parameter>
+    <parameter id="app.mail_encryption" key="app.mail_encryption">%env(MAIL_ENCRYPTION)%</parameter>
+
+  </parameters>
+
+</container>
+security
+security:
+imports :
+  - { resource: '../parameters.xml' }
+
+  encoders      :
+    App\Entity\User:
+      algorithm: 'bcrypt'
+      cost     : 12
+
+  providers     :
+    api_user_provider:
+      id: App\Security\ApiUserProvider
+
+  access_control:
+    - { path: '^/%app.public_api_prefix%', roles: [IS_AUTHENTICATED_ANONYMOUSLY], requires_channel: https }
+    - { path: '^/%app.secured_api_prefix%', roles: [IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED], requires_channel: https }
+
+// works if replaced with parameter { path: '^/admin/secured/api/v1'
+    - { path: '^/%app.admin_api_prefix%', roles: [IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED], requires_channel: https } 
+ 
+  firewalls     :
+    # authenticated admins
+    admin_area  :
+      access_denied_handler: App\Security\AccessDeniedHandler
+
+// works as it is, if replaced with parameter does not work
+      pattern              : '^/admin/secured/api/v1' 
+
+      anonymous            : ~
+      http_basic           : trueonly admins can accecss
+      provider             : api_user_provider
+      guard                :
+        authenticators:
+          - App\Security\ApiTokenAuthenticator
+      entry_point          : App\Security\ApiTokenAuthenticator
+
+    # authenticated users
+    secured_area:
+      access_denied_handler: App\Security\AccessDeniedHandler
+      pattern              : '^/%app.secured_api_prefix%' 
+      anonymous            : ~
+      http_basic           : true
+      provider             : api_user_provider
+      guard                :
+        authenticators:
+          - App\Security\ApiTokenAuthenticator
+      entry_point          : App\Security\ApiTokenAuthenticator
+used docs:
+
+https://symfony.com/doc/current/reference/configuration/security.html
+https://symfony.com/doc/current/security.html#denying-access-roles-and-other-authorization
+https://symfony.com/doc/current/security/access_control.html
+
+Tell me please what I am missing?
+Should we create custom handlers for access control?
+https://symfony.com/doc/current/security/access_denied_handler.html

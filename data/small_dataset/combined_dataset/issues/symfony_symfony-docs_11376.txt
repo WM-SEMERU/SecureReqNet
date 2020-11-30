@@ -1,0 +1,10 @@
+[Workflow] missing twig function "workflow_all_transitions"
+
+
+Hi everyone,
+when copy-pasting an example of the documentation regarding blocked transitions in a fresh Symfony project, I found that a Twig function is not defined (neither in 4.2 nor master).
+    {% for transition in workflow_all_transitions(article) %}
+
+Learning from #11268, maybe you also want to add this function to the core? Or should there be another example utilizing the $workflow->getDefinition()->getTransitions() function?
+Best regards,
+cawolf

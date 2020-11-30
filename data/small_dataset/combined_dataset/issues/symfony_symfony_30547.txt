@@ -1,0 +1,51 @@
+[HttpClient] Add new bearer option
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+n/a   
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Add a new "auth_bearer" option to set the corresponding flavor of the Authorization header as defined in RFC 6750 and used in OAuth (and others).
+Also rename "auth" to "auth_basic" for consistency as discussed with @nicolas-grekas.

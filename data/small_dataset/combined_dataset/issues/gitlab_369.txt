@@ -1,0 +1,18 @@
+'After updating to 7.0, our uploaded avatar urls do not resolve properly with a relative url. I narrowed it down to the `avatar_url` method in the [User](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/models/user.rb#L492) model class. The `URI::join` call is stripping our relative path from the url. The following rails console session demonstrates the problem:
+
+```ruby
+irb(main):001:0> Gitlab.config.gitlab.url
+=> "https://www.example.com/git"
+irb(main):002:0>me = User.find_by(:name => 'Michael Mims')
+=> #<User id: 2 ...
+irb(main):003:0> me.avatar.url
+=> "/uploads/user/avatar/2/mims.michael528e64e62a918.png"
+irb(main):004:0> me.avatar_url
+=> "https://www.example.com/uploads/user/avatar/2/mims.michael528e64e62a918.png"
+irb(main):005:0> URI::join(Gitlab.config.gitlab.url, me.avatar.url).to_s
+=> "https://www.example.com/uploads/user/avatar/2/mims.michael528e64e62a918.png"
+irb(main):005:0> URI::join('https://www.example.com/git/', 'uploads/user/avatar/2/mims.michael528e64e62a918.png').to_s
+=> "https://www.example.com/git/uploads/user/avatar/2/mims.michael528e64e62a918.png"
+```
+
+In order to use `URI::join` the gitlab url needs to be `https://www.example.com/git/` and the avatar url cannot have a leading forward slash `uploads/user/avatar/2/mims.michael528e64e62a918.png`.

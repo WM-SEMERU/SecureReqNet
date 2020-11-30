@@ -1,0 +1,13 @@
+[Security] Integration with form for login
+
+
+Hello,
+I was wondering if it could be interesting to provide a intergration between the security and form components for the login part.
+The security listeners for login work with the request object directly. It's easy to create a formType class and use it to display the form, but it will never be submitted.
+I see two main benefits of using a formType for the login:
+
+templating: use the same markup as in other form without writing all the html, with the form_* twig functions
+validation: ease validation of the scalar values of the fields (without security considerations) like an email format
+
+Do you think it is worth working on it ? If so where should it live ? Any other recommandations ?
+Thank you

@@ -1,0 +1,6 @@
+root@dev:/home/git/gitlab# sudo -u git -H bundle exec rake gitlab:backup:create RAILS_ENV=production
+https://github.com/gitlabhq/markup.git (at 61ade38) is not checked out. Please run `bundle install`
+
+I already bundle installed and bundle updated several times. I also installed the markup Gem manually on my system, same result.
+
+ATM, 6.4.3 is installed and works fine.

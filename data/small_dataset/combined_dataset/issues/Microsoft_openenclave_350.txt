@@ -1,0 +1,61 @@
+No validation in elf.c
+
+
+When testing the parameters of oe_create_enclave, I found that the code to load the elf image into memory does not validate it all.
+Here is a code snippet from ELF64_Load:
+int Elf64_Load(const char* path, Elf64* elf)
+{
+    int rc = -1;
+    FILE* is = NULL;
+
+    /* Open input file */
+    if (oe_fopen(&is, path, "rb") != 0)
+        goto done;
+
+    /* Get the size of this file */
+    fseek(is, 0, SEEK_END);
+    elf->size = (size_t)ftell(is);
+
+    /* Allocate the data to hold this image */
+    if (!(elf->data = malloc(elf->size)))
+        goto done;
+
+    /* Read the file into memory */
+    rewind(is);
+    if (fread(elf->data, 1, elf->size, is) != elf->size)
+        goto done;
+
+    /* Set the magic number */
+    elf->magic = ELF_MAGIC;
+
+    rc = 0;
+}
+
+As you can see, it just loads the file into memory without any validation that it's actually an ELF file. Also, it assumes that the input file is seekable, so I don't know what happens if you give a non-regular file.
+After that, all the ELF functions assume that the ELF64 struct holds a valid ELF64 binary, so they do stuff like this:
+static Elf64_Ehdr* _GetHeader(const Elf64* elf)
+{
+    return (Elf64_Ehdr*)elf->data;
+}
+
+int Elf64_FindSection(
+    const Elf64* elf,
+    const char* name,
+    uint8_t** data,
+    size_t* size)
+{
+    /* Reject invalid parameters */
+    if (!_Ok(elf) || !name || !data || !size)
+        return -1;
+
+    /* Search for section with this name */
+    for (i = 0; i < _GetHeader(elf)->e_shnum; i++)
+    {
+
+    }
+
+    /* Not found! */
+    return -1;
+}
+
+Since there's no size checking or ELF validation, if the input isn't a valid ELF64 file, there will be a lot of buffer overflows and undefined behavior in the ELF64 code.

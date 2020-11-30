@@ -1,0 +1,7 @@
+Move the ACL part of the Security Component outside of Symfony
+
+
+I've been thinking about this one for a long time now.
+The ACL sub-system has been contributed a long time ago but since then it has been abandoned as nobody really maintain it. Personally, I don't want to maintain that part as I don't use it and frankly I don't any valid use cases for it.
+So instead of keeping it in Symfony, I propose to create a new repo for it, where a new team can take care of its future (let's say symfony/acl for instance).
+ping @schmittjoh

@@ -1,0 +1,4 @@
+Allow multiple user impersonation
+
+
+Removing that simple piece of code, allows users to do multi impersonation.

@@ -1,0 +1,7 @@
+Custom Operation for UseDeveloperExceptionPage
+
+
+Is your feature request related to a problem? Please describe.
+I want to log the error to database, for UseExceptionHandler, we could custom it in public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, Action<IApplicationBuilder> configure), but for UseDeveloperExceptionPage, there is no such operation.
+Describe the solution you'd like
+Provider the Action<IApplicationBuilder> configure in UseDeveloperExceptionPage

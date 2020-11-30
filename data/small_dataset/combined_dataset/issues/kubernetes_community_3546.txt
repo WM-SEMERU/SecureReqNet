@@ -1,0 +1,14 @@
+"Writing Good Conformance Tests" doc required
+
+
+Tracking issue for something discussed in SIG-Architecture/Conformance Definition meeting.
+We need a set of published guidelines describing how to write good conformance tests.  Anecdotally we know of lots of tests that are not portable, or do not adequately test conformance against a desired set of functionality, but most of that information is in people's heads.  So lets rather get it in a doc that we can refer people to, and improve over time.
+Here is an equivalent doc that I wrote many years ago for e2e tests, to give a flavor of what we're after.
+https://github.com/kubernetes/community/blob/master/contributors/devel/sig-testing/writing-good-e2e-tests.md
+Volunteers?
+One way of doing it would be to:
+
+Interview an experienced conformance test reviewer, to get a braindump of what constitutes good and bad conformance tests. (see https://github.com/kubernetes/kubernetes/labels/area%2Fconformance)
+Go through all of the historical PR reviews of conformance tests, to check that all previous rejection reasons have been covered. (As above, see https://github.com/kubernetes/kubernetes/labels/area%2Fconformance)
+Write the doc.
+

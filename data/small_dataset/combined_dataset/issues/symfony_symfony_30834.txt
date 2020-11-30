@@ -1,0 +1,7 @@
+May not inherit from final class
+
+
+Symfony version affected: 4.2
+Description
+Can't use PHPUnit 8.0, because this error appears
+"PHP Fatal error: Class Symfony\Bridge\PhpUnit\Legacy\TestRunnerForV7 may not inherit from final class (PHPUnit\TextUI\TestRunner) in /home/NIX/kruhliak/Projects/second/vendor/symfony/phpunit-bridge/Legacy/TestRunnerForV7.php on line 22"

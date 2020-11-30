@@ -1,0 +1,5 @@
+Missing access decision strategy "highest not abstained voter"
+
+
+I am currently implementing a security system, and I am missing one strategy for the AccessDecisionManager.
+I have two voters, but only one of these two should actually vote. My current Workaround would be to put this logic into the voters, but that's IMHO not the best place for it. I would prefer this to be handled by the AccessDecisionManager. Therefore I would suggest to add another strategy, so that the result of the first voter being not abstain, whether it grants or denies access, should be returned.

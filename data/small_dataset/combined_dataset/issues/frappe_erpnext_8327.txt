@@ -1,0 +1,9 @@
+Notifications to Dormant Accounts
+
+
+
+ If inactive for a week, send a followup email.
+ If active for fortnight, send a followup email offering session and latest updates in ERPNext.
+ Make a report of dormant account, so that we could followup with them.
+ Send feedback email/survey if paid account gets expired. Also, offer session in this email.
+

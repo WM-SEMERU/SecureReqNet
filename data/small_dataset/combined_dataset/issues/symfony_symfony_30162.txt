@@ -1,0 +1,79 @@
+[Validator] Add the missing translations for the Persian ("fa") locale
+
+
+IMPORTANT: this issue is reserved for new contributors, because we want to give the opportunity to people who want to contribute to Symfony but never found the right issue to do that.
+If you want to work on this issue, add a comment to assign it to yourself and let others know that this is already taken. Thanks!
+
+Symfony version(s) affected: 3.4
+Description
+The src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf file is missing the following translations compared to the original English file:
+<trans-unit id="73">
+    <source>The image ratio is too big ({{ ratio }}). Allowed maximum ratio is {{ max_ratio }}.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="74">
+    <source>The image ratio is too small ({{ ratio }}). Minimum ratio expected is {{ min_ratio }}.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="75">
+    <source>The image is square ({{ width }}x{{ height }}px). Square images are not allowed.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="76">
+    <source>The image is landscape oriented ({{ width }}x{{ height }}px). Landscape oriented images are not allowed.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="77">
+    <source>The image is portrait oriented ({{ width }}x{{ height }}px). Portrait oriented images are not allowed.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="78">
+    <source>An empty file is not allowed.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="79">
+    <source>The host could not be resolved.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="80">
+    <source>This value does not match the expected {{ charset }} charset.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="81">
+    <source>This is not a valid Business Identifier Code (BIC).</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="82">
+    <source>Error</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="83">
+    <source>This is not a valid UUID.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="84">
+    <source>This value should be a multiple of {{ compared_value }}.</source>
+    <target>...</target>
+</trans-unit>
+<trans-unit id="85">
+    <source>This Business Identifier Code (BIC) is not associated with IBAN {{ iban }}.</source>
+    <target>...</target>
+</trans-unit>
+
+Possible Solution
+A Pull Request must be sent to Symfony's 3.4 branch adding the missing translations.
+Don't forget to take a quick look at the existing translations to use the same tone and style in the new translations.
+Additional context
+You have two ways to make this contribution:
+1) Use the GitHub web interface to edit the translation and make the pull request.
+
+It's recommended if you don't have any experience using Git in the terminal.
+To do so, click here to edit the translation file and follow the given steps to create the pull request.
+
+2) Use your own editor to edit the translation file and use the Git commands in the terminal to make the pull request.
+
+It's the most common way to contribute to Symfony.
+You need to download Symfony's code to your computer and follow the steps explained in this contribution guide
+
+
+If you need any help during the contribution process, visit the #contribs channel on Symfony Slack where we'll be happy to help you.

@@ -1,0 +1,51 @@
+[Security][bugfix] "Remember me" cookie cleared on logout with custom "secure"/"httponly" config options [1]
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#14822
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+
+
+test now always pass "secure" and "httponly" options, as they are required
+could be considered BC, but RememberMeFactory passes them, so they should've always been treated as required
+I can squash the commits before merging
+Alternative solution: #14843
+

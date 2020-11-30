@@ -1,0 +1,4 @@
+Proposed: Allow users to encrypt EC2 Access and Secret keys in their configuration
+
+
+Some people (notably, me) aren't comfortable with sensitive information lurking in configuration files.  I'd like to make it possible for users to encrypt certain fields in their machine configurations such that they either have to specify a passphrase as a cli option or be prompted for it ever time they run a machine command.

@@ -1,0 +1,4 @@
+Implement X-Frame-Options HTTP header
+
+
+Spec: https://tools.ietf.org/html/rfc7034

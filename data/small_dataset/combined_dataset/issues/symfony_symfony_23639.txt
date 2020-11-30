@@ -1,0 +1,65 @@
+[RFC] Simplify the role hierarchy feature
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.4
+
+
+
+I always considered this feature a minor "syntactic sugar": instead of granting a user two roles (ROLE_USER and ROLE_ADMIN), you configure in app/config/security.yml that ROLE_ADMIN already includes ROLE_USER and then in your code you just grant ROLE_ADMIN (and ROLE_USER is granted automatically).
+However, this feature is pretty complex internally because it requires services, parameters, voters, interfaces, etc. The problem is that part of that complexity is forced into the developer. For example, when defining a role hierarchy you must use this code to check if some user is granted some permission:
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+private $roleHierarchy;
+
+public function __construct(RoleHierarchyInterface $roleHierarchy = null)
+{
+    $this->roleHierarchy = $roleHierarchy;
+}
+
+private function userHasRole(UserInterface $user, $roleName)
+{
+    if (null === $this->roleHierarchy) {
+        return in_array($roleName, $user->getRoles(), true);
+    }
+
+    foreach ($this->roleHierarchy->getReachableRoles($user->getRoles()) as $role) {
+        if ($roleName === $role->getRole()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+This is too much to me. Could we improve this feature?
+
+Proposal 1
+My favorite solution, which I'm sure you won't accept, is to remove this feature completely. If you want to grant two or three roles to a user, grant them all instead of relying on some hierarchy defined in some remote YAML file.
+Proposal 2
+My other proposal would be to make this feature 100% transparent to the developer. If you define a role hierarchy, it's "flattened" and "processed" so when you grant a role to a user, all the inherited roles are granted too. This way you don't have to care about the hierarchy, the getReachableRoles() method, etc. All roles would be considered the same and always available everywhere.

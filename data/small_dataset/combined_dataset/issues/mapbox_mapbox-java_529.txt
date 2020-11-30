@@ -1,0 +1,5 @@
+Expose direction intersection class
+
+
+https://www.mapbox.com/api-documentation/#routestep-object
+cc: @zugaldia @danesfeder

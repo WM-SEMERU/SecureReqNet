@@ -1,0 +1,73 @@
+SQL Injection and Timing Attacks using TLS SNI and HTTP Host Header
+
+
+
+Version: all
+Platform: all
+Subsystem: http, tls, maybe http2
+
+The Specs
+
+TLS SNI Extension
+
+https://tools.ietf.org/html/rfc3546 (deprecated)
+https://tools.ietf.org/html/rfc6066#page-6
+
+
+HTTP/1.1 Host
+
+https://tools.ietf.org/html/rfc2616#page-128
+
+
+Internet Host Names
+
+https://tools.ietf.org/html/rfc952
+https://tools.ietf.org/html/rfc1123
+https://tools.ietf.org/html/rfc5890
+
+
+
+Summary
+Essentially these say that the SNI field and the Host field are defined as strings limited to the following characters: a-z0-9.-_, which the addition of : to specify a port in some cases. Obviously there are some other restrictions such as the use of _ and a leading character in front of an "A" label, no numbers in TLDs, restriction on strength length per label between .s, etc.
+Attacks
+There are at least two classes of attack that are very easy to do, but shouldn't be possible by parsers follow the spec.
+SNI - SQL Injection, Timing Attack
+https.SNICallback will happily passes invalid SNI bytes, such as
+SQL
+Robert'); DROP TABLE Student;
+
+So if I could guess that a client was doing some sort of virtual hosting and vulnerable to sql injection, I could easily (albeit blindly) send SQL commands:
+openssl s_client -connect test.ppl.family:443 -servername "Robert'); DROP TABLE Students;" -showcerts
+
+Paths
+../probing/a/path/or/file
+
+If I know that the server is using fs calls to find certificates to load based on the SNI then I can repeatedly send paths over and over and distinguish slight but consistent variances in the the time it takes to get an error in order to know whether or not certain target files exist on the file system, which may lead to further exploit opportunities.
+openssl s_client -connect test.ppl.family:443 -servername "../probing/a/path/or/file" -showcerts
+
+Host Header - SQL Injection, Timing Attack
+The host header is susceptible to the same attacks in nearly the same way, excepting that it is more potentially dangerous since the attacker can get back some sort of plain-text data with either a leading error message or the actual target data in many of the affected cases:
+curl https://test.ppl.family  -H "Host: Robert'); DROP TABLE Students;"
+
+curl https://test.ppl.family  -H "Host: ../probing/a/path/or/file"
+
+Again, I don't know what use malformed headers would be to a legitimate client or server and, whatever they may be, they're off-spec.
+Domain Fronting
+A different, but related vulnerability is that the tls servername and Host header can be different, this is known as domain fronting.
+For example, In a shared hosting environments the SNI may come in as foo.com and the host header could be set to bar.net. I don't think this introduces any new attack and the risk is relatively low from what I know (WRONG, see below), but it is subversive behavior.
+Update: After reading https://portswigger.net/blog/practical-web-cache-poisoning I could definitely see how domain fronting could be used in DoS and DDOS attacks - like causing a reverse proxy to download lots of extremely large files or proxy internal private resources.
+Non-Attack Use Case: Knocking
+The current behavior does enable "knocking" - sending arbitrary as a side channel for an application-specific protocol. A traditional example of knocking is sending a ping or "magic packet" to a certain port on a server which then causes a firewall rule to be enabled or disabled.
+Personally, I think that's a pretty cool like the idea of being able to pass arbitrary bytes in order to perform SNI knocking or Host knocking.
+However, this is not supported by the spec and is a very very edge case that would be better hid behind a configuration option - or even require the user to drop down to TCP to do.
+I just mention this as a way of acknowledging an off-spec, but valid-ish use case.
+Video Demonstration
+https://youtu.be/aZgVqPzoZTY?list=PLZaEVINf2Bq_lrS-OOzTUJB4q3HxarlXk
+Note: I created the video as a tutorial for Greenlock.js explaining some of the security features and afterwards I realized that this is probably the sort of thing that belongs in core rather than sparsely implemented here and there among frameworks.
+Why Not Let "The Community" Deal With It?
+Node isn't just for the technical elite anymore. I would imagine that its community has more script kiddies from boot camps than seasoned programmers or security professionals. Even the major frameworks - like express - are not mitigating these attacks (I'm using express in the video demo).
+Since these are issues that deal directly with the specs for the related standards, they affect all frameworks and libraries alike. I believe it should be the responsibility of node, which is parsing the data in the first place, to put at least a small measure of protection in place by better adhering to the existing standards.
+Proposed Solution
+I propose that as node is parsing SNI and Host Headers that it reject, with the most appropriate error code, any requests that come in which arbitrary bytes that cannot be parsed according to the specification.
+As a stop-gap solution I'd recommend simply matching case-insensitively on the set of the 39 allowed characters a-z0-9.-_.
+I also suggest that there be a flag in the TLS,HTTP, HTTP2, and HTTPS modules when creating a server that allows these arbitrary bytes be passed rather than returning an error just in case someone is doing something off-spec, such as SNI or Host knocking.

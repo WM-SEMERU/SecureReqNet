@@ -1,0 +1,26 @@
+Can't use FQDN of host when pushing images to remote registry (Unsecure)
+
+
+Hello All,
+I'm using Ubuntu 14.04 LTS.
+Client:
+Version:       18.02.0-ce
+API version:   1.36
+Go version:    go1.9.3
+Git commit:    fc4de44
+Built: Wed Feb  7 21:16:47 2018
+OS/Arch:       linux/amd64
+Experimental:  false
+Orchestrator:  swarm
+Server:
+Engine:
+Version:      18.02.0-ce
+API version:  1.36 (minimum version 1.12)
+Go version:   go1.9.3
+Git commit:   fc4de44
+Built:        Wed Feb  7 21:15:21 2018
+OS/Arch:      linux/amd64
+Experimental: false
+When running the following on host machine:
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+From a remote machine, I cannot push using the host FQDN. I must tag and push using the ip.

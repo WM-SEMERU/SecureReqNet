@@ -1,0 +1,23 @@
+### Problem to solve
+
+When we see issues or merge request, we have a generic indication when it was created/written (1 month ago). If we go on-hover, a tooltip will say the exact time (with seconds!) when the comment was written. We also see this information about when an issue or a merge request is created.
+
+This could be very dangerous for privacy, because users can be tracked second by second. Unfortunately this is a big concern that may affect people. The worst thing is that we really don't need this information to be so detailed. Probably the day when it was written is really enough.
+
+### Further details
+
+We don't want to use a tool that can be turned into a Big Brother. See recent privacy concerns from all mayor social platforms. People should know this place is public, but there are so many cases when abuses can affect people. GitLab should be privacy-friendly by default.
+
+### Proposal
+
+Instead of the exact date+time, just show the date. Not totally enough, but a compromise.
+
+Probably other places where this information is shown should be changed.
+
+### What does success look like, and how can we measure that?
+
+GitLab will not be a Big Brother and will protect privacy of users.
+
+### Links / references
+
+https://gitlab.com/gitlab-org/gitlab-ce/issues/38604

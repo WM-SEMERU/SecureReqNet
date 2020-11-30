@@ -1,0 +1,6 @@
+Update json_login_setup.rst
+
+
+After a successfully login, the json_login system failed with an error:  "The controller must return a response (null given). Did you forget to add a return statement somewhere in your controller? (500 Internal Server Error)",  because it had nowhere to go after a successfully authentication.
+A quick fix was to redirect the user to a secure location in the login controller. This works when the login is successful and respective json responses are sent when the login fails.
+Am not core symfony developer hence i don't know if this is a perfect method or there is another better way. But this worked on my end.

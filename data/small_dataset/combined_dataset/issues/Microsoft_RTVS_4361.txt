@@ -1,0 +1,13 @@
+Unable to transfer file Rpackage without admin rights
+
+
+If a user without local admin rights is connected to a remote workspace and wants to load the demo() script, he encounters the followin message:
+
+Additional each time a user with admin rights in a new session does the same, a new copy of the package is stored in that path.
+Additional information:
+OS Information
+Version:       Microsoft Windows NT 10.0.14393.0
+RTVS Information:
+Assembly: Microsoft.VisualStudio.R.Package, Version=1.3.40517.1016, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+Active R URI:
+servername_masked: https://servername_masked:5444#1

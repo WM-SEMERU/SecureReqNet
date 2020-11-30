@@ -1,0 +1,23 @@
+Allow git to follow global tagsign config
+
+
+-a tells git to "ignore the git config for signing tags"
+that is all it does.
+Default is "not signed" anyways, so why not listen to the git config? Why explicitly forbid signing when the commit option follows git config and does not explicitly forbid signing unless the npm config says so?
+If there is an explicit reason for forbidding signatures, I would like to hear it.
+If this is a bug than it is a simple BUGFIX.
+Workaround I've been using: (TIL about the npm config option to add tag signing)
+npmversion() {
+  if [ -z "$1" ]; then
+    echo "need to specify version type (major, minor, patch)"
+    return 1
+  fi
+  MYNPMVER=$(npm version $1)
+  git tag -d $MYNPMVER > /dev/null
+  git tag -s $MYNPMVER -m "${MYNPMVER/v/}"
+  echo $MYNPMVER
+  git verify-tag $MYNPMVER
+}
+So perhaps another way to fix this is to forbid signing of git commit without explicitly naming in npm config.
+I think this difference between tag and commit handling is a bug.
+Thank you for your review.

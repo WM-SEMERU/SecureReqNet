@@ -1,0 +1,24 @@
+AuthorizationPolicyBuilder.RequireUserName requires Name - not UserName in Google authentication type
+
+
+https://github.com/aspnet/Security/blob/beaa2b443d46ef8adaf5c2a89eb475e1893037c2/src/Microsoft.AspNetCore.Authorization/AuthorizationPolicyBuilder.cs#L192
+See that we require on the user name, but a NameAutorizationRequired requirement is added.
+NameAutorizationRequired checks Identity.Name
+When using tokens from Google, the name is the real name (e.g. "Eva T"), and not the user name - and real names can have duplicates.
+(Debug info for claims returned from Google below)
+Name Value Type
+Identities Count = 1 System.Collections.Generic.IEnumerable<System.Security.Claims.ClaimsIdentity> {System.Collections.Generic.List<System.Security.Claims.ClaimsIdentity>}
+[0] {System.Security.Claims.ClaimsIdentity} System.Security.Claims.ClaimsIdentity
+Actor null System.Security.Claims.ClaimsIdentity
+AuthenticationType "Google" string
+Claims Count = 6 System.Collections.Generic.IEnumerable<System.Security.Claims.Claim> {System.Collections.Generic.List<System.Security.Claims.Claim>}
+[0] {http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier: 1234567} System.Security.Claims.Claim
+[1] {http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name: Eva T} System.Security.Claims.Claim   [2] {http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname: Eva} System.Security.Claims.Claim
+[3] {http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname: T} System.Security.Claims.Claim   [4] {urn:google:profile: https://profiles.google.com/123456} System.Security.Claims.Claim
+[5] {http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress: evat@gmail.com} System.Security.Claims.Claim
+CustomSerializationData null byte[]
+IsAuthenticated true bool
+Label null string
+Name "Eva T" string
+NameClaimType "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" string
+RoleClaimType "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"

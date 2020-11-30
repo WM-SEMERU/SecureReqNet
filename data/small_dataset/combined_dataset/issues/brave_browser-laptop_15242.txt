@@ -1,0 +1,10 @@
+update to muon 8.1.8
+
+
+Test plan
+
+Visit about:brave
+Ensure Muon version is 8.1.8
+
+Description
+Update to https://github.com/brave/muon/releases/tag/v8.1.8

@@ -1,0 +1,11 @@
+Not all inputs are cajoled
+
+
+Original issue 1002 created by ben@links.org on 2009-03-09T16:32:26.000Z:
+Inputs in some contexts are passed through without cajoling. In particular,
+arguments to constructors are not processed. As a result, arbitrary
+Javascript can be run by an attacker.
+Obviously this represents a complete break.
+Also, there was supposed to have been a check for this mistake (i.e. a
+check that all output is the result of processing), so the check is clearly
+failing.

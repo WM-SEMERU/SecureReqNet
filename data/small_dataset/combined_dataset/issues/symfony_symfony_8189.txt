@@ -1,0 +1,58 @@
+auto login after logout when I enabled remember_me
+
+
+my config:
+security.yml:
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:
+                path:   /logout
+                target: /about
+            anonymous:    true
+            remember_me:
+                key: "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path: /
+                domain: ~ # Defaults to the current domain from $_SERVER
+
+
+config.yml:
+framework:
+    esi:             { enabled: true }
+    translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    default_locale:  "%locale%"
+    trust_proxy_headers: true # Deprecated in 2.0; will be removed in 2.3 (used trusted_proxies instead)
+    trusted_proxies: [ "127.0.0.1" ]
+    session:         ~
+    templating:
+        assets_version: 1
+        assets_version_format: %%s?%%s
+        engines:
+            - twig
+
+I'm using sf2.2.2 and fosuserbundle.
+1.open my site, login in with checked "remember me"
+2.I'm log in
+3.click logout
+4.I'm still in the same page with login status.
+seems the system auto login for me after I logout.
+If I remove the section of remember_me in security.yml. the problem won't happen(which means I can logout normally)

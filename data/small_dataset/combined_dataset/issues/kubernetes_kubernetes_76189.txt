@@ -1,0 +1,62 @@
+Fix flaky legacy pod autoscaler test
+
+
+What type of PR is this?
+/kind flake
+What this PR does / why we need it:
+The reactor in runTest is set to catch all actions, but eventually it only handles CreateAction without checking action type which might fail sometimes when Patch arrives. This fix ensures we handle only the CreateAction.
+This is failing in openshift CI a lot, a few examples are: https://openshift-gce-devel.appspot.com/build/origin-ci-test/pr-logs/pull/22464/pull-ci-openshift-origin-master-unit/4644/, https://openshift-gce-devel.appspot.com/build/origin-ci-test/pr-logs/pull/22464/pull-ci-openshift-origin-master-unit/4699, https://openshift-gce-devel.appspot.com/build/origin-ci-test/pr-logs/pull/22464/pull-ci-openshift-origin-master-unit/4669/, each time the error is:
+=== RUN   TestLegacyScaleUpCMUnreadyNoScaleWouldScaleDown
+E0404 09:25:57.405470    3764 runtime.go:69] Observed a panic: &runtime.TypeAssertionError{interfaceString:"", concreteString:"testing.PatchActionImpl", assertedString:"testing.CreateAction", missingMethod:"GetObject"} (interface conversion: testing.PatchActionImpl is not testing.CreateAction: missing method GetObject)
+/go/src/github.com/openshift/origin/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:76
+/go/src/github.com/openshift/origin/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:65
+/go/src/github.com/openshift/origin/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:51
+/usr/local/go/src/runtime/asm_amd64.s:573
+/usr/local/go/src/runtime/panic.go:502
+/usr/local/go/src/runtime/iface.go:85
+/usr/local/go/src/runtime/iface.go:562
+/go/src/github.com/openshift/origin/vendor/k8s.io/kubernetes/pkg/controller/podautoscaler/legacy_horizontal_test.go:475
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/testing/fixture.go:504
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/testing/fake.go:140
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/kubernetes/typed/core/v1/fake/fake_event_expansion.go:64
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/kubernetes/typed/core/v1/event_expansion.go:163
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:178
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:142
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:124
+/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:238
+/usr/local/go/src/runtime/asm_amd64.s:2361
+panic: interface conversion: testing.PatchActionImpl is not testing.CreateAction: missing method GetObject [recovered]
+	panic: interface conversion: testing.PatchActionImpl is not testing.CreateAction: missing method GetObject
+
+goroutine 1986 [running]:
+github.com/openshift/origin/vendor/k8s.io/apimachinery/pkg/util/runtime.HandleCrash(0x0, 0x0, 0x0)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/apimachinery/pkg/util/runtime/runtime.go:58 +0x16b
+panic(0x1a2a1c0, 0xc420f94b00)
+	/usr/local/go/src/runtime/panic.go:502 +0x24a
+github.com/openshift/origin/vendor/k8s.io/kubernetes/pkg/controller/podautoscaler.(*legacyTestCase).runTest.func1(0x1d51ba0, 0xc42050fb80, 0x0, 0x0, 0x0, 0x0, 0x0)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/kubernetes/pkg/controller/podautoscaler/legacy_horizontal_test.go:475 +0x1da
+github.com/openshift/origin/vendor/k8s.io/client-go/testing.(*SimpleReactor).React(0xc420eca480, 0x1d51ba0, 0xc42050fb80, 0x1, 0x2, 0xc42130d520, 0x1, 0x2)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/testing/fixture.go:504 +0x65
+github.com/openshift/origin/vendor/k8s.io/client-go/testing.(*Fake).Invokes(0xc420e700a0, 0x1d51ba0, 0xc42050fa40, 0x1d31260, 0xc42016ac80, 0x0, 0x0, 0x0, 0x0)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/testing/fake.go:140 +0x276
+github.com/openshift/origin/vendor/k8s.io/client-go/kubernetes/typed/core/v1/fake.(*FakeEvents).PatchWithEventNamespace(0xc421026420, 0xc42016ac80, 0xc4209a80c0, 0x70, 0xb1, 0x0, 0xc420e744e0, 0x30)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/kubernetes/typed/core/v1/fake/fake_event_expansion.go:64 +0x30a
+github.com/openshift/origin/vendor/k8s.io/client-go/kubernetes/typed/core/v1.(*EventSinkImpl).Patch(0xc420f58110, 0xc42016ac80, 0xc4209a80c0, 0x70, 0xb1, 0x28, 0xc420e744e0, 0x7f0d941d7748)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/kubernetes/typed/core/v1/event_expansion.go:163 +0x81
+github.com/openshift/origin/vendor/k8s.io/client-go/tools/record.recordEvent(0x1d48c40, 0xc420f58110, 0xc42016ac80, 0xc4209a80c0, 0x70, 0xb1, 0xc4212bcc01, 0xc4210264a0, 0xc)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:178 +0x671
+github.com/openshift/origin/vendor/k8s.io/client-go/tools/record.recordToSink(0x1d48c40, 0xc420f58110, 0xc4202b3680, 0xc4210264a0, 0xc420ecaed0, 0x2540be400)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:142 +0x1cc
+github.com/openshift/origin/vendor/k8s.io/client-go/tools/record.(*eventBroadcasterImpl).StartRecordingToSink.func1(0xc4202b3680)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:124 +0xb7
+github.com/openshift/origin/vendor/k8s.io/client-go/tools/record.(*eventBroadcasterImpl).StartEventWatcher.func1(0x1d33620, 0xc420ecb080, 0xc420ecb050)
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:238 +0xfb
+created by github.com/openshift/origin/vendor/k8s.io/client-go/tools/record.(*eventBroadcasterImpl).StartEventWatcher
+	/go/src/github.com/openshift/origin/vendor/k8s.io/client-go/tools/record/event.go:229 +0x8e
+FAIL	github.com/openshift/origin/vendor/k8s.io/kubernetes/pkg/controller/podautoscaler	12.781s
+
+Special notes for your reviewer:
+/assign @mwielgus @DirectXMan12
+Does this PR introduce a user-facing change?:
+NONE
+

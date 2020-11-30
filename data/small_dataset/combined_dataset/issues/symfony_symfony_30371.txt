@@ -1,0 +1,191 @@
+[OptionsResolver] Add a new method addNormalizer and normalization hierarchy
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30310
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11103
+
+
+
+3rd-party package
+Given: (CLICK ME)
+
+Generic type:
+class FooType extends AbstractType
+{
+    private $registry;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        $this->registry = $registry;
+    }
+
+    // buildForm ...
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setRequired('class');
+        $resolver->setDefaults([
+            'em' => null,
+            'query' => null,
+        ]);
+        $resolver->setAllowedTypes('em', ['null', 'string']);
+        $resolver->setAllowedTypes('query', ['null', 'callable']);
+
+        $resolver->setNormalizer('em', function (Options $options, $em) {
+            if (null !== $em) {
+                return $this->registry->getManager($em);
+            }
+
+            return $this->registry->getManagerForClass($options['class']);
+        });
+
+        $resolver->setNormalizer('query', function (Options $options, $query) {
+            if (\is_callable($query)) {
+                $query = $query($options['em']->getRepository($options['class']));
+
+                if (!$query instanceof Query) {
+                    throw new UnexpectedTypeException($query, 'Doctrine\ORM\Query');
+                }
+            }
+
+            return $query;
+        });
+    }
+}
+
+
+App context
+Before (CLICK ME)
+
+Normalizing the new allowed value will require to override the parent's normalizer:
+class BarType extends AbstractType
+{
+    private $registry;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        $this->registry = $registry;
+    }
+
+    // buildForm ...
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->addAllowedTypes('em', 'Doctrine\ORM\EntityManagerInterface');
+
+        $resolver->setNormalizer('em', function (Options $options, $em) {
+            if ($em instanceof EntityManagerInterface) {
+                return $em;
+            }
+
+            if (null !== $em) {
+                return $this->registry->getManager($em);
+            }
+
+            return $this->registry->getManagerForClass($options['class']);
+        });
+
+        $resolver->addAllowedTypes('query', 'string');
+
+        $resolver->setNormalizer('query', function (Options $options, $query) {
+            if (\is_callable($query)) {
+                $query = $query($options['em']->getRepository($options['class']));
+
+                if (!$query instanceof Query) {
+                    throw new UnexpectedTypeException($query, 'Doctrine\ORM\Query');
+                }
+            }
+
+            if (\is_string($query)) {
+                $query = $options['em']->createQuery($query);
+            }
+
+            return $query;
+        });
+    }
+
+    public function getParent()
+    {
+        return FooType::class;
+    }
+}
+
+
+After (CLICK ME)
+
+The new normalizer is added to the stack and it'll receive the previously normalized value or if forcePrepend = true the validated value:
+class BarType extends AbstractType
+{
+    // buildForm ...
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->addAllowedTypes('em', 'Doctrine\ORM\EntityManagerInterface');
+
+        $resolver->addNormalizer('em', function (Options $options, $em) {
+            if ($em instanceof EntityManagerInterface) {
+                return $em;
+            }
+
+            return $em;
+        }, true); // $forcePrepend = true (3rd argument)
+
+        $resolver->addAllowedTypes('query', 'string');
+
+        $resolver->addNormalizer('query', function (Options $options, $query) {
+            if (\is_string($query)) {
+                $query = $options['em']->createQuery($query);
+            }
+
+            return $query;
+        });
+    }
+
+    public function getParent()
+    {
+        return FooType::class;
+    }
+}
+
+

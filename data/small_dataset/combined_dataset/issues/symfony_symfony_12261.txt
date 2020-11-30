@@ -1,0 +1,18 @@
+How to configure security.firewalls.*.entry_point
+
+
+I have configured a different firewall entry point for one firewall. However, when authentication must be performed, it still calls Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint::start() instead of my service's start(). My service is instantiated, yet never used.
+What do?
+
+# security.yml
+security:
+    firewalls:
+        api:
+            pattern: ^/api/
+            http_basic: ~
+            entry_point: my.service
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        default:
+            anonymous: ~

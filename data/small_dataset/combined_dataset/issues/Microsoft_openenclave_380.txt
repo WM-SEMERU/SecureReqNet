@@ -1,0 +1,4 @@
+App devs can refer to samples for implementing quote providers for handling PCK certs, CRLs and TCBInfo
+
+
+Lower priority sample to illustrate how to implement custom handling of quote generation artifacts (PCK cert chain) and quote revocation artifacts (CRL and TCBInfo). This is primarily useful for individuals who want to roll their own management infrastructure outside of Azure (niche scenario) and as a fallback if there is no default Intel quote provider available for use outside of Azure.

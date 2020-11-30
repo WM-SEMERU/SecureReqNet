@@ -1,0 +1,9 @@
+registry/api/v2: stronger validation for uuid field in urls
+
+
+This change adds strong validation for the uuid variable for v2 routes. This is
+a minor specification change but is okay since the uuid field is controlled by
+the server. The character set is restricted to avoid path traversal, allowing
+for alphanumeric values and urlsafe base64 encoding.
+This change has no effect on client implementations.
+Signed-off-by: Stephen J Day stephen.day@docker.com

@@ -1,0 +1,40 @@
+CertUtils: export private key to pem format correctly
+
+
+This makes openssl rsa -in  -check pass, due to "RSA" string the
+validate of private key (pem file) by openssl fails. Also removes
+a commented import.
+Without this fix, in some systems the key/crt could not be reused. Following error was observed in openssl:
+$ openssl rsa -in  -check
+RSA key ok
+139832889164824:error:0D0680A8:asn1 encoding routines:ASN1_CHECK_TLEN:wrong tag:tasn_dec.c:1220:
+139832889164824:error:0D06C03A:asn1 encoding routines:ASN1_D2I_EX_PRIMITIVE:nested asn1 error:tasn_dec.c:788:
+139832889164824:error:0D08303A:asn1 encoding routines:ASN1_TEMPLATE_NOEXP_D2I:nested asn1 error:tasn_dec.c:720:Field=n, Type=RSA
+139832889164824:error:04093004:rsa routines:OLD_RSA_PRIV_DECODE:RSA lib:rsa_ameth.c:121:
+With this fix, the private key pem file will pass. Openssl output:
+$ openssl rsa -in  -check
+RSA key ok
+writing RSA key
+-----BEGIN RSA PRIVATE KEY-----
+...content of the file...
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+How Has This Been Tested?
+More Found this issue while refactoring/fixing CCS with ACS 4.11.1. With the fix, kubernetes api service could use CA framework issued certificates.
+Checklist:
+
+ I have read the CONTRIBUTING document.
+ My code follows the code style of this project.
+ My change requires a change to the documentation.
+ I have updated the documentation accordingly.
+Testing
+ I have added tests to cover my changes.
+ All relevant new and existing integration tests have passed.
+ A full integration testsuite with all test that can run on my environment has passed.
+

@@ -1,0 +1,26 @@
+Fix URL parsing consistency issue
+
+
+Fix #10270 by preferring muon.url.parse over Node's legacy (and non-standards compliant) URL parser. This is subobtimal because unit tests are running a different URL parser from the actual browser, but seems like the best trade off for now.
+Also fixes #6098
+Test Plan:
+
+go to brave.com and disable shields
+go to http://brave.com%60x.code-fu.org/. shields should not be disabled.
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+
+Test Plan:
+Reviewer Checklist:
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

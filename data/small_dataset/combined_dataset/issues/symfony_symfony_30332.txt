@@ -1,0 +1,39 @@
+Ability to avoid session creation for anonymous page hit (with patch)
+
+
+Description
+Sites (with statefull Firewall) with secured area always start session for any anonymous hit of url in secured area. This is related to PathTrait feature. Every hit generate a session which store initial URL (PathTrait) that may be used later to redirect user to initial page after authentication. But in the case that this was a bot/anonymous/DoS hit the session just left in session storage for it lifetime.
+It may be good to avoid such behavour for non-standart authentication schemes and DoS tolerance.
+Proposed solution is to introduce earlySession(): bool function in AuthenticationEntryPointInterface which must be consulted everytime when making decision of creating (storing data in) anonymous  session. At this time only saveTargetPath == savePathTrait affected.
+The earlySession() function is:
++    /**
++     * Returns whether to start session before authentication.
++     *
++     * The true value means to start session and enable PathTrait feature (ability to
++     * redirect/forward user to initially hitted page after authentication).
++     *
++     * The false value mean no session start (disabling PathTrait feature)
++     * before authentication avoiding generating and storing session for anonymous
++     * page hit.
++     *
++     * @return bool
++     */
++    public function earlySession();
+
+Example
+In case of earlySession implementation avoiding session start will look like this:
+class MyAuthenticator extends AbstractGuardAuthenticator {
+...
+    /*
+      disable session for anonymous
+    */
+    public function earlySession()
+    {
+      return false;
+    }
+
+...
+}
+
+Patch is here:
+https://gist.github.com/ant5/a95afbfaa9df2c188653038a1ecd68f4

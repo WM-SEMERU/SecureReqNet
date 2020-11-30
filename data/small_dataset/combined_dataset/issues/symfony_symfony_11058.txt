@@ -1,0 +1,44 @@
+[Security] bug #10242 Missing checkPreAuth from RememberMeAuthenticationProvider
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#10242
+
+
+License
+MIT
+
+
+
+[Security] fixed missing call to UserChecker::checkPreAuth
+edit : after the discution with @hellomedia , i replaced postcheck with precheck
+glutamatt@e0730e0#commitcomment-6580764

@@ -1,0 +1,84 @@
+Update API server certSANs
+
+
+What keywords did you search in kubeadm issues before filing this one?
+apiserver
+sa
+certificate
+certSANs
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+Versions
+kubeadm version (use kubeadm version):
+v1.13.4
+Environment:
+
+Kubernetes version (use kubectl version):
+
+Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-02-28T13:37:52Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-02-28T13:30:26Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration: VM on GCE
+OS (e.g. from /etc/os-release): Ubuntu 18.04
+Kernel (e.g. uname -a): Linux kube-master 4.18.0-1007-gcp
+Others:
+
+What happened?
+After bootstrap k8s cluster using kubeadm, I realize that I forgot public IP/DNS of API server. So I'd like to reconfig k8s cluster by using kubeadm, but it doesn't work.
+What you expected to happen?
+Cluster update with new config.
+How to reproduce it (as minimally and precisely as possible)?
+
+Bootstrap cluster
+
+root@kube-master:~# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP group default qlen 1000
+    link/ether 42:01:0a:94:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 10.148.0.2/32 scope global dynamic ens4
+       valid_lft 2525sec preferred_lft 2525sec
+    inet6 fe80::4001:aff:fe94:2/64 scope link 
+       valid_lft forever preferred_lft forever
+root@kube-master:~# kubeadm init
+....
+
+# Check PKI Certificates
+root@kube-master:~# openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
+....
+X509v3 Subject Alternative Name: 
+    DNS:kube-master, DNS:kubernetes, DNS:kubernetes.default, DNS:kubernetes.default.svc, DNS:kubernetes.default.svc.cluster.local, IP Address:10.96.0.1, IP Address:10.148.0.2
+...
+
+Get kubeadm config
+
+kubeadm config view > kubeadm.yaml
+
+
+Update kubeadm.yaml
+
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+apiServer:
++  certSANs:
++  - 35.198.193.188
+  extraArgs:
+    authorization-mode: Node,RBAC
+  timeoutForControlPlane: 4m0s
+- controlPlaneEndpoint: ""
++ controlPlaneEndpoint: 10.148.0.2:6443
+kubernetesVersion: v1.13.4
+...
+
+Apply config
+
+root@kube-master:~# kubeadm upgrade apply --config=kubeadm.yaml
+root@kube-master:~# openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
+# certSANs are the same as above
+I also try to review certificates, but the result is the same.
+root@kube-master:~# kubeadm alpha certs renew all --config kubeadm.yaml

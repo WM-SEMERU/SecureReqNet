@@ -1,0 +1,17 @@
+webroot flags macos installer Brave-0.21.18.dmg  as a threat
+
+
+Description
+Steps to Reproduce
+
+install webroot
+scan brave installer
+
+
+Actual result:
+Expected result:
+Reproduces how often:
+Brave Version
+about:brave info:
+Reproducible on current live release:
+Additional Information

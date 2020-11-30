@@ -1,0 +1,18 @@
+NPM Deps Being Downgraded to HTTP
+
+
+Description:
+resolve dependency URLs maybe downgraded to http
+https://npm.community/t/npm-install-downgrading-resolved-packages-from-https-to-http-registry-in-package-lock-json/1818/3
+Steps to Reproduce
+
+Run npm update / ./bootstrap.sh
+View diff on package-lock.json
+resolve dependency URLs maybe downgraded to http
+
+Actual result: 
+
+Expected result:
+All dep URLs should be HTTPS
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Intermittent

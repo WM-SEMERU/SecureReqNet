@@ -1,0 +1,4 @@
+Update entity.rst
+
+
+Highlight the name property and use FQCN instead of string.

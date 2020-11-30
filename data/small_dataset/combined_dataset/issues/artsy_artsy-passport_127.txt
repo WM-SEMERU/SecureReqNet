@@ -1,0 +1,4 @@
+@damassi => Bump passport lib and release 1.1.0
+
+
+I released this as 1.1.0, included in artsy/force#3039

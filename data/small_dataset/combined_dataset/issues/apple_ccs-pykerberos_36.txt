@@ -1,0 +1,6 @@
+Push PyKerberos 1.1.2 to PyPI
+
+
+hugh.xie@… originally submitted this as ticket:900
+
+Successfully tested kerberos delegation on trunk (v1.1.2, ticket 862). Please push this version to PyPI. Thanks.

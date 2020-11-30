@@ -1,0 +1,4 @@
+regroup some constraints
+
+
+fixes #11167

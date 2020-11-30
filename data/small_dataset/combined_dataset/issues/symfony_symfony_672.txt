@@ -1,0 +1,5 @@
+Acl
+
+
+This is an update to the security bundle to allow other acl providers. There is a related pull request on the DoctrineMongoDBBundle. I modeled adding an acl provider after how adding a user provider config is currenty set up.
+Thanks

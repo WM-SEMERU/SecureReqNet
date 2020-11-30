@@ -1,0 +1,4 @@
+Option to turn off basic auth
+
+
+This may be as simple as not passing basic-auth-file to the api server, but need to understand what else this disables!

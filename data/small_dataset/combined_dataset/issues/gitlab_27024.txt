@@ -1,0 +1,15 @@
+An external audit found that our asciidoc library "asciidoctor" is vulnerable to several cross-site scripting (XSS) attacks.
+
+Code samples:
+```
+link:bla"onmouseover="alert(1)[KLIK HIER]
+  Results in: <a onmouseover="alert(1)" href="bla">KLIK HIER</a>
+image:https://gitlab-a.ing.net/fake.png[Alt text" onerror="alert(7)]
+  Results in: <img onerror="alert(7)" alt="Alt text" src="https://gitlab-a.ing.net/fake.png">
+```blaat"><script>alert(3)</script>
+  Results in: <pre lang="blaat"><script>alert(3)</script>"&gt;<code></code></pre>
+```
+
+Saving these to a project as a file with extension .adoc results in the scripts executing when viewed, similar to the .rst vulnerability.
+
+I've run these samples through the command-line version of asciidoctor using the "secure" security level and it still outputs dangerous code. So at first glance this appears to be a vulnerability in asciidoctor itself. I'd like to verify that before we contact the maintainer for a patch.

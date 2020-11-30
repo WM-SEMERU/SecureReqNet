@@ -1,0 +1,4 @@
+[Messenger] Rename the messenger:consume-messages command
+
+
+This fixes one of the bullet points of #11236.

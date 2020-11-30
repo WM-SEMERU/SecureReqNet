@@ -1,0 +1,5 @@
+Use includeSubdomains for HSTS on addons-server and addons-frontend.
+
+
+We don't currently send includeSubdomains for the HSTS header on AMO. We do use includeSubdomains for the pinning though. I don't think there's a reason not to send includeSubdomains for HSTS so we should check the spec and turn it on for both addons-server and addons-frontend.
+Issues for the relevant repos should reference this one.

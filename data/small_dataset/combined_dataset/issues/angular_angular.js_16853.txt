@@ -1,0 +1,8 @@
+Memory keeps on increasing while we click or move from one page to another page (any other event)  on Chrome,  ie 11 and edge
+
+
+When we work longer time on same browser (Angularjs SPA app) the memory allocation keeps on increasing while we click or move from one page to another page (any other event). Eventually after certain time browser get crashed (Chrome latest version, ie 11 and edge) . We already destroying $watchers , events at the end of $scope life cycle hook.Technology used : Angularjs 1.7 , angular-bootstrap, ui-grid.
+
+
+
+

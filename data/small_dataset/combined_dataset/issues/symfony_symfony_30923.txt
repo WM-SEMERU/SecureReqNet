@@ -1,0 +1,52 @@
+[BrowserKit vs HttpFoundation][TestSuite]Run test in separate process
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+This test calls code that defines some environment variables, which in
+turn trigger the registration of a the deprecation error handler, which
+causes unexpected issues when testing other components.

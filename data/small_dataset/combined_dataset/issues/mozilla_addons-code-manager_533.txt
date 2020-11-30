@@ -1,0 +1,5 @@
+Move buildFileTree into a fileTree reducer
+
+
+Supports #522
+In preparation for also storing the ordered fileTree paths and linter messages, move the buildFileTree function from FileTree into a fileTree reducer and store the tree in the redux store.

@@ -1,0 +1,11 @@
+We introduced uploads for personal snippets in https://gitlab.com/gitlab-org/gitlab-ce/commit/43ff7386411af0f538710f3627622f71e5e34472#2f154d17ee4bad51947893baa3c1671d74502ca6_0_12 when we implemented support of comments for personal snippets.
+
+We started uploading snippets into `public/uploads/personal_snippets` but they should be uploaded to `public/uploads/system/personal_snippets` instead.
+
+As part of !11071 we added description to snippets - another place where users can upload files for personal snippets. Also these uploads end in the wrong path.
+
+We should change `PersonalSnippetUploader` so that files end up in the correct location, under `system` directory.
+
+As part of this issue all existing uploads have to be moved to the new location.
+
+While cleaning up the symlinks that kept the files available during the deploy, [we missed cleaning up the appearance folder because of a typo.](https://gitlab.com/gitlab-org/gitlab-ce/blob/70d7ded5b38376809365cadd7e542254003f8210/db/post_migrate/20170406111121_clean_upload_symlinks.rb#L9). The folder still needs to be cleaned up because if someone would create a group with full patch `appearance/logo` or `appearance/header_logo` the images stored in those locations could get lost.

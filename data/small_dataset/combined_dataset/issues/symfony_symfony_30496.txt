@@ -1,0 +1,50 @@
+[PHPUnit-Bridge] override some Composer environment variables
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30467
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Override COMPOSER_VENDOR_DIR and COMPOSER_BIN_DIR with their default values in PHPUnit Bridge: #30467

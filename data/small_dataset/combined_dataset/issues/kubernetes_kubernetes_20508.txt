@@ -1,0 +1,9 @@
+kubectl --record should avoid capturing secrets on the command line
+
+
+Follow up #20035
+#20035 (comment):
+
+@smarterclayton: We need to be careful that security information does not get added to this annotation. I don't expect users would be surprised that --record records the command, but they would be surprised if we stored passwords or other attributes. (For example, --password, --token, possibly --username.)
+
+@kubernetes/kubectl

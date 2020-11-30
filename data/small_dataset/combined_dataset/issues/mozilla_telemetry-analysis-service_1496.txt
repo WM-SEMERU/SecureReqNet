@@ -1,0 +1,87 @@
+[Security] Bump bootstrap from 3.3.7 to 3.4.0
+
+
+Bumps bootstrap from 3.3.7 to 3.4.0. This update includes security fixes.
+
+Vulnerabilities fixed
+Sourced from The Sonatype OSS Index.
+
+CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+The software does not neutralize or incorrectly neutralizes user-controllable input before it is placed in output that is used as a web page that is served to other users.
+Affected versions: <=3.3.7
+
+
+
+Release notes
+Sourced from bootstrap's releases.
+
+v3.4.0
+
+New: Added a .row-no-gutters class.
+New: Added docs searching via Algolia.
+Fixed: Resolved an XSS issue in Alert, Carousel, Collapse, Dropdown, Modal, and Tab components. See https://snyk.io/vuln/npm:bootstrap:20160627 for details.
+Fixed: Added padding to .navbar-fixed-* on modal open
+Fixed: Removed the double border on <abbr> elements.
+Removed Gist creation in web-based Customizer since anonymous gists were disabled long ago by GitHub.
+Removed drag and drop support from Customizer since it didn't work anymore.
+Added a dropdown to the docs nav for newer and previous versions.
+Update the docs to use a new baseurl, /docs/3.4/, to version the v3.x documentation like we do with v4.
+Reorganized the v3 docs CSS to use Less.
+Switched to BrowserStack for tests.
+Updated links to always use https and fix broken URLs.
+Replaced ZeroClipboard with clipboard.js
+
+
+
+
+Commits
+
+4c547f2 Dist.
+0f1c6b0 Move the whole autoprefixer config to configBridge.json.
+9332f3c Add polyfills for older browsers.
+dd71b40 docs: Concat the IE files with the rest.
+4a5c7f2 Update devDependencies, gems and lots of cleanup/build fixes.
+7a2cdfb Center skippy.
+3b82587 Restore cursor: help for abbr.
+bf69f1f Backport the abbr fix from the updated normalize.css.
+dd23bb5 Backport search.js changes from v4-dev.
+9edba61 search input: hide box-shadow.
+Additional commits viewable in compare view
+
+
+
+Maintainer changes
+This version was pushed to npm by xhmikosr, a new releaser for bootstrap since your current version.
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

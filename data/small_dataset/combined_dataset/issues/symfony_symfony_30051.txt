@@ -1,0 +1,58 @@
+Drop \Serializable implementations
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+yes, it removes \Serializable interface from many classes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+This PR replaces Serializable implementations with __sleep() and __wakeup().
+Changes touch these components:
+
+Config
+DependencyInjection
+Form
+HttpKernel
+Validator
+

@@ -1,0 +1,19 @@
+Hi,
+
+Since I upgraded (even checked out a clean branch) , creating a branch returns a 500 internal error. When I look at the logs it shows me this:
+
+
+NoMethodError (undefined method `commit' for #<Gitlab::Git::Branch:0x007fc211ccd050>):
+  app/models/event.rb:61:in `create_ref_event'
+  app/controllers/projects/branches_controller.rb:22:in `create'
+  app/controllers/application_controller.rb:57:in `set_current_user_for_thread'
+
+
+It did seem to create the branch through.
+
+
+GitLab 6.6.1
+GitLab Shell 1.8.0
+GitLab API v3
+Ruby 2.1.0p0
+Rails 4.0.3

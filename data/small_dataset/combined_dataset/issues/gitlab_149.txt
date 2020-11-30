@@ -1,0 +1,12 @@
+'In stable version 6.7.2, Ruby 1.9.3p194 and Rails 4.0.3 when Email on push service is switched on, sidekiq log produces following error:
+
+"No route matches" ... missing required keys: [:id]
+
+when calling
+
+in app/mailers/emails/projects.rb line:29
+@target_url = project_commit_url(@project, @compare.commit)
+
+workaround:
+@target_url = project_commit_url(@project, id: @compare.commit.id)
+

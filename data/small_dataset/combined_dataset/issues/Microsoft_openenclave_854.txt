@@ -1,0 +1,30 @@
+Need API to get symmetric key, public private/key pair, or certificate for the enclave
+
+
+oe_get_seal_key_by_policy only deals with symmetric keys, not asymmetric keys or certificates.
+Similarly the internal oe_get_key only deals with symmetric keys, not asymmetric keys or certificates and uses SGX-specific types (sgx_key_t, sgx_key_request_t).
+oe_get_report also doesn't (necessarily) return an X.509 certificate for the enclave.
+TEE_GenerateKey() is the standard GlobalPlatform() API that can generate either a symmetric key, or a public/private key pair.  Similarly, CyRes generates a public/private key pair and certificate for the trusted application.
+We need a platform-agnostic (and TLS-stack agnostic) APIs for an enclave to get its public/private key pair and its X.509 certificate.   The oe_seal_policy_t enum is potentially usable as is, other than being a misnomer since it uses the term "seal".
+APIs along the following lines would likely suffice:
+oe_result_t oe_get_public_key_by_policy(
+    oe_seal_policy_t seal_policy,
+    uint8_t* key_buffer,
+    size_t* key_buffer_size,
+    uint8_t* key_info,    /** might be unused? */
+    size_t* key_info_size); /** might be unused? */
+
+oe_result_t oe_get_private_key_by_policy(
+    oe_seal_policy_t seal_policy,
+    uint8_t* key_buffer,
+    size_t* key_buffer_size,
+    uint8_t* key_info,   /** might be unused? */
+    size_t* key_info_size);   /** might be unused? */
+
+oe_result_t oe_get_certificate_by_policy(
+    oe_seal_policy_t seal_policy,
+    uint8_t* certificate_buffer,
+    size_t* certificate_buffer_size,
+    uint8_t* certificate_info,  /** might be unused? */
+    size_t* certificate_info_size);  /** might be unused? */
+

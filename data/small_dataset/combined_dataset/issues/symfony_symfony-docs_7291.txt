@@ -1,0 +1,4 @@
+Reworded the user checker aliases explanation
+
+
+The original explanation looked confusing to me. Let's see if others agree.

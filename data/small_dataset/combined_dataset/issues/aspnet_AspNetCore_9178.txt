@@ -1,0 +1,4 @@
+Try new Fedora queue for Helix
+
+
+Right now helix is always failing on fedora agents: https://mc.dot.net/#/user/aspnetcore/pr~2Faspnet~2Faspnetcore/ci/20190408.19. Talked with @MattGal and it seems we can just use the following definition instead (original found here https://github.com/dotnet/corefx/blob/184089d748b705438a117002143ebb4429ce0d97/eng/pipelines/linux.yml#L104).

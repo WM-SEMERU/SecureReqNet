@@ -1,0 +1,4 @@
+Add ability to run E2Es with non-root uids
+
+
+There should be a way to easily run any e2e test as a non-root uid -- there's at least one issue that I believe would cause a breakage that it will be critical going forward to surface (#2630)

@@ -1,0 +1,24 @@
+```
+Link:          https://hackerone.com/reports/405709
+By:            @ngalog
+```
+
+Details:
+This finding is possible because of the Slack integration in Gitlab instance is vulnerable to CSRF.
+
+This mean attacker could supply a GET request look like this
+
+`https://gitlab.com/{org_id}/{project_id}/settings/slack/slack_auth?code={attacker_authorization_code}&state=`
+
+and make user to visit this link with authenticated session, then attacker would do whatever the slack instance is allowed to do to that project.
+
+I will supply a PoC video later, but I think you guys get the idea.
+
+## Impact
+
+CSRF  to add slack app to project, which allow attacker to perform what slack app is allowed to do
+
+Timeline:
+2018-09-05 05:56:17 +0000: @ngalog (comment)
+Vimeo: https://vimeo.com/288299962/
+password: `sakdlfjlksdfj`

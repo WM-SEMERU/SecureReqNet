@@ -1,0 +1,4 @@
+Implement Content Security Policy
+
+
+CSP lets us tell the browser what we consider as valid resources to load for a page, restricting by domain & etc. We should implement this for our site.

@@ -1,0 +1,57 @@
+JWT Bearer middleware support for error_description other than built-in.
+
+
+The current JwtBearerHandler creates an error description that can be returned via the WWW-Authenticate HTTP header as error_description=an error description during a challenge. The value for the error description is provided via the following function:
+private static string CreateErrorDescription(Exception authFailure)
+{
+	IEnumerable<Exception> exceptions;
+	if (authFailure is AggregateException agEx)
+	{
+		exceptions = agEx.InnerExceptions;
+	}
+	else
+	{
+		exceptions = new[] { authFailure };
+	}
+
+	var messages = new List<string>();
+
+	foreach (var ex in exceptions)
+	{
+		// Order sensitive, some of these exceptions derive from others
+		// and we want to display the most specific message possible.
+		switch (ex)
+		{
+			case SecurityTokenInvalidAudienceException _:
+				messages.Add("The audience is invalid");
+				break;
+			case SecurityTokenInvalidIssuerException _:
+				messages.Add("The issuer is invalid");
+				break;
+			case SecurityTokenNoExpirationException _:
+				messages.Add("The token has no expiration");
+				break;
+			case SecurityTokenInvalidLifetimeException _:
+				messages.Add("The token lifetime is invalid");
+				break;
+			case SecurityTokenNotYetValidException _:
+				messages.Add("The token is not valid yet");
+				break;
+			case SecurityTokenExpiredException _:
+				messages.Add("The token is expired");
+				break;
+			case SecurityTokenSignatureKeyNotFoundException _:
+				messages.Add("The signature key was not found");
+				break;
+			case SecurityTokenInvalidSignatureException _:
+				messages.Add("The signature is invalid");
+				break;
+		}
+	}
+
+	return string.Join("; ", messages);
+}
+
+This function only supports known issue types. This does not support the situation where I might call ResultContext.Fail("My error message")  from within one of the JwtBearerEvents delegates.
+This seems like a waste to allow the user to provide a failure via ResultContext.Fail("Message") yet do almost nothing with it other than log it via the logger (which is the current functionality).
+It seems easy enough to add functionality for errors beyond the built-ins. Are you accepting pull-requests?

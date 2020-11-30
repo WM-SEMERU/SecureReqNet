@@ -1,0 +1,5 @@
+Reaching out to other projects of the OpenJS Foundation
+
+
+We should probably start to reach out to other projects in the Foundation to check which ones would be interested in building a larger security community around JavaScript.
+Do we have any way to setup such discussion?

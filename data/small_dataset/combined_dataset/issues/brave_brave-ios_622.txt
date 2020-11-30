@@ -1,0 +1,23 @@
+Opening a new tab in private browsing mode doesn't switch to PBM
+
+
+Description:
+Steps to Reproduce
+In normal browsing mode
+
+Long press on a link, bookmark or history
+Choose open link in new private tab
+
+Actual result: 
+User is not taken to private browsing mode.
+Expected result:
+Should open private browsing mode.
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Brave Version: 
+Device details: 
+Website problems only:
+
+did you check with Brave Shields down?
+did you check in Safari/Firefox (WkWebView-based browsers)?
+
+Additional Information

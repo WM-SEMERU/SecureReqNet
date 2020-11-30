@@ -1,0 +1,5 @@
+deps: V8 6.1 get one phase of the optimization pipeline disabled
+
+
+Refs: https://v8project.blogspot.com/2017/09/disabling-escape-analysis.html
+Does this mean that Node.js 8 LTS will stick with a bit slower V8?

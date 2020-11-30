@@ -1,0 +1,11 @@
+Etcd and SSL
+
+
+Hello!
+I have a question about etcd and ssl.
+As it described here https://github.com/coreos/etcd/blob/master/Documentation/security.md, with flannel we can do something like this:
+/usr/bin/flanneld -etcd-endpoints=https://10.10.10.10:1010 -etcd-prefix=/coreos.com/network -etcd-cafile=ca.crt -etcd-certfile=client.crt -etcd-keyfile=client.key
+
+How to do something like this with kubernetes?
+I see TODO: authorization, authentication here https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/design/security.md
+Is it in plans? How to protect etcd?

@@ -1,0 +1,42 @@
+[Security] Add symfony/polyfill-ctype to dev requirements
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+because this test uses ctype_print

@@ -1,0 +1,4 @@
+[hackerone] #420391 - Tor Bypass
+
+
+https://hackerone.com/bugs?report_id=420391

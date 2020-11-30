@@ -1,0 +1,14 @@
+Constrain content message handler using a switch statement
+
+
+I used a JS object for message handler dispatch. This should probably be a switch statement to constrain the accepted messages:
+https://github.com/mozilla/ThemesRFun/blob/master/src/extension/background.js#L20
+        messageHandlers[message.type]({ port, message })
+    );
+    port.postMessage({ type: 'hello' });
+  });
+  fetchTheme().then(applyTheme);
+};
+
+const messageHandlers = {
+fetchTheme: ({ port }) => {

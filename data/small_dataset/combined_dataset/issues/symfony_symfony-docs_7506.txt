@@ -1,0 +1,22 @@
+"broken" example retrieving the user object
+
+
+http://symfony.com/doc/current/security.html#retrieving-the-user-object
+When updating the docs, I didn't quite take the workings of the security into account. The following example is broken:
+use Symfony\Component\Security\Core\User\UserInterface;
+
+public function indexAction(UserInterface $user)
+{
+    if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        throw $this->createAccessDeniedException();
+    }
+
+    // the above is a shortcut for this
+    $user = $this->get('security.token_storage')->getToken()->getUser();
+}
+This will lead to an error unless access_control has already triggered the authentication process to get a user object. The example can be fixed in two ways:
+
+Add an access_control example that triggers security here which populates the object
+Add @Security("is_granted('IS_AUTHENTICATED_FULLY')") to trigger security before the $user is required
+
+Besides of this, there's a small other issue: // the above is a shortcut for this makes it look like the isGranted is part of the "shortcut", while it's only the type-hint of the method that is part of the shortcut.

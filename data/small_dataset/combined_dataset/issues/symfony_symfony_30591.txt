@@ -1,0 +1,16 @@
+[Translator] Deprecated interface still required for Form
+
+
+Symfony version(s) affected: 4.2.x
+Description
+According to the current docs the Symfony\Component\Translation\TranslatorInterface has been superseded by the Symfony\Contracts\Translation\TranslatorInterface. I've updated our custom GettextTranslator and dropped the deprecated interface.
+This leads to an exception in the form handling:
+
+Argument 1 passed to Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension::__construct() must implement interface Symfony\Component\Translation\TranslatorInterface or be null, instance of Acme\Translation\GettextTranslator given
+
+How to reproduce
+See above. Use a custom Translator and only implement the new interface(s).
+Possible Solution
+I'm not sure how Symfony exactly handles an interface exchange, but it smells like the doc should be improved stating that the old interface is still required in combination with the form/validator? Otherwise the TransformationFailureExtension could be improved to accept both interfaces? Currently the upgrade doc reads like "just replace the interface".
+Cheers
+Matthias

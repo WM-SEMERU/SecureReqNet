@@ -1,0 +1,6 @@
+Make sure that Kubelet Certificate Rotation is enabled in v1.8
+
+
+As kubernetes/enhancements#266 and kubernetes/enhancements#267 mature, we should enable them in the kubeadm-specific kubelet arg list (https://github.com/kubernetes/release/blob/master/debian/xenial/kubeadm/channel/stable/etc/systemd/system/kubelet.service.d/10-kubeadm.conf)
+At least client cert rotation will be beta in v1.8. We should enable that behavior by default.
+cc @kubernetes/sig-auth-feature-requests @jcbsmpsn

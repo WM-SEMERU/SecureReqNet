@@ -1,0 +1,5 @@
+Remove ES5/3 and cajoler
+
+
+Original issue 1861 created by kpreid.switchb.org on 2013-09-23T22:43:21.000Z:
+We want to simplify our codebase by removing support for non-SES-compatible browsers. This means we can get rid of ES5/3, the entire server-side cajoler (but not all of the Java language-processing-framework stuff, because that's used in other ways), and workarounds for ES5/3's limitations such as lack of eval and lack of Object.create(null).

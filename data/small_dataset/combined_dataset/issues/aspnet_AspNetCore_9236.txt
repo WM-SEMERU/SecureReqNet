@@ -1,0 +1,14 @@
+Implement Html.EnableClientValidation in Asp.net Core View
+
+
+Is your feature request related to a problem? Please describe.
+For MVC .net framework, there is Html.EnableClientValidation which could be used to disable the client side validation for the specific field like
+    @{ Html.EnableClientValidation(false); }
+    @Html.TextBoxFor(m => m.BatchId, new { @class = "k-textbox" })
+    @{ Html.EnableClientValidation(true); }
+
+But, for asp.net core, there is no such method in Html.
+Describe the solution you'd like
+I am wondering whether it is possible to add this feature.
+Describe alternatives you've considered
+Built-in implement to disable client validation for per field.

@@ -1,0 +1,49 @@
+[Impersonation] Change user entity via SWITCH_USER event
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+Symfony version
+~3
+
+
+
+What do you think about adding possibility to modify user entity obtained from SwitchUserEvent and injecting it back into SwitchUserListener? In some cases on impersonation we need to modify target user entity before being logged in.
+Let me show what would be awesome to achieve in custom listener:
+class ImpersonationSubscriber implements EventSubscriberInterface
+{
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            SecurityEvents::SWITCH_USER => 'onSwitchUser',
+        ];
+    }
+
+    public function onSwitchUser(SwitchUserEvent $event)
+    {
+        $targetUser = $event->getTargetUser();
+        $targetUser->setFullname('Impersonated User');
+        $event->setTargetUser(targetUser); // this line would do the job
+    }
+}
+Right now it is only possible via total override of security.authentication.switchuser_listener service, also even because attemptSwitchUser is private. :/

@@ -1,0 +1,5 @@
+The currently used Rails version, in the stable branch, is insecure
+
+You should update the Gemfile.lock to hotfix this.
+
+http://weblog.rubyonrails.org/2014/2/18/Rails_3_2_17_4_0_3_and_4_1_0_beta2_have_been_released/

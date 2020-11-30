@@ -1,0 +1,9 @@
+Correctly send list metadata with v1beta1 PartialObjectMetadataList
+
+
+The ListMeta field was accidentally omitted. The v1 api version will change the
+protobuf ID ordering to match other lists, but v1beta1 can't do that without being
+backwards incompatible.
+/kind bug
+Resource list requests for PartialObjectMetadata now correctly return list metadata like the resourceVersion and the continue token.
+

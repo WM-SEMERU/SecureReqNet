@@ -1,0 +1,21 @@
+Add pod sandbox image to runtime API
+
+
+What type of PR is this?
+/kind api-change
+/sig node
+What this PR does / why we need it:
+This commits changes the runtime protocol to propagate the kubelet
+configured pause image to the remote runtime. The information about the
+pause image should only be needed during the RPC RunPodSandbox, so
+the information goes directly into the RunPodSandboxRequest.
+A benefit of this change is that we can avoid having different pause
+images within the cluster and only one point of configuration: the
+kubelet.
+The necessary tests have been adapted as well as the command line help
+of the kubelet.
+Which issue(s) this PR fixes:
+Fixes #73132
+Does this PR introduce a user-facing change?:
+kubelet: The flag `--pod-infra-container-image` works now for remote runtimes, too. The CRI sends the configured container image to the runtime, which can use it as infra container. Configured remote runtimes have to support this feature and decide on their own if they use it or not. Please refer to the corresponding runtime documentation for further information.
+

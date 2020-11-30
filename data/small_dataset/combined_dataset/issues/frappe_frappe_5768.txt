@@ -1,0 +1,9 @@
+File Upload XSS
+
+
+https://cxsecurity.com/issue/WLB-2018060329
+POC steps are the following
+[+] chose web siite and signup .
+[+] go to update profile : https://www.your-erpnext.com/update-profile?name=
+[+] chose your Ev!l & upload it & go to :/files/yours
+Also posted on discuss: https://discuss.erpnext.com/t/file-upload-xss/38052

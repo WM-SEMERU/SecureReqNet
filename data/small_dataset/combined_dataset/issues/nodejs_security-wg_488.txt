@@ -1,0 +1,14 @@
+What security guidance would be most useful for Node.js developers?
+
+
+Background
+Currently the Guides section of the Node.js documentation does not have any documentation around security. I think it's fair to say that such guidance would be a useful and welcome addition to the documentation.
+Based on my experience there are two target groups for such guidance: programmers working on Node.js applications and application security engineers supporting Node.js applications. I think the focus here should be on the first group.
+The second group already has a very useful resource in the form of Node.js Security Roadmap. See #101 for background on this document.
+This issue was inspired by #478.
+Expected outcome
+I would like to use this issue to solicit input both from the Security Working Group as well as from the broader Node.js community. An ideal outcome would be a list of security aspects to take into account when writing Node.js programs that we could turn into guides or a set of guides on the Node.js website.
+Scope
+Ideally, the guidance should be limited to the JavaScript programming techniques, the Node.js runtime and its core libraries.
+How to move forward
+If you have an idea, describe it and post as a comment under this issue. If you like an already existing idea, use 👍 to express support. This way we can gauge the demand for guidance on a given aspect.

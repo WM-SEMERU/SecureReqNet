@@ -1,0 +1,51 @@
+Disable SSL Medium Strength Cipher Suites Support.
+
+
+Is this a request for help? (If yes, you should use our troubleshooting guide and community support channels, see http://kubernetes.io/docs/troubleshooting/.):Yes
+What keywords did you search in Kubernetes issues before filing this one? (If you have found any duplicates, you should instead reply there.):Cipher,3DES,SHA1
+
+Is this a BUG REPORT or FEATURE REQUEST? (choose one):
+Disable SSL Medium Strength Cipher Suites Support.
+Kubernetes version (use kubectl version):
+Client Version: version.Info{Major:"1", Minor:"5", GitVersion:"v1.5.2", GitCommit:"08e099554f3c31f6e6f07b448ab3ed78d0520507", GitTreeState:"clean", BuildDate:"2017-01-12T04:57:25Z", GoVersion:"go1.7.4", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"5", GitVersion:"v1.5.2", GitCommit:"08e099554f3c31f6e6f07b448ab3ed78d0520507", GitTreeState:"clean", BuildDate:"2017-01-12T04:52:34Z", GoVersion:"go1.7.4", Compiler:"gc", Platform:"linux/amd64"}
+Environment:
+
+
+Cloud provider or hardware configuration:
+Bare-Metal
+
+
+OS (e.g. from /etc/os-release):
+NAME="Ubuntu"
+VERSION="16.04.1 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.1 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+
+
+Kernel (e.g. uname -a):
+Linux xxx 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Install tools:
+
+
+Others:
+
+
+What happened:
+Based on our security scanning: The remote service supports the use of medium strength SSL ciphers.
+TLSv1
+ECDHE-RSA-DES-CBC3-SHA Kx=ECDH Au=RSA Enc=3DES-CBC(168) Mac=SHA1
+DES-CBC3-SHA Kx=RSA Au=RSA Enc=3DES-CBC(168) Mac=SHA1
+What you expected to happen:
+Reconfigure the kube-apiserver to avoid use of medium strength ciphers.
+How to reproduce it (as minimally and precisely as possible):
+Anything else we need to know:

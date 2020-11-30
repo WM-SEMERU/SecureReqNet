@@ -1,0 +1,5 @@
+[sql lab] improve table name detection in free form SQL
+
+
+This addresses some special cases where subqueries as expressions would not be covered as well as other cases where a from clause would have a mix of identifiers (tables) and subqueries.
+This code is fairly hard to reason about and SQL parsing is a huge bottomless can of worms. I researched solutions that would do this on our behalf reliably in Python but couldn't find anything. It could be good to refactor this logic out as a contribution to sqlparse or as its own package.

@@ -1,0 +1,18 @@
+[sig-storage] Slow running tests in the test suite
+
+
+@Katharine created a spread sheet of the slowest running tests for the pull-kubernetes-gce job.
+cc @liggitt
+discussion on slack:
+https://kubernetes.slack.com/archives/C09QZ4DQB/p1554413286170600
+spreadsheet:
+https://docs.google.com/spreadsheets/d/1XXXBQtqARIfgY9HaAJvf0dJ83kydq14mQijAsH9tWYQ/edit?usp=sharing
+pie chart of test durations from SIGs:
+
+it seems appropriate to evaluate the state of the tests and reduce these runtimes.
+possibly move tests to periodic by marking them as [Slow].
+@kubernetes/sig-storage-bugs
+/assign @saad-ali @childsb
+/kind design
+/area test
+(?)

@@ -1,0 +1,51 @@
+[Debug][DebugClassLoader] Match callable() type for parameters not defined in sub classes
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29969
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Added test fixture for multi param, no param type and multi spaces as well.
+BTW, I didn't understand why there was a positive lookbehind on the current regex. Looks useless to me and tests passes without it.

@@ -1,0 +1,4 @@
+Handle feature gate errors
+
+
+Especially mismatch between apiserver and global gate default value went unnoticed and led to hard to debug test failures.

@@ -1,0 +1,23 @@
+proposal: x/crypto/poly1305: implement a subset of the hash.Hash interface
+
+
+Currently the interface to poly1305, func Sum(out *[TagSize]byte, msg []byte, key *[32]byte), forces the user to copy everything they want to sum into a single slice (msg). It would be nice to have a way to append multiple slices and then generate the sum.
+The main motivation would be to avoid an allocation in the x/crypto/chacha20poly1305 AEAD. We could avoid adding new API surface by implementing this in something like internal/poly1305 but I thought I'd create this proposal to see if we could just add it to the poly1305 package. I'm imagining the API would be used something like (not tested):
+zeros := [16]byte{}
+h := poly1305.New(key)
+h.Write(additionalData)
+if len(additionalData) % 16 != 0 {
+     h.Write(zeros[:16 - (len(additionalData) % 16)] // pad to 16
+}
+h.Write(plaintext)
+if len(plaintext) % 16 != 0 {
+     h.Write(zeros[:16 - (len(plaintext) % 16)] // pad to 16
+}
+lengths := [16]byte{}
+binary.LittleEndian.PutUint64(lengths[0:8], uint64(len(additionalData))
+binary.LittleEndian.PutUint64(lengths[8:16], uint64(len(plaintext))
+h.Write(lengths[:])
+h.Sum(out[:len(plaintext)])
+For reference this is the current code:
+https://github.com/golang/crypto/blob/613d6eafa307c6881a737a3c35c0e312e8d3a8c5/chacha20poly1305/chacha20poly1305_generic.go#L31-L39
+Also, @aead's poly1305 library already implements [EDIT: a subset of] hash.Hash if you want to take a look: https://github.com/aead/poly1305.

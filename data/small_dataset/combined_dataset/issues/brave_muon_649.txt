@@ -1,0 +1,7 @@
+security: remove getBuiltin() and depending functions
+
+
+In the spirit of #644
+getBuiltin() allows you to get any arbitrary electron module, such as app.
+Page 9 - app = ipcRenderer.sendSync('ELECTRON_BROWSER_GET_BUILTIN', 'app') 
+https://www.blackhat.com/docs/us-17/thursday/us-17-Carettoni-Electronegativity-A-Study-Of-Electron-Security-wp.pdf

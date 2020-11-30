@@ -1,0 +1,6 @@
+Document outline misses heading levels
+
+
+See https://validator.w3.org/nu/?showoutline=yes&doc=https%3A%2F%2Fextensionworkshop.com%2F
+See also https://www.w3.org/wiki/HTML/Usage/Headings/Missing for additional context.
+

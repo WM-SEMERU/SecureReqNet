@@ -1,0 +1,7 @@
+Missing comma in css-whitelist.json
+
+
+@felix9
+See af1b007
+https://github.com/google/caja/blob/master/src/com/google/caja/lang/css/css3-whitelist.json
+There's a missing comma after z-index, before zoom

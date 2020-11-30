@@ -1,0 +1,50 @@
+Publish rate limiting for topic
+
+
+Motivation
+Producers and consumers can interact with broker on high volumes of data. This can monopolize broker resources and cause network saturation, which can have adverse effects on other topics owned by that broker. Throttling based on resource consumption can protect against these issues and it can play an important role for large multi-tenant clusters where a small set of clients using high volumes of data can easily degrade performance of other clients.
+State of the art
+Right now, broker has mechanism to restrict the number of concurrent publish messages on each connection. So, broker serves only certain (1K) number of concurrent publish per connection.
+However, client can create multiple producers for the topic by creating separate connection for each producer. So, client can aggregately publish large number of messages on the topic using multiple connections and it can have adverse impacts on broker n/w bandwidth, CPU and main-memory which can ultimately affect other topics/tenants on the same broker.
+Publish Rate limiting  on the topic
+Publish rate-limiting on a topic should be able to throttle publish-rate on a topic. So, once topic reaches per-second publish rate-limiting quota, broker will not read messages from the topic until quota will be refreshed at every one second.
+So, broker can maintain a count of the current number of published messages and once this counter reaches to rate-limiting threshold, broker can start throttling new messages until counter will be reset at the next second.
+There are multiple mechanism in which broker can throttle and restrict new incoming messages  on the topic.
+One of the approaches: Once topic exceeded publish quota, broker will stop reading from all the connections on which any producer of that topic which has exceeded publish-quota is connected. And broker will start reading again once publish quota will be refreshed (at next second).
+Disadvantage:
+- Client can use one connection to serve multiple producers from different topics. So, client  can publish messages on all different topics using the same shared connection. So, broker will not read messages from other topics which are sharing the same connection with the topic that has exceeded the publish-quota. So, client will face high publish latency for other topics which are sharing the same connection but has not exceeded publish quota.
+Alternative approach
+
+
+Once topic exceeded publish quota, broker will fail incoming publish and send publish-failure to client.
+Disadvantage:
+
+In this scenario, client will receive publish-failure once it reaches to publish-quota so, client producer will close the connection and try to resend the same messages again which will unnecessarily increases the traffic and wastes n/w bandwidth at client and server side.
+also, it also causes client to close and recreate connection and it will increase the number of lookup requests at broker which we want to avoid.
+
+
+
+Once topic exceeded publish quota, broker will fail incoming publish and send publish-failure to client. Client can handle this publish-failure and resend those failed messages after certain backoff without closing connection.
+Disadvantage:
+
+it requires client change and client needs to upgrade library
+it avoids reconnection and extra lookup but it still requires client to re-send the same messages again which could waste the n/w bandwidth at client and server side.
+
+
+
+Broker changes
+Throttling limit per topic
+After configuring publish rate-limit, each topic can publish with in that rate-limit . If a topic is configured with rate-limiting of 10 messages per second then broker serves only 10 publish messages per second for that topic.
+Throttling limit: Message-rate Vs Byte-rate
+Throttling limit can be defined in two ways:
+Message-rate: Publish can be throttled by total number of messages per second. If message-rate is configured 100/second then broker serves only 100 messages publish per second.
+Byte-rate: Publish can be throttled by total number of bytes per duration. If byte-rate is configured 1MB/second then broker serves publish with total size of 1 MB per second.
+If both the limits are configured for the topic then broker applies both the limit and throttles based on whichever threshold reaches first.
+Throttling configuration
+User can configure publish-throttling using pulsar-admin api. Broker stores this namespace configuration as part of namespace policies. Following configuration forces broker to serve only 1000 messages publish per second for each topic under the given namespace.
+pulsar-admin namespaces set-publish-rate <property/cluster/namespace> -m 1000
+
+Following configuration forces broker to dispatch only 1000 bytes per second for each topic under the given namespace.
+pulsar-admin namespaces set-publish-rate <property/cluster/namespace> -b 1000
+
+By default, the value of both the configurations is 0 which disables publish-throttling for the namespace.

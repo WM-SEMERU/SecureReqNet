@@ -1,0 +1,29 @@
+Autotype Username writing in Password field
+
+
+Description
+When you have a remembered Username and click tab it types it in the Password field instead of the Username field
+Steps to Reproduce
+
+Go to https://pastebin.com/login or any other place to login
+Start typing your Username (login and out if none)
+Press Tab when it shows your username as remembered
+
+Actual result:
+Username gets entered in the Password field
+Expected result:
+Username in the Username field
+Reproduces how often:
+100%
+Brave Version
+Brave: 0.23.105
+V8: 6.8.275.24
+rev: 9a46f8f
+Muon: 8.0.9
+OS Release: 10.0.17134
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84

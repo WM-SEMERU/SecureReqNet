@@ -1,0 +1,5 @@
+Align signup screen typography and spacing
+
+
+Now that we have the Inter UI license, we can update production (left) to match the style of the original design (right). Also please note the line height and bullet point spacing.
+

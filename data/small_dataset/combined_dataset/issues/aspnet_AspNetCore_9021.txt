@@ -1,0 +1,13 @@
+Why processPath attribute of aspNetCore tag need full dotnet path under web.config?
+
+
+I am using Asp.Net Core 2.2 and noticed a weird situation when I deployed my build to server in IIS.
+Before deploying the application to IIS, just to make sure I ran the below command:
+
+dotnet .\myApp.dll
+
+My app was deployed to http://localhost:5000 and I can browse the app without any issue.
+Later I have hosted the app in IIS and when I browse the app, got an error. And finally I was able to fix the issue by providing full dotnet path in web.config as shown below:
+Changed from <aspNetCore processPath="dotnet" .........   to
+<aspNetCore processPath="C:\Program Files\dotnet\dotnet" .........
+Is it something known issue in Asp.Net Core or Am I missing anything?

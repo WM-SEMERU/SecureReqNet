@@ -1,0 +1,4 @@
+Whitelist prefs that can be set via content
+
+
+We might want to consider whitelisting prefs that can be set via content through SET_PREF

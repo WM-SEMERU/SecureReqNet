@@ -1,0 +1,22 @@
+Wrong tab URL showing in URL bar
+
+
+Did you search for similar issues before submitting this one?
+Yes. There are similar issues like #4219 but I don't see this exact one.
+Describe the issue you encountered:
+Sometimes I end up with the wrong tab's URL in my URL bar
+Expected behavior:
+
+Platform (Win7, 8, 10? macOS? Linux distro?):
+
+macOS
+
+Brave Version:
+
+0.12.3
+
+Steps to reproduce:
+I'm not able to 100% reproduce but at least once a day I end up with the wrong tabs URL.
+Screenshot if needed:
+
+

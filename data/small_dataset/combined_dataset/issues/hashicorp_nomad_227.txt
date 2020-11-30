@@ -1,0 +1,10 @@
+Authentication and authorization
+
+
+For production use, authentication so that we can restrict who has access to administrate the cluster is important.
+It would be nice to also have some sort of authorization, for example:
+
+Users can only manage their own jobs.
+Users can only use x amount of resources in the cluster.
+etc
+

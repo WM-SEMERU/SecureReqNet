@@ -1,0 +1,8 @@
+'According to [securityheaders.io](https://securityheaders.io/?q=https%3A%2F%2Fgitlab.com%2Fexplore), GitLab is missing two security headers:
+
+- [Content Security Policy](https://scotthelme.co.uk/content-security-policy-an-introduction/)
+- [HPKP: HTTP Public Key Pinning](https://scotthelme.co.uk/hpkp-http-public-key-pinning/)
+
+These are not easy to implement in our NGINX config and just deliver to the users, but is rather a sysadmin's job to do them right. The least we can do is advise users to enable them by leaving a note in NGINX's config or writing a special document under `doc/security/`.
+
+\cc @sytses @jacobvosmaer @rspeicher @brodock 

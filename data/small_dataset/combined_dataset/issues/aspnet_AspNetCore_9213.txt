@@ -1,0 +1,42 @@
+Consider exposing Bedrock's "Connection Features" on HttpContext
+
+
+I'm filing this to track some ideas that came up while @Tratcher was looking at Kerberos/NTLM auth. The exact requirements are still coming but I wanted to file this to start some parallel discussion on things that may help make the implementation smooth.
+NTLM requires mandatory caching storage of security context information between requests occurring on the same connection. So, given a connection C and NTLM-authenticated requests R1 and R2 (with R2 following after R1), it is not possible to authenticate R2 without using cached stored data from the authentication process in R1.
+Using current features, it is relatively simple to implement this by caching this data keyed off the Connection ID. However this has a few problems:
+
+It's a little clunky to have to maintain a separate cache dictionary when there is generally a connection state object in the server
+It is difficult to reliably expire this cache clean-up unnecessary contexts unless the server exposes a "Connection Ended" event of some kind.
+
+public interface INtlmConnectionStateFeature
+{
+    // ... ntlmy data ...
+}
+The auth middleware can implement this feature entirely, however, it needs to be able to store it somewhere that is guaranteed to live across the entire connection. Bedrock's "Connection Features" is a perfect place for this, however it is not exposed up through the stack.
+If we had a way to Get/Set connection-level features, we could implement this in the auth handler with pseudo-code like this:
+var currentState = context.Connection.Features.Get<INtlmConnectionStateFeature>();
+if (currentState == null)
+{
+    currentState = new NtlmConnectionState();
+    context.Connections.Features.Set(currentState);
+}
+PerformAuthentication(currentState);
+My proposal is this:
+
+Add a new feature to the request features: IHttpConnectionFeaturesFeature (name can be bikeshed later)
+
+public interface IHttpConnectionFeaturesFeature
+{
+    IFeatureCollection ConnectionFeatures { get; }
+}
+
+
+Add read-only Features property to ConnectionInfo which returns null if there is no IHttpConnectionFeaturesFeature present.
+
+
+Implement IHttpConnectionFeaturesFeature in Kestrel to expose the underlying Connection's feature collection.
+
+
+The NTLM authentication logic will require this feature be present in order to function, and will throw a useful exception if it isn't present. This way, servers which do not support this feature are not "broken", but they can't be used with NTLM auth. Since even the "custom dictionary" method requires a server change in order to detect the end of the connection, this seems like a reasonable requirement to make.
+We can consider implementing the feature in IIS and HttpSysServer as well, though since they have integrated Windows Auth, it may not be as necessary at the moment.
+Let the discussion begin! @davidfowl @halter73

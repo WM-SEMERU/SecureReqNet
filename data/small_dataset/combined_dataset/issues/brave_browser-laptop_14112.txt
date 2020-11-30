@@ -1,0 +1,6 @@
+New electron vulnerability. Is brave affected ?  CVE-2018-1000136
+
+
+I've just came across this CVE-2018-1000136 on site below.
+https://www.bleepingcomputer.com/news/security/security-flaw-impacts-electron-based-apps-such-as-skype-github-discord-others/
+Since brave is based on electron, is it affected by this bug ?

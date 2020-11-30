@@ -1,0 +1,23 @@
+Add security headers to 404s
+
+
+The staging site is only failing the security baseline on 2 things - good work team!
+Both of them are missing security headers on 404s:
+
+Content Security Policy (CSP) Header Not Set
+Strict-Transport-Security Header Not Set
+
+curl -I https://extensionworkshop.allizom.org/rubbish
+HTTP/1.1 404 Not Found
+Connection: keep-alive
+x-amz-error-code: NoSuchKey
+x-amz-error-message: The specified key does not exist.
+x-amz-error-detail-Key: rubbish
+Date: Fri, 08 Feb 2019 10:55:21 GMT
+Server: AmazonS3
+X-Cache: Error from cloudfront
+Via: 1.1 16291083b92e5aa4f2f272f1da69c5e4.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: lhULSY3paIGZtnLmKVqfoSHkNPP-geVAnz5JTsDsAVcdsakOhQIRrA==
+
+Can these be added?
+Its not a blocker to going to production but would be good to fix these soon.

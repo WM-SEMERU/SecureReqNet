@@ -1,0 +1,4 @@
+CA: Intermediates support
+
+
+Currently, the initial leader gets the root CA while subsequent managers have nothing. This prevents agents from getting certificates from any manager but the original one.

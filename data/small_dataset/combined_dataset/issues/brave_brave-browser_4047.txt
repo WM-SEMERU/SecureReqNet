@@ -1,0 +1,31 @@
+Implement user feedback loop
+
+
+Specification details -- images and UX coming shortly.
+V1.1 User feedback changes
+The Brave Ads panels will be expanded to have a Browser history; this browser history table will also be allowing multi-functional actions back from the user.
+In V1.0, the actions are;
+Don’t send me this again - Block ad from notifying me again
+Dismiss action on Ad will perform the same action
+Save - Want to ensure Ad is saved for future viewing
+Adds to Bookmark
+Flag - Ad is very inappropriate
+This will also trigger Action#1
+Personalize Ads - add/remove categories i am interested in
+Includes LDA check upfront
+These categories will be flagged the highest in the taxonomy
+Categories opted out will be tagged opted out forever
+Mock for Ads Rewards feedback panel
+Note: Mock is not complete and needs to be re-rendered
+User flow
+The user can reach the User feedback setting as part of Brave rewards. The user can see which ads were delivered for the last 30 days with the following detail;
+Advertiser detail (main + ad-text)
+Category why ad was delivered and allow quick click to opt out for that specific category
+Viewed or Clicked or Dismissed
+Earned reward per line level item
+The above details provide a bookmark view of Ads viewed in the past. The user can decide to choose the dismissed Ads to personalize ad viewing. The user can opt out of Ad categories, including 18 and over.
+In the same flow, the user can decide to personalize further and decide not opt out of categories. When the user opts out, they are opted out of those categories permanently. The user can search through categories via drop down or by searching for them. Similarly, a user can decide to opt in to certain categories in the same flow.
+Spec: https://docs.google.com/document/d/1XusXB1li8I7Q-3PAk3-2BcdujwZ0Y6oD0yNvhsahZgc/edit#heading=h.l7wtf1v849do
+@jsecretan V1.1 prioritization
+@NejcZdovc user feedback loop in Brave Rewards
+@jenn-rhim to prioritize the visualization of the user feedback loop

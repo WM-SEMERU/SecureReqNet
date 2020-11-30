@@ -1,0 +1,53 @@
+Get-PFXCertificate does not support -Password like Import-PFXCertificate
+
+
+Get-PFXCertificate doesn't have a -Password param like Import-PFXCertificate. So when I try to import a password protected pfx, it prompts for a password. It would be better if we could provide a password to it so we could use it in non-interactive code.
+It looks like here it is doing the prompt
+I am hoping that we can get functionality like Import-PFXCertificate -Password on Get-PFXCertificate
+As a work around I have been able to do
+$certFile    = '\\server\share\pwd-protected.pfx'
+$certPass = Read-Host -AsSecureString -Prompt 'Enter the password for certificate: '
+
+$PFXCert =  Get-PfxData -FilePath $certFile -Password $certPass
+$PFXCert.EndEntityCertificates.ThumbPrint
+Steps to reproduce
+$certFile    = '\\server\share\pwd-protected.pfx'
+$certPass = Read-Host -AsSecureString -Prompt 'Enter the password for certificate: '
+
+#Will prompt for password
+$certThumbPrint = (Get-PfxCertificate -FilePath $certFile ).ThumbPrint
+
+#Works fine, but imports the cert, which one might not want to do. 
+$PFXCert = Import-PfxCertificate -FilePath $certFile -Password $certPass -CertStoreLocation Cert:\LocalMachine\My 
+
+Expected behavior
+$certFile    = '\\server\share\pwd-protected.pfx'
+$certPass = Read-Host -AsSecureString -Prompt 'Enter the password for certificate: '
+
+$certThumbPrint = (Get-PfxCertificate -FilePath $certFile  -Password $certPass ).ThumbPrint
+
+
+Actual behavior
+$certFile    = '\\server\share\pwd-protected.pfx'
+$certPass = Read-Host -AsSecureString -Prompt 'Enter the password for certificate: '
+
+$certThumbPrint = (Get-PfxCertificate -FilePath $certFile  -Password $certPass ).ThumbPrint
+
+Get-PfxCertificate : A parameter cannot be found that matches parameter name 'Password'.
+At line:1 char:60
++ ... umbPrint = (Get-PfxCertificate -FilePath $certFile  -Password $certPa ...
++                                                         ~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-PfxCertificate], ParameterBindingException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.GetPfxCertificateCommand
+Environment data
+> $PSVersionTable
+Name                           Value
+----                           -----
+PSVersion                      5.1.14409.1005
+PSEdition                      Desktop
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                   10.0.14409.1005
+CLRVersion                     4.0.30319.42000
+WSManStackVersion              3.0
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1

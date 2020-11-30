@@ -1,0 +1,4 @@
+* [ ] Further build out https://docs.gitlab.com/ee/security/README.html
+  * [ ] It should link to (or include) our security release information, which should be reviewed/improved upon https://docs.gitlab.com/ee/policy/maintenance.html#security-releases (including mention of the [Advance Notification Program](https://gitlab.slack.com/archives/C0259241C/p1540580234034300?thread_ts=1540572267.024400&cid=C0259241C))
+  * [ ] We have https://gitlab.com/gitlab-org/release/docs/blob/master/general/security/process.md but this entire section (/release/docs) appears to be intended to cover "releasing new versions of GitLab" and is not specifically geared for the GitLab admin audience. We should extract the relevant information to them and keep it in the aforementioned docs section.
+* [ ] Clarify on https://about.gitlab.com/security/ what pertains to .com vs self-managed.

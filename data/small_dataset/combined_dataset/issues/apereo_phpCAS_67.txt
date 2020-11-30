@@ -1,0 +1,9 @@
+Improve cookie security
+
+
+Phpcas should have the option to properly security the session cookies:
+
+Secure only
+HTTP only
+set proper path
+

@@ -1,0 +1,73 @@
+Bump airbrake from 8.3.2 to 9.0.0
+
+
+Bumps airbrake from 8.3.2 to 9.0.0.
+
+Changelog
+Sourced from airbrake's changelog.
+
+[v9.0.0][v9.0.0] (March 29, 2019)
+
+Fixed NoMethodError in route_filter.rb on 404 in Sinatra apps
+(#939)
+Stopped loading Rails performance hooks for apps that don't use performance
+stats (#942)
+Stopped loading default Rack filters for Sinatra & Rack integrations (Rails is
+not affected). You must load them manually after you configure your notifier
+with help of Airbrake::Rack.add_default_filters. Please refer to the README
+(#942)
+Started depending on airbrake-ruby
+v4.2.0 and
+higher (#946)
+
+
+
+
+Commits
+
+8c94119 Merge pull request #947 from airbrake/release-9-0-0
+0244958 Release v9.0.0
+49ce910 Merge pull request #946 from airbrake/941-airbrake-ruby-42-dep
+057ad56 gemspec: bump airbrake-ruby to '~> 4.2'
+1fce07b Merge pull request #942 from airbrake/performance-stats-hooks-fix
+c1d7ee3 Merge pull request #945 from airbrake/circle-link-fix
+ab6e6f6 README: fix CircleCI config link
+b69c19b rails: load performance hooks only if performance_stats is enabled
+136e5e7 Merge pull request #939 from airbrake/sinatra-route-filter-fix
+345db2e rack/route_filter: don't crash when no Sinatra route is available
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot squash and merge will squash and merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge and block automerging
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

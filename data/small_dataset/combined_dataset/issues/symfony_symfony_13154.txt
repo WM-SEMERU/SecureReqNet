@@ -1,0 +1,6 @@
+[security] Base ACL exceptions on the RuntimeException
+
+
+All the ACL exceptions are based on the generic \Exception class. This is only done in a three different components (CSS, Config and the Security ACL).
+I would suggest a change to \RuntimeException, as this is a more detailed exception, giving users the opportunity to deal with the exceptions in a cleaner way (easier distinguish between runtime and logic exceptions for one) and to be more consistent with the rest of the exceptions defined in Symfony, which all rely on the SPL exceptions.
+It can break backward compatibility when exception handling is done on both RuntimeException and Exception, and not on any of the ACL exceptions directly, although I doubt this will ever be the case.

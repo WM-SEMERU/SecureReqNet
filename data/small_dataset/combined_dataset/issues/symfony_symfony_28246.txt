@@ -1,0 +1,11 @@
+is access_control only executed  when there is a firewall matching the path?
+
+
+security:
+	access_control:
+        - { path: ^/api/internal, roles: "IS_AUTHENTICATED_ANONYMOUSLY", ips: [199.0.0.0/8, 172.16.0.0/16] }
+        - { path: ^/api/internal, roles: ROLE_NO_ACCESS }
+
+each access control is added into the AccessMap class,the AccessMap is only used in AccessListener,
+so I infer  access_control is only executed  when there is a firewall matching the path, is this right?
+I want to let a user call   ^/api/internal apis without authentication from these ips [199.0.0.0/8, 172.16.0.0/16] , if the access control is only executed  the user is authenticated, this is not what I want.

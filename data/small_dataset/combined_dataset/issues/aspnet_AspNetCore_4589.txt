@@ -1,0 +1,76 @@
+Open Id Connect implementation does not play well with Web Application Firewall
+
+
+The default implementation of Open Id Connect uses a Data Protection Provider that generates strings that fall foul of a Web Application Firewall implementing the OWASP rule set's SQL Injection checking. For example, a Nonce cookie is created where the name of the cookie has Options.StringDataFormat.Protect(nonce) appended. This means the cookie often has the string "--" somewhere within it. This then gets picked up as a potential SQL Comment Sequence and blocked. I have also seen the SQL Hex Encoding rule triggered.
+Other places I have seen the issue:
+
+Contents of the Authentication Cookie
+Contents of the Anti Forgery Cookie
+Contents of the Anti Forgery request verification token form data
+
+For my WAF I am using the Azure Application Gateway Web Application Firewall. I can configure its Exclusion rules to mitigate against these last three instances of the issue. However, Exclusions are only available in "Preview" of the WAF so should not be used in production. Also, they don't help with the Nonce issue as the exclusion rules only exclude the checking of a cookie's value, not of its name!
+My only alternative is to turn off the checks for SQL Injection... however since that is the considered the most common attack vector it seems to go against the point of using a WAF!
+To Reproduce
+Steps to reproduce the behavior:
+
+Create an ASP.Net Core web application and use an Identity Server for authentication (using the code id_token flow)
+Host the application behind Azure Application Gateway
+Turn on WAF in the Application Gateway, enabling the Firewall, setting the Firewall mode to Prevention and use the OWASP 3.0 rule set
+Repeatedly log in and log out of the application
+
+Expected behavior
+I would expect the log in and log out to always succeed, however perhaps 1 in 5 / 1 in 10 attempts to login will fail with a 403 returned by the Application Gateway.
+Additional context
+Using the Preview exclusion feature I have added the following exclusions to the WAF on the Application Gateway:
+
+
+
+Field
+Operator
+Selector
+
+
+
+
+Request attribute name
+Equals
+id_token
+
+
+Request attribute name
+Equals
+state
+
+
+Request cookie name
+starts with
+.AspNetCore.OpenIdConnect.Nonce.
+
+
+Request cookie name
+starts with
+.AspNetCore.Correlation.oidc.
+
+
+Request cookie name
+starts with
+.AspNetCore.Cookies
+
+
+Request cookie name
+starts with
+ABC.AuthCookie
+
+
+Request cookie name
+starts with
+.AspNetCore.Antiforgery.
+
+
+Request attribute name
+starts with
+__RequestVerificationToken
+
+
+
+But as I said above, Exclusions should not be used in production and they do not fix issues with the names of cookies containing character sequences that trigger SQL Injection rules.

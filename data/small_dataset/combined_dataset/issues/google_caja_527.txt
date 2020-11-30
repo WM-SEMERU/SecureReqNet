@@ -1,0 +1,14 @@
+Password autofill allows modules to steal usernames and passwords
+
+
+Original issue 527 created by collin.jackson on 2008-06-11T23:33:47.000Z:
+What steps will reproduce the problem?
+<form>
+<input name="username">
+<input type="password" name="password">
+</form>
+What is the expected output?
+Form has autocomplete=off
+What do you see instead?
+Form is prefilled with user's password, and can be read by the module using
+domita.

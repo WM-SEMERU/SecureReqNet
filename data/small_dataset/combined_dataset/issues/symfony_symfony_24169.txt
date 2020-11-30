@@ -1,0 +1,49 @@
+[Security][Guard] Allow overriding firewall's default entry point
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.4
+
+
+
+Taking the following firewall:
+main:
+    entry_point: default_entrypoint_service
+    some_listener: ~
+    another_listener: ~
+    guard:
+        authenticators:
+            - some_authenticator
+        entry_point: some_authenticator
+leads to the following error:
+
+The guard authentication provider cannot use the "some_authenticator" entry_point because another entry point is already configured by another provider! Either remove the other provider or move the entry_point configuration as a root key under your firewall (i.e. at the same level as "guard").
+
+The default entry_point option (first level, firewall) wins over the listener specific option, meaning that there is no way to keep a default entry point that works for all other listeners of the firewall but a specific for guard.
+I think it should be the opposite, listener specific should win over defaults. WDYT?
+ping @weaverryan

@@ -1,0 +1,72 @@
+Update karma-mocha to version 1.3.0 🚀
+
+
+Hello lovely humans,
+karma-mocha just published its new version 1.3.0.
+
+
+
+      State
+    
+
+      Update 🚀
+
+
+
+
+      Dependency
+    
+    
+      karma-mocha
+    
+
+
+
+      New version
+    
+    
+      1.3.0
+    
+
+
+
+      Type
+    
+    
+      devDependency
+    
+
+
+This version is not covered by your current version range.
+Without accepting this pull request your project will work just like it did before. There might be a bunch of new features, fixes and perf improvements that the maintainers worked on for you though.
+I recommend you look into these changes and try to get onto the latest version of karma-mocha.
+Given that you have a decent test suite, a passing build is a strong indicator that you can take advantage of these changes by merging the proposed change into your project. Otherwise this branch is a great starting point for you to work on the update.
+Do you have any ideas how I could improve these pull requests? Did I report anything you think isn’t right?
+Are you unsure about how things are supposed to work?
+There is a collection of frequently asked questions and while I’m just a bot, there is a group of people who are happy to teach me new things. Let them know.
+Good luck with your project ✨
+You rock!
+🌴
+
+The new version differs by 49 commits .
+
+e39c323 chore: release v1.3.0
+f3a114d chore: update contributors
+eadaee0 Merge pull request #123 from maksimr/karma-mocha-103
+a21c2b2 chore: Add Changelog.md
+b6af3eb Merge pull request #121 from maksimr/mocha-opts
+11a0dd8 feat: support mocha opts
+e8ff71f Merge pull request #120 from maksimr/master
+30bbe29 chore: add tests for lib files
+0bbf932 fix(deps): remove peer dependency on mocha
+65a93d7 Merge pull request #119 from boneskull/travis-node-fix
+5213d5f chore(ci): fix node v0.10 version in build matrix
+246f25a fix: polyfill Date.now to restore IE compat
+7319c81 chore: release v1.2.0
+153f363 chore: update contributors
+7bb69d6 Merge pull request #115 from hackreactor-labs/master
+
+There are 49 commits in total. See the full diff.
+
+This pull request was created by greenkeeper.io.
+Tired of seeing this sponsor message? ⚡️ greenkeeper upgrade

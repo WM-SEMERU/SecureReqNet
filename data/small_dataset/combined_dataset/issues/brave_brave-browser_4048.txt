@@ -1,0 +1,35 @@
+OnDrive PowerPoint presentations broken by anti-fingerprinting
+
+
+Description
+OneDrive presentations are broken when Shields' anti-fingerprinting mode is enabled.
+Steps to Reproduce
+
+Visit https://onedrive.live.com/view.aspx?resid=40AD2A59FD334E8C!400130&ithint=file%2cpptx&authkey=!ADAerq8JH6E4yRA
+Go into Shields and switch the anti-fingerprinting setting to: "All device recognition allowed".
+
+Actual result:
+With "3rd party device recognition blocked":
+
+With "all device recognition allowed":
+
+Expected result:
+The slides should load properly.
+Reproduces how often:
+Always reproducible.
+Brave version (brave://version info)
+Brave | 0.62.51 Chromium: 73.0.3683.103 (Official Build) (64-bit)
+Revision | e82a658d8159cabbd4938c1660f9bb00b4a82a23-refs/branch-heads/3683@{#902}
+OS | Linux
+
+Reproducible on current release:
+It's also broken on brave-browser dev/beta builds.
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+
+Yes, though only the anti-fingerprinting setting needs to be disabled.
+
+Is the issue reproducible on the latest version of Chrome?
+
+No.

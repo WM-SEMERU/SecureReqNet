@@ -1,0 +1,5 @@
+Spotify Web Player not working.
+
+
+This stopped working as of the Chromium update.
+

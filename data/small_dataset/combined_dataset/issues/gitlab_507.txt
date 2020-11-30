@@ -1,0 +1,11 @@
+I've created a test repo in my own namespace called "test" and when I try to rename it to "test123" under "Dangerous Settings -> Rename repository -> Path" then I got an redirect error because GitLab tries to redirect to the old path name:
+
+http://mygitlab.domain.com/myusername/test
+
+instead of
+
+http://mygitlab.domain.com/myusername/test123
+
+I've also noticed that the repo under "/var/opt/gitlab/git-data/repositories/myuser/" is still named "test.git" and not "test123.git".
+
+This makes the "Rename repository" option unusable!!!

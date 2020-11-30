@@ -1,0 +1,4 @@
+The SecurityBundle config reference is incomplete
+
+
+At least the hide_user_not_found option of the firewall is missing, which is how I identified this. But this is not the only one (access_control is not in the reference either, but this one is at least documented elsewhere)

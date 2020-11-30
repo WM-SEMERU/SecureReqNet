@@ -1,0 +1,75 @@
+[HttpClient] Add a ConditionalHttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Adding a new client ConfitionalHttpClient to the new HttpClient component.
+This class is intended to allow different options to be sent based on a regexp executed on the url of the request.  In simple words : Auto-configure the default options based on the requested URL.
+This class implement the HttpClientInterface interface
+The first regexp that math the url win.
+Its first parameter expects an object implementing the HttpClientInterface interface
+The second parameter is an array, of default options to use when the regexp provided as key matches the requested URL, to be given to the HttpClientInterface request method.
+Here is an example of how to use this class :
+$regexpOptions = [
+   '#^.*length-broken$#' => [ 'headers' => [
+         'ConditionalHttpClient' => 'CurlHttpClient',
+         'ConditionalHttpClient2' => 'url:length-broken',
+   ]],
+   '#^.*$#' => ['headers' => ['ConditionalHttpClient' => 'CurlHttpClient']],
+]
+
+$client = new ConditionalHttpClient(new CurlHttpClient(), $regexpOptions );
+
+//Will result in a merge of the second $regexpOptions index value and
+//the options given to $client->request()
+$client->request('POST', 'http://anydomain/', [
+    'headers' => [ 'Content-Type' => 'application/json'],
+]);
+
+//Only the first $regexpOptions index value will be use as we do not give
+//extra options to the request call
+$client->request('GET', 'http://anydomain/length-broken');

@@ -1,0 +1,6 @@
+Hello,
+
+I have noticed that voting only works if the smiley is at the beginning of the comment.  
+Is this expected?
+
+Some users are confused about that behavior.

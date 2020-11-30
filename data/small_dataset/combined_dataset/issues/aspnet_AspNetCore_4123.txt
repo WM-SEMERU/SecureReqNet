@@ -1,0 +1,33 @@
+InvalidOperationException: No authenticationScheme was specified, and there was no DefaultForbidScheme found
+
+
+Could someone please clear this up for me.
+I have a web api built using .net core 2.1
+I have a custom database table called tblUser (which doesn't take part in any authorisation like AspNetUsers).
+This table contains three boolean fields I wish to utilize in my authorization, these are the same as my policy names.
+In my Startup.cs ConfigureServices method:
+services.AddAuthorization(options => { options.AddPolicy("CanCreateCallLog", policy => policy.RequireRole("ocm")); options.AddPolicy("CanUpdateCallLog", policy => policy.RequireRole("ocm")); options.AddPolicy("CanViewCallLog", policy => policy.RequireRole("ocm", "assurance")); });
+I have  a controller with a method thus:
+[Authorize(Policy = "CanViewCallLog")]  [HttpGet] public ActionResult<List<TblCall>> Get() {         return _repo.findAll(); }
+With the Authorize attribute present I get an error: "InvalidOperationException: No authenticationScheme was specified, and there was no DefaultForbidScheme found"
+Without the attribute everything works properly.
+What piece of the puzzle am I missing ?
+Do I need to implement a handler:
+public class CustomAuthorize : AuthorizationFilterAttribute, IAuthorizationFilter
+{
+public override void OnAuthorization(HttpActionContext actionContext)
+{
+
+.....
+If so, where is the best place to add this class to my project, e.g Helpers folder ?
+Also, in my launchSettings.json file:
+"iisSettings": {
+"windowsAuthentication": true,
+"anonymousAuthentication": false,
+.....
+}
+},
+is that correct ?
+I just read somewhere that when using Windows authentication, you don't need to use Active Directory like this which I am doing:
+[Authorize] [HttpPost] public ActionResult Authenticate([FromBody] LoggedInUser loggedInUser) { if (!IsLDAPAuthenticated("LDAP://bcl.local", loggedInUser.username, loggedInUser.password)) { return StatusCode(403); // assume user not registered in Engage            } ...
+Do I need the LDAP stuff (which works fine) ?

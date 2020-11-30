@@ -1,0 +1,53 @@
+[LDAP] Ldap bind authentication does not load my user entity class but the core class symfony user
+
+
+Hi
+If the verification of the password is done on the provider sql it is well my class user which is charged
+"AcMarche\Travaux\Entity\Security\User"
+But if the check is done on the ldap is the class
+"Symfony \ Component \ Security \ Core \ User \ User" which loaded
+What's wrong in my config ?
+Thanks
+`# security
+security:
+providers:
+sql_provider:
+entity:
+class: AcMarche\Travaux\Entity\Security\User
+property: username
+ldap_provider:
+ldap:
+service: Symfony\Component\Ldap\Ldap
+base_dn: '%env(ACLDAP_DN)%'
+search_dn: '%env(ACLDAP_USER)%'
+search_password: '%env(ACLDAP_PASSWORD)%'
+default_roles: ROLE_USER
+uid_key: sAMAccountName
+encoders:
+    AcMarche\Travaux\Entity\Security\User: bcrypt
+
+firewalls:
+    dev:
+        pattern: ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+
+    secured_area:
+        pattern:    ^/
+        provider: sql_provider
+        form_login:
+            use_referer: true
+            remember_me: true
+        form_login_ldap:
+            provider: ldap_provider
+            use_referer: true
+            remember_me: true
+            service: Symfony\Component\Ldap\Ldap
+            dn_string: '%env(ACLDAP_DN)%'
+            query_string: '(&(|(sAMAccountName=*{username}*))(objectClass=person))'
+        logout:       true
+        anonymous:    true
+
+access_control:
+    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+`

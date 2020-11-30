@@ -1,0 +1,18 @@
+OpenPGP: S2K uses small c/bytecount, inconsistent suite of S2K-KDF-SHA1 (160b) and AES-256
+
+
+From coruus@gmail.com on July 05, 2014 23:47:38
+Is this report about the crypto library or the extension?
+Crypto library. javascript/crypto/e2e/openpgp/encryptedcipher.js
+What is the security bug? The library assumes that the hash algorithm used for the Iterated and Salted S2K specifier type is SHA1. (This is also a functionality bug; it makes it impossible to interoperate with implementations that require > 128-bit security for private keys.)
+
+The count field is specified as c=69. This results in a bytecount of 65536, or 3277 SHA1 compression function evaluations. At a rate of 2^30 SHA1 compressions per second (Fermi), this allows ~ 327660 password guesses per second. (The rate on ASIC is much, much higher -- SHA1 is small in silicon.) This is plainly inadequate for typical users' passphrases.
+
+Fix: Set c=255, bytecount=65011712, or 3m SHA1 compression function evaluations. Use SHA2-512 instead (it is the largest RFC 4880 hash function in hardware).
+
+AES-256 is always used to encrypt the payload. But using SHA-1 as the S2K KDF results in passwords with > 160 bits of entropy being compressed to < 160 bits of entropy. And probably rather less security-strength than that.
+
+Fix: Use a hash function with at least 256 bits of output instead. SHA2-512, again, would be preferable.
+How would someone exploit it? Brute force.
+(Note that SHA2-256 is smaller in hardware than SHA2-512; they are distinct functions.)
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=102

@@ -1,0 +1,12 @@
+[Tooling] Blazor Libraries are treated as 2.1 MVC at design time
+
+
+Describe the bug
+Basically Blazor libraries do not work in tooling. They're treated as MVC 2.1 projects. In order to work around this you need to currently do 2 things:
+
+Add <RazorLangVersion>3.0</RazorLangVersion>
+Add <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
+Then it treats the components properly. I'm not confident if we want the AddRazorSupportForMvc bit there but currently it's the only way to force the DefaultRazorConfiguration to be something other than Default.
+The reason why this is currently an issue is that when DefaultRazorConfiguration is Default the IDE lifts that and interprets it as MVC 2.1. Therefore it doesn't understand components and generates the pages as if they were normal views:
+

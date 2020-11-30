@@ -1,0 +1,5 @@
+2017 requirements updates
+
+
+Updating  setup.py to pass requirements checks … on Ubuntu 16.04
+Modifying crontab handler to add a specific entry required by MongoEngine

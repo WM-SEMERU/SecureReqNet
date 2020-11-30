@@ -1,0 +1,7 @@
+Remove Quirk in GoogleDefaults
+
+
+src/Security/Authentication/Google/src/GoogleDefaults.cs
+#6069
+After the GoogleAuth patch gets merged to master we need to remove the quriks mode switch. This is not blocking for any preview.
+Merge PR: https://github.com/aspnet/AspNetCore/pull/6709/files

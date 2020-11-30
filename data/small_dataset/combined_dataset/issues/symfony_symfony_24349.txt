@@ -1,0 +1,50 @@
+[SecurityBundle] Add missing AclSchemaListener deprecation
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes 
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A 
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+Missing from #24318

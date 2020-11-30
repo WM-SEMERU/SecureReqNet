@@ -1,0 +1,5 @@
+AWS: We should lock down the IAM policies (further)
+
+
+For example, the master currently has blanket permissions on ec2, and the minion has write access to the s3 bucket, but only needs read access.
+This may entail giving objects we create a prefix to enable stricter policies.

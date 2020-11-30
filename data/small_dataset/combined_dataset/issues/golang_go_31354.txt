@@ -1,0 +1,100 @@
+plugin: Plugins doesn't work when remote path of dependency is used in Go Module
+
+
+What did you do?
+I have simple application that loads Go plugins and allows them to communicate with app via exported interface.
+Simplified version can be found here.
+Shared interface is stored under ext directory, real implementation is located underplugin directory.
+Application passes pointer to real implementation to dynamically loaded plugin which expects interface.
+Example plugin code can be found here.
+Unfortunately combination of Go Modules and Go Plugins doesn't work unless go.mod of plugins module has replace entry with local relative path for shared interface path.
+When I use remote location in plugins module, application crashes because of wrong version of packages.
+Build app:
+~/tmp/go-plugin-bug/central on  master ⌚ 16:12:19
+$ go clean -modcache 
+
+~/tmp/go-plugin-bug/central on  master ⌚ 16:12:21
+$ git checkout v1.0.0
+Note: checking out 'v1.0.0'.
+
+~/tmp/go-plugin-bug/central on  f1d7e9f ⌚ 16:12:22
+$ go install -a
+
+Then build plugin
+~/tmp/go-plugin-bug/central on  f1d7e9f ⌚ 16:12:27
+$ cd ../plugins 
+
+~/tmp/go-plugin-bug/plugins on  master ⌚ 16:12:28
+$ cat go.mod 
+module github.com/zimnx/plugins
+
+go 1.12
+
+require github.com/zimnx/central v1.0.0
+
+
+~/tmp/go-plugin-bug/plugins on  master ⌚ 16:12:30
+$ go build -buildmode=plugin -o plugin.so
+go: finding github.com/zimnx/central v1.0.0
+go: downloading github.com/zimnx/central v1.0.0
+go: extracting github.com/zimnx/central v1.0.0
+
+~/tmp/go-plugin-bug/plugins on  master ⌚ 16:12:39
+$ central plugin.so 
+2019/04/08 16:12:42 cant open plugin: plugin.Open("plugin"): plugin was built with a different version of package github.com/zimnx/central/ext
+
+When I change plugins go mod to use local path instead of remote one everything works.
+~/tmp/go-plugin-bug/plugins on  master ⌚ 16:12:42
+$ cat go.mod                             
+module github.com/zimnx/plugins
+
+go 1.12
+
+require github.com/zimnx/central v1.0.0
+
+replace github.com/zimnx/central => ../central
+
+~/tmp/go-plugin-bug/plugins on  master! ⌚ 16:14:30
+$ go build -buildmode=plugin -o plugin.so
+
+~/tmp/go-plugin-bug/plugins on  master! ⌚ 16:14:33
+$ central plugin.so 
+hello = world
+
+What did you expect to see?
+Go Modules and plugins working fine when remote path is used.
+What did you see instead?
+Error about different package versions.
+Does this issue reproduce with the latest release (go1.12.3)?
+Yes.
+System details
+go version go1.12.3 linux/amd64
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/home/maciej/.cache/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/maciej/work"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/local/go"
+GOTMPDIR=""
+GOTOOLDIR="/usr/local/go/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+CXX="g++"
+CGO_ENABLED="1"
+GOMOD="/home/maciej/tmp/go-plugin-bug/plugins/go.mod"
+GOROOT/bin/go version: go version go1.12.3 linux/amd64
+GOROOT/bin/go tool compile -V: compile version go1.12.3
+uname -sr: Linux 4.14.13-041413-generic
+Distributor ID:	Ubuntu
+Description:	Ubuntu 17.10
+Release:	17.10
+Codename:	artful
+/lib/x86_64-linux-gnu/libc.so.6: GNU C Library (Ubuntu GLIBC 2.26-0ubuntu2.1) stable release version 2.26, by Roland McGrath et al.
+gdb --version: GNU gdb (Ubuntu 8.0.1-0ubuntu1) 8.0.1
+

@@ -1,0 +1,6 @@
+"show in folder" in chrome/chomium downloads just opens folder in caja, but does not selects particular file
+
+
+
+
+

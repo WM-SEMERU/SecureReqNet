@@ -1,0 +1,11 @@
+'### Summary
+
+There seems to be a minor bug where the `rel` attribute isn't set for some URLs in a Markdown field. I believe this has been abused by spammers in the past for PageRank / similar purposes. I don't believe there are immediate security implications, but you want want to consider fixing this nonetheless.
+
+### Steps to reproduce
+
+- http://google.com
+- http://google.com\
+- http://google.com/"--
+
+Inspect the URLs above. You'll notice that the `rel` attribute is only set for the first URL.

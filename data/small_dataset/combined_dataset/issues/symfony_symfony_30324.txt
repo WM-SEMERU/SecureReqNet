@@ -1,0 +1,50 @@
+[Validator] Fixed duplicate UUID
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30285
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+Fixes the TOO_HIGH_ERROR constant had the same value in two different constraints: LessThan and LessThanOrEqual.

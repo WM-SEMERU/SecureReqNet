@@ -1,0 +1,31 @@
+Update handlebars dep to patch vulnerability
+
+
+I saw the following message during a build:
+[INFO] added 1153 packages from 1222 contributors and audited 91849 packages in 10.626s
+[INFO] found 1 high severity vulnerability
+[INFO]   run `npm audit fix` to fix them, or `npm audit` for details
+
+npm audit reports the following:
+$ npm audit
+                                                                                
+                       === npm audit security report ===                        
+                                                                                
+# Run  npm update handlebars --depth 5  to resolve 1 vulnerability
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution                                          │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ handlebars                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > jest-cli > istanbul-api > istanbul-reports >          │
+│               │ handlebars                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://nodesecurity.io/advisories/755                       │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+found 1 high severity vulnerability in 91849 scanned packages
+  run `npm audit fix` to fix 1 of them.
+
+
+This patch is the fix applied by npm audit fix.

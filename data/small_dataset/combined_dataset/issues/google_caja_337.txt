@@ -1,0 +1,5 @@
+Review explicit xo4a support in caja.js
+
+
+Original issue 337 created by ihab.awad on 2008-05-31T00:32:53.000Z:
+Decide whether to add a caja.xo4a(...) function.

@@ -1,0 +1,25 @@
+### Problem to solve
+
+A user should be able to filter issues based on whether the issue is confidential or not.
+
+### Further details
+
+Currently, issues can not be filtered by whether they are confidential or not.
+
+### Proposal
+
+Implement a filter for `confidential:true` similar to the other issue filters.  `confidential:true` and `confidential:false` should be available.  `present` and `yes` should be accepted as synonyms for `true`
+
+### What does success look like, and how can we measure that?
+
+Usage data and traffic will show use of the `confidential` filter.
+
+### Links / references
+
+
+This is related to #17326, which focused on search visibility and #29784 which has a scope much larger then this MVC.
+
+### Design
+<img src="/uploads/5d690721e1ef01f24b55c8c45da938c7/Screen_Shot_2018-08-29_at_11.21.31_AM.png" width="500px">
+
+![Screen_Shot_2018-08-28_at_4.49.23_PM](/uploads/7e3d7047cee9da2118fd5bbcd4257c84/Screen_Shot_2018-08-28_at_4.49.23_PM.png)

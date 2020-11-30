@@ -1,0 +1,6 @@
+RPC building block: future hook for repetitive queries
+
+
+Generified idea of #7231. A lot of Druid nodes do RPC to each other with idempotency expectations. If one query is already in-flight, another query can just wait for the same Future.
+I've once implemented similar functionality here in an ad-hoc manner: metamx@772bd29#diff-b246e418901d237662b3363cdc950d13R118
+We can build something generic and allow to use it in a declarative manner, for example, a static utility that accepts a lambda and creates a hook.

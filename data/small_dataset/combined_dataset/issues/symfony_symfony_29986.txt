@@ -1,0 +1,20 @@
+[Twig][Bootstrap 4 Theme]: Displaying errors like in official docs
+
+
+Symfony version(s) affected: 4.2.2
+Description
+As for me, error displaying is much prettier with official bootstrap v4 component/forms.
+How to reproduce
+
+config/packages/twig.yaml in "form_themes" put bootstrap_4_(horizontal)_layout.html.twig
+Create a form, cause a validation error
+
+Possible Solution
+MR: #29987
+Additional context
+Currect views:
+
+Horizontal: 
+Proposed:
+
+Horizontal: 

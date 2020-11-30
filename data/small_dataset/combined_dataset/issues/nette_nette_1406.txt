@@ -1,0 +1,7 @@
+Alternative login mechanism
+
+
+There is a note in David's TODO list about alternative way to user authentication and one part of it will by quite handy to me - login from database.
+I use nice ORM but entities cannot be serialized (what a surprise) so I have to have one more unwanted property profile which is set in a secured BasePresenter manualy. It contains all data I need, but there is still $presenter::$user which becames confusing now because it no longer holds all proper data.
+This situation was quite schizophrenic to me so I decided to modify Identity and UserStorage. There is no problem to rewrite Identity, but when I tried to modify (inheritted) UserStorage, I have realized that there is only few lines to rewrite but due to private fields I had to copy almost whole implementation.
+So, is it possible to change these 3 fileds to protected or at least could you answer me, why there is such a condition? I would like to store only id, but to modify this condition, I have to rewrite so much... for what reason?

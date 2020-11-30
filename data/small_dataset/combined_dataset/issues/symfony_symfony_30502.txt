@@ -1,0 +1,23 @@
+[HttpClient] Next steps
+
+
+Our shiny new HTTP client (see #30413) raised some comments. Some of them are about missing features. I'm opening this RFC to keep track of them. If anyone would like to work on any item, it'd be very welcome. I'm adding the "help wanted" label to hopefully make this call more visible.
+
+ #30494 add TraceableHttpClient and integrate with the profiler
+ the on_progress callback could benefit from an additional ?string $chunk argument - it might be helpful e.g. to catch response's contents in TraceableHttpClient or any other decorators that want to monitor the content
+ at least for debugging purposes, it could be useful to give access to the full headers that were sent to the remote server. Two ideas: that could be done by the logger - it would then be implementation-dependent; or we could add a new request_headers entry to responses' getInfo().
+ creating clients with custom behavior requires writing decorators. The component provides no base class to help doing so. It might be useful to provide an abstract one for this purpose. See #30413 (comment) and following comments.
+ the "buffer" option is required to allow accessing the content several times, but it should really be turned to false when downloading large files. We discussed with @joelwurtz about an "auto" mode, which could be the default one, and which would look at the content-type of the response to auto-enable buffering for some content types only. If anyone wants to take that task, please open a separate issue/PR to discuss more precisely how this could work.
+ NativeHttpClient currently relies on the native http stream wrappers. This means sending a request is blocking until the response headers come back. We discussed about that with @joelwurtz: porting his socket client to the component could remove this limitation. It would also allow sending requests through unix sockets, which only CurlHttpClient can do right now.
+ #30537 logger integration - to me, this should be done by injecting a logger into existing implementations (a logging middleware wouldn't allow accessing some internal things that might be useful to debugging)
+ #30419 FrameworkBundle integration: autowireable alias + semantic configuration for default options
+ #30604 add a mock client - a client that would return fake responses to help writing tests. Note that unlike HTTPlug's Mock Client, collecting requests could be delegated to the TraceableHttpClient and the profiler service instead. To be discussed in a separate issue of course. Achieving parity with CsaGuzzleBundle's mock middleware could be a nice goal.
+ handling of cookies is "do it yourself" right now. Defining a cookie_jar option could be useful. Or maybe an option is not the correct way. More ideas welcome in a separate issue/PR.
+ we could provide a decorator that would add HTTP and/or HSTS caching. Using HttpCache internally would be awesome :)
+ have exceptions carry responses
+ support for multipart/form-data
+ CurlHttpClient works on steroids with HTTP/2 thanks to multiplexing and server pushes, but this is untested right now. We could use the symfony CLI binary to build such a test suite. That would allow testing HTTPS features also.
+ provide a way to inject custom curlopts (not sure we should personnaly - existing options already cover most of them)
+ provide a way to inject custom JSON flags (not sure we should personnaly - ppl can always encode/decode on their own if they really want precise control on these)
+ expose API with URI manipulation (not sure we should personnaly - future will tell)
+

@@ -1,0 +1,4 @@
+Add CI for contrib/terraform/openstack
+
+
+Adds CI for contrib/terraform/openstack using the CI resources donated by OVH.

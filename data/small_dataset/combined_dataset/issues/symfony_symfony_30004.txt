@@ -1,0 +1,52 @@
+Fix format strings for deprecation notices
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features / 3.4 up to 4.2 for bug fixes 
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+The %c conversion specifier expects an integer
+(the value of the byte to print). To produce a literal %, %% should be used.
+Detected via static analysis

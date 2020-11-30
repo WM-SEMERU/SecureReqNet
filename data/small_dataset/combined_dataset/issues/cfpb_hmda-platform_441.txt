@@ -1,0 +1,17 @@
+Add user authorization to REST API
+
+
+We need to protect our RESTful resources from unauthorized access.  Our goal is to keep authentication and authorization as simple as possible within our APIs, using an upstream security service (coming soon...) for handling all the gory auth details.  All our API code has to care about are the existence of the following HTTP headers.
+CFPB-HMDA-Username
+This header will contain the username of the user accessing the API.  We will check for it's existence by all but the root (/) resource.  Lack of this header will result in a 403 HTTP error, and an appropriately detailed error message in the response (related to #433).  This username will be available for use in logging or any other features that need to know who took a given action.
+CFPB-HMDA-Institutions
+This header will contain a comma-separated list of institution IDs (probably integers, see #437).  We will check for its existence on all resources rooted from /institutions, which at this point is pretty much everything.  Think of it as a whitelist of institutions authorized to a given user.
+Similar to the CFPB-HMDA-Username header, a 403 error will be returned if:
+
+The header is not present.
+An attempt is made to access an institution-specific resource (/institutions/<institution_id>/*) not in the user's whitelist. (Now a separate issue: #504)
+
+This header will also be used in the future for filtering lists of institutions (/institutions), but that functionality is likely tied to #437, so I don't want to block this one.
+Implementation
+Akka HTTP's provides an authorize() directive for just this sort of thing.
+Eventually the upstream security service will guarantee that these headers are not being spoofed.  In the meantime, this lack of anti-spoofing keeps this from being a block for testing and frontend integration.

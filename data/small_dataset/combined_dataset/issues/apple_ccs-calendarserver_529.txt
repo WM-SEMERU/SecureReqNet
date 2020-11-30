@@ -1,0 +1,71 @@
+Documented installation process fails
+
+
+Help, please.
+Following exact installation procedure from https://github.com/apple/ccs-calendarserver/blob/master/doc/Admin/Guide.rst fails.
+Running virgin Ubuntu 18.04.1 LTS (64-bit)
+Error:
+/bin/bash ./libtool --tag=CC   --mode=link gcc  -g -O2 -Wall -fno-strict-aliasing -pthread -version-info 6:9:1 -release 2.0  -L/home/macsrwe/CalendarServer/ccs-calendarserver/.develop/roots/libevent/lib -L/home/macsrwe/CalendarServer/ccs-calendarserver/.develop/roots/libevent/lib64   -o libevent.la -rpath /home/macsrwe/CalendarServer/ccs-calendarserver/.develop/roots/libevent/lib event.lo evthread.lo buffer.lo bufferevent.lo bufferevent_sock.lo bufferevent_filter.lo bufferevent_pair.lo listener.lo bufferevent_ratelim.lo evmap.lo log.lo evutil.lo evutil_rand.lo strlcpy.lo select.lo poll.lo   epoll.lo  signal.lo event_tagging.lo http.lo evdns.lo evrpc.lo
+libtool: link: gcc -shared  -fPIC -DPIC  .libs/event.o .libs/evthread.o .libs/buffer.o .libs/bufferevent.o .libs/bufferevent_sock.o .libs/bufferevent_filter.o .libs/bufferevent_pair.o .libs/listener.o .libs/bufferevent_ratelim.o .libs/evmap.o .libs/log.o .libs/evutil.o .libs/evutil_rand.o .libs/strlcpy.o .libs/select.o .libs/poll.o .libs/epoll.o .libs/signal.o .libs/event_tagging.o .libs/http.o .libs/evdns.o .libs/evrpc.o   -L/home/macsrwe/CalendarServer/ccs-calendarserver/.develop/roots/libevent/lib -L/home/macsrwe/CalendarServer/ccs-calendarserver/.develop/roots/libevent/lib64  -O2 -pthread   -pthread -Wl,-soname -Wl,libevent-2.0.so.5 -o .libs/libevent-2.0.so.5.1.9
+bufferevent_openssl.c: In function 'bio_bufferevent_new':
+bufferevent_openssl.c:106:3: error: dereferencing pointer to incomplete type 'BIO {aka struct bio_st}'
+b->init = 0;
+^~
+bufferevent_openssl.c: At top level:
+bufferevent_openssl.c:228:1: error: variable 'methods_bufferevent' has initializer but incomplete type
+static BIO_METHOD methods_bufferevent = {
+^~~~~~
+bufferevent_openssl.c:79:27: warning: excess elements in struct initializer
+#define BIO_TYPE_LIBEVENT 57
+^
+bufferevent_openssl.c:229:2: note: in expansion of macro 'BIO_TYPE_LIBEVENT'
+BIO_TYPE_LIBEVENT, "bufferevent",
+^~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:79:27: note: (near initialization for 'methods_bufferevent')
+#define BIO_TYPE_LIBEVENT 57
+^
+bufferevent_openssl.c:229:2: note: in expansion of macro 'BIO_TYPE_LIBEVENT'
+BIO_TYPE_LIBEVENT, "bufferevent",
+^~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:229:21: warning: excess elements in struct initializer
+BIO_TYPE_LIBEVENT, "bufferevent",
+^~~~~~~~~~~~~
+bufferevent_openssl.c:229:21: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:230:2: warning: excess elements in struct initializer
+bio_bufferevent_write,
+^~~~~~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:230:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:231:2: warning: excess elements in struct initializer
+bio_bufferevent_read,
+^~~~~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:231:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:232:2: warning: excess elements in struct initializer
+bio_bufferevent_puts,
+^~~~~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:232:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:233:2: warning: excess elements in struct initializer
+NULL /* bio_bufferevent_gets /,
+^~~~
+bufferevent_openssl.c:233:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:234:2: warning: excess elements in struct initializer
+bio_bufferevent_ctrl,
+^~~~~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:234:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:235:2: warning: excess elements in struct initializer
+bio_bufferevent_new,
+^~~~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:235:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:236:2: warning: excess elements in struct initializer
+bio_bufferevent_free,
+^~~~~~~~~~~~~~~~~~~~
+bufferevent_openssl.c:236:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:237:2: warning: excess elements in struct initializer
+NULL / callback_ctrl */,
+^~~~
+bufferevent_openssl.c:237:2: note: (near initialization for 'methods_bufferevent')
+bufferevent_openssl.c:228:19: error: storage size of 'methods_bufferevent' isn't known
+static BIO_METHOD methods_bufferevent = {
+^~~~~~~~~~~~~~~~~~~
+libtool: link: (cd ".libs" && rm -f "libevent-2.0.so.5" && ln -s "libevent-2.0.so.5.1.9" "libevent-2.0.so.5")
+libtool: link: (cd ".libs" && rm -f "libevent.so" && ln -s "libevent-2.0.so.5.1.9" "libevent.so")
+Makefile:793: recipe for target 'bufferevent_openssl.lo' failed

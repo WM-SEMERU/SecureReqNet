@@ -1,0 +1,18 @@
+Fails to load jquery-ui.css
+
+
+Original issue 1879 created by FHS.CCClassic on 2014-01-05T02:57:55.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+Firefox v26 and others
+Whatever version is used by google sites
+What steps will reproduce the problem?
+1.simply create a google sites page that has the following:
+<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/smoothness/jquery-ui.css' />
+and it will fail to load.
+2.The jquery and jquery ui both load but the UI needs the .css
+3. The examples on the caja playground do not work for this reason when copied into an HTML box  in Google sites.
+What is the expected output? What do you see instead?
+Expected output is a normal edit. Code tested works outside of google sites but the editor for the Google sites HTML box reports:
+"failed to load external url jquery-ui.css" error message
+Please provide any additional information below.
+The assumption for reporting this "bug" is that google sites uses caja since you see caja when you look at the source for a page. All seems to work until you need the jquery-ui.css

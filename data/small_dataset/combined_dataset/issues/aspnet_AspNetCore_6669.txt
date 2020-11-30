@@ -1,0 +1,45 @@
+AccessDeniedPath wrong
+
+
+Describe the bug
+https://localhost:5001/Account/AccessDenied?ReturnUrl=%2FPrivacy
+To Reproduce
+Steps to reproduce the behavior:
+
+New ASP.Net Core 2.2 Web Application
+Add package
+<PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="2.2.0" />
+Authorize Privacy.cshtml.cs
+
+    [Authorize(Roles = "myb2capp-power-user")]
+    public class PrivacyModel : PageModel
+
+
+configure "AzureAdB2C" in appsettings.json
+F5 to run
+click Privacy
+got 404
+
+
+No webpage was found for the web address: https://localhost:5001/Account/AccessDenied?ReturnUrl=%2FPrivacy
+HTTP ERROR 404
+
+Expected behavior
+shoule redirect to
+
+https://localhost:5001/AzureADB2C/Account/AccessDenied?ReturnUrl=%2FPrivacy
+
+Workaround
+    services.Configure<CookieAuthenticationOptions>(AzureADB2CDefaults.CookieScheme, options => {
+            options.AccessDeniedPath = "/AzureADB2C/Account/AccessDenied";
+    });
+
+Findings
+When using github code "AzureADB2CSample" project for debugging
+internal class CookieOptionsConfiguration : IConfigureNamedOptions<CookieAuthenticationOptions>{
+        private string GetAzureADB2CScheme(string name)
+        { //name = "AzureADB2CCookie"
+        }
+}
+
+

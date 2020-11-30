@@ -1,0 +1,44 @@
+**[HackerOne report #426577](https://hackerone.com/reports/426577)** by xanbanx on 2018-10-21:
+
+Hi GitLab security team.
+
+I found a stored XSS vulnerability related to environments. Environments have an associated environment URL. This URL is susceptible to XSS attacks since it allows the `javascript` pseudo protocol with proper XSS payload. The generated URL is visible to all users with merge request access, which is highly critical for internal and public projects. 
+
+## Steps To Reproduce:
+
+
+This was tested on GitLab 11.4.0-rc8-e
+
+1. Create a project 
+2. Add the following `.gitlab-ci.yml`
+
+```yaml
+deploy_staging:
+  stage: deploy
+  script:
+    - echo "Deploy to staging server"
+  environment:
+    name: test
+    url: javascript://gitlab.com/xanbanx%0aalert(1)
+````
+
+3. Create a new merge request and let the CI job run
+4. Click on `View app` to trigger the XSS vulnerability. Note that this button is visible to all users who have access to the project.
+
+5. This XSS can also be triggered on `hxxps://gitlab.com/&lt;namespace&gt;/&lt;project&gt;/environments` and on `hxxps://gitlab.com/&lt;namespace&gt;/&lt;project&gt;/environments/&lt;env_id&gt;` by opening the environment of viewing the deployment
+
+A similar vulnerabilty can be crafted by creating an environment manually:
+
+1. Goto hxxps://gitlab.com/&lt;namespace&gt;/&lt;project&gt;/environments
+2. Create a new environment with:
+    name : test
+    External url : javascript://gitlab.com/xanbanx%0aalert(1)
+3. This XSS can also be triggered on `hxxps://gitlab.com/&lt;namespace&gt;/&lt;project&gt;/environments` and on `hxxps://gitlab.com/&lt;namespace&gt;/&lt;project&gt;/environments/&lt;env_id&gt;` by opening the environment of viewing the deployment
+
+## Mitigation
+
+Only allow `http(s)` for the environment URL.
+
+## Impact
+
+The stored XSS is triggering for anyone who read a merge request, also triggering on gitlab.com, and it can trigger on public repositories. The PoC can easily be extended to steal the users CSRF token, modify their email address to, e.g., takeover their account, or steal other private information.

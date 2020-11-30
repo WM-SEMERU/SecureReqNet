@@ -1,0 +1,16 @@
+Update API Reference doc with endpoints' request parameters and response model
+
+
+Motivation
+The existing API reference is very difficult to use since there's no documented parameters and sample responses.  Using many of the endpoints requires searching through the other docs for other places where the endpoint is mentioned and its functionality is described in greater detail.  The API reference would be much more usable if all the API specs were consolidated into one doc.
+Description
+I think the docs would be easier to use if each endpoint had the following information:
+
+Supported HTTP Method(s) and URI
+Description of the endpoint's functionality
+If applicable, each parameter's name, type, and description
+Response schema and sample response (or a link to relevant documentation)
+
+Currently, the API reference is all contained on one page.  With all of this added information, it would be better to split it among multiple pages.
+Discussion
+Since this is a decently-sized undertaking, do community members see value in changing the API reference this way?

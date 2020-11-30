@@ -1,0 +1,35 @@
+Impersonate Disabled User
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.1
+
+
+
+While testing disabling a user, I decided to try to impersonate the disabled user and found that you are able to impersonate the user as normal (as if they were never disabled). I expected the user should be disabled. Is this expected behavior?
+When I log out, then try to log in as the disabled user, I am properly alerted that the account is disabled and am not logged in.

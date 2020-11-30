@@ -1,0 +1,5 @@
+[Security] Remember me does not check the checkPreAuth
+
+
+I was debugging a situation where a user is still logged in our system after we blocked the user. I found that the RememberMeAuthenticationProvider does not check the checkPreAuth. The user could still browse the system after we blocked them.
+I found this pull request #9902

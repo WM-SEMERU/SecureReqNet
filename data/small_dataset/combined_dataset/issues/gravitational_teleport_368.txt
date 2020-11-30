@@ -1,0 +1,6 @@
+TSH does not verify host signatures
+
+
+TSH has a facility for checking host signatures when connecting. Currently it's not used.
+This function CheckHostSignature() is never called:
+https://github.com/gravitational/teleport/blob/master/lib/client/keystore.go#L79

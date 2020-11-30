@@ -1,0 +1,6 @@
+discuss CA checksum flag for kubeadm join
+
+
+From @errordeveloper on October 3, 2016 11:31
+It could prevent MITM, where attacker has guessed the JWS token, yet hasn't provided the same CA certificate.
+Copied from original issue: kubernetes/kubernetes#33918

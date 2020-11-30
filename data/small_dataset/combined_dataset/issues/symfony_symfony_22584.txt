@@ -1,0 +1,50 @@
+[Security] Avoid unnecessary route lookup for empty logout path
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no-ish
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes/no
+
+
+Fixed tickets
+#... 
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+i first included this with #22572 where having logout: { path: ~ } makes more sense for disabling logout path matching/generation. But currently it's already allowed and causes an unneeded route lookup and url generation.

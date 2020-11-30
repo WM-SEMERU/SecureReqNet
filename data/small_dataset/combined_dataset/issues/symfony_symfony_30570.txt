@@ -1,0 +1,41 @@
+[Validator] Different behaviours on the Valid Constraint
+
+
+Symfony version(s) affected: 4.2.4
+Description:
+MacOS Mojave 10.14.3
+Tried with 7.3.3 built-in server and docker image php:7.3-fpm-alpine (7.3.2 in the case)
+The Valid constraint type skips the validation of the property once it is set, which usually gives me the object as a valid one, even when I am expecting it to fails.
+How to reproduce
+The codebase to reproduce the issue can be found in the link bellow:
+https://github.com/jvahldick/sf-form-validation
+Following the different behaviours:
+
+
+If the Valid is set in the validation.yaml (https://github.com/jvahldick/sf-form-validation/blob/master/config/validation/User.yaml#L6), and I send in the payload only with the username field, the form is considered valid. (It skips the password and customId fields).
+
+
+If I just remove the Valid constraint, the form validation behaves as expected.
+
+
+If I add the Default validation group into the Valid constraint, it throws a 500 error.
+
+
+App\Form\Data\User:
+  properties:
+    username:
+      - NotBlank: { groups: ['Default'] }
+      - Email: ~
+      - Valid: { groups: ['Default'] }
+Result:
+RuntimeException: Cannot validate values of type "string" automatically. Please provide a constraint.
+
+When I add a different string to the groups in the Valid constraint, it validates the form as expected.
+
+App\Form\Data\User:
+  properties:
+    username:
+      - NotBlank: { groups: ['Default'] }
+      - Email: ~
+      - Valid: { groups: ['AnyOtherString'] }
+I couldn't see anything specific to this on the documentation. Are these the expected behaviours?

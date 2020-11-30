@@ -1,0 +1,9 @@
+[Security] Digest authetication does not set roles
+
+
+Hello,
+I set up the current release version (2.0.15) and changed the authetication method in the "app/config/security.yml" to "http_digest".
+The login (../demo/secured/hello/World) worked but no roles were set.
+The issue does not occur, if the "http_basic" authentication method is used. So it seems to be a bug with the digest authentication.
+The problem may be in the "Symfony\Component\Security\Http\Firewall\DigestAuthenticationListener".
+In line 120 the UsernamePasswordToken is constructed without the roles and then is set without further modification into the security context.

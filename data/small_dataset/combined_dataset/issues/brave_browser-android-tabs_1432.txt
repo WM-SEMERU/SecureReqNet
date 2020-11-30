@@ -1,0 +1,4 @@
+Moved bottom toolbar setting
+
+
+Closes #1377

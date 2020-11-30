@@ -1,0 +1,28 @@
+Error: super() call outside constructor of a subclass
+
+
+Got this error on bench start with a fresh install just now:
+...
+listening on *: 9000
+ * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+ * Restarting with inotify reloader
+yarn run v1.13.0
+$ node rollup/watch.js
+ * Debugger is active!
+ * Debugger PIN: 281-506-182
+
+Rollup Watcher Started
+
+Watching...
+Rebuilding frappe-web.css
+Rebuilding frappe-web-b4.css
+Rebuilding chat.js
+Error in: undefined
+Error: super() call outside constructor of a subclass
+114:
+115:   clear() {
+116:     super();
+         ^
+117:     this.clear_message();
+118:   }
+

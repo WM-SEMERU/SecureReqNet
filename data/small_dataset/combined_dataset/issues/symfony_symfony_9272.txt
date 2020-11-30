@@ -1,0 +1,40 @@
+Security - custom success_handler options
+
+
+Hi there!
+Trying to override default success_handler, I've written the following service :
+users.handlers.abstract.login.success:
+        arguments:  ["@security.context", "@logger"]
+        abstract: true
+        parent: security.authentication.success_handler
+and in security.yml:
+backoffice:
+       pattern: ^/
+       form_login:
+             provider: fos_users
+             csrf_provider: form.csrf_provider
+             always_use_default_target_path: false
+             default_target_path:            /backoffice
+             use_referer:                    true
+             # Custom login handler extending my users.handlers.abstract.login.success service :
+             success_handler: user.handlers.login.success.customer 
+Problem is, that the $option array is always null, despite of configuring the parent service with the default one.
+Therefore, I can't use properly my service (and it's children), because I can't even redirect users to the good page (using referer for example)
+I'm always getting / for default_target_path for example, because of Symfony DefaultAuthenticationSuccessHandler & $options null :
+
+#Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler.php
+
+public function __construct(HttpUtils $httpUtils, array $options)
+    {
+        $this->httpUtils   = $httpUtils;
+
+        $this->options = array_merge(array(
+            'always_use_default_target_path' => false,
+            'default_target_path'            => '/',
+            'login_path'                     => '/login',
+            'target_path_parameter'          => '_target_path',
+            'use_referer'                    => false,
+        ), $options);
+    }
+I'm using multiple firewalls, and I need to deny access for some roles, on different part of the application, through this. Works perfectly, but login always redirect to /.
+So, how can I get properly $options from the good firewall ?

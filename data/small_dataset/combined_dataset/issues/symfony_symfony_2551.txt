@@ -1,0 +1,15 @@
+[Security] AdvancedUserInterface change
+
+
+I would like to propose a change to the Symfony\Component\Security\Core\User\AdvancedUserInterface. In my opinion the current method names are not really to the point. I propose a change for the methods from isNotXxx to isXxx for shorter and more obvious method names.
+If there are no arguments against this, I'd be happy to open a pull request for this.
+proposed interface:
+<?php
+namespace Symfony\Component\Security\Core\User;
+interface AdvancedUserInterface extends UserInterface
+{
+    function isAccountExpired();
+    function isAccountLocked();
+    function isCredentialsExpired();
+    function isDisabled();
+}

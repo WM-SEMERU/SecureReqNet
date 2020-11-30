@@ -1,0 +1,11 @@
+Unable to use dictionary with the new format
+
+
+Describe the problem and steps to reproduce it:
+I simply add new uploaded Persian spell dictionary to Mozila Firefox.
+What happened?
+It doesn't list under language menu (for spell checking)
+What did you expect to happen?
+It should listed properly. Older versions work fine.
+Anything else we should know?
+I have uploaded this new version with the new format. Shall I continue with older format?

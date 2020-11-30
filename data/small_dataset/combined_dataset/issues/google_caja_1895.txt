@@ -1,0 +1,22 @@
+jQuery UI spinner styling wrong in Google Apps Script Caja
+
+
+Original issue 1897 created by bradford.carl.smith on 2014-03-04T07:21:59.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+Whatever version of caja was used by Google Apps Script as of 2014-03-01.
+Chrome 33.0.1750.117 running on Ubuntu Linux 13.10
+What steps will reproduce the problem?
+Minimal example code is here:
+https://script.google.com/d/1TfFbjpqBoVehFA2fMsgH8s_B4xkpTN8lCT1u3kHpYB0yX_rtp8x_L57Q/edit?usp=sharing
+Deployed as a webapp here:
+https://script.google.com/macros/s/AKfycbzlvc8ZTXHi-N2qw3IBnIxkWpAducmjgPg7oVurdE-3QRKMpIE/exec
+What is the expected output? What do you see instead?
+I expect to see spinner up/down buttons on the right side of the element,
+but instead they are huge and stuck on the far right of the window.
+(I didn't actually even see them there at first.
+They don't really look like buttons.)
+Please provide any additional information below.
+I've used this exact same code in a text file on my machine,
+and it works fine there, so I believe the problem is related to
+caja on apps script.
+The key board shortcuts for the widget still seem to work fine.

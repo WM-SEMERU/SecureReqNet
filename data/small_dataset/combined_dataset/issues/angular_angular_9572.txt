@@ -1,0 +1,46 @@
+fix(security): add missing HTML5 elements and attributes
+
+
+Please check if the PR fulfills these requirements
+
+ The commit message follows our guidelines: https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-format
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+What kind of change does this PR introduce? (check one with "x")
+[x] Bugfix
+[ ] Feature
+[ ] Code style update (formatting, local variables)
+[ ] Refactoring (no functional changes, no api changes)
+[ ] Build related changes
+[ ] CI related changes
+[ ] Other... Please describe:
+
+What is the current behavior? (You can also link to an open issue here)
+Sanitized some legitimate HTML5 elements and attributes, like <video> (#9438).
+What is the new behavior?
+New HTML5 elements and attributes allowed.
+Does this PR introduce a breaking change? (check one with "x")
+[ ] Yes
+[x] No
+
+If this PR contains a breaking change, please describe the impact and migration path for existing applications: ...
+Other information:
+I've checked "tests" and "docs" as they don't need any changes for this PR.
+I didn't run the test suite, it's my first PR and I'm feeling quite overwhelmed by this step. Open to help.
+I followed the spec https://w3c.github.io/html/.
+I have a doubt about srcset attribute for <picture> and <img> : I put it in URI attributes (so will be sanitized as a URI), but it does not contain only a URI, will it be  OK ?
+<meta> added because it can be used anywhere for HTML5 microdata.
+Not added :
+
+some ruby elements (<rb> and <rtc>) and <data> element as I don't understand them,
+menuitem as I wasn't sure about security,
+template, canvas and draggable / dropzone as they need JavaScript to run,
+RDFa Lite attributes (vocab, typeof, property), should we ?
+ARIA attributes, should we ?
+custom attributes (like data-some-name) should be allowed too, but as they are custom they are more difficult to manage.
+
+@rjamet has some concerns about <track> as it may contains CSS (discussed in #9438).
+fix(security): add missing HTML5 elements and attributes
+Added missing elements and attributes which were stripped by the htmlSanitizer.
+fixes #9438

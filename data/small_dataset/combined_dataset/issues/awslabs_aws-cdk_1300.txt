@@ -1,0 +1,4 @@
+If scrutiny-checker can't parse JSON, show it anyway
+
+
+Right now things that don't parse might be inadvertently hidden.

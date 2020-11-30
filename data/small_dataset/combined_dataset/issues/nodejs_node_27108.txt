@@ -1,0 +1,16 @@
+build: fixes and optimizations in gyp files
+
+
+
+Move V8 PCH to tools/v8_gypfiles
+Create new v8_initializers_pch.h
+Define GTEST_LANG_CXX11 for gtest compatibility with C++17 (TR namespace removed)
+Include PCH header directory when using PCH
+De-dup directives in toolchain.gypi and add comments
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+

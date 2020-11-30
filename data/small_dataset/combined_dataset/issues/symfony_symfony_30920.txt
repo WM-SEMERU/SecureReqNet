@@ -1,0 +1,12 @@
+[Console] Broken tags with long words in a block
+
+
+Symfony version(s) affected: 4.2+
+Description
+When a long word is wrapped between tags in a block, if the word is longer than its window, the wrapping tag will be broken breaking the whole formatting.
+How to reproduce
+Create a new Symfony command with:
+(new SymfonyStyle($input, $output))->comment(‘This job was cancelled because the “Auto Cancellation” feature is currently enabled, and a more recent build (#71235) <comment>“for/branch/master/came/in/while/this/job/was/waiting/to/be/processed</comment>“.’);
+Depending of the window size (typically when smaller than the word in-between the tags), you will have something along the lines of:
+
+/cc @Simperfit

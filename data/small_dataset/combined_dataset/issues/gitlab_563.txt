@@ -1,0 +1,5 @@
+I need to run some automated job when a wiki page changes. Currently, I see no way to get notifications on wiki page edits. It would be nice if GitLab would support this use case.
+
+Additionally, I can't achieve it even with shell access to the GitLab server with setting up native git hooks, since GitLab uses Gollum as wiki engine, Gollum uses Grit for git manipulation, and Grit does not fire git hooks (they manipulate the git repo directly).
+
+Please don't hesitate to share any workaround if you are aware of any.

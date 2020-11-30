@@ -1,0 +1,4 @@
+Unable to reserve UID -> raise exception
+
+
+@wsanchez originally submitted this as ticket:192

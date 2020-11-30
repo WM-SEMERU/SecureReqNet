@@ -1,0 +1,11 @@
+Add RUNTIME_REQUEST_TIMEOUT to local-up-cluster.sh
+
+
+The changes to local-cluster-up.sh from #75662 is causing the
+CRI-O CI to break since it picks up the --runtime-request-timeout
+flag as part of the container-runtime-endpoint flag.
+Adding a new env so that we can set the runtime-request-timeout
+value for our CI.
+Signed-off-by: Urvashi Mohnani umohnani@redhat.com
+none
+

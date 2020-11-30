@@ -1,0 +1,18 @@
+browser flash back
+
+
+Description
+when i browse website on brave,website flash back happened
+Steps to Reproduce
+
+
+
+
+
+Actual result:
+Expected result:
+Reproduces how often:
+Brave Version
+about:brave info:
+Reproducible on current live release:
+Additional Information

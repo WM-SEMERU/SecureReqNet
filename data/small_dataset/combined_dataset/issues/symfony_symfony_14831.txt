@@ -1,0 +1,5 @@
+Remove Deprecated Class+Interface from Map of Compiled Classes
+
+
+In the security bundle's extension class for Symfony v2.7.0 (and apparently still in master and 2.7 branches) there is still a reference to Symfony\Component\Security\Core\SecurityContext in a call to addClassesToCompile() on line 103 in file src/Symfony/Bundle/SecurityBundle/DependencyInjection/SecurityExtension.php.
+Due to SexurityContext being included in the compiled classes.map and classes.php, two deprecated errors are thrown on every request (an extra one is thrown due to the inclusion of SecurityContextInterface which SecurityContext implements).

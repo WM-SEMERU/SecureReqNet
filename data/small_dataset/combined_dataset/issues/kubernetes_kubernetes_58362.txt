@@ -1,0 +1,10 @@
+Add a subresource for Node.ConfigSource?
+
+
+Use-cases:
+
+Restrict access to the config source as tightly as possible, even if write access to other parts of Node is more widespread
+Providers can use webhook authorizers that return a deny response to block access to Node.ConfigSource, in the case that they are responsible for managing node config, without having to restrict write access to the entire Node.
+
+This needs to be figured out before dynamic config can graduate.
+/cc @bgrant0607 @thockin @liggitt @mikedanese @ihmccreery @dchen1107 @luxas

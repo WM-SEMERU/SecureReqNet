@@ -1,0 +1,79 @@
+CLOUDSTACK-9993: Securing Agents Communications
+
+
+This introduces a new certificate authority framework that allows
+pluggable CA provider implementations to handle certificate operations
+around issuance, revocation and propagation. The framework injects
+itself to NioServer to handle agent connections securely. The
+framework adds assumptions in NioClient that a keystore if available
+with known name cloud.jks will be used for SSL negotiations and
+handshake.
+FS: https://cwiki.apache.org/confluence/display/CLOUDSTACK/Secure+Agent+Communications
+This includes a default 'root' CA provider plugin which creates its own
+self-signed root certificate authority on first run and uses it for
+issuance and provisioning of certificate to CloudStack agents such as
+the KVM, CPVM and SSVM agents and also for the management server for
+peer clustering.
+Additional changes and notes:
+
+Comma separate list of management server IPs can be set to the 'host'
+global setting. Newly provisioned agents (KVM/CPVM/SSVM etc) will get
+radomized comma separated list to which they will attempt connection
+or reconnection in provided order. This removes need of a TCP LB on
+port 8250 (default) of the management server(s).
+All fresh deployment will enforce two-way SSL authentication where
+connecting agents will be required to present certificates issued
+by the 'root' CA plugin.
+Existing environment on upgrade will continue to use one-way SSL
+authentication and connecting agents will not be required to present
+certificates.
+A script keystore-setup is responsible for initial keystore setup
+and CSR generation on the agent/hosts.
+A script keystore-cert-import is responsible for import provided
+certificate payload to the java keystore file.
+Agent security (keystore, certificates etc) are setup initially using
+SSH, and later provisioning is handled via an existing agent connection
+using command-answers. The supported clients and agents are limited to
+CPVM, SSVM, and KVM agents, and clustered management server (peering).
+Certificate revocation does not revoke an existing agent-mgmt server
+connection, however rejects a revoked certificate used during SSL
+handshake.
+Older cloudstackmanagement.keystore is deprecated and will no longer
+be used by mgmt server(s) for SSL negotiations and handshake. New
+keystores will be named cloud.jks, any additional SSL certificates
+should not be imported in it for use with tomcat etc. The cloud.jks
+keystore is stricly used for agent-server communications.
+Management server keystore are validated and renewed on start up only,
+the validity of them are same as the CA certificates.
+
+New APIs:
+
+listCaProviders: lists all available CA provider plugins
+listCaCertificate: lists the CA certificate(s)
+issueCertificate: issues X509 client certificate with/without a CSR
+provisionCertificate: provisions certificate to a host
+revokeCertificate: revokes a client certificate using its serial
+
+Global settings for the CA framework:
+
+ca.framework.provider.plugin: The configured CA provider plugin
+ca.framework.cert.keysize: The key size for certificate generation
+ca.framework.cert.signature.algorithm: The certificate signature algorithm
+ca.framework.cert.validity.period: Certificate validity in days
+ca.framework.cert.automatic.renewal: Certificate auto-renewal setting
+ca.framework.background.task.delay: CA background task delay/interval
+ca.framework.cert.expiry.alert.period: Days to check and alert expiring certificates
+
+Global settings for the default 'root' CA provider:
+
+ca.plugin.root.private.key: (hidden/encrypted) CA private key
+ca.plugin.root.public.key: (hidden/encrypted) CA public key
+ca.plugin.root.ca.certificate: (hidden/encrypted) CA certificate
+ca.plugin.root.issuer.dn: The CA issue distinguished name
+ca.plugin.root.auth.strictness: Are clients required to present certificates
+ca.plugin.root.allow.expired.cert: Are clients with expired certificates allowed
+
+UI changes:
+
+Button to download/save the CA certificates
+

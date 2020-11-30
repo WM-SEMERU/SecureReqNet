@@ -1,0 +1,5 @@
+[Security] custom_password_authenticator
+
+
+In security/custom_password_authenticator.rst line 64 an exception with status code 100 that is specified to tell to a client to continue the request.
+What about using 401 or 412 status code ?

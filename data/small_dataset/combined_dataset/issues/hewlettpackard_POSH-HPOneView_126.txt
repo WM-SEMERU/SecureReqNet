@@ -1,0 +1,30 @@
+New-HPOVLdapDirectory (2.0.436.0) -- Invalid credentials to connect to the directory X
+
+
+Please fill in as much information as possible to help resolve your issue.
+This can be labeled as a question as I'm unsure if it's an issue or just my environment.
+I'd like to know what format the username input should be in.
+Expected Behavior
+Being able to create a new directory for the appliance.
+Actual Behavior
+Credentials are rejected time and again. I had it working at one point, but when I recreated the appliance it doesn't work again.
+errorcode: AUTHN_LOGINDOMAIN_SERVER_CREDENTIALS_INCORRECT
+message: Invalid credentials to connect to the directory X
+HTTP 400 bad request.
+When I look at the request using -Verbose, the username and password are 100% correct. I've tried multiple users and multiple ways of setting up the username:
+netbios\username
+username
+username@fqdn
+The password is a SecureString object.
+When I input the exact same values in the UI everything goes right through.
+Steps to reproduce
+New-HPOVLdapDirectory
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion): 2.0.436.0
+HPE OneView Appliance Version: 2.00.07-0250853
+Output from $PSVersionTable on your Windows Host:
+PSVersion 4.0
+WSAnStackVersion 3.0
+SerializationVersion 1.1.0.1
+CLRVersion 4.0.30319.42000
+Buildversion 6.3.9600.17400

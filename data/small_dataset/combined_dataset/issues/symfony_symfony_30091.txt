@@ -1,0 +1,36 @@
+[DI] Broken entity manager service
+
+
+Symfony version(s) affected: 4.2.3
+Updating symfony/dependency-injection (v4.2.2 => v4.2.3)
+
+Somehow there are now 2 entity manager instances in my application, causing all sort of WTFs :)
+See https://github.com/ro0NL/symfony-issue-30091
+Before:
+DefaultController.php on line 13:
+EntityAwareFactory {#278 ▼
+...
+  -em: EntityManager {#233 …11}
+}
+DefaultController.php on line 13:
+UserEmailRepository {#212 ▼
+...
+  -em: EntityManager {#233 …11}
+...
+}
+
+Both entity managers are instance 233
+After
+DefaultController.php on line 13:
+EntityAwareFactory {#278 ▼
+...
+  -em: EntityManager {#233 …11}
+}
+DefaultController.php on line 13:
+UserEmailRepository {#298 ▼
+...
+  -em: EntityManager {#283 …11}
+...
+}
+
+Now the instances differ. The only differenence is sf/di 4.2.2 vs 4.2.3. Respectively the first and last commit.

@@ -1,0 +1,13 @@
+add Liran Tal as group member.
+
+
+I would like to nominate Liran Tal as a member of te Security WG:
+
+
+Liran requested to join the ecosystem triage team and the process state that triage team members must be WG members.
+
+
+Liran has published some very good security content and  a book
+
+
+Since our next meeting is only next month, if @nodejs/security-wg  accepts it, I would like to have Liran becoming a member ASAP in order to have him join the ecosystem triage team.

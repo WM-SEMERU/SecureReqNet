@@ -1,0 +1,13 @@
+iOS 12 Safari breaks ASP.NET Core OIDC authentication
+
+
+When logging into a site using Azure AD B2C Auth flow on IOS 12 I get caught in an infinite loop between my site and login.microsoft.com.
+The application works fine on other browsers and operating systems.
+I believe the issue may be related to:
+
+https://social.msdn.microsoft.com/Forums/en-US/5f0aa4a8-9bfe-4be2-a366-77e6939ae36d/ios-12-safari-breaks-aspnet-core-21-oidc-authentication?forum=WindowsAzureAD&prof=required
+https://bugs.webkit.org/show_bug.cgi?id=188165
+https://hajekj.net/2018/08/31/beware-of-samesite-cookie-policy-in-asp-net-core-and-upcoming-ios-12/
+
+As an interim fix I have set o.Cookie.SameSite = SameSiteMode.None; but this seems like a pretty suboptimal approach.
+Is there a better solution?

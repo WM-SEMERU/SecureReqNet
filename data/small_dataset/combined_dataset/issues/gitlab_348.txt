@@ -1,0 +1,8 @@
+GitLab 6.9
+
+![2014-06-19 01-00-34 Merge request #5706 - Administrator  sbis3-ws | GitLab](https://gitlab.com/uploads/gitlab-org/gitlab-ce/07066f6149/2014-06-19_01-00-34_Merge_request__5706_-_Administrator__sbis3-ws___GitLab.png)
+
+User is not blocked. It has other merge requests which has no such problems.
+Others users also has such merge requests.
+
+Controls are completely absent in page DOM.

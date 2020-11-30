@@ -1,0 +1,8 @@
+archive/zip: sanitize the FileHeader.Name to remove path traversal ("../../") from zip files?
+
+
+Go isn't directly affected by path traversal attacks in archives but programs written in Go might be.
+In particular, if a Go program reads a malicious zip file, the archive/zip package will return the malicious filename in the FileHeader.FileName.
+Perhaps we should sanitize it?
+If we really need the raw/unsanitized version, we could copy it to a new field FileHeader.InsecureFileName or RawFilename or something.
+/cc @dsnet @ianlancetaylor @FiloSottile @andybons @rsc

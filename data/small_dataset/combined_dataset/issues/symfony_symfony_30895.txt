@@ -1,0 +1,50 @@
+[Form] turn failed file uploads into form errors
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#27524
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+#FOSSHackathons #EUFOSSA

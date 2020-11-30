@@ -1,0 +1,4 @@
+document the deprecation of the role classes
+
+
+see symfony/symfony#22048

@@ -1,0 +1,36 @@
+valija breaks cajita's setBadFreeVariable rule
+
+
+Original issue 943 created by felix8a on 2008-12-02T22:09:51.000Z:
+I don't think this is an exploitable problem, but there's
+something wrong in some security assumption somewhere.
+setBadFreeVariable is rule 34 in
+http://cajadores.com/docs/rules/DefaultCajaRewriter.html
+it's the rule that prevents cajita programs from saying 'x = 3'
+without first declaring x in some scope.
+so, this rule is pointless if valija is enabled, because
+plugin.js effectively does:
+imports.outers = imports;
+valijaMaker(imports);
+and domita.js effectively does:
+imports.outers.window = imports.outers;
+which means cajita code can modify its imports by setting
+properties of its window object.  eg, 'x = 3' is rejected at
+compile-time, but 'window.x = 3' works and does the same thing.
+there's code in domita.js that says, if valija isn't enabled,
+cajita.freeze(tameWindow);
+imports.window = tameWindow;
+but that never happens in the testbed, because the testbed
+only builds imports once for each gadget, and the first build
+is always with valija enabled.
+in any case, this violates the principle that valija is
+"as secure" as cajita.
+I think, either
+a, setBadFreeVariable is not preserving an important security
+property, and it should be removed.
+b, valija setup should be changed to something like:
+imports.outers = ___.copy(imports);
+valijaMaker(imports.outers);
+which would isolate valija's mutable external scope from cajita's
+immutable external scope.  this might have implications elsewhere
+at cajita/valija boundaries.

@@ -1,0 +1,5 @@
+Docker Private Registry Configuration Question related to redis
+
+
+Does Docker Private Registry support Redis cluster or Redis sentinel? Reference: https://docs.docker.com/registry/configuration/#overriding-the-entire-configuration-file.
+After reviewing this link, I understand that redis can be used as a blobdescriptor. Further by defining the redis server & port details under redis: section, one can configure registry to use redis for layer metadata caching. But what is not clearly mentioned is the support for redis advanced features like sentinel or cluster. As per redis documentation, client libraries should be able to understand the redirection and connect to the redis server in case of failovers (from sentinel when master fails and a slave is promoted as new master) or when data hash is found in a different redis node ( than the currently connected node in the redis pool). Is registry is coded to understand these redirections and work? I am looking forward to understand how registry behaves in these mentioned scenarios to architect a high available setup for Docker Private Registry.  Thanks in advance for any help or suggestions.

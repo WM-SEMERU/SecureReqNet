@@ -1,0 +1,10 @@
+allocs: Add nomad alloc signal command
+
+
+This command will be used to send a signal to either a single task within
+an allocation, or all of the tasks if  is omitted. If the sent
+signal terminates the allocation, it will be treated as if the allocation
+has crashed, rather than as if it was operator-terminated.
+Signal validation is currently handled by the driver itself and nomad does
+not attempt to restrict or validate them. There is future work to ensure
+compatibility of drivers and portability of signal names.

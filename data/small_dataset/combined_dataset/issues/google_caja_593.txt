@@ -1,0 +1,7 @@
+Refactor rewriting rules to centralize rejection of illegal names -- those ending in double "_".
+
+
+Original issue 593 created by erights on 2008-06-13T03:15:46.000Z:
+Refactor rewriting rules to reject illegal names in the earlier scope
+visitor, or somewhere small, rather than rejecting them in a bunch of
+separate rules scattered thru DefaultCajaRewriter.java.

@@ -1,0 +1,7 @@
+Auth plugins
+
+
+This supercedes #1358.
+Since some folks want a very simple default implementation for auth, and others want to be able to plug in a more full-featured implementation, I've focused on the problem of defining how Authorization plugs in.
+In the process, I found I was unable to talk about that without also defining how Authentication and Group Membership should plug in.
+I've also removed the text from access.md about "userAccounts", since I no longer feel that is resource type has to be part of kubernetes.

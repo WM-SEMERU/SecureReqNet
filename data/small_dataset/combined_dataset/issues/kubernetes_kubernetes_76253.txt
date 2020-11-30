@@ -1,0 +1,16 @@
+Fixes # 76094 - Check the content of WHAT for Makefile's verify target
+
+
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+If the target xx specified in WHAT is not verified, make verify WHAT="xx yy" should fail
+Which issue(s) this PR fixes:
+Fixes # 76094
+Special notes for your reviewer:
+/assign @liggitt
+/assign @BenTheElder
+Does this PR introduce a user-facing change?:
+no
+no
+

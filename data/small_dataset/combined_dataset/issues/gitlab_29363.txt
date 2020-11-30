@@ -1,0 +1,57 @@
+'This vulnerability was reported via the `security@gitlab.com` list. The contents of the report are below:
+
+>>>
+1 SUMMARY
+
+The Gitlab project import and export feature discloses internal paths to users in case of errors
+
+2 AFFECTED PRODUCTS
+
+The following Products have been tested as vulnerable so far:
+
+Gitlab-CE: 8.11.11, 8.16.1, 8.16.4
+
+3 DETAILS
+
+If an invalid tar archive is imported, an error message will show up containing the full, internal path of the upload and import location.
+Also if multiple exports are triggered in a short time range, race conditions will come up and error messages containing the full, internal export path
+are sent to the user.
+
+5 PROOF OF CONCEPT
+
+
+Variant 1: Project Import
+=========================
+
+Request
+-----------
+
+GET /foobar/test2/import/new HTTP/1.0
+[...]
+
+Response
+-------------
+
+HTTP/1.1 200 Ok
+[...]
+<h3 class="page-title">
+Import repository
+</h3>
+<hr>
+<div class="panel panel-danger">
+<div class="panel-heading">The repository could not be imported.</div>
+<div class="panel-body">
+<pre>tar: Skipping to next header
+tar: Exiting with failure status due to previous errors
+, Unable to decompress <path>uploads/f.tar.gz into <path>/foobar/test2</pre>
+</div>
+</div>
+[...]
+
+Variant 2: Project Export
+=========================
+
+Project public couldn't be exported.
+The errors we encountered were:
+No such file or directory @ rb_sysopen - <path>/foobar/public/work/project.json
+>>>

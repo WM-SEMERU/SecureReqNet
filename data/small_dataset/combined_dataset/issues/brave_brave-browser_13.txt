@@ -1,0 +1,4 @@
+Privacy audit to create MVP list of things we should disable in Chromium
+
+
+Emphasis on MVP for something we'd be able to release as 1.0. This should be similar to what we have privacy wise with Muon.  This is just a task for the audit itself.

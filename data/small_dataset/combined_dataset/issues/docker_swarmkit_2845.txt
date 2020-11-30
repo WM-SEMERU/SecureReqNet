@@ -1,0 +1,6 @@
+Fix linting error
+
+
+Fixes;
+manager/allocator/network.go:186::error: Entry.Errorf format %s has arg nc.ingressNetwork.Spec.Annotations of wrong type github.com/docker/swarmkit/api.Annotations (vet)
+

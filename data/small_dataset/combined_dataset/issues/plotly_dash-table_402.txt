@@ -1,0 +1,5 @@
+Border colors rework
+
+
+This PR aims to replace the way we handle border colors. Still a WIP - pushing up so others can see progress!
+

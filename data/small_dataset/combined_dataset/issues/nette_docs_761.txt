@@ -1,0 +1,6 @@
+Add example of configuring opening file in VSCode
+
+
+
+No description provided.
+

@@ -1,0 +1,15 @@
+URL in the bar is replaced during load
+
+
+Describe the issue you encountered: URL in the URL bar is replaced during load
+Expected behavior: It should not be replaced
+
+Platform (Win7, 8, 10? macOS? Linux distro?): macOS
+Brave Version: https://github.com/brave/browser-laptop/tree/71f4ebe80cedbd25a5fcd976a380f69de5b69d68
+Steps to reproduce:
+
+Go to http://ja.espnf1.com/f1/motorsport/team/371.html
+The URL is replaced with http://player.performgroup.com/eplayer/eplayer.html#, which is not the URL of the page
+
+
+

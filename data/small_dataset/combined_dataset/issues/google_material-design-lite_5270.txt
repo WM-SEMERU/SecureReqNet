@@ -1,0 +1,4 @@
+Dialog animation
+
+
+Hello. Is it possible to animate opening and closing an dialog?

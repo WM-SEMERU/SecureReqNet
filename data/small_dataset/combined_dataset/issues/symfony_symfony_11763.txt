@@ -1,0 +1,10 @@
+BasicAuthenticationListener has private properties
+
+
+Hi there,
+I would like to implement a (slightly) different basic authentication header mechanism and therefore inherited the new authentication listener from BasicAuthenticationListener. In the inherited one, I need access to the properties $securityContext and $providerKey. Those are private, though.
+To make them available, I introduced the two parameters in the inherited listener again, making them protected this time. To grab the values, I had to overload the constructor, though.
+Is the BasicAuthenticationListener considered final or should the properties be protected?
+Thanks for looking into that!
+Best,
+Thomas

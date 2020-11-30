@@ -1,0 +1,8 @@
+Need "best practices for container writers"
+
+
+Original issue 490 created by google@web.dwdw.me on 2008-06-11T01:11:05.000Z:
+Caja needs a document that describes best practices for container writers.
+Intended audience would be container writers.  It should describe what
+container writers must do to be secure, what they should and shouldn't do
+when writing their container, and some important hazards that they must avoid.

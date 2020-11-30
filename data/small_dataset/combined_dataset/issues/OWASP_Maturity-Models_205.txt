@@ -1,0 +1,8 @@
+Score and radar data is loaded multiple times
+
+
+This is a variation of View team is loading schema 3 times #140 now happening with the radar and score data
+Note how the table view generated 17 request for a full refresh
+
+and 9 when flicking tabs
+

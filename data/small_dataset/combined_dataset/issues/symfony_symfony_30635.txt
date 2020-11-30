@@ -1,0 +1,6 @@
+The UrlType renders an <input type = "text" /> instead of an <input type = "url" />
+
+
+Symfony version(s) affected: 3.4.22
+Description
+The Url Type renders an  instead of an  so this field is not validated in Google Chrome.

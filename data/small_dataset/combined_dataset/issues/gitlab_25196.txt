@@ -1,0 +1,17 @@
+### Description
+
+It would be great if Gitlab allowed use of temporary credentials when consuming the API (other than OAuth). Any pathway to achieve that would do, even an obscure one (as long as it's supported). Correct me if I'm being silly, but it seems to be currently not possible:
+
+* going in through the `api/v3/session` gives you a `private_token`, which is an insecure plain-text stored password, which is never automatically reset
+* session cookie is a dead end too from the API perspective: according to [docs](https://docs.gitlab.com/ce/api/README.html), "using the API to generate a new session cookie is currently not supported"
+* there is no API calls available to reset the `private_token`
+* there is no API calls available for personal access tokens.
+
+### Proposal
+
+I guess the most obvious solution is to expose the `private_token` reset call through the API, and make it return the new private token. I could then reset the token on a schedule.
+
+### Links / references
+
+* ["BUG: Regenerate auth token when logging in via the API"](https://gitlab.com/gitlab-org/gitlab-ce/issues/5828)
+* ["FORUM: How can I create a Personal Access Tokens by API"](https://forum.gitlab.com/t/how-can-i-create-a-personal-access-tokens-by-api/4321)

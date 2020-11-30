@@ -1,0 +1,11 @@
+'It's currently only possible to create a fork under the namespace of the current user.
+If you like to create a fork of a repository within a group, you will need to fork to your user and than transfer it to the desired group/namespace.
+Forking into a group is interesting for companys having code ownership where projects do build theire stuff on common code repositorys.
+
+GitHub allows to create a fork directly [under an organization](https://github.com/blog/674-introducing-organizations) (Forking friendly).
+This feature whould also be nice to have in GitLab.
+
+
+UI entry could be:
+- Additional dropdown after hiting the **Fork repository** button, holding target group and repository name.
+- Additional point under **Create project** (/projects/new): **Fork existing repository** with dropdown selector for selecting source repository.

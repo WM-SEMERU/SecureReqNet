@@ -1,0 +1,6 @@
+Using "folders" for tags and branch names is usually done with just creating example a branch called `bug/1234` where `bug` is the name of the folder. Some git utilities displays this as a folder, so that 1234 would look like its inside a folder.
+
+Is this something that is interesting to do for gitlab as well?
+There are several places this would needs to be implemented. Dropdown boxes and other lists.
+
+Example "folders" people would probably use would be `feature`, `release`, `bugfix` and so on.

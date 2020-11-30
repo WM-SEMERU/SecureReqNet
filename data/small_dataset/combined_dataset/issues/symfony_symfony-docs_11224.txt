@@ -1,0 +1,4 @@
+Adding ignoreVCSIgnored documentation
+
+
+Adding documentation for symfony/symfony#30448

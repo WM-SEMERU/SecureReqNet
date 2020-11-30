@@ -1,0 +1,1 @@
+This is something new in 6.7. When I edit merge request, it creates duplicate `mentioned in !4444` message to ticket referenced in title, when title wasn't updated.

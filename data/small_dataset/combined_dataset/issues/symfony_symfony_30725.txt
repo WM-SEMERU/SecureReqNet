@@ -1,0 +1,63 @@
+[Console/Table] Format string is shown, if a Backslash is on the position of a line break
+
+
+Symfony version(s) affected: v4.2.4
+Description
+In the project useragent-parser-comparison we compare the results of different useragent parsers. To show the differences we use the table helper from symfony console.
+Because the useragents and the differences may be very long, the table rows often need 2 or 3 lines in the console output.
+To make the result better readable I want to limit the column width.
+If the content is too long, the table helper breaks the content into multiple lines, but if on the position of that break is a Backslash, a format string is shown in the output.
+How to reproduce
+the used command (in the original code, the table is filled dynamically)
+class Analyze extends Command
+{
+    protected function configure(): void
+    {
+        $this->setName('analyze')
+            ->setDescription('Analyzes the data from test runs')
+            ->setHelp('');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $table = new Table($output);
+        $table->setColumnWidth(0, 50);
+        $table->setColumnMaxWidth(0, 50);
+        $table->setColumnWidth(1, 50);
+        $table->setColumnMaxWidth(1, 50);
+        $table->setColumnWidth(2, 50);
+        $table->setColumnMaxWidth(2, 50);
+        $table->setStyle('box');
+        $table->setHeaders([
+            [new TableCell('UserAgent', ['colspan' => 3])],
+            [new TableCell('Browser'), new TableCell('Platform'), new TableCell('Device')],
+        ]);
+
+        $rows = [];
+
+        $rows[] = [new TableCell('YUANDA50_12864_11B_HW (MRE\2.5.00(800) resolution\320480 chipset\MT6250 touch\1 tpannel\1 camera\1 gsensor\0 keyboard\reduced) C529AH_JY_539_W1.11B.V2.2 Release/2012.09.26 WAP Browser/MAUI (HTTP PGDL; HTTPS) Profile/ Q03C1-2.40 fr-FR', ['colspan' => 3])];
+        $rows[] = [
+            new TableCell('name: <fg=white;bg=green>googlebotvideo</> <fg=white;bg=red>googlebot</> '),
+            new TableCell(''),
+            new TableCell(''),
+        ];
+
+        $table->setRows($rows);
+        $table->render();
+
+        return 0;
+    }
+}
+the result is:
+┌────────────────────────────────────────────────────┬────────────────────────────────────────────────────┬────────────────────────────────────────────────────┐
+│ UserAgent                                                                                                                                                    │
+┌────────────────────────────────────────────────────┬────────────────────────────────────────────────────┬────────────────────────────────────────────────────┐
+│ Browser                                            │ Platform                                           │ Device                                             │
+├────────────────────────────────────────────────────┼────────────────────────────────────────────────────┼────────────────────────────────────────────────────┤
+│ YUANDA50_12864_11B_HW (MRE\2.5.00(800) resolution<fg=default;bg=default> │                                                    │                                                    │
+│ 320480 chipset\MT6250 touch\1 tpannel\1 camera\1 g │                                                    │                                                    │
+│ sensor\0 keyboard\reduced) C529AH_JY_539_W1.11B.V2 │                                                    │                                                    │
+│ .2 Release/2012.09.26 WAP Browser/MAUI (HTTP PGDL; │                                                    │                                                    │
+│ HTTPS) Profile/ Q03C1-2.40 fr-FR                   │                                                    │                                                    │
+│ name: googlebotvideo googlebot                     │                                                    │                                                    │
+└────────────────────────────────────────────────────┴────────────────────────────────────────────────────┴────────────────────────────────────────────────────┘

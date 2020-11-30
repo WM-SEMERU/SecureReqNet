@@ -1,0 +1,13 @@
+I suggest to change the calls 
+```
+sudo -u git
+```
+in the installation and update guides by
+```
+sudo -E -u git
+```
+Sometimes it is useful if the sudo process inherits the Environment, e.g. git needs to know a proxy server. 
+
+Many thanks for the wonderful GitLab!
+
+...Rolf

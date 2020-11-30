@@ -1,0 +1,13 @@
+SecurityDataCollector.php: Nesting level too deep - recursive dependency?
+
+
+Hello,
+we got the following php exeption: Fatal error: Nesting level too deep - recursive dependency? in .../vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/DataCollector/SecurityDataCollector.php on line 74
+The user / userRole configuration is the same as in our other projects, we use only 11 users and 2 userRoles with doctrine. After some google we could fix the error with changing the line 74
+from
+if (!in_array($role, $assignedRoles)) {
+to
+if (!in_array($role, $assignedRoles, TRUE)) {
+Is this a bad or good thing?
+We found a lot of information in this thread:
+http://stackoverflow.com/questions/3834791/fatal-error-nesting-level-too-deep-recursive-dependency#comment31801209_19097159

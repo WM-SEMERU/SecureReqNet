@@ -1,0 +1,4 @@
+Go over the log in start flow with the FxA team
+
+
+We should ensure that there aren't any problems we aren't seeing with the log in start flow that we currently use in the admin log in and will likely start using for AMO as well.

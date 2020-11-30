@@ -1,0 +1,23 @@
+Open Enclave SDK users trust that it has completed secure development lifecycle review
+
+
+Users of the Open Enclave SDK must be able to trust that, as a project maintained by Microsoft, due diligence has been applied to ensure secure development practices have been followed as tracked by the Secure Development Lifecycle tasks.
+
+ Create and review the threat model
+ Run SDL code analysis tools
+ Run CredScanner
+ Run Attack Surface analyzer
+ Use cryptographically secure SSL/TLS
+ Use platform approved crypto libraries
+ Use only approved cryptographic hash functions
+ Use integer-safe arithmetic with memory allocations
+ Prevent dangling pointers with static analysis
+ Conduct OSS security review
+ Create, verify and store X.509 certs securely
+ Create and maintain a security response plan
+ Use approved distribution and update mechanisms
+ Onboard to Azure Standard Access
+ Provide private symbols to MSRC
+ Update service tree metadata and asset inventory
+ Triage against security bug bar and address issues
+

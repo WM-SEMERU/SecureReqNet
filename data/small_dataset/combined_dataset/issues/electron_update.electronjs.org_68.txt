@@ -1,0 +1,6 @@
+How to use a new code sign cert for existing app for autoupdate?
+
+
+Dear All,
+I have would like to use another cert to build the mac app. when I update the app it shows code signature error. How could I change to new cert?
+Thanks

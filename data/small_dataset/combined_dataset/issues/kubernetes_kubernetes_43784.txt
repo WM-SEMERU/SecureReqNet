@@ -1,0 +1,5 @@
+Recommended liveness check for kube-apiserver
+
+
+For 1.6, what is the healthz endpoint / recommended liveness check for a secure setup (RBAC, kubeadm discovery not enabled, insecure port disabled)?
+curl https://127.0.0.1/healthz is returning a 401 for me.

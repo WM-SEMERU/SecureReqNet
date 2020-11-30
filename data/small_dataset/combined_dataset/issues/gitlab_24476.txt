@@ -1,0 +1,7 @@
+### Description
+
+My organization recently went through a security audit and it was noted that we use GitLab (self-hosted) which has the "Remember Me" option. I believe this option creates a persistent cookie. The auditor wanted us to turn off/disable this option entirely. There is an admin setting for the duration of session cookies but I don't believe there is a setting to turn off persistent cookies entirely.
+
+### Proposal
+
+Please consider having an admin setting to disable the "Remember Me" option (and thereby persistent cookies).

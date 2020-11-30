@@ -1,0 +1,4 @@
+i had a k8s cluster ,but how to change kube-proxy mode from iptables to ipvs now?
+
+
+i had a k8s cluster now (version 1.12.3 ) ,but now i want to change the kube-proxy mode from iptables to ipvs without rebuilding the cluster.

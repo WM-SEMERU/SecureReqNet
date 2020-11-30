@@ -1,0 +1,55 @@
+cmd/compile: emit (MAX|MIN)SD instead of UCOMISD when possible
+
+
+What version of Go are you using (go version)?
+$ go version
+go version devel +4091cf972a Sun Mar 31 23:35:35 2019 +0000 linux/amd64
+
+Consider this:
+func max(x, y float64) float64 {
+	if x > y {
+		return x
+	}
+	return y
+}
+This gets compiled to
+0x0000 00000 (max.go:5) MOVSD   "".x+8(SP), X0
+0x0006 00006 (max.go:5) MOVSD   "".y+16(SP), X1
+0x000c 00012 (max.go:5) UCOMISD X1, X0
+0x0010 00016 (max.go:5) JLS     25
+0x0012 00018 (max.go:6) MOVSD   X0, "".~r2+24(SP)
+0x0018 00024 (max.go:6) RET
+0x0019 00025 (max.go:8) MOVSD   X1, "".~r2+24(SP)
+0x001f 00031 (max.go:8) RET
+
+Whereas, it could have been written as
+MOVSD x+8(SP), X0
+MOVSD y+16(SP), X1
+MAXSD X1, X0
+MOVSD X0, ret+24(SP)
+RET
+
+Benchmarks show a 12.6% improvement, when the assembly call overhead is ignored.
+I am wondering if it is possible to detect patterns like these and insert a (MAX/MIN)SD instead of a UCOMISD and a Jump ? Might also be possible to use a FCMOV, but that is also not implemented yet.
+Is this possible with a simple rewrite rule or does it require deeper compiler knowledge to achieve this ? Happy to work on it if it is the former :)
+FYI, the SSA during the lower pass is
+b1:-
+v1 (?) = InitMem <mem>
+v2 (?) = SP <uintptr>
+v6 (?) = LEAQ <*float64> {~r2} v2
+v7 (4) = Arg <float64> {x} (x[float64])
+v8 (4) = Arg <float64> {y} (y[float64])
+v11 (+5) = UCOMISD <flags> v7 v8
+v10 (+5) = SETGF <bool> v11
+v12 (+5) = TESTB <flags> v10 v10
+UGT v11 → b3 b2 (5)
+b2: ← b1-
+v17 (8) = VarDef <mem> {~r2} v1
+v18 (+8) = MOVSDstore <mem> {~r2} v2 v8 v17
+Ret v18 (+8)
+b3: ← b1-
+v13 (6) = VarDef <mem> {~r2} v1
+v14 (+6) = MOVSDstore <mem> {~r2} v2 v7 v13
+Ret v14 (+6)
+
+@josharian @randall77 @martisch

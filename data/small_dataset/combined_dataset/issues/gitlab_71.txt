@@ -1,0 +1,10 @@
+Hi, I am testing out gitlab. Very nice so far but I have seen a few issues. Wish I could put screen-shots here!
+
+Firstly, https://gitlab.com/help/markdown#toc_7 - the menu item selected on right, the blue box that shows selection is over-shooting and messing up the page. It looks to be about two inches wider than the menu bar on my browser.
+
+Also, when I pasted some test code (just plain text) using ```on the wiki``` the line wraping stopped and the code just went on and on in one long line. Not sure if thats a display issue or my markdown wrong. If I did it wrong the the doc's could be clearer.
+
+Thanks - loving it all so far, very nice!
+
+A
+x

@@ -1,0 +1,58 @@
+Running pre-flight checks hang
+
+
+What keywords did you search in kubeadm issues before filing this one?
+preflight
+hang
+kubeadm join
+BUG REPORT
+Versions
+kubeadm version (use kubeadm version):
+kubeadm version: &version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:51:21Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Environment:
+
+
+Kubernetes version (use kubectl version):
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration:
+
+
+OS (e.g. from /etc/os-release):
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+
+Kernel (e.g. uname -a):
+Linux vm02.andrefagundes.org 3.10.0-957.5.1.el7.x86_64 #1 SMP Fri Feb 1 14:54:57 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Others:
+
+
+What happened?
+Problem when joining a control-plane. The process hang with message Running pre-flight checks. See below:
+[root@vm02 ~]#   kubeadm join vm10.andrefagundes.org:6443 --token 07nh7g.v8p5fcs61fn3o2h4 --discovery-token-ca-cert-hash sha256:039a5f9229dafe39d4a51af6899c20adff1de5dda23f780ac9b896e95f95623a --experimental-control-plane --certificate-key 8afd066a7b8baa2abf86ba1b2d5e7f29625875d8f78a3e136f7fd35605b4775
+[preflight] Running pre-flight checks
+What you expected to happen?
+I was expecting the node to be joined or a message indicating an error.
+How to reproduce it (as minimally and precisely as possible)?
+I am following the official documentation below.
+https://kubernetes.io/docs/setup/independent/high-availability/#external-etcd-nodes
+Anything else we need to know?
+No.

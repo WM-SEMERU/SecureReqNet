@@ -1,0 +1,19 @@
+Security Group: add secondary ips to the correct ipset based on ip family
+
+
+Description
+Currently secondary ipv6 addresses are added to the ipv4 ipset in security_group.py.
+This doesn't work, so this patch adds a function to split a set of ips in ipv4 and ipv6 addresses.
+Both the default_network_rules and `` functions now utilise this function and add the ips to the appropriate ipsets.
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+How Has This Been Tested?
+Not tested live yet. The function has been tested in idle.
+Will ask my colleague @GabrielBrascher  to test this.

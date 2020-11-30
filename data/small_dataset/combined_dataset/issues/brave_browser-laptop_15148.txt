@@ -1,0 +1,28 @@
+CapitalOne.com doesn't load with shields up.
+
+
+Description
+Steps to Reproduce
+
+With shields enabled, visit https://www.capitalone.com
+Notice totally blank screen
+Disabled shield, and refresh and site loads normally
+
+Actual result:
+Expected result:
+Reproduces how often:
+Brave Version
+about:brave info:
+Brave: 0.23.105
+V8: 6.8.275.24
+rev: 9a46f8f
+Muon: 8.0.9
+OS Release: 17.7.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+Additional Information

@@ -1,0 +1,53 @@
+Crash in 6l - out of bounds read (../ld/go.c:547)
+
+
+by robert.swiecki:
+What steps will reproduce the problem?
+1. Run '6l
+SIGSEGV.PC.0x406e10.CODE.1.ADDR.0xfffffffc00179012.INSTR.movzx_eax,_byte_[rax+0x12].6'
+
+What is the expected output?
+Error message or a.out file
+
+What do you see instead?
+Crash (SIGSEGV)
+
+What is your $GOOS?  $GOARCH?
+linux/amd64
+
+Which revision are you using?  (hg identify)
+80fd480b0892+ tip
+
+Please provide any additional information below.
+$ gdb /usr/local/google/src/go/6l
+(gdb) r
+SIGSEGV.PC.0x406e10.CODE.1.ADDR.0xfffffffc00179012.INSTR.movzx_eax,_byte_[rax+0x12].6
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000406e10 in mark (s=0xfffffffc00179000) at ../ld/go.c:547
+547     if(s == S || s->reachable)
+
+(gdb) p/x s
+$1 = 0xfffffffc00179000
+(gdb) x/x s
+0xfffffffc00179000: Cannot access memory at address 0xfffffffc00179000
+
+(gdb) bt
+#0  0x0000000000406e10 in mark (s=0xfffffffc00179000) at ../ld/go.c:547
+#1  0x0000000000406cd8 in marktext (p=0x7ffff70589f0) at ../ld/go.c:527
+#2  0x0000000000406e3d in mark (s=0x7ffff7058900) at ../ld/go.c:551
+#3  0x0000000000406dd2 in marktext (p=0x7ffff7101ed8) at ../ld/go.c:539
+#4  0x0000000000406e3d in mark (s=0x7ffff71019e8) at ../ld/go.c:551
+#5  0x0000000000406db5 in marktext (p=0x7ffff7101a60) at ../ld/go.c:537
+#6  0x0000000000406e3d in mark (s=0x7ffff70665d0) at ../ld/go.c:551
+#7  0x0000000000406db5 in marktext (p=0x7ffff7066648) at ../ld/go.c:537
+#8  0x0000000000406e3d in mark (s=0x7ffff7058028) at ../ld/go.c:551
+#9  0x0000000000406f90 in deadcode () at ../ld/go.c:615
+#10 0x000000000040d2a3 in p9main (argc=1, argv=0x7fffffffe620) at
+/usr/local/google/src/go/src/cmd/6l/obj.c:351
+#11 0x000000000041873c in main (argc=2, argv=0x7fffffffe618) at
+/usr/local/google/src/go/src/lib9/main.c:35
+Attachments:
+
+SIGSEGV.PC.0x406e10.CODE.1.ADDR.0xfffffffc00179012.INSTR.movzx_eax,byte[rax+0x12].6 (3171 bytes)
+

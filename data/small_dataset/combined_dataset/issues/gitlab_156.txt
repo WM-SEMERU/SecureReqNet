@@ -1,0 +1,1 @@
+If you delete some project with a deploy key, this key can't be added again.

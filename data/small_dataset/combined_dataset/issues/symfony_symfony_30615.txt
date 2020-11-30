@@ -1,0 +1,46 @@
+[Validator] fix 'this' variable in expression when the root value of the validation is an array
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30568
+
+
+License
+MIT
+
+
+
+fix 'this' variable in expression when the root value of the validation is an array instead of object.

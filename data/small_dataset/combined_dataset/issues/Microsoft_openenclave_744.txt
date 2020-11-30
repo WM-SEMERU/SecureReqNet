@@ -1,0 +1,4 @@
+#215 Deprecation of unsafe crt functions
+
+
+Occurances of memcpy, memmove, strncat, memset and strncopy has been replaced with their safer implementations.

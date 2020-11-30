@@ -1,0 +1,12 @@
+Docs CheckAlways missing link
+
+
+📚 Docs or angular.io bug report
+Description
+CheckAlways link leads to main page
+🔬 Minimal Reproduction
+What's the affected URL?**
+https://angular.io/api/core/ChangeDetectionStrategy
+🌍  Your Environment
+Anything else relevant?
+Angular.io version stable (7.2.12), next (8.0.0-beta.11)

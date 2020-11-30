@@ -1,0 +1,50 @@
+[Security] remove invalid deprecation notice on AbstractGuardAuthenticator::supports()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#16835 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+This deprecation flag causes a false positive.

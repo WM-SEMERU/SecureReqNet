@@ -1,0 +1,4 @@
+don't show blank urlbar for about:blank
+
+
+this makes certain phishing attacks slightly harder since it's clear to the user that they are not on <legitimate-site>.com. matches chrome's behavior.

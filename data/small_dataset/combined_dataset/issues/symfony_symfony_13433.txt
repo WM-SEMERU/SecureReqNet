@@ -1,0 +1,29 @@
+[Security] Setting DefaultAuthenticationFailureHandler options more than once doesn't work
+
+
+I think there is bug in the DefaultAuthenticationFailureHandler's setOptions method which means that if it is called more than once, only the options from the last call will be applied.
+For example, given this:
+// Assume $handler is an instance of DefaultAuthenticationFailureHandler
+$handler->setOptions(array('foo' => 'bar'));
+$handler->setOptions(array('baz' => 'qux'));
+I would expect this when I call getOptions:
+array(
+    'failure_path' => null,
+    'failure_forward' => false,
+    'login_path' => '/login',
+    'failure_path_parameter' => '_failure_path',
+    'foo' => 'bar',
+    'baz' => 'qux',
+)
+But what I would actually get is (note the missing foo key):
+array(
+    'failure_path' => null,
+    'failure_forward' => false,
+    'login_path' => '/login',
+    'failure_path_parameter' => '_failure_path',
+    'baz' => 'qux',
+)
+Since setOptions is called by the DefaultAuthenticationFailureHandler constructor, this means that when overriding the security.authentication.failure_handler service, any custom options provided as service arguments are lost when setOptions is called later.
+From a quick glance at the code DefaultAuthenticationSuccessHandler would exhibit the same behaviour.
+It seems to me that the setOptions method in both of these classes should be doing something more like this, unless the current behaviour is intentional?
+$this->options = array_merge($this->defaultOptions, $this->options, $options);

@@ -1,0 +1,8 @@
+Add AppArmor status annotation
+
+
+Fixes #31284
+Adds a new annotation, apparmor.security.alpha.kubernetes.io/status: enabled, when a pod specifies an AppArmor profile for at least one container, and the node is AppArmor enabled (as defined by the prerequisites & Kubelet version >= v1.4).
+/cc @yujuhong @thockin @matchstick
+
+This change is 

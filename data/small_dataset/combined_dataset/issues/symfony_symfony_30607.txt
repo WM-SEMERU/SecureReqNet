@@ -1,0 +1,51 @@
+[Serializer] Add Support of recursive denormalization on object_to_populate
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+Pending
+
+
+Fixed tickets
+#21669
+
+
+License
+MIT
+
+
+Doc PR
+Pending
+
+
+
+Currently the deserialization re-create new sub-object with object_to_populate.
+This option permit to make object_to_populate recursive.

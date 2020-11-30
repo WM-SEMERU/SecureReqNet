@@ -1,0 +1,50 @@
+[Security] Complain about an empty decision strategy
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+When an empty string is passed (or objects with a similarly behaving __toString() method) to the constructor, the call to decide causes infinite recursion.

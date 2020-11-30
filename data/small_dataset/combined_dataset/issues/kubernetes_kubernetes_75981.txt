@@ -1,0 +1,19 @@
+Kubectl plugin not working on Windows
+
+
+What happened: Running kubectl hello results in not supported by windows
+What you expected to happen: kubectl-hello.bat from PATH gets executed
+How to reproduce it (as minimally and precisely as possible): Add kubetl-hello.bat somewhere to PATH
+ECHO Hello!
+
+Anything else we need to know?:
+Could it be related to this? golang/go#30662
+Environment:
+
+Kubernetes version (use kubectl version): Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"windows/amd64"}
+Cloud provider or hardware configuration: N/A
+OS (e.g: cat /etc/os-release): Windows 10 (Build 17763.379)
+Kernel (e.g. uname -a):
+Install tools:
+Others:
+

@@ -1,0 +1,10 @@
+Supply default provider key for logout_path() and logout_url() twig functions
+
+
+Currently, the logout_path() and logout_url() from the LogoutUrlExtension will need a specific provider key to generate the logout path.
+{{ logout_path('main') }}  {# display logout path for your 'main' firewall #}
+
+If you are dealing with multiple firewalls, you sometimes like to use the current context instead of a hardcoded one. This could be achieved by using the following twig:
+{{ logout_path(app.security.token.providerKey) }}
+
+I'm proposing to change this a bit without a BC break: by not specifying a key, the LogoutUrlHelper will use the security context based on the request. This could be fairly simple by just adding the security context service to the twig extension, and lookup the current context before passing it to the LogoutUrlHelper, or some similar setup.

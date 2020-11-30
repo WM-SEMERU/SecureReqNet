@@ -1,0 +1,50 @@
+require the XML PHP extension
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#22676 (comment), symfony/symfony-standard#1099
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+I suggest to either revert #22676 or to be consistent and require the XML extension in all bundles as well as in the symfony/symfony package.

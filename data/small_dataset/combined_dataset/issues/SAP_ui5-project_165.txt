@@ -1,0 +1,15 @@
+[INTERNAL] Docs: Fix link to types
+
+
+Thank you for your contribution! 🙌
+To get it merged faster, kindly review the checklist below:
+Pull Request Checklist
+
+ Reviewed the Contributing Guidelines
+
+Especially the How to Contribute section
+
+
+ No merge commits
+ Correct commit message style
+

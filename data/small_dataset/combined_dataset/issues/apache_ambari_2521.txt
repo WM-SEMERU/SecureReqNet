@@ -1,0 +1,32 @@
+[AMBARI-24827] LDAP users fail to authenticate using LDAPS due to 'No subject alternative DNS name' exception
+
+
+What changes were proposed in this pull request?
+LDAP users fail to authenticate using LDAPS due to No subject alternative DNS name exception:
+2018-10-26 14:49:45,716  WARN [ambari-client-thread-37] AmbariLdapAuthenticationProvider:126 - Failed to communicate with the LDAP server: simple bind failed: ad.example.com:636; nested exception is javax.naming.CommunicationException: simple bind failed: ad.example.com:636 [Root exception is javax.net.ssl.SSLHandshakeException: java.security.cert.CertificateException: No subject alternative DNS name matching ad.example.com found.]
+
+This is the other half of the issue from AMBARI-24533 (which was related to the LDAP sync process).
+Note:  If LDAP sync is performed before a user attempts to log in, then the issue will not be seen since the system property, com.sun.jndi.ldap.object.disableEndpointIdentification, would have already been set to "true".   However, the logic path setting this value is not reached for an authentication attempt.
+Note: This occurs with OpenJDK 1.8.0.191 and maybe some earlier versions.
+openjdk version "1.8.0_191"
+OpenJDK Runtime Environment (build 1.8.0_191-b12)
+OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
+
+This does not occur with Oracle JDK 1.8.0.112
+java version "1.8.0_112"
+Java(TM) SE Runtime Environment (build 1.8.0_112-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 25.112-b15, mixed mode)
+
+How was this patch tested?
+Manually tested against a test AD.
+mvn clean test package install  -pl ambari-server
+...
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 31:03 min
+[INFO] Finished at: 2018-10-26T12:55:38-04:00
+[INFO] Final Memory: 208M/977M
+[INFO] ------------------------------------------------------------------------
+
+Please review Ambari Contributing Guide before opening a pull request.

@@ -1,0 +1,4 @@
+Why can't (shouldn't) primitive types be passed to AuthorizationChecker::isGranted
+
+
+Naming the second Argument of AuthorizationChecker::isGranted, "$object", implies that it should always be an object. Now this in itself imposes no hard restrictions, but the Implementation of AbstractVoter in the 2.7 branch will cause errors, if a primitive is passed to the voter. Can this be fixed or is there a reason to it?

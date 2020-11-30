@@ -1,0 +1,46 @@
+[Routing] Share configuration between routes
+
+
+I have a website splitted in 2 areas:
+
+public customers
+professional customers
+
+Both areas contains the same organization (a list of the same activities).
+I am trying to generate the sames urls for both areas (just adding a prefix on pro area) and share the configuration so I don't need to duplicate all urls.
+The goal is to have something looking like this:
+Public area:
+- /activity-1/
+- /activity-2/
+- /reuse-same-slug/
+
+Pro area (reuse same slugs without prefix):
+- /pro/activity-1/
+- /pro/activity-2/
+- /pro/reuse-same-slug/
+
+My controllers are stored in 2 distinct folders using same controller names:
+App\Controller\Pub\Activity1Controller.php
+App\Controller\Pub\Activity2Controller.php
+
+App\Controller\Pro\Activity1Controller.php
+App\Controller\Pro\Activity2Controller.php
+
+So I am able to load the same route configuration on both Pub and Pro controllers with this configuration:
+activity-1:
+    resource: ../../src/Controller/*/Activity1Controller.php
+    type: annotation
+    name_prefix: activity-1_
+    prefix: /activity-1
+
+activity-2:
+    resource: ../../src/Controller/*/Activity2Controller.php
+    type: annotation
+    name_prefix: activity-2_
+    prefix: /activity-2
+But now, in order to distinguish public and professional routes, I need to the same custom annotation on each Pro controllers:
+/**
+ * @Route("/professional", name="professional_")
+ */
+
+I am wondering if there is a better way to do this or if there is a way to not duplicate the annotation in all controllers?

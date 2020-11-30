@@ -1,0 +1,34 @@
+AbstractNormalizer::IGNORED_ATTRIBUTES => does not work with GetSetMethodNormalizer
+
+
+Symfony version(s) affected: 4.2.3
+Description
+When normalizing an object, some properties are to be ignored.
+The method setIgnoredAttributes is deprecated in favor of setting AbstractNormalizer::IGNORED_ATTRIBUTES in the $context array.
+However, This only works with ObjectNormalizer and not GetSetMethodNormalizer.
+How to reproduce
+class testObject {
+  private $me='me';
+  private $notMe ='notMe';
+  public function getMe(): string  {return $this->me;}
+  public function setMe(string $me): void  {$this->me = $me;}
+  public function getNotMe(): string  {return $this->notMe;}
+  public function setNotMe(string $notMe): void {$this->notMe = $notMe;}
+}
+
+This does NOT work:
+    $testObject = new testObject();
+    $normalizer = new GetSetMethodNormalizer();
+    $serializer = new Serializer([$normalizer]);
+    $a1 = $serializer->normalize($testObject, null, [ AbstractNormalizer::IGNORED_ATTRIBUTES => ['notMe']  ] );
+    dd($a1, $testObject);
+
+This works
+    $testObject = new testObject();
+    $normalizer = new ObjectNormalizer();
+    $serializer = new Serializer([$normalizer]);
+    $a1 = $serializer->normalize($testObject, null, [AbstractNormalizer::IGNORED_ATTRIBUTES => ['notMe']]);
+    dd($a1, $testObject);
+
+Possible Solution
+Additional context

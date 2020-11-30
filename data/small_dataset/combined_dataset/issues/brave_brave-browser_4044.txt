@@ -1,0 +1,29 @@
+Media publishers are not working
+
+
+Description
+Media publishers are not working anymore.
+Steps to Reproduce
+
+Clean profile and enable rewards
+Go to some youtube video
+Click on panel
+
+Actual result:
+Summary is shown
+Expected result:
+Publishers should be shown
+Reproduces how often:
+100%
+Brave version (brave://version info)
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+Is the issue reproducible on the latest version of Chrome?
+
+Additional Information
+Regression from brave/brave-core#2166

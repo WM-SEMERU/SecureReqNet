@@ -1,0 +1,15 @@
+can not enter the CJK language at the wiki title
+
+change file  config/router.rb
+resources :wikis, only: [:show, :edit, :destroy, :create], constraints: {id: /.+/} do
+can enter CJK language
+but save wiki  get this error
+
+
+Encoding::CompatibilityError (incompatible character encodings: UTF-8 and ASCII-8BIT):
+  app/models/project_wiki.rb:87:in `create_page'
+  app/models/wiki_page.rb:179:in `save'
+  app/models/wiki_page.rb:139:in `create'
+  app/controllers/projects/wikis_controller.rb:57:in `create'
+
+GitLab 7.2.0 da5d33e

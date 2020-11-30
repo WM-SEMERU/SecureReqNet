@@ -1,0 +1,216 @@
+# Summary
+When clicking the 'New issue' button on the issues page, I get a 500 error.
+
+# Steps to reproduce
+Go to a repository with content
+click on one of the issues
+click on the new issue button
+
+# Expected behavior
+The UI to allow me to create new issue
+
+# Observed Behavior
+receive 500 http error
+
+# Relevant logs and/or screenshots
+```
+Processing by Projects::IssuesController#new as HTML
+Parameters: {"issue"=>{"assignee_id"=>"", "milestone_id"=>""}, "project_id"=>"webmap/webmap"}
+Rendered projects/issues/_form.html.haml (4.0ms)
+Rendered projects/issues/new.html.haml within layouts/projects (4.5ms)
+Completed 500 Internal Server Error in 43ms
+ActionView::Template::Error (undefined method `sha' for nil:NilClass):
+```
+
+# Output of checks
+### gitlab:check
+```
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.1 ? ... OK (1.9.1)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ...
+Michal Schneider / UPD ... ok
+WebMap / AJAX klient ... ok
+Nette / Remote logger ... ok
+HvMap / AJAX druhe generace ... ok
+WebMap / WebMap ... repository is empty
+Michal Schneider / PDU ... ok
+Michal Schneider / HV-Finder ... ok
+Nette / Menu ... ok
+Oracle / ZPV ... repository is empty
+GeoServer / konfigurace ... repository is empty
+Tomáš Herza / Hydrologicke site ... ok
+Nette / XML2JSON-Proxy ... ok
+Michal Schneider / AtlasZP ... ok
+Michal Schneider / Test ... repository is empty
+Michal Schneider / Git skoleni ... repository is empty
+Josef Beneš / DMG UAP ... repository is empty
+Michal Schneider / WebHydrosoft ... ok
+HvMap / Libraries ... ok
+HvMap / Framework ... ok
+HvMap / WebLoader ... ok
+Nette / Translator ... ok
+Tomáš Herza / CDSApp ... ok
+Nette / Composer ... ok
+JavaScript / jQWidgets ... ok
+GDAL / PHP GDAL ... ok
+Michal Schneider / DMVS ... ok
+Nette / Mailer ... ok
+Nette / Tree ... repository is empty
+Hydrosoft / Components ... ok
+WebMap / REST ... ok
+GDAL / Converter ... ok
+Hydrosoft / OGR ... ok
+Hydrosoft / OGR Tools ... ok
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files:
+    /home/git/repositories: OK
+    /home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.4.15
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ...
+Michal Schneider / UPD ... yes
+WebMap / AJAX klient ... yes
+Nette / Remote logger ... yes
+HvMap / AJAX druhe generace ... yes
+WebMap / WebMap ... yes
+Michal Schneider / PDU ... yes
+Michal Schneider / HV-Finder ... yes
+Nette / Menu ... yes
+Oracle / ZPV ... yes
+GeoServer / konfigurace ... yes
+Tomáš Herza / Hydrologicke site ... yes
+Nette / XML2JSON-Proxy ... yes
+Michal Schneider / AtlasZP ... yes
+Michal Schneider / Test ... yes
+Michal Schneider / Git skoleni ... yes
+Josef Beneš / DMG UAP ... yes
+Michal Schneider / WebHydrosoft ... yes
+HvMap / Libraries ... yes
+HvMap / Framework ... yes
+HvMap / WebLoader ... yes
+Nette / Translator ... yes
+Tomáš Herza / CDSApp ... yes
+Nette / Composer ... yes
+JavaScript / jQWidgets ... yes
+GDAL / PHP GDAL ... yes
+Michal Schneider / DMVS ... yes
+Nette / Mailer ... yes
+Nette / Tree ... yes
+Hydrosoft / Components ... yes
+WebMap / REST ... yes
+GDAL / Converter ... yes
+Hydrosoft / OGR ... yes
+Hydrosoft / OGR Tools ... yes
+Projects have satellites? ...
+Michal Schneider / UPD ... yes
+WebMap / AJAX klient ... yes
+Nette / Remote logger ... yes
+HvMap / AJAX druhe generace ... yes
+WebMap / WebMap ... yes
+Michal Schneider / PDU ... yes
+Michal Schneider / HV-Finder ... yes
+Nette / Menu ... yes
+Oracle / ZPV ... yes
+GeoServer / konfigurace ... yes
+Tomáš Herza / Hydrologicke site ... yes
+Nette / XML2JSON-Proxy ... yes
+Michal Schneider / AtlasZP ... yes
+Michal Schneider / Test ... yes
+Michal Schneider / Git skoleni ... yes
+Josef Beneš / DMG UAP ... yes
+Michal Schneider / WebHydrosoft ... yes
+HvMap / Libraries ... yes
+HvMap / Framework ... yes
+HvMap / WebLoader ... yes
+Nette / Translator ... yes
+Tomáš Herza / CDSApp ... yes
+Nette / Composer ... yes
+JavaScript / jQWidgets ... yes
+GDAL / PHP GDAL ... yes
+Michal Schneider / DMVS ... yes
+Nette / Mailer ... yes
+Nette / Tree ... yes
+Hydrosoft / Components ... yes
+WebMap / REST ... yes
+GDAL / Converter ... yes
+Hydrosoft / OGR ... yes
+Hydrosoft / OGR Tools ... yes
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.7.10)
+
+Checking GitLab ... Finished
+```
+
+### gitlab:env:info
+```
+System information
+System:        Ubuntu 12.10
+Current User:    git
+Using RVM:    no
+Ruby Version:    1.9.3p194
+Gem Version:    1.8.23
+Bundler Version:1.5.3
+Rake Version:    10.1.1
+
+GitLab information
+Version:    6.7.2
+Revision:    dbbf4ea
+Directory:    /home/git/gitlab
+DB Adapter:    mysql2
+URL:        xxx
+HTTP Clone URL:    xxx
+SSH Clone URL:    xxx
+Using LDAP:    no
+Using Omniauth:    no
+
+GitLab Shell
+Version:    1.9.1
+Repositories:    /home/git/repositories/
+Hooks:        /home/git/gitlab-shell/hooks/
+Git:        /usr/bin/git
+```
+
+Thanks a lot!

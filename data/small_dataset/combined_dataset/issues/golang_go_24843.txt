@@ -1,0 +1,32 @@
+proposal: x/sys/cpu
+
+
+This is a proposal for unifying the CPU detection for /x/crypto similar to the standard lib internal/cpu.
+Current situation
+Currently different crypto implementations detect CPU features differently:
+
+ChaCha20Poly1305 uses a mixture of Go and x64 asm.
+Blake2{b,s} uses plain asm and undocumented runtime functionality.
+Argon2 also uses plain asm and a pending CL for argon2 AVX2 support wants to add AVX2 detection in plain asm.
+
+This has lead to asm code which was copied over and over again. Usually we try to avoid asm code if possible.
+Why not use internal/cpu and the linker
+This CL tried to use the linker to reuse internal/cpu. But this approach does not work since x/crypto must also work with older Go releases and causes a performance regression at the moment.
+Possible Solution
+One possible solution would be an internal package (e.g. x/crypto/internal/cpu) which contains functionality to detect CPU/platform specific features similar to internal/cpu in the standard library.
+This package would be vendored into the standard library because chacha20poly1305 is used by crypto/tls.
+Using the linker approach showing in CL-106336 it's not required that internal/cpu duplicates x/crypto/internal/cpu. Instead we can use //go:linkname to instruct the linker to bind vars in internal/cpu to x/crypto/internal/cpu. This way both cpu packages only have to export the same API but the CPU feature detection (asm code) would be only in  x/crypto/internal/cpu.
+So this proposal would:
+
+Create a new package x/crypto/internal/cpu.
+Copy the CPU feature detection code from internal/cpu to  x/crypto/internal/cpu.
+Remove the the CPU feature detection code from internal/cpu but keep the export API.
+Change all crypto primitive implementations to use x/crypto/internal/cpu.
+Vendor x/crypto/internal/cpu into standard library (required by chacha20poly1305)
+Use the //go:linkname directive to bind the internal/cpu API to x/crypto/internal/cpu.
+
+Remark
+While it possible to extract the package x/crypto/internal/cpu to x/internal/cpu using the same approach described above it's not clear whether this is needed. AFAIK only x/crypto uses asm code depending on the CPU/platform features.
+Ref: #24828
+Also related: #24813
+/cc @ianlancetaylor @tklauser @FiloSottile @gtank

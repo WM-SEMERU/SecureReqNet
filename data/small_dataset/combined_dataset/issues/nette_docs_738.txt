@@ -1,0 +1,4 @@
+Update security-warning.texy
+
+
+V bežnej adresárovej štruktúre nette je cesta ku configu app/config/config.neon a príde mi, ze v ukážke by mala byt pouzitá práve celá táto cesta. Hlavne, ak si bude bezpečnosť testovať zaciatočník, tak nebude meniť adresárovú štruktúru nette.

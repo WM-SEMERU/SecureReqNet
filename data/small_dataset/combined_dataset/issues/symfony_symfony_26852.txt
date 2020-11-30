@@ -1,0 +1,71 @@
+Security component: extract LogoutManager from LogoutListener
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+4.0.6
+
+
+
+Sometimes we need to manually logout user, e.g. when a user was disabled (isEnabed() returns false).
+Controller code may look like this:
+# in this case user disables himself
+
+        $form = $this->createDeleteUserForm($userId);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $currentUser = $this->getUser();
+
+            if (
+                $currentUser
+                && $authChecker->isGranted('ROLE_USER')
+                && $currentUser->isEqualTo($requestedUser)
+            ) {
+                $requestedUser->disable();
+
+                $this
+                    ->getDoctrine()
+                    ->getManager()
+                    ->flush();
+
+                //$this->logoutUser(); <<< here is the problem
+            }
+        }
+
+The point is to logout user correctly I have to call manually and copy-paste this section of LogoutListener:
+// handle multiple logout attempts gracefully
+        if ($token = $this->tokenStorage->getToken()) {
+            foreach ($this->handlers as $handler) {
+                $handler->logout($request, $response, $token);
+            }
+        }
+
+        $this->tokenStorage->setToken(null);
+
+The only way for now is to pass hardcoded in SecurityExtension handlers (security.logout.handler.session, security.authentication.rememberme.services.simplehash.{providerKey}) somewhere. But their count and definitions could be changed.
+Could we move this code to separate class with public definition? LogoutManager or something like that.

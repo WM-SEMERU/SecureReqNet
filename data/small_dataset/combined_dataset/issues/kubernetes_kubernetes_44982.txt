@@ -1,0 +1,6 @@
+PodSecurityPolicy and PersistentVolumes
+
+
+In today's implementation, PodSecurityPolicy only limits volume types are directly specified in the pod.  Do we also want to support PersistentVolumeSource types?
+If the main purpose is to just limit HostPath volumes, then it is mostly ok as HostPath cannot be used as a PV for in a cluster with more than one node.  But if want to limit other types, then it may be worth expanding the policy to PVs.
+cc @kubernetes/sig-storage-feature-requests @kubernetes/sig-node-feature-requests

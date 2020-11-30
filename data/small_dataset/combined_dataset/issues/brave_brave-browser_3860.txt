@@ -1,0 +1,5 @@
+Extended validation SSL certificate is not indicated in browser URL field
+
+
+As title says, when viewing a website that has an Extended Validation SSL Certificate, Brave Browser does not indicate this in the URL bar at the top by showing the prefix of the SSL certificate. The only thing Brace Browser shows is a lock icon.
+I believe this should be honored as it is a security feature that is helpful in preventing phishing and the likes. The current functionality in Brave Browser strays from the (beneficial) convention of previous browsers.

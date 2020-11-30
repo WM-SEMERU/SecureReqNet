@@ -1,0 +1,4 @@
+Style HTTP links differently from HTTPS
+
+
+HTTP is a risky legacy protocol which we should do our best to deprecate. Styling HTTP and HTTPS links differently allows users to easily see what they're getting into.

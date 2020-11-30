@@ -1,0 +1,8 @@
+Validate that GitRepoVolumeSource parameters are not flags to git
+
+
+What this PR does / why we need it:
+Validate that GitRepoVolumeSource parameters are not flags to git, as a mitigation for vulnerabilities in git. See https://groups.google.com/d/msg/kubernetes-security-announce/ayqL4LiUcV4/09HL6e11AgAJ
+Release note:
+NONE
+

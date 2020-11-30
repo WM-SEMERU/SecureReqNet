@@ -1,0 +1,5 @@
+Consider masking `Authorization` header value in debugging transports
+
+
+kubectl get pods --v=8 is very handy for collecting wire traces of API communications, and is a good starting point for debugging problems, but exposes any bearer/basic auth in use. Requiring redaction before posting output is probably not good.
+cc @deads2k

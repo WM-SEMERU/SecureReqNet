@@ -1,0 +1,156 @@
+'### Summary
+
+Images attached to the wiki are Attached images
+
+### Steps to reproduce
+
+1. Create a project with Private access. Here I created a project named “sandbox”
+
+2. Next, edit the home page of the project’s wiki and insert an image using the “Attach a file” button :
+
+3. Hit the “Save changes” button. The image has been uploaded and saved.
+
+4. Now, log out from gitlab (Or open another browser)
+
+5. Try accessing the wiki page : And you are redirected to the sign-in page : OK
+
+6. Try accessing the just uploaded image and the image is displayed : KO
+
+### Expected behavior
+
+All images from the wiki on a private project should also be private.
+
+### Actual behavior
+
+Images being added to the wiki 
+
+### Relevant logs and/or screenshots
+
+Sample from a private project: http://gitlab.rocks/root/troop/uploads/cbd2e6d446bdb9a2d51290858b3273ca/logs.png 
+
+### Output of checks
+
+#### Results of GitLab application Check
+
+```
+Checking GitLab Shell ...
+
+GitLab Shell version >= 3.6.0 ? ... OK (3.6.0)
+Repo base directory exists?
+default... yes
+Repo storage directories are symlinks?
+default... no
+Repo paths owned by git:git?
+default... yes
+Repo paths access is drwxrws---?
+default... yes
+hooks directories in repos are links: ... 
+2/1 ... ok
+1/4 ... ok
+21/5 ... ok
+23/6 ... ok
+1/7 ... repository is empty
+1/8 ... ok
+1/9 ... ok
+1/10 ... ok
+25/11 ... repository is empty
+1/12 ... repository is empty
+Running /opt/gitlab/embedded/service/gitlab-shell/bin/check
+Check GitLab API access: OK
+Access to /var/opt/gitlab/.ssh/authorized_keys: OK
+Send ping to redis server: OK
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking Reply by email ...
+
+Reply by email is disabled in config/gitlab.yml
+
+Checking Reply by email ... Finished
+
+Checking LDAP ...
+
+LDAP users with access to your GitLab server (only showing the first 100 results)
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Git configured with autocrlf=input? ... yes
+Database config exists? ... yes
+All migrations up? ... yes
+Database contains orphaned GroupMembers? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Uploads directory setup correctly? ... yes
+Init script exists? ... skipped (omnibus-gitlab has no init script)
+Init script up-to-date? ... skipped (omnibus-gitlab has no init script)
+projects have namespace: ... 
+2/1 ... yes
+1/4 ... yes
+21/5 ... yes
+23/6 ... yes
+1/7 ... yes
+1/8 ... yes
+1/9 ... yes
+1/10 ... yes
+25/11 ... yes
+1/12 ... yes
+Redis version >= 2.8.0? ... yes
+Ruby version >= 2.1.0 ? ... yes (2.3.1)
+Your git bin path is "/opt/gitlab/embedded/bin/git"
+Git version >= 2.7.3 ? ... yes (2.7.4)
+Active users: 6
+
+Checking GitLab ... Finished
+```
+
+#### Results of GitLab environment info
+
+```
+System information
+System:		Ubuntu 14.04
+Current User:	git
+Using RVM:	no
+Ruby Version:	2.3.1p112
+Gem Version:	2.6.6
+Bundler Version:1.13.1
+Rake Version:	10.5.0
+Sidekiq Version:4.1.4
+
+GitLab information
+Version:	8.12.1-ee
+Revision:	8a575a5
+Directory:	/opt/gitlab/embedded/service/gitlab-rails
+DB Adapter:	PostgreSQL
+DB Version:	9.2.18
+URL:		http://gitlab.rocks
+HTTP Clone URL:	http://gitlab.rocks/some-group/some-project.git
+SSH Clone URL:	git@gitlab.rocks:some-group/some-project.git
+Elasticsearch:	no
+Geo:		no
+Using LDAP:	yes
+Using Omniauth:	yes
+Omniauth Providers: bitbucket
+
+GitLab Shell
+Version:	3.6.0
+Repository storage paths:
+- default: 	/var/opt/gitlab/git-data/repositories
+Hooks:		/opt/gitlab/embedded/service/gitlab-shell/hooks/
+Git:		/opt/gitlab/embedded/bin/git
+```
+
+***
+
+/cc @@DouweM

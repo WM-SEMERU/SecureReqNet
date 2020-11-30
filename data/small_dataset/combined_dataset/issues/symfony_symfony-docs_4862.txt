@@ -1,0 +1,10 @@
+Sticky Locale based on User Entity
+
+
+I think it is a common requirement that you want to define your locale based on
+a database value. E.g. the locale property of the user entity.
+There is no direct way to access the user in the LocaleListener hence it is registered
+before the FirewallListener and so no token exists.
+How about an additional chapter explaining how to achieve this adding a listener to
+the security.interactive_login event and storing the locale in this step?
+If this is wanted I might find the time for a draft.

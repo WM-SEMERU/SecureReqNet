@@ -1,0 +1,7 @@
+moved XSD to HTTPS - Part 2
+
+
+This is a follow up of #11122.
+I double checked the doctrine and phpunit namespaces, and the are available
+via https!
+//cc @fabpot

@@ -1,0 +1,11 @@
+Duo bypass
+
+
+This PR is a refactor of the Duo webflow to address the following.
+
+Corrects /serviceValidate to allow bypassed MFA.
+Set MFA ByPass flags in user authentication when Duo returns ALLOW, or bypass is set because of failure mode policy.
+Removes duplicated call to Duo /preAuth endpoint.
+Attempts to better detect when Duo should be considered unavailable by add inspections to /preAuth response.
+Adds to MFA Unavailable and MFA Denied end states to CAS login flow.
+

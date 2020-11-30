@@ -1,0 +1,7 @@
+Integrate Captcha for Signup, Contact Us and Other Public Forms
+
+
+Hi all,
+When in use, Signup, Contact Us and any other public webform form without Captcha presents a good opportunity for bot attacks.
+How can we have in-built Captcha integration for Signup and Contact Us pages as a basic security measure?
+Note: This issue was raised back in 2012 but was closed with no roadmap.

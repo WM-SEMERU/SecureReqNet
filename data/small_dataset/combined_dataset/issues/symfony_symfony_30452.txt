@@ -1,0 +1,14 @@
+[DX] Is DX is focused on IDE autocompletion ?
+
+
+It's awesome to see Symfony having a goal of improving developer experience (DX). However, as seen on the communication around the new HttpClient and on the related PR, it appears that this effort is mainly focused on making IDEs auto-completion nicer by reducing the number of symbols exposed to the user.
+In order to support this effort, it appears that compromises are being made on the design and the behavior of the component.
+Example of design compromise: Building a HTTP client with multiple backends is a natural fit for an adapter pattern. Instead, it has been chosen to re-implement the full client for each backend, and to use a trait for code re-use between them. Given rationale: Using an adapter pattern would introduce a new interface (e.g. HttpClientAdapterInterface), which would pollute the type space [and IDEs auto-completion]. An adapter pattern would have been better, IMO: Clearer extension points defined by the adapter interface, thus easier implementation of backends including by third parties, and easier evolution / backwards compatibility management. In contrast, a trait, whose methods and properties are inherently accessible by using classes, is impossible to evolve safely (especially if third parties use it).
+Example of behavior compromise: In order to support batching, the HTTP client exposes lazy responses instead: The request() method immediately returns a response that will be truly executed upon first access. The result of this choice is that error behavior is less intuitive, less obvious. It is unclear when and how exceptions can be thrown. Some getters, once called, change the behavior of other getters. An alternative approach would have been to return request objects, and to allow to execute the requests in batch. The non-lazy appraoch has apparently not been taken because of DX reason as well.
+Symfony 2 was once a model of clean code, clean design, least-surprise, non-magic, explicit code for me, which made for a the best developer experience I ever had with any web framework before. I feel that some of these values are being abandoned for the sake of IDE auto-completion conciseness.
+Here are my questions:
+
+Is it worth it ?
+Is it really improving the developer experience, beyond auto-completion ?
+Can Symfony cooperate with IDEs to improve the experience while reducing the compromises made on Symfony side ? (e.g. introducing an annotation that's mid-way between "every day APIs" and "internal")
+

@@ -1,0 +1,10 @@
+Toxiproxy API access from browser
+
+
+This was previously "fixed" in PR #184, but it looks like it is still possible to access Toxiproxy from a malicious page.
+I was looking deeper into this, and the User-Agent header is programmable via JS.
+See: https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name
+Generally this means a malicious page can make requests from the user's IP. The Host header can't be set, so this isn't terribly useful to an attacker, but there's still definitely DOS possibilities, and issues around unsecured internal endpoints.
+I think the main thing that needs to happen is to lock down and verify the hostname requests are being sent to. 127.0.0.1 and localhost should be safe, but we should disallow requests to other hostnames unless explicitly set when starting the service.
+CC-ing people on the original PR/issue:
+@JackMc @jpittis @sirupsen @EiNSTeiN-

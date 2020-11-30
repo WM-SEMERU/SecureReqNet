@@ -1,0 +1,60 @@
+Manifests v2 Schema2 : "missing signature key"
+
+
+I research how to push image for using registry v2 api.
+I uploaded blob layer and config layer. (https://www.danlorenc.com/posts/containers-part-2/)
+and finally I uploaded manifests file. but it didn't work.
+<registry file storage structure>
+
+`-- docker
+    `-- registry
+        `-- v2
+            |-- blobs
+            |   `-- sha256
+            |       |-- 54
+            |       |   `-- 54511612f1c4d97e93430fc3d5dc2f05dfbe8fb7e6259b7351deeca95eaf2971
+            |       |       `-- data
+            |       `-- 5c
+            |           `-- 5c3b4c4568d8a599ee334bc2333832f6745b91271c83acc5f756442d84f91edb
+            |               `-- data
+            `-- repositories
+                `-- busybox
+                    |-- _layers
+                    |   `-- sha256
+                    |       |-- 54511612f1c4d97e93430fc3d5dc2f05dfbe8fb7e6259b7351deeca95eaf2971
+                    |       |   `-- link
+                    |       `-- 5c3b4c4568d8a599ee334bc2333832f6745b91271c83acc5f756442d84f91edb
+                    |           `-- link
+                    `-- _uploads
+
+<manifests file>
+{
+   "schemaVersion": 2,
+   "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+   "config": {
+      "mediaType": "application/vnd.docker.container.image.v1+json",
+      "size": 1497,
+      "digest": "sha256:54511612f1c4d97e93430fc3d5dc2f05dfbe8fb7e6259b7351deeca95eaf2971"
+   },
+   "layers": [
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 694035,
+         "digest": "sha256:5c3b4c4568d8a599ee334bc2333832f6745b91271c83acc5f756442d84f91edb"
+      }
+   ]
+}
+
+<error message>
+time="2019-04-02T07:23:02Z" level=error msg="response completed with error" 
+auth.user.name=mozart err.code="manifest invalid" err.detail="missing signature key" 
+err.message="manifest invalid" go.version=go1.7.6 http.request.host="localhost:5000" 
+http.request.id=3d902243-f05d-461e-8014-6599e0202e76 http.request.method=PUT 
+http.request.remoteaddr="172.17.0.1:38734" http.request.uri="/v2/busybox/manifests/latest" 
+http.request.useragent="curl/7.35.0" http.response.contenttype="application/json; charset=utf-8" http.response.duration=1.722398ms http.response.status=400 http.response.written=82 
+instance.id=f9f88297-df84-445c-aa5a-91eb7122fe82 vars.name=busybox vars.reference=latest version=v2.6.2
+
+I don't understand why error message prints about signature key.
+In this documentation(https://docs.docker.com/registry/spec/manifest-v2-2/),
+manifests v2 schema2 has not include signature field.
+Please advise me about above signature error meaning. Thanks.

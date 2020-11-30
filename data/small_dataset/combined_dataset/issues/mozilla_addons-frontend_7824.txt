@@ -1,0 +1,5 @@
+Update prettier check
+
+
+Fixes #7823
+The first commit should fail the tests. Once that's proven, prettier can be run to catch-up the files that have been missed.

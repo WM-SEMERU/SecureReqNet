@@ -1,0 +1,50 @@
+[Translator] Warm up the translations cache in dev
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR fixes a bug in development when using the DataCollectorTranslator: because it's not implementing WarmableInterface, the translations cache is not built during cache:clear during development.

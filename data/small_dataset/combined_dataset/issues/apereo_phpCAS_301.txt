@@ -1,0 +1,5 @@
+phpCAS not sending logout request after session timeout
+
+
+If a user voluntarily clicks the logout link (and uses the phpCAS::logout() method, everything works fine. However, if the PHP session timeouts (after 24 mins), no logout request is sent to the iDP server. Is this something the library handles or does the app need to handle this? What is the proper way to handle this? I'm using phpCAS 1.3.4
+Thanks in advance

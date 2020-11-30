@@ -1,0 +1,49 @@
+[Security] Preserve URI fragment in HttpUtils::generateUri()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#23675
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

@@ -1,0 +1,20 @@
+'-----
+
+Filing this issue over here, to see if we can get some more attention on it. From the original [GitHub](https://github.com/gitlabhq/gitlabhq/issues/5563) issue filed by **alexdiliberto**:
+
+-----
+
+**Summary**: The Merge request "Assign To" dropdown is only populating with members of the "From" repository rather than the "Target" repository.
+
+**Steps to reproduce**: 
+1. Fork a repo
+2. Code / commit / push to forked repo
+3. Create a Merge Request back to the upstream repo
+4. Click on the "Assign To" dropdown
+5. Notice that the dropdown only contains users from the current forked repo (just myself)
+6. Just go ahead and leave it blank and create the Merge Request
+7. Now click edit to make changes, then click the "Assign To" dropdown again.
+8. Notice now that the dropdown contains users from the target upstream repo which is different from the first time.
+
+**Expected behavior**:
+I would expect the dropdown to **always** contain users from the target upstream repo. This is actually what happens when, after I create the merge request, I click Edit and then select the "Assign To" dropdown for a second time.

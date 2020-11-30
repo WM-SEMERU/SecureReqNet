@@ -1,0 +1,20 @@
+obj.valueOf and/or toString gets called by call(obj, ...) and apply(obj, ...)
+
+
+Original issue 323 created by metaweta on 2008-05-28T21:55:22.000Z:
+If an attacker gets a reference to a function that can't be called from
+caja code, he can assign it to the valueOf property of an object obj.  The
+function readPub() and its cousins use call or apply with obj as the first
+parameter.
+var counter=0;
+function countUseFunction(x) {
+return function () {
+++counter;
+return x;
+};
+}
+var o = { valueOf: countUseFunction('x') };
+(function(){}).apply(o)
+// counter === 1
+(function(){}).call(o)
+// counter === 2

@@ -1,0 +1,1 @@
+incorrectly sends requests to the sites of this type http://site.com/webh.php?name=name&test=test. As I understood the whole thing in &.

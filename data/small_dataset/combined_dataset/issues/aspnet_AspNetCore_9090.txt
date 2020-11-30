@@ -1,0 +1,20 @@
+<text> tags should not be rendered
+
+
+In a component, the following code results in the <text> tag showing up in the output instead of being omitted.
+<div class="footer">
+    @if (_sections.TryGetSection("footer", out var footer))
+    {
+        @footer
+    }
+    else
+    {
+        <text>Copyright 2019.</text>
+    }
+</div>
+
+The <text> is needed in this case because the inside of the else is in the C# context. We need to transition back to markup which requires @: or a tag.
+
+In generated code
+builder.AddMarkupContent(31, "<text>Copyright 2019.</text>");
+

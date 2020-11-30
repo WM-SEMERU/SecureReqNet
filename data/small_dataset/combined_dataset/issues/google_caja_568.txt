@@ -1,0 +1,12 @@
+Domita: TameNodes need to consistently check editable___
+
+
+Original issue 568 created by google@web.dwdw.me on 2008-06-12T23:41:36.000Z:
+TameNode.appendChild(), .insertBefore(), and removeChild() do not check
+editable___ on either the receiver or the child-argument.  (It should check
+on both.)  As a result, if some other gadget gives me a non-editable
+TameNode n that wraps one of its DOM nodes, I can launder it into an
+editable TameNode: I call myNode.appendChild(n), then ask for the children
+of myNode, and assuming myNode is editable, I've got an editable wrapper for n.
+Recommendation: Audit every method in domita.js that can mutate a node and
+ensure that it checks editable___.  I haven't done such a careful audit.

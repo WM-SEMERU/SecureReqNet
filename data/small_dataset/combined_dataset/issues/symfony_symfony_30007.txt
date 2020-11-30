@@ -1,0 +1,59 @@
+[FrameworkBundle] Support use of hyphen in asset package name
+
+
+This PR is a continuity of #28128
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29122
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+According to issue symfony/symfony-docs#10442, we tested in a demo bundle, for example in src/AppBundle/Resources/config/config.yml a package using hyphens: app-client-frontend, and withouth the patch it fails because the package is not recognized. With the patch, it works as expected.
+framework:
+    assets:
+        packages:
+            app-client-frontend:
+                version: "%env(FRONTEND_VERSION)%"
+                version_format: '%%2$s/dist/%%1$s'
+                base_urls:
+                  - "%env(FRONTEND_URL)%"

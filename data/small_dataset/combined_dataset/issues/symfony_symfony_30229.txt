@@ -1,0 +1,75 @@
+[Twig] Add a env variable call in AppVariable
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+To be created
+
+
+
+Hi everyone,
+Small PR about the AppVariable class, since 3.3, we can now access the flash message using getFlashes() (shortened to flashes() in Twig templates), since > 3.4, we can now use a .env file to define environment variable, problem is, what if we need to access a value in a template?
+Small exemple:
+
+Let's imagine that I need to define a hardcoded URL in my .env file and pass it (maybe as an API endpoint?) to JS?
+
+Actually, this look like this:
+# ... 
+<script type="text/javascript">
+    randomMethod('{{ app.request.server.get('key')|e('js') }}'); 
+</script>
+That's not really a problem but I think that we can have a shortcut (like the flash one) which allow us to write easier-to-read code:
+# ... 
+<script type="text/javascript">
+    randomMethod('{{ app.env('key')|e('js') }}'); 
+</script>
+Actually, this PR does not support the array usage (but this could be added if needed):
+# ... 
+<section>
+    {% for key, value in app.env(['firstKey', 'secondKey']) }} %}
+        # ...
+    {% endfor %}
+</section>
+This PR is based on a recent project where I needed to pass the Mercure hub URL to my JS code, the JS code made a call to the HUB and I can't pass the URL in a plain value in my template (as it can change due to Docker and server configuration).
+This PR is not fully tested for now (mainly for the array usage and the case where Request is null) but it can be improved) but I thought that it could be a good idea to discuss it before finishing the tests.
+Thanks for the feedback.

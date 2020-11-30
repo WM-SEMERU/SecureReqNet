@@ -1,0 +1,47 @@
+[Security] Add check for supported attributes in AclVoter
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Couldn't get the tests to pass but the issues were unrelated to the change.
+This fixes issues with Attribute containing ExpressionLanguage instance when using allow_if.

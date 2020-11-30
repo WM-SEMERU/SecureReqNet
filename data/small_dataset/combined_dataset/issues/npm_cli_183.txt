@@ -1,0 +1,4 @@
+licensee@7.0.1
+
+
+This PR upgrades licensee, the license checking tool.  The new major version of licensee supports considerably streamlined configuration, which I've leveraged here.

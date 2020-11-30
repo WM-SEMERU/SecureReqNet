@@ -1,0 +1,663 @@
+Logic in permissions handler misinterprets and/or abuses its parameters
+
+
+
+
+
+browser-laptop/app/filtering.js
+
+
+        Lines 485 to 643
+      in
+      06905f4
+
+
+
+
+
+
+ /** 
+
+
+
+  * Register permission request handler 
+
+
+
+  * @param {Object} session to add permission request handler on 
+
+
+
+  * @param {string} partition name of the partition 
+
+
+
+  */ 
+
+
+
+ function registerPermissionHandler (session, partition) { 
+
+
+
+ const isPrivate = module.exports.isPrivate(partition) 
+
+
+
+ // Keep track of per-site permissions granted for this session. 
+
+
+
+ let permissions = null 
+
+
+
+ session.setPermissionRequestHandler((mainFrameOrigin, requestingUrl, permissionTypes, muonCb) => { 
+
+
+
+ if (!permissions) { 
+
+
+
+       permissions = { 
+
+
+
+         media: { 
+
+
+
+           action: locale.translation('permissionCameraMicrophone') 
+
+
+
+         }, 
+
+
+
+         geolocation: { 
+
+
+
+           action: locale.translation('permissionLocation') 
+
+
+
+         }, 
+
+
+
+         notifications: { 
+
+
+
+           action: locale.translation('permissionNotifications') 
+
+
+
+         }, 
+
+
+
+         midiSysex: { 
+
+
+
+           action: locale.translation('permissionWebMidi') 
+
+
+
+         }, 
+
+
+
+         pointerLock: { 
+
+
+
+           action: locale.translation('permissionDisableCursor') 
+
+
+
+         }, 
+
+
+
+         fullscreen: { 
+
+
+
+           action: locale.translation('permissionFullscreen') 
+
+
+
+         }, 
+
+
+
+         openExternal: { 
+
+
+
+           action: locale.translation('permissionExternal') 
+
+
+
+         }, 
+
+
+
+         protocolRegistration: { 
+
+
+
+           action: locale.translation('permissionProtocolRegistration') 
+
+
+
+         } 
+
+
+
+       } 
+
+
+
+     } 
+
+
+
+ 
+
+
+
+ // TODO(bridiver) - the permission handling should be converted to an action because we should never call `appStore.getState()` 
+
+
+
+ // Check whether there is a persistent site setting for this host 
+
+
+
+ const appState = appStore.getState() 
+
+
+
+ const isBraveOrigin = mainFrameOrigin.startsWith(`chrome-extension://${config.braveExtensionId}/`) 
+
+
+
+ const isPDFOrigin = mainFrameOrigin.startsWith(`${pdfjsOrigin}/`) 
+
+
+
+ let response = [] 
+
+
+
+ 
+
+
+
+ if (!requestingUrl) { 
+
+
+
+       response = new Array(permissionTypes.length) 
+
+
+
+ response.fill(false, 0, permissionTypes.length) 
+
+
+
+ muonCb(response) 
+
+
+
+ return 
+
+
+
+     } 
+
+
+
+ 
+
+
+
+ for (let i = 0; i < permissionTypes.length; i++) { 
+
+
+
+ const responseSizeThisIteration = response.length 
+
+
+
+ const permission = permissionTypes[i] 
+
+
+
+ const alwaysAllowFullscreen = module.exports.alwaysAllowFullscreen() === fullscreenOption.ALWAYS_ALLOW 
+
+
+
+ const isFullscreen = permission === 'fullscreen' 
+
+
+
+ const isOpenExternal = permission === 'openExternal' 
+
+
+
+ 
+
+
+
+ let requestingOrigin 
+
+
+
+ 
+
+
+
+ if (requestingUrl === appUrlUtil.getBraveExtIndexHTML() || isPDFOrigin || isBraveOrigin) { 
+
+
+
+ // lookup, display and store site settings by the origin alias 
+
+
+
+         requestingOrigin = isPDFOrigin ? 'PDF Viewer' : 'Brave Browser' 
+
+
+
+ // display on all tabs 
+
+
+
+         mainFrameOrigin = null 
+
+
+
+       } else { 
+
+
+
+         requestingOrigin = getOrigin(requestingUrl) || requestingUrl 
+
+
+
+       } 
+
+
+
+ 
+
+
+
+ if (isOpenExternal) { 
+
+
+
+ // Open external is a special case since we want to apply the permission 
+
+
+
+ // for the entire scheme to avoid cluttering the saved permissions. See 
+
+
+
+ // https://github.com/brave/browser-laptop/issues/13642 
+
+
+
+ const protocol = urlParse(requestingUrl).protocol 
+
+
+
+         requestingOrigin = protocol ? `${protocol} URLs` : requestingUrl 
+
+
+
+       } 
+
+
+
+ 
+
+
+
+ // Look up by host pattern since requestingOrigin is not necessarily 
+
+
+
+ // a parseable URL 
+
+
+
+ const settings = siteSettings.getSiteSettingsForHostPattern(appState.get('siteSettings'), requestingOrigin) 
+
+
+
+ const tempSettings = siteSettings.getSiteSettingsForHostPattern(appState.get('temporarySiteSettings'), requestingOrigin) 
+
+
+
+ 
+
+
+
+ if (!permissions[permission]) { 
+
+
+
+ console.warn('WARNING: got unregistered permission request', permission) 
+
+
+
+ response.push(false) 
+
+
+
+       } else if (permission === 'geolocation' && partition === appConfig.tor.partition) { 
+
+
+
+ // Never allow geolocation in Tor mode 
+
+
+
+ response.push(false) 
+
+
+
+       } else if (isFullscreen && mainFrameOrigin && 
+
+
+
+ // The Torrent Viewer extension is always allowed to show fullscreen media 
+
+
+
+ mainFrameOrigin.startsWith('chrome-extension://' + config.torrentExtensionId)) { 
+
+
+
+ response.push(true) 
+
+
+
+       } else if (isFullscreen && alwaysAllowFullscreen) { 
+
+
+
+ // Always allow fullscreen if setting is ON 
+
+
+
+ response.push(true) 
+
+
+
+       } else { 
+
+
+
+ const permissionName = permission + 'Permission' 
+
+
+
+ let isAllowed 
+
+
+
+ if (settings) { 
+
+
+
+           isAllowed = settings.get(permissionName) 
+
+
+
+         } 
+
+
+
+ // Private tabs inherit settings from normal tabs, but not vice versa. 
+
+
+
+ if (isPrivate && tempSettings) { 
+
+
+
+           isAllowed = tempSettings.get(permissionName) 
+
+
+
+         } 
+
+
+
+ if (typeof isAllowed === 'boolean') { 
+
+
+
+ response.push(isAllowed) 
+
+
+
+         } 
+
+
+
+       } 
+
+
+
+ 
+
+
+
+ const message = locale.translation('permissionMessage').replace(/{{\s*host\s*}}/, requestingOrigin).replace(/{{\s*permission\s*}}/, permissions[permission].action) 
+
+
+
+ 
+
+
+
+ // If this is a duplicate, clear the previous callback and use the new one 
+
+
+
+ if (permissionCallbacks[message]) { 
+
+
+
+         permissionCallbacks[message](0, false) 
+
+
+
+       } 
+
+
+
+ 
+
+
+
+ const responseAutoAdded = responseSizeThisIteration !== response.length 
+
+
+
+ if (!responseAutoAdded) { 
+
+
+
+ appActions.showNotification({ 
+
+
+
+           buttons: [ 
+
+
+
+             {text: locale.translation('deny')}, 
+
+
+
+             {text: locale.translation('allow')} 
+
+
+
+           ], 
+
+
+
+           frameOrigin: getOrigin(mainFrameOrigin), 
+
+
+
+           options: { 
+
+
+
+             persist: !!requestingOrigin, 
+
+
+
+             index: i 
+
+
+
+           }, 
+
+
+
+           message 
+
+
+
+         }) 
+
+
+
+ 
+
+
+
+ // Use a closure here for the index instead of passing an index to the 
+
+
+
+ // function because ipcMain.on(messages.NOTIFICATION_RESPONSE above 
+
+
+
+ // calls into the callback without knowing an index. 
+
+
+
+ const index = i 
+
+
+
+         permissionCallbacks[message] = (buttonIndex, persist) => { 
+
+
+
+ // hide the notification if this was triggered automatically 
+
+
+
+ appActions.hideNotification(message) 
+
+
+
+ const result = !!(buttonIndex) 
+
+
+
+           response[index] = result 
+
+
+
+ if (persist) { 
+
+
+
+ // remember site setting for this host 
+
+
+
+ appActions.changeSiteSetting(requestingOrigin, permission + 'Permission', result, isPrivate) 
+
+
+
+           } 
+
+
+
+ if (response.length === permissionTypes.length) { 
+
+
+
+             permissionCallbacks[message] = null 
+
+
+
+ muonCb(response) 
+
+
+
+           } 
+
+
+
+         } 
+
+
+
+       } 
+
+
+
+     } 
+
+
+
+ if (response.length === permissionTypes.length) { 
+
+
+
+ muonCb(response) 
+
+
+
+     } 
+
+
+
+   }) 
+
+
+
+ } 
+
+
+
+
+
+What we currently call mainFrameOrigin is what the web contents calls GetLastCommittedURL().  This is, if I understand correctly, the last URL that was completely rendered in the main frame.  If you type in a new URL and there are redirects, that doesn't change it until the new page is completely rendered.  So no permissions requested by the new URL should be granted on the basis of the mainFrameOrigin.  We should make sure that all use of mainFrameOrigin makes sense, if any use of it makes sense here at all, or replace it by something involving requestingUrl or something if it doesn't make sense.
+Related:
+
+#14679
+#14887
+https://hackerone.com/bugs?subject=brave&report_id=388494
+

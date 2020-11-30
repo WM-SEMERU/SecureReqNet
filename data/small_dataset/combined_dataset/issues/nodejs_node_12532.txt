@@ -1,0 +1,4 @@
+Deps: Upgrade `c-ares` to >= 1.12.0 (CVE-2016-5180)
+
+
+c-ares has a vulnerability in ares_create_query or ares_mkquery. I don't know if this affects Node.js itself. However, it's shown as a  vulnerability in the node Docker image. E.g. the only one in the alpine image. 👍 Keep up the good work.

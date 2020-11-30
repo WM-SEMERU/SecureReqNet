@@ -1,0 +1,6 @@
+Have the Windows installer pin Brave to the taskbar
+
+
+This issue is to track having the installer of Brave automatically pin Brave to the taskbar.
+I'm not certain if this is still possible in Windows 10, but it used to be possible.
+This will certainly help retain engagement for new users.

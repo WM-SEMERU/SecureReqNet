@@ -1,0 +1,6 @@
+### Description
+
+There currently isn't a set way for admins to be able to manage tokens or their expiration date. Creating a setting to admins to set a default access token expiry time would give admins more control over the access tokens of their users.
+
+### Links / references
+https://gitlab.zendesk.com/agent/filters/325771188

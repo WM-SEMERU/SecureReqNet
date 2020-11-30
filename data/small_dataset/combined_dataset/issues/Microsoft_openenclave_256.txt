@@ -1,0 +1,20 @@
+Remove support for arbitrary EC curves in mbedtls
+
+
+We currently support MBEDTLS_PK_PARSE_EC_EXTENDED which parses the SpecifiedECDomain choice of EC parameters, to support variants of SEC1 that are not in RFC5915/RFC5480. The decision to support it is only based on hearing that bitcoin apps may use “non-standard” EC keys like that.
+Per GregZ's review:
+
+include/mbedtls/config.h says that only named curves are supported, but library/pkparse.c
+has code to parse ASN.1 and support arbitrary curves (see pk_group_from_specified), when that
+MBEDTLS_PK_PARSE_EC_EXTENDED is defined. Parsing risk aside (probably no one has fuzzed this
+code) I would still avoid this.  Allowing use of arbitrary curves can be a security concern, since
+validating that a curve is secure given the ASN.1 is not really feasible and efficient for a crypto library.
+I would leave this out and re-evaluate if someone requests it.
+
+
+If you want to support the bitcoin curve, make sure MBEDTLS_ECP_DP_SECP256K1_ENABLED is
+defined.  secp256k1 is non-standard in the sense that it’s in SEC1 but not the NIST standards, and
+people don’t use it outside of bitcoin.  But it is standardized, and probably has the biggest bounty
+on it of all time (breaking it would let you steal all the coins).
+
+We do already support MBEDTLS_ECP_DP_SECP256K1_ENABLED, so we should remove MBEDTLS_PK_PARSE_EC_EXTENDED.

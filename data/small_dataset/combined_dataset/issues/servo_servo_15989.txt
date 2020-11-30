@@ -1,0 +1,4 @@
+Incorporate cargo-audit into CI process for checking for security vulnerabilities
+
+
+https://github.com/RustSec/cargo-audit

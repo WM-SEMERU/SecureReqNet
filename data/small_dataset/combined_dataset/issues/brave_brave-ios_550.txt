@@ -1,0 +1,19 @@
+Enable HTTPSeverywhere
+
+
+Description:
+HTTPSEverywhere is not available on 1.7.
+Steps to Reproduce
+
+Navigate to http://rabbitmq.com
+
+Actual result: 
+Insecure connection is made
+Expected result:
+Request should be upgraded to https
+Reproduces how often: [Easily reproduced, Intermittent Issue]
+Everytime
+Brave Version: 
+1.7 (18.11.30.03)
+Device details: 
+iOS 12.1/iPhone SE

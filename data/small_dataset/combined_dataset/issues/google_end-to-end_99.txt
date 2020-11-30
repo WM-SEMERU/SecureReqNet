@@ -1,0 +1,6 @@
+Figure out what to do with revoked OpenPGP keys
+
+
+From evn@google.com on June 10, 2014 17:47:14
+Existing OpenPGP users probably can't use the extension unless we deal with revocations in a backwards-compatible way.
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=62

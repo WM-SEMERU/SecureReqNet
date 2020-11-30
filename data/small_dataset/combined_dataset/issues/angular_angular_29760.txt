@@ -1,0 +1,52 @@
+Running Bazel build on Windows with default Execution Policy doesn't work
+
+
+🐞 bug report
+Affected Package
+This issue is related to running Bazel on Windows.
+Is this a regression?
+N/A
+Description
+I checked out Angular and did a fresh yarn install. Once that was done, I tried running one of the package/examples, in this case it was my own example package (for my PR at #29755), which runs fine on the CI.
+Once I run my example using yarn bazel run //packages/examples/router/activated-route:devserver, I get the error I mentioned below.
+To resolve this, all I had to do was open PowerShell and execute the following command:
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+
+When I now try and run yarn bazel run //packages/examples/router/activated-route:devserver, everything works fine! :)
+As this unblocked me, I used this aproach and decided to see if anyone on twitter had a way to solve this.
+The friendly @alexeagle replied to my tweet asking if I had an Github issue. I didn't, but now I do 😄 !
+🔬 Minimal Reproduction
+Just run the master on Windows 10 with the default Execution Policy (Resitricted) and run any example mini-app ( ensure to empty your bazel directory with cache etc). If you want to execute the command I've been pasting (yarn bazel run //packages/examples/router/activated-route:devserver), you'll need to run my branch for this PR: #29755
+🔥 Exception or Error
+Extracting Bazel installation...
+Starting local Bazel server and connecting to it...
+ERROR: error loading package '': Encountered error while reading extension file 'package.bzl': no such package '@npm_bazel_karma//': copy_repository failed:
+STDOUT:
+
+STDERR:
+File C:\users\frederik\_bazel_frederik\p5aerkcd\external\npm_bazel_karma\_copy.ps1 cannot be loaded because running
+scripts is disabled on this system. For more information, see about_Execution_Policies at
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+    + CategoryInfo          : SecurityError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+ERROR: error loading package '': Encountered error while reading extension file 'package.bzl': no such package '@npm_bazel_karma//': copy_repository failed:
+STDOUT:
+
+STDERR:
+File C:\users\frederik\_bazel_frederik\p5aerkcd\external\npm_bazel_karma\_copy.ps1 cannot be loaded because running
+scripts is disabled on this system. For more information, see about_Execution_Policies at
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+    + CategoryInfo          : SecurityError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+INFO: Elapsed time: 54.276s
+INFO: 0 processes.
+FAILED: Build did NOT complete successfully (0 packages loaded)
+FAILED: Build did NOT complete successfully (0 packages loaded)
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+🌍  Your Environment
+Angular Version:
+N/A
+Anything else relevant?
+So I'm running on Windows 10, My Execution-Policy is set to its default value.
+If any other environmental information is needed, feel free to reach out.

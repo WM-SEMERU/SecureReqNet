@@ -1,0 +1,8 @@
+[Security] AbstractVoter should not abstain when object == null
+
+
+I was migrating our voters to use the AbstractVoter and I notice something strange.
+In 2.7 and in 2.8, if nothing is passed for the object argument, the voter votes ACCESS_ABSTAIN.
+IMHO, this is wrong. For example, If a voter votes for POST_CREATE, I may have no $object parameters. and so the abstract voter should let the voter decide.
+What do you think?
+ping @inoryy @weaverryan @wouterj @Koc

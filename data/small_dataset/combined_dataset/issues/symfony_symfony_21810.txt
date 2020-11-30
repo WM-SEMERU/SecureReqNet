@@ -1,0 +1,58 @@
+#21809 [SecurityBundle] bugfix: if security provider's name contains upper cases then container didn't compile
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations? no
+
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#21809
+
+
+License
+MIT
+
+
+
+then security.yml  providers was with upper case, on container compile error was thrown:
+[04:39:32][Ant output]      [exec]      [exec] > Sensio\Bundle\DistributionBundle\Composer\ScriptHandler::clearCache
+[04:39:32][Ant output]      [exec]      [exec] 
+[04:39:32][Ant output]      [exec]      [exec] 
+[04:39:32][Ant output]      [exec]      [exec]   [Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException]
+[04:39:32][Ant output]      [exec]      [exec]   The service "security.authentication.provider.simple_form.default" has a de
+[04:39:32][Ant output]      [exec]      [exec]   pendency on a non-existent service "security.user.provider.concrete.carrier
+[04:39:32][Ant output]      [exec]      [exec]   User".
+
+
+Problem has occurred with this commit line:
+fbd9f88#diff-2be909961a57bf75fbb600c1f5fc46e3R320
+Issue fixes with this PR.

@@ -1,0 +1,4 @@
+Reconsider AddAuthorizationPolicyEvaluator required for the auth middleware
+
+
+Setting up the Auth middleware requires calling services.AddAuthorizationPolicyEvaluator. The name isn't particularly discoverable. We should instead see if we could repurpose services.AddAuthorization

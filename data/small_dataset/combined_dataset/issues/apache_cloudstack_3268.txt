@@ -1,0 +1,22 @@
+Support sort_key for vpc_offerings table
+
+
+Fixes- #2742
+UI Supported ordering VPC Offerings but the API did not have that
+support implemented. This makes the change in updateVPCOfferings
+and listVPCOfferings API calls, along with necessary database
+changes for supporting sorting of VPC Offerings.
+Description
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+Added column to Database -
+
+How Has This Been Tested?
+Load the UI and sort VPC Offerings. Ensure the order persists. Make sure issue 2742 is not reproducible.

@@ -1,0 +1,11 @@
+If you include an image that comes from an HTTP connection and
+GitLab is set up to use TLS, then you get mixed content issues.
+See for example https://gitlab.com/gitlab-org/gitlab-ce/issues/13162.
+
+GitHub is using https://github.com/atmos/camo, a Node.js proxy to serve all images.
+
+Diaspora is also using it https://wiki.diasporafoundation.org/Installation/Camo
+
+I think it would be cool to support it.
+
+\cc @JobV @jacobvosmaer @sytses 

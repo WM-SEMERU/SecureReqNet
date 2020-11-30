@@ -1,0 +1,31 @@
+goinstall fails on Windows, sh: ./goinstall: Bad file number
+
+
+by jcowgar:
+What steps will reproduce the problem?
+
+C:\Development\Go> goinstall github.com/dchest/gotweet/src
+
+-- or --
+
+C:\Development\Go> goinstall
+
+
+What is the expected output?
+No output, just the installation of the package
+
+What do you see instead?
+sh: ./goinstall: Bad file number
+
+Which compiler are you using (5g, 6g, 8g, gccgo)?
+N/A
+
+Which operating system are you using?
+Windows 7 Home Premium
+
+Which revision are you using?  (hg identify)
+hg not installed, using the May 3rd release of Go, 
+
+gowin32_release.r57.1_installer.exe
+
+Please provide any additional information below.

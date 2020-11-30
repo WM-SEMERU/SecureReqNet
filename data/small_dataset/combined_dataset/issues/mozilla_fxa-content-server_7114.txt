@@ -1,0 +1,4 @@
+chore(docs): Update the README to point to the monorepo
+
+
+@mozilla/fxa-devs - r?

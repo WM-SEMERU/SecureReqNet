@@ -1,0 +1,16 @@
+TraceableVoter seems to retain tags from inner service
+
+
+Symfony version(s) affected: 4.2.0
+Description
+I have a voter that implements ServiceSubscriberInterface. When clearing the cache I get the following error:
+[Symfony\Component\DependencyInjection\Exception\InvalidArgumentException]                                                                                         
+  Service "debug.security.voter.App\Voter\MyVoter" must implement interface "Symfony\Contracts\Service\ServiceSubscriberInterface".
+
+How to reproduce
+Create a auto-configured voter that implements ServiceSubscriberInterface and clear the cache in dev.
+Possible Solution
+Not a solution but if I remove this bit of code from AddSecurityVoter, it works as expected.
+Additional context
+Possibly related to #29385?
+Looks to have been introduced in #27914.

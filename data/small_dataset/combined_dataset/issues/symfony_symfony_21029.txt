@@ -1,0 +1,102 @@
+Reduce the perceived complexity of the security component
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.3
+
+
+
+I'm sure that the Security component is great ... but most Symfony newcomers think that it's an abhorrent monstrosity. Could we please discuss about solutions to reduce its perceived complexity?
+Problem 1 - Low level calls
+I think this is the worst problem for newcomers. Symfony forces you to make "low level" calls for all its operations.
+Example: getting the current user (what's a token storage?)
+$user = $this->get('security.token_storage')->getToken()->getUser();
+instead of:
+$user = $this->get('security')->getUser();
+
+// add this method too in case you need the token
+// $user = $this->get('security')->getToken();
+Example: checking permissions (who's the authorization checker?)
+$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
+// $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN', $subject);
+instead of:
+$this->get('security')->isGranted('ROLE_ADMIN');
+// $this->get('security')->isGranted('ROLE_ADMIN', $subject);
+Problem 2 - Unintuitive behavior
+Example: defining a role hierarchy simplifies the assignment of roles for users, but complicates the code a lot. You need to deal with the getReachableRoles() method, etc.
+Example: the management of the user types is so confusing. Checking if a user is anonymous is usually done like this:
+$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY');
+First, it's incredibly verbose. Second, it returns true also when the user is NOT strictly anonymous (for example when the user is logged in).
+Why not add something like this that returns true ONLY when the user is really anonymous (not logged in, not remembered, etc.):
+$this->get('security')->isAnonymous();
+The anonymous handling in general is very confusing. For example, having to add the anonymous option to firewalls is always a big "WTF?" in workshops for Symfony newcomers.
+Problem 3 - Common tasks verbosity
+Example: encoding a password for the currently logged user
+$user = $this->get('security.token_storage')->getToken()->getUser();
+$password = $this->get('security.password_encoder')->encodePassword($user, 'foobar');
+Instead of:
+$password = $this->get('security')->encodePassword('foobar');
+
+// in case you want to encode it for other user:
+// $password = $this->get('security')->encodePassword('foobar', UserInterface $user);
+Example: login a user.
+$user = ...
+// why does the token need the roles as the 4th arg if I pass the entire user as the 1st arg?
+$token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
+$token->setAuthenticated(true);
+$this->get('security.token_storage')->setToken($token);
+$this->get('session')->set('_security_main', serialize($token));
+$this->get('session')->save();
+instead of:
+$user = ...
+$this->get('security')->login($user);
+// support this also: $this->get('security')->login($user, $providerKey);
+Problem 4 - Roles, attributes
+
+The concept of "security attributes" is hard to understand for a lot of newcomers. If they were called "security permissions", anyone could understand them even without an explanation.
+Having roles separated from attributes is always confusing. Are roles attributes? Are a special type of attributes? Are something different but related? Is IS_AUTHENTICATED_ANONYMOUSLY a role or not?
+
+We could make everything "security permissions" and forget about roles.
+// Before:
+@Security("has_role('ROLE_ADMIN')")
+@Security("is_granted('EDIT_PRODUCT')")
+
+// After:
+@Security("is_granted('ROLE_ADMIN')")
+@Security("is_granted('EDIT_PRODUCT')")
+// Alternative
+@Security("is_granted('ROLE_ADMIN') and is_granted('EDIT_PRODUCT')")
+Maintaining the ROLE_ prefix would be a good idea for most apps, but if they were permissions, people could remove it if needed. Example: "does the user have the ADMIN permission?" instead of "does the user has the ROLE_ADMIN role?".
+Final remarks
+I'm not proposing to remove the low level security calls. I'm not asking to hide Security features. I'm not asking to remove developer's control of Security component. I'm just asking to:
+
+Make people work less and learn less things to make the common security tasks.
+Allow people to go deep into low level functions if they need to (exactly the same as today).
+
+References
+A while ago I published a proof-of-concept bundle with some of these ideas: EasySecurityBundle. Don't use it in real applications! I don't know if it's safe and it's not optimized for performance. It was just a proof of concept to see if this idea is doable.

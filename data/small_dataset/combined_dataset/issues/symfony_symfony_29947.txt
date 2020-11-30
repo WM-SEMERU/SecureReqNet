@@ -1,0 +1,13 @@
+Request::isSecure returns that url is not secured when server HTTPS variable is "OFF"
+
+
+Symfony version(s) affected: 3.4.15 and maybe other versions
+Description
+By the documentation:
+http://php.net/manual/en/reserved.variables.server.php
+'HTTPS' => 'Set to a non-empty value if the script was queried through the HTTPS protocol.'
+So if HTTPS is "OFF" or "ON" or "BLABLA" its all good and isSecure should return true, which is not case for "OFF"
+How to reproduce
+I noticed bug on my production server where server HTTPS variable was "OFF" and SERVER_PORT was "443"
+Possible Solution
+Check for empty (null) value in isSecure method instead of string "OFF"

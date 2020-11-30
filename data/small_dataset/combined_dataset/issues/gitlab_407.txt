@@ -1,0 +1,3 @@
+Checkout John Smith's Temp repository. It has nice HTML dscription, but in listing raw tags are visible.
+
+![screenshot6](https://gitlab.com/uploads/gitlab-org/gitlab-ce/5ffb379499/screenshot6.png)

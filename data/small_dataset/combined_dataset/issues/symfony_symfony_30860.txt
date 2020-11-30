@@ -1,0 +1,63 @@
+[Profiler] Fix dark theme elements color
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#29194 
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+I think the color handling of the code highlighted (exceptions, ...) is quite questionnable, but as we use the highlight_file() function, I don't really see an other way to handle it, tell me what you think.
+Before/After
+Form
+
+
+Twig render graph
+
+
+Exceptions
+
+
+Doctrine queries
+
+

@@ -1,0 +1,51 @@
+[Ldap] Add @method addAttributeValues/removeAttributeValues to EntryManagerInterface
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29433
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+this is the continuity of the PR #29434 of @grahl
+Fix should be self-explanatory based on details in #29433

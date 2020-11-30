@@ -1,0 +1,6 @@
+DCR: As a developer, I would like to be able use a FakeQnaMaker service so I can programmatically set the QnA responses that will be returned by my bot
+
+
+
+
+

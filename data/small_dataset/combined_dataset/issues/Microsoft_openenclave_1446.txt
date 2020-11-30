@@ -1,0 +1,6 @@
+Upgrade mbedtls to 2.7.9 or better
+
+
+We've fallen behind in keeping up with the various fixes in the crypto library and as of 2/11/19 we're about 3 stable versions behind to get to 2.7.9.
+Of note is a fix to handling for MBEDTLS_PLATFORM_CALLOC/FREE_MACRO which can be worked around by setting MBEDTLS_PLATFORM_STD_CALLOC/FREE instead, but that should be updated to use the macro definitions as documented for MBEDTLS_PLATFORM_MEMORY when we upgrade to 2.7.9 or better.
+Related to #1457: We may move directly to 2.16.0 instead as the new long-term support branch mbedTLS has marked.

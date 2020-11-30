@@ -1,0 +1,7 @@
+fix: Calculate rate based on discount on server side, only if not rate or pricing rule applied
+
+
+Before:
+
+After:
+

@@ -1,0 +1,27 @@
+`kubeadm join` aborts during CA key rotation
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+Versions
+kubeadm version (use kubeadm version):
+kubeadm version: &version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.3", GitCommit:"721bfa751924da8d1680787490c54b9179b1fed0", GitTreeState:"clean", BuildDate:"2019-02-01T20:05:53Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Environment:
+
+Kubernetes version (use kubectl version): 1.10.x apiserver
+Cloud provider or hardware configuration: baremetal
+OS (e.g. from /etc/os-release): CoreOS
+Kernel (e.g. uname -a): 4.19.18-coreos
+Others:
+
+What happened?
+I am part-way through rotating my CA key.  This involves appending a second key to just about everywhere that needs it (in particular: /etc/kubernetes/pki/ca.crt now contains two keys).  I updated the cluster-info configmap similarly, but now kubeadm join loops continuously with:
+[discovery] Trying to connect to API Server "kube.lan:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://kube.lan:6443"
+[discovery] Failed to connect to API Server "kube.lan:6443": failed to parse cluster CA from the cluster-info configmap: trailing data after first PEM block
+(repeat)
+What you expected to happen?
+As with everywhere else in k8s, I expect kubeadm to use all the CA keys for TLS validation (ie: each connection must be validated against at least one key in this set).  In particular, the presence of a second key should not be an error.
+How to reproduce it (as minimally and precisely as possible)?
+Append a second CA key to cluster-info configmap
+Anything else we need to know?

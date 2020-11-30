@@ -1,0 +1,52 @@
+[Form] Refactor DefaultChoiceListFactory
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+A small optimization (remove unnecessary foreach calls) and a naming improvement.
+ping @HeahDude , @stof
+#EUFOSSA

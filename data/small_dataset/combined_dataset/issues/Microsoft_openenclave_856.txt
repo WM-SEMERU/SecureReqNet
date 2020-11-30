@@ -1,0 +1,5 @@
+Updates samples to use MBEDTLS_RSA_PKCS_V21 instead of MBEDTLS_RSA_PKCS_V15
+
+
+The changes in this  PR addressed issue: #810
+It impacts both the local_attestation and remote_attestation samples

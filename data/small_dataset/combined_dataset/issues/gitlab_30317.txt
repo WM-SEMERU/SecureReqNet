@@ -1,0 +1,14 @@
+### Summary
+
+In a Gitlab instance where the public visibility level is restricted, access to the profile pages is denied.
+However, profile pages are handled differently from everything else, which makes it possible to confirm the existence of a guested username.
+
+### Steps to reproduce
+
+Restrict public visibility level in the Gitlab settings. I also assume, that there are no public groups or projects.
+When publicly accessing (not logged in) https://gitlab-instance/{user} where {user} is a valid username in the gitlab instance, I get a 404.
+When accessing https://gitlab-instance/{something-else} where {something-else} is not a valid username and no publicly visible object, I am redirected to the login-page.
+
+### What is the expected *correct* behavior?
+
+When not logged in, every access (except to publicly visible objects) should redirect to the login page.

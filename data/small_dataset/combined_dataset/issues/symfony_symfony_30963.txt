@@ -1,0 +1,52 @@
+[Serializer] Experimental for ObjectListExtractor
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30904
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Related to #30818
+I want to mark this class as @expiremental until we have the full refactoring done of the Serializer, also this would allow change needed if some behavior was not correctly taken into care in 4.3
+Mark also final for the default implementation as we don't want that to be extendable and user should use composition over inheritance.

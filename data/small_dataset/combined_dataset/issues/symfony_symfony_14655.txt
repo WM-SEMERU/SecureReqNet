@@ -1,0 +1,4 @@
+[Security] Documentation about VoterInterface.supportsAttribute(...) is wrong
+
+
+The documentation says that the parameter of VoterInterface.supportsAttribute( $attribute ) should be a string. But this is neither required nor inforced by the code. Actually, the child class ExpressionVoter even checks if $attribute is an instance of Expression.

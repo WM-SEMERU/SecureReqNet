@@ -1,0 +1,101 @@
+Just upgraded fine but I have noticed some strange text -- a string of all 'a's -- above the Commit Message box when editing a file in the GUI. See attached screen shot.
+
+https://dl.dropboxusercontent.com/u/2790/temp/gitlab6.9.png
+
+I wouldn't know what or where to look to fix this string of 'a's.
+
+```
+sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production 
+
+System information
+System:		Ubuntu 12.04
+Current User:	git
+Using RVM:	no
+Ruby Version:	1.9.3p327
+Gem Version:	1.8.23
+Bundler Version:1.5.3
+Rake Version:	10.3.1
+Sidekiq Version:2.17.0
+
+GitLab information
+Version:	6.9.0
+Revision:	f0a32c6
+Directory:	/home/git/gitlab
+DB Adapter:	mysql2
+URL:		https://<redacted>
+HTTP Clone URL:	https://<redacted>/some-project.git
+SSH Clone URL:	git@<redacted>:some-project.git
+Using LDAP:	no
+Using Omniauth:	no
+
+GitLab Shell
+Version:	1.9.4
+Repositories:	/home/git/repositories/
+Hooks:		/home/git/gitlab-shell/hooks/
+Git:		/usr/bin/git
+```
+
+```
+sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.4 ? ... OK (1.9.4)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ... 
+... all ... ok
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files: 
+	/home/git/repositories: OK
+	/home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.2.12
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ... 
+... all have namespace ... yes
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.9.3)
+
+Checking GitLab ... Finished
+
+```

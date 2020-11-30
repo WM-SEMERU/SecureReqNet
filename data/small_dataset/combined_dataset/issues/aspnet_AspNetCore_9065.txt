@@ -1,0 +1,16 @@
+MissingManifestResourceException forces you to Stop running.
+
+
+Describe the bug
+I get a lot of these exceptions:
+System.Resources.MissingManifestResourceException: 'Could not find any resources appropriate for the specified culture or the neutral culture.  Make sure "Foo.Bar.Resources.Areas.Identity.Pages.Account.Manage.IndexModel+InputModel.resources" was correctly embedded or linked into assembly "Foo.Bar" at compile time, or that all the satellite assemblies required are loadable and fully signed.'
+
+sometimes I can just F5 them and continue,
+Other times I just get this and I can only click Stop and run my solution again:
+
+To Reproduce
+Steps to reproduce the behavior:
+
+Using this version of ASP.NET Core 2.2 (sdk 2.2.105 - 2.2.3)
+Visual Studio 2017 15.9.11
+

@@ -1,0 +1,5 @@
+[Security][Firewall] Why firewalls are not merged as other security elements?
+
+
+I made a bundle to handle all the various user management needs common to several websites. The bundle contains a security boilerplate configuration ready to import. The problem is: with this setup I can only have a single main firewall. If I want to add a second one (for example a service that exposes an api with a different user provider) I obtain the message "You are not allowed to define new elements for path "security.firewalls". Please define all elements for this path in one config file".
+What are the technical reasons for this choice? It should be farly simple to enable this feature.

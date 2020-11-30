@@ -1,0 +1,21 @@
+Bitwarden extension icon does not move focus to 'Search vault' field when pressed.
+
+
+Description
+Bitwarden extension icon does not move focus to 'Search vault' field when pressed.
+Steps to Reproduce
+
+Be logged in to Bitwarden.
+Activate Bitwarden by pressing the extension icon top right.
+
+Actual result:
+'Search vault' field is not in focus, as it should be.
+Expected result:
+'Search vault' field is in focus and searching for passwords can immediately begin. This behavior is seen when the same actions are taken in other browsers' Bitwarden extensions.
+Reproduces how often:
+Always.
+Brave Version
+about:brave info:
+0.23.79 rev 51b4905
+OS Version
+macOS 10.13.6 (17G65)

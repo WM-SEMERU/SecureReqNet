@@ -1,0 +1,8 @@
+[AMBARI-25051] Solved the problem of not being able to abort the request when a custom command request has a failed task.
+
+
+What changes were proposed in this pull request?
+When you call the request interface to execute a custom new request, you can choose to skip the failed task by specifying the skip_failure parameter to true in the RequestInfo parameter.
+How was this patch tested?
+manual tests
+Please review Ambari Contributing Guide before opening a pull request.

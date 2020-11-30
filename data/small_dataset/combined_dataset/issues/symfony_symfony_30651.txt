@@ -1,0 +1,58 @@
+Allow user to set the project dir
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes 
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Currently, the project directory is defined by the location of the composer.json file.
+That file is not required in production, which therefore breaks the method getProjectDir (who sends back null).
+The offered solution, while working, requires the developer to implement it, and uses inheritance override, while a more aesthetic solution could be used.
+This does not fix the behaviour, but allows the developer to pass the project dir as a parameter.
+While this solution does not include BC break or anything, it is important to notice that it includes
+an optional parameter.
+Object instantiation in the framework bundle recipe could be updated as follow (in another PR):
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG'], dirname(__DIR__));

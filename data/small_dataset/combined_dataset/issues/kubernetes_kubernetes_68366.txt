@@ -1,0 +1,6 @@
+Deprecate and remove debugging logging handler on apiserver
+
+
+Audit logging replaced a majority of valid uses of this endpoint. It provides an easy escalation and is a security concern.
+/sig api-machinery
+@liggitt @cjcullen

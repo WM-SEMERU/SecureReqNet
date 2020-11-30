@@ -1,0 +1,13 @@
+Fix "cURL error 60: SSL certificate problem"
+
+
+
+It only happens on Windows systems
+It's causing lots of different issues:
+
+.gitignore is not downloaded when creating a project (#249)
+PHPStorm can't create Symfony projects (symfony/symfony#19360)
+...
+
+
+

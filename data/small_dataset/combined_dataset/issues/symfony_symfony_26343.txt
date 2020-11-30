@@ -1,0 +1,49 @@
+[Security][DX] improve Access decision log in debugger
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.4
+
+
+
+Currently, security profiler displays a useful decision log which helps you figure out what's going on:
+
+But, you as the developer are not sure:
+
+where the access decision request originated, in what scope
+what voters declared they're abstained?
+what voters voted on what decision (assuming multiple "trees")
+what the final decision was?
+
+In my mind, we could reorganize this to have it be some sort of tree:
+
+each decision request would be a branch with the origin class/method as the name of the branch
+if a voter requires a decision again, we could nest it under the origin branch
+
+Basically, the decision log should be visualized in the way in which it works (which seems like a tree) instead of a linear list.
+It would even be useful if you could get this decision from elsewhere (say, a command) which could explain the decision process to you for a given set of requirements (access token, user + action etc) retroactively.

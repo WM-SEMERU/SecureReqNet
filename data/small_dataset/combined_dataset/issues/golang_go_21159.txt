@@ -1,0 +1,47 @@
+net/smtp: SMTP injection via recipient addresses
+
+
+(I contacted security@golang.org about this and was asked to create a public issue.)
+What version of Go are you using (go version)?
+1.8.3 and 1.9beta2
+What operating system and processor architecture are you using (go env)?
+darwin/amd64
+What did you do?
+Go's net/smtp package appears to be vulnerable to SMTP injection via recipient e-mail addresses, similar to the issues outlined in this whitepaper for other languages: http://www.mbsd.jp/Whitepaper/smtpi.pdf
+Here's a quick demonstration:
+package main
+
+import (
+	"log"
+	"net/smtp"
+)
+
+func main() {
+	to := []string{"recipient@example.net>\r\nDATA\r\nInjected message body\r\n.\r\nQUIT\r\n"}
+	msg := []byte("To: recipient@example.net\r\n" +
+		"Subject: discount Gophers!\r\n" +
+		"\r\n" +
+		"Real message body\r\n")
+	err := smtp.SendMail("localhost:25", nil, "sender@example.org", to, msg)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+Basically, if you pass an unsanitized address to address inputs, like SendMail, Rcpt, or Mail (eg "recipient@example.net>\r\nDATA\r\nInjected message body\r\n.\r\nQUIT\r\n"), it's possible to manipulate the e-mail body sent.
+What did you expect to see?
+In the example above, net/smtp should reject the recipient address since it contains line breaks.
+What did you see instead?
+The message is sent to recipient@example.net with a message body of  "Injected message body" (instead of the intended body of "Real message body").
+Notes
+As indicated in the whitepaper, the solution for this is to disallow line breaks in the "RCPT TO" and "MAIL FROM" commands, which is also in accordance with RFC 5321. So unless you think it's the responsibility of applications to sanitize addresses (rather than in net/smtp's purview), it would be nice to see this fixed in Go's builtin net/smtp package, so things are safer by default.
+If you'd like for me to put together a patch to address this, I'd be happy to try and do that.
+And if it helps (and for additional context), you can see how this security issue was addressed in the Ruby ecosystem last year:
+
+Ruby's Net::SMTP library was updated to reject any command lines with line breaks in it.
+The "mail" gem was also updated with similar validations, as well as rejecting any addresses longer than 2KB in length.
+
+The length restriction is to address the theoretical CRLF-less attack outlined in the whitepaper, but as the whitepaper's conclusion indicates:
+
+Of course, a little more relaxed rule can be an option, as a small proportion of existing and actually used addresses is known to be incompliant to the standard. Needless to say, when a relaxed rule is employed, addresses containing line-breaks must not be allowed.
+
+So I'm not 100% sure about the best approach, but it seems like perhaps just rejecting line breaks in a library like net/smtp might be preferable, unless you think it's also worth enforcing the line length limits in accordance with RFC 5321.

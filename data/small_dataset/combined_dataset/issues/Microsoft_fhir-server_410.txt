@@ -1,0 +1,9 @@
+Fix for SmartProxy E2E test failure
+
+
+Description
+Fixed the SmartProxy E2E test. The failure was caused because we were advancing to the next action before the previous action completed. Added delay to prevent this.
+Related issues
+Addresses [issue #409 ].
+Testing
+Existing tests passed.

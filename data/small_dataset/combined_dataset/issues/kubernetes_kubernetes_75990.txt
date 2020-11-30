@@ -1,0 +1,15 @@
+Remove hard-coded region list from AWS cloud provider
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+This consumes the region list from the AWS SDK and accounts for special opt-in regions and removes the hard-coded region list in k8s. This will ensure that the regions are always up-to-date as we update the AWS SDK instead of requiring duplicated accounting.
+Which issue(s) this PR fixes:
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+consume the AWS region list from the AWS SDK instead of a hard-coded list in the cloud provider
+
+/sig aws
+/sig cloud-provider
+/assign @justinsb

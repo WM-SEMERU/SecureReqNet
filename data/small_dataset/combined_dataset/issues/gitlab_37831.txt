@@ -1,0 +1,18 @@
+The 9.5.4 security release contained a combined patch for Nokogiri and the Mail Ruby gem. The Nokogiri patch was backported but the Mail gem patch was not. The Mail gem upgrade patches an SMTP injection vulnerability.
+
+This vulnerability actually exists in [ActionMailer](https://www.mbsd.jp/Whitepaper/smtpi.pdf) and was patched in newer versions of Ruby. No patch has been released in an official Ruby 2.3 version, though it has been backported. The [Mail gem upgrade](https://github.com/mikel/mail/pull/1097) was intended to protect these older Ruby versions that did not receive the ActionMailer patch.
+
+GitLab versions 9.5.3 and older are vulnerable to CRLF SMTP injection in the pipelines emails service. An attacker can use line feeds to issue SMTP commands directly to any SMTP server if the instance is configured to use SMTP for mail delivery. The default configuration does not but most large instances are probably using SMTP.
+
+Entering the following in the list of recipient email addresses will send an email to `gavin@hooli.com`:
+
+```
+user1@example.com>
+RCPT TO:<gavin@hooli.com>
+DATA
+You stink
+.
+QUIT
+```
+
+9.5.4 is patched, but we need backports in the next security release to upgrade the Mail gem for 9.4 and 9.3. There is also [work being done](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/14250) to translate the CR and LF into commas for this field.

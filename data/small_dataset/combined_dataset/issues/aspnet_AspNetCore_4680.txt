@@ -1,0 +1,10 @@
+Binding Secure cookies to ITlsTokenBindingFeature
+
+
+Any protected cookie marked as Secure should also use ITlsTokenBindingFeature as part of its protection.
+Today CookieAuth always uses ITlsTokenBindingFeature if it's available, ignoring CookieSecureOption. Check CookieSecureOption before applying ITlsTokenBindingFeature.
+Other protected data to consider:
+OAuth state field
+OIDC state fields
+OIDC nonce
+Twitter request token

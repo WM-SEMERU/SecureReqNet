@@ -1,0 +1,97 @@
+Identity Cannot connect to remote Authority URL - says url is invalid when it is clearly valid.
+
+
+Describe the bug
+Identity Apparently does not recognize Authority URL - because I'm getting an error saying my url is not valid, but it is as seen below.
+To Reproduce
+
+Create a new ASP.NET Core API project on visual studio against ASP.NET Core 2.2 SDK
+Configure it to allow using JWT with a remote authority by adding this to ConfigureServices:
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = "http://localhost:5000";
+                    options.RequireHttpsMetadata = false;
+                    options.Authority = "partnerAPI";
+                });
+
+
+Add
+
+            app.UseAuthentication();
+
+To Configure.
+
+Now protect an endpoint with [Authorize] and try accessing it.
+It gives the following error:
+
+System.InvalidOperationException: IDX20803: Unable to obtain configuration from: '[PII is hidden]'. ---> System.IO.IOException: IDX20804: Unable to retrieve document from: '[PII is hidden]'. ---> System.InvalidOperationException: An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.
+   at System.Net.Http.HttpClient.PrepareRequestMessage(HttpRequestMessage request)
+   at System.Net.Http.HttpClient.SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.GetAsync(Uri requestUri, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Microsoft.IdentityModel.Protocols.HttpDocumentRetriever.<GetDocumentAsync>d__8.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.Protocols.HttpDocumentRetriever.<GetDocumentAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectConfigurationRetriever.<GetAsync>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.<GetConfigurationAsync>d__24.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.<GetConfigurationAsync>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.<HandleAuthenticateAsync>d__6.MoveNext()
+
+Expected behavior
+The expected behaviour is to hit the Authority server to try and authenticate the token. It works fine in another project I have targeting ASP.NET Core 2.1
+Additional context
+NET Core SDK (reflecting any global.json):
+ Version:   2.2.101
+ Commit:    236713b0b7
+
+Runtime Environment:
+ OS Name:     Windows
+ OS Version:  10.0.17134
+ OS Platform: Windows
+ RID:         win10-x64
+ Base Path:   C:\Program Files\dotnet\sdk\2.2.101\
+
+Host (useful for support):
+  Version: 2.2.0
+  Commit:  1249f08fed
+
+.NET Core SDKs installed:
+  1.1.10 [C:\Program Files\dotnet\sdk]
+  1.1.11 [C:\Program Files\dotnet\sdk]
+  2.1.4 [C:\Program Files\dotnet\sdk]
+  2.1.202 [C:\Program Files\dotnet\sdk]
+  2.1.402 [C:\Program Files\dotnet\sdk]
+  2.1.502 [C:\Program Files\dotnet\sdk]
+  2.2.101 [C:\Program Files\dotnet\sdk]
+
+.NET Core runtimes installed:
+  Microsoft.AspNetCore.All 2.1.4 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+  Microsoft.AspNetCore.All 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+  Microsoft.AspNetCore.All 2.2.0 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.All]
+  Microsoft.AspNetCore.App 2.1.4 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 2.2.0 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 1.0.12 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 1.0.13 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 1.1.9 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 1.1.10 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 2.0.5 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 2.0.9 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 2.1.4 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 2.1.6 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 2.2.0 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+
+To install additional .NET Core runtimes or SDKs:
+  https://aka.ms/dotnet-download
+

@@ -1,0 +1,22 @@
+PowerShell 6.2 window often just closes immediately after launch
+
+
+After upgrading to PowerShell 6.2, from 6.1.3, and removing PowerShell 6 Preview (6.2 RC 1), PowerShell often will not start.  The window appears, powershell looks like its starting, and then the window closes.    Several attempts are usually needed to get a window to successfully get to a prompt.
+All the update/uninstall process was done at one time.  I have two different machines that seem to be exhibiting this issue, but I don't have any that are not.
+Environment data
+Name                           Value
+----                           -----
+PSVersion                      6.2.0
+PSEdition                      Core
+GitCommitId                    6.2.0
+OS                             Microsoft Windows 10.0.17763
+Platform                       Win32NT
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0…}
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1
+WSManStackVersion              3.0
+
+My other machine is running the most recent Windows 19H1 Insiders Preview.
+I am also experiencing a lot of crashing in VS Code's PowerShell 2.0.1 extension with certain documents open, but at least PowerShell 6.2 usually opens fine in the 'integrated console' of the extension.  May or may not be related, but I am not seeing anyone posting on that topic either.
+Let me know if there is any other data I can include.
+Note I originally had trouble with earlier updates to the preview releases, see #8442.  I have not reviewed the condition there as in this case, PowerShell does usually open if I keep trying.

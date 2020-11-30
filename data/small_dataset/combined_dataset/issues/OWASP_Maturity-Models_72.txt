@@ -1,0 +1,36 @@
+Project list gets data from File System and allows DoS (with large amounts of requests)
+
+
+this code will transverse the file system
+  # returns a list of current projects (which are defined by a folder containing an maturity-model.json )
+  list: ()=>
+    projects = {}
+    for folder in @.data_Path.folders_Recursive()
+      config_File = folder.path_Combine @.config_File
+      if config_File.file_Exists()
+        data = config_File.load_Json()
+        if data and data.key
+          projects[data.key] = 
+            path: folder
+            data: data    
+    projects   
+check performance and DoS implications of this code
+Here is the test that confirms the DoS prob
+describe '_regression | A11 - DoS', ->
+
+  # https://github.com/DinisCruz/BSIMM-Graphs/issues/72
+  it 'Issue 72 - Project list gets data from File System and could cause DoS', ()->
+    using new Data_Project(), ->
+      start = Date.now();
+      test_List = (index, next)=>
+        @.list().assert_Is_Object()
+        next()
+
+      #items = [0..0     ]   # 1 takes 15ms
+      items = [0..10   ]   # 10 takes 50ms
+      #items = [0..100  ]   # 100 takes 250ms
+      #items = [0..1000 ]   # 1000 takes 2250ms
+      #items = [0..5000 ]   # 5000 takes 1200ms
+      async.each items, test_List, ->
+        duration = Date.now() - start
+        duration.assert_In_Between(30,80)  # for 10 it should take between 20ms and 80ms

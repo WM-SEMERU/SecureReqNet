@@ -1,0 +1,20 @@
+'When logging requests and other data GitLab tries to filter tokens to the best of our extend. However, if any tokens got missed its hard to detect and this might only get noticed after an incident.
+
+My proposal would be to use a fixed prefix for all authentication tokens we use, to be set on `add_authentication_token_field :token`
+
+Example;
+
+```ruby
+#Ci::Build model
+add_authentication_token_field :token, prefix: 'GLCI'
+```
+
+The token as output should be `GLCI-<SecureRandomToken>`. This change should be backwards compatible, so token being used right now should still work.
+
+Models using tokens that I know of:
+- Ci::Build
+- Ci::Runner
+- PersonalAccessToken
+- ApplicationSettings 2x
+- DeployToken
+- User 2x

@@ -1,0 +1,9 @@
+Reclassify [Skipped] issues: Security Context
+
+
+@swagiaal there is a test that you marked as skipped that needs to be reenabled or otherwise taken care of (see #19505):
+
+"Security Context [Skipped]"
+
+Can we instead classify these as [Feature:SecurityContext]? See #19505 for context.
+Happy to answer any questions if anything doesn't make sense.

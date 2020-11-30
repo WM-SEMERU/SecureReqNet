@@ -1,0 +1,4 @@
+Bug 1541543 - Update svg to use context-fill
+
+
+#4863 (comment)

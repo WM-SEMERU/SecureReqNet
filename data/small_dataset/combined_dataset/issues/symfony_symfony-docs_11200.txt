@@ -1,0 +1,6 @@
+Update dotenv.rst
+
+
+it seems standard practice is to no longer use getenv() due to it not being thread safe.
+symfony/symfony@21a909a
+Updated the docs to remove reference to that function.  Would we want to go so far as to add a note to not use getenv()?

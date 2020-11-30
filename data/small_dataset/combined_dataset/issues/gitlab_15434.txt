@@ -1,0 +1,9 @@
+ZD: https://gitlab.zendesk.com/agent/tickets/19595  
+
+# Description
+
+XSS injection: naming a branch:  `");alert(1);console.log(" ` including the quotes around it, then going to the commits page of this branch causes the alert to be displayed. This is due to the CommitsList.init() call that's made on that page, which allows any name to be inserted there without filtering that I can see.
+
+***
+
+/cc @rspeicher 

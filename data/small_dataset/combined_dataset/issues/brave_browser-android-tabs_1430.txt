@@ -1,0 +1,9 @@
+Suggestion to Add a Scheduling Feature where you can schedule to surf a site at a particular time.
+
+
+Proposal
+My proposal is for a scheduling feature on the browser.
+Component
+When you are on a site, and would probably want to do something else on that same site at a particular time, a feature should be added that when you are not using the browser you get a notification from the browser about your scheduled surf on that site. Also if you are on the browser,  the notification can still come as a message that will read over the tab you are on.
+Benefits
+This will be an amazing feature for sites which open and close registration forms due to large queues. With this feature, using Brave browser will give users and edge to getting to the site early at the intended time,  even if you get carried away with other things.

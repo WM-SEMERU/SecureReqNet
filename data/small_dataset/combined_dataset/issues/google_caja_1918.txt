@@ -1,0 +1,44 @@
+Whitelist HSL color notation in CSS
+
+
+Original issue 1920 created by riel@zzapps.nl on 2014-05-16T08:21:03.000Z:
+What revision of the cajoler exhibits the problem?  On what browser and OS?
+Caja Playground
+Rev 5643 built on 2013-12-05 14:54:08.
+ChromeOS
+Versie 35.0.1916.69
+Platform 5712.35.0 (Official Build) stable-channel stumpy
+Firmware Google_Stumpy.2.102.0
+What steps will reproduce the problem?
+
+Change backgroundcolor using HSL values with Javascript
+document.getElementById("myDIV").style.backgroundColor = "hsl(59,100%,50%)";
+Console gives error "bad value hsl(59,100%,50%) for CSS property backgroundColor "
+
+What is the expected output?
+
+Changing background color
+
+Setting colors using HSL is very easy programmatically, i.e. a color bar. Cannot be used using HTMLService in GAS.
+What do you see instead?
+
+Error message in console
+
+Please provide any additional information below.
+--- source ----
+<style>
+myDIV
+{
+width:300px;
+height:300px;
+background-color:coral;
+color:white;
+}
+</style>
+<div id="myDIV">
+<h1>Hello</h1>
+</div>
+<script>
+document.getElementById("myDIV").style.backgroundColor = "hsl(59,100%,50%)";
+</script>
+​

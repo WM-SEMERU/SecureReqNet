@@ -1,0 +1,11 @@
+Block Third Party Cookies -- Allow Users to Use a Global Exception List
+
+
+
+A recent user request to make platform.twitter.com unblocked so that they can view embedded tweets on a blog page made clear the need for a Global Exception List
+in EFF Privacy Badger which Blocks Third Party Cookies and Tracking, One Can Setup a Global Whitelist if so inclined:
+
+
+- You can allow Third Party Cookies in Bravery -> Clicking 'Allow ads and Tracking'
+- The Problem being that it is a binary, globally on or globally off. A user cannot just allow a specific site through (like platform.twitter.com for embedded tweets) on all of their sites.
+      

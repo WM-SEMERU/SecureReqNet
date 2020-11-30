@@ -1,0 +1,40 @@
+Facebook login in Asp.Net Core 3.0 doesn't work
+
+
+Describe the bug
+I've followed the steps in the docs to add facebook login to my web app, but I get an error stating that 'AuthenticationBuilder' doesn't contain a definition for 'AddFacebook'.
+To Reproduce
+Steps to reproduce the behavior:
+
+Using this version of ASP.NET Core 3.0
+Run this code:
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
+
+            services.AddMvc()
+                .AddNewtonsoftJson();
+        }
+
+
+See error
+

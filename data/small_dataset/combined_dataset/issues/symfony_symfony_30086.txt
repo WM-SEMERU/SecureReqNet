@@ -1,0 +1,10 @@
+symfony/routing: "Notice: Undefined offset: 6"
+
+
+Symfony/routing version(s) affected: >4.2.1
+Description
+Symfony throws error exception "Notice: Undefined offset: 6"
+https://github.com/symfony/symfony/blob/4.2/src/Symfony/Component/Routing/Matcher/Dumper/PhpMatcherTrait.php#L87
+foreach ($this->staticRoutes[$trimmedPathinfo] ?? [] as list($ret, $requiredHost, $requiredMethods, $requiredSchemes, $hasTrailingSlash, , $condition)) // Typo comma?
+Possible Solution
+Remove duplicated comma.

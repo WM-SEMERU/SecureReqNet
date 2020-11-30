@@ -1,0 +1,50 @@
+Given the following Haml template:
+
+```haml
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{property: 'og:title',       content: unsafe_string(quote: '"')}
+    %meta{property: 'og:description', content: unsafe_string(quote: "'")}
+    %meta{property: 'og:description', content: double_quotes}
+
+    %title TestHaml
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    = yield
+```
+
+and the following helpers:
+
+```ruby
+module ApplicationHelper
+  def unsafe_string(quote: '"')
+    %{0;url=http://www.bing.com#{quote} http-equiv=#{quote}refresh}.html_safe
+  end
+
+  def double_quotes
+    %{0;url=http://www.bing.com" http-equiv='refresh'}.html_safe
+  end
+end
+```
+
+Haml 4.0.7 will produce the following HTML:
+
+```html
+    <meta content='0;url=http://www.bing.com" http-equiv="refresh' property='og:title'>
+    <meta content="0;url=http://www.bing.com' http-equiv='refresh" property='og:description'>
+    <meta content='0;url=http://www.bing.com" http-equiv=&#x0027;refresh&#x0027;' property='og:description'>
+```
+
+while Hamlit 2.5.0 produces the following:
+
+```html
+<meta content='0;url=http://www.bing.com" http-equiv="refresh' property='og:title'>
+<meta content='0;url=http://www.bing.com' http-equiv='refresh' property='og:description'>
+<meta content='0;url=http://www.bing.com" http-equiv='refresh'' property='og:description'>
+```
+
+this leads to XSS.

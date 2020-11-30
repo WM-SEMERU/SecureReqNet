@@ -1,0 +1,4 @@
+make sure we pass basic Electron security audit
+
+
+Most of https://doyensec.com/resources/us-17-Carettoni-Electronegativity-A-Study-Of-Electron-Security-wp.pdf does not apply to Muon but we should go through it anyway and make sure we don't have any security gaps.

@@ -1,0 +1,27 @@
+Documentation for startup analyzer endpoint routing warning
+
+
+
+
+
+AspNetCore/src/Mvc/Mvc.Analyzers/src/Startup/StartupAnalyzer.Diagnostics.cs
+
+
+         Line 18
+      in
+      69f4b6d
+
+
+
+
+
+
+ helpLinkUri: "https://aka.ms/YJggeFn"); 
+
+
+
+
+
+This help link currently goes to https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing
+Before 3.0 final the link should point to an article on migrating MVC from 2.0 to 3.0
+// @rynowak

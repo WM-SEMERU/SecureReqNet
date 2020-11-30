@@ -1,0 +1,16 @@
+http2: add aligned padding strategy
+
+
+Add a padding strategy option that makes a best attempt to ensure
+that total frame length for DATA and HEADERS frames are aligned
+on multiples of 8-bytes.
+Ping @nodejs/http2
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+http2

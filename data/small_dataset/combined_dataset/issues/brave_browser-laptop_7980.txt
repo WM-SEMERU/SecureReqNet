@@ -1,0 +1,49 @@
+Prevent navigation to non-dotted IP addresses?
+
+
+
+
+Did you search for similar issues before submitting this one?
+Yes
+
+
+Describe the issue you encountered:
+The use of non-dotted IP addresses online is rare, and often associated with malicious activity. Brave should consider whether or not to respect attempts to navigate to non-dotted IP addresses. This would include redirection by way of the location header.
+
+
+Platform (Win7, 8, 10? macOS? Linux distro?):
+All
+
+
+Brave Version (revision SHA):
+0.14.0
+
+
+Steps to reproduce:
+
+Navigate to http://2955052009
+Note that Brave navigates to duckduckgo.com
+
+
+
+Actual result:
+Brave resolves the decimal IP, and navigates.
+
+
+Expected result:
+Brave should, perhaps, refuse to navigate to these less-common patterns.
+
+
+Will the steps above reproduce in a fresh profile? If not what other info can be added?
+Yes
+
+
+Is this an issue in the currently released version?
+Yes
+
+
+Can this issue be consistently reproduced?
+Yes
+
+
+#5627 #4761 #3317

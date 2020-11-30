@@ -1,0 +1,6 @@
+Update images before 1.7 release
+
+
+A number of addon images have CVEs that have been fixed in the upstream base images.
+We should update these images before the final 1.7 release.
+cc @timstclair

@@ -1,0 +1,13 @@
+Refactor performEtcdStaticPodUpgrade to reduce its complexity
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Refactor performEtcdStaticPodUpgrade to reduce its complexity.
+Which issue(s) this PR fixes:
+Fixes #
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+/release-note-none
+/priority backlog

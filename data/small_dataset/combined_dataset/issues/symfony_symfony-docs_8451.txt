@@ -1,0 +1,4 @@
+Added shortcuts for the main security functionality
+
+
+See symfony/symfony#24337.

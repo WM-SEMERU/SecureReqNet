@@ -1,0 +1,58 @@
+[Security] Do not mix password_*() API with libsodium one
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+n/a
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Argon2IPasswordEncoder uses native password_hash() and password_verify() functions if the current PHP installation embeds Argon2 support (>=7.2, compiled --with-password-argon2).
+Otherwise, it fallbacks to the libsodium extension.
+This was fine at time the encoder was introduced, but meanwhile libsodium changed the algorithm used by sodium_crypto_pwhash_str() which is now argon2id, that goes outside of the scope of the encoder which was designed to deal with argon2i only.
+Nothing we can do as databases may already contain passwords hashed with argon2id, the encoder must keep validating those.
+However, the PHP installation may change as time goes by, and could suddenly embed the Argon2 core integration. In this case, the encoder would use the password_verify() function which would fail in case the password was not hashed using argon2i.
+This PR prevents it by detecting that argon2id was used, avoiding usage of password_verify().
+See jedisct1/libsodium-php#194 and #28093 for references.
+Patch cannot be tested as it is platform dependent.
+Side note: I'm currently working on a new implementation for 4.3 that will properly supports argon2id (which has been added to the PHP core sodium integration in 7.3) and argon2i, distinctively.

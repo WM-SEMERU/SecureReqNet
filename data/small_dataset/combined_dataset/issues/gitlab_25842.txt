@@ -1,0 +1,10 @@
+## Steps to reproduce
+1. Upload html file as attachment to any comment on a project
+1. Set up service, such as Redmine
+1. Set project URLs to uploaded html file's URL
+1. Enable and save service
+1. Click issues link on project
+1. Turbolinks will execute the file
+
+## Screenshot
+![Screen_Shot_2016-12-20_at_00.24.32__50_](/uploads/b256c9e71b0d796055265f435489ffe1/Screen_Shot_2016-12-20_at_00.24.32__50_.png)

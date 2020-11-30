@@ -1,0 +1,7 @@
+Unpublished modules should return 410 Gone
+
+
+Unpublished packages currently cause pain for NPM users. A recommended approach ends up being to delete your lock file and re-generate it, which can cause a huge amount of dependencies to change when only one was needed.
+Unpublished packages currently return the HTTP status code "404 Not Found". This code is designed for resources that might exist again in the future. In the NPM ecosystem, version numbers are wisely
+immutable. A better HTTP status code to return for an unpublished package is "410 Gone", designed for resources that will never come back.
+When npm encounters a 410 Gone resource, it could try to resolve the related semantic version again, possibly selecting a newer version, fixing the issue the single dependency without requiring regenerating the entire lock file.

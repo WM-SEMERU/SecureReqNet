@@ -1,0 +1,13 @@
+[Security] Anonymous token is not automatically removed
+
+
+Is there a reason why AnonymousToken is not persistent into session? I am not sure about others use case, but I want to work with AnonymousToken same as UsernamePasswordToken or any other.
+AnonymousToken has ability to store attributes. This feature is useless as anything you store can not be accessed. Not only that, developers might think that it works same as UsernamePasswordToken which is correctly stored in session and they use this feature for example to store sort order in table. Not realising that this won't work for anonymous users.
+I think that AnonymousToken should behave same as any other token. Can somebody maybe write a reason why this is not the case?
+For me it's better to work with tokens than sessions as I can change token based on context.
+Other options how to store values between calls are:
+
+Sessions - this is not directly related to token
+Creating specific token and using it instead of AnonymousToken
+Altering SecurityContext and place parameter bag right there
+

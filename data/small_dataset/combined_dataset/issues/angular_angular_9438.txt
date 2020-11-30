@@ -1,0 +1,20 @@
+HTML Sanitization removes HTML5 Video elements
+
+
+I'm submitting a ...  (check one with "x")
+[x] bug report
+[ ] feature request
+[ ] support request => Please do not submit support request here, instead see https://github.com/angular/angular/blob/master/CONTRIBUTING.md#question
+
+Current behavior
+Since the introduction of html sanitization with rc2, html5 video elements get removed when binding html to the innerHTML property of an element.
+Expected/desired behavior
+Video elements should be retained just like img elements.
+What is the motivation / use case for changing the behavior?
+I need to incorporate external html into my app and if sanitization removes video elements I need to turn it off, which causes security issues.
+Please tell us about your environment:
+
+Angular version: 2.0.0-rc.2 and rc.3
+Browser: [all]
+Language: [all]
+

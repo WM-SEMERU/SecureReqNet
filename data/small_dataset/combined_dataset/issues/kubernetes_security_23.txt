@@ -1,0 +1,15 @@
+Change distributor applications from email to issues
+
+
+Reasons for doing so:
+
+Eliminate non-vulnerability reports from security@kubernetes.io
+Provide public record of justifications for distributors list membership
+Easier to track process
+
+Downsides:
+
+Requires the person filling in the application to have a github account
+Makes the application public record (+/-)
+
+In some ways, having someone apply with a PR to edit the documented list would be even cleaner, but you can't have multiple PR templates.

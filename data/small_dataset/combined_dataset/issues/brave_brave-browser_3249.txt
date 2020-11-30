@@ -1,0 +1,11 @@
+[hackerone] #492048 - .onion domains leaks
+
+
+https://hackerone.com/bugs?report_id=492048
+Test Plan (windows only):
+
+Go to a non-existent site like dklfjdkafjdkafj.com in a regular tab
+You should see a link that says 'Running Windows Network Diagnostics'
+Repeat in a private tab; you should not see this link
+Repeat in a tor tab; you should not see this link
+

@@ -1,0 +1,16 @@
+Symfony ``cache.serializer`` pool clearing does not work in prod env
+
+
+Symfony version(s) affected: v3.4.24
+Description
+Symfony cache.serializer pool clearing does not work in prod env.
+How to reproduce
+git clone git@github.com:symfony/symfony-standard.git
+cd symfony-standard/
+composer install
+php bin/console cache:pool:clear cache.serializer # works 
+php bin/console cache:pool:clear cache.serializer --env=prod # does not work
+
+Error message:
+13:46:06 ERROR     [console] Error thrown while running command "cache:pool:clear 'cache.serializer' --env=prod". Message: "The "cache.serializer" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead." ["exception" => Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException { …},"command" => "cache:pool:clear 'cache.serializer' --env=prod","message" => "The "cache.serializer" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead."]
+

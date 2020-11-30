@@ -1,0 +1,7 @@
+verify javascript toUpperCase is independent of locale
+
+
+Original issue 557 created by felix8a on 2008-06-12T19:43:22.000Z:
+es3 specifies a separate method toLocaleUpperCase, but it's not clear from
+the description of toUpperCase that it's guaranteed to be
+locale-independent.  need to verify this for the common browsers.

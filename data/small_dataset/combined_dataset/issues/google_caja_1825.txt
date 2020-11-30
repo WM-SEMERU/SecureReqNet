@@ -1,0 +1,5 @@
+Google Visualization ComboChart not rendered properly
+
+
+Original issue 1827 created by ihab.awad on 2013-08-02T16:40:37.000Z:
+ComboChart demo shows the superimposed line chart in native and ES5/3 modes, but not in ES5 mode.

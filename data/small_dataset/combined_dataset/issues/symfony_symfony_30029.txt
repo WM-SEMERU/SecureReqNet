@@ -1,0 +1,22 @@
+UniqueEntity custom error message with toString on entity does not work
+
+
+Symfony version(s) affected: 4.2.*
+Description
+According to Symfony UniqueEntity documentation  if the constraint is violated then I can create a custom message error by implementing the __toString() method on my Entity.
+I've attempted to create my custom message via the validation.yaml (which works) and I've implemented the __toString() method (which does not work)
+According to the docs:
+
+Messages can include the {{ value }} placeholder to display a string representation of the invalid entity. If the entity doesn't define the __toString() method, the following generic value will be used: "Object of class CLASS identified by "
+
+How to reproduce
+To reproduce, clone my project and follow README.md guide:
+https://github.com/kemicofa/unique_entity_custom_message_tostring_bug
+Once, the project is installed run the WebCaseTest that I've implemented.
+Essentially my project will attempt to insert two users with the same email in the database.
+The first works as expected and the second fails as expected. However, the second response doesn't have the expected __toString() return message sent, only the default message is sent:
+
+Object(App\Entity\User).email: /** more text here */
+
+Possible Solution
+Additional context

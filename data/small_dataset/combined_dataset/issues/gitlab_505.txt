@@ -1,0 +1,5 @@
+I agree that people are using self-signed certificates a lot, but for real organizations, having ssl verification on web-hooks turned off isn't good.
+
+Maybe this should be something that is configurable?
+
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/models/web_hook.rb#L34

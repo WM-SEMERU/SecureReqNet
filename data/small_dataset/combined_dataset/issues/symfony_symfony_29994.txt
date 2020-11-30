@@ -1,0 +1,50 @@
+Replace gender by eye color in tests
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4 
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#29737 
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+I've slightly changed @derrabus proposition to use color only because of the potentially racist interpretation when used for a person, open for discussion though.

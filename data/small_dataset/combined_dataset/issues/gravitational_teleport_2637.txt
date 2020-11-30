@@ -1,0 +1,4 @@
+[Forward-port] Add "search events" web API method.
+
+
+Forward-port of #2632 to master.

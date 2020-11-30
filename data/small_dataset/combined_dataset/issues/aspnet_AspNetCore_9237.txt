@@ -1,0 +1,75 @@
+Inject configuration into ASP Core correctly
+
+
+We host a ASP Core web api inside a service fabric instance. I want to forward all configs to the Core app. I use this method
+https://dzimchuk.net/configuring-asp-net-core-applications-in-service-fabric/
+And then I invoke it using ConfigureAppConfiguration
+protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
+{
+    return new[]
+    {
+        new ServiceInstanceListener(serviceContext =>
+            new KestrelCommunicationListener(serviceContext, "ServiceEndpoint", (url, listener) =>
+            {
+                ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
+
+                return new WebHostBuilder()
+                            .UseKestrel()
+                            .ConfigureServices(
+                                services => services.AddSingleton(serviceContext))
+                            .ConfigureAppConfiguration(builder => builder.AddServiceFabricConfiguration(serviceContext))
+                            .UseContentRoot(Directory.GetCurrentDirectory())
+                            .UseStartup<Startup>()
+                            .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.UseReverseProxyIntegration)
+                            .UseUrls(url)
+                            .Build();
+            }))
+    };
+}
+The inected configration in startup class do have the configs applied, like connection string and logging
+
+But it seems its not fully jacked into the framework.
+For example I need to explicit supply ApplicationInsights with the config services.AddApplicationInsightsTelemetry(Configuration); otherwise it does not pickup the instrument key. And the logging does not work (the log level is not applied).
+Update:
+I tried doing a custom config provider in a standard core project without service fabric and it works.
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateWebHostBuilder(args).Build().Run();
+    }
+
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        WebHost.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration(builder => builder.AddServiceFabricConfiguration())
+            .UseStartup<Startup>();
+}
+
+internal class ServiceFabricConfigurationProvider : ConfigurationProvider
+{
+
+    public override void Load()
+    {
+        Data["Logging:Debug:LogLevel:Default"] = "Information";
+    }
+}
+
+internal class ServiceFabricConfigurationSource : IConfigurationSource
+{
+
+
+    public IConfigurationProvider Build(IConfigurationBuilder builder)
+    {
+        return new ServiceFabricConfigurationProvider();
+    }
+}
+
+public static class ServiceFabricConfigurationExtensions
+{
+    public static IConfigurationBuilder AddServiceFabricConfiguration(this IConfigurationBuilder builder)
+    {
+        builder.Add(new ServiceFabricConfigurationSource());
+        return builder;
+    }
+}
+So it seems something i service fabric land is not working as it should.

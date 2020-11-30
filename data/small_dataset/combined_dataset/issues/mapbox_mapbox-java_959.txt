@@ -1,0 +1,7 @@
+Add via waypoints support to MapboxDirections
+
+
+Fixes #956
+
+Adds via waypoints support to MapboxDirections
+

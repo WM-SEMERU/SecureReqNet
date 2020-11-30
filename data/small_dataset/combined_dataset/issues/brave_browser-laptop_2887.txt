@@ -1,0 +1,4 @@
+mixed content blocker not blocking active mixed content
+
+
+https://mixed-script.badssl.com/

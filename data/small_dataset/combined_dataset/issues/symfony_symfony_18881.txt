@@ -1,0 +1,55 @@
+[Security][Ldap] Fixed issue with password attribute containing an array of values.
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.1
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#18401
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+This PR fixes #18401, as well as other possible issues:
+
+First, the user provider no longer requires a password attribute by default. While this is not mandatory, it is more explicit to not set a password when using the form_login_ldap or http_basic_ldap, as these two providers don't use a password comparison mechanism, but ldap_bind() instead.
+Second, the attribute is now configurable. Some implementations actually use different properties to store the user's password attribute. This will enable some users to correctly work with specific configurations.
+Third, the user provider normalises the attribute array into a single string. Also, if the attribute has more than one value (which should not be possible), or if is not set, an exception will be thrown, with a clear error message.
+

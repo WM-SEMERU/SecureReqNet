@@ -1,0 +1,19 @@
+[Security][DX] Allow omitting provider in firewall config, when each authenticator has a provider set explicitly
+
+
+Given the following firewall config:
+        main:
+            pattern:   ^/
+            stateless: true
+            http_basic:
+                provider: in_memory
+            http_basic_ldap:
+                provider:     ldap
+                service:      Symfony\Component\Ldap\Ldap
+                dn_string:    "%env(LDAP_USER_BASE_DN)%"
+                query_string: "sAMAccountName={username}"
+This config causes following deprecation notice:
+Firewall "main" has no "provider" set but multiple providers exist. Using the first configured provider (in_memory) is deprecated since 3.4 and will throw an exception in 4.0, set the "provider" key on the firewall instead.
+Because there is no "default" provider set as a child of the main key.
+However each authenticator has a provider set explicitly, so there is no need for the "default" provider.
+It would be nice, if this kind of config is allowed (no deprecation and working in 4.0)

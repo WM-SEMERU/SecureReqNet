@@ -1,0 +1,46 @@
+[Validator] Add the missing translations for the Dutch (nl) locale
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30177
+
+
+License
+MIT
+
+
+
+This PR addresses the issue #30177, adding the missing translations for the Dutch (nl) locale.

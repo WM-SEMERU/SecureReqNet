@@ -1,0 +1,5 @@
+[Security] Lazy load user providers
+
+
+See symfony/symfony#23295
+Probably irrelevant for end-users, but we should review if we mention somewhere that user providers not being lazy is a well-known limitation.

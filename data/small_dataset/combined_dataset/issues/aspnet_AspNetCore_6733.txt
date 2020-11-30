@@ -1,0 +1,9 @@
+Enforce multiple Authentication Schemes
+
+
+When set up with multiple authentication schemes I can do the following to run them both:
+[Authorize(AuthenticationSchemes = "Scheme1,Scheme2")]
+This runs both schemes and if at least one succeeds the execution proceeds into the controller action.
+I'd like to be able to set this up so that it runs both schemes and makes them both required. I. e. the one that fails issues a challenge.
+When both schemes are present the framework correctly merges the ClaimIdentities into User ClaimsPrincipal.
+Apologies if this is already possible and I missed it.

@@ -1,0 +1,5 @@
+[Security] Mention ROLE_ prefix requirement in API key authentication docs
+
+
+When you read https://symfony.com/doc/current/security/api_key_authentication.html it's never mentioned that there's a requirement that a role must begin with ROLE_.
+A link could be added to https://symfony.com/doc/current/security.html#roles or the caution block could also be added on this page near the access_control config for example.

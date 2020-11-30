@@ -1,0 +1,38 @@
+TameInputElement.prototype.setValue() doesn't work
+
+
+Original issue 611 created by google@web.dwdw.me on 2008-06-14T00:52:45.000Z:
+I didn't get enough time to check out TameInputElement.setAttribute()
+carefully, but I had some concerns/uncertainties about it.
+1    TameInputElement.prototype.setValue = function (newValue) {
+2      if (!this.editable___) { throw new Error(); }
+3      // == matches undefined
+4      this.node___.value = (newValue == null ? '' : '' + value);
+5      return newValue;
+6    };
+Concern:
+
+What does the "value" on on the right side of line 4 refer to?  What is
+it bound to?  It's not the parameter to this function (that's named
+"newValue").  Does it refer to something in a wider scope?  (And is it
+supposed to?)  Is it just going to return "undefined"?  Smells like a bug
+to me.  Not sure if it could be a security bug (perhaps if "value" could
+get bound to something in the global scope this could be quite dangerous).
+
+I'm going to assume you'll replace "'' + value" with "'' + newValue".  With
+that change, one more concern:
+
+
+This function does not check that its input (newValue) is of the
+expected type (namely, String, I suppose?) and does not coerce its input to
+the expected type.  Do I have to worry about TOCTTOU attacks?  Suppose that
+I write malicious Caja code that creates a malicious object with a
+malicious toValue() or toString() method: the first time this method is
+called, it returns something other than null or undefined; the second time,
+it returns null or undefined.  In that case you will execute
+this.node___.value = null;  (or: undefined)
+
+
+So we're setting the browser's DOM node to null or undefined.  Does that
+have any funny side effects?  I'm 99% sure this has no security
+consequences but wanted to write it down anyway just in case.

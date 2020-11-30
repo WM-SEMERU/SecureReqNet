@@ -1,0 +1,4 @@
+Whitelist network connections from main process
+
+
+We should ensure that the main process only makes connections to specifically whitelisted domains to make sure that Brave or included components (Widevine, Flash…) doesn't accidentally make requests to unexpected endpoints.

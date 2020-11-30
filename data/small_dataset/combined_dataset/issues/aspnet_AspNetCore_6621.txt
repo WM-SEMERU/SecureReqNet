@@ -1,0 +1,35 @@
+401/403 returned from asp.net core Authentication middleware with a valid token
+
+
+From @caradong on Friday, 11 January 2019 20:06:46
+Issue Title
+asp.net core Authentication middleware return 401/403 with a valid token
+General
+Our api use built-in middleware from .net core to validate tokens. We have a valid token returned by AAD and service-to service call (JwtBearerAuthentication ) always return 401 while visit the app in a browser (CookieAuthentication) middle ware always return 403.
+The exact same code is running on two slots with two separate AAD app and both have been running for a while. One of the two started to have the above mentioned issue and the only change happened was for the AAD app that has the issue, it was switched to multi-tent app and new service principles were created briefly. All these changes were reverted and the service principles were deleted as well. However, that does not solve the problem.
+For the cookie authentication:
+builder.UseCookieAuthentication(new CookieAuthenticationOptions 
+            {
+                AutomaticAuthenticate = true,
+            });
+For JwtBearerOptions:
+JwtBearerOptions jwtBearerOptions = new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                Authority = string.Format(jwtSettings.SignInAuthority, jwtSettings.Tenant),
+               TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = true,
+                    ValidAudiences = jwtSettings.Audiences
+                };
+                TokenValidationParameters = new TokenValidationParameters {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtSettings.Issuer
+                }
+            };
+Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.0.2"
+Microsoft.AspNetCore.Authentication" Version="1.0.2"
+Microsoft.AspNetCore.Authentication.Cookies" Version="1.0.2"
+Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="1.0.2"
+Copied from original issue: dotnet/core#2224

@@ -1,0 +1,51 @@
+[SecurityBundle] Make the FirewallConfig class final
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+I suggest to make the FirewallConfig class final. This value object is only built by the SecurityExtension from the SecurityBundle and is not meant to be an extension point.
+ping @chalasr

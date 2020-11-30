@@ -1,0 +1,2 @@
+It would we great if there would be a RSS feed available for the tags of a project.
+Then people could easily subscribe to that feed to be automatically notified about updates - for example, about updates of gitlab itself :D (as there doesn't seem to be any automatic notification for point-releases).

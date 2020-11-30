@@ -1,0 +1,192 @@
+Update all dependencies
+
+
+This PR contains the following updates:
+
+
+
+Package
+Type
+Update
+Change
+References
+
+
+
+
+@​types/react
+devDependencies
+patch
+^16.8.5 -> ^16.8.7
+source
+
+
+css-loader
+devDependencies
+patch
+^2.1.0 -> ^2.1.1
+source
+
+
+npm
+devDependencies
+minor
+^6.8.0 -> ^6.9.0
+homepage, source
+
+
+react
+devDependencies
+patch
+16.8.3 -> 16.8.4
+homepage, source
+
+
+react-docgen
+devDependencies
+minor
+^4.0.1 -> ^4.1.0
+source
+
+
+react-dom
+devDependencies
+patch
+16.8.3 -> 16.8.4
+homepage, source
+
+
+tslint
+devDependencies
+patch
+^5.13.0 -> ^5.13.1
+homepage, source
+
+
+webpack
+devDependencies
+patch
+^4.29.5 -> ^4.29.6
+source
+
+
+
+
+Release Notes
+
+storybooks/storybook
+v5.0.0
+Compare Source
+Storybook 5.0 is a completely new UI with the following improvements:
+
+🌓 New design with light and dark themes
+🛠 Canvas toolbar for easy access to addons
+🗺 Overhauled navigation sidebar with an intuitive menu
+🗜 Redesigned addons panel with handy buttons to toggle visibility and orientation
+⌨️ Improved keyboard shortcuts that are user configurable
+🌍 New URL structure that eliminates long strings of query parameters
+
+5.0 contains hundreds more fixes, features, and tweaks. Browse the changelogs matching 5.0.0-alpha.*, 5.0.0-beta.*, and 5.0.0-rc.* for the full list of changes. See MIGRATION.md to ugprade from 4.x.
+
+
+webpack-contrib/css-loader
+v2.1.1
+Compare Source
+Bug Fixes
+
+do not break selector with escaping (#​896) (0ba8c66)
+source map generation when sourceRoot is present (#​901) (e9ce745)
+sourcemap generating when previous loader pass sourcemap as string (#​905) (3797e4d)
+
+
+
+npm/cli
+v6.9.0
+Compare Source
+FEATURES
+
+2ba3a0f67 #​90 Time traveling installs using the --before flag. (@​zkat)
+b7b54f2d1 #​3 Add support for package aliases. This allows packages to be installed under a different directory than the package name listed in package.json, and adds a new dependency type to allow this to be done for registry dependencies. (@​zkat)
+684bccf06 #​146 Always save package-lock.json when using --package-lock-only. (@​aeschright)
+b8b8afd40 #​139 Make empty-string run-scripts run successfully as a no-op. (@​vlasy)
+8047b19b1 npm.community#​3784 Match git semver ranges when flattening the tree. (@​larsgw)
+e135c2bb3 npm.community#​1725 Re-enable updating local packages. (@​larsgw)
+
+BUGFIXES
+
+cf09fbaed #​153 Set modified to undefined in npm view when time is not available. This fixes a bug where npm view would crash on certain third-party registries. (@​simonua)
+774fc26ee #​154 Print out tar version in install.sh only when the flag is supported not all the tar implementations support --version flag. This allows the install script to work in OpenBSD, for example. (@​agudulin)
+863baff11 #​158 Fix typo in error message for npm stars. (@​phihag)
+a805a95ad npm.community#​4227 Strip version info from pkg on E404. This improves the error messaging format. (@​larsgw)
+
+DOCS
+
+5d7633833 #​160 Add npm add as alias to npm install in docs. (@​ahasall)
+489c2211c #​162 Fix link to RFC #​10 in the changelog. (@​mansona)
+433020ead #​135 Describe exit codes in npm-audit docs. (@​emilis-tm)
+
+DEPENDENCIES
+
+ee6b6746b zkat/make-fetch-happen#​29 agent-base@4.2.1 (@​TooTallNate)
+2ce23baf5 lock-verify@2.1.0: Adds support for package aliases (@​zkat)
+baaedbc6e pacote@9.5.0: Adds opts.before support (@​zkat)
+57e771a03 #​164 licensee@6.1.0 (@​kemitchell)
+2b78288d4 add core to default inclusion tests in pack (@​zkat)
+9b8b6513f npm.community#​5382 npm-packlist@1.4.1: Fixes bug where core/ directories were being suddenly excluded. (@​zkat)
+
+
+
+facebook/react
+v16.8.4
+Compare Source
+React DOM and other renderers
+
+Fix a bug where DevTools caused a runtime error when inspecting a component that used a useContext hook. (@​bvaughn in #​14940)
+
+
+
+reactjs/react-docgen
+v4.1.0
+Compare Source
+New Features
+
+Support all the config resolving related babel options (#​334)
+This allows the new options envName, babelrc, root, rootMode, configFile and babelrcRoots in the programatic API. To see what this options do head over to the babel documentation
+
+Thanks @​jquense.
+
+
+palantir/tslint
+v5.13.1
+Compare Source
+
+[bugfix] Fix regression in CheckstyleFormatter backwards compatibility (#​4561)
+
+
+
+webpack/webpack
+v4.29.6
+Compare Source
+Bugfixes
+
+typeof __webpack_require__ and require.onError is no longer evaluated to undefined and evaluation is done at runtime instead.
+this value in module.hot.accept with imported dependency is correctly preserved.
+webassemblyjs updated to latest version
+
+Contributing
+
+added a linting step to ensure all dependencies resolve to npm modules
+
+
+
+Renovate configuration
+📅 Schedule: "before 2am" (UTC).
+🚦 Automerge: Disabled by config. Please merge this manually once you are satisfied.
+♻️ Rebasing: Whenever PR becomes conflicted, or if you modify the PR title to begin with "rebase!".
+👻 Immortal: This PR will be recreated if closed unmerged. Get config help if that's undesired.
+
+
+ If you want to rebase/retry this PR, check this box
+
+
+This PR has been generated by Renovate Bot. View repository job log here.

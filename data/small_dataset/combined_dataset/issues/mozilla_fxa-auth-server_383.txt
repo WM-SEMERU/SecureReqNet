@@ -1,0 +1,4 @@
+Mitigate CSRF for Web logins
+
+
+This is largely a placeholder, but if we end up using cookies to log users in on the Web, we need to consider CSRF mitigation.

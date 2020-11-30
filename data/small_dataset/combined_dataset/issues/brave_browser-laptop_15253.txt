@@ -1,0 +1,4 @@
+[hackerone] #416040 URL permissions confusion
+
+
+https://hackerone.com/bugs?report_id=416040

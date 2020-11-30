@@ -1,0 +1,4 @@
+Only ever display the microphone icon in a top level document
+
+
+Meaning, disable functionality within frames

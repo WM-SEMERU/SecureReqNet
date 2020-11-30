@@ -1,0 +1,6 @@
+[1.8] Automated cherry pick of #57422: Rework method of updating atomic-updated data volumes
+
+
+Cherry pick of #57422 on release-1.8.
+#57422: Rework method of updating atomic-updated data volumes
+Fixes #60814 for 1.8

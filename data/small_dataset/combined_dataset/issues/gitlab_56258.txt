@@ -1,0 +1,31 @@
+### Summary
+
+(RememberMe)Session of at least LDAP Users (maybe also regular users) is not invalidated if the account is expired.
+Eventually the LDAP Server does not output enough information (can not be tested)
+
+### Steps to reproduce
+
+Login to Gitlab and tick the "remember me" Box after login.
+Having a LDAP Account from an external LDAP service which expires after login (i.e. managed by phpldapadmin)
+
+Tested with an account which expired 11 days ago.
+
+You can still browse the projects, change your profile and so on.
+
+### What is the current *bug* behavior?
+
+Session is not invalidated
+
+### What is the expected *correct* behavior?
+
+* Invalidate session if account has been expired
+
+OR
+
+* Periodically check if account has been expired
+
+#### Results of GitLab environment info
+
+#### Version
+
+GitLab Community Edition 11.6.2

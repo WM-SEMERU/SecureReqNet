@@ -1,0 +1,8 @@
+Replace NO_KNOWN_EXPLOIT_SPEC_VIOLATION with application-specific indicators
+
+
+Original issue 1702 created by kpreid.switchb.org on 2013-04-15T23:47:49.000Z:
+In order to increase compatibility with browsers, we introduced the SES severity level NO_KNOWN_EXPLOIT_SPEC_VIOLATION (hereafter NKESV). This level has been described as "a known and potentially unsafe spec violation [which] does not appear to be exploitable" and "known to introduce an indirect safety issue which, however, is not known to be exploitable".
+My recent work on the Firefox cross-frame freeze bug has led me to the notion that this is incoherent: "no known exploit" depends on the use being made of SES, not just SES itself.
+I therefore propose that we should remove the NKESV severity level entirely; instead, the interface for SES initialization (currently consisting of the property ses.maxAcceptableSeverityName) should include a means to specify which unrepaired problems the application is prepared to operate in spite of. Caja would then specify such a list which consists of every problem currently denoted as NKESV.
+This means that our choices of problems we are prepared to deal with in Caja are not directly changes to SES per se, and do not affect the security of any other users of SES.

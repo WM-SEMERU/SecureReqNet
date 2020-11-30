@@ -1,0 +1,4 @@
+[Components][Security] Taking the Security component split into account
+
+
+Starting with Symfony 2.4, the Security component has been split into four packages: symfony/security-acl, symfony/security-core, symfony/security-csrf and symfony/security-http. This should be documented in some way at least in the components documentation.

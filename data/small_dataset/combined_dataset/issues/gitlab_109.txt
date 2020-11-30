@@ -1,0 +1,28 @@
+'Hello,
+
+as a lot of people I add the message 'Access denied.' when I tried to push via ssh and ssh keys. I see a lot of people on different forum who had the same issue. I find one cause for this problem and I think you can add a note in the installation guide to people.
+
+So if I resume. I installed gitlab via he installation guide on a new empty server (ubuntu). And after the installation, gitlab web interface was good, I was able to push via HTTP but not via SSH (after adding my SSH keys). I have an 'Access denied' message
+
+After analysing the logs I see that : 
+
+D, [2014-02-28T17:43:34.306524 #5831] DEBUG -- : Performing GET http://XXXXX//api/v3/internal/allowed?key_id=1&action=git-receive-pack&ref=_any&project=papy/testinternal
+
+
+Normally it should answer 
+D, [2014-02-28T17:43:34.312242 #5831] DEBUG -- : Received response 200 => <true>
+
+But it answered 
+D, [2014-02-28T17:43:34.312242 #5831] DEBUG -- : Received response 200 => <<!DOCTYPE html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+...
+> 
+
+=> The default page of ngnix (/usr/share/nginx/html/index.html)
+
+The problem is when we pushed by ssh, it doesn't pass trough the configuration file on gitlab you put (lib/support/nginx/gitlab) : it passed via the sites-available/default configuration file. The solution I found was to delete the default configuration file and to add "default_server" into sites-available/gitlab file 

@@ -1,0 +1,50 @@
+Upgrade zookeeper ext
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+no
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+This bumps the zookeeper extension to recent versions. versions > 0.6.0 and < 0.7.1 caused segfaults. This seems to be fixed in the latest version

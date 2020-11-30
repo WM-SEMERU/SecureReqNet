@@ -1,0 +1,63 @@
+CVE-2018-1002105: proxy request handling in kube-apiserver can leave vulnerable TCP connections
+
+
+CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H (9.8, critical)
+With a specially crafted request, users that are authorized to establish a connection through the Kubernetes API server to a backend server can then send arbitrary requests over the same connection directly to that backend, authenticated with the Kubernetes API server’s TLS credentials used to establish the backend connection.
+Thanks to Darren Shepherd for reporting this problem.
+CVE-2018-1002105 is fixed in the following Kubernetes releases:
+
+v1.10.11
+v1.11.5
+v1.12.3
+v1.13.0-rc.1
+
+Affected components:
+
+Kubernetes API server
+
+Affected versions:
+
+Kubernetes v1.0.x-1.9.x
+Kubernetes v1.10.0-1.10.10 (fixed in v1.10.11)
+Kubernetes v1.11.0-1.11.4 (fixed in v1.11.5)
+Kubernetes v1.12.0-1.12.2 (fixed in v1.12.3)
+
+Note: If you are using binaries or packages provided by a distributor (not the ones provided in the open source release artifacts), you should contact them to determine what versions resolve this CVE. Distributors may choose to provide support for older releases beyond the ones maintained by the open source project.
+Affected configurations:
+
+Clusters >= 1.6.x that run aggregated API servers (like the metrics server) that are directly accessible from the Kubernetes API server’s network. If there are aggregated API servers configured in a cluster, the following command will return the names of the associated APIService objects (if no names are listed, or the kube-apiserver is an older version that does not have the apiservices API, then the cluster has no aggregated API servers configured):
+kubectl get apiservices \
+  -o 'jsonpath={range .items[?(@.spec.service.name!="")]}{.metadata.name}{"\n"}{end}'
+
+
+Clusters >= 1.0.x that grant pod exec/attach/portforward permissions to users that are not expected to have full access to kubelet APIs
+
+Vulnerability impact:
+
+An API call to any aggregated API server endpoint can be escalated to perform any API request against that aggregated API server, as long as that aggregated API server is directly accessible from the Kubernetes API server’s network. Default RBAC policy allows all users (authenticated and unauthenticated) to perform discovery API calls that allow this escalation against any aggregated API servers configured in the cluster.
+A pod exec/attach/portforward API call can be escalated to perform any API request against the kubelet API on the node specified in the pod spec (e.g. listing all pods on the node, running arbitrary commands inside those pods, and obtaining the command output). Pod exec/attach/portforward permissions are included in the admin/edit RBAC roles intended for namespace-constrained users.
+
+Mitigations:
+This section lists possible mitigations to use prior to upgrading. Note that many of the mitigations are likely to be disruptive, and upgrading to a fixed version is strongly recommended.
+Mitigations for the anonymous user -> aggregated API server escalation include:
+
+suspend use of aggregated API servers (note that this will disrupt users of the APIs provided by the aggregated server)
+disable anonymous requests by passing --anonymous-auth=false to the kube-apiserver (note that this may disrupt load balancer or kubelet health checks of the kube-apiserver, and breaks kubeadm join setup flows)
+remove all anonymous access to all aggregated APIs (including discovery permissions granted by the default discovery role bindings)
+
+Mitigations for the authenticated user -> aggregated API server escalation include:
+
+suspend use of aggregated API servers (note that this will disrupt users of the APIs provided by the aggregated server)
+remove all access to all aggregated APIs (including discovery permissions granted by the default discovery role bindings) from users that should not have full access to the aggregated APIs (note that this may disrupt users and controllers that make use of discovery information to map API types to URLs)
+
+Mitigation for the authorized pod exec/attach/portforward -> kubelet API escalation:
+
+Remove pod exec/attach/portforward permissions from users that should not have full access to the kubelet API
+
+Detection:
+There is no simple way to detect whether this vulnerability has been used. Because the unauthorized requests are made over an established connection, they do not appear in the Kubernetes API server audit logs or server log. The requests do appear in the kubelet or aggregated API server logs, but are indistinguishable from correctly authorized and proxied requests via the Kubernetes API server.
+Post-mortem:
+
+Document
+Recorded meeting
+

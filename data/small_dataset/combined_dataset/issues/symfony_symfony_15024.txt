@@ -1,0 +1,41 @@
+[VOTER] Voter unanimous decision-strategy looping though the passed attributes (Question)
+
+
+[QUESTION] I implemented a custom Symfony2 Voter and would pass an array of attributes to the first parameter of the denyAccessUnlessGranted like so in my controller:
+$attr = [
+    'module' => 'userModule'
+    'action' => 'edit'
+];
+$this->denyAccessUnlessGranted($attr, $this, 'Not authorize to edit user');
+This works alright if the decision manager approach is set to affirmative. However when I shifted to the unanimous approach all of sudden things didn't work because of the way my custom voter is designed. I looked through the Symfony source code and found that the reason is because the method for determining the result of a vote for the unanimous approach loops through the attributes before calling all the registered voters (instead of simply passing them to the voters as is the case for the affirmative and consensus approaches).
+Snippets of the Symfony/Component/Security/Core/Authorization/AccessDecisionManager are included below:
+private function decideAffirmative(TokenInterface $token, array $attributes, $object = null)
+{
+    $deny = 0;
+    foreach ($this->voters as $voter) {
+        $result = $voter->vote($token, $object, $attributes);
+        ...
+     }
+}
+
+private function decideConsensus(TokenInterface $token, array $attributes, $object = null)
+{
+    foreach ($this->voters as $voter) {
+        $result = $voter->vote($token, $object, $attributes);
+        ...
+    }
+}
+
+
+private function decideUnanimous(TokenInterface $token, array $attributes, $object = null)
+{
+    $grant = 0;
+    // ***** THIS IS THE ISSUE: WHY LOOP THROUGH THE ATTRIBUTES ****
+    foreach ($attributes as $attribute) {
+        foreach ($this->voters as $voter) {
+            $result = $voter->vote($token, $object, array($attribute));
+            ...
+        }
+    }
+ }
+The one for the unanimous decision making is the third one. What's the reasoning behind having to loop through the attributes? Does this mean I have to recode my custom voter depending on what decision making strategy I use? Or maybe I'm simply using the attribute argument in a way that it's not designed to be used.

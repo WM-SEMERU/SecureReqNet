@@ -1,0 +1,17 @@
+[filter box] Loading icon shown when nothing is being loaded
+
+
+Repro:
+(1) Switch to viz type that requires additional left hand nav fields to be populated
+(2) While validation check has errored (due to no fields being populated), Superset infinity loading icon is "spinning", indicating something is loading, but in reality, nothing is
+Users are trained to "wait" until the loading stops when they should be correcting the validation error.
+Make sure these boxes are checked before submitting your issue - thank you!
+
+ I have checked the superset logs for python stacktraces and included it here as text if there are any.
+ I have reproduced the issue with at least the latest released version of superset. (deck.gl, filter box, time series table, etc.)
+ I have checked the issue tracker for the same issue and I haven't found one similar.
+
+Superset version
+Expected results
+Actual results
+Steps to reproduce

@@ -1,0 +1,9 @@
+Security: Brave vulnerable to socially-engineered XSS
+
+
+Modern browsers strip the javascript: prefix when pasting in the address bar to mitigate the (astoundingly common and successful) self-inflicted XSS attack vector.
+Brave should too.
+https://blogs.msdn.microsoft.com/ieinternals/2011/05/19/socially-engineered-xss-attacks/
+CTRL+L
+CTRL+V
+javascript:alert(document.domain);

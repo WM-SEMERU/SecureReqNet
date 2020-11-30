@@ -1,0 +1,7 @@
+Find better solution for Team_Data data load
+
+
+and consumption
+at the moment there is a notify and subscribe workflow which works but it is not optional (and makes the code much more complex than it should be)
+
+

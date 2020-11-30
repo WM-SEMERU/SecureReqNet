@@ -1,0 +1,4 @@
+We should use KMS to encrypt items in S3
+
+
+Following on from #212, we should use a KMS key to encrypt (secret) items in S3

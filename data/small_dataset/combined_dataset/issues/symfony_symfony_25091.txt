@@ -1,0 +1,35 @@
+[Security] Add target user to SwitchUserListener decide() call
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.3.x
+
+
+
+Add target user as $object parameter to SwitchUserListener's decide() call.  Providing the target user allows a security voter to fine-tune access control.  For example, a user with the role ROLE_ACCOUNT_MANAGER could be allowed to switch to ROLE_CUSTOMER, without giving the account manager too much access.
+PR forthcoming...

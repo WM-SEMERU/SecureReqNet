@@ -1,0 +1,64 @@
+[FrameworkBundle] change the way http clients are configured by leveraging ScopingHttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR allows configuring scoped HTTP clients ("scoped_clients" replaces the previous "clients" options):
+framework:
+  http_client:
+    max_host_connections: 4
+    default_options:
+      # ...
+    scoped_clients:
+      github_client:
+        base_uri: https://api.github.com
+        headers:
+          Authorization: token abc123
+          # ...
+The base URI is turned into a scoping regular expression so that the token will be sent only when the github_client service is requesting the corresponding URLs.
+When the base URI is too restrictive, the scope option can be used explicitly to define the regexp that URLs must match before any other options are applied.
+All defined scopes are passed to a new scoping_http_client service, that can be used to hit endpoints with authentication pre-configured for several hosts. Its named autowiring alias is HttpClientInterface $scopingClient (this cannot be done with http_client as we want safe defaults, e.g. credentials should not be used implicitly when writing webhooks/crawlers.)

@@ -1,0 +1,5 @@
+Don't pass any auth parameters when authentication is disabled
+
+
+Motivation
+When authenticationEnabled is set to false, don't set or pass any of the other configurations related to authentication

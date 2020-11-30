@@ -1,0 +1,14 @@
+[feature] support CRL (certificate revocation list) files
+
+
+Preface
+Nomad is currently using two systems for securing its protocols.
+
+ACL (which has a token revocation mechanism) controls access to data and APIs
+mTLS that could work in an untrusted  #environment and even prevent other services from masquerading as Nomad agents.
+
+Use case
+We have to use nomad agents over the internet and would like to protect our communication channels. So, mTLS sounds like a very natural choice. However, some of the agents could be compromised and we would like to be able to revoke their certificates.
+Supporting a revocation list could help to avoid building a system for rotation low TTL certs.
+What do you think?
+P. S. And Vault already has a CRL support.

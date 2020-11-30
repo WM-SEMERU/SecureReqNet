@@ -1,0 +1,10 @@
+PHPUnit Bridge 3.4 is incompatible with php 5.3
+
+
+Symfony version(s) affected: 3.4-dev
+Description
+PHPUnit Bridge 3.4 claims to be compatible with php 5.3, but after #29903, this is not the case anymore.
+How to reproduce
+See this Travis build of the Polyfills: https://travis-ci.org/symfony/polyfill/jobs/484968278
+Possible Solution
+Revert the changes of #29903 at least for the PHPUnit Bridge.

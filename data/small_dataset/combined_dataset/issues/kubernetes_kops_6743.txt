@@ -1,0 +1,5 @@
+Increase apiserver timeout to 45 seconds
+
+
+Fix #6702
+Parallel to upstream issue #71054

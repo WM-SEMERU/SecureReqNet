@@ -1,0 +1,108 @@
+kubectl exec produces unexpected result when printing out a zip
+
+
+I have a use case of generating a zip file from within a pod with python. That pod has the host system's fs mounted, and uses the host's python and libraries for generating the zip file. The file is output to stdout so that the following call can generate a zip on the host via the pod:
+kubectl exec the-pod chroot /host-root /usr/bin/python3 /tmp/bar.py > ~/some_file.zip
+
+What happened:
+The file is generated, and appears to be valid. It can be used everywhere, except with the MacOSX default archive utility, where it throws the following error:
+"Unable to expand some_file.zip into "some_dir": (Error 2 - no such file or directory.)
+What you expected to happen:
+The file should be extractable everywhere, including on OSX with the archive utility.
+How to reproduce it (as minimally and precisely as possible):
+I'm using the following test file ("/tmp/test") that is archived:
+123
+
+And the following python script ("/tmp/bar.py"):
+#!/usr/bin/env python3                                                                                                                                                                                                                         
+import glob
+import os
+import sys 
+import zipfile
+
+from typing import IO, List
+
+FILES=[
+    "/tmp/test",
+]
+
+hostname="some.host.name"
+
+def archive_files(out: IO, files: List[str] = FILES):
+    with zipfile.ZipFile(out, 'w') as z:
+        for file in files:
+            add_path_to_zip(z, file)
+
+def add_path_to_zip(z: zipfile.ZipFile, path: str):
+    if os.path.isfile(path):
+        z.write(path, os.path.join(hostname, path.lstrip("/")))
+    elif os.path.isdir(path):
+        for root, dirs, files in os.walk(path):
+            for f in files:
+                if f.startswith(".") or os.path.basename(root).startswith("."):
+                    continue
+
+                z.write(os.path.join(root, f), os.path.join(hostname, root.lstrip("/"), f)) 
+    else:
+        for f in glob.glob(path):
+            if f.startswith("."):
+                continue
+            add_path_to_zip(z, f)
+
+if __name__ == "__main__":
+    archive_files(sys.stdout.buffer)
+
+And finally, the following command from the host to generate the zip:
+kubectl exec the-pod chroot /host-root /usr/bin/python3 /tmp/bar.py > ~/some_file.zip
+
+Anything else we need to know?:
+If I run the following command from the host itself:
+ python3 /tmp/bar.py  > ~/some_file.zip
+
+or the following one using kubectl exec without piping the result:
+kubectl exec the-pod chroot /host-root bash -c '/usr/bin/python3 /tmp/bar.py > ~/some_file.zip'
+
+The result is identical and works everywhere.
+Also, there appear to be subtle differences between the working and the non-working zip files:
+cat ~/some_broken.zip 
+PjNsome.host.name/tmp/test123
+ZPjZsome.host.name/tmp/testPKEE
+
+and
+cat ~/some_working.zip 
+PKjZsome.host.name/tmp/test123
+PKjZsome.host.name/tmp/testPKE9
+
+Environment:
+
+
+Kubernetes version (use kubectl version):
+Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.3", GitCommit:"435f92c719f279a3a67808c80521ea17d5715c66", GitTreeState:"archive", BuildDate:"2019-01-29T23:14:39Z", GoVersion:"go1.10.3", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.0", GitCommit:"0ed33881dc4355495f623c6f22e7dd0b7632b7c0", GitTreeState:"clean", BuildDate:"2018-09-27T16:55:41Z", GoVersion:"go1.10.4", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration:
+N/A
+
+
+OS (e.g: cat /etc/os-release):
+NAME="VMware Photon OS"
+VERSION="2.0"
+ID=photon
+VERSION_ID=2.0
+PRETTY_NAME="VMware Photon OS/Linux"
+ANSI_COLOR="1;34"
+HOME_URL="https://vmware.github.io/photon/"
+BUG_REPORT_URL="https://github.com/vmware/photon/issues"
+
+
+Kernel (e.g. uname -a):
+Linux sc-rdops-vm11-dhcp-75-44.eng.vmware.com 4.9.154-3.ph2 #1-photon SMP Tue Mar 5 14:21:54 UTC 2019 x86_64 Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz GenuineIntel GNU/Linux
+
+
+Install tools:
+
+
+Others:
+
+

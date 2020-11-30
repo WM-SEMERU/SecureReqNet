@@ -1,0 +1,5 @@
+SECURITY: [DID] Installer not timestamped, signed only with SHA1
+
+
+The installer for Windows should probably be dual-signed with SHA256 and SHA1, and should be timestamped to avoid future compatibility problems.
+http://textslashplain.com/2016/01/10/authenticode-in-2016/

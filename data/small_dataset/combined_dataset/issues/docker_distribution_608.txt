@@ -1,0 +1,4 @@
+Implementation of a basic authentication scheme using standard .htpasswd
+
+
+This carries #409.

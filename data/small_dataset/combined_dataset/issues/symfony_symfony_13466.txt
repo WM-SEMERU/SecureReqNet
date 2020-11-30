@@ -1,0 +1,54 @@
+[Security] Remove ContextListener's onKernelResponse listener as it is used
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+The context listeners are specific to a particular firewall, and as such, should not be applied if the current request doesn't match that context listener. To avoid this, the context listener can remove itself from the dispatcher as it is called.
+This comes in to affect when two or more firewalls are setup and using the same kernel for multiple requests.  Assuming there are two firewalls 'site' and 'admin'
+
+Request comes in matching 'site' firewall, 'site' ContextListener adds it's onKernelResponse method to the dispatcher
+Succesful auth for 'site'
+ContextListener writes token to session
+Request comes in matching 'admin' firewall, 'admin' ContextListener can't find anything in the session, so nulls the token in the security context
+'site' ContextListener listens for response, can't find a token in the security context so removes the 'site' token from the session
+

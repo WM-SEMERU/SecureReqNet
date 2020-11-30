@@ -1,0 +1,4 @@
+Provide signed updates on the website and through auto-update
+
+
+It would be great if you could provide signed updates on the website and through the auto-update functionality. There are a few different ways you can do this, but I highly recommend using GPG signatures. This will require some key management on your end. Please let me know if you'd like to chat about how to best implement this.

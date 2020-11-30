@@ -1,0 +1,45 @@
+**[HackerOne report #447264](https://hackerone.com/reports/447264)** by xanbanx on 2018-11-19:
+
+For private projects, guest users do not have access to CI jobs if public CI pipelines are deactivated. However, the API endpoints `GET /projects/:id/jobs` and `GET /projects/:id/pipelines/:pipeline_id/jobs` do not check for the correct permission and therefore cause an information leak. This gives a malicious user access to private information like the commits and commit messages, branch names, tag names, etc.
+
+## Steps to reproduce
+
+This was tested on GitLab 11.5.0 RC12
+
+1. Create private project and disable public pipelines at `https://mygitlab.com/<namespace>/<project-name>/settings/ci_cd`
+2. Add a guest user to the project
+3. As the guest user perform the following API request:
+
+```bash
+curl --header "PRIVATE-TOKEN: <GUEST-USER-TOKEN>" 'https://mygitlab.example.com/api/v4/projects/<project_id>/jobs
+```
+
+This will return all jobs as a JSON response.
+
+## Possible fixes
+
+The API endpoint `GET /projects/:id/jobs` is implemented in [`jobs.rb`](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/api/jobs.rb#L32) and looks like the following.
+
+```ruby
+ desc 'Get a projects jobs' do
+  success Entities::Job
+end
+params do
+  use :optional_scope
+  use :pagination
+end
+# rubocop: disable CodeReuse/ActiveRecord
+get ':id/jobs' do
+  builds = user_project.builds.order('id DESC')
+  builds = filter_builds(builds, params[:scope])
+
+  builds = builds.preload(:user, :job_artifacts_archive, :job_artifacts, :runner, pipeline: :project)
+  present paginate(builds), with: Entities::Job
+end
+```
+
+Here, the first line in the implementation should be `authorize_read_builds!` to proper check for the permission. The same holds true for the second API endpoint.
+
+## Impact
+
+Guest users have access to private information of CI jobs.

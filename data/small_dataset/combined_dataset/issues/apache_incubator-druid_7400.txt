@@ -1,0 +1,7 @@
+Allow users to use a provider for metadata username
+
+
+Description
+Currently, we can use a PasswordProvider to provide credentials for connecting to the metadata store without hardcoding them. However, we still need to hardcode the username, and we need to restart Druid if we want to change the username.
+Motivation
+We would like to be able to change the user Druid uses to interact with the metadata database without needing to restart Druid. To do so, we need to be able to change the druid.metadata.storage.connector.user property during operation in the same way we can change druid.metadata.storage.connector.password while Druid is running. In our specific case, we would like to be able to use a single provider to furnish both the user name and the password, and such an implementation would also avoid introducing a race condition a la #6666. If users wanted to use separate providers for the username and the password, we could build a PasswordProvider that yoked together two other PasswordProviders to provide each field.

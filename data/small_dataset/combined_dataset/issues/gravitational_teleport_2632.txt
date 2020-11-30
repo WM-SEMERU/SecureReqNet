@@ -1,0 +1,5 @@
+Add "search events" web API method.
+
+
+This PR adds a new web API method for searching audit events. This new method will be used by the new audit log page. Web API already has a method that was misleadingly named "siteEventsGet" but it is used for session player and thus returns only session events and has some extra logic around processing them.
+Adding this method also required adding a read-only permissions for events to the default admin role, otherwise events can't be read. This, in turn, required a migration to add missing "events" permissions to all roles which already have permissions to access "session".

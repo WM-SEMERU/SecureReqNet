@@ -1,0 +1,16 @@
+hGetContents: invalid argument (invalid byte sequence)
+
+
+When running pull-request-mailer-server on ganeti/ganeti#16, it failed with:
+pull-request-mailer-server: patch-dir/0000-cover-letter.patch: hGetContents: invalid argument (invalid byte sequence)
+
+Root cause is probably an encoding problem, likely in the UTF8 author name in the commit (see https://github.com/nh2/ganeti/commit/48770897db31d6ffc08b7488dd75f31a020e337c.patch).
+Cabal has had this problem, and same for hlint. An explanation can be found here:
+
+This is caused by relying on System.IO.readFile to infer the text-encoding, instead of explicitly setting it to utf8.
+
+Processing the problematic PR locally on a different machine with pull-request-mailer worked, most likely because there the LANG environment variable was set to something, e.g. en_US.UTF-8, while on the problematic server it was not set (or set to the empty string).
+You can reproduce it like this:
+LANG="" pull-request-mailer --discussion-location='somewhere else' --to you@example.com --no-thread-tracking ganeti ganeti 16
+
+The solution should be either instructing the user to set LANG or check if git format-patch outputs UTF-8 by default and explicitly specify that encoding when reading the cover letter.

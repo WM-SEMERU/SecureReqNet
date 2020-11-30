@@ -1,0 +1,10 @@
+Remove '(BETA)' from app window title
+
+
+Has there been any discussion about removing (BETA) from the app window title?
+I didn't see any relevant issues or PRs. There is no reference to Beta status in README or elsewhere in the codebase, as far as I can tell, other than current version = 0.20.
+My 2¢: I haven't run into a single case of bugginess, after a year+ of usage.
+I think it's more than deserving of removing the BETA label. (Great work contributors 👍)
+Or maybe there's a milestone list of todo before this is ready?
+If not yet, would be useful to clarify path forward.
+Thanks

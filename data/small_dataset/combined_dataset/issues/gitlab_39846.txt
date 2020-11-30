@@ -1,0 +1,15 @@
+If a user is removed from a project/group, he/she still receives e-mail notifications for confidential issues.
+
+We should automatically unsubscribe them from confidential issues to ensure no data is leaked.
+
+This could be done via subscriptions, e.g., something like:
+
+```ruby
+user = User.find_by(username: 'my-user')
+issues = user.notes.where(noteable_type: 'Issue').joins('INNER JOIN issues ON notes.noteable_id = issues.id').where('issues.confidential IS true').select("issues.id AS issue_id").map(&:issue_id).uniq
+
+issues.each do |id|
+  issue = Issue.find(id)
+  issue.unsubscribe(user, issue.project)
+end
+```

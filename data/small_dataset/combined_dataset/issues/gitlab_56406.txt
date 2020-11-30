@@ -1,0 +1,51 @@
+**[HackerOne report #477247](https://hackerone.com/reports/477247)** by `xanbanx` on 2019-01-09, assigned to `asaba`:
+
+GitLab supports referencing external project badges, e.g., to include a 3rd party CI status or coverage report. These badges can be configured on project basis or on group basis for all projects in that group
+Those badges can be configured to include the following variables: project id, project name, default branch, commit SHA.
+When the repository of the project is restricted to certain users, the default branch and the commit SHA are still leaking to unauthorized users via these badges.
+
+This access works for different configurations:
+
+1. For public projects with restricted repository access, any user (the user does not need to be signed in) has access to this information
+2. For internal projects with restricted repository access, any authenticated user has access to this information
+3. For private projects, any Guest user of that project has access to this information
+
+## Steps to reproduce
+
+1. Create a public repo, and push some code. Consider the project namespace to be `test/badges` and project id to be 1 in these steps
+2. Restrict the visibility of repository to `Project Members Only`
+3. Under the badge settings, add a new badge with the following link `https://example.gitlab.com/%{project_path}/%{project_id}/%{default_branch}/%{commit_sha}` and following image url `https://example.gitlab.com/%{project_path}/%{project_id}/%{default_branch}/%{commit_sha}/badge.svg`
+3. As a non-authenticated user visit the following page: `https://example.gitlab.com/test/badges`
+
+This will render the project page. Although the user does not have repo access, i.e., it shows only the empty state of the project, the badge is rendered, which leaks the default branch and the latest commit SHA. You can see that in the attached screenshot.
+
+You retrieve the same information also via an API request. Perform the following API request:
+
+```bash
+curl https://example.gitlab.com/api/v4/projects/1/badges
+```
+
+This returns the following JSON response also leaking the default branch and the commit SHA.
+
+```json
+[
+    {
+        "link_url": "https://example.gitlab.com/%{project_path}/%{project_id}/%{default_branch}/%{commit_sha}",
+        "image_url": "https://example.gitlab.com/%{project_path}/%{project_id}/%{default_branch}/%{commit_sha}/badge.svg",
+        "rendered_link_url": "https://example.gitlab.com/test/badges/1/master/28f7481f90e2a771dc51f08bd3eb40bfc8a37c2f",
+        "rendered_image_url": "https://example.gitlab.com/test/badges/1/master/28f7481f90e2a771dc51f08bd3eb40bfc8a37c2f/badge.svg",
+        "id": 1,
+        "kind": "project"
+    }
+]
+```
+
+Note that for configuration (2) internal projects, and (3) private projects, the `curl` request requires a proper authentication token.
+
+## Steps to mitigate
+
+Do not render project badges for unauthorized users. Perform proper authorization for badge API requests.
+
+## Impact
+
+Unauthorized users have access to the default branch and latest commit SHA of the project.

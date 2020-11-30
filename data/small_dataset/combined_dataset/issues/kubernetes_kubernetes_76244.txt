@@ -1,0 +1,10 @@
+Couple of dependency script cleanups
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Cleans up some leftover script stuff after the move to go modules.
+Does this PR introduce a user-facing change?:
+NONE
+

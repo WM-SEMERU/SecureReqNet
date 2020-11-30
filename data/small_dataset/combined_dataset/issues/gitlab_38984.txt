@@ -1,0 +1,24 @@
+'We received this vulnerability report via email.
+
+https://gitlab.zendesk.com/agent/tickets/83606
+
+-----
+
+Hello,
+
+I’ve found a security vulnerability that causes all protected variables to be exposed to CI jobs running on every branch, regardless of whether that branch is actually protected or not.
+
+To reproduce, simply set a wildcard for protected tags, like so: 
+<img src="https://i.imgur.com/Bc3YcBn.png">
+
+This makes GitLab think that every time the CI is running, it’s running on a protected branch. I’ve set up a public repository that demonstrates this: https://gitlab.com/wescossick/protected-variables-exposed <https://gitlab.com/wescossick/protected-variables-exposed>.
+
+Notice the following secret variables: 
+
+<img src="https://i.imgur.com/ogv1PF8.png">
+
+And the runner output for the following unprotected branch: https://gitlab.com/wescossick/protected-variables-exposed/-/jobs/35772011 <https://gitlab.com/wescossick/protected-variables-exposed/-/jobs/35772011>. Screenshot of output: 
+
+<img src="https://i.imgur.com/NsxqbeT.png">
+
+I would appreciate public acknowledgement <https://about.gitlab.com/vulnerability-acknowledgements/> for finding this vulnerability once it is resolved.

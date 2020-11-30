@@ -1,0 +1,11 @@
+[HttpClient] Obscure curl error on non successful responses
+
+
+Symfony version(s) affected: master / 4.3
+Description
+If you are using the brand new symfony http client, and the request fails for some reasons (e.g a 400 or a 500 is returned), instead of having a neat http client exception stating that we had a 400 or a 500, we have a TransportException with an obscure curl error message (failed writing headers).
+If we add a call to getStatusCode, the exception disappear (as expected). This seems to happen only with a request returning a body within the response with the status code and currently I managed to reproduce it only with a application/json content type.
+How to reproduce
+See my reproducer : https://gist.github.com/Taluu/50aa950b4fcfd5997f69e1d11ead6cdf
+Possible Solution
+No idea. :D

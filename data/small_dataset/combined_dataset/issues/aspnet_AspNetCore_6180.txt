@@ -1,0 +1,61 @@
+SignoutAsync doesn't fully signout
+
+
+I try to implement a cookie login and logout feature. My expectation is after user signout, page redirects to home page. However, after the redirect, the user logged back in. I found a similar issue solution from @HaoK. I tried the solution, however, it didn't redirect. And when the user accessed the home page, it logged back in.
+I feel like asp.net core 2.0 should be able to support this signout+redirect scenario. If so, is there any official doc or example we could use as a reference.
+Thank you very much.
+My own code:
+    [Route("signout")]
+    [HttpPost]
+    public async Task<IActionResult> SignOut()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Index", "Home");
+    }
+
+Authentication service setup:
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddMvc(options =>
+        {
+            options.Filters.Add(new RequireHttpsAttribute());
+
+            var policy = new AuthorizationPolicyBuilder()
+                             .RequireAuthenticatedUser()
+                             .Build();
+            options.Filters.Add(new AuthorizeFilter(policy));
+        });
+        services.AddAuthentication(options =>
+        {
+            options.DefaultChallengeScheme = FacebookDefaults.AuthenticationScheme;
+            options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        }).AddFacebook(options =>
+        {
+            options.AppId = Configuration["Authentication:Facebook:FacebookAuthenticationAppId"];
+            options.AppSecret = Configuration["Authentication:Facebook:FacebookAuthenticationAppSecret"];
+        }).AddCookie();
+        
+    }
+
+A solution found from stackoverflow:
+    [Route("signout")]
+    [HttpPost]
+    public async Task SignOut()
+    {
+        var prop = new AuthenticationProperties()
+        {
+            RedirectUri = "/"
+        };
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync("oidc", prop);
+    }
+
+Solution from @HaoK
+    [Route("signout")]
+    [HttpPost]
+    public async Task SignOut()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+    }
+

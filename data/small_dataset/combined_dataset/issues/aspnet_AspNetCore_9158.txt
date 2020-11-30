@@ -1,0 +1,8 @@
+INodeServices not working on Azure, but working on Localhost
+
+
+I'm using asp.net core 2.2 and an instance of INodeServices for interoperability between C# and Node. The problem is that my Node invocation works great on my development environment, but once I push my code to Azure App Service and then execute the invocation (trough an MVC controller), it seems unable to locate the Node code to execute and after waiting a bit, it throws an error.
+I've founded by using Kudu that my node_modules Folder as well as my NodeCode folder dont get copied to the publish directory on deployment unless I configure them to do so by setting the some code on my .csproj file.
+This doesn't seem to solve the problem, but i think that my NodeCode Folder should be deployed next to my node_nodules because of dependencies.
+As of right now, the INodeServices invocation works great on my development environment, but once deployed to Azure, it fails after a long wait.
+Thanks a lot.

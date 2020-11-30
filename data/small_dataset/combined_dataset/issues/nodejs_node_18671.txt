@@ -1,0 +1,20 @@
+build: Utilize Modern Compiler Flags to Address Potential Security Issues
+
+
+I've done some search in issues list and I feel I should log a new one.
+It's a common best practice to utilize the flags of modern compilers, e.g. the following flags are from GCC
+Stack execution protection:                    LDFLAGS="-z noexecstack" 
+Data relocation and protection (RELRO):        LDLFAGS="-z relro -z now" 
+Stack-based Buffer Overrun Detection:          CFLAGS=”-fstack-protector-strong” if using GCC 4.9 or newer,
+                                                                                 otherwise CFLAGS="-fstack-protector"
+Position Independent Execution (PIE)           CFLAGS="-fPIE -fPIC" LDFLAGS="-pie" (PIE for executables only)
+Fortify source:                                CFLAGS="-O2 -D_FORTIFY_SOURCE=2"
+Format string vulnerabilities:                 CFLAGS="-Wformat -Wformat-security"
+
+noexecstack was addressed in #17933
+
+Version: Future versions
+Platform: All supported platforms
+Subsystem:
+
+I've done a little experiment and found that most of the flags can be directly applied on Linux platform without build errors or loss of basic functionalities. Further test on functionality and the viability on other platforms remains unknown.

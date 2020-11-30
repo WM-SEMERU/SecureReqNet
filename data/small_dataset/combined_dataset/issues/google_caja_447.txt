@@ -1,0 +1,12 @@
+Need to sanitize NAME=... attribute on HTML tags
+
+
+Original issue 447 created by google@web.dwdw.me on 2008-06-10T01:17:38.000Z:
+Currently there is no sanitization of the value of NAME attributes.  A
+document can use NAME="jimbob", and then Javascript adds a property named
+jimbob to the global scope.  Of course, a malicious content provider could
+provide some other name -- like something with trailing underscores or with
+a trusted name like "caja" or "window".  Should fix this to validate the
+value of all NAME attributes so that they are subject to the same
+restrictions on variable names as Caja code is.
+Maybe need to do the same to ID (and perhaps CLASS) attributes??

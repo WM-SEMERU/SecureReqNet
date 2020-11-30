@@ -1,0 +1,50 @@
+[Security] Expose Previous Exceptions in ChainUserProvider
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+not sure
+
+
+Bug fix?
+maybe?
+
+
+New feature?
+maybe?
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#20181
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+To the maintainer, I don't know if this is a feature of a bugfix, so I don't know what branch it should be merged into. I had to break our style guide rule of calling exceptions $e because there are two possibilities.

@@ -1,0 +1,6 @@
+Notification counter does not increment when Ads grant is received
+
+
+Really, this is occurring because no checks are happening while the user is idly browsing. (Currently it will happen if the user opens the Rewards Settings page or the Rewards panel)
+Grants should be fetched inside the existing 24 hour notification interval inside rewards_service_impl.cc here: https://github.com/brave/brave-core/blob/master/components/brave_rewards/browser/rewards_service_impl.cc#L2414
+In this case then, the longest the user can go without seeing the notification bubble if they don't open any Rewards features at all would be 24 hours.

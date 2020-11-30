@@ -1,0 +1,1 @@
+It would appear with GitLab 6.6 CE when you make a merge request in the UI it fails to actually see that theres actually a diff. I'm not sure how to trace it. 

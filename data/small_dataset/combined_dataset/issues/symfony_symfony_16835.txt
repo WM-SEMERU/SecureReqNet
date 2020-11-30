@@ -1,0 +1,48 @@
+[Security] Add Guard authenticator <supports> method
+
+
+This method will be called before starting an authentication against a guard authenticator.
+The authentication will be tried only if the supports method returned true
+This improves understanding of code, increase consistency and removes responsability for getCredentials method to decide if the current request should be supported or not.
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

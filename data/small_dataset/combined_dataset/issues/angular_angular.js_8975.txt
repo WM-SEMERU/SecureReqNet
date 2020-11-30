@@ -1,0 +1,9 @@
+fix XSS vulnerability in ng-srcset
+
+
+There is a security issue with ng-srcset.
+URIs aren't sanitized.
+The behiavor is correct for ng-src but not for ng-srcset.
+The probleme is with src/ng/compile.js that ignore srcset.
+Here is the fix.
+Laurent Trillaud

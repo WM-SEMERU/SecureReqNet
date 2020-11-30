@@ -1,0 +1,13 @@
+Better webhook flow
+
+
+This PR enhances the basic webhook workflow for pulselistener, and allows long security policy  checks, while replying immediatley to HTTP requests
+
+An HTTP POST query is made towards pulselistener by Harbormaster, to initiate the build. Pulselistener must reply immediately.
+The build information are stored in a queue
+The queue is processed regularly, and check the current builds security policy
+3.a. If a build is secured, the check is retried N times with a wait period between each checks (without locking other processes). When the max retries is exceeded, the build is marked as Secured, and the Harbormaster target updated as fail.
+3.b. If a build is public, it's processed by the trigger_task (normally using Try pushes). The build is marked as Public and the Harbormaster target updated as work
+At the end of the try push, an uri artifact is published on Harbormaster to add the treeherder link.
+
+The build plan n°7 on phabricator-dev implements the initial query.

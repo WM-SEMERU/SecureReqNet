@@ -1,0 +1,14 @@
+[Release 2.3.1] go version error in DEB package
+
+
+Describe the bug
+now, pulsar-client-go uses the package management method of go mod, go mod requires that the version of go must be 1.11 or higher
+we can fix it , as follows:
+610 # apt-get update
+611 # apt-get -y upgrade
+612 # apt-get install -y git curl gcc
+613 # curl -O https://storage.googleapis.com/golang/go1.11.4.linux-amd64.tar.gz
+614 # tar -xvf go1.11.4.linux-amd64.tar.gz
+615 # mv go /usr/local
+616 # export GOROOT=/usr/local/go
+617 # export PATH=$PATH:$GOROOT/bin

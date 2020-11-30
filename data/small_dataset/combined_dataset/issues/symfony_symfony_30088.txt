@@ -1,0 +1,8 @@
+Wrong deprecation message related to PHP templates
+
+
+Symfony version(s) affected: 4.2
+Description
+When using PHP templates instead of Twig templates, you must store them in src/Resources/views/. However, if you do that, you see a deprecation message telling you to store them in templates/.
+Is this OK or should the deprecation message only be displayed for Twig templates?
+Originally reported by @nyroDev in https://twitter.com/Nyr0/status/1092901535179255808

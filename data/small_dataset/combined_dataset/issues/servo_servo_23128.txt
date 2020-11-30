@@ -1,0 +1,32 @@
+Pass not none value in setfullscreen
+
+
+Diagnose
+Entering fullscreen mode is passing None value to Window when set_fullscreen function is called which prevents
+Servo actually entering fullscreen mode.
+In addition, the function exit_fullscreen in document.rs is passing True value to
+SetFullscreenState which doesn't allow to exit from fullscreen mode.
+Solution
+
+Instead of passing None value when FullScreenState is true, window.get_primary_monitor() is called in order to pass a monitor id.
+This fix make Servo actually enter fullscreen mode.
+Changed SetFullscreenState to false when exit_fullscreen function is called.
+In addition, added new implementation to support exiting from fullscreen mode by pressing Escape button.
+
+Testing Plan
+After my change in windows.rs and document.rs,
+the Servo app can enter/exit fullscreen mode.
+In addition, the ESC button support
+allows to exit from fullscreenmode.
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #22853
+
+
+ There are tests for these changes OR
+ These changes do not require tests because ___
+
+
+This change is 

@@ -1,0 +1,8 @@
+Crypto: cert chains vs cert store
+
+
+Our crypto API provides an oe_cert_chain_t type which expects certs to be sorted  leaf->intermediate-root.
+PR #861 implements this missing sort functionality. For a simpler implementation, it uses the issue date (technically the not before date) to sort certs. Since mbedtls resolution is in seconds, it cannot handle certs that are issued within a second of each other.
+In the future, we need to enhance the implementation to handle auto-generated certs generated close to each other.
+It might also be better if we want to model a cert chain (which requires an order) or a cert store which does not require any order. The current implementation relies on issuer name; but technically two different certs can have the same name. We need to decide if we want to handle such scenarios.
+@mikbras @CodeMonkeyLeet @soccerGB

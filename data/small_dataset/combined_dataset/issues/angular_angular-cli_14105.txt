@@ -1,0 +1,39 @@
+The server started by ng e2e does not seem to auto reload changed files
+
+
+🐞 Bug report
+Command (mark with an x)
+ng e2e --configuration=my-module-config
+- [ ] new
+- [ ] build
+- [ ] serve
+- [ ] test
+- [x] e2e
+- [ ] generate
+- [ ] add
+- [ ] update
+- [ ] lint
+- [ ] xi18n
+- [ ] run
+- [ ] config
+- [ ] help
+- [ ] version
+- [ ] doc
+
+Is this a regression?
+I don't know wether this is a bug or this is how it's intended to work.
+Description
+I am trying to change a content of a json file from one test suite to another, and the file I am changing is not reloading
+🔬 Minimal Reproduction
+🔥 Exception or Error
+
+
+
+
+
+🌍 Your Environment
+Angular CLI: 7.3.6
+Node: 11.0.0
+OS: darwin x64
+Angular: 7.2.9
+Anything else relevant?

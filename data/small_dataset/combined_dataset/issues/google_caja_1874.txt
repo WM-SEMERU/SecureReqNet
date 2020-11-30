@@ -1,0 +1,5 @@
+Update title of explicit.html
+
+
+Original issue 1876 created by kpreid.switchb.org on 2013-12-19T21:57:40.000Z:
+Title of explicit.html is "Testing SES/5". "SES/5" sounds like an obsolete name from the ES5/3 days. It should be updated to use the current name "SES" and perhaps to more clearly summarize its purpose.

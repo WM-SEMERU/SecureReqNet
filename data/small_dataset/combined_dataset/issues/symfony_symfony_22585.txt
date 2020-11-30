@@ -1,0 +1,61 @@
+[Security] json login listener: ensure a json response is sent on bad request
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master (3.3)
+
+
+Bug fix?
+yesish
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+I would have simply recommended to set the proper format when declaring the route:
+# routing.yml
+api_login:
+    path: /login
+    defaults: { _format: json }
+but, since #22477 has been merged, and considering #22477 (comment):
+
+my point above regarding checking the content type is so that one could use form_login and json_login in parallel on the same routes and within the same firewall
+
+we may consider setting the request format to json when throwing the BadRequestHttpException, so used conjointly with the TwigBundle, the exception is rendered using the exception.json.twig template.
+ping @lsmith77
+(An alternative would be to check the Accept header to set the request format to json if it's the preferred one instead of doing it each time we throw the exception. But Symfony never used such content negotiation AFAIK, and I think it's safe enough to assume someone sending json is expecting json as ouput for exceptions.)

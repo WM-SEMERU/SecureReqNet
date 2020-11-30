@@ -1,0 +1,7 @@
+Table of contents links to header tags within the same wiki page are no longer working. Links render properly, but clicking link results in 404 error.  In example below, clicking [Page Item] link displays the 404 error.
+
+# Page Header #
+
+[Page Item](#toc_1)
+
+## Page Item ##

@@ -1,0 +1,64 @@
+[kubeadm] kubelet fails to start with featureGate KubeletPodResources: true
+
+
+What happened:
+Tried enabling pod-resources feature gate via kubeadm. kubelet did not start.
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+featureGates:
+  KubeletPodResources: true
+
+Apr 01 08:20:51 s2rf6n6 kubelet[73271]: F0401 08:20:51.001896   73271 server.go:178] Failed to create listener for podResources endpoint: listen unix /var/lib/kubelet/pod-resources/kubelet.sock: bind: no such file or directory
+
+What you expected to happen:
+kubelet to start and kubeadm init to succeed
+How to reproduce it (as minimally and precisely as possible):
+Use kubeadm init with the feature gate turned on as shown above. kubeadm init will not succeed. Check journalctl -xeu kubelet
+Anything else we need to know?:
+While kubeadm init is happening, once its waiting for pods to come up, create the directory
+# mkdir -p /var/lib/kubelet/pod-resources
+
+This makes kubeadm init succeed
+Environment:
+
+Kubernetes version (use kubectl version):
+
+kubectl
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:45:25Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+
+kubeadm
+kubeadm version: &version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:51:21Z", GoVe
+rsion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+
+kubelet
+Kubernetes v1.14.0
+
+
+Cloud provider or hardware configuration:
+Baremetal
+OS (e.g: cat /etc/os-release):
+
+NAME="Ubuntu"
+VERSION="16.04.5 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.5 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+
+
+Kernel (e.g. uname -a):
+
+Linux s2rf6n6 4.15.0-29-generic #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Install tools:
+kubeadm
+Others:
+Issue seen with 1.13 also
+

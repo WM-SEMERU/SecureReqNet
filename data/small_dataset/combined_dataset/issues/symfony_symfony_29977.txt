@@ -1,0 +1,54 @@
+[PropertyInfo] Use a single cache item per method, not per method + arguments
+
+
+Description
+I'm using the Serializer component to deserialize objects with 100+ properties. In some cases, Symfony\Component\PropertyInfo\PropertyInfoCacheExtractor::extract ends up being called thousands of times. I'm using memcache as the backend and profiling locally, so my results are a "best case" without any network latency.
+
+9310 calls to extract, total 128ms, and 1340 gets from memcache, for a total of 69ms
+In most cases, I'm deserializing complete objects, where every property is populated with something. By saving all properties into a single cache item, once the cache is populated I'm seeing a significant improvement.
+
+9310 calls to extract, total 54ms, and 7 gets from memcache, for a total of 3ms
+That's a 42% improvement locally, and assuming 1ms in network latency for a cache reads the real-world performance could be much worse.
+Here's the proof-of-concept code I've used for this:
+    private function extract($method, array $arguments)
+    {
+        try {
+            $serializedArguments = serialize($arguments);
+        } catch (\Exception $exception) {
+            // If arguments are not serializable, skip the cache
+            return \call_user_func_array(array($this->propertyInfoExtractor, $method), $arguments);
+        }
+
+        $key = rawurlencode($method);
+        if (array_key_exists($key, $this->arrayCache) && array_key_exists($serializedArguments, $this->arrayCache[$key])) {
+          return $this->arrayCache[$key][$serializedArguments];
+        }
+
+        $item = $this->cacheItemPool->getItem($key);
+
+        $data = $item->get();
+          if ($item->isHit()) {
+            $this->arrayCache[$key] = $data[$key];
+              if (array_key_exists($serializedArguments, $data[$key])) {
+                return $this->arrayCache[$key][$serializedArguments];
+              }
+          }
+
+          if (!$data) {
+            $data = [];
+          }
+          $value = \call_user_func_array(array($this->propertyInfoExtractor, $method), $arguments);
+          $data[$key][$serializedArguments] = $value;
+          $this->arrayCache[$key][$serializedArguments] = $value;
+          $item->set($data);
+          $this->cacheItemPool->save($item);
+
+          return $this->arrayCache[$key][$serializedArguments];
+    }
+Questions I have:
+
+Is optimizing for the "most properties will need to be extracted case" best?
+Are there commonly used cached backends where rewriting the same cache key like this will cause problems?
+
+Depending on the above, I'd like to file a pull request either modifying the existing extract method or adding a new class with the different behaviour.
+aside The fact that there's a static array cache needs to be documented. By default I added in a Drupal memory cache in a chain, and the class docs should call out that's not needed. Or, we should benchmark Doctrine / Drupal to see if the performance improvement documented at #16838 (comment) still holds.

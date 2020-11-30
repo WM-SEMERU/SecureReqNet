@@ -1,0 +1,267 @@
+'Good day!
+At some point work gitlab error 500.
+When the error appeared, I can't in any way work.
+
+An attempt to clone the repository:
+```
+roman-sosnovsky@DDS6F-ASUSN76VB:~$ git clone http://dds6f.ru/website-anastasia-and-victoria-petrik/website-anastasia-and-victoria-petrik.git
+Cloning into 'website-anastasia-and-victoria-petrik'...
+Username for 'http://dds6f.ru': romansosnovsky
+Password for 'http://romansosnovsky@dds6f.ru': 
+fatal: unable to access 'http://dds6f.ru/website-anastasia-and-victoria-petrik/website-anastasia-and-victoria-petrik.git/': The requested URL returned error: 500
+
+```
+
+I can't see the logs in the admin panel
+```
+==> /var/log/gitlab/gitlab-rails/production.log <==
+Started GET "/admin/logs" for 79.165.163.57 at 2014-09-21 06:29:14 +0000
+Processing by Admin::LogsController#show as HTML
+Completed 500 Internal Server Error in 91ms
+
+ActionView::Template::Error (Cannot allocate memory - tail):
+21: Scroll down
+22: .file-content.logs
+23: %ol
+24: - Gitlab::GitLogger.read_latest.each do |line|
+25: %li
+26: %p= line
+27: .tab-pane#application
+lib/gitlab/popen.rb:23:in `popen'
+lib/gitlab/logger.rb:14:in `read_latest'
+app/views/admin/logs/show.html.haml:24:in `_app_views_admin_logs_show_html_haml__2417158534035027289_32872880'
+
+
+==> /var/log/gitlab/nginx/gitlab_access.log <==
+79.165.163.57 - - [21/Sep/2014:06:29:14 +0000] "GET /admin/logs HTTP/1.1" 500 349 "http://dds6f.ru/admin" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.94 Chrome/37.0.2062.94 Safari/537.36"
+```
+
+Corrected only by rebooting the server.
+
+Output ```gitlab-rake gitlab:check``` (The time of failure).
+```
+ubuntu@server7682:~$ sudo gitlab-rake gitlab:check --trace
+[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+** Invoke gitlab:check (first_time)
+** Invoke gitlab:env:check (first_time)
+** Invoke environment (first_time)
+** Execute environment
+** Execute gitlab:env:check
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+** Invoke gitlab:gitlab_shell:check (first_time)
+** Invoke environment 
+** Execute gitlab:gitlab_shell:check
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.8 ? ... OK (1.9.8)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+hooks directories in repos are links: ... 
+Website Anastasia and Victoria Petrik / Website Anastasia and Victoria Petrik ... ok
+Роман Сосновский / Traffic simulator ... ok
+Иван Мялин / For learning ... ok
+Running /opt/gitlab/embedded/service/gitlab-shell/bin/check
+Check GitLab API access: /opt/gitlab/embedded/lib/ruby/2.1.0/net/http.rb:879:in `initialize': Connection refused - connect(2) for "127.0.0.1" port 8080 (Errno::ECONNREFUSED)
+        from /opt/gitlab/embedded/lib/ruby/2.1.0/net/http.rb:879:in `open'
+        from /opt/gitlab/embedded/lib/ruby/2.1.0/net/http.rb:879:in `block in connect'
+        from /opt/gitlab/embedded/lib/ruby/2.1.0/timeout.rb:76:in `timeout'
+        from /opt/gitlab/embedded/lib/ruby/2.1.0/net/http.rb:878:in `connect'
+        from /opt/gitlab/embedded/lib/ruby/2.1.0/net/http.rb:863:in `do_start'
+        from /opt/gitlab/embedded/lib/ruby/2.1.0/net/http.rb:852:in `start'
+        from /opt/gitlab/embedded/service/gitlab-shell/lib/gitlab_net.rb:79:in `get'
+        from /opt/gitlab/embedded/service/gitlab-shell/lib/gitlab_net.rb:43:in `check'
+        from /opt/gitlab/embedded/service/gitlab-shell/bin/check:15:in `<main>'
+gitlab-shell self-check failed
+  Try fixing it:
+  Make sure GitLab is running;
+  Check the gitlab-shell configuration file:
+  sudo -u git -H editor /opt/gitlab/embedded/service/gitlab-shell/config.yml
+  Please fix the error above and rerun the checks.
+
+Checking GitLab Shell ... Finished
+
+** Invoke gitlab:sidekiq:check (first_time)
+** Invoke environment 
+** Execute gitlab:sidekiq:check
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+** Invoke gitlab:ldap:check (first_time)
+** Invoke environment 
+** Execute gitlab:ldap:check
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+** Invoke gitlab:app:check (first_time)
+** Invoke environment 
+** Execute gitlab:app:check
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... skipped (omnibus-gitlab has no init script)
+Init script up-to-date? ... skipped (omnibus-gitlab has no init script)
+projects have namespace: ... 
+Website Anastasia and Victoria Petrik / Website Anastasia and Victoria Petrik ... yes
+Роман Сосновский / Traffic simulator ... yes
+Иван Мялин / For learning ... yes
+Projects have satellites? ... 
+Website Anastasia and Victoria Petrik / Website Anastasia and Victoria Petrik ... yes
+Роман Сосновский / Traffic simulator ... yes
+Иван Мялин / For learning ... yes
+Redis version >= 2.0.0? ... yes
+Ruby version >= 2.0.0 ? ... yes (2.1.2)
+Your git bin path is "/opt/gitlab/embedded/bin/git"
+Git version >= 1.7.10 ? ... yes (2.0.0)
+
+Checking GitLab ... Finished
+
+** Execute gitlab:check
+
+```
+
+Output ```gitlab-rake gitlab:check``` (after reboot server)
+```
+ubuntu@server7682:~$ sudo gitlab-rake gitlab:check --trace
+[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+** Invoke gitlab:check (first_time)
+** Invoke gitlab:env:check (first_time)
+** Invoke environment (first_time)
+** Execute environment
+** Execute gitlab:env:check
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+** Invoke gitlab:gitlab_shell:check (first_time)
+** Invoke environment 
+** Execute gitlab:gitlab_shell:check
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.8 ? ... OK (1.9.8)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+hooks directories in repos are links: ... 
+Website Anastasia and Victoria Petrik / Website Anastasia and Victoria Petrik ... ok
+Роман Сосновский / Traffic simulator ... ok
+Иван Мялин / For learning ... ok
+Running /opt/gitlab/embedded/service/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files: 
+        /var/opt/gitlab/git-data/repositories: OK
+        /var/opt/gitlab/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.8.2
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+** Invoke gitlab:sidekiq:check (first_time)
+** Invoke environment 
+** Execute gitlab:sidekiq:check
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+** Invoke gitlab:ldap:check (first_time)
+** Invoke environment 
+** Execute gitlab:ldap:check
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+** Invoke gitlab:app:check (first_time)
+** Invoke environment 
+** Execute gitlab:app:check
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... skipped (omnibus-gitlab has no init script)
+Init script up-to-date? ... skipped (omnibus-gitlab has no init script)
+projects have namespace: ... 
+Website Anastasia and Victoria Petrik / Website Anastasia and Victoria Petrik ... yes
+Роман Сосновский / Traffic simulator ... yes
+Иван Мялин / For learning ... yes
+Projects have satellites? ... 
+Website Anastasia and Victoria Petrik / Website Anastasia and Victoria Petrik ... yes
+Роман Сосновский / Traffic simulator ... yes
+Иван Мялин / For learning ... yes
+Redis version >= 2.0.0? ... rake aborted!
+Errno::ENOMEM: Cannot allocate memory - redis-cli
+/opt/gitlab/embedded/lib/ruby/2.1.0/open3.rb:193:in `spawn'
+/opt/gitlab/embedded/lib/ruby/2.1.0/open3.rb:193:in `popen_run'
+/opt/gitlab/embedded/lib/ruby/2.1.0/open3.rb:93:in `popen3'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/popen.rb:23:in `popen'
+/opt/gitlab/embedded/service/gitlab-rails/lib/tasks/gitlab/task_helpers.rake:83:in `run'
+/opt/gitlab/embedded/service/gitlab-rails/lib/tasks/gitlab/task_helpers.rake:73:in `run_and_match'
+/opt/gitlab/embedded/service/gitlab-rails/lib/tasks/gitlab/check.rake:284:in `check_redis_version'
+/opt/gitlab/embedded/service/gitlab-rails/lib/tasks/gitlab/check.rake:29:in `block (3 levels) in <top (required)>'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:240:in `call'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:240:in `block in execute'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:235:in `each'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:235:in `execute'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:179:in `block in invoke_with_call_chain'
+/opt/gitlab/embedded/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:201:in `block in invoke_prerequisites'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:199:in `each'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:199:in `invoke_prerequisites'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:178:in `block in invoke_with_call_chain'
+/opt/gitlab/embedded/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/task.rb:165:in `invoke'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:150:in `invoke_task'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:106:in `block (2 levels) in top_level'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:106:in `each'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:106:in `block in top_level'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:115:in `run_with_threads'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:100:in `top_level'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:78:in `block in run'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:176:in `standard_exception_handling'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/lib/rake/application.rb:75:in `run'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/gems/rake-10.3.2/bin/rake:33:in `<top (required)>'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/bin/rake:23:in `load'
+/opt/gitlab/embedded/service/gem/ruby/2.1.0/bin/rake:23:in `<main>'
+Tasks: TOP => gitlab:check => gitlab:app:check
+
+```
+
+My server runs Ubuntu and has 1 Gb of RAM.

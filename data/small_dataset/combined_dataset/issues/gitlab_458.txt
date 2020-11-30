@@ -1,0 +1,8 @@
+The dropzone for dropping images into markdown area is stopping cursor input.
+
+
+```
+<div class="div-dropzone-hover"><i class="icon-picture div-dropzone-icon"></i></div>
+```
+
+You cannot click inside that box, maybe needs z-index when not activated?

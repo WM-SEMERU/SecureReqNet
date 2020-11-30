@@ -1,0 +1,16 @@
+Is it possible to disable a user in a one db per-user schema?
+
+
+Hi
+Is it possible to disable / enable back an user (restricting login) if we are using Cookie authentication for a per-user db configuration.
+Summary
+Desired Behavior
+Ideally there could be a 'disabled' field in the user document in _users db, and that to be considered in authentication handler, hence the login would be rejected, ideally with an specific error code. Of course this could be controlled via other processes or as the admin.
+Possible Solution
+There are few options, but we wouldn't like to get to it unless it's strictly necessary:
+
+Writing a custom httpd_auth that will take the disabled field into account and configuring it instead of cookie default handler - but is in erlang and we would have to constantly keep it up to date
+Using Proxy Authentication - but that is not ideal as well, since we would have to manage the authentication separately, and the user base (accounts and passwords), and this also means that the ENTIRE traffic wold have to be routed through the reverse proxy, and we are afraid this would be a scalability issue, especially if we're to migrate to a cloud solution.
+
+Additional context
+We're using CouchDB with PouchDB, continuous replication

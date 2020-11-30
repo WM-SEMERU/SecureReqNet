@@ -1,0 +1,7 @@
+'using ==== and ----- for H1 and H2 should have CSS that makes it more obvious of the difference in level.
+
+H1
+=====
+
+h2
+--------

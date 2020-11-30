@@ -1,0 +1,61 @@
+[Security] fix merge of 2.7 into 2.8 + add test case
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26109
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This fixes the merge mistake done in 899bf99
+that caused this fail with the added test case:
+There was 1 failure:
+
+1) Symfony\Component\Security\Tests\Http\Firewall\UsernamePasswordFormAuthenticationListenerTest::testHandleNonStringUsername with data set #1 (false)
+Failed asserting that exception of type "TypeError" matches expected exception "\Symfony\Component\HttpKernel\Exception\BadRequestHttpException". Message was: "Argument 1 passed to Symfony\Component\Security\Http\ParameterBagUtils::getParameterBagValue() must be an instance of Symfony\Component\HttpFoundation\ParameterBag, instance of Symfony\Component\HttpFoundation\Request given, called in /var/www/symfony/src/Symfony/Component/Security/Http/Firewall/UsernamePasswordFormAuthenticationListener.php on line 100" at
+/var/www/symfony/src/Symfony/Component/Security/Http/ParameterBagUtils.php:39
+/var/www/symfony/src/Symfony/Component/Security/Http/Firewall/UsernamePasswordFormAuthenticationListener.php:100
+/var/www/symfony/src/Symfony/Component/Security/Http/Firewall/AbstractAuthenticationListener.php:140
+/var/www/symfony/src/Symfony/Component/Security/Http/Tests/Firewall/UsernamePasswordFormAuthenticationListenerTest.php:102
+
+Original fix in 2.7: https://github.com/symfony/symfony/pull/25657/files#diff-e07c3e5653e210d017545d47c1bd7e76R111

@@ -1,0 +1,5 @@
+Fix privilege acquisition to work better with docker
+
+
+This problem was noted by people trying to make Traffic Server work in docker without complete privileges.  The current code tries to grab all privileges at once.  If any privilege fails, no privilege is granted.  In the standard --privileged case only the CAP_NET_BIND_SERVICE is granted (of the privileges we care about), and for a basic reverse proxy that is the only capability needed,  but the Traffic Server code would try to get all three of CAP_NET_ADMIN, CAP_NET_BIND_SERVICE, CAP_IPC_LOCK and fail.  So the Traffic Server process running in the docker container could not listen on low ports.
+This code change attempts to get the capabilities one at a time so that capabilities that can be granted will be granted.

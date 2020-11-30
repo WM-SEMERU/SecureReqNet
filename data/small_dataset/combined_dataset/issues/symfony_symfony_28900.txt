@@ -1,0 +1,20 @@
+ContextListener may disclose sensitive information i.e. credentials
+
+
+Symfony version(s) affected: 2.8.46+
+Description
+Symfony\Component\Security\Http\Firewall\ContextListener::safelyUnserialize
+and
+Symfony\Component\Security\Http\Firewall\ContextListener::handle
+may log sensitive information i.e. credentials that $serializedToken can have.
+There is no way to override the methods or explicitly disable logging of 'received'.
+How to reproduce
+
+create a token
+serialize
+rename the class in
+try to safelyUnserialize
+
+Possible Solution
+Exclude 'received' from logging in safelyUnserialize and handle
+Additional context

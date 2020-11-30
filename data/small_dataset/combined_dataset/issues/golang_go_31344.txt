@@ -1,0 +1,5 @@
+go/packages: fake command-line-args package isn't created on windows when ad-hoc package file is missing
+
+
+I haven't been able to reproduce this for go list, so I'm setting this as a go/packages bug for now.
+It seems like on Windows, when doing a go list -e of an ad-hoc package where a source file doesn't exist, the fake command-line-args package that contains the error isn't created. See the comment on golang.org/x/tools/go/packages.TestErrorMissingFile.

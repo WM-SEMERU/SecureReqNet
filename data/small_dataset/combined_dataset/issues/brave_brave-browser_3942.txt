@@ -1,0 +1,5 @@
+Consider disabling lookalike url navigation observer
+
+
+Chromium enabled this feature by default: https://tech.slashdot.org/story/19/01/30/2020218/google-chrome-to-get-warnings-for-lookalike-urls
+Can be annoying to users: https://community.brave.com/t/did-you-mean-to-go-to-all-of-a-sudden-displaying/50950/6

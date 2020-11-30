@@ -1,0 +1,11 @@
+[WIP] nodelifecycle controller: Paginate pod List call in MarkAllPodsNotReady using ListPager.EachListItem
+
+
+Incrementally list and process pods instead of batch loading them all.
+Based #75849, so please ignore the base commit. I'll rebase to master once #75849 is merged.
+Incrementally list/process pods in nodelifecycle controller's MarkAllPodsNotReady to prevent arbitrarily large pod list requests
+
+/kind feature
+/priority important-longterm
+/sig api-machinery
+/sig cluster-lifecycle

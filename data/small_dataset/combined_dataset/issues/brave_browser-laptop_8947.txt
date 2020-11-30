@@ -1,0 +1,9 @@
+noscript exceptions applies non-http/https exceptions to all origins
+
+
+Test plan
+#8969 (comment)
+
+in 0.15.304 and 0.15.305, i noticed that noscript works initially but stops working after a while. in 0.15.305, it worked when i installed it this morning but has now stopped working:
+
+i don't know exactly what made it stop working, but this has happened at least twice now

@@ -1,0 +1,1 @@
+I'd like the option to prevent users from changing or adding new email addresses. If we allow them to change it they may have data from an internal GitLab instance sent to non-approved email addresses.

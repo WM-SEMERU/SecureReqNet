@@ -1,0 +1,4 @@
+[2.0] SignIn for cookies should honor AuthenticationProperties.RedirectUri
+
+
+When calling SignInAsync for the cookie handler, if an AuthenticationProperties with a RedirectUri set is passed it's not honored unless the current path is the same as the LoginPath. If an explicit AuthenticationProperties is passed with a RedirectUri set, then I'd expect it to be honored.

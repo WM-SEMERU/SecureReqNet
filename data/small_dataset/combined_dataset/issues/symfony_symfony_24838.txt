@@ -1,0 +1,38 @@
+Improve performance of TraceableFirewallListener
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+all
+
+
+
+While analyzing Symfony 4 performance (see #24808) I saw that TraceableFirewallListener is super slow. It's about 20 times slower than the average debug listener (~22ms vs. ~1ms):
+
+It's not a Symfony 4 thing. In previous Symfony versions this was called FirewallListener and it was also 20 times slower:
+
+I just open this issue in case someone experienced in the Security bundle can take a look and see if this can be optimized somehow. Thanks!

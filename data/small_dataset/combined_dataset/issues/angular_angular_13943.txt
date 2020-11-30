@@ -1,0 +1,9 @@
+feat(security): allow calc and gradient functions.
+
+
+Also includes support for # color notation in function arguments (common
+in gradient functions).
+Does this PR introduce a breaking change? (check one with "x")
+[ ] Yes
+[x] No
+

@@ -1,0 +1,5 @@
+There are a few contexts in GitLab where, if you have a project path like "namespace/project", it would help to be able to click the "namespace" half separately from the "project" half. The link would take you to the group or user page that owns the project.
+
+The most prominent context is the project landing page itself, since this gives you an easy anchor for going up a level or refreshing the project's URL. (Image forthcoming..) It's also valuable in contexts where the namespace component of paths aren't necessarily uniform, like on the public landing page.
+
+As a hack we made a new helper analogous to link_to_project: https://gist.github.com/dvander/9407433 (though it uses shortnames, not human names).

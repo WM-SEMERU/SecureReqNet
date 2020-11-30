@@ -1,0 +1,9 @@
+below operation
+
+ 1. create new project( do not init repository)
+ 2. create some issues from web api
+ 3. create issue from web page
+
+We always get `500 Internal Server Error`
+
+is this bug?

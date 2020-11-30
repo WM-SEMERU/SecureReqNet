@@ -1,0 +1,5 @@
+Authorize spec history instead of current specs for supervisor history API
+
+
+The auth checks on the /history and /{id}/history endpoints in the SupervisorResource are incorrect, they filter based on the current specs of supervisors, instead of filtering the lists of spec history.
+This PR fixes the checks so that they filter the spec history properly.

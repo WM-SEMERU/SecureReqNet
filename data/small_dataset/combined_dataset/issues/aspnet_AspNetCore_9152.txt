@@ -1,0 +1,8 @@
+.NET Core 3.0.0-preview4-27604-05 Runtime - blob not exist
+
+
+I'm trying to build from source. When I run build.cmd, it tries to download .NET Core 3.0.0-preview4-27604-05 from this URL, but the URL says:
+
+BlobNotFound - The specified blob does not exist.
+
+So, where can I download that version of .NET Core to build the source code? Previous versions were worked correctly, but today when I've pulled the repository, this issue happens.

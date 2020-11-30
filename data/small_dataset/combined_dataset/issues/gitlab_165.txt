@@ -1,0 +1,1 @@
+I think it was working in 6.5.x version, but in 6.7 after creating a project I am given Error 500 if I did not add any commits to project.

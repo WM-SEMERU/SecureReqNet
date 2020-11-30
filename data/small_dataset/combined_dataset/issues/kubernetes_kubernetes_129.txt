@@ -1,0 +1,5 @@
+Secure intra-cluster communication with TLS
+
+
+Right now components within a cluster (etcd, for example) are accessed over non-encrypted channels.  Ideally this would be secured.
+This is an offshoot of #128.

@@ -1,0 +1,4 @@
+[hackerone] #367056
+
+
+https://hackerone.com/bugs?report_id=367056 - Windows only

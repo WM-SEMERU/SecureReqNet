@@ -1,0 +1,8 @@
+Default log function (myLogFunc_) should be frozen
+
+
+Original issue 446 created by google@web.dwdw.me on 2008-06-10T00:35:45.000Z:
+In caja.js, the default logging function myLogFunc_ was never frozen:
+>>> ___.isFrozen(caja.getLogFunc());
+false
+For general hygiene, it should probably be frozen.

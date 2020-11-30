@@ -1,0 +1,15 @@
+Remaining (tamed) exophoric functions still dangerous
+
+
+Original issue 803 created by erights on 2008-10-07T21:43:29.000Z:
+Given (presumed defensive) Cajita code
+outer.setListener = function(newListener) {
+inner.listener = newListener;
+};
+outer.trigger = function(arg) {
+inner.listener(arg);
+};
+A Cajita attacker can
+outer.setListener([].push);
+outer.trigger(3);
+storing a 0:3 into inner, which outer intended to encapsulate.

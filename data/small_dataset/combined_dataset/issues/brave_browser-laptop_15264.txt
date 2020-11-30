@@ -1,0 +1,31 @@
+Linux Hide Menu Bar by Default not working
+
+
+Description
+When launching brave browser menu bar is not hidden. you can toggle it to hide by pressing alt key or clicking the setting but every time at launch it appears.
+Steps to Reproduce
+1.Open Brave Browser
+2.Verify Setting
+3.Re-launch and see the menu bar is still there
+Actual result:
+
+
+Expected result:
+Menu Bar is hidden.
+Reproduces how often:
+Every time
+Brave Version
+about:brave info:
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 4.15.0-36-generic
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+Additional Information

@@ -1,0 +1,26 @@
+Add a sandbox attribute to the inserted iframes
+
+
+Wladimir Palant on January 20, 2016 at 13:51:08 says:
+Hm, safe ads... You know that an iframe with srcdoc attribute is considered first-party and the same-origin policy isn't stopping it from accessing its parent? So, unless you also add a sandbox attribute, the ad frames you are injecting are just as unsafe as the ones you blocked. Want to actually sandbox them?
+For reference, I'm talking about this code: 
+
+
+browser-laptop/app/content/webviewPreload.js
+
+
+         Line 110
+      in
+      e008a78
+
+
+
+
+
+
+ // ref param for referrer when possible 
+
+
+
+
+

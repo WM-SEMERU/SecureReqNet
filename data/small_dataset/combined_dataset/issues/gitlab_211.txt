@@ -1,0 +1,9 @@
+Hi, someone on our team opened up quite a large merge request, and we were all adding comments to it when suddenly everyone started getting 500 Internal Server errors.
+
+I checked the app logs and found this error:
+
+    ActiveRecord::StatementInvalid (Mysql2::Error: Data too long for column 'st_diff' at row 1: INSERT INTO `notes` (`author_id`, `commit_id`, `created_at`,     `line_code`, `note`, `noteable_id`, `noteable_type`, `project_id`, `st_diff`, `updated_at`) VALUES (2, '', '2014-04-16 17:49:06', '26676d61649fdd751479b01366ca6eaa526d9793_25_27', 'Test comment. Please Ignore.', 52, 'MergeRequest', 50, '---\n:diff: \  -------- rest of the diff is really large
+
+We're using MySQL as the database, so I went in and modified the column type of `st_diff` on `notes` to `mediumtext` and it has solved the issue. I realize this is a bit of a hack to fix it but I'm wondering if there's a larger issue with storing too much data in that field or if the migrations just need to be updated so no one else runs into this.
+
+I can provide some more info if needed.

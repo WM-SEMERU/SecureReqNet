@@ -1,0 +1,11 @@
+Some samples do not work out of box
+
+
+At least the following samples do not work if you do .\build.cmd move into their directory and do dotnet run.
+
+OpenIdConnect.AzureAdSample
+WsFederation
+OpenIdConnectSample
+
+These samples should either be fixed so that an outside user can run them without modification (or if modification is required for config or some such, it should be explicitly called out in the error message), or removed entirely if they no longer serve a purpose.
+More generally it would be a good idea for us build and test basic functionality of all our samples (IE, index page returns 200) so we can ensure that they are up to date and not misleading to customers.

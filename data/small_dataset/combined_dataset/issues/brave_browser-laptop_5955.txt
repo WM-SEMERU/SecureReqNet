@@ -1,0 +1,6 @@
+Adding and managing client certificates (HTTPS/SSL)
+
+
+It's a feature but I'd love to have a way to add my own HTTPS/SSL certificate to securely connect to privately hosted webapps. Juste like Chrome and Firefox lets you save and manage external certificates.
+Maybe it's already possible, but I cant find it !
+Great work anyway guys :)

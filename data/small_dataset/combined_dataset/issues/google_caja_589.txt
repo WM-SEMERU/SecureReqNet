@@ -1,0 +1,9 @@
+tameNode should not return a functional node for an unrecognized or unsafe element
+
+
+Original issue 589 created by mikesamuel on 2008-06-13T01:21:46.000Z:
+tameNode will return a TamedElement for any element regardless of whether
+the element name is recognized and safe.
+If it isn't, we still need to return a node so that tree traversal works,
+but should not return an editable node, or one that exposes details of the
+node.

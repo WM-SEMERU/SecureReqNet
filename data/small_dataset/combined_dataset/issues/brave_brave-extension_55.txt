@@ -1,0 +1,4 @@
+disallow unsafe-eval for scripts and wildcard for styles in manifest file
+
+
+closes brave/brave-browser#691

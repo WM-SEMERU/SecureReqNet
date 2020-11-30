@@ -1,0 +1,9 @@
+add default routing to canal and disable bird checks
+
+
+Fixes Canal support:
+
+removed bird check. Canal uses flannel for networking so bird is not used (calico uses bird for bgp networking). Currently this check causes pod to be "not ready" all the time
+added default routing - currently by default only routing to container network was added, so there was no way for app in pod to connect to k8s services or outside of the cluster
+
+This is a re-authored version of #4421 since @pskrzyns can't access his LinuxFoundation account to fix CLA, he agreed to re-author this as another PR in the comments.

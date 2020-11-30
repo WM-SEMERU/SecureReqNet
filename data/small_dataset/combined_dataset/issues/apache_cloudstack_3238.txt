@@ -1,0 +1,17 @@
+client: don't disable TLSv1, TLSv1.1 by default that breaks VMware env
+
+
+This fixes the issue that TLSv1 and TLSv1.1 are still used by CloudStack
+management server to communicate with VMware vCenter server. With the
+current defaults, the setup/deployment on VMware fails. Users/admins
+can however setup the security file according to their env needs to
+disable TLSv1 and TLSv1.1 for server sockets (8250/agent service for
+example).
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+

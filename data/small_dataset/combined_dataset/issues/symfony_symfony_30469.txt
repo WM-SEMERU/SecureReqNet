@@ -1,0 +1,52 @@
+Create a hyperlink to interfaces/classes that can be autowired
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Added hyperlink to definition of interfaces/classes that can be used for autowiring.
+But I need help with:
+
+
+the aliases are becoming hyperlinks too, but shouldn't.
+It's outputting <fg=yellow;href=phpstorm://open?file=filepath&line=17>Symfony\Contracts\Translation\TranslatorInterface</> <fg=cyan>(translator.default)</>
+
+
+it currently works with phpstorm because it's hardcoded but it should work with framework.ide option, but don't know what the best approach is to support that config option.
+
+

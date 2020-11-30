@@ -1,0 +1,5 @@
+If you browse directly to [help/api](https://gitlab.com/help/api), or if you browse to [help](https://gitlab.com/help), then follow any link BUT the `api readme`, and then follow the `API` link on the menu, all links in the `README` will be broken.
+
+BUT, if you browse to [the README file](https://gitlab.com/help/api/README) (however you want to), links work fine.
+
+I'm guessing they're relative to `README` path.

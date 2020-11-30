@@ -1,0 +1,9 @@
+crypto: Add crypto/dh to the stdlib
+
+
+by deleted.evan.phoenix@hungrymachine.com:
+Please consider adding crypto/dh, found here: https://github.com/evanphx/go-crypto-dh to
+the stdlib. RSA and EC are already present and using diffie hellman for custom crypto
+protocols is very useful.
+
+Thanks for your consideration!

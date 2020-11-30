@@ -1,0 +1,42 @@
+'An unverified password change weakness was reported by Jobert via HackerOne. The details are as follows:
+
+There's a settings page that allows the user to update their current password. This only works if they either know the user's current password or have access to the user's email address to intercept the password reset token. However, the `ProfilesController#update` endpoint can be used to reset the user's password without knowing the user's current password. The root cause of this is the whitelisted `:password` and `:password_confirmation` keys in the `ProfilesController#user_params` method. To reproduce, follow these steps:
+
+*  make sure you're signed into an account
+*  go to /profile
+*  intercept your traffic
+*  click the "Update profile settings" button
+*  observe the following request being submitted
+
+**Request**
+
+```
+POST /profile HTTP/1.1
+Host: gitlab-instance
+...
+
+------WebKitFormBoundaryrZtUNz6xfmg4kUBu
+Content-Disposition: form-data; name="utf8"
+
+â
+------WebKitFormBoundaryrZtUNz6xfmg4kUBu
+Content-Disposition: form-data; name="_method"
+
+put
+------WebKitFormBoundaryrZtUNz6xfmg4kUBu
+Content-Disposition: form-data; name="authenticity_token"
+
+ee7fpIvcDlZwDCVTEd7p+4noyMK/nl+rVATSR6Vx/y4RbH0KPmKZrCRAlpb6yx98egUOgxGIJedPrWymTFCMEw==
+------WebKitFormBoundaryrZtUNz6xfmg4kUBu
+Content-Disposition: form-data; name="user[name]"
+
+test
+...
+------WebKitFormBoundaryrZtUNz6xfmg4kUBu--
+```
+
+In this request, simply add the `user[password]` and `user[password_configuration]` parameters (make sure they have the same value) to change the user's password. To make sure it worked, open up a new browser window, and sign in with the new password. This seems to be a rather low severity vulnerability, but wanted to let you know regardless.
+
+**Impact**
+
+This may lead to an account takeover when the attacker has access to a user's session and wants to sign in as the user on a different machine. While I'm typing this, I realize that they could also create a personal access token, but I think you want to know about this regardless.

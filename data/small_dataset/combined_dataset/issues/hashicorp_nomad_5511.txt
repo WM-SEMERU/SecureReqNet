@@ -1,0 +1,15 @@
+Reorder executor lookupBin ordering
+
+
+This is a follow up work to #4813 to fix #4809 and fix a regression introduced in 0.9 in marking files in libcontainer executable.
+#4809 bug is that lookupBin uses exec.LookPath when not inspecting task dir files.  exec.LookPath only returns a file if it's already marked as an executable path in https://github.com/golang/go/blob/go1.12.1/src/os/exec/lp_unix.go#L24-L27 .  This affects raw exec as if passed an absolute path to file, lookupBin returns an error if file isn't already an executable.  This explains why the error manifests when an absolute interpolated path is used (e.g. ${NOMAD_TASK_DIR}/hellov1) but not when using a task rel dir (e.g. local/hellov1) in the above examples used in ticket.
+PR #4813 remedied this problem for raw exec but inadvertably broke libcontainer executor, as it made lookupBin returns the paths to host files rather than ones found inside chroot.
+This PR reorders the evaluation, so we go back to 0.8 behavior of looking up task directories first, but then check for host paths before using exec.LookPath.
+This PR is broken into three commits to illustrate evolution and confirming hypothesis:
+
+9adab75 : Adding a test illustrating how libcontainer executor fails at marking processes as executable in https://travis-ci.org/hashicorp/nomad/jobs/514942694 - note that the test doesn't depend on artifacts or interpolated paths
+d441cdd: reverting PR #4809 and showing the test fail now with raw_exec case (as expected) in https://travis-ci.org/hashicorp/nomad/jobs/514944065
+244544b: in where we add the check in appropriate place next to exec.LookPath(...) for absolute paths and have a green job in https://travis-ci.org/hashicorp/nomad/jobs/514945024
+
+Future work
+Inspecting lookupBin in 0.8 and 0.9 case, we have a bug in using exec.LookPath for the libcontainer executor case.  We should be looking up paths based on the container chroot and container PATH rather than the host's.  However, this is not a 0.9.0 regression and was present in 0.8; so punting to fix it post 0.9.

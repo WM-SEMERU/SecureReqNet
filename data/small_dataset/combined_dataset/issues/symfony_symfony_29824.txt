@@ -1,0 +1,15 @@
+[DX][Guard] Rememberme misconfiguration improvements
+
+
+While implementing Guard is easy and really powerful, we had two situations in which debugging took long while the code change was a single line. The Developer eXperience could get improved:
+
+rememberme needs access_control to be set to IS_AUTHENTICATED_REMEMBERED, and will  otherwise land at GuardAuthenticator::start
+Even while rememberme is configured on security.yml method  GuardAuthenticator::supportsRememberMe (obviously) needs to return true. When this still is set to false, it will not work but also will not throw an exception
+
+Suggestion
+Not sure whether all below suggestions are possible:
+
+Let \Symfony\Component\Security\Http\Firewall\ExceptionListener:195 check access_control when authenticationEntryPoint::start did not return a Response. Is access_control config data accessible?
+Throw a clear exception in case rememberme does not match GuardAuthenticator::supportsRememberMe
+Throw a clear exception in case ... there's one firewall with one guard authenticator configured, and ... rememberme does not match GuardAuthenticator::supportsRememberMe
+

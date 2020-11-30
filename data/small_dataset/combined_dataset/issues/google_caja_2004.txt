@@ -1,0 +1,12 @@
+Remove extra charset parameter if present
+
+
+Caja fails to load resources when the server returns the charset in the content type header.
+This header works:
+content-type: application/javascript
+But this fails without the fix:
+content-type: application/javascript; charset=utf-8
+In that case, Caja throws an error:
+
+Unimplemented content-type application/javascript; charset=utf-8
+

@@ -1,0 +1,6 @@
+Show name of node with unsupported platform
+
+
+I got message no suitable node (scheduling constraints not satisfied on 3 nodes; unsupported platform on 1 node) and I don't know which node has unsupported platform because all of them is running as virtual machines (3 masters, 1 worker). All has x86_64 and linux. So I don't know where is the problem.
+Suggestion
+As a part of the message https://github.com/docker/swarmkit/blob/master/manager/scheduler/filter.go#L315 show also Node.Description.Hostname, Node.Description.Platform.OS, Node.Description.Platform.Architecture.

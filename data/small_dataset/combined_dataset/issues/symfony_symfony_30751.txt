@@ -1,0 +1,4 @@
+[Routing] UrlGenerator could benefit from cache support
+
+
+UrlGenerator could benefit from cache support. When generating thousands routes (eg for sitemap), time it takes for this call creeps up (for about 200000 calls this is responsible for more than 4 seconds). I believe this is good candidate for caching, because it's rare that route definiton + input ever yields different output.

@@ -1,0 +1,7 @@
+PS7 should also respect the old Windows PowerShell GPO registry settings
+
+
+Summary of the new feature/enhancement
+As part of the side-by-side work for PSCore6, PSCore6 uses a different set of registry paths for GPO policies.  This means admins can set policies separately for Windows PowerShell vs PowerShell Core, but makes it more difficult to manage.
+Proposed technical implementation details (optional)
+For PowerShell 7, pwsh should look in both paths.

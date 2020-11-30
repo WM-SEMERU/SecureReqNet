@@ -1,0 +1,12 @@
+success_handler not exist from simple_form
+
+
+http://symfony.com/doc/current/cookbook/security/custom_password_authenticator.html
+firewalls:
+secured_area:
+pattern: ^/
+simple_form:
+provider: fos_userbundle
+authenticator: custom_authenticator
+success_handler: my_login_success_handler
+ServiceNotFoundException: The service "security.firewall.map.context.secured_area" has a dependency on a non-existent service "security.authentication.success_handler.secured_area.simple_form".

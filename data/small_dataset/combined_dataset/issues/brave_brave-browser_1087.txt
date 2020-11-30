@@ -1,0 +1,11 @@
+Developer Tools - Security Suggestions
+
+
+Lot of web-developers want to do the right thing from a security perspective but have less insight into what the right thing is. Some of them are not up-to speed about the latest developments in web app sec.  Some of them read about protections like CSP, x-frame options and various security headers but don't use them correctly.
+The security suggestions add-on, will help developers identify security issues in their site like:
+
+Invalid/Incorrect CSPs
+Missing security headers
+Cookie flags
+<To-Do: Add more to the list>
+

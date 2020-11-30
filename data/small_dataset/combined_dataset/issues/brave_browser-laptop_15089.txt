@@ -1,0 +1,27 @@
+binance.com not displaying properly due to cross-origin read blocking
+
+
+Description
+Reported via community: https://community.brave.com/t/binance-issues-w-shields/30391
+Binance.com is not loading correctly. Default shields show nothing blocked (all 0's) but images and table are not displayed properly. Dev Tools show Cross-Origin Read Blocking (CORB) blocked cross-origin response messages. If you put shields down, this page loads correctly.
+Steps to Reproduce
+
+Open binance.com with default shields.
+Note table and images at top are not displayed correctly.
+Open shields, verify nothing is showing as blocked.
+
+Actual result:
+
+
+Expected result:
+
+Reproduces how often:
+Easily
+Brave Version
+about:brave info:
+0.23.79
+Reproducible on current live release:
+Yes
+Additional Information
+Does not reproduce in brave-core.
+Maybe related to #14841 (comment) ?

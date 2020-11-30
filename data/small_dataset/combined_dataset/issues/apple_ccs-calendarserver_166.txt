@@ -1,0 +1,7 @@
+Invalid principal URIs should not be accepted in ACLs
+
+
+strauss@… originally submitted this as ticket:201
+
+Currently, principal URIs other than /principals/__uids__/*, e.g. /principals/users/frank/ are accepted and stored as principals in ACL operations, although access control is not based on such other URIs. Hence, it would be better, if the server would return an error upon such ACL operations.
+This has been observed on trunk revision 1975 and tested with a Mulberry client.

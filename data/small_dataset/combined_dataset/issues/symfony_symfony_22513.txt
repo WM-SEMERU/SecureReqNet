@@ -1,0 +1,89 @@
+GetToken() from TokenStorage returns null in some cases
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+3.2.3
+
+
+
+Hi,
+The function getToken from tokenStorage returns in some cases null.
+namespace AppBundle\Security;
+
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
+class CurrentUserProvider
+{
+    private $tokenStorage;
+ 
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+ 
+    /**
+     * Get the logged in user or null.
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        $user = null;
+        $token = $this->tokenStorage->getToken();
+
+        if ($token !== null) {
+            $user = $token->getUser();
+        }
+ 
+        return $user;
+    }
+}
+
+In my controller POST method works but DELETE doesn't...
+class ImageController extends Controller
+{
+    /**
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"image"})
+     */
+    public function postImagesAction(Request $request)
+    { 
+        $currentUser = $this->get('current_user');  // OK
+        ... 
+    }
+
+    /**
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @Rest\Delete("/images/{id}")
+     */
+    public function deleteImagesAction(Request $request) 
+    { 
+        $currentUser = $this->get('current_user');  // KO
+        ... 
+    }
+}
+

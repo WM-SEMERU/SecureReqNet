@@ -1,0 +1,129 @@
+After rolling-update nodes can't join cluster - DNS lookup fails to master host
+
+
+1. What kops version are you running? The command kops version, will display
+this information.
+Version 1.11.1
+2. What Kubernetes version are you running? kubectl version will print the
+version if a cluster is running or provide the Kubernetes version specified as
+a kops flag.
+v1.11.8
+3. What cloud provider are you using?
+AWS
+4. What commands did you run?  What is the simplest way to reproduce this issue?
+I performed an upgrade from k8s 1.10.X to 1.11.8 using the rolling-updated cluster command.
+5. What happened after the commands executed?
+The nodes (master included) were recreated however the cluster is completely down. None of the nodes will join the cluster.
+I should note that this was a gossip based cluster.
+ kops validate cluster
+Using cluster from kubectl context: xxxxx.k8s.local
+
+Validating cluster xxxxx-dev.k8s.local
+
+INSTANCE GROUPS
+NAME			ROLE	MACHINETYPE	MIN	MAX	SUBNETS
+ig1		        Node	t2.medium	2	2	us-west-2a
+ig2		        Node	t2.medium	2	2	us-west-2a
+ig3		        Node	t2.large	1	1	us-west-2a
+master-us-west-2a	Master	m3.medium	1	1	us-west-2a
+nodes			Node	t2.large	1	1	us-west-2a
+
+NODE STATUS
+NAME						ROLE	READY
+ip-172-20-33-205.us-west-2.compute.internal	node	True
+
+VALIDATION ERRORS
+KIND	NAME							MESSAGE
+Machine	i-0903f012046f2ec0c			machine "i-0903f012046f2ec0c" has not yet joined cluster
+Machine	i-0a1855f9c5344648f			machine "i-0a1855f9c5344648f" has not yet joined cluster
+Machine	i-0b9f3a36b884528ef			machine "i-0b9f3a36b884528ef" has not yet joined cluster
+Machine	i-0c52fb5cf8cf01f45			machine "i-0c52fb5cf8cf01f45" has not yet joined cluster
+Machine	i-0f4366de2eac498b1			machine "i-0f4366de2eac498b1" has not yet joined cluster
+
+There seems to be a DNS and networking issue. When logging in to the nodes I see several relevant errors in the syslog:
+Unable to update cni config: No networks found in /etc/cni/net.d/
+Container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: cni config uninitialized
+Get https://api.internal.xxxx.k8s.local/api/v1/services?limit=500&resourceVersion=0: dial tcp: lookup api.internal.xxxxx.k8s.local: no such host
+
+Looking in the /etc/hosts file, the hostname for the master is not there:
+127.0.1.1 ip-172-20-58-91.int.xxxx ip-172-20-58-91
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+# Begin host entries managed by kops - do not edit
+172.20.34.80	etcd-a.internal.xxxxx.k8s.local etcd-events-a.internal.xxxxxk8s.local
+# End host entries managed by kops
+
+6. What did you expect to happen?
+I was hoping the upgrade would work.
+7. Please provide your cluster manifest. Execute
+kops get --name my.example.com -o yaml to display your cluster manifest.
+You may want to remove your cluster name and other sensitive information.
+apiVersion: kops/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: 2017-12-25T03:13:56Z
+  name: xxxxx.k8s.local
+spec:
+  additionalNetworkCIDRs:
+  - 172.20.0.0/16
+  api:
+    loadBalancer:
+      type: Internal
+  authorization:
+    alwaysAllow: {}
+  channel: stable
+  cloudProvider: aws
+  configBase: <redacted>
+  etcdClusters:
+  - etcdMembers:
+    - instanceGroup: master-us-west-2a
+      name: a
+    name: main
+  - etcdMembers:
+    - instanceGroup: master-us-west-2a
+      name: a
+    name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  kubernetesVersion: 1.11.8
+  masterPublicName: api.xxxxx.k8s.local
+  networkCIDR: 172.16.0.0/16
+  networkID: <redacted>
+  networking:
+    canal: {}
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+  - 0.0.0.0/0
+  subnets:
+  - cidr: 172.20.32.0/19
+    egress: <redacted>
+    id: <redacted>
+    name: us-west-2a
+    type: Private
+    zone: us-west-2a
+  - cidr: 172.20.0.0/22
+    id: <redacted>
+    name: utility-us-west-2a
+    type: Utility
+    zone: us-west-2a
+  topology:
+    dns:
+      type: Public
+    masters: private
+    nodes: private
+---
+
+8. Please run the commands with most verbose logging by adding the -v 10 flag.
+Paste the logs into this report, or in a gist and provide the gist link here.
+9. Anything else do we need to know?

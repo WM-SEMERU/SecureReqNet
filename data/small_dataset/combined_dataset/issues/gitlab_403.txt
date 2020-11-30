@@ -1,0 +1,11 @@
+Since the downtime gitlab experienced our repo etix/scrobble looks corrupted.
+A git pull results in:
+```
+error: object file ./objects/86/f8e901529aaf8990d9cff3d6b2a9297364465f is empty
+error: object file ./objects/86/f8e901529aaf8990d9cff3d6b2a9297364465f is empty
+error: object file ./objects/86/f8e901529aaf8990d9cff3d6b2a9297364465f is empty
+fatal: loose object 86f8e901529aaf8990d9cff3d6b2a9297364465f (stored in ./objects/86/f8e901529aaf8990d9cff3d6b2a9297364465f) is corrupt
+fatal: The remote end hung up unexpectedly
+```
+
+The website seems also to be affected, with HTTP 500 errors while accessing the project's page.

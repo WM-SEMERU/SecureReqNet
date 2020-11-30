@@ -1,0 +1,3 @@
+I have few files likes hello.work.markdown linked internally.
+
+So when I try to load that(http://{myurl}/wiki/hello.world), it will take me to create new page screen. It was working fine for my previous v6.5.1 but its failing in v7.0

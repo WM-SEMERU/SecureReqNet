@@ -1,0 +1,7 @@
+domita should describe its taming decisions
+
+
+Original issue 578 created by felix8a on 2008-06-13T00:14:08.000Z:
+for a dom feature not implemented by domita,
+there isn't an easy way of knowing if it's "not implemented yet" or
+"deliberately not implemented because of security problems".

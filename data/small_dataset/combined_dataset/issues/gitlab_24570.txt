@@ -1,0 +1,26 @@
+'A user sent us a vulnerability report via the security email list:
+
+https://gitlab.zendesk.com/agent/tickets/49147
+
+The user believes that an attacker can construct a regular expression that exhausts resources and results in a denial of service. This goes beyond my knowledge of CI. Is this legit?
+
+```
+GitLab shows code coverage which comes as output of CI process.
+
+Particularly code coverage is extracted from "tray" (build output) by user defined regular expression.
+
+But you can create "evil Regexp" which takes very long to calculate. See https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+
+particularly in ruby: 
+'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!' =~ /^(([a-z])+.)+[A-Z]([a-z])+$/i
+
+takes really, really long (don't time to measure and wait...) in 2.3 and previews versions of ruby.
+
+The problematic code is here: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/models/ci/build.rb#L208
+
+IMHO solution isn't easy, Let me propose two different ways: 
+* workaround: put the regexp extraction to background job in the Timeout::timeout block (but there should be another issue with ruby timeout. Which I hope could be mitigated in this case). 
+* redesign the build data flow. I have created issue for a bit different thing but it's a general proposal how to pass data form gitlab ci multirunner. See my issue: https://gitlab.com/gitlab-org/gitlab-ce/issues/23618
+```
+
+@DouweM @rspeicher @marin @northrup

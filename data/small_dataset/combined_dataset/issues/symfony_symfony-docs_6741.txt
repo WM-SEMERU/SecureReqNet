@@ -1,0 +1,9 @@
+Delete or improve "How to Simulate Authentication with a Token in a Functional Test" article
+
+
+I propose to delete the "How to Simulate Authentication with a Token in a Functional Test" cookbook article:
+
+It's an alternative of "How to Simulate HTTP Authentication in a Functional Test", but it doesn't explain when to use this or the other technique.
+At the bottom, it says "The technique described in How to Simulate HTTP Authentication in a Functional Test is cleaner and therefore the preferred way." Why should we document something that's not recommended?
+The technique doesn't look clean at all.
+

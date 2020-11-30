@@ -1,0 +1,4 @@
+Documented the disable_not_compromised_password option
+
+
+Fixes #11327 and documents symfony/symfony#30932.

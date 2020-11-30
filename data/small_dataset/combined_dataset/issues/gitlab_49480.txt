@@ -1,0 +1,46 @@
+### Summary
+
+Deleted commits still show in user profiles, including the diffs/contents of the commit.
+
+### Steps to reproduce
+
+1. Push commits to a repository. 
+1. Use `git reset` or `rebase` to delete some commits and push - ensure `git log` and Commits page on project show that the targeted commits have been deleted. 
+1. Go to the user's (who pushed the commits) profile. 
+1. The deleted commit should still show on their profile history. Clicking on that commit should open a page with all of the commit details.
+
+### Example Project
+
+https://gitlab.com/services-support-testing/gitstuff
+
+### What is the current *bug* behavior?
+
+Deleted commits can still be seen on web UI.
+
+### What is the expected *correct* behavior?
+
+Deleted commits should be removed entirely as these are often deleted to remove sensitive information that was accidentally pushed.
+
+### Relevant logs and/or screenshots
+<details>
+<summary>Git log</summary>
+<img src="/uploads/17f8cc03297c85332de248c36cf3da0e/git_log.png"/>
+</details>
+<details>
+<summary>Profile history</summary>
+<img src="/uploads/40a408ac6ad390088f773d3248511bfa/profile_history.png"/>
+</details>
+<details>
+<summary>Deleted commit contents</summary>
+<img src="/uploads/5f96480495ff11d818cc2c7102b8a255/deleted_commit_contents.png"/>
+</details>
+
+### Output of checks
+
+This bug happens on GitLab.com
+
+`GitLab Enterprise Edition 11.1.0-ee 9a9f41d`
+
+### Possible fixes
+
+(If you can, link to the line of code that might be responsible for the problem)

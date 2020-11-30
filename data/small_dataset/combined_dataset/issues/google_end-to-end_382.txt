@@ -1,0 +1,4 @@
+Update CONTRIBUTORS?
+
+
+Multiple PRs have been merged recently by new contributors (yay!) but the CONTRIBUTORS has not  changed, is it still being maintained?

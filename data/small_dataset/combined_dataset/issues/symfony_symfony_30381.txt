@@ -1,0 +1,46 @@
+[DX] Fix PHPDoc of Container*::set
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+
+I've discovered this inconsistency while writing a redistributable bundle, and using PHPStan. It's possible to use a callable as a service in the DI container, but the set method doesn't report this correctly.

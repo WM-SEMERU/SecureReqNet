@@ -1,0 +1,8 @@
+ES5/3 markFuncFreeze leaves .prototype undefended
+
+
+Original issue 1695 created by kpreid.switchb.org on 2013-04-09T18:38:51.000Z:
+ES5/3 internally uses markFuncFreeze in a fashion which suggests that it is intended that the resulting function is (trivially) transitively immutable (ignoring prototypes). However, it leaves the .prototype property untouched, so any such function, if not otherwise defended, has an accessible non-frozen .prototype object.
+Unless we find a reason to do otherwise, I propose that markFuncFreeze set .prototype to null; or, if that proves to be problematic, that it freeze the .prototype.
+The function should also perhaps be renamed since it is no longer the composition of markFunc and freeze.
+(For the most part, this is not a issue for the taming frame, because anything we care about will have gotten def()ed, but there are corners by which I discovered this.)

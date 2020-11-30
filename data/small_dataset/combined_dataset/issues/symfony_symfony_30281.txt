@@ -1,0 +1,9 @@
+[TwigBridge] Suggestion: Add HTTP username and password to `absolute_url`
+
+
+Description
+Allow generating URL's containing username and password: http://foo:bar@example.com/
+Example
+{{ absolute_url(path(...), {username:'foo', password: 'bar'}) }}
+This would be useful in cases where the website is (still) hidden behind some basic HTTP auth, e.g. during development or on a staging server.
+Should be easy to implement, just add two optional parameters to HttpFoundationExtension::generateAbsoluteUrl()

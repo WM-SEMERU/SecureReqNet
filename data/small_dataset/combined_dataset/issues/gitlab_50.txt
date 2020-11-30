@@ -1,0 +1,1 @@
+This even affects the GitLab Community Edition's own GitLab host: When I login, I expect Git Lab to at *least* redirect to the page I was on, or even better, complete whatever task I was trying to do (submit an issue, fork a repo, ...).

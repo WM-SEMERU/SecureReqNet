@@ -1,0 +1,15 @@
+assert: fix rejects stack trace and operator
+
+
+This makes sure the stack trace is not removed due to a wrong stack
+start function being used. It also fixes the wrong operator caused
+by the same reason. This only applies in case an validation object
+was used to validate the rejection passed to assert.reject() as
+first argument.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

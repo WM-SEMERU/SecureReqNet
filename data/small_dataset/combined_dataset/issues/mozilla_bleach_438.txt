@@ -1,0 +1,7 @@
+Unvendor the html5lib library
+
+
+html5lib development has stabilized in recent months. So concerns of frequent API breakage is less than it was in the past.
+Reduces the need for users to have html5lib installed multiple times: once by itself and once by Bleach. setup.py now uses a version specifier to ensure a compatible version is installed.
+Unvendoring is more secure. Should the html5lib library discover and fix a security issue, library users can update html5lib -- and only html5lib -- to incorporate the fix across their project. In Bleach's current
+state, Bleach will immediately need to make a release to include such a security fix. This creates unnecessary additional attack vectors.

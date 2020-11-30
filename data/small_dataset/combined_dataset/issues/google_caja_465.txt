@@ -1,0 +1,14 @@
+html4-attributes-whitelist has attributes of prohibited elements
+
+
+Original issue 465 created by adriennefelt on 2008-06-10T18:31:43.000Z:
+What steps will reproduce the problem?
+
+Go to caja.lang.html4-attributes-whitelist.json
+Look at the file
+
+What is the expected output? What do you see instead?
+Attributes of prohibited elements are on the attribute whitelist, such as all of the <OBJECT>
+attributes (codebase, align, etc.).  I can't see any way to exploit this at the moment (since the tag
+will still be denied based on the OBJECT name) but it seems like something that ought to be fixed.
+Please use labels and text to provide additional information.

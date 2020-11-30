@@ -1,0 +1,3 @@
+Gitlab cloud service is really awsome, but I encountered a 500 error (encoding error) with chinese characters.
+
+https://gitlab.com/Novtopro/learning-c/commit/906d3d4b14e9220056c89e3740fdff6800c4249d

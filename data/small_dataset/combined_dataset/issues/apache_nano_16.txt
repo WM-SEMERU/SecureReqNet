@@ -1,0 +1,5 @@
+URL injection
+
+
+Nano sometimes interpolates user input without proper escaping.
+Should we concern ourselves with protecting from URL injection? Or should the library user take care of that? Is this even a problem?

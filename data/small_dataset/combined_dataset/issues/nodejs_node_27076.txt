@@ -1,0 +1,9 @@
+meta: move ofrobots to TSC emeritus
+
+
+I have some internal things keeping me busy and not able to spend enough time on the project. I hope to be able to come back to increased activity in the project down the road.
+Checklist
+
+ documentation is changed or added
+ commit message follows commit guidelines
+

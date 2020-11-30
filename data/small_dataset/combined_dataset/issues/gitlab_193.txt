@@ -1,0 +1,17 @@
+'I'm seeing a bug happening regularly where merge requests are created with the same issue numbers. I cannot find a way to reproduce at this time.
+
+Example:
+
+In Merge Request list:
+![mr_list](http://i.imgur.com/QDGA2ro.png)
+
+In Merge Request detail:
+![mr_detail](http://i.imgur.com/OagPCCj.png)
+
+```
+gitlabhq_production=# select id, iid, title from merge_requests WHERE iid=1010 LIMIT 10;
+  id  | iid  |               title
+------+------+------------------------------------
+ 1919 | 1010 | Item <redacted>
+ 1918 | 1010 | Sav 8955 <redacted>
+```

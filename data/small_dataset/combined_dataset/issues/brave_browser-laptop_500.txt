@@ -1,0 +1,5 @@
+mitigate DLL hijacking on windows.
+
+
+@ericlaw1979 reports that we use a windows installer (Squirrel, default for Electron apps) which is vulnerable to DLL hijacking. this is similar to OpenLiveWriter/OpenLiveWriter#177.
+one thing we can do to address this until fixed in the installer is to show some sort of scary UI when the user tries to download a DLL, c.f. OpenLiveWriter/OpenLiveWriter#177 (comment)

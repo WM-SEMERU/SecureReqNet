@@ -1,0 +1,4 @@
+Improve withShop security
+
+
+We need to more thoroughly check that the accessToken matches the shop the user has given.

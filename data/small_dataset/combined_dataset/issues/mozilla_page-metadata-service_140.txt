@@ -1,0 +1,13 @@
+Wiki changes
+
+
+FYI: The following changes were made to this repository's wiki:
+
+
+defacing spam has been removed
+
+
+Restricting write access to contributors is strongly encouraged.  Please make that change  (documentation).
+
+
+These were made as the result of a recent automated defacement of publically writeable wikis.

@@ -1,0 +1,40 @@
+Incorrect behavior of COPY
+
+
+I have the following file hierarchy in my build environment:
+./
+  lua/
+    zua/
+      feature/
+      zua.lua
+    zua.proxy/
+      app/
+        feature/
+          feature1.lua
+          feature2.lua
+      
+
+I have this in my Dockerfile:
+RUN mkdir -p /lua/zua
+COPY ./lua/zua/* ./lua/zua.proxy/* /lua/zua/
+
+I expect this layout in the image:
+/
+  lua/
+    zua/
+      app/
+        feature/
+          feature1.lua
+          feature2.lua
+      feature/
+      zua.lua
+
+However the actual layout I get is this:
+/
+  lua/
+    zua/
+      feature/
+        feature1.lua
+        feature2.lua
+      zua.lua
+

@@ -1,0 +1,4 @@
+Self hosted pods should not mount host files
+
+
+Right now the scheduler and the controller-manager consume files that live on the host. This binds them to a specific host. We should use ConfigMaps (Secrets?) instead.

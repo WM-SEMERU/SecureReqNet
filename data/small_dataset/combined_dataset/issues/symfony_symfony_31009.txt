@@ -1,0 +1,5 @@
+[VarDumper] Internal state of the HTTP client should not be dumped when dumping a response
+
+
+The dump of the response is huge currently, as it contains the internal state of the client.
+This should probably wait for #30967 as that changes the internals.

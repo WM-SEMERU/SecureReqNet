@@ -1,0 +1,4 @@
+I want to extends this class and use this attribute $map in my child clas
+
+
+I want to extends this class and use this attribute $map in my child class to add a MASK_EXPORT

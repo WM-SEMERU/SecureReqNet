@@ -1,0 +1,6 @@
+Add --allow-host-ports flag to master and kubelet
+
+
+People often use hostPort when they shouldn't. Additionally, host ports are a precious resource. Eventually we should have a policy that controls access by namespace. For now, we should use the same approach as privileged.
+hostDir is similar security-wise to privileged, but doesn't cause as much confusion as hostPort.
+@thockin @derekwaynecarr

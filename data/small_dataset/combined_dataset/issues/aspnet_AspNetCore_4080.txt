@@ -1,0 +1,7 @@
+Question : No Authentication in development possible?
+
+
+Hi,
+I want to use ASP.NET Core Web API for a new Project. One of the requirement is to use a JWT Bearer token authentication. But I don't want in the development of the API the use the authentication. Do you have any idea how I can perform that.
+I'm using ASP.NET Core 2.1
+Thanks.

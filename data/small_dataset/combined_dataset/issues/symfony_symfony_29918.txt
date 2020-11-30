@@ -1,0 +1,16 @@
+prefixed routes for localization bring slow performance in dev and prod
+
+
+Hi,
+I migrated a project from Symfony 3.4 to Symfony 4.2 with prefixed routes for localization purposes and experienced that every time I change some code in a controller, the first time a page is loaded it takes more than 30s, when It was about 1-2 seconds before.
+In Symfony 3.4 I used the third party component: be_simple_i18n.
+In Symfony 4.2 I use the symfony's routing component that works about the same way (not using be_simple_i18n anymore).
+Here you are a short code from a yaml conf file:
+frontend_yaml_i18n_routes:
+    resource: "../../src/K2K/Resources/config/routing/routing_frontend.yml"
+    prefix:
+        default: "/"
+        es:      "/es"
+        es_ES:   "/"
+        en_ES:   "/en-es"
+Thanks!

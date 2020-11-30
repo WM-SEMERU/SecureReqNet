@@ -1,0 +1,5 @@
+Handle mXSS
+
+
+"m-XSS vectors bypassed widely deployed server-side XSS protection techniques (like HTML Purifier, kses, htmlLawed, Blueprint and Google Caja), client-side filters (XSS Auditor, IE XSS Filter), Web Application Firewall (WAF) systems, as well as Intrusion Detection and Intrusion Prevention Systems (IDS/IPS)" https://cure53.de/fp170.pdf
+This should be interesting.

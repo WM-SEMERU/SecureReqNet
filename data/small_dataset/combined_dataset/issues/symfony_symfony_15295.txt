@@ -1,0 +1,50 @@
+[Security] Make AccessDecisionStrategy extensible. And add highestnotabstainedvoter strategy
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#14049
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+
+ submit changes to the documentation
+
+This PR adds a new access decision strategy, called highest not abstained voter. The main idea of the voter is documented on issue #14049 .
+At the same time the PR tries to make access decision strategy extensible. The way it's done is via any service that implements the newly created AccessDecisionManagerInterface and has the tag security.access_strategy

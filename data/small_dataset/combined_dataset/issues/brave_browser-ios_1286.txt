@@ -1,0 +1,4 @@
+fingerprinting protection bypass
+
+
+this fix needs to be ported to iOS/Android: brave/browser-laptop#11683. i think you should be able to just pull app/extensions/brave/content/scripts/blockCanvasFingerprinting.js from browser-laptop master.

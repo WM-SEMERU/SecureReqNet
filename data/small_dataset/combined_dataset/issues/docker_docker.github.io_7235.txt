@@ -1,0 +1,6 @@
+No documentation on where iptables entries are generated
+
+
+File: network/iptables.md
+I have issues with Docker generating a network that conflicts with a VPN network, even after changing the daemon to launch on a different network. I've tracked the issue to be with iptables entries; however, I could not find any documentation in this page that says where these entries are being set on start-up, thus requiring me to clear those entries manually before connecting to the VPN.
+I'd be great if there was some sort of documentation listing which parts of Docker set iptables entries, and possibly, how to configure them.

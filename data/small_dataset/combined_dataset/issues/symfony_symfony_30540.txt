@@ -1,0 +1,43 @@
+[Messenger] Making it Shine
+
+
+Messenger is great. But, we've only carried it 90% of the way. It's missing key features and key things to really make it as usable as it deserves to be. Similar to #30502, I'd like to ask for help & ideas from the community to really make it shine.
+(Note: in some of these cases, we just need more review & testing to help push PR's forward).
+
+ #30970 Handling & Tracking Failed Messages Support
+ #30917 redis adapter
+ #30957 Remove base64_encode from PhpSerializer
+ #30958 Allows to register handlers on a specific transport
+ Validate transport options with OptionsResolver
+ Some sort of decent dashboard (or integration) to get stats about the health of your queues
+ Some support, docs, something, for spinning up multiple workers, restarting them, etc
+ Allow 3rd parties to define virtual transports and the user them maps to real transports
+ Review pending doc PRs
+ Review pending doc issues
+ #30558 (and #29950 #28772) Transport Configuration & priority support (and retry attempts, etc)
+ #29040, #29097 null transport
+ #30020 Calling all handlers, even if one fails
+ #30008 multiple queues & routing key support for AMQP + routing key Envelope
+ #30757 get size of messages waiting in a transport
+ #30670 make sure bus service ids are consistent
+ #30707 Adding argument to MessageBus::dispatch() for envelopes
+ #30756 Fix serialization problem with empty messages
+ #30759 sync transport
+ #30676 dispatch send event not on retry
+ #30708 Move receive loop into Worker and allow supporting multiple transports
+ #30628 transport-by-transport serialization config
+ #29007 Doctrine transport (the Enqueue adapter is great, but we should support some basic adapters in core)
+ #30754 Command to stop/restart all workers
+ #29303 messenger:consume has no output
+ #30557 (#27215 #27008) Retry mechanism
+ #30557 (#29132)  Making messenger:consume not fail when a worker fails
+ #30557 Hook on worker failure so it can be handled/logged
+ #30764 log error when messages fail on Worker
+ #30650 Allow stamping messages dispatched by 3rd parties via events
+ #30631 sent received messages to the correct bus automatically
+ #30634 Possibly allow each handler of a message to be sent to a different transport (e.g. 1 handler async, 1 sync) and when received, only the 1 handler is executed.
+ #29476 Command to setup transports
+ #28849 Doctrine transaction support
+ #30671 amqp prefetch
+
+What else?

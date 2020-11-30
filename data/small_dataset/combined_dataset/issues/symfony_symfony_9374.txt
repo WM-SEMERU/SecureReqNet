@@ -1,0 +1,8 @@
+Change of scope
+
+
+Hi,
+when overriding the Symfony RoleHierarchy it would be great to be able to get access to the buildRoleMap-method and map-variable for more advanced usage.
+Don't hesitate to ask for further clarification if necessary - thanks in advance for merging the PR!
+Kind regards,
+David

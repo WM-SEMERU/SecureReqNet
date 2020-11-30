@@ -1,0 +1,19 @@
+bookmark management followups
+
+
+
+ overflow menu submenus aren't showing
+ drag of item causes background window to move
+ Properly set parent when right clicking in context menu on a folder and hitting Add bookmark or Add Bookmark Folder.
+ context menu on bookmark folder items
+ Dragging a bookmark onto of an about tab reuses it instead of re-creating web view
+ overflow menu should only have parent 0 items
+ Overflow menu should expand when dragged over
+ Right click add folder or bookmark should add to the location of the right click and not append all bookmarks
+ Overflow menu should have ... for labels which are too long
+ Overflow menu can be laggy when a lot of items, limit to 100
+ Clicking on space where there is no submenu but within the context menu container should hide context menu completely
+ Reverse order overflow bookmark folder so that menus open to the left
+ Fix pinned site dragging regression
+ Bookmark toolbar doesn't refresh fast enough after dragging and dropping bookmark
+

@@ -1,0 +1,6 @@
+Graduate Bootstrap Tokens to GA
+
+
+https://github.com/kubernetes/cluster-bootstrap is the new location for these, but we need to move some utilities (?) from kubeadm to this new repo.
+#964 (comment)
+PR: TODO

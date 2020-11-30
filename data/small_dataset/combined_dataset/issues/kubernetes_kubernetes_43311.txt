@@ -1,0 +1,5 @@
+Replace out of date security disclosure doc
+
+
+This document was inconsistent with the process described at https://kubernetes.io/security/, so I replaced its content with a link to the new process.
+/cc @liggitt @jessfraz

@@ -1,0 +1,69 @@
+Start-Transcript might silently delete the output file
+
+
+If Start-Transcript is ran without -Append and a user has write privileges on the file without write privileges on the parent folder, the file will be silently deleted without any kind of error message.
+Steps to reproduce
+As administrator create a folder and file with the privileges specified above. I'm assuming that a local user, "myuser" exist:
+mkdir "c:\test\"
+icacls.exe "c:\test" "/grant" "builtin\administrators:(CI)(OI)(F)" "/inheritance:r"
+icacls.exe "c:\test" "/grant" "myuser:(CI)(OI)(RX)"
+"" | Out-File -Encoding "ascii" -LiteralPath "c:\test\my-transcript.txt"
+icacls.exe "c:\test\my-transcript.txt" "/grant:r" "myuser:(F)"
+Run Start-Transcript as "myuser":
+Start-Transcript -LiteralPath "c:\test\my-transcript.txt"
+Stop-Transcript
+Expected behavior
+The transcript should be written to c:\test\my-transcript.txt
+Actual behavior
+The output states success, but the file is actually deleted.
+
+PS C:> Start-Transcript -LiteralPath "c:\test\my-transcript.txt"
+Transcript started, output file is c:\test\my-transcript.txt
+PS C:> Stop-Transcript
+Transcript stopped, output file is C:\test\my-transcript.txt
+PS C:> Test-Path "c:\test\my-transcript.txt"
+False
+
+Environment data
+Not the newest PowerShell ...
+
+PS C:> $PSVersionTable
+Name                           Value
+
+PSVersion                      5.1.14393.1358
+PSEdition                      Desktop
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                   10.0.14393.1358
+CLRVersion                     4.0.30319.42000
+WSManStackVersion              3.0
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1
+
+... but you can clearly see the error in line 230 of StartTranscriptCmdlet.cs :
+
+
+
+PowerShell/src/Microsoft.PowerShell.ConsoleHost/host/msh/StartTranscriptCmdlet.cs
+
+
+         Line 230
+      in
+      02b5f35
+
+
+
+
+
+
+ System.IO.File.Delete(effectiveFilePath); 
+
+
+
+
+
+// If they didn't specify -Append, delete the file
+if (!_shouldAppend)
+{
+	System.IO.File.Delete(effectiveFilePath);
+}
+This part of the code should rather write some sort of zero length content to the file.

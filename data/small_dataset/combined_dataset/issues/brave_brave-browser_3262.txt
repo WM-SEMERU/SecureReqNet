@@ -1,0 +1,18 @@
+test-security audit is failing due to sinon -> just-extend
+
+
+As reported by @mihaiplesa :
+0:47:29 # Run  npm update nise --depth 2  to resolve 1 vulnerability
+10:47:29                                                                                 
+10:47:29   Moderate        Prototype Pollution                                           
+10:47:29                                                                                 
+10:47:29   Package         just-extend                                                   
+10:47:29                                                                                 
+10:47:29   Dependency of   sinon [dev]                                                   
+10:47:29                                                                                 
+10:47:29   Path            sinon > nise > just-extend                                    
+10:47:29                                                                                 
+10:47:29   More info       https://nodesecurity.io/advisories/780   
+
+Test Plan
+npm run test-security

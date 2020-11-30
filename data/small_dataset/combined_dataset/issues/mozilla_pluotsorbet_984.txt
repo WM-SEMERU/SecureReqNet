@@ -1,0 +1,5 @@
+Disallow non-HTTP(s) URLs for `windowOpen`
+
+
+For defense in depth I would recommend the windowOpen handler to check URLs and only allow those that point to the web. This could be problematic with blob or app URLs.
+cf. index.js line ~524, DumbPipe.registerOpener("windowOpen", function(message, sender) {

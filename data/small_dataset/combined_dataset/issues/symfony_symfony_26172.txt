@@ -1,0 +1,42 @@
+[ Security ][ Firewall ] Bug in the last version with SimpleFormAuthentication
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+
+
+
+RFC?
+
+
+
+Symfony version
+Since version 2.7
+
+
+
+In the last version im detected a bug in component SimpleFormAuthentication when check if only accept method POST. If configuration security form set "post_only: false" the variable $requestBag get a Object Request and try getParameterBagValue with object wrong.
+path:symfony/symfony/src/Symfony/Component/Security/Http/Firewall/SimpleFormAuthenticationListener.php
+namespace Symfony\Component\Security\Http\Firewall;
+method: protected function attemptAuthentication(Request $request)
+line: 102
+        $requestBag = $this->options['post_only'] ? $request->request : $request;
+        $username = ParameterBagUtils::getParameterBagValue($requestBag, $this->options['username_parameter']);
+        $password = ParameterBagUtils::getParameterBagValue($requestBag, $this->options['password_parameter']);
+For fix the problem i need downgrade version.

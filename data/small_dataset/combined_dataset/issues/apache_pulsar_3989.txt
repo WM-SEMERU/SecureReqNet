@@ -1,0 +1,8 @@
+[Question] Geo Replication docs out of date?
+
+
+The documentation on Geo Replication mentions:
+
+Replication must be used with global topics, meaning topics that belong to a global namespace and are thus not tied to any particular cluster... Global namespaces need to be created in the global virtual cluster.
+
+Is this part of documentation still valid? It seems I can create namespaces that replicate between two clusters (i.e. creating a namespace for a given tenant and then using set-clusters to set both ) without having to use the virtual cluster notation mentioned on this page.. Replication seems to work fine.

@@ -1,0 +1,8 @@
+update kinder docs
+
+
+This PR updates kinder docs with changes in #1488
+/kind documentation
+/priority important-longterm
+/assign @neolit123
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

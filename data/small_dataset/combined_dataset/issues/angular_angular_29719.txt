@@ -1,0 +1,13 @@
+next.angular.io/guide/ivy doesn't mention ivy-ngcc
+
+
+📚 Docs or angular.io bug report
+Description
+https://next.angular.io/guide/ivy comes up if you Google how to enable/disable Ivy in existing project. It states that changing angularCompilerOptions is sufficient for that.
+However, it doesn't mention the fact that when Angular CLI creates a project with --experimental-ivy it adds postinstall hook in package.json that runs ivy-ngcc. It then compiles all dependencies (as far as I understand) for the new compiler. And when you think you've disabled Ivy you are still in fact using it for external libraries, like Angular Material, which seems to be widely incompatible with Ivy.
+🔬 Minimal Reproduction
+What's the affected URL?**
+https://next.angular.io/guide/ivy
+Expected vs Actual Behavior**
+Expected: tell about ivy-ngcc, what it does and how to fully enable/get rid of Ivy in a project.
+Actual: states that changing configuration is enough.

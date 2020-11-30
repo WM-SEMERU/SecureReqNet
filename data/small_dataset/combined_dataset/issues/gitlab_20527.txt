@@ -1,0 +1,11 @@
+We already fixed this issue few months ago. It's weird that it's introduced again.
+
+It looks like @dblessing updated his fork and that "regular" action closed issue https://gitlab.com/gitlab-org/gitlab-ee/issues/835 
+
+![Screen_Shot_2016-08-02_at_11.32.49](/uploads/00d396ce5e7dcde1b497960285ea43fd/Screen_Shot_2016-08-02_at_11.32.49.png)
+
+I think it's related to recent work on performance improvements for references.
+
+Also we should cover this case with tests to not introduce this bug third time
+
+/cc @DouweM @stanhu @dzaporozhets 

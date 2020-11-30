@@ -1,0 +1,8 @@
+Remove GetRootContext method from VolumeHost interface
+
+
+Remove the GetRootContext call from the VolumeHost interface, since Kubernetes no longer needs to know the SELinux context of the Kubelet directory.
+Per #33951 and #35127.
+Depends on #33663; only the last commit is relevant to this PR.
+
+This change is 

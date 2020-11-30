@@ -1,0 +1,5 @@
+Remove references to "pcf-"
+
+
+We should remove references to "pcf-" and replace them with something that's more inclusive towards CF and K8s.
+For example, IAM should go from having a template starting with "pcf-sb-" to "gcpsb-"

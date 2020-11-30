@@ -1,0 +1,46 @@
+[Validator] Add the missing translations for the Portuguese ("pt") locale
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30181
+
+
+License
+MIT
+
+
+
+This PR addresses the issue #30181, adding the missing translations.

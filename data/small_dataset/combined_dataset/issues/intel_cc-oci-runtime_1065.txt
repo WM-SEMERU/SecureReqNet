@@ -1,0 +1,11 @@
+docs: Update README stating this project is in maintenance mode
+
+
+Now that we have released Clear Containers
+3.0,
+this codebase (CC 2.x) is now deprecated and the project is in
+maintenance mode.
+Updated the README.rst to state this and encourage users to switch to
+the new runtime.
+Fixes #1064.
+Signed-off-by: James O. D. Hunt james.o.hunt@intel.com

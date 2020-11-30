@@ -1,0 +1,43 @@
+[Serializer] Docblock about throwing exceptions on serializer
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Most of the serializers can throw a \Symfony\Component\Serializer\ExceptionInterface. This makes the docblock in line with that.
+Similar to this #29832

@@ -1,0 +1,8 @@
+https://hackerone.com/reports/202082
+
+SVG files can contain Javascript in `<script>` tags. Browsers are smart enough to ignore scripts embedded in SVG files included via IMG tags. However, a direct request for a SVG file will result in the scripts being executed. 
+
+So an embedded SVG as an attachment in an issue or avatar does not execute the code, but if a user clicks on the attachment the code will execute.
+
+https://www.grepular.com/Scalable_Vector_Graphics_and_XSS
+https://www.owasp.org/images/0/03/Mario_Heiderich_OWASP_Sweden_The_image_that_called_me.pdf

@@ -1,0 +1,38 @@
+Call the __toString func from  Request, both the POST data  the request disappear
+
+
+Symfony version(s) affected:4.0
+Description
+After I called the __toString method in Request, I found that POST data disappeared.
+How to reproduce
+ps:
+$symfony_request = SymfonyRequest::create(
+    "http://test.wkcoding.com/common/member/login",
+    "POST",
+    [
+      'username' => 'abc',
+      'password' => 'xxasd%'
+    ],
+    [],
+    [],
+    $_SERVER,
+    null
+ );
+
+echo ((string)$symfony_request);
+
+
+result:
+
+
+POST /common/member/login HTTP/1.1
+Accept:          text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Charset:  ISO-8859-1,utf-8;q=0.7,*;q=0.3
+Accept-Language: en-US,en;q=0.8
+Content-Type:    application/x-www-form-urlencoded
+Host:            test.wkcoding.com
+Origin:          test.wkcoding.com
+User-Agent:      Slim Framework
+
+Possible Solution
+According to the PSR7 specification or HTTP RFC, the getBody function returns the data in the request including $POST or File stream ?

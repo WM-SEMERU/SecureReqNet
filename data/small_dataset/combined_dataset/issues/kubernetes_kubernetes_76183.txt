@@ -1,0 +1,8 @@
+Scalability tests are failing to start 5k-node cluster
+
+
+Last 2 runs of correctness tests and last run of performance tests failed to create a cluster:
+https://testgrid.k8s.io/sig-scalability-gce#gce-scale-correctness
+https://testgrid.k8s.io/sig-scalability-gce#gce-scale-performance
+Something regressed ~2 days ago.
+@kubernetes/sig-scalability-bugs

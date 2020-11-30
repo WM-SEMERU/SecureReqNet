@@ -1,0 +1,5 @@
+Add server-side raft encryption
+
+
+We need to either encrypt all of raft, or at least the sensitive portions of it: secrets and the root key.
+This should be done with an in-memory-only key (#1467).

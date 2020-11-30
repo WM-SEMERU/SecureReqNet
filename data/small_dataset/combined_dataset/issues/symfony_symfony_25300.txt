@@ -1,0 +1,45 @@
+[Core] Missing translations for exception messages shown to users.
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+?
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+yes
+
+
+Symfony version
+3.3.9 / master
+
+
+
+There was a talk about this in #8341 and other issues but it looks like some of the core translations are still missing (including the "Bad Credentials." message).
+Devs can translate them on their own if they can find them by scanning the core code for exception strings (who would want to do that?) and speak all languages.
+https://github.com/symfony/security-core/blob/master/Authentication/Provider/UserAuthenticationProvider.php
+'Bad Credentials.' which replaces the default 'Invalid Credentials.' exception message which IMO is a much better translation (there is nothing "bad" about your credentials...)
+In https://github.com/symfony/security-core/blob/master/Authentication/Provider/DaoAuthenticationProvider.php you can find:
+
+'The credentials were changed from another session.'
+'The presented password cannot be empty.'
+'The presented password is invalid.'
+
+None are translated in https://github.com/symfony/security-core/tree/master/Resources/translations
+In general the exception messages should be targeted at the devs however in this case they are shown to end users, mix'n'match.

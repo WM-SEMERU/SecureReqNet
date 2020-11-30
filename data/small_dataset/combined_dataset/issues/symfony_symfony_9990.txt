@@ -1,0 +1,49 @@
+[SecurityBundle] added acl:set command
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+no
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+This new command allows to set ACL directly from the command line. This useful to quickly set up an environment and for debugging / maintenance purpose.
+This PR also includes a functional test system for the ACL component. As an example, it is used to test the acl:set command.
+The provided entity class is not mandatory (tests will still be green without it) but can be useful to test other ACL related things. I can remove it if necessary.
+The instantiation of the MaskBuilder object is done in a separate method to be easily overridable to use a custom one (e.g. the SonataAdmin one).

@@ -1,0 +1,31 @@
+CLI ng update refers to version 7, should be generic
+
+
+📚 Docs or angular.io bug report
+Description
+The reference page for ng update https://angular.io/cli/update refers to updating to v7 specifically:  "Perform a basic update to v7 of the core framework and CLI by running the following command."
+ A clear and concise description of the problem...
+🔬 Minimal Reproduction
+n/a
+What's the affected URL?**
+ https://angular.io/...
+https://angular.io/cli/update
+Reproduction Steps**
+n/a
+Expected vs Actual Behavior**
+There is nothing specific to v7 about the command below. Also, this page shouldn't have anything version-specific in it.
+Recommend: "Perform a basic update to the most current stable release of the CLI and the core framework by running the following command."
+Note: I'm not sure how to phrase it, but this command won't update to a beta or RC. Only the most current generally-available release (but Angular project doesn't use the term "GA"). Maybe the most current stable release?
+📷Screenshot
+n/a
+🔥 Exception or Error
+
+
+
+n/a
+
+
+🌍  Your Environment
+Browser info
+n/a
+Anything else relevant?

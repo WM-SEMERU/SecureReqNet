@@ -1,0 +1,5 @@
+Explain how to rehash passwords from Bcrypt to Argon2i
+
+
+As requested in https://symfony.com/blog/new-in-symfony-4-1-argon2i-configuration#comment-22135 it'd be great to have some docs about how to update an existing app to use Argon2i hasher instead of Bcrypt.
+This is a very serious security topic, so we need help from people who has done this with success in a non-trivial real-world app. Thanks!

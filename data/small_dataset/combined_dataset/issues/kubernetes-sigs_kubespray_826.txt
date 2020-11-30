@@ -1,0 +1,27 @@
+insecureport/secureport settings for apiserver being deduced incorrectly
+
+
+https://github.com/kubernetes-incubator/kargo/blob/master/docs/ha-mode.md
+
+Note: Kubernetes master nodes still use insecure localhost access because there are bugs in Kubernetes <1.5.0 in using TLS auth on master role services. This makes backends receiving unencrypted traffic and may be a security issue when interconnecting different nodes, or maybe not, if those belong to the isolated management network without external access.
+
+
+Access endpoints are evaluated automagically, as the following:
+Endpoint type	kube-master	non-master
+Local LB	http://lc:p https://lc:sp
+External LB, no internal	https://lb:lp https://lb:lp
+No ext/int LB (default)	http://lc:p https://m[0].aip:sp
+Where:
+m[0] - the first node in the kube-master group;
+lb - LB FQDN, apiserver_loadbalancer_domain_name;
+lc - localhost;
+p - insecure port, kube_apiserver_insecure_port
+sp - secure port, kube_apiserver_port;
+lp - LB port, loadbalancer_apiserver.port, defers to the secure port;
+ip - the node IP, defers to the ansible IP;
+aip - access_ip, defers to the ip.
+
+this was done in https://github.com/kubernetes-incubator/kargo/blob/114ab5e4e67cd94b66de02c07f6f4816e1599981/roles/kubernetes/preinstall/tasks/set_facts.yml#L11-L15
+The entire automagic evaluation was done because TLS auth fails on master for the earlier versions.
+Please note that im not asking for using the TLS Bootstrap  necessarily. It is a very useful feature, but i believe kargo can generate certs and bootstrap on its own as well.
+Do we really need forced insecure behavior even after 1.5.1 ?

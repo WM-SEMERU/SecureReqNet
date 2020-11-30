@@ -1,0 +1,1 @@
+When an account using LDAP is locked or disabled for a user, the user can still access repositories using his SSH private key.

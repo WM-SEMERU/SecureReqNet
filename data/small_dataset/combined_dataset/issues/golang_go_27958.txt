@@ -1,0 +1,130 @@
+crypto/x509: if system keychain has a cert with an empty but valid trust settings array, cert should be trusted but Go does not trust it
+
+
+The OS X-specific code for finding system trusted roots has a bug. The code that is assessing each certificate configured in the keychain defaults all flags to zero here. Later, if the resulting trust settings array is empty, the code will fail to change any of the flags, here. If they are all unset, it ends up putting the cert into the "untrusted" section here.
+However, in the Apple documentation, it explicitly states that if a given trust settings array is valid but empty, that it means "always trust this cert":
+https://developer.apple.com/documentation/security/1400261-sectrustsettingscopytrustsetting?language=objc#discussion
+
+An empty trust settings array (that is, the trustSettings parameter returns a valid but empty CFArray) means "always trust this certificate” with an overall trust setting for the certificate of kSecTrustSettingsResultTrustRoot. Note that an empty trust settings array is not the same as no trust settings (the trustSettings parameter returns NULL), which means "this certificate must be verified to a known trusted certificate”.
+
+The fix is to simply set trustRoot = 1; if the array is empty.
+What version of Go are you using (go version)?
+go version go1.10.4 darwin/amd64
+Does this issue reproduce with the latest release?
+I have not tried. However, I tracked down the source of the bug in the runtime source, and that portion of the runtime is unchanged in latest. (So I am pretty certain it will still repro in latest.)
+What operating system and processor architecture are you using (go env)?
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/Users/jh/Library/Caches/go-build"
+GOEXE=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/Users/jh/src/projects/go"
+GORACE=""
+GOROOT="/Users/jh/src/dev-mac/tools/go"
+GOTMPDIR=""
+GOTOOLDIR="/Users/jh/src/dev-mac/tools/go/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+CXX="clang++"
+CGO_ENABLED="1"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/4g/3qjdct5s79l4tt8rkddrncm00000gn/T/go-build043012801=/tmp/go-build -gno-record-gcc-switches -fno-common"
+
+What did you do?
+Added a self-signed cert as a trusted root to the system keychain:
+cat > test.ssl.cnf <<EOM
+  [req]
+  distinguished_name = req_distinguished_name
+  x509_extensions = v3_req
+  prompt = no
+  [req_distinguished_name]
+  CN = *.local.test
+  [v3_req]
+  keyUsage = keyEncipherment, dataEncipherment, cRLSign, keyCertSign
+  extendedKeyUsage = serverAuth
+  subjectAltName = @alt_names
+  subjectKeyIdentifier = hash
+  authorityKeyIdentifier = keyid:always,issuer:always
+  basicConstraints = CA:true
+  [alt_names]
+  DNS.1 = *.local.test
+  DNS.2 = local.test
+EOM
+
+openssl req \
+  -new \
+  -newkey rsa:2048 \
+  -sha512 \
+  -days 3650 \
+  -nodes \
+  -x509 \
+  -keyout "test.ssl.key" \
+  -out "test.ssl.crt" \
+  -config test.ssl.cnf
+
+sudo security add-trusted-cert -d -r trustRoot \
+  -k /Library/Keychains/System.keychain test.ssl.crt
+I use that cert in a Go HTTP server. Here is a simple example:
+// test_server.go
+package main
+
+import (
+	"net"
+	"net/http"
+)
+
+func main() {
+	ln, err := net.Listen("tcp", "127.0.0.1:8043")
+	if err != nil {
+		panic(err)
+	}
+
+	server := &http.Server{
+		Addr: "127.0.0.1:8043",
+		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "text/plain")
+			w.Write([]byte("Hello, world!"))
+		}),
+	}
+
+	if err := server.ServeTLS(ln, "test.ssl.crt", "test.ssl.key"); err != nil {
+		panic(err)
+	}
+}
+Now I use /etc/hosts to make sure that www.local.test resolves to my loopback interface:
+# /etc/hosts line
+127.0.0.1       www.local.test
+
+When I run a simple Go client program, even though my browser trusts the cert due to configuration above, Go does not:
+// test_client.go
+package main
+
+import "net/http"
+
+func main() {
+  r, err := http.NewRequest("GET", "https://www.local.test:8043/", nil)
+  if err != nil {
+    panic(err)
+  }
+  _, err = http.DefaultTransport.RoundTrip(r)
+  if err != nil {
+    panic(err)
+  }
+}
+What did you expect to see?
+I expected the client program to trust the server's cert (since browsers and other system functions do). That means the client program should have trivially succeeded.
+What did you see instead?
+Output of test Go client program:
+panic: x509: certificate signed by unknown authority
+
+goroutine 1 [running]:
+main.main()
+	/Users/jh/src/test_client.go:12 +0xc0
+

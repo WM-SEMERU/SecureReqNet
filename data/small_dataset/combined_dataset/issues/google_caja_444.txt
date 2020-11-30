@@ -1,0 +1,10 @@
+caja.each() should protect against possible plan interference hazard
+
+
+Original issue 444 created by google@web.dwdw.me on 2008-06-09T23:45:04.000Z:
+caja.each(o, f) can give unexpected results if calling f() can cause side
+effects on o.  It's an obligation on the caller of caja.each() to avoid
+this situation; failure to respect this obligation may introduce the
+possibility of plan interference, which is a potential security hazard.
+Arguably, the documentation for caja.each() should warn of this hazard or
+should state this obligation on the caller.

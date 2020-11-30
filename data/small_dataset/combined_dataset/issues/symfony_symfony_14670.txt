@@ -1,0 +1,47 @@
+[Security] TokenBasedRememberMeServices test to show why encoding username is required
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#14577
+
+
+License
+MIT
+
+
+Doc PR
+no
+
+
+
+241538d shows that it's not actually tested, 257b796 reimplements it with test.
+I can remove the POC commit if it's not needed.

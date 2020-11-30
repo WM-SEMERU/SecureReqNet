@@ -1,0 +1,52 @@
+[Security] Add authentication success sensitive event to authentication provider manager (enabled separation of subscribers with credentials access)
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#18494
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+This PR adds an AUTHENTICATION_SUCCESS_SENSITIVE authentication event that is dispatched immediately prior to the existing AUTHENTICATION_SUCCESS event.
+By default, the token provided to the authentication success event is sanitized and does not contain any sensitive data (for example, the user's raw password). The existing success event can be configured such that the token is not sanitized of sensitive data, but then we have the problem of providing this data to all authentication success subscribers, when the vast majority should not have access to such data.
+The newly added sensitive success event includes the original, unmodified token, including the raw password. These two events now provide a clear separation between subscribers that shoulder the added responsibility of handling sensitive user data and those that do not. The new event can be used for actions such as rehashing passwords and other credentials-aware actions.

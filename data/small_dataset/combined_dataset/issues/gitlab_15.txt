@@ -1,0 +1,1 @@
+I configured my project in gitlab to trigger a weebhook. I noticed that each webhook is fired twice. Is it a bug or feature?

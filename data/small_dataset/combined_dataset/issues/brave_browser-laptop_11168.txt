@@ -1,0 +1,50 @@
+npm run check-security fails (Large gzip Denial of Service)
+
+
+Description
+npm run check-security fails
+Steps to Reproduce
+
+run npm run check-security
+
+Actual result:
+$ npm run check-security
+
+> brave@0.21.0 check-security C:\dev\browser-laptop
+> nsp check
+
+(+) 1 vulnerabilities found
+┌───────────────┬─────────────────────────────────────────────────────────────────┐
+│               │ Large gzip Denial of Service                                    │
+├───────────────┼─────────────────────────────────────────────────────────────────┤
+│ Name          │ superagent                                                      │
+├───────────────┼─────────────────────────────────────────────────────────────────┤
+│ CVSS          │ 3.7 (Low)                                                       │
+├───────────────┼─────────────────────────────────────────────────────────────────┤
+│ Installed     │ 3.5.2                                                           │
+├───────────────┼─────────────────────────────────────────────────────────────────┤
+│ Vulnerable    │ All                                                             │
+├───────────────┼─────────────────────────────────────────────────────────────────┤
+│ Patched       │ None                                                            │
+├───────────────┼─────────────────────────────────────────────────────────────────┤
+│ Path          │ brave@0.21.0 > ledger-client@0.9.21 > bitgo@3.5.1 > superagent… │
+├───────────────┼─────────────────────────────────────────────────────────────────┤
+│ More Info     │ https://nodesecurity.io/advisories/479                          │
+└───────────────┴─────────────────────────────────────────────────────────────────┘
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! brave@0.21.0 check-security: `nsp check`
+npm ERR! Exit status 1
+npm ERR!
+npm ERR! Failed at the brave@0.21.0 check-security script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+Expected result:
+success
+Reproduces how often: [What percentage of the time does it reproduce?]
+100%
+Brave Version
+0.21.0
+Additional information
+Vulnerability opened 27th Sep. 2017

@@ -1,0 +1,8 @@
+Fix sync infinite update loop, and updating correct record.
+
+
+Two things are fixed
+
+sending records received from server(should never happen)
+sending correct record after local update
+

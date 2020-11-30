@@ -1,0 +1,6 @@
+private wallet data in ledger state files should be encrypted using password manager
+
+
+The wallet private key and passphrase are as sensitive as most passwords, so we should use the Brave password manager encryption key to encrypt them before saving to disk.
+related: #8449
+cc @darkdh @mrose17

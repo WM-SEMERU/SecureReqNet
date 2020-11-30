@@ -1,0 +1,10 @@
+SECURITY_CONTACTS files in all Kubernetes project repos have old link
+
+
+Now that the new Product Security Committee has superseded the Product Security Team, and now that documents have been moved from https://github.com/kubernetes/sig-release to this repo, all of the SECURITY_CONTACTS files across all other Kubernetes project repositories need to be updated. They contain a link to the old location and reference the old PST. I will open PRs across the other repositories, but I need an issue to track all of those open PRs.
+More information about the creation of the Product Security Committee and the docs move:
+Create the Product Security Committee: kubernetes/steering#89
+Create Product Security Committee, update references from PST to PSC: kubernetes/community#3311
+Copy docs from sig-release, rename PST to PSC: #1
+security: add tombstone files to redirect to new docs: kubernetes/sig-release#537
+edit: Sorry that I titled all the PRs SECURITY_OWNERS instead of SECURITY_CONTACTS. Hopefully that wasn't too confusing.

@@ -1,0 +1,74 @@
+On Premise Add Node gMSA Issues
+
+
+Can someone please document all of the security and permissions requirements for properly running fabric secured with gMSA?
+The following is what I've had to do so far to just add a node, it is long and complicated. I have a on premise cluster secured by gMSA setup and wanted to add a new node.
+It failed with no error message on the powershell client, but after digging a lot I found the following trace:
+2018-9-27 17:03:39.799,Warning,10992,2500,UpgradeOrchestrationService.UOSMessageProcessor,ProcessStartUpgradeAsync exception: System.AggregateException: One or more errors occurred. ---> System.Security.SecurityException: Requested registry access is not allowed.
+	   at System.ThrowHelper.ThrowSecurityException(ExceptionResource resource)
+	   at Microsoft.Win32.RegistryKey.OpenSubKey(String name, Boolean writable)
+	   at Microsoft.ServiceFabric.DeploymentManager.Common.StandaloneUtility.<>c__DisplayClass14_1.<IsMsiInstalled>b__0(String machineName)
+	   at System.Threading.Tasks.Parallel.<>c__DisplayClass17_0`1.<ForWorker>b__1()
+	   at System.Threading.Tasks.Task.InnerInvokeWithArg(Task childTask)
+	   at System.Threading.Tasks.Task.<>c__DisplayClass176_0.<ExecuteSelfReplicating>b__0(Object )
+	   --- End of inner exception stack trace ---
+	   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+	   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+	   at System.Threading.Tasks.Parallel.ForWorker[TLocal](Int32 fromInclusive, Int32 toExclusive, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Func`4 bodyWithLocal, Func`1 localInit, Action`1 localFinally)
+	   at System.Threading.Tasks.Parallel.ForEachWorker[TSource,TLocal](IEnumerable`1 source, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Action`3 bodyWithStateAndIndex, Func`4 bodyWithStateAndLocal, Func`5 bodyWithEverything, Func`1 localInit, Action`1 localFinally)
+	   at System.Threading.Tasks.Parallel.ForEach[TSource](IEnumerable`1 source, Action`1 body)
+	   at Microsoft.ServiceFabric.DeploymentManager.Common.StandaloneUtility.IsMsiInstalled(IEnumerable`1 machineNames)
+	   at Microsoft.ServiceFabric.DeploymentManager.Common.StandaloneSettingsValidator.ValidateAddedNodes(NodeList nodesFromFM, List`1 addedNodes, String fabricDataRoot)
+	   at Microsoft.ServiceFabric.DeploymentManager.Common.StandaloneSettingsValidator.<ValidateTopologyAsync>d__49.MoveNext()
+	--- End of stack trace from previous location where exception was thrown ---
+	   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+	   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+	   at Microsoft.ServiceFabric.DeploymentManager.Common.StandaloneSettingsValidator.<ValidateUpdateFrom>d__21.MoveNext()
+	--- End of stack trace from previous location where exception was thrown ---
+	   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+	   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+	   at System.Fabric.UpgradeOrchestration.Service.UpgradeOrchestrationMessageProcessor.<ValidateModel>d__15.MoveNext()
+	--- End of stack trace from previous location where exception was thrown ---
+	   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+	   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+	   at System.Fabric.UpgradeOrchestration.Service.UpgradeOrchestrationMessageProcessor.<ProcessStartClusterConfigurationUpgradeAsync>d__8.MoveNext()
+	---> (Inner Exception #0) System.Security.SecurityException: Requested registry access is not allowed.
+	   at System.ThrowHelper.ThrowSecurityException(ExceptionResource resource)
+	   at Microsoft.Win32.RegistryKey.OpenSubKey(String name, Boolean writable)
+	   at Microsoft.ServiceFabric.DeploymentManager.Common.StandaloneUtility.<>c__DisplayClass14_1.<IsMsiInstalled>b__0(String machineName)
+	   at System.Threading.Tasks.Parallel.<>c__DisplayClass17_0`1.<ForWorker>b__1()
+	   at System.Threading.Tasks.Task.InnerInvokeWithArg(Task childTask)
+	   at System.Threading.Tasks.Task.<>c__DisplayClass176_0.<ExecuteSelfReplicating>b__0(Object )
+	The Zone of the assembly that failed was:
+	MyComputer<---
+	
+	---> (Inner Exception #1) System.Security.SecurityException: Requested registry access is not allowed.
+	   at System.ThrowHelper.ThrowSecurityException(ExceptionResource resource)
+	   at Microsoft.Win32.RegistryKey.OpenSubKey(String name, Boolean writable)
+	   at Microsoft.ServiceFabric.DeploymentManager.Common.StandaloneUtility.<>c__DisplayClass14_1.<IsMsiInstalled>b__0(String machineName)
+	   at System.Threading.Tasks.Parallel.<>c__DisplayClass17_0`1.<ForWorker>b__1()
+	   at System.Threading.Tasks.Task.InnerInvokeWithArg(Task childTask)
+	   at System.Threading.Tasks.Task.<>c__DisplayClass176_0.<ExecuteSelfReplicating>b__0(Object )
+	The Zone of the assembly that failed was:
+	MyComputer<---
+
+I took at event logs and everywhere I could to determine which registry key was the issue. Gave the gMSA service user local admin on the new node, and all sorts of things with no luck.
+Eventually I found some extra security (that has no log when it fails) that you have to put allowed remote registry reads into:
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg\AllowedPaths
+
+Then I had to dig around in the source of the Microsoft.ServiceFabric.DeploymentManager assembly to determine which registry paths it needed access to and add those paths to the key.
+Now I'm getting the following exception (found in the event log thankfully) when trying to do the configuration upgrade to add the node:
+System.Fabric.FabricDeployer.ClusterManifestValidationException: Cluster manifest validation failed with exception System.ArgumentException: Loader exception: System.IO.FileNotFoundException: Could not load file or assembly 'NetFwTypeLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. The system cannot find the file specified.
+File name: 'NetFwTypeLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'
+   at System.Fabric.Management.WindowsFabricValidator.FabricSettingsValidator.WriteError(String format, Object[] args)
+   at System.Fabric.Management.WindowsFabricValidator.FabricSettingsValidator.RunOtherConfigurationValidatorsInTheAssembly()
+   at System.Fabric.Management.WindowsFabricValidator.FabricSettingsValidator.ValidateSettings()
+   at System.Fabric.Management.WindowsFabricValidator.FabricValidator.Validate()
+   at System.Fabric.FabricDeployer.FabricValidatorWrapper.ValidateAndEnsureDefaultImageStore()
+   at System.Fabric.FabricDeployer.FabricValidatorWrapper.ValidateAndEnsureDefaultImageStore()
+   at System.Fabric.FabricDeployer.ConfigureOperation.OnExecuteOperation(DeploymentParameters parameters, ClusterManifestType clusterManifest, Infrastructure infrastructure)
+   at System.Fabric.FabricDeployer.DeploymentOperation.ExecuteOperationPrivate(DeploymentParameters parameters)
+   at System.Fabric.FabricDeployer.DeploymentOperation.ExecuteOperation(DeploymentParameters parameters, Boolean disableFileTrace)
+   at System.Fabric.FabricDeployer.ConfigurationDeployer.NewNodeConfigurationInner(String clusterManifestPath, String infrastructureManifestPath, String jsonClusterConfigPath, String fabricDataRoot, String fabricLogRoot, String fabricHostCredentialUser, SecureString fabricHostCredentialPassword, Boolean runFabricHostServiceAsManual, Boolean removeExistingConfiguration, FabricPackageType fabricPackageType, String fabricPackageRoot, String machineName, String bootstrapPackagePath)
+
+Is this also a permissions issue?

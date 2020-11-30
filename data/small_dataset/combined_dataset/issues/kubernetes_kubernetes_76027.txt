@@ -1,0 +1,6 @@
+single-use controller config defaults should auto-apply
+
+
+The functions added in https://github.com/kubernetes/kubernetes/blob/master/pkg/controller/apis/config/v1alpha1/defaults.go#L68-L105 should be normal defaults. The "RecommendedDefaults" helper function approach was only needed for config structs used in multiple contexts (like client configuration, rate limiting, leader election, etc).
+The controller-specific config structs should use normal defaulting functions so we don't have to remember to wire them up in every use.
+/cc @stewart-yu

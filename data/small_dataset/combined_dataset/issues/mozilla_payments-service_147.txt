@@ -1,0 +1,4 @@
+Prevent creating a subscription with someone else's payment method
+
+
+Most form handlers in payments-service prevent a submission using another user's payment method URI with the utils.user_owns_resource(...) helper. We should add this to the subscription post endpoint to prevent a user from subscribing with someone else's payment method URI. This could lead to billing the wrong user.

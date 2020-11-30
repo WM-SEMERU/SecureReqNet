@@ -1,0 +1,4 @@
+Update sync deps for fixing event-stream vulnerability
+
+
+needed for brave/internal#457

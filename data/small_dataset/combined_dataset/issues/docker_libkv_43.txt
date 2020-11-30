@@ -1,0 +1,4 @@
+etcd backend won't do TLS client auth
+
+
+Setting the tls.Config object isn't enough; you also need to get the etcd Client by calling etcd.NewTLSClient().

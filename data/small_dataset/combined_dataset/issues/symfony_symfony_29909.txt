@@ -1,0 +1,49 @@
+PHP short arrays for 4.1
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.1
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

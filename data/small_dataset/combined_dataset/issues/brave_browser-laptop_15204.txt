@@ -1,0 +1,36 @@
+Block privileged URL loads in context menu only
+
+
+Partial revert of #14973.
+Fix #15134
+Fix #15203
+Test Plan:
+
+Repeat test plan in
+#14973 and verify it
+still passes.
+Drag and drop an HTML or image file into Brave and verify that it
+opens
+With Brave set to the default browser, double click an HTML file and
+verifies that it opens correctly.
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+Reviewer Checklist:
+
+ Request a security/privacy review as needed if one was not already requested.
+
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

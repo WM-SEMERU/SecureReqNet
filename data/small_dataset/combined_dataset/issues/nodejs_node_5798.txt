@@ -1,0 +1,4 @@
+Use system random generator in crypto
+
+
+randomBytes uses OpenSSL as its random number generator. It would be wiser and less errorprone to use a system RNG like urandom on Unix platforms, getrandom syscall on Linux and CryptGenRandom on Windows.

@@ -1,0 +1,6 @@
+Document the class/id renaming scheme for DOM classes, ids, etc.
+
+
+Original issue 551 created by ping@zesty.ca on 2008-06-12T18:05:49.000Z:
+The cajoler and DOMita seem to both rely on this (and on having a
+consistent understanding of it); please document separately.

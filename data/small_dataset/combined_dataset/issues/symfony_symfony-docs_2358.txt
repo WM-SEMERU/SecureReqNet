@@ -1,0 +1,5 @@
+Cookbook article: Authenticating against an external API
+
+
+This is a question that comes up quite frequently: how to setup a custom authentication system where the username/password are checked in the background against an API. In this case, things in the normal flow like UserProvider::loadUserByUsername don't make sense.
+I think it may be useful to have a second cookbook entry (in addition to custom_authentication_provider, which talks about WSSE) for this use-case. The "custom-authentication" world is big and varied - if we added this, it would serve to cover more common, but difficult use cases.

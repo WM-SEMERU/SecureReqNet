@@ -1,0 +1,5 @@
+brave builtin password manager should stop autofilling when a different password manager is selected
+
+
+current behavior: if you save some passwords using Brave's builtin password manager, then switch the password manager to another one like lastpass, Brave will still autofill its saved passwords.
+expected behavior: if you choose ‘use Lastpass’ or a different password manager in Brave, Brave should not autofill using the builtin password manager anymore

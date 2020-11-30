@@ -1,0 +1,30 @@
+### Summary
+
+Regular users are currently able to change the `repository_storage` value using the API.
+
+### Steps to reproduce
+
+Create a project, ensure at least one file exists.
+
+Update the project using API and change the `repository_storage` value. (`curl -X PUT -H "Private-Token: <token> https://gitlab.com/api/v4/projects/<id>?repository_storage=default`)  
+
+### What is the current *bug* behavior?
+
+Regular users can edit `repository_storage` with the API.
+
+### What is the expected *correct* behavior?
+
+Non-admin users should be prevented from doing this.
+
+### Relevant logs and/or screenshots
+
+
+### Output of checks
+
+This bug happens on GitLab.com
+
+#### Results of GitLab environment info
+
+`GitLab Enterprise Edition 11.2.0-rc1-ee 53c4827`
+
+### Possible fixes

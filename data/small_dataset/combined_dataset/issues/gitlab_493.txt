@@ -1,0 +1,5 @@
+It will be good to allow the administrator to configure the actions allowed for each role so that issues like Issue #492 can be resolved. It will also make possible workflows like:
+
+1. Members of a group, can create forks within the group namespace.
+2. Members of a group have rw access to their forks and read access to all the other repos in the same group.
+

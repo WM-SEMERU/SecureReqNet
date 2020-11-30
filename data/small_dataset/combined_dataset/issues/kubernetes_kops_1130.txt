@@ -1,0 +1,38 @@
+Issues adding RBAC support
+
+
+Use Case
+I'd like to provision and maintain an up-to-date Kubernetes cluster on AWS, and provide it to my colleagues so they can experiment with using it to deploy applications.  I don't want them provisioning ELBs within my account so I'd like to give them non-admin access to create and manage resources except ELBs, and I'd also like to apply resource quota limits to what they can do.  I'd also like to configure access dynamically through the API (no SSH'ing in, editing files, restarting the entire cluster, etc.), hence the desire to use RBAC (see also #203, #312).
+Purpose of this issue
+
+Have a record of current work in progress, and confirm my understanding on the remaining work required.
+Ask some questions to address confusion I ran into doing my current work in progress
+Highlight some blockers to completing this work
+Offer to complete the work assuming my understanding of the remaining work is correct and the blockers can be fixed.
+
+Current work
+I simply added:
+AuthorizationMode          string `json:"authorizationMode,omitempty" flag:"authorization-mode"`
+AuthorizationRbacSuperUser string `json:"authorizationRbacSuperUser,omitempty" flag:"authorization-rbac-super-user"`
+
+to both componentconfig.go and v1alpha1/componentconfig.go.  I was then able to make and kops edit cluster, setting the auth mode to RBAC,AlwaysAllow, the super user to kubecfg, and adding runtime config with rbac.authorization.k8s.io/v1alpha1: "true".  I was able to kops update cluster, saving the configuration in the state store, however this didn't actually update the real cluster, I suspect due to #925.
+Question: When I didn't make these changes to both files, I got some strange errors when running kops edit cluster, e.g. complaints about the vi editor.  My cluster config mentions Version: v1alpha1 at the top.  Why did I need to udpate both of those source files?  Why do the two even exist?
+Question: Does this seem correct so far?  If this were a new cluster, would you expect this to just work?
+Remaining work
+I included AlwaysAllow because I figure all the control plane components using service accounts would break otherwise.  My plan was to then use the RBAC API to grant sufficient permissions to those service accounts, then edit my cluster again to only have RBAC as the auth mode, and update the cluster.  Does this sound correct?
+Because it's probably not safe to directly switch a running Kubernetes cluster from AlwaysAllow to RBAC, or even bootstrap a new cluster with just RBAC, I wouldn't add any actual flags to the kops commands.
+Question: So the remaining work would simply document the procedure to enable RBAC, probably in docs/cluster_spec.md, right?
+My personal next steps would be to:
+
+create a namespace
+apply quota limits to that namespace
+figure out if it's possible to restrict the ability to create ELBs at either the namespace, user, or group level
+use the RBAC API to create a user or group that only has access to that namespace, and hopefully can't create ELBs,
+issue client certs and keys to my colleagues signed by the CA key stored in my $KOPS_STATE_STORE with the appropriate users/groups in the cert metadata.
+
+Question: Does it even seem likely that there's a fine-grained way to restrict ability to create ELBs?  Where is the right place to look for documentation on this?
+Blockers
+So far, I think it's just the one mentioned above:
+
+#925: Making changes to the cluster configuration in the KubeAPIServer section seems to have no effect, and so it doesn't work with kops {rolling-,}update cluster if the cluster already exists.  Maybe it only works for fresh clusters?
+

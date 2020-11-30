@@ -1,0 +1,50 @@
+[SecurityBundle] make remember-me cookies auto-secure + inherit their default config from framework.session.cookie_*
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#28338
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Let's make it easier to have a good default security level, now for the remember-me cookie.

@@ -1,0 +1,142 @@
+'### Summary
+
+When parsing a JUnit test report fails, the JSON endpoint exposes the full stack trace.
+
+### Steps to reproduce
+
+- create a JUnit test report that cannot be parsed (for example contains invalid characters like `\u0000`)
+
+### Example Project
+
+- https://dev.gitlab.org/winh/junit-test/merge_requests/1/diffs
+- https://dev.gitlab.org/winh/junit-test/merge_requests/1/test_reports.json
+
+<details><pre>
+{"status_reason":"XML parsing failed: #\u003cRuntimeError: Illegal character \"\\u0000\" in raw string \"Do a test\u0000here\"\u003e
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/text.rb:139:in `block in check'
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/text.rb:135:in `each'
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/text.rb:135:in `check'
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/attribute.rb:157:in `element='
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/element.rb:1125:in `[]='
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/parsers/treeparser.rb:36:in `block in parse'
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/parsers/treeparser.rb:35:in `each'
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/parsers/treeparser.rb:35:in `parse'
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/document.rb:288:in `build'
+/opt/gitlab/embedded/lib/ruby/2.4.0/rexml/document.rb:45:in `initialize'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/xml_mini/rexml.rb:27:in `new'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/xml_mini/rexml.rb:27:in `parse'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/xml_mini.rb:99:in `parse'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/core_ext/hash/conversions.rb:131:in `initialize'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/core_ext/hash/conversions.rb:110:in `new'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/core_ext/hash/conversions.rb:110:in `from_xml'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/ci/parsers/junit.rb:10:in `parse!'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:645:in `block (2 levels) in collect_test_reports!'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:655:in `block (2 levels) in each_test_report'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/ci/build/artifacts/gzip_file_adapter.rb:21:in `block in each_blob'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/ci/build/artifacts/gzip_file_adapter.rb:36:in `gzip'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/ci/build/artifacts/gzip_file_adapter.rb:20:in `each_blob'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/job_artifact.rb:92:in `block in each_blob'
+/opt/gitlab/embedded/service/gitlab-rails/app/uploaders/gitlab_uploader.rb:90:in `open'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/job_artifact.rb:91:in `each_blob'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:654:in `block in each_test_report'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:653:in `each'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:653:in `each_test_report'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:644:in `block in collect_test_reports!'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:643:in `tap'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/build.rb:643:in `collect_test_reports!'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `block in collect_test_reports!'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/method_call.rb:34:in `measure'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `collect_test_reports!'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/pipeline.rb:615:in `block (2 levels) in test_reports'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activerecord-4.2.10/lib/active_record/relation/delegation.rb:46:in `each'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activerecord-4.2.10/lib/active_record/relation/delegation.rb:46:in `each'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/pipeline.rb:614:in `block in test_reports'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/pipeline.rb:613:in `tap'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/ci/pipeline.rb:613:in `test_reports'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `block in test_reports'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/method_call.rb:34:in `measure'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `test_reports'
+/opt/gitlab/embedded/service/gitlab-rails/app/services/ci/compare_test_reports_service.rb:7:in `execute'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/merge_request.rb:1057:in `calculate_reactive_cache'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `block in calculate_reactive_cache'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/method_call.rb:34:in `measure'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `calculate_reactive_cache'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/concerns/reactive_caching.rb:96:in `block (2 levels) in exclusively_update_reactive_cache!'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/concerns/reactive_caching.rb:141:in `enqueuing_update'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `block in enqueuing_update'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/method_call.rb:34:in `measure'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `enqueuing_update'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/concerns/reactive_caching.rb:94:in `block in exclusively_update_reactive_cache!'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/concerns/reactive_caching.rb:131:in `locking_reactive_cache'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `block in locking_reactive_cache'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/method_call.rb:34:in `measure'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `locking_reactive_cache'
+/opt/gitlab/embedded/service/gitlab-rails/app/models/concerns/reactive_caching.rb:92:in `exclusively_update_reactive_cache!'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `block in exclusively_update_reactive_cache!'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/method_call.rb:34:in `measure'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/instrumentation.rb:159:in `exclusively_update_reactive_cache!'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/core_ext/object/try.rb:77:in `public_send'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/core_ext/object/try.rb:77:in `try!'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/activesupport-4.2.10/lib/active_support/core_ext/object/try.rb:63:in `try'
+/opt/gitlab/embedded/service/gitlab-rails/app/workers/reactive_caching_worker.rb:14:in `perform'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:187:in `execute_job'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:169:in `block (2 levels) in process'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:128:in `block in invoke'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/sidekiq_status/server_middleware.rb:5:in `call'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:130:in `block in invoke'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/sidekiq_middleware/request_store_middleware.rb:6:in `call'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:130:in `block in invoke'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/sidekiq_middleware/shutdown.rb:52:in `call'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:130:in `block in invoke'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/sidekiq_middleware.rb:13:in `block in call'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/transaction.rb:53:in `run'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/metrics/sidekiq_middleware.rb:13:in `call'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:130:in `block in invoke'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/server/active_record.rb:16:in `call'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:130:in `block in invoke'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sentry-raven-2.7.2/lib/raven/integrations/sidekiq.rb:9:in `call'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:130:in `block in invoke'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:133:in `invoke'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:168:in `block in process'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:139:in `block (6 levels) in dispatch'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/job_retry.rb:98:in `local'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:138:in `block (5 levels) in dispatch'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq.rb:36:in `block in \u003cmodule:Sidekiq\u003e'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:134:in `block (4 levels) in dispatch'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:199:in `stats'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:129:in `block (3 levels) in dispatch'
+/opt/gitlab/embedded/service/gitlab-rails/lib/gitlab/sidekiq_logging/structured_logger.rb:13:in `call'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:128:in `block (2 levels) in dispatch'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/job_retry.rb:73:in `global'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:127:in `block in dispatch'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/logging.rb:48:in `with_context'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/logging.rb:42:in `with_job_hash_context'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:126:in `dispatch'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:167:in `process'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:85:in `process_one'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:73:in `run'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/util.rb:16:in `watchdog'
+/opt/gitlab/embedded/lib/ruby/gems/2.4.0/gems/sidekiq-5.1.3/lib/sidekiq/util.rb:25:in `block in safe_thread'
+...
+Illegal character \"\\u0000\" in raw string \"Do a test\u0000here\"
+Line: 1
+Position: 46
+Last 80 unconsumed characters:
+"}
+</pre></details>
+
+### What is the current *bug* behavior?
+
+Full stack trace is exposed containing
+
+- Ruby version
+- Gem versions
+- directory structure on server
+
+### What is the expected *correct* behavior?
+
+A production environment should not expose such information to (unauthenticated) users.
+
+### Possible fixes
+
+Catch error and provide a custom error message.

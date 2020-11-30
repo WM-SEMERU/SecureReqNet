@@ -1,0 +1,31 @@
+'In the GitLab app you can create a merge request with a description, the Create and Update MR API calls do not support the "description" parameter, please add the "description" parameter tp both Create MR and Update MR API calls.
+
+From the docs:
+---
+Create MR
+Creates a new merge request.
+
+POST /projects/:id/merge_requests
+Parameters:
+
+id (required) - The ID of a project
+source_branch (required) - The source branch
+target_branch (required) - The target branch
+assignee_id (optional) - Assignee user ID
+title (required) - Title of MR
+
+---
+
+Update MR
+
+Updates an existing merge request. You can change branches, title, or even close the MR.
+
+PUT /projects/:id/merge_request/:merge_request_id
+Parameters:
+
+id (required) - The ID of a project
+merge_request_id (required) - ID of MR
+source_branch - The source branch
+target_branch - The target branch
+assignee_id - Assignee user ID
+title - Title of MR

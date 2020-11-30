@@ -1,0 +1,9 @@
+hack/local-up-cluster.sh fails with kubelet reporting "server.go:160] unknown command"
+
+
+The master branch is failing now. The error was because when staring the kubelet, the local-up-cluster.sh script ran:
+hyperkube kubelet '' --v=3...
+The '' was interpreted as non-flag arguments and caused the kubelet to fail.
+/assign
+/kind bug
+cc @roycaihw

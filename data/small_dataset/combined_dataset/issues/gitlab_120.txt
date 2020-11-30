@@ -1,0 +1,9 @@
+It would be great if GitLab's public landing page were more accessible, i.e. it was the default route. Having a single URL for both sign-in and browsing is a huge usability win - it means we don't have to distribute two different URLs to our users, and everyone has a unified landing point.
+
+Our quick fix was to change the root route to:
+
+```
+root :controller => 'public/projects', :action => 'index'
+```
+
+And in app/controllers/public/projects_controller.rb, it redirects to /dashboard if the user is signed in.

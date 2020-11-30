@@ -1,0 +1,10 @@
+"cluster inspect" prints bcrypted secret
+
+
+cluster inspect has the following code:
+                        if policy.Secret != nil {
+                                fmt.Fprintf(w, "    Secret\t: %v\n", string(policy.Secret.Data))
+                        }
+
+This appears to be printing bcrypted data. Since one would have reverse the hash to make any use of this output, what's the point of including it in the output?
+ping @diogomonica @aluzzardi

@@ -1,0 +1,14 @@
+tls: rejectUnauthorized is treated to true by default
+
+
+Pull Request check-list
+
+ Does make -j8 test (UNIX) or vcbuild test nosign (Windows) pass with
+this change (including linting)?
+ Is the commit message formatted according to [CONTRIBUTING.md][0]?
+
+Affected core subsystem(s)
+tls
+Description of change
+Improves usability as described here - #5917
+tls.connect treats rejectUnauthorized as a false value, when we need to treat it only when rejectUnauthorized is really set to false.

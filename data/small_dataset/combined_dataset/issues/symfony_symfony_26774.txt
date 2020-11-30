@@ -1,0 +1,50 @@
+[SecurityBundle] Add missing argument to security.authentication.provider.simple
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26753
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Created PR in relation to a conversation in PR #26762

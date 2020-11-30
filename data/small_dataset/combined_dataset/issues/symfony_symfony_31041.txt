@@ -1,0 +1,57 @@
+Expected argument of type "array or (\Traversable and \ArrayAccess)", "string" given
+
+
+Symfony version(s) affected: 3.4.24
+Hello,
+When I upgrade my project from 3.3 to 3.4.24, I have some errors with form field and transformer.
+with symfony 3.3 I had this code :
+      ` ->add('labels', TextType::class, ['property_path' => 'labels']);
+
+`
+With a viewTransformer to transform ( I receive an array and i register a string in my database)
+  $builder->get('labels')->addViewTransformer(new TestLabelsTransformer());
+    /**
+     * @param mixed $value
+     * @return array
+     */
+    public function reverseTransform($value)
+    {
+        if (is_array($value)) {
+            return implode(',', $value);
+        }
+        return $value;
+    }
+
+With the 3.4.24, i have an invalid value. So I change my code to use a CollectionType instead of TextType and i add a transformer but I get this error : Expected argument of type "array or (\Traversable and \ArrayAccess)", "string" given when i try to use a ModelTransformer to convert an array to a string.
+In my Form:
+            ->add('labels', CollectionType::class, ['entry_type' => TextType::class, 'allow_add' => true, 'allow_delete' =>true])
+
+$builder->get('labels')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($labelsAsString) {
+                    return explode(', ', $labelsAsString);
+                },
+                function ($labelsAsArray) {
+                    return implode(', ', $labelsAsArray);
+                }
+            ))
+        ;
+
+The validator catch the exception Type before passing by the ModelTransformer. ( With a patch method)
+ Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener
+
+public function preSetData(FormEvent $event)
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+// with the post 
+        if (null === $data) {
+            $data = [];
+        }
+// with patch  $data = 'the string1,string2'  sor it doesn't use the ModelTransformer 
+        if (!\is_array($data) && !($data instanceof \Traversable && $data instanceof \ArrayAccess)) {
+            throw new UnexpectedTypeException($data, 'array or (\Traversable and \ArrayAccess)');
+        }}
+
+the same error here #30622
+Thank you

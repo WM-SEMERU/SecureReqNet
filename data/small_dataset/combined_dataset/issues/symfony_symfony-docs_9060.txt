@@ -1,0 +1,4 @@
+Don't mention the UserInterface type-hinting
+
+
+This fixes #7506. Ping @iltar.

@@ -1,0 +1,9 @@
+[Security] [Firewall] Still cannot return null from SimplePreAuthenticationListener::createToken()
+
+
+I've found a couple of issues regarding only authenticating for certain urls when using the SimplePreAuthenticationListener.
+The docs claim you can return null from the ::createToken() method and I've found a pull request that supposedly fixes this bug. However, the bug persists because the AccessListener kicks in an throws an exception if there's no token found.
+Unfortunately I don't know the security component well enough to take a crack at a pull request.
+The issues referenced above
+#3815
+#1033

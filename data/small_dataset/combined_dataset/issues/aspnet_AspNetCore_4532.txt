@@ -1,0 +1,32 @@
+Microsoft.Aspnetcore.Authorization namespace is missing with .NET Core 2.2
+
+
+Microsoft.Aspnetcore.Authorization namespace is missing when using .NET Core 2.2
+To Reproduce
+
+Set TargetFramework of .csproj file to "netcoreapp2.2"
+Set RuntimeFrameworkVersion to "2.2.0"
+Include PackageReference "Microsoft.AspNetCore.App"
+Try to use Authorize attribute or to Microsoft.AspNetCore.Authorization namespace in any controller.
+Namespace is not found.
+
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RuntimeFrameworkVersion>2.2.0</RuntimeFrameworkVersion>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App"/>
+  </ItemGroup>
+</Project>
+
+Expected behavior
+Running the same project with net core 2.1 works fine. Tried to include Microsoft.AspNetCore.Authorization package explicitly using nuget with no success. Error appears to be the same.
+Screenshots
+
+Desktop:
+
+OS: Windows 10 x64
+IDE: Visual Studio 15.9.3
+

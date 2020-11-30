@@ -1,0 +1,10 @@
+CLOUDSTACK-10294: PEP-8 fixes and enhancements to security_group.py
+
+
+The code in security_group.py is very old.
+I looked into using Libvirt network filters for this, but it's lacking functionality we require.
+This is my first attempt in cleaning up this file. There is a lot more work to do.
+I tested this on a local system with Basic Networking and that worked just fine in my case.
+The quality of the code is still horrible though:
+Your code has been rated at 3.60/10 (previous run: 3.56/10, +0.04)
+A lot more work is needed, but I'm taking baby-steps so that it makes the review a bit easier and not one big bang with changes.

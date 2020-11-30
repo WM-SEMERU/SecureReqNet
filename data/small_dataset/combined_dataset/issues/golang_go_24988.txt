@@ -1,0 +1,6 @@
+proposal: x/crypto/sha3: add KMAC
+
+
+The KMAC message authentication code specified in NIST SP 800-185 may be a useful MAC implementation.
+In particular, it can be used as a KDF as specified by NIST SP 800-56C.
+I'm submitting a CL implementing it, in case there is interest. I can also add support for TupleHash and ParallelHash.

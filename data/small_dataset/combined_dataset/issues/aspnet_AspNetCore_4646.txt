@@ -1,0 +1,13 @@
+Documentation issue: clarify JwtBearerOptions.Audience's behaviour in its <summary>
+
+
+The current XML documentation for JwtBearerOptions.Audience does not explain why this property exists when JwtBearerOptions.TokenValidationParameters.ValidAudience is also an Audience property.
+I had to look into the source code to find JwtBearerPostConfigureOptions and I see that it simply copies JwtBearerOptions.Audience into JwtBearerOptions.TokenValidationParameters.ValidAudience - but only if JwtBearerOptions.TokenValidationParameters.ValidAudience is empty. This behavior is not documented.
+I'd suggest changing the comment on JwtBearerOptions.Audience from this:
+
+Gets or sets the audience for any received OpenIdConnect token.
+
+... to something like:
+
+Gets or sets a single valid audience value for any received OpenIdConnect token. This value is passed into TokenValidationParameters.ValidAudience if that property is empty.
+

@@ -1,0 +1,7 @@
+Addon details user count should be a link
+
+
+Relevant: #5434
+If user statistics are public (or the signed-in user has access to them), the count should be clickable like the "Reviews" button.
+
+I'm willing to write a PR for this.

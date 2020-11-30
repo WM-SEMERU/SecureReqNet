@@ -1,0 +1,41 @@
+Login form does nothing if in another firewall
+
+
+Using symfony full stack 3.0.2.
+Followed exactly the "cookbook/security/form_login_setup.rst". At anchor "#be-sure-the-login-page-isn-t-secure-redirect-loop", the suggestion to "create a special firewall that allows anonymous users for the login page" simply does not work.
+The login page is just reloading, no error or authentication happens.
+All my PHP/Twig code is exactly as per the doc, and here is my security.yml:
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+    providers:
+        in_memory:
+            memory:
+                users:
+                    morille:
+                        password: morille
+                        roles: 'ROLE_USER'
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt))/
+            security: false
+        login_firewall:
+            pattern:   ^/login$
+            anonymous: ~
+        secured_area:
+            pattern:    ^/
+            form_login: ~
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
+If I just replace both firewalls ("login_firewall" and "secured_area") by a single firewall as below, it works:
+        ...
+        secured_area:
+            anonymous: ~
+            context: default
+            pattern:    ^/
+            form_login:
+                login_path: login
+                check_path: login
+        ...
+

@@ -1,0 +1,23 @@
+$guardHandler->authenticateUserAndHandleSuccess()  not working
+
+
+Symfony version(s) affected: 4.2.1
+Description
+This is not working as expected. The user is redirected to the login form, not to the restricted area:
+$guardHandler->authenticateUserAndHandleSuccess($singer, $request, $authenticator, 'singer_firewall');
+However, if I do it "manually", it works as expected (i.e. user redirected to restricted area):
+$token = new UsernamePasswordToken($singer, null, 'singer_firewall', $singer->getRoles());
+$tokenStorage->setToken($token);
+$session = $request->getSession();
+$session->set('_security_singer_firewall', serialize($token));
+$event = new \Symfony\Component\Security\Http\Event\InteractiveLoginEvent($request, $token);
+$eventDispatcher->dispatch("security.interactive_login", $event);
+return $this->redirectToRoute('singer_profile', array('singerId'=>$singer->getId()));
+That's why I'm positive that my config is correct ;-)
+Wasn't authenticateUserAndHandleSuccess() meant to be a "shortcut" for this?
+Additional context
+
+I have multiple firewalls.
+My onAuthenticationSuccess() returns a RedirectResponse (basically the same as above).
+If I die; in onAuthenticationSuccess(), Symfony's debug toolbar shows me that I am authenticated. However, there's no "Firewall name" shown in the popup.
+

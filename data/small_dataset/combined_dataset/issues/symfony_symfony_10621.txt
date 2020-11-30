@@ -1,0 +1,8 @@
+[Security] Replace exception mocks with actual exception instances.
+
+
+It is done for two reasons:
+
+consistency - we use real exception objects in most of the code
+latest phpunit does not like the way we were creating mocks for exceptions (it could be also fixed by letting phpunit to call the original constructor)
+

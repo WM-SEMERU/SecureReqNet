@@ -1,0 +1,23 @@
+'Hello.
+
+I want to back up remote repository (online repository at GitLab.org ).
+I didn't install gitlab on my own server.
+I don't wish it.
+
+I read https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md ,
+And I tryed according to this.
+
+But the below message was shown.
+
+====================================================
+
+bundle exec rake origin:backup:create RAILS_ENV=production
+rake aborted!
+No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)
+
+(See full trace by running task with --trace)
+
+====================================================
+
+in the first place、can I realize it (backup of online repository) ?
+

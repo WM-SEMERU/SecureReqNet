@@ -1,0 +1,12 @@
+MustRunAsNonRoot should reject a pod if it has non-numeric USER
+
+
+What this PR does / why we need it:
+This PR modifies kubelet behavior to reject pods with non-numeric USER instead of showing a warning.
+Special notes for your reviewer:
+Related discussion: kubernetes/community#756 (comment)
+Release note:
+kubelet: fix bug where `runAsUser: MustRunAsNonRoot` strategy didn't reject a pod with a non-numeric `USER`.
+
+PTAL @pweil- @tallclair @liggitt @Random-Liu
+CC @simo5 @adelton

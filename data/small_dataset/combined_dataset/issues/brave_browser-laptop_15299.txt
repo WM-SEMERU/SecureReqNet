@@ -1,0 +1,4 @@
+Update README with current status; update issue template
+
+
+Auditors: @bbondy

@@ -1,0 +1,74 @@
+Address Bar Freezes GUI
+
+
+Description
+Typing into the address bar (still) results in an approximately 3-4 second full-browser freeze, sometimes giving a "brave.exe is not responding" message from Windows in the top left corner.  All GUI elements become unresponsive, and text input is occasionally lost when the browser resumes again.
+Steps to Reproduce
+
+Ensure you have imported bookmarks/passwords from Chrome and that Brave Payments are enabled.
+Ensure a page is loaded.
+Click on (or press alt+D) the address bar and begin typing.  (CPU usage should rise, you may hear your fan spin up.)
+Watch the browser come to a complete halt for 3-4 seconds, looks like a database is freezing on lookup
+Visit any new webpage to repeat steps 2 and 3.
+
+Actual result:
+Brave.exe freezes on text input to the address bar.  It cannot be closed or given inputs for 3-4 seconds afterward on a modern desktop.
+Expected result:
+Brave.exe does not freeze, accepts text input without issues.
+Reproduces how often:
+99.999%
+Brave Version
+
+
+
+Brave
+0.25.2
+
+
+
+
+V8
+6.9.427.23
+
+
+rev
+8ea2a9c
+
+
+Muon
+8.1.8
+
+
+OS Release
+10.0.17134
+
+
+Update Channel
+Release
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Microsoft Windows
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+69.0.3497.100
+
+
+
+Reproducible on current live release:
+Yes.
+Additional Information
+You may need to have a webpage loaded already to generate this bug.  Brave.exe seems to freeze a lot, making it unusable as a primary browser.  Ctrl+F and text selection result in freezes as well.  The payments screen freezes almost every time I try to access it following an import of data from Chrome.  Removing all but ~25 bookmarks did not resolve any of these issues.

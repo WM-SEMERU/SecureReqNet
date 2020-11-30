@@ -1,0 +1,4 @@
+Publish dash-table on conda-forge
+
+
+I would love to be able to install via conda like the other dash libraries!

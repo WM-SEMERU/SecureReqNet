@@ -1,0 +1,63 @@
+[Messenger] Remove base64_encode, but make optional
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+already covered by existing issue
+
+
+
+In #30814, we base64_encoded messages because some transports (specifically DoctrineTransport + Postgresql & SQS) do not allow binary data.
+The downside is that the messages become unreadable, which makes it much less convenient to debug your messages with 3rd party monitoring tools, for example.
+This PR does 2 things:
+
+
+Solves the DoctrineTransport by using a blob type. Drupal does this whenever they have a column that will hold serialized data from objects (https://www.drupal.org/project/drupal/issues/690746). I've confirmed with @vincenttouzet that this fixes Postgresql, though the text is still unreadable there due to how Postgresql handles those fields). In MySQL, the blob types are readable using the mysql command line client tool.
+
+
+Make base64_encode optional, so that you can turn it on if you are using a transport that does not allow binary data.
+
+
+I also put all the serializer config under a nice, neat serializer key under messenger.
+Best seen with ?w=1.
+Cheers!

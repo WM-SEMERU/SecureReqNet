@@ -1,0 +1,31 @@
+[RFC][DX][Workflow] Configuration of initial places and marking store
+
+
+Description
+
+
+In #30551, the marking store has been "simplified" internally, but the configuration is now more confusing (ref #30551 (review)).
+
+
+In #30468, initial_place has been renamed initial_places but still supports passing one place that will be normalized to an array despite this single example in the upgrade file. Also, this naming is now a bit confusing too, whether we can use it with one place is not obvious anymore.
+
+
+Proposition
+
+
+Simplify the method type configuration which is the only one built-in we want to support now, and infer the single state from the type of the workflow, this leaves one argument to configure, the property name:
+framework:
+ workflows:
+     article:
+         type: state_machine # or workflow for multiple states
+         marking_store:
+             type: method # this line can be removed in Symfony 5.0
+             property: state
+Instead of inferring we can use another key: state (single or multiple) along with property,
+or use a boolean as suggested by @pbowyer in the review linked above.
+
+
+We could rename initial_places to something invariant like initial_marking or initial_state.
+
+
+Any other suggestions? What do you think? ping @javiereguiluz @lyrixx

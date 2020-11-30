@@ -1,0 +1,18 @@
+retirejs find jquery in demo folder of tinycolor2
+
+
+Expected Behavior:
+no retirejs warnings
+Actual Behavior:
+$ npx retire
+Loading from cache: https://raw.githubusercontent.com/RetireJS/retire.js/master/repository/jsrepository.json
+Loading from cache: https://raw.githubusercontent.com/RetireJS/retire.js/master/repository/npmrepository.json
+[..path..]/node_modules/tinycolor2/demo/jquery-1.9.1.js
+ ↳ jquery 1.9.1 has known vulnerabilities: severity: medium; issue: 2432, summary: 3rd party CORS request may execute, CVE: CVE-2015-9251; https://github.com/jquery/jquery/issues/2432 http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/ https://nvd.nist.gov/vuln/detail/CVE-2015-9251 http://research.insecurelabs.org/jquery/test/ severity: medium; CVE: CVE-2015-9251, issue: 11974, summary: parseHTML() executes scripts in event handlers; https://bugs.jquery.com/ticket/11974 https://nvd.nist.gov/vuln/detail/CVE-2015-9251 http://research.insecurelabs.org/jquery/test/
+Please specify which version of Storybook and optionally any affected addons that you're running
+
+@storybook/addon-knobs@4.0.0-alpha.24
+
+=> what to do? find something else/fork?
+=> also made an issue at tinycolor2 but it does not seem to be alive 🙈
+bgrins/TinyColor#195

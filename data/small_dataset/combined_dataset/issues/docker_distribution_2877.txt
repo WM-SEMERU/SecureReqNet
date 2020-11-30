@@ -1,0 +1,17 @@
+Docker for Windows does not respect container_name property when running various docker-compose files in the same directory.
+
+
+So you can easily recreate this problem by having two yaml files in the same directory or using a single yaml file using an environment variable as the container_name with docker-compose.  If you make a copy of the directory and run docker-compose in two different directories then everything works fine.
+To recreate consider this docker-compose.yaml file using any image that keeps the container up and running:
+version: "3"
+services:
+service:
+build:
+context: .
+dockerfile: Dockerfile
+container_name: $CONTAINER_NAME
+In one console set CONTAINER_NAME to "a" and then run the "docker-compose up" command.  You'll see all the messages and it says "recreating container a" and the container will run.
+Then in another console set the CONTAINER_NAME to "b" and run the "docker-compose" up command.  Now you'll see the bug, notice that there's message "recreating container a".  Also notice that the running container "a" will stop running.  Then the new container named "b" will get created and it will run.  The bug is this, why does the "a" container get recreated, stopped and killed.
+If you then switch back to the console with container named "a" and try to run it again with the "docker-compose-up" command and you'll see that in now recreates container "b" and starts up container "a".
+Again this happens if you use the same docker-compose.yaml file leveraging environment variables or if you create two yaml fils a.yaml and b.yaml and then run "docker-compose up" using the -f option to specify the files.
+This bug does not happen if you copy the directory with all the docker setup files into a new directory and run the same containers from different directories.

@@ -1,0 +1,7 @@
+DomProcessingEvents.cdata should never be reached and is dangerous
+
+
+Original issue 515 created by mikesamuel on 2008-06-11T22:27:34.000Z:
+We do not whitelist any elements that take CDATA content.
+Remove DomProcessingEvents.cdata, and make it's client issue an error if an
+cdata node is seen by CompileHtml.

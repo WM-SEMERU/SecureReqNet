@@ -1,0 +1,74 @@
+Mailto can be spam-clicked with jQuery
+
+
+
+
+Did you search for similar issues before submitting this one?
+Yes
+
+
+Description:
+Using jQuery, a malicious website can spam document.querySelector('a').click(); to click on an anchor tag such as jQuery('#result').append('<a href="mailto:popup@example.com">.</a>');. This will open the native iOS Mail app without asking permission from the user. Done in a loop, this click() call can endlessly redirect the user from Brave to Mail with a new email draft. This popup technique is still being used by iPhone Support scammers.
+
+
+Device (iPhone5, iPhone6s plus, iPad 3, ?):
+iPhone 6
+
+
+Brave Version:
+1.3.3
+
+
+Steps to reproduce:
+
+Open Brave
+Visit the proof of concept page I made
+Observe
+
+
+
+Actual Behavior
+Spawns iOS Mail app
+
+
+Expected Behavior
+Ask permission to draft a new email, as Safari does
+
+
+Is this an issue with Beta build?
+Maybe
+
+
+Is this an issue in the currently released version?
+Yes
+
+
+Can this issue be consistently reproduced?
+Yes
+
+
+Extra QA steps:
+
+N/A
+
+
+
+
+
+Website problems only:
+
+
+did you check with Brave Shields down?
+
+
+did you check in Puffin/Dolphin/iCab/Firefox (UIWebView-based browsers)?
+FireFox for iOS is also affected.
+
+
+Screenshot if needed:
+
+
+Any related issues:
+Returning to Brave may cause a crash
+
+

@@ -1,0 +1,11 @@
+[2.2] add out of the box support for refreshUser strategies
+
+
+while users might want to do other optimizations I think there are 3 main strategies most users will need that imho we should support out of the box
+
+fetch on every request
+this is what we have today
+fetch every X requests
+fetch after Y amount of seconds
+
+See also http://groups.google.com/group/symfony-devs/browse_thread/thread/4eaa8d045227d9e2

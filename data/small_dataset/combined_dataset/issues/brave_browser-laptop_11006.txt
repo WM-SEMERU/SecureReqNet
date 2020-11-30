@@ -1,0 +1,26 @@
+fix homepage punycode display bypass
+
+
+fix #11001
+Test Plan:
+
+automated tests for homepage should pass
+try setting your homepage to ebаy.com/
+it should display the punycode
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+
+Test Plan:
+Reviewer Checklist:
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

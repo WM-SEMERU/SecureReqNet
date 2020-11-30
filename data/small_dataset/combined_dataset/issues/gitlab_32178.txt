@@ -1,0 +1,6 @@
+After making the merge request widget update automatically at regular polling intervals, we opened ourselves up to the following scenario:
+
+1. MR reviewer takes a look at a merge request diff and decides it looks ok to merge
+2. user updates the branch with new changes
+3. MR reviewer's MR widget is updated to use the new SHA of the changes
+4. MR reviewer clicks the merge button and unknowingly merges the latest version which he/she did not yet review.

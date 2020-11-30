@@ -1,0 +1,23 @@
+disable non-chrome-extension origins from navigating to chrome-extension
+
+
+independent of #14712 , we should generally not allow origins that are not chrome-extension to navigate to chrome-extension
+note it's already blocked in some origins like http and https
+TEST PLAN:
+
+save the following to a local file
+
+<html>
+    <head>
+        <meta http-equiv="refresh" content="0;url=chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/about-preferences.html" />
+        <title>Page Moved</title>
+    </head>
+    <body>
+        This page has moved. 
+    </body>
+</html>
+
+
+open it in brave
+it should navigate to about:blank instead of about:preferences
+

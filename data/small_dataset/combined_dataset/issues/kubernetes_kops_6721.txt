@@ -1,0 +1,12 @@
+coredns pods are located in same node
+
+
+1. Describe IN DETAIL the feature/behavior/change you would like to see.
+coredns pods are should not be executed in same node. If that single node fails, we have small downtime in dns when pods are failovering. We could avoid this by using anti-affinity rules in deployment.
+2. Feel free to provide a design supporting your feature request.
+Currently the situation might be this:
+NAME                                                       READY     STATUS    RESTARTS   AGE       IP            NODE
+coredns-6d999b89cd-8nm4b                                   1/1       Running   0          4m        100.124.0.3   nodes-2-os19-k8s-local
+coredns-6d999b89cd-cp455                                   1/1       Running   0          4m        100.124.0.5   nodes-2-os19-k8s-local
+
+We should define antiaffinity rules to https://github.com/kubernetes/kops/blob/master/upup/models/cloudup/resources/addons/coredns.addons.k8s.io/k8s-1.12.yaml.template example https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#always-co-located-in-the-same-node maybe better to use preferredDuringSchedulingIgnoredDuringExecution

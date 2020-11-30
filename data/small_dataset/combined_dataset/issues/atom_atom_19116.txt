@@ -1,0 +1,23 @@
+Make sure that Atom does not get autoupdated when running main process tests
+
+
+Context
+Somehow, after adding a main process test in df54e90, the Azure builds have started failing on master (example).
+By looking at the logs, this seems to be caused by the autoupdate logic being triggered when that test is executed. Then, when Atom gets autoupdated during the CI build, another unrelated test starts failing with the following error:
+{ Error: spawn /Users/vsts/agent/2.149.2/work/1/s/out/Atom Dev.app/Contents/MacOS/Atom Dev ENOENT
+    at _errnoException (util.js:1024:11)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:190:19)
+    at onErrorNT (internal/child_process.js:372:16)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  code: 'ENOENT',
+  errno: 'ENOENT',
+  syscall: 'spawn /Users/vsts/agent/2.149.2/work/1/s/out/Atom Dev.app/Contents/MacOS/Atom Dev',
+  path: '/Users/vsts/agent/2.149.2/work/1/s/out/Atom Dev.app/Contents/MacOS/Atom Dev',
+  spawnargs: 
+   [ '--benchmark-test',
+     '/Users/vsts/agent/2.149.2/work/1/s/benchmarks' ] }
+
+This issue only appears on master or on release branches (not on PRs), since the autoupdate logic  only works correctly when executed against a signed build of Atom, and we don't sign Atom on PRs.
+Solution
+This PR is basically a workaround to avoid autoupdating Atom when running the tests, but the root issue here is that builds generated from CI can get autoupdated, somehow the autoupdate logic should prevent this...

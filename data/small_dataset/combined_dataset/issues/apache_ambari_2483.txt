@@ -1,0 +1,9 @@
+AMBARI-24799. Fix jetty CVEs for Log Search (2.7.x)
+
+
+What changes were proposed in this pull request?
+Fix CVE issues (updating to latest Spring updates - 2018 Oct)- see:
+CVE-2018-12536
+CVE-2017-9735
+How was this patch tested?
+Waiting for the results

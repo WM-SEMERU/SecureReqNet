@@ -1,0 +1,51 @@
+[Security][bugfix] "Remember me" cookie cleared on logout with custom "secure"/"httponly"  config options [2]
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#14822
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+
+
+tests show that currently those options might not exist
+should not be considered BC? if the options are not present, it works as before.
+I can squash the commits before merging
+Alternative solution: #14842
+

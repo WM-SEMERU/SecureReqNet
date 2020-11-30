@@ -1,0 +1,4 @@
+The release naming is confusing.
+
+
+On the releases page of muon the packaged binaries when extracted are named Brave. Shouldn't these be named Muon? For instance the Darwin package for macOS is Brave.app  shouldnt this be Muon.app?

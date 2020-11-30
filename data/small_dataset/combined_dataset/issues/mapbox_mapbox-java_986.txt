@@ -1,0 +1,5 @@
+removing sonarqube integration
+
+
+Looks like we are not benefiting from SonarQube integration.
+Removing to avoid maintenance

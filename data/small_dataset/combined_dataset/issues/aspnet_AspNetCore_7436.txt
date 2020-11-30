@@ -1,0 +1,26 @@
+Browser response caching (because of wrong cache-control http header) on 302 response causes TOO_MANY_REDIRECTS when pressing browser back button after login
+
+
+The net core web server is configured to do the following:
+https://domain/ redirects 302 redirect to https://domain/Home/Welcome when user is logged off.
+https://domain/ redirects 302 redirect to https://domain/Home/User when user is logged on.
+https://domain/Home/Welcome redirects 302 redirect to https://domain/ if user is logged on.
+If we do the following:
+
+Logout(ajax) and get redirected (by javascript) to https://domain/ and from there (by the server) to https://domain/Home/Welcome
+Login(ajax) and get redirected (by javascript) to https://domain/ and from there (by the server) to https://domain/Home/User
+Press back button in the browser (chrome)
+
+The expected behavior is for the browser to request https://domain/ and since the user is logged on then be redirected (by the server) to https://domain/Home/User.
+If in chrome devtools network tab to check the "disable cache" then everything works as desired.
+If "disable cache" is unchecked and chrome disk cache starts working then https://domain/ is returned from disk cache and redirects to https://domain/Home/Welcome which in turn redirects to https://domain/ because the user is logged on and so on causing TOO_MANY_REDIRECTS on chrome and memory leak/crash on firefox.
+Assume this code design is what is desired and lets deal with what causes this bug.
+The server uses net core 2.1 and has response caching middleware configured:
+app.UseResponseCaching();
+The server response to https://domain/ has the http headers:
+cache-control: no-cache
+pragma: no-cache
+And seems it doesnt prevent caching. According to results of google search to solve this the server should have return no-store instead of no-cache for 302 redirects, see:
+https://stackoverflow.com/questions/22495231/chrome-and-safari-caching-302-redirect/31550450#31550450
+Is there some net core configuration to make 302 responses return no-store instead of no-cache?
+The first bullet here mentions this issue I think: #4647 (comment)

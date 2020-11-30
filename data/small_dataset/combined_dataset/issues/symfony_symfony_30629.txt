@@ -1,0 +1,51 @@
+[HttpClient] added CachingHttpClient
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+The proposed CachingHttpClient uses HttpCache from the HttpKernel component to provide an HTTP-compliant cache.
+If this is accepted, it could replace the corresponding part in #30602

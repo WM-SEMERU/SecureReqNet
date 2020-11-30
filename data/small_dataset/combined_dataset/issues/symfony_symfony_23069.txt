@@ -1,0 +1,58 @@
+[SecurityBundle] Show unique Inherited roles in profile panel
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+
+When more than one assigned role reaches the same inherited role then it's duplicated in the "Inherited roles" list.
+The changes in the test case show the unexpected result before fix it:
+There was 1 failure:
+
+1) Symfony\Bundle\SecurityBundle\Tests\DataCollector\SecurityDataCollectorTest::testCollectAuthenticationTokenAndRoles with data set #4 (array('ROLE_ADMIN', 'ROLE_OPERATOR'), array('ROLE_ADMIN', 'ROLE_OPERATOR'), array('ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH'))
+Failed asserting that Array &0 (
+    0 => 'ROLE_USER'
+    1 => 'ROLE_ALLOWED_TO_SWITCH'
+    2 => 'ROLE_USER'
+) is identical to Array &0 (
+    0 => 'ROLE_USER'
+    1 => 'ROLE_ALLOWED_TO_SWITCH'
+)

@@ -1,0 +1,4 @@
+unsafe use of firstPartyUrl
+
+
+we are using it for main frame URL checking in a few places, which is not exactly safe according to https://cs.chromium.org/chromium/src/net/url_request/url_request.h?sq=package:chromium&dr=C&l=257

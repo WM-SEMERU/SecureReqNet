@@ -1,0 +1,5 @@
+Brave doesn't ask for notifications/geolocation/etc permission
+
+
+I have notifications disabled on Slack in Chrome. However, when I use Slack in Brave, it was surprising to get notifications despite not granting that permission to Slack.
+Same for geolocation: http://html5demos.com/geo

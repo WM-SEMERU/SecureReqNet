@@ -1,0 +1,8 @@
+Copy-paste on possible when the table is editable
+
+
+As originally mentioned in #75 (comment).
+
+At the moment, copying from browser only seem to work when the table is editable.
+As an example, I tried to copy the content of the cell "New Mexico" on the simple table at https://dash.plot.ly/datatable/, and nothing gets copied in the clipboard.
+

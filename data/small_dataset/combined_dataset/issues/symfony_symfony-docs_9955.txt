@@ -1,0 +1,23 @@
+Inconsistent User Entity classes
+
+
+The User classes shown on pages How to Load Security Users from the Database and How to Implement a Simple Registration Form are inconsistent. For one, the Security Users page includes
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    public function __construct()
+    {
+        $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid('', true));
+    }
+
+whereas the Simple Registration page instead has
+    public function __construct()
+    {
+        $this->roles = array('ROLE_USER');
+    }
+
+One would expect them either to be the same or to include an explanation for why they are different.

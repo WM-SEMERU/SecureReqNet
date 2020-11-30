@@ -1,0 +1,12 @@
+Unable to get rid of SaveSessionListener deprecation
+
+
+Symfony version(s) affected: 4.1.1
+Description
+Getting:
+The "Symfony\Component\HttpKernel\EventListener\SaveSessionListener" class is deprecated since Symfony 4.1, use AbstractSessionListener instead.
+
+First of all, it's not documented in https://github.com/symfony/symfony/blob/master/UPGRADE-4.1.md
+And second, I can't get rid of this deprecation error.
+How to reproduce
+Upgrade from 4.0 to 4.1

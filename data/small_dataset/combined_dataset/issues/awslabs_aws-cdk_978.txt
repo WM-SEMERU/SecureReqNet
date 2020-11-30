@@ -1,0 +1,11 @@
+toolkit: surface potentially risky changes and enforce confirmation
+
+
+"cdk diff" should surface to the user any changes to IAM permissions in a very explicit way. Users should be able to see exactly which permissions were added or removed from their app.
+This is particularly important when using 3rd party construct libraries, it's important to ensure that any permissions changes are clearly visible to the user.
+We should also consider requiring an explicit interactive approval for permission changes in "cdk deploy". Something like:
+$ cdk deploy
+Please confirm that the following permissions will be added:
+- sqs:SendMessage on <ARN> will be granted to <PRINCIPAL>
+- dynamodb:PutObject on <ARN> will be granted to <PRINCIPAL>
+Please confirm (Y/N) or use -y for non-interactive experience [N]: 

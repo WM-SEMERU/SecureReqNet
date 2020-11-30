@@ -1,0 +1,7 @@
+Fix wrong usage of https in the monolog.xml file
+
+
+The monolog.xml examples mixup 'http' and https, which results in the XML configuration being invalid.
+The mixup results in the XmlFileLoader being unable to properly replace the URL with the actual local path, so he tries to load the actual URL, which is not available.
+This also happened for the services.xsd - but since it's also available via URL, that's not an actual issue.
+Should I also change that?

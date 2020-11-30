@@ -1,0 +1,46 @@
+[Translations] added missing Croatian validators
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4 up to 4.2 for bug fixes
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30167
+
+
+License
+MIT
+
+
+
+[Validator] Add the missing translations for the Croatian ("hr") locale #30167

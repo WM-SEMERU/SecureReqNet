@@ -1,0 +1,6 @@
+fsevents exception crashes extension in vscode-insiders
+
+
+The latest version of vscode-insiders has an upgraded version of Electron which includes a newer version of Node.
+Due to our dependency on kissfs and webpack-watch, we're getting an old version of fsevents. This version does not handle newer versions of node on OSX, and causes the extension to crash.
+This has been temporarily fixed with a manual (and somewhat dirty) release, but requires additional attention to properly sort out.

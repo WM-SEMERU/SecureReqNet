@@ -1,0 +1,33 @@
+Disable SameSite for AzureAd and B2C cookies
+
+
+RE: #4647
+We've disabled SameSite for many OAuth/OIDC scenarios, but we haven't done it for the cookies added by AddAzureAd and AddAzureAdB2C.
+The workaround for these scenarios is not discoverable:
+services.Configure<CookieAuthenticationOptions>(AzureADDefaults.CookieScheme, options =>
+{
+  options.Cookie.SameSite = SameSiteMode.None;
+});
+
+The fix would go here:
+
+
+
+AspNetCore/src/Azure/AzureAD/Authentication.AzureAD.UI/src/AzureADCookieOptionsConfiguration.cs
+
+
+         Line 31
+      in
+      258d34e
+
+
+
+
+
+
+ options.AccessDeniedPath = "/AzureAD/Account/AccessDenied"; 
+
+
+
+
+

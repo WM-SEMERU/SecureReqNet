@@ -1,0 +1,32 @@
+Adds debug for ledger roundtrip calls
+
+
+Fixes: #14874
+This simply ensures that roundtrip calls made inside ledger.js are debugged appropriately depending on LEDGER_VERBOSE
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+
+Build Brave from this pull request
+Run with LEDGER_VERBOSE=true npm start
+Enable payments, wait a minute or so
+Confirm response is shown from /promo/custom-headers
+
+This affects 3 calls in total, but getting the others to appear requires a different test approach. This change should be small enough that it can be verified through the code changes.
+Reviewer Checklist:
+
+ Request a security/privacy review as needed if one was not already requested.
+
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

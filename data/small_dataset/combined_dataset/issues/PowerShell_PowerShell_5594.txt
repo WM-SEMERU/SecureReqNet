@@ -1,0 +1,47 @@
+Test-FileCatalog does not work on PSCore.
+
+
+Steps to reproduce
+
+Create new file catalog for one of the modules in your system (using New-FileCatlog)
+Run Test-FileCatlog on the catalog created in step 1.
+
+New-FileCatalog -CatalogFilePath "C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0\pester.cat"  -Path "C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0"
+
+Test-FileCatalog "C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0\pester.cat"
+
+Expected behavior
+PS C:\DSC-tests\DSC\Tests\PullServerClient\BVT> Test-FileCatalog "C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0\pester.cat" -Detailed
+
+
+Status        : Valid
+HashAlgorithm : SHA1
+CatalogItems  : {[Functions\Coverage.ps1, F4022ABD45FE0FB2C3527A539F022E2AFDF16851], [Functions\Assertions\BeGreaterThan.ps1, 
+                EEE62A89040021D1F3B2B86D8B6C4884AF7C8925], [bin\Pester.bat, E20AF79E7EC1B2DBA3DF7600C46E9CA613DF1A3C], [Functions\GlobalMock-A.Tests.ps1, 
+                DF7F6F009A46AE9386C01A2350741C264FB4163D]...}
+PathItems     : {[Build.bat, B4FEDB2F7522EB6EEA68EEA73A095EBA8E441926], [build.psake.ps1, 70DA7E6DF0664C0E791C32C31E14924B779A6938], [CHANGELOG.md, 
+                86F6D42CC7389E38952ED741BFACE73A2C755119], [chocolateyInstall.ps1, 013A7B468B830C37FA51518E56933ACE54889CCC]...}
+Signature     : System.Management.Automation.Signature
+
+
+
+Actual behavior
+PS C:\InGuestPolicyx64> Test-FileCatalog "C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0\pester.cat"
+
+<NO OUTPUT>
+
+Environment data
+PS C:\InGuestPolicyx64> $PSVersionTable
+
+Name                           Value
+----                           -----
+PSVersion                      6.0.0-beta
+PSEdition                      Core
+GitCommitId                    v6.0.0-beta.6-dirty
+OS                             Microsoft Windows 10.0.16250
+Platform                       Win32NT
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1
+WSManStackVersion              3.0
+

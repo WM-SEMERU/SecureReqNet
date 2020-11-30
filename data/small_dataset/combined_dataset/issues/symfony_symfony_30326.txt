@@ -1,0 +1,47 @@
+Additional addons for the ghost
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Following #30236 I've prepared two additional addons for the ghost.
+The first one will display a plus on February 29, to indicate it's a leap year.
+
+The second one will display a gift on October 18, to indicate it's Symfony's birthday.
+
+I would just like to point out that the addons are purely for fun, to amuse every hardcoding Symfony developer and offer a chance to smile on these few selected occasions.

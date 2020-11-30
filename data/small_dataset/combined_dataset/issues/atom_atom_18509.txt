@@ -1,0 +1,12 @@
+The event-stream incident and Atom's response
+
+
+As reported this week, a person socially-engineered the takeover of the Node flatmap-stream package and injected code that, through a series of detailed steps targeted at a very specific environment, tries to steal an end-user's bitcoin wallet. The Atom team has completed our investigation into whether any repository in the atom organization uses or includes the compromised version of the package. We wanted to document what we did so that people using Atom or any of the code in our organization can understand if they might have been affected and how.
+In our investigation, the only repository that referenced flatmap-stream was https://github.com/atom/flight-manual.atom.io. But it never referenced the malicious version of that package and would not affect users of the Flight Manual website hosted at https://flight-manual.atom.io. People who locally compiled the Atom Flight Manual could be affected if they manually updated to use the malicious version of flatmap-stream, v0.1.1.
+Summary
+
+If you're a normal user of Atom, this security vulnerability does not affect you
+If you use the https://flight-manual.atom.io website, this security vulnerability does not affect you
+If you develop content for the https://flight-manual.atom.io website AND have tested those changes locally recently AND use crypto-currency wallets from that same machine, this security vulnerability might affect you
+
+If you have any questions, please post in the discussion topic on the official Atom message board or contact the team by email at atom@github.com. You can also read the detailed analysis from the npm team.

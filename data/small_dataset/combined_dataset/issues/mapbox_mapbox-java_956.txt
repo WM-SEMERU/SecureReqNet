@@ -1,0 +1,5 @@
+Add waypoint indices option for Directions API
+
+
+The Directions API will soon expose a waypoints parameter similar to the Map Matching API’s: Project-OSRM/osrm-backend#5345.
+We should add / account for this parameter - iOS equivalent in mapbox/MapboxDirections.swift#334

@@ -1,0 +1,49 @@
+[Console] Fix inconsistent result for choice questions in non-interactive mode
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+n/a
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30774
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

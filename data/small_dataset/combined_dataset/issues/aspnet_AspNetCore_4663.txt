@@ -1,0 +1,5 @@
+Add support for X509 client certificate "authentication"
+
+
+It's important for a number of enterprise and financial API / OAuth scenarios.
+@blowdart already has 85% of it done - please include that in ASP.NET itself.

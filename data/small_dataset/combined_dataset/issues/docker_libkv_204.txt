@@ -1,0 +1,38 @@
+panic in List() method with boltdb backend
+
+
+If you add the following test to store/boltdb/boltdb_test.go, it will panic:
+func TestGetAllKeys(t *testing.T) {
+	kv := makeBoltDBClient(t)
+
+	kv.Put("key1", []byte("value1"), &store.WriteOptions{})
+	_, err := kv.List("")
+	assert.NoError(t, err)
+}
+
+This code is trying to get all possible entries from the DB.
+Traceback:
+panic: runtime error: slice bounds out of range [recovered]
+	panic: runtime error: slice bounds out of range
+
+goroutine 5 [running]:
+testing.tRunner.func1(0xc42011c0f0)
+	/usr/local/go/src/testing/testing.go:742 +0x29d
+panic(0x12a6860, 0x14851e0)
+	/usr/local/go/src/runtime/panic.go:505 +0x229
+github.com/oopcode/libkv/store/boltdb.(*BoltDB).List.func1(0xc4201260e0, 0x1312eb0, 0xc4201260e0)
+	/Users/andrei/projects/go/src/github.com/oopcode/libkv/store/boltdb/boltdb.go:289 +0x4ce
+go.etcd.io/bbolt.(*DB).View(0xc4201221e0, 0xc420053ea8, 0x0, 0x0)
+	/Users/andrei/projects/go/src/go.etcd.io/bbolt/db.go:701 +0x90
+github.com/oopcode/libkv/store/boltdb.(*BoltDB).List(0xc42009c370, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+	/Users/andrei/projects/go/src/github.com/oopcode/libkv/store/boltdb/boltdb.go:279 +0x16e
+github.com/oopcode/libkv/store/boltdb.TestGetAllKeys(0xc42011c0f0)
+	/Users/andrei/projects/go/src/github.com/oopcode/libkv/store/boltdb/boltdb_test.go:151 +0x117
+testing.tRunner(0xc42011c0f0, 0x1312e88)
+	/usr/local/go/src/testing/testing.go:777 +0xd0
+created by testing.(*T).Run
+	/usr/local/go/src/testing/testing.go:824 +0x2e0
+
+This line is the one that panics. For some reason the last pair that boltdb driver returns for the "" query is a pair of empty byte slices (empty, not nil); libkv tries to cut its libkvmetadatalen-sized metadata from the returned empty value, which results in the slice bounds out of range error.
+I'm not sure whether it's a libkv or boltdb problem, but I thought you might like to know about it.
+libkv version is current master, and boltdb version is its latest release.

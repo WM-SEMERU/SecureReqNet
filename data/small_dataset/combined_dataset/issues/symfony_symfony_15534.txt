@@ -1,0 +1,6 @@
+[3.0][Security] target path and security.exception_listener.class
+
+
+Hey all, I ran into this cookbook article http://symfony.com/doc/current/cookbook/security/target_path.html
+Since in 3.0 the .class parameters will be gone (see #11881)  this method of overriding will no longer work. Also, since the Symfony\Component\Security\Http\Firewall\ExceptionListener does not implement an interface, It cannot be decorated properly without implementing the whole class again.
+So, in 3.0 it would no longer be possible to change the default Target Path behavior if this is not refactored.

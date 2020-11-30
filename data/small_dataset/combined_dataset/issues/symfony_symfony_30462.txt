@@ -1,0 +1,16 @@
+FlattenException doesn't support undefined value
+
+
+Symfony version(s) affected: 4
+Description
+A php exception (Call to a member function x() on null) throws a second exception from flattenexception.
+https://github.com/symfony/debug/blob/master/Exception/FlattenException.php#L295
+php.WARNING: Notice: Undefined variable: value {"exception":"[object] (ErrorException(code: 0): Notice: Undefined variable: value at vendor/symfony/debug/Exception/FlattenException.php:295)"}
+How to reproduce
+It happens after an exception
+request.CRITICAL: Uncaught PHP Exception Error: "Call to a member function x() on null"
+Possible Solution
+            if (!isset($value)) {
+                $result[$key] = array('null', 'NOT ISSET');
+            } elseif ($value instanceof \__PHP_Incomplete_Class) {
+Not sure how $value can't be defined as we are in a for loop, maybe a PHP bug ?

@@ -1,0 +1,4 @@
+Default to minimum necessary permissions on bind
+
+
+Use curated roles as much as possible, defaulting to a viewer-type role.

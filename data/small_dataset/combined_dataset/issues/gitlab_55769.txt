@@ -1,0 +1,46 @@
+This was originally discovered in https://gitlab.com/gitlab-org/gitlab-ce/issues/55754, and I already submitted https://gitlab.com/gitlab-org/omnibus-gitlab/merge_requests/2932/diffs not realizing the full security implications. But I've managed to clone dev's security branches by doing the following:
+
+1. `GIT_TRACE_PACKET=1 git clone https://gitlab.com/gitlab-org/gitlab-ce.git /tmp/gitlab > /tmp/gitlab.txt`
+2. Find the ref name by looking at the trace:
+
+```sh
+$ grep security-11-6 /tmp/gitlab.txt  `
+23:21:49.406734 pkt-line.c:80           packet:          git< 943bc6705b7a58fc57c2bf03c22c69ef19252197 refs/remotes/remote_mirror_b061b3e6d4173941af9715b0bba911b6/security-11-6
+```
+
+3. Check out the branch:
+
+```sh
+$ git fetch origin refs/remotes/remote_mirror_b061b3e6d4173941af9715b0bba911b6/security-11-6
+remote: Enumerating objects: 489, done.
+remote: Counting objects: 100% (489/489), done.
+remote: Compressing objects: 100% (360/360), done.
+remote: Total 489 (delta 244), reused 245 (delta 128)
+Receiving objects: 100% (489/489), 384.96 KiB | 1.74 MiB/s, done.
+Resolving deltas: 100% (244/244), done.
+From https://gitlab.com/gitlab-org/gitlab-ce
+ * remote-tracking branch    remote_mirror_b061b3e6d4173941af9715b0bba911b6/security-11-6 -> FETCH_HEAD
+$ git checkout -b test FETCH_HEAD
+Switched to a new branch 'test'
+$ git log
+commit 943bc6705b7a58fc57c2bf03c22c69ef19252197 (HEAD -> test)
+Merge: 880b72d9824 21dd6f080c5
+Author: John Jarvis <jarv@gitlab.com>
+Date:   Thu Dec 27 14:20:35 2018 +0000
+
+    Merge branch 'security-fix/security-group-user-removal-11-6' into 'security-11-6'
+    
+    [11.6] Resolve "Removing a user from a private group doesn't remove them from group's project, if their project's role was changed"
+    
+    See merge request gitlab/gitlabhq!2716
+```
+
+Note that this only affects installations that use a remote mirror as confidential fork. GitLab.com is probably the main user exposed to this.
+
+We should:
+
+1. Update the gitconfig in GitLab.com to hide these refs: https://ops.gitlab.net/gitlab-cookbooks/chef-repo/merge_requests/482
+2. Make this the default in Omnibus: https://gitlab.com/gitlab-org/omnibus-gitlab/merge_requests/2932/diffs 
+3. Backport this to other releases 
+
+/cc: @jarv, @dappelt, @estrike

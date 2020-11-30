@@ -1,0 +1,9 @@
+doc: update LICENSE file
+
+
+Refs: #24898
+Checklist
+
+ documentation is changed or added
+ commit message follows commit guidelines
+

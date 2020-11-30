@@ -1,0 +1,54 @@
+[RouterDebugCommand] add link to Controllers
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Adds a link to the controller method on your IDE from dev's terminal:
+
+Configuration in your services.yaml:
+parameters:
+    debug.file_link_format: phpstorm://open?file=%%f&line=%%l

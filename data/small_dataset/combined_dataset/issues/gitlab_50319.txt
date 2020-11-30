@@ -1,0 +1,31 @@
+From https://gitlab.zendesk.com/agent/tickets/101860:
+
+> Due to a lack of time at the moment, this is not a nicely formatted report, but I think it is more important to get the message out.
+> 
+> We are a penetration testing company and during an assignment last week with one of our clients, I discovered a security vulnerability in Gitlab:
+> 
+> Using any “personal access token” regardless of the assigned scopes/permissions it is possible to access the full Web-UI with all functions and permissions of the issuing user.
+> 
+> Including, issuing more access tokens with any scope/permission. To make things worse these session-less logins, don't show up in the user authentications or active web-sessions and it is thus hard to detect an ongoing attack.
+> 
+> To achieve this, one only has to insert (manually or automatically) a “private_token” parameter or “Private-Token” header into every request send by the browser.
+> 
+> The tested Gitlab version was “11.1.4-ee d17962f” but looking at the source code it should also be present in the latest version and seems to be around for a while.
+> 
+> After looking quickly at the source code the RSS “feed_token” parameter may also be affected in the same way, but as the assignment is closed, I currently don’t have access to a Gitlab instance to check this.
+> 
+> The current expected CVSS Score is 7.6 (High), as this issue at least constitutes a severe privilege escalation for restricted tokens and may have further impact depending on the user permissions and the exact use-case.
+> 
+> CVSS-String: CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:L
+> 
+> I hope this information is enough. If not, please don’t hesitate to contact me.
+> 
+> Please note, that this vulnerability report is governed by our Vulnerability Disclosure Policy you can find attached.
+> 
+> Thank you!
+> 
+> Regards,
+> 
+> Jan
+
+/cc @wvandenberg @DouweM @smcgivern

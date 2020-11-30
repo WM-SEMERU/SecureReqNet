@@ -1,0 +1,4 @@
+fix(config): remove hash alg from config
+
+
+cc @jrgm

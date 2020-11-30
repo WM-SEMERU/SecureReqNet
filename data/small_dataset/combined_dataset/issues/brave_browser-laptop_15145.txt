@@ -1,0 +1,39 @@
+Unable to Open the payment history pdf file from About:downloads
+
+
+Description
+Unable to Open the payment history pdf file from About:downloads
+Steps to Reproduce
+
+Launch brave with clean profile
+Enable payments and add websites to ledger
+Complete the contribution
+Download the contribution statement from Payment History
+Go to About:Downloads and try to open the pdf file
+
+Note: Please note that this issue is arising only for the payment history pdf file. I have downloaded other pdf files and tried opening them from About:Downloads and i was able to open them successfully.
+Actual result:
+Unable to Open the payment history pdf file from About:downloads
+
+Expected result:
+User should be able to open the pdf file
+Reproduces how often:
+Always
+Brave Version
+0.23.203
+about:brave info:
+Brave: 0.23.203
+V8: 6.9.427.18
+rev: 16c2c19
+Muon: 8.1.2
+OS Release: 10.0.17134
+Update Channel: Beta
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.72
+Reproducible on current live release:
+No
+Additional Information
+cc: @kjozwiak @LaurenWags @srirambv @btlechowski

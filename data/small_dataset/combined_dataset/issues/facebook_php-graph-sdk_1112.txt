@@ -1,0 +1,7 @@
+How do I create an async batch request using the sdk?
+
+
+I'm able to do it sync but not async.
+I've search through the documentation and in a lot of different websites but I haven't find anything.
+Anyone knows how?
+https://developers.facebook.com/docs/marketing-api/asyncrequests/

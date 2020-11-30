@@ -1,0 +1,4 @@
+[18.09 backport] use a custom grpc dialer when managers are joining
+
+
+backport of #2802 for 18.09. cherry-pick was clean; no conflicts

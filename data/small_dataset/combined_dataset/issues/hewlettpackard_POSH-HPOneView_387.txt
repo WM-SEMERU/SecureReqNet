@@ -1,0 +1,21 @@
+Add Server with scope parameter
+
+
+Expected Behavior
+Add a server in a specific scope with the command:
+Add-HPOVServer Srv01 -ApplianceConnection $session -Username Administrator -Password xxx -Scope Scope1 -monitored
+Actual Behavior
+> Add-HPOVServer : Cannot process argument transformation on parameter 'Scope'. Cannot convert the "Scope1" value of type "System.String" to type
+> "HPOneView.Appliance.ScopeCollection".
+> At line:1 char:108
+> + ... ession -Username Administrator -Password xxx -Scope Scope1 -monito ...
+> +                                                              ~~~~
+>     + CategoryInfo          : InvalidData: (:) [Add-HPOVServer], ParameterBindingArgumentTransformationException
+>     + FullyQualifiedErrorId : ParameterArgumentTransformationError,Add-HPOVServer
+
+Steps to reproduce
+Add-HPOVServer Srv01 -ApplianceConnection $session -Username Administrator -Password xxx -Scope Scope1 -monitored
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion or $PSLibraryVersion): 4.10.1889.2173
+HPE OneView Appliance Version (Get-HPOVVersion -ApplianceVer):  4.10.01.348545.00
+Output from $PSVersionTable on your Windows Host: PS 5.1

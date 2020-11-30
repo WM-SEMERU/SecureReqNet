@@ -1,0 +1,10 @@
+Empty Microsoft.AspNetCore.Server.Kestrel.Https assembly being removed
+
+
+In ASP.NET Core 2.1 the contents of Microsoft.AspNetCore.Server.Kestrel.Https.dll were moved to Microsoft.AspNetCore.Server.Kestrel.Core.dll. This was done in a non-breaking way using TypeForwardedTo attributes. In the next major release (3.0) this empty assembly will be removed. Note that the nuget package was already being removed as part of #325.
+Action required:
+
+Libraries referencing Microsoft.AspNetCore.Server.Kestrel.Https 2.0 should update all AspNetCore dependencies to 2.1 or later. Otherwise they may break when loaded into a 3.0 application.
+Applications and libraries targeting AspNetCore 2.1 and later should remove any direct references to the Microsoft.AspNetCore.Server.Kestrel.Https nuget package.
+
+Please use aspnet/AspNetCore#4228 for discussion about this issue.

@@ -1,0 +1,47 @@
+Broken Text for Bookmarkmenu
+
+
+Description
+The Text for Bookmarks is broken in the main menu.
+
+Brave Version
+
+
+
+Brave
+0.54.4 Chromium: 70.0.3528.4 (Offizieller Build) dev(64-Bit)
+
+
+
+
+Überarbeitung
+1911f781145b803e04f2d0b5b1a0146ae69fcbdc-refs/branch-heads/3528@{#9}
+
+
+Betriebssystem
+Mac OS X
+
+
+JavaScript
+V8 7.0.242
+
+
+Flash
+30.0.0.154 /Library/Internet Plug-Ins/PepperFlashPlayer/PepperFlashPlayer.plugin
+
+
+User-Agent
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3528.4 Safari/537.36
+
+
+Befehlszeile
+/Applications/Brave-Browser-Dev.app/Contents/MacOS/Brave-Browser-Dev --enable-tab-audio-muting --disable-domain-reliability --disable-chrome-google-url-tracking-client --no-pings --enable-features=EnableEmojiContextMenu,DesktopPWAWindowing,fill-on-account-select --flag-switches-begin --flag-switches-end
+
+
+Ausführbarer Pfad
+/Applications/Brave-Browser-Dev.app/Contents/MacOS/Brave-Browser-Dev
+
+
+
+Additional Information
+As you see in the screenshot I use german as language on my operation system. Probably a translation issue.

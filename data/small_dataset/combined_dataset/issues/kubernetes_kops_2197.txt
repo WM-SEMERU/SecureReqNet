@@ -1,0 +1,6 @@
+kops should run the certificates controller
+
+
+
+
+

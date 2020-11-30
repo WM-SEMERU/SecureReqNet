@@ -1,0 +1,17 @@
+Secure connection security indicator should not be shown for bad SSL requests
+
+
+Secure connection security indicator should not be shown for bad SSL requests
+Steps to Reproduce
+
+Navigate to "badssl.com"
+Select a link with a  icon, i.e. untrusted-root
+Tap "Continue" button
+
+Actual result: Secure connection security indicator is shown
+Expected result: Insecure connection security indicator should be shown
+Reproduces how often: Every time
+Brave Version: App Store 1.6.4 (18.08.14.13)
+Device details: iPad Pro 10.5" iOS 11.4.1
+Additional Information
+Fix should be validated at badssl.com by validating that the insecure connection security indicator is shown for all links that have a  icon

@@ -1,0 +1,10 @@
+⚠️⚠️⚠️New version not support array.sort() function
+
+
+
+Version:v11.3.0 and lastest
+Platform:Mac
+Subsystem:macOS Mojave v10.14.1
+
+new version V8 is not support array.sort() function.
+This problem occurs in node after v11 and in Chrome after v70.

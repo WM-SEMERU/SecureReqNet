@@ -1,0 +1,4 @@
+Not sure if this is intentional or not, but when I run 
+`sudo gitlab-rake gitlab:check SANITIZE=true`
+
+It prints the account information of my LDAP accounts.  I would consider that sensitive information that should be sanitized.

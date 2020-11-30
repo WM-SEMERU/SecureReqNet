@@ -1,0 +1,45 @@
+Mysql-agent not ready but mysql endpoint still added
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+Versions
+MySQL Operator Version: 0.3.0
+Environment:
+
+Kubernetes version (use kubectl version):
+
+Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-03-01T23:34:27Z", GoVersion:"go1.12", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.2", GitCommit:"cff46ab41ff0bb44d8584413b598ad8360ec1def", GitTreeState:"clean", BuildDate:"2019-01-10T23:28:14Z", GoVersion:"go1.11.4", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration: On-premises ProxMox servers
+OS (e.g. from /etc/os-release): ProxMox
+Kernel (e.g. uname -a):
+Others:
+
+What happened?
+Some of my statefulset pods fell out-of-sync, and so the mysql-agent container was not ready, but the mysql server container was still ready (as it has no readinessProbe).  The pod was not fully ready (1/2 containers ready), but the pod's IP and port 3306 was still present on the service's endpoints.
+This exacerbated the unsynchronized pods, as they still received queries to their mysql containers.
+What you expected to happen?
+When mysql-agent is not ready, the pod's IP:3306 should be removed from the service's endpoints.
+How to reproduce it (as minimally and precisely as possible)?
+For a three-pod cluster, say mysql:
+$ kubectl delete pvc/mysql-data-mysql-2 po/mysql-2
+$ kubectl get po mysql-2 -w -owide
+(watch mysql-2 attempt to recover, and Ctrl-C after the pod is only 1/2 ready)
+$ kubectl get endpoints mysql
+[note that the pod's IP, port 3306 is present, even though the pod is only 1/2 ready]
+Anything else we need to know?
+Maybe it would be better to have the mysql container have something like:
+   name: mysql
+   readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /ready
+        port: 10512
+        scheme: HTTP
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+so that if the mysql-agent container is not ready, the mysql container is also not marked ready, and therefore is kept out of the mysql service pool.

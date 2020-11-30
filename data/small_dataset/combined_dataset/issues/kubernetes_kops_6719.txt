@@ -1,0 +1,4 @@
+Allow customizing Resource Request & Limits for CoreDNS
+
+
+We have needed to adjust the default request/limits for coredns. This allows you to customize these settings as part of the cluster config.

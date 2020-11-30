@@ -1,0 +1,22 @@
+Enable PB only bring modal on settings page
+
+
+Description:
+Enable PB only bring modal on settings page
+Steps to Reproduce
+
+Enable PB only from settings
+Stay on the settings pane
+DDG modal and Enable Pin modal popup on settings pane itself
+
+Actual result:
+https://youtu.be/t6CzVyPOsAw
+Expected result:
+Should probably show once the settings window is closed and webview is shown
+Reproduces how often: [Easily reproduced/Intermittent issue]
+Easy
+Brave Version:
+All
+Device details:
+All
+Additional Information

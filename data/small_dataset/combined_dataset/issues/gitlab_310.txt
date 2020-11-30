@@ -1,0 +1,6 @@
+It should be possible to define webhooks which execute a HTTP GET request instead of HTTP POST.
+
+Use-Case: We use Redmine for issue and task management and have added git repositories to redmine projects. 
+To update this git repositories, redmine requires a HTTP GET request every time a change is pushed to the git server (see http://www.redmine.org/projects/redmine/wiki/HowTo_setup_automatic_refresh_of_repositories_in_Redmine_on_commit)
+
+For this use case, i don't care about the data which is sent along with the web hook POST request; i simply need Gitlab to GET a defined URL on each push.

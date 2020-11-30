@@ -1,0 +1,93 @@
+Voter priority in reverse order from lowest to highest
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+v2.8.11
+
+
+
+Although this is poorly documented, I understand that voter services can have a priority.
+Relevant commit: 0643dc4
+Similar to other DI tags with a priority attribute this was intended to be implemented as follows:
+
+The priority value is optional and defaults to 0. The higher the priority, the sooner it gets executed.
+
+The compiler pass responsible for adding all configured voters is the AddSecurityVoterPass which uses an SplPriorityQueue (max heap) to correctly order the voters one by one.
+The priority queue is then converted to an array and passed to the AccessDecissionManager service definition by adding a method call for setVoters.
+The problem is that right after the array conversion a ksort is done on the voters array. This actually reverses the prioritization done by SplPriorityQueue!
+Result: voters are ordered from lowest to highest priority and are also processed in this order in the different decision strategies.
+I think the priority queue was added later as an optimization for setting the prio as the indices of an associative array, but the obsolete call to ksort was never removed.
+I double checked other compiler passes using priority attributes:
+
+
+
+Compiler Pass
+A-OK
+unit tested
+impl
+
+
+
+
+AddCacheWarmerPass
+yes
+yes
+set + ksort
+
+
+AddSecurityVotersPass
+no
+no
+prio queue + ksort
+
+
+ConfigCachePass
+yes
+yes
+set + ksort
+
+
+ProfilerPass
+yes
+no
+prio queue
+
+
+PropertyInfoPass
+yes
+yes
+set + ksort
+
+
+SerializerPass
+yes
+yes
+set + ksort
+
+
+

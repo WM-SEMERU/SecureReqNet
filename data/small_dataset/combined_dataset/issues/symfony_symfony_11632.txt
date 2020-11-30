@@ -1,0 +1,47 @@
+[Security] Change private properties and methods into protected to make ...
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Loosening the properties and method visibility to protected allows to quickly create a new SwitchUserListener class, which extends the core class, and hook your custom changes anywhere.
+Before this patch, I had to copy the whole class, just to add 1 line of code...

@@ -1,0 +1,37 @@
+Developer Tools don't close on CMD+W if source tab isn't main tab
+
+
+Description
+Whenever using CMD+W to close the Developer Tools, it closes the last active tab UNLESS the last active tab is the page connected to the Developer Tools
+Steps to Reproduce
+
+Open page (1)
+Right Click and select "Inspect Element"
+Open new page (2)
+Focus on Developer Tools opened in step 2
+Press CMD+W
+
+Actual result:
+It closes page (2)
+Expected result:
+No matter if page (1) or page (2) is selected, while being focused on Developer Tools, the key combination CMD+W should always close the current (in this case: Developer Tools) window.
+Reproduces how often:
+100%
+Brave Version
+0.24.0
+about:brave info:
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 17.7.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+Yes?
+Additional Information
+This could be connected to the other issue I have with Developer Tools. It just doesn't seem to focus properly on the window? #15274

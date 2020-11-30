@@ -1,0 +1,49 @@
+fix type hints for PHPUnit 4.8 mocking compat
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+alternative to #29914
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

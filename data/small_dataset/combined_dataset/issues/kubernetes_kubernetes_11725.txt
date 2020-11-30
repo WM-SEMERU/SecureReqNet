@@ -1,0 +1,6 @@
+Signing certificates for cluster addons using apiserver CA
+
+
+I've been looking into getting a cluster-local docker registry up as a cluster addon (#1319) and the problem comes down to creating the certificate for the registry and trusting it. The apiserver CA cert is already visible from every node and every pod, so signing the registry certificate with the apiserver CA would eliminate any CA cert distribution issues.
+Right now, we create the CA and apiserver certificate and key in a number of places (we have provider-specific ways to create them or use one of two scripts in salt). We don't copy over the CA key which is needed to sign new certificates.
+One approach to fixing this is copying the CA key (might as well copy all of the pki/ directory used by easyrsa), but I'm not sure that this is a good idea. Alternative, we could add creation to every instance where the CA cert is created, but this is tedious and error prone.

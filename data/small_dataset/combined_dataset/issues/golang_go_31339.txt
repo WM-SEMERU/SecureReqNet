@@ -1,0 +1,15 @@
+cmd/go version encoding in GOPROXY indexes (list files)
+
+
+goproxy states that
+
+GET $GOPROXY//@v/list returns a list of all known versions of the given module, one per line.
+
+but also, a few lines later, that
+
+To avoid problems when serving from case-sensitive file systems, the module and version elements are case-encoded
+
+That seems to imply that because version is case-encoded in file paths and urls, it is also encoded in lists. However, “seems to imply” is not the same thing as a clear specification, and
+rewriteVersionList for example, does not seem to perform any encoding check before writing indexes.
+(practically we will need to force lower-casing in the versions we process for other reasons, but the go version spec, unfortunately, is not so strict).
+That's one of the many little things that make an official go mod index desirable (issue #31303)

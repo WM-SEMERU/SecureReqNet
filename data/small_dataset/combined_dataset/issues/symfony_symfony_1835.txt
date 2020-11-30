@@ -1,0 +1,5 @@
+[Translation] [UserChecker] Exceptions don't support internationalization
+
+
+The exception messages thrown by the user checker don't support internationalization natively :
+Symfony/vendor/symfony/src/Symfony/Component/Security/Core/User/UserChecker.php

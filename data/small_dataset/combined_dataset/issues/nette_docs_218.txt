@@ -1,0 +1,4 @@
+Security: replacnout všechny booleany v User/Security za flagy
+
+
+viz: User: bool parameters replaced with flags, i.e. $user->setExpiration('20 minutes', TRUE, TRUE)› setExpiration('20 minutes', $user::BROWSER_CLOSED | $user::CLEAR_IDENTITY)

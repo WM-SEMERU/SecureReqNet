@@ -1,0 +1,6 @@
+Security: brave-extension CSP permissions are not very restrictive
+
+
+https://github.com/brave/brave-extension/blob/master/app/manifest.dev.json#L22 - why does this require unsafe-eval?
+https://github.com/brave/brave-extension/blob/master/app/manifest.prod.json#L22 - does this need style-src set to *? are we loading stylesheets from arbitrary origins?
+cc @cezaraugusto

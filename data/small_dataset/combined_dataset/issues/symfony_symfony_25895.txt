@@ -1,0 +1,54 @@
+in_memory UserProvider causes exception in test-environment
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.0
+
+
+
+I am currently migrate a SF3.4 application to SF4.0. The only part which is still broken are our tests. When I run phpunit then I get this error:
+Symfony\Component\Config\Definition\Exception\InvalidConfigurationException: Not configuring explicitly the provider for the "remember_me" listener on "main" firewall is ambiguous as there is more than one registered provider.
+Can not find anything a provider config-option for the remember_me section in the last docs.
+The affected test is a controller-test. This is our config/packages/test/security.yaml
+security:
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    test-user:
+                        password: '8*zYKR)tBYyaN}qd'
+                        roles: 'ROLE_USER'
+
+    firewalls:
+        main:
+            http_basic:
+                provider: in_memory

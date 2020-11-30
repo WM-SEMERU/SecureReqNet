@@ -1,0 +1,28 @@
+I can't browse milestones from group panel after upgrading to v7.1.1.
+
+This cc_enews group was created when my gitlab version was 6.5.
+
+It seems that this problem only happens on old groups. I create a new group and there is no problem with it.
+
+
+Here is the log:
+
+```
+Started GET "/groups/cc_enews/milestones" for 192.168.0.1 at 2014-07-30 17:05:48 +0800
+Processing by Groups::MilestonesController#index as HTML
+  Parameters: {"group_id"=>"cc_enews"}
+Completed 500 Internal Server Error in 28ms
+
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"groups/milestones", :format=>nil, :group_id=>#<Group id: 39, name: "CC_ENEWS", path: "cc_enews", owner_id: nil, created_at: "2014-02-24 06:10:54", updated_at: "2014-02-24 06:28:44", type: "Group", description: "enews", avatar: "wiki.jpg">, :id=>"", :milestone=>{:state_event=>:close}, :title=>"dashboard"} missing required keys: [:id]):
+    28:                   - if milestone.closed?
+    29:                     = link_to 'Reopen Milestone', group_milestone_path(@group, milestone.safe_title, title: milestone.title, milestone: {state_event: :activate }), method: :put, class: "btn btn-small btn-grouped btn-reopen"
+    30:                   - else
+    31:                     = link_to 'Close Milestone', group_milestone_path(@group, milestone.safe_title, title: milestone.title, milestone: {state_event: :close }), method: :put, class: "btn btn-small btn-close"
+    32:               %h4
+    33:                 = link_to_gfm truncate(milestone.title, length: 100), group_milestone_path(@group, milestone.safe_title, title: milestone.title)
+    34:               %div
+  app/views/groups/milestones/index.html.haml:31:in `block in _app_views_groups_milestones_index_html_haml___2746329326865712314_69992200100320'
+  app/views/groups/milestones/index.html.haml:24:in `each'
+  app/views/groups/milestones/index.html.haml:24:in `_app_views_groups_milestones_index_html_haml___2746329326865712314_69992200100320'
+
+```

@@ -1,0 +1,12 @@
+Fix HTTP OPTIONS request auth handling
+
+
+Fixes #5588
+This PR sets the AUTHORIZATION_CHECKED flag to true for all HTTP OPTIONS requests. This is handled in a new servlet filter (Druid has no explicit OPTIONS method handlers on its endpoints).
+It seems that CORS pre-flight OPTIONS requests do not generally contain credentials headers:
+
+https://stackoverflow.com/questions/15734031/why-does-the-preflight-options-request-of-an-authenticated-cors-request-work-in
+https://fetch.spec.whatwg.org/#cors-preflight-request
+https://bugzilla.mozilla.org/show_bug.cgi?id=778548
+
+So a disableHttpOptionsAuthentication config is added to disable authentication checks on OPTIONS requests (authentication is required by default) to support CORS use cases.

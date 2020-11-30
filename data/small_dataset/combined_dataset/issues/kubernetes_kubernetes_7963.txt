@@ -1,0 +1,7 @@
+The apiserver read-only API leaks bearer tokens
+
+
+From a minion:
+curl http://kubernetes-master:7080/api/v1beta3/secrets
+will return the bearer tokens for all service accounts.
+I'm not sure if this is already taken care of as part of #5921.

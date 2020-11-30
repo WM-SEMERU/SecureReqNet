@@ -1,0 +1,32 @@
+```
+Link:          https://hackerone.com/reports/406600
+By:            @ashish_r_padelkar
+```
+
+Details:
+**Summary:** 
+It is possible to see name of any private groups of other companies
+
+
+
+**Description:** 
+When company creates a Private groups, it should not be visible to other users. However, if user can just guess the ID of the group, they can see the group name!!
+
+## Steps To Reproduce:
+
+1. Just visit below url in browser and replace the value `group_id` parameter
+
+`https://gitlab.com/dashboard/todos?state=&utf8=%E2%9C%93&group_id=3567586`
+
+2. Name of the group will be populated in dropdown
+
+![Screen_Shot_2018-09-07_at_01.15.09](/uploads/a617994cf2c128684ed1fbfaada17d66/Screen_Shot_2018-09-07_at_01.15.09.png)
+
+2.This way you can actually enumerate all the private group names from GITLAB
+
+## Impact
+
+Get all private group names
+
+## Merge request
+https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2589

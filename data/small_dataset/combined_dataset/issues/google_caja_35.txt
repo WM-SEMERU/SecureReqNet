@@ -1,0 +1,13 @@
+caja.def unrecognized
+
+
+Original issue 35 created by metaweta on 2008-01-17T00:01:16.000Z:
+What steps will reproduce the problem?
+1.
+function F(x) { this.x_ = x; }
+caja.def(F, Object, {});
+What is the expected output? What do you see instead?
+I expect the cajoler to recognize the special form caja.def(derived, base,
+methods).  Instead I get
+Constructors are not first class: Rule "varBadCtorLeak", Reference
+Identifier : F

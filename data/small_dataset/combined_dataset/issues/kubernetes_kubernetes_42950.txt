@@ -1,0 +1,14 @@
+End-2-end encrypted kubectl exec using SSH as protocol
+
+
+The current kubectl-exec implementation is using the transport encryption from the kubectl to the apiserver and the transport encryption from the apiserver to the kubelet to tunnel the terminal data. The terminal data itself is not protected otherwise, i.e. the apiserver can read everything in plain text.
+This is a potential attack surface as taking over the apiserver allows to watch execs and/or to even initiate them to attack any pod and compromise it.
+In other words, this issue is part of the investigation of how containers on the node can be protected if the apiserver cannot be fully trusted.
+The basic idea is:
+
+use end-2-end encrypted connections from kubectl to the pods for kubectl-exec (and -run and -port-forward)
+using SSH as the binary protocol
+by letting the kubelet spawn ad-hoc SSH servers on each connection
+add an ssh subcommand to kubectl like kubectl ssh -i ~/.ssh/kube-rsa pod-name /bin/bash.
+
+The SSH public key will be provided somehow to the kubelet. One approach would be to pass them as an annotation of a pod. But as the apiserver by assumption cannot be trusted, also the annotation cannot be trusted. This means that measures are necessary to protect against the apiserver playing man-in-the-middle by faking the public keys in the pod's annotation. So probably the kubectl needs some kind of identity check that it is talking to the kubelet and no man-in-the-middle.

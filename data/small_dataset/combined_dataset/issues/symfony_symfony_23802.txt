@@ -1,0 +1,50 @@
+[Security] Fix security.interactive_login event const doc block
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7 
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+N/A 
+
+
+License
+MIT
+
+
+Doc PR
+N/A
+
+
+
+I'd suggest to reuse the explanation we give about this event on the docs because the current one in the code is misleading: this event is not triggered for http basic/digest authentication for instance.

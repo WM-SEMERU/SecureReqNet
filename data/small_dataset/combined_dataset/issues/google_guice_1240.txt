@@ -1,0 +1,45 @@
+Moe Sync
+
+
+This code has been reviewed and submitted internally. Feel free to discuss on the PR and we can submit follow-up changes as necessary.
+Commits:
+ Change infrastructure to allow using java8-isms.
+fd04a9e
+
+ Some more infrastructure changes to work w/ java8 code.  Namely, neuter ant so that we don't use it for anything other than javadoc & jdiff.  A few of the libraries it depended on (jarjar, bnd) didn't work with java8 code.  We don't really need ant (we just use it for javadocs & jdiffs right now, and theoretically those could move to mvn too if someone figures out how to do that).
+c09ba1d
+
+ Refactor code to use java8-isms.
+Generated with refaster, with some manual touch-ups afterwards.
+37255a2
+
+ Stop using reflection to handle java.util.Optional in OptionalBinder-related code.
+e27d4c0
+
+ Stop using reflection to access MethodHandle MethodHandles.Lookups.  Continue using reflection to access the private constructor for MethodHandles.Lookups.  See https://github.com//issues/904 for more information on why we need that particular bit of reflection.
+5058704
+
+ Automated rollback of commit 37255a2
+*** Original change description ***
+Refactor code to use java8-isms.
+Generated with refaster, with some manual touch-ups afterwards.
+
+32fef20
+
+ Roll forward of 37255a2
+Automated rollback of changelist 32fef20
+*** Original change description ***
+Automated rollback of commit 37255a2
+*** Original change description ***
+Refactor code to use java8-isms.
+Generated with refaster, with some manual touch-ups afterwards.
+3f0dbb8
+
+ Refactor exception-message assertions to use ThrowableSubject.hasMessageThat(). This replaces assertions of the form assertThat(e).hasMessage(...) and assertThat(e.getMessage()) with assertThat(e).hasMessageThat().
+70552b0
+
+ Add an Injector#getAllMembersInjectorInjectionPoints method.
+a6293fb
+
+ Add a note in isTransparentProvider that folks who trace through the code & detect that their binding isn't working because of this call should use @Bind(lazy=true) instead.
+7e7ac3e

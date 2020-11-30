@@ -1,0 +1,20 @@
+Vulnerability Warning Tracking Issue
+
+
+Two project-level development only packages currently produce vulnerability warnings upon package install of a new project.
+
+
+ Protractor (1 warning) -- dependency webdriver-js-extender uses an outdated version of selenium-webdriver (UPDATE: Protractor 4.5.0 has been released with a fix)
+
+
+ Karma (2.0: 6 warnings) -- dependency log4js uses an outdated version of loggly.  Note also that log4js (and as a result karma) produce the following deprecated package warnings upon install:
+npm WARN deprecated nodemailer@2.7.2: All versions below 4.0.1 of Nodemailer are deprecated. See   https://nodemailer.com/status/
+npm WARN deprecated node-uuid@1.4.8: Use uuid module instead
+npm WARN deprecated socks@1.1.10: If using 2.x branch, please upgrade to at least 2.1.6 to avoid a serious bug with socket data flow and an import issue introduced in 2.1.0
+npm WARN deprecated socks@1.1.9: If using 2.x branch, please upgrade to at least 2.1.6 to avoid a serious bug with socket data flow and an import issue introduced in 2.1.0
+npm WARN deprecated mailcomposer@4.0.1: This project is unmaintained
+npm WARN deprecated buildmail@4.0.1: This project is unmaintained
+npm WARN deprecated uws@9.14.0: stop using this version
+
+
+

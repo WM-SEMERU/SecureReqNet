@@ -1,0 +1,8 @@
+regexp: Optimize for inputs that are provably too short
+
+
+I'm following up on my work on regexp performance from #21463 with a couple smaller patches. This one is somewhat related.
+For many patterns we can compute the minimum length of the input at compile time. For instance, an HTTP router might use a pattern like \/(path1|path2)\/(.+)\.html, which has a minimum input length of 13 bytes.
+If the input is shorter than that, as may happen quite frequently, we can return early and get a huge speedup.
+Some benchmarks are included in the CL.
+Feedbacks welcome!

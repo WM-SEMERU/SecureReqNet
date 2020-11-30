@@ -1,0 +1,9 @@
+Since I am writing this in markdown I hope it will be clear to read. Maybe a preview button would be in order :-)
+
+    **`TEST`**
+
+at the beginning of a line will produce
+
+**`TEST`**
+
+where as inside text it will produce **`TEST`**.

@@ -1,0 +1,9 @@
+Documentation on OpenIdConnectOptions.RemoteSignOutPath is really misleading
+
+
+Describe the bug
+Documentation on OpenIdConnectOptions is really misleading.
+The documentation says:
+this path will cause the handler to invoke SignOut using the SignInScheme
+However the implementation of the handler says:
+await Context.SignOutAsync(*Options.SignOutScheme*);

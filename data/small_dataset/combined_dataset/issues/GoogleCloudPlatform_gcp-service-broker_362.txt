@@ -1,0 +1,4 @@
+add note about CVE
+
+
+Note about #361 in README

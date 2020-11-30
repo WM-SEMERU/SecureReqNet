@@ -1,0 +1,8 @@
+[SecurityBundle] Using route as check_path in form_login
+
+
+@SecurityBundle/DependencyInjection/MainConfiguration
+On line 277 there is thrown an exception that says the check_path is not covered by the firewall in which it is registered when using a route for the value.
+The AbstractAuthenticationListener does however support routes given as the value for this, just like any other path you can set in the security configuration.
+As i dont think there is a way to access the router and try and match the route when building and validating the config i suggest removing the exception.
+The tests for SecurityBundle dosent pass currently so i didnt do a Pull Request

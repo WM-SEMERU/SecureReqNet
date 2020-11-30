@@ -1,0 +1,17 @@
+VpcNetwork.import does not default subnet names correctly
+
+
+Posted on Gitter:
+const vpc = VpcNetwork.import(this, 'VpcSviluppo', {
+      vpcId: 'vpc-0e0311c34e5d7c8ac',
+      availabilityZones: ['eu-west-1a','eu-west-1b','eu-west-1c'],
+      publicSubnetIds: [
+        'subnet-0c2fda469e286aa78',
+        'subnet-030da2fd20cae22b3',
+        'subnet-0dd5750486e28414d'
+      ]
+    });
+Leads to:
+Error: There are no 'Public' subnets in this VPC. Use a different VPC subnet selection.
+
+The subnet group name should have defaulted to Public, but it didn't.

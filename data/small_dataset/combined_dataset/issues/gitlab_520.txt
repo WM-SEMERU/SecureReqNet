@@ -1,0 +1,54 @@
+'We were using 6.9 for a long time and everything worked fine. After I've done an incremental upgrade from 6.9 to 7.2, all web hooks stopped working. Server is in a private network, web hook target is in the same network. Web hook target is plain HTTP.
+
+After I try to test the web hook by the Test hook button, I get the following error in production.log:
+
+```
+Processing by Projects::HooksController#test as HTML
+  Parameters: {"project_id"=>"test", "id"=>"4"}
+Completed 500 Internal Server Error in 10137ms
+
+Net::OpenTimeout (execution expired):
+  app/models/web_hook.rb:34:in `execute'
+  app/services/test_hook_service.rb:4:in `execute'
+  app/controllers/projects/hooks_controller.rb:28:in `test'
+```
+
+- I have tried clean install of 7.2 on another VPS in the same network and all worked fine (same web hook target responded in about 100 ms).
+- I have tried clean install (with the original DB) of 7.2 on the VPS where I did the upgrade and web hooks were not working.
+- I have tried calling the web hook target from shell with curl under git user and everything worked fine on the affected VPS.
+
+It is obviously some kind of a networking issue related to sidekiq or VPS setup but I am not able to fix it by myself, so I'm hoping someone here might help me. In the meantime I am checking with our networking guy if there is some issue (which I highly doubt since curl works fine).
+
+Affected VPS gitlab setup (Debian 6 box):
+```
+System information
+System:
+Current User:   git
+Using RVM:      no
+Ruby Version:   2.1.2p95
+Gem Version:    2.2.2
+Bundler Version:1.7.1
+Rake Version:   10.3.2
+Sidekiq Version:2.17.0
+
+GitLab information
+Version:        7.2.0
+Revision:       ce6767c
+Directory:      /home/git/gitlab
+DB Adapter:     mysql2
+URL:            http://git.example.com
+HTTP Clone URL: http://git.example.com/some-project.git
+SSH Clone URL:  git@git.example.com:some-project.git
+Using LDAP:     no
+Using Omniauth: no
+
+GitLab Shell
+Version:        1.9.7
+Repositories:   /home/git/repositories/
+Hooks:          /home/git/gitlab-shell/hooks/
+Git:            /usr/bin/git
+```
+
+Thank you for any hint, I am totally lost here.
+
+**Update:** Not a ruby issue, I've put up a simple ruby script that calls web hook target with HTTP POST and it runs fine under git user.

@@ -1,0 +1,119 @@
+Summary: In prior versions of Gitlab, when creating a merge request, you could assign a user to the merge request. In 6.8.1, this is no longer an option.
+
+Steps to reproduce: Choose a project that you have access to creating a merge request. Select the "New Merge Request" button. There is not a field to choose the user to assign the merge request.
+
+Expected behavior: There used to be a drop down that allowed the user to select a user to assign the merge request. 
+
+Output of checks
+        Results of GitLab Application Check 
+```
+sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+Checking Environment ...
+
+Git configured for git user? ... yes
+
+Checking Environment ... Finished
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 1.9.3 ? ... OK (1.9.3)
+Repo base directory exists? ... yes
+Repo base directory is a symlink? ... no
+Repo base owned by git:git? ... yes
+Repo base access is drwxrws---? ... yes
+Satellites access is drwxr-x---? ... yes
+update hook up-to-date? ... yes
+update hooks in repos are links: ...
+NPD / Arrow Data Transfer ... ok
+NPD / Lucky Pot Bingo ... ok
+NPD / Ticket Bar Code ... ok
+NPD / Emax Shells ... ok
+NPD / Bluedog Support ... ok
+NPD / Bluedog ... ok
+NPD / Utilities ... ok
+NPD / Emax Console 2013 ... ok
+NPD / EGV ... ok
+NPD / Ticket Dispenser ... ok
+Joe Adams / ProTab ... ok
+Nuget / Emax Nuget Server ... ok
+Nuget / Emax.Io ... ok
+Running /home/git/gitlab-shell/bin/check
+Check GitLab API access: OK
+Check directories and files:
+        /home/git/repositories: OK
+        /home/git/.ssh/authorized_keys: OK
+Test redis-cli executable: redis-cli 2.6.13
+Send ping to redis server: PONG
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Database config exists? ... yes
+Database is SQLite ... no
+All migrations up? ... yes
+Database contains orphaned UsersGroups? ... no
+GitLab config exists? ... yes
+GitLab config outdated? ... no
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Init script exists? ... yes
+Init script up-to-date? ... yes
+projects have namespace: ...
+NPD / Arrow Data Transfer ... yes
+NPD / Lucky Pot Bingo ... yes
+NPD / Ticket Bar Code ... yes
+NPD / Emax Shells ... yes
+NPD / Bluedog Support ... yes
+NPD / Bluedog ... yes
+NPD / Utilities ... yes
+NPD / Emax Console 2013 ... yes
+NPD / EGV ... yes
+NPD / Ticket Dispenser ... yes
+Joe Adams / ProTab ... yes
+Nuget / Emax Nuget Server ... yes
+Nuget / Emax.Io ... yes
+Projects have satellites? ...
+NPD / Arrow Data Transfer ... yes
+NPD / Lucky Pot Bingo ... yes
+NPD / Ticket Bar Code ... yes
+NPD / Emax Shells ... yes
+NPD / Bluedog Support ... yes
+NPD / Bluedog ... yes
+NPD / Utilities ... yes
+NPD / Emax Console 2013 ... yes
+NPD / EGV ... yes
+NPD / Ticket Dispenser ... yes
+Joe Adams / ProTab ... yes
+Nuget / Emax Nuget Server ... yes
+Nuget / Emax.Io ... yes
+Redis version >= 2.0.0? ... yes
+Your git bin path is "/usr/bin/git"
+Git version >= 1.7.10 ? ... yes (1.8.3)
+
+Checking GitLab ... Finished
+```
+Version of GitLab you are running; 
+```
+GitLab 6.8.1
+GitLab Shell 1.9.3
+GitLab API v3
+Ruby 2.0.0p247
+Rails 4.0.3
+```
+Last commit sha1 of the GitLab version: GitLab 6.8.1 3197990
+

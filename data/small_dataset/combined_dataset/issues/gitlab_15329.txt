@@ -1,0 +1,108 @@
+'HackerOne: [131190](https://hackerone.com/bugs?subject=gitlab&report_id=131190&view=new&substates%5B%5D=new&text_query=&sort_type=latest_activity&sort_direction=descending&limit=25&page=1)   
+
+_keeping HO report format_
+
+# Vulnerability details
+
+There are multiple server-side request forgery issues in the Services feature. This means that an attacker can make requests to servers within the same network of the GitLab instance. This could lead to information disclosure, authentication bypasses, or, as described later in this report, to a remote code execution vulnerability.
+
+## Proof of concept
+
+Reproducing this issue is pretty straightforward. As a user (called jane), create a new project (called example-project in this case), push at least one commit to the project, and go to http://gitlab-instance/jane/example-project/services. The following services are vulnerable to a SSRF issue:
+
+* Atlassian Bamboo CI (via Bamboo url)
+* Buildkite (via Project url)
+* Drone CI (via Drone url)
+* HipChat (via Server)
+* Irker (via Default IRC URI)
+* JIRA (via Api url)
+* JetBrains TeamCity CI (via Teamcity URL)
+* Redmine (via Project URL)
+* Slack (via Webhook)
+
+Now SSH into the GitLab instance and run nc -l -vv -p 10000. This will listen for incoming connections on TCP port 10000. Set up one of the services above and point it to http://127.0.0.1:10000/. Now trigger the service by clicking the "Test service" button or by pushing to the project. The nc command will show an incoming HTTP request, which looks something like this:
+
+```
+$ nc -l -vv -p 10000
+Listening on [0.0.0.0] (family 0, port 10000)
+Connection from [127.0.0.1] port 10000 [tcp/webmin] accepted (family 2, sport 49028)
+POST //httpAuth/app/rest/buildQueue HTTP/1.1
+Content-Type: application/xml
+Authorization: Basic YWRtaW46YWRtaW4=
+Connection: close
+Host: 127.0.0.1:10000
+Content-Length: 62
+
+<build branchName="master"><buildType id="some-type"/></build>
+``` 
+
+## Impact
+
+The issue can leak the server its real IP address when it'd be behind a service CloudFlare. This would make it easier for people to target a DDoS attack, but this isn't super likely. A more interesting attack vector is to turn this into a remote code execution. GitLab has the ability to host its Redis instace over a TCP connection instead of a local socket (default). When someone configured Redis to connect over TCP, an attacker could send HTTP packets to the Redis server. This doesn't seem to big of a deal, but Redis is pretty forgiving with incorrect data. Here's an example when the JetBrains TeamCity CI request is sent to a Redis instance:
+
+```
+$ cat /tmp/captured-teamcity-request | nc 127.0.0.1 6379
+-ERR unknown command 'POST'
+-ERR unknown command 'ontent-Type:'
+-ERR unknown command 'uthorization:'
+-ERR unknown command 'onnection:'
+-ERR unknown command 'ost:'
+-ERR unknown command 'ontent-Length:'
+-ERR Protocol error: unbalanced quotes in request
+```
+
+As can be seen, it tries to execute each line as a Redis command. It resets the connection when it parses the last line, <build branchName="master"><buildType id="some-type"/></build>. It turns out that the build type field is vulnerable to a CRLF injection that allows us to inject additional lines in the packet. Burp Suite can be used to inject those by intercepting the Save request. The content of the build type field is set to %0a%0dflushdb%0a%0d. %0a%0d are the URL encoded form of a new line and a carriage return. The following screenshot demonstrates this:
+
+![Screen_Shot_2016-04-15_at_12.40.57](/uploads/98966a0ad053a4ed4c014ec1ed660dd6/Screen_Shot_2016-04-15_at_12.40.57.png)
+
+If we execute nc -l -vv -p 10000 again and click "Test settings", the request below is sent to Redis. Notice that the flushdb command (http://redis.io/commands/flushdb) is now placed on its own line:
+
+```
+$ nc -l -vv -p 10000
+Listening on [0.0.0.0] (family 0, port 10000)
+Connection from [127.0.0.1] port 10000 [tcp/webmin] accepted (family 2, sport 49045)
+POST //httpAuth/app/rest/buildQueue HTTP/1.1
+Content-Type: application/xml
+Authorization: Basic YWRtaW46YWRtaW4=
+Connection: close
+Host: 127.0.0.1:10000
+Content-Length: 64
+
+<build branchName="master"><buildType id="
+flushdb
+"/></build>
+```
+
+If this request is sent to Redis, it resets to connection when it parses `<build branchName="master"><buildType id="`. Taking a closer look to the Redis source, there's this code (from http://download.redis.io/redis-stable/src/sds.c):
+
+```
+/* ... */
+} else if (*p == '"') {
+  /* closing quote must be followed by a space or
+  * nothing at all. */
+  if (*(p+1) && !isspace(*(p+1))) goto err;
+    done=1;
+  } else if (!*p) {
+    /* unterminated quotes */
+    goto err;
+/* ... */
+err:
+    while((*argc)--)
+        sdsfree(vector[*argc]);
+    zfree(vector);
+    if (current) sdsfree(current);
+    *argc = 0;
+    return NULL;
+```
+
+The variable `p` in the code above is each byte in a single line and is set in a loop. The code tells us that a double quote MUST be followed by a space or nothing (a null byte, for that matter), otherwise the connection is reset before the `flushdb` command is executed. This means there needs to be an injection in the branch name. Branch names may contain double quotes, but can't contain white space or a null byte (sad face!). My conclusion (for now) is that a single space saved GitLab from being vulnerable to an RCE. However, with other services being added all the time, this definitely warrants a fix because it can introduce an RCE without people knowing it.
+
+Lets say the injection would've worked (or I find a way around it), turning this into an RCE is pretty straightforward. The Redis instance is used by Sidekiq for async job processing. Through this injection, a custom Sidekiq job could've been injected that contained the attacker it's Ruby code. From that point, the attacker can execute code on the machine that processes the async jobs.
+
+## Further thinking
+
+The JetBrains TeamCity CI service was the only service that could've led to an RCE. This was due to the fact that all other services send JSON to their endpoints. Since attributes in a JSON body are always wrapped by double quotes, it would be extremely unlikely that that would happen. The TeamCity CI sends XML instead.
+
+## Fix
+
+Like I said earlier, given that this was so close to an actual RCE vulnerability, I'd suggest to lock down the servers the Services feature can connect to. This might be harder than it sounds at first sight, so I'm happy to discuss other solutions as well. In the meantime, I'll try to turn it into a real RCE.

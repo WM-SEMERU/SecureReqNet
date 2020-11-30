@@ -1,0 +1,4 @@
+Add auth sample demonstrating how to handle events using the context classes
+
+
+So we can point issues like this: aspnet/Security#1543

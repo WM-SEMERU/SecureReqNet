@@ -1,0 +1,37 @@
+cmd/link: testDWARF in c-archive mode fails on Linux (but not Darwin)
+
+
+From the discussion in https://go-review.googlesource.com/c/go/+/170377:
+$ git diff
+diff --git a/src/cmd/link/dwarf_test.go b/src/cmd/link/dwarf_test.go
+index ecc96019be..ffdad6ce10 100644
+--- a/src/cmd/link/dwarf_test.go
++++ b/src/cmd/link/dwarf_test.go
+@@ -148,6 +148,7 @@ func testDWARF(t *testing.T, buildmode string, expectDWARF bool, env ...string)
+ 
+ func TestDWARF(t *testing.T) {
+        testDWARF(t, "", true)
++       testDWARF(t, "c-archive", true)
+ }
+ 
+ func TestDWARFiOS(t *testing.T) {
+$ ./make.bash 
+Building Go cmd/dist using /home/elias/dev/go-1.7.
+Building Go toolchain1 using /home/elias/dev/go-1.7.
+Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
+Building Go toolchain2 using go_bootstrap and Go toolchain1.
+Building Go toolchain3 using go_bootstrap and Go toolchain2.
+Building packages and commands for linux/amd64.
+---
+Installed Go for linux/amd64 in /home/elias/dev/go-tip
+Installed commands in /home/elias/dev/go-tip/bin
+$ go test cmd/link
+--- FAIL: TestDWARF (0.09s)
+    --- FAIL: TestDWARF/testprog#01 (3.02s)
+        dwarf_test.go:130: ErrUnknownPC
+    --- FAIL: TestDWARF/testprogcgo#01 (4.01s)
+        dwarf_test.go:130: ErrUnknownPC
+FAIL
+FAIL	cmd/link	4.248s
+
+On the other hand, testDWARF successfully runs on Darwin as demonstrated by CL 170377. It also successfully runs in the related testDWARFiOS test.

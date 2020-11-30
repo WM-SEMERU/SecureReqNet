@@ -1,0 +1,4 @@
+api server: patch operation should use patched object to check admission control
+
+
+Currently, patch will check admission control with an empty object and if it passes, then will proceed to update the object with the patch. Admission control plugins don't get a chance to see/validate what is actually going to be updated.

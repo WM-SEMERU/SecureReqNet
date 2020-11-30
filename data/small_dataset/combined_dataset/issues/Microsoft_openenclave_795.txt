@@ -1,0 +1,6 @@
+remove DEBUG flag from enclave creation
+
+
+Sample should be secure in case it is just cut and pasted. The debug
+flagflag is mentioned in the README as an option, but not in the actual
+code snippet.

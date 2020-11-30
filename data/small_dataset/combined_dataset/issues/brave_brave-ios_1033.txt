@@ -1,0 +1,15 @@
+URP Beta Endpoint Change
+
+
+Description:
+User Referral Promo endpoint for beta builds points to Staging. Additionally, the shortened timeouts only impact development builds, both of these should be changed.
+
+ beta app should point to production URP endpoint
+ beta app should have shortened timeouts / time limits
+
+Steps to Reproduce
+
+In beta app, go into settings
+At bottom under "DEBUG" menu, select "View URP Logs"
+Top line should show the endpoint URL, this should be a non-staging endpoint
+

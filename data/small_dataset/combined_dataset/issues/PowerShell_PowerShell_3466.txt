@@ -1,0 +1,40 @@
+Running Authenticode-signed script is seen as changed when file is UTF8 (w/out BOM) and contains a unicode character
+
+
+Related to #1195 and #3361 / Found with chocolatey/choco#1225.
+Following up on an issue we had addressed locally, we found another possibly more serious issue. If you create a UTF8 (w/out BOM) file and sign it, all is well. When you add a unicode character, such as a ©, then sign and run the file, it does not work. Remove the unicode character and it works again. Convert the file to UTF8-BOM, it works.
+For reference, the error is 'The contents of file filepath may have been tampered because the hash of the file does not match the hash stored in the digital signature.' or  'The contents of file filepath might have been changed by an unauthorized user or process, because the hash of the file does not match the hash stored in the digital signature.' (different versions of PowerShell)
+Steps to reproduce
+UTF8 (no BOM) without Unicode
+
+Change execution policy to all signed. Set-ExecutionPolicy AllSigned
+Create a script and save it as UTF8 (make sure that is UTF8 w/out BOM). Save it as UTF8FileWithNoUnicode.ps1
+Authenticode sign the script.
+Check to be sure the signature is valid. Get-AuthenticodeSignature .\UTF8FileWithNoUnicode.ps1
+Attempt to run the script. .\UTF8FileWithNoUnicode.ps1
+Note that it works.
+
+UTF8 (no BOM) with Unicode
+
+Change execution policy to all signed. Set-ExecutionPolicy AllSigned
+Create a script and save it as UTF8 (make sure that is UTF8 w/out BOM). Save it as UTF8FileWithUnicode.ps1.
+Add a unicode character to the file. Save and close it.
+Authenticode sign the script.
+Check to be sure the signature is valid. Get-AuthenticodeSignature .\UTF8FileWithUnicode.ps1
+Attempt to run the script. .\UTF8FileWithUnicode.ps1
+Note that it fails.
+
+UTF8 (w/BOM) with Unicode
+
+Change execution policy to all signed. Set-ExecutionPolicy AllSigned
+Create a script and save it as UTF8 (make sure that is UTF8 BOM). Save it as UTF8BOMFileWithUnicode.ps1.
+Add a unicode character to the file. Save and close it.
+Authenticode sign the script.
+Check to be sure the signature is valid. Get-AuthenticodeSignature .\UTF8BOMFileWithUnicode.ps1
+Attempt to run the script. .\UTF8BOMFileWithUnicode.ps1
+Note that it works.
+
+Expected behavior
+All scenarios should work. It should run the script as it has not been modified since it was signed.
+Actual behavior
+It fails the UTF8 (no BOM) with Unicode scenario because it believes the file has been modified.

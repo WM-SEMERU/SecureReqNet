@@ -1,0 +1,7 @@
+[security] Remove dependency on security-core from security-csrf
+
+
+I'm currently trying to use symfony/form on its own and ran into the folowing problem. I need CSRF protection for the forms so I added symfony/security-csrf to my project. However this also installs symfony/security-core which I don't need at all.
+I've looked around and the only classes from security-csrf which use something from security-core are Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator and Symfony\Component\Security\Csrf\Exception\TokenNotFoundException.
+I want to implement Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface on my own anyway so I don't need the UriSafeTokenGenerator and the exception inheritance probably doesn't matter much.
+So can the dependency be removed?

@@ -1,0 +1,16 @@
+unhandled exception crashes dotnet web api on linux
+
+
+Have a .net core 2.1 web api running on AWS Linux instance. All of a sudden a few weeks ago, started having issues with an unhandled exception crashing the dotnet process, therefore the web api is no longer available.
+The error message seen when running the dotnet api dll from the command line
+--- End of stack trace from previous location where exception was thrown --- at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) --- End of stack trace from previous location where exception was thrown --- at System.Threading.ThreadPoolWorkQueue.Dispatch() Aborted
+I have some custom IExceptionFilters registered. I unregistered all of those and still failure. I also tried the following..
+ var opts = new ExceptionHandlerOptions()
+        {
+             ExceptionHandler = async context =>
+             {
+             }
+        };
+        app.UseExceptionHandler(opts);
+and still the process crashes. I have read about issues when using ThreadPool directly or have an async method returning void without being a Task. Neither of these are the case.  The code is highly async  from the top level controller down to the data access.
+I am unable to repeat this on Windows.

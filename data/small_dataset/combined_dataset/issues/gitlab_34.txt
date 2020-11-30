@@ -1,0 +1,3 @@
+When typing in the text input area on the 'Wall' page of a project, text flows out of view.
+
+http://puu.sh/6wIqb.png

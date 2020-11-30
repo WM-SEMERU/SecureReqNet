@@ -1,0 +1,12 @@
+App devs trust 3rd party libraries included in Open Enclave to be up-to-date
+
+
+The versions of the libraries under 3rdparty have not been updated since inception of the OpenEnclave project. These libraries should be updated to the latest versions prior to public preview. In particular, the mbedtls library has definite security implications.
+
+ MUSL libc (Update to 1.1.9 in #620)
+ LLVM libcxx (Update to 6.0.0 in #628)
+libcxxrt (Vishnu verified there were no updates available)
+ libunwind (Update to 1.3 in #439)
+dlmalloc (Vishnu verified there were no updates available)
+ mbedtls (Update to 2.7.5 in #630)
+

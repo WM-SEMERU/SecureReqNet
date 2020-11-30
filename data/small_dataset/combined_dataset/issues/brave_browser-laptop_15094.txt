@@ -1,0 +1,30 @@
+Pinned Tab remains pinned after closing it, unpinning, and restarting the browser.
+
+
+Description
+Pinned tab remains as pinned after unpinning it or closing and then restarting the browser
+Steps to Reproduce
+
+Pin a tab
+Unpin it or manually close it
+Restart the browser
+
+Actual result:
+Pinned tab appears as pinned again.
+Expected result:
+Pinned tab is actually closed and not pinned.
+Reproduces how often:
+100%
+Brave Version
+about:brave info:
+Brave | 0.23.79
+V8 | 6.8.275.24
+rev | 51b4905
+Muon | 8.0.7
+OS Release | 10.0.16299
+Update Channel | Release
+OS Architecture | x64
+OS Platform | Microsoft Windows
+Node.js | 7.9.0
+Brave Sync | v1.4.2
+libchromiumcontent | 68.0.3440.84

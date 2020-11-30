@@ -1,0 +1,43 @@
+Remote DoS attack against cupsd via invalid username and malicious D-Bus library
+
+
+Any user who can submit a print job to a CUPS server
+can abort the cupsd running on the CUPS server by
+submitting a job as a user with an invalid username.
+I tested it with CUPS 1.7.5 and also the newest 2.2.5
+so that I assume the issue is old and not fixed.
+I think this issue here has the same root cause as
+#4748
+As far as I see the fix there belongs to the LPD mini daemon
+but this issue here belongs to the cupsd.
+How to reproduce:
+On a (Linux) client system create a user with an
+invalid username - I use 'binär' as username that has
+the character ä (Latin small letter a with diaeresis,
+i.e. the German a-umlaut) encoded in  ISO-8859-1
+encoding so that the username in hex byte values is
+62 69 6e e4 72
+
+Usually one cannot create such a username with "useradd"
+(because it rejects invalid usernames) so that one must
+manually edit /etc/passwd.
+Then as this user submit a print job from the client system
+to a (possibly remote) CUPS server.
+The cupsd on the CUPS server will bet aborted
+inside a D-Bus library call that sends SIGABRT
+which aborts the whole caller process.
+In /var/log/messages or nowadays in the "journalctl" output
+one gets things like
+2017-10-16T11:06:16.952539+02:00 e205 cupsd[14581]: process 14581: arguments to dbus_message_iter_append_basic() were incorrect, assertion "_dbus_check_is_valid_utf8 (*string_p)" failed in file dbus-message.c line 2676.
+2017-10-16T11:06:16.952889+02:00 e205 cupsd[14581]: This is normally a bug in some application using the D-Bus library.
+2017-10-16T11:06:16.953120+02:00 e205 cupsd[14581]: D-Bus not built with -rdynamic so unable to print a backtrace
+2017-10-16T11:06:16.963025+02:00 e205 systemd[1]: cups.service: Main process exited, code=dumped, status=6/ABRT
+2017-10-16T11:06:16.963303+02:00 e205 systemd[1]: cups.service: Unit entered failed state.
+2017-10-16T11:06:16.963502+02:00 e205 systemd[1]: cups.service: Failed with result 'core-dump'.
+2017-10-16T11:06:17.679479+02:00 e205 systemd-coredump[18461]: Process 14581 (cupsd) of user 0 dumped core.
+
+or
+Oct 16 12:57:12 caps cupsd[6930]: process 6930: arguments to dbus_message_iter_append_basic() were incorrect, assertion "_dbus_check_is_valid_utf8 (*string_p)" failed in file dbus-message.c line 2676.
+Oct 16 12:57:12 caps cupsd[6930]: This is normally a bug in some application using the D-Bus library.
+Oct 16 12:57:12 caps cupsd[6930]: D-Bus not built with -rdynamic so unable to print a backtrace
+

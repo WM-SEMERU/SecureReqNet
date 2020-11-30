@@ -1,0 +1,4 @@
+Deprecate non-string default envs
+
+
+see symfony/symfony#27808

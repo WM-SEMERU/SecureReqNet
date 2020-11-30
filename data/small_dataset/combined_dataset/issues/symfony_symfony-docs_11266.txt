@@ -1,0 +1,4 @@
+[4.3] New assertions for WebTestCase
+
+
+See symfony/symfony#30813

@@ -1,0 +1,28 @@
+Roles are not unserialized in UsernamePasswordToken if they are references to objects in the user
+
+
+$roles = [new \Symfony\Component\Security\Core\Role\Role('name')];
+$user = new \Symfony\Component\Security\Core\User\User('name', 'password', $roles);
+$token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, 'password', 'providerKey', $user->getRoles());
+
+$serialized = serialize($token);
+$unserialized = unserialize($token);
+
+var_dump($serialized, $token->getRoles(), $unserialized->getRoles());
+
+/*
+Output:
+string(859) "C:74:"Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken":771:{a:3:{i:0;s:8:"password";i:1;s:11:"providerKey";i:2;s:710:"a:4:{i:0;O:41:"Symfony\Component\Security\Core\User\User":7:{s:51:"\000Symfony\Component\Security\Core\User\User\000username";s:4:"name";s:51:"\000Symfony\Component\Security\Core\User\User\000password";s:8:"password";s:50:"\000Symfony\Component\Security\Core\User\User\000enabled";b:1;s:60:"\000Symfony\Component\Security\Core\User\User\000accountNonExpired";b:1;s:64:"\000Symfony\Component\Security\Core\User\User\000credentialsNonExpired";b:1;s:59:"\000Symfony\Component\Security\Core\User\User\000accountNonLocked";b:1;s:48:"\000Symfony\Component\Security\Core\User\User\000roles";a:1:{i:0;O:41:"Symfony\Component\Security\Core\Role\Role":1:{s:47:"\000Symfony\Component\Security\Core\Role\Role\000role";s:4:"name";}}}i:1;b:1;i:2;a:1:{i:0;r:11;}i:3;a:0:{}}";}}"
+array(1) {
+  [0] =>
+  class Symfony\Component\Security\Core\Role\Role#947 (1) {
+    private $role =>
+    string(4) "name"
+  }
+}
+array(1) {
+  [0] =>
+  bool(true)
+}
+*/
+The problem appears to be with the role object being serialized as {i:0;r:11;}. I think the issue is that the roles are serialized separately from the user, but \serialize() is still treating the role object as a reference, so on \unserialize(), the reference id doesn't exist.

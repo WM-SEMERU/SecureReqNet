@@ -1,0 +1,25 @@
+Access control on the explore page
+
+
+I want to build dashboards for the users, but don't want them to send custom queries. If I take away their can_save and can_edit permission, they still can sent custom queries. So I want to prohibit the user from entering the pages like /caravel/explore/druid/3 . But if I take away their can_explore permission, they will be unable to see the slices on the dashboard. So this is what I am trying to add in view.py:
+def explore(self, datasource_type, datasource_id):
+    ...
+    slice_custom_query_perm = self.appbuilder.sm.has_access(
+        'can_custom_query', 'SliceModelView')
+
+    if request.args.get("json") == "true":
+        ...
+    elif request.args.get("csv") == "true":
+        ...
+    else:
+        if request.args.get("standalone") == "true":
+            template = "caravel/standalone.html"
+        else:
+            if not slice_custom_query_perm:
+                flash(_("You don't seem to have the permission "
+                        "to customize the slices"), "danger")
+                return redirect(error_redirect)
+
+            template = "caravel/explore.html"
+
+Do you think it is a good idea to design it this way? How can I create the new permission "can_custom_query" in caravel init? Thanks

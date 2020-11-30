@@ -1,0 +1,12 @@
+REPL history file should not be world-readable
+
+
+This is what we normally do for privacy.
+~ $ ll .*history
+-rw------- 1 xecycle xecycle 1.1K Sep 23 12:02 .bash_history
+-rw------- 1 xecycle xecycle  326 Jun 23 16:30 .gnuplot_history
+-rw------- 1 xecycle xecycle  67K Sep 18 14:32 .mysql_history
+-rw-r--r-- 1 xecycle xecycle    0 Oct 16 13:17 .node_repl_history
+-rw------- 1 xecycle xecycle  20K Oct 12 17:18 .psql_history
+-rw------- 1 xecycle xecycle   15 Mar 11  2015 .zcalc_history
+

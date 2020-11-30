@@ -1,0 +1,42 @@
+Issue with isPasswordValid in BCryptPasswordEncoder
+
+
+Symfony version(s) affected: 4.0.9
+Description
+The current version of symfony has an issue in the BCryptPasswordEncoder. When you use the following code to create a new user the user will be unable to login.
+$user->setPassword($this->userPasswordEncoder->encodePassword($user, $user->getPassword()));
+Where user is the User class from symfony.
+IMPORTANT NOTICE The example stated here is wrong cause it access the BCryptPasswordEncoder directly. Actually it is accessed via UserPasswordEncoderInterface, see this comment for details.
+How to reproduce
+<?php
+
+$encoder = new \Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder(30);
+$password = 'test';
+
+$user = new User(); // User class based on symfony security User class
+$user->setSalt(uniqid());
+$user->setPassword($encoder->encodePassword($user, $password));
+
+if ($encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+    echo 'Authenticated';
+} else {
+    echo 'Wrong username or password';
+}
+Possible Solution
+Not actually meant as a solution, but when I reencode the password and compare them it works fine.
+<?php
+
+$encoder = new \Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder(30);
+$password = 'test';
+
+$user = new User(); // User class based on symfony security User class
+$user->setSalt(uniqid());
+$user->setPassword($encoder->encodePassword($user, $password));
+
+if ($encoder->encodePassword($user, $password) === $user->getPassword()) {
+    echo 'Authenticated';
+} else {
+    echo 'Wrong username or password';
+}
+Additional context
+If it helps you can checkout the project I use the code in. See here the linked commit is the state of writing this issue.

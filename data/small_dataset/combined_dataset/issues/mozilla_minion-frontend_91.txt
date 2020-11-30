@@ -1,0 +1,7 @@
+To solve #47 we need to look for user's permission
+
+
+#47 attempts to verify plan ownership. I don't think we have a mechanism to do that because a plan can be shared across multiple sites. So an innocent plan like basic doesn't really need any check, but I can create a zap plan for each site I want to scan (e.g. add session information), and I wouldn't want to put that same zap in another website.
+So we have to verify the ownership, as in we need to restrict such plan to a specific group. If a person has access to a group, we can assume this person is OKAY to see that plan if the person makes such request.
+We should check whether the user has permission to a site.
+But I want to outline the dependency graph first..

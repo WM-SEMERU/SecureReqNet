@@ -1,0 +1,1 @@
+Web hooks and gitlab-ci integration should allow self-signed certs by giving an option to ignore ssl certificate verification. httparty supports validate option to dynamically enable/disable certificate validation.

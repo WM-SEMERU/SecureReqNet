@@ -1,0 +1,6 @@
+IoC for advisories
+
+
+So far we have no IoC (Indicators of Compromise) of malicious packages.
+In general this would be helpful for creating YARA rules and other solutions.
+https://www.npmjs.com/advisories/774

@@ -1,0 +1,5 @@
+Implement Tau proof-of-concept
+
+
+https://github.com/PhilippLgh/tau
+By moving away from electron, we reduce mist attack surface by a significant factor.

@@ -1,0 +1,70 @@
+Passwords are stored differently when Brave is installed via Snap vs. deb
+
+
+Description
+Follow-up from brave/brave-core#185.
+While working on the browser-laptop importer for brave-browser, I encountered some unexpected discrepancies between how browser-laptop stores certain types of user data, which seem to depend on whether it is installed via Snapcraft or deb package. I have noticed a specific discrepancy between how it stores passwords; other types of data may be affected as well.
+This discrepancy is undesirable because it:
+
+Creates additional complexity for brave-browser's BraveImporter
+Has a low-to-moderate security impact (severity is debatable)
+
+Steps to Reproduce
+You will need a Linux installation that supports both the Snap and deb package installation methods. I am using Ubuntu 16.04.
+
+Follow the instructions in the documentation to install Brave via Snapcraft.
+Open Brave.
+Visit a website that has a password field to trigger the password save prompt (pretty much any login page will do—I'm using amazon.com). Log in. After logging in, Brave should present a "Would you like Brave to remember the password?" prompt. Click Allow.
+Quit Brave.
+Disable the Brave snap: snap disable brave. This prevents the Snap package from conflicting with the deb package we're about to install, but avoids deleting the user data directory, which we will want later for comparison.
+Follow the instructions in the documentation to install Brave via deb package.
+Repeat steps 2-4 with the version of brave you just installed from the deb package. If you get the error bash: /snap/bin/brave: No such file or directory, try again in a new terminal.
+
+Actual result:
+Now we want to compare how each Brave stored passwords. Run the following commands in a terminal:
+# deb package's user data directory
+sqlite3 ~/.config/brave/Login\ Data "select origin_url, username_value, password_value from logins;"
+# Snap's user data directory
+sqlite3 ~/snap/brave/current/.config/brave/Login\ Data "select origin_url, username_value, password_value from logins;"
+
+Note that there are no results for the query when it is run on the deb package's Login Data. This is because browser-laptop/Muon/Chromium prefers to store saved passwords in the system keychain on Linux when possible (on Ubuntu, open Passwords & Keys and you should see an entry for the test login you saved).
+Note that there is a result for the query when it is run on the Snap package's Login Data; furthermore, note that password_value is saved in plaintext.
+Expected result:
+Brave should store passwords in a consistent manner regardless of the method that was used to install it. Some people may also feel it is important that they be stored encrypted on disk; I'm under the impression that this is a long-running point of contention in the security community. For comparison, Chromium defaults to storing sensitive data (cookies, passwords, etc.) encrypted on disk.
+Reproduces how often:
+Consistently.
+Brave Version
+about:brave info:
+Snap brave
+Brave: 0.22.721 
+V8: 6.6.346.32 
+rev: bfe7cdd026c68013236ebe206a33448db9370fca 
+Muon: 6.0.12 
+OS Release: 4.13.0-45-generic 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: Linux 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 66.0.3359.170
+
+deb package Brave
+Brave: 0.22.810 
+V8: 6.7.288.43 
+rev: 8f30eeba0c2d6cccf1920a360b4774f820adbc58 
+Muon: 7.0.6 
+OS Release: 4.13.0-45-generic 
+Update Channel: Release 
+OS Architecture: x64 
+OS Platform: Linux 
+Node.js: 7.9.0 
+Brave Sync: v1.4.2 
+libchromiumcontent: 67.0.3396.71
+
+Reproducible on current live release:
+Yes.
+Additional Information
+From my investigation, I believe the cause of the discrepancy is Snap's containment. I noticed the following, likely relevant, log message from Snap brave only:
+Gkr-Message: secret service operation failed: An AppArmor policy prevents this sender from sending this message to this recipient; type="method_call", sender=":1.97" (uid=1000 pid=5052 comm="/snap/brave/25/usr/bin/brave --no-sandbox ") interface="org.freedesktop.Secret.Service" member="SearchItems" error name="(unset)" requested_reply="0" destination="org.freedesktop.secrets" (uid=1000 pid=1619 comm="/usr/bin/gnome-keyring-daemon --daemonize --login ")
+
+My guess is Snap's containment (which uses AppArmor on Ubuntu) is preventing Snap brave from accessing the GNOME keyring, so the Muon/Chromium code is falling back to using the basic (unencrypted) password store, as described in this comment.

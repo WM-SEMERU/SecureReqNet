@@ -1,0 +1,20 @@
+'#### Overview
+
+A ~"customer+" has requested the ability to run a vulnerability scan as part of all GitLab CI pipelines. There are a number of ways to achieve this functionality however the majority do not scale. 
+
+1. Control all runners and add a `pre_build_script` step to trigger a scan of the build 
+
+1. Trigger another pipeline via "triggers" using a projects webhooks, sending the project_id as variables. Perform a scan and update the MRs via the API.
+
+Both of these options involve a large amount of manual intervention to configure and setup.   
+
+
+#### Customer notes
+
+>One request we have from above is that a code scanning happens on every build. In GitLab CI, there is no way to assert that a vulnerability scan has happened. It’s also a fair amount of work for each development team to set that up for every repository they have. Ideally, as an administrator I could go configure a CI build to happen before every build that a developer runs. I’d probably have to configure a runner or two for those build scans to happen, but then it’d save developers time from setting up scans and we can tell management that any build that happens throught GitLab CI has been scanned.
+
+>The developer community I support is potentially 10,000 users at its largest. I’m not going to try to assert control over the runners, it just seems a tad restricting. Then again, maybe if we setup an auto scalling docker cluster we could accomodiate all of those builds. The problem then becomes making sure the utilities required to do the scans are in the images the the developer sets in their gitlab-ci.yml.
+
+>While I appreciate the write up for how we can sort of achieve this functionality, and I might explore doing it, can we get a feature request in for a built in way to do this? Without this feature it makes it really hard to argue for GitLab CI as a pipeline over other pipelines offered internally. This is especially so when upper management wants verification that all builds have been scanned.
+
++ https://gitlab.zendesk.com/agent/tickets/74666

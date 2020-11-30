@@ -1,0 +1,29 @@
+'@connorshea noticed a tweet from a user asking about the GitLab API support for session based authentication and asking if this opened GitLab up to security vulnerabilities.
+
+https://twitter.com/teabass/status/865241370147123200
+
+They were specifically concerned with using CSRF to POST data to the API since the API doesn't utilize CSRF tokens. I've verified this isn't possible, as state changing operations aren't allowed using session auth:
+
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/api/helpers.rb#L336
+
+GitLab.com is not vulnerable in any case thanks to CSP (`frame-src` and `frame-ancestors`).
+
+It did get me wondering how the read-only operations could be abused to scare users. On self-hosted installs a malicious website could include an iframe that pulled data from the API and displayed it back to the user. Strategic use of the frame sizing attributes could make it appear as if the malicious website was hosting the data.
+
+By using HTML like this:
+```
+<head>
+<body>
+<h1>I KNOW WHO YOU ARE</h1>
+<iframe src="http://gitlab.example.com/api/v3/users" width="100%"></iframe>
+</body>
+</html>
+```
+
+You can display:
+
+![api](/uploads/a1925aa9b147ecf719095ce670bc38fe/api.png)
+
+This doesn't provide access to the data but it would be concerning to users.
+
+There is a simple way to fix this by including the `X-Frame-Options: SameOrigin` header with API responses. This can be done by adding `before { header['X-Frame-Options'] = 'SAMEORIGIN' }` to `/lib/api/api.rb`.

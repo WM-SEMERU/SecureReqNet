@@ -1,0 +1,15 @@
+Open Enclave SDK users can verify Linux SDK binaries are built from audited OSS code
+
+
+A key reason to open source all of the Open Enclave code is to create transparency and trust that there is not subversive or flawed code running in the enclave. Consumers of the SDK need a way to verify that the binaries and libraries are actually built from the source code that is audited. This requires quite a few things:
+
+The RPM package must be signed, and the Debian package must have a published hash value
+All libraries and binaries in the SDK must have a cryptographic hash (SHA-256) documented for it
+The version of the code for any drop of the SDK must be explicitly tagged so that the build can be exactly recreated.
+The exact versions of all the tools and library dependencies that go into building that SDK version must be documented.
+
+Ideally, there is an automated script that will set up a clean build environment with all the dependency tools and library packages and execute the build with the expected build options.
+OpenSSL CLI can be used to dump hashes to file or console as part of this script.
+
+
+

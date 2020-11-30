@@ -1,0 +1,7 @@
+reload `aws-iam-authenticator` process when `ConfigMap` update
+
+
+Issue
+When we update the ConfigMap then we have to do the manually deletion of the pod.
+Solution
+add extra container which look for change into ConfigMap and reload the config.

@@ -1,0 +1,14 @@
+can load bookmark in tor tab before tor finishes loading
+
+
+Test plan
+See #14709
+Original issue description
+STR:
+
+open tor tab
+before Tor is done initializing, click on a bookmarked site in the bookmarks toolbar
+the site loads
+
+expected result:
+the site does not load until tor finishes initializing

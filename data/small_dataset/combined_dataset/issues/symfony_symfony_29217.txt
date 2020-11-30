@@ -1,0 +1,11 @@
+Cannot build container if framework.session is set to false
+
+
+Symfony version(s) affected: 4.2.0-BETA1
+Description
+Upgrading to Symfony 4.2.0-BETA1 failed with the following error when framework.session is set to false:
+In SecurityExtension.php line 70:
+
+  Warning: array_key_exists() expects parameter 2 to be array, boolean given
+
+Looks like it was introduced by #28446 which doesn't handle the false value.

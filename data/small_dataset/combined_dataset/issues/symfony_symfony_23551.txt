@@ -1,0 +1,79 @@
+[Security] Login: Only use referer URL if it differs from default login_path
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+This PR fixes a strange behaviour by the use_referer logic inside the DefaultAuthenticationSuccessHandler inside the security component.
+When use_referer is enabled in your security.yml for a given firewall like so:
+    firewalls:
+        secured_area:
+            pattern: ^/
+            anonymous: ~
+            form_login:
+                login_path:          login
+                check_path:          login_check
+                default_target_path: admin
+                username_parameter:  "login[username]"
+                password_parameter:  "login[password]"
+                csrf_parameter:      "login[_token]"
+                csrf_token_id:       authenticate
+                remember_me:         true
+                use_referer:         true
+And then follow the given workflow:
+
+Visit /admin/login/
+Enter credentials
+Get redirected to /admin/login/ again with no message or whatsoever
+
+But now if you follow the regular/normal workflow:
+
+Visit /admin/
+Get redirected to /admin/login
+Enter credentials
+Get redirected to /admin/ and enjoy your website
+
+The cause for this behaviour was the introduction of parse_url to $targetUrl in DefaultAuthenticationSuccessHandler's determineTargetUrl in ac9d75a#diff-a654f85d03c2e834cb8701bec08e2a4fR125. The code itself was testing a relative path against an absolute URL (e.g. /admin/login/ vs. http://domain.com/admin/login/).

@@ -1,0 +1,46 @@
+[Security] Allow overloading ContextListener::refreshUser()
+
+
+Allow overloading refreshUser() for the use case of doing something special with user providers.
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n.A.
+
+
+License
+MIT
+
+
+Doc PR
+n.A.
+
+
+

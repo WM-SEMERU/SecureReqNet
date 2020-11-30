@@ -1,0 +1,9 @@
+VPC Network ACLs can break node-to-node communication
+
+
+
+In the picture above, the default ACL has the "100" and "*" rules
+When I added just the 50 rule, that blocked UDP packets going node-to-node, which meant DNS broke
+When I then added the 10 rule (highest precedence), UDP worked again
+This is my outbound rule; I suspect you need to do the same 100.64.0.0/10 allow rule for both inbound & outbound
+(and 100.64.0.0/10 should match your nonMasqueradeCIDR as seen in kops edit cluster, but I don't think most people change that!)

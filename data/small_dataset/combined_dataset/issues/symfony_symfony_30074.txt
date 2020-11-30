@@ -1,0 +1,51 @@
+Fix wrong value in file id attribute for Xliff 2.0
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+?
+
+
+Deprecations?
+no
+
+
+Tests pass?
+?
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Currently using the XliffFileDumper for exporting messages from catalogue with domain of the form xxxx+intl-icu produces an invalid Xliff version 2.0 file as the file id attribute is of type xs:NMTOKEN (cf. https://github.com/symfony/translation/blob/master/Resources/schemas/xliff-core-2.0.xsd#L139) which doesn't accept + character (cf. http://www.datypic.com/sc/xsd/t-xsd_NMTOKEN.html).
+Exception is thrown when loading the content after.

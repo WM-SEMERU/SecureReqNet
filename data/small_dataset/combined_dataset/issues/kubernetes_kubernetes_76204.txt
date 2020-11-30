@@ -1,0 +1,22 @@
+[sig-apimachinery] removal of an aggregated client from the e2e test framework
+
+
+please mind that this is more of a question/proposal.
+in the e2e testing framework we import an aggregated clientset from here:
+https://github.com/kubernetes/kubernetes/blob/master/test/e2e/framework/framework.go#L49
+the only consumer of this client is this conformance test:
+https://github.com/kubernetes/kubernetes/blob/master/test/e2e/apimachinery/aggregator.go#L80
+
+Should be able to support the 1.10 Sample API Server using the current Aggregator
+
+the k8s testing commons group discussed if this client should be removed from the framework, possibly moved inside this test only.
+PR in flight (needs changes):
+https://github.com/kubernetes/kubernetes/pull/75989/files
+questions:
+
+is this test up to date and maintained?
+any objections to creating the client in the test instead of the framework?
+
+/sig testing
+/sig api-machinery
+/area e2e-test-framework

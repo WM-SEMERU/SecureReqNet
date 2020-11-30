@@ -1,0 +1,52 @@
+[Filesystem] Fix mirroring a directory into itself or in his child with realpath checks
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none / PR #29857
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+This this the continuity of #29857 by @Fleuv
+Fix a bug while trying to mirror a directory into itself or in a child
+Adding handle real path checks when mirroring.

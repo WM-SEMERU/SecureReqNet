@@ -1,0 +1,4 @@
+Add the JSON files to data_file
+
+
+This prevents crashes when running 'python setup.py install'.

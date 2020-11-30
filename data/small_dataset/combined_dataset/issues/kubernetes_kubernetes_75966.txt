@@ -1,0 +1,16 @@
+[Build scripts] Parameterize Golang image version
+
+
+Context
+As recently uncovered from issues like #75833, or #75833, updating the golang toolchain can lead to non-obvious but serious issues. To make it easier to test early new versions of the toolchains, and to allow anyone building its own Kubernetes distribution to choose the toolchain she wants to use to build it, this should be parameterized. It is already possible when building with the host toolchain, but it seems not to be the case when building with a container.
+What would you like to be added:
+
+add multiple build images with different versions of the toolchain
+make this selectable in hack/run.sh easily (e.g. KUBE_BUILD_IMAGE_VERSION=5-1.11.5-2 ./hack/run.sh make release)
+make it easier to plug-in my own build image
+
+Why is this needed:
+
+For early test against unstable golang releases : providing my own build image with an experimetal toolchain to validate results.
+For vendors to use the toolchain version they want without having to do actual code changes.
+

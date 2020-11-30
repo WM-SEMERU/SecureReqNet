@@ -1,0 +1,11 @@
+Synchronous network fetch does not create performance resource timing entry
+
+
+All of our async network fetch code ends up calling the submit_timing helper function in order to register the resource timing information for the network load. However, the dedicated worker initial script fetch and the worker global importScripts API use the load_whole_resource helper API, which blocks until a response is complete and returns the response data. In the handler for FetchResponseMsg::ProcessResponseEOF in load_whole_resource, the resource timing information is discarded without being used. To fix this, we should:
+
+make a new SyncFetchResponse structure that contains the resource timing, metadata, and response body
+have load_whole_resource return this new structure
+extract the guts of submit_timing into a helper submit_timing_data function that does not use any generics, but accepts the required arguments
+make submit_timing call submit_timing_data
+make all callers of load_whole_resource call submit_timing_data with the required resource timing arguments that are now available
+

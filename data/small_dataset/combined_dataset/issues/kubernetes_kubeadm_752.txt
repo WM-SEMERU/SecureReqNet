@@ -1,0 +1,14 @@
+Front proxy ca private key has to be shared accross all nodes
+
+
+FEATURE REQUEST
+You can externalize the CA and delegate tls cert management to a third party
+But actually, you can't do it with the front proxy ca as kubeadm requires
+the private key to be installed on all master nodes.
+see:
+https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/phases/certs/certs.go#L639
+Versions
+kubeadm version (use kubeadm version):
+1.10.0
+What you expected
+That the front ca key is not required as the front proxy client tls keypair can be managed by the third party.

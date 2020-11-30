@@ -1,0 +1,7 @@
+[Enhancement] Error correction (reed solomon) for dropped packets
+
+
+Wireguard is agnostic to dropped packets (it's the job of applications reliant on UDP transmissions or just TCP to handle retransmits) but this results in abysmal performance in environments where dropped packets are common.
+There are multiple solutions to this on github, basically socat-ing an error correcting (reed solomon) tunnel to go through Wireguard and use that instead. ex: https://github.com/wangyu-/UDPspeeder
+Have you considered or would you be willing to consider augmenting Wireguard to keep track of dropped packets and engaging Reed Solomon coding for tunnels depending on how much packet loss they get. It can probably be made backward compatible with the kernel version or perhaps they can be convinced to cooperate.
+The benefits are not marginal. A simple experiment with one of the aforementioned tunnels and a packet loss of just 5-10% can result in absurd improvements. ex: https://raw.githubusercontent.com/wangyu-/UDPspeeder/branch_libev/images/en/scp_compare2.PNG

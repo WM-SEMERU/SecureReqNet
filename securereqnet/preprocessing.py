@@ -174,7 +174,7 @@ def process_corpora(data_path,isZip=True,save_file=False,save_path="",name=""):
         np.save(name + '/corpora_test_x.npy',corpora_test_x)
         np.save(name + '/target_test_y.npy',target_test_y)
 
-    return corpora_train, corpora_test, target_train_y, target_test_y
+    return corpora_train_x, corpora_test_x, target_train_y, target_test_y
 
 
 

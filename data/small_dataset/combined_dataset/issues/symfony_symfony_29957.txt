@@ -1,0 +1,29 @@
+[Messenger] memory-limit option inaccurate / memory_resolver not configurable
+
+
+Symfony version(s) affected: 4.2 with symfony/messenger v4.2.2
+Description
+Using the messenger:consume-messages command with -m 250M when memory_limit is set to 400M still crashes the worker.
+How to reproduce
+I have (obviously) some module (like PHPSpreadsheet) with memory leaks in use and each consumed message increases the memory usage by around 20-60MB. Even with a buffer of 150M the limit option does not prevent the memory exhaustion.
+Possible Solution
+I don't know if memory_get_usage(false) is accurate for other use cases than mine, else I would suggest to change the default memory_resolver to set the real_usage option to true.
+If this is not possible because it would break other use cases it would be best to make the memory_resolver really configurable. He can be set in the StopWhenMemoryUsageIsExceededReceiver constructor but ConsumeMessagesCommand::execute uses a hardcoded constructor without the ability to inject a memory_resolver via a service or replacing the complete StopWhenTimeLimitIsReachedReceiver with a service.
+Additional context
+I think this is because the memory_resolver in StopWhenMemoryUsageIsExceededReceiver uses memory_get_usage() instead of memory_get_usage(true). My debug output is below, "before" is the value of memory_get_usage(true) when the MessageHandler starts executing, "X vs. Y" is my debug in StopWhenMemoryUsageIsExceededReceiver::receive, where X is the value of memory_get_usage() and Y is the value of the --memory-limit option used to call the script. As you can see memory_get_usage(true) is much closer to the real memory limit when the script crashes:
+before: 65011712
+76763096 vs. 262144000
+before: 214433792
+91614464 vs. 262144000
+before: 225443840
+120261384 vs. 262144000
+before: 254279680
+167287440 vs. 262144000
+before: 305659904
+204516872 vs. 262144000
+before: 340262912
+253016296 vs. 262144000
+before: 402132992
+Fatal error: Allowed memory size of 420478976 bytes exhausted ...
+
+The unit tests dont use memory_get_usage at all so a real memory leak is not tested. I understand that it would be difficult to create a reproducible leak with predictable amout of memory usage where the discrepancy of memory_get_usage() and memory_get_usage(true) would show up.

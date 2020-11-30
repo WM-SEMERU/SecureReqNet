@@ -1,0 +1,21 @@
+### Summary: 
+The use of raw HTML in Markdown does not work (in the Wiki). This issue was observed in version 7.0.0 and 7.1 (online)
+
+### Steps to reproduce: 
+Create/edit a Wiki page and enter some raw/inline HTML, such as the definition lists described in the Gitlab Flavored Markdown documentation https://gitlab.com/help/markdown/markdown#inline-html :
+```
+<dl>
+ <dt>Definition list</dt>
+ <dd>Is something people use sometimes.</dd>
+
+ <dt>Markdown in HTML</dt>
+ <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>
+```
+The same problem occurs when using other HTML tags such as a <a> tags to create links opened in new Tab.
+
+### Expected behavior: 
+The HTML is rendered correctly as seen in the Gitlab Flavored Markdown documentation.
+
+### Observed behavior: 
+The output is rendered incorrectly.

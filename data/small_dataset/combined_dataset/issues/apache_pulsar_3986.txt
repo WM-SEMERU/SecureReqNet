@@ -1,0 +1,5 @@
+[pulsar-broker] Introduce publish rate-limiting on topic
+
+
+Motivation
+It addresses  #3985 by introducing publish rate-limiting on the topic.

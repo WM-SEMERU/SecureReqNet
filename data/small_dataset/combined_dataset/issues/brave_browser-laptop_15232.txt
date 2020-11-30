@@ -1,0 +1,8 @@
+[hackerone] 414609 noscript issue
+
+
+Test Case
+Please go through the test case that was provided by @diracdeltas via QA Slack DM.
+Original Reported Issue
+https://hackerone.com/reports/414609
+verified in latest release

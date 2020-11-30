@@ -1,0 +1,9 @@
+[Security][bug] Remember-me cookie with custom `secure`/`httponly` options is not cleared on logout
+
+
+AbstractRememberMeServices does not pass secure/httponly options when it clears the cookie on logout: https://github.com/symfony/symfony/blob/2.3/src/Symfony/Component/Security/Http/RememberMe/AbstractRememberMeServices.php#L296
+Both existing implementations use these options:
+
+https://github.com/symfony/symfony/blob/2.3/src/Symfony/Component/Security/Http/RememberMe/TokenBasedRememberMeServices.php#L102
+https://github.com/symfony/symfony/blob/2.3/src/Symfony/Component/Security/Http/RememberMe/PersistentTokenBasedRememberMeServices.php#L105
+

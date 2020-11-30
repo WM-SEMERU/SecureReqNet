@@ -1,0 +1,8 @@
+No obvious way to call the default authz policy imperatively
+
+
+AuthorizationOptions defines a DefaultPolicy, but when you're trying to call IAuthorizationService.AuthorizeAsync there's no obvious way to ask it to use that default policy.  Today DefaultPolicy is only used by [Authorize].
+Workarounds:
+A) Flow the policy instance through some side channel (?) and pass it directly into AuthorizeAsync. This is how [Authorize] works.
+B) Double register the default policy as a named policy and then pass that name into AuthorizeAsync.
+Found while implementing aspnet/AuthSamples#28.

@@ -1,0 +1,38 @@
+[Validator] Added missing use statement for UnexpectedTypeException
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2 (be careful when merging)
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+License
+MIT
+
+
+
+Added a simple use statement that I saw it was not added, can't elaborate more than that 😄 .

@@ -1,0 +1,49 @@
+[Bridge][Twig] DebugCommand - fix escaping and filter
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+The PR fixes:
+
+output escaping was not done for decorated consoles
+filter was not applied when using format json
+
+
+added some tests for paths currently not tested
+

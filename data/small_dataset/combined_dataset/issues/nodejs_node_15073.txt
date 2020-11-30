@@ -1,0 +1,13 @@
+Why do you trust CNNIC?
+
+
+
+Subsystem: tls
+
+
+CNNIC has made tons of malware
+CNNIC has issued cert for possible MiTM attempt (distrust from Mozilla & Google)
+CNNIC has once banned personal registration for it's own profit (& political power)
+CNNIC has recalled several registered .cn domains arbitrarily for no prior acknowledgement from domains' owners (because domain name is same as names of Chinese athletes in 2008 Olympics)
+
+You really shouldn't trust CNNIC.

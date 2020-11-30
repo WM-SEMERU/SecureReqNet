@@ -1,0 +1,9 @@
+RegExp save static state which can be access by other instances of RegExp
+
+
+Original issue 531 created by jasvir on 2008-06-12T00:04:16.000Z:
+RegExp use static variables input, multiline, lastMatch, lastParen,
+leftContext, rightContext, and $1 through $9.  As a result, a RegExp.exec
+and RegExp.test which don't take an input string are able to access prior
+regexp state and input including matches which happen in a different gadget.
+These static variables must be unset before executing a match.

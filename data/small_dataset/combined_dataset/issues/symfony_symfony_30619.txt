@@ -1,0 +1,17 @@
+[HttpFoundation] session not reset when booting multiple kernels within same php process
+
+
+Symfony version(s) affected: 3.4 until master
+Description
+In one of my apps I process messages from AMQP asynchronously using a Symfony command worker (not using symfony/messenger).
+Every message is handled in a fresh newly booted kernel to ensure proper isolation.
+This worked fine until recently through some changes in our app the session service is used (instantiated & started) during the processing of a message.
+Whenever within the same php process now another message gets handled (with a new kernel) we get the following error:
+
+"Warning: ini_set(): A session is active. You cannot change the session module's ini settings at this time"
+
+This is because the NativeFileSessionHandler tries to set some ini settings again:
+https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/NativeFileSessionHandler.php#L52
+And the session from the previous kernel was never closed.
+Possible Solution
+I discussed this briefly with @nicolas-grekas and to fix this I added the kernel.reset tag to the session service so it can be properly reset. This fixes the issue in my app if I call ServicesResetter::reset() on every kernel before its shut down.

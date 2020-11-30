@@ -1,0 +1,4 @@
+[Backport] Fix authorization check in supervisor history API (#5460)
+
+
+Backport of #5460 to 0.12.0

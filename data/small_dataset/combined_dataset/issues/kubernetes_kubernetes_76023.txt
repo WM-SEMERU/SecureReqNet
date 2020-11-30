@@ -1,0 +1,14 @@
+Add system uuid to node column definitions
+
+
+What type of PR is this?
+
+/kind design
+
+What this PR does / why we need it:
+Add system uuid to node column definitions
+Which issue(s) this PR fixes:
+Fixes #
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+None

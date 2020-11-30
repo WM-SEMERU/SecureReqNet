@@ -1,0 +1,57 @@
+[Security] Trigger a deprecation when a voter is missing the VoterInterface
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+~
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+
+Right now it's possible to add voters to the access decision manager that do not have a VoterInterface.
+
+No Interface, no vote() method, and it will give a PHP error.
+No Interface, but vote() method, it will still work.
+If I don't implement the interface and have no vote() method, I will get weird exception that's not meaningful: Attempted to call an undefined method named "vote" of class "App\Voter\MyVoter".
+
+This PR will deprecate the ability to use voters without the interface, it will also throw a proper exception when missing the interface and the vote() method. Why when using and not when setting? Due to the fact that the voters can be set lazily via the IteratorArgument. The SecurityBundle will trigger a deprecation if the interface is not implemented and an exception if there's not even a vote() method present (to prevent exceptions at run-time).
+This should have full backwards compatibility with 3.3, but give more meaningful errors. The only behavioral difference, might be that the container will throw an exception instead of maybe succeeding in voting when 1 voter would be broken at the end of the list (based on strategy). This case however, will be detected during development and deployment, rather than run-time.

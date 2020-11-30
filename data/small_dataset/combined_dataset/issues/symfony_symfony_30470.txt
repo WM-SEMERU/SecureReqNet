@@ -1,0 +1,88 @@
+[SecurityCore] Wrong indications for Unknown function "is_granted".
+
+
+Symfony version(s) affected: 4.2.4
+Description
+I am extending this template in a empty twig template like this
+admin.twig.html
+{% extends '@AvanzuAdminTheme/layout/default-layout.html.twig' %}
+
+{% block avanzu_page_content %}
+Admin index
+{% endblock %}
+When it loads, it shows a Stack Trace like this:
+Twig_Error_Syntax:
+Did you forget to run "composer require symfony/security-core"? Unknown function "is_granted".
+
+  at vendor/shakaran/admin-theme-bundle/Resources/views/layout/default-layout.html.twig:1
+  at Symfony\Bridge\Twig\UndefinedCallableHandler::onUndefined('is_granted', 'function', 'security-core')
+     (vendor/symfony/twig-bridge/UndefinedCallableHandler.php:83)
+  at Symfony\Bridge\Twig\UndefinedCallableHandler::onUndefinedFunction('is_granted')
+     (vendor/symfony/twig-bundle/DependencyInjection/Configurator/EnvironmentConfigurator.php:56)
+  at Symfony\Bundle\TwigBundle\DependencyInjection\Configurator\EnvironmentConfigurator->Symfony\Bundle\TwigBundle\DependencyInjection\Configurator\{closure}('is_granted')
+     (vendor/twig/twig/lib/Twig/ExtensionSet.php:215)
+  at Twig_ExtensionSet->getFunction('is_granted')
+     (vendor/twig/twig/lib/Twig/Environment.php:846)
+  at Twig_Environment->getFunction('is_granted')
+     (vendor/twig/twig/lib/Twig/ExpressionParser.php:650)
+  at Twig_ExpressionParser->getFunctionNodeClass('is_granted', 243)
+     (vendor/twig/twig/lib/Twig/ExpressionParser.php:367)
+  at Twig_ExpressionParser->getFunctionNode('is_granted', 243)
+     (vendor/twig/twig/lib/Twig/ExpressionParser.php:152)
+  at Twig_ExpressionParser->parsePrimaryExpression()
+     (vendor/twig/twig/lib/Twig/ExpressionParser.php:92)
+  at Twig_ExpressionParser->getPrimary()
+     (vendor/twig/twig/lib/Twig/ExpressionParser.php:45)
+  at Twig_ExpressionParser->parseExpression(16)
+     (vendor/twig/twig/lib/Twig/ExpressionParser.php:58)
+  at Twig_ExpressionParser->parseExpression()
+     (vendor/twig/twig/lib/Twig/TokenParser/If.php:31)
+  at Twig_TokenParser_If->parse(object(Twig_Token))
+     (vendor/twig/twig/lib/Twig/Parser.php:168)
+  at Twig_Parser->subparse(array(object(Twig_TokenParser_Block), 'decideBlockEnd'), true)
+     (vendor/twig/twig/lib/Twig/TokenParser/Block.php:38)
+  at Twig_TokenParser_Block->parse(object(Twig_Token))
+     (vendor/twig/twig/lib/Twig/Parser.php:168)
+  at Twig_Parser->subparse(null, false)
+     (vendor/twig/twig/lib/Twig/Parser.php:81)
+  at Twig_Parser->parse(object(Twig_TokenStream))
+     (vendor/twig/twig/lib/Twig/Environment.php:533)
+  at Twig_Environment->parse(object(Twig_TokenStream))
+     (vendor/twig/twig/lib/Twig/Environment.php:565)
+  at Twig_Environment->compileSource(object(Twig_Source))
+     (vendor/twig/twig/lib/Twig/Environment.php:368)
+  at Twig_Environment->loadTemplate('@AvanzuAdminTheme/layout/default-layout.html.twig', null)
+     (vendor/twig/twig/lib/Twig/Template.php:326)
+  at Twig_Template->loadTemplate('@AvanzuAdminTheme/layout/default-layout.html.twig', 'admin/index.html.twig', 1)
+     (var/cache/dev/twig/db/db9ef7c182ddd665f1ccc3fa226679a2be20ba1f378542812932f53481db74e0.php:15)
+  at __TwigTemplate_bfad452ad121d3b07ee1d874ea612c0f2b7d1371f540f0f9affec9b78e83dd9f->__construct(object(Twig_Environment))
+     (vendor/twig/twig/lib/Twig/Environment.php:397)
+  at Twig_Environment->loadTemplate('admin/index.html.twig')
+     (vendor/twig/twig/lib/Twig/Environment.php:289)
+  at Twig_Environment->render('admin/index.html.twig', array())
+     (vendor/symfony/framework-bundle/Controller/ControllerTrait.php:229)
+  at Symfony\Bundle\FrameworkBundle\Controller\AbstractController->render('admin/index.html.twig', array())
+     (src/Controller/AdminController.php:16)
+  at App\Controller\AdminController->index()
+     (vendor/symfony/http-kernel/HttpKernel.php:150)
+  at Symfony\Component\HttpKernel\HttpKernel->handleRaw(object(Request), 1)
+     (vendor/symfony/http-kernel/HttpKernel.php:67)
+  at Symfony\Component\HttpKernel\HttpKernel->handle(object(Request), 1, true)
+     (vendor/symfony/http-kernel/Kernel.php:198)
+  at Symfony\Component\HttpKernel\Kernel->handle(object(Request))
+     (public/index.php:25)
+
+I check in my composer, clear my cache, etc, but it still outputs the same fatal message:
+$ grep -in security composer.json 
+16:        "symfony/security": "4.2.*",
+17:        "symfony/security-bundle": "4.2.*",
+18:        "symfony/security-core": "4.2.*",
+19:        "symfony/security-csrf": "4.2.*",
+
+$ grep -in twig composer.json 
+20:        "symfony/twig-bridge": "4.2.*",
+21:        "symfony/twig-bundle": "4.2.*",
+
+I think that it is a wrong description and solution problem or I am missing some package for is_granted function in symfony for 4.2.4, but I cannot get rid this problem
+How to reproduce
+Just create a base project and inherit the template with is_granted

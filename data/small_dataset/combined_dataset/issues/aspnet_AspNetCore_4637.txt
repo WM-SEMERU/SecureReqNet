@@ -1,0 +1,8 @@
+angular client and aspnet core api ws-federation
+
+
+Hi,
+Anyone implemented WS-Federation authentication with Angular client and aspnet core api? I have on-prem ADFS with WS-Federation sign in protocol returning JWT. I am planning to authenticate the user in aspnet core api and return accesstoken to angular, then pass token on each call to api.
+I am able to login thru adfs sign on page but not getting the token back. How to get the token in api once user log in and send it to angular client? how to do token validation on each api call? what is the best to preserve the token in angular client so that i can pass it in each call?
+Any working sample with the above scenario will be of great help. I  know this is not an issue but posting it here as i could not find a discussion page.
+Thanks.

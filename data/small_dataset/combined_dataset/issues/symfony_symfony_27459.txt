@@ -1,0 +1,44 @@
+[Security] Object properties stored on UserInterface may be inconsistent or inaccurate
+
+
+Symfony version(s) affected: 2.8.x - 3.4.x (maybe 4 as well, haven't tested that)
+Description
+I have a custom Guard user called GuardUser that implements UserInterface. I have my own local user entity called User.  I pass my User entity into my GuardUser object during instantiation in order to mirror some of the User properties on the GuardUser object.  Simple User properties like strings and integers map just fine.  But, when I try to mirror object properties on GuardUser, particularly deep Doctrine Collection objects, the data consistency can start to fall apart.
+How to reproduce
+When I instantiate the GuardUser in my custom UserProvider , I pass the corresponding User entity into a hydrateFromUser method where I take properties from the User entity and apply them to the GuardUser object:
+use App\Package\Entity\User;
+
+class GuardUser implements UserInterface
+{
+    private $address;
+    private $childCollection;
+    private $user;
+
+    ....
+    public function hydrateFromUser(User $user)
+    {
+        $this->address = $user->getAddress(); // string
+        $this->childCollection = $user->getChildCollection();  // ManyToMany Doctrine collection
+        $this->user = $user; // User
+
+        var_dump(get_class($this->user));  // outputs "App\Package\Entity\User"
+    }
+
+    public function getUserInfo()
+    {
+        var_dump(gettype($this->address));  // this data is correct
+
+        var_dump(gettype($this->childCollection));  // the objects in this collection are inconsistent in some contexts
+
+        var_dump(gettype($this->user));  // now this is a string, not an object
+
+        ...
+    }
+    ....
+}
+
+Later in the session, on some specific page, I call the getUserInfo method on my GuardUser instance for the current authenticated used, and now the local user property on that object is a string instead of an instance of App\Package\Entity\User.
+The issue with childCollection is rather complex, and confusing.  I am happy to share details if someone thinks they can help, but I'm kind of hoping someone might point out something obvious that I am doing wrong that might resolve all of this weirdness I am experiencing.  If need be, I can try to "bug reproducer" route, but I fear that I won't be able to get that working, as the issue related to the Collections properties is quite complex and thorny, and depends on various relational data mappings.
+Possible Solution
+no clue
+Additional context

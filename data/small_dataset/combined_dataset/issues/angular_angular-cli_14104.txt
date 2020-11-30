@@ -1,0 +1,5 @@
+fix(@angular-devkit/build-angular): verify chunk files exist before a…
+
+
+…ccessing
+chunk.files[0] can be undefined, which caused  chunk.files[0].endsWith to fail.

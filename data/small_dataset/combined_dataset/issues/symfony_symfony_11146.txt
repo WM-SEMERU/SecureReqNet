@@ -1,0 +1,25 @@
+Introduce a new check:security command
+
+
+(this issue is part of the "DX" ("Developer eXperience") initiative introduced by Symfony project)
+Security for professional web applications is not an option. That's why we should make easier for developers to check for potential security vulnerabilities in their Symfony applications. In the past, Symfony project took some bold actions towards security, such as organizing a crowdfunded security audit for Symfony2.
+The proposal
+Introduce a new command (for now, let's call it check:security) that checks the status of your project's dependencies using the public Security Advisories Database provided by SensioLabs. As a matter of fact, there is already a project called security-checker which is a Symfony console command that performs this check.
+Example of the desired output for this command:
+$ php app/console check:security
+
+ +---------------------------+
+ | Security Status: CRITICAL |
+ +---------------------------+
+
+ The security checker detected 1 package with known vulnerabilities.
+ Upgrade those dependencies as soon as possible.
+
+ Detected vulnerabilities
+ ------------------------
+
+  * swiftmailer/swiftmailer (v5.1.0)
+    > Sendmail transport arbitrary shell execution
+    > http://blog.swiftmailer.org/post/88660759928/security-fix-swiftmailer-5-2-1-released
+
+Lastly, if you think that this command is "too coupled with SensioLabs", please point to an alternative public database of vulnerabilities related to PHP/Symfony which is actively maintained and that provides a simple and free API.

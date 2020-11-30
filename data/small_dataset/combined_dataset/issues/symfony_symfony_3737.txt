@@ -1,0 +1,17 @@
+Query for user on every request in user provider service.
+
+
+I`m using Symfony's Security component with custom user provider service (due to using mongodb as default users storage).
+In security.yml:
+    providers:
+        entity:
+            id: fw.user_provider
+
+in services.yml:
+    fw.user_provider:
+        class: FW\UserBundle\Services\UserProvider
+        arguments: [@doctrine.odm.mongodb.document_manager]
+
+Query to find out user in mongo collection in locatd in loadUserByUserName method.
+I see in profiler that query to mongodb to find out user is executed on every request, not only after submitting login form.
+Is this behaviour correct? I think it's a little performance issue. Maybe user object should be stored in session?

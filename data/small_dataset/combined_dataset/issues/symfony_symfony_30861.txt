@@ -1,0 +1,9 @@
+[Console] broken terminal after running tests
+
+
+On 3.4, 4.2, master:
+When I run the tests of the Console component, my terminal ends up being broken.
+Running this is enough to reproduce:
+./phpunit src/Symfony/Component/Console/ --filter testCommandWithQuestionsButNoInputs
+If I revert #30271, the issue is gone.
+ping @chalasr if you have any idea why

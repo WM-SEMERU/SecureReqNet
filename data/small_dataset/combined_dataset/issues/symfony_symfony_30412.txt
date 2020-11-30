@@ -1,0 +1,261 @@
+"This value should be of type array." on multiple select field
+
+
+Symfony version(s) affected: 4.2.3
+Description
+Submitting form with multiple select generates error "This value should be of type array." on this select.
+How to reproduce
+Product entity:
+class Product
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer", options={"unsigned": true})
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="products")
+     */
+    private $categories;
+
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories(): ArrayCollection
+    {
+        return $this->categories;
+    }
+}
+
+Category entity:
+class Category
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="smallint", options={"unsigned": true})
+     *
+     * @var int
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Country")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(name="parent_id", onDelete="CASCADE")
+     */
+    private $parent;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $title;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="categories")
+     * @ORM\JoinTable(name="categories_products", joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")})
+     */
+    private $products;
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return Country|null
+     */
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param Country|null $country
+     *
+     * @return Category
+     */
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Category|null
+     */
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Category|null $parent
+     *
+     * @return Category
+     */
+    public function setParent(?Category $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return Category
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+}
+
+Product type:
+class ProductType extends AbstractType
+{
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * ProductType constructor.
+     *
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $hierarchicalTree = $this->entityManager->getRepository(Category::class)->getHierarchicalTree(1);
+
+        $categories = $this->entityManager->getRepository(Category::class)->getFlatTree($hierarchicalTree);
+
+        $builder
+            ->add('categories', EntityType::class, [
+                'choices' => $categories,
+                'choice_label' => function (Category $category = null) {
+                    return null !== $category ? $category->getTitle() : '';
+                },
+                'choice_value' => function (Category $category = null) {
+                    return null !== $category ? $category->getId() : '';
+                },
+                'class' => Category::class,
+                'constraints' => [
+                    new Assert\Choice([
+                        'choices' => $categories,
+                        'multiple' => true,
+                        'multipleMessage' => '...',
+                    ]),
+                ],
+                'label' => 'Categories',
+                'multiple' => true,
+            ])
+        ;
+    }
+}
+
+Category repository:
+class CategoryRepository extends ServiceEntityRepository
+{
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, Category::class);
+    }
+
+    /**
+     * @param array $hierarchicalTree
+     * @param int   $parentId
+     * @param array $flatTree
+     *
+     * @return array
+     */
+    public function getFlatTree(array $hierarchicalTree, int $parentId = 0, array $flatTree = []): array
+    {
+        if (empty($hierarchicalTree[$parentId])) {
+            return $flatTree;
+        }
+
+        foreach ($hierarchicalTree[$parentId] as $category) {
+            $flatTree[] = $category;
+
+            $flatTree = $this->getFlatTree($hierarchicalTree, $category->getId(), $flatTree);
+        }
+
+        return $flatTree;
+    }
+
+    /**
+     * @param int $countryId
+     *
+     * @return array
+     */
+    public function getHierarchicalTree(int $countryId): array
+    {
+        $hierarchicalTree = [];
+
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.country = :country')
+            ->setParameter('country', $countryId)
+            ->orderBy('c.title')
+            ->getQuery();
+
+        foreach ($query->getResult() as $category) {
+            $parentId = null !== $category->getParent() ? $category->getParent()->getId() : 0;
+
+            $hierarchicalTree[$parentId][] = $category;
+        }
+
+        return $hierarchicalTree;
+    }
+}
+
+Possible Solution
+Additional context

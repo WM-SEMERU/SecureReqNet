@@ -1,0 +1,4 @@
+Buffer writes from sources of synchronous writes
+
+
+Fixes #6397

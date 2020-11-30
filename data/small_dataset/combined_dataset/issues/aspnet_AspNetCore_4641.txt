@@ -1,0 +1,99 @@
+Sharing Auth Cookies between .NET 4.6.1 and NET Core (Cookies was not authenticated. Failure message: Unprotect ticket failed)
+
+
+I'm having an incredibly difficult time getting auth cookies made in .NET 4.6.1 to work in .NET Core. I followed online microsoft documentation, but have not had any successs ( https://docs.microsoft.com/en-us/aspnet/core/security/cookie-sharing?view=aspnetcore-2.1 )
+I have a site url like site1.mysite.local that is in 4.6.1 and site2.mysite.local which is a .NET Core 2.1 site
+I added the following code to the startup class of .NET 4.6.1 (site1.mysite.local). I also changed the constant values to string values to make it easier to follow in the examples below.
+var cookieEncryptionKeyRing = "C:/Keyring";
+
+var authOptions = new CookieAuthenticationOptions
+{
+    CookieName = "theCookieName",
+    CookieDomain = ".mysite.local",
+    AuthenticationType = "Cookies",
+    LoginPath = new PathString("/default.aspx"),
+    LogoutPath = new PathString("/logout.aspx"),
+    ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToDouble(20)),
+    SlidingExpiration = true,
+
+    Provider = new CookieAuthenticationProvider()
+    {
+        OnValidateIdentity = (cic) => {
+            // Validate token and / or refresh it.                        
+            return Task.FromResult<object>(true);
+        },
+    },
+    TicketDataFormat = new AspNetTicketDataFormat(
+        new DataProtectorShim(
+            DataProtectionProvider.Create(new DirectoryInfo(cookieEncryptionKeyRing),
+                    (builder) => { builder.SetApplicationName("SharedCookieApp"); })
+                .CreateProtector(
+                    "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware",
+                    "Cookies",
+                    "v2"))),
+    CookieManager = new ChunkingCookieManager()
+};
+
+app.UseCookieAuthentication(authOptions);
+app.SetDefaultSignInAsAuthenticationType("Cookies");
+
+This works well for the .NET 4.6.1  (site1.mysite.local) web app. I am able to log in and use the cookie to maintain authentication within site1.mysite.local.
+This doesn't work in the NET Core app and I get the error message "Cookies was not authenticated. Failure message: Unprotect ticket failed"
+I added the following code to the startup class of .NET Core (site2.mysite.local).
+public void ConfigureServices(IServiceCollection services)
+{
+    var keyRing = "C:/Keyring";
+
+    var protectionProvider = DataProtectionProvider.Create(
+        new DirectoryInfo(keyRing), (action) =>
+        {
+            action.SetApplicationName("SharedCookieApp");
+        });
+    var dataProtector = protectionProvider.CreateProtector(
+        "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware",
+        "Cookies",
+        "v2");
+    var ticketFormat = new TicketDataFormat(dataProtector);
+
+    services.AddAuthentication("Cookies")
+        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+        {
+            options.LoginPath = "/Home/AccessDenied";
+            options.Cookie.Name = "theCookieName";    
+            options.Cookie.Domain = ".mysite.local";
+            options.TicketDataFormat = ticketFormat;
+            options.Events.OnValidatePrincipal = (cic) =>
+            {
+                return Task.FromResult<object>(true);
+            };
+        });
+
+    services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+}
+
+// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Home/Error");
+        app.UseHsts();
+    }
+
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();            
+    app.UseAuthentication();
+    app.UseMvc(routes =>
+    {
+        routes.MapRoute(
+            name: "default",
+            template: "{controller=Home}/{action=Index}/{id?}");
+    });
+}
+
+I've gone over all the documentation I've been able to find and nothing has given me any clue on what to do.
+Any help you can give would be greatly appreciated. Thank you!

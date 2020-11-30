@@ -1,0 +1,8 @@
+Docker compose configuration with TLS
+
+
+Change adds a docker compose recipe with a zk node, 2 bookies, a
+pulsar broker and a proxy node. The proxy and the broker are both
+configured to use TLS authentication.
+The certs/keys to use to connect are those in
+tests/certificate-authority/client-keys. admin is the super user.

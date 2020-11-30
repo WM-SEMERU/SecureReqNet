@@ -1,0 +1,9 @@
+https://medium.com/@jitbit/target-blank-the-most-underestimated-vulnerability-ever-96e328301f4c#.hcfpkgkat
+
+```
+› git grep _blank
+app/assets/javascripts/boards/components/board.js.es6://= require ./board_blank_state
+app/assets/javascripts/network/branch-graph.js:        return window.open(options.commit_url.replace("%s", commit.id), "_blank");
+app/assets/javascripts/todos.js:        return window.open(todoLink, '_blank');
+app/assets/javascripts/tree.js:            return window.open(path, '_blank');
+app/helpers/import_helper.rb:    link_to path_with_namespace, github_project_url(path_with_namespace), target: '_blank'

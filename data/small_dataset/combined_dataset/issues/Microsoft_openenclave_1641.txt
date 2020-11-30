@@ -1,0 +1,6 @@
+Apply Spectre mitigations automatically in the CMake package
+
+
+This slightly duplicates code in our build, but it is necessary because the compiler used to generate the package can be different than the compiler used by the consumer of the package.
+This code checks if the given Spectre mitigation compiler flags are available, and if so, it enables them unconditionally for all code linking against openenclave::oecore (that is, all enclaves).
+This resolves #1596 (by removing the need to document the flags as we now apply them opportunistically).

@@ -1,0 +1,19 @@
+[BUG][3.4] Missing service security.http_utils after upgrade to 3.4.11
+
+
+Symfony version(s) affected: 3.4.11
+Description
+After upgrading from version 3.4.9 to 3.4.11 I'm getting the following error when trying to clear the cache:
+  [RuntimeException]
+  An error occurred when executing the "'cache:clear --no-warmup'" command:
+
+
+
+
+  In ContainerBuilder.php line 1043:
+
+    You have requested a non-existent service "security.http_utils".
+
+It looks like this is related to c003b7a but I'm not entirely sure on how to fix this issue. Could you please provide some information on why this change has been made?
+How to reproduce
+Upgrade to 3.4.11 and run bin/console c:c

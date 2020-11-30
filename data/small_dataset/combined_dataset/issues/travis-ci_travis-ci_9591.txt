@@ -1,0 +1,10 @@
+Web SSH UI does not accept ECDSA keys
+
+
+Github allows EC keys. The Travis UI does not. This seems to be a format/verification issue as the UI responds with "This is not a private key" when, if fact, it's a private key.
+The key format is:
+-----BEGIN EC PRIVATE KEY-----
+< 5 lines of key material >
+-----END EC PRIVATE KEY-----
+
+In some organizations, RSA keys have been deprecated in favor of EC keys.

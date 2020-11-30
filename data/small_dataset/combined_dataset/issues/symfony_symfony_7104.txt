@@ -1,0 +1,28 @@
+[Security] Strange behaviour of Symfony\Component\Security\Http\Firewall\LogoutListener
+
+
+Hi,
+There is a problem with handler usage in Symfony\Component\Security\Http\Firewall\LogoutListener.
+The problem occurs in this case:
+
+You hit directly the logout route without being authenticated (route defined with roles "IS_AUTHENTICATED_ANONYMOUSLY")
+You use RememberMe
+
+In this case, le first logout won't work because the handlers are only called when a Security Token is set and the "delete RememberMe" handler "Symfony\Component\Security\Http\RememberMe\PersistentTokenBasedRememberMeServices" is one of these handler.
+It is strange to think that a logoutAction doesn't always delete RememberMe, meaning that the user will be authenticated at the next hit.
+The problem is the same for this handler "Symfony\Component\Security\Http\Logout\CookieClearingLogoutHandler".
+Seems that there is no need to restrict the handlers execution with the existence of the SecurityToken because they don't use it:
+
+PersistentTokenBasedRememberMeServices use only Request
+CookieClearingLogoutHandler use only Response
+And even SessionLogoutHandler use only Request
+
+I think there is three ways for solve that:
+
+Ensure that the user will be authenticated before the LogoutListener->handle is called
+Remove the Security Token restriction to call these handlers
+Add an INTERACTIVE_LOGOUT event to call these handler (thanks to @alexandresalome for this idea)
+
+If you have any question on that problem or if you need any help (code example) to solve it, I'm in.
+Thanks for your help.
+Xavier

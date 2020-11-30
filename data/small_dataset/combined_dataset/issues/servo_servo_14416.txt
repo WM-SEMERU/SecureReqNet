@@ -1,0 +1,26 @@
+[security] Use-after-free in run_the_animation_frame_callbacks
+
+
+Possibly exploitable use after free due to bad rooting. This is because we have FnBox and we don't scan these for roots.
+Call stack:
+    * thread #25: tid = 0xce1e1, 0x00000001013b7943 servo`js::GetGlobalForObjectCrossCompartment(JSObject*) [inlined] js::ObjectGroup::compartment(this=0x4b4b4b4b4b4b4b4b) const at ObjectGroup.h:127, stop reason = EXC_BAD_ACCESS (code=EXC_I386_GPFLT)
+      * frame #0: 0x00000001013b7943 servo`js::GetGlobalForObjectCrossCompartment(JSObject*) [inlined] js::ObjectGroup::compartment(this=0x4b4b4b4b4b4b4b4b) const at ObjectGroup.h:127 [opt]
+        frame #1: 0x00000001013b7943 servo`js::GetGlobalForObjectCrossCompartment(JSObject*) [inlined] JSObject::compartment(this=0x0000000131479560) const + 3 at jsobj.h:170 [opt]
+        frame #2: 0x00000001013b7940 servo`js::GetGlobalForObjectCrossCompartment(JSObject*) [inlined] JSObject::global(this=0x0000000131479560) const at jsobjinlines.h:427 [opt]
+        frame #3: 0x00000001013b7940 servo`js::GetGlobalForObjectCrossCompartment(obj=0x0000000131479560) at jsfriendapi.cpp:357 [opt]
+        frame #4: 0x0000000100cf6c98 servo`script::dom::bindings::codegen::Bindings::WindowBinding::FrameRequestCallback::Call__::h06af494b38233384 + 72
+        frame #5: 0x000000010074fc23 servo`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h000a725167954168 + 83
+        frame #6: 0x0000000100869fea servo`script::dom::document::Document::run_the_animation_frame_callbacks::h82d85d7cb9276eb0 + 426
+        frame #7: 0x0000000100a4372b servo`script::script_thread::ScriptThread::handle_msg_from_constellation::h1ae6ab180e71d498 + 3467
+        frame #8: 0x0000000100d52f03 servo`script::script_thread::ScriptThread::handle_msgs::_$u7b$$u7b$closure$u7d$$u7d$::hfae0766a0aa36e39 + 1075
+        frame #9: 0x0000000100a3e65e servo`script::script_thread::ScriptThread::handle_msgs::hd530ca7e9b38a437 + 19870
+        frame #10: 0x000000010064f2d8 servo`std::panicking::try::do_call::hb007126d0f1a6bb0 + 1400
+        frame #11: 0x0000000101a8686b servo`panic_unwind::__rust_maybe_catch_panic + 27 at lib.rs:97 [opt]
+        frame #12: 0x0000000100750b77 servo`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::he103368d7e26669f + 167
+        frame #13: 0x0000000101a846f5 servo`std::sys::thread::{{impl}}::new::thread_start [inlined] alloc::boxed::{{impl}}::call_once<(),()> + 37 at boxed.rs:605 [opt]
+        frame #14: 0x0000000101a846ef servo`std::sys::thread::{{impl}}::new::thread_start [inlined] std::sys_common::thread::start_thread + 15 at thread.rs:21 [opt]
+        frame #15: 0x0000000101a846e0 servo`std::sys::thread::{{impl}}::new::thread_start + 16 at thread.rs:84 [opt]
+        frame #16: 0x00007fff8ffcb99d libsystem_pthread.dylib`_pthread_body + 131
+        frame #17: 0x00007fff8ffcb91a libsystem_pthread.dylib`_pthread_start + 168
+        frame #18: 0x00007fff8ffc9351 libsystem_pthread.dylib`thread_start + 13
+

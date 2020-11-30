@@ -1,0 +1,37 @@
+**[HackerOne report #433047](https://hackerone.com/reports/433047)** by jobert on 2018-11-02:
+
+To reproduce, follow these steps:
+
+**As user 1**
+ - sign in
+ - create a private project
+ - add a file to the repository
+ - invite user 2 (maintainer)
+
+**As user 2**
+ - change the file in the repository
+ - create a merge request
+
+**As user 1**
+ - remove user 2 from the project
+ 
+**As user 2**
+ - create a new, random project
+ - create an issue
+ - in bulk, close the issue and intercept the request, it'll look something like this:
+
+```
+POST /jobertabma/75e7/issues/bulk_update HTTP/1.1
+Host: gitlab-instance
+...
+
+{"update":{"state_event":"close","assignee_ids":[null],"issuable_ids":"1","add_label_ids":[],"remove_label_ids":[]}}
+```
+
+In this request, substitute `issues` in the URL with `merge_requests` and the `issuable_ids` with a list (comma separated) with the merge request that was created by user 2 while they were part of the project. After the request has been submitted, go back to user 1 and observe that the merge request has been closed (or whatever state change was made in the request).
+
+This vulnerability also works when the attacker (user 2) was the assignee on a merge request. It also works with issues.
+
+## Impact
+
+A project member that has been removed from a private project remains control over the state, assignee, milestones, and labels of a merge request and issue.

@@ -1,0 +1,4 @@
+Replace Role to RoleInterface for RoleSecurityIdentity
+
+
+Class Symfony\Component\Security\Acl\Domain\RoleSecurityIdentity should be able to be created from every object implementing RoleInterface.

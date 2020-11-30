@@ -1,0 +1,15 @@
+Errors are not frozen or not reported as such
+
+
+Original issue 1038 created by kpreid.switchb.org on 2009-06-04T00:17:42.000Z:
+> What steps will reproduce the problem?
+
+Evaluate cajita.isFrozen(new Error("abc"))
+
+> What is the expected output?
+true, according to MarkM.
+> What do you see instead?
+false
+The discussion was:
+Me: Um. Errors are not cajita.isFrozen?
+MarkM: Didn't know that. Could you please file that as a bug? Thanks.

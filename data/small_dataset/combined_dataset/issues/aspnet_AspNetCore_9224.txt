@@ -1,0 +1,6 @@
+Make DataProtection certificate tests assertions stricter about which  cert is used in the test
+
+
+Addresses aspnet/AspNetCore-Internal#2177
+This test only fails on some CI agents. As these tests rely on a certificate store shared by other builds, it's probably that the failures are the result of some other dotnet team adding a cert called 'TestCert' into the X509Store.
+This changes the tests to pull from the X509Store the exact cert we want the test to use.

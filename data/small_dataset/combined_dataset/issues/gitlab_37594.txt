@@ -1,0 +1,25 @@
+Via customer ticket: https://gitlab.zendesk.com/agent/tickets/82188
+
+Their reproduction steps were good so I'll just copy those here:
+
+>>>
+As a guest user it is possible to change a deployment key to give it write access.
+
+Steps to reproduce:
+1. as a project owner (or master) add a deployment key and make it read-only
+2. grant a user (we will call it user2) guest permissions on the project (it doesn't matter if this is done directly on the project or through a group)
+3. login as user2, create a project user2 is the owner of.  Go to deployment keys, the user can select this key and edit the key to toggle the write flag, which will affect all repos this key is used for
+
+The feature for using they keys is great, it seems odd a user that is a guest in a project can use the keys, but I don't see a security issue with that.
+
+I would expect the read or read/write to be set per project not as a global setting anyone can change.
+>>>
+
+Unless I'm missing something the security implication seems low since `user2` (presumably) doesn't have access to the private key so they can't then write to the first project's repository. But it's still unexpected, and it could lead to an accidental write if some script using the deploy key inadvertently performs a write.
+
+# Proposed solution
+
+* Move the `read_write` boolean to the `DeployKeyProject` link, instead of the `DeployKey` model itself. 
+* Migrate existing keys as per above
+
+cc @DouweM

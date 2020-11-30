@@ -1,0 +1,11 @@
+[Security] Unintuitive naming of the new simple authenticators
+
+
+I really like how the new simple authenticators make the configuration of security easier. But the naming is really hard to figure out for me (i.e. a simplification layer which complicates things again...)
+SimpleFormAuthenticatorInterface
+Apparently I can just use SimpleFormAuthenticatorInterface with login forms. Just Symfony forms? Just HTML-based forms? What about other kinds of interactions where I provide a password? It's method signature is
+public function createToken(Request $request, $username, $password, $providerKey);
+so I think naming it SimplePasswordAuthenticatorInterface would be much more understandable.
+SimplePreAuthenticatorInterface
+What is pre-authentication? I will never remember this name. Fabien described it quite nicely as "Authenticating a user based on the Request information should be done via a pre-authentication mechanism" (source). So why not just name it SimpleRequestAuthenticatorInterface?
+I really like simplifications in general, but we need to get the naming right, otherwise they again need documentation (vs. intuition). That's one of the biggest strengths of Rails and we should copy that.

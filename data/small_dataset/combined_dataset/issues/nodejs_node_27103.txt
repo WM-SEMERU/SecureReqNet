@@ -1,0 +1,13 @@
+doc: revise Collaborator material in GOVERNANCE.md
+
+
+
+Reduce passive voice
+Shorter and simpler sentences
+
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+

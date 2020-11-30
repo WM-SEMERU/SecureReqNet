@@ -1,0 +1,4 @@
+Strings: removed Czech word from English documentation
+
+
+I think it is better to keep English documentation in English even in this code example.

@@ -1,0 +1,50 @@
+[Security] check request scheme in HttpUtils::checkRequestPath
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#22097 
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#...
+
+
+
+This PR checks the request scheme to be matched with route configuration when security listeners need to match the current request with some actions like logout path or check login.

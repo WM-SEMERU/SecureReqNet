@@ -1,0 +1,6 @@
+proposal: crypto/tls: allow configurability of supported Signature Hash Algorithms
+
+
+Go up to and including the current version (at this writing, 1.11.2) hardcodes the list of supported algorithms for the TLS 1.2 Signature Algorithms extension. Concurrently, crypto/tls also allows the use of custom signers which may have their own limitations not addressed by the hardcoded list of supported algorithms.
+One real-world example of this is a custom signer for a TLS client that uses a hardware backend such as a Trusted Platform Module. TPM 1.2 modules can only support SHA1, and while TPM 2.0 modules can support SHA512, they are only required under the current spec to support SHA1 and SHA256. Depending on the list of algorithms provided by the remote party, the Go implementation may choose a 384-bit or 512-bit algorithm that is not supported by the backing hardware module, causing the handshake to fail.
+In order to address this, I propose adding a configuration option to tls.Config to allow a custom list of supported signature algorithms to be provided, which will allow custom signer implementations to express the algorithms they support.

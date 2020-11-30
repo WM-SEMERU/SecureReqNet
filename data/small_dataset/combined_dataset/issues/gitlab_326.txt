@@ -1,0 +1,5 @@
+Hello everyone,
+
+the Gitlab::OAuth::User checks if the provider is ldap otherwise it takes the first part of the mail address (https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/gitlab/oauth/user.rb#L37).
+
+It would be better to check if user.username is set and use that value. For example GitHub always return an username.

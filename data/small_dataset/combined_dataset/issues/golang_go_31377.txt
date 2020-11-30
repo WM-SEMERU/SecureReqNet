@@ -1,0 +1,44 @@
+cmd/go: use slice expression a[x : x] where cap(a) is x should cause panic
+
+
+What version of Go are you using (go version)?
+$ go version
+1.12.3
+
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/Users/cholerae/Library/Caches/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/Users/cholerae/Documents/gopath"
+GOPROXY=""
+GORACE=""
+GOROOT="/Users/cholerae/Documents/gopath/go"
+GOTMPDIR=""
+GOTOOLDIR="/Users/cholerae/Documents/gopath/go/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+CXX="clang++"
+CGO_ENABLED="1"
+GOMOD="/Users/cholerae/Documents/gocode/ByteGraph/go.mod"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/1q/bn5v_zpd5qzc4dlg3bbp2psm0000gn/T/go-build647264484=/tmp/go-build -gno-record-gcc-switches -fno-common"
+
+What did you do?
+https://play.golang.org/p/XT4xCSpIylL
+What did you expect to see?
+Panic at line 9.
+What did you see instead?
+Panic at line 10.

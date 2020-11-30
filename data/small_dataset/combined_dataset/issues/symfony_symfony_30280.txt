@@ -1,0 +1,8 @@
+Var-dumper; html format with live or hot reloading
+
+
+Description
+I use symfony/var-dumper with dump server and with html format, I am wondering if there is a way to watch this html file online, so as not to reload the page (live / hot reloading). Is there a ready-made solution in a Symfony?
+Example
+For example, I need to show debug information when requesting to the REST API or when I execute some console command.
+Do you think it makes sense to debug in this way?

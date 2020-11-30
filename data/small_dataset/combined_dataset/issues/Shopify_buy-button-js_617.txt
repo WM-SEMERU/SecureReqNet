@@ -1,0 +1,4 @@
+Fix cart subtotal field
+
+
+Leverage the new formattedLineItemsSubtotal getter in the cart's viewData

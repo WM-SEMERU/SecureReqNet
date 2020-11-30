@@ -1,0 +1,45 @@
+Add element to ghost in Exception
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+Let's make love (& good code) not war. Sorry for not submitting it at least yesterday, but hopefully you will accept it, and we will be able to merge today. This will allow us to add different addons on other special ocasions.
+
+On personal side, I dedicate it, with lots of kisses, to my wife Martha.
+If you like it, just ❤️

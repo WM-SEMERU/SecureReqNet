@@ -1,0 +1,6 @@
+Caja ignores CSS ::first-letter styling
+
+
+Original issue 1845 created by bruant.d on 2013-08-18T14:22:21.000Z:
+Note that first-letter exists in 2 forms (one ':first-letter' or two '::first-letter' colons) for historical reasons.
+I haven't tested ::first-line, but I imagine it is ignored as well.

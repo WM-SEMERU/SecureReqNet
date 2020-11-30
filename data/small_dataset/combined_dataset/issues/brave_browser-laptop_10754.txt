@@ -1,0 +1,10 @@
+bypass data: phishing warning by opening a URL in a new tab
+
+
+Test plan
+#10760 (comment)
+
+STR:
+save <a href='data:,Hello%2C%20World!'>click me</a> to an HTML file
+open it and right-click the anchor element to open in new tab
+you should see a data phishing URL warning, but instead you see 'this site is secure' for the current tab.

@@ -1,0 +1,16 @@
+Alert: "Your computer has been blocked" Error #S47452D
+
+
+For the second time in just two weeks, a warning pop-up opens when browsing on websites. e.g. while browsing on website frontlineshop.com suddenly the BRAVE warning pop-up opens with the message: "YOUR COMPUTER HAS BEN BLOCKED" - Error: #S47452D. i had to force quiting BRAVE in order to be able o use the browser again. does anyone know what i did wrong or how i should handle such issues?
+Thanks and all the best,
+D
+Expected behavior:
+
+Platform: mac OS X El Capitan V.10.11.5
+Brave Version: 0.12.5
+Steps to reproduce: browsing on website: http://www.frontlineshop.com
+Screenshot if needed:
+
+Any related issues:
+
+

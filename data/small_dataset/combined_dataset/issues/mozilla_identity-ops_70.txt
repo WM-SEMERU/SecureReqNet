@@ -1,0 +1,5 @@
+Change outbound internet access to traverse the proxy
+
+
+Currently all instances can directly initiate connections out to the internet. Please change this so that instances must travers the proxy tier to reach the internet.
+This will likely require enabling in the proxy rules access to AWS services (the api, s3 etc)

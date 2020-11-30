@@ -1,0 +1,7 @@
+validate that devServerPort is numeric
+
+
+in https://github.com/brave/browser-laptop/blob/aafa62a373b9bec7b669ced88dd36304410206e8/app/extensions/brave/js/about.js, devServerPort is untrusted input, so it should be validated.
+ex: any page can do window.open("chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/about-flash.html?devServerPort=foo@test.com/")
+doesn't directly cause an issue thanks to CSP, it seems
+thanks to Tavis Ormandy for the report

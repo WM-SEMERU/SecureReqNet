@@ -1,0 +1,7 @@
+Dispose configuration in WebHost
+
+
+This is a companion-PR to aspnet/Extensions#1361 which addresses aspnet/Extensions#938: When disposing the WebHost, the underlying configurations will also be disposed by the service provider.
+Since the IConfiguration that is passed to the WebHost constructor is the host configuration, and does not access the configuration directly (the Startup may though), the WebHost has to resolve the app configuration from the service provider. This is done early within Initialize as soon as the service provider is available to avoid having to retrieve it later only for disposal.
+The host configuration is also disposed by the WebHost transitively. While the host configuration only ever contains a single environment variables configuration provider (which is not disposable itself), disposing the configuration will also make sure to dispose the change registration.
+The drawback for this is that using the WebHostBuilder.GetSetting() after the web host is disposed means that the operation is made on an already disposed configuration root. The way the configuration root is currently implemented, this should not actually prevent this from working though.

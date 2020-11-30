@@ -1,0 +1,43 @@
+[SecurityBundle] UserPasswordEncoderCommand concerns
+
+
+As I just tried it now, I've some concerns about the newly introduced command to encode user password (#12818).
+Arguments order
+The command currently looks like :
+security:encode-password [password] [user-class] [salt]
+
+All arguments are optional, for the interactive command purpose (The command will ask the user for missing arguments in a very user-friendly way).
+But, as they are arguments, we should provide each of them in the proper order. That means we cannot provide a salt without defining the optional user-class.
+Why not using options instead of arguments for both user-class & salt ?
+Empty salt
+Currently, the only way to generate a password with an empty salt (for in_memory users and bcrypt for example) is by executing the following trick:
+security:encode-password p@ssw0rd --no-interaction.
+
+Indeed, with interaction, if no salt or an empty salt is provided (security:encode-password p@ssw0rd 'Symfony\Component\Security\Core\User\User' ''), we'll be asked for a salt. Then again, if we provide an empty salt (press enter), a salt is automatically generated.
+Solutions (one of those):
+
+a new --empty-salt option
+ask confirmation about providing or generating a salt
+do not ask for salt if an empty salt is provided (security:encode-password p@ssw0rd 'Symfony\Component\Security\Core\User\User' '')
+
+Symfony Core User should be the default user-class
+As @jeremyFreeAgent said:
+
+Since we configure Symfony\Component\Security\Core\User\User in the setAutocompleterValues and set the $value to Symfony\Component\Security\Core\User\User if null, I guess we can configure the default value of the user-class.
+
+Indeed, why not providing the Symfony\Component\Security\Core\User\User as the default value of the user-class option/argument ?
+Asking it explicitly to the user is only useful for new symfony's users. Once understood, I think most users will provide it directly, or expect the default Symfony\Component\Security\Core\User\User value.
+Non interactive salt generation
+I see 2 "issues" here:
+
+We cannot ask for a generated salt with non-interactive usage
+Anyway, the salt isn't in the Table summarizing the generation.
+
+Solution
+
+add a --generate-salt option in order to generate the salt instead of providing it
+add the generated salt to the Table output
+
+
+What do you think ?
+ping @saro0h

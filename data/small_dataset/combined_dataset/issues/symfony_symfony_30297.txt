@@ -1,0 +1,10 @@
+dotenv issue
+
+
+Symfony version(s) affected: 4.2
+Description
+Hi all, I am having an issue where .env is working on local host however not on my Hostwinds server.
+How to reproduce
+Fatal error: Uncaught TypeError: Return value of Symfony\Component\Dotenv\Dotenv::populate() must be an instance of Symfony\Component\Dotenv\void, none returned in /home/kjzotpry/public_html/server.com/vendor/symfony/dotenv/Dotenv.php:146 Stack trace: #0 /home/kjzotpry/public_html/server.com/vendor/symfony/dotenv/Dotenv.php(469): Symfony\Component\Dotenv\Dotenv->populate(Array, false) #1 /home/kjzotpry/public_html/server.com/vendor/symfony/dotenv/Dotenv.php(51): Symfony\Component\Dotenv\Dotenv->doLoad(false, Array) #2 /home/kjzotpry/public_html/server.com/review/send_review.php(7): Symfony\Component\Dotenv\Dotenv->load('../.env') #3 {main} thrown in /home/kjzotpry/public_html/server.com/vendor/symfony/dotenv/Dotenv.php on line 146
+How can I fix this?
+Thanks!

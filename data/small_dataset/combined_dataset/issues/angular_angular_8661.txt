@@ -1,0 +1,5 @@
+feat(security): allow data: URLs for images and videos.
+
+
+Allows known-to-be-safe media types in data URIs.
+Part of #8511.

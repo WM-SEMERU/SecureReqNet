@@ -1,0 +1,4 @@
+Don't use AbstractController in 3.4 branch
+
+
+In 3.4 we always extend from Controller instead of AbstractController, so this PR fixes the wrong occurrences. The only remaining occurrence is one which explicitly explains something about AbstractController.

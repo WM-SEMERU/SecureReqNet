@@ -1,0 +1,155 @@
+Consul membership reelected when node (consul server) rejoins
+
+
+We passing our system (and consul since it's part of our CM) through intensive resiliency  testing, where network interfaces comes and go.
+During such cycle, sometime we run into a flow where we disconnect a node that was a consul leader, and once it rejoins the cluster (since it's got reconnected, after 10min), cluster leader is lost for ~10s and then reelected.
+We have a cluster of 3 servers and 1 client (in the tested environment)
+Consul log on the node that was a leader prior the node rejoins:
+2019/04/06 01:52:10 [WARN] raft: Rejecting vote request from 1.164.128.5:8300 since we have a leader: 1.164.187.2:8300
+2019/04/06 01:52:10 [INFO] serf: EventMemberJoin: stratonode2 1.164.128.5
+2019/04/06 01:52:10 [INFO] consul: Adding LAN server stratonode2 (Addr: tcp/1.164.128.5:8300) (DC: stratocluster-13491205452125510595)
+2019/04/06 01:52:10 [INFO] consul: member 'stratonode2' joined, marking health alive
+2019/04/06 01:52:12 [INFO] serf: attempting reconnect to stratonode2.stratocluster-13491205452125510595 1.164.128.5:8302
+2019/04/06 01:52:12 [INFO] serf: EventMemberJoin: stratonode2.stratocluster-13491205452125510595 1.164.128.5
+2019/04/06 01:52:12 [INFO] consul: Handled member-join event for server "stratonode2.stratocluster-13491205452125510595" in area "wan"
+2019/04/06 01:52:13 [WARN] raft: Rejecting vote request from 1.164.128.5:8300 since we have a leader: 1.164.187.2:8300
+2019/04/06 01:52:13 [ERR] raft: peer {Voter 08ca7db8-57ff-11e9-aaed-001e6744484e 1.164.128.5:8300} has newer term, stopping replication
+2019/04/06 01:52:13 [INFO] raft: Node at 1.164.187.2:8300 [Follower] entering Follower state (Leader: "")
+2019/04/06 01:52:13 [INFO] raft: aborting pipeline replication to peer {Voter 8b9a301c-57ff-11e9-8175-001e67697170 1.164.148.23:8300}
+2019/04/06 01:52:13 [INFO] consul: cluster leadership lost
+2019/04/06 01:52:17 [WARN] raft: Heartbeat timeout from "" reached, starting election
+2019/04/06 01:52:17 [INFO] raft: Node at 1.164.187.2:8300 [Candidate] entering Candidate state in term 19
+2019/04/06 01:52:17 [INFO] raft: Node at 1.164.187.2:8300 [Follower] entering Follower state (Leader: "")
+2019/04/06 01:52:18 [WARN] raft: Rejecting vote request from 1.164.128.5:8300 since our last term is greater (18, 16)
+2019/04/06 01:52:22 [WARN] raft: Heartbeat timeout from "" reached, starting election
+2019/04/06 01:52:22 [INFO] raft: Node at 1.164.187.2:8300 [Candidate] entering Candidate state in term 197
+2019/04/06 01:52:22 [INFO] raft: Election won. Tally: 2
+2019/04/06 01:52:22 [INFO] raft: Node at 1.164.187.2:8300 [Leader] entering Leader state
+2019/04/06 01:52:22 [INFO] raft: Added peer 08ca7db8-57ff-11e9-aaed-001e6744484e, starting replication
+2019/04/06 01:52:22 [INFO] raft: Added peer 8b9a301c-57ff-11e9-8175-001e67697170, starting replication
+2019/04/06 01:52:22 [INFO] consul: cluster leadership acquired
+2019/04/06 01:52:22 [INFO] consul: New leader elected: stratonode1
+2019/04/06 01:52:22 [INFO] raft: pipelining replication to peer {Voter 8b9a301c-57ff-11e9-8175-001e67697170 1.164.148.23:8300}
+2019/04/06 01:52:22 [WARN] raft: AppendEntries to {Voter 08ca7db8-57ff-11e9-aaed-001e6744484e 1.164.128.5:8300} rejected, sending older logs (next: 37077)
+2019/04/06 01:52:22 [WARN] raft: AppendEntries to {Voter 08ca7db8-57ff-11e9-aaed-001e6744484e 1.164.128.5:8300} rejected, sending older logs (next: 37076)
+2019/04/06 01:52:22 [WARN] raft: AppendEntries to {Voter 08ca7db8-57ff-11e9-aaed-001e6744484e 1.164.128.5:8300} rejected, sending older logs (next: 37075)
+2019/04/06 01:52:22 [WARN] raft: AppendEntries to {Voter 08ca7db8-57ff-11e9-aaed-001e6744484e 1.164.128.5:8300} rejected, sending older logs (next: 37074)
+2019/04/06 01:52:22 [WARN] raft: AppendEntries to {Voter 08ca7db8-57ff-11e9-aaed-001e6744484e 1.164.128.5:8300} rejected, sending older logs (next: 37073)
+2019/04/06 01:52:23 [INFO] raft: pipelining replication to peer {Voter 08ca7db8-57ff-11e9-aaed-001e6744484e 1.164.128.5:8300}
+Consul log of the rejoined node:
+2019/04/06 01:52:10 [INFO] serf: attempting reconnect to stratonode3 1.164.148.23:8301
+2019/04/06 01:52:10 [INFO] serf: EventMemberJoin: stratonode0 1.164.168.142
+2019/04/06 01:52:10 [INFO] serf: EventMemberJoin: stratonode3 1.164.148.23
+2019/04/06 01:52:10 [INFO] serf: EventMemberJoin: stratonode1 1.164.187.2
+2019/04/06 01:52:10 [INFO] consul: Adding LAN server stratonode3 (Addr: tcp/1.164.148.23:8300) (DC: stratocluster-13491205452125510595)
+2019/04/06 01:52:10 [INFO] consul: Adding LAN server stratonode1 (Addr: tcp/1.164.187.2:8300) (DC: stratocluster-13491205452125510595)
+2019/04/06 01:52:10 [INFO] consul: New leader elected: stratonode1
+2019/04/06 01:52:12 [INFO] serf: EventMemberJoin: stratonode1.stratocluster-13491205452125510595 1.164.187.2
+2019/04/06 01:52:12 [INFO] serf: EventMemberJoin: stratonode3.stratocluster-13491205452125510595 1.164.148.23
+2019/04/06 01:52:12 [INFO] consul: Handled member-join event for server "stratonode1.stratocluster-13491205452125510595" in area "wan"
+2019/04/06 01:52:12 [INFO] consul: Handled member-join event for server "stratonode3.stratocluster-13491205452125510595" in area "wan"
+2019/04/06 01:52:13 [WARN] raft: Election timeout reached, restarting election
+2019/04/06 01:52:13 [INFO] raft: Node at 1.164.128.5:8300 [Candidate] entering Candidate state in term 195
+2019/04/06 01:52:13 [DEBUG] raft-net: 1.164.128.5:8300 accepted connection from: 1.164.187.2:54965
+2019/04/06 01:52:14 [WARN] agent: Check "service:rack-storage-radosgw" is now critical
+2019/04/06 01:52:15 [WARN] agent: Check "service:influxdb" is now critical
+2019/04/06 01:52:15 [WARN] agent: Check "service:mysql" is now critical
+2019/04/06 01:52:16 [WARN] agent: Check "service:docker-registry" is now critical
+2019/04/06 01:52:18 [WARN] raft: Election timeout reached, restarting election
+2019/04/06 01:52:18 [INFO] raft: Node at 1.164.128.5:8300 [Candidate] entering Candidate state in term 196
+2019/04/06 01:52:18 [WARN] agent: Check "service:ui-backend" is now critical
+2019/04/06 01:52:18 [WARN] agent: Check "service:quotas-manager" is now warning
+2019/04/06 01:52:19 [WARN] agent: Check "service:virtual-nb" is now critical
+2019/04/06 01:52:19 [ERR] agent: failed to sync remote state: No cluster leader
+2019/04/06 01:52:20 [WARN] agent: Check "service:ntpd-server" is now critical
+2019/04/06 01:52:20 [WARN] agent: Check "service:influxdb" is now critical
+2019/04/06 01:52:22 [DEBUG] raft-net: 1.164.128.5:8300 accepted connection from: 1.164.187.2:54337
+2019/04/06 01:52:22 [INFO] raft: Node at 1.164.128.5:8300 [Follower] entering Follower state (Leader: "")
+2019/04/06 01:52:22 [WARN] raft: Failed to get previous log: 40730 log not found (last: 37076)
+2019/04/06 01:52:22 [WARN] raft: Previous log term mis-match: ours: 16 remote: 18
+2019/04/06 01:52:22 [WARN] raft: Previous log term mis-match: ours: 16 remote: 18
+2019/04/06 01:52:22 [WARN] raft: Previous log term mis-match: ours: 16 remote: 18
+2019/04/06 01:52:22 [WARN] raft: Previous log term mis-match: ours: 16 remote: 18
+2019/04/06 01:52:22 [WARN] raft: Clearing log suffix from 37073 to 37076
+2019/04/06 01:52:22 [INFO] consul: New leader elected: stratonode1
+Please ignore the ips and cluster name since I dont have exec values that correlates to the failure log).
+Consul v1.1.0
+root@stratonode2 consul]# consul members
+Node         Address             Status  Type    Build  Protocol  DC                                 Segment
+stratonode0  1.150.252.191:8301  alive   server  1.1.0  2         stratocluster-5592351459952895953  
+stratonode1  1.150.251.86:8301   alive   server  1.1.0  2         stratocluster-5592351459952895953  
+stratonode2  1.150.192.5:8301    alive   server  1.1.0  2         stratocluster-5592351459952895953  
+[root@stratonode2 consul]# consul operator raft list-peers
+Node         ID                                    Address             State     Voter  RaftProtocol
+stratonode2  d52b21d8-58c6-11e9-9ea6-001e6769901f  1.150.192.5:8300    leader    true   3
+stratonode0  44068020-58c7-11e9-a125-001e67482028  1.150.252.191:8300  follower  true   3
+stratonode1  4578549c-58c7-11e9-88fc-001e67456f4f  1.150.251.86:8300   follower  true   3
+Consul info (from one for the servers)
+agent:
+check_monitors = 32
+check_ttls = 82
+checks = 164
+services = 164
+build:
+prerelease =
+revision = 5174058
+version = 1.1.0
+consul:
+bootstrap = true
+known_datacenters = 1
+leader = true
+leader_addr = 1.150.192.5:8300
+server = true
+raft:
+applied_index = 213005
+commit_index = 213005
+fsm_pending = 0
+last_contact = 0
+last_log_index = 213005
+last_log_term = 2
+last_snapshot_index = 200869
+last_snapshot_term = 2
+latest_configuration = [{Suffrage:Voter ID:d52b21d8-58c6-11e9-9ea6-001e6769901f Address:1.150.192.5:8300} {Suffrage:Voter ID:44068020-58c7-11e9-a125-001e67482028 Address:1.150.252.191:8300} {Suffrage:Voter ID:4578549c-58c7-11e9-88fc-001e67456f4f Address:1.150.251.86:8300}]
+latest_configuration_index = 2800
+num_peers = 2
+protocol_version = 3
+protocol_version_max = 3
+protocol_version_min = 0
+snapshot_version_max = 1
+snapshot_version_min = 0
+state = Leader
+term = 2
+runtime:
+arch = amd64
+cpu_count = 12
+goroutines = 626
+max_procs = 12
+os = linux
+version = go1.10.1
+serf_lan:
+coordinate_resets = 0
+encrypted = false
+event_queue = 0
+event_time = 10
+failed = 0
+health_score = 0
+intent_queue = 0
+left = 0
+member_time = 9
+members = 3
+query_queue = 0
+query_time = 1
+serf_wan:
+coordinate_resets = 0
+encrypted = false
+event_queue = 0
+event_time = 1
+failed = 0
+health_score = 0
+intent_queue = 0
+left = 0
+member_time = 4
+members = 3
+query_queue = 0
+query_time = 1
+Thanks

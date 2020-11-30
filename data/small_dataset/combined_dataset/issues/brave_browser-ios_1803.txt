@@ -1,0 +1,50 @@
+update to 1.6.6 wipes out data
+
+
+Description:
+Updating from 1.6.5 (app store version) to 1.6.6 via provided IPA file wipes out:
+
+Favorites
+Bookmarks
+History
+Session (opened tabs)
+
+The follow appear to be retained:
+
+Stats
+Settings (specifically checked default search engine)
+Passwords
+
+Steps to Reproduce
+
+Download 1.6.5 from app store
+Add bookmarks, history, tabs, stats, cookies, logins/passwords, site specific shield settings, custom sites to ‘favorites/top site tiles’, set default search engine to DDG
+Use IPA file to update to 1.6.6
+
+Actual result:
+Be sad when your hard work is wiped out
+
+Expected result:
+All data should be retained
+Reproduces how often: [Easily reproduced/Intermittent issue]
+easily
+Brave Version:
+1.6.5 -> 1.6.6 update
+Device details:
+reproduced on devices running iOS 10, 11, 12
+Website problems only:
+
+
+did you check with Brave Shields down? n/a
+
+
+did you check in Puffin/Dolphin (UIWebView-based browsers)? n/a
+
+
+did you check in Safari/Firefox (WkWebView-based browsers)? n/a
+
+
+Additional Information
+Reproduced by @kjozwiak @srirambv
+@srirambv also mentioned seeing a 'cleaning' message when updating on iOS12. I did not see this on iOS11.
+

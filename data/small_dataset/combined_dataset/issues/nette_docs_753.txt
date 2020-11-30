@@ -1,0 +1,4 @@
+Form Fields: removed unnecessary constructor
+
+
+I think this constructor isn't needed. In all other code examples there is no constructor, so I don't see reason for having constructor here.

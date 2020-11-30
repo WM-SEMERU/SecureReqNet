@@ -1,0 +1,12 @@
+buffer: stricter buffer from
+
+
+We have a lot of special casing in Buffer.from that we do not have anywhere else in the code base. There are multiple cases where it's very difficult to actually identify what the users intent was. As such, it seems best to just throw an error instead.
+@nodejs/buffer this still requires the docs and error messages to be slightly updated but I'd like a first opinion.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

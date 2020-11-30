@@ -1,0 +1,110 @@
+cmd/go: [modules + integration] go mod build, build all the binaries provided by a module
+
+
+This report is part of a series focused at making Go modules work in integrator workflows. It’s being filled at the request of @mdempsky in golang-dev. It is informed both by the results of this golang-dev discussion, and by trying to make things work with Go module tooling as it exists today (experiment¹).
+Please do not dismiss it or mark it as duplicate of another vaguely similar issue without making sure you’ve read and understood the golang-dev discussion. A lot of work went into identifying problems points precisely.
+Needed feature
+Go needs an official go mod build command that builds all the binaries provided by a particular Go module.
+Constrains
+
+
+the input should be:
+
+a module path,  or
+a module path + module version, or
+the filesystem path of a specific mod module descriptor
+
+either the go.mod file at the root of an unpacked module tree, or
+a mod file inside a  goproxy hierarchy
+
+
+
+
+
+all the usual go build flags  should apply
+
+
+the destination should be any binary directory path the user specifies
+
+
+for compatibility with existing tooling, a separate optional prefix flag should allow pre-pending a path to the destination:
+
+ie pretend working on destination, actually work on filepath.Join(prefix, destination)
+that is typically used to prepare deployment to canonical_path, using a /prefix/canonical_path staging directory
+
+
+
+to allow integration with CI/CD software, the command should optionally output a list of the files it created, in machine-readable format, to a user-specified result file
+
+the result file path is not affected by destination
+the result file lists paths without prefix, since the command is pretending to write directly into destination
+this is similar to the behaviour of go mod pack (#31302) and should use the same conventions
+
+
+
+the command should allow selecting (or not) the following binary sets:
+
+target binaries (binaries the module was created for, intended for general use)
+unit test helpers (ancillary binaries, created for the needs of unit tests, that only require the compiler)
+integration test helpers (ancillary binaries, created for the needs of integration tests, that require more things than just the compiler to run see also #31300)
+example binaries, that have no use in production or tests
+
+though most of them won’t build as is, and projects should be incentivised to split them in separate example modules
+
+
+
+
+
+the command should work in secure no-internet-download mode. In that mode it should fail if one of the modules it needs for building is not available in the cache or configured goproxy  (#31304) sources
+
+it should not get stuck forever waiting on the CI/CD firewall to let go get download from the internet
+
+
+
+Motivation
+Go modules are wonderful and exciting, until you realise they only deal with the code download part. One stills need to dissect individual Go packages in the next stages of a CI/CD Go-related job.
+The Go module concept should be extended to the rest of Go code processing phases.
+Detailed Context
+The current Go module design and implementation targets small Go projects. Those projects consume raw unchanged third party projects, and rely blindly on the QA done by those other projects. Their only needs are to download those projects, check they’ve not been tampered with (via notaries),  regularly check for updates.
+Small project code supply chain:
+third party code
+        ↓
+direct or proxied
+download,
+without changes
+(upstream integrity checks required)
+        ↓
+use in project without checks
+(blind third party trust)
+
+Big integration projects, however, can not afford this direct pipeline.
+Big integration projects can be:
+
+Linux distributions
+huge software projects like Kubernetes (as noted by @thockin)
+
+There is too much third party code in play. Every member of the team can not be expected to master all the third party parts. All the third party projects may not be up to the project QA standards. Expecting all of them to deal timely with issues all the time (and thus being able to use them unchanged) is unrealistic. Continuous internet downloads make CI/CD prohibitively expensive, unreliable and unreproducible.
+Therefore any big integration project will have to give up on direct internet third party code use. It will work from a baseline of third party code. This baseline will receive small last-mile fixes to deal with the problems encountered while integrating a large mass of third-party code, and mask the lag of getting all those fixes accepted by the original third party projects. This baseline will be broken up in individual components to allow different teams to take ownership the curation of different parts of the third party codebase. And, because all this is a huge amount of work, the organisation managing the project will want to share it with its other projects.
+Big project code supply chain:
+third party code
+        ↓
+direct or proxied
+download
+without changes
+(upstream integrity checks required)
+        ↓
+curating 
+– checking,
+– fixing, 
+– removing unneeded/broken/dead parts
+(upstream integrity checks voided)
+        ↓
+curated baseline
+        ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓ ↓
+use in project A … use in project N
+(no other third party code or internet download checks permitted)
+
+The aim of this report series is to make Go module tooling integration-friendly, helping big integration projects to constitute and manage their baselines, and consume the result in all their sub-projects.
+For historical reasons baselines have been created in GOPATH/vendor mode so far. But, there is no reason for this mode to persist. All the code management wins produced by modules in the direct download case, are also desirable in the integration/baseline case.
+Therefore, there is a tooling need to convert the existing GOPATH/vendor baselines of third party code into  baselines of Go modules.
+¹ The experimental code is probably horrible. That's not the point. Most of its functions are generic and should have been provided by generic Go tooling in the first place.

@@ -1,0 +1,12 @@
+cajita.js has wrong Attribute regexp
+
+
+Original issue 762 created by ihab.awad on 2008-09-25T00:27:52.000Z:
+In cajita.js, we have --
+var Attribute = new RegExp(
+'^(.*)(?:canRead|canCall|getter|handler)__$');
+Mike Stay noticed that the regular expression '.' doesn't match end-of-line
+characters, so "x['\n'] = 5" would set a property that does not appear in
+getOwnPropertyNames.
+Not sure if this is exploitable but should be fixed. Is this fix trivial,
+or are there other characters that are not matched by '.'?

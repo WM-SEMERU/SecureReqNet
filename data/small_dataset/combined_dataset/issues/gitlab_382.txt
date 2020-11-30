@@ -1,0 +1,7 @@
+UNC Pathes that points to windows shares are not rendered correctly from GitLab's markdown interpreter
+
+A UNC path like this: [\\\\servername\share\file.ext](file://///servername/share/file.ext)
+
+With a markdown syntax: __\[\\\\servername\share\file.ext\]\(file://///servername/share/file.ext\)__
+* Will be rendered as __\<a\>__ or __\<a href="/gitlab-org/gitlab-ce/blob/master/file://///servername/share/file.ext"\>__
+* But not as __\<a href="file://///servername/share/file.ext"\>__

@@ -1,0 +1,26 @@
+Improve/simplify skeleton(s) app and documentation
+
+
+Description
+This may be not so obvious for those who are working with Symfony on daily basis, but current symfony/website-skeleton or symfony/skeleton are pretty bloated in my opinion. When I compare project skeleton with .NET Core, Symfony is just over the top.
+Example
+Problems I see when using current skeleton(s):
+
+Too many config files: for "Hello World"/skeleton, I believe I shouldn't need any! And if so, I would start with few files, but definitely not with 31 config files for multiple envs! (not counting /.env)
+Skeleton configuration contains bundles.php, yet documentation says that bundles are not recommended in Symfony 4.x: The Bundle System.
+Skeleton contains a lot of empty directories under src: Controller, Entity, Migrations, ... - purpose of those directories is obvious, but why keep them empty? This is in contrast with dependencies (mentioning later) - skeleton requires package, but does not really show how to use it.
+Overall: Ideally skeleton should not be needed - IMHO it should be easy to start with couple of files created manually (creating web sites in PHP used to be really simple (Pepperidge farm remembers!), but these days it's more complicated than building web in ASP.NET!). (Unfortunately starting from scratch is not documented)
+
+Skeleton also requires tons of dependencies I won't need or I don't want:
+
+symfony/flex: there's composer already, is this really needed?
+symfony/orm-pack (~ doctrine/*): my app won't need DB, or I will happily stick with PDO & repository pattern, or anything but Doctrine!
+symfony/swiftmailer-bundle: my app won't send e-mails
+symfony/translation: maybe I will stick with single language
+symfony/twig-bundle: what if I want to use different templating system?
+symfony/yaml: why not using good old PHP configuration in arrays?
+
+... and I could continue. All those should be offered as addons (and documented as such - how to add and configure). If that is not possible for some reason, there should be information how to get rid of it/switch to something else.
+Other words
+I'm aware that some of my points are going against philosophy of Symfony (I guess), like unnecessary yaml configs, but I believe changing way how you handle skeleton/demo app could ramp-up newcomers (those who don't live in PHP/Symfony universe) significantly.
+Current state of documentation is also not helping - it either makes use of symfony/website-skeleton or it describes stand alone components, often without describing how to add it in (apart of how to do composer require, there's often some piece missing how to make it work with the rest of the app).

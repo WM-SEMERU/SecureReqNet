@@ -1,0 +1,201 @@
+New-HPOVLdapGroup command returns error but completes successfully
+
+
+Please fill in as much information as possible to help resolve your issue.
+Expected Behavior
+New-HPOVLdapGroup should not return an error when it runs successfully.  The error message indicates the -Group parameter is expecting a Distinguished Name, yet the examples in the help text indicate this field can also be a string.  The examples use group names like "MY Directory Group1" or "CorpVirtAdmins", neither of which is in DN format.   Also, the command completes successfully using the Group name provided, yet it returns the below error text.
+Actual Behavior
+New-HPOVLdapGroup -Directory $LDAPdomain -Group "OV Server Admin" -Username $LDAPuser -Password $SecurePass -Roles $RoleArray
+WARNING: The -Username parameter will be deprecated in a future release. Please transition to using the -Credental Parameter.
+WARNING: The -Username parameter will be deprecated in a future release. Please transition to using the -Credental Parameter.
+New-ErrorRecord : A positional parameter cannot be found that accepts argument 'The provided -Group Parameter value OV Infrastructure Admin is not a valid Distinguished Name
+(DN) value.  Please verify the Group DN follows this format: CN=GroupName,OU=OrganizationalUnit,DC=Domain,DC=com'.
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\HPOneView.410.psm1:102884 char:22
+
+
+                    $ErrorRecord = New-ErrorRecord ArgumentException InvalidGroupCommonName In ...
+
+
+
+
+
+
++ CategoryInfo          : InvalidArgument: (:) [New-ErrorRecord], ParameterBindingException
++ FullyQualifiedErrorId : PositionalParameterNotFound,New-ErrorRecord
+
+Exception calling "ThrowTerminatingError" with "1" argument(s): "Value cannot be null.
+Parameter name: errorRecord"
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\HPOneView.410.psm1:102885 char:7
+
+
+                    $PSCmdlet.ThrowTerminatingError($ErrorRecord)
+
+
+
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
+FullyQualifiedErrorId : ArgumentNullException
+
+
+
+Steps to reproduce
+See above
+VERBOSE: [NEW-HPOVLDAPGROUP] Bound PS Parameters:
+Key                                                                                      Value
+---                                                                                      -----
+Directory                                                                                @{type=LoginDomainConfigV600; uri=/rest/logindomains/10; category=users; eTag=Mon Se...
+Group                                                                                    OV Server Admin
+Username                                                                                 oneview
+Password                                                                                 System.Security.SecureString
+Roles                                                                                    {Server administrator}
+Verbose                                                                                  True
+
+
+
+VERBOSE: [NEW-HPOVLDAPGROUP] Called from: Import-Groups
+VERBOSE: [NEW-HPOVLDAPGROUP] Verify auth
+VERBOSE: [TEST-HPOVAUTH] Caller: New-HPOVLdapGroup
+VERBOSE: [TEST-HPOVAUTH] Verify Auth for 10.188.30.15
+VERBOSE: [TEST-HPOVAUTH] $Appliance is [HPOneView.Appliance.Connection]
+VERBOSE: [TEST-HPOVAUTH] Received HPOneView.Appliance.Connection Object:
+ConnectionID Name         UserName      AuthLoginDomain Default
+------------ ----         --------      --------------- -------
+1            10.188.30.15 Administrator LOCAL           True
+
+
+
+VERBOSE: [NEW-HPOVLDAPGROUP] Processing '10.188.30.15' Appliance (of 1)
+VERBOSE: [NEW-HPOVLDAPGROUP] Validating requested role values
+VERBOSE: [NEW-HPOVLDAPGROUP] Processing role: Server administrator
+VERBOSE: [NEW-HPOVLDAPGROUP] Supported
+VERBOSE: [NEWOBJECT] Bound PS Parameters:
+Key                                                                                      Value
+---                                                                                      -----
+DirectoryGroupPermissions                                                                True
+
+
+
+VERBOSE: [NEWOBJECT] Called from: New-HPOVLdapGroup
+New-ErrorRecord : A positional parameter cannot be found that accepts argument 'The provided -Group Parameter value OV Server Admin is not a valid Distinguished Name (DN)
+value.  Please verify the Group DN follows this format: CN=GroupName,OU=OrganizationalUnit,DC=Domain,DC=com'.
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\HPOneView.410.psm1:102884 char:22
++                         $ErrorRecord = New-ErrorRecord ArgumentException InvalidGroupCommonName In ...
++    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [New-ErrorRecord], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,New-ErrorRecord
+
+Exception calling "ThrowTerminatingError" with "1" argument(s): "Value cannot be null.
+Parameter name: errorRecord"
+At C:\Program Files\WindowsPowerShell\Modules\HPOneView.410\HPOneView.410.psm1:102885 char:7
++                         $PSCmdlet.ThrowTerminatingError($ErrorRecord)
++                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
+    + FullyQualifiedErrorId : ArgumentNullException
+
+VERBOSE: [NEWOBJECT] Bound PS Parameters:
+Key                                                                                      Value
+---                                                                                      -----
+DirectoryGroup                                                                           True
+
+
+
+VERBOSE: [NEWOBJECT] Called from: New-HPOVLdapGroup
+VERBOSE: [NEWOBJECT] Bound PS Parameters:
+Key                                                                                      Value
+---                                                                                      -----
+DirectoryGroupCredentials                                                                True
+
+
+
+VERBOSE: [NEWOBJECT] Called from: NewObject
+VERBOSE: [NEW-HPOVLDAPGROUP] Sending request to create  Directory Group
+VERBOSE: [SEND-HPOVREQUEST] BEGIN
+VERBOSE: [SEND-HPOVREQUEST] Called from: New-HPOVLdapGroup
+VERBOSE: [SEND-HPOVREQUEST] Bound PS Parameters:
+Key                                                                                      Value
+---                                                                                      -----
+uri                                                                                      /rest/logindomains/grouptorolemapping
+method                                                                                   POST
+body                                                                                     @{type=LoginDomainGroupCredentials; group2PermissionPerGroup=; credentials=}
+Hostname                                                                                 10.188.30.15
+
+
+
+VERBOSE: [SEND-HPOVREQUEST] Process
+VERBOSE: [SEND-HPOVREQUEST] Hostname value:
+ConnectionID Name         UserName      AuthLoginDomain Default
+------------ ----         --------      --------------- -------
+1            10.188.30.15 Administrator LOCAL           True
+
+
+
+VERBOSE: [SEND-HPOVREQUEST] Processing '10.188.30.15' appliance connection request. 1 of 1
+VERBOSE: [SEND-HPOVREQUEST] Requested URI '/rest/logindomains/grouptorolemapping' to '10.188.30.15'
+VERBOSE: [RESTCLIENT] Building new [System.Net.HttpWebRequest] object for POST https://10.188.30.15/rest/logindomains/grouptorolemapping
+VERBOSE: [RESTCLIENT] Increasing timeout to 10 minutes for '/rest/logindomains/grouptorolemapping'
+VERBOSE: [SEND-HPOVREQUEST] Body object found. Converting to JSON.
+VERBOSE: [SEND-HPOVREQUEST] HTTP Method is POST. Removing 'ApplianceConnection' NoteProperty from object(s).
+VERBOSE: InputObject is [PSCustomObject]. Copying...
+VERBOSE: Nested [PSCustomObject] group2PermissionPerGroup, Processing...
+VERBOSE: InputObject is [PSCustomObject]. Copying...
+VERBOSE: Property is IEnumerable
+VERBOSE: InputObject is [PSCustomObject]. Copying...
+VERBOSE: Nested [PSCustomObject] credentials, Processing...
+VERBOSE: InputObject is [PSCustomObject]. Copying...
+VERBOSE: [SEND-HPOVREQUEST] Request Body: {"type":"LoginDomainGroupCredentials","group2PermissionPerGroup":{"type":"LoginDomainGroupPermission","loginDomain":"V28","egroup":"OV
+Server Admin","permissions":[{"roleName":"Server administrator","scopeUri":null}]},"credentials":{"userName":"oneview","password":null}}
+VERBOSE: [SEND-HPOVREQUEST] Request: POST https://10.188.30.15/rest/logindomains/grouptorolemapping
+VERBOSE: [SEND-HPOVREQUEST] Request Header 1: User-Agent = HPEOneview_PowerShell/4.10 (Microsoft Windows NT 6.3.9600.0)
+VERBOSE: [SEND-HPOVREQUEST] Request Header 2: Content-Type = application/json
+VERBOSE: [SEND-HPOVREQUEST] Request Header 3: Accept = application/json, text/html, application/xhtml+xml
+VERBOSE: [SEND-HPOVREQUEST] Request Header 4: X-API-Version = 800
+VERBOSE: [SEND-HPOVREQUEST] Request Header 5: accept-language = en_US
+VERBOSE: [SEND-HPOVREQUEST] Request Header 6: accept-encoding = gzip, deflate
+VERBOSE: [SEND-HPOVREQUEST] Request Header 7: auth = [*****REDACTED******]
+VERBOSE: [SEND-HPOVREQUEST] Request Header 8: Host = 10.188.30.15
+VERBOSE: [SEND-HPOVREQUEST] Response time: 00:00:16.8160378
+VERBOSE: [SEND-HPOVREQUEST] Response Status: 201 (Created)
+VERBOSE: [SEND-HPOVREQUEST] Response Header 1: Transfer-Encoding = chunked
+VERBOSE: [SEND-HPOVREQUEST] Response Header 2: Cache-Control = no-cache
+VERBOSE: [SEND-HPOVREQUEST] Response Header 3: Content-Type = application/json;charset=UTF-8
+VERBOSE: [SEND-HPOVREQUEST] Response Header 4: Date = Tue, 25 Sep 2018 18:17:01 GMT
+VERBOSE: [SEND-HPOVREQUEST] Response Header 5: Location = /rest/tasks/9DEAAE17-2CC5-4A45-A076-BA5C8B451960
+VERBOSE: [SEND-HPOVREQUEST] Response Header 6: Server = Apache
+VERBOSE: [SEND-HPOVREQUEST] FinalResponse: {"type":"LoginDomainGroupPermission","uri":"/rest/logindomains/grouptorolemapping/10/OV$_sp_$Server$_sp_$Admin","category":null,"eTag":"Tue Sep 25 18:13:20 UTC 2018_12","created":"Tue Sep 25 18:13:20 UTC 2018","modified":"Tue Sep 25 18:13:20 UTC 2018","loginDomain":"V28","egroup":"OV Server Admin","directoryType":"Group","permissions":[{"roleName":"Server administrator","scopeUri":null}]}
+VERBOSE: [SEND-HPOVREQUEST] Manual Pagination: False
+VERBOSE: [SEND-HPOVREQUEST] Response object, no paging needed.
+VERBOSE: [SEND-HPOVREQUEST] Cleaning up HttpWebRequest
+VERBOSE: [SEND-HPOVREQUEST] Does nextPageUri member exist: False
+VERBOSE: [SEND-HPOVREQUEST] Is nextPageUri Null or Empty: True
+VERBOSE: [SEND-HPOVREQUEST] Stopping Do/Until loop because nextPageUri doesn't exist and have received all objects.
+VERBOSE: [SEND-HPOVREQUEST] End
+
+
+### Version Information
+HPE OneView PowerShell Library Version (`Get-HPOVVersion` or `$PSLibraryVersion`):
+
+Get-HPOVVersion
+
+10.188.30.15                                               LibraryVersion                                             Path
+------------                                               --------------                                             ----
+ApplianceVersion: 4.10.01.348545.00                        4.10.1809.2203                                             C:\Program Files\WindowsPowerShell\Modules\HPOneView.410
+
+Output from `$PSVersionTable` on your Windows Host:
+
+$PSVersionTable
+
+Name                           Value
+----                           -----
+PSVersion                      4.0
+WSManStackVersion              3.0
+SerializationVersion           1.1.0.1
+CLRVersion                     4.0.30319.42000
+BuildVersion                   6.3.9600.18968
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}
+PSRemotingProtocolVersion      2.2
+
+
+```PowerShell
+# Output from $PSVersionTable

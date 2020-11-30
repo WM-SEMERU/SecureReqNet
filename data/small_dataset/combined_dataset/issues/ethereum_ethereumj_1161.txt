@@ -1,0 +1,9 @@
+Unsafe Java object serialization
+
+
+What's wrong
+Ethash class uses pure Java object serialization to store light and full datasets.
+As @ThingToNO pointed out, this serialization in its pure form can be exploited, additional information can be found here.
+However, in this particular case it doesn't look valuable for attacker.
+How to fix
+Looks like the easiest way is to use custom serialization.

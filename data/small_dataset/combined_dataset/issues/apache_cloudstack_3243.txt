@@ -1,0 +1,15 @@
+[WIP DO NOT MERGE] ui: add memory used column in instance metrics view
+
+
+Problem: The metrics view for instances does not show used memory.
+Root Cause: Used memory was not added as a column in the metrics view for instances.
+Solution: Metrics view for instances makes ‘listVirtualMachineMetrics’ API call to gather metrics. The response of this API call contains total and free memory with the instance. These have been used to compute used memory as a percentage of total memory and displayed as a new column in UI. Also fixes
+a bug for VMware, due to which incorrect memory usage was returned.
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+

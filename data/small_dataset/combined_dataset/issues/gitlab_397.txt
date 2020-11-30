@@ -1,0 +1,6 @@
+![Screenshots_20140705_072456](https://gitlab.com/uploads/gitlab-org/gitlab-ce/1128da3b01/Screenshots_20140705_072456.png)
+
+**Information:**
+
+Forgot Password button isn't aligned with the login button.
+Currently using asus fonepad, google chrome.

@@ -1,0 +1,4 @@
+Nomad Vault Integration To Supply Registry Credentials
+
+
+As part of the nomad integration with vault it will be great if nomad can fetch the docker registry credentials from vault and supply that to the docker driver so that we do not need to add that in plain text to job configuration.

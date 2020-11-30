@@ -1,0 +1,33 @@
+Cajoler returns No file found for: /v6003-es53-1-g4391844/utility-frame.opt.js
+
+
+Maybe I'm dense, but as I'm just starting out with Caja
+
+
+The caja.appspot server seems to be down
+
+
+Installing caja on my own machine, when I run just a first simple test  of
+
+
+   caja.initialize({
+         cajaServer: 'http://localhost:8080/'
+     });
+    caja.load(document.getElementById('guest'), caja.policy.net.ALL, function(frame) {
+
+        frame.code('-- My statically hosted test guest page--',
+                'text/html')
+                .run();
+    });
+
+The browser returns a 404 for
+
+http://localhost:8080/v6003-es53-1-g4391844/ses-single-frame.opt.js?debug=1
+http://localhost:8080/v6003-es53-1-g4391844/ses-single-frame.opt.js?debug=1
+
+Local server returns:
+
+[java] WARNING: No file found for: /v6003-es53-1-g4391844/ses-single-frame.opt.js
+[java] WARNING: No file found for: /v6003-es53-1-g4391844/utility-frame.opt.js
+
+Any idea what I'm doing wrong?

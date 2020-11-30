@@ -1,0 +1,4 @@
+Add custom exception referral codes pointing to test binaries
+
+
+Point a set of referral codes to a custom binary build for partners

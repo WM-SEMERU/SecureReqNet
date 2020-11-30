@@ -1,0 +1,5 @@
+Mark 4.1 AdvancedUserInterface deprecated and show alternatives
+
+
+In symfony/symfony#23508 the advanced user interface is deprecated. If the desired functionality is to be kept, a custom user-checker has to be implemented, but this is currently not documented yet. This part of the docs can in theory be simplified to a single method as well.
+https://symfony.com/doc/current/security/entity_provider.html#security-advanced-user-interface

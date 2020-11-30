@@ -1,0 +1,40 @@
+password reset broken
+
+
+I'm opening this issue because:
+
+ npm is crashing.
+ npm is producing an incorrect install.
+ npm is doing something I don't understand.
+ npm is producing incorrect or undesirable behavior.
+ Other (see below for feature requests):
+
+What's going wrong?
+Password reset link from email now gets 404 due apparently to token being rejected, so likely somehow related to today's incident that led you to invalidate tokens......?
+How can the CLI team reproduce the problem?
+request a password reset link form the login form and follow the link
+supporting information:
+
+npm -v prints:
+node -v prints:
+npm config get registry prints:
+Windows, OS X/macOS, or Linux?:
+Network issues:
+
+Geographic location where npm was run:
+ I use a proxy to connect to the npm registry.
+ I use a proxy to connect to the web.
+ I use a proxy when downloading Git repos.
+ I access the npm registry via a VPN
+ I don't use a proxy, but have limited or unreliable internet access.
+
+
+Container:
+
+ I develop using Vagrant on Windows.
+ I develop using Vagrant on OS X or Linux.
+ I develop / deploy using Docker.
+ I deploy to a PaaS (Triton, Heroku).
+
+
+

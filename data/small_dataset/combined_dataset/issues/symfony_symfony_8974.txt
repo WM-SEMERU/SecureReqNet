@@ -1,0 +1,7 @@
+Switch user and parametr always_authenticate_before_granting
+
+
+Hi,
+I need update user's security group without logout him, to see changes,  so I had set parameter "always_authenticate_before_granting: true" in security.xml. This is working as expected, but unfortunatly I have a problem with switching user. When i switch to another user with role ROLE_ALLOWED_TO_SWITCH  and gain all roles assigned to that user i have no extra role: ROLE_PREVIOUS_ADMIN and cannot back to previous role.
+Any help appreciated.
+Marcin

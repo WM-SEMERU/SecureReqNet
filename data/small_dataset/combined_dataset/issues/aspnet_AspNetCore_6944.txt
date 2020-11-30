@@ -1,0 +1,25 @@
+DefaultAntiforgery should not log user errors as ERROR
+
+
+Describe the bug
+In DefaultAntiforgery.GetCookieTokenDoesNotThrow when an exception occurs it is logged as ERROR. This is problematic since that means user-triggered errors are logged as ERROR, which is problematic for us since normally ERROR logs mean that we have an application error that we need to investigate.
+As far as we know in other cases user-generated errorrs are not logged as ERROR in ASP.NET Core.
+To Reproduce
+Steps to reproduce the behavior:
+
+Using version 2.1.1 of ASP.NET Core
+In a web application using DefaultAntiforgery, trigger a deserialization error (we observed this when a user had a Antiforgerytoken generated on one server that is then sent to another server, which happened during a blue-green switch in our environment).
+This message is logged as ERROR:
+
+Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException:
+--
+at Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenSerializer.Deserialize (Microsoft.AspNetCore.Antiforgery, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60)
+at Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgery.GetCookieTokenDoesNotThrow (Microsoft.AspNetCore.Antiforgery, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60)
+Inner exception System.Security.Cryptography.CryptographicException handled at Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenSerializer.Deserialize:
+at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.UnprotectCore (Microsoft.AspNetCore.DataProtection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60)
+at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.DangerousUnprotect (Microsoft.AspNetCore.DataProtection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60)
+at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.Unprotect (Microsoft.AspNetCore.DataProtection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60)
+at Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenSerializer.Deserialize (Microsoft.AspNetCore.Antiforgery, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60)
+
+Expected behavior
+We expect the error to get logged as WARN/INFO, but definitely not as ERROR.

@@ -1,0 +1,46 @@
+Don't resolve the Deprecation error handler mode until a deprecation is triggered
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30047
+
+
+License
+MIT
+
+
+
+Don't resolve the Deprecation error handler mode until a deprecation is triggered

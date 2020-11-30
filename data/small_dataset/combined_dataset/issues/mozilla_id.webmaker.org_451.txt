@@ -1,0 +1,5 @@
+Unable to create new account
+
+
+Hi. I'm unable to create a new account for Thimble when browsing with Firefox developer edition, out of the box. I'm seeing this in the javascript console:
+Content Security Policy: The page’s settings blocked the loading of a resource at self (“script-src”). Source: ;(function installGlobalHook(window) { .... signup:1 Content Security Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified Content Security Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified Content Security Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified You have failed the reCAPTCHA test signup.jsx:186:10 handleFormData/</< signup.jsx:186:10

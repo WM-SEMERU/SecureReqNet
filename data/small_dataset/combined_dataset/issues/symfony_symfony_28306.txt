@@ -1,0 +1,24 @@
+When switching user eraseCredentials is not called causing the user to not match when refreshing the user
+
+
+Symfony version(s) affected: 2.8+
+Description
+When using the impersonate user feature the credentials are not erased causing the users credentials to be stored in the TokenStorage.
+We are using the UsernamePasswordToken and when authenticating the credentials are erased before the user is stored in the TokenStorage. This does not happen when you impersonate a user. The user is stored with the credentials.
+This causes various oddities like when you go to the next page the user in the TokenStorage will not match the user that is loaded when ContextListener->refreshUser is called and the underlying UserProvider provides a user with erasedCredentials as suggested in the following ticket: #13287.
+This results in the AbstractToken->$authenticated parameter to be set to false. And the user will be re-authenticated with the Authentication provider. (This hides what is really happening because this is succesful).
+I'm willing to make a PR if it is agreed that this is a bug.
+Causing code
+https://github.com/symfony/security/blob/master/Core/Authentication/AuthenticationProviderManager.php#L92
+https://github.com/symfony/security/blob/master/Http/Firewall/SwitchUserListener.php
+https://github.com/symfony/security/blob/master/Http/Firewall/ContextListener.php#L172
+https://github.com/symfony/security/blob/master/Core/Authentication/Token/AbstractToken.php#L244
+How to reproduce
+
+Login with a FormUserProvider
+Impersonate another user.
+Use XDebug to check TokenStorage
+The token will have a password
+
+Possible Solution
+SwitchUserListener should also call eraseCredentials when security.erase_credentials === true.

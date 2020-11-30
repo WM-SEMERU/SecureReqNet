@@ -1,0 +1,79 @@
+x/vgo: "cannot find module providing package"
+
+
+What version of Go are you using (go version)?
+$ go version
+go version go1.11.5 darwin/amd64
+
+$ vgo version
+go version go1.11.5 darwin/amd64 vgo:devel +b0a1c5df98
+
+
+Does this issue reproduce with the latest release?
+Yes (I just installed vgo today)
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/Users/mike/Library/Caches/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/Users/mike/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/usr/local/go"
+GOTMPDIR=""
+GOTOOLDIR="/usr/local/go/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+CXX="clang++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/8f/52n7yvw92z9_qccbwpd5blnw0000gn/T/go-build582893504=/tmp/go-build -gno-record-gcc-switches -fno-common"
+
+What did you do?
+I have a file myfile.go with contents:
+package mypackage
+
+import (
+	"github.com/docker/docker/errdefs"
+)
+
+I can use go get successfully to fetch the errdefs package needed above:
+$ go get -v github.com/docker/docker/errdefs
+# success
+
+But using vgo build fails:
+$ vgo build
+go: creating new go.mod: module github.com/PullRequestInc/testvgo
+go: finding github.com/docker/docker/errdefs latest
+myfile.go:4:2: unknown import path "github.com/docker/docker/errdefs": cannot find module providing package github.com/docker/docker/errdefs
+
+My guess it has something to do with either:
+
+The weird way this package in github redirects to moby. (It's unclear to me how go get looks up these dependencies)
+Possibly the fact that there's not an errdefs.go file in https://github.com/moby/moby/tree/master/errdefs
+
+Note that I don't encounter this problem when importing other related packages:
+import (
+	//"github.com/docker/docker/errdefs"
+	"github.com/docker/docker/api/types"
+        "github.com/docker/docker/api/types/container"
+        "github.com/docker/docker/client"	
+)
+
+What did you expect to see?
+I expected vgo build to succeed.
+What did you see instead?
+vgo build failed with error:
+myfile.go:4:2: unknown import path "github.com/docker/docker/errdefs": cannot find module providing package github.com/docker/docker/errdefs
+

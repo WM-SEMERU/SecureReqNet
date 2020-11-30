@@ -1,0 +1,18 @@
+Argument 1 passed to Descriptor::getClassDescription() must be of the type string
+
+
+Symfony version(s) affected: 4.2.4
+Description
+Running the command "debug:container kernel --format=json" results in an error
+`In Descriptor.php line 292:
+[Symfony\Component\Debug\Exception\FatalThrowableError]
+Argument 1 passed to Symfony\Bundle\FrameworkBundle\Console\Descriptor\Descriptor::getClassDescription() must be of the type string, null given, called in ####\vendor\symfony\framework-bundle\Console\Descriptor\JsonDescriptor.php on line 223
+`
+How to reproduce
+
+Download fresh copy of the symfony/skeleton
+Run "bin\console debug:container kernel --format=json"
+
+Possible Solution
+Notable that ServiceID kernel has no classname associated with it
+Believe this is related to this: #28117

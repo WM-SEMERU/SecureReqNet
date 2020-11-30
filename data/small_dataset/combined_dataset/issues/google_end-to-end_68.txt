@@ -1,0 +1,12 @@
+User can create a key without a passphrase
+
+
+From michael....@gmail.com on June 06, 2014 09:42:05
+Is this report about the crypto library or the extension?
+extension
+What is the security bug?
+The user can create a key pair which is directly saved unencrypted to the local storage. In a second action the key can be secured with a passphrase.
+How would someone exploit it?
+After creating the kay pair, someone with access to the file system of the computer could access the local storage where the key is not secured with a passphrase.
+On creation the user should be ask for a passphrase, so the key pair can be directly stored in the local storage secured with a passphrase. If the user doesn't want a passphrase a warning should be shown.
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=31

@@ -1,0 +1,8 @@
+JS identifier length not limited (was Risk of too many spicy wunderbars)
+
+
+Original issue 488 created by jasvir on 2008-06-11T01:02:58.000Z:
+The length of identifiers is browser dependent.  If an identifier is too
+long and does not generate a syntax error or gets truncated, it may be used
+to prevent trailing underbars on a variable from being applied.
+Caja should enforce a short identifier length.

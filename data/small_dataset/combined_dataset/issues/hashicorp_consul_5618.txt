@@ -1,0 +1,302 @@
+When a service instance is deregistered TTL checks for all instances of that service are deregistred.
+
+
+When a service instance is deregistered TTL checks for all instances of that service are deregistred.
+When filing a bug, please include the following headings if possible. Any example text in this template can be deleted.
+Overview of the Issue
+After updating from version 1.4.2 to 1.4.3 we have an issue. When a service instance of a service is deregistered TTL checks for all instances of that service are deregistred.
+I am unsure but a quick review of this issue leads me to believe the issue is related to this fix that was merged in 1.4.3
+#4998
+Reproduction Steps
+Steps to reproduce this issue, eg:
+
+Create a cluster with 1 server node (v1.4.3)
+Register a service (v1/agent/service/register)
+
+{
+  "ID": "instance1a",
+  "Name": "servicea",
+  "Tags": [
+      "version|v1"
+  ],
+  "Address": "10.3.160.101",
+  "Port": 8088,
+  "Meta": {},
+  "EnableTagOverride": false
+}
+
+
+Register TTL check (/v1/agent/check/register) associated with that service using the agent check endpoint.
+
+{
+  "ID": "servicea-instance1a-DataCentera-ttl",
+  "Name": "servicea-instance1a-ttl",
+  "TTL": "15s",
+  "ServiceID": "instance1a",
+  "ServiceName": "servicea"
+}
+
+
+Register a new instance of that service (/v1/agent/service/register) with a unique id but same service name.
+
+{
+  "ID": "instance2a",
+  "Name": "servicea",
+  "Tags": [
+      "version|v1"
+  ],
+  "Address": "10.3.160.101",
+  "Port": 8088,
+  "Meta": {},
+  "EnableTagOverride": false
+}
+
+
+Register an TTL check for this service (/v1/agent/check/register)
+
+{
+  "ID": "servicea-instance2a-DataCentera-ttl",
+  "Name": "servicea-instance2a-ttl",
+  "TTL": "15s",
+  "ServiceID": "instance2a",
+  "ServiceName": "servicea"
+}
+
+[note: I did verify, both checks exist here]
+
+GET (/v1/agent/checks)
+{
+    "servicea-instance1a-DataCentera-ttl": {
+        "Node": "centos7-x64-015",
+        "CheckID": "servicea-instance1a-DataCentera-ttl",
+        "Name": "servicea-instance1a-ttl",
+        "Status": "critical",
+        "Notes": "",
+        "Output": "",
+        "ServiceID": "instance1a",
+        "ServiceName": "servicea",
+        "ServiceTags": [
+            "version|v1"
+        ],
+        "Definition": {},
+        "CreateIndex": 0,
+        "ModifyIndex": 0
+    },
+    "servicea-instance2a-DataCentera-ttl": {
+        "Node": "centos7-x64-015",
+        "CheckID": "servicea-instance2a-DataCentera-ttl",
+        "Name": "servicea-instance2a-ttl",
+        "Status": "critical",
+        "Notes": "",
+        "Output": "",
+        "ServiceID": "instance2a",
+        "ServiceName": "servicea",
+        "ServiceTags": [
+            "version|v1"
+        ],
+        "Definition": {},
+        "CreateIndex": 0,
+        "ModifyIndex": 0
+    }
+}
+
+
+
+
+Deregister first service PUT (/v1/agent/service/deregister/instance1a)
+
+
+result both TTLs are deregistered. In version 1.4.2 this is not an issue, only the expected TTL check is deregistered.
+
+
+Consul info for both Client and Server
+
+Client info
+No Client, used API endpoints.
+
+
+
+Server info
+agent:
+        check_monitors = 0
+        check_ttls = 1
+        checks = 0
+        services = 1
+build:
+        prerelease =
+        revision = 567e41ff
+        version = 1.4.3
+consul:
+        acl = enabled
+        bootstrap = true
+        known_datacenters = 1
+        leader = true
+        leader_addr = 10.3.161.234:8300
+        server = true
+raft:
+        applied_index = 123
+        commit_index = 123
+        fsm_pending = 0
+        last_contact = 0
+        last_log_index = 123
+        last_log_term = 3
+        last_snapshot_index = 0
+        last_snapshot_term = 0
+        latest_configuration = [{Suffrage:Voter ID:a3ebd483-195b-b90a-f485-56f0650e1432 Address:10.3.161.234:8300}]
+        latest_configuration_index = 1
+        num_peers = 0
+        protocol_version = 3
+        protocol_version_max = 3
+        protocol_version_min = 0
+        snapshot_version_max = 1
+        snapshot_version_min = 0
+        state = Leader
+        term = 3
+runtime:
+        arch = amd64
+        cpu_count = 2
+        goroutines = 85
+        max_procs = 2
+        os = linux
+        version = go1.11.4
+serf_lan:
+        coordinate_resets = 0
+        encrypted = true
+        event_queue = 1
+        event_time = 2
+        failed = 0
+        health_score = 0
+        intent_queue = 0
+        left = 0
+        member_time = 1
+        members = 1
+        query_queue = 0
+        query_time = 1
+serf_wan:
+        coordinate_resets = 0
+        encrypted = true
+        event_queue = 0
+        event_time = 1
+        failed = 0
+        health_score = 0
+        intent_queue = 0
+        left = 0
+        member_time = 1
+        members = 1
+        query_queue = 0
+        query_time = 1
+
+
+
+Operating system and Environment details
+OS, Architecture, and any other information you can provide about the environment.
+docker info
+
+docker info
+Containers: 5
+ Running: 4
+ Paused: 0
+ Stopped: 1
+Images: 128
+Server Version: 18.09.0
+Storage Driver: overlay2
+ Backing Filesystem: extfs
+ Supports d_type: true
+ Native Overlay Diff: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host ipvlan macvlan null overlay
+ Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version: c4446665cb9c30056f4998ed953e6d4ff22c7c39
+runc version: 4fc53a81fb7c994640722ac585fa9ca548971871
+init version: fec3683
+Security Options:
+ seccomp
+  Profile: default
+Kernel Version: 3.10.0-862.14.4.el7.x86_64
+Operating System: CentOS Linux 7 (Core)
+OSType: linux
+Architecture: x86_64
+CPUs: 2
+Total Memory: 3.702GiB
+Name: CentOS7-x64-015
+ID: 2CRS:YDBH:K4YU:5QB7:GOZ6:7EDP:T5XY:OSME:XATG:3C47:AV2E:3RKI
+Docker Root Dir: /data/var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+HTTP Proxy: http://xxxxx:xxxxx@10.1.16.13:3128
+HTTPS Proxy: http://xxxxx:xxxxx@10.1.16.13:3128
+No Proxy: 127.0.0.1,localhost,.kroger.com
+Registry: https://index.docker.io/v1/
+Labels:
+Experimental: true
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+Product License: Community Engine
+
+
+docker --version
+Docker version 18.09.0, build 4d60db4
+
+To use the same image as this. I am not going to provide how I started the container, here.
+docker pull consul:1.4.3
+
+Log Fragments
+
+2019/04/08 15:43:58 [DEBUG] agent: Service tag "version|v1" will not be discoverable via DNS due to invalid characters. Valid characters include all alpha-numerics and dashes.
+2019/04/08 15:43:58 [INFO] agent: Synced service "instance1a"
+2019/04/08 15:43:58 [DEBUG] agent: Node info in sync
+2019/04/08 15:43:58 [DEBUG] http: Request PUT /v1/agent/service/register (5.955147ms) from=10.9.87.5:60204
+2019/04/08 15:43:58 [DEBUG] agent: Service "instance1a" in sync
+2019/04/08 15:43:58 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:01 [DEBUG] agent: Service "instance1a" in sync
+2019/04/08 15:44:01 [INFO] agent: Synced check "servicea-instance1a-DataCentera-ttl"
+2019/04/08 15:44:01 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:01 [DEBUG] agent: Service "instance1a" in sync
+2019/04/08 15:44:01 [DEBUG] agent: Check "servicea-instance1a-DataCentera-ttl" in sync
+2019/04/08 15:44:01 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:01 [DEBUG] http: Request PUT /v1/agent/check/register (4.605148ms) from=10.9.87.5:60204
+2019/04/08 15:44:03 [DEBUG] agent: Service tag "version|v1" will not be discoverable via DNS due to invalid characters. Valid characters include all alpha-numerics and dashes.
+2019/04/08 15:44:03 [DEBUG] agent: Service "instance1a" in sync
+2019/04/08 15:44:03 [INFO] agent: Synced service "instance2a"
+2019/04/08 15:44:03 [DEBUG] agent: Check "servicea-instance1a-DataCentera-ttl" in sync
+2019/04/08 15:44:03 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:03 [DEBUG] http: Request PUT /v1/agent/service/register (5.269624ms) from=10.9.87.5:60204
+2019/04/08 15:44:03 [DEBUG] agent: Service "instance1a" in sync
+2019/04/08 15:44:03 [DEBUG] agent: Service "instance2a" in sync
+2019/04/08 15:44:03 [DEBUG] agent: Check "servicea-instance1a-DataCentera-ttl" in sync
+2019/04/08 15:44:03 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:06 [DEBUG] agent: Service "instance1a" in sync
+2019/04/08 15:44:06 [DEBUG] agent: Service "instance2a" in sync
+2019/04/08 15:44:06 [DEBUG] agent: Check "servicea-instance1a-DataCentera-ttl" in sync
+2019/04/08 15:44:06 [INFO] agent: Synced check "servicea-instance2a-DataCentera-ttl"
+2019/04/08 15:44:06 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:06 [DEBUG] agent: Service "instance1a" in sync
+2019/04/08 15:44:06 [DEBUG] agent: Service "instance2a" in sync
+2019/04/08 15:44:06 [DEBUG] agent: Check "servicea-instance1a-DataCentera-ttl" in sync
+2019/04/08 15:44:06 [DEBUG] agent: Check "servicea-instance2a-DataCentera-ttl" in sync
+2019/04/08 15:44:06 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:06 [DEBUG] http: Request PUT /v1/agent/check/register (4.915419ms) from=10.9.87.5:60204
+2019/04/08 15:44:09 [DEBUG] http: Request GET /v1/agent/checks (339.915µs) from=10.9.87.5:60204
+2019/04/08 15:44:13 [DEBUG] agent: removed check "servicea-instance1a-DataCentera-ttl"
+2019/04/08 15:44:13 [DEBUG] agent: removed service "instance1a"
+2019/04/08 15:44:13 [DEBUG] agent: Service "instance2a" in sync
+2019/04/08 15:44:13 [INFO] agent: Deregistered service "instance1a"
+2019/04/08 15:44:13 [INFO] agent: Deregistered check "servicea-instance1a-DataCentera-ttl"
+2019/04/08 15:44:13 [INFO] agent: Deregistered check "servicea-instance2a-DataCentera-ttl"
+2019/04/08 15:44:13 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:13 [DEBUG] http: Request PUT /v1/agent/service/deregister/instance1a (6.741026ms) from=10.9.87.5:60204
+2019/04/08 15:44:13 [DEBUG] agent: Service "instance2a" in sync
+2019/04/08 15:44:13 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:13 [DEBUG] agent: Service "instance2a" in sync
+2019/04/08 15:44:13 [DEBUG] agent: Node info in sync
+2019/04/08 15:44:15 [DEBUG] http: Request GET /v1/agent/checks (257.054µs) from=10.9.87.5:60204
+
+

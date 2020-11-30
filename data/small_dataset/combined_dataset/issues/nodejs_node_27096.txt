@@ -1,0 +1,9 @@
+lib: use safe methods from primordials
+
+
+This changes the primordials to expose built-in prototypes with their
+methods already uncurried.
+The uncurryThis function is therefore moved to the primordials.
+All uses of uncurryThis on built-ins are changed to import the relevant
+prototypes from primordials.
+All uses of Function.call.bind are also changed to use primordials.

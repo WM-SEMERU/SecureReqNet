@@ -1,0 +1,21 @@
+Add testcases for all documented safeguards
+
+
+To clarify: I am not blaming anyone. I view this as a problem of the process that we used, the aim of this issue is to seek how we can actually improve things. I myself LGTMd the change that introduced the initial safeguard without a testcase.
+This is a post-mortem of nodejs-private/security#202 (see 40a7bee).
+That itself was a minor issue which is very unlikely to be exploitable (more unlikely than the second one fixed in the same release), but it revealed what I think is a process problem.
+That issue was introduced in #18790 which removed the corresponding safeguard from the code while optimizing performance. The safeguard was initially introduced in #4682, and was documented in the code — that didn't save it from being removed:
+
+This prevents accidentally sending in a number that would be interpretted as a start offset.
+
+My opinion is that a testcase should have been introduced at the same time when the comment was. Or, perhaps, even instead of the comment — the comment turned out to be not effective.
+So, the proposal is to:
+
+Collect a list of similar comments in the codebase that warn against changing some code or explain why is it needed — that hints that the common usecase might work with that code removed, but doing so is expected to break some rare usecase or cause a potential security issue.
+Try removing/modifying the safegaurds and see if any tests break, make a list of safeguards that do not break tests when are tampered with.
+Add missing tests.
+Update to try spotting such things (i.e. untested expectations) in the future while reviewing PRs. Should be fairly easy to spot things that were worth a comment in the code and to question if those are tested?
+
+There might be none — but I would prefer if we re-checked that.
+Side note: code coverage is not an effective measure to collect the data here or prevent the issue.
+/cc @nodejs/security-wg

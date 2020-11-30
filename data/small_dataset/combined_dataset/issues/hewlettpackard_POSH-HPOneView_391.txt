@@ -1,0 +1,18 @@
+New-HPOVAddressPoolSubnet incorrectly has -gateway as mandatory
+
+
+Please fill in as much information as possible to help resolve your issue.
+Expected Behavior
+Running a PS script to create the Image Streamer Address pool.
+Was not planning on adding a gateway but when runing the script I get prompted for gateway since it's tagged as mandatory, which is not consistent with OV UI.
+# Add iSCSI IS Pool 
+$netid="192.168.2.0"
+New-HPOVAddressPoolSubnet -NetworkID $netid -Subnetmask 255.255.255.0 
+Get-HPOVAddressPoolSubnet -NetworkId $netid | New-HPOVAddressPoolRange -Name "iSCSI-Streamer_Boot" -Start 192.168.2.10 -end 192.168.2.30
+
+Actual Behavior
+Steps to reproduce
+Run the lines above
+Version Information
+HPE OneView PowerShell Library Version : 4.10.1928.2181
+HPE OneView Appliance Version: 4.10.04-0370820

@@ -1,0 +1,4 @@
+[Security] Remember me: samesite cookie
+
+
+symfony/symfony#27976

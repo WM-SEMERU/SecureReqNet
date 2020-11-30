@@ -1,0 +1,13 @@
+Authorization Policy should be able to require "trusted images"
+
+
+First, need to define what a "trusted" image is:
+
+docker image name has some prefix.
+define an "image" resource, which has labels (as has previously been proposed, and may already exist in openshift)
+
+Suggest definitely doing the first, since this is composible with people's existing use of docker.  Also consider second if openShift folks want it.
+Second, need a way to further restrict a policy which allows pod creation to require all images to be trusted.   Amazon IAM has "Cond" sections in their policy, and they predefine certain condition matchers.
+We might have something like this:
+{User:"alice", Kind:"pods", Namespace:"prod", Conds: [{Cond:"ContImagesHaveImagePrefix", Arg1:"quay.io/alicecorp/trusted"}]}
+

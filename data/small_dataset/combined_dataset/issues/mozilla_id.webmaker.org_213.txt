@@ -1,0 +1,12 @@
+Implement CSRF
+
+
+
+ find out how this will work with the react router
+ should do csrf on per-request basis (rather than per-page-load)?
+
+is this really more secure?
+hash per request or secret per request?
+
+
+

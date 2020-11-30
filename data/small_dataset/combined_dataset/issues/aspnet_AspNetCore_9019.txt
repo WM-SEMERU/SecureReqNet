@@ -1,0 +1,9 @@
+Controller not hitting and no response from server, Browser keep loading
+
+
+Hi,
+Controller not hitting and no response from server, Browser keep loading .
+To reproduce the issue, just download the attached application, then run the application. then you will get home page, it contains a text box and file uploader. Just click submit button. controller will not hit.
+Then problem is when i use file , controller is hitting if i remove the below code from the BModel class
+public IFormFileCollection myfile { get; set; }
+WebApplication2.zip

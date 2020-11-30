@@ -1,0 +1,7 @@
+[REFACTOR] Messenger - Serializer groups
+
+
+Hi everyone,
+I've faced some problems yesterday due to groups definition (mainly about embedded objects) and I think it could be a good idea to add a tip (or even a note?) about the groups usage.
+Any idea?
+Thanks :)

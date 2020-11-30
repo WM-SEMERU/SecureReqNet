@@ -1,0 +1,65 @@
+New Guard Authentication System (e.g. putting the joy back into security)
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+at least partially: #14300, #11158, #11451, #10035, #10463, #8606, probably more
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#5265
+
+
+
+Hi guys!
+Though it got much easier in 2.4 with pre_auth, authentication is a pain in Symfony. This introduces a new authentication provider called guard, with one goal in mind: put everything you need for any authentication system into one spot.
+How it works
+With guard, you can perform custom authentication just by implementing the GuardAuthenticatorInterface and registering it as a service. It has methods for every part of a custom authentication flow I can think of.
+For a working example, see https://github.com/weaverryan/symfony-demo/tree/guard-auth. This uses 2 authenticators simultaneously, creating a system that handles form login and api token auth with a respectable amount of code. The security.yml is also quite simple.
+This also supports "manual login" without jumping through hoops: https://github.com/weaverryan/symfony-demo/blob/guard-auth/src/AppBundle/Controller/SecurityController.php#L45
+I've also tested with "remember me" and "switch user" - no problems with either.
+I hope you like it :).
+What's Needed
+
+
+Other Use-Cases?: Please think about the code and try it. What use-cases are we not covering? I want Guard to be simple, but cover the 99.9% use-cases.
+
+
+Remember me functionality cannot be triggered via manual login. That's true now, and it's not fixed, and it's tricky.
+
+
+Deprecations?
+This is a new feature, so no deprecations. But, creating a login form with a guard authenticator is a whole heck of a lot easier to understand than form_login or even simple_form. In a perfect world, we'd either deprecate those or make them use "guard" internally so that we have just one way of performing authentication.
+Thanks!

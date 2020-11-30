@@ -1,0 +1,4 @@
+Implement contextual identity?
+
+
+Firefox is getting contextual identity: https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers Implementing something like this in Servo should be straightforward, once we've got private browsing in place.

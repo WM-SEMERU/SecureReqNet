@@ -1,0 +1,8 @@
+tls: remove client renegotiation?
+
+
+The docs are talking about a DoS vector in the TLS session renegotiation feature, and from what I gather, this extension has no practical use and serves purely as a potential attack vector. I think it may be removable, or are there legimitate uses?
+Some more information:
+[1] https://wiki.mozilla.org/Security:Renegotiation
+[2] https://blog.qualys.com/ssllabs/2011/10/31/tls-renegotiation-and-denial-of-service-attacks
+cc: @nodejs/security

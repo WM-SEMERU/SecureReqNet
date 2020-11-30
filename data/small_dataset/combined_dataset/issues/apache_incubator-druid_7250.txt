@@ -1,0 +1,4 @@
+Add support for optional client authentication on TLS
+
+
+Fixes #6900

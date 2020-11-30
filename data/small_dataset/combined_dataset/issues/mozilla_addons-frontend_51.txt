@@ -1,0 +1,5 @@
+Lets use SRI
+
+
+https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
+SRI will ensure that the JS we get from the server is the JS we expect

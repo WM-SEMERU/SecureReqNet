@@ -1,0 +1,47 @@
+[SecurityComponent] Added a "target_forward" option
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+None
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#3364
+
+
+
+This PR add an target_forward option that makes the DefaultAuthenticationSuccessHandler to forward instead of redirect if login is successful.
+A use case is using XmlHttpRequests, 302 Found redirects might not works with CORS.

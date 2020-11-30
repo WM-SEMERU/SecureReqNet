@@ -1,0 +1,12 @@
+v1/health/state/passing is not protected by ACL
+
+
+Excactly the setup from #2163
+curl http://consul:8500/v1/health/state/passing  | grep fpm
+"CheckID":"fpm55","Name":"fpm TCP on port 9055","Status":"passing","Notes":"","Output":"TCP connect localhost:9055: Success",
+
+while services are not listed at all
+curl http://consul:8500/v1/catalog/services
+{"consul":[]}%
+
+Those curl commands have been run on the same instance, remotely on a consul port running a container - so not credentials whatever

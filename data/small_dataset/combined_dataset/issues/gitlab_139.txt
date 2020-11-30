@@ -1,0 +1,13 @@
+using instruction from here https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/6.4-to-6.5.md
+never modified files by hands 
+
+```
+#sudo -u git -H git checkout 6-5-stable
+
+error: Your local changes to the following files would be overwritten by checkout:
+  db/schema.rb
+Please, commit your changes or stash them before you can switch branches.
+Aborting
+```
+
+can you help me?

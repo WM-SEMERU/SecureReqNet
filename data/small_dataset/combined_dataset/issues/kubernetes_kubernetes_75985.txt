@@ -1,0 +1,13 @@
+Fix besteffort pods for conflicting tolerations
+
+
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+Which issue(s) this PR fixes:
+Fixes #
+Special notes for your reviewer:
+As of now for best effort pods, we are allowing conflicting tolerations meaning, tolerations with same Key, Effect are being appended instead of overwritten. For example if a best effort pod is created with Key:abc, Effect: NoSchedule, Value: Test1 and Key:abc, Effect: NoSchedule. Value:Test2, we are seeing 2 tolerations but in case of pods with other QoS tiers, we are seeing a pod with Key:abc, Effect: NoSchedule. Value:Test2 because the Test2 overwrites the Test1 value. This PR fixes so that BE pods have consistent behaviour with other pods.
+Does this PR introduce a user-facing change?:
+Tolerations with the same key and effect will be merged into one which has the value of the latest toleration for best effort pods.
+

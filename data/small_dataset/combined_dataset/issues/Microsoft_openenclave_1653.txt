@@ -1,0 +1,4 @@
+Minor fixes to CHANGELOG.md
+
+
+Moved checking support for AVX in platform/OS to correct section and some minor fixes to CHANGELOG.md.

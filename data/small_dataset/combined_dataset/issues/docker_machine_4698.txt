@@ -1,0 +1,6 @@
+how revert  `sudo chown -R $(whoami) /usr/local/bin` and back to root as owner
+
+
+I want to restart the permissions on my /usr/local/bin I used this command  sudo chown -R $(whoami) /usr/local/bin, it was an error I cannot get permissions to docker-compose and now I can't restart the permissions for  /usr/local/bin
+in terminate input  sudo chown -R $(whoami) /usr/local/bin
+Originally posted by @zhangqinghe in #652 (comment)

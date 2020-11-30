@@ -1,0 +1,5 @@
+Add health endpoint
+
+
+The broker needs a health endpoint so helm can do a proper liveness and health check.
+This endpoint should validate access to the GCP project from the provided credentials and database connection.

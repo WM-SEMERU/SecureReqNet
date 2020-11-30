@@ -1,0 +1,127 @@
+AddOAuth authorization failing and it leads to infinite recursion loop
+
+
+Hi,
+In the ASP.NET Razor pages (Core 2.2) application, I'm defining OAuth provider.
+In application is /User authorize page. After to navigate to authorize page, default challenge schema is used and I am redirected to the login page of the Identity provider.
+After sign-in Identity provider redirects to /app-signin and the provider is able to obtain an authorize_code, exchange authorize_code for a token and get user details.
+But only .AspNetCore.Correlation.app cookie is stored in the user agent and also I would expect .AspNetCore.app. cookie in the user agent.
+But apparently, authentication from some reason (missing .AspNetCore.challangescheme. cookie?) fails and the user agent is again redirected to the Identity provider, but this time authorization cookie of Identity provider is already assigned and user is automatically sign-in and user agent is redirected to /app-signin and the whole process repeats several times and fails with redirected you too many times. in the end.
+Not sure if it's a bug or just misconfiguration of something - are you able to see any misconfiguration?
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = "app";
+    })
+    .AddCookie()
+    .AddOAuth("app", options =>
+    {
+        options.ClientId = "appclient";
+        options.ClientSecret = "3f97501d279b44f3bd69e8eec64cf336";
+
+        options.CallbackPath = new PathString("/app-signin");
+
+        options.Scope.Add("app_identity");
+        options.Scope.Add("profile");
+        options.Scope.Add("email");
+
+        options.AuthorizationEndpoint = "http://dev/services/identity/connect/authorize";
+        options.TokenEndpoint = "http://dev/services/identity/connect/token";
+        options.UserInformationEndpoint = "http://dev/services/identity/api/user-profile";
+
+        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
+        options.ClaimActions.MapJsonKey(ClaimTypes.GivenName, "firstName");
+        options.ClaimActions.MapJsonKey(ClaimTypes.Surname, "lastName");
+        options.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
+
+        options.Events = new OAuthEvents
+        {
+            OnCreatingTicket = async context =>
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
+                request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
+
+                var response = await context.Backchannel.SendAsync(request,
+                                   HttpCompletionOption.ResponseHeadersRead,
+                                   context.HttpContext.RequestAborted);
+                response.EnsureSuccessStatusCode();
+
+                var user = JObject.Parse(await response.Content.ReadAsStringAsync());
+                context.RunClaimActions(user);
+            }
+        };
+    });
+
+    services
+        .Configure<CookiePolicyOptions>(options =>
+        {
+            options.CheckConsentNeeded = context => true;
+            options.MinimumSameSitePolicy = SameSiteMode.Lax;
+        })
+        .AddMvc()
+        .AddRazorPagesOptions(options => options.Conventions.AuthorizePage("/User"))
+        .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+ }
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseStaticFiles();
+    app.UseAuthentication();
+    app.UseMvc();
+}
+Application output
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5001/User
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Page: /User'
+info: Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker[3]
+      Route matched with { page = "/User"}. Executing page /User
+info: Microsoft.AspNetCore.Authorization.DefaultAuthorizationService[2]
+Authorization failed.
+info: Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker[3]
+Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+info: Microsoft.AspNetCore.Mvc.ChallengeResult[1]
+      Executing ChallengeResult with authentication schemes().
+info: Microsoft.AspNetCore.Authentication.OAuth.OAuthHandler`1[[Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions, Microsoft.AspNetCore.Authentication.OAuth, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]][12]
+        AuthenticationScheme: app was challenged.
+  info: Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker[4]
+        Executed page /User in 60.7032ms
+  info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+        Executed endpoint 'Page: /User'
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 116.835ms 302
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5001/app-signin?code=3a06464...E-Ri
+info: Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler[10]
+      AuthenticationScheme: Cookies signed in.
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 324.1941ms 302
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5001/User
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Page: /User'
+info: Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker[3]
+      Route matched with { page = "/User"}. Executing page /User
+info: Microsoft.AspNetCore.Authorization.DefaultAuthorizationService[2]
+Authorization failed.
+info: Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker[3]
+Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+info: Microsoft.AspNetCore.Mvc.ChallengeResult[1]
+      Executing ChallengeResult with authentication schemes().
+info: Microsoft.AspNetCore.Authentication.OAuth.OAuthHandler`1[[Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions, Microsoft.AspNetCore.Authentication.OAuth, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]][12]
+        AuthenticationScheme: app was challenged.
+  info: Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker[4]
+        Executed page /User in 15.5423ms
+  info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+        Executed endpoint 'Page: /User'
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 32.1902ms 302
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5001/app-signin?code=416b8...NRBb
+...
+
+In the log you can see correct authentication scheme was challenged AuthenticationScheme: app was challenged. and the user should be authentication with a cookie (AuthenticationScheme: Cookies signed in.) but then authentication failed with Authorization failed..

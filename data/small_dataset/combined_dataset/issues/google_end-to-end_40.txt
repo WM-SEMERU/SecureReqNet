@@ -1,0 +1,14 @@
+Switch to OpenPGP.js as a PGP encryption stack (already audited and community effort)
+
+
+From n...@apps.globaleaks.org on June 03, 2014 23:29:16
+Is this report about the crypto library or the extension?
+crypto library
+What is the security bug?
+The current crypto library implementing OpenPGP stack for end-to-end is relatively young and unaudited.
+To improve the security of the platform, it's suggested to integrate and switch OpenPGP.js http://openpgpjs.org/
+OpenPGP.js has been already audited https://github.com/openpgpjs/openpgpjs/wiki/Cure53-security-audit and it's used by known client-side-crypto applications such as Mailvelope https://www.mailvelope.com/ .
+Additionally OpenPGP.js is now being used by multiple-teams and projects around the world with a good "community effort" .
+By having a multi-stakeholder approach to the development of an encryption library for OpenPGP.js that's already used by other projects, would benefit the security of the end-to-end project but also the community at large.
+Would you join the mailing list list@openpgpjs.org on http://list.openpgpjs.org/ to introduce a discussion on possible integration?
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=3

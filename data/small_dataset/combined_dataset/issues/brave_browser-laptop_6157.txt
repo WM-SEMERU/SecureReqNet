@@ -1,0 +1,12 @@
+Show more details on secure connections
+
+
+Test plan
+#7319 (comment)
+
+From support 
+
+Clicking the lock just gives a relatively less-than-useful "Secure connection / This page was loaded securely over HTTPS." message. There is no information about protocol details such as cipher choice or CA
+
+Similar to #791
+cc: @diracdeltas

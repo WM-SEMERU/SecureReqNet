@@ -1,0 +1,91 @@
+[Messenger] Allows to register handlers on a specific transport (and get rid of this handler alias)
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30110
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11236
+
+
+
+With the #30008 pull-request in, we can now do the following:
+framework:
+    messenger:
+        transports:
+            events:
+                dsn: amqp://guest:guest@127.0.0.1/%2f/events
+                options:
+                    queues:
+                        3rdparty:
+                            binding_keys: [ 3rdparty ]
+                        projection:
+                            binding_keys: [ projection ]
+
+            events_3rdparty: amqp://guest:guest@127.0.0.1/%2f/events?queues[3rdparty]
+            events_projection: amqp://guest:guest@127.0.0.1/%2f/events?queues[projection]
+
+        routing:
+            'App\Message\RegisterBet': events
+This will bind two queues to the events exchange, fantastic:
+
+
+Now, in this setup, the message will be duplicated within the 3rdparty & projection queues. If you just run the consumer for each transport, it will consume the message and call all the handlers. You can't do different things based on which queue you have consumed the message. This pull-request adds the following feature:
+class RegisterBetHandler implements MessageSubscriberInterface
+{
+    public function __invoke(RegisterBet $message)
+    {
+        var_dump('Do something only when the message comes from the events_projection transport');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getHandledMessages(): iterable
+    {
+        yield RegisterBet::class => [
+            'transport' => 'events_projection',
+        ];
+    }
+}
+
+In the debugger, it looks like this:
+

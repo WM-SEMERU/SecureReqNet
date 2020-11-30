@@ -1,0 +1,81 @@
+Sync: orders for other and mobile child bookmarks
+
+
+Description
+From conversation with @darkdh .
+
+https://github.com/brave/brave-core/blob/27c5932db8909cf01c0b16f55902bba65f8db98c/components/brave_sync/client/bookmark_change_processor.cc#L699
+This is weird. Two questions here.
+
+Do we need to assign order to permanent nodes?
+Assume permanent nodes require order, should it be 1.[device_id].1 for toolbar and 1.[device_id].2 for other bookmarks? This line will make 1.[device_id].0 for both toolbar and other bookmarks
+
+
+This does not causes problems now:
+
+when 2nd device is desktop the bookmark goes into separate folders so they are ordering between siblings.
+when 2nd device is Android the bookmark goes into еру same folder (Mobile bookmarks) and impossible get strint ordering.
+
+But it is required to have it fixed for the migration into Chromium sync infrastructure.
+Steps to Reproduce
+
+Get an empty profile
+Create bookmark with title BB_Item  and url http://bb_item.com/ in the folder Bookmarks bar
+Create bookmark with title OB_Item  and url http://ob_item.com/ in the folder Other bookmarks
+Create sync chain on brave-core desktop.
+Connect Android or desktop device to chain
+See logs either in console or inspector
+
+
+Actual result:
+[
+{"action":0,
+"bookmark":{"hideInToolbar":true,"isFolder":false,
+==> "order":"1.0.0.1",
+"site":{"creationTime":0,"customTitle":"OB_Item","favicon":"","lastAccessedTime":0,
+"location":"http://ob_item.com/",
+==> "title":"OB_Item"
+},"parentFolderObjectId":{}},"deviceId":{"0":0},"objectData":"bookmark",
+"objectId":{"0":76,"1":20,"2":233,"3":211,"4":201,"5":39,"6":111,"7":78,"8":121,"9":79,"10":194,"11":9,"12":25,"13":4,"14":188,"15":234},
+"syncTimestamp":1554126894011.489},
+
+{"action":0,
+"bookmark":{"hideInToolbar":false,"isFolder":false,
+==> "order":"1.0.0.1",
+"site":{"creationTime":0,"customTitle":"BB_Item","favicon":"","lastAccessedTime":0,"location":"http://bb_item.com/",
+==> "title":"BB_Item"
+},"parentFolderObjectId":{}},"deviceId":{"0":0},"objectData":"bookmark","objectId":{"0":23,"1":6,"2":238,"3":202,"4":248,"5":190,"6":76,"7":235,"8":49,"9":30,"10":253,"11":12,"12":90,"13":135,"14":123,"15":104},
+"syncTimestamp":1554126894012.078
+}
+]", source: chrome-extension://nomlkjnggnifocmealianaaiobmebgil/extension/background.js (58)
+
+Expected result:
+Have different order like:
+BB_Item - 1.0.1.1
+OB_Item - 1.0.2.1
+Reproduces how often:
+Easily
+Brave version (brave://version info)
+
+
+
+Brave
+0.65.3 Chromium: 73.0.3683.75 (Developer Build) (64-bit)
+
+
+
+
+Revision
+909ee014fcea6828f9a610e6716145bc0b3ebf4a-refs/branch-heads/3683@{#803}
+
+
+OS
+Linux
+
+
+
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+Yes
+

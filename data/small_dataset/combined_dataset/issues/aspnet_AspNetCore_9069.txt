@@ -1,0 +1,7 @@
+Re-enable SignalR functional tests
+
+
+After many failures of these tests in #8877, I skipped the entire test suite by adding <SkipTests/> to src/SignalR/clients/ts/FunctionalTests/SignalR.Npm.FunctionalTests.npmproj Tests should be examined and re-enabled when failures are understood.
+Problem has occurred in multiple Test… jobs but affected mostly the macOS job in #8877.
+See https://dev.azure.com/dnceng/public/_build/results?buildId=142691 for example.
+@anurse please added any further labels and otherwise do the needful.

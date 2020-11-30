@@ -1,0 +1,33 @@
+
+```
+xxx:/home/git/gitlab# sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
+Instance method "lock!" is already defined in ActiveRecord::Base, use generic helper instead or set StateMachine::Machine.ignore_method_conflicts = true.
+
+System information
+System:
+Current User:   git
+Using RVM:      no
+Ruby Version:   2.1.2p95
+Gem Version:    2.2.2
+Bundler Version:1.6.3
+Rake Version:   10.3.2
+Sidekiq Version:2.17.0
+
+GitLab information
+Version:        7.0.0
+Revision:       de9bf7d
+Directory:      /home/git/gitlab
+DB Adapter:     mysql2
+URL:            http://xxx
+HTTP Clone URL: http://xxx/some-project.git
+SSH Clone URL:  git@xxx:some-project.git
+Using LDAP:     yes
+Using Omniauth: no
+
+GitLab Shell
+Version:        1.9.6
+Repositories:   /home/git/repositories/
+Hooks:          /home/git/gitlab-shell/hooks/
+Git:            /usr/bin/git
+[WARN] mysql2 failed to invalidate FD safely, leaking some memory
+```

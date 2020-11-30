@@ -1,0 +1,15 @@
+Enable 2FA via Email or TOTP for Developer Accounts
+
+
+Initially Filed Here:
+https://bugzilla.mozilla.org/show_bug.cgi?id=1466712
+Context
+Chrome extension developer accounts were compromised in 2017 resulting in malicious addons being pushed to Chrome users. This could have been prevented by 2FA.
+https://arstechnica.com/information-technology/2017/08/after-phishing-attacks-chrome-extensions-push-adware-to-millions/
+Firefox Accounts
+Since Q1, FxA has the capability to require certain logins to go through a verification loop.
+This verification loop can be done by email where the user has to enter the codes we emailed them. ( See Bug 1432189 )
+Alternatively, as of this week, for increased security, it is possible to force users to enable 2FA via TOTP. For example, this will be forced for IAM team's integration of FxA into Auth0.
+Description
+Enable at a minimum email confirmation loops for developer accounts.
+If desired, force developers to turn on TOTP. (increased friction over checking an email due to effort to setup)

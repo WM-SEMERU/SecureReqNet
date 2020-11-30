@@ -1,0 +1,4 @@
+Create a README.md
+
+
+This is mostly a copy of the introductory text on the old Google developers site with a link pointing back there for the rest of the documentation.

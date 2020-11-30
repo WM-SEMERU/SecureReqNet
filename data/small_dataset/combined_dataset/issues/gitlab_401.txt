@@ -1,0 +1,114 @@
+1. **Summary:** When clicking the Reply button in a Merge Request diff (or anywhere a comment can be replied to), if the click occurs inside the ``icon-comment`` icon inside the Reply button, then the comment form spawns *inside* the Reply button.
+1. **Steps to reproduce:**
+    * Create a new Merge Request
+    * Make a comment on a line of code in the MR diff tab
+    * Click the icon-comment icon inside the Reply button for that original comment
+      (you should see that the form has replaced the icon-comment icon, inside the button)
+    * Refresh the page
+    * Click the "Reply" text inside the Reply button for that same comment
+      (you should see that the comment form is now in the right spot, under the button)
+1. **Expected behavior:** When I click anywhere on the Reply button, whether it's on the ``icon-comment`` icon or the text, I
+   expect the same behavior: the Reply button should disappear and the comment form should appear where it used to be.
+1. **Observed behavior:** When I click the ``icon-comment`` icon, I see the comment form spawned inside the Reply button, where
+   the icon used to be; subsequent clicks (e.g. clicking Write or Preview) in the form causes more forms to be spawned inside
+   the existing form.  This was confirmed in Firefox 30.0 and Chrome 35.0.1916.153 m
+1. **Relevant logs and/or screenshots:** 
+
+    ![gitlab-reply-bug](https://gitlab.com/uploads/gitlab-org/gitlab-ce/c1ab1e15f9/gitlab-reply-bug.png)
+
+1. **Output of checks**
+    * Health check:
+
+      ```
+      Checking Environment ...
+      
+      Git configured for git user? ... yes
+      
+      Checking Environment ... Finished
+      
+      Checking GitLab Shell ...
+      
+      GitLab Shell version >= 1.9.6 ? ... OK (1.9.6)
+      Repo base directory exists? ... yes
+      Repo base directory is a symlink? ... no
+      Repo base owned by git:git? ... yes
+      Repo base access is drwxrws---? ... yes
+      Satellites access is drwxr-x---? ... yes
+      update hook up-to-date? ... yes
+      update hooks in repos are links: ...
+      [All projects are] ... ok
+      Running /home/git/gitlab-shell/bin/check
+      Check GitLab API access: OK
+      Check directories and files:
+              /home/git/repositories: OK
+              /home/git/.ssh/authorized_keys: OK
+      Test redis-cli executable: redis-cli 2.4.14
+      Send ping to redis server: PONG
+      gitlab-shell self-check successful
+      
+      Checking GitLab Shell ... Finished
+      
+      Checking Sidekiq ...
+      
+      Running? ... yes
+      Number of Sidekiq processes ... 1
+      
+      Checking Sidekiq ... Finished
+      
+      Checking LDAP ...
+      
+      LDAP is disabled in config/gitlab.yml
+      
+      Checking LDAP ... Finished
+      
+      Checking GitLab ...
+      
+      Database config exists? ... yes
+      Database is SQLite ... no
+      All migrations up? ... yes
+      Database contains orphaned UsersGroups? ... no
+      GitLab config exists? ... yes
+      GitLab config outdated? ... no
+      Log directory writable? ... yes
+      Tmp directory writable? ... yes
+      Init script exists? ... yes
+      Init script up-to-date? ... yes
+      projects have namespace: ...
+      [All projects are] ... ok
+      Projects have satellites? ...
+      [All projects are] ... ok
+      Redis version >= 2.0.0? ... yes
+      Your git bin path is "/usr/bin/git"
+      Git version >= 1.7.10 ? ... yes (1.7.10)
+      
+      Checking GitLab ... Finished
+      ```
+    * System info:
+      ```
+      System information
+      System:         Debian 7.5
+      Current User:   git
+      Using RVM:      no
+      Ruby Version:   2.0.0p353
+      Gem Version:    2.0.14
+      Bundler Version:1.6.3
+      Rake Version:   10.3.2
+      Sidekiq Version:2.17.0
+      
+      GitLab information
+      Version:        7.0.0
+      Revision:       de9bf7d
+      Directory:      /home/git/gitlab
+      DB Adapter:     mysql2
+      URL:            http://gitlab.<company-name>.com
+      HTTP Clone URL: http://gitlab.<company-name>.com/some-project.git
+      SSH Clone URL:  git@gitlab.<company-name>.com:some-project.git
+      Using LDAP:     no
+      Using Omniauth: no
+      
+      GitLab Shell
+      Version:        1.9.6
+      Repositories:   /home/git/repositories/
+      Hooks:          /home/git/gitlab-shell/hooks/
+      Git:            /usr/bin/git
+      ```

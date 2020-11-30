@@ -1,0 +1,6 @@
+0.24.x (Chromium 69)
+
+
+Currently a work in progress; this has all the feature work for the following milestone:
+https://github.com/brave/browser-laptop/milestone/125
+Don't merge until QA approved 😄

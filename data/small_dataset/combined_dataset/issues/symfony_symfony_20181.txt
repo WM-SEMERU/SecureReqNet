@@ -1,0 +1,5 @@
+Why ChainUserProvider overwrite the exception ?
+
+
+https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/ChainUserProvider.php#L55
+I want get the last UserNotFoundException with my custom message, why this code overwrite the exception ?

@@ -1,0 +1,3 @@
+After migration from the very-well working pygments-driven highlighting implementation to the highlight.js I'm all the time expierencing wrong autodetection of the file type.
+For VHDL or C/C++ files it does detect as Makefile syntax. Proof:
+![hljs_bug](https://cloud.githubusercontent.com/assets/203261/3146439/0bc58f74-ea47-11e3-9621-c2a8e4750f69.png)

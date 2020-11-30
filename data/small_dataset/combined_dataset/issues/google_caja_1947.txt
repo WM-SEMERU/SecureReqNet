@@ -1,0 +1,8 @@
+Caja is using Proxy.create
+
+
+Original issue 1949 created by evilpies on 2014-12-20T15:19:29.000Z:
+While debugging a Firefox crash (bugzil.la/1113980), I came across code that suggests that Caja is still using Proxy.create. We have plans to remove the old API in the future (bugzil.la/892903), so it would be good if Caja started using the new API.
+Does Caja work without Proxy.create? Do you have any idea how long replacing Proxy.create is going to take?
+Thank you,
+Tom

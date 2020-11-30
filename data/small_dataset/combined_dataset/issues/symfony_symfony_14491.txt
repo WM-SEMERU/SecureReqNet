@@ -1,0 +1,45 @@
+[2.3][SECURITY] Add remember me cookie configuration
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#14490
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

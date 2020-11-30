@@ -1,0 +1,6 @@
+Refresh druid process (CLI / endpoint) should create perms as it creates datasources
+
+
+May i ask a question about permission, superset can support assign permissions with those datasources of druid?
+Cuz i only can find those permission options like [datasource access on [main].[birth_names](id:3)] about SQLite, MySQL etc, rather than Druid.
+

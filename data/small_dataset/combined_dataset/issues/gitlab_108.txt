@@ -1,0 +1,1 @@
+I have a repo, by default it does not have a master branch. It works well when it only has one branch (e.g. develop). But if I push a feature branch (e.g. feature-1) to the repo, I got 500 when I try to browse the repo from the web ui of gitlab.com.

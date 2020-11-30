@@ -1,0 +1,52 @@
+Fix the configurability of CoreExtension deps in standalone usage
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+not yet, but will allow fixing them
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+When using the Forms entrypoint to configure the component, there was no chance to configure dependencies of the CoreExtension, as the one registered without argument was first and would win.
+The builder now delays the prepending of the CoreExtension to do it only if the CoreExtension is not registered explicitly.
+We discovered that when trying to fix tests for the FileType, where we wanted to pass a Translator to it.

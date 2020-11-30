@@ -1,0 +1,1 @@
+There is a problem with files added to the wall, and the wall itself, on a public project. They return 401 when trying to access them if you are not logged in. I'm running GitLab CE 6.7.4.

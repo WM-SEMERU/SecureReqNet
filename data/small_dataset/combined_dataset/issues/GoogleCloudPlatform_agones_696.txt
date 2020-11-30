@@ -1,0 +1,8 @@
+Add Helm Terraform config
+
+
+Deploying agones using agones.dev chart. Version is specified in helm.tf config.
+Needs to get an ability to install current version like make install does.
+This Pull Request adds an ability to install Agones along with creating the cluster using Terraform.
+Contains part of #670 Pull Request, so leave it as draft until rebased with new master.
+For #657.

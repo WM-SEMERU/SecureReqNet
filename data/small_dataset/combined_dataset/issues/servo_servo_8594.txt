@@ -1,0 +1,5 @@
+servo should negotiate more modern secure ciphersuites
+
+
+Right now servo appears to use OpenSSL's defaults, which are very bad. It should use a modern ciphersuite string such as https://github.com/python/cpython/blob/master/Lib/ssl.py#L168-L172
+You can see the list it's sending at https://howsmyssl.com

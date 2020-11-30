@@ -1,0 +1,10 @@
+Add Druid SQL support to JetBrains DataGrip
+
+
+Description
+JetBrains DataGrip is a cross-database IDE which is meant for the current era of teams using multiple databases. It currently supports around 20 different database systems.
+JetBrains provides guidelines to database vendors on how to help them onboarding a new DBMS: https://www.jetbrains.com/datagrip/new_dbms/
+It would be nice if we can gather the required information and work with JetBrains on onboarding.
+Motivation
+With the latest improvements to Druid SQL, including metadata access, it would be a good opportunity to promote Druid and reach a broader audience via an existing database IDE.
+Also, the product is just great to use, so I hope using it with Druid.

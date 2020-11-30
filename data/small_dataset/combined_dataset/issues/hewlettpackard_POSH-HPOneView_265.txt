@@ -1,0 +1,13 @@
+Add a filter function to "Get-HPOVAuditLog"
+
+
+Please fill in as much information as possible to help resolve your issue.
+Can a filter function be added to "Get-HPOVAuditLog" ?
+The current setup gives me the complete audit dump. This is slow and impacts the appliance.
+We would like to add a filter option to only retrieve for example all events of the last 2 hours.
+This works for the Rest API
+Retrieval and scan on recent audits events is required for us, and would be nice to do this completely in powershell. As Oneview lacks a syslog option, this is a workaround to do this.
+Version Information
+HPE OneView PowerShell Library Version (Get-HPOVVersion): 3.00
+HPE OneView Appliance Version:  3.0.1221.2746
+Output from $PSVersionTable on your Windows Host:

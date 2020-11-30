@@ -1,0 +1,50 @@
+[2.8][Security][Guard] Docblock improvement
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Added this small detail which might prevent exception when developing

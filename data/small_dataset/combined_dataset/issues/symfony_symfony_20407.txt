@@ -1,0 +1,29 @@
+[SecurityBundle] FirewallConfig's user_checker should be mandatory
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#20404 (comment)
+
+
+License
+MIT
+
+
+

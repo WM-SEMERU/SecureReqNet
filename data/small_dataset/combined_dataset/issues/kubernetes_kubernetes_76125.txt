@@ -1,0 +1,75 @@
+Apply ECR PrivateLink support to kubelet 1.12.x
+
+
+What happened:
+Now I'm using AWS EKS, and I am trying to launch a Worker with a closed VPC, (i.e. I'm not using Internet Gateway and Nat Gateway.
+However, Worker did not start.
+$ kubectl get no
+NAME                                             STATUS     ROLES    AGE   VERSION
+ip-10-0-10-245.ap-northeast-1.compute.internal   NotReady   <none>   58s   v1.12.7
+
+I checked kubelet log, I find out that kubelet cannot pull necessity images from ecr.
+$ journalctl -u kubelet
+...
+2019/04/04 05:47:09 ip-10-0-10-245.ap-northeast-1.compute.internal kubelet[4454]: E0404 05:47:09.039972    4454 remote_runtime.go:96] RunPodSandbox from runtime service failed: rpc error: code = Unknown desc = Error response from daemon: Get https://602401143452.dkr.ecr.ap-northeast-1.amazonaws.com/v2/eks/pause-amd64/manifests/3.1: no basic auth credentials
+2019/04/04 05:47:09 ip-10-0-10-245.ap-northeast-1.compute.internal kubelet[4454]: E0404 05:47:09.040332    4454 kuberuntime_sandbox.go:68] CreatePodSandbox for pod "kube-proxy-cxhg8_kube-system(c5b0357a-569c-11e9-90b9-0ac9980acc4a)" failed: rpc error: code = Unknown desc = Error response from daemon: Get https://602401143452.dkr.ecr.ap-northeast-1.amazonaws.com/v2/eks/pause-amd64/manifests/3.1: no basic auth credentials
+2019/04/04 05:47:09 ip-10-0-10-245.ap-northeast-1.compute.internal kubelet[4454]: E0404 05:47:09.040601    4454 kuberuntime_manager.go:657] createPodSandbox for pod "kube-proxy-cxhg8_kube-system(c5b0357a-569c-11e9-90b9-0ac9980acc4a)" failed: rpc error: code = Unknown desc = Error response from daemon: Get https://602401143452.dkr.ecr.ap-northeast-1.amazonaws.com/v2/eks/pause-amd64/manifests/3.1: no basic auth credentials
+
+Therefore I created following VPC Endpoint.
+
+com.amazonaws.ap-northeast-1.ec2
+com.amazonaws.ap-northeast-1.s3
+com.amazonaws.ap-northeast-1.ecr.dkr
+com.amazonaws.ap-northeast-1.ecr.api
+
+But, kubelet couldn't pull images.
+again I checked kubelet log, I got following message.
+$ journalctl -u kubelet
+...
+2019/04/04 05:46:54 ip-10-0-10-245.ap-northeast-1.compute.internal kubelet[4454]: caused by: Post https://ecr.ap-northeast-1.amazonaws.com/: dial tcp 52.119.220.175:443: i/o timeout
+
+https://ecr.ap-northeast-1.amazonaws.com/ is different from my assumption
+What you expected to happen:
+Access to https://api.ecr.ap-northeast-1.amazonaws.com/
+How to reproduce it (as minimally and precisely as possible):
+in AWS, Launch Worker with this AMI in Closed VPC.
+Anything else we need to know?:
+I understand that this issue has been resolved in kubelet 1.14.0
+https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.14.md#other-notable-changes-3
+But now, latest kubernetes version supported AWS EKS is v1.12
+so, I want this to be committed to kubelet 1.12.x
+Environment:
+
+Kubernetes version (use kubectl version):
+
+$ kubectl version
+Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.7", GitCommit:"6f482974b76db3f1e0f5d24605a9d1d38fad9a2b", GitTreeState:"clean", BuildDate:"2019-03-27T15:15:05Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"12+", GitVersion:"v1.12.6-eks-d69f1b", GitCommit:"d69f1bf3669bf00b7f4a758e978e0e7a1e3a68f7", GitTreeState:"clean", BuildDate:"2019-02-28T20:26:10Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration:
+aws
+OS (e.g: cat /etc/os-release):
+
+$ cat /etc/os-release
+NAME="Amazon Linux"
+VERSION="2"
+ID="amzn"
+ID_LIKE="centos rhel fedora"
+VERSION_ID="2"
+PRETTY_NAME="Amazon Linux 2"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2"
+HOME_URL="https://amazonlinux.com/"
+
+
+Kernel (e.g. uname -a):
+
+$ uname -a
+Linux ip-172-16-3-234.ap-northeast-1.compute.internal 4.14.104-95.84.amzn2.x86_64 #1 SMP Sat Mar 2 00:40:20 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Install tools:
+AWS EKS, CloudFormation
+Others:
+

@@ -1,0 +1,6 @@
+Removed references to openssl from mbedtls README
+
+
+
+
+

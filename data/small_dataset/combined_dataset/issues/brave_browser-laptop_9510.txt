@@ -1,0 +1,13 @@
+host is not parsed correctly in titleMode
+
+
+
+Issues:
+
+no host defined for about pages
+Trailling colon for all urls
+
+Issue found in 0.18.x sha 3535c8d
+Given this is related with security matters I'm labeling to 0.18.x itself given it is not reproducible in 0.17.x
+/cc @diracdeltas
+/cc @srirambv for triage

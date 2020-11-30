@@ -1,0 +1,107 @@
+Drag and drop on correct colour doesn't claim grant
+
+
+Description
+Drag and drop on correct colour doesn't claim grant
+Steps to Reproduce
+
+Launch clean profile on 0.23.102 using `LEDGER_ENVIRONMENT=staging LEDGER_VERSBOE=true 
+Click Claim token button to bring up the CAPTCHA
+Dnd on wrong colour, complains not quite right
+Repeat step 3 several times and check console, shows the following errors
+
+WalletProperties refreshes payment info
+<<< PUT https://ledger-staging.mercury.basicattentiontoken.org/v2/grants/194e99c9-062e-4436-9e8f-9a9c12d8b3b1
+<<< content-type: application/json; charset=utf-8
+<<< user-agent: Brave/0.23.102 Chrome/68.0.3440.84 Muon/8.0.8 Microsoft Windows x64
+<<< accept-encoding:
+<<<
+<<< {
+<<<   "promotionId": "9354b7e3-eb81-40d2-a4d5-a615285082ce",
+<<<   "captchaResponse": {
+<<<     "x": 746,
+<<<     "y": 137
+<<<   }
+<<< }
+[ response for PUT https://ledger-staging.mercury.basicattentiontoken.org/v2/grants/194e99c9-062e-4436-9e8f-9a9c12d8b3b1 ]
+>>> HTTP/1.1 403
+>>> cache-control: no-cache
+>>> connection: keep-alive
+>>> content-length: 60
+>>> content-type: application/json; charset=utf-8
+>>> date: Mon, 20 Aug 2018 12:41:39 GMT
+>>> server: Cowboy
+>>> vary: accept-encoding
+>>> via: 1.1 vegur
+>>>
+>>> {"statusCode":403,"error":"Forbidden","message":"Forbidden"}
+Problem claiming promotion Error: HTTP response 403 for PUT /v2/grants/194e99c9-062e-4436-9e8f-9a9c12d8b3b1
+<<< GET https://ledger-staging.mercury.basicattentiontoken.org/v2/captchas/194e99c9-062e-4436-9e8f-9a9c12d8b3b1
+<<< content-type: application/json; charset=utf-8
+<<< user-agent: Brave/0.23.102 Chrome/68.0.3440.84 Muon/8.0.8 Microsoft Windows x64
+<<< accept-encoding:
+
+
+Now dnd on the actual colour mentioned in the CAPTCHA modal, still shows the same errors but doesn't claim the grant
+
+Actual result:
+https://drive.google.com/open?id=1VZ632KMsQZKdF3wYWefaUEeG834v6wzI
+Expected result:
+Should claim grant when dnd on the specified colour
+Reproduces how often:
+100%
+Brave Version
+
+
+
+Brave
+0.23.102
+
+
+
+
+V8
+6.8.275.24
+
+
+rev
+43eb667
+
+
+Muon
+8.0.8
+
+
+OS Release
+10.0.17134
+
+
+Update Channel
+Release
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Microsoft Windows
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Reproducible on current live release:
+N/A
+Additional Information
+Causes #15054  as well when dnd on wrong colour.

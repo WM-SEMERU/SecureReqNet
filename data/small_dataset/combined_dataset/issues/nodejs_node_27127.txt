@@ -1,0 +1,10 @@
+lib: move DEP0021 to end of life
+
+
+Server.listenFD() has been runtime deprecated since Node 0.7.12. This commit moves the deprecation to end-of-life.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+

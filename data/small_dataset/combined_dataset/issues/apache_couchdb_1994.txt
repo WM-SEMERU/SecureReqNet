@@ -1,0 +1,7 @@
+CouchDB heavy storage consumption
+
+
+We have a project that involved with a database sync with pouchdb in mobile devices. We have faced issue when updating multiple documents (8400 docs per minute), internal storage increasing (around 20MB per minute) frequency.
+We figured one main reason for that couchdb revisions. So we decided to decrease database rev_limit to around 5. But we heard it may impact replication process between couchdb and pouchdb. So how this decrease of revision limit impact to the replication process?
+And figured out views taking more space than normal document storage. Is there any way to reduce couchdb view size?
+I have refered to this problem also and found out we don't have local documents issue

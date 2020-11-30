@@ -1,0 +1,23 @@
+### Summary
+
+There is a cross-site scripting XSS attack when selecting an author filter in the issue search bar when the user's profile name has malicious script in it.
+
+### Steps to reproduce
+
+1. Visit https://gitlab.com/profile
+2. Edit your Name to include the following text `" onload="alert('hi')">`
+3. Visit https://gitlab.com/gitlab-org/gitlab-ce/issues/
+4. In the filter bar type 'author:' and select your profile.
+
+### What is the current *bug* behavior?
+JavaScript alert hi appears
+
+### What is the expected *correct* behavior?
+Malicious script should be encoded correctly in the alt tag of the avatar as well as the inner html.
+
+![image](/uploads/d6b644acd768b1231ee7e42a8bf4cea9/image.png)
+![image](/uploads/2f228ecef52581e767dd01f56b7877fc/image.png)
+
+### Possible fixes
+
+See https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/assets/javascripts/filtered_search/filtered_search_visual_tokens.js

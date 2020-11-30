@@ -1,0 +1,39 @@
+[DI] Decorate the service directly instead of override
+
+
+Description
+Add possibility to decorate the service directly instead of override.
+Example
+override:
+services:
+    ham_burger:
+        class: Burger
+
+    cheese_burger:
+        class: Burger
+
+    ham.ham_decorator:
+        class: HamDecorator
+        decorate: ham_burger
+
+    cheese.cheese_decorator:
+        class: CheeseDecorator
+        decoration_priority: 2
+        decorate: cheese_burger
+
+    ham.cheese_decorator:
+        class: CheeseDecorator
+        decoration_priority: 1
+        decorate: cheese_burger
+decorate :
+services:
+    ham_burger:
+        class: Burger
+        decorators:
+            - HamDecorator
+
+    cheese_burger:
+        class: Burger
+        decorators:
+            - CheeseDecorator
+            - HamDecorator

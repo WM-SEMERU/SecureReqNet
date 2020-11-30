@@ -1,0 +1,4 @@
+Streamline Flow execution for multiple Duo providers
+
+
+This PR refactors the Duo MFA webflow to determine the provider in an initial action that is added to the conversation scope.  Subsequent actions then only need to pull the provider from the scope instead of locating it in the application context.

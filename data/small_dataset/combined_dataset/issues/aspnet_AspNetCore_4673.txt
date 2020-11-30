@@ -1,0 +1,23 @@
+Improve support for bearer token authentication
+
+
+The current JwtBearer middleware is pretty limited.
+We need support for scenarios where an API can accept different token formats - e.g. JWT and reference token (both would use the bearer scheme on the authorization header).
+What we need is
+
+
+general purpose "bearer token authentication middleware"
+
+retrieves tokens from the rfc6750 specified locations
+all the necessary validation etc
+proper eventing model to retrieve tokens from other locations etc
+
+
+
+extensible token validation infrastructure
+
+they probably need to come from DI because they need support for other dependencies like caching etc
+they need access to the "top level" options - e.g. the discovery document
+
+
+

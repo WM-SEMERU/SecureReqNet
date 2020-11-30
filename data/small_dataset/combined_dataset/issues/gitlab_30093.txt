@@ -1,0 +1,35 @@
+'Sensitive information sometimes accidentally pushed to Git repositories. Although it is possible to safeguard against this in various ways it isn't possible to succeed every time. Sensitive information is a broad definition that could include trade secrets in the form of lab results from testing an experimentally drug, or personal information of a real person that was used to replicate and fix a bug. Unlike passwords, this information can't be rotated and needs to be permanently removed from the repository.
+
+Sensitive information can be removed from the Git repository using https://gitlab.com/gitlab-org/gitlab-ce/issues/19376
+
+### Further details
+
+In addition to the repository, there are other places where this data may also reside:
+
+- cached diffs (**this issue**)
+- elastic search (https://gitlab.com/gitlab-org/gitlab-ce/issues/54608)
+- CI pipelines (supported via API since GitLab 11.6, [docs](https://docs.gitlab.com/ce/api/pipelines.html#delete-a-pipeline))
+
+### Proposal
+
+Extending the approach taken in https://gitlab.com/gitlab-org/gitlab-ce/issues/19376 we need to make sure that other data derived from contaminated commits is removed from **cached diffs**.
+
+When an instance administrator who uploads a list of bad SHAs to be removed, cached commit diffs will also be removed.
+
+
+- [ ] Gitaly MR
+- [ ] gitaly-proto MR https://gitlab.com/gitlab-org/gitaly-proto/merge_requests/282
+- [ ] GitLab CE MR
+
+### Links / references
+
+<details><summary>Original request</summary>
+Hello,  
+I accidentally publish sensitive file in git repository together with some minor changes in other files. After push I start commenting each modification in commit and found that I also publish sensitive file. So I remove file from git history (according to https://help.github.com/articles/remove-sensitive-data/#using-filter-branch), force push modified repo and it seems ok. When I check situation in branch there was **new** modified commit without that file. So far so good.
+
+But when I go into Merge request detail page and check "Discussion" tab, there were 2 commits: old one with leaked file and new one (with same commit message as old one) without sensitive file. It seems to me that GitLab keep every commit related to MR in some cache. If the commit is commented, it is not possible to remove it from GitLab (old commit is still accessible on direct link `https://<ourdomain>/<group>/<project>/commit/<hash>` even after git history rewrite and MR delete). I am not sure here, but I think that I have similar situation some time ago, and we **were able** to remove bad commit from history (with the same process described on GitHub). The only difference here was, that bad commit wasn't commented in GitLab UI.
+
+Could you explain me how we could remove bad commit from GitLab please?
+
+Thanks!
+</details>

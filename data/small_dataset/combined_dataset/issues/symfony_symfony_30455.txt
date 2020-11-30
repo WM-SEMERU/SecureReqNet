@@ -1,0 +1,21 @@
+[Messenger] PhpSerializer with AmqpExt transport
+
+
+Symfony version(s) affected: dev-master
+Description
+Trying to use php's native serializer #29958 with amqp transport.
+But ending with error
+{
+    "code": 0,
+    "message": "Notice: Undefined index: headers",
+    "file": "/srv/vendor/symfony/symfony/src/Symfony/Component/Messenger/Transport/AmqpExt/AmqpSender.php",
+    "line": 46
+}
+How to reproduce
+Configuration messenger.yaml:
+framework:
+    messenger:
+        serializer: messenger.transport.native_php_serializer
+
+        transports:
+            command: '%env(RABBITMQ_DSN)%/commands'

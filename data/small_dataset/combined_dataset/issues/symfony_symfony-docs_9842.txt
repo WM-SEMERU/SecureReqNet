@@ -1,0 +1,8 @@
+Documented the logout_on_user_change option
+
+
+This fixes #8428.
+@iltar I need your help here. In your PR (https://github.com/symfony/symfony/pull/23882/files) you said:
+This config item will trigger a logout when the user has changed.
+
+I need more precision about what this means: "the user has changed". What exactly has changed? The token, the object that represents the user, some property of the user, etc. Thanks!

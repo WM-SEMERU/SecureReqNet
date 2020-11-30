@@ -1,0 +1,5 @@
+Fixed potential auth bypass issue on old/insecure CAS servers
+
+
+As discussed in #228 .
+Just making sure we first assert the response was not a failed authentication

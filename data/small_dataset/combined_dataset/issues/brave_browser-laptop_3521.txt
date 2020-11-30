@@ -1,0 +1,8 @@
+Provide a way to see cert details from the urlbar hanger
+
+
+This is how it looks currently:
+
+Other browsers allow you to press a link that says details that shows the cert details.
+We allow you to see cert details only when there's an error currently.
+/cc @bradleyrichter for design, @diracdeltas for feedback, @darkdh for eventual implementation

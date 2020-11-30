@@ -1,0 +1,49 @@
+[SecurityBundle] Fix FirewallContext constructor 3.4 compatibility
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.7
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#24805 (comment)
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

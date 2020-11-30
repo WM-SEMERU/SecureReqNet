@@ -1,0 +1,4 @@
+Fixes XMLHttpRequest in Firefox/IE
+
+
+Fixes #1878.

@@ -1,0 +1,163 @@
+Control plane nodes failing to join when specific IP Address provided in etcd.local.extraArgs
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+This issue appears to be the same as #1359 . Only found out when filling the title (sorry about that, I had looked for open issues before creating this, didn't think of look for closed ones), but in any case that issue is closed (not sure why).
+On that issue, a suggestion is not to override etcd extraArgs but that doesn't work out if:
+
+the intention is to expose etcd on an internal IP range
+we want to expose metrics (supported in kubeadm v1.14 since kubernetes v1.14 uses etcd 3.3.10) only on the internal IP range
+
+Versions
+kubeadm version (use kubeadm version):
+kubeadm version: &version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:51:21Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Environment:
+
+
+Kubernetes version (use kubectl version):
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+
+
+Cloud provider or hardware configuration:
+DigitalOCean, hw configuration not relevant for the issue
+
+
+OS (e.g. from /etc/os-release):
+NAME="Ubuntu"
+VERSION="18.04.2 LTS (Bionic Beaver)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 18.04.2 LTS"
+VERSION_ID="18.04"
+UBUNTU_CODENAME=bionic
+
+
+Kernel (e.g. uname -a):
+Linux HOSTNAME 4.15.0-46-generic #49-Ubuntu SMP Wed Feb 6 09:33:07 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+
+Others:
+
+
+What happened?
+This issue happens when all below conditions are met:
+
+creating a multimaster cluster with kubeadm
+using a local etcd
+Configuring extraArgs that set etcd related URLs (listen-client-urls, advertise-client-urls, listen-peer-urls, initial-advertise-peer-urls, listen-metrics-urls) to a specific IP Address (not localhost or 0.0.0.0, but the IP of the first master for instance)
+
+Under that scenario, local etcd for the joining masters will fail to start since it will attempt to bind an IP not belonging to the corresponding host.
+What you expected to happen?
+Each local etcd should use the appropiate IP for listening(one that actually belongs to the host the pod is running on) so that the binding doesn't fail and that extra control plane nodes can actually join the cluster.
+This could something the user can configure (for instance by adding some etcd configuration to the JoinConfiguration) or maybe if not specified we could try to find the "best match" IP address given the address that was set in the master (configuration approach sounds much more reliable though)
+How to reproduce it (as minimally and precisely as possible)?
+Given a scenario with 2 VMs, where:
+
+VM1 has 12.13.14.15 as public IP and 192.168.0.2 as private IP
+VM2 has 12.13.14.16 as public IP and 192.168.0.3 as private IP
+
+
+Create a k8s cluster using kubeadm with the following configuration
+
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: InitConfiguration
+bootstrapTokens:
+- token: 59dcmo.7i7osjjh2d73i5m4
+  description: "kubeadm bootstrap token"
+
+nodeRegistration:
+  name: VM1
+  criSocket: /var/run/dockershim.sock
+  kubeletExtraArgs:
+    node-ip: 192.168.0.2
+localAPIEndpoint:
+  advertiseAddress: 192.168.0.2
+  bindPort: 443
+---
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+etcd:
+  local:
+    dataDir: "/var/lib/etcd"
+    extraArgs:
+      listen-metrics-urls: http://192.168.0.2:2381
+kubernetesVersion: 1.14.0
+apiServer:
+  extraArgs:
+    authorization-mode: "Node,RBAC"
+  certSANs:
+  - 192.168.0.2
+  - 12.13.14.15
+  - VM1
+controllerManager:
+  extraArgs:
+    bind-address: 192.168.0.2
+scheduler:
+  extraArgs:
+    bind-address: 192.168.0.2
+controlPlaneEndpoint: 192.168.0.2
+networking:
+  podSubnet: 172.16.0.0/16
+  serviceSubnet: 10.96.0.0/16
+clusterName: kubernetes
+Run:
+kubeadm init --config config_principal.yaml where config_principal.yamlrefers to above yaml
+
+Join a control plane node with the following configuration
+
+apiVersion: kubeadm.k8s.io/v1beta1
+caCertPath: /etc/kubernetes/pki/ca.crt
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: 192.168.0.2:443
+    token: 59ecmo.7i7osjjh5d73i5m4
+    unsafeSkipCAVerification: true
+  tlsBootstrapToken: 59dcmo.7i7osjjh2d73i5m4
+kind: JoinConfiguration
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  name: VM2
+  kubeletExtraArgs:
+    node-ip: 192.168.0.3
+controlPlane:
+  localAPIEndpoint:
+    advertiseAddress: 192.168.0.3
+    bindPort: 443
+Run kubeadm join --config config_extra_cp.yaml where config_extra_cp.yaml refers to above yaml
+Joining the cluster should fail since etcd on the new joining control plane is not able to start (in fact, since we are creating an etcd cluster, our k8s cluster is completely down since etcd on the principal is waiting to its other member to come up)
+Logs can be retrieved on the joining node:
+root@VM2:~# docker logs $(docker ps -a | grep "etcd --advertise" | awk '{print $1}')
+019-03-26 14:44:59.306309 I | etcdmain: etcd Version: 3.3.10
+2019-03-26 14:44:59.306587 I | etcdmain: Git SHA: 27fc7e2
+2019-03-26 14:44:59.306628 I | etcdmain: Go Version: go1.10.4
+2019-03-26 14:44:59.306730 I | etcdmain: Go OS/Arch: linux/amd64
+2019-03-26 14:44:59.306835 I | etcdmain: setting maximum number of CPUs to 2, total number of available CPUs is 2
+2019-03-26 14:44:59.307086 N | etcdmain: the server is already initialized as member before, starting as etcd member...
+2019-03-26 14:44:59.307232 I | embed: peerTLS: cert = /etc/kubernetes/pki/etcd/peer.crt, key = /etc/kubernetes/pki/etcd/peer.key, ca = , trusted-ca = /etc/kubernetes/pki/etcd/ca.crt, client-cert-auth = true, crl-file =
+2019-03-26 14:44:59.308352 I | embed: listening for peers on https://192.168.0.3:2380
+2019-03-26 14:44:59.308547 I | embed: listening for client requests on 192.168.0.3:2379
+2019-03-26 14:44:59.308680 I | embed: listening for client requests on 127.0.0.1:2379
+2019-03-26 14:44:59.309780 I | etcdserver: name = vm2
+2019-03-26 14:44:59.309885 I | etcdserver: data dir = /var/lib/etcd
+2019-03-26 14:44:59.309965 I | etcdserver: member dir = /var/lib/etcd/member
+2019-03-26 14:44:59.309974 I | etcdserver: heartbeat = 100ms
+2019-03-26 14:44:59.309990 I | etcdserver: election = 1000ms
+2019-03-26 14:44:59.309993 I | etcdserver: snapshot count = 10000
+2019-03-26 14:44:59.310008 I | etcdserver: advertise client URLs = https://192.168.0.3:2379
+2019-03-26 14:44:59.310523 I | etcdserver: restarting member 5cf7134594070361 in cluster ee77800d64079c67 at commit index 0
+2019-03-26 14:44:59.310702 I | raft: 5cf7134594070361 became follower at term 1
+2019-03-26 14:44:59.310852 I | raft: newRaft 5cf7134594070361 [peers: [], term: 1, commit: 0, applied: 0, lastindex: 0, lastterm: 0]
+2019-03-26 14:44:59.314361 W | auth: simple token is not cryptographically signed
+2019-03-26 14:44:59.319208 I | etcdserver: starting server... [version: 3.3.10, cluster version: to_be_decided]
+2019-03-26 14:44:59.323965 I | embed: ClientTLS: cert = /etc/kubernetes/pki/etcd/server.crt, key = /etc/kubernetes/pki/etcd/server.key, ca = , trusted-ca = /etc/kubernetes/pki/etcd/ca.crt, client-cert-auth = true, crl-file =
+2019-03-26 14:44:59.324151 I | etcdserver: skipped leadership transfer for stopping non-leader member
+2019-03-26 14:44:59.324210 E | etcdserver: publish error: etcdserver: request cancelled
+2019-03-26 14:44:59.324227 E | etcdserver: publish error: etcdserver: request cancelled
+2019-03-26 14:44:59.324234 E | etcdserver: publish error: etcdserver: request cancelled
+2019-03-26 14:44:59.324241 I | etcdserver: aborting publish because server is stopped
+2019-03-26 14:44:59.324882 C | etcdmain: listen tcp 192.168.0.2:2381: bind: cannot assign requested address
+Anything else we need to know?
+I think the issue comes from getEtcdCommand function (https://github.com/kubernetes/kubernetes/blob/7dfcacd1cfcbdfe74b28f2473fb107e9a47ec905/cmd/kubeadm/app/phases/etcd/local.go#L179) where ClusterConfiguration is used but there is a single ClusterConfiguration that contains only the "principal" master IPs.
+This configuration is used when calling kubeadmutil.BuildArgumentListFromMap(
+https://github.com/kubernetes/kubernetes/blob/7dfcacd1cfcbdfe74b28f2473fb107e9a47ec905/cmd/kubeadm/app/phases/etcd/local.go#L212) which overrides default arguments with etcd.local.extraArgs arguments that contain such IP address

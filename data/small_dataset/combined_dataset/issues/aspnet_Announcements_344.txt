@@ -1,0 +1,20 @@
+IHostingEnvironment's and IApplicationLifetime's marked obsolete and replaced
+
+
+When Microsoft.Extensions.Hosting was introduced in 2.1 some types like IHostingEnvironment and IApplicationLifetime were copied from Microsoft.AspNetCore.Hosting. Some 3.0 changes cause apps to include both the Microsoft.Extensions.Hosting and Microsoft.AspNetCore.Hosting namespaces. Any use of those duplicate types causes an "ambiguous reference" compiler error when both namespaces are referenced.
+This error has been addressed in 3.0.0-preview3 by marking the following types obsolete and replacing them with new types. There have not been any behavioral changes made for the new types, only naming.
+Obsolete types (warning):
+Microsoft.Extensions.Hosting.IHostingEnvironment
+Microsoft.AspNetCore.Hosting.IHostingEnvironment
+Microsoft.Extensions.Hosting.IApplicationLifetime
+Microsoft.AspNetCore.Hosting.IApplicationLifetime
+Microsoft.Extensions.Hosting.EnvironmentName
+Microsoft.AspNetCore.Hosting.EnvironmentName
+New types:
+Microsoft.Extensions.Hosting.IHostEnvironment
+Microsoft.AspNetCore.Hosting.IWebHostEnvironment : IHostEnvironment
+Microsoft.Extensions.Hosting.IHostApplicationLifetime
+Microsoft.Extensions.Hosting.Environments
+Note the new IHostEnvironment IsDevelopment, IsProduction, etc. extension methods are in the Microsoft.Extensions.Hosting namespace which may need to be added to your app.
+For 3.0 both the old and new types will be available from HostBulder's and WebHostBuilder's dependency injection containers. The old types will be removed in 4.0.
+See aspnet/AspNetCore#7749 for discussion.

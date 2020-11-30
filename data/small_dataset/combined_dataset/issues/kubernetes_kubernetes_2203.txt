@@ -1,0 +1,18 @@
+Audit logs
+
+
+APIserver should generate audit logs of accesses.
+Should these be just HTTP server logs, or should they have more structure?
+Things to log in a structured audit log:
+
+identity associated with client, from e.g. tokenfile.Tokenfile
+time
+which apiserver if multiple ones
+sourceIP?
+which authorization policy matched (e.g. abac.Policy)
+request attributes used for authorization (e.g. authorizer.Attributes)
+
+References
+
+#443
+

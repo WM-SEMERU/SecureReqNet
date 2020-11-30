@@ -1,0 +1,16 @@
+test(security): work around an escaping bug in IE9
+
+
+2 unit tests were failing in IE9:
+IE 9.0.0 (Windows 7 0.0.0) jit security integration tests sanitizing should escape unsafe HTML values FAILED
+    Expected 'also  evil&lt;/body&gt;' to equal 'also  evil'.
+IE 9.0.0 (Windows 7 0.0.0) no jit security integration tests sanitizing should escape unsafe HTML values FAILED
+    Expected 'also  evil&lt;/body&gt;' to equal 'also  evil'.
+
+The root cause behind this failure is a weird behavior in IE9:
+el.innerHTML = 'also <iframe srcdoc="evil"> evil';
+el.innerHTML;
+ -> "also <iframe srcdoc="evil"> evil&lt;/body&gt;</iframe>"
+
+Changing the input string avoids the problem, but it also changes what is being. If it doesn't make sense, then the input should be kept and the validation should be changed to take IE9 into account.
+@mprobst What do you think please?

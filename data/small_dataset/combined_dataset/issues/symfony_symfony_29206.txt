@@ -1,0 +1,49 @@
+[Security] use the authorization checker in has_role()
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+2.8
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#21861
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

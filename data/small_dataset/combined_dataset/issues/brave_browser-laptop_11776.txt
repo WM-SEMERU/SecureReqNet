@@ -1,0 +1,29 @@
+Frontend EV Certificate Changes
+
+
+Require: brave/muon#377
+Fixes #791
+Work in progress PR for the frontend EV certificate changes. Still needs lots of work on the CSS end!
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+
+Test Plan:
+Updated relevant unit tests.
+
+Go to github.com
+There should be GitHub, Inc. [US] displayed in URL bar
+(organization name + country code)
+
+
+Reviewer Checklist:
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

@@ -1,0 +1,6 @@
+Look into using “source maps” for SES rewrite
+
+
+Original issue 1875 created by kpreid@google.com on 2013-12-12T22:10:08.000Z:
+Outside of interactive debugging, stack traces from SES guest code are useless, because they have no filename (coming from eval) and mismatched line numbers (due to mitigateSrcGotchas).
+We may be able to fix one or both of these by using the “source maps” feature in browsers, which is intended to translate line numbers in rewritten code back to the original source file. Investigate this.

@@ -1,0 +1,73 @@
+Payments FAQ opens in the same iframe instead of opening in a new tab
+
+
+Description
+Payments FAQ opens in the same iframe instead of opening in a new tab
+Steps to Reproduce
+
+Build from master (6ab4f61)
+Enable ETH, Click on Fund Brave Wallet
+Click on FAQ hyper link, opens in the same iframe
+Click browser back button, doesn't go back to ETH, have to navigate to other preferences option and back to ETH to see the ETH interface
+
+Actual result:
+
+Expected result:
+Should open FAQ in a new tab
+Reproduces how often:
+100%
+Brave Version
+
+
+
+Brave
+0.25.0
+
+
+
+
+V8
+6.8.275.24
+
+
+rev
+6ab4f61
+
+
+Muon
+8.0.8
+
+
+OS Release
+10.0.17134
+
+
+Update Channel
+ 
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Microsoft Windows
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Reproducible on current live release:
+N/A
+Additional Information
+cc: @kjozwiak @LaurenWags @GeetaSarvadnya

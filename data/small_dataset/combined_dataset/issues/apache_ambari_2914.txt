@@ -1,0 +1,16 @@
+[AMBARI-25184] configs.py: cannot set an empty property value (apappu)
+
+
+What changes were proposed in this pull request?
+UI allows to enter empty value for some of the configs but configs.py does not allow.
+(Please fill in changes proposed in this fix)
+How was this patch tested?
+Tested in live Ambari server.
+
+Tried to run configs.py with empty value for specific key - it worked
+Tried to run configs.py with some xxx value for specific key - it worked
+Tried to run configs.py with inputs from json file  - it worked
+(Please explain how this patch was tested. Ex: unit tests, manual tests)
+(If this patch involves UI changes, please attach a screen-shot; otherwise, remove this)
+
+Please review Ambari Contributing Guide before opening a pull request.

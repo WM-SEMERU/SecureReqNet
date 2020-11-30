@@ -1,0 +1,3 @@
+after updating to GitLab 6.7.3 
+have a problem on adding issue to a project with no files at all
+after adding one empty file to project the problem has disappeared

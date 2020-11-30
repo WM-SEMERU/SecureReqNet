@@ -1,0 +1,5 @@
+Kubelet should attach SHA of image(s) to pod status
+
+
+Moving this piece from this comment. Generally the idea is to have the kubelet to attach SHA of the image(s) running in a pod in the pod status field. This will be useful for the aforementioned image policy proposal and related image auditing capabilities.
+@erictune fyi

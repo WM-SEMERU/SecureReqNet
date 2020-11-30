@@ -1,0 +1,35 @@
+"Call to a member function getBaseUrl() on null" on exception in KernelTerminate event
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.0.9
+
+
+
+When an exception occurred during a KernelTerimate event and a user is logged in the following fatal error occured:
+PHP Fatal error:  Uncaught Symfony/Component/Debug/Exception/FatalThrowableError: Call to a member function getBaseUrl() on null in project_dir/vendor/symfony/security/Http/Logout/LogoutUrlGenerator.php:118 Stack trace: #0 project_dir/vendor/symfony/security/Http/Logout/LogoutUrlGenerator.php(65): Symfony/Component/Security/Http/Logout/LogoutUrlGenerator->generateLogoutUrl(NULL, 1) #1 project_dir/vendor/symfony/security-bundle/DataCollector/SecurityDataCollector.php(115): Symfony/Component/Security/Http/Logout/LogoutUrlGenerator->getLogoutPath() #2 project_dir/vendor/symfony/http-kernel/Profiler/Profiler.php(162): Symfony/Bundle/SecurityBundle/DataCollector/SecurityDataCollector->collect(Object(Symfony/Component/HttpFoundation/Request), Object(Symfony/Component/HttpFoundation/Response), NULL) #3 project_dir/vendor/symfony/http-kernel/EventListener/ProfilerListener.php(91): Symfony/Component/HttpKernel/Profiler/Profiler->collect(Objec in project_dir/vendor/symfony/security/Http/Logout/LogoutUrlGenerator.php on line 118

@@ -1,0 +1,5 @@
+Consider not using cookies with csurf
+
+
+https://github.com/artsy/artsy-passport/blob/master/lib/app/index.coffee#L25
+"It is not ideal to store csrf tokens in cookies because they can be compromised if the cookies are compromised"

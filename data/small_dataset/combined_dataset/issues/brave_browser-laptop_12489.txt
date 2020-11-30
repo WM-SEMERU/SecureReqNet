@@ -1,0 +1,20 @@
+Disable password autofill on page load
+
+
+Description
+https://freedom-to-tinker.com/2017/12/27/no-boundaries-for-user-identities-web-trackers-exploit-browser-login-managers/
+Steps to Reproduce
+
+Go to https://senglehardt.com/demo/no_boundaries/loginmanager/
+Submit username/password and save password using built-in password manager
+3rd party script will steal your password and display on the page
+
+Actual result:
+Username and password get sniffed
+Expected result:
+No username and password will get leaked when page load
+Reproduces how often:
+Brave Version
+about:brave info:
+Reproducible on current live release:
+Additional Information

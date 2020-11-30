@@ -1,0 +1,4 @@
+[hackerone] #416089 - Download DoS
+
+
+https://hackerone.com/bugs?report_id=416089

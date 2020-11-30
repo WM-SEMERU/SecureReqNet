@@ -1,0 +1,4 @@
+Web browser
+
+
+So Atom is secretly a web browser, the interface of Atom is inside index.html, except for the menu-bar. If you press Ctrl+⇧ Shift+I you can open the web console. If you switch to the console tab, and type open("https://www.example.com/"): Atom will open another window that redirects to https://www.example.com/! 

@@ -1,0 +1,9 @@
+Clarify the CPUID implication on mbedtls
+
+
+The CPUID in enclave is fed from host, it means the host can control which feature is available for mbedtls. It might has security implication on mbedtls.
+Had a quick chat with Simon. For the AESNI impact on mbedtls, we explicitly configure the mbedtls to use AESNI, the expectation is it will fail if AESNI is absent. In that case:
+•	If host lies that AESNI is absent, mbedtls fails.
+•	If host lies that AESNI is present, it’s not interesting because mbedtls attempting to use AESNI will hit SIGILL and fail out.
+If the mbedtls will not fail when AESNI is absent even after we explicitly configure it to use AESNI, we will do the same mitigation as Bcrypt (fail enclave initialization if AESNI is not present).
+We need to clarify and test the behavior.

@@ -1,0 +1,5 @@
+MemoryCache: obsolete API removed in 3.0
+
+
+This is a follow up to aspnet/Caching#221. The 3.0 release will remove the obsolete MemoryCacheOptions APIs.
+Discussion: aspnet/Extensions#1062.

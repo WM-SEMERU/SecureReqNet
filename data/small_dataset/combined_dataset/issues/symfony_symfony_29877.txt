@@ -1,0 +1,21 @@
+[Cache] Apcu supported check in cli
+
+
+Symfony version(s) affected: 4.2.1
+Description
+When running application in cli
+ApcuAdapter::isSupported() === true
+even though apc.enable_cli is set to 0 in php configuration.
+Because of that Symfony\Component\Cache\Adapter\AbstractAdapter creates instance of Symfony\Component\Cache\Adapter\ApcuAdapter as system cache and application can not write in cache.
+How to reproduce
+If you have this in php configuration:
+apc.enable_cli => Off => Off
+apc.enabled => On => On
+And if you run application in cli, then the Cache component will use ApcuAdapter but it will not be able to write in cache.
+Possible Solution
+It seems to me that AbstractAdapter::createSystemCache() must check apc.enable_cli when running in cli.
+Maybe ApcuTrait::isSupported() can check for 'cli' === \PHP_SAPI and if true check for apc.enable_cli, like in this line
+or that can be done in
+AbstractAdapter::createSystemCache
+Additional context
+I noticed this after update to Symfony 4.2.1 (from v4.1.3) and running behat tests, then tests was executing very slow. The problem was that Symfony Cache component could not write in the cache.

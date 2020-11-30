@@ -1,0 +1,4 @@
+Fixed security expression testing user
+
+
+The example "user and ..." is broken when the user is a string.

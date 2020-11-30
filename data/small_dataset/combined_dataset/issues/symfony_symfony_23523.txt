@@ -1,0 +1,51 @@
+[SecurityBundle] Clarify deprecation in UserPasswordEncoderCommand::getContainer
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#... 
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+@ogizanagi in 4.0 it will simply extend Command right.. wdyt?
+Also we dont deprecate setContainer is that intentional?

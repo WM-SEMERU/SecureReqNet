@@ -1,0 +1,4 @@
+Leak-proof history-removal-on-shutdown
+
+
+In #492, we added an option to clear browsing state when you quit Brave. In rare cases when the browser process is killed (mostly on slower machines or after a crash), we don't have a chance to clean up. This leaves browsing state on disk, despite the intent to clean it up. We could leakproof this by (ex) encrypting that state on disk with a key that's only stored in memory, so that even an unexpected termination doesn't leave history. This would have the added benefit of likely not making a forensically-recoverable trace either. But also that's a lot of work for a slim edge-case benefit.

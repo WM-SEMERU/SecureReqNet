@@ -1,0 +1,50 @@
+Update bad header content response
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+No
+
+
+New feature?
+No
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+In the previous version the dispatcher continues it's road and the output error is not reflecting it's true origin. Hence I tried to add an exception regarding this matter (I am no master in PHP yet ^^ ) .

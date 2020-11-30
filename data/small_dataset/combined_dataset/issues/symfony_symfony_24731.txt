@@ -1,0 +1,38 @@
+[security] serialize the user, again
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes/no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+silex 2
+
+
+
+One more time I have a "Class __PHP_Incomplete_Class has no unserializer" thanks to security component. It is probably caused by a doctrine relation, the security component wants to serialize a proxy or something, I don't know.
+However I implemented \Serializable on my User, and serialize only the ID, so why implement serializable seems completely useless ?
+As the doc say, This may or may not be needed depending on your setup, but it's probably a good idea. not very clear...
+I still have to do a special object like SecurityUser to log my users, and have to surcharge "user" service, etc... and this solution is not in SF docs (but in some blogs).
+After all those years, this serialize thing has always been a balls breaker thing to me. Could you try to simplify it ? Une fois pour toute qu'on en parle plus !

@@ -1,0 +1,28 @@
+Redirect on login
+
+
+I have the following security firewall config:
+firewalls:
+        admin_area:
+            pattern: ^/admin
+            anonymous: ~
+            provider: admin_provider
+            form_login:
+                check_path:  acme_admin.security.check
+                login_path:  acme_admin.security.login
+                use_forward: true
+                remember_me: true
+            logout:
+                path:   acme_admin.security.logout
+                target: admin_homepage
+            remember_me:
+                key:      %secret%
+                lifetime: 1209600 # 2 weeks
+The "use_forward" is set to true. However, if I open up 2 page tabs.
+
+/secure/link1 (opened first)
+/secure/link2 (opened second)
+
+Both will display the login form. However, if I login on /secure/link2 (which was opened second), the page redirects to /secure/link1 rather than /secure/link2.
+The page is redirected to the value stored in the session here: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Authentication/DefaultAuthenticationSuccessHandler.php#L98
+If I am using use_forward shouldn't it always use the url in the browser rather than session etc?

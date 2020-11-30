@@ -1,0 +1,16 @@
+Alternative fix to #6468
+
+
+Checklist
+
+ tests and code linting passes
+ a test and/or benchmark is included
+ documentation is changed or added
+ the commit message follows commit guidelines
+
+Affected core subsystem(s)
+deps
+Description of change
+Note: this PR should not be landed until this patch will be upstreamed to the v8's trunk.
+Here I propose, instead of turning off ASLR at either runtime or compile-time, export the ASLR slide in the profile data and parse it to resolve the symbols during --prof-process.
+Fix: #6466

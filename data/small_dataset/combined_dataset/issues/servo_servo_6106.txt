@@ -1,0 +1,4 @@
+Support cert pinning via HPKP
+
+
+A mechanism very similar to HSTS (#6105).

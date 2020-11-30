@@ -1,0 +1,4 @@
+Export reports
+
+
+Add the ability to export the radar or score reports per team. or per organization into PDF.

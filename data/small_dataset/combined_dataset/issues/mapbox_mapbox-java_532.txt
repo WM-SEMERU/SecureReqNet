@@ -1,0 +1,6 @@
+StepManeuver getType doc outdated
+
+
+Hey,
+I'm currently building my own translation for LegStep Instuctions. I noticed that the documentation for LegStep.getType() is outdated (e.g. ramp changed to on ramp / off ramp).
+Perhaps it would be good if an enum is created for the types.

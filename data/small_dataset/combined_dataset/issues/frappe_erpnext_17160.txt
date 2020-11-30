@@ -1,0 +1,5 @@
+excel xlsx Importing tool really slow / not working
+
+
+I'm trying to import an .xlsx with only 10 rows and it's really annoying that it doesn't work.
+It spend half an hour to upload xlsx and then the bar just stuck in red area.

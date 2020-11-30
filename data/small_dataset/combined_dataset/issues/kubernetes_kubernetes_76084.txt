@@ -1,0 +1,13 @@
+Fix shellcheck failures of test/images/pets/redis-installer/on-start.sh
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Fix shellcheck failures of test/images/pets/redis-installer/on-start.sh
+Which issue(s) this PR fixes:
+Ref: #72956
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+

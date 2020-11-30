@@ -1,0 +1,12 @@
+Can't build AspNetCore source with VS 2019 RTM
+
+
+When I follow the instructions in docs/BuildFromSource.md and run .\restore.cmd it tells me that I don't have the correct version of Visual Studio 2019 installed"
+The screenshot below shows I have Visual Studio Community 2019 16.0 RTM installed.
+
+If I run .\eng\scripts\InstallVisualStudio.ps1 -Edition Community as suggested by the error message in the screenshot above; it launches the the Visual Studio Installer and tries to modify my existing installation of Visual Studio Community 2019 16.0 RTM.
+Currently Visual Studio Community 2019 16.0 RTM is the same as Visual Studio Community 2019 Preview 5
+
+At the moment the only way to get around this Visual Studio version check in .\restore.cmd is to install Visual Studio Community 2019 Preview 5 as the check seems to be looking for a preview version.
+N.B. Before I installed Visual Studio Community 2019 16.0 RTM when I ran .\eng\scripts\InstallVisualStudio.ps1 -Edition Community it wanted to install Visual Studio Community 2019 Preview 5
+Going forward are we going to be getting any more Preview versions of Visual Studio 2019 now that it has RTM'd or will it be the RTM version plus subsequent servicing updates?

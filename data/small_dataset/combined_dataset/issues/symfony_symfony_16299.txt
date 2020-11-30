@@ -1,0 +1,8 @@
+[Security] Easier authentication entry point decoration
+
+
+Use case: I want to display a (flash) message to user when he needs to login to acces a secured page. By default he's only redirected to login page. That's fine. I just want to add the message.
+I was examining what's the easiest way. And it looks to me like the easiest way is to define my own entry point and add a flash message inside the entry point.
+Creating my own entry point is very simple. But i'd like to decorate the default one. And i don't know what is the default one because it depends on configuration. So i hardcoded it (in services configuration file) to decorate security.authentication.form_entry_point.main because that's the one it currently uses. If i switched from form_login to something else or after renaming the firewall key then it's needed to update the service configuration again.
+=> I think it would be better to be able to somehow decorate it easier. To somehow pass the original entry point to the new one.
+Or is it a bad idea which doesn't worth implementation?

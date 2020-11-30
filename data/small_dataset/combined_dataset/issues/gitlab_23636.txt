@@ -1,0 +1,8 @@
+This method can in the worst case run a handful of SQL queries, even when project members are eager loaded. This in turn makes it unpleasant to use in loops due to performance reasons. For example, if one wants to check if a 100 different users are a member of the same project this will result in:
+
+1. At least 1 SQL query triggered by `ProjectTeam#find_member`, 2 in the worst case for this method
+2. If `min_member_access` is given we will run an extra query to get the access levels for users in a project. The logic is rather confusing so it's not entirely clear how many queries this will trigger. The results however are cached if RequestStore is enabled
+
+So in the best case we'll run 1 query per user, regardless of any eager loaded associations. In the worst case this might be 2 + N.
+
+We should strive to make this method _not_ perform any SQL queries at all, other than maybe an initial query to load members and their access levels. This in turn should re-use any eager loaded associations as much as possible.

@@ -1,0 +1,19 @@
+feat(http): JSONP requests now require trusted resource URLs
+
+
+JSONP requests allow full access to the browser and the JavaScript context. So allowing a malicious attacker to make a JSONP request to an evil server could have bad results.
+By requiring that JSONP urls are trusted we make it easier for developers to see that their app is only able to make JSONP requests to urls that they have audited.
+There are two ways to trust:
+
+whitelisting the url
+explicitly marking a url as trusted by calling $sce.trustAs
+
+The first commit in this PR ensures that all JSONP requests use a URL that is validated against the $sce ResourceUrl whitelist/blacklist checking. This commit creates a Breaking Change for app developers as they must now add all of their JSONP endpoints to the whitelist before their app will work. Although as significant breaking change, it is fairly simple to fix: just search for all calls to $http.jsonp and identify the url. Of course if the url is being generated dynamically then this is harder to fix but also indicates that perhaps there is a security vulnerability.
+The second commit allows developers to provide explicitly trusted urls as a result of calling $sce.trustAsResourceUrl. This second approach has a few quirks:
+
+the $http service needs to append parameters to the url, which means that the trusted url must be unwrapped, modified and then re-wrapped as trusted before passing it to $httpBackend.
+it may be possible (??) that there might be an attack vector if an attacker is able to access a different endpoint by changing the parameters. But perhaps since the domain and path cannot be modified by the param serializer this is not an issue?
+
+Is it acceptable (from a security point of view) to allow parameters to be added to a trusted url? If so then we could refactor the checks to happen in the $http service instead of $httpBackend which would remove the need for the re-wrapping of the built url.
+Closes #11352
+Closes #11328

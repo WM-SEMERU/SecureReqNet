@@ -1,0 +1,29 @@
+admin REST API serves 404 response to GET /admin/v2/tenants/{tenant} even though tenant exists
+
+
+Describe the bug
+The admin REST API returns a 404 Not Found response to GET /admin/v2/tenants/$TENANT even when GET /admin/v2/tenants shows that $TENANT exists.
+To Reproduce
+Using Pulsar 2.3.0:
+# Create tenant with an empty request body
+$ curl -X PUT http://host/admin/v2/tenants/foo
+
+# List tenants shows the newly created tenant
+$ curl -X GET http://host/admin/v2/tenants
+["foo","public"]
+
+# Trying to get the newly created tenant returns 404 Not Found
+$ curl -X GET http://host/admin/v2/tenants/foo
+{"reason":"Tenant does not exist"}
+
+After I update the tenant so that it has a valid allowedClusters, the get request returns a 200 OK response:
+$ curl -X POST -v -H 'Content-Type: application/json' -d '{"adminRoles":[],"allowedClusters":["mycluster"]}' http://host/admin/v2/tenants/foo
+
+$ curl -X GET http://host/admin/v2/tenants/foo
+{"adminRoles":[],"allowedClusters":["mycluster"]}
+
+
+Expected behavior
+I expect a 200 OK response with an empty response body, like
+{"adminRoles":[],"allowedClusters":[]}
+

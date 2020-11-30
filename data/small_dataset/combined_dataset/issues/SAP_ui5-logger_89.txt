@@ -1,0 +1,139 @@
+Bump eslint from 5.15.1 to 5.16.0
+
+
+Bumps eslint from 5.15.1 to 5.16.0.
+
+Release notes
+Sourced from eslint's releases.
+
+v5.16.0
+
+dfef227 Build: gensite passes rulesMeta to formatter rendering (#11567) (Kevin Partington)
+c06d38c Fix: Allow HTML formatter to handle no meta data (#11566) (Ilya Volodin)
+87a5c03 Docs: func-style: clarify when allowArrowFunctions is used (#11548) (Oliver Joseph Ash)
+bc3e427 Update: pass rule meta to formatters RFC 10 (#11551) (Chris Meyer)
+b452f27 Chore: Update README to pull in reviewer data (#11506) (Nicholas C. Zakas)
+afe3d25 Upgrade: Bump js-yaml dependency to fix Denial of Service vulnerability (#11550) (Vernon de Goede)
+4fe7eb7 Chore: use nyc instead of istanbul (#11532) (Toru Nagashima)
+f16af43 Chore: fix formatters/table test (#11534) (Toru Nagashima)
+78358a8 Docs: fix duplicate punctuation in CLI docs (#11528) (Teddy Katz)
+
+v5.15.3
+
+71adc66 Fix: avoid moving comments in implicit-arrow-linebreak (fixes #11521) (#11522) (Teddy Katz)
+1f715a2 Chore: make test-case-property-ordering reasonable (#11511) (Toru Nagashima)
+
+v5.15.2
+
+29dbca7 Fix: implicit-arrow-linebreak adds extra characters (fixes #11268) (#11407) (Mark de Dios)
+5d2083f Upgrade: eslint-scope@4.0.3 (#11513) (Teddy Katz)
+a5dae7c Fix: Empty glob pattern incorrectly expands to "/**" (#11476) (Ben Chauvette)
+448e8da Chore: improve crash reporting (fixes #11304) (#11463) (Alex Zherdev)
+0f56dc6 Chore: make config validator params more consistent (#11435) (薛定谔的猫)
+d6c1122 Docs: Add working groups to maintainer guide (#11400) (Nicholas C. Zakas)
+5fdb4d3 Build: compile deps to ES5 when generating browser file (fixes #11504) (#11505) (Teddy Katz)
+06fa165 Build: update CI testing configuration (#11500) (Reece Dunham)
+956e883 Docs: Fix example in no-restricted-modules docs (#11454) (Paul O’Shannessy)
+2c7431d Docs: fix json schema example dead link (#11498) (kazuya kawaguchi)
+e7266c2 Docs: Fix invalid JSON in "Specifying Parser Options" (#11492) (Mihira Jayasekera)
+6693161 Sponsors: Sync README with website (ESLint Jenkins)
+62fee4a Chore: eslint-config-eslint enable comma-dangle functions: "never" (#11434) (薛定谔的猫)
+34a5382 Build: copy bundled espree to website directory (#11478) (Pig Fang)
+f078f9a Chore: use "file:" dependencies for internal rules/config (#11465) (Teddy Katz)
+0756128 Docs: Add visualstudio to formatter list (#11480) (Patrick Eriksson)
+44de9d7 Docs: Fix typo in func-name-matching rule docs (#11484) (Iulian Onofrei)
+
+
+
+
+Changelog
+Sourced from eslint's changelog.
+
+v5.16.0 - March 29, 2019
+
+dfef227 Build: gensite passes rulesMeta to formatter rendering (#11567) (Kevin Partington)
+c06d38c Fix: Allow HTML formatter to handle no meta data (#11566) (Ilya Volodin)
+87a5c03 Docs: func-style: clarify when allowArrowFunctions is used (#11548) (Oliver Joseph Ash)
+bc3e427 Update: pass rule meta to formatters RFC 10 (#11551) (Chris Meyer)
+b452f27 Chore: Update README to pull in reviewer data (#11506) (Nicholas C. Zakas)
+afe3d25 Upgrade: Bump js-yaml dependency to fix Denial of Service vulnerability (#11550) (Vernon de Goede)
+4fe7eb7 Chore: use nyc instead of istanbul (#11532) (Toru Nagashima)
+f16af43 Chore: fix formatters/table test (#11534) (Toru Nagashima)
+78358a8 Docs: fix duplicate punctuation in CLI docs (#11528) (Teddy Katz)
+
+v5.15.3 - March 18, 2019
+
+71adc66 Fix: avoid moving comments in implicit-arrow-linebreak (fixes #11521) (#11522) (Teddy Katz)
+1f715a2 Chore: make test-case-property-ordering reasonable (#11511) (Toru Nagashima)
+
+v5.15.2 - March 15, 2019
+
+29dbca7 Fix: implicit-arrow-linebreak adds extra characters (fixes #11268) (#11407) (Mark de Dios)
+5d2083f Upgrade: eslint-scope@4.0.3 (#11513) (Teddy Katz)
+a5dae7c Fix: Empty glob pattern incorrectly expands to "/**" (#11476) (Ben Chauvette)
+448e8da Chore: improve crash reporting (fixes #11304) (#11463) (Alex Zherdev)
+0f56dc6 Chore: make config validator params more consistent (#11435) (薛定谔的猫)
+d6c1122 Docs: Add working groups to maintainer guide (#11400) (Nicholas C. Zakas)
+5fdb4d3 Build: compile deps to ES5 when generating browser file (fixes #11504) (#11505) (Teddy Katz)
+06fa165 Build: update CI testing configuration (#11500) (Reece Dunham)
+956e883 Docs: Fix example in no-restricted-modules docs (#11454) (Paul O’Shannessy)
+2c7431d Docs: fix json schema example dead link (#11498) (kazuya kawaguchi)
+e7266c2 Docs: Fix invalid JSON in "Specifying Parser Options" (#11492) (Mihira Jayasekera)
+6693161 Sponsors: Sync README with website (ESLint Jenkins)
+62fee4a Chore: eslint-config-eslint enable comma-dangle functions: "never" (#11434) (薛定谔的猫)
+34a5382 Build: copy bundled espree to website directory (#11478) (Pig Fang)
+f078f9a Chore: use "file:" dependencies for internal rules/config (#11465) (Teddy Katz)
+0756128 Docs: Add visualstudio to formatter list (#11480) (Patrick Eriksson)
+44de9d7 Docs: Fix typo in func-name-matching rule docs (#11484) (Iulian Onofrei)
+
+
+
+
+Commits
+
+ded2f94 5.16.0
+ea36e13 Build: changelog update for 5.16.0
+dfef227 Build: gensite passes rulesMeta to formatter rendering (#11567)
+c06d38c Fix: Allow HTML formatter to handle no meta data (#11566)
+87a5c03 Docs: func-style: clarify when allowArrowFunctions is used (#11548)
+bc3e427 Update: pass rule meta to formatters RFC 10 (#11551)
+b452f27 Chore: Update README to pull in reviewer data (#11506)
+afe3d25 Upgrade: Bump js-yaml dependency to fix Denial of Service vulnerability (#11550)
+4fe7eb7 Chore: use nyc instead of istanbul (#11532)
+f16af43 Chore: fix formatters/table test (#11534)
+Additional commits viewable in compare view
+
+
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting @dependabot rebase.
+
+
+Dependabot commands and options
+
+You can trigger Dependabot actions by commenting on this PR:
+
+@dependabot rebase will rebase this PR
+@dependabot recreate will recreate this PR, overwriting any edits that have been made to it
+@dependabot merge will merge this PR after your CI passes on it
+@dependabot squash and merge will squash and merge this PR after your CI passes on it
+@dependabot cancel merge will cancel a previously requested merge and block automerging
+@dependabot reopen will reopen this PR if it is closed
+@dependabot ignore this [patch|minor|major] version will close this PR and stop Dependabot creating any more for this minor/major version (unless you reopen the PR or upgrade to it yourself)
+@dependabot ignore this dependency will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+@dependabot use these labels will set the current labels as the default for future PRs for this repo and language
+@dependabot use these reviewers will set the current reviewers as the default for future PRs for this repo and language
+@dependabot use these assignees will set the current assignees as the default for future PRs for this repo and language
+@dependabot use this milestone will set the current milestone as the default for future PRs for this repo and language
+@dependabot badge me will comment on this PR with code to add a "Dependabot enabled" badge to your readme
+
+Additionally, you can set the following in your Dependabot dashboard:
+
+Update frequency (including time of day and day of week)
+Automerge options (never/patch/minor, and dev/runtime dependencies)
+Pull request limits (per update run and/or open at any time)
+Out-of-range updates (receive only lockfile updates, if desired)
+Security updates (receive only security updates, if desired)
+
+Finally, you can contact us by mentioning @dependabot.
+

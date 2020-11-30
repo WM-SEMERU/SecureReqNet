@@ -1,0 +1,4 @@
+Add validation to ensure Cookie.Expiration is not set
+
+
+Fixes #4671

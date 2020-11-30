@@ -1,0 +1,25 @@
+[Finder] Glob braces do not work on Alpine Linux with PHP 7.2
+
+
+Symfony version(s) affected: master, did not try other versions yet
+Description
+Apparently, glob patterns with braces do not work on Alpine Linux with PHP 7.2 (64bit). I do not know yet what causes this issue, just wanted to document it if someone else has the same issue.
+The test testInWithGlobBrace therefore fails on this platform. If I perform the same steps on the debian stretch PHP image, the test passes.
+How to reproduce
+docker run -it gmitirol/alpine39-php72 bash
+php-ext.sh enable-all
+cd /home/project
+git clone https://github.com/symfony/symfony.git
+cd symfony
+composer update
+php phpunit src/Symfony/Component/Finder/ -vvv
+
+Additional context
+There was 1 error:
+
+1) Symfony\Component\Finder\Tests\FinderTest::testInWithGlobBrace
+InvalidArgumentException: The "/home/project/symfony/src/Symfony/Component/Finder/Tests/Fixtures/{A,copy/A}/B/C" directory does not exist.
+
+/home/project/symfony/src/Symfony/Component/Finder/Finder.php:600
+/home/project/symfony/src/Symfony/Component/Finder/Tests/FinderTest.php:919
+

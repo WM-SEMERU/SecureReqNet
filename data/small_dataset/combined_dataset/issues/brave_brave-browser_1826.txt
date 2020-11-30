@@ -1,0 +1,16 @@
+Change Linux signing key via keyring package
+
+
+details in brave/devops#361
+Note that this involves:
+
+Rotating the key (details in issue above)
+Updating the linux install documentation to show the new key
+
+QA steps (only needs to be done on Linux):
+
+For each linux platform, download the key that is linked in https://brave-browser.readthedocs.io/en/latest/installing-brave.html#linux in the Release Channel section (for instance https://brave-browser-apt-release.s3.brave.com/brave-core.asc)
+Import the downloaded key into gpg: gpg --import /path/to/downloaded/file
+Run the command gpg --list-keys $KEY_ID where KEY_ID is the ID of the key that you just imported. This should be displayed in the terminal output from step 2.
+There should be no keys that show rsa2048, only rsa4096.
+

@@ -1,0 +1,16 @@
+proposal: crypto/x509: allow certificates to be exported from CertPool
+
+
+Copied from review 126016 (@FiloSottile asked me to open a proposal issue):
+
+Some users may find it helpful to be able to inspect the Roots/Intermediates in a VerifyOptions.
+The main issue with exposing this is that users could mess with the slice, causing the two indices (bySubjectKeyId and byName) to be broken. To avoid this, a Certificates() method is added, returning a copy of the internal slice.
+
+In the review, @FiloSottile said:
+
+We will have to be careful considering this change because we don't want to necessarily require the availability of full certificates on all OSes to support SystemCertPool, as opposed to just the subjects which might be all the system API returns.
+
+I admit, I hadn't looked too carefully into how SystemCertPool was implemented on various systems. My desire for this change is a situation where a certificate from the Intermediates of a VerifyOptions needs to be inspected. In my case, the CertPool is is not going to be the SystemRoots, but something the user has constructed.
+Maybe, to support my use case, as well as to support system stores where the actual certs aren't available, the function could be changed to return an error if the certs aren't available. We could check this by seeing if the length of the subject list matches the length of the certs member. Does that sound reasonable?
+Edit: Just to decouple this a bit from the premature review I opened, here's the signature I'm suggesting:
+func (s *CertPool) Certificates() ([]*Certificate, error)

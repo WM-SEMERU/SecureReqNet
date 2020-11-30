@@ -1,0 +1,22 @@
+proposal: crypto/cipher: ability to use AEAD mode as block mode
+
+
+Currently AEAD interface provides only two functions
+Seal(dst, nonce, plaintext, additionalData []byte) []byte
+Open(dst, nonce, ciphertext, additionalData []byte) ([]byte, error)
+
+That works for network protocols where messages are usually small. That may work for small files but that doesn't work for larger payloads. GCM provides enough security to use its tag to authenticate large payloads that you wouldn't want to (or couldn't, even) store in memory in its entirety. With the current implementation there's no other way.
+I propose to change existing AEAD interface or add another one to give the ability to encrypt/decrypt payload block by block. When finished it would produce authentication tag that you may use as you see fit. The tag could be stored at the end of the cipher text implicitly but I don't really like the idea of implementation forcing me to something that isn't required.
+All implementations that I'm familiar with and has used myself divide into three steps:
+
+initialization where you set key, nonce and AAD
+update where encryption/decryption happens
+finalization
+
+The main difference is in finalization:
+
+JCA and NetFramework use it to output leftover plain text or leftover cipher text with the tag attached at the end. Tag verification is done implicitly.
+OpenSSL use it to output leftover cipher/plain text and verify tag. The tag is accessible through a separate routine on encryption and should be provided by the programmer on decryption.
+mbedtls does everything in update and uses finalization only to return the tag. Tag verification is done by the programmer.
+
+All of these implementations fit the proposal. My only preference is that the tag should be separate from the payload. The implementation shouldn't write or read it implicitly. Programmer should have the access and freedom to use it as needs to. OpenSSL and mbedtls both implement it that way.

@@ -1,0 +1,5 @@
+Encrypted environment variables shouldn't use PKCS1v15 padding
+
+
+Currently when environment variables are encrypted, they use RSA keys with PKCS1v15 padding: https://github.com/travis-ci/travis.rb/blob/master/lib/travis/client/repository.rb#L15-L18 (it's the default for OpenSSL::PKey::RSA.public_encrypt: http://ruby-doc.org/stdlib-2.2.0/libdoc/openssl/rdoc/OpenSSL/PKey/RSA.html#method-i-public_encrypt).
+PKCS1v15 has a number of problems, and any new applications should be using RSA with OAEP padding, I'm not quite sure what the API for this is in Ruby.

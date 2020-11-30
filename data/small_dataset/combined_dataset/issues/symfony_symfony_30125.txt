@@ -1,0 +1,103 @@
+[Forms] Custom Form Types with array broken since 4.2.2
+
+
+Symfony version(s) affected: 4.2.2 and up
+Description
+Since 4.2.2 I noticed that when my form handles the request and I check that the form is valid it returns an error for one of my custom fields. This field returns an array of values, so its form name is as following name="example[]" this is commonly used for things like select fields which sources are not predetermined (reason why not using ChoiceType). For example a select2 type with sources comming from an ajax call.
+How to reproduce
+
+Create a form with a custom type that has name="example[]" as a field name. $_POST shows that the value is indeed there as an array, however the form itself does not recognise it as such. When removing the [] it works but as a single value field.
+
+Possible Solution
+For now fixing composer to use version 4.2.1 fixes this issue, but this is indeed no fix.
+Additional context
+class Select2Type extends AbstractType implements DataTransformerInterface
+{
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+
+        $resolver->setDefaults(array(
+            'selected' => array(),
+            'compound' => false,
+        ));
+
+        $resolver->setAllowedTypes('selected', array('null', 'array', '\Traversable'));
+
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->addViewTransformer($this);
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+
+        $view->vars['choices'] = $options['selected'];
+    }
+
+    public function getBlockPrefix()
+    {
+
+        return 'select2';
+    }
+
+    public function transform($value)
+    {
+
+        if(!is_array($value)){
+            return [];
+        }
+
+        return array_values($value);
+    }
+
+    public function reverseTransform($value)
+    {
+        if(!is_array($value)){
+            return [$value];
+        }
+
+        return array_values($value);
+    }
+
+}
+
+class ExampleType extends AbstractType
+{
+    const PRODUCT_IDS_FIELD = 'productIds';
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add(self::PRODUCT_IDS_FIELD, Select2Type::class, array (
+                'label' => 'Products',
+                'attr' => array (
+                    'class' => 'select2-products',
+                    'data-ajax--url' => '/app/ajax/products',
+                    'data-ajax--dataType' => 'json',
+                ),
+                'required' => true
+            ))
+            ->add('save', SubmitType::class, array (
+                'label' => 'Submit',
+                'translation_domain' => 'form',
+                'attr' => array (
+                    'class' => 'btn-primary ml-auto mr-auto d-block text-uppercase'
+                )
+            ));
+    }
+}
+
+// The field template
+{% block select2_widget %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
+    {% set full_name = full_name ~ '[]' %}
+    <select {{ block('widget_attributes') }} multiple="multiple" >
+        {% for index,value in choices%}
+            <option value="{{ value }}" selected>{{ index }}</option>
+        {% endfor %}
+    </select>
+{% endblock %}
+

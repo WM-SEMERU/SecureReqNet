@@ -1,0 +1,4 @@
+added missing php before bin/console
+
+
+to be consistent throughout the docs

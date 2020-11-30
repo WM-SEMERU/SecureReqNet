@@ -1,0 +1,26 @@
+Invalid markup in nl translation on Test Pilot site
+
+
+
+
+
+testpilot/locales/nl/app.ftl
+
+
+         Line 323
+      in
+      9c663ab
+
+
+
+
+
+
+ eolMessageThree = We hebben ook geweldige nieuwe app-belevingen zoals a data-l10n-name="lockboxLink" title="{ -exp-lockbox }">{ -exp-lockbox }</a> en <a data-l10n-name="sendLink" title="{ -exp-send }">{ -exp-send }</a> gebouwd die { -brand } voorbij de browser zullen blijven stuwen. Kijk uit naar spannende nieuwe ontwikkelingen van deze beide projecten in 2019. 
+
+
+
+
+
+
+https://github.com/pdehaan/testpilot-puppeteer/blob/master/shots/README.md#nl

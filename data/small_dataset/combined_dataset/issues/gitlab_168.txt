@@ -1,0 +1,3 @@
+When a HTML tag is in a git commit message, the layout n the commits listing renders it causing a styling "breakage". 
+
+It is fine, however, when viewing the individual commit

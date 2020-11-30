@@ -1,0 +1,31 @@
+Allow `view-source` as openable by context menu
+
+
+Fixes #15075
+Auditors: @diracdeltas
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+
+Visit https://brave.com
+Right click the page, pick View Page Source.  Ensure page source comes up. Close it
+Manually type a view source URL into URL bar: view-source:https://clifton.io. Ensure page source comes up. Close it
+Make a new bookmark for view-source:https://brianbondy.com/ and launch the bookmark. Ensure page source comes up
+
+Reviewer Checklist:
+
+ Request a security/privacy review as needed if one was not already requested.
+
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

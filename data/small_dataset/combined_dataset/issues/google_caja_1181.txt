@@ -1,0 +1,15 @@
+CSS capabilities exposed via Caja appear to allow covering content of the embedding page
+
+
+Original issue 1181 created by maciej on 2010-01-13T19:40:20.000Z:
+I found this potential security vulnerability by code inspection, so I'm not sure if it is a real
+vulnerability or if I have merely misread the code.
+In src/com/google/caja/lang/css/css21-whitelist.json, the CSS properties "position", "top" and
+"left" are allowed (in addition to "bottom", "top" and "z-index").
+Per css21-defs.json in the same directory, it appears that for the "position" property, the values
+"relative", "absolute" and "fixed" are allowed. It seems that this would be sufficient to allow
+Cajoled content to be positioned outside of its natural contents, overlapping arbitrary other
+content in the embedding page. For example, if the embedding page has a password field,
+Cajoled content could cover it with its own and trick users into giving up their passwords.
+I have not been able to get Caja running enough to attempt a proper proof-of-concept, so I
+don't know if there is a mechanism to prevent this.

@@ -1,0 +1,14 @@
+[AppArmor] Promote AppArmor annotations to beta
+
+
+Justification for promoting AppArmor to beta:
+
+We will provide an upgrade path to GA
+We don't anticipate any major changes to the design, and will continue to invest in this feature
+We will thoroughly test it. If any serious issues are uncovered we can reevaluate, and we're committed to fixing them.
+We plan to provide beta-level support for the feature anyway (responding quickly to issues).
+
+Note that this does not include the yet-to-be-merged status annotation (#31382). I'd like to propose keeping that one alpha for now because I'm not sure the PodStatus is the right long-term home for it (I think a separate monitoring channel, e.g. cAdvisor, would be a better solution).
+/cc @thockin @matchstick @erictune
+
+This change is 

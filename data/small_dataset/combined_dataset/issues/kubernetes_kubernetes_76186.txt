@@ -1,0 +1,6 @@
+nslookup kubernetes fails from ambassador pod
+
+
+
+
+

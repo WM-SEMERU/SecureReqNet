@@ -1,0 +1,3 @@
+I created a new branch (say it's "foo") in one of my gitlab project, fetch-checkout-change-commit-push in my local repo, and then created a merge request from foo to master successfully. It's showing one commit about this merge request. Then I change-commit-push again on branch foo, hoping to see 2 commits but only the initial one is there. Refreshing the page does not help.
+
+FYI, the second commit does appear in branch foo's commit history.

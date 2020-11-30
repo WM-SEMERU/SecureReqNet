@@ -1,0 +1,7 @@
+## Description
+A `.gitlab-ci.yml` may contain rules to deploy application to production server and (ususally) runs automaticaly after push. It's not always wanted that any developer could change this.
+
+## Proposal
+Add "Allow developers to change CI configuration" option to projects. If it's not selected — push by developer is declined if there are changes in `.gitlab-ci.yml` file.
+
+~"feature proposal"

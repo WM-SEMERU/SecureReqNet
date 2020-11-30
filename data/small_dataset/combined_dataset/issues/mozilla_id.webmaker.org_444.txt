@@ -1,0 +1,4 @@
+Password requirement not enforced
+
+
+It looks like the requirement to "have at least 1 capital letter" in your password is not verified when creating an account. We should either add this verification or remove this constraint from the UI.

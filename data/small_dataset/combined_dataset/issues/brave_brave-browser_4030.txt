@@ -1,0 +1,7 @@
+test-security timeout does not work on build machines
+
+
+Description
+npm run test-security uses timeout to make sure that the browser process is terminated after 2 mins.
+https://github.com/brave/brave-browser/blob/master/lib/start.js#L95
+The timeout does not work on build machines, and the processes keep running even after 2 mins. Leading to an eventual abort.

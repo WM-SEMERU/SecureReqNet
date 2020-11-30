@@ -1,0 +1,5 @@
+Browser API: expose SSL info (securitychange event)
+
+
+mozbrowsersecuritychange properties: https://github.com/paulrouget/mozBrowserAPI/blob/master/BrowserAPI.md#the-mozbrowsersecuritychange-event
+Could someone describe what needs to be done to expose SSL information (no ssl, non valid cert, valid cert, mixed content, …)? At least, we'd like to start with basic info: ssl or no ssl.

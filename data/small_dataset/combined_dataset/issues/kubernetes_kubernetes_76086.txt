@@ -1,0 +1,16 @@
+Adds cri-api in the staged repository list
+
+
+What type of PR is this?
+Adds cri-api in the staged repository list
+/kind documentation
+What this PR does / why we need it:
+Adds cri-api in the staged repository list
+Which issue(s) this PR fixes:
+None
+Special notes for your reviewer:
+None
+cc @dims
+Does this PR introduce a user-facing change?:
+NONE
+

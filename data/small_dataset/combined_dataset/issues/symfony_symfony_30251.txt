@@ -1,0 +1,51 @@
+#30172 Add the missing validation translations for the Luxembourgish …
+
+
+…locale
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master for features / 3.4 up to 4.2 for bug fixes 
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30172 
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+Add the missing validation translations for the Luxembourgish locale

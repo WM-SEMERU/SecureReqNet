@@ -1,0 +1,49 @@
+[Cache] fix warming up cache.system and apcu
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29601, #29877
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+

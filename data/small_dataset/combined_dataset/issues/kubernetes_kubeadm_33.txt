@@ -1,0 +1,30 @@
+kubeadm: More secure TLS certificate provisioning
+
+
+From @superdump on October 24, 2016 9:56
+Is this a request for help? (If yes, you should use our troubleshooting guide and community support channels, see http://kubernetes.io/docs/troubleshooting/.): No
+What keywords did you search in Kubernetes issues before filing this one? (If you have found any duplicates, you should instead reply there.): PKI
+
+Is this a BUG REPORT or FEATURE REQUEST? (choose one):
+FEATURE REQUEST
+The kubernetes API server can now act as a PKI to service Certificate Signing Requests for kubelets and set up secured and authenticated TLS communications between the API server and kubelets. kubeadm makes use of this API endpoint. In order to provide this endpoint, the CA key must be present on the master (or API server) to be able to sign certificates.
+It should be clear that having a CA key, or more clearly the ability to sign new certificates, as a permanent part of the cluster could be considered weaker security than not. If the cluster gets hacked, one admittedly already has problems, but in terms of security it is common to think in terms of having layers of security so that if one barrier gets broken, there are still more to overcome.
+It could make sense then to support somehow provisioning certificates in a way that the cluster does not retain the capability to provision new certificates while a cluster operator/administrator is not actively managing the cluster, so to speak. This could be in the form of kubeadm using a temporary token to interact with an external PKI such that when the kubeadm provisioning session is completed, no further certificates can be provisioned from the PKI with that token. Something along those lines.
+Kubernetes version (use kubectl version):
+1.4.3
+Environment:
+
+Cloud provider or hardware configuration: N/A
+OS (e.g. from /etc/os-release): N/A
+Kernel (e.g. uname -a): N/A
+Install tools: kubeadm
+Others: N/A
+
+What happened:
+kubeadm generated a CA key on the master and retained it. kubelets sent their CSRs to the master API server in order to provision certificates.
+What you expected to happen:
+I expected the above to happen, but the proposal is that if security is particularly important, the CA key and ability to provision new TLS certificates does not remain part of the cluster but is a separate concern that is separately managed.
+How to reproduce it (as minimally and precisely as possible):
+Use kubeadm to deploy a cluster.
+Anything else do we need to know:
+Copied from original issue: kubernetes/kubernetes#35413

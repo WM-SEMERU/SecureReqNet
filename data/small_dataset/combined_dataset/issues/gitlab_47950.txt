@@ -1,0 +1,61 @@
+'### Problem to solve
+
+When users submit abuse reports, they often do not specify the problem in detail. This can make it difficult for the Security team to know the root of the issue and whether it is a valid report.
+
+### Proposal
+
+- Create a template for reporting abuse that guides a user to provide more detailed descriptions, when they are submitting a report.
+
+  - This template should:
+     - Pop up when a user clicks the "Report as abuse" button.
+     - Cover the most common reasons people report abuse.
+     - Allow a user to enter in other relevant information.
+
+- Change the **Report as abuse** button to read **Report Abuse to Gitlab** so that users are aware that the report goes directly to GitLab, rather than the owner of the project/comment
+
+### Template Format
+- First Name:
+- Last Name:
+- Organization:
+- Email address:
+- Reported URL(s):
+
+**Please select the date, time, and Time Zone corresponding to the moment the Abuse first occurred or was discovered**
+- Abuse date: _(yyyy-mm-dd):_
+- Abuse time: _24-hr format (hh:mm):_
+- Time Zone:  _GMT (+/- hh:mm)_
+
+**Abuse type** - This would include a drop-down menu.
+- DMCA/Trademark
+- Non-Trademark
+- PII
+- Phishing
+- Malware
+- DoS
+- Other - _(This could prompt a greyed out example template in the **comments** section to guide the reporter on what kind of information we are typically looking for.)_
+
+**Logs**
+_This would be an open text box with a large character limit._
+
+**Comments**
+_This section would be an open area for any additional instructions/information from the reporter_
+
+### Required Fields
+For reporting general **Content and Activity Abuse**
+
+These are the fields that need to be completed in order to submit:
+- [ ] E-mail Address:
+- [ ] Abuse Type:
+- [ ] Reported URL(s):
+- [ ] Date/Time/Timezone:
+- [ ] Logs:
+
+For reporting a specific **User, Issue or Merge request, or Comment**
+
+These are the fields that need to be completed in order to submit:
+- [ ] Comment, User, Issue or Merge Request
+- [ ] A brief description of the Spam/Abuse
+  
+### What does success look like, and how can we measure that?
+
+We've created a first iteration of the template and given this issue a milestone.

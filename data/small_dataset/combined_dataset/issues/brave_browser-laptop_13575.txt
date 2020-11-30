@@ -1,0 +1,32 @@
+Set correct widevine resource ID
+
+
+fix #11430
+Test Plan:
+
+on a windows machine/VM, go to https://shaka-player-demo.appspot.com/demo/#asset=//media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest.mpd;lang=en-US;build=uncompiled and click 'load'
+the video should show a DRM error
+go to about:preferences#plugins and enable Widevine
+repeat step 1
+the video should now load
+
+Submitter Checklist:
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+ Tagged reviewers and labelled the pull request as needed.
+ Request a security/privacy review as needed. (Ask a Brave employee to help if you cannot access this document.)
+
+Test Plan:
+Reviewer Checklist:
+
+ Request a security/privacy review as needed if one was not already requested.
+
+Tests
+
+ Adequate test coverage exists to prevent regressions
+ Tests should be independent and work correctly when run individually or as a suite ref
+ New files have MPL2 license header
+

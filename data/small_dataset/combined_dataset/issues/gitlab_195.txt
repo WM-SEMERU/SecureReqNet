@@ -1,0 +1,1 @@
+Will be possible to pair more than one Jira project (Jira Key) with a repository issue tracker?

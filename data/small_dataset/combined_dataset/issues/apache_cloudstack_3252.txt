@@ -1,0 +1,49 @@
+Load balancer protocols bug
+
+
+ISSUE TYPE
+
+Bug Report
+Improvement Request
+
+COMPONENT NAME
+
+ACS 4.11 VR load balancer
+ACS 4.11 CreateLoadBalancerRule API call
+
+CLOUDSTACK VERSION
+
+ACS 4.11.x
+
+CONFIGURATION
+
+Advanced zone
+Isolated guest network
+Load balancer rules
+
+OS / ENVIRONMENT
+
+N/A
+
+SUMMARY
+
+Load balancer protocols for UDP and TCP-proxy are not labelled correctly in the GUI:
+** 
+** Note label is label.lb.protocol_udp / label.lb.protocol_tcp-proxy (underscores used to signify the inserted space)
+** Whatever protocol is chosen is persisted in the DB with the above strings.
+However HAproxy and iptables configuration will always be configured with "TCP".
+This may or may not be down to two protocol parameters here: https://github.com/apache/cloudstack/blob/4.11.2.0/api/src/org/apache/cloudstack/api/command/user/loadbalancer/CreateLoadBalancerRuleCmd.java#L316 where the first one is always set to "TCP"
+
+STEPS TO REPRODUCE
+
+Create LB rule using each protocol
+Observe the configuration which ends up on the HAproxy configuration on the VR does NOT change and always uses TCP.
+
+EXPECTED RESULTS
+
+Protocols UDP and TCP-proxy being honoured
+
+ACTUAL RESULTS
+
+All LB rules are configured as TCP.
+

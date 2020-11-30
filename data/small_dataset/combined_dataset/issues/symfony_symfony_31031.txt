@@ -1,0 +1,52 @@
+[Serializer]  MetadataAwareNameConverter: Do not assume that property names are strings
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2 (class introduced in v4.2.3)
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+api-platform/core#2709
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+When this class was introduced, there was an assumption made about the type of propertyNames and therefore a : ?string return type was introduced in the fallbacks/normalization private methods. Because symfony doesn't use strict mode yet (compatibility issues with php IIRC), when using a non-string property name (for example the integer 0 which is a valid property name in an array), it will convert the integer to a string.
+This is not good, especially if you have a name converter that returns the given property name (ie no transformation) you'll have it's type changed which isn't correct.
+I've discovered this bug while working on adding this name converter in api platform (api-platform/core#2709).

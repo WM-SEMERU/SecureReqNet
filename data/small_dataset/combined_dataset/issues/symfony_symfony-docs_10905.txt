@@ -1,0 +1,4 @@
+Documented the new csrf_token field prefix
+
+
+Fixes #10884.

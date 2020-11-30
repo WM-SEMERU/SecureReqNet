@@ -1,0 +1,15 @@
+[2.2][Firewall] DefaultAuthenticationFailureHandler::onAuthenticationFailure() saves Exception in Session and fails because of the backtrace's large amount of data
+
+
+I made this title pretty descriptive; if you consider the code in the documentation.
+        $request = $this->container->get('request');
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+            $request->getSession()->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+According to the class DefaultAuthenticationFailureHandler on line 88, AuthenticationException is saved in the session which can hold tons of backtrace data and therefore the exception is not saved in the database. In the end, the user won't get the reason why the authentication failed.
+It is troublesome for sessions saved in SQL databases but it's even more troublesome for sessions saved in Memcached (a singe value is limited to 1MB).
+I wish I didn't have to create a custom AuthenticationFailureHandler but I guess it's easy enough.
+I noticed that the AuthenticationException can be serialized and unserialized, I will try extending DefaultAuthenticationFailureHandler and serializing/unserializing before calling the parent method onAuthenticationFailure. I will lose the backtrace but it will probably boost things up.

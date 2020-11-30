@@ -1,0 +1,56 @@
+'Zendesk: https://gitlab.zendesk.com/agent/tickets/48860
+
+Under certain circumstances, if an admin visits a project's labels page, all labels for all projects will be loaded in. This is due to a bug in `LabelsFinder`. 
+
+## Steps to reproduce
+
+1. Create a couple of private projects (ProjectA and ProjectB)
+1. Create some labels in ProjectA
+1. For good measure, visit ProjectB -> Issues -> Labels and note that there are no labels.
+1. Sign in as an admin user (that did *not* create the above projects)
+1. Add the administrator as a user of ProjectA.
+1. Visit ProjectB -> Issues -> Labels
+1. Whoa! Where did all these labels come from?
+
+I did some troubleshooting with the user and we narrowed it down to the `LabelsFinder`. There are two pieces in this finder that cause the problem.
+
+First, in `#find_project`. `skip_authorization` is not true when loading the labels page so it falls back to looking through a user's 'available projects'. This in turn calls `ProjectsFinder` which returns the user's authorized_projects plus all public projects. Under these circumstances the method will return `nil` because the administrator is not a member of the ProjectB.
+
+```ruby
+  def find_project
+    if skip_authorization
+      Project.find_by(id: project_id)
+    else
+      available_projects.find_by(id: project_id)
+    end
+  end
+```
+
+During execution, `LabelsFinder#label_ids` first checks to see if `project` evaluates to anything. We know now it doesn't (via #find_project). Now the method falls back to loading all labels for all the user's authorized projects. :tada: Bad times. 
+
+```ruby
+  def label_ids
+    label_ids = []
+
+    if project
+      label_ids << project.group.labels if project.group.present?
+      label_ids << project.labels
+    else
+      label_ids << Label.where(group_id: projects.group_ids)
+      label_ids << Label.where(project_id: projects.select(:id))
+    end
+
+    label_ids
+  end
+```
+
+Also of note, the `else` portion of this `#label_ids` method returns an array of two ActiveRecord relations arrays. Apparently it's flattened elsewhere or it probably wouldn't work, but that's not really what we wanted. 
+
+```
+[[Projects from `Label.where(group_id: projects.group_ids`], [Projects from `Label.where(project_id: projects.select(:id))`]]
+```
+
+
+cc/ @stanhu 
+
+@DouweM Is there someone from your team that can look at this ASAP? It's a large issue for this group as they have many admins. Also, a ~customer+. Thank you!

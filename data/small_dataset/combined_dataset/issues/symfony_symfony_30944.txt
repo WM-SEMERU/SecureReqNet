@@ -1,0 +1,49 @@
+Fix Lock test suite
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+na
+
+
+License
+MIT
+
+
+Doc PR
+na
+
+
+

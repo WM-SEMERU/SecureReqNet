@@ -1,0 +1,6 @@
+registry, configuration, doc: client certificates for authentication purposes.
+
+
+Some organisations require authentication via certificates for security purposes. This PR allows for that, by specifying the CA cert in the TLS configuration block, one is able to require certificates to be presented during a request.
+Refs: #278
+I guess this work could be continued for #280, #279

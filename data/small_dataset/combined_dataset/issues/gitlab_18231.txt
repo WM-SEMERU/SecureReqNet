@@ -1,0 +1,79 @@
+'Content Security Policy headers help to mitigate security vulnerabilities such as cross-site scripting. Due to the custom nature of our Markdown pipeline, we have to be always-vigilant in order to prevent malicious scripts from being loaded inline on a page. Note that I’m not saying GitLab is insecure. Security is incredibly difficult, and it’s essentially impossible to have a perfectly secure application. That’s the exact reason why platforms like HackerOne exist.
+
+For big customers that may have valuable source code or other information in their private projects and instances, implementing CSP has numerous very obvious benefits.
+
+## Policies we should enable
+
+A few basic policies we either can adopt with relative ease or should adopt regardless of difficulty (any uses of gitlab.com, and assets.gitlab.com would obviously be generated dynamically and configurable for on-premise instances):
+- `default-src ‘self’`, this would let all content types coming from gitlab.com, unless a more specific header is provided with a differing ruleset. It may also be worth looking at using `default-src ‘none’` which prevents anything from being loaded unless other rules explicitly permit it, and is used by HackerOne and GitHub.
+- `connect-src ‘self’ gitlab.com`, to be updated with a WebSockets URL 
+- `block-all-mixed-content` this would prevent mixed content warnings from occurring, and assets loaded over HTTP would not be allowed. I think this is reasonable to enable out-of-the-gate.
+- `form-action 'self' gitlab.com` to allow form data to only be submitted to self.
+- `font-src ‘self’`, preventing any external fonts from being loaded.
+- `plugin-types ‘none’` to disable Flash, Silverlight, etc. since we don’t use them at all.
+- `frame-src ‘none’` and `child-src ‘none’` to disable iframes (see below for more information on that).
+- `object-src ‘none’` to disable `<embed>`, `<object>`, and `<applet>` elements.
+- `script-src ‘self’ assets.gitlab.com` to disable inline scripts and only scripts from gitlab.com or assets.gitlab.com (see below for difficulties disabling inline scripts).
+- `style-src ‘unsafe-inline’ ‘self’ assets.gitlab.com`, this allows inline style tag and attributes (required for now in a few places, e.g. for labels), and prevents stylesheets from being loaded from anywhere but gitlab.com or assets.gitlab.com.
+
+A more complete list of policies can be found [on MDN](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives).
+
+## Problems and Considerations
+### Inline scripts
+We seem to use a number of these, which is problematic for properly implementing CSP rules. Preventing inline scripts is a basic preventative measure against XSS. If inline scripts don’t work, we can let users try to inject all the scripts they want, and that type of vulnerability will be entirely mitigated.
+
+In [their blog post](https://github.com/blog/1477-content-security-policy) from when they had just started implementing CSP headers, GitHub notes that they replaced most of their inline JavaScript for supplying data to the client with `data-*` attributes. This is worth looking into, and I think it’d be fairly effective.
+
+Throughout the application there are currently 68 uses `:javascript`, suggesting 68 different inline scripts in various pages. This is going to be an... interesting problem to solve.
+
+### External images
+These are problematic regardless because they can theoretically be used to exploit vulnerabilities in our sanitization of external resources. They also cause Mixed Content Warnings when loaded over an insecure (HTTP) connection. Then there’s the problem of relying on third party image hosts to keep content over the long-term. Imgur has recently took steps to lock down embedding their images in other sites, for example. These should be blocked from use on most, if not all pages.
+
+External images in README’s are another problem. Badges from sites like Circle CI, Coveralls, Travis, etc. would all need to be rehosted by us and checked for updates frequently. I’m not sure how or if this can be handled.
+
+All instances should have the domain we use to check version info set for images.
+
+### External scripts
+Google Analytics, Piwik, and any asset monitoring we do in the future will need to be taken into consideration when implementing CSP headers. 
+
+### Blocking plugins like Flash
+We don’t use Flash or any other plugins anywhere on the site, so we can just kill that right now. Woo!
+
+### Disabling `iframes`
+The only time we use `iframes` is in the admin dashboard for rendering Sidekiq. I don’t think we should risk `iframes` being embedded in GitLab for the sake of this single use. The Sidekiq dashboard should be linked-to from the admin dashboard instead of embedded.
+
+### Breakage of existing projects
+We shouldn’t break anyone’s existing wikis, issues, files, etc. if we can prevent it. In some cases where the security implications outweigh potential breakage, this can be disregarded and we might frustrate a few users for the greater security benefit of all.
+
+For on-premise installations that don’t want to go through the hassle of enabling HTTPS, we either have to have an `insecure-instance` configuration option (alternatively we could name it `enable-foot-gun` and then print `”COME ON, IT’S #{CURRENT_YEAR}!”` to the log every few minutes) *or* prevent GitLab instances from working at all over HTTP connections.
+
+The latter option may be preferable (despite its downsides) for a few reasons.
+
+1. Users shouldn’t be able to attacked by way of downgrading GitLab to connect over HTTP.
+2. Users shouldn’t be allowed to shoot themselves in the foot no matter how much they want to.
+3. “Advanced” features are beginning to be blocked in browsers when connecting to a site over non-HTTPS connections. It’s only a matter of time before features start breaking because someone is running a GitLab instance that connects over HTTP. 
+
+### CDNs
+We’re looking to use a CDN for GitLab.com, as such we should take that into consideration for implementing some of the CSP headers. It may be preferable to route assets through a domain like assets.gitlab.com. Some on-premise installations also use CDNs to speed-up their load times, and so we’d need to take that use-case into consideration as well.
+
+### On-premise installations
+GitLab is frequently installed on-premises, it’s where we earn money. This makes it slightly more difficult to implement basic CSP headers as many require the headers to explicitly define the acceptable source URLs. We'll have to generate the headers dynamically per-instance.
+
+### Defining HTTP headers in Rails rather than Nginx/Apache
+I know there are many people who would prefer we don’t define any HTTP headers in Rails ever, but in this case I think it should be allowed. As we implement new features such as websockets – which require a specific `ws://` domain – they’ll be forced to update their server configs whenever such changes are made. This is frustrating and may be missed by many who don’t read the changelogs or announcement posts.
+
+By default our headers should be enabled, but I’d imagine it’d be easy enough to add an option to our config file that would disable any headers we send via Rails - for use at their own risk.
+
+## Resources
+- [Content Security Policy on the GitHub Blog](https://github.com/blog/1477-content-security-policy)
+- [GitHub’s CSP Journey on the GitHub Engineering Blog](http://githubengineering.com/githubs-csp-journey/)
+- [MDN Articles on CSP](https://developer.mozilla.org/en-US/docs/Web/Security/CSP)
+- [Mozilla’s HTTP Observatory CLI](https://github.com/mozilla/http-observatory-cli) for testing websites for security best practices.
+- [Twitter’s Secure Headers gem for Rails apps](https://github.com/twitter/secureheaders) - We should *definitely* be using this.
+- [Removing Inline Javascript (for CSP)](https://oreoshake.github.io/csp/2013/01/13/removing-inline-js-for-csp.html)
+- [Content Security Policy for Single Page Web Apps](https://corner.squareup.com/2016/05/content-security-policy-single-page-app.html)
+- [How to Get Started with a Content Security Policy on the Codeship Blog](https://blog.codeship.com/how-to-get-started-with-a-content-security-policy/)
+- [Ruby on Rails Content-Security-Policy (CSP)](http://bauland42.com/ruby-on-rails-content-security-policy-csp/)
+- [Reshaping web defenses with strict Content Security Policy](https://security.googleblog.com/2016/09/reshaping-web-defenses-with-strict.html)
+
+cc: @dzaporozhets @DouweM @rspeicher @jschatz1 

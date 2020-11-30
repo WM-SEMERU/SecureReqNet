@@ -1,0 +1,7 @@
+Proposal: SELinux enhancements
+
+
+TLDR: Try to make SELinux support better by not requiring Kubelet directory to be labeled with an SELinux type usable from the container.
+cc @kubernetes/sig-node @yifan-gu
+
+This change is 

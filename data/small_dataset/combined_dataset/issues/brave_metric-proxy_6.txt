@@ -1,0 +1,5 @@
+Purge MixPanel from Repository
+
+
+MixPanel is not presently used anywhere, but still shows up in searches. Present results point to documentation or otherwise-inert code. We should remove it all entirely, thus avoiding any confusion about what Brave is and is not using.
+We may opt to simply remove this repo entirely.

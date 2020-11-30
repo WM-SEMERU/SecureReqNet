@@ -1,0 +1,53 @@
+[Security] Logout configuration in security.yml & route.yml with Internationalization
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+yes
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+4.1.0
+
+
+
+I am trying the 4.1 route Internationalization & inline route, and it works well (even combined with prefix)
+But i can't translate the logout url due to the current mechanisme:
+Actual logout configuration :
+            logout:
+                path: /logout.html
+                target: /
+
+Tehorical version with Internationalization:
+            logout:	
+                path:
+                    fr: /compte/deconnexion.html
+                    en: /account/logout.html
+                target: /
+
+but even this would not make a real solution (by the way it doesn't work cause path wait only scalar expression)
+Maybe logout security configuration should be based on logout route like
+            logout:
+				route: security_logout
+				target: index_route
+

@@ -1,0 +1,15 @@
+PDFs are still opened in-browser even though "Download PDF files instead of automatically opening them in Brave" is on
+
+
+Description
+When I attempt to download any .pdf file, the file is opened by the built in brave PDF viewer even though "Download PDF files instead of automatically opening them in Brave" is turned on (Settings > Advanced Settings > Content Settings > PDF documents).
+Steps to Reproduce
+
+Turn "Download PDF files instead of automatically opening them in Brave" on;
+Close Browser
+Reopen Browser
+Open any link to a pdf
+ex: http://www.africau.edu/images/default/sample.pdf
+
+What version of Brave are you using?
+Version 0.56.15 Chromium: 70.0.3538.110 (Official Build) (64-bit)

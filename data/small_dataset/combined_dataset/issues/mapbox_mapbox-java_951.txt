@@ -1,0 +1,15 @@
+Fix banner MAS models to match what actually comes from Directions API
+
+
+As part of mapbox/mapbox-navigation-android#1543 work we've noticed that some banner Directions API / MAS models don’t match each other completely matches and some annotations need to be fixed in MAS so they match what actually comes from the API. These are the changes needed:
+BannerInstructions:
+primary 👉 should be @NonNull
+BannerText:
+text 👉 should be @NonNull
+UPDATED
+type 👉 should be @NonNull
+modifier 👉 should be @NonNull
+BannerComponents:
+text 👉 not specified and should be @NonNull
+type 👉 not specified and should be @NonNull
+cc @kevinkreiser @osana

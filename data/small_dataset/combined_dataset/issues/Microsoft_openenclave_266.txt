@@ -1,0 +1,10 @@
+Open Enclave users trust that SGX quote parsing is fuzz tested and secure
+
+
+oe_verify_report handling for remote attestation reports (SGX quotes) introduces a non-trivial amount of parsing code into the OE runtime. This includes:
+
+Logic to interpret Intel's binary SGX quote format and validate signatures over it
+Wrapper for mbedtls/openSSL ASN methods to parse custom Intel SGX PCK certificate extensions
+Minimal JSON parser for Intel's TCBInfo and QEIdentity blobs
+
+Per security best-practices, we should run the quote handling code under fuzz testing to increase our confidence that the parsing logic is robust and secure.

@@ -1,0 +1,4 @@
+added retry to delete
+
+
+This should fix paper over an issue with CloudSQL and Terraform: terraform-providers/terraform-provider-google#1558.

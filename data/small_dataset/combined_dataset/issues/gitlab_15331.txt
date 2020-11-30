@@ -1,0 +1,30 @@
+ZD: [128626](https://hackerone.com/bugs?subject=gitlab&report_id=128626&view=new&substates%5B%5D=new&text_query=&sort_type=latest_activity&sort_direction=descending&limit=25&page=1)  
+
+# Description
+
+I was testing the markdown issues again and saw that the way you are opening the user submitted links is not proper. When you open a new link using target="_blank", by default, the new page opened will have the control of window object on the page which opens it.
+
+## POC:
+
+1. Comment the following to an open issue or anywhere where html is automatically converted as links: (like for a comment in issues)
+```
+<a href="http://52.37.33.104/opener.html" target="_blank">example</a>
+```
+
+2. Take on the preview option (or actually submit the comment). Click on the link and it opens inside a new tab. But you can see that after clicking, I could change the window.opener.location and use it to execute javascript via data URIs (a sample alert("XSS") pops up) on gitlab.com.
+
+3. This can also be misused to redirect the users to malicious links or I can buy a very similar domain and host your login page there and in turn use this for phishing.
+eg for open redirect:
+```
+<a href="https://mathiasbynens.be/demo/opener" target="_blank">example</a>
+```
+
+The awesomeness here is that when user clicks on the link, a new tab is opened and the users attention will be on the new tab. In the background I can control what happens to the tab behind and I can use it to redirect users to a very similar phishing page (login page clone of gitlab hosted on a very similar domain name) and users won't have a clue on what happened.
+
+## Mitigation:
+
+One of the simple way to fix this is is to use `rel=noopener` which automatically sets `window.opener` to null. Or you can even explicitly set the `window.opener` to null using javascript.
+
+***
+
+/cc @rspeicher 

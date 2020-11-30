@@ -1,0 +1,66 @@
+Hi.
+
+I did an upgrade from my Gitlab CE (6.5 to 6.6).
+Since this upgrade, all our avatar group were destroyed.
+Now, when I try to upload a new avatar, it doesn't work.
+
+Here is the log when I push a new avatar:
+
+```Started GET "/assets/no_group_avatar.png" for 127.0.0.1 at 2014-03-05 11:35:30 +0100
+Started PATCH "/groups/company" for 127.0.0.1 at 2014-03-05 11:35:40 +0100
+Processing by GroupsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+HeiayawlT/HF5zA2BIR7djpMy5UBdUkTauFX/VacPU=", "group"=>{"name"=>"Company", "description"=>"", "avatar"=>#<ActionDispatch::Http::UploadedFile:0x0000000805bb50 @tempfile=#<File:/tmp/RackMultipart20140305-26555-1a2axep>, @original_filename="logo_rouge.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"group[avatar]\"; filename=\"logo_rouge.png\"\r\nContent-Type: image/png\r\n">}, "id"=>"company"}
+Redirected to https://git.company.net/groups/company
+Completed 302 Found in 96ms (ActiveRecord: 73.8ms)
+Started GET "/groups/company" for 127.0.0.1 at 2014-03-05 11:35:40 +0100
+Processing by GroupsController#show as HTML
+  Parameters: {"id"=>"company"}
+  Rendered events/_event_last_push.html.haml (0.1ms)
+  Rendered shared/_event_filter.html.haml (1.1ms)
+  Rendered groups/_projects.html.haml (18.1ms)
+  Rendered shared/_promo.html.haml (0.2ms)
+  Rendered groups/show.html.haml within layouts/group (24.7ms)
+  Rendered layouts/_head.html.haml (0.9ms)
+  Rendered layouts/_broadcast.html.haml (1.2ms)
+  Rendered layouts/_search.html.haml (0.9ms)
+  Rendered layouts/_head_panel.html.haml (6.0ms)
+  Rendered layouts/_flash.html.haml (0.2ms)
+  Rendered layouts/nav/_group.html.haml (7.7ms)
+Completed 200 OK in 56ms (Views: 40.3ms | ActiveRecord: 4.9ms)
+Started GET "/assets/application-1919a37530d19e53ab54e778f086fe7b.css" for 127.0.0.1 at 2014-03-05 11:35:40 +0100
+Started GET "/assets/application-25b0e529a750710c27d99a8f9f2cd929.js" for 127.0.0.1 at 2014-03-05 11:35:40 +0100
+Started GET "/uploads/group/avatar/17/logo_rouge.png" for 127.0.0.1 at 2014-03-05 11:35:40 +0100 
+```
+
+After validation, the group page is reloaded, and then, I have a 404 on the avatar
+```
+ActionController::RoutingError (No route matches [GET] "/uploads/group/avatar/17/logo_rouge.png"):
+  vendor/bundle/ruby/1.9.1/gems/actionpack-4.0.3/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  vendor/bundle/ruby/1.9.1/gems/actionpack-4.0.3/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  vendor/bundle/ruby/1.9.1/gems/railties-4.0.3/lib/rails/rack/logger.rb:38:in `call_app'
+  vendor/bundle/ruby/1.9.1/gems/railties-4.0.3/lib/rails/rack/logger.rb:20:in `block in call'
+  vendor/bundle/ruby/1.9.1/gems/activesupport-4.0.3/lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  vendor/bundle/ruby/1.9.1/gems/activesupport-4.0.3/lib/active_support/tagged_logging.rb:25:in `tagged'
+  vendor/bundle/ruby/1.9.1/gems/activesupport-4.0.3/lib/active_support/tagged_logging.rb:67:in `tagged'
+  vendor/bundle/ruby/1.9.1/gems/railties-4.0.3/lib/rails/rack/logger.rb:20:in `call'
+  vendor/bundle/ruby/1.9.1/gems/actionpack-4.0.3/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/methodoverride.rb:21:in `call'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/runtime.rb:17:in `call'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/lock.rb:17:in `call'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/sendfile.rb:112:in `call'
+  vendor/bundle/ruby/1.9.1/gems/railties-4.0.3/lib/rails/engine.rb:511:in `call'
+  vendor/bundle/ruby/1.9.1/gems/railties-4.0.3/lib/rails/application.rb:97:in `call'
+  vendor/bundle/ruby/1.9.1/gems/railties-4.0.3/lib/rails/railtie/configurable.rb:30:in `method_missing'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/builder.rb:138:in `call'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/urlmap.rb:65:in `block in call'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/urlmap.rb:50:in `each'
+  vendor/bundle/ruby/1.9.1/gems/rack-1.5.2/lib/rack/urlmap.rb:50:in `call'
+  vendor/bundle/ruby/1.9.1/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:552:in `process_client'
+  vendor/bundle/ruby/1.9.1/gems/unicorn-worker-killer-0.4.2/lib/unicorn/worker_killer.rb:51:in `process_client'
+  vendor/bundle/ruby/1.9.1/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:632:in `worker_loop'
+  vendor/bundle/ruby/1.9.1/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:500:in `spawn_missing_workers'
+  vendor/bundle/ruby/1.9.1/gems/unicorn-4.6.3/lib/unicorn/http_server.rb:142:in `start'
+  vendor/bundle/ruby/1.9.1/gems/unicorn-4.6.3/bin/unicorn_rails:209:in `<top (required)>'
+  vendor/bundle/ruby/1.9.1/bin/unicorn_rails:23:in `load'
+  vendor/bundle/ruby/1.9.1/bin/unicorn_rails:23:in `<main>'
+```

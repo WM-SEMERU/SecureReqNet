@@ -1,0 +1,49 @@
+Security.tl.xlf file
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+

@@ -1,0 +1,1 @@
+When importing a new repo by URL, the information entered in the "Git repository URL" input field (https://username:password@gitlab.company.com/group/project.git) is stored in the browser. This should be disabled to protect the credentials.

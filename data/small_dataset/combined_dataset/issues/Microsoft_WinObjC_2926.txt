@@ -1,0 +1,5 @@
+Undefined reference to this pointer adjustor thunk
+
+
+I had some C++ code in my project using multiple inheritance. The project had optimization set to -O2, I think this was imported from the Xcode settings. The linker gave me an error saying something like (I'm writing this from memory) "undefined reference to [thunk:] __thiscall MyClass::adjustor{4}".
+This was solved by disabling optimization but I think this is a bug in the build system / compiler.

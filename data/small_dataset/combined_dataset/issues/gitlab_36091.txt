@@ -1,0 +1,45 @@
+'This was discovered during our external whitebox testing. I'm not sure they've considered all possible exploits for this vulnerability. They might be able to duplicate the previous disclosure of any file on the system by symlinking the right
+location inside `.git`.
+
+The text from the report:
+
+-----
+
+## Details
+
+When importing GitLab projects from a GitLab project backup tarball the follow- ing decompression method tries to prevent symlinks within the extracted tar- balls:
+
+```
+def decompress_archive
+  result = untar_zxf(archive: @archive_file, dir: @shared.export_path)
+  raise Projects::ImportService::Error.new("Unable to decompress
+#{@archive_file} into #{@shared.export_path}") unless result
+  remove_symlinks!
+end
+def remove_symlinks!
+  Dir["#{@shared.export_path}/**/*"].each do |path|
+    FileUtils.rm(path) if File.lstat(path).symlink?
+  end
+true end
+```
+The above glob pattern #{@shared.export_path}/**/*, however, catches only files which do not start with a dot. If the tarball contains symbolic links which start with a dot, those will not be removed.
+As a result an attacker might clone arbitrary repositories on the GitLab host. In a legit GitLab backup the to be restored git repository is stored in form of a git bundle within a file called project.bundle. When a project is imported from an export tarball the GitLab server will issue a git clone command in order to restore the git repository for the project. An attacker can now provide a mali- cious tarball with the following contents in order to get access to a repository:
+
+```
+./project.json
+./VERSION
+./project.bundle/
+./project.bundle/.git # symlink to target repository
+```
+
+The .git symlink in the project.bundle repository will not be removed as it will not be listed with the above glob pattern. Therefore the git clone process will clone the repository targeted by the symbolic link.
+
+Another attack vector bypassing this glob pattern is e.g. placing dot-prefixed symlinks into the upload directory. As a result, arbitrary files from the GitLab server might be read with the permission of the git user.
+
+## Reproduction Steps
+
+Unpack a regular exported GitLab project and remove the project.bundle file. Create a project.bundle directory in the same folder. Within this project.bundle directory create a symbolic link to /var/opt/gitlab/git-data/repositories/$USERNAME/$REPONAME. Create a gzipped tarball of the files project.json, VERSION and project.bundle/.git. Upon import the targeted $USERNAME/$REPONAME git repository should be used.
+
+## Recommendation
+
+The remove_symlinks method should be improved in a way that files starting with a dot (.) are checked for symbolic links as well.

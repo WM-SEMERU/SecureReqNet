@@ -1,0 +1,12 @@
+I have uploaded a large pdf-file (1.9MB) in the wiki-repository from one of my projects.
+If I reference this file per markdown and access it, I get a corrupted pdf-file with 52771 bytes.
+
+Steps:
+
+* clone the wiki to local
+* add the pdf-file, commit and push to the wiki-area
+* in the home.md-file
+   [Entwurf](Entwurf.pdf)
+* if I access this pdf in browse-mode, I get only 52kb from 1.9 MB.
+* if I clone the wiki-repo again, I get the correct file
+

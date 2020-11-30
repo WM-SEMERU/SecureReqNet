@@ -1,0 +1,9 @@
+If I rename git-keep files with `git mv`, the online message for the commit doesn't show the rename like it usually does, it just leaves it out entirely.
+
+Example:
+
+    $ git mv .keep .gitkeep
+    $ echo test > test.txt
+    $ git add test.txt
+    $ git commit -m 'gitkeep and test'
+    $ git push

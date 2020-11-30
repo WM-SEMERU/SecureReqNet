@@ -1,0 +1,7 @@
+Polymer & Vue knobs are vulnerable to XSS Attack
+
+
+We probably should escape text values in those frameworks, or at least the values that came from URL
+Polymer
+Vue
+Other frameworks are safe because they do escaping on their side

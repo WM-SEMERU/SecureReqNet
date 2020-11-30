@@ -1,0 +1,7 @@
+Step to reproduce
+
+ - create a new project on GitLab. Use the "import existing repository" option, with an invalid/non-accessible URL
+ - give up on the import, by switching to another page, after the `git clone` failure message 
+ - use the given instructions to push your repository manually (i.e., `git remote add origin git@gitlab.org:username/projectname` followed by `git push -u origin master`) 
+
+The push operation fails, with permission error. Most likely because since the `git clone --bare` operation failed the repository directory has not been created.

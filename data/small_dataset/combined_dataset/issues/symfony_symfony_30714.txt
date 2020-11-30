@@ -1,0 +1,49 @@
+[PhpUnitBridge] fix PHP 5.3 compatibility
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30709
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

@@ -1,0 +1,8 @@
+'The patch for #55320 was not included in the 11.7.3 security release. Therefore, since it has been publicly disclosed and we should: 
+- [x] Create a post-deployment patch for `gitlab.com` 
+- [x] Include it in the upcoming critical security release.
+
+Original Issue: https://gitlab.com/gitlab-org/gitlab-ce/issues/55320  
+Security Issue: https://dev.gitlab.org/gitlab/gitlabhq/issues/2786 
+
+https://dev.gitlab.org/gitlab/gitlabhq/issues/2786#note_150471 captures why this was missed

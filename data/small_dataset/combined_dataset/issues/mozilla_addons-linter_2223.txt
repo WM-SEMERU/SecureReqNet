@@ -1,0 +1,6 @@
+Warn on nested zip files
+
+
+Following mozilla/addons-server#9584 the linter should warn for nested ZIP files, originally we expanded .crx, .jar, .xpi, .zip files but in theory the same problems with zip files apply with tar files and more.
+We should rather warn about them or even disallow them altogether.
+Originally nested .zip/.jar files were used to distribute additional software together with an add-ons XPI file, that is not needed anymore with WebExtensions.

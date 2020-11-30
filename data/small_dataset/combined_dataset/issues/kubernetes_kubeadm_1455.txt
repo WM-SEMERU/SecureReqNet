@@ -1,0 +1,45 @@
+Allow adding extraVolumes in ClusterConfiguration for local etcd manifests
+
+
+What keywords did you search in kubeadm issues before filing this one?
+etcd, localEtcd, extraVolumes
+Is this a BUG REPORT or FEATURE REQUEST?
+FEATURE REQUEST
+Versions
+kubeadm version (use kubeadm version):
+Environment:
+
+Kubernetes version (use kubectl version): kubeadm version: &version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.4", GitCommit:"c27b913fddd1a6c480c229191a087698aa92f0b1", GitTreeState:"clean", BuildDate:"2019-02-28T13:35:32Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Cloud provider or hardware configuration: AWS
+OS (e.g. from /etc/os-release): Container Linux
+Kernel (e.g. uname -a): 4.19
+Others: -
+
+What happened?
+I required to mount the hosts' /etc/hosts file to the etcd container / pod as the etcd peers are referenced by their names and those are updated automatically there.
+With the etcd manifest file kubeadm init  creates out of a provided ClusterConfiguration adding extraVolumes to the local etcd section throws a schema validation varning.
+What you expected to happen?
+Looking at the extraVolumes parameter that can be used for all other ControlPlaneComponents (https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm#ControlPlaneComponent)
+I expected the same to be possible to do so for etcd as well, but until now this is unfortunately not the case.
+How to reproduce it (as minimally and precisely as possible)?
+          apiVersion: "kubeadm.k8s.io/v1beta1"
+          kind: ClusterConfiguration
+          etcd:
+            local:
+              serverCertSANs:
+                - "etcd-0"
+              peerCertSANs:
+                - "etcd-0"
+              extraArgs:
+                initial-cluster: etcd-0=https://etcd-0:2380
+                initial-cluster-state: new
+                name: etcd-0
+                listen-peer-urls: https://0.0.0.0:2380
+                listen-client-urls: https://0.0.0.0:2379
+                advertise-client-urls: https://etcd-0:2379
+                initial-advertise-peer-urls: https://etcd-0:2380
+            extraVolumes:
+                - name: hosts-file
+                  hostPath: /etc/hosts
+                  mountPath: /etc/hosts
+

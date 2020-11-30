@@ -1,0 +1,37 @@
+Compile error in 3.4 by using handler lowercase name in config.yml
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+maybe
+
+
+Feature request?
+No
+
+
+BC Break report?
+No
+
+
+RFC?
+No
+
+
+Symfony version
+3.4
+
+
+
+I don’t know if it’s really a bug, but as stated in https://stackoverflow.com/q/48909964/6028808, when a handler for the logout is specified using a lowercase for second part of the name, i.e. Logoutlistener, symfony tries to find an unexisting file named with a 2.
+I saw, after having found the solution, that declaring with lowercase is deprecated in 3.4.x and throws an error in 4.
+The purpose of this issue is to, maybe, improve the error message, the error was on my side, as I had the typo in my code but was hard to find.
+Furthermore, as it is deprecated but still in use in 3.4, I think it should « compile » without error, except the deprecate warning, so I think the error is not attended, that’s why I submit it as a bug, but feel free to close, if you don’t think it is.

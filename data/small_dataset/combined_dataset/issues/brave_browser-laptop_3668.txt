@@ -1,0 +1,25 @@
+target="_blank" vulnerability
+
+
+Did you search for similar issues before submitting this one?
+Yes
+Describe the issue you encountered:
+A popup window or other tab can modify the location of it's window.opener even when the two windows have different domains.
+See for more information:
+
+https://dev.to/ben/the-targetblank-vulnerability-by-example
+http://lists.w3.org/Archives/Public/public-whatwg-archive/2015Jan/0002.html
+
+Expected behavior:
+A popup window or tab shouldn't be able to modify the location of it's window.opener.
+
+Platform (Win7, 8, 10? macOS? Linux distro?):
+OS X 10.10.5
+Brave Version:
+0.11.6
+Steps to reproduce:
+1.Visit The Practical Dev Facebook page.
+2.Click the dev.to link in the profile. This opens a new tab or window.
+3.Observe that the original tab has migrated to this page.
+These steps are described at https://dev.to/ben/the-targetblank-vulnerability-by-example
+

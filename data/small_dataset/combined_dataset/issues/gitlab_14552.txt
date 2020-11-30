@@ -1,0 +1,14 @@
+To reproduce:
+1. Go to https://gitlab.com/users/sign_in
+2. Attempt to login with an invalid username+password combination.
+3. Click the 'Sign in' button.
+4. The page should say "Invalid login or password", and the password field should have been cleared.
+   However, if you view the page source you will find the following:
+
+```html
+<input value="ThisIsThePassword" class="form-control bottom" id="user_password_sign_up" placeholder="Password" required="required" type="password" name="user[password]" />
+```
+
+The value entered into the password box has leaked down into the 'Create an account' form underneath.
+
+I believe this is a minor security vulnerability. While GitLab is generally served over HTTPS and this only affects invalid passwords, it may allow someone with access to the computer to acquire what the user believes to be their password (which they may be using for other websites), even after the password would usually no longer be stored.

@@ -1,0 +1,5 @@
+[Security] DNS rebinding attack against webtorrent
+
+
+our webtorrent integration may be vulnerable to the DNS rebinding attack described in transmission/transmission#468. the torrent server uses CORS but it doesn't check the Host header.
+impact: remote sites may see what a user is torrenting

@@ -1,0 +1,42 @@
+security revert CVE-2016-2216 didn't work with HPE_UNEXPECTED_CONTENT_LENGTH
+
+
+
+Version: v4.4.0
+Platform: Darwin MacBook-Pro.local 15.3.0 Darwin Kernel Version 15.3.0: Thu Dec 10 18:40:58 PST 2015; root:xnu-3248.30.4~1/RELEASE_X86_64 x86_64
+
+We encounter this issue when we upgrade node.js from v4.2.x to v4.3.x or v4.4.0.
+A service we depends on will return both Transfer-Encoding and Content-Length in headers, and the node.js > 4.3.x will throw a HPE_UNEXPECTED_CONTENT_LENGTH error when  we make a request with the service. and security revert CVE-2016-2216 also can't resolve this problem.
+Also, according to RFC 2616
+
+If a Content-Length header field (section 14.13) is present, its
+decimal value in OCTETs represents both the entity-length and the
+transfer-length. The Content-Length header field MUST NOT be sent
+if these two lengths are different (i.e., if a Transfer-Encoding header field is present). If a message is received with both a
+Transfer-Encoding header field and a Content-Length header field,
+the latter MUST be ignored.
+
+So I think Node.js should ignore the content-length when both header was given rather than throw a error.
+Here is some code the reproduce this issue
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.setHeader('Transfer-Encoding', 'chunked');
+    res.setHeader('Content-Length', 344);
+    res.end('ok');
+}).listen(8085);
+
+const options = {
+    port: 8085,
+    hostname: '127.0.0.1',
+    method: 'GET',
+};
+
+const req = http.request(options);
+req.on('error', function (err) {
+    console.error(err);
+});
+req.end();
+➜  ~ node --security-revert=CVE-2016-2216 index.js
+SECURITY WARNING: Reverting CVE-2016-2216: Strict HTTP Header Parsing
+{ [Error: Parse Error] bytesParsed: 123, code: 'HPE_UNEXPECTED_CONTENT_LENGTH' }

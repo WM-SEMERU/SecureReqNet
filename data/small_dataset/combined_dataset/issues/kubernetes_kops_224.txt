@@ -1,0 +1,5 @@
+Allow extra security groups
+
+
+It would be great if we could apply extra security groups to the InstanceGroups. This would allow layering in access to other AWS resources such as RDS, elasticache, etc.
+Applying these changes to an autoscale group would require a rolling update unless they are manually applied to running servers...

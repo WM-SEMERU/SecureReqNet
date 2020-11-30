@@ -1,0 +1,7 @@
+Remove usage of 'displayed_pages' for pagination
+
+
+
+displayed_pages is deprecated as per documentation but still used by derived/data/viewport.ts
+remove from DataTable prop 'pagination_settings'
+

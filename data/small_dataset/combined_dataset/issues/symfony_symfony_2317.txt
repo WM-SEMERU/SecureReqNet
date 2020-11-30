@@ -1,0 +1,7 @@
+HTTPS/SSL error on login form
+
+
+Hi,
+i have configured the https routes and access control and i found a problem.
+routes are well generated with scheme https, but for acces control zone, symfony give an error if i try to access a secure zone and redirect to login form (redirection error).
+thank you

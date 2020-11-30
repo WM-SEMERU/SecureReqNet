@@ -1,0 +1,3 @@
+I ran into an issue after running the upgrade script for Gitlab 6.5. It said that it worked but when I went to restart the gitlab service it couldn't find multi_json. I had to log in as the git user and manually run "bundle install --without development test postgres --deployment". After that it worked fine.
+
+Afterwards I realized that the problem was that I have rbenv installed for my git user.  The instructions say to run commands with ```sudo -u git -H``` which doesn't load the rbenv environment for the user.

@@ -1,0 +1,51 @@
+[Security] Adding a GuardAuthenticatorHandler alias
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+kinda
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+This feature is not currently documented
+
+
+
+The security.authentication.guard_handler service is actually meant to be available for users to use. Specifically, the authenticateUserAndHandleSuccess() method is useful to auto-login the user after, for example, registration, but maintain all the behavior of a normal login (success behavior, trigger the login event).
+So, it should have an autowiring alias.

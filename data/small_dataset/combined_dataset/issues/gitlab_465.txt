@@ -1,0 +1,7 @@
+I understand your enthusiasm for namespaces (aka groups) and know that preventing projects in the root namespace cleared up a lot of code.
+
+But, to make migration from other services easier (e.g. gitolite) it would be brilliant if we could set a 'default' namespace that gitlab assumes when there is a git access.
+
+e.g. if I set my default namespace to 'legacy' and I run git clone git@git.domain.com:oldproject, this would actually checkout the git repo at git@git.domain.com:legacy/oldproject. Thus the web front end would still show the project being under the legacy namespace but legacy project with submodules stand a chance of working.
+
+A further to this would be to allow us to map the old repos across to their new namespaces.

@@ -1,0 +1,12 @@
+publishers should not make requests to youtube, twitch, etc in the main process
+
+
+Test Plan:
+
+turn on Brave Payments
+browse Youtube for a while in a regular tab; the publishers should show up in the ledger payments panel, and favicons should appear
+repeat Step 2 for Twitch
+browse Youtube in a private tab; this time the publishers should not show up in the payments panel
+
+Original issue description
+related: #12938

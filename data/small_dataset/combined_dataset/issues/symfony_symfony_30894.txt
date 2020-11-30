@@ -1,0 +1,23 @@
+[Serializer] Add options to JsonDecode and JsonEncode to wrap/unwrap json data
+
+
+from @nonanerz
+
+Add options to JsonDecode and JsonEncode to wrap/unwrap json data
+Q 	A
+Branch? 	master
+Bug fix? 	no
+New feature? 	yes
+BC breaks? 	no
+Deprecations? 	no
+Tests pass? 	yes
+Fixed tickets 	n/a
+License 	MIT
+Doc PR 	n/a
+Add options to JsonDecode and JsonEncode to wrap/unwrap json data.
+So you can use:
+$serialiser->deserialize("{object: {value: 1, other: 2}}", Object::class, ['json_root_key' => 'object'])
+
+I've just rebase the PR with master without the merge cc @fabpot
+from #28887
+#FOSSHackathons

@@ -1,0 +1,49 @@
+[SecurityBundle] Improve error when argon2i is not available
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master?
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+?
+
+
+Fixed tickets
+~
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+

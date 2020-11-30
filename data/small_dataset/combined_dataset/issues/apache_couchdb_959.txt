@@ -1,0 +1,19 @@
+Support different pbkdf2 iterations for admin vs. regular users
+
+
+In #957 I proposed increasing our default number of iterations to 10000. @rnewson had a very good reason why not to do so:
+
+Until the replicator acquires a session cookie, this seems unwise.
+
+Meaning that the replicator uses basic auth for its requests, and slowing down those requests will have a drastic impact on total replication time.
+I proposed that, instead, we require a higher # of iterations for server admins (i.e. those stored in the [admins] section of the ini file). @rnewson responded:
+
+separate iteration counts for admins vs not-admins is a good idea and simple to implement. Unfortunately it's a requirement to use admin creds if you want to successfully replicate design documents, but that's another part of the couchapp story, and perhaps we can document around it, telling folks to publish their design docs separately to replication.
+
+So to do this right we need to:
+
+Have two iteration settings in the config, admins vs. non-admins, and apply them appropriately; and
+Work out what to do about replication of design documents.
+
+I believe that changing the permissions such that ddoc replication doesn't require admin credentials will break backward compatibility, but it's one possibility I need to learn more about.
+I also wonder if we can't differentiate here between server admins vs. DB admins, and only impose the higher # of iteration limit for server admins.

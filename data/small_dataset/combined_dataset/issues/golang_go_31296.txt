@@ -1,0 +1,72 @@
+cmd/go: go build now builds executable under directory with same name as executable
+
+
+What version of Go are you using (go version)?
+$ gotip version
+go version devel +cf8cc7f63c Thu Apr 4 16:10:12 2019 +0000 darwin/amd64
+
+Does this issue reproduce with the latest release?
+No, it does not reproduce with go 1.12.2.
+What operating system and processor architecture are you using (go env)?
+go env Output$ go env
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/Users/mr/Library/Caches/go-build"
+GOEXE=""
+GOFLAGS=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/Users/mr/go"
+GOPROXY=""
+GORACE=""
+GOROOT="/Users/mr/sdk/go1.12.2"
+GOTMPDIR=""
+GOTOOLDIR="/Users/mr/sdk/go1.12.2/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+CXX="clang++"
+CGO_ENABLED="1"
+GOMOD=""
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/ct/bl4_z3g51ks8239_r2k07v_40000gn/T/go-build838756939=/tmp/go-build -gno-record-gcc-switches -fno-common"
+
+What did you do?
+Given a layout with files like this, noting that there a main package inside cmd/foo and a top-level directory foo:
+bash-3.2$ tree -F
+.
+├── cmd/
+│   └── foo/
+│       └── main.go
+└── foo/
+
+Then running go build ./cmd/foo now creates the binary to ./foo/foo whereas it was previously rejected:
+bash-3.2$ GO111MODULE=off gotip build ./cmd/foo
+bash-3.2$ tree -F
+.
+├── cmd/
+│   └── foo/
+│       └── main.go
+└── foo/
+    └── foo*
+
+What did you expect to see?
+I expected an error like the output in go.1.12.2 about the foo directory existing, and no binary being built:
+bash-3.2$ $GOPATH/bin/go1.12.2 build ./cmd/foo
+go build _/tmp/x/cmd/foo: build output "foo" already exists and is a directory
+
+What did you see instead?
+A successful build that placed an executable into ./foo/foo.
+I haven't bisected, but I'm guessing https://go-review.googlesource.com/c/go/+/167679/ (b48bda9) introduced this behavior, where:
+
+I did not specify -o
+The default behavior is equivalent to -o foo
+foo exists and is a directory, therefore cmd/foo's resultant binary is placed inside the foo directory
+
+In the actual project I'm working on, I occasionally run go build ./cmd/foo to ensure that foo builds correctly, and I expect no binary to be built because the foo directory exists. I was surprised that tip actually created ./foo/foo. I would run go build ./cmd/... to achieve the same thing but there are a lot of commands in this particular project, so go build ./cmd/foo is more to the point.
+Reading the comments in the CL, looking at the tests introduced in the CL, and reading through the comments in #14295, it doesn't look like this behavior was intended.

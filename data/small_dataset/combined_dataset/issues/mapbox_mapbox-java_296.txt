@@ -1,0 +1,5 @@
+Add convenience method for roundabout exit
+
+
+If the maneuver type is a roundabout, an exit is provided in the json properties.
+cc: @zugaldia

@@ -1,0 +1,5 @@
+Remove global cmake flags and add them to CheckDevFlows
+
+
+Currently we have alot of CMake warnings generating hundreds of MB of Jenkins logs
+Removed global "--warn-uninitialized and --warn-unused-vars" CMake flags and add them only to the CheckDevFlows stage

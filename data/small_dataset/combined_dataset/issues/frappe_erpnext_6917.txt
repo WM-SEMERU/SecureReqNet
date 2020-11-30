@@ -1,0 +1,5 @@
+system manager can add permision to page without changing core code
+
+
+We can easily customize default permission for doctype and report, but its hard to add role in page.
+We need to add some roles in Stock Summery report, as if user has permission to stock summery then he can see stock level in Item Master.

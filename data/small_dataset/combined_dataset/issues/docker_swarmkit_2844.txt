@@ -1,0 +1,100 @@
+[17.06 backport] switch CircleCI 2.0, bump go version
+
+
+
+
+ #2248 [ci] Bump go verison up to 1.8.3
+
+
+ #2254 Run CI with temporary files on a ramdisk
+
+
+ #2337 Use protobuild to build protobufs
+
+skipped
+
+
+
+ #2349 Stabilize the api proto descriptors in swarmkit
+
+only second commit
+
+
+
+ #2395 Bump Go to 1.8.4
+
+
+ #2448 Update protobuf to 3.5.0
+
+skipped
+
+
+
+ #2489 Bump Go to 1.9.3
+
+
+ #2636 Bump Go to 1.10.3
+
+
+ #2659 Convert the circle config file to v2 format, as Circle v1 is deprecated
+
+
+ #2690 Just use the default GOPATH in CircleCI
+
+
+ #2537 Fix possible data race in manager/state/store/memory_test.go
+
+
+Not yet included:
+
+ #2752 Switch to go 1.11
+ #2756 Dockerfile, circleci: update protoc to 3.6.1, simplify install
+
+# https://github.com/docker/swarmkit/pull/2248 [ci] Bump go verison up to 1.8.3
+git cherry-pick -s -S -x b5c4335827eade52ab960f037a38085bdb3fcd00
+
+# https://github.com/docker/swarmkit/pull/2254 Run CI with temporary files on a ramdisk
+git cherry-pick -s -S -x ff0a39725b9469db101e01ae0ab4d61a70d1c754
+
+# https://github.com/docker/swarmkit/pull/2337 Use protobuild to build protobufs
+# skipped --- git cherry-pick -s -S -x 135371fbd0bd8fab2d18d5122305469712a8c56b
+# skipped --- git cherry-pick -s -S -x fef5dc055f8ff22d1115be57738228d20afd618e
+# skipped --- git cherry-pick -s -S -x 5bb2d6a8ca33436518cefc1aa83506a5b3cf0c07
+# skipped --- git cherry-pick -s -S -x 79c9bf263e7aa1b3b9e887ac86627acd02e134b3
+# skipped --- git cherry-pick -s -S -x 01abb6951cb006d254cfea9010b3cb4ddeadc5e4
+
+
+# https://github.com/docker/swarmkit/pull/2349 Stabilize the api proto descriptors in swarmkit
+# skipped --- git cherry-pick -s -S -x be3bab1201ef85f2eff1e1d8dfb6c65d631e7b13
+git cherry-pick -s -S -x 1540992284f0b570cd1b24080d8d94239f1765f2
+# skipped --- git cherry-pick -s -S -x b891ae74e9fa8a7e0e1f8b4557e00bef21936a2a
+
+
+# https://github.com/docker/swarmkit/pull/2395 Bump Go to 1.8.4
+git cherry-pick -s -S -x 6d2c849853d5f7439b86d579a2ef2e727f6e78de
+
+# https://github.com/docker/swarmkit/pull/2448 Update protobuf to 3.5.0
+# skipped --- git cherry-pick -s -S -x 9b981e255e4b3172b54db76e3c96021f981f3e27
+
+# https://github.com/docker/swarmkit/pull/2489 Bump Go to 1.9.3
+git cherry-pick -s -S -x 2d27a21b5776827f0918d10db5f62979b7cf2a2b
+
+# https://github.com/docker/swarmkit/pull/2636 Bump Go to 1.10.3
+git cherry-pick -s -S -x 0ad63eaff3733cf1175d667c5e2ce6e8660089ba
+
+# https://github.com/docker/swarmkit/pull/2659 Convert the circle config file to v2 format, as Circle v1 is deprecated
+git cherry-pick -s -S -x 19114b466a3bf1a538e40d641f809d9d3bf74515
+
+# https://github.com/docker/swarmkit/pull/2690 Just use the default GOPATH in CircleCI
+git cherry-pick -s -S -x 7fc0c4f3a35bd7d9e8c26f6d86acf7e2718eb778
+
+# https://github.com/docker/swarmkit/pull/2537 Fix possible data race in manager/state/store/memory_test.go
+git cherry-pick -s -S -x 06add13d57411618c18d4b9d181013e932462834
+
+# https://github.com/docker/swarmkit/pull/2752 Switch to go 1.11
+# skipped --- git cherry-pick -s -S -x fd2d7f2ef925282e8cd2920efa253151749102ad
+
+# https://github.com/docker/swarmkit/pull/2756 Dockerfile, circleci: update protoc to 3.6.1, simplify install
+# skipped --- git cherry-pick -s -S -x 1831e6f05b99a5fb62ebdbdf5a02c711a8940ed8
+
+

@@ -1,0 +1,28 @@
+ErrorHandler preserve our error handler
+
+
+Symfony version(s) affected: 3.4.22
+Description
+We are temporary overwriting error handler to mute notices, warnings by our custom error handler for a while we need it. By the change in that commit it was killed, because our custom error handler is being overwritten in this place: 
+
+
+symfony/src/Symfony/Component/Debug/ErrorHandler.php
+
+
+         Line 503
+      in
+      33145da
+
+
+
+
+
+
+  set_error_handler([$this, __FUNCTION__]); 
+
+
+
+
+
+How to reproduce
+Revert commit b979fff

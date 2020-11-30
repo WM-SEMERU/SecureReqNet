@@ -1,0 +1,4 @@
+[Backport] Update handlebars dep to patch vulnerability (#7083)
+
+
+Backport #7083 to 0.14.0-incubating

@@ -1,0 +1,5 @@
+Use the multi-arch manifest etcd for the e2e conformance tests
+
+
+What happened:
+I see only amd64 architecture etcd is used for the conformance which will create issues for the other architectures like ppc64le, arm etc. We need to replace this etcd image with the k8s maintained fat manifest image present in gcr.io/google-containers/etcd:3.3.10

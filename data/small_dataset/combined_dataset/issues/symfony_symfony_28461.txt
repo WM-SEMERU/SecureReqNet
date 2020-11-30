@@ -1,0 +1,7 @@
+Add event for pre-authentication
+
+
+Description
+For a security-related bundle I would like to react on user login attempt, both before and after authentication. There already are events to use after the authentication attempt, but none is dispatched before. In a project I would simply write a custom UserChecker and be fine with it. But for a (distributed) bundle it feels wrong to hijack the singular user checker option of a firewall as it leaves no room for a project-specific implementation (except decorating, but this means a developer cannot simply install the bundle).
+I didn't find another existing way, so I suggest to dispatch a PreAuthenticationEvent (name to be refined) just before UserChecker::checkPreAuth() is called. This event could e.g. be used to intercept any authentication attempts in order to impose user-independent constraints like brute-force protection.
+I'm not sure if it makes sense to limit listeners for this event to specific firewalls and how to do this, though. Also I'm not deeply familiar with the security component, so I'm sure there are implications I missed - this is an RFC anyway. Thanks for comments!

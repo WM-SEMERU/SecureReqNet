@@ -1,0 +1,4 @@
+drop legacy home view
+
+
+fixes #11146

@@ -1,0 +1,7 @@
+I have a user account on my GitLab Omnibus setup (GitLab 7.2.1 ff1633f). I have multiple email addresses on my profile. However in one of my repos commits submitted by those different email addresses don't seem to be correctly associated with my user account.
+
+![screenshot-by-nimbus](https://gitlab.com/uploads/gitlab-org/gitlab-ce/509a50db16/screenshot-by-nimbus.png)
+
+You can see 3 of the 4 authors actually are all me. 2 have the same name but different email addresses (which are added to my profile) and the 3rd has a different name but the same email?
+
+I'm totally confused shouldn't these all be my commits?

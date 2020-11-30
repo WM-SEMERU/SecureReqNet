@@ -1,0 +1,5 @@
+Security: data v identite
+
+
+usermanager v sandboxu predava do identity data, v dokumentaci o tom neni zminka.
+a pridat varovani, ze ulozena v identite (vcetne role) jsou v session a sama se neaktualizuji

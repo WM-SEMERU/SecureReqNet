@@ -1,0 +1,31 @@
+[WIP][SecurityBundle] Added a way to extend the providers section of the config
+
+
+Bug fix: no
+Feature addition: yes
+BC break: no (for now) yes
+Tests pass: yes
+This adds a way to extend the providers section of the security config so that other bundles can hook their stuff into it. An example is available in DoctrineBundle which is now responsible to handle the entity provider (needs some cleanup as the service definition is still in SecurityBundle currently). This will allow PropelBundle to provide a propel: provider for instance.
+In order to keep BC with the existing configuration for the in-memory and the chain providers, I had to allow using a prototyped node instead of forcing using an array node with childrens. This introduces some issues:
+
+impossible to validate easily that a provider uses only one setup as prototyped node always have a default value (the empty array)
+the getFixableKey method is needed in the interface to support the XML format by pluralizing the name.
+
+Here is my non-BC proposal for the configuration to clean this:
+security:
+    providers:
+        first:
+            memory: # BC break here by adding a level before the users
+                users:
+                     joe: { password: foobar, roles: ROLE_USER }
+                     john: { password: foobarbaz, roles: ROLE_USER }
+        second:
+            entity: # this one is BC
+                class: Acme\DemoBundle\Entity\User
+        third:
+            id: my_custom_provider # also BC
+        fourth:
+            chain: # BC break by adding a level before the providers
+                 providers: [first, second, third]
+What do you think about it ? Do we need to keep the BC in the config of the bundle or no ?
+Btw note that the way to register the factories used by the firewall section should be refactored using the new way to provide extension points in the extensions (as done here) instead of relying on the end user to register factories, which would probably mean a BC break anyway.

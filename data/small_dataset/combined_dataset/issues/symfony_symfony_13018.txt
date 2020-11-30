@@ -1,0 +1,10 @@
+[security] Uppercase HTTP methods before serializing requestmatchers
+
+
+In the SecurityExtension:createRequestMatcher, the HTTP methods are used for creating the request hash. If a matcher is already found, it will return the already defined request matcher instead of creating a new one.
+Since the HTTP methods are uppercased on the next lines, it will create a matchers that might be different in ID, but equal in workings. By uppercasing the methods before serializing, it doesn't matter how a user specifies the matcher.
+    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ POST, GET ] }
+    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ post, get ] }
+    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ post, GET ] }
+
+(it's a small thing with little effect I guess, since unused services will be removed anyway and not very likely requestmatchers will be reused to begin with, but still...)

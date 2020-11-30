@@ -1,0 +1,32 @@
+Notifications not shown on Web Push Book
+
+
+Description
+Notifications not shown on Web Push Book
+Steps to Reproduce
+
+Visit https://web-push-book.gauntface.com/demos/notification-examples/
+Click on allow in notification bar
+No notification is shown
+
+Actual result:
+Notifications not shown on Web Push Book
+Expected result:
+Should show web notification
+Reproduces how often:
+100%
+Brave Version
+Brave	0.23.104
+V8	6.8.275.24
+rev	b454a4a
+Muon	8.0.8
+OS Release	10.0.17134
+Update Channel	Release
+OS Architecture	x64
+OS Platform	Microsoft Windows
+Node.js	7.9.0
+Brave Sync	v1.4.2
+libchromiumcontent	68.0.3440.84
+Reproducible on current live release:
+Yes
+Additional Information

@@ -1,0 +1,11 @@
+symfony/security from 2.3 and symfony/security-core conflict
+
+
+Currently, you could install the Security component in version 2.3 while also requiring the symfony/security-core package from more recent Symfony versions like this:
+{
+    "require": {
+        "symfony/symfony": "2.3.*",
+        "symfony/security-core": "~2.7"
+    }
+}
+The installation will succeed, but you will end up with duplicated classes. Is there anything we can do here? For example, what about adding conflict rules in the Security component's composer.json file in 2.3?

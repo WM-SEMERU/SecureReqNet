@@ -1,0 +1,35 @@
+cajoled recursive functions fail in IE
+
+
+Original issue 297 created by felix8a on 2008-05-20T20:06:58.000Z:
+function foo(x) {
+    return x == 0 ? 0 : foo(0);
+}
+foo(1);
+
+cajoled, that works fine in firefox, but fails in IE7
+"Untamed functions can't be called as simple functions".
+it's complaining about the inner call to foo().
+the problem is, this statement
+var x = function y() { return y; };
+
+creates two different function objects, x and y.
+x !== y
+x !== x()
+y === y()
+the function foo cajoles to this:
+IMPORTS___.foo = undefined;
+var x0___;
+x0___ = ___.simpleFunc(function foo(x) {
+    return x == 0? 0: ___.asSimpleFunc(___.primFreeze(foo))(0);
+}),
+IMPORTS___.foo_canSet___
+   ? (IMPORTS___.foo = x0___)
+   : ___.setPub(IMPORTS___, 'foo', x0___);
+
+IE creates two copies of the foo function.
+one is the return value of the function expression, which gets passed to
+simpleFunc, which attaches the SIMPLE_FUNC attribute.  and then that
+function gets assigned to IMPORTS___.foo.
+the other is assigned to the local var foo.  it's the one used in the
+primFreeze call, and it doesn't have the SIMPLE_FUNC attribute.

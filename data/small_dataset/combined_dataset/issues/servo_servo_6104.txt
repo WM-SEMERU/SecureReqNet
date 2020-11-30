@@ -1,0 +1,5 @@
+Support cert pinning via DANE
+
+
+DNS-based Authentication of Named Entities.
+This may require having our own DNSSEC resolver.

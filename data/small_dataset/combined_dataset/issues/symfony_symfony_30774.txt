@@ -1,0 +1,37 @@
+[Console] invalid default returned from ChoiceQuestion on non interactive mode
+
+
+Symfony version(s) affected: symfony/console v4.2.3
+Description
+ChoiceQuestion returns the index in interactive mode but the value in non interactive mode
+How to reproduce
+Using this command:
+class TestCommand extends Command
+{
+    protected function configure()
+    {
+        $this->setName('test');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $choices = [
+            'a' => 'aaaa',
+            'b' => 'bbbb',
+        ];
+
+        $questionHelper = new SymfonyQuestionHelper();
+        $choice = $questionHelper->ask(
+            $input,
+            $output,
+            new ChoiceQuestion('Does it work?', $choices, 'a')
+        );
+
+        $output->writeln("Choice: $choice");
+    }
+}
+Then php bin/console test or php bin/console -n will not display the same value.
+Possible Solution
+https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Helper/QuestionHelper.php#L56 should probably return default, and not the value.
+Additional context
+The opposite bug with reported in #25470 , the non-interactive mode was returning the index instead of the value. I suppose the return value was changed from value to index meanwhile?

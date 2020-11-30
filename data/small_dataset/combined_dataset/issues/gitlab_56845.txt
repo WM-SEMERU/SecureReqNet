@@ -1,0 +1,17 @@
+'The following discussion from !24284 should be addressed:
+
+- [ ] @mayra-cabrera started a [discussion](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/24284#note_130555453):  (+8 comments)
+
+    > Could we use a constant here instead of a magic number?
+    > 
+    > 
+    > ```ruby
+    > HTTP_MAX_REDIRECTS = 0
+    > 
+    > def initialize(...)
+    >   # ... 
+    >   @kubeclient_options = kubeclient_options.merge(
+    >      http_max_redirects: HTTP_MAX_REDIRECTS
+    >   )
+    > end
+    > ````

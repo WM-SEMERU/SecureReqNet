@@ -1,0 +1,42 @@
+[Validator] BIC remove unused sprintf and parameter
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+removed surplus parameter and sprintf as there are no placeholders in message template

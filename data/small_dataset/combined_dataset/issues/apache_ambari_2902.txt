@@ -1,0 +1,10 @@
+[AMBARI-25209] : Bulk Operation Refresh Configs for selected hosts
+
+
+What changes were proposed in this pull request?
+The changes are related to introducing new bulk operation to perform Refresh Configs for All/Selected hosts. The changes are related to ambari-web.
+How was this patch tested?
+The patch was tested manually on UI. The screenshots are attached in JIRA: https://issues.apache.org/jira/browse/AMBARI-25209
+https://issues.apache.org/jira/secure/attachment/12963746/Screen%20Shot%202019-03-26%20at%202.26.58%20PM.png
+https://issues.apache.org/jira/secure/attachment/12963747/Screen%20Shot%202019-03-26%20at%202.27.30%20PM.png
+https://issues.apache.org/jira/secure/attachment/12963748/Screen%20Shot%202019-03-26%20at%202.27.46%20PM.png

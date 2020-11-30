@@ -1,0 +1,5 @@
+SecurityContextInterface deprecated in 2.6
+
+
+On http://symfony.com/doc/2.7/book/security.html, the controller for the login form implements SecurityContextInterface, which is depcrecated since 2.6 according to the DocBlock.
+I wasn't able to obtain information on what to use instead of the SecurityContextInterface. If somebody could point me to it I'm happy to change the docs accordingly.

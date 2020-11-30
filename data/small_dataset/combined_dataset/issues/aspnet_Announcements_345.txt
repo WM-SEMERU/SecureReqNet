@@ -1,0 +1,14 @@
+For contributors: using Visual Studio on aspnet repos requires installing or upgrading to 2019
+
+
+We are updating the master branch of the following repos to require Visual Studio 2019.
+
+aspnet/AspNetCore
+aspnet/AspNetCore-Tooling
+aspnet/EntityFrameworkCore
+aspnet/Extensions
+
+The .NET Core 3.0 SDK requires MSBuild 16, which is currently only supported by Visual Studio 2019. VS 2019 will be released on April 2.  In the meantime, you can get VS 2019 Preview 3 here: https://visualstudio.microsoft.com/vs/preview/.
+If you are working on the aspnet/AspNetCore repo, you can run this script to install or modify your current VS2019 installation to add features required by this repo.
+
+Use aspnet/AspNetCore#7752 for discussion on this announcement.

@@ -1,0 +1,15 @@
+Issue with Filter Date in UTC+ timezones
+
+
+I'm submitting a ...
+
+ bug report
+ feature request
+ other 
+
+Current behavior: Strange/Incorrect handling of $filter('date') with UTC+ timezone conversions.  Converting 2019-01-23T00:00:00+0530 to UTC results in 2019-01-22T06:30:00+0000 which is exactly 12 hours incorrect.  Even converting from +0530 to +0530 is incorrect by the same 12 hours.
+Expected / new behavior: Converting from 2019-01-23T00:00:00+0530 to UTC should result in 2019-01-22T18:30:00+0000 if my math is correct.  If you look at Plunker below, depending on the timezone conversion, the values are strangely off.
+Minimal reproduction of the problem with instructions:  See https://plnkr.co/edit/nuaHO7yMkUFl8BF5ZSDx?p=preview
+AngularJS version: 1.7.6
+Browser: Chrome 72 Mac | Firefox 64 Mac | Safari 12.1 ... I suspect all browsers affected
+Anything else:  When initially working on the issue, I had my computer's timezone set to Indian time (UTC+530).  Changing timezones back to US Pacific had no affect on the values.  In my actual code, we're using a Date() object, but for debugging purposes I found it easier to show the example using a date string as supported by the function.  Also, this is not a dupe of #14418.  This is also a rather newly reported issue for us, so it's possibly a regression bug, or we just don't have enough clients overseas.

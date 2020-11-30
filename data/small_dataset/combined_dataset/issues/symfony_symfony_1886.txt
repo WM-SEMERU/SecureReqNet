@@ -1,0 +1,9 @@
+[Security] Remove VoterInterface::supports{Attribute,Class}
+
+
+These methods are never used by Symfony. So there is no point in making
+them part of the VoterInterface. Plus it is confusing to the developer who
+implements it.
+In fact these methods appear once in
+AccessDecisionManager::suports{Attribute,Class}. But again, these
+methods are never called, so I removed them to.

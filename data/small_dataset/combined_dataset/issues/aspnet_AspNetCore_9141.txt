@@ -1,0 +1,38 @@
+Can't run AspNetCore - File not found on restore.cmd
+
+
+Hi, I'm trying to setup a dev envinroment to try to contribute with something.
+Following this guide I should run ".\restore.cmd" first.
+When running it I get the following error:
+PS D:\Projects\AspNetCore> .\restore.cmd
+Using KoreBuild 3.0.0-build-20190322.1
+WARNING: dotnet found on the system PATH is 'C:\Program Files\dotnet\dotnet.exe' but KoreBuild will use
+'D:\Projects\AspNetCore\.dotnet\x64\dotnet.exe'.
+WARNING: Adding 'D:\Projects\AspNetCore\.dotnet\x64' to system PATH permanently may be required for applications like
+Visual Studio or VS Code to work correctly.
+Adding D:\Projects\AspNetCore\.dotnet\x64 to PATH
+dotnet-install: Downloading link: https://dotnetcli.azureedge.net/dotnet/Sdk/3.0.100-preview4-010940/dotnet-sdk-3.0.100-preview4-010940-win-x64.zip
+dotnet-install: Cannot download: https://dotnetcli.azureedge.net/dotnet/Sdk/3.0.100-preview4-010940/dotnet-sdk-3.0.100-preview4-010940-win-x64.zip
+dotnet-install: Downloading legacy link: https://dotnetcli.azureedge.net/dotnet/Sdk/3.0.100-preview4-010940/dotnet-dev-win-x64.3.0.100-preview4-010940.zip
+
+Exception calling "Invoke" with "0" argument(s): "Failed to download
+https://dotnetcli.azureedge.net/dotnet/Sdk/3.0.100-preview4-010940/dotnet-dev-win-x64.3.0.100-preview4-010940.zip.
+StatusCode: 404, ReasonPhrase: 'Not Found', Version: 1.1, Content: System.Net.Http.StreamContent, Headers:
+{
+  x-ms-request-id: 84b61e81-801e-00dc-63fc-ebfa98000000
+  x-ms-version: 2009-09-19
+  Date: Fri, 05 Apr 2019 22:13:11 GMT
+  Server: Windows-Azure-Blob/1.0
+  Server: Microsoft-HTTPAPI/2.0
+  Content-Length: 215
+  Content-Type: application/xml
+}"
+At D:\Projects\AspNetCore\.dotnet\buildtools\korebuild\3.0.0-build-20190322.1\scripts\dotnet-install.ps1:137 char:20
++             return $ScriptBlock.Invoke()
++                    ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : RuntimeException
+
+Checking the link it tries to download it really seems to a 404.
+Is the restore.cmd broke or...?
+Thanks!

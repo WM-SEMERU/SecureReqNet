@@ -1,0 +1,20 @@
+I do have some symbolic links within my GitLab installation due to have a more easy config:
+
+    log -> /var/log/gitlab
+    tmp -> /tmp/gitlab
+
+rvmsudo -u git -H ruby script/upgrade.rb -y
+
+    GitLab 6 upgrade tool
+    Your version is 6.7.2
+    Latest available version for GitLab 6 is 6.8.1
+    Newer GitLab version is available
+    Stash changed files
+     -> git stash
+    error: 'log/.gitkeep' is beyond a symbolic link
+    fatal: Unable to process path log/.gitkeep
+    Cannot save the current worktree state
+     -> FAILED
+    Failed to upgrade. Try to repeat task or proceed with upgrade manually
+
+Might the fix be to change .gitignore from "log/*.log*" to "log/" ?

@@ -1,0 +1,5 @@
+"tel", "sms", and "geo" uri schemes stripped out
+
+
+I've created a pull request to add these in, #2016. I'm adding this as an issue as well so it can be marked as complete.
+Have a great day!

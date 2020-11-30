@@ -1,0 +1,15 @@
+Fix golint failures of e2e/framework/r*.go
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+This fixes golint failures of the following files:
+
+test/e2e/framework/resource_usage_gatherer.go
+test/e2e/framework/rs_util.go
+
+Does this PR introduce a user-facing change?:
+NONE
+
+Ref: #68026

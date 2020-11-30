@@ -1,0 +1,39 @@
+Angular 2 Security Tracking Issue
+
+
+Angular 2 should implement security features on-par with Angular 1. This is a tracking issue for all implementation work.
+The basic idea is to implement automatic, secure escaping for all values that can reach the DOM by whitelisting known to be safe patterns, comparable to Angular 1's $sce service. By default, with no specific action for developers, Angular apps must be secure. To support all use cases, allow users to explicitly bypass security checks for specific values (sanitizer.bypassSecurityTrust...).
+This follows the OWASP recommendations on XSS prevention.
+
+ Basic security infrastructure: SanitizationService and safe values (#8387)
+ Security Contexts for HTML, Style, Script, URLs, Resource URLs (#8387)
+ Sanitize all values before they flow into DOM sinks (#8387)
+ Allow marking values as safe for particular (#8387)
+ Sanitize Style/CSS values (#8387, #8453)
+
+ More liberal Style sanitization (#8514)
+
+
+ Sanitize URL values (#8387, #8453)
+
+ Allow data: URIs for images and videos (#8661)
+
+
+ Sanitize HTML values (#8453)
+ Log sanitization in development mode (#8522)
+ List all unsafe DOM properties (#8479)
+Easy to use safe HTTP interactions
+
+ Automatically strip XSSI prefixes (#8497)
+ Automatically send back XSRF cookies (#8898)
+
+
+Documentation
+
+ Mention incomplete security implementation in release notes
+ Document breaking changes for security (#8510)
+ Check implementation/API documentation
+ Security section on Angular site
+
+
+

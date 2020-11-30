@@ -1,0 +1,17 @@
+AMBARI-25043. Make sure we mask password properties when fetching sensitive Ambari configuration via the API (just like we do it for service configs)
+
+
+What changes were proposed in this pull request?
+Like I indicated in #2742 the API returned the encrypted form instead of a secret reference (this is what we do for service configs). From now on we are in synch with service configurations.
+How was this patch tested?
+Running JUnit tests in ambari-server:
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 28:27 min
+[INFO] Finished at: 2019-01-14T12:52:47+01:00
+[INFO] Final Memory: 163M/1047M
+[INFO] ------------------------------------------------------------------------
+
+Additionally I executed some E2E tests and found that passwords are masked by SECRET:
+

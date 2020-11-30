@@ -1,0 +1,286 @@
+Microsoft Security Advisory CVE-2018-0787: ASP.NET Core Elevation Of Privilege Vulnerability
+
+
+Microsoft Security Advisory CVE-2018-0787: ASP.NET Core Elevation Of Privilege Vulnerability
+Executive summary
+Microsoft is releasing this security advisory to provide information about a vulnerability in ASP.NET Core versions 1.0, 1.1 and 2.0. This advisory also provides guidance on what developers can do to update their applications to remove this vulnerability.
+Microsoft is aware of a security vulnerability in all public versions of ASP.NET Core where an elevation of privilege vulnerability exists when a ASP.NET Core web application fails to validate web requests correctly.
+Announcement
+The announcement for this issue can be found at aspnet/Announcements#295
+Mitigation factors
+Sites are not vulnerable to this elevation of privilege when:
+
+
+The site is hosted behind a proxy, such as Internet Information Services (IIS), NGINX, or Apache, where:
+
+The proxy validates the host header, and
+The proxy is configured to listen on fully qualified domain names or
+The proxy is configured with a wildcard subdomain where the root domain is fully controlled by the site owner.
+
+
+
+For example, if IIS is configured to respond to requests for contoso.com or *.contoso.com hosts, the application is protected.
+If IIS is configured to respond to any request from any host, the application is vulnerable.
+Kestrel does not have the capability to validate host headers and is vulnerable if not placed behind a proxy that performs the host header validation.
+Apps hosted in Azure Web Apps are not susceptible to this vulnerability.
+Affected software
+Any ASP.NET Core hosted application which is directly exposed to the internet, or hosted behind a proxy which does not validate or restict host headers to known good values.
+The vulnerability also affects any ASP.NET Core 2.0 project if it uses the following package versions, which must also be updated, in addition to addressing your proxy configuration :
+
+
+
+Package name
+Vulnerable versions
+Secure versions
+
+
+
+
+Microsoft.AspNetCore.HttpOverrides
+2.0.0, 2.0.1
+2.0.2 and later
+
+
+Microsoft.AspNetCore.Server.Kestrel.Core
+2.0.0, 2.0.1
+2.0.2 and later
+
+
+
+No patches are available for ASP.NET Core 1.0.x or ASP.NET Core 1.1.x. Microsoft requires that you place your 1.x ASP.NET Core application behind a proxy.
+You must address the configuration of your proxy to protect your application. If you're not running ASP.NET Core 1.x behind a proxy, you must either place a proxy in front of your application or upgrade to ASP.NET Core 2.0.
+and add the host validating middleware provided at https://github.com/aspnet/BasicMiddleware/blob/release/2.0/samples/HostFilteringSample/.
+Advisory FAQ
+How do I know if I am affected?
+Review the server and proxy configuration instructions below to see if your system is configured correctly, and adjust the configuration if necessary.
+How do I fix the issue?
+You must address the configuration of your server or proxy to protect your application to limit requests to known hosts.
+If you're not running Kestrel 1.x behind a proxy, you must either place a proxy in front of your application or upgrade to ASP.NET Core 2.0 and follow the 2.0 instructions below.
+ASP.NET Core 2.0.x applications must update your code to fully protect your application.
+ Server and Proxy configuration
+You must examine your externally facing server or proxy configuration and ensure it requires host headers with fully qualified domain names, or known sub-domains if you are using sub-domain wild cards.
+ASP.NET Core applications behind IIS
+To configure IIS to only respond to know hosts:
+
+Open IIS Manager.
+Expand the Sites node for the machine you want to configure.
+Select the site by clicking on the site.
+In the Actions list on the right-hand side of IIS Manager, click Bindings.
+Edit any bindings that do not have a host name to specify one. Do not use a * wildcard unless it's against a domain under your control. For example, *.contoso.com is safe, *.com is not.
+
+ASP.NET Core applications running publicly on Kestrel
+Kestrel does not have the capability to validate host headers. It must either be placed behind a proxy that performs the host header validation or the validation must be performed within the application by adding  host filtering middleware provided at https://github.com/aspnet/BasicMiddleware/blob/release/2.0/samples/HostFilteringSample/. You must also update your dependencies to fully protect your application.
+ASP.NET Core applications running on HTTP.SYS
+To configure URL prefixes and ports, you can use the UseUrls extension method, the urls command-line argument, the ASPNETCORE_URLS environment variable, or the UrlPrefixes property on HttpSysOptions. The following code example uses UrlPrefixes.
+public static IWebHost BuildWebHost(string[] args) =>
+    WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>()
+        .UseHttpSys(options =>
+        {
+            // The following options are set to default values.
+            options.Authentication.Schemes = AuthenticationSchemes.None;
+            options.Authentication.AllowAnonymous = true;
+            options.MaxConnections = null;
+            options.MaxRequestBodySize = 30000000;
+            options.UrlPrefixes.Add("http://localhost:5000");
+        })
+        .Build();
+ASP.NET Core applications behind NGINX
+To configure NGINX as a reverse proxy to forward requests to your ASP.NET Core app, replace the contents /etc/nginx/sites-available/default with the following:
+server {
+    listen        80;
+    server_name   example.com *.example.com;
+    location / {
+        proxy_pass         http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection keep-alive;
+        proxy_set_header   Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+Note that with NGINX, when there is no match for server_name, NGINX will pick the default server. If no default server has been defined, the first server in the conf file is the default server. Best practice is to add a specific default server which returns a status code of 444 in the conf file. An example default server configuration would be as follows:
+server {
+    listen   80 default_server;
+    # listen [::]:80 default_server deferred;
+    return   444;
+}
+With the preceding configuration file and default server, NGINX accepts public traffic on port 80 with host header example.com or *.example.com. Requests not matching these hosts won't get forwarded to Kestrel. NGINX forwards the matching requests to Kestrel at http://localhost:5000. See How nginx processes a request for more information.
+Once the NGINX configuration is established, run sudo nginx -t to verify the syntax of the configuration files. If the configuration file test is successful, force NGINX to pick up the changes by running sudo nginx -s reload.
+ASP.NET Core applications behind Apache
+Configuration files for Apache are located within the /etc/httpd/conf.d/ directory. Any file with the *.conf* extension:
+
+Is processed in alphabetical order, and
+The module configuration files in /etc/httpd/conf.modules.d/ are processed. The module configuration files in /etc/httpd/conf.modules.d/ contain any configuration files necessary to load modules.
+
+<VirtualHost *:80>
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:5000/
+    ProxyPassReverse / http://127.0.0.1:5000/
+    ServerName www.example.com
+    ServerAlias *.example.com
+</VirtualHost>
+
+The VirtualHost block can appear multiple times, in one or more files on a server. In the preceding configuration file, Apache accepts public traffic on port 80. The domain www.example.com is being served, and the *.example.com alias resolves to the same website. See Name-based virtual host support for more information. Requests are proxied at the root to port 5000 of the server at 127.0.0.1. For bi-directional communication, ProxyPass and ProxyPassReverse are required.
+Save the file and test the configuration. If everything passes, the response is Syntax [OK].
+sudo service httpd configtest
+Restart Apache:
+sudo systemctl restart httpd
+sudo systemctl enable httpd
+ ASP.NET Core 2.0 application code updates
+
+If you're targeting .NET Core 2.x and the Microsoft.AspNetCore.All "metapackage":
+
+Update its version number to 2.0.6 or later.
+Updating will pull in the fixed packages listed above.
+
+If you're targeting .NET Framework, update the packages listed above to their safe version or later.
+If your application is using Kestrel without a proxy or the HttpOverrides functionality (UseForwardedHeaders with ForwardedHost) you must also add the host filtering middleware provided at https://github.com/aspnet/BasicMiddleware/tree/release/2.0/samples/HostFilteringSample/.
+
+.NET Core and ASP.NET Core have two types of dependencies: direct and transitive. You must follow the update instructions below to address both types of dependency.
+Direct dependencies
+Direct dependencies are dependencies where you specifically add a package to your project. For example, if you add the Microsoft.AspNetCore.Mvc package to your project then you have taken a direct dependency on Microsoft.AspNetCore.Mvc.
+Direct dependencies are discoverable by examining your csproj file.
+Transitive dependencies
+Transitive dependencies occur when you add a package to your project that in turn relies on another package. For example, if you add the Microsoft.AspNetCore.Mvc package to your project it depends on the Microsoft.AspNetCore.Mvc.Core package (among others). Your project has a direct dependency on Microsoft.AspNetCore.Mvc and a transitive dependency on the Microsoft.AspNetCore.Mvc.Core package.
+Transitive dependencies are reviewable:
+
+In the Visual Studio Solution Explorer window, which supports searching.
+By examining the project.assets.json file contained in the obj directory of your project.
+
+The project.assets.json files are the authoritative list of all packages used by your project, containing both direct and transitive dependencies.
+Fixing direct dependencies – Projects targeting .NET Core
+Open projectname.csproj in your editor. If you're using Visual Studio, right-click the project and choose Edit projectname.csproj from the content menu, where projectname is the name of your project. Look for PackageReference elements. The following shows an example project file:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+</Project>
+The preceding example has a reference to the vulnerable metapackage, as seen by the single PackageReference element. The name of the package is in the Include attribute. The package version number is in the Version attribute. The example shows a single direct dependency on Microsoft.AspNetCore.All version 2.0.5.
+To update the version to the secure package, change the version number to a secure package version. In this example, update Microsoft.AspNetCore.All to 2.0.6 or later. Save the csproj file. The example csproj now looks as follows:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+</Project>
+If you're using Visual Studio and save your updated csproj file, Visual Studio will restore the new package version. You can see the restore results by opening the Output window (Ctrl+Alt+O) and changing the Show output from drop-down list to Package Manager.
+If you're not using Visual Studio, open a command line and change to your project directory. Execute the dotnet restore command to restore the updated dependencies.
+Fixing direct dependencies – Projects targeting .NET Framework
+Open projectname.csproj in your editor. If you're using Visual Studio, right-click the project and choose Edit projectname.csproj from the content menu, where projectname is the name of your project. Look for PackageReference nodes. The following shows an example project file:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.HttpOverrides" Version="2.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+</Project>
+The example has a reference to a single package, as seen by the PackageReference element. The name of the package is in the Include attribute. The package version number is in the Version attribute. The example shows a direct dependency on one of the vulnerable packages from the table above, Microsoft.AspNetCore.HttpOverrides version 2.0.1.
+To update to the secure package, change the version number to the updated package version. In the example, this would be updating Microsoft.AspNetCore.HttpOverrides to 2.0.2 and later. Save the csproj file. The updated and secure csproj look as follows:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.HttpOverrides" Version="2.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+</Project>
+If you're using Visual Studio and save your updated csproj file, Visual Studio will restore the new package version. You can see the restore results by opening the Output window (Ctrl+Alt+O) and changing the Show output from drop-down list to Package Manager.
+If you're not using Visual Studio, open a command line and change to your project directory. Execute the dotnet restore command to restore the new dependency version.
+After updating your direct dependencies
+Recompile your application.
+If after recompilation you see a Dependency conflict warning, you must update your other direct dependencies to a compatible version.
+For example if your project refers directly to Microsoft.AspNetCore.Mvc.Cors with a version number of 2.0.0, when you update your Microsoft.AspNetCore.Mvc package to 2.0.1, compilation will throw:
+NU1012      Dependency conflict. Microsoft.AspNetCore.Mvc 2.0.1 expected Microsoft.AspNetCore.Mvc.Cors >= 2.0.1 but received 2.0.0
+To fix this, edit the version for the expected package to be the version expected by updating your project.json in the same way that you used to update the vulnerable package versions.
+After you've addressed all of your direct dependencies, you must review your transitive dependencies.
+Reviewing transitive dependencies
+There are two ways to view transitive dependencies. You can either use Visual Studio’s Solution Explorer, or you can review the project.assets.json file.
+Using Visual Studio Solution Explorer
+To use Solution Explorer, open the project in Visual Studio 2017, and then press Ctrl+; to activate the search in Solution Explorer. Search for each of the vulnerable package names above and make a note of the version numbers of any results you find.
+For example, searching for Microsoft.AspNetCore.Mvc.Core in an example project that contains a package that takes a dependency on Microsoft.AspNetCore.Mvc shows the following results in Visual Studio 2017:
+
+The search results appear as a tree. In these results, you can see a reference to Microsoft.AspNetCore.Mvc.Core version 1.1.2 is discovered.
+Under the Dependencies node is a NuGet node. Under the NuGet node is the list of packages you have directly taken a dependency on and their versions. In this example, the application takes a direct dependency on Microsoft.AspNetCore.Mvc. Microsoft.AspNetCore.Mvc in turn has leaf nodes that list its dependencies and their versions. In the example, the Microsoft.AspNetCore.Mvc package takes a dependency on a version of Microsoft.AspNetCore.Mvc.ApiExplorer, that in turn takes a dependency on a vulnerable version of Microsoft.AspNetCore.Mvc.Core.
+Manually reviewing project.assets.json (VS2017)
+Open the project.assets.json file from your project’s obj directory in your editor. We suggest you use an editor that understands JSON and allows you to collapse and expand nodes to review this file. Visual Studio and Visual Studio Code provide JSON friendly editing.
+Search the project.assets.json file for each of the vulnerable packages, using the format packagename/ for each of the package names from the preceding table. If you find the assembly name in your search:
+
+Examine the line on which they are found, the version number is after the /.
+Compare to the vulnerable versions table above.
+
+For example, a search result that shows Microsoft.AspNetCore.Mvc.Cors/1.1.0 is a reference to v1.1.0 of Microsoft.AspNetCore.Mvc.Cors.   If your project.assets.json file includes references to any of the vulnerable packages shown above, then you need to fix the transitive dependencies.
+Overriding transitive dependencies
+If you have not found any reference to any vulnerable packages this means:
+
+None of your direct dependencies depend on any vulnerable packages, or
+You have already fixed the problem by updating the direct dependencies.
+
+If your transitive dependency review found references to any of the vulnerable packages you must add a direct dependency to the updated package to your csproj file to override the transitive dependency.
+Open projectname.csproj in your editor. If you're using Visual Studio, right-click the project and choose Edit projectname.csproj from the content menu, where projectname is the name of your project. Look for PackageReference nodes, for example:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ThirdParty.NotUpdatedYet" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+</Project>
+For each of the vulnerable packages your search returned, you must add a direct dependency to the updated version by adding it to the csproj file.
+You do this by adding a new line to the dependencies section, referring the fixed version.
+For example, if your search showed a transitive reference to the vulnerable Microsoft.AspNetCore.HttpOverrides version 2.0.0 you would add a reference to the fixed version, that is, 2.0.2 or later.
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.HttpOverride" Version="2.0.2" />
+    <PackageReference Include="ThirdParty.NotUpdatedYet" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+</Project>
+After you have added the direct dependency reference, save your csproj file.
+If you're using Visual Studio, save your updated csproj file and Visual Studio will restore the new package versions.
+You can see the restore results by opening the Output window (Ctrl+Alt+O) and changing the Show output from drop-down list to Package Manager.
+If you're not using Visual Studio, open a command line and change to your project directory. Execute the dotnet restore command to restore the new dependencies.
+Rebuilding your application
+Rebuild your application. Test and deploy.
+Other Information
+Reporting Security Issues
+If you have found a potential security issue in .NET Core, please email details to secure@microsoft.com. Reports may qualify for the .NET Core Bug Bounty. Details of the .NET Core Bug Bounty including terms and conditions are at https://aka.ms/corebounty.
+Support
+You can ask questions about this issue on GitHub in the .NET Core or ASP.NET Core organizations. These are located at https://github.com/dotnet/ and https://github.com/aspnet/. The Announcements repo for each product (https://github.com/dotnet/Announcements and https://github.com/aspnet/Announcements) will contain this bulletin as an issue and will include a link to a discussion issue. You can ask questions in the discussion issue.
+Disclaimer
+The information provided in this advisory is provided "as is" without warranty of any kind. Microsoft disclaims all warranties, either express or implied, including the warranties of merchantability and fitness for a particular purpose. In no event shall Microsoft Corporation or its suppliers be liable for any damages whatsoever including direct, indirect, incidental, consequential, loss of business profits or special damages, even if Microsoft Corporation or its suppliers have been advised of the possibility of such damages. Some states do not allow the exclusion or limitation of liability for consequential or incidental damages so the foregoing limitation may not apply.
+Acknowledgements
+Mikhail Shcherbakov
+External Links
+CVE-2018-0787
+Revisions
+V1.1 (Mar 15, 2018): NGINX configuration instructions updated, thanks to @buglloc
+V1.0 (Mar 13, 2018): Advisory published.
+Version 1.1
+Last Updated 2018-03-15

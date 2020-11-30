@@ -1,0 +1,28 @@
+[SecurityBundle] UserPasswordEncoderCommand: fix help arguments order.
+
+
+
+
+
+Q
+A
+
+
+
+
+Fixed tickets
+✘
+
+
+License
+MIT
+
+
+
+A very small fix about the newly introduced command to encode a user password (#12818).
+The help message states the command looks like:
+security:encode-password [password] [salt] [user-class]
+
+but is the following instead:
+security:encode-password [password] [user-class] [salt]
+

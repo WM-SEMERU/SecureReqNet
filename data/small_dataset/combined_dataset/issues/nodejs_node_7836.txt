@@ -1,0 +1,8 @@
+Please update minimatch
+
+
+Hi,
+there has been a recent security issue in minimatch.js
+https://nodesecurity.io/advisories/118
+Could you update the minimatch under deps/npm ?
+thanks

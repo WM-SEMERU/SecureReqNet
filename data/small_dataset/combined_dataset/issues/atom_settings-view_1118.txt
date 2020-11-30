@@ -1,0 +1,35 @@
+Package author shown in atom package list may not match actual author on atom.io
+
+
+Prerequisites
+
+ Put an X between the brackets on this line if you have done all of the following:
+
+Reproduced the problem in Safe Mode: http://flight-manual.atom.io/hacking-atom/sections/debugging/#using-safe-mode
+Followed all applicable steps in the debugging guide: http://flight-manual.atom.io/hacking-atom/sections/debugging/
+Checked the FAQs on the message board for common solutions: https://discuss.atom.io/c/faq
+Checked that your issue isn't already filed: https://github.com/issues?utf8=✓&q=is%3Aissue+user%3Aatom
+Checked that there is not already an Atom package that provides the described functionality: https://atom.io/packages
+
+
+
+Description
+Package author displayed based on repository in atom packages settings may not match the actual author/publisher on atom.io, can be spoofed.
+Steps to Reproduce
+
+This package - https://atom.io/packages/atom-whois
+View the package in atom Packages search
+
+Expected behavior: Shows actual author of package based on atom.io author
+Actual behavior: Package author is shown as being atom, presumably based on the user in the repository field.
+
+The package repo URL was set to atom - giovazz89/atom-whois#4
+Reproduces how often: 💯
+Versions
+macOS
+Atom    : 1.34.0
+Electron: 2.0.16
+Chrome  : 61.0.3163.100
+Node    : 8.9.3
+apm  2.1.3
+

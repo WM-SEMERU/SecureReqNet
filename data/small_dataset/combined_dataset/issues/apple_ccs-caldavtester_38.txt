@@ -1,0 +1,7 @@
+Weak Cryptographic Hash
+
+
+I found a reflective Weak Cryptographic Hash issue in the request.py
+Details are as follows:
+
+Weak cryptographic hashes cannot guarantee data integrity and should not be used in security-critical contexts.It is recommended to use SHA-224, SHA-256，SHA-384

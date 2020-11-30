@@ -1,0 +1,20 @@
+Allow `file:///` URLs to open other `file:///` URLs
+
+
+STR:
+poc.html:
+<a href="file:///<path_to_demo.html>">Test</a>
+
+demo.html:
+Hello World!
+
+
+Save poc.html in any folder
+Open in Brave: file:///<path_to_poc.html>
+Right click on test and open in new tab.
+
+Current Result:
+about:blank is opened
+Expected Result:
+file:///<path_to_demo.html> should open
+Follow-up from #14973 (comment)

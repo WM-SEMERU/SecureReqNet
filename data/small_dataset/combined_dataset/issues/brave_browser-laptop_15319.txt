@@ -1,0 +1,48 @@
+CORS Redirects to same domain are blocked
+
+
+Troubleshooting checklist
+There's a good chance the bug you're about to report is fixed in the new version of Brave
+
+Download latest version of Brave from https://brave.com/download/
+Import your data by navigating to brave://settings/importData
+
+If you'd like to continue for this old version, please check the applicable items:
+
+ Yes I did try the new version
+ I believe this issue is critical for users (security issue, bug that prevents folks from using the software)
+ I've read the FAQs and Common Issues section on community.brave.com (https://community.brave.com/c/common-issues)
+
+Description
+When attempting to make a CORS request from javascript, 307 redirect responses to the same domain are blocked. The error which appears is Access to fetch at 'https://cognito-idp.us-west-2.amazonaws.com/' from origin 'https://dashboard.nodesmith.io' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: Redirect is not allowed for a preflight request.
+In this example we are receiving a redirect (307) response, the redirect domain is exactly the same as the original, so the redirect should be allowed.
+Here's what the request looks like
+General
+Request URL: https://cognito-idp.us-west-2.amazonaws.com/
+Request Method: OPTIONS
+Status Code: 307 Internal Redirect
+Referrer Policy: no-referrer-when-downgrade
+Response Headers
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://dashboard.nodesmith.io
+Location: https://cognito-idp.us-west-2.amazonaws.com/
+Non-Authoritative-Reason: Delegate
+Request Headers
+Provisional headers are shown
+Access-Control-Request-Headers: content-type,x-amz-target,x-amz-user-agent
+Access-Control-Request-Method: POST
+Origin: https://dashboard.nodesmith.io
+Referer: https://dashboard.nodesmith.io/
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36
+I don't see the same issues in Chrome or Firefox. Additionally, if I enable 3rd party cookies for the page, the request will go through (I'm not quite sure how the 3rd party cookies are related to all this).
+Steps to Reproduce
+Edit: These steps no longer reproduce the issue because we switched out authentication system to get around this bug. There are plenty of other examples of the bug in the issue though.
+
+Go to https://dashboard.nodesmith.io/#/logIn
+Enter foo@bar.com for username and ABC123!@# for a password
+Hit Log In
+
+EXPECTED: Requests hit the IDP servers and notify that the password is invalid
+ACTUAL: CORS error on the 307 response
+What version of Brave are you using?
+0.56.15 Chromium: 70.0.3538.110 (Official Build) (64-bit)

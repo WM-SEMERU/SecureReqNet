@@ -1,0 +1,6 @@
+Removing outdated note: AJAX requests are not set to target path
+
+
+Hey guys!
+As far as I can tell, AJAX requests have not been added to the target path session key since at least 2.7. So, I think we can safely remove this stuff.
+Cheers!

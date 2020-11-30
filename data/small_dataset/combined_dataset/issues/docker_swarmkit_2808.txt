@@ -1,0 +1,4 @@
+Fix flaky tests
+
+
+It is likely that a large portion of test flakiness, especially in CI, comes from the fact that swarmkit components under test are started in goroutines, but those goroutines never have an opportunity to run. This adds code ensuring those goroutines are scheduled and run, which should hopefully solve many inexplicably flaky tests.

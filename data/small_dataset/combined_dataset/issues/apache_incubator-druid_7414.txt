@@ -1,0 +1,15 @@
+Adding ability to pass configs in and fixing misc bugs
+
+
+Adding a rudimentary mechanism for Druid to pass configs to the console (by overriding the web-console/console-config.js file) for future extensibility.
+Also making misc fixes:
+
+Add missing addOnBlur for tag input
+Remove extra margin in column selector
+Fix column name capitalization in lookup view
+Lookup view will now confirm deleting a lookup (like all the other views do)
+Lookup view will not show option to Initialize lookups on errors other than 404 and will correctly display a legitimate error
+Avoid using display: none to hide elements
+
+Lookup delete confirmation:
+

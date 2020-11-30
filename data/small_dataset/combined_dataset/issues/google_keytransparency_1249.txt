@@ -1,0 +1,5 @@
+Emit index for empty map leaf
+
+
+Include the index of an empty map leaf.
+This ensures that empty map leaves end up at the right place after they are joined with log items.

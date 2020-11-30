@@ -1,0 +1,44 @@
+[Console] More info returned by AboutCommand
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+
+This will make AboutCommand display additional information, indicating which basic symfony bundles are installed. For example:
+
+As a consequence, a user will have a general idea about the commands that can be run, without having to go through composer.json, or checking if a command is available by trying something like php bin/console make:entity --help.

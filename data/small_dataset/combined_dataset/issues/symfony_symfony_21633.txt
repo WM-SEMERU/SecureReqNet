@@ -1,0 +1,51 @@
+[Security] remove unused translation file
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.2
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+With Symfony 3, translation files have been moved to the Security Core
+component.

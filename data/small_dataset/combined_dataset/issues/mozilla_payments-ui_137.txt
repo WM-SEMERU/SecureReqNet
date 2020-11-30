@@ -1,0 +1,5 @@
+Ensure name attrs aren't specified on the form
+
+
+This is so the form values aren't submitted to us if the js submit breaks.
+Needs test coverage too.

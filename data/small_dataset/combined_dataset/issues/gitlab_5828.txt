@@ -1,0 +1,69 @@
+'- Dev: https://dev.gitlab.org/gitlab/gitlabhq/issues/2339
+- Zendesk ticket: https://gitlab.zendesk.com/agent/tickets/2892
+
+### Requested Feature
+
+Marc would like to have some extra security when using the API and would like for his auth token to be regenerated when he authenticates. This is his reasoning:
+
+> My (admin) private_token is permanent and visible as cleartext in every HTTP header. Does that not pose a monumental security issue?
+
+> Session API (http://doc.gitlab.com/ce/api/session.html) strongly implies a better security model than this – presumably I don’t actually need to “login” (with my LDAP credentials) to use the rest of the API? Surely the better model is to regen a new privateToken each time you “POST /session”? That is what I am used to from other “session APIs” – a “session token”. What do GitLab think of that?
+
+> I see it as perfectly reasonable to expect users to do something equivalent to this at beginning of operations:
+
+```
+export GL_TKN=`curl -XPOST --data "login=$USER&password=$PASS" https://gitlabserver/api/v3/session | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["private_token"]'
+```
+
+Jacob
+
+> I don't understand what this person wants. Maybe we can ask for a use case?
+
+Patricio
+
+>  I believe the use case is there. He would like for his token to change every time he logs in via the API, or better put, in his use case, he does the following steps when interacting with the API:
+
+> 1. POST to /session to get the token
+> 2. Save the session token in memory
+> 3. Interact with the API
+> 4. Interaction is finished
+
+> After some time he wants to interact again, by this point he would like for his session token to expire and be required to get a new one. (maybe different feature request) POST to /session to get token. The token should be different that the first token received.
+
+> I believe what he would like is some extra security in the API by not having the token be fixed for an indefinite period of time.
+> I know a lot of API endpoints use tokens to authenticate that don't expire.
+> Maybe he is confused by the fact that we have a /session API endpoint but the token returned there is not exactly a "session token". He expects a "session token" to expire. 
+> Ours is simply not a "session token" it is an "API token".
+
+> Does this make sense?
+
+
+Jacob
+
+> Thanks patricio !
+
+> **I believe what he would like is some extra security in the API by not having the token be fixed for an indefinite period of time**
+> That would break a lot of existing GitLab API integrations.
+
+> Maybe it would help to improve the API documentation for /session? I am not sure what other actions we can take here.
+
+Patricio
+
+> jacobvosmaer I agree that implementing something like will break every API client currently available. We could improve the documentation on the /session endpoint and state that the tokes doesn't expire.
+
+> We could also think about implementing this for `API v4`. Might be a good step forward towards GitLab 8.0. What do you think job ?
+
+Job
+
+> I'm not sure whether it would be worth to make API v4 / GL 8 (which I think are different things, as api v3 and v4 can coexist, therefore not warranting a major release) just for this feature.
+
+> I vote backlog and reply that we might consider this for the future, but that for now it'll break most integrations.
+
+Jacob
+
+> I think documentation is the first and probably only answer.
+
+> - explain what kinds of tokens exist in http://doc.gitlab.com/ce/api/README.html (private "permanent" token, oauth token)
+> - in http://doc.gitlab.com/ce/api/session.html make clearer what kind of token you get and link to the main discussion about authentication in api/README
+
+cc/ @patricio @jacobvosmaer @JobV @dzaporozhets 

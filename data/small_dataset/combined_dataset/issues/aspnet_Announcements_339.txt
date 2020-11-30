@@ -1,0 +1,8 @@
+AspNetCoreModule V1 removed from Windows Hosting Bundle
+
+
+Windows Hosting Bundle wouldn't contain AspNetCoreModule V1 in 3.0 release.
+AspNetCoreModuleV2 is backwards compatible with AspNetCoreModule OutOfProcess and is recommended for use with ASP.NET Core 3.0 applications.
+If AspNetCoreModule V1 is required it can be installed using 2.1/2.2 Windows Hosting Bundle.
+This would break 3.0 applications that explicitly opted into using AspNetCoreModule V1 using <AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName> or ones having custom web.config with <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+Please discuss this on  aspnet/AspNetCore#7095

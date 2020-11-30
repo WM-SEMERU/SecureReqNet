@@ -1,0 +1,9 @@
+Document the assumptions caja makes about browser features
+
+
+Original issue 534 created by jasvir on 2008-06-12T05:02:26.000Z:
+Caja makes asssumptions about the features a browser provides which are not
+documented.  These should be documented as a series of js, html and css
+tests which can be run on existing and new browsers to establish on which
+ones Caja assumptions hold and thus the ones on which cajoled code executes
+securely.

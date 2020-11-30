@@ -1,0 +1,10 @@
+add redis, telegram config, remove them from preDispatch
+
+
+issue#104
+issue#120
+
+ @n0str
+ @ivanszhuravlev
+ @neSpecc
+

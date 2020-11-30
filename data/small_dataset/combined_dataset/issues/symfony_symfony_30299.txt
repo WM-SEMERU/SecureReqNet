@@ -1,0 +1,7 @@
+[Security] Validate IPs in Access Control
+
+
+Description
+The feature to use access_control for IP validation is very convenient. However it doesn't validate IPs, which may lead to confusing debugging scenarios (e.g. #30298)
+Example
+Putting anything that it's not an IP or a subnet mask should result in an exception.

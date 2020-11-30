@@ -1,0 +1,2 @@
+In Persian language, we write documents from right-to-left (rtl), so, in markdown documents, when we need to wite in persian, we would add `<div dir="rtl">` before Persian section.
+could you please enhance Gitlab markdown than can pars div html tag?

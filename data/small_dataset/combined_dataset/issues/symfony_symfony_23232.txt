@@ -1,0 +1,91 @@
+[Bug] Firewall triggers on RedirectController::urlRedirectAction
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+2.7+
+
+
+
+This is pretty much a reopen of my previous issue: #13277
+Setup
+I have a configuration similar to this the following examples. 2 firewalls, of which 1 is not on the main context. This firewall is stateless and authenticates based on {something}.
+route:
+   pattern: /special-page/{something}/
+# for the special page
+firewall1:
+    pattern: ^/special-page
+    stateless: true
+
+# for the rest of the site
+firewall2:
+    pattern: ^/
+
+access_control:
+  - ^/: FULLY
+Scenario
+I visit: /special-page/foo
+I get redirected to /special-page/foo/
+Result: Failure.
+This scenario fails, because internally, Symfony sets a response, while still triggering the firewall:
+Request {#9 ▼
+  +attributes: ParameterBag {#12 ▼
+    #parameters: array:8 [▼
+      "_controller" => "Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction"
+      "path" => "/some-page/some-value/"
+      "permanent" => true
+      "scheme" => null
+      "httpPort" => 80
+      "httpsPort" => 443
+      "_route" => "app.some-route"
+      "_route_params" => array:5 [▼
+        "path" => "/some-page/some-value/"
+        "permanent" => true
+        "scheme" => null
+        "httpPort" => 80
+        "httpsPort" => 443
+      ]
+    ]
+  }
+}
+
+In my authenticator, I request the token via $token = $request->attributes->get('token')). This fails because Symfony merely redirects to the page with the trailing slash.
+Attempt to fix
+I've tried to fix this with the following setup, now it will only match with trailing slash for that firewall. However, now it will try authenticate against firewall2, because this one still triggers on the redirect controller.
+# for the special page
+firewall1:
+    pattern: ^/special-page/.*/
+    stateless: true
+
+# for the rest of the site
+firewall2:
+    pattern: ^/
+
+access_control:
+  - ^/: FULLY
+Solution
+I think that the Firewall should not match any requests if the _controller is Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction

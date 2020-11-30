@@ -1,0 +1,4 @@
+Extension API: chrome.proxy - Access to extension API denied
+
+
+Trying to run VPN extension in Brave, getting error Access to extension API denied when running chrome.proxy.settings.get.

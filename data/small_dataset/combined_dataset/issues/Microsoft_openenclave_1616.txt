@@ -1,0 +1,5 @@
+Fix formatting in CHANGELOG
+
+
+This adds backticks around symbols which is especially important for symbols with underscores so that Markdown rendering engines aren't so easily confused.
+Resolves #1614.

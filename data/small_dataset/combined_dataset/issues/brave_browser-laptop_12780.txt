@@ -1,0 +1,7 @@
+EV certificate string overflows
+
+
+follow-up to #11776
+actual behavior: if the organization name is very long, it overflows and makes it impossible to see the URL of the page:
+
+expected behavior: the EV info box should enforce a max-width such that the URL is always visible

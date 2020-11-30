@@ -1,0 +1,5 @@
+Add comment and code tweak to Basic HTTP Authenticator
+
+
+Adds a comment clarifying error handling in BasicHTTPAuthenticator and a small code tweak.
+See #5856 (comment)

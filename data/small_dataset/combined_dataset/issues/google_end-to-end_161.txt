@@ -1,0 +1,23 @@
+No warning on decrypting Tag 9 (no integrity protection) packets
+
+
+From coruus@gmail.com on August 02, 2014 20:09:48
+Is this report about the crypto library or the extension? Both.
+What is the security bug? No warning on decrypting a message that uses a Tag 9 packet. (Even GnuPG warns.)
+How would someone exploit it? Unclear.
+(Two messages are attached to illustrate the behavior. The passphrase for both is "test".)
+Fix:
+
+The minimal fix
+
+UI side: Always warn (with, preferably, a difficult to click through warning, see Felt 2014), before showing decrypted plaintext that wasn't integrity protected.
+Library side: Treat packets as invalid that use Tag 9 packets that cannot have been plausibly emitted by a legitimate user.
+In particular, GnuPG will, so long as you choose AES (and a few other modern ciphers), always emit a Tag 18 packet and MDC unless you pass it the "--disable-mdc" switch (and, in addition, "force-mdc" is not set in your preferences). A Tag 9 packet encrypted using AES should not be treated as valid under any circumstances.
+
+The better fix
+
+Reject all tag 9 packets. Tag 9 packets are only(?) needed because GnuPG's defaults result in it encrypting packets with CAST5 and no MDC in (unpatched) builds. Since you aren't yet in public release, GnuPG will have plenty of time to push a release with changed defaults.
+(I'm not familiar enough with the UI code to implement the minimal fix fully, but I'm happy to provide a patch to the library side either way you decide to proceed.)
+[Felt 2014] http://research.google.com/pubs/archive/41927.pdf
+Attachment: tag9.asc tag18.asc
+Original issue: http://code.google.com/p/end-to-end/issues/detail?id=124

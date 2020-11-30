@@ -1,0 +1,4 @@
+Improved a help note about authentication providers
+
+
+This should fix #5264.

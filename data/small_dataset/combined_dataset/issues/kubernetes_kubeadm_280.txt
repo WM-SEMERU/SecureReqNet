@@ -1,0 +1,24 @@
+Make it easy to run an other certificates controller
+
+
+Is this a BUG REPORT or FEATURE REQUEST?
+Choose one: BUG REPORT or FEATURE REQUEST
+FEATURE REQUEST
+It would be nice if we made it easy to deploy your own certificates controller instead of relying on the one that's built-in into the core controller-manager.
+If the user opts in to running a separate certificates signing controller, the availability of ca.key on disk will be optional if and only if the user specifies the rest of the required files, namely:
+
+ca.crt
+apiserver.{crt,key}
+apiserver-kubelet-client.{crt,key}
+admin.conf
+kubelet.conf
+controller-manager.conf
+scheduler.conf
+
+This assumes the CSR approval controller will still be run, so it's only the CSR signing controller that's deactivated. This can be done by just omitting the cluster-signing-cert-file and cluster-signing-key-file flags to the controller-manager.
+Combined with kubelet certification rotation, all kubelets (including the master) will have a client/server cert/key pair signed by the external CA without ever having the CA key on disk.
+kubeadm changes: The certificates controller can be added just by a kubectl apply -f post-installation, the only thing that needs to be done is to inactivate the default CSR signing controller.
+We should document how to do this in detail.
+Is there anything I missed that has to be done for this to work?
+Thoughts?
+@kubernetes/sig-auth-feature-requests @mikedanese @jcbsmpsn

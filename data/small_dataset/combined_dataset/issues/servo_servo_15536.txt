@@ -1,0 +1,15 @@
+Implement setter for document.domain
+
+
+This PR implements the setter for document.domain.
+It builds on #15438 and #15478, only the last commit is part of this PR.
+It includes tests for similar-origin security checks.
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes fix #934.
+ There are tests for these changes.
+
+
+This change is 

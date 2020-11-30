@@ -1,0 +1,4 @@
+API documentation link is dead
+
+
+I just visited https://developers.google.com/caja/ and noticed that the link to the API documentation is broken.

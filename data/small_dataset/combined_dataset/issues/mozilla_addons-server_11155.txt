@@ -1,0 +1,4 @@
+remove legacy views from /ratings
+
+
+they're not referenced or accessible any more

@@ -1,0 +1,51 @@
+[SecurityBundle] Made 2 service aliases private
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.3
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+no
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+We missed making them private :(
+Is it too late to fix that?

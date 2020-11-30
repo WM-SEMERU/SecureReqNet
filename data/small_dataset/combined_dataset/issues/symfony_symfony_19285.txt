@@ -1,0 +1,9 @@
+Http Firewall ExceptionListener : setTargetPath() should not be called on subrequests
+
+
+In cases where a subrequest triggers an auth error, the ExceptionListener stores the url of the subrequest as targetPath.
+Once the user logs in, he lands on the url for the subrequest instead of the url he should land on.
+This happens with fos_user_content_hash as well as with _fragment urls.
+Related issues:
+FriendsOfSymfony/FOSHttpCacheBundle#302
+FriendsOfSymfony/FOSHttpCache#287

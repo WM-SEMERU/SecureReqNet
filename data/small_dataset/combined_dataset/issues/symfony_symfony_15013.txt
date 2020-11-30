@@ -1,0 +1,52 @@
+[Security] Removed security-acl from the core
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+part of #14718
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+
+The Security\Acl is removed from the core and is loaded from its own repository. All tests were passing and this is fully backwards compatible. I have removed all but the Test files in the first step and added the dependency to verify the Test were still working with the package dependency. The second step was to remove the remaining test files and tests are still running for both the Bundle and the Framework. Once the Read-Only repository is a full standalone repository, this PR can be merged.
+
+ Remove component from the core
+ Remove read-only from https://github.com/symfony/security-acl
+
+Once this PR is merged, I can start working on splitting the SecurityBundle and extracting the ACL part to the AclBundle.
+/cc @fabpot

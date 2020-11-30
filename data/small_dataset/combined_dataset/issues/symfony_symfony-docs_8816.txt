@@ -1,0 +1,6 @@
+Unknown Twig function csrf_token
+
+
+See symfony-docs/security/csrf_in_login_form.rst
+There's no more csrf_token function included in twig since Symfony 4.0.
+Or is there a missing composer require ?

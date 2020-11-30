@@ -1,0 +1,19 @@
+Fix PSP volumes error message
+
+
+Was:
+Error from server: error when creating "pause-pod.yaml": pods "pause" is forbidden: unable to validate against any pod security policy: [spec.containers[0].securityContext.volumes[0]: Invalid value: "secret": secret volumes are not allowed to be used]
+
+Now:
+Error from server: error when creating "pause-pod.yaml": pods "pause" is forbidden: unable to validate against any pod security policy: [spec.volumes[0]: Invalid value: "secret": secret volumes are not allowed to be used]
+
+Also, only perform the validation once (by moving it from ValidateContainerSecurityContext to ValidatePodSecurityContext).
+
+1.4 Justification:
+
+Risk: low, this is just altering an error message
+Rollback: nothing should depend on this functionality
+Cost: the old error message didn't make any sense (there are no volumes on a container SecurityContext). This is fixing a bug.
+
+
+This change is 

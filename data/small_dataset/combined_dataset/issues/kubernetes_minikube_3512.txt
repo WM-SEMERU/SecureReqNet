@@ -1,0 +1,4 @@
+Migrate away from rootfs / DOCKER_RAMDISK
+
+
+This will allow us to use pivot_root and mitigate security issues which involve escaping containers.

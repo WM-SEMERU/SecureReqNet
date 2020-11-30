@@ -1,0 +1,6 @@
+Activity feed granular permissions
+
+
+The activity feed doesn't seem to respect permissions. With a restricted user with only the Employee role, and the Employee role with Rules to access only the Employee's own data and salary slips I can still see Activity feed entries that leak data about Communications, as well as Submission and Deletion entries on other Employee's salary slips.
+More over I can see login and logout information about all users.
+How are permissions on the activity feed managed currently and could they be more granular?

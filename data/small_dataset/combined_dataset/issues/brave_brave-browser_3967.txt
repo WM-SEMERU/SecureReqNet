@@ -1,0 +1,52 @@
+Ads enabled for unsupported regions
+
+
+Description
+While verifying #2562, found even if device on unsupported region, Ads get enabled.
+Steps to Reproduce
+
+Set VPN to a unsupported region
+Launch a clean profile of beta
+Enable rewards
+Open rewards setting, Sorry, Ads are not available in your region message pops up for a second and then ads settings get enabled
+
+Actual result:
+Ads enabled for unsupported regions
+Expected result:
+Unavailable message should persist and ads should not be enabled. Only for supported regions should be enabled
+Reproduces how often:
+Easy
+Brave version (brave://version info)
+
+
+
+Brave
+0.63.28 Chromium: 73.0.3683.75 (Official Build) beta(64-bit)
+
+
+
+
+Revision
+909ee014fcea6828f9a610e6716145bc0b3ebf4a-refs/branch-heads/3683@{#803}
+
+
+OS
+Linux
+
+
+
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+Yes on beta and dev. Not checked on Nightly
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+N/A
+Is the issue reproducible on the latest version of Chrome?
+N/A
+
+Additional Information
+cc: @tmancey @jsecretan set priority to P2, please change if required
+@brave/legacy_qa to verify on other platforms as well

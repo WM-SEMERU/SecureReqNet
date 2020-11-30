@@ -1,0 +1,4 @@
+The [GitLab upgrader documentation][1] does not mention anything about upgrading `gitlab-shell`, while if I were to manually upgrade my GitLab instance according to the [From 6.4 to 6.5 documentation][2] it tells me to also upgrade `gitlab-shell`. Is this by purpose? I did not notice the upgrade script do any upgrades on `gitlab-shell`.
+
+[1]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/upgrader.md
+[2]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/6.4-to-6.5.md

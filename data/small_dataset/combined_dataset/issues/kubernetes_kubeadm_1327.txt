@@ -1,0 +1,20 @@
+Use secure port for scheduler and controller-manager liveness probe
+
+
+Feature request:
+Since 1.13, kube-controller-manager and kube-scheduler expose secure ports and marked insecure ports as deprecated.
+scheduler: kubernetes/kubernetes#69663
+change: 1.13
+enable secure port: 10259
+deprecate old port: 10251
+
+controller-manager: kubernetes/kubernetes#67069
+change: 1.12
+enable secure port: 10257
+deprecate old port: 10252
+
+We should use the secure ports as the default the livenessProbes going forward. I have this fixed in a fork and will open a PR.
+Versions
+kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"14+", GitVersion:"v1.14.0-alpha.0.1048+21904a5f7d38b1", GitCommit:"21904a5f7d38b1054edad36f3b05b0d7bd556d08", GitTreeState:"clean", BuildDate:"2018-12-18T01:09:09Z", GoVersion:"go1.11.3", Compiler:"gc", Platform:"linux/amd64"}
+

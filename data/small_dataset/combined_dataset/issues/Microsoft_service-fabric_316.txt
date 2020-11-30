@@ -1,0 +1,6 @@
+Diff upgrade for Docker Containers
+
+
+Hi guys,
+Is there a way to perform a diff upgrade using Docker containers?
+I'm not even sure if that is possible...how to compare the content of the images? One of the things I come up with is avoiding to build a new version of the image if the code doesn't change at all, so like that the image version will be the same in the manifest file and I might aware that there are no changes thru the image version, but how to do that?

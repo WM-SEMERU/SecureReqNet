@@ -1,0 +1,8 @@
+Pass an empty buffer to Buffer.alloc filling will cause not responding and high CPU usage
+
+
+
+Version: 9.4.0
+Platform: Arch Linux
+
+Buffer.alloc(1, Buffer.alloc(0));

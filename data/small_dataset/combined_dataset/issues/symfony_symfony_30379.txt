@@ -1,0 +1,50 @@
+[FrameworkBundle][Routing] allow boolean container parameters for routes
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30366
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11059
+
+
+
+This fixes #30366 and adds support for boolean container parameters in route conditions, defaults etc.

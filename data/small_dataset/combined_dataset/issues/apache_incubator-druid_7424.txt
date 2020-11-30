@@ -1,0 +1,26 @@
+Suspicious place in ByteBufferMinMaxOffsetHeap
+
+
+
+
+
+incubator-druid/processing/src/main/java/org/apache/druid/query/groupby/epinephelinae/ByteBufferMinMaxOffsetHeap.java
+
+
+         Line 299
+      in
+      431d3d8
+
+
+
+
+
+
+ } else if (minChild > -1) { 
+
+
+
+
+
+This condition is always true.
+FYI @jon-wei

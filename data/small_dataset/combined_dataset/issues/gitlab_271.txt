@@ -1,0 +1,5 @@
+When LDAP users login for the first time, they are given a default primary email 'username'@'domain'. They cannot change this primary email, so they add secondary emails instead. 
+
+On the Admin interface, Users secondary email are not shown. When an Admin user tries to change a regular user's primary email to an email that was already listed as a secondary email, the Admin User gets an 'Email has already been taken' error.
+
+In the Admin user interface, it would be helpful to see the primary and secondary emails of Users.

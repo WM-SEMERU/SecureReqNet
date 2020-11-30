@@ -1,0 +1,15 @@
+MetadataSegmentView should correctly handle the situation of Coordinator being down or changed leadership
+
+
+Regardless of whether any of the designs proposed for MetadataSegmentView here: #6834 (comment) is applied, MetadataSegmentView should document its behavior in the face of the Coordinator being down, or just started, or leadership changed.
+Currently, there is a single comment "Note that coordinator must be up to get segments" which, IMO, only adds FUD and doesn't explain anything.
+Ideally, MetadataSegmentView should correctly recognize the situations of changed Coordinator's leadership and not to flush all cached published segments.
+Explanation may look like the following:
+/**
+ * When Coordinator is just started or leadership changed,
+ * its SegmentsMetadata is unpopulated. Then the endpoint /metadata/abc/foo/bar
+ * which we are querying returns code XXX (see {@link DataSourcesResource#theRelevantMethod}).
+ * We process this code here and don't flush {@link #cachedPublishedSegments} in this case.
+ */
+
+FYI @surekhasaharan

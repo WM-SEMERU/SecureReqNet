@@ -1,0 +1,61 @@
+WIP: [serializer] extract normalizer tests to traits
+
+
+eufossa
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+Relates to #30818
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+As discussed with @joelwurtz, extract normalizer functionality tests into traits to ensure consistent behaviour of all normalizers.
+
+ Rebase when #30977, #30950 and #30907 are merged to master blocker
+ Clean up order of trait inclusion and methods in the tests
+ Clean up fixture classes of the traits. I started having one class named the same as the trait, where possible
+
+Stuff that we should do eventually, but can also do in separate pull requests, after this one has been merged:
+
+ Extract all features that we can (the existing normalizer tests should more or less only have the legacy tests in them, all functionality should be in trait)
+ Run test coverage and increase coverage so that we cover all important features and all relevant error cases.
+

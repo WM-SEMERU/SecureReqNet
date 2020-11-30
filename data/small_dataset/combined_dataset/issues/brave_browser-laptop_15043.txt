@@ -1,0 +1,43 @@
+Transactions are failing due to password authentication
+
+
+Description
+Transactions are failing due to password authentication
+Steps to Reproduce
+
+Build from source (Master -6ab4f61)
+Launch browser using ETHEREUM_NETWORK=ropsten LEDGER_ENVIRONMENT=staging
+GETH_LOG=1 LEDGER_VERBOSE=true npm run start
+Enable Eth-wallet
+Create Eth wallet
+Add Funds to Eth-wallet through http://faucet.ropsten.be:3001/
+Enable payments
+Click on Fund Brave wallet and verify Brave wallet address is displayed in To filed
+Wait until blocks gets synced
+Transfer the funds from eth wallet to Brave wallet once the sync is completed
+
+Actual result:
+Transactions are failing due to password authentication
+
+Expected result:
+Transaction should be successful without any issue
+Reproduces how often:
+100%
+Brave Version
+0.25.0
+about:brave info:
+Brave: 0.25.0
+V8: 6.8.275.24
+rev: 6ab4f61
+Muon: 8.0.8
+OS Release: 10.0.17134
+Update Channel:
+OS Architecture: x64
+OS Platform: Microsoft Windows
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 68.0.3440.84
+Reproducible on current live release:
+NA
+Additional Information
+cc : @kjozwiak @LaurenWags @srirambv

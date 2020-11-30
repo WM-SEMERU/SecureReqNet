@@ -1,0 +1,4 @@
+Information sharing dashboard
+
+
+It can be difficult to keep track of all the places that you've shared your address, billing information, and so on. Features like auto-fill make it easy to share this info, but don't help you find out who knows it. The browser is in a good position to notice when you submit this info and let you keep track of it later.

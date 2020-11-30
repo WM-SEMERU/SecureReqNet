@@ -1,0 +1,10 @@
+Deprecate unsafe CRT functions.
+
+
+This task tracks identifying the use of unsafe CRT functions in the OE code and replacing them with secure equivalents. In particular, this includes:
+
+ Verifying that the OE versions of CRT methods are secure (e.g. we have applied appropriate Spectre1 mitigations)
+ Using secure versions of CRT functions (e.g. memset_s rather than memset)
+ Upgrading CRT functions to custom methods as required by security context (e.g. use of oe_secure_memcpy, oe_secure_zero_fill rather than memcpy or memset)
+
+To avoid future unsafe use, #28 also tracks adding deprecation warnings as appropriate.

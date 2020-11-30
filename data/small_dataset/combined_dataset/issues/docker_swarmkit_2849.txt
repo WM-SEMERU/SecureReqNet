@@ -1,0 +1,12 @@
+Bump stretchr/testify v1.3.0, davecgh/go-spew  v1.1.1
+
+
+
+bump stretchr/testify v1.3.0 stretchr/testify@v1.1.4...v1.3.0
+bump davecgh/go-spew  v1.1.1 davecgh/go-spew@v1.1.0...v1.1.1
+
+davecgh/go-spew#79 simpler, more robust bypass
+
+
+bump code.cloudfoundry.org
+

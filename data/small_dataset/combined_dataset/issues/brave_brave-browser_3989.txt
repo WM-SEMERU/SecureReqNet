@@ -1,0 +1,5 @@
+Ads Rewards grants should trigger BAT icon badge (Rewards notification badge)
+
+
+If an Ads user (Ads ON) receives their ads rewards payment, the BAT logo should show the notification logo so user know ads rewards payment is available to be made, and needs to be claimed.
+@jsecretan @NejcZdovc

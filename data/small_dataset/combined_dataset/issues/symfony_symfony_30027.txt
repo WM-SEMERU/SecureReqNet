@@ -1,0 +1,57 @@
+[FrameworkBundle] Add sid_length and sid_bits_per_character session ini options in session configuration
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29830
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+this a fix for the issue #29830
+After deliberation, we estimate that only sid_length and sid_bits_per_character session options should be exposed. These options à optional.
+For others, we recommend changing your php.ini file
+We can now configure the session like this :
+framwork:
+  session:
+    sid_length: 64 //optional, recommended value is 32
+    sid_bits_per_character: 6 //optional, recommended value is 5

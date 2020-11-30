@@ -1,0 +1,5 @@
+installer issue on mac
+
+
+this is not an issue but a question- please.  On the mac, what exactly is the installer app?  It is not a pkg file, but an embedded app.
+What type of installer are you using, it's not clear to me at least.  Thank you kindly.

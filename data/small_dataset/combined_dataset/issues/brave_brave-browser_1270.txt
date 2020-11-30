@@ -1,0 +1,4 @@
+Audit for tor leakage parity with browser-laptop
+
+
+We should go through all of the test cases in brave/browser-laptop#14143 and make sure none of them exist in private tabs with Tor.

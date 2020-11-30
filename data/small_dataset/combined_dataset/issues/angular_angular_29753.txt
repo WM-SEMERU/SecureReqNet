@@ -1,0 +1,16 @@
+ViewEncapsulation.ShadowDom is creating shadow dom but not encapsulating component from external css
+
+
+🐞 bug report
+I have a simplest possible angular component. The only difference is that I have encapsulation: ViewEncapsulation.ShadowDom enabled. Doing this is creating shadow dom as expected. But its not protecting component from external styling.
+For example I have following styles in style.css
+*{
+  font-size: 30px;
+  color:red;
+}
+
+This style is being applied to divs inside the component.
+🔬 Minimal Reproduction
+https://stackblitz.com/edit/angular-1phjqd?file=src%2Fstyles.css
+other info:
+Angular 7

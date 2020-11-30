@@ -1,0 +1,22 @@
+```
+August 09, 2014 21:09 -> ERROR -> Command failed [1]: /usr/bin/git --git-dir=/home/git/gitlab-satellites/apps/setka-expo/.git --work-tree=/home/git/gitlab-satellites/apps/setka-expo push origin master
+
+remote: /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/spec_set.rb:92:in `block in materialize': Could not find rake-10.3.2 in any of the sources (Bundler::GemNotFound)ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/spec_set.rb:85:in `map!'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/spec_set.rb:85:in `materialize'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/definition.rb:133:in `specs'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/definition.rb:178:in `specs_for'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/definition.rb:167:in `requested_specs'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/environment.rb:18:in `requested_specs'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/runtime.rb:13:in `setup'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler.rb:120:in `setup'ESC[K
+remote:         from /usr/local/lib/ruby/gems/2.1.0/gems/bundler-1.6.3/lib/bundler/setup.rb:17:in `<top (required)>'ESC[K
+remote:         from /usr/lib/ruby/1.9.1/rubygems/custom_require.rb:36:in `require'ESC[K
+remote:         from /usr/lib/ruby/1.9.1/rubygems/custom_require.rb:36:in `require'ESC[K
+remote: error: hook declined to update refs/heads/masterESC[K
+To /home/git/repositories/apps/setka-expo.git
+ ! [remote rejected] master -> master (hook declined)
+error: failed to push some refs to '/home/git/repositories/apps/setka-expo.git'
+```
+
+I have ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux] installed on debian squeeze. (with ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux])

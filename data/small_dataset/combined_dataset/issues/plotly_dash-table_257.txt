@@ -1,0 +1,5 @@
+Override data cell styling when focused / selected
+
+
+Feature follow up to the bug reported in #256
+Adding isActive: boolean and isSelected: boolean to style_data_conditional entries would allow overriding the styling applied when a data cell is selected -- and allow greater visual customization.

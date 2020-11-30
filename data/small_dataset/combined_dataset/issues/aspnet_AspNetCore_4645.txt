@@ -1,0 +1,41 @@
+One rule from several rules in AuthorizationPolicyBuilder
+
+
+Hello, all
+Now, If AuthorizationPolicyBuilder have several rules, all rules should be fulfilled.
+But in our project we have use case when need to resolve only one rule from several rules.
+As example:
+/* Adding policy */
+options.AddPolicy("UserOrClient",
+                    policy => policy.AddRequirements(
+                        new UserAccessRequirement(),
+                        new ClientAccessRequirement()));
+
+/* Handler */
+public class UserOrClientAccessHandler : IAuthorizationHandler {
+
+Task HandleAsync(AuthorizationHandlerContext context) {
+            var requirements = context.PendingRequirements.ToList();
+
+            var userRequirement = requirements.FirstOrDefault(item => item is UserAccessRequirement);
+            var clientRequirement = requirements.FirstOrDefault(item => item is ClientAccessRequirement);
+
+           if (userRequirement.IsNull() && clientRequirement.IsNotNull())
+            {
+                IsOnlyClienCheck(context, clientRequirement);
+            }
+            else if (userRequirement.IsNotNull() && clientRequirement.IsNull())
+            {
+                await IsOnlyUserCheckAsync(context, userRequirement);
+            }
+            else if (userRequirement.IsNotNull() && clientRequirement.IsNotNull())
+            {
+                await IsUserOrClientAsync(context, userRequirement, clientRequirement);
+            }
+}
+
+}
+
+And for situations like this needs to write CustomHandler and several requirements.
+When we will add more rules, handler will be "trash"
+Maybe you know, How I can this resolve?

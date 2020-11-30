@@ -1,0 +1,9 @@
+Search form missing data-no-csrf attribute
+
+
+Describe the problem and steps to reproduce it:
+The Search form included on most (all?) pages doesnt have an anti-csrf token (which is fine) and also doesnt have a 'data-no-csrf' attribute (which is not).
+This means that the addons.mozilla.org and addons.allizom.org are now failing the baseline tests.
+For more background see https://bugzilla.mozilla.org/show_bug.cgi?id=1328560
+Is here a good place to add it? https://github.com/mozilla/addons-frontend/blob/master/src/amo/components/SearchForm/index.js#L242-L251
+If so I'm happy to submit a PR...

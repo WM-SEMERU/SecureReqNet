@@ -1,0 +1,5 @@
+Take advantage of os-provided hardening features
+
+
+Most of the major OS platforms provide distinctive hardening features which we should take advantage of.
+Examples: brave/muon#454, brave/muon#453, brave/muon#452.

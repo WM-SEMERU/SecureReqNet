@@ -1,0 +1,24 @@
+Improve cache
+
+
+SUMMARY
+Some improvements to the ETag cache:
+
+Superset works in debug mode if no cache is set (before it would raise an exception).
+We only use the response cache on GET requests (doesn't make sense on POST requests).
+
+Note that we still use the dataframe cache on POST requests, which is something we want. The dataframe cache is useful when the HTTP request is different but the generated SQL query is unaltered.
+TEST PLAN
+Tested the "Misc Charts" dashboard, saw cache working. I also ran a local server without any cache, and verified that it works.
+ADDITIONAL INFORMATION
+[ ] Has associated issue:
+[ ] Changes UI
+[ ] Requires DB Migration. Confirm DB Migration upgrade and downgrade tested.
+[ ] Introduces new feature or API
+[ ] Removes existing feature or API
+[ ] Fixes bug
+[x] Refactors code
+[ ] Adds test(s)
+
+REVIEWERS
+@xtinec @khtruong @DiggidyDave @datability-io

@@ -1,0 +1,16 @@
+Fix frame-ancestors blocking the disco pane loading
+
+
+STR:
+
+Go to about:config , change the extensions.webserver.discoverURL host to point at discovery.addons.allizom.org
+Hit about:addons and click get addons.
+
+What happens:
+
+"Blocked by Content Security Policy" page
+
+What should happen:
+
+The about:addons page should render normally.
+

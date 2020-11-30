@@ -1,0 +1,154 @@
+[Messenger] SerializerStamp is never used in decode
+
+
+Symfony version(s) affected: 4.2
+Description
+SerializerStamp won't be used in decode.
+
+
+
+symfony/src/Symfony/Component/Messenger/Transport/Serialization/Serializer.php
+
+
+        Lines 74 to 76
+      in
+      a9f8ca5
+
+
+
+
+
+
+  if (isset($stamps[SerializerStamp::class])) { 
+
+
+
+  $context = end($stamps[SerializerStamp::class])->getContext() + $context; 
+
+
+
+         } 
+
+
+
+
+
+This will never be true because decodeStamps returns:
+array(1) {
+      │   [0]=>
+      │   object(Symfony\Component\Messenger\Stamp\SerializerStamp)#1012 (1) {
+      │     ["context":"Symfony\Component\Messenger\Stamp\SerializerStamp":private]=>
+      │     array(0) {
+      │     }
+      │   }
+      │ }
+
+And isset($stamps[SerializerStamp::class]) is checking the key which is 0 here.
+
+
+
+symfony/src/Symfony/Component/Messenger/Tests/Transport/Serialization/SerializerTest.php
+
+
+        Lines 75 to 96
+      in
+      a9f8ca5
+
+
+
+
+
+
+  public function testEncodedWithSymfonySerializerForStamps() 
+
+
+
+     { 
+
+
+
+  $serializer = new Serializer(); 
+
+
+
+  
+
+
+
+  $envelope = (new Envelope(new DummyMessage('Hello'))) 
+
+
+
+  ->with($serializerStamp = new SerializerStamp([ObjectNormalizer::GROUPS => ['foo']])) 
+
+
+
+  ->with($validationStamp = new ValidationStamp(['foo', 'bar'])) 
+
+
+
+         ; 
+
+
+
+  
+
+
+
+  $encoded = $serializer->encode($envelope); 
+
+
+
+  
+
+
+
+  $this->assertArrayHasKey('body', $encoded); 
+
+
+
+  $this->assertArrayHasKey('headers', $encoded); 
+
+
+
+  $this->assertArrayHasKey('type', $encoded['headers']); 
+
+
+
+  $this->assertArrayHasKey('X-Message-Stamp-'.SerializerStamp::class, $encoded['headers']); 
+
+
+
+  $this->assertArrayHasKey('X-Message-Stamp-'.ValidationStamp::class, $encoded['headers']); 
+
+
+
+  
+
+
+
+  $decoded = $serializer->decode($encoded); 
+
+
+
+  
+
+
+
+  $this->assertEquals($serializerStamp, $decoded->last(SerializerStamp::class)); 
+
+
+
+  $this->assertEquals($validationStamp, $decoded->last(ValidationStamp::class)); 
+
+
+
+     } 
+
+
+
+
+
+This test never checked if the group is actually applied, it just checks if stamp is there and it will always be there, it just won't be used.
+How to reproduce
+Install messenger with Symfony serializer, add SerializerStamp and see if it is used when you get a response.

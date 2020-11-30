@@ -1,0 +1,41 @@
+Unrecognized option “form_login” under “security.firewalls.main”
+
+
+When you start this fall:
+InvalidConfigurationException in ArrayNode.php line 317:
+Unrecognized option "form_login" under "security.firewalls.main"
+# app/config/security.yml
+
+    security:
+        encoders:
+            AppBundle\Entity\Management:
+                algorithm: bcrypt
+
+        role_hierarchy:
+            ROLE_ADMIN:       ROLE_USER
+            ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
+        providers:
+            administrators:
+                entity: { class: AppBundle:Management, property: login }
+
+        firewalls:
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+
+            main:
+                anonymous: ~
+                form_login:
+                    login_path: login
+                    check_path: login_check
+
+# app/config/routing.yml
+
+login:
+    path:     /login
+    defaults: { _controller: AppBundle:Security:login }
+login_check:
+    path: /login_check
+    defaults: { _controller: AppBundle:Security:loginCheck }
+

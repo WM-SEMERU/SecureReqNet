@@ -1,0 +1,139 @@
+Add "input" option to NumberType
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#24793
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+This PR replaces #24793 in (partially) fixing how Doctrine's DECIMAL type is handled by the Form component.
+Previously, DECIMAL was mapped to the regular NumberType. That confuses Doctrine's change detection, depending on the DB platform.
+Examples:
+
+
+
+DB
+DB value
+Doctrine entity before submit
+Form input
+Doctrine entity after submit
+
+
+
+
+SQLite
+8.000
+'8'
+8
+8
+
+
+SQLite
+8.123
+'8.123'
+8.123
+8.123
+
+
+PostgreSQL
+8.000
+'8.000'
+8
+8
+
+
+PostgreSQL
+8.123
+'8.123'
+8.123
+8.123
+
+
+
+The value in the Doctrine entity changes before and after submit. Hence Doctrine believes an update is necessary.
+This PR introduces an input option to NumberType (similar to DateType), that can be set to 'number' (default) or 'string'. If set to 'string', the conversion is as follows:
+
+
+
+DB
+DB value
+Doctrine entity before submit
+Form input
+Doctrine entity after submit
+
+
+
+
+SQLite
+8.000
+'8'
+8
+'8.000'
+
+
+SQLite
+8.123
+'8.123'
+8.123
+'8.123'
+
+
+PostgreSQL
+8.000
+'8.000'
+8
+'8.000'
+
+
+PostgreSQL
+8.123
+'8.123'
+8.123
+'8.123'
+
+
+
+You see that this does not completely solve this issue for SQLite. However, @Ocramius and I agree that this is something to be fixed by Doctrine, since Doctrine is providing the database abstraction.
+That fix should be done in the SqlitePlatform object in Doctrine as part of another PR and should be backwards compatible with the current Doctrine version (i.e. opt in via configuration).
+Compared to #24793, this PR does not introduce a new type but instead makes the NumberType more flexible. Also, this PR does not introduce the force_full_scale option since that should be solved by Doctrine as described above.

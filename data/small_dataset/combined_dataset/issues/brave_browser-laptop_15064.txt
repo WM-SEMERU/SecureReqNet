@@ -1,0 +1,26 @@
+"View Certificate" and "Open full certificate details" in the Developer Tools don't appear to work.
+
+
+Description
+When trying to view a SSL certificate for a site delivered over HTTPS, the "View Certificate" and "Open full certificate details" buttons in the Developer Tools console don't result in anything additional being displayed.
+Steps to Reproduce
+
+Browse to a website that is delivered over HTTPS (eg. https://brave.com)
+Press F12 to bring up the Developer Tools console.
+Click onto the Security tab.
+Click the View Certificate button (nothing happens)
+Click onto any of the origins (main or secure).
+Click the "Open full certificate details" button (nothing happens).
+
+Actual result:
+Nothing happens
+Expected result:
+Display of the full security certificate.
+Reproduces how often:
+100% of the time.
+Brave Version
+about:brave info:
+0.23.79
+Reproducible on current live release:
+Yes
+Additional Information

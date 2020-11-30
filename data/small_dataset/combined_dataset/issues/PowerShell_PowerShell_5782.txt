@@ -1,0 +1,4 @@
+Support ASKPASS for credential prompt
+
+
+For some scenarios (AzureRM auth or hosted in VS), it may be better to support the SSH ASKPASS model to use a GUI for auth and pass the creds back to PowerShell

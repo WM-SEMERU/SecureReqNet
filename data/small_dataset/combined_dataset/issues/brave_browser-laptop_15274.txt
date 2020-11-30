@@ -1,0 +1,36 @@
+Developer tools not brought to front on "Inspect element", if already open
+
+
+Description
+When I try to inspect an element on a page where I have opened developer tools beforehand (or because I already inspected the page earlier on), the developer tools are not brought to the front.
+Steps to Reproduce
+
+Open a page
+Right click on an element and choose "inspect element"
+Make sure a window (another program or just Brave) overlaps the Developer Tools
+Right click again and choose "inspect element" again
+
+Actual result:
+The Developer Tools-window is not being brought to front
+Expected result:
+The Developer Tools-window is brought to front
+Reproduces how often:
+100%
+Brave Version
+0.24.0
+about:brave info:
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 17.7.0
+Update Channel: Release
+OS Architecture: x64
+OS Platform: macOS
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+Yes?
+Additional Information
+None

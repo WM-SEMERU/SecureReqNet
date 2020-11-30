@@ -1,0 +1,63 @@
+[Security] SimpleAuthenticationProvider is broken
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+yes
+
+
+RFC?
+no
+
+
+Symfony version
+3.4.7
+
+
+
+The changes from #26370 break the simple authentication provider.
+
+
+
+symfony/src/Symfony/Component/Security/Core/Authentication/Provider/SimpleAuthenticationProvider.php
+
+
+        Lines 47 to 48
+      in
+      341682e
+
+
+
+
+
+
+  $user = $authToken->getUser(); 
+
+
+
+  $this->userChecker->checkPreAuth($user); 
+
+
+
+
+
+$authToken->getUser() returns a "UserInterface instance, an object implementing a __toString method, or the username as a regular string", however the UserChecker::checkPreAuth() method allows a UserInterface instance only. An anonymous token results in the following exception:
+Type error: Argument 1 passed to Symfony\Component\Security\Core\User\UserChecker::checkPreAuth() must be an instance of Symfony\Component\Security\Core\User\UserInterface, string given, called in …/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authentication/Provider/SimpleAuthenticationProvider.php on line 49
+
+@i3or1s /cc

@@ -1,0 +1,4 @@
+feat(security): trust resource URLs as URLs.
+
+
+Resource URLs are strictly "more" trustworthy than plain URLs, so trusting them maintains the same level of security while avoiding to break people when we downgrade a resource URL context to a plain URL context.

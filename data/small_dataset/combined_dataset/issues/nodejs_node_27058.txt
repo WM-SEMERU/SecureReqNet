@@ -1,0 +1,11 @@
+test: log errors in test-fs-readfile-tostring-fail
+
+
+The test writes out a large file via fs.createWriteStream() but was
+not listening for the error event, which the fs docs describe as the
+reliable way to detect write errors.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ commit message follows commit guidelines
+

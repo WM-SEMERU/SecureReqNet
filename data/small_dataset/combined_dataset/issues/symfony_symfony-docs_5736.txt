@@ -1,0 +1,5 @@
+[Security] Custom authentication error messages
+
+
+Starting with Symfony 2.8, we can easily throw an AuthenticationException in the Security subsystem with a custom error message thanks to the new CustomUserMessageAuthenticationException (see symfony/symfony#15882).
+It must be made clear that the message configured here is likely to be shown to the user, so no sensitive information should be included in this message.

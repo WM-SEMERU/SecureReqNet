@@ -1,0 +1,21 @@
+'#### Overview
+
+By default the `ruby-net-ldap` gem does not enabled SSL verification unless configured via [tls_options](https://github.com/ruby-ldap/ruby-net-ldap/blob/master/lib/net/ldap.rb#L505-L515). 
+
+GitLab uses the [omniauth-ldap](https://gitlab.com/gitlab-org/omniauth-ldap) library for LDAP auth. There is currently an open issue [LDAP Server certificate not validated](https://github.com/intridea/omniauth-ldap/issues/58) which describes the SSL verification problem. 
+
+I've lodged this issue here for posterity. We should either address it upstream or in our fork. 
+
+#### Problem
+
+As no verification is performed on the SSL certificate an attacker could easily impersonate an LDAP server. 
+
+#### Solution 
+
+We should patch our fork of the omniauth-ldap library to pass and verify SSL certificates by default. 
+
+cc @briann @dblessing @stanhu 
+
+______
+
++ https://gitlab.zendesk.com/agent/tickets/71302

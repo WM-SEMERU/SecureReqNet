@@ -1,0 +1,73 @@
+cmd/go: [modules + integration] provide foreign content extension points
+
+
+This report is part of a series focused at making Go modules work in integrator workflows. It’s being filled at the request of @mdempsky in golang-dev. It is informed both by the results of this golang-dev discussion, and by trying to make things work with Go module tooling as it exists today (experiment¹).
+Please do not dismiss it or mark it as duplicate of another vaguely similar issue without making sure you’ve read and understood the golang-dev discussion. A lot of work went into identifying problems points precisely.
+Needed feature
+Go needs to provide system extension points, either in go mod descriptor file, or another module-specific metadata file.
+Constrains
+The metadata file should allow declaring the replacement of an in-module:
+
+directory path
+file path
+variable
+
+… by some system-specific path or value.
+Motivation
+Source code is not sufficient to build complex software. It needs other files (documentation, legal files, content files, protobuf files, other language source files…).
+Because go get is the only distribution tool (or familiar distribution tool) at the disposition of many Go developers, they will add all this foreign (#31319 ) content to their Go modules. However, while better than nothing, go get is not really adapted to distributing foreign content.
+At the last stages of system integration, when the integrator has fine knowledge of the target OS, and the necessary tooling to coordinate Go modules with other content providers, it is possible to relocate some of this content to the correct places of the filesystem, or even replace it with better versions. However this is difficult to do without module surgery, if Go modules do not provide an official mechanism for this kind of extension/replacement.
+Applications:
+
+move module documentation files to /usr/share/doc where humans can read them without dezipping a module file
+move module legal files to /usr/share/licenses where legal audit scripts can find them
+tell Go code to use javascript files managed by npm or yarn, instead of an embedded copy in the Go module file
+point golang/x/mobile to the full system copy of Noto (all x Gigs of it) instead of the limited subset it embeds
+move golang/x/image Go fonts to /usr/share/fonts, so Go developers can write documents that use the Go fonts, without needing to extract them manually
+make all Go modules use the same protobuf files, instead of private copies in various stages of obsolescence
+
+Some of those elements are quite bulky and a system replace will usually happen at the same time of a removal from the zip payload file. Removal also makes it easier to diagnose problems, when you don't have to wonder which copy is in use at any given time.
+Detailed Context
+The current Go module design and implementation targets small Go projects. Those projects consume raw unchanged third party projects, and rely blindly on the QA done by those other projects. Their only needs are to download those projects, check they’ve not been tampered with (via notaries),  regularly check for updates.
+Small project code supply chain:
+third party code
+        ↓
+direct or proxied
+download,
+without changes
+(upstream integrity checks required)
+        ↓
+use in project without checks
+(blind third party trust)
+
+Big integration projects, however, can not afford this direct pipeline.
+Big integration projects can be:
+
+Linux distributions
+huge software projects like Kubernetes (as noted by @thockin)
+
+There is too much third party code in play. Every member of the team can not be expected to master all the third party parts. All the third party projects may not be up to the project QA standards. Expecting all of them to deal timely with issues all the time (and thus being able to use them unchanged) is unrealistic. Continuous internet downloads make CI/CD prohibitively expensive, unreliable and unreproducible.
+Therefore any big integration project will have to give up on direct internet third party code use. It will work from a baseline of third party code. This baseline will receive small last-mile fixes to deal with the problems encountered while integrating a large mass of third-party code, and mask the lag of getting all those fixes accepted by the original third party projects. This baseline will be broken up in individual components to allow different teams to take ownership the curation of different parts of the third party codebase. And, because all this is a huge amount of work, the organisation managing the project will want to share it with its other projects.
+Big project code supply chain:
+third party code
+        ↓
+direct or proxied
+download
+without changes
+(upstream integrity checks required)
+        ↓
+curating 
+– checking,
+– fixing, 
+– removing unneeded/broken/dead parts
+(upstream integrity checks voided)
+        ↓
+curated baseline
+        ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓ ↓
+use in project A … use in project N
+(no other third party code or internet download checks permitted)
+
+The aim of this report series is to make Go module tooling integration-friendly, helping big integration projects to constitute and manage their baselines, and consume the result in all their sub-projects.
+For historical reasons baselines have been created in GOPATH/vendor mode so far. But, there is no reason for this mode to persist. All the code management wins produced by modules in the direct download case, are also desirable in the integration/baseline case.
+Therefore, there is a tooling need to convert the existing GOPATH/vendor baselines of third party code into  baselines of Go modules.
+¹ The experimental code is probably horrible. That's not the point. Most of its functions are generic and should have been provided by generic Go tooling in the first place.

@@ -1,0 +1,22 @@
+Caja should apply autocomplete="off" on forms
+
+
+Original issue 1197 created by erikeldridge on 2010-03-11T02:06:08.000Z:
+I'm using the caja playground (Rev 4007M built on 2010-03-08 15:51:45) in
+FF 3.6 on Mac 10.5.8, but this is just a general enhancement request for
+access to the autocomplete attribute on input tags.  For what it's worth,
+the attribute is standard in html 5 (
+http://www.w3.org/TR/html5/forms.html#the-autocomplete-attribute ).
+I'd like to be able to do something like this:
+<input autocomplete="false"/>
+But the cajoler removes it w/ this warning:
+WARNING http:///:1+8 - 20: removing unknown attribute autocomplete on
+input:http:///:1: <input autocomplete="false"/>
+What steps will reproduce the problem?
+
+open the caja playground in ff 3.6 on mac 10.5.8
+enter <input autocomplete="false"/> in the source box
+click the "Cajole" button
+view the compile warnings/errors
+
+Thanks

@@ -1,0 +1,32 @@
+DOM Sanitizer is too aggressive for background-image
+
+
+I'm submitting a ...  (check one with "x")
+[ X] bug report => search github for a similar issue or PR before submitting
+[ ] feature request
+[ ] support request => Please do not submit support request here, instead see https://github.com/angular/angular/blob/master/CONTRIBUTING.md#question
+
+Current behavior
+When using the [style.background-image] binding, if your source URL contains the string parameter src=, this fails the sanitization process, and no background image url is added to the element.
+Expected behavior
+I would expect that the URL I am binding to the [style.background-image] property would be passed through.  Especially since I don't have control over the source image to change the params on the image request.
+Here's a PLUNKR that recreates the issue:
+http://plnkr.co/edit/86o4oNfP4sQF32zx4BEf?p=preview
+Minimal reproduction of the problem with instructions
+What is the motivation / use case for changing the behavior?
+Please tell us about your environment:
+OSX 10, Chrome 57, @angular 2.4.1, TypeScript 2.0.2
+
+Angular version: 2.0.X
+
+
+Browser: [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]
+
+
+
+Language: [all | TypeScript X.X | ES6/7 | ES5]
+
+
+Node (for AoT issues): node --version =
+
+

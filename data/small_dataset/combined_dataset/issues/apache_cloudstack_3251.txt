@@ -1,0 +1,25 @@
+[WIP DO NOT MERGE] Add local ISO upload via UI
+
+
+Description
+Problem: Users can register ISOs from URL but cannot upload local ISOs.
+Root cause: CloudStack provides browser-based upload support for volumes and templates, but ISOs are not supported.
+Solution:
+The existing browser-based upload from local functionality for templates and volumes (https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=39620237) is extended to support uploading local ISOs.
+
+Extend the UI: A new button is created under the ISOs view: 'Upload from Local'. A new dialog form is displayed in which the user must select the ISO to upload from its local file system.
+Extend the API: New 'GetUploadParamsForIso' API command is created to handle the ISO upload.
+
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+
+
+How Has This Been Tested?
+Templates tab -> ISOs -> Upload from local -> Select file on local file system

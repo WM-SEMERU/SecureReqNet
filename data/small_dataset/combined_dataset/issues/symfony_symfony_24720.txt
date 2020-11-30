@@ -1,0 +1,52 @@
+Improved the deprecation about logout_on_user_change
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+I've updated several Symfony apps to 3.4 beta and I'm always getting this annoying deprecation message:
+
+It's annoying because I've never configured this option in my security.yml, so it's strange to add logout_on_user_change: true to my firewalls in order to remove this deprecation. Could we avoid this deprecation when the option is not configured explicitly?

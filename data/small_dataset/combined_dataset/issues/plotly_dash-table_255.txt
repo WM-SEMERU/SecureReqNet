@@ -1,0 +1,44 @@
+`editable_name` showing controls but not changing column names
+
+
+Passing editable_name: True in the columns dict seems to show the pencils, clicking on the pencils also shows the prompt, but does not actually change the column name.
+I also tried passing a number for this parameter, and in this case no pencils appeared next to column names:
+
+My code for the above tables:
+import dash
+import pandas as pd
+import dash_html_components as html
+from dash_table import DataTable
+
+
+df = pd.DataFrame({
+    'one': [1, 2, 3],
+    'two': [2, 3, 4],
+    'three': [3, 4, 5]
+})
+
+app = dash.Dash(__name__)
+
+app.layout = html.Div([
+    DataTable(columns=[{'name': c, 'id': c, 'editable_name':True}
+                        for c in df.columns],
+              data=df.to_dict('rows')),
+
+    DataTable(columns=[{'name': c, 'id': c, 'editable_name': 2}
+                       for c in df.columns],
+              data=df.to_dict('rows'))
+])
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+
+
+Packages:
+dash==0.30.0
+dash-core-components==0.38.1
+dash-html-components==0.13.2
+dash-renderer==0.15.1
+dash-table==3.1.7
+
+I'm using a Mac and tried the above on Chrome, Safari, and Firefox.

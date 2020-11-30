@@ -1,0 +1,4 @@
+Fix invalid mirror mode
+
+
+Slipped through the cracks of the #444 overhaul. Also fixes #452 (hopefully before it makes it into a release)

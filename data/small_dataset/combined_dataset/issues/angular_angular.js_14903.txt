@@ -1,0 +1,7 @@
+fix($sanitize): blacklist the `usemap` attribute
+
+
+Backport of 234053f.
+BREAKING CHANGE:
+The $sanitize service will now remove instances of the usemap attribute from any elements passed to it.
+This attribute is used to reference another element by name or id. Since the name and id attributes are already blacklisted, a sanitized usemap attribute could only reference unsanitized content, which is a security risk.

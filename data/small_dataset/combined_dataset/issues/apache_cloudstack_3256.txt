@@ -1,0 +1,24 @@
+ui: show complete domain for accounts (#2994)
+
+
+Fixes #2994
+This PR allows showing complete domain, ie, domain path for accounts list view and account detail.
+Added a new key, domainpath, in AccountResponse for accounts API to facilitate this in UI.
+Description
+Types of changes
+
+ Breaking change (fix or feature that would cause existing functionality to change)
+ New feature (non-breaking change which adds functionality)
+ Bug fix (non-breaking change which fixes an issue)
+ Enhancement (improves an existing feature and functionality)
+ Cleanup (Code refactoring and cleanup, that may add test cases)
+
+Screenshots (if appropriate):
+Original behavior  in UI
+
+After changes,
+
+
+
+How Has This Been Tested?
+UI and cmk

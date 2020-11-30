@@ -1,0 +1,15 @@
+### Problem to solve
+
+Prevent any roles from seeing [trigger variables](https://docs.gitlab.com/ee/ci/triggers/#making-use-of-trigger-variables) due to potential security leaks
+
+### Further details
+
+If a job is [triggered](https://docs.gitlab.com/ee/ci/triggers/#triggering-a-pipeline) and has any [variables](https://docs.gitlab.com/ee/ci/triggers/#making-use-of-trigger-variables) associated to it, everyone who can view the build can view it. When discussing this in https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/21495#note_99395147 having some kind of permissions on it might be ideal. 
+
+### Proposal
+
+Only allow maintainers to see the trigger variables.
+
+### Links / references
+
+https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/21495#note_99395147

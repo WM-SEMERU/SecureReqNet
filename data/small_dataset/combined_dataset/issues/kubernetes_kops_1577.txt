@@ -1,0 +1,23 @@
+Securing default configuration of kops-provisioned clusters - IAM and api tokens
+
+
+Hi all,
+as me and my colleagues started to evaluate Kubernetes (with success, largely thanks to kops) we have found critical security issues related to default configuration of kops-provisioned clusters.
+
+Access to IAM role credentials (with broad permissions) available from every Pod, mentioned already in #379 #376 #528 #1100 #363
+API token mounted in every Pod (as far as I understand it gives ability to manage kubernetes from within every running Pod)
+
+Me and my team would like to address those issues, preferably in a way that could make it into kops. This is why I would like to ask for suggestion how you would like to get it solved. I understand that making kops-provisioned clusters secure enough to run untrusted code is a big task.
+My initial take on that
+
+Document current behavior. I believe it is crucial to make it clear to users and early adopters about current state and progress being made in that matter. I wish to start working on that once I get full understanding of current setup.
+Block access to IAM by default, at least from Pods run in 'default' namespace (or every namespace other than kube-system)
+Do not mount api token by default
+Further lower the amount of permissions that IAM roles have
+
+I'd like to get your input how we can achieve 2) and 3)
+Kube2iam seems to be the default go-to for people wishing to manage IAM roles for Pods. Could we install it by default?
+Or should we just block 169.254.169.254 by default? If so, how to achieve that in a configurable (ability to turn that off when editing cluster) and clean way? Could this be done by protokube itself ? Once I get directions from you I can start working on that.
+I'd also like to get better understanding of why kubernetes mounts default api token inside every Pod and how we can disable it.
+Regarding 4) - I believe we should start by scoping EC2 permissions to resources tagged with KubernetesCluster=$clustername , I'll play with it in the next few days.
+Looking forward for your input.

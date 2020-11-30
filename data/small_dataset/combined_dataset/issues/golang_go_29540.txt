@@ -1,0 +1,8 @@
+x/crypto/acme/autocert: Enable custom port / IP binding
+
+
+It is mandatory to be reachable on port 443 from the public internet for autocert to work but it is completely fine to run a service on a different port internally and use e. g. NAT on a router to fulfill this requirement.
+Additionally there are setups where I don't want to listen on all my local IP addresses.
+This can be implemented through a new function ListenerCustomAddress(address) that works like Listener() but accepts a custom address.
+PR: golang/crypto#69
+Gerrit: https://go-review.googlesource.com/c/crypto/+/155744

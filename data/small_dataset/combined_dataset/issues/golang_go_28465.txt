@@ -1,0 +1,10 @@
+crypto/cipher: move xorBytes function to internal
+
+
+Some packages need an efficient xor function bytes, for example:
+gogrep -x 'for $*_ { $m[i] = $k[i] ^ $l[i] }' std cmd
+src/crypto/rand/rand_unix.go:149:3: for i := 0; i < aes.BlockSize; i++ { r.dst[i] = r.time[i] ^ r.seed[i]; }
+src/crypto/rand/rand_unix.go:153:3: for i := 0; i < aes.BlockSize; i++ { r.seed[i] = r.time[i] ^ r.dst[i]; }
+
+And about 18 code pieces in golang.org/x/crypto https://github.com/golang/crypto/search?l=Go&q=xor
+If this CL( https://go-review.googlesource.com/c/go/+/125316 ) get merged in master we will get a SIMD xorBytes which will be a benefit  for all other package that use xor function and reduce redundancy.

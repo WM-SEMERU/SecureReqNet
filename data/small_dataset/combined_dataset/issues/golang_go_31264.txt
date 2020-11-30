@@ -1,0 +1,73 @@
+os/signal: test flaky on darwin-amd64
+
+
+The os/signal test seems to time out fairly frequently on the darwin-amd64-race builder.
+It's not obvious to me whether the test is deadlocked or just slow.
+Example: https://build.golang.org/log/7c20aa477d782f38c6184e7f8bce05c9648b57b3
+panic: test timed out after 3m0s
+
+goroutine 20 [running]:
+testing.(*M).startAlarm.func1()
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:1332 +0x11c
+created by time.goFunc
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/time/sleep.go:169 +0x52
+
+goroutine 1 [chan receive]:
+testing.(*T).Run(0xc0000c0000, 0x42154f9, 0x9, 0x421e888, 0x1)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:917 +0x68a
+testing.runTests.func1(0xc0000c0000)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:1157 +0xa7
+testing.tRunner(0xc0000c0000, 0xc000046db0)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:865 +0x163
+testing.runTests(0xc00000e060, 0x435ace0, 0xb, 0xb, 0x0)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:1155 +0x522
+testing.(*M).Run(0xc0000ba000, 0x0)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:1072 +0x2ea
+main.main()
+	_testmain.go:64 +0x21f
+
+goroutine 4 [syscall]:
+os/signal.signal_recv(0x4247580)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/runtime/sigqueue.go:139 +0x9f
+os/signal.loop()
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal_unix.go:23 +0x30
+created by os/signal.init.0
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal_unix.go:29 +0x4f
+
+goroutine 10 [runnable]:
+runtime.Gosched(...)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/runtime/proc.go:266
+os/signal.signalWaitUntilIdle()
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/runtime/sigqueue.go:172 +0x31
+os/signal.Stop(0xc00009c300)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal.go:196 +0x2f3
+runtime.Goexit()
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/runtime/panic.go:503 +0xec
+testing.(*common).FailNow(0xc0000c0300)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:609 +0x5b
+testing.(*common).Fatalf(0xc0000c0300, 0x4218523, 0x16, 0xc0000e6d18, 0x1, 0x1)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:672 +0x9f
+os/signal.waitSig(0xc0000c0300, 0xc00009c2a0, 0x4247580, 0x42436a8)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal_test.go:32 +0x309
+os/signal.testCancel(0xc0000c0300, 0xc00003b700)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal_test.go:133 +0x1f9
+os/signal.TestReset(0xc0000c0300)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal_test.go:187 +0x3e
+testing.tRunner(0xc0000c0300, 0x421e888)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:865 +0x163
+created by testing.(*T).Run
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/testing/testing.go:916 +0x652
+
+goroutine 8 [runnable]:
+runtime.Gosched(...)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/runtime/proc.go:266
+os/signal.signalWaitUntilIdle()
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/runtime/sigqueue.go:172 +0x31
+os/signal.Stop(0xc00009c180)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal.go:196 +0x2f3
+os/signal.TestStress.func1(0xc000022480, 0xc0000224e0)
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal_test.go:92 +0x194
+created by os/signal.TestStress
+	/var/folders/dx/k53rs1s93538b4x20g46cj_w0000gn/T/workdir/go/src/os/signal/signal_test.go:79 +0xe1
+FAIL	os/signal	180.028s
+

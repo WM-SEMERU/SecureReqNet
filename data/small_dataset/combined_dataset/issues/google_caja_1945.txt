@@ -1,0 +1,10 @@
+Firefox 34 CANT_GOPD_CALLER"
+
+
+Original issue 1947 created by james.keane@wishabi.com on 2014-12-11T21:38:09.000Z:
+What steps will reproduce the problem?
+1.
+2.
+3.
+What is the expected output? What do you see instead?
+Please use labels and text to provide additional information.

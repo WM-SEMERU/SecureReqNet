@@ -1,0 +1,14 @@
+### Description
+
+Provide a template for creating a security release issue in https://gitlab.com/gitlab-org/gitlab-ce to help establish the issue as a primary tool for communication.
+
+### Proposal
+
+Create template for Security Releases which included:
+
+ * Making it confidential
+ * Some default labels: ~security ~Release 
+ * A table to fill in for the release process roles
+ * Links to process docs https://gitlab.com/gitlab-org/release/docs
+
+### Links / references

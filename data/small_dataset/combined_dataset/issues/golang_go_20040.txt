@@ -1,0 +1,6 @@
+crypto/elliptic: carry bug in x86-64 P-256
+
+
+Cloudflare reported a carry bug in the P-256 implementation that they submitted for x86-64 in 7bacfc6. I can reproduce this via random testing against BoringSSL and, after applying the patch that they provided, can no longer do so, even after ~231 iterations.
+This issue is not obviously exploitable, although we cannot rule out the possibility of someone managing to squeeze something through this hole. (It would be a cool paper.) Thus this should be treated as something to fix, but not something on fire, based on what we currently know.
+Fix will be coming in just a second.

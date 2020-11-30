@@ -1,0 +1,5 @@
+Allow requiring client certificates for HTTP access
+
+
+Currently mutual TLS is only enforced for Nomad's RPC. Users interacting with Nomad's HTTP endpoint do not need to present a client certificate even when all TLS options are enabled on the agent.
+A new tls option should be added to allow requiring clients to present a certificate signed by the same CA when communicating with the HTTPS API.

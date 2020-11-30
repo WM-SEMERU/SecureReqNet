@@ -1,0 +1,7 @@
+Implement 1st party storage isolation
+
+
+Carried over from brave/browser-laptop#3826
+
+https://twitter.com/rlbarnes/status/773895944031076352, AKA > https://www.torproject.org/projects/torbrowser/design/#identifier-linkability
+

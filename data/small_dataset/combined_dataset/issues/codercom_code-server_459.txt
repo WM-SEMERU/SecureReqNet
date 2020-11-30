@@ -1,0 +1,5 @@
+Docker issue
+
+
+os Debian 9.0
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:345: starting container process caused "chdir to cwd (\"/home/coder/project\") set in config.json failed: permission denied": unknown.

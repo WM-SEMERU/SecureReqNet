@@ -1,0 +1,38 @@
+[Security] Allow run-time configuration of hash algo
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+New feature?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Required if we want run-time config with env vars. See #19681

@@ -1,0 +1,7 @@
+Provide an option to generate _app passwords_ which can be used to authenticate with GitLab in place of a user's real password.
+
+With the current password system, enabling 2FA means it is not possible to authenticate using systems that do not support 2FA. For example, users cannot log into GitLab Container Registry from a Docker client when 2FA is enabled, because the password is rejected. 
+
+It would be good to be able to create passwords specifically for different apps, and specify what they are allowed to access (e.g. per project, read/write access, container registry etc). Google has [something similar](https://support.google.com/accounts/answer/185833).
+
+This was previously mentioned in comments for !3787.

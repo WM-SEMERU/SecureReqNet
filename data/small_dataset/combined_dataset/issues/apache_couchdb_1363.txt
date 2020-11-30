@@ -1,0 +1,15 @@
+Credentials leaked in logfile when replication job crashes
+
+
+After a CRASH REPORT, the state of the gen_server couch_replicator_scheduler_job is dumped in the logfile at error level. This log line contains the credentials for the job in the URL.
+Here is a censored example.
+[error] 2018-05-29T12:45:00.976000Z couchdb@node1 <0.29397.581> -------- CRASH REPORT Process  (<0.29397.581>) with 2 neighbors exited with reason: changes_reader_died at gen_server:terminate/7(line:826) <= proc_lib:init_p_do_apply/3(line:240); initial_call: {couch_replicator_scheduler_job,init,['Argument__1']}, ancestors: [couch_replicator_scheduler_sup,couch_replicator_sup,...], messages: [], links: [<0.30307.432>,<0.13375.581>,<0.8145.604>,<0.13512.577>,<0.32578.349>,...], dictionary: [{task_status_props,[{changes_pending,null},{checkpoint_interval,...},...]},...], trap_exit: true, status: running, heap_size: 4185, stack_size: 27, reductions: 24764
+[error] 2018-05-29T12:45:00.976000Z couchdb@node1 <0.27201.432> -------- gen_server <0.27201.432> terminated with reason: changes_reader_died
+  last msg: {'EXIT',<0.29397.581>,changes_reader_died}
+     state: {state,<0.29397.581>,<0.16013.476>,20,{httpdb,"https://admin:REALPASSWORD@SERVER/db/",nil,[{"Accept","application/json"}
+,{"User-Agent","CouchDB-Replicator/2.1.0"}],30000,[{is_ssl,true},{socket_options,[{keepalive,true},{nodelay,false}]},{ssl_options,[{depth,3},{verify,verify_none}]}],10,250
+,<0.13264.515>,20,nil,undefined},{httpdb,"https://admin:REALPASSWORD@SERVER/db/",nil,[{"Accept","application/json"},{"User-Agent"
+,"CouchDB-Replicator/2.1.0"}],30000,[{is_ssl,true},{socket_options,[{keepalive,true},{nodelay,false}]},{ssl_options,[{depth,3},{verify,verify_none}]}],10,250,<0.6420.509>,
+20,nil,undefined},[],nil,nil,nil,[],nil,nil,{batch,[],0}}
+
+/cc @nickva

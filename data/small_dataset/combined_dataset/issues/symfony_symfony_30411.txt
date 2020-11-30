@@ -1,0 +1,15 @@
+[PhpUnitBridge] SYMFONY_DEPRECATIONS_HELPER env is empty in bootstrap
+
+
+Symfony version(s) affected: 4.2.3
+Description
+i run a bin/phpunit and see a deprecation message
+Remaining deprecation notices (12).
+i want to disable it and i edit .env.test
+SYMFONY_DEPRECATIONS_HELPER=disabled
+but the message is still appears.
+so, i dumped here
+https://github.com/symfony/phpunit-bridge/blob/master/bootstrap.php#L38
+and SYMFONY_DEPRECATIONS_HELPER return false.
+SYMFONY_DEPRECATIONS_HELPER  dont load frpm .env.test and phpunit.xml.dist
+possible solution is export variable before testing, but i think is not good, because SYMFONY_DEPRECATIONS_HELPER present in .env.test by default

@@ -1,0 +1,13 @@
+simple_form doesn't work with AdvancedUserInterface
+
+
+How to reproduce:
+
+Create a User class which implements AdvancedUserInterface
+Create a custom authenticator
+Set up a firewall to use simple_form with the authenticator you just created
+Try to login
+
+Google Chrome shows me with error message "Redirect Loop". However, if I change the User class to implement UserInterface, it works.
+You can clone this repo and replicate this bug.
+Login path: /login

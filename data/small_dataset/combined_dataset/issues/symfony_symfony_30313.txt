@@ -1,0 +1,52 @@
+Avoid mutating the Finder when building the iterator
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+When excluding dot files or vcs files (which is done by default), the Finder object was mutated each time searchInDirectory was called to register the extra exclusions. This leads to registering them multiple times when the method is called multiple times (which happens either because you have multiple directories in ->in() or because you call getIterator multiple times, for instance because of using hasResults or count).
+This mutation create bugs if the Finder object is reconfigured between the 2 calls to getIterator to disable some of these ignore rules, as they would already be registered in the other config properties. New tests have been added to reproduce these bugs and prevent regressions.
+This mutation is now avoided by using a local array for the final configuration, preserving the user configuration.

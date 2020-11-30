@@ -1,0 +1,21 @@
+2.1 beta2: Custom success handler throws an exception
+
+
+I have a custom authentication listener + provider with a custom success handler. when upgrading to 2.1 beta2 (on beta1 everything works good) I get an exception:
+RuntimeException: The definition "acme.security.authentication.listener.openid"  has a
+reference to an abstract definition "security.authentication.success_handler". Abstract
+definitions cannot be the target of references.
+
+I know the error is because of this commit but is it a bug or just wrong implementation by me? It seems that the default abstract handler is passed to the listener instead of my custom one.
+my security.yml:
+secured_area:
+    ...
+    openid:
+        check_path: /login/openid/auth
+        success_handler: acme.identity.authentication.handler
+        failure_handler: acme.identity.authentication.handler
+
+and the service definition:
+acme.identity.authentication.handler:
+    class: %acme.identity.authentication.handler.class%
+

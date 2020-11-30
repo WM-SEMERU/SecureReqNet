@@ -1,0 +1,9 @@
+'The following discussion from !23412 should be addressed:
+
+- [ ] check on production if we managed to migrate all records
+- [ ] check on production if we can safely remove columns
+- [ ] check in sentry if there are no exceptions related to new encryption mechanisms
+- [ ] check how often we had to use fallback-plaintext strategy
+- [ ] add plain-text columns to ignored columns
+- [ ] remove columns in a migration following our docs
+- [ ] done.

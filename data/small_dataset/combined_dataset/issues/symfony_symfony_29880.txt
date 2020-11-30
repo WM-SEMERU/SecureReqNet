@@ -1,0 +1,49 @@
+[TwigBridge] bump required Twig version
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.1
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+twigphp/Twig#2810
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+

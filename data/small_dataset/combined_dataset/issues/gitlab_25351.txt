@@ -1,0 +1,1 @@
+Similar to most other 2FA implementations I've seen, it should be possible to remember the device and not prompt for 2FA again each and every time. This hits me particularly hard as I'm signing in frequently due to #25350 - perhaps this won't really be an issue once that's solved. (Or perhaps the other way around.)

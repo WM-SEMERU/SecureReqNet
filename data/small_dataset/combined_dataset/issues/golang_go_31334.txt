@@ -1,0 +1,5 @@
+x/any: make the netrc parser importable
+
+
+There are two implementations of a netrc parser: one lives in src/cmd/go/internal/web2/web.go and the other one lives in x/tools/cmd/auth/netrcauth/netrcauth.go.
+Apart from the fact that these two implementations may differ in how they parse the spec this is a useful piece of functionality written by people with a high degree of trust and it would be nice if this library could be imported from somewhere.

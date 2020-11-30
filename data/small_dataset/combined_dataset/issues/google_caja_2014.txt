@@ -1,0 +1,23 @@
+Html.Exploit.CVE_2016_3198-1
+
+
+Yesterday i scaned whole bunch of archives (unpacked) for sec issues with clamav and guess what it found?
+Html.Exploit.CVE_2016_3198-1 FOUND:
+bower_components/google-caja/ses-single-frame.js
+infected package's bower.json shows:
+{
+  "description": "Google Caja HTML Sanitizer",
+  "homepage": "https://github.com/minrk/google-caja-bower",
+  "ignore": [
+    "git-svn-revision",
+    "tasks.py"
+  ],
+  "keywords": [
+    "sanitization"
+  ],
+  "license": "Apache 2.0",
+  "name": "google-caja",
+  "version": "6005.0.0"
+}
+
+false positive?

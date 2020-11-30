@@ -1,0 +1,13 @@
+inspector: introduce inspector.SyncSession
+
+
+This patch introduces a synchronous inspector session that
+dispatches the message and returns the result synchronously
+to the user.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+

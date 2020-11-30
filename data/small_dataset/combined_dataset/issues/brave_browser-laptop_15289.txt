@@ -1,0 +1,34 @@
+Error when connecting to a VM SPICE remote console
+
+
+Description
+SPICE is an open source solution for remote access to virtual machines. It is an alternative for VNC. It is used by my company as the default remote console for our OpenStack deployments. When I try to access any SPICE console through Brave browser I get an 'Unexpected mismatch protocol' error. I can connect using Google Chrome.
+Steps to Reproduce
+
+Create a VM with a SPICE remote console.
+Access the SPICE console through the browser.
+Get an 'Unexpected mismatch protocol' error.
+
+Actual result:
+'Unexpected mismatch protocol' error.
+
+
+Expected result:
+Access to the console.
+
+Reproduces how often:
+Always.
+Brave Version
+Brave: 0.24.0
+V8: 6.9.427.23
+rev: f657f15
+Muon: 8.1.6
+OS Release: 4.17.13-041713-generic
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+Additional Information

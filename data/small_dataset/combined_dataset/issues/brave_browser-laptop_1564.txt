@@ -1,0 +1,9 @@
+Add NoScript feature
+
+
+This adds a noscript feature which can be turned off globally, for the current site temporarily, or for the current site permanently.
+I chose to put the noscript site options in a popup on the right side of the urlbar, which is what chrome does. Ideally this would be merged with the UI for per-site bravery settings when that exists. CC @bradleyrichter for design thoughts.
+Fix #231
+
+^ noscript popup appears when clicking on the red ban icon. ideally it would be something similar to the noscript logo, which is what noscript users are used to clicking on.
+

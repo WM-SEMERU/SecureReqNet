@@ -1,0 +1,4 @@
+Need to support running as non-root
+
+
+Ideally with the ability to bind to low ports, use the full nice range, etc.

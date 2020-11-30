@@ -1,0 +1,8 @@
+Feature request: sandbox
+
+
+Request to add a sandbox feature to Brave
+I would like to request adding a sandbox or immutability to Brave. There's a few types of sandboxes out there like Sandboxie, virustotal.com, reverse.it, cuckoo sandbox, windows enterprise sandbox, or just a Virtual machine.
+Brave core dev tools sandbox question raised but not for production browser
+issues/911
+issues/1086

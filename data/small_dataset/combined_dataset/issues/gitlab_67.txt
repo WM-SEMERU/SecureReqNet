@@ -1,0 +1,9 @@
+If gitlab is run under a RAILS_RELATIVE_URL_ROOT, relative links in README.md are broken as they forgot to include the RAILS_RELATIVE_ROOT. i.e. any commit will points to
+
+```
+http(s)+://hostname/namespace/project/wikis/path_to_file
+```
+instead of 
+```
+http(s)+://hostname/relative_root/namespace/project/path_to_file
+```

@@ -1,0 +1,15 @@
+proposal: crypto: add function to compare PrivateKey and PublicKey
+
+
+What version of Go are you using (go version)?
+1.9
+Does this issue reproduce with the latest release?
+Yes
+What operating system and processor architecture are you using (go env)?
+Any
+What did you do?
+https://play.golang.org/p/DAZM324jkY
+What did you expect to see?
+This is a request for adding a Cmp() function to the PublicKey / PrivateKey types in the crypto library. Currently it is non-trivial to check if two public keys or two private keys are the same and requires checking the algorithms definition and manually comparing each operator. It would be much similar to have some Cmp() functions to simplify this.
+What did you see instead?
+This is a feature request - but not to be too cheeky - a lack of a simple way to compare two crypto keys.

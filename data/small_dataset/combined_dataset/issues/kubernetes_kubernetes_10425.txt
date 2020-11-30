@@ -1,0 +1,15 @@
+Unable to revoke docker credentials
+
+
+Steps to repro:
+
+put a .dockercfg in /root/.dockercfg with credentials for a private repository
+run a pod that uses an image from that repository.  it will succeed.
+stop the pod
+delete the .dockercfg
+restart the kubelet
+remove the image with docker rmi -f [privateimagename]
+docker logout
+verify that you cannot manually pull the private image with a node-local docker pull.
+run the pod again.   magically, the image is still pulled. 😕
+

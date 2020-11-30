@@ -1,0 +1,4 @@
+Hello everyone,
+
+I have noticed the buttons closing and reopen doesn't create a comment, if there is a comment written down in the comment field.
+The content is lost after clicking.

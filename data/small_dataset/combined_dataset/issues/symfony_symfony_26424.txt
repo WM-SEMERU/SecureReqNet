@@ -1,0 +1,43 @@
+[SecurityBundle] Make extra character non mandatory in regex
+
+
+The extra character was introduced in 5f9471e, and breaks the testsuite
+in native php 7.2.
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+

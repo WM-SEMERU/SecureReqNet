@@ -1,0 +1,5 @@
+How to use NotCompromisedPasswordValidator in tests/dev?
+
+
+Asked on https://symfony.com/blog/new-in-symfony-4-3-compromised-password-validator
+What's the recommended way to test/dev with the validator added on entities via annotations?

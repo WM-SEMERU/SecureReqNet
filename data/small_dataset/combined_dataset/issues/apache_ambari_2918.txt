@@ -1,0 +1,9 @@
+[AMBARI-25233] : Improve console message for DB consistency check fai…
+
+
+…lure
+What changes were proposed in this pull request?
+Improvement in console message for Database consistency check failure with exception message
+How was this patch tested?
+This patch was tested manually
+Backport to branch-2.7 from here

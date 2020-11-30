@@ -1,0 +1,59 @@
+Using AMQP auto-setup in all cases, not just in debug
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes and no
+
+
+New feature?
+no
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no->
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+Related to #29476
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+Currently AMQP does auto-setup of queues/exchanges in dev-mode only. That's a problem for 2 reasons:
+
+
+Behavior in prod is drastically different... and actually... there's not currently a way I know of (easily) to set things up on prod.
+
+
+One of the properties of AMQP is that you typically DO want things to be set up at runtime, as you need them - you usually do want auto-setup.
+
+
+This changes the behavior to auto-setup true always.

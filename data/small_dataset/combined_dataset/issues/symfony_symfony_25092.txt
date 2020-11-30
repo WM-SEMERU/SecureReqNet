@@ -1,0 +1,52 @@
+[Security] #25091 add target user to SwitchUserListener
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#25091
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+This patch provides the target user to the SwitchUserListener's
+accessDecisionManager->decide() call as the $object parameter to
+give any registered voters extra information.

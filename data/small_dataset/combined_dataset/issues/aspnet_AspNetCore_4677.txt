@@ -1,0 +1,8 @@
+OIDC MW: add HandleRemoteSignOutAsync event
+
+
+Should emit cache control headers:
+Cache-Control: no-cache, no-store
+Pragma: no-cache
+
+https://openid.net/specs/openid-connect-frontchannel-1_0-01.html#RPLogout

@@ -1,0 +1,4 @@
+Private key export?
+
+
+Is there an easy way to export private keys that have been generated with end-to-end? The export functionality in settings.html will only export public keys.

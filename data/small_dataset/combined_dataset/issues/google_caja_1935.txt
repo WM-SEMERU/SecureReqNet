@@ -1,0 +1,6 @@
+onkeypress not working
+
+
+Original issue 1937 created by jsc802 on 2014-09-10T02:08:27.000Z:
+is there any possibility of allowing keypress or keydown to work with caja?
+I'm making an app with apps script HTMLService and want to be able to have a keyboard shortcut

@@ -1,0 +1,18 @@
+SmartProxy E2E test is failing
+
+
+Describe the bug
+The SmartProxy E2E test is failing with the following error:
+Microsoft.Health.Fhir.Tests.E2E.SmartProxy.SmartProxyTests.GivenPatientIdAndSmartAppUrl_WhenLaunchingApp_LaunchSequenceAndSignIn [FAIL]
+Failed  Microsoft.Health.Fhir.Tests.E2E.SmartProxy.SmartProxyTests.GivenPatientIdAndSmartAppUrl_WhenLaunchingApp_LaunchSequenceAndSignIn
+Error Message:
+OpenQA.Selenium.WebDriverException : unknown error: Element <input type="submit" id="idSIButton9" class="btn btn-block btn-primary" data-bind="
+To Reproduce
+Steps to reproduce the behavior:
+
+Just running the test against a test environment is enough to trigger the failure.
+
+Expected behavior
+Test should pass
+Actual behavior
+Test fails

@@ -1,0 +1,50 @@
+[Form] Added ResetInterface to CachingFactoryDecorator
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29259
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+
+I don't know if this should be considered a feature and target master, but I tend to see it as a bug fix.

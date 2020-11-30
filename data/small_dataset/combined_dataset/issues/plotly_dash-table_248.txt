@@ -1,0 +1,6 @@
+allow html rendering in cells
+
+
+I am desperately trying to add a line break () in a cell to display two strings one below the other in a cell.
+I have read about the issue #222 where chriddyp adds some perspective to the issue (different renderer, editing cells, etc).
+However, for my basic use case, is there some temporary "hack" allowing to add a  (and other simple html rendering like bold, ...) ? could I do it through css ? I also tried with a Div(["text1", Br(), "text2"]) but without success.

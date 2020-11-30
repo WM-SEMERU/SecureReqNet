@@ -1,0 +1,7 @@
+POSIX'ify, ZSH'ify & BASH'ify PowerShell?
+
+
+Make PowerShell not only POSIX compliant, but also ZSH & BASH compatible.
+I don't want to start any kind of negative feedback loop here, but I'm thinking about a way for folks like me to give PowerShell a chance.  I've used it off and on for years and each time I've used it I have always spit and cursed under my breath about how on earth could MS be pushing backwards vs forging ahead with a proven technology that sys admins and developers already know and love around the globe.  I'm impressed that Microsoft is taking such steps as open sourcing this and I think this kind of an attempt at a visionary movement forward is both honorable and praiseworthy.
+In an effort to unify the shell world, I think PowerShell could get really creative by providing a ZSH and BASH compatibility layer.  Frankly I'd probably use PowerShell if I could do this as I'd feel good about it being supported by a serious, large and long term investor like Microsoft - even though it would be on macOS for my OS flavor.
+So to this end, could you please implement a POSIX compliant layer in conjunction with ZSH and BASH compatibility that would allow us to bring our decades of accrued shell scripts and configurations over to PowerShell?

@@ -1,0 +1,5 @@
+The pagination on load functionality for the commit page of projects is broken. Error log throws the following:
+
+Uncaught TypeError: undefined is not a function application-fbdc1e4460d67e3a522e6376bee697cf.js:33
+
+I've already recreated any assets but it didn't work at all.

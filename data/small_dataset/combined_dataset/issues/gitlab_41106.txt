@@ -1,0 +1,30 @@
+'This report write-up left a lot to be desired, but here's the content:
+
+-----
+
+Title:         Persistent XSS via label dropdown
+
+Scope:         None
+
+Weakness:      Cross-site Scripting (XSS) - Generic
+
+Severity:      Medium
+
+Link:          https://hackerone.com/reports/294099
+
+Date:          2017-11-30 21:42:42 +0000
+
+By:            @c05m0ch405
+
+Details:
+gitlab 9.4.5 add label in the issue:
+
+`&lt;script&gt;alert("xss");&lt;&#x2F;script&gt;`
+
+## Impact
+
+get session, cookies ... and more using little fantasy!
+
+-----
+
+I've verified the finding against 10.2.4. If you create a label with that name and with that description the script will be executed when the label dropdown is opened.

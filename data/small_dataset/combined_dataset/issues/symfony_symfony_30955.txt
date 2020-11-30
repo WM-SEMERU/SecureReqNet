@@ -1,0 +1,51 @@
+[Security] Add authentication success sensitive event to authentication provider manager (rebase #26050)
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#26050 #18494
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11334
+
+
+
+Rebased #26050 at EUFOSSA
+Thanks @robfrawley for the excellent work!

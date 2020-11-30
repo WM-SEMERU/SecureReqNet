@@ -1,0 +1,23 @@
+Add support for directions annotations
+
+
+optional parameter when making a directions request and can provide a response in the routeleg called annotation. Can look something like this:
+{
+    "annotation": {
+        "duration": [
+            10.6,
+            7.1,
+            4.8,
+            12.8,
+            9.3,
+            17.3,
+            11,
+            15.6
+        ]
+    },
+    "duration": 88.4,
+    "distance": 830.4,
+    "steps": [ ],
+    "summary": ""
+}```
+

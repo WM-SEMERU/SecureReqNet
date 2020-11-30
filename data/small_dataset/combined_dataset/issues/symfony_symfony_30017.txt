@@ -1,0 +1,33 @@
+Possible BC break introduce since v3.4.20
+
+
+Symfony version(s) affected: v3.4.20 and v3.4.21
+Description
+I'm not sure if it's a BC break in Symfony or a bad practice in Doctrine ORM (doctrine/orm:v2.5.14).
+Since the commit 0d0be12, if a service is attached to the lifecycle events of doctrine, the service is not called. Instead, doctrine try to implement a new instance of the service (without the arguments).
+How to reproduce
+Configure a service that is attached to a doctrine event:
+services:
+  app.my_service:
+    class: App\Listener\MyService
+    arguments: ['foo', 'bar']
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: App\Entity\MyEntity, event: preUpdate }
+The service:
+namespace App\Listener;
+
+class MyService
+{
+  public function __construct($foo, $bar) { }
+  //...
+}
+Trigger the event and an error occur:
+Type error: Too few arguments to function App\Listener\MyServicer::__construct(), 0 passed in /.../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/DefaultEntityListenerResolver.php on line 74 and exactly 2 expected
+
+Additional context
+By digging inside, I found that inside the ListenersInvoker of Doctrine, a resolver has the responsibility to resolve the class and method attached to an event into an instance.
+Before v3.4.20, the resolver was an instance of ContainerAwareEntityListenerResolver which is capable of translating the class in the corresponding service.
+Since v3.4.20, it's a DefaultEntityResolverListener which only create a new instance of the class without arguments.
+It's a problem of timing.
+The resolver is not directly injected on the constructor of the ListenersInvoker. Instead, the ListenersInvoker receive the doctrine.orm.configuration from which it retrieve the resolver inside the constructor. But at this state, the  doctrine.orm.configuration is not yet configured.
+The doctrine.orm.configuration service is configured by some setters. The fact is that since the v3.4.20, the setters are called after ListenersInvoker::construct(). So the ListenersInvoker don't have the good resolver.

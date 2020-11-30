@@ -1,0 +1,21 @@
+as mentioned in omnibus-gitlab#3788
+
+### Summary
+
+The "Results of GitLab application Check" previously requested with the bug template (accidentally removed?)'s _sanitized_ `gitlab-rake gitlab:check SANITIZE=true` command did/does not sanitize the LDAP users out, potentialy leaking private information.
+
+### Steps to reproduce
+
+`gitlab-rake gitlab:check SANITIZE=true` on an ldap-enabled gitlab server
+
+### What is the current *bug* behavior?
+
+ldap users leaked in the output
+
+### What is the expected *correct* behavior?
+
+ldap users redacted out
+
+### Relevant logs
+
+see https://gitlab.com/gitlab-org/omnibus-gitlab/issues/3788

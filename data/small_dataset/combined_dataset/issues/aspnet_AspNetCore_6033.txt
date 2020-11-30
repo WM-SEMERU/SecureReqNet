@@ -1,0 +1,101 @@
+Revisit TryAdd* vs Add* decision
+
+
+Hi,
+I want to add 2 JWT bearer authentication schemes to my authentication pipeline, one using azure B2C generated tokens and one using locally generated tokens.
+If I add the 'b2cBearer' scheme BEFORE I add the 'localBearer' scheme I CAN use PostConfigure("jwtB2cBearer") to configure the JwtBearerOptions for the 'b2cBearer' scheme. The correct JwtBearerOptions instance is returned.
+
+If I add the 'b2cBearer' scheme AFTER I add the 'localBearer' scheme I CANNOT use PostConfigure("jwtB2cBearer") to configure the JwtBearerOptions for the 'b2cBearer' scheme. An empty JwtBearerOptions instance is returned.
+
+Why??
+Can someone explain in detail what is going on? Is this related to IOC container behavior? One singleton being replaced by another?
+Is there another way to get the JwtBearerOptions instance that is created within the 'AddAzureADB2CBearer' function call? Why isn't it simply a property member of 'AzureADB2COptions'??!
+My sample code:
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+
+namespace WebApplication1
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            var builder = services.AddAuthentication();
+
+            builder.AddAzureADB2CBearer("b2cBearer", "jwtB2cBearer", options =>
+            {
+                Configuration.Bind("AzureAdB2C", options);
+            });
+
+            builder.AddJwtBearer("localBearer", options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("MySymmetricSecurityKey")),
+
+                    ValidateIssuer = true,
+                    ValidIssuer ="MyIssuer",
+
+                    ValidateAudience = true,
+                    ValidAudience = "MyAudience",
+
+                    ValidateLifetime = true,
+
+                    ClockSkew = TimeSpan.Zero
+                };
+
+                options.SecurityTokenValidators.Clear();
+                options.SecurityTokenValidators.Add(new SecurityTokenHandlerLocal());
+            });
+
+            services.PostConfigure<JwtBearerOptions>("jwtB2cBearer", options =>
+            {
+                options.SecurityTokenValidators.Clear();
+                options.SecurityTokenValidators.Add(new SecurityTokenHandlerB2C());
+            });
+
+            services.AddAuthorization(options =>
+            {
+                var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder("localBearer", "b2cBearer");
+                defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+                options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseMvc();
+        }
+    }
+}
+

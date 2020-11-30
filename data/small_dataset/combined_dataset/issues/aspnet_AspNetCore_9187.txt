@@ -1,0 +1,4 @@
+Use WORKITEM_ROOT instead of CORRELATIONPAYLOAD for helix workloads
+
+
+Better way of fixing #9186, but not certain it will work yet. CORRELATION_PAYLOAD is readonly on these new helix payloads.

@@ -1,0 +1,26 @@
+Adding permission for can_only_access_owned_queries
+
+
+SUMMARY
+Adding an optional restriction on query search to only allow users to access their own queries. Right now query search lets anyone access any queries. That would be the default for all roles, but if a deployment wanted to change to restrict users to only search their queries they could do that with the can_only_access_owned_queries permission.
+With can_only_access_owned_queries in OBJECT_SPEC_PERMISSIONS, this permission is not added to any role by default.
+BEFORE/AFTER SCREENSHOTS OR ANIMATED GIF
+N/A
+TEST PLAN
+Run superset init with new can_only_access_owned_queries default off in OBJECT_SPEC_PERMISSIONS
+Logged in as user1 and ran query
+Logged in as user2 and confirmed that I could see all queries queries in /superset/sqllab#search and /queryview/list/
+Moved perm can_only_access_owned_queries to ADMIN_ONLY_PERMISSIONS
+Run superset init
+Confirmed that as user2 I could see only my queries queries in /superset/sqllab#search and /queryview/list/
+ADDITIONAL INFORMATION
+[ ] Has associated issue:
+[ ] Changes UI
+[ ] Requires DB Migration. Confirm DB Migration upgrade and downgrade tested.
+[ ] Introduces new feature or API
+[ ] Removes existing feature or API
+[ ] Fixes bug
+[ ] Refactors code
+[x] Adds test(s)
+
+REVIEWERS

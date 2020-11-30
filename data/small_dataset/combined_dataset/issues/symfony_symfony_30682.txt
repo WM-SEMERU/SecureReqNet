@@ -1,0 +1,23 @@
+[HttpFoundation] Session::getBag($name) does not match Storage\SessionStorageInterface::getBag($name)
+
+
+Symfony version(s) affected: 3.4.0 and higher
+Description
+There is getBag method at Symfony\Component\HttpFoundation\Session which calls $this->storage->getBag($name)->getBag().
+As defined in constructor $this->storage is instance of Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface which contains method getBag(string $name). As defined in comment it is expected that SessionStorageInterface::getBag(string $name) should return instance of Symfony\Component\HttpFoundation\Session\SessionBagInterface.
+The problem is that SessionBagInterface does not contain getBag method so it's impossible to expect that $this->storage->getBag($name) will return object containing getBag() method.
+How to reproduce
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
+
+$bag = new AtrributeBag();
+$bag->setName('foo');
+
+$storage = new MockArraySessionStorage();
+$storage->registerBag($bag);
+
+$session = new Session($storage);
+$session->getBag('foo'); // this will effect with "Error: Call to undefined method Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag::getBag()
+Possible Solution
+I'm not sure, probably removing second getBag call from Session::getBag($name).

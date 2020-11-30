@@ -1,0 +1,4 @@
+In erpnext, check if all whitelisted methods have data permissions explicitly checked
+
+
+for example acounts.utils.get_balance_on

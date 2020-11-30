@@ -1,0 +1,5 @@
+make it possible to unmount secrets
+
+
+Many applications have a setup phase where they need credentials and don't afterwards. It would be great not to retain the secrets in case of an application vulnerability.
+It might also be nice to do that automatically (e.g. after a readiness probe succeeds). I think it ought to be an attribute of the container's volume mount (and not the volume).

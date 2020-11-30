@@ -1,0 +1,6 @@
+[Security] Don't redirect when the AuthenticationException is thrown
+
+
+Hi,
+when the AuthenticationException or AccessDeniedException are thrown, the ExceptionListener catches it and immediately redirects to the login page.
+Sometimes this is not wanted (for example in ajax request to a secured page), but I couldn't find a way to disable it, so it would be nice to have one :)

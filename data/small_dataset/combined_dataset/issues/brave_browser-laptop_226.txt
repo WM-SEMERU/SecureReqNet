@@ -1,0 +1,4 @@
+Implement safebrowsing
+
+
+https://www.google.com/transparencyreport/safebrowsing/

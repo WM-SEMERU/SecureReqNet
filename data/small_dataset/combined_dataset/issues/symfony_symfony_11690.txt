@@ -1,0 +1,100 @@
+[Security] Split of the SecurityContext
+
+
+As a reminder, this PR is not ready to be merged. It's merely a proof of concept in which I'm trying to fix a circular dependency with the SecurityContext and the entity manager for Symfony 2.6 and/or 3.0
+PR Info
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+yes
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+yes
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#4188
+
+
+
+TODO List
+
+ Split tests for SecurityContext/AuthorizationChecker/TokenStorage
+ Fix tests for security usages (only the component has been successfully tested at this point)
+ Submit changes to the documentation
+ Document the BC breaks
+
+Main Problem for my use case
+I've build a bunch of event listeners on doctrine.event_manager. They include a Blamable, Revision and Mutation annotation on entities. It works by creating a custom event listener on preFlush which then throws an entityChanged event (also a doctrine hooked up event).
+To make it configurable and flexible, we have written a provider for Blamable to provide the username/user-id and a date time (updated-by, updated-at). In order to get that information, we need to look into the SecurityContext to get the current user and ask the user id (custom user implementation).
+However, injecting the SecurityContext - or services depending on the SecurityContext - creates a circular reference and causes the container to blurt out an Exception. This is because the SecurityContext uses a UserProvider (indirectly) which has a dependency on doctrine (em, connection). Because it needs doctrine, it's impossible for my listener to inject the SecurityContext as it becomes this:
+
+SecurityContext requires AuthenticationProvider
+(Simple)AuthenticationProvider requires UserProvider
+UserProvider requires EntityManager
+EntityManager requires insert connection name here
+My custom Listener calls addEvent (or something similar) in doctrine which causes a dependency from the EM/Connection to my Listener
+My Listener requires SecurityContext... which finishes the circle.
+
+I've googled for this problem and it wasn't hard to find similar issues, it seems to be a quite common issue regarding the SecurityContext and the EntityManager
+
+http://stackoverflow.com/questions/7561013/injecting-securitycontext-into-a-listener-prepersist-or-preupdate-in-symfony2-to
+http://stackoverflow.com/questions/8708822/circular-reference-when-injecting-security-context-into-entity-listener-class
+http://stackoverflow.com/questions/17020733/how-to-get-userid-from-eventlistener-which-are-called-from-ajax
+You can find more simply by googling.
+
+The main solution seems to be to lazy load using an additional bundle or as recommended in the above topics, inject the container. Neither of them is really a solution I'm happy with. I don't want my code to know about the Container(Interface), nor do I want to use a another bundle just to get around an issue that a lot of people seem to have with the SecurityContext and EntityManager.
+Possible Solutions
+I've been thinking about several solutions:
+
+I could write a service that listens to kernel.request and when possible injects the username/user-id into my provider which then can provide it to my listener
+I could use the Container directly
+I can use a lazy service with symfony/proxy-manager-bridge
+I can store the user-id in my request
+
+However, those solutions are just not it for me. Depending on an event like kernel.request is a bad practice in my opinion, I shouldn't depend on what listeners might be registered. Using the container directly inverses the dependency which is also wrong in my opinion. Using a lazy service will only work around the problem and storing the user-id in my request means I might not always have it (say commands).
+Long story short, not what I'm looking for.
+Splitting the SecurityContext
+So, I ended up at the SecurityContext. Digging back to the real problem, I started asking myself the following questions: why do I have that dependency? Why do I need to have the EntityManager when the only thing I want, is the currently logged in User object? (which is not related to a database). I came to the conclusion that the SecurityContext gives me too many dependencies in order to retrieve a simple Token/User object, which is not really what I want. Most of the times I need the SecurityContext to get the token/user and not for isGranted. Personally I use @Security and access_control for that.
+I came to the conclusion that storing the Token within the SecurityContext wasn't what I found useful due to the dependencies of the SecurityContext. I figured I'd want a storage class with a dependency on the SessionInterface which could autonomously retrieve and store the TokenInterface (@session in this case). It would also be handling the storage within the session using get/setToken.
+I have proposed this change and had a small discussion with @wouterj on IRC about my proposal to take out the Token (can be read here http://pastebin.com/8kSvVZtj). Based on his feedback, I have split the isGranted to the AuthorizationChecker(Interface), which now has those dependencies. I have also moved the set/getToken to a TokenStorage.
+tldr;
+
+The getToken en setToken are moved to the TokenStorage(Interface).
+If this idea is feasible, I will also try to get the SecurityContext to actually store and retrieve it from the session instead of ContextListener::onKernelResponse. This will just do $context->setToken($token); which will handle this storage itself. I still chase this idea but I will create a new PR for this in the future if I find time.
+isGranted is moved to AuthorizationChecker(Interface) so that you don't have a bunch of dependencies you don't need when retrieving the Token/User.
+
+Draft
+This PR is just a draft. I'm looking for feedback if this proposal is A) desired and B) in-line with the developer's ideas regarding the SecurityContext.
+Changed Components/bundles
+[FrameworkBundle] Updated GlobalVariables, added test for GlobalVariables
+[SecurityBundle] Updated service definitions
+[Security Component] Deprecated SecurityContext(Interface), added AuthorizationChecker(Interface) and TokenStorage(Interface)

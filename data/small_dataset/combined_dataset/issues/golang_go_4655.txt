@@ -1,0 +1,8 @@
+x/tools/cmd/godoc: switch to use html/template
+
+
+Godoc should use the auto-escaping htm/template package instead of text/template, for
+security reasons.
+
+With text/template, it is hard to write UI code that doesn't introduce content injection
+vulnerabilities.

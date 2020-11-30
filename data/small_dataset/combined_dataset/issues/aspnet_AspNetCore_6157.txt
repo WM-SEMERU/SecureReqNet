@@ -1,0 +1,9 @@
+Add SaveTokens property to AzureADB2COptions
+
+
+I want to get the id_token of the user who signed in with AzureADB2C.
+However, because the SaveTokens property does not exist in the AzureADB2COptions
+used in extension method: Microsoft.AspNetCore.Authentication.AddAzureADB2C().
+id_token can not be acquired with HttpContext.GetTokenAsync ("id_token").
+Can implement the SaveTokens property like OpenIdConnectOptions?
+I think that it is possible, If modify the Microsoft.AspNetCore.Authentication.AzureADB2C.UI.OpenIdConnectOptionsConfiguration.Configure().

@@ -1,0 +1,4 @@
+Use PasswordProvider for basic HTTP escalator
+
+
+PR #6303 neglected to add PasswordProvider to the Escalator implementation as well.

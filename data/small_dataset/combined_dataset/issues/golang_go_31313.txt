@@ -1,0 +1,63 @@
+cmd/go: go list std returns no packages
+
+
+This was initially reported as dvyukov/go-fuzz#234. I've migrated it here as we investigate further, since this appears to be the correct home for it.
+@saschagrunert reports that:
+
+My distribution links the go sources into the go lib sources.
+
+And provides this command and results:
+$ go list -e -json -compiled=false -test=false -export=false -deps=false -find=true -- std
+warning: ignoring symlink /usr/lib64/go/1.11/src/archive
+warning: ignoring symlink /usr/lib64/go/1.11/src/bufio
+warning: ignoring symlink /usr/lib64/go/1.11/src/builtin
+warning: ignoring symlink /usr/lib64/go/1.11/src/bytes
+warning: ignoring symlink /usr/lib64/go/1.11/src/compress
+warning: ignoring symlink /usr/lib64/go/1.11/src/container
+warning: ignoring symlink /usr/lib64/go/1.11/src/context
+warning: ignoring symlink /usr/lib64/go/1.11/src/crypto
+warning: ignoring symlink /usr/lib64/go/1.11/src/database
+warning: ignoring symlink /usr/lib64/go/1.11/src/debug
+warning: ignoring symlink /usr/lib64/go/1.11/src/encoding
+warning: ignoring symlink /usr/lib64/go/1.11/src/errors
+warning: ignoring symlink /usr/lib64/go/1.11/src/expvar
+warning: ignoring symlink /usr/lib64/go/1.11/src/flag
+warning: ignoring symlink /usr/lib64/go/1.11/src/fmt
+warning: ignoring symlink /usr/lib64/go/1.11/src/go
+warning: ignoring symlink /usr/lib64/go/1.11/src/hash
+warning: ignoring symlink /usr/lib64/go/1.11/src/html
+warning: ignoring symlink /usr/lib64/go/1.11/src/image
+warning: ignoring symlink /usr/lib64/go/1.11/src/index
+warning: ignoring symlink /usr/lib64/go/1.11/src/internal
+warning: ignoring symlink /usr/lib64/go/1.11/src/io
+warning: ignoring symlink /usr/lib64/go/1.11/src/log
+warning: ignoring symlink /usr/lib64/go/1.11/src/math
+warning: ignoring symlink /usr/lib64/go/1.11/src/mime
+warning: ignoring symlink /usr/lib64/go/1.11/src/net
+warning: ignoring symlink /usr/lib64/go/1.11/src/os
+warning: ignoring symlink /usr/lib64/go/1.11/src/path
+warning: ignoring symlink /usr/lib64/go/1.11/src/plugin
+warning: ignoring symlink /usr/lib64/go/1.11/src/reflect
+warning: ignoring symlink /usr/lib64/go/1.11/src/regexp
+warning: ignoring symlink /usr/lib64/go/1.11/src/runtime
+warning: ignoring symlink /usr/lib64/go/1.11/src/sort
+warning: ignoring symlink /usr/lib64/go/1.11/src/strconv
+warning: ignoring symlink /usr/lib64/go/1.11/src/strings
+warning: ignoring symlink /usr/lib64/go/1.11/src/sync
+warning: ignoring symlink /usr/lib64/go/1.11/src/syscall
+warning: ignoring symlink /usr/lib64/go/1.11/src/testing
+warning: ignoring symlink /usr/lib64/go/1.11/src/text
+warning: ignoring symlink /usr/lib64/go/1.11/src/time
+warning: ignoring symlink /usr/lib64/go/1.11/src/unicode
+warning: ignoring symlink /usr/lib64/go/1.11/src/unsafe
+warning: ignoring symlink /usr/lib64/go/1.11/src/vendor
+go: warning: "std" matched no packages
+
+This breaks go/packages.
+@saschagrunert I have a couple of questions:
+
+What distribution is it? Are you using it in any unusual way? (I'm trying to scope how widespread this issue may be.)
+You reported using Go 1.12.1, but those symlinks all say go/1.11. Any idea why there is this disparity? Are the Go 1.12.1 std sources present, and if so, at what path? (And what does which go report?
+Are the symlinks created by you or by your distribution? IIRC, the go tool has long ignored symlinks.
+
+Thanks for your help tracking this down.

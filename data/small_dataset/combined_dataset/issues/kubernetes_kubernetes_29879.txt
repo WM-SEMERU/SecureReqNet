@@ -1,0 +1,10 @@
+Update the AppArmor design proposal
+
+
+3 modifications to the original AppArmor design proposal:
+
+Remove the pod-level AppArmor profile specification, since it was unnecessary complexity. I think the typical multi-container case is a main app, some side-cars (e.g. log helpers), and maybe some init containers. All of those containers are likely to have very different permissions needs, so I do not see benefit to the pod-level profile. If there is sufficient demand (i.e. user feedback) for this feature we can add it back.
+Added a proposal for the beta (and GA) API. Beginning the discussion of this API now will smooth the transition from alpha, and guide the implementation of the internal API.
+[EDIT] The profile deployment pod will poll the source directories for changes. This change is motivated by the fact that DaemonSets must run with RestartAlways.
+
+/cc @bgrant0607 @erictune @pmorie @pweil-

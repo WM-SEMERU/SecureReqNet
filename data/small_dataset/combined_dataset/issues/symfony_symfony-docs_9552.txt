@@ -1,0 +1,5 @@
+[Security] add tip about using custom functions
+
+
+Since 4.1 its possible to use custom functions inside security allow_if expressions.
+See symfony/symfony#26660

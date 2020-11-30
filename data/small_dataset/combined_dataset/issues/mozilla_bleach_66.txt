@@ -1,0 +1,4 @@
+add tests for XSS examples in OWASP testing guide
+
+
+Adding all the tests from http://ha.ckers.org/xss.html would be a good idea

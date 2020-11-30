@@ -1,0 +1,42 @@
+UserProvider not called after initial login when multiple user providers
+
+
+Symfony version(s) affected: 4.2.1
+Description
+The api_provider is being used to refresh the user for the main firewall instead of the api_provider.
+Is it me, or a bug in Symfony?
+How to reproduce
+Security.yml:
+providers:
+    api_provider:
+        id: App\Security\APIProvider
+    user_provider:
+        id: App\Security\UserProvider
+firewalls:
+    dev:
+        # assets and profiler
+        pattern: ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+
+    api:
+        host: ^(api\.mydomain\.com|crm-api\.localhost|dev-api\.mydomain\.com)$
+        stateless: true
+        provider: api_provider
+        guard:
+            authenticators:
+                - App\Security\APIAuthenticator
+
+    #the main firewall
+    main:
+        #guard will run the form authenticator on each request
+        guard:
+            authenticators:
+                - App\Security\FormAuthenticator
+        provider: user_provider
+        switch_user: { role: ROLE_IMPERSONATE_USER, parameter: _switch_user }
+        anonymous: ~
+
+        #the path /logout should logout our user and send them to /login
+        logout:
+            path:   /logout
+            target: /login

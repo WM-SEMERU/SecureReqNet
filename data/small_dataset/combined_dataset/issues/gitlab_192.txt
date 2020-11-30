@@ -1,0 +1,13 @@
+Sorry for the confusing title, didn't know how to put it. I found an interesting bug. Tested on GitLab Cloud.
+
+Steps to reproduce:
+
+1. Create a branch named after this regex: `^[a-z]?\d{6,}*` (start with zero or one length string, followed by at least 6 digits, then anything)
+2. Push and create an MR.
+3. Give title ***same*** as branch name (case sensitive).
+4. Go to MR index page.
+5. Click on MR link.
+
+You should be directed to the MR, but you go to that commit of the branch instead. I created a test repo: https://gitlab.com/axil/dude/merge_requests
+
+MRs 4-8 are buggy. Notice that 7 and 8 although different names, they point to the same commit.

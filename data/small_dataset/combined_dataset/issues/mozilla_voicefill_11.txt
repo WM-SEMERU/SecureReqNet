@@ -1,0 +1,4 @@
+Disable add-on functionality on non-ssl sites
+
+
+We don't want to run code or display the microphone on sites that aren't served over SSL

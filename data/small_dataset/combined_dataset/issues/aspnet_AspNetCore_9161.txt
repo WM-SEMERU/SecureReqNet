@@ -1,0 +1,7 @@
+AspNetCore rdlc
+
+
+When i am trying with expression in .rdlc file i am getting exception:
+AspNetCore.ReportingServices.ReportProcessing.ReportProcessingException: 'An unexpected error occurred while compiling expressions. Native compiler return value: ‘[BC30390] 'AspNetCore.ReportingServices.RdlExpressions.ExpressionHostObjectModel.DataRegionExprHost(Of TMemberType, TCellType).m_memberTreeHostsRemotable' n├úo est├í acess├¡vel neste contexto porque ele ├® 'Friend'.’.'
+in localreport.Execute()
+Please help me!

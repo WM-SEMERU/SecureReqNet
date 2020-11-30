@@ -1,0 +1,22 @@
+OnSignedIn event regardless of the authentication used
+
+
+Is there a way to register a delegate to be called on successful login regardless of the authentication method used (Identity, AzureAD, etc), and not on every request, similar to this one?
+Right now I'm using ClaimsTransformationMiddleware, but it's called on every request.
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddSingleton<IClaimsTransformation, EveryoneGroupTransformer>();
+    ...
+}
+...
+
+public class EveryoneGroupTransformer : IClaimsTransformation
+{
+    public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
+    {
+        Console.WriteLine(principal.Identity.Name);
+        return Task.FromResult(principal);
+    }
+}
+

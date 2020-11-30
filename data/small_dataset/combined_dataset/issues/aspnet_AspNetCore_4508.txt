@@ -1,0 +1,16 @@
+Angular 4 with .Net core 2.1 role based authorization issue
+
+
+I am using Angular 4 with dot net core 2.1(project skeleton is the one which gets created by default in visual studio 2017). I am doing claim based policy validation as below in my startup.cs :
+services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ReaderRole", policy => policy.RequireClaim("role", "READER"));
+            }); 
+and along with this I am decorating my API controller action with the attribute as shown below:
+[Authorize(Policy = "ReaderRole")]
+[HttpGet("{id}")]
+public async Task<JsonResult> Get(string id)
+{
+}
+Now authorization is working as expected and in case if user is not authorized controller is throwing below error but the response is in HTTP which browser(chrome) is blocking and I am not able to proceed further. My angular is not receiving the repose of the api call(.Net api) and it breaks in between.
+Mixed Content: The page at 'https://myURL/home' was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 'http://myURL/Account/AccessDenied?returnUrl=%2Fapi%2FAccount%2Frandomemail@xxx.com'. This request has been blocked; the content must be served over HTTPS.

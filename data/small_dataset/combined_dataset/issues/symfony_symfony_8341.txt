@@ -1,0 +1,9 @@
+missing security translations
+
+
+Exceptions in symfony/vendor/symfony/symfony/src/Symfony/Component/Security/Core/User/UserChecker.php are not translated. (and possibly more Exceptions)
+this problem was already mentioned in #1835 and #837 but those tickets are closed and the problem still exist.
+what makes this confusing is, that some exceptions are translated and some not.
+f.e. class LockedException returns "Account is locked" and this is translated in security.{local}.xlf
+this can be translated by creating translating file manually, but why should we do this?
+any harcoded text in the framework should be translated, or refactored so it is stored in one place and can be easily overwritten and translated.

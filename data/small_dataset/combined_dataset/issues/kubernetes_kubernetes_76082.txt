@@ -1,0 +1,5 @@
+Add default timeout for httpClient
+
+
+/king bug
+We had better add a timeout for httpClient.

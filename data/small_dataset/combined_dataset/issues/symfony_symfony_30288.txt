@@ -1,0 +1,5 @@
+workflow_all_transitions() twig function to list all transition not just enabled
+
+
+I want to show all transitions available for an object, but some of them make disabled and not clickable. workflow_transitions() returns the list of only available transitions. I don't want to hardcode the list of any transitions nor in my twig templates nor in forms, iterate over the list taken from workflow definition is just fine. Is it possible to add workflow_all_transitions() to achieve this purpose?
+Thanks.

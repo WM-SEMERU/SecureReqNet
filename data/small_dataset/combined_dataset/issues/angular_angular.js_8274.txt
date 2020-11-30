@@ -1,0 +1,14 @@
+imgSrcSanitizationWhitelist seems too broad
+
+
+in
+https://github.com/angular/angular.js/blob/master/src/ng/sanitizeUri.js
+imgSrcSanitizationWhitelist = /^\s*(https?|ftp|file|blob):|data:image\//;
+
+probably should be:
+imgSrcSanitizationWhitelist = /^\s*(https?|ftp|file|blob):|^\s*data:image\//;
+
+otherwise:
+javascript:alert(1)//data:image/
+
+passes as valid.

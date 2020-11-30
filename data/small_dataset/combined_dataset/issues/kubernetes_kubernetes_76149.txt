@@ -1,0 +1,11 @@
+Make pin-dependency.sh work with things other than docker
+
+
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+Removes hard-coded check in pin-dependency.sh, fixes it to work with modules that don't have go files in their root
+Does this PR introduce a user-facing change?:
+NONE
+
+/cc @sttts

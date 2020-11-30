@@ -1,0 +1,38 @@
+CVE-2017-1000056: PodSecurityPolicy admission plugin authorizes incorrectly
+
+
+A PodSecurityPolicy admission plugin vulnerability allows users to make use of any PodSecurityPolicy object, even ones they are not authorized to use.
+CVE: CVE-2017-1000056
+
+Fixed in v1.5.5 in 7fef0a4
+Fixed in release-1.5 branch in #43491
+Fixed in master in #43489
+
+Who is affected?
+Only Kubernetes 1.5.0-1.5.4 installations that do all of the following:
+
+Enable the PodSecurityPolicy API (which is not enabled by default):
+--runtime-config=extensions/v1beta1/podsecuritypolicy=true
+Enable the PodSecurityPolicy admission plugin (which is not enabled by default):
+--admission-control=...,PodSecurityPolicy,...
+Use authorization to limit users' ability to use specific PodSecurityPolicy objects
+
+kubeadm and GKE do not allow enabling PodSecurityPolicy in 1.5, so are not affected by this vulnerability.
+kube-up.sh and kops do not enable PodSecurityPolicy by default, so are not affected by this vulnerability. A modified kube-up.sh or kops deployment could have enabled it.
+What is the impact?
+A user that is authorized to create pods can make use of any existing PodSecurityPolicy, even ones they are not authorized to use.
+How can I mitigate this prior to installing 1.5.5?
+
+
+Export existing PodSecurityPolicy objects:
+kubectl get podsecuritypolicies -o yaml > psp.yaml
+
+
+Review and delete any PodSecurityPolicy objects you do not want all pod-creating users to be able to use (NOTE: Privileged users that were making use of those policies will also lose access to those policies). For example:
+kubectl delete podsecuritypolicies/my-privileged-policy
+
+
+After upgrading to 1.5.5, re-create the exported PodSecurityPolicy objects:
+kubectl create -f psp.yaml
+
+

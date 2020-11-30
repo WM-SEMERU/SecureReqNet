@@ -1,0 +1,23 @@
+Directions Refresh new implementation
+
+
+This PR creates the infrastructure to allow updating routes with updated annotations via the directions-refresh endpoint (This endpoint is currently only on staging). Included in this PR:
+
+
+A directions request can contain a new boolean parameter enable_refresh. If this parameter is set to true, the route will be cached and will be refreshable via the directions-refresh endpoint.
+
+
+The directions-refresh request needs to include the route_id, route_index, leg_index, access_token, and whatever annotations needed.
+
+
+The directions-refresh response is basically a barebones DirectionsRoute, which only includes a list of barebones RouteLegs, which only include the requested LegAnnotations.
+
+
+Todo:
+
+ Add enable_refresh option to directions API
+ Create DirectionsRefresh service module
+ Create sample test
+ Create unit test
+ Add javadoc
+

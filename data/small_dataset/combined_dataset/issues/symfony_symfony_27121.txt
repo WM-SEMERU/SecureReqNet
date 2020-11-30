@@ -1,0 +1,58 @@
+[Security] reusing AuthorizationChecker in AccessListener
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+Fixed tickets
+#21571
+
+
+
+While investigating why AuthenticationEvents::AUTHENTICATION_SUCCESS is not dispatched, noticed similarity between AccessListener and AuthorizationChecker and the only real difference is alwaysAuthenticate flag.
+Case 1:
+When UsernamePasswordToken is serialized it will be serialized with state of authenticated,
+so when application will load token from session AccessListener won't call authenticate because authenticated=true, even if alwaysAuthenticate=true
+Case 2:
+User A has roles foo, bar and admin, User A is signed-in into application and token is persisted, later another User B with role admin, decided to restrict role admin for User A, so User A won't lose it's privileges until session is expired or logout, because token is persisted with roles and authenticated=true and AccessListener does not call authenticate even if alwaysAuthenticate=true
+TODO
+
+ - reuse AuthorizationChecker in AccessListener
+ - adjust unit tests
+ - add deprecation notices
+ - update CHANGELOG and UPGRADE*
+

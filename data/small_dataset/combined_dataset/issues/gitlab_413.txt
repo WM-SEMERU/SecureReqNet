@@ -1,0 +1,5 @@
+I have installed GitLab and with version 7.0 a lot of warnings appear after evry ruby command:
+
+`Instance method "lock!" is already defined in ActiveRecord::Base, use generic helper instead or set StateMachine::Machine.ignore_method_conflicts = true.`
+
+This is really annoying because I run a backup script under Ubuntu 14.04 which generates an error mail every execution of the backup command.

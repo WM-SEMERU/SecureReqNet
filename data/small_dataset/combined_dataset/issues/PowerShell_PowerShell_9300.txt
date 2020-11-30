@@ -1,0 +1,39 @@
+Question: not getting expected results for get-formatdata
+
+
+This is a followup to issue #8063 which appears closed but which did not fix the originally reported problem.
+Steps to reproduce
+Hi Steve,
+I have been anxiously awaiting this fix to test out the issues we discussed last year.
+Unfortunately the problems do not appear to be fixed and things appear to be seriously broken still to the point that the results are unusable.
+Run these commands
+pwsh -noprofile
+Get-FormatData -PowerShellVersion 6.2 -TypeName System.IO.DirectoryInfo | Export-FormatData -LiteralPath DirectoryInfo.ps1xml
+Get-FormatData -PowerShellVersion 6.2 -TypeName System.IO.FileInfo      | Export-FormatData -LiteralPath FileInfo.ps1xml
+If you compare DirectoryInfo.ps1xml and FileInfo.ps1xml you will find the are exactly the same, however, the output for a directory item versus a file item should not be the same as a directory does not contain a length.
+Ignoring that issue, the results returned are missing lots of XML code that was previously in FileSystem.format.ps1xml.
+I won't detail them all here as you can compare the results produced of Get-FormatData with the old FileSystem.format.ps1xml file to see them all, however, I will point out a few.
+FileSystem.format.ps1xml created a SelectionSet named FileSystemTypes and then used that and a CustomControlName FileSystemTypes-GroupingFormat for the view definitions. Those are all missing from the "Get-FormatData" results for System.IO.DirectoryInfo / System.IO.FileInfo.
+Ignore those issues, I attempted to merge my changes into the results returned from Get-FormatData and I found that my changes were not displaying so I did this simple test.
+pwsh -noprofile
+Get-FormatData -PowerShellVersion 6.2 -TypeName System.IO.DirectoryInfo | Export-FormatData -LiteralPath DirectoryInfo.ps1xml
+Edit the DirectoryInfo.ps1xml file and make the following change:
+Look for <Label>LastWriteTime</Label> and change it to <Label>XXXXWriteTime</Label>
+
+Now run
+Update-FormatData -PrependPath .\DirectoryInfo.ps1xml
+
+Now run Get-ChildItem and you will see that the label still says LastWriteTime instead of XXXXWriteTime
+Now run this to get what the updated formatting info looks like
+Get-FormatData -PowerShellVersion 6.2 -TypeName System.IO.DirectoryInfo | Export-FormatData -LiteralPath DirectoryInfo2.ps1xml
+
+You will find that it does show the change, however. there is another section after it that still has the label as "LastWriteTime".
+I believe all of these issues are because Get-FormatData is not returning the full and correct format data for these types.
+If I run "Update-FormatData -Prepend My,FileSystem.format.ps1" which uses the modified version of the old FileSystem.format.ps1xml file that used to be included in PowerShell, then everything works correctly and it has my changes.
+So we are back to the original problem.
+There needs to be a way for me to obtain the format data being used (either via a file like it previously did or with Get-FormatData returning the correct formatting that is really being used).
+Since PowerShell is no longer including the *.format.ps1xml files and Get-FormatData is broken and does not return the correct format data I have no way to determine what changes were made in new versions of PowerShell so that I can integrate them into my modified version.
+I hope that this can be made a priority and get fixed soon.
+Holler if you want any more details.
+Thanks!
+Joe

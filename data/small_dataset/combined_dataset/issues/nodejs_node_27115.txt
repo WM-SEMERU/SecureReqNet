@@ -1,0 +1,5 @@
+Nominating Christian Clauss @cclauss to be a Collaborator
+
+
+Hello, friends! I'd like to nominate @cclauss to be a Collaborator. They have worked a lot on our Python code to get everything ready for Python 3.
+PRs & Issues across the nodejs org: https://github.com/search?q=org%3Anodejs+author%3Acclauss&type=Issues

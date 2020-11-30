@@ -1,0 +1,49 @@
+NCC Group Security Advisory  
+https://www.nccgroup.trust
+
+Risk: High
+
+## Summary
+
+A recent security release of GitLab enabled Rails session cookie authentication for the GitLab API.  Because the API was not initially designed for session-based authentication, it does not include cross-site request forgery (CSRF) protections.
+
+With the addition of session-based authentication, the GitLab API is now vulnerable to CSRF attacks.
+
+## Location
+
+All state-changing GitLab API endpoints.
+
+## Impact
+
+An attacker can cause a targeted user to perform API actions chosen by the attacker.  For example, if an administrator visits an attacker controlled web page, the attacker can create an admin account on the administrators GitLab instance.
+
+## Details
+
+This issue has been manually tested on multiple endpoints.  One example endpoint is the user creation endpoint.
+
+This example form will create a new admin account and can be submitted automatically by an attacker when a GitLab admin visits their site.
+
+```html
+<form action="https://gitlab.example.com/api/v3/users" method="post">
+  <input type="text" name="name" value="test user" />
+  <input type="text" name="email" value="user@domain.invalid" />
+  <input type="text" name="username" value="testuser" />
+  <input type="text" name="password" />
+  <input type="hidden" name="admin" value="true" />
+  <input type="submit" />
+</form>
+```
+
+Note that there is no CSRF protection.
+
+This vulnerability has been identified in the current version of GitLab (version 8.11.7) and is expected to affect versions 8.10.10 and 8.9.10 as well.
+
+## Recommendation
+
+In the immediate term, disable access to state-changing API endpoints via session-based authentication.  In addition, review audit logs to identify potential exploitation attempts.
+
+In the long term, require CSRF protection for API endpoints similar to the CSRF protections provided by Rails.
+
+## About NCC Group
+
+NCC Group is a global expert in cyber security and risk mitigation, working with businesses to protect their brand, value and reputation against the ever-evolving threat landscape. Our Security Consulting services leverage our extensive knowledge of current security vulnerabilities, penetration testing techniques and software development best practices to enable organizations to secure their applications against ever-present threats. At NCC Group we can boast unrivaled talent and recognized world-class security expertise. Bringing together best in class security consultancies iSEC Partners, Intrepidus Group, Matasano Security, NCC Group and NGS we have created one of the largest, most respected security consultancies in the world.

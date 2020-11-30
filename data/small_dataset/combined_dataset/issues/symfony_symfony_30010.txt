@@ -1,0 +1,41 @@
+Twig path function fails for internationalized routes
+
+
+Symfony version(s) affected: 4.2.2
+Description
+The Twig path function fails for internationalized routes  when rendering a template on NotFoundHttpException.
+How to reproduce
+1/3: Have an internationalized route (routes.yaml):
+mypage:
+    path:
+        en: /en/english
+        de: /de/german
+    controller: App\Controller\SimplePageController::page
+2/3: Have an EventListener that renders a 404 template:
+class ExceptionListener {
+
+	private $twig;
+
+	public function __construct( \Twig_Environment $twig ) {
+		$this->twig = $twig;
+	}
+
+	public function onKernelException( GetResponseForExceptionEvent $event ) {
+		if ( $event->getException() instanceof NotFoundHttpException ) {
+			$response = new Response(
+				$this->twig->render( 'errors/404.html.twig' ),
+				404
+			);
+
+			$event->setResponse( $response );
+		}
+	}
+}
+3/3: Call the path function with the name of the internationalized route in the template:
+{{ path('mypage') }}
+
+The path function works fine for routes that do not use the i18n feature like this one:
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+I did some digging though the Symfony code though did not find the issue. Might be related to #27872

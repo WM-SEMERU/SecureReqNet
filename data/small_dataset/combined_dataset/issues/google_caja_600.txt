@@ -1,0 +1,15 @@
+Static cajoler rewrites "name" attribute, html sanitizer does not
+
+
+Original issue 600 created by collin.jackson on 2008-06-13T17:26:42.000Z:
+When an element is created with innerHTML, its name property is not
+rewritten the way that the it is when the static cajoler is used.
+Example:
+<div id="foo"></div>
+<script>
+document.getElementById("foo").innerHTML = "<form name='body'></form>";
+</script>
+What is the expected output?
+The form's name is suffixed with the module ID.
+What do you see instead?
+document.body is overwritten.

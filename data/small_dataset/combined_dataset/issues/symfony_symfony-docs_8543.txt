@@ -1,0 +1,6 @@
+Made a Twig code example more robust by checking the existence of variables
+
+
+
+No description provided.
+

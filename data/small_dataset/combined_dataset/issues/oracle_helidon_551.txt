@@ -1,0 +1,20 @@
+Support for named routing in Health, Metrics etc.
+
+
+We should support named routings in MP extensions such as Metrics and Healthchecks
+In case a named socket is configured, we should provide the possibility to assign MP extensions to run on such a socket
+Example config:
+metrics:
+  socket: "admin"
+health:
+  socket: "admin"
+
+server:
+  sockets...
+
+If the "admin" socket is configured, both metrics and health would be exposed only on that socket using the named routing feature.
+Environment Details
+
+Helidon Version: 1.0.2
+Helidon MP
+

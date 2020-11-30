@@ -1,0 +1,41 @@
+[SecurityBundle] Use RequestStack instead of full Container in LogoutUrlHelper
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+kinda
+
+
+New feature?
+no
+
+
+BC breaks?
+kinda(?)
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#10249 (this PR is an alternative approach)
+
+
+License
+MIT
+
+
+

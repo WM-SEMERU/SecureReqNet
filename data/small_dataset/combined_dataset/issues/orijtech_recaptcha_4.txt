@@ -1,0 +1,13 @@
+internals: send body as postform instead of querystring
+
+
+Fixes #3.
+Send the body as a post form so make a url.Values
+from all the secrets to send, then make a request
+whose body is "application/x-www-form-urlencoded".
+Yesterday's solution didn't settle right with me
+and after reading
+https://www.eff.org/deeplinks/2017/03/five-creepy-things-your-isp-could-do-if-congress-repeals-fccs-privacy-protections
+that drove me to fix this in class.
+Now the body will be sent in the body and secrets won't be inspected
+when encrypted.

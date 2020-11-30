@@ -1,0 +1,11 @@
+Razor pages in a component should support @Namespace
+
+
+Is your feature request related to a problem? Please describe.
+I don't want generated razor.g.cs files to create a namespace that is dependent upon the directory structure containing the .razor page.
+Describe the solution you'd like
+I believe that an @namespace directive in a rzor page should override the generated namespace. Currently adding "@namespace xyzzy" is ignored.
+Describe alternatives you've considered
+n/a
+Additional context
+VS2019/DNC 3.0.0 Preview 3

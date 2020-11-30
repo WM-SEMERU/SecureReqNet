@@ -1,0 +1,50 @@
+Fixing bad return on getter
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+none
+
+
+License
+MIT
+
+
+Doc PR
+not needed
+
+
+
+My bad - this method is only to make the Symfony Serializer happy (not used in our code), so I missed it. Test added to be sure.

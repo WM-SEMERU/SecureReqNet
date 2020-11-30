@@ -1,0 +1,29 @@
+Fix typo in description
+
+
+
+
+
+Q
+A
+
+
+
+
+Doc fix?
+yes
+
+
+New docs?
+no
+
+
+Applies to
+2.7
+
+
+Fixed tickets
+
+
+
+

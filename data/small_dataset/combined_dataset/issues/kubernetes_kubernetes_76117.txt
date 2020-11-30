@@ -1,0 +1,14 @@
+Fix some golint failures of e2e_kubeadm/bootstrap_signer.go e2e_kubeadm/framework.go
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Fix some golint failures of e2e_kubeadm/bootstrap_signer.go e2e_kubeadm/framework.go
+Which issue(s) this PR fixes:
+Ref #68026
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+NONE
+
+/priority important-soon

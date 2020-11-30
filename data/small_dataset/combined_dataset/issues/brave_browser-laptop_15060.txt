@@ -1,0 +1,70 @@
+CAPTCHA targets should always have some spacing between them
+
+
+Test Plan
+
+Ensure that the triangles have some spacing between them and are not touching when the CAPTCHA is generated after clicking on the Claim my free tokens button under about:preferences#payments.
+
+Original Issue
+Description
+CAPTCHA targets should always have some spacing between them
+Actual result:
+
+Expected result:
+Should not overlap or be next to each other
+Reproduces how often:
+Can't put a number. Keep dropping on wrong target and hope you get this screen
+Brave Version
+
+
+
+Brave
+0.23.102
+
+
+
+
+V8
+6.8.275.24
+
+
+rev
+43eb667
+
+
+Muon
+8.0.8
+
+
+OS Release
+10.0.17134
+
+
+Update Channel
+Release
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Microsoft Windows
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Reproducible on current live release:
+N/A
+Additional Information

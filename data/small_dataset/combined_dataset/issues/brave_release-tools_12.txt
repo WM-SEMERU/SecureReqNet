@@ -1,0 +1,4 @@
+github shows security issue with lodash
+
+
+https://github.com/brave/release-tools/network/alerts

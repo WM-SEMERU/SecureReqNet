@@ -1,0 +1,50 @@
+[SecurityBundle] Make the default value of check_path option the same as login_path
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#27602
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This PR simplifies the form_login config so when developers build a traditional login form, they don't have to learn or know about the check_path option.

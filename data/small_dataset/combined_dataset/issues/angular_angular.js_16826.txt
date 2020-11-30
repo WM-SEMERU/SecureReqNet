@@ -1,0 +1,20 @@
+ng-required not working with simple boolean in 1.7.6 (works in 1.7.5)
+
+
+I'm submitting a ...
+
+ bug report
+ feature request
+ other 
+
+Current behavior:
+ng-required="!foo" still marks the field required if foo===true but ng-required="{false: 'true'}[foo]" works as expected.
+Expected / new behavior:
+Minimal reproduction of the problem with instructions:
+see above, it's pretty simple
+AngularJS version: 1.x.y
+version 1.7.6 - works fine in 1.7.5
+Browser: [all | Chrome XX | Firefox XX | Edge XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView | Opera XX ]
+all browsers
+Anything else:
+I guess I might explain why I am even using it this way.  a bunch of fields are created by an ng-repeat and I don't want the last field requied so I was using ng-required="!$last" which worked in 1.7.5 but is now broken in 1.7.6 and I tried a bunch of stuff and narrowed it down to it just not liking anything with the !

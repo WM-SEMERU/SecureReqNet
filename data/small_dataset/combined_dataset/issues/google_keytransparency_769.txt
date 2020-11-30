@@ -1,0 +1,13 @@
+Protos: Move backpointer to Entry
+
+
+First step of clarifying what to store in leafs. See  #758 (comment) and related to  #387
+message Entry {
+  // commitment is a cryptographic commitment to arbitrary data.
+  bytes commitment = 1;
+  // authorized_keys is the set of keys allowed to sign updates for this entry.
+  repeated PublicKey authorized_keys = 2;
+  // previous contains the backpointer to the prev. leaf (sha256)
+  bytes previous = 3;
+}
+Clients need it to verify the history of changes as presented by servers (and signed by monitors); Entry is the thing clients see and receive from the server.

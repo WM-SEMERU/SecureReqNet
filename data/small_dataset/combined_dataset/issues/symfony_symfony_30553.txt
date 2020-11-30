@@ -1,0 +1,59 @@
+[HttpClient] Add a mock client
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+
+
+
+License
+MIT
+
+
+Doc PR
+TODO
+
+
+
+Add a new MockClient usable for test purpose:
+/** @var ResponseInterface $response */
+$response = $this->createMock(ResponseInterface::class);
+$client = new MockClient();
+
+// Add one or more predefined responses
+$client->addResponse($response);
+
+$client->request('GET', '/whatever', ['base_uri' => 'http://example.org']);
+WDYT?

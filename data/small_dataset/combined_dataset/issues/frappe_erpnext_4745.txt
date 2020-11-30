@@ -1,0 +1,8 @@
+Critical - Sales invoice notification and not permitted popup error after setting "Read Permission" for Account User
+
+
+Hello Sirs; we have a small issue; we want to prevent cashiers from viewing sales invoices when they click the Sales Invoice link above; this is for security. Under Permissions; we have unchecked "Read" for the Account user role and yes it works; they can no longer view sales invoice list but there is a problem now; the POS module keeps randomly popping up "Not Permitted" and "Notifications for sales Invoice not permitted"; its random and erratic; closing the pop up doesnt stop the sale; but scanning or searching or starting a new sale could keep these pop ups coming on and on. I think once this permission is unchecked; the Account user role should only get this "not permitted" notification when trying to access the sales invoice list not during the sale. We would appreciate getting some information on how to remove this from the POS module code.
+
+
+
+

@@ -1,0 +1,21 @@
+Update to go1.11.4
+
+
+The go team has released 1.11.3 with three security fixes.
+From their e-mail announcement:
+cmd/go: remote command execution during "go get -u"
+The issue is CVE-2018-16873 and Go issue golang.org/issue/29230. See the Go issue for details.
+Thanks to Etienne Stalmans from the Heroku platform security team for discovering and reporting this issue.
+
+cmd/go: directory traversal in "go get" via curly braces in import paths
+The issue is CVE-2018-16874 and Go issue golang.org/issue/29231. See the Go issue for details.
+Thanks to ztz of Tencent Security Platform for discovering and reporting this issue.
+
+crypto/x509: CPU denial of service in chain validation
+The issue is CVE-2018-16875 and Go issue golang.org/issue/29233. See the Go issue for details.
+Thanks to Netflix for discovering and reporting this issue.
+
+We should kick off upgrades of both the kubernetes build system, and our CI, as soon as possible.
+@jayconrod: Do you have an ETA for the rules_go bump that will contain 1.11.3 toolchain support?
+
+cc: @ixdy @kubernetes/sig-testing @kubernetes/sig-release @kubernetes/product-security-team

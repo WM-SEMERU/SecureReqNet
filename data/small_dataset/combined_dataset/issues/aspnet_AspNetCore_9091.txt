@@ -1,0 +1,4 @@
+Disable template test
+
+
+This test is constantly failing on all os's on all prs. I'm not sure how it was merged broken...

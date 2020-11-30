@@ -1,0 +1,51 @@
+[BrowserKit] Fixed BC-break introduced by rename of Client to Browser
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#31039
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Since #30541 the inheritance hierarchy of \Symfony\Component\BrowserKit\Client has changed. Notably the test.client no longer is an instance of \Symfony\Component\BrowserKit\Client.
+This PR uses class_alias to fix the class hierarchy similarly as has been done in Twig. In this case I copied the approach of Twig_TokenParser_AutoEscape and \Twig\TokenParser\AutoEscapeTokenParser

@@ -1,0 +1,11 @@
+[#3944][dashboard]Dashboard authentication support for JWT token
+
+
+Signed-off-by: Yuvaraj Loganathan uvaraj6@gmail.com
+<--
+Contribution Checklist
+
+Added support for jwt token authentication.
+Feature is documented
+Added logging
+

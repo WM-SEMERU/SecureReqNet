@@ -1,0 +1,4 @@
+Encrypting Dropbox backup - Suggestion
+
+
+I would suggest adding encryption feature to encrypt the backup files before uploading them to Dropbox as this would provide extra security, the encryption key should be assigned by the user.

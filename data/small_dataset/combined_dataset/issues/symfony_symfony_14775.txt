@@ -1,0 +1,24 @@
+Exception on ObjectIdentity's constructor with $identifier == 0
+
+
+Hi, working with ACL, calling:
+ObjectIdentity::fromDomainObject($obj);
+with $obj's id set to 0, I get:
+InvalidDomainObjectException: $identifier cannot be empty
+
+This exception comes from the ObjectIdentity's construction where empty($identifier) is TRUE when $identifier is 0:
+final class ObjectIdentity implements ObjectIdentityInterface
+{
+    ...
+    public function __construct($identifier, $type)
+    {
+        if (empty($identifier)) {
+            throw new \InvalidArgumentException('$identifier cannot be empty.');
+        }
+        ...
+    }
+    ...
+}
+If $obj's id != 0 all works just fine.
+Am I missing something obvious? Perhaps it should be !isset($identifier)?
+I'm using Symfony v2.6.5 and PHP v5.6.2, thanks.

@@ -1,0 +1,10 @@
+[Security][Guard] Deprecated GuardAuthenticatorInterface
+
+
+As of 3.4
+
+GuardAuthenticatorInterface is deprecated and will be removed in 4.0, references should be updated to use AuthenticatorInterface instead (starting from 3.4);
+AuthenticatorInterface introduces a supports() method used to skip authenticators which are not  able to process authentication from the given request, any authenticator must implement it
+GuardAuthenticatorInterface::getCredentials() returning null causes the authenticator to be skipped. This behavior has been removed in the new AuthenticatorInterface, returning null from AuthenticatorInterface::getCredentials() throws an \UnexpectedValueException exception (false should be returned from supports() instead)
+
+Code PR: symfony/symfony#16835

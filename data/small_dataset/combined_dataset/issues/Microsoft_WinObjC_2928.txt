@@ -1,0 +1,159 @@
+Error Compiling Storyboard - MSB3073
+
+
+I am getting the following error when I try to compile a project:
+1>Unable to find class mapping for required object 
+1>...nuget\packages\winobjc.language\0.2.180220\build\msvc\sbresources.targets(190,5): error MSB3073: The command "...nuget\packages\winobjc.language\0.2.180220\build\msvc..\bin\Xib2Nib.exe" "....\vfl-ipad-01\Base.lproj\Main.storyboard" "Debug\Base.lproj\Main.storyboardc"" exited with code -1.
+Here is the contents of the storyboard file (I am unable to upload attachments at the moment):
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cP4-OA-ESO">
+    <device id="ipad12_9rounded" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--home-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewControllerMain" customModule="vfl_ipad_01" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ly-SI-Egz">
+                                <rect key="frame" x="185" y="311" width="473" height="317"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="vfl-button.png"/>
+                                <connections>
+                                    <action selector="goToVfl:" destination="BYZ-38-t0r" eventType="touchUpInside" id="089-br-HNX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Virtual Fire Lab" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psI-E6-8Vr">
+                                <rect key="frame" x="385" y="633" width="116" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbn-Bi-om8">
+                                <rect key="frame" x="713" y="306" width="522" height="348"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="Screen Shot 2018-11-02 at 10.18.43 AM.png"/>
+                                <connections>
+                                    <action selector="goToValidation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z7s-3h-wg6"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Validation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2DM-ht-Gpv">
+                                <rect key="frame" x="937" y="633" width="75" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="home" id="iIj-rR-YvT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="-872"/>
+        </scene>
+        <!--VFL-->
+        <scene sceneID="sEn-KT-NX9">
+            <objects>
+                <viewController id="sXA-gd-CaW" customClass="ViewControllerVfl" customModule="vfl_ipad_01" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XYd-ez-vBG">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4QU-r1-QIr"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="VFL" id="K43-d9-ysH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vw3-M9-kSK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1264" y="-263"/>
+        </scene>
+        <!--animation-->
+        <scene sceneID="34k-gw-M7B">
+            <objects>
+                <viewController id="rVY-hd-6zN" customClass="ViewControllerAnimation" customModule="vfl_ipad_01" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pd2-LS-5fH">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Bx6-6k-jNK"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="animation" id="WC9-Sg-dLF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f0d-h3-EAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="902" y="233"/>
+        </scene>
+        <!--validation-->
+        <scene sceneID="Yt3-Ha-J6S">
+            <objects>
+                <viewController id="rCX-lR-7gr" customClass="ViewControllerValidation" customModule="vfl_ipad_01" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="adn-Q3-Cyx">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4HG-DL-Qzr"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="validation" id="7YO-OS-wUt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9et-tP-Vdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1088" y="927"/>
+        </scene>
+        <!--validationPlayer-->
+        <scene sceneID="4FU-iz-TAC">
+            <objects>
+                <viewController id="bZp-Bo-50K" customClass="ViewControllerValidationPlayer" customModule="vfl_ipad_01" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bnM-GH-jpo">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Lwd-xI-kWo"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="validationPlayer" id="P24-2X-sqF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KC2-hS-xGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1072" y="1584"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="337-fb-mPV">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="cP4-OA-ESO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ux6-xy-HRY">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="7AJ-2s-tUt"/>
+                        <segue destination="sXA-gd-CaW" kind="relationship" relationship="viewControllers" id="kIe-5x-suM"/>
+                        <segue destination="rVY-hd-6zN" kind="relationship" relationship="viewControllers" id="enm-hL-O16"/>
+                        <segue destination="rCX-lR-7gr" kind="relationship" relationship="viewControllers" id="MFH-dL-glU"/>
+                        <segue destination="bZp-Bo-50K" kind="relationship" relationship="viewControllers" id="ABc-gE-MO3"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IpQ-ZI-TLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="69.7265625" y="123.86530014641288"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Screen Shot 2018-11-02 at 10.18.43 AM.png" width="1534" height="1184"/>
+        <image name="vfl-button.png" width="3464" height="2050"/>
+    </resources>
+</document>
+

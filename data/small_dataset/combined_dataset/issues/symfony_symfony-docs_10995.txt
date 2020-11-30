@@ -1,0 +1,5 @@
+Update some articles related to user providers
+
+
+This makes the security/user_provider.rst a reference article which explains everything about all user providers (except LDAP, which is complicated). This could simplify things because allows developers to read just one article to know all the basics about user providers.
+If you are worried about the length of this single article ... don't worry ... the 500-line length is misleading because most of it is about configuration-block.

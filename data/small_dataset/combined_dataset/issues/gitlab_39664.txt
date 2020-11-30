@@ -1,0 +1,153 @@
+'### Summary
+
+In a GitLab CE installation (v10.1.0) - I have the server configured to allow signups and to treat new users as `external users`.  Per [documentation](https://docs.gitlab.com/ee/user/permissions.html#external-users-permissions) a user who signs up with this should not be able to create projects or groups.  
+
+> They cannot however create groups or projects, and they have the same access as logged out users in all other cases.
+
+However such a user can create repositories and groups.
+
+### Steps to reproduce
+
+Create a GitLab installation (I suppose v10.1.0 would be best to use) - allow for sign ups and check the box for `New users set to external` in `/admin/application_settings`
+
+Register a new user.  Note that the new user is marked as External, but has the user has privileges to create projects and groups.
+
+### What is the expected *correct* behavior?
+
+External Users should not be able to create projects or groups.
+
+There is a similar ticket #37428 - but this seems to be more broad.  I have oauth2 enabled, but I was able to do this using non-oauth2 registration.
+
+### Relevant logs and/or screenshots
+
+![Screen_Shot_2017-10-31_at_2.04.33_PM](/uploads/ff6200bf3659b88113fd35c4ac37fe8a/Screen_Shot_2017-10-31_at_2.04.33_PM.png)
+
+#### Results of GitLab environment info
+
+<details>
+<summary>Expand for output related to GitLab environment info</summary>
+<pre>
+
+System information
+System:		
+Current User:	git
+Using RVM:	no
+Ruby Version:	2.3.5p376
+Gem Version:	2.6.13
+Bundler Version:1.13.7
+Rake Version:	12.1.0
+Redis Version:	3.2.5
+Git Version:	2.13.5
+Sidekiq Version:5.0.4
+Go Version:	unknown
+
+GitLab information
+Version:	10.1.0
+Revision:	5a695c4
+Directory:	/opt/gitlab/embedded/service/gitlab-rails
+DB Adapter:	postgresql
+URL:		https://git.redacted.com
+HTTP Clone URL:	https://git.redacted.com/some-group/some-project.git
+SSH Clone URL:	git@git.redacted.com:some-group/some-project.git
+Using LDAP:	no
+Using Omniauth:	yes
+Omniauth Providers: github, google_oauth2, facebook, twitter, gitlab
+
+GitLab Shell
+Version:	5.9.3
+Repository storage paths:
+- default: 	/gitlab-data/git-data/repositories
+Hooks:		/opt/gitlab/embedded/service/gitlab-shell/hooks
+Git:		/opt/gitlab/embedded/bin/git
+
+</pre>
+</details>
+
+#### Results of GitLab application Check
+
+<details>
+<summary>Expand for output related to the GitLab application check</summary>
+<pre>
+
+Checking GitLab Shell ...
+
+GitLab Shell version >= 5.9.3 ? ... OK (5.9.3)
+Repo base directory exists?
+default... yes
+Repo storage directories are symlinks?
+default... no
+Repo paths owned by git:root, or git:git?
+default... yes
+Repo paths access is drwxrws---?
+default... yes
+hooks directories in repos are links: ... 
+2/1 ... ok
+2/2 ... ok
+10/3 ... ok
+2/4 ... ok
+9/5 ... ok
+2/6 ... ok
+2/7 ... ok
+10/8 ... ok
+2/9 ... ok
+2/10 ... ok
+2/11 ... ok
+Running /opt/gitlab/embedded/service/gitlab-shell/bin/check
+Check GitLab API access: OK
+Redis available via internal API: OK
+
+Access to /gitlab-data/ssh/authorized_keys: OK
+gitlab-shell self-check successful
+
+Checking GitLab Shell ... Finished
+
+Checking Sidekiq ...
+
+Running? ... yes
+Number of Sidekiq processes ... 1
+
+Checking Sidekiq ... Finished
+
+Reply by email is disabled in config/gitlab.yml
+Checking LDAP ...
+
+LDAP is disabled in config/gitlab.yml
+
+Checking LDAP ... Finished
+
+Checking GitLab ...
+
+Git configured correctly? ... yes
+Database config exists? ... yes
+All migrations up? ... yes
+Database contains orphaned GroupMembers? ... no
+GitLab config exists? ... yes
+GitLab config up to date? ... yes
+Log directory writable? ... yes
+Tmp directory writable? ... yes
+Uploads directory exists? ... yes
+Uploads directory has correct permissions? ... yes
+Uploads directory tmp has correct permissions? ... yes
+Init script exists? ... skipped (omnibus-gitlab has no init script)
+Init script up-to-date? ... skipped (omnibus-gitlab has no init script)
+Projects have namespace: ... 
+2/1 ... yes
+2/2 ... yes
+10/3 ... yes
+2/4 ... yes
+9/5 ... yes
+2/6 ... yes
+2/7 ... yes
+10/8 ... yes
+2/9 ... yes
+2/10 ... yes
+2/11 ... yes
+Redis version >= 2.8.0? ... yes
+Ruby version >= 2.3.3 ? ... yes (2.3.5)
+Git version >= 2.7.3 ? ... yes (2.13.5)
+Git user has default SSH configuration? ... yes
+Active users: ... 10
+
+Checking GitLab ... Finished
+</pre>
+</details>

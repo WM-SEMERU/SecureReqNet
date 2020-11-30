@@ -1,0 +1,1 @@
+When editing a label on gitlab.com (7.2.0.rc2-ee), I see color buttons to help me pick pre-defined label colors. But if I click on one of those buttons, nothing happens.

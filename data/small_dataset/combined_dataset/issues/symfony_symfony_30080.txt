@@ -1,0 +1,39 @@
+[Workflow] Being able to have more than one initial_place when using multiple_state store
+
+
+Description
+When we are using multiple_state marking store, we should be able to have multiple initial_place as well.
+Example
+Before
+framework:
+  workflows:
+    order:
+      supports:
+      - 'Foo\Bar\Order'
+      audit_trail:
+        enabled: true
+      type: workflow
+      marking_store:
+        type: 'multiple_state'
+        arguments:
+        - 'marking'
+      places:
+      initial_place: 'order_created'
+After
+framework:
+  workflows:
+    order:
+      supports:
+      - 'Foo\Bar\Order'
+      audit_trail:
+        enabled: true
+      type: workflow
+      marking_store:
+        type: 'multiple_state'
+        arguments:
+        - 'marking'
+      places:
+      initial_place:
+      - 'order_created'
+      - 'order_cart'
+Since multiple_state allow us to handle more than one marking, it should be same for initial_place.

@@ -1,0 +1,49 @@
+Autoconfig: don't automatically tag decorators
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.1
+
+
+Bug fix?
+yes
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30391 
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+

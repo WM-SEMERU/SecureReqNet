@@ -1,0 +1,37 @@
+Endpoints object got deleted after cluster upgrade
+
+
+What happened:
+I am using selectorless service to integrate my external glusterfs with Kubernetes. I only create the endpoint object without service object because that all what glusterfs needs. I upgraded my cluster through a process that involves cycling master nodes. Unexpectedly, the glusterfs endpoints object got deleted after cluster upgrade/update.
+Since this causes my application down after the period of endpoint got deleted, is this expected behavior of Kubernetes?
+/sig network
+What you expected to happen:
+Endpoint stays after cluster upgrade/update even when corresponding service object is missing.
+How to reproduce it (as minimally and precisely as possible):
+Easy reproduce. Create an endpoint:
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: glusterfs-cluster
+subsets:
+  - addresses:
+      - ip: 192.168.122.221
+    ports:
+      - port: 1
+  - addresses:
+      - ip: 192.168.122.222
+    ports:
+      - port: 1
+
+Upgrade the cluster. Then the endpoint is gone.
+Anything else we need to know?:
+I find this endpoint_controller has this behavior that it only stays with service object present, but got delete if service object is missing. Could we do better that this? Or why not?
+Environment:
+
+Kubernetes version (use kubectl version): 1.11
+Cloud provider or hardware configuration: aws
+OS (e.g: cat /etc/os-release):
+Kernel (e.g. uname -a):
+Install tools:
+Others:
+

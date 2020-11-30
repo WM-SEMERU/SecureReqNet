@@ -1,0 +1,4 @@
+Include Chromium build date in about:brave
+
+
+It would be helpful to have a Chromium build date in about:brave since there are some security features in Chromium that have a 10-week lifespan.

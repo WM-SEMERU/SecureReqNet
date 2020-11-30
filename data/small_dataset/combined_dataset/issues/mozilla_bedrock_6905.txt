@@ -1,0 +1,4 @@
+Bug 1533839: Allow non-CVE identifiers when parsing YAML for security advisory pages
+
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=1533839

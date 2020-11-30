@@ -1,0 +1,5 @@
+Add vendor selection process writeup for security audit
+
+
+In the interest of transparency, the Security Audit Working Group would like to document the decision process we used for evaluating the vendor proposals for the security audit.
+cc the rest of the WG: @aasmall @joelsmith

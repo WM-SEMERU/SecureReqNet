@@ -1,0 +1,13 @@
+Add a note to indicate PKG_CONFIG_PATH required
+
+
+I just got the error messages like #23015 again and then I think the root cause should be about
+PKG_CONFIG_PATH. After following #23015 (comment) said, I can build Servo successfully.
+
+
+ ./mach build -d does not report any errors
+ ./mach test-tidy does not report any errors
+ These changes do not require tests because this just updates README.
+
+
+This change is 

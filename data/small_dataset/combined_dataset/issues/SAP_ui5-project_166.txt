@@ -1,0 +1,49 @@
+Cannot read property 'name' of undefined
+
+
+Expected Behavior
+ui5 build -a exits with exit code 0 (or errors with a useful error message).
+Current Behavior
+ui5 build -a fails with the error below (folder path shortened).
+info builder:builder Building project openui5-sample-app including dependencies...
+TypeError: Cannot read property 'name' of undefined
+    at projectCount (/Users/.../openui5-sample-app/node_modules/@ui5/builder/lib/builder/builder.js:186:45)
+    at project.dependencies.reduce (/Users/.../openui5-sample-app/node_modules/@ui5/builder/lib/builder/builder.js:183:13)
+    at Array.reduce (<anonymous>)
+    at projectCount (/Users/.../openui5-sample-app/node_modules/@ui5/builder/lib/builder/builder.js:182:34)
+    at project.dependencies.reduce (/Users/.../openui5-sample-app/node_modules/@ui5/builder/lib/builder/builder.js:183:13)
+    at Array.reduce (<anonymous>)
+    at projectCount (/Users/.../openui5-sample-app/node_modules/@ui5/builder/lib/builder/builder.js:182:34)
+    at project.dependencies.reduce (/Users/.../openui5-sample-app/node_modules/@ui5/builder/lib/builder/builder.js:183:13)
+    at Array.reduce (<anonymous>)
+    at projectCount (/Users/.../openui5-sample-app/node_modules/@ui5/builder/lib/builder/builder.js:182:34)
+
+Steps to reproduce the issue
+
+execute git clone git@github.com:SAP/openui5-sample-app.git && cd openui5-sample-app
+execute npm i --save @babel/polyfill mobx serve && npm i --save-dev @babel/core @babel/preset-env && npm uninstall karma karma-chrome-launcher karma-openui5 karma-qunit rimraf start-server-and-test karma-coverage qunitjs && npm i
+replace ui5.yaml's content with https://gist.githubusercontent.com/aktivalux/5e979bd330bb2006acb06b239411296d/raw/509886c18ccc0d0bf5c65b999af392e28aa69351/ui5.yaml
+execute ui5 build --all
+
+Context
+
+UI5 Module Version (output of ui5 --version when using the CLI): 1.2.4
+Node.js Version: v8.11.4 (also tested with v10.15.3)
+npm Version: 5.6.0 (also tested with 6.4.1)
+OS/Platform: macOS Mojave 10.14.4
+Browser (if relevant): N/A
+
+Additional observations
+The error seems to occure in the specific combination of the installed packages and the ui5.yaml. If you for example just uninstall one of mobx,  @babel/polyfill (both referenced in ui5.yaml as shim) or cross-var (not defined as shim; just required in the npm scripts) the build starts to work again.
+Also it is only builds which also work with the dependencies (such as ui5 build -a or ui5 build self-contained) have issues.
+Affected components (if known)
+
+ ui5-builder
+ ui5-server
+ ui5-cli
+ ui5-fs
+ ui5-project
+ ui5-logger
+
+Log Output / Stack Trace
+(see above / can be generated with ui5 build -a --verbose)

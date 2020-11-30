@@ -1,0 +1,31 @@
+Regression transChoice / bug trans() when count is a non-castable integer
+
+
+Symfony version(s) affected: 4.2.3
+Description
+There is a regression with the now deprecated transChoice function/Twig filter.
+It is also a bug with the new synthax: transChoice + %count% token
+How to reproduce
+This used to work on Symfony 4.1:
+{% set count = 1100|number_format(0, '.', ' ') %}
+
+{{ '{0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples'|trans({'%count%': count}) }}
+
+ or
+
+{% transchoice count %}
+{0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples
+{% endtranschoice %}
+There are 1100 apples or There are 1100 apples
+This does not work anymore with Symfony 4.2:
+{0} There are no apples|{1} There is one apple|]1,Inf[ There are 1 100 apples or {0} There are no apples|{1} There is one apple|]1,Inf[ There are 1 100 apples
+The new synthax is also impacted by the issue:
+{% set count = 1100|number_format(0, '.', ' ') %}
+{{ '{0} There are no apples|{1} There is one apple|]1,Inf[ There are %count% apples'|trans({'%count%': count}) }}
+
+{0} There are no apples|{1} There is one apple|]1,Inf[ There are 1 100 apples
+Issue
+
+If count = 1100 (int) or count = '1100' (string), it works.
+If count = '1 100', it doesn't work anymore.
+

@@ -1,0 +1,59 @@
+$PSSenderInfo does not show correct RunAsUser when virtual account enabled in PS 5.1
+
+
+
+Note: Ported from bug 10564373
+
+Steps to reproduce
+New-PSSessionConfigurationFile -Path .\SenderInfo.pssc -RunAsVirtualAccount
+Register-PSSessionConfiguration -Path .\SenderInfo.pssc -Name SenderInfoRepro -Force
+Enter-PSSession -ComputerName . -ConfigurationName SenderInfoRepro
+$PSSenderInfo
+whoami
+Expected behavior
+$PSSenderInfo should output the name of a WinRM Virtual Account user, the context under which the user is actually running, for "RunAsUser"
+[localhost]: PS C:\Windows\system32> $PSSenderInfo
+
+
+UserInfo             : System.Management.Automation.Remoting.PSPrincipal
+ClientTimeZone       : System.CurrentSystemTimeZone
+ConnectionString     : http://localhost:5985/wsman?PSVersion=5.1.14393.693
+ApplicationArguments : {PSVersionTable}
+ConnectedUser        : priv\Administrator
+RunAsUser            : winrm virtual users\winrm va_2_priv_administrator
+
+
+
+
+[localhost]: PS C:\Windows\system32> whoami
+winrm virtual users\winrm va_2_priv_administrator
+
+Actual behavior
+ConnectedUser and RunAsUser are both the connected user's identity, which is misleading and incorrect. whoami shows the correct run as account.
+[localhost]: PS C:\Windows\system32> $PSSenderInfo
+
+
+UserInfo             : System.Management.Automation.Remoting.PSPrincipal
+ClientTimeZone       : System.CurrentSystemTimeZone
+ConnectionString     : http://localhost:5985/wsman?PSVersion=5.1.14393.693
+ApplicationArguments : {PSVersionTable}
+ConnectedUser        : priv\Administrator
+RunAsUser            : priv\Administrator
+
+
+
+[localhost]: PS C:\Windows\system32> whoami
+winrm virtual users\winrm va_2_priv_administrator
+
+Environment data
+> $PSVersionTable
+Name                           Value
+----                           -----
+PSVersion                      5.1.14393.693
+PSEdition                      Desktop
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
+BuildVersion                   10.0.14393.693
+CLRVersion                     4.0.30319.42000
+WSManStackVersion              3.0
+PSRemotingProtocolVersion      2.3
+SerializationVersion           1.1.0.1

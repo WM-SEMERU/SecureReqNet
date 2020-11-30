@@ -1,0 +1,20 @@
+HTTP 404 when redirecting to the AccessDenied page
+
+
+Functional impact
+When accessing a page with no access permissions, an HTTP 404 error is returned (after an HTTP 302 redirect to an invalid location) instead of the AccessDenied page.
+Minimal repro steps
+
+Set up a simple project using the ASP.NET Core 2.1 MVC template and add Azure AD authentication.
+Annotate a controller action with some dummy role requirement that won't be fulfilled (e.g. HomeController.Contact).
+Launch, navigate to the annotated action (e.g. Home/Contact)
+An HTTP 302 is returned, redirecting to /Account/AccessDenied, missing the /AzureAD prefix.
+
+Expected result
+An HTTP 302 redirecting to /AzureAD/Account/AccessDenied
+Actual result
+An HTTP 302 redirecting to /Account/AccessDenied
+Further technical details
+CookieAuthentication Login, Logout and AccessDeniedPath properties are not updated to reflect the new /AzureAD/ area due to a bug in the CookieOptionsConfiguration class.
+When configuring CookieAuthenticationOptions, the scheme name is compared with the OpenIdConnectScheme name instead of the CookieScheme name.
+This check causes the  GetAzureADScheme method to return null and to skip the CookieAuthenticationOptions configuration.

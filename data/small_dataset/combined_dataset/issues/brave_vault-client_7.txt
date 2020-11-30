@@ -1,0 +1,5 @@
+0.0.6 - do not encode privateKey in persona URL
+
+
+instead, encrypt the privateKey using the masterKey and a one-time iv, and store the iv and the resulting encryptedData in the vault.
+this makes for a much shorter URL, which makes for a less busy QRcode!

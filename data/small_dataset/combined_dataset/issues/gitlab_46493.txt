@@ -1,0 +1,34 @@
+Per the latest MR on defining priority labels https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/18361
+
+And a follow up from https://gitlab.com/gitlab-org/gitlab-ce/issues/45474
+
+The ~SL1 ~SL2 ~SL3 label will be removed by the security team manually for auditing reasons and only then we can delete the label.  Currently these labels have `DEPRECATED` in the description to prevent it from being used further.
+
+# Tasks
+* The ~security team will remove these labels after the issue is closed. This is just a checklist for the team to track.
+  * [x] `gitlab-org`
+      * [x] [SL1 labels](https://gitlab.com/groups/gitlab-org/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL1)
+      * [x] [SL2 labels](https://gitlab.com/groups/gitlab-org/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL2)
+      * [x] [SL3 labels](https://gitlab.com/groups/gitlab-org/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL3)
+  * [x] `gitlab-com`
+      * [x] [SL1 labels](https://gitlab.com/groups/gitlab-com/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL1)
+      * [x] [SL2 labels](https://gitlab.com/groups/gitlab-com/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL2)
+      * [x] [SL3 labels](https://gitlab.com/groups/gitlab-com/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL3)
+*  Delete labels from project configuration. SL labels will be removed by the ~security team for audit reasons
+  * [x] `gitlab-org`
+      * [x] ~SL1  labels
+      * [x] ~SL2  labels
+      * [x] ~SL3  labels
+  * [x] `gitlab-com`
+      * [x] ~SL1  labels
+      * [x] ~SL2  labels
+      * [x] ~SL3  labels
+
+| previous | link | Priority | Severity |
+|----------|------|----------|----------|
+| ~SL1     | https://gitlab.com/groups/gitlab-org/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL1, https://gitlab.com/groups/gitlab-com/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL1 | manually groomed | ~S1
+| ~SL2     | https://gitlab.com/groups/gitlab-org/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL2, https://gitlab.com/groups/gitlab-com/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL2 | manually groomed | ~S2
+| ~SL3     | https://gitlab.com/groups/gitlab-org/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL3, https://gitlab.com/groups/gitlab-com/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=SL3 | manually groomed | ~S3 
+
+
+/cc @rymai @kathyw 

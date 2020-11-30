@@ -1,0 +1,54 @@
+mapbox navigation crashes
+
+
+E/Mbgl-MapChangeReceiver: Exception in onDidFinishLoadingStyle
+java.lang.BootstrapMethodError: Exception from call site #0 bootstrap method
+at com.mapbox.mapboxsdk.plugins.annotation.AnnotationManager.(AnnotationManager.java:87)
+at com.mapbox.mapboxsdk.plugins.annotation.SymbolManager.(SymbolManager.java:79)
+at com.mapbox.mapboxsdk.plugins.annotation.SymbolManager.(SymbolManager.java:56)
+at com.mapbox.mapboxsdk.plugins.annotation.SymbolManager.(SymbolManager.java:44)
+at com.mapbox.services.android.navigation.ui.v5.map.NavigationMapboxMap.initializeNavigationSymbolManager(NavigationMapboxMap.java:583)
+at com.mapbox.services.android.navigation.ui.v5.map.NavigationMapboxMap.(NavigationMapboxMap.java:92)
+at com.mapbox.services.android.navigation.ui.v5.NavigationView.initializeNavigationMap(NavigationView.java:556)
+at com.mapbox.services.android.navigation.ui.v5.NavigationView.access$100(NavigationView.java:68)
+at com.mapbox.services.android.navigation.ui.v5.NavigationView$1.onStyleLoaded(NavigationView.java:222)
+at com.mapbox.mapboxsdk.maps.MapboxMap.notifyStyleLoaded(MapboxMap.java:839)
+at com.mapbox.mapboxsdk.maps.MapboxMap.onFinishLoadingStyle(MapboxMap.java:204)
+at com.mapbox.mapboxsdk.maps.MapView$MapCallback.onDidFinishLoadingStyle(MapView.java:1176)
+at com.mapbox.mapboxsdk.maps.MapChangeReceiver.onDidFinishLoadingStyle(MapChangeReceiver.java:194)
+at com.mapbox.mapboxsdk.maps.NativeMapView.onDidFinishLoadingStyle(NativeMapView.java:1040)
+at android.os.MessageQueue.nativePollOnce(Native Method)
+at android.os.MessageQueue.next(MessageQueue.java:325)
+at android.os.Looper.loop(Looper.java:142)
+at android.app.ActivityThread.main(ActivityThread.java:6518)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807)
+Caused by: java.lang.NoClassDefFoundError: Invalid descriptor: ���������������������.
+at com.mapbox.mapboxsdk.plugins.annotation.AnnotationManager.(AnnotationManager.java:87) 
+at com.mapbox.mapboxsdk.plugins.annotation.SymbolManager.(SymbolManager.java:79) 
+at com.mapbox.mapboxsdk.plugins.annotation.SymbolManager.(SymbolManager.java:56) 
+at com.mapbox.mapboxsdk.plugins.annotation.SymbolManager.(SymbolManager.java:44) 
+at com.mapbox.services.android.navigation.ui.v5.map.NavigationMapboxMap.initializeNavigationSymbolManager(NavigationMapboxMap.java:583) 
+at com.mapbox.services.android.navigation.ui.v5.map.NavigationMapboxMap.(NavigationMapboxMap.java:92) 
+at com.mapbox.services.android.navigation.ui.v5.NavigationView.initializeNavigationMap(NavigationView.java:556) 
+at com.mapbox.services.android.navigation.ui.v5.NavigationView.access$100(NavigationView.java:68) 
+at com.mapbox.services.android.navigation.ui.v5.NavigationView$1.onStyleLoaded(NavigationView.java:222) 
+at com.mapbox.mapboxsdk.maps.MapboxMap.notifyStyleLoaded(MapboxMap.java:839) 
+at com.mapbox.mapboxsdk.maps.MapboxMap.onFinishLoadingStyle(MapboxMap.java:204) 
+at com.mapbox.mapboxsdk.maps.MapView$MapCallback.onDidFinishLoadingStyle(MapView.java:1176) 
+at com.mapbox.mapboxsdk.maps.MapChangeReceiver.onDidFinishLoadingStyle(MapChangeReceiver.java:194) 
+at com.mapbox.mapboxsdk.maps.NativeMapView.onDidFinishLoadingStyle(NativeMapView.java:1040) 
+at android.os.MessageQueue.nativePollOnce(Native Method) 
+at android.os.MessageQueue.next(MessageQueue.java:325) 
+at android.os.Looper.loop(Looper.java:142) 
+at android.app.ActivityThread.main(ActivityThread.java:6518) 
+at java.lang.reflect.Method.invoke(Native Method) 
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438) 
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807) 
+E/libc++abi: terminating with uncaught exception of type jni::PendingJavaException
+A/libc: Fatal signal 6 (SIGABRT), code -6 in tid 13675 (ocator_forblind), pid 13675 (ocator_forblind)
+this was the error
+i followed the tutorail given in the ooficial website
+https://docs.mapbox.com/help/tutorials/android-navigation-sdk/#next-steps
+everything was working fine excpet for the last part

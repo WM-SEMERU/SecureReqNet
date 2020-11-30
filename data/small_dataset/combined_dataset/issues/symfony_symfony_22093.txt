@@ -1,0 +1,36 @@
+AuthenticationProviderManager can contain duplicate authentication providers
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+no
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+2.8.11
+
+
+
+If my application has multiple firewalls with some of them using the same user provider; they will be added to the AuthenticationProviderManager as unique authentication providers.
+Is this intended behavior c.q. is there a use case I'm overlooking?
+I would expect them to be deduplicated somewhere during the configuration compilation.

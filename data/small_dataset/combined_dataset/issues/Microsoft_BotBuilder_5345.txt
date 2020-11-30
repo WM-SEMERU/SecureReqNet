@@ -1,0 +1,12 @@
+encrypt aad password in OAuth Connection Settings
+
+
+Issue Description
+In bot channel registration under OAuth Connection Settings the client secret is shown in plain text.
+Everyone who owns the bot channel registration can see the client secret. The client secret is generate by Azure Active Directory and is shown to the user once, and then the user should keep it in a safe place. I believe that showing the password in plain text is a security vulnerability and I think it should be fixed.
+Proposed change
+Don't display client password, allow only to change it.
+Component Impact
+Bot Channel Registration
+Customer Impact
+Our subscription was compromised and the client secret was stolen.

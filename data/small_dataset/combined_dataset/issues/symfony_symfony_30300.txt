@@ -1,0 +1,29 @@
+public alias is still being removed or inlined, why?
+
+
+I  add an alias to a service, this alias is public, but when I try to get it from container , it says it is removed or inlined, how could this happen?
+if ($container->has($repositoryClass)) {
+            var_dump($repositoryClass,  $container
+              ->getDefinition($repositoryClass)
+              ->isPublic()
+            );
+            $container->setAlias($alias, $repositoryClass);
+
+            var_dump($alias, $container
+              ->getAlias($alias)
+              ->isPublic()
+            );
+
+            return;
+        }
+Debug info
+/demo-bundle/DependencyInjection/Compiler/RegisterResourcesCompilerPass.php:75:
+bool(true)
+/demo-bundle/DependencyInjection/Compiler/RegisterResourcesCompilerPass.php:81:
+string(27) "acme.repository.advertisement"
+/demo-bundle/DependencyInjection/Compiler/RegisterResourcesCompilerPass.php:81:
+bool(true)
+
+
+{"message":"The \"acme.repository.advertisement\" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead."}
+

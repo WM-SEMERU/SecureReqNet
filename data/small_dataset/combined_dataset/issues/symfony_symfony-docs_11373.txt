@@ -1,0 +1,4 @@
+remove blank line after filepath in php code block
+
+
+Follow up of #11288 but against 4.2

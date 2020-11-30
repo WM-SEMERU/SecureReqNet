@@ -1,0 +1,140 @@
+kubectl create (role, job, cronjob) respect --namespace with --dry-run
+
+
+Signed-off-by: Andrey Voronkov voronkovaa@gmail.com
+What type of PR is this?
+/kind bug
+What this PR does / why we need it:
+For kubectl create role, kubectl create job, kubectl create cronjob respect --namespace global option when doing Dry Run.
+Constructions like kubectl create role ... --dry-run -o yaml | kubectl apply -f - are useful for Create or Update operations imitation inside the scripts.
+Which issue(s) this PR fixes:
+I have not found them :(
+Special notes for your reviewer:
+Not a Go coder at all, so I cannot write appropriate tests, but here is system kubectl output:
+Role
+kubectl v1.14.0
+kubectl create role --namespace test testrole --verb=* --resource=*.apps --dry-run -o yaml                                   
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: testrole
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - '*'
+  verbs:
+  - '*'
+
+Built kubectl
+_output/dockerized/bin/linux/amd64/kubectl create role --namespace test testrole --verb=* --resource=*.apps --dry-run -o yaml 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: testrole
+  namespace: test
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - '*'
+  verbs:
+  - '*'
+
+Job
+kubectl v1.14.0
+kubectl create job --namespace test testjob --image nginx:1.15.10-alpine --dry-run -o yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: testjob
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: nginx:1.15.10-alpine
+        name: testjob
+        resources: {}
+      restartPolicy: Never
+status: {}
+
+Built kubectl
+_output/dockerized/bin/linux/amd64/kubectl create job --namespace test testjob --image nginx:1.15.10-alpine --dry-run -o yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: testjob
+  namespace: test
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: nginx:1.15.10-alpine
+        name: testjob
+        resources: {}
+      restartPolicy: Never
+status: {}
+
+CronJob
+kubectl v1.14.0
+kubectl create cronjob --namespace test testcronjob --image nginx:1.15.10-alpine --schedule "0 * * * *" --dry-run -o yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: testcronjob
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: testcronjob
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: nginx:1.15.10-alpine
+            name: testcronjob
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: 0 * * * *
+status: {}
+
+Built kubectl
+_output/dockerized/bin/linux/amd64/kubectl create cronjob --namespace test testcronjob --image nginx:1.15.10-alpine --schedule "0 * * * *" --dry-run -o yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: testcronjob
+  namespace: test
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: testcronjob
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: nginx:1.15.10-alpine
+            name: testcronjob
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: 0 * * * *
+status: {}
+
+Does this PR introduce a user-facing change?:
+NONE
+

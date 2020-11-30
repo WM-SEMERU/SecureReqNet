@@ -1,0 +1,13 @@
+Fix typo in cleaner.rb
+
+
+Seems like auto-correct was a bit too eager to fix things :) ?
+
+[ X ] Have you followed the guidelines in our Contributing document?
+[ X ] Have you checked to ensure there aren't other open Pull Requests for the same change?
+[ X ] Have you added an explanation of what your changes do and why you'd like us to include them?
+[ X ] Have you written new tests for your changes? Here's an example.
+[ X ] Have you successfully run brew style with your changes locally?
+[ X ] Have you successfully run brew tests with your changes locally?
+
+

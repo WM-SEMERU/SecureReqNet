@@ -1,0 +1,85 @@
+[DependencyInjection] Allow to choose an index for tagged collection
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29203
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11009
+
+
+
+This is the continuity of the PR #29598
+Add a way to specify an index based on a tag attribute when injecting a tag collection into services, but also a a way to fallback to a static method on the service class.
+services:
+  foo_service:
+    class: Foo
+    tags:
+      - foo
+  foo_service_tagged:
+    class: Bar
+    arguments:
+      - !tagged
+          tag: 'foo'
+          index_by: 'tag_attribute_name'
+          default_index_method: 'static_method'
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <services>
+    <service id="foo" class="Foo">
+        <tag name="foo_tag" />
+    </service>
+    <service id="foo_tagged_iterator" class="Bar" public="true">
+      <argument type="tagged" tag="foo_tag" index-by="tag_attribute_name" default-index-method="static_method" />
+    </service>
+  </services>
+</container>
+Tasks
+
+  Support PHP loader/dumper
+  Support YAML loader/dumper
+  Support XML loader/dumper (and update XSD too)
+  Add tests
+  Documentation
+

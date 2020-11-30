@@ -1,0 +1,36 @@
+Provide helpful error message when requested dependency is not found
+
+
+As described by @KPhans, get_package_mapping() throws a bit of an obscure error when dependency resolution fails. This probably occurs when the dependency name is not matched in the package_map object:
+Error in get_package_mapping: 'package' must be of length 1'.
+We should return a user-friendly error message here, so that app users understand that the problem is dependency-related, and so that app and component library developers can troubleshoot more easily during their build process.
+The offending lines are linked below:
+
+
+
+dashR/R/utils.R
+
+
+        Lines 457 to 459
+      in
+      a03df0b
+
+
+
+
+
+
+ result <- c(pkg_name=ifelse("package" %in% names(x), x$package, NULL), 
+
+
+
+ dep_name=x$name, 
+
+
+
+ dep_path=gsub("//+", replacement = "/", dep_path) 
+
+
+
+
+

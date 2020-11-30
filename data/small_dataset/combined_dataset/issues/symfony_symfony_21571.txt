@@ -1,0 +1,46 @@
+[security] "security.authentication.success" event should be fired on every request?
+
+
+At least that's what the docs say: https://symfony.com/doc/2.8/components/security/authentication.html#authentication-success-and-failure-events
+
+When a provider authenticates the user, a security.authentication.success event is dispatched. But beware - this event will fire, for example, on every request if you have session-based authentication.
+
+The problem is, it doesn't fire for me (?) on Symfony 2.8.12.
+Not sure if this is a problem with Symfony, with my code/configuration or just the documentation.
+My config (I've cut off what I think are irrelevant parts):
+#security.yml
+security:
+
+    providers:
+        orm:
+            entity:
+                class: AppBundle:User
+                property: username
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        default:
+            anonymous: ~
+            provider: orm
+
+            form_login:
+                login_path: user_login
+                check_path: user_login_check
+                success_handler: security_login_success_handler
+                target_path_parameter: relocate
+
+            remember_me:
+                lifetime: 604800 # 1 week in seconds
+                always_remember_me: true
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+#config.yml
+framework:
+    session:
+        handler_id:  session.handler.memcached
+        cookie_domain: '%auth_cookies_domain%'

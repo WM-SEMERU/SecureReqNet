@@ -1,0 +1,5 @@
+TCP put isn't secure
+
+
+Currently we don't authenticate servers/processes/anything sending us data. Open a socket and timely will record what you send.
+Perhaps we want to fix that, but there's many ways to do this and more implications.

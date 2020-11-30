@@ -1,0 +1,18 @@
+'- Title:	Bypassing markdown based stored XSS filters
+- Types:	Cross-Site Scripting (XSS)
+- Link:	https://hackerone.com/reports/120369
+- Date:	2016-03-03 11:54:40 -0600
+- By:		a0xnirudh
+
+Details:
+Hello team,
+
+I was going through the methods by which you were sanitizing user input to fix my other 2 stored XSS vulnerabilities namely #116697 and #118024 and suddenly I understood that you filtering mechanisms are not proper and its bypassable. 
+
+### POC:
+Here is another Stored XSS based on Markdown: `[click this](JAVASCRIPT:alert(document.domain))`.
+
+### Mitigation:
+You are only checking small letter characters, like "javascript", "data" etc.. which can be bypassed using capital letters which is also a proper declaration (like the payload I mentioned above). 
+
+Hope this bug will also get resolved soon ! Thanks !

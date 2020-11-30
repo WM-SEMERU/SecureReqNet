@@ -1,0 +1,6 @@
+App devs trust that Open Enclave runtime is hardened against Spectre 1 vulnerability
+
+
+Per Specter mitigation discussion, we were originally planning to manually lfence conditionals used in enclave bounds checking and in enclave transition methods, however, this proved to be tricky, particularly having to work around compiler optimizations that would change the intended lfence positioning.
+To address this, we will rely on compiler tooling, specifically the Speculative Load Hardening prototype extension. This approach has a hard dependency on enabling clang compilation of Open Enclave (#353)
+If we can't get to this, having a centralized point of control where we can consistently apply manual lfencing in EDL emitted code (#386) rises in importance.

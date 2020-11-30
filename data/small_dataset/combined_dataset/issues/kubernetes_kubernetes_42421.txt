@@ -1,0 +1,14 @@
+proxy not providing user info should cause error
+
+
+Fixes #42437
+When using a front proxy authenticator it should behave like this:
+
+unrecognized client-cert: skip
+unrecognized subject: skip
+recognized client-cert/subject, missing username: fail (the data provided was invalid)
+
+In addition, the group information should come from the front proxy and not be later manipulated.  Having that separation eliminates weird cases like the proxy saying a user is system:anonymous and the authentication chain adding group system:authenticated.
+@kubernetes/sig-auth-pr-reviews
+You cannot use a front proxy client certificate as front proxy client and a direct user against the API.
+

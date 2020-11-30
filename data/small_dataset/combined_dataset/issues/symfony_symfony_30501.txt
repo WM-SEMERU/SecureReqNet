@@ -1,0 +1,63 @@
+[FrameworkBundle][Routing] added proper Loader namespace to handle controllers
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+let's see
+
+
+Fixed tickets
+#24640, #25145
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#11120
+
+
+
+While working on symfony/symfony-docs#11085, I felt bad about the long notations required for simple redirects and templates rendering template actions, but I love and use those features since always. Then I gave it a try yesterday night and now I realised I missed #24640 and that #25145 has been closed x).
+So here we go, here's my WIP. WDYT of this implementation? ping @javiereguiluz?
+I'm going to open the PR in the docs so we can discuss the DX changes there too, and keep focus on the code here.
+Cheers!
+
+TODO:
+
+ gather reviews
+ fix xml schema
+ add some tests
+ handle xsd auto discovery
+ rebase on top of #30507
+ add shortcuts for #30514
+

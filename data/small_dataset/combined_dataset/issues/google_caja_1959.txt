@@ -1,0 +1,37 @@
+caja incorrectly nests empty HTML nodes causing them to be displayed in reverse order
+
+
+Original issue 1961 created by admin@troop1313.com on 2015-03-24T04:54:27.000Z:
+What steps will reproduce the problem?
+============== cajole the script below  ===============
+caja incorrectly nests empty HTML nodes causing them to be displayed in reverse order.<p/>
+These table nodes contain separate open and close tags.
+caja renders them in the order in which they are defined in the HTML as expected.<p/>
+<table id="full_first"></table>
+<table id="full_second"></table>
+<table id="full_third"></table>
+These table nodes are created as empty since they are populated at run time.
+caja incorrectly nests them inside of each other so they are appear to be rendered in reverse order.<p/>
+<table id="empty_first"/>
+<table id="empty_second"/>
+<table id="empty_third"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+</script>
+<script>
+test("full")
+test("empty")
+function test(prefix)
+{
+var row = $("<tr/>")
+row.append($('<td/>').text(prefix + "_first"));
+$("#" + prefix + "_first").append(row);
+var row = $("<tr/>")
+row.append($('<td/>').text(prefix + "_second"));
+$("#" + prefix + "_second").append(row);
+var row = $("<tr/>");
+row.append($('<td/>').text(prefix + "_third"));
+$("#" + prefix + "_third").append(row);
+}
+</script>
+
+On what browser and OS? Chrome 41 Windows 7

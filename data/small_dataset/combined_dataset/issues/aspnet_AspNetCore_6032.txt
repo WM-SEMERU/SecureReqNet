@@ -1,0 +1,6 @@
+Alternative SignedOut callback url
+
+
+Is there a good way to use Areas/Controllers/AccountController.cs, but have alternative routes for pages like SignedOut.cshtml.  What I'm after is for the signed out user to be redirected to the home page rather than the current https://localhost:44383/AzureADB2C/Account/SignedOut
+Is it the intention that the code under https://github.com/aspnet/AADIntegration/tree/master/src/Microsoft.AspNetCore.Authentication.AzureADB2C.UI/Areas/AzureADB2C is just to demo how code should be structured and a real implementation would be code in the project?
+Thanks, John

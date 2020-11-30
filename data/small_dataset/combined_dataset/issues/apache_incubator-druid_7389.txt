@@ -1,0 +1,11 @@
+Popovers are no longer inline
+
+
+Figured out the container CSS needed to make the portals work and was able to make the Popovers (and dialogs) use portals instead of being inline.
+Why is this important? Well check this out:
+Before:
+
+After:
+
+Notice how the backdrop in the "before" image only covers the header. This is an annoying visual artifact. Using a portal instead of declaring inline magically fixes it.
+Also made misc usability fixes like having the spec dialog not start empty.

@@ -1,0 +1,5 @@
+As you can see in this image [broken semver][tags] the tags in the drop down list aren't sorted according to semantic versioning (SemVer) but purely alphabetical.
+
+It'd be great to see them in the "correct" order instead.
+
+[tags]: http://i.imgur.com/3wBchXe.png "Tags aren't sorted according to SemVer"

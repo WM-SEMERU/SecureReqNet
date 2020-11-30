@@ -1,0 +1,58 @@
+OIDC JWK Issue
+
+
+I'm trying to implement OIDC for my ASP.NET Core application using the code flow. Since my internal corporate auth provider doesn't offer an configuration endpoint I'm creating the OpenID configuration manually:
+services.AddAuthentication(options =>
+  {
+      options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+      options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+  })
+  .AddCookie()
+  .AddOpenIdConnect(options =>
+    {
+      options.Configuration = OpenIdConnectConfiguration.Create("{\n\t\"issuer\": \"https://base-url.net\",\n\t\"authorization_endpoint\": \"https://base-url.net/as/authorization.oauth2\",\n\t\"token_endpoint\": \"https://base-url.net/as/token.oauth2\",\n\t\"userinfo_endpoint\": \"https://base-url.net/idp/userinfo.openid\",\n\t\"revocation_endpoint\": \"https://base-url.net/as/revoke_token.oauth2\",\n\t\"jwks_uri\": \"https://base-url.net/pf/JWKS\"\n}");
+
+      options.Authority = Configuration["Authentication:Authority"];
+      options.ClientId = Configuration["Authentication:ClientId"];
+      options.ClientSecret = Configuration["Authentication:ClientSecret"];
+      options.CallbackPath = new PathString("/oauth2redirect");
+      options.ResponseType = OpenIdConnectResponseType.Code;
+      options.SignedOutRedirectUri = "https://application-url.net/logout";
+      options.GetClaimsFromUserInfoEndpoint = true;
+      options.SignInScheme = "Cookies";
+    }
+  })
+
+Unfortunately the JWK endpoint doesn't seem to be called. The application fails with the following exception:
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidSignatureException: IDX10500: Signature validation failed. No security keys were provided to validate the signature.
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateSignature(String token, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.ValidateToken(String idToken, AuthenticationProperties properties, TokenValidationParameters validationParameters, JwtSecurityToken& jwt)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleRemoteAuthenticateAsync()
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+System.Exception: An error was encountered while handling the remote login. ---> Microsoft.IdentityModel.Tokens.SecurityTokenInvalidSignatureException: IDX10500: Signature validation failed. No security keys were provided to validate the signature.
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateSignature(String token, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.ValidateToken(String idToken, AuthenticationProperties properties, TokenValidationParameters validationParameters, JwtSecurityToken& jwt)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleRemoteAuthenticateAsync()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRequestAsync()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIIndexMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+Application is shutting down...
+
+Adding the keys manually works perfectly fine:
+options.TokenValidationParameters = new TokenValidationParameters {
+    IssuerSigningKeys = new List<SecurityKey> {
+        new JsonWebKey("{\n\t\t\"kty\": \"EC\",\n\t\t\"kid\": \"supersecretkey\",\n\t\t\"use\": \"sig\",\n\t\t\"x\": \"supersecretkey\",\n\t\t\"y\": \"supersecretkey\",\n\t\t\"crv\": \"P-521\"\n\t}")
+    }
+}
+
+Is there a configuration parameter to trigger the JWK request or am I missing something else?
+Thanks in advance,
+Florian

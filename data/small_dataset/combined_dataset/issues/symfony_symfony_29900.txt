@@ -1,0 +1,47 @@
+[Cache] PDO-based cache pool table autocreation does not work
+
+
+look at #29898
+I believe that it is not good fix... But pgsq table not foutd throwed right there, in execute(). Dont know about another DB drivers, and i dont know will execute() again work or not, please if some one know more about PDO than me, check it!
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29898
+
+
+License
+MIT
+
+
+

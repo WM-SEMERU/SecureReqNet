@@ -1,0 +1,25 @@
+Part of the clickable area on the input UrlBar is not clickable
+
+
+Description
+I've noticed this for a while but only decided to look into it further today. When clicking on the url bar, on the input, if you click on the top part of said bar it will not register the click. It will however work if the url is long enough and you do it on the right side of it.
+Steps to Reproduce
+
+Open a website
+Click on the url so that you get the input mode
+Double click on a work, using the top half part of the input
+
+Actual result:
+Click is not registered, text is not selected, cursor is not placed.
+
+Expected result:
+The click should register and allow the selection of the text or placement of the cursor.
+Reproduces how often:
+Always
+Brave Version
+0.25.2 but also happens on a locally run version straight from a clone of the repo
+Reproducible on current live release:
+Yes
+Additional Information
+I initially thought it might be a matter of an extra component being rendered on top of the bar, I'm still not sure it's not, but couldn't find anything enabling the devtools for the window. The bar seems to not be partially covered. The click events do not trigger as seen on the gif.
+This is Mac Mojave since I understand the outer window is rendered differently in different OS

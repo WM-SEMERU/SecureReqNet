@@ -1,0 +1,46 @@
+[SecurityBundle] error helper added symfony/symfony#11147
+
+
+Added helper that extracts last authentication error and username.
+
+
+
+Q
+A
+
+
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+[ #11147 ]
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#3996
+
+
+

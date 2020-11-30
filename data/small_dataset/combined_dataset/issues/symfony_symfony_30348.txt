@@ -1,0 +1,112 @@
+[DependencyInjection] Add ability to define an index for service in an injected service locator argument
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29203
+
+
+License
+MIT
+
+
+Doc PR
+in progress /  symfony/symfony-docs#...
+
+
+
+It's more or less the same thing then the PR #30257 but for a service locator argument
+Add a simple way to specify an index based on a tag attribute to simplify retrieving a specific service when injecting a service locator as argument into services, but also a way to fallback to a static method on the service class.
+Yaml:
+services:
+  foo_service:
+    class: Foo
+    tags:
+      - {name: foo_tag, key: foo_service}
+  foo_service_tagged:
+    class: Bar
+    arguments:
+      - !tagged_locator
+          tag: 'foo_tag'
+          index_by: 'key'
+          default_index_method: 'static_method'
+XML:
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+    http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <services>
+    <service id="foo" class="Foo">
+        <tag name="foo_tag" key="foo_service" />
+    </service>
+    <service id="foo_tagged_iterator" class="Bar" public="true">
+      <argument type="tagged_locator" tag="foo_tag" index-by="key" default-index-method="static_method" />
+    </service>
+  </services>
+</container>
+PHP:
+// config/services.php
+use Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+
+$container->register(Foo::class)
+        ->addTag('foo_tag', ['key' => 'foo_service']);
+
+$container->register(App\Handler\HandlerCollection::class)
+         // inject all services tagged with app.handler as first argument
+         ->addArgument(new ServiceLocatorArgument(new TaggedIteratorArgument('app.handler', 'key')));
+Usage:
+// src/Handler/HandlerCollection.php
+namespace App\Handler;
+
+use Symfony\Component\DependencyInjection\ServiceLocator;
+
+class HandlerCollection
+{
+     public function __construct(ServiceLocator $serviceLocator)
+     {
+           $foo = $serviceLocator->get('foo_service'):
+     }
+}
+Tasks
+
+  Support PHP loader/dumper
+  Support YAML loader/dumper
+  Support XML loader/dumper (and update XSD too)
+  Add tests
+  Documentation
+

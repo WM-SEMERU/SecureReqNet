@@ -1,0 +1,34 @@
+Brave installed as snap doesn't open links from external apps
+
+
+Description
+Brave installed as snap on Ubuntu 18.04 doesn't open links from external apps (e.g. email client). If Brave is installed with the .deb file, the issue doesn't exist.
+Steps to Reproduce
+
+Install Brave as snap.
+Set Brave as default browser.
+Open a link from an email.
+
+Actual result:
+Brave launches if it's closed, but does not open the link from the email. It opens the home page or whatever it's set to start with. If Brave is opened, it brings the window to the front.
+Expected result:
+Brave should open the link from the email.
+Reproduces how often:
+100%
+Brave Version
+0.25.2
+about:brave info:
+Brave: 0.25.2
+V8: 6.9.427.23
+rev: 8ea2a9c
+Muon: 8.1.8
+OS Release: 4.15.0-36-generic
+Update Channel: Release
+OS Architecture: x64
+OS Platform: Linux
+Node.js: 7.9.0
+Brave Sync: v1.4.2
+libchromiumcontent: 69.0.3497.100
+Reproducible on current live release:
+
+Additional Information

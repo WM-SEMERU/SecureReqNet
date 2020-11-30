@@ -1,0 +1,10 @@
+Need to support Digest for sudoers always
+
+
+@dreid originally submitted this as ticket:239
+
+Owner: @dreid
+Keywords: 5571771
+
+
+Currently we accept sudoer authentication for whatever methods are enabled in the config file, if only kerberos is enabled in the config then sudoers can not authenticate to the calendar server. This causes a 210 error when viewing the web calendar.

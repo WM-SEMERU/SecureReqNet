@@ -1,0 +1,10 @@
+'Your `private_token` is currently available through `gon.api_token` which:
+
+> it’s as though my password is displayed...
+
+--*Stan*
+
+AFAIK `private_token`s should never be available on the client side as they are the same as passwords. 
+
+cc @DouweM @rspeicher @stanhu @dzaporozhets 
+

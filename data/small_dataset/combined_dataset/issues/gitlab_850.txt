@@ -1,0 +1,15 @@
+When a new user creates an account, his password is written without any encryption or even just obfuscation into the sidekiq.log file.
+
+This should be only visible to the admin, but still exposing passwords in clear text is VERY BAD PRACTICE!
+
+I'm currently using stable-7-5, build from source.
+
+sidekiq.log:
+```
+2014-11-27T08:33:25Z 12921 TID--9w50p8 Devise::Async::Backend::Sidekiq JID-1bdc84ced4a99f6de285b424 INFO: start
+2014-11-27T08:33:25Z 12921 TID--9w50p8 Devise::Async::Backend::Sidekiq JID-1bdc84ced4a99f6de285b424 INFO: arguments: ["confirmation_instructions", "User", "5", "6Di-HAYWb1VTzSz9cD2F", {}]
+2014-11-27T08:33:28Z 12921 TID--9w50p8 Devise::Async::Backend::Sidekiq JID-1bdc84ced4a99f6de285b424 INFO: done: 2.329 sec
+2014-11-27T08:33:32Z 12921 TID--9w50p8 Sidekiq::Extensions::DelayedMailer JID-b070e12bd1d99737c8dc11e0 INFO: start
+2014-11-27T08:33:32Z 12921 TID--9w50p8 Sidekiq::Extensions::DelayedMailer JID-b070e12bd1d99737c8dc11e0 INFO: arguments: ["---\n- !ruby/class 'Notify'\n- :new_user_email\n- - 5\n - CLEARTEXT_PASSWORD\n - \n"]
+2014-11-27T08:33:33Z 12921 TID--9w50p8 Sidekiq::Extensions::DelayedMailer JID-b070e12bd1d99737c8dc11e0 INFO: done: 1.835 sec
+```

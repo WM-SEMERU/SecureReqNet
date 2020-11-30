@@ -1,0 +1,87 @@
+HTTP Maximum Connections per Server limit too low for ZoneMinder
+
+
+Have you searched for similar issues? I have and not found anything.
+Description: I am using ZoneMinder ( https://www.zoneminder.com ) to monitor my video security system and while Brave works for some functions it fails when the more advanced options are set (Montage View in particular) that require more than six open connections to the ZoneMinder local server. Also once the per-server limit is reached no other pages from the server (options, logs, console) can be opened.
+Steps to Reproduce
+
+Open a connection to a ZoneMinder Montage page ( use your ZM server address instead of zm.home: http://zm.home/zm/index.php?view=montage&group=0 ) with six or more video locations shown.
+
+Actual result:
+Only the first six video locations show, any additional locations and things like the State and FPS data that are intermittent connections do not show. No additional pages on the server can be opened.
+Switch to a Montage view with less than six locations and observe that the State and FPS information is now displayed and you can open a limited number of additional pages.
+Expected result:
+Being able to observe at least 9 locations (more would be better) and have the State and FPS information displayed. Being able to open additional pages on the ZM server, Console, Logs and Settings at a minimum.
+Having this setting not being the default or even easily changed would be acceptable as few people actually need it.
+Having the increased setting only apply to a selected domain or list of servers would also be acceptable and would limit unwanted behavior when accessing other servers.
+Reproduces how often: Every time.
+Brave Version
+
+
+
+Name
+Version
+
+
+
+
+Brave
+0.23.79
+
+
+V8
+6.8.275.24
+
+
+rev
+51b4905
+
+
+Muon
+8.0.7
+
+
+OS Release
+4.4.143-65-default
+
+
+Update Channel
+Release
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Linux
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Reproducible on current live release: I have not tried the live build.
+Additional Information:
+This limitation can be bypassed in Firefox (which I hate to use) by changing these settings:
+( https://zoneminder.readthedocs.io/en/latest/faq.html#i-have-several-monitors-configured-but-when-i-load-the-montage-view-in-firefox-why-can-i-only-see-two-or-why-don-t-all-my-cameras-display-when-i-use-the-montage-view-in-firefox )
+Enter about:config in the address bar
+scroll down to browser.cache.check_doc_frequency 3 change the 3 to a 1
+browser.cache.disk.enable True -> False
+network.http.max-connections-per-server -> put a value of 100
+network.http.max-persistent-connections-per-proxy -> 100 again
+network.http.max-persistent-connections-per-server -> 100 again
+
+This is also a problem in Chrome
+
+
+

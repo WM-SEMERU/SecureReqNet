@@ -1,0 +1,8 @@
+[hackerone] chrome://brave issues
+
+
+Test Case
+Please go through the test case that was provided by @diracdeltas via QA Slack DM.
+Original Reported Issue
+reported at https://hackerone.com/reports/415178 and https://hackerone.com/reports/415258
+EDIT: also in https://hackerone.com/reports/415967

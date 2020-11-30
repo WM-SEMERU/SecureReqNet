@@ -1,0 +1,17 @@
+'https://hackerone.com/reports/174689
+
+>  Anyone entering the project link, and press on the link located, pull cookies the victim, or be used in other ways.
+
+> url video: https://youtu.be/N_yenMP-B6k
+
+> the script code used in video: 
+
+> `javascript://a.com//%0aalert(document.cookie);`
+
+> `javascript://a.com//%0aalert(document.domain);`
+
+----
+
+I've verified this works on CE and gitlab.com. Auth tokens are protected by the HttpOnly flag.
+
+Be warned that our issue tracker is also vulnerable in the description field. Be careful when including sample code in the issue tracker.

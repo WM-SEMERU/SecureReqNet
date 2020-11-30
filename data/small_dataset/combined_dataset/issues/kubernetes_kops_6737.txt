@@ -1,0 +1,8 @@
+Add min-resync-period for Controller Manager
+
+
+Adds ability to specify minResyncPeriod for the Controller Manager
+spec:
+  kubeControllerManager:
+    minResyncPeriod: 6h
+

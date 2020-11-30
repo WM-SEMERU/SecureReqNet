@@ -1,0 +1,17 @@
+delete rules forgot to check for global this
+
+
+Original issue 285 created by erights on 2008-05-17T23:25:57.000Z:
+<script>
+delete this['x_'];
+</script>
+cajoles to
+<script type="text/javascript">{
+_.loadModule(function (, IMPORTS__) {
+{
+caja.result(_.deleteProp(IMPORTS, 'x'));
+}
+});
+}</script>
+which inappropriately uses deleteProp rather than deletePub. This is a
+security hole.

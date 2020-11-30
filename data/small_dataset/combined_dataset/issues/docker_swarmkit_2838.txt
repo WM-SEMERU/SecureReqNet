@@ -1,0 +1,11 @@
+Update x/crypto for salsa fix
+
+
+This includes fix for golang/go#30965
+This should not break any update, as we should not be encrypting more than
+256GB data, as we only use secretbox for encrypting Raft values.
+Signed-off-by: Justin Cormack justin.cormack@docker.com
+- What I did
+- How I did it
+- How to test it
+- Description for the changelog

@@ -1,0 +1,11 @@
+doc: inspector security warning for changing host to a public IP
+
+
+This is the documentation part of #23444.
+Checklist
+
+ make -j4 test (UNIX), or vcbuild test (Windows) passes
+ documentation is changed or added
+ commit message follows commit guidelines
+
+/cc @nodejs/documentation @nodejs/security-wg

@@ -1,0 +1,1 @@
+We have https://oursite.com set as the external_url. Yet, the avatar urls are generated as http://oursite.com/uploads/user/avatar/ID/FILE.png

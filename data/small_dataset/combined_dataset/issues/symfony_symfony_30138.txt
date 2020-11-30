@@ -1,0 +1,33 @@
+PHPUnit test freezes when testing ChoiceCommand with multiSelect enabled
+
+
+Symfony version(s) affected: Console 4.2.3
+Description
+This is a standalone Symfony Console project. I have one simple test, to test a command that requires input. I use the setInputs method in the test on $commandTester and input 6 answers there for the 6 questions that will be asked. However, the test hangs at the ChoiceQuestion with multiSelect enabled ($question->setMultiselect(true);), causing PHP to use a lot of processing power (CPU usage) and the Terminal ends up using a lot of RAM.
+How to reproduce
+Make a simple test like this one:
+<?php
+
+namespace Dockr\Tests\Command;
+
+use MyApp\Commands\MyCoolCommand;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Tester\CommandTester;
+
+class MyCoolCommandTest extends TestCase
+{
+    public function testExecute()
+    {
+        $application = new Application();
+        $application->add(new MyCoolCommand);
+
+        $command = $application->find('do_cool_stuff');
+
+        $commandTester = new CommandTester($command);
+        $commandTester->setInputs(['This', 'This', 'This', 'This', 'This', 'This']);
+        $commandTester->execute(['command' => $command->getName()]);
+    }
+}
+
+And make sure that there is one multiSelect question ($question->setMultiselect(true);). The question should hang at the $questionHelper->ask($input, $output, $question) call.
+Please note: This command works perfectly fine when running the command manually, only fails when running it via a test like above.

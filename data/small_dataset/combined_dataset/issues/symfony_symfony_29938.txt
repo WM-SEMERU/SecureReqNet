@@ -1,0 +1,6 @@
+[MIME component] Alternative effort
+
+
+Hi, looks like we are up to similar goal:
+https://github.com/FileEye/MimeMap and https://github.com/symfony/mime
+Any opportunity to combine efforts?

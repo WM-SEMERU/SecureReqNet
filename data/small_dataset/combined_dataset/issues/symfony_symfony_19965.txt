@@ -1,0 +1,51 @@
+[Security] Make sure RoleVoter only votes for RoleInterface objects and strings
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+"master"
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+yes
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#18042
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+make sure RoleVoter only vote for roles and don't produce fatal error on non-strings.
+The BC-Break happen, if someone use a Object as Role by not implementing the RoleInterface but adding a toString method which gives "ROLE_SOMETHING" back. This "feature" breaks.

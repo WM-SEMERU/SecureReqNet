@@ -1,0 +1,14 @@
+Remaining freeze violations among v8 array methods
+
+
+Original issue 1816 created by erights on 2013-07-15T01:56:14.000Z:
+https://code.google.com/p/v8/issues/detail?id=2615
+Lists the following methods as potentially problematic, though by different criteria:
+
+Array.prototype.unshift
+Array.prototype.splice
+Array.prototype.shift
+Array.prototype.pop
+Array.prototype.sort
+
+We need to test each of these to determine whether they violate freeze safety, and if so, repair them. The good new is that, unlike push, probably none of these are as performance critical for the code we care about, and so we can afford to replace them.

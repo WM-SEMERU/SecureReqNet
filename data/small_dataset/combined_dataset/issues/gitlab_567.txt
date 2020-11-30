@@ -1,0 +1,11 @@
+Example of test that sometimes fails:
+
+Spinach Tests:
+
+Feature: Search
+
+Scenario: I should see project issues
+
+And I should not see "Bar" link  # features/steps/search.rb:66
+
+expected not to find link "Bar", found 3 matches: "Project: Barry Zboncak / Shop", "Barry Zboncak / Shop", "Barry Zboncak / Shop" /gems/capybara-2.2.1/lib/capybara/node/matchers.rb:108:in `block in assert_no_selector'

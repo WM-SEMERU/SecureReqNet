@@ -1,0 +1,6 @@
+acceptableProblems glitch causing SES failure on Chrome 32.0.1700.107
+
+
+Original issue 1891 created by kpreid.switchb.org on 2014-02-11T18:47:29.000Z:
+It appears that "doNotRepair: true, permit: true" no longer properly ignores the problem, and that this was broken by the repair-framework refactoring r5659.
+This causes SES to fail e.g. on Chrome stable 32.0.1700.107.

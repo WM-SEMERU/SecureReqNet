@@ -1,0 +1,27 @@
+Should be able to set --cert-dir for service account key generation (kubeadm init phase certs sa)
+
+
+What keywords did you search in kubeadm issues before filing this one?
+cert-dir, init phase certs
+Is this a BUG REPORT or FEATURE REQUEST?
+BUG REPORT
+Versions
+kubeadm version (use kubeadm version): v1.13.2
+Environment:
+
+Kubernetes version (use kubectl version): v1.13.2
+Cloud provider or hardware configuration: N/A
+OS (e.g. from /etc/os-release): N/A
+Kernel (e.g. uname -a): N/A
+Others: N/A
+
+What happened?
+For all other kubeadm init phase certs subcommands, I can set --cert-dir. For kubeadm init phase certs sa, I cannot.
+The reasoning for this (I assume) is that the sa command does not actually relate to certificates - just a public/private key pair. See the code here.
+This used to be possible when these subcommands were still under kubeadm alpha phase certs.
+What you expected to happen?
+Since I can change the target location for other PKI assets, I should be able to do the same for these assets.
+How to reproduce it (as minimally and precisely as possible)?
+kubeadm init phase certs sa --cert-dir <anything> should error due to --cert-dir not being a valid flag for the sa subcommand at this time.
+Anything else we need to know?
+I'm also in favor of renaming --cert-dir to --pki-dir if possible, as that seems more logical given the assets that are generated. We could also name the flag differently for just he sa subcommand, I suppose.

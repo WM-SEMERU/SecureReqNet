@@ -1,0 +1,45 @@
+[Translator] Add resource path to exception message for schema validation errors
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+yes    
+
+
+Fixed tickets
+#30762 
+
+
+License
+MIT
+
+
+

@@ -1,0 +1,4 @@
+Do not use node require in renderer process
+
+
+Currently we still use node in the renderer process, but should allow node stdlib's that are browserify-able via https://github.com/webpack/node-libs-browser, like assert, url, path, etc. and wire this up to our webpack build (maybe just change the target from electron renderer to browser? sure there's a few config things to do for this) to ensure we're not using any non-browserify-able node stdlibs.

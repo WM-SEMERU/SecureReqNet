@@ -1,0 +1,5 @@
+fix(scripts): ignore bouncing accounts in verification reminders
+
+
+Small tweak for the verification reminders script, if the mailer fails with a bounce error then just delete the reminder records and ignore that account.
+It turns out it's quite hard to force a bounce error in local testing. I tried with a non-existent domain and a non-existent account at a valid domain, but the email service succeeded with both. So I'm going to mark this as WIP and try again tomorrow. We can still cut the train in the meantime, I'll make a point release if I get it to fail.

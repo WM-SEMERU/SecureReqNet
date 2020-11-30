@@ -1,0 +1,5 @@
+Update kops ami for cve issues - meltdown and spectre
+
+
+Patch kernel in our Jessie and Stretch amis for
+(CVE-2017-5715, CVE-2017-5753, and CVE-2017-5754)

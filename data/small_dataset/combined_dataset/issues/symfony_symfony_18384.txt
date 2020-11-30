@@ -1,0 +1,10 @@
+PersistentTokenBasedRememberMeServices does not support concurrent requests
+
+
+When using a rememberme token povider, during each request the "PersistentTokenBasedRememberMeServices" compares the request's cookie token value with the value from the token provider.
+If the comparison fails it throws a "CookieTheftException".
+If it succeeds, it generates a new random value for the token, stores it using the token provider and updates the rememberme cookie.
+So if you send concurrent requests to your application only the first one will suceed, because the token value is changed on the server side when new requests are already sent, containing the previous (wrong) token value.
+I have a page containing a few hinclude tags and the ajax calls make the "CookieTheftException" throw systematically on the second or third request.
+I'm using the token provider from the doctrine bridge as explained here; https://symfony.com/doc/current/cookbook/security/remember_me.html
+Quick fix was to avoid re-generating the token value for xmlhttp requests, but I wonder if this value should change at all.

@@ -1,0 +1,18 @@
+Hello everyone,
+
+I have just noticed that there is an issue registering via github omniauth if the name is blank.  
+To reproduce, blank your name on GitHub and try to register on GitLab. You will get the 422 error page.
+
+```
+Started GET "/users/auth/github" for xxx at 2014-06-10 01:16:39 +0200
+Started GET "/users/auth/github/callback?code=75ca39b262468fc6662a&state=e44ed912f09d1f974bdfba1ae5ad4994ada3dd8cfaa75fd7" for xxx at 2014-06-10 01:16:40 +0200
+Processing by OmniauthCallbacksController#github as HTML
+  Parameters: {"code"=>"75ca39b262468fc6662a", "state"=>"e44ed912f09d1f974bdfba1ae5ad4994ada3dd8cfaa75fd7"}
+Completed 422 Unprocessable Entity in 300ms
+
+ActiveRecord::RecordInvalid (Validation failed: Name can't be blank):
+  lib/gitlab/oauth/user.rb:45:in `create'
+  app/controllers/omniauth_callbacks_controller.rb:41:in `handle_omniauth'
+  app/controllers/omniauth_callbacks_controller.rb:4:in `block (2 levels) in <class:OmniauthCallbacksController>'
+  app/controllers/application_controller.rb:59:in `set_current_user_for_thread'
+```

@@ -1,0 +1,11 @@
+Hi
+
+I want to configure the gitlab-shell config. I have the following entry in  in /etc/gitlab/gitlab.rb
+
+gitlab_shell['auth_file'] = 'bla'
+
+But this does not change the entry in the gitlab-shell/config.yml
+
+auth_file: "/var/opt/gitlab/.ssh/authorized_keys"
+
+Is this even supported?

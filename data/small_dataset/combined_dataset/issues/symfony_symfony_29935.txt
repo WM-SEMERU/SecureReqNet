@@ -1,0 +1,49 @@
+[DI] Fix bad error message for unused bind under _defaults
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#27828
+
+
+License
+MIT
+
+
+
+Sidenote: I originally included the fix in #29897, but I decided to close the previous PR and divide it into two separate PRs for clarity.
+Description:
+With this fix, the message regarding an unused bind will have a clear information about the type of the bind (defined under _defaults, _instanceof or per service), as well as the name of the file, in which it was configurated. It's for, both, YAML and XML configurations.
+For the core team, please note, that the fix assumes a possibility of definings binds under _instanceof, which was introduced in #27806. But since fixes are merged into other branches, I thought that it might be necessary to inlude this possibility. If this case requires making separate fixes for different branches, I will gladly do it.

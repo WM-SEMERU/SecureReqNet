@@ -1,0 +1,55 @@
+[Security] register custom providers on ExpressionLanguage directly
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.4
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This is a fix on 3.4 related to #26660.
+See the comment from @stof here: #26660 (comment)
+
+fixes a bug where custom providers would not be registered when retrieving the security.expression_language instance without the ExpressionVoter being instantiated.
+avoids deprecations on 3.4 when using the 4.1 patch in #26660
+

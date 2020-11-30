@@ -1,0 +1,51 @@
+(HttpFoundation) Better approach to determine is_numeric value
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master  
+
+
+Bug fix?
+no
+
+
+New feature?
+no 
+
+
+BC breaks?
+no     
+
+
+Deprecations?
+no 
+
+
+Tests pass?
+no    
+
+
+Fixed tickets
+#...   
+
+
+License
+MIT
+
+
+Doc PR
+symfony/symfony-docs#... 
+
+
+
+What it does (as an alternative to is_numaric), is use preg_match to check whether any non-numeric characters exist in the variable. If non-numeric characters exist, it calls strtotime,. If non-numeric characters don't exist, it calls nothing
+(HttpFoundation) Better approach to determine is_numeric value

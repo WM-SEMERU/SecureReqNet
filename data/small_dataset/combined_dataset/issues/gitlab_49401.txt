@@ -1,0 +1,13 @@
+### Problem to solve
+
+Once an administrator is logged in, we don't ask for your credentials again. If an administrator accidentally leaves their session unattended, an unintended party has full administrative access to the instance.
+
+### Proposal
+
+If a user has not entered their password for a reasonable period of time (~2-4 hours), ask for their password/2FA again on attempting to view or use the admin features.
+
+### What does success look like, and how can we measure that?
+
+Security is increased without excessively inconveniencing users. Negative feedback from <2% of instances using it.
+
+### Links / references

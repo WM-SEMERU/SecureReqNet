@@ -1,0 +1,122 @@
+ETH toggle throws "Uncaught Exception: Error: connect ENOENT \\.\pipe\geth.ipc "
+
+
+Description
+ETH toggle throws "Uncaught Exception: Error: connect ENOENT \.\pipe\geth.ipc "
+Steps to Reproduce
+
+Build from master (6ab4f61), launch clean profile with GETH_LOG=1 npm run start
+Enable ETH Wallet, wait for the blocks to sync and be upto date
+Toggle ETH Wallet button, console throws up the errors (see full log below)
+
+Actual result:
+
+Full console log which is not visible in the recording
+INFO [08-16|11:48:56.501] Imported new block headers               count=3    elapsed=7.936ms   number=6158582 hash=aba2c4…946427 ignored=15
+INFO [08-16|11:49:06.788] Imported new block headers               count=2    elapsed=7.439ms   number=6158584 hash=105e89…d408bc ignored=0
+INFO [08-16|11:49:54.808] Imported new block headers               count=2    elapsed=6.944ms   number=6158586 hash=ccc16b…bc3f36 ignored=0
+[9360:2696:0816/115001.693:ERROR:latency_info.cc(163)] Surface::TakeLatencyInfoFromFrame, LatencyInfo vector size 102 is too big.
+INFO [08-16|11:50:37.430] Imported new block headers               count=4    elapsed=9.423ms   number=6158590 hash=7c4c0e…91af35 ignored=0
+INFO [08-16|11:50:55.119] Imported new block headers               count=2    elapsed=6.943ms   number=6158592 hash=84a15d…2fd520 ignored=0
+GETH: process killed
+GETH: cleanup done
+GETH exit: Code: 1 | Signal: null
+GETH close: Code: 1 | Signal: null
+unable to kill 7472: kill ESRCH
+GETH: process killed
+GETH: cleanup done
+INFO [08-16|11:51:18.042] Maximum peer count                       ETH=0 LES=100 total=10
+GETH: spawned
+INFO [08-16|11:51:18.081] Starting peer-to-peer node               instance=Geth/v1.8.13-stable-225171a4/windows-amd64/go1.10.3
+INFO [08-16|11:51:18.081] Allocated cache and file handles         database=C:\\Users\\Owner\\AppData\\Roaming\\brave-development\\ethereum\\mainnet\\geth\\lightchaindata cache=768 handles=1024
+INFO [08-16|11:51:18.955] Initialised chain configuration          config="{ChainID: 1 Homestead: 1150000 DAO: 1920000 DAOSupport: true EIP150: 2463000 EIP155: 2675000 EIP158: 2675000 Byzantium: 4370000 Constantinople: <nil> Engine: ethash}"
+INFO [08-16|11:51:18.955] Disk storage enabled for ethash caches   dir=C:\\Users\\Owner\\AppData\\Roaming\\brave-development\\ethereum\\mainnet\\geth\\ethash count=3
+INFO [08-16|11:51:18.955] Disk storage enabled for ethash DAGs     dir=C:\\Users\\Owner\\AppData\\Ethash                                                      count=2
+INFO [08-16|11:51:18.956] Added trusted checkpoint                 chain=mainnet block=5898239 hash=ae778e…76d0ea
+INFO [08-16|11:51:18.956] Loaded most recent local header          number=6158592 hash=84a15d…2fd520 td=6041806852458060679428
+INFO [08-16|11:51:18.960] Starting P2P networking
+An uncaught exception occurred in the main process Uncaught Exception:
+Error: connect ENOENT \\.\pipe\geth.ipc
+    at Object.exports._errnoException (util.js:1050:11)
+    at exports._exceptionWithHostPort (util.js:1073:20)
+    at PipeConnectWrap.afterConnect [as oncomplete] (net.js:1097:14)
+INFO [08-16|11:51:21.063] UDP listener up                          net=enode://cf6caa73dcb69dc671f89be40dae4f62189afc7071eae2c2c689837c5f4f6c4214a356992d7ab1c853cc032809f2ed0d3374ed1d06fd9a910164c12a86bd0db6@[::]:40400
+INFO [08-16|11:51:21.066] RLPx listener up                         self="enode://cf6caa73dcb69dc671f89be40dae4f62189afc7071eae2c2c689837c5f4f6c4214a356992d7ab1c853cc032809f2ed0d3374ed1d06fd9a910164c12a86bd0db6@[::]:40400?discport=0"
+WARN [08-16|11:51:21.066] Light client mode is an experimental feature
+INFO [08-16|11:51:21.072] IPC endpoint opened                      url=\\\\.\\pipe\\geth.ipc
+INFO [08-16|11:51:21.073] HTTP endpoint opened                     url=http://127.0.0.1:40800 cors= vhosts=localhost
+INFO [08-16|11:51:21.073] WebSocket endpoint opened                url=ws://127.0.0.1:40600
+An uncaught exception occurred in the main process Uncaught Exception:
+Error: connect ENOENT \\.\pipe\geth.ipc
+    at Object.exports._errnoException (util.js:1050:11)
+    at exports._exceptionWithHostPort (util.js:1073:20)
+    at PipeConnectWrap.afterConnect [as oncomplete] (net.js:1097:14)
+An uncaught exception occurred in the main process Uncaught Exception:
+Error: connect ENOENT \\.\pipe\geth.ipc
+    at Object.exports._errnoException (util.js:1050:11)
+    at exports._exceptionWithHostPort (util.js:1073:20)
+    at PipeConnectWrap.afterConnect [as oncomplete] (net.js:1097:14)
+An uncaught exception occurred in the main process Uncaught Exception:
+Error: connect ENOENT \\.\pipe\geth.ipc
+    at Object.exports._errnoException (util.js:1050:11)
+    at exports._exceptionWithHostPort (util.js:1073:20)
+    at PipeConnectWrap.afterConnect [as oncomplete] (net.js:1097:14)
+
+Expected result:
+Should not throw error when ETH is toggled
+Reproduces how often:
+Brave Version
+
+
+
+Brave
+0.25.0
+
+
+
+
+V8
+6.8.275.24
+
+
+rev
+6ab4f61
+
+
+Muon
+8.0.8
+
+
+OS Release
+10.0.17134
+
+
+Update Channel
+ 
+
+
+OS Architecture
+x64
+
+
+OS Platform
+Microsoft Windows
+
+
+Node.js
+7.9.0
+
+
+Brave Sync
+v1.4.2
+
+
+libchromiumcontent
+68.0.3440.84
+
+
+
+Reproducible on current live release:
+N/A
+Additional Information
+Similar to #15031

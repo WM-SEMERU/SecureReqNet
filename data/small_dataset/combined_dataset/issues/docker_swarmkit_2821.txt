@@ -1,0 +1,4 @@
+allocator: use a map for network-IDs to prevent O(n2)
+
+
+ping @dperny @andrey-ko PTAL

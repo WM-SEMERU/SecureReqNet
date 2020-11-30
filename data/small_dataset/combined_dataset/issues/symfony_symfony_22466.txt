@@ -1,0 +1,35 @@
+Missing alias of security.user_checker
+
+
+
+
+
+Q
+A
+
+
+
+
+Bug report?
+yes
+
+
+Feature request?
+no
+
+
+BC Break report?
+no
+
+
+RFC?
+no
+
+
+Symfony version
+master
+
+
+
+Alias of security.user_checker to Symfony\Component\Security\Core\User\UserCheckerInterface seems missing.
+Defining an autowired service that depends on the interface raises a deprecation error (Autowiring services based on the types they implement is deprecated since Symfony 3.3 and won't be supported in version 4.0. You should rename (or alias) the "security.user_checker" service to "Symfony\Component\Security\Core\User\UserCheckerInterface")

@@ -1,0 +1,9 @@
+Support U2F Keys
+
+
+Test plan
+See #12507
+Original issue description
+I use a U2F key (YubiKey Neo) for Two factor authentication in locations such as here on github and with Google accounts (as well as Lastpass extension).
+While the key works great in Chrome, it's not currently supported in Brave. This is a significant blocker for me. I'd love to see this functionality implemented. See the error I get when trying log into my github account with Brave (at the point where the security key is requested).
+

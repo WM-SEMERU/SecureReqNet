@@ -1,0 +1,6 @@
+Lazy initialize UUID for Background context
+
+
+Fixes #782
+This will lazy initialize the UUID using sync/once.  Given that in the happy path of already initialized value, sync/once does a atomic.LoadUint32() instead of a full Lock(), I can't imagine this will have any real performance impact.
+I don't really know under what context this is used so not totally sure if a tests should be added for this or if in general it should be obvious if this code works because of other tests.

@@ -1,0 +1,10 @@
+Setting node name via kubeadm extra config leads to a crash
+
+
+I tried setting the k8s node name with minikube start --extra-config=kubeadm.node-name=foo, but minikube crashed with a timeout. The kubelet logs contain node "minikube" not found, which is probably due to this line in pkg/minikube/bootstrapper/kubeadm/versions.go:
+NewUnversionedOption(Kubelet, "hostname-override", constants.DefaultNodeName),
+
+I was able to make it work with:
+minikube start --extra-config=kubeadm.node-name=foo --extra-config=kubelet.hostname-override=foo
+
+This took me by surprise, since I was expecting the kubeadm setting to affect the kubelet one in absence of any explicit settings for the latter. Maybe this just needs some extra docs, since the above workaround is available. Or perhaps a top-level --node-name option for minikube start that ensures a consistent handling of the flag in the various components.

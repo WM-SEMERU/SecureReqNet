@@ -1,0 +1,4 @@
+ci: simplify RBE execution
+
+
+Run all targets with RBE config. Previously we filtered out one target, //tools/ts-api-guardian:tests, and ran that with a different bazelrc

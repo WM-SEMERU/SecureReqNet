@@ -1,0 +1,22 @@
+Certificate rotation for kubelet server certs.
+
+
+Replaces the current kubelet server side self signed certs with certs signed by
+the Certificate Request Signing API on the API server. Also renews expiring
+kubelet server certs as expiration approaches.
+Two Points:
+
+With --feature-gates=RotateKubeletServerCertificate=true set, the kubelet will
+request a certificate during the boot cycle and pause waiting for the request to
+be satisfied.
+In order to have the kubelet's certificate signing request auto approved,
+--insecure-experimental-approve-all-kubelet-csrs-for-group= must be set on
+the cluster controller manager. There is an improved mechanism for auto
+approval proposed.
+
+Release note:
+With `--feature-gates=RotateKubeletServerCertificate=true` set, the kubelet will
+request a server certificate from the API server during the boot cycle and pause
+waiting for the request to be satisfied. It will continually refresh the certificate as
+the certificates expiration approaches.
+

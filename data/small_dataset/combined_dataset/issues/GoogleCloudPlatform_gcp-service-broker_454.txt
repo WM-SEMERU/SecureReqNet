@@ -1,0 +1,4 @@
+fixed formatting of some fields in the generated docs
+
+
+The formatter expected all values to be strings but that's not actually the case for some of the values we want to format so this is now a generic value to enable formatting values like true and 42.

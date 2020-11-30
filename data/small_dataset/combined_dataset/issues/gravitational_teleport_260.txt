@@ -1,0 +1,8 @@
+lock user account after certain amount of failed attempts
+
+
+Our rate limits should be more intelligent to prevent brute-forcing our 2FA auth:
+
+ Limit amount of auth attempts per user separately from other requests
+ lock the account in case if there was a certain amount of failed login attempts
+

@@ -1,0 +1,17 @@
+Fron ZenDesk: https://gitlab.zendesk.com/agent/tickets/28123
+
+```
+Vulnerability type: Information Disclosure.
+
+My girlfriend requested access to join a group with private repositories and was immediately able to see the group's full list of repositories, including private repositories. **The request had not yet been accepted.** She was not able to _access_ any of them: clicking on a private repository yielded a 404. However, she was able to observe that private repositories exist, their name, description, and build status. Interestingly enough, the favicon for the project doesn't load: requesting it directly yields a 404.
+
+I was able to replicate this by creating a new account and requesting access myself. I observed the very same behavior. Once I had an administrator of the group reject the request to join the group, I was no longer able to see the private repositories. I requested access again and could once again see the private repositories in the list. Interestingly enough, the favicon for the project doesn't load because requesting it yields a 404.
+
+I recorded a video of me doing this, but it's too large to attach to this report. I'll happily provide it upon request.
+
+I noticed a few other problems in the process of reproducing this:
+
+* Members of a group who do not have access to approve membership requests receive a non-actionable notification of each request. This seems useless. * The "confirmation email sent" page does not have a link back to the login page. If I confirm in another tab or on another machine (e.g. phone) I cannot just click a link to login on the browser where I created the account.
+```
+
+/cc: @DouweM, @rspeicher, @rymai 

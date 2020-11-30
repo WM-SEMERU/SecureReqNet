@@ -1,0 +1,7 @@
+Login attempts Administrator Warning!
+
+
+Hi,
+How can we Administrators of ERPNext know that a user has tried more than 3/5 times to login and did not succeeded?
+By checking the Authentication Log but why does not the system informs the Admin of the wrong attempts and lock the account for XXXX amount of time.
+This should be a security concern.

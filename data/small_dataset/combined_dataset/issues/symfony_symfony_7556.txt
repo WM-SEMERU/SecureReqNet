@@ -1,0 +1,41 @@
+Login after registration failing on 2.2
+
+
+I want to make the User stay logged after registering, however the authentication handler ignores the firewall parameter in class UsernamePasswordToken and using the first firewall declared on security.yml:
+//tried code
+$token = new UsernamePasswordToken($entity->getEmail(),$entity->getPassword(), 'main', $entity->getRoles());
+$this->get('security.context')->setToken($token);
+my security:
+firewalls:
+    backend:
+        pattern:        ^/admin
+        provider:       administradores
+        anonymous:      ~
+        context: admin
+        form_login:
+            login_path: admin_login
+            check_path: admin_login_check
+        logout:
+            path:       admin_logout
+            target:     /admin
+        remember_me:
+            key:        adminassinatura2013
+            lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
+
+
+    main:
+        pattern:        ^/*
+        provider:       usuarios
+        anonymous:      ~
+        context: user
+        form_login:
+            login_path: usuario_login
+            check_path: usuario_login_check
+            use_referer:        true
+        logout:
+            path:       usuario_logout
+        remember_me:
+            key:        userassinatura2013
+            lifetime:   604800  
+
+should be logging into the site, and in fact are logging into the admin panel

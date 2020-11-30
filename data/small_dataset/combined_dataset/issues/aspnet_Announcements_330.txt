@@ -1,0 +1,5 @@
+Bulk moving issues to the AspNetCore, Extensions, and EntityFrameworkCore repos
+
+
+As a follow-up to #320, we will start bulk moving issues from the many 'smaller' repos into the few, new 'mondo' repos. We will continue to use labels to signify various product areas and sub-features to make it reasonably easy to locate issues of interest.
+Please use aspnet/AspNetCore#3598 for discussions.

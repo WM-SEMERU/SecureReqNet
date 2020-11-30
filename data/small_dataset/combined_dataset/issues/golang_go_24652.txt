@@ -1,0 +1,65 @@
+crypto/x509: root_cgo_darwin and root_nocgo_darwin omit some system certs
+
+
+Please answer these questions before submitting your issue. Thanks!
+What did you do?
+$ cat main.go
+
+package main
+
+import (
+	"crypto/x509"
+	"fmt"
+	"log"
+)
+
+func main() {
+	certs, err := x509.SystemCertPool()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Num System Certs: %d\n", len(certs.Subjects()))
+}
+$ CGO_ENABLED=0 go run main.go
+Num System Certs: 188
+$ CGO_ENABLED=1 go run main.go
+Num System Certs: 168
+
+What did you expect to see?
+I expected to see the same number of certificates regardless of whether I used cgo.
+What did you see instead?
+The implementation using CGO resulted in fewer system certificates, which causes problems for our tooling that relies on one of those missing certificates to be in the SystemCertPool.
+System details
+go version go1.10.1 darwin/amd64
+GOARCH="amd64"
+GOBIN=""
+GOCACHE="/Users/jhenke/Library/Caches/go-build"
+GOEXE=""
+GOHOSTARCH="amd64"
+GOHOSTOS="darwin"
+GOOS="darwin"
+GOPATH="/Users/jhenke"
+GORACE=""
+GOROOT="/usr/local/go"
+GOTMPDIR=""
+GOTOOLDIR="/usr/local/go/pkg/tool/darwin_amd64"
+GCCGO="gccgo"
+CC="clang"
+CXX="clang++"
+CGO_ENABLED="1"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+PKG_CONFIG="pkg-config"
+GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/_b/gz_w_nfj0_33f5y3s_0pg8xs080pym/T/go-build925272903=/tmp/go-build -gno-record-gcc-switches -fno-common"
+GOROOT/bin/go version: go version go1.10.1 darwin/amd64
+GOROOT/bin/go tool compile -V: compile version go1.10.1
+uname -v: Darwin Kernel Version 16.7.0: Mon Nov 13 21:56:25 PST 2017; root:xnu-3789.72.11~1/RELEASE_X86_64
+ProductName:	Mac OS X
+ProductVersion:	10.12.6
+BuildVersion:	16G1114
+lldb --version: lldb-900.0.64
+  Swift-4.0
+

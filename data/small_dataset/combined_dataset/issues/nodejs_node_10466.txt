@@ -1,0 +1,14 @@
+doc: Provide a warning around child_process.exec()
+
+
+child_process.exec() allows trivial arbitrary command execution if code
+passes unsanitised user input to it. Add a warning in the docs to make that
+clear.
+Checklist
+
+ documentation is changed or added
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+doc
+Description of change

@@ -1,0 +1,45 @@
+Public key is not signed message on OpenSuse
+
+
+Description
+Public key is not signed message on OpenSuse
+Steps to Reproduce
+
+Run the following commands
+
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
+cat << EOF | sudo tee /etc/zypp/repos.d/brave-browser-release.repo
+[brave-browser-release]
+name=Brave Browser Release Channel repository
+baseurl=https://brave-browser-rpm-release.s3.brave.com/x86_64/
+enabled=1
+EOF
+
+sudo zypper  install brave-keyring brave-browser
+
+
+Console throws message saying public key is not signed
+
+Actual result:
+
+Expected result:
+Should not throw any error message
+Reproduces how often:
+Eay
+Brave version (brave://version info)
+Release
+Reproducible on current release:
+
+Does it reproduce on brave-browser dev/beta builds?
+Yes
+
+Website problems only:
+
+Does the issue resolve itself when disabling Brave Shields?
+Is the issue reproducible on the latest version of Chrome?
+
+Additional Information
+Possibly similar to #3617
+Same error shown for beta/dev/nightly install as well.
+cc: @mbacchi @bkero

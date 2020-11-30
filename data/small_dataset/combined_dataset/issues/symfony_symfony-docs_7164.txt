@@ -1,0 +1,4 @@
+Add docs for the Firewall Config class
+
+
+symfony/symfony#19398 introduced a FirewallConfig class accessible from FirewallContext. Should we document it or at leas mention it?

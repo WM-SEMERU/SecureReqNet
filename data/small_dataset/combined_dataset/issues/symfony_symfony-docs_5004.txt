@@ -1,0 +1,20 @@
+Tip for multiple authentication mechanisms
+
+
+In the Form login chapter of the Cookbook there is an example of security.yml configuration:
+# app/config/security.yml
+security:
+    # ...
+
+    firewalls:
+        default:
+            anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+In this example two different authentication methods are used in the same firewall. There was a small section in book/security/authentication.rst with the following explanation:
+
+When the user is not authenticated and if there is more than one authentication mechanisms, Symfony2 automatically defines a default entry point (in the example above, the login form; but if the user send an Authorization HTTP header with wrong credentials, Symfony2 will use the HTTP basic entry point).
+
+But in this commit it was deleted and now I can't find anything about the behavior of such configuration in Symfony documentation. This example is a bit confusing for novices, so it will be great to restore a small tip about how it works.

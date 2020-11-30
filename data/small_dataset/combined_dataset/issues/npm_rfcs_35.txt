@@ -1,0 +1,5 @@
+rfc: @pika/pack available in stock npm
+
+
+Here's a lil RFC suggesting that maybe @pika/pack should be directly integrated into npm.
+rendered

@@ -1,0 +1,7 @@
+[1.8] subpath fixes
+
+
+cherrypick of #61044
+fixes #60813 for 1.8
+Fixes CVE-2017-1002101 - See https://issue.k8s.io/60813 for details
+

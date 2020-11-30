@@ -1,0 +1,141 @@
+Auth cookies not sticking with Desktop versions of Safari
+
+
+I have a small handful of users that are unable to log on to our site while using their macOS & Safari browser. These users have confirmed they can authenticate just fine with another browser, or their phones (typically iPhone). This is a preview release of our new version of our product so I have very limited reach to these users in terms of technical troubleshooting. I am hesitant to release this further until I can fix this problem.
+Users attempt to log in, but the login screen just refreshes, with no errors. Think of behavior like a sign in page redirect after accessing a protected resource. My theory is the Set-Cookie response headers are for some reason being ignored with the redirect.
+I do not have anyone on the company side to reproduce. Any developers with Mac's can't reproduce.
+ASP.NET Core 2.2
+Auth0 for identity provider
+Cookie Authentication
+Safari 10.X & 12.X fail, but others also report success.
+What I'm looking for
+Is there anything misconfigured here that could be affecting Safari somehow? I'm at a loss as I can't reproduce this, but enough random users have reported it so it's certainly a problem.
+Startup Configure
+public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+{
+    // irrelevant bits removed
+
+    app.Use(next => context =>
+    {
+        context.Request.EnableRewind();
+        return next(context);
+    });
+
+    if (Environment.IsDevelopment())
+    {
+        app.UseDatabaseErrorPage();
+        app.UseDeveloperExceptionPage();
+        app.UseMiniProfiler();
+
+        loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Trace);
+    }
+    else
+    {
+        app.UseHsts();
+        app.UseExceptionHandler("/error");
+        app.UseStatusCodePagesWithRedirects("/error/{0}");
+        loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Warning);
+    }
+
+    app.UseHttpsRedirection();
+    app.UseSession();
+    app.UseStaticFiles();
+    app.UseAuthentication();
+
+    app.UseMvc(routes =>
+    {
+            // commented out
+    });
+}
+
+Startup Configure Services
+public void ConfigureServices(IServiceCollection services)
+{
+    // irrelevant bits removed 
+
+    services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+    services.AddHsts(options =>
+    {
+        options.Preload = true;
+        options.IncludeSubDomains = true;
+        options.MaxAge = TimeSpan.FromDays(180);
+    });
+
+    // add data protection
+
+    // add distributed session
+
+    services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    })
+    .AddCookie(opts =>
+    {
+        var cookieDomain = Configuration.GetValue<string>("Auth0:CookieDomain");
+        if (!string.IsNullOrWhiteSpace(cookieDomain))
+        {
+            opts.Cookie.Domain = cookieDomain;
+        }
+        
+        opts.LoginPath = "/login";
+        opts.Events = new CookieAuthenticationEvents()
+        {
+            OnValidatePrincipal = CustomCookieAuthenticationEvents.ValidatePrincipal
+        };
+    });
+
+    services.Configure<SecurityStampValidatorOptions>(options =>
+    {
+        options.ValidationInterval = TimeSpan.FromMinutes(1);
+        options.OnRefreshingPrincipal = context =>
+        {
+            var isImpersonatingClaim = context.CurrentPrincipal.IsImpersonating();
+            if (isImpersonatingClaim)
+            {
+                var impersonationClaims = context.CurrentPrincipal.BuildImpersonationClaims();
+                context.NewPrincipal.Identities.First().AddClaims(impersonationClaims);
+            }
+            return Task.FromResult(0);
+        };
+    });
+
+    // Add AutoMapper
+    services.AddAutoMapper(typeof(Startup));
+    MappingConfigurator.InitializeAndCompile();
+
+    services
+        .AddMvc()
+        .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+}
+
+Login
+[HttpPost]
+[Route("/login")]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+{
+    // irrelevant bits removed 
+
+    if (!ModelState.IsValid) return View(model);
+
+    var ticket = await _authorizeService.Authorize(model.EmailAddress, model.Password);
+
+    var claimsPrincipal = authTicket.CreateClaimsPrincipal();
+    var authProps = authTicket.CreateAuthProperties(persistent);
+
+    // Sign user into cookie middleware
+    await HttpContextAccessor.HttpContext.SignInAsync(
+        CookieAuthenticationDefaults.AuthenticationScheme,
+        claimsPrincipal,
+        authProps);
+
+    // this uses the claims principal to figure out where to send the user.
+    // this will result in a 302 
+    return BaseServices.RedirectService.AfterLogin(claimsPrincipal, returnUrl);
+
+    return View(model);    
+}
+

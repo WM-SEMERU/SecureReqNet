@@ -1,0 +1,45 @@
+[Messenger] Make 'headers' key optional for encoded messages
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#30455
+
+
+License
+MIT
+
+
+

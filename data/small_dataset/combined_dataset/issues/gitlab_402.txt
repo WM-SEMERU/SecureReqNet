@@ -1,0 +1,9 @@
+If you merge one project into an other project, the issues of the one project gets automaticaly closed because of the commit messages in the other merged project.
+
+We often use one project for the product (= master project), and fork that project for customers who wants modifications.
+
+When there's a bug in the main project, we fix it and close the issue with a commit message (ie. `fix #1: Become a programmer, they said. It'll be fun, they said.`)   
+The customers project also got an `issue #1`, but is totaly unreleated to the master project `issue #1`.   
+When you merge the master project into customers project, the customers issue `#1` gets also closed because of the merged commit `fix #1: Become a programmer, they said. It'll be fun, they said.`. 
+
+This unwanted behavior can be avoided if all issues would have an unique id, like it used to be in Gitlab. So there can be only one `#1`.    

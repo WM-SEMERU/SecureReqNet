@@ -1,0 +1,4 @@
+Remove deleted RoleInterface
+
+
+As the master branch of symfony/symfony deleted the Symfony\Component\Security\Core\Role\RoleInterface as of 4.0, this update remove the interface to only mention the base class.

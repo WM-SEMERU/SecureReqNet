@@ -1,0 +1,16 @@
+Large gzip Denial of Service on superagent is found by nsp
+
+
+
+code-push@1.11.2-beta:
+  version "1.11.2-beta"
+  resolved "http://registry.npm.taobao.org/code-push/download/code-push-1.11.2-beta.tgz#642f5199edb0fd6d6d300e439883b03b8b252737"
+  dependencies:
+    q "^1.4.1"
+    recursive-fs "0.1.4"
+    slash "1.0.0"
+    superagent "^1.7.2"
+    superagent-proxy "^1.0.0"
+    yazl "^2.4.1"
+
+This bug fixed in superagent 3.7.0, maybe we should try to update it.

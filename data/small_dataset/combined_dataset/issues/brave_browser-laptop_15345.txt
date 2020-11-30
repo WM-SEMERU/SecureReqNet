@@ -1,0 +1,30 @@
+Reddit videos and spotify web player don't play when shields are up
+
+
+Troubleshooting checklist
+There's a good chance the bug you're about to report is fixed in the new version of Brave
+
+Download latest version of Brave from https://brave.com/download/
+Import your data by navigating to brave://settings/importData
+
+If you'd like to continue for this old version, please check the applicable items:
+
+ Yes I did try the new version
+ I believe this issue is critical for users (security issue, bug that prevents folks from using the software)
+ I've read the FAQs and Common Issues section on community.brave.com (https://community.brave.com/c/common-issues)
+
+Description
+I can't get reddit videos and spotify web player to play. I installed Windvine and yes, I can login into spotify now, but it doesn't play the songs - they get stuck at 00:00. The same happens on reddit, because the videos won't play at all.
+But if I put the shields down, all of these work.
+
+Steps to Reproduce
+
+Go to https://www.reddit.com/r/nonononoyes/comments/9i5myc/i_think_i_can_i_think_i_can/ and try to play the video with shields up
+See that it won't play and disable shields
+See that the videos play
+Go to https://open.spotify.com/track/4YsFuYyDwfDrUl6bSL6g8H and try to play the song with sheidls up
+See that it won't play and disable shields
+See that the song plays now
+
+What version of Brave are you using?
+Versão 0.58.18 Chromium: 71.0.3578.98 (Versão oficial) 64 bits

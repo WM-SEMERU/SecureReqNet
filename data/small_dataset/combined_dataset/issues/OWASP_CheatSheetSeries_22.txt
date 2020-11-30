@@ -1,0 +1,11 @@
+Cheat sheets index from OWASP ASVS point of view
+
+
+Task:
+Create a index file (maintained manually in order to allow contribution on it) that classify all the cheat sheets using of the point of view of the differents sections of the ASVS.
+Objective:
+Address the following important problem raised by the community:
+Too many best practices:
+It would be nice to have them structured so people drill down to Exactly what they want.
+Like the @thoughtworks tech radar: https://www.thoughtworks.com/radar
+

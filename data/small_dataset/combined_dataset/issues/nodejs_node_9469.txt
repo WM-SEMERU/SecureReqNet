@@ -1,0 +1,16 @@
+Distrust certs issued after 00:00:00 Oct. 21, 2016 by StartCom and WoSign
+
+
+Checklist
+
+ make -j8 test (UNIX), or vcbuild test nosign (Windows) passes
+ tests and/or benchmarks are included
+ documentation is changed or added
+ commit message follows commit guidelines
+
+Affected core subsystem(s)
+crypto, tls and test.
+Description of change
+Per discussion of #9434, this PR checks the certs issued by StartCom and WoSign and if notBefore is after 00:00:00 Oct. 21 2016, the tls client connection is failed with CERT_REVOKED error.
+This also includes CNNIC whitelist update since #1895 that expired certs were removed and a minor bug fix of test/parallel/test-tls-cnnic-whitelist.js which came from 2bc7841.
+R: @bnoordhuis

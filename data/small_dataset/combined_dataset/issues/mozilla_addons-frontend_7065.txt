@@ -1,0 +1,6 @@
+Prevent unrelated code changes from L10n contributors / localizers
+
+
+When AMO strings are updated, the commit looks something like this: 8993e7e The commits are always made directly to master rather than in a pull request.
+Mozilla's L10n community is very trustworthy but since we get so many string commits, we don't review each one. If a localizer's user account were compromised, we might never notice a malicious commit. It would be helpful to minimize the damage that one could do to AMO with a malicious L10n commit.
+Possible idea: restrict all mozilla-pontoon commits to the locale directory of the codebase? I guess it would have to be a pre-commit failure because simply making it a one time build failure might not be enough for us to notice.

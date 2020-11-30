@@ -1,0 +1,8 @@
+refactor AuthorizationProvider interface to allow custom logic for determining super user
+
+
+Motivation
+Currently the logic for determining if a role is a super user is not pluggable.  Thus, users have to specify who is a super using the the configuration of a broker which is hard coded.
+Making the logic of determining if a role is a super user pluggable while allow users more flexibility in setting super users which can be a dynamic list of users held in an external source.
+Modifications
+Made the mechanism of determining super users pluggable

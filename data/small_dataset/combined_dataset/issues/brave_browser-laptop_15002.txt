@@ -1,0 +1,4 @@
+Update translations
+
+
+We need to upload translations to Transifex when #14980 is closed and then update all languages in browser laptop. Reason for this is because we added one translation that is key for solving the captcha. If this is not shown to the user then he can't solve it.

@@ -1,0 +1,9 @@
+Investigate first party cookies, cookie prefix, and insecure modification of secure cookies
+
+
+https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/2PK3q_VE1rg
+
+ https://tools.ietf.org/html/draft-west-first-party-cookies-04
+ https://tools.ietf.org/html/draft-west-cookie-prefixes-04
+ https://tools.ietf.org/html/draft-west-leave-secure-cookies-alone-04
+

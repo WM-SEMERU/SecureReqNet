@@ -1,0 +1,28 @@
+Explanation of how a user is saved in session is very vague
+
+
+Understanding serialize and how a User is Saved in the Session tries to explain why your application should serialize the user object to avoid the following infamous error:
+Symfony\Component\Security\Core\Authentication\Token\
+UsernamePasswordToken::serialize() must return a string or NULL.
+
+The problem is that the explanation is very vague. First example:
+This may or may not be needed depending on your setup,
+but it's probably a good idea.
+
+Probably a good idea? May or may not be needed? Depending on what?
+Another example:
+In theory, only the id needs to be serialized.
+
+"In theory"? My guess is that developers only care about "practice".
+And another final example:
+Symfony also uses the username, salt, and password to verify that the
+User has not changed between requests. Failing to serialize these
+may cause you to be logged out on each request.
+
+May cause to be logged out? Is it random? What factors does it depend on?
+
+This is my suggestion to rewrite from scratch this section:
+1) Mention the common UsernamePasswordToken::serialize() must return a string or NULL error.
+2) Describe precisely the situations when you need to do the changes explained in the next step (this would replace the previous "may or may not be needed depending on your setup").
+3) Explain with an example that the User object must implement the Serializable interface to serialize id, username, salt, and password properties.
+4) As an advanced tip or note, mention the EquatableInterface and isEqualTo method.

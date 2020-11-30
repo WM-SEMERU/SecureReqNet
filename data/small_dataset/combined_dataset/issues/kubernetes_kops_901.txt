@@ -1,0 +1,4 @@
+`kops get ig --v=8` prints a secret
+
+
+It outputs the kubecfg, which includes a token.

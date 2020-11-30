@@ -1,0 +1,5 @@
+Class is not required to call 'super' in its ctor
+
+
+Original issue 343 created by ihab.awad on 2008-05-31T00:43:37.000Z:
+We do not enforce that a ctor must call 'super'.

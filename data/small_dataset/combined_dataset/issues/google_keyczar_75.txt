@@ -1,0 +1,15 @@
+KeyczarTool private key export reveals passphrase
+
+
+When exporting a private key as a PKCS8 file, the user has to specify the 
+passphrase on the command line with --passphrase="my password".  This makes it 
+possible for users of arcane hacking tools like "ps" to discover the 
+passphrase.  Not good.
+
+I had intended to use --passphrase as a boolean flag indicating "prompt me for 
+a passphrase" and then to have KeyczarTool prompt twice, without echo, etc.  
+But then I got busy and forgot.
+
+Filing this bug to make sure I don't continue to forget.
+
+Original issue reported on code.google.com by swillden@google.com on 14 Oct 2011 at 2:42

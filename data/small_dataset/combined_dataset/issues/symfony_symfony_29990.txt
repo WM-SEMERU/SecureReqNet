@@ -1,0 +1,75 @@
+Create new PHPUnit assertions for the WebTestCase
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+no
+
+
+New feature?
+yes
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+License
+MIT
+
+
+Doc PR
+~
+
+
+
+I got inspirations from Laravel Dusk's assertions to bring new assertion capabilities to the WebTestCase in order to ease functional testing.
+WDYT?
+Edit: Here's the list of the added assertions, as a summary of this PR:
+
+assertResponseIsSuccessful
+assertHttpCodeEquals
+assertResponseHasHeader
+assertResponseNotHasHeader
+assertResponseHeaderEquals
+assertResponseHeaderNotEquals
+assertResponseRedirects
+assertPageTitleEquals
+assertPageTitleContains
+assertClientHasCookie
+assertClientNotHasCookie
+assertClientCookieValueEquals
+assertClientRawCookieValueEquals
+assertResponseHasCookie
+assertResponseNotHasCookie
+assertResponseCookieValueEquals
+assertResponseCookieValueNotEquals
+assertSelectorExists
+assertSelectorNotExists
+assertSelectorContainsText
+assertSelectorNotContainsText
+assertInputValueEquals
+assertInputValueNotEquals
+assertRouteEquals
+assertRequestAttributeValueEquals
+

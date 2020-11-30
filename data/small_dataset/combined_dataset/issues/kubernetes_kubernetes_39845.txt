@@ -1,0 +1,27 @@
+Change seccomp default to 'docker/default'
+
+
+Seccomp is currently defaulted to unconfined on docker: 
+
+
+kubernetes/pkg/kubelet/dockertools/docker_manager.go
+
+
+         Line 120
+      in
+      9a88687
+
+
+
+
+
+
+ defaultSeccompOpt = []dockerOpt{{"seccomp", "unconfined", ""}} 
+
+
+
+
+
+I believe this is for historical reasons, from #21790. However, we now have the ability (albeit alpha) to control seccomp profiles, so we should change the default to the more secure docker/default option. This profile is carefully curated, and should provide enhanced security without breaking the majority of users. Unfortunately "the majority" is not "everybody", so changing this default would be a breaking change, and care needs to be taken when rolling it out.
+This may also need to wait for seccomp to be promoted to beta.
+@vishh @pmorie @kubernetes/sig-node-misc

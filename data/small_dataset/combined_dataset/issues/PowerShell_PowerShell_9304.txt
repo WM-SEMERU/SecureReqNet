@@ -1,0 +1,41 @@
+Fix skipping of tests in RemoteSession.Basic.Tests.ps1
+
+
+PR Summary
+Moved check if able to write to $PSHome as way to skip test to BeforeAll which already contained a check if running on Windows.
+PR Context
+As part #9279, tests were updated to be skipped if the test requires writing to $PSHome but is not able to.  However, these tests already had a skip mechanism in place so the additional check caused the test to run when it should have skipped.
+PR Checklist
+
+ PR has a meaningful title
+
+Use the present tense and imperative mood when describing your changes
+
+
+ Summarized changes
+ Change is not breaking
+ Make sure all .h, .cpp, .cs, .ps1 and .psm1 files have the correct copyright header
+ This PR is ready to merge and is not Work in Progress.
+
+If the PR is work in progress, please add the prefix WIP: or [ WIP ] to the beginning of the title (the WIP bot will keep its status check at Pending while the prefix is present) and remove the prefix when the PR is ready.
+
+
+User-facing changes
+
+ Not Applicable
+OR
+ Documentation needed
+
+ Issue filed: 
+
+
+
+
+Testing - New and feature
+
+ N/A or can only be tested interactively
+OR
+ Make sure you've added a new test if existing tests do not effectively test the code changed
+
+
+

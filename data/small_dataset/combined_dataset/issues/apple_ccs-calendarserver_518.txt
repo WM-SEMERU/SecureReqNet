@@ -1,0 +1,20 @@
+setup.py will break when dealing with non -dev version
+
+
+This refers to version 9.3, as in https://github.com/apple/ccs-calendarserver/blob/df3d001ec81ad734534740eda69b70a57656f16e/setup.py
+setup.py breaks when dealing with a branch that has no "-dev" ending, as with
+git clone -b release/CalendarServer-9.3 https://github.com/apple/ccs-calendarserver.git
+See comments with #!
+(I have no clear idea what is intended with the beta stuff, so there is no pull request here...)
+setup.py, line 142ff
+if info["branch"].startswith("release/"):
+project_version = info["branch"][len("release/"):]
+project, version, dev = project_version.split("-")    #!will break when there is only one hyphen "-"
+assert project == project_name, (
+"Branched project {!r} != {!r}".format(project, project_name)
+)
+assert version == base_version, (
+"Branched version {!r} != {!r}".format(version, base_version)
+)
+assert dev == "dev", (   #!there might be no "dev" in the project version.
+"Branch name doesn't end in -dev: {!r}".format(info["branch"])

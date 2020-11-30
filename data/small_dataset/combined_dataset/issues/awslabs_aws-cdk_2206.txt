@@ -1,0 +1,49 @@
+We have to rename complex ImportProps fields
+
+
+See the following code:
+ const vpc = VpcNetwork.import(this, 'VpcSviluppo', {
+       vpcId: 'vpc-0e0311c34e5d7c8ac',
+       availabilityZones: ['eu-west-1a','eu-west-1b','eu-west-1c'],
+       publicSubnetIds: [
+         'subnet-0c2fda469e286aa78',
+         'subnet-030da2fd20cae22b3',
+         'subnet-0dd5750486e28414d'
+       ]
+    });
+ 
+
+ const defaultSecurityGroup = SecurityGroup.import(this, 'SviluppoSecurityGroup', {
+       securityGroupId: 'sg-062d4c1255df27688', //default-sviluppo
+});
+ 
+const cluster = Cluster.import(this, 'Fargate', {
+    clusterArn: 'arn:aws:ecs:eu-west-1:xxxxxxx:cluster/fargate',
+    clusterName: 'fargate',
+    vpc: vpc,
+    securityGroups: [
+        defaultSecurityGroup
+    ]
+});
+Looks correct, right? And TSC doesn't complain. It is, however, wrong. You're supposed to do this:
+const cluster = Cluster.import(this, 'Fargate', {
+    clusterArn: 'arn:aws:ecs:eu-west-1:xxxxxxx:cluster/fargate',
+    clusterName: 'fargate',
+    vpc: {
+       vpcId: 'vpc-0e0311c34e5d7c8ac',
+       availabilityZones: ['eu-west-1a','eu-west-1b','eu-west-1c'],
+       publicSubnetIds: [
+         'subnet-0c2fda469e286aa78',
+         'subnet-030da2fd20cae22b3',
+         'subnet-0dd5750486e28414d'
+       ]
+    },
+    securityGroups: [
+        {
+       securityGroupId: 'sg-062d4c1255df27688', //default-sviluppo
+      }
+    ]
+});
+TSC accepts this because vpcId is a property on both VpcNetworkImportProps and IVpcNetwork, and all the other fields are optional.
+I have spoken to at least 3 people who have made this mistake, and it seems to fit the pattern of the rest of the CDK. We have to fix this, either by making Cluster.import() take an actual IVpcNetwork like everyone is expecting it to, or renaming the field something like vpcImportProps.
+I don't know how much of this is going to be taken care of by #1546, but whatever is left after that should be fixed.

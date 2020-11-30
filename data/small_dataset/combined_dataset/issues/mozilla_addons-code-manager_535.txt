@@ -1,0 +1,6 @@
+Filter old/new versions depending on the selected values
+
+
+Fixes #415
+
+Comparisons are strict because I am not sure we want to compare the same old/new version but it is easy to change if needed.

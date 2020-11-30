@@ -1,0 +1,53 @@
+Build enclaves with more secure flags
+
+
+Per review of build options for ELF binaries, we should apply the recommended compiler flags for better security properties, and in particular, making them default in the pkg-config:
+Host:
+
+ Use -fstack-protector-strong for stronger protections
+Use -fPIE to take advantage of ASLR as a defense against ROP attacks
+
+Per @anakrish, we will not enable this by default because the oehostapp.lib could be linked by shared libs and not just executable hosts.
+
+
+ Use -z noexecstack to mark the stack as non-executable and reduce exploitable code on the stack
+
+We may not be able to enable this if we are using trampolines.
+
+
+ Use -D_FORTIFY_SOURCE=2 when -O2 is enabled to replace some unsafe functions with checked versions where a static length can be determined.
+
+Verify that this is properly supported in Clang
+
+
+Use -z now to enable BIND_NOW so that the linker resolve all dynamically linked functions at the beginning of execution and make the global offset table (GOT) read-only. This prevents attacks from using GOT overwrites for ROP attacks.
+
+There is significant startup cost overhead, so we defer this to the app dev to include at link time for their specific build instead of making it default in pkg-config or our cmake exports.
+
+
+We get partial RELRO by default with GCC/Clang. This ensures the GOT is before the BSS so overwriting global variables doesn't overwrite the GOT at least.
+
+We don't need to explicitly add the linker flag for -z relro.
+
+
+
+Enclave:
+
+Use -fstack-protector-strong or -fstack-protector-all.
+
+This is tracked separately with #81 which needs to be implemented for enclaves.
+
+
+ Use -z noexecstack to mark the stack as non-executable and reduce exploitable code on the stack.
+Use -D_FORTIFY_SOURCE=2 when -O2 is enabled to replace some unsafe functions with checked versions where a static length can be determined.
+
+This has no effect in our default compiler (Clang) and also does not work when not linked with custom string.h header as in corelibc.
+
+
+ Use -z now to enable BIND_NOW so that the linker resolve all dynamically linked functions at the beginning of execution and make the global offset table (GOT) read-only. This prevents attacks from using GOT overwrites for ROP attacks.
+
+The switch to -fPIE in #1577 makes it so that enclaves generally don't emit a .rela.plt already, but we explicitly add the -z now linker flags to be clear and for future safety.
+Per @anakrish -z relro is redundant in this case. We also would need to do additional work to support partial RELRO by updating the enclave loader to mark the resulting relro sections as read-only.
+
+
+

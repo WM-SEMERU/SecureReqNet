@@ -1,0 +1,82 @@
+Additional validation of tag length in AES GCM decryption
+
+
+I notice here that validation of tag length is planned when using authenticated decryption:
+
+
+
+node/src/node_crypto.cc
+
+
+         Line 3713
+      in
+      50ec9bf
+
+
+
+
+
+
+ // FIXME(bnoordhuis) Throw when buffer length is not a valid tag size. 
+
+
+
+
+
+I'm assuming this comment addresses the fact that the current implementation doesn't check whether the provided tag conforms to the valid tag lengths for GCM: 128, 120, 112, 104, or 96 (or 64 or 32 for certain applications) according to this document).
+Even with such validation however, if no default minimum tag length is enforced, there is a lot of scope for insecure use of authenticated encryption, where developers authenticate decryption in a manner that accepts shorter tags than necessary (e.g. 32 bits when they only ever intend to use 128-bit tags).
+A solution would be to validate tag length against not only the list of valid lengths according to the specification, but also a minimum length (128 bits by default, but configurable by users who have a good reason to allow shorter tags).
+For example:
+// 16-byte tag originally created using createCipheriv
+const validTag = Buffer.from('11112222333344445555666677778888', 'hex');
+
+
+// Using the full tag (same as now)
+const decipher1 = crypto.createDecipheriv('aes-256-gcm', key, iv);
+decipher1.setAuthTag(validTag);
+decipher1.update(cipherText);
+// Does not throw
+decipher1.final();
+
+
+// Using a shortened tag of valid length
+const decipher2 = crypto.createDecipheriv('aes-256-gcm', key, iv);
+decipher2.setAuthTag(validTag.slice(0, 4));
+decipher2.update(cipherText);
+// Throws "Unsupported state or unable to authenticate data"
+decipher2.final();
+
+
+// Specifying an invalid minimum tag length
+// Throws "Invalid minimum tag bytes value. Must be one of 16, 15, 14, 13, 12, 8 or 4. Is there a good reason to set this option?"
+const decipher3 = crypto.createDecipheriv('aes-256-gcm', key, iv, { minimumTagBytes: 11 }); 
+
+
+// Specifying a valid minimum tag length with a shortened tag of conforming length
+const decipher4 = crypto.createDecipheriv('aes-256-gcm', key, iv, { minimumTagBytes: 8 });
+decipher4.setAuthTag(validTag.slice(0, 8));
+decipher4.update(cipherText);
+// Does not throw
+decipher4.final();
+
+
+// Specifying a valid minimum tag length with a shortened tag of non-conforming length
+const decipher5 = crypto.createDecipheriv('aes-256-gcm', key, iv, { minimumTagBytes: 8 });
+decipher5.setAuthTag(validTag.slice(0, 4));
+decipher5.update(cipherText);
+// Throws "Unsupported state or unable to authenticate data"
+decipher5.final();
+
+
+// Specifying a minimum tag length at the same time as stream.transformoptions
+// { transform: myTransform, flush: myFlush } is passed as options argument to stream transform
+const decipher6 = crypto.createDecipheriv('aes-256-gcm', key, iv, {
+	minimumTagBytes: 8,
+	transform: myTransform,
+	flush: myFlush,
+});
+Caveats with the above proposal:
+
+I'm not very familiar with Node's standards regarding where to throw errors (e.g. whether to throw when creating a decipher with an invalid minimumTagBytes value or when calling .final()) or how to word error messages.
+I have no experience with these stream transform options so I have no idea if it's a plausible suggestion to combine both sets of options in one object. One alternative would be to have an additional options argument after the stream transform options.
+

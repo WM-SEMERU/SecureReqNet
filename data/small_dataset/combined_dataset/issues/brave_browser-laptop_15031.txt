@@ -1,0 +1,53 @@
+unable to write \\.\pipe\geth.pid: ENOENT: no such file or directory, open '\\.\pipe\geth.pid'
+
+
+Description
+Geth doesn't spawn when built from source on Windows
+Steps to Reproduce
+
+Build from master aff1a96
+Launch browser with GETH_LOG=1 npm run start
+Enable ETH, shows error message
+
+Actual result:
+$ GETH_LOG=1 npm run start
+
+> brave@0.25.0 start C:\browser-laptop
+> node ./tools/start.js --user-data-dir-name=brave-development --enable-logging --v=0 --enable-extension-activity-logging --enable-sandbox-logging --enable-dcheck
+
+Crash reporting enabled
+GET: nothing to cleanup
+[15976:7332:0815/122534.729:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
+[15976:7332:0815/122534.729:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
+[15976:7332:0815/122534.729:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
+unable to write \\.\pipe\geth.pid: ENOENT: no such file or directory, open '\\.\pipe\geth.pid'
+unable to spawn C:\browser-laptop\app\extensions\bin\geth.exe: ENOENT: no such file or directory, open '\\.\pipe\geth.pid'
+GETH: process killed
+GETH: cleanup done
+GETH exit: Code: 1 | Signal: null
+GETH close: Code: 1 | Signal: null
+unable to configure C:\Users\Owner\AppData\Roaming\brave-development\ethereum\mainnet\geth\static-nodes.json: ENOENT: no such file or directory, open 'C:\Users\Owner\AppData\Roaming\brave-development\ethereum\mainnet\geth\static-nodes.json'
+Unhandled promise rejection in the main process Error: ENOENT: no such file or directory, open 'C:\Users\Owner\AppData\Roaming\brave-development\ethereum\mainnet\geth\static-nodes.json'
+GET: nothing to cleanup
+unable to write \\.\pipe\geth.pid: ENOENT: no such file or directory, open '\\.\pipe\geth.pid'
+unable to spawn C:\browser-laptop\app\extensions\bin\geth.exe: ENOENT: no such file or directory, open '\\.\pipe\geth.pid'
+GETH: process killed
+GETH: cleanup done
+GETH exit: Code: 1 | Signal: null
+GETH close: Code: 1 | Signal: null
+unable to configure C:\Users\Owner\AppData\Roaming\brave-development\ethereum\mainnet\geth\static-nodes.json: ENOENT: no such file or directory, open 'C:\Users\Owner\AppData\Roaming\brave-development\ethereum\mainnet\geth\static-nodes.json'
+Unhandled promise rejection in the main process Error: ENOENT: no such file or directory, open 'C:\Users\Owner\AppData\Roaming\brave-development\ethereum\mainnet\geth\static-nodes.json'
+GET: nothing to cleanup
+process exited with code 0
+
+Expected result:
+Should spawn Geth.
+Reproduces how often:
+100% on master, @GeetaSarvadnya reproduced it on Windows
+Brave Version
+aff1a96
+Reproducible on current live release:
+N/A
+Additional Information
+@LaurenWags didnt see the same on mac and she was able to successfully build and launch ETH wallet
+cc; @mrose17

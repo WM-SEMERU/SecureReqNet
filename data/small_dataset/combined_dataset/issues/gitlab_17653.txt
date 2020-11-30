@@ -1,0 +1,13 @@
+I am having some troubles with the IP whitelisting for git basic auth. Our jenkins server gets constantly blacklisted.
+
+I have added our jenkins IP to the whitelist: https://gitlab.com/gitlab-org/gitlab-ce/blob/89644edc4e2a9447cc31d4f966c163316dff95fa/config/gitlab.yml.example#L498
+
+```
+  rack_attack:
+    git_basic_auth:
+      ip_whitelist: ["192.168.123.123"] # our jenkins IP
+```
+
+But as far as I found out so far the whitelist is only applied for backend logins and not for git basic auth over https.
+
+The whitelist is checked in `grack_auth.rb` (https://gitlab.com/gitlab-org/gitlab-ce/blob/89644edc4e2a9447cc31d4f966c163316dff95fa/lib/gitlab/backend/grack_auth.rb) but not in `rack_attack_git_basic_auth.rb` (https://gitlab.com/gitlab-org/gitlab-ce/blob/89644edc4e2a9447cc31d4f966c163316dff95fa/config/initializers/rack_attack_git_basic_auth.rb). Am I missing something or should it also be checked in `rack_attack_git_basic_auth.rb`?

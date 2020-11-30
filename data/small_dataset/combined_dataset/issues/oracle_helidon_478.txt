@@ -1,0 +1,10 @@
+Security: Refactor providers that use JWT
+
+
+We currently have 3 providers that use JWT - OidcProvider, JwtProvider and JwtAuthProvider.
+There is a set of common functionality used in each of these that is duplicated.
+Environment Details
+
+Helidon Version: 1.0.0
+Helidon SE
+

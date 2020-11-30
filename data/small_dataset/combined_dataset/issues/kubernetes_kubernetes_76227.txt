@@ -1,0 +1,26 @@
+Replace syscall.Execve with exec.Command.
+
+
+Use exec.Command instead of syscall.Execve to launch plugin.
+On windows syscall.Execve fails.
+What type of PR is this?
+
+Uncomment only one  /kind <> line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+/kind api-change
+/kind bug
+/kind cleanup
+/kind design
+/kind documentation
+/kind failing-test
+/kind feature
+/kind flake
+
+What this PR does / why we need it:
+Uses exec.Command instead of execve to start plugin.
+Which issue(s) this PR fixes:
+Fixes kubernetes/kubectl#603
+Special notes for your reviewer:
+Does this PR introduce a user-facing change?:
+Fixes bug while launching plugins on windows.
+
+

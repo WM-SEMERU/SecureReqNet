@@ -1,0 +1,4 @@
+Linked the new Traverse article from an index
+
+
+Travis build is failing because of this.

@@ -1,0 +1,44 @@
+[Security] [Firewall] Fix support of multiple HTTP authentication methods
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#10035
+
+
+
+Configuring guard along with http_digest breaks, because the default entry point for the firewall is automatically the guard authenticator, which is not a BasicAuthenticationEntryPoint / DigestAuthenticationEntryPoint.
+We do create the entry point if there is no default entry point configured, so we should keep creating it if the default one is not an instance of BasicAuthenticationEntryPoint / DigestAuthenticationEntryPoint.
+Related to lexik/LexikJWTAuthenticationBundle#384.

@@ -1,0 +1,4 @@
+Throttle an IP address when it has too many failed login attempts on different accounts
+
+
+If someone tries the same password on multiple accounts using the same IP, they should be throttled after a certain number of failed logins.

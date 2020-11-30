@@ -1,0 +1,59 @@
+[HttpClient] changes minimal php version to use curl push function
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+master
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+n/a
+
+
+License
+MIT
+
+
+Doc PR
+
+
+
+
+Adding some changes to CurlHttpClient to avoid potential bugs in php < 7.2.17 or php < 7.3.4.
+For more information check these bugs :
+
+https://bugs.php.net/bug.php?id=77747
+https://bugs.php.net/bug.php?id=77535
+
+Resolve by the following commit by Nikic :
+
+php/php-src@97f9fd6
+

@@ -1,0 +1,12 @@
+Add better logging when iptables-restore fails
+
+
+What type of PR is this?
+/kind cleanup
+What this PR does / why we need it:
+Log the failing ruleset when iptables-restore fails.
+Which issue(s) this PR fixes:
+xref #71706
+Does this PR introduce a user-facing change?:
+NONE
+

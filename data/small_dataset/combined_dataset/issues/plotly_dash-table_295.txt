@@ -1,0 +1,10 @@
+Feature suggestion: optional column description tooltip
+
+
+Naming columns can be easy, and can be difficult sometimes. Even when it is easy, we often need to explain a little more about the data in a certain column without having to clutter the page / table with too much text.
+A good solution to this might be to create the ability to add a clickable question mark (or some other symbol) which shows a tooltip explaining more about the column.
+Something like this:
+
+Or maybe just hovering over a column name shows the optional tooltip:
+
+Thanks!

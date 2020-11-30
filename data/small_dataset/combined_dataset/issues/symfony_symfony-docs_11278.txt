@@ -1,0 +1,4 @@
+Debug container environment variables
+
+
+see symfony/symfony#27684

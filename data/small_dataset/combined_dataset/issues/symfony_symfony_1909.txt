@@ -1,0 +1,10 @@
+UsernamePasswordToken should accept roles as Collection.
+
+
+Now we can pass roles into UsernamePasswordToken only as array like
+public function getRoles() { return array('FOO', 'BAR'); //sample }
+or if for example User ManyToMany Role
+public function getRoles() { return $this->roles->asArray(); }
+the problem is that second example with is quite common will not work with Forms in Symfony because
+$builder->add('roles', 'entity', array('class' => 'Bundle\Entity\Role'))
+expects that getRoles method will return Collection.

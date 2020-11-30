@@ -1,0 +1,9 @@
+[cookbook] Error in "custom Authentication Provider" listener code (and proposed fix)
+
+
+Hi,
+I've just followed this cookbook entry.
+However I'm encountering an issue when pretty much exactly following it: an AuthenticationCredentialsNotFoundException is raised.
+In my understanding the issue is that we should be doing something, returning prematurely in the listener is relevant only if another firewall is enabled, otherwise we end up having a 500 error.
+This is not the case of the tutorial (the firewall is set for a very precise URL pattern): I guess we should be returning a 403 error, isn't it? And eventually adding a note to explain it.
+I'm ok about submitting a PR if we agree upon the fix.

@@ -1,0 +1,8 @@
+Factor out the use of star selectors in the CSS
+
+
+There's a lot of cases in the CSS that have selectors like .some-class > *, which is like saying "every direct descendant of .some-class".
+These should be refactored to be clearer.
+Star selectors are hard to understand, so looking at the CSS it's difficult to understand the markup structure that the styles it being applied to. The markup is pretty verbosely decorated with classes so it should be completely possible to target the style to the right place more directly.
+Doing this may also negate the need for > too.
+CSS engines tend to be good at optimising for performance so this is a secondary concern, however, CSS rules are parsed right to left, so every element has be considered before the selector is narrowed down to apply to the actual relevant elements.

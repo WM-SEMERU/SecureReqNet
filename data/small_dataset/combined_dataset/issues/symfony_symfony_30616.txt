@@ -1,0 +1,48 @@
+Fix case when multiple loaders are providing paths for the same namespace
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+
+Fixes @stof #30440 (comment)
+Let me know if a test case is necessary for this.
+Cheers!

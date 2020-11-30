@@ -1,0 +1,5 @@
+Nat must include at most (2**53)-1
+
+
+Original issue 1801 created by erights@google.com on 2013-07-10T01:54:27.000Z:
+Currently in includes 2**53 as well. This leaves intuitive uses of Nat vulnerable. See https://mail.mozilla.org/pipermail/es-discuss/2013-July/031670.html

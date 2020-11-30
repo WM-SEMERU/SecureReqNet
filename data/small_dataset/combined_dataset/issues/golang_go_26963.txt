@@ -1,0 +1,105 @@
+x/crypto/openpgp: ReadMessage never returns an error if decryption failed. Is openpgp compatible with gnupg version > 2.1?
+
+
+Please answer these questions before submitting your issue. Thanks!
+What version of Go are you using (go version)?
+1.10.2
+Does this issue reproduce with the latest release?
+I don't know
+What operating system and processor architecture are you using (go env)?
+set GOARCH=amd64
+set GOBIN=
+set GOCACHE=C:\Users\xqian\AppData\Local\go-build
+set GOEXE=.exe
+set GOHOSTARCH=amd64
+set GOHOSTOS=windows
+set GOOS=windows
+set GOPATH=******
+set GORACE=
+set GOROOT=C:\Go
+set GOTMPDIR=
+set GOTOOLDIR=C:\Go\pkg\tool\windows_amd64
+set GCCGO=gccgo
+set CC=gcc
+set CXX=g++
+set CGO_ENABLED=1
+set CGO_CFLAGS=-g -O2
+set CGO_CPPFLAGS=
+set CGO_CXXFLAGS=-g -O2
+set CGO_FFLAGS=-g -O2
+set CGO_LDFLAGS=-g -O2
+set PKG_CONFIG=pkg-config
+set GOGCCFLAGS=-m64 -mthreads -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=C:\Users******\AppData\Local\Temp\go-build060555462=/tmp/go-build -gno-record-gcc-switches
+What did you do?
+func (o *OpenpgpEntity) decryptFile(file *BankFile, entityList openpgp.EntityList, passphrase []byte, testEnv bool) (bankFile *BankFile, err error) {
+	zipFile := NewBankFile()
+	zipFile.Path = file.DstPath
+	zipFile.DstPath = file.DstPath
+	fs := strings.Split(file.Filename, ".")
+	zipFile.Filename = fs[0]
+	nf := filepath.Join(zipFile.Path, zipFile.Filename)
+	w, err := os.Create(nf)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to create new file %s, Error: %s", nf, err)
+	}
+
+	fr, err := os.Open(filepath.Join(file.DstPath, file.Filename))
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		if err = fr.Close(); err != nil {
+			log.Panicln(err)
+		}
+	}()
+
+	block, err := armor.Decode(fr)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to decode, error: %s", err)
+	}
+	if testEnv == true {
+		if block.Type != "Message" {
+			return nil, errors.New("Invalid message type")
+		}
+	} else {
+		if block.Type != "PGP MESSAGE" {
+			return nil, errors.New("Invalid message type")
+		}
+	}
+
+	prompt := func(keys []openpgp.Key, symmetric bool) ([]byte, error) {
+		if symmetric {
+			return nil, errors.New("prompt: message was marked as symmetrically encrypted")
+		}
+
+		if len(keys) == 0 {
+			return nil, errors.New("prompt: no keys requested")
+		}
+
+		err = keys[0].PrivateKey.Decrypt(passphrase)
+		if err != nil {
+			return nil, fmt.Errorf("prompt: error decrypting key, error: %s", err)
+		}
+
+		return nil, nil
+	}
+
+	md, err := openpgp.ReadMessage(block.Body, entityList, prompt, getConfig())
+	if err != nil || md == nil {
+		return nil, errors.New("Failed to read content")
+	}
+	n, err := io.Copy(w, md.UnverifiedBody)
+	if err != nil || n == 0 {
+		return nil, errors.New("Failed to write to zip file")
+	}
+	if err = w.Close(); err != nil {
+		log.Panicln(err)
+	}
+	zipFile.Filesize = int64(n)
+	return zipFile, nil
+}
+
+What did you expect to see?
+returned file point should not be nil, if it is nil, there should be some error returned when doing decruption
+What did you see instead?
+returned file pointer is nil and there was no error before that

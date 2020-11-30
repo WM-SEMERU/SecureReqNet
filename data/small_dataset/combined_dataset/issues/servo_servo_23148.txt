@@ -1,0 +1,4 @@
+Create tool for offline symbolification of sampled profiles
+
+
+Resolving symbols for anything but the smallest profiles is a long process. It would be great to be able to extract unresolved profiles and run a tool offline that resolves them. https://github.com/sfackler/rstack/tree/master/symbolize/src might be one way of doing this, if the tool depends on the the appropriate servo crates, but it's a linux-only solution that relies on dl_iterate_phdr.

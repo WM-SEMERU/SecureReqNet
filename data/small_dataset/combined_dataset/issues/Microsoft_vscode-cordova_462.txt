@@ -1,0 +1,4 @@
+Fix security vulnerabilities (except for cordova-simulate)
+
+
+This PR fixes all security vulnerabilities except the ones caused by cordova-simulate and its sub dependencies.

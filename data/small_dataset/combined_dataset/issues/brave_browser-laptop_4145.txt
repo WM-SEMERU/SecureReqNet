@@ -1,0 +1,13 @@
+use main frame url for webrequest first party url
+
+
+
+ Submitted a ticket for my issue if one did not already exist.
+ Used Github auto-closing keywords in the commit message.
+ Added/updated tests for this change (for new code or code which already has tests).
+ Ran git rebase -i to squash commits (if needed).
+
+Test Plan: covered by automated test
+fix #4137
+fix #4300
+auditors: @bridiver

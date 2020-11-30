@@ -1,0 +1,54 @@
+[SecurityBundle] Move cache of the firewall context into the request parameters
+
+
+Following this proposal. Since the matching context relates to the request, this information should have been cached inside the request parameters.
+
+
+
+Q
+A
+
+
+
+
+Branch?
+3.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#22605
+
+
+License
+MIT
+
+
+Doc PR
+n/a
+
+
+
+
+Avoid memory leak when handling multiple requests
+Adding the new request parameter _firewall_context might be considered as a breaking change. That adds a new "public" property that could be used by end developers.
+

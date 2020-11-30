@@ -1,0 +1,50 @@
+[WebProfilerBundle] toolbar: invisible route name in Firefox
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+4.2
+
+
+Bug fix?
+yes
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+#29858
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+This fixes #29858, fixing a bug that prevents Route name displaying in debug toolbar on Firefox

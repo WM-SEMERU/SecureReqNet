@@ -1,0 +1,26 @@
+Problem with what_is_document_freshness with guaranteed_max<=doc fresh_limit, will never reval
+
+
+We have some content with a fresh limit of 2592000 (30 days).
+[Apr  5 19:55:57.425] Server {0x2b0744910700} DEBUG: <HttpTransact.cc:7296 (calculate_document_freshness_limit)> (http_match) [1366449236] calculate_document_freshness_limit --- max_age set, freshness_limit = 2592000
+[Apr  5 19:55:57.425] Server {0x2b0744910700} DEBUG: <HttpTransact.cc:7387 (calculate_document_freshness_limit)> (http_match) [1366449236] calculate_document_freshness_limit --- final freshness_limit = 2592000
+However it is very old in cache:
+[Apr  5 19:55:57.426] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:432 (calculate_document_age)> (http_age) [calculate_document_age] age_value:              0
+[Apr  5 19:55:57.426] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:433 (calculate_document_age)> (http_age) [calculate_document_age] date_value:             1544156685
+[Apr  5 19:55:57.427] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:434 (calculate_document_age)> (http_age) [calculate_document_age] response_time:          1544156685
+[Apr  5 19:55:57.427] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:435 (calculate_document_age)> (http_age) [calculate_document_age] now:                    1554494157
+[Apr  5 19:55:57.427] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:436 (calculate_document_age)> (http_age) [calculate_document_age] now (fixed):            1554494157
+[Apr  5 19:55:57.427] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:437 (calculate_document_age)> (http_age) [calculate_document_age] apparent_age:           0
+[Apr  5 19:55:57.428] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:438 (calculate_document_age)> (http_age) [calculate_document_age] corrected_received_age: 0
+[Apr  5 19:55:57.428] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:439 (calculate_document_age)> (http_age) [calculate_document_age] response_delay:         0
+[Apr  5 19:55:57.429] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:440 (calculate_document_age)> (http_age) [calculate_document_age] corrected_initial_age:  0
+[Apr  5 19:55:57.429] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:441 (calculate_document_age)> (http_age) [calculate_document_age] resident_time:          10337472
+[Apr  5 19:55:57.429] Server {0x2b0744910700} DEBUG: <HttpTransactHeaders.cc:442 (calculate_document_age)> (http_age) [calculate_document_age] current_age:            10337472
+So once we do a doc freshness check on it the actual limit is set to the fresh limit:
+[Apr  5 19:55:57.429] Server {0x2b0744910700} DEBUG: <HttpTransact.cc:7517 (what_is_document_freshness)> (http_match) [1366449236] [what_is_document_freshness] fresh_limit:  2592000  current_age: 2592000
+since our cache_guaranteed_max_lifetime is also 2592000, the min is the same and taken as the current age
+So when we get down to the final basic reval match of current_age>age_limit we have:
+[Apr  5 19:55:57.430] Server {0x2b0744910700} DEBUG: <HttpTransact.cc:7623 (what_is_document_freshness)> (http_seq) [1366449236] document_freshness --- current_age = 2592000
+[Apr  5 19:55:57.430] Server {0x2b0744910700} DEBUG: <HttpTransact.cc:7624 (what_is_document_freshness)> (http_seq) [1366449236] document_freshness --- age_limit   = 2592000
+[Apr  5 19:55:57.430] Server {0x2b0744910700} DEBUG: <HttpTransact.cc:7625 (what_is_document_freshness)> (http_seq) [1366449236] document_freshness --- fresh_limit = 2592000
+which will always fail because the 2 are equal, and it will never be revalidated because our guaranteed max is the same as the documents limit

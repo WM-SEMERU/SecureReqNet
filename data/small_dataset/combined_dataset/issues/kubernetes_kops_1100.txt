@@ -1,0 +1,9 @@
+make it clear about aws permissions
+
+
+Problem:
+It is not clear how many aws permissions we need to create a k8s cluster with kops.
+Suggest solutions:
+a) Would be good to maintain a list of all required permissions.
+b) add dry-run for 'kops create'?
+c) generate a service-user iam policy template for review prior to the 'kops create'

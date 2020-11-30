@@ -1,0 +1,174 @@
+Ioq per shard or user
+
+
+IOQ2 Improvements
+The IOQ system provides a way to prioritize a variety of request types such that
+standard database operations can be run in parallel to background operations
+without negative impact. IOQ also provides some levers to change
+prioritization of request types on the fly, so that you can prioritize view
+builds or compactions. IOQ1 was a single Erlang server pid that all requests
+funneled through, which given the rise in CPU cores and SSD hard drives, quickly
+becomes a fundamental bottleneck of CouchDB.
+IOQ2 improves the situation by adding parallelism and faster data structures.
+You can find more details about IOQ2 in [1]. With the increased parallelism, the
+challenge becomes how do we dispatch requests across a pool of processes? The
+simple case of round robin or random uniform distribution will do a good job of
+distributing the load across the pool of processes, but it does not group
+requests together in a beneficial way. This lack of grouping is problematic
+because it minimizes the amount of "deduping" we can do of identical requests,
+and it also greatly complicates prioritization of requests to an individual
+database shard.
+Deduping is very important because it results in identical in flight read
+requests to only be performed once, and the result is returned to all waiting
+readers.  This is especially useful for inner b-tree nodes and can have a
+substantial impact on improving performance, reducing couch file overload, and
+reducing IO operations.
+The other big reason to group requests together that are for the same couch
+file, is that it allows us to prioritize those requests in concert. When we
+dispatch requests to a single couch file pid across a pool of IOQ pids, that
+means we can't prioritize those requests as a whole because prioritization
+happens at the IOQ2 pid level, not at a global level.
+This means that ideally we want to be dispatching all requests for an individual
+couch file through a single IOQ2 pid. This is exactly what the fd_hash
+dispatch strategy does, where it takes a hash of the couch file pid modulo the
+number of IOQ2 pids, so that all requests to a particular couch file go through
+the same IOQ2 pid. The problem with this approach is that you can have multiple
+heavily active couch file pids funneling through the same IOQ2 pid while other
+IOQ2 pids are idle. This is problematic because eventually IOQ2 pids will become
+bottlenecked (on metrics collection amusingly enough), and also because there is
+currently no couch file concurrency control within IOQ2 pids, so heavily active
+couch files can starve requests to other couch files.
+This PR introduces a new approach to dispatching requests across IOQ2 pids.
+Instead of having a fixed pool of IOQ2 pids to dispatch requests across, this PR
+introduces an ioq_opener process responsible for dynamically spawning IOQ2
+pids as appropriate, with configuration options for grouping requests by shard,
+user, db, or even request class. The result is a dedicated IOQ2 pid per group so
+all of the related requests are funneling through the same IOQ2 pid which allows
+for deduping of requests and appropriate prioritization.
+Current Status
+This is currently a draft PR and provides a proof of concept implementation of
+the IOQ opener logic, and it also demonstrates a few approaches taken over the
+course of iterating through this. The work is spread out across two repos, first
+in the CouchDB repo [2] and second in the CouchDB IOQ repo [3]. Because the
+commits have been structured to illustrate different ideas and approaches, I'll
+link out to individual commits rather than comparing the branches as a whole.
+Initial Approach
+My initial approach was to hook the IOQ opener logic into the places that open
+the .couch file handles. My thought was that by fetching the appropriate IOQ pid
+when the database handle was opened, that all clients of that database would be
+able to utilize that pid without needing to look it back open. So the approach
+was to ensure an IOQ pid was set prior to storing the db reference in
+couch_server such that all clients getting a db handle out of couch_server
+also get a handle to the appropriate IOQ pid. This works ok in the simple
+cases, but starts to get complicated in a hurry.
+First off, view handles don't go through couch_server, so similar opener logic
+needs to be implemented for views and other places. Second, with the Pluggable
+Storage Engines, the use of couch_file for the storage engine is an
+implementation detail and no longer guaranteed, yet views do not support PSEs so
+we have an awkward mix of an indirection layer around couch_file's in primary
+database operations and not in views. This is awkward because we need to key the
+IOQ pid on the couch_file pid so that all IOQ requests to the relevant
+couch_file go through the same IOQ pid, but the actual couch_file pid is
+hidden behind the PSE abstraction. This wasn't too hard to work around and I
+added a get_fd_pid to the PSE implementation to support extracting it, but
+given we have to do similar types of things in couch_server,
+couch_bt_engine_compactor, couch_db_updater, couch_mrview_updater, etc, it
+seems like this is not an ideal approach.
+You can see a rough version of this approach in the CouchDB repo at [4] and the
+corresponding changes in the IOQ repo at [5].
+Lazy Opener Approach
+I quickly became dissatisfied with the initial approach, especially with the
+dichotomy around couch_file interactions with some hidden behind PSE and
+others hardcoded to use couch_file directly. I also didn't like how spread out
+the setting of IOQ pids was and the requirement that all future uses of
+couch_file pids would need to properly set the pids as well.
+I started working on a lazy opener approach where we don't open the IOQ pid
+until we're in ioq:call and we conclude an appropriate IOQ pid has not yet
+been opened. That pid is then set in the pdict of the caller pid so that further
+IOQ calls to that fd will utilize the pre-determined IOQ pid. This approach
+seems natural, but it has its own set of awkwardness as we're only guaranteed to
+have the fd pid when we're in ioq:call, which means that we can't easily
+determine the database name from the pid alone. I experimented with a hybrid
+approach that would do an initial opener logic when the database handle was
+opened and store a reference to the IOQ pid keyed off the fd in the ioq_opener
+with the idea that we can then just lazily look up the appropriate IOQ pid based
+on the fd at ioq:call time, which worked ok but I was not a fan of sometimes
+presetting the IOQ pid and other times not.
+My next iteration on this approach was to switch to using the #ioq_request{}
+record as the lookup value to ioq_opener rather than the fd or db name. This
+request record should contain the appropriate shard name and IOQ class and
+other relevant information we would want to use for dispatching across IOQ pids.
+You can see the combination of these two approaches in [6].
+The tricky bit here being the part where we should have the appropriate shard
+name and other information. The problem is that this information is extracted
+from the io_priority parameter to ioq:call, which, if set, contains the
+shard name, however there is no fixed requirement that io_priority is set,
+which means there are a number of places that don't set an appropriate IOQ
+priority and just use the default values. There's no reason to ever not want an
+appropriate io_priority set, so this seems like an opportune time to finally
+rectify the lack of io_priority values. To do that, I added temporary measures
+to explode loudly when an IOQ request was missing an io_priority value. You
+can see those changes for CouchDB and IOQ in [7] and [8], respectively.
+So the next step was to set io_priority in all the places that it was not
+appropriately set. I accomplished this by adding the explode loudly changes
+above and then running the test suite to trigger explosions. I've updated all
+of the missing io_priority locations with appropriate values in [9]. It's
+worth noting that this is not a guaranteed exhaustive list as this is a run time
+check and the run time was only exercised as efficiently as the eunit test suite
+exercises it. It would surprise me if there are not a few other corner cases
+where io_priority is not properly set.
+Unfortunately, the eunit test suite almost entirely ignores setting
+io_priority values and relies on not setting the priority being an acceptable
+course of action. If we're going to ensure that io_priority is set, then we
+need to make sure it's set in the test suite as well. The somewhat arduous
+commit to set io_priority throughout all the test suites is in [10]. I think
+we can simplify that with some logic and utilities around setting io_priority
+in the test suites, but [10] does the initial leg work and sets it manually
+everywhere it needs to be set so that the test suite passes. Figuring out what
+to do on that front is one of the primary questions to be answered as part of
+this work, but I think we would benefit considerably from a more rigorous
+approach to io_priority so I took the time to make it work initially so we can
+get a view of what it entails.
+The changes in these two branches result in a proof of concept version of the
+ioq_opener logic that lazily assigns the IOQ pids as needed, based on the
+dimensions extracted for the #ioq_request{}, ensures that io_priority is
+always set, and that the test suite passes.
+IOQ Pid Eviction
+If we're going to be dynamically spawning IOQ pids as needed, we need some
+mechanism to determine when to clear those processes out. The approach taken
+here is basically reference counting clients to those pids. So the ioq_opener
+process will monitor the couch_file pids, view pids, compaction pids, client
+pids, etc, and when all the relevant pids using that IOQ pid exit, then the IOQ
+pid exits as well.
+What is shared per pid?
+One question is how many different client types should funnel through the same IOQ
+pid? For instance, when we have a couch_file pid for a particular database
+shard, and we have corresponding view pids for that database shard, should they
+all go through the same IOQ pid? I believe they should, as otherwise we can't
+actually prioritize interactive database requests versus compaction/views/etc,
+so essentially the IOQ pid should be determined by database shard, not
+necessarily the exact file that is currently being interacted with. Although
+there are a few different dispatch strategies, one of which being fd pid based
+dispatch so you can run an IOQ pid per couch_file if so desired. You can see
+the dispatch logic in [11].
+Status
+This currently works and passes the test suite, although I want to add
+ioq_opener specific tests to ensure the eviction and dispatch logic is
+properly functioning. There's some inconsistencies with shard names flying around
+that need to be resolved to ensure all requests goto the appropriate IOQ pid.
+The IOQ config settings also need to be updated to allow per IOQ pid config
+values. This is a great feature and will allow per shard concurrency levels and
+priority values for classes.
+Let me know what you think!
+References
+[1] https://github.com/apache/couchdb-ioq/blob/master/IOQ2.md
+[2] https://github.com/apache/couchdb/tree/ioq-per-shard-or-user
+[3] https://github.com/apache/couchdb-ioq/tree/ioq-per-shard-or-user
+[4] 1644b1d
+[5] apache/couchdb-ioq@1dee640
+[6] apache/couchdb-ioq@acd776b
+[7] 3b4cf71
+[8] apache/couchdb-ioq@c5e91ca
+[9] b85c17d
+[10] 733b025
+[11] https://github.com/apache/couchdb-ioq/blob/ioq-per-shard-or-user/src/ioq_opener.erl#L148-L171

@@ -1,0 +1,50 @@
+[SecurityBundle] Changed encoder configuration example to bcrypt
+
+
+
+
+
+Q
+A
+
+
+
+
+Branch?
+"master"
+
+
+Bug fix?
+no
+
+
+New feature?
+no
+
+
+BC breaks?
+no
+
+
+Deprecations?
+no
+
+
+Tests pass?
+yes
+
+
+Fixed tickets
+-
+
+
+License
+MIT
+
+
+Doc PR
+-
+
+
+
+Simple change in the configuration example to help developers to not use sha512 as encoder when using config:dump-reference.

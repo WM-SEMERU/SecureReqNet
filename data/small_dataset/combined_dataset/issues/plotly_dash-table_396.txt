@@ -1,0 +1,546 @@
+Update all dependencies
+
+
+This PR contains the following updates:
+
+
+
+Package
+Type
+Update
+Change
+References
+
+
+
+
+@​storybook/cli
+devDependencies
+major
+^4.1.13 -> ^5.0.3
+source
+
+
+@​storybook/react
+devDependencies
+major
+^4.1.13 -> ^5.0.3
+source
+
+
+@​types/ramda
+devDependencies
+minor
+^0.25.51 -> ^0.26.3
+source
+
+
+@​types/react
+devDependencies
+patch
+^16.8.5 -> ^16.8.8
+source
+
+
+css-loader
+devDependencies
+patch
+^2.1.0 -> ^2.1.1
+source
+
+
+cypress
+devDependencies
+minor
+^3.1.5 -> ^3.2.0
+source
+
+
+npm
+devDependencies
+minor
+^6.8.0 -> ^6.9.0
+homepage, source
+
+
+react
+devDependencies
+patch
+16.8.3 -> 16.8.4
+homepage, source
+
+
+react-docgen
+devDependencies
+minor
+^4.0.1 -> ^4.1.0
+source
+
+
+react-dom
+devDependencies
+patch
+16.8.3 -> 16.8.4
+homepage, source
+
+
+tslint
+devDependencies
+minor
+^5.13.0 -> ^5.14.0
+homepage, source
+
+
+webpack
+devDependencies
+patch
+^4.29.5 -> ^4.29.6
+source
+
+
+webpack-cli
+devDependencies
+minor
+^3.2.3 -> ^3.3.0
+source
+
+
+
+
+Release Notes
+
+storybooks/storybook
+v5.0.3
+Compare Source
+Bug Fixes
+
+Accessibility: Add missing button titles (#​6124)
+
+Maintenance
+
+UI: Make update notifications much less aggressive (#​6143)
+
+v5.0.2
+Compare Source
+Features
+
+CLI: Add --debug-webpack option (#​6082)
+
+Bug Fixes
+
+Addon-a11y: Fix design icons (#​5991)
+Addon-cssresources: Fix STORY_RENDERED CSS reset (#​6050)
+CLI: Clear build folder in static build (#​6024)
+Addon-backgrounds: Set preview to theme color when "transparent" (#​6042)
+UI: Fix search item in menu (#​6027)
+Addon-knobs: Fix key press debouncing (#​6022)
+CLI: Fix welcome component in dark theme (#​5998)
+Addon-viewport: Fix viewport iframe dimensions (#​5993)
+Core: fix selectStory with one parameter (#​5983)
+
+Maintenance
+
+Addon-viewport: Change styling to more closely match v4 (#​5979)
+
+v5.0.1
+Compare Source
+Bug Fixes
+
+Core: Remove custom presets warning (#​5911)
+Core: support unicode chars in story IDs (#​5964)
+Core: Add core-js dependencies where it was missing (#​5961)
+CLI: Fix missing iframe.html in absolute path output directory(#​5947)
+Addon-knobs: Added debouncing between keystrokes to speed up component rendering (#​5811)
+UI: Fix search in production mode (#​5909)
+
+v5.0.0
+Compare Source
+Storybook 5.0 is a completely new UI with the following improvements:
+
+🌓 New design with light and dark themes
+🛠 Canvas toolbar for easy access to addons
+🗺 Overhauled navigation sidebar with an intuitive menu
+🗜 Redesigned addons panel with handy buttons to toggle visibility and orientation
+⌨️ Improved keyboard shortcuts that are user configurable
+🌍 New URL structure that eliminates long strings of query parameters
+
+5.0 contains hundreds more fixes, features, and tweaks. Browse the changelogs matching 5.0.0-alpha.*, 5.0.0-beta.*, and 5.0.0-rc.* for the full list of changes. See MIGRATION.md to ugprade from 4.x.
+v4.1.14
+Compare Source
+Dependency Upgrades
+
+React-native: Fix RN 0.58.5 / support 0.59 via react-native-modal-datetime-picker 6.0.0 (#​4425)
+
+
+
+webpack-contrib/css-loader
+v2.1.1
+Compare Source
+Bug Fixes
+
+do not break selector with escaping (#​896) (0ba8c66)
+source map generation when sourceRoot is present (#​901) (e9ce745)
+sourcemap generating when previous loader pass sourcemap as string (#​905) (3797e4d)
+
+
+
+cypress-io/cypress
+v3.2.0
+Compare Source
+Released 3/15/2019
+Features:
+
+cy.visit() has been expanded to allow options url, method, body, and headers. This allows cy.visit() to be called with a POST method or with headers like Accept-Language or Authorization. Fixes #​1500, #​1904 and #​908.
+cy.request() now allows any valid HTTP method to be used including TRACE, COPY, LOCK, MKCOL, MOVE, PURGE, PROPFIND, PROPPATCH, UNLOCK, REPORT, MKACTIVITY, CHECKOUT, MERGE, M-SEARCH, NOTIFY, SUBSCRIBE, UNSUBSCRIBE, SEARCH, and CONNECT. Addresses #​1302
+The --browser argument of the Command Line and the browser argument of the Module API have been updated to allow passing a <path>. Addresses #​1026.
+cy.type() now accepts {home} and {end} special character sequences to move the cursor to the start or end of a line. Addresses #​2033.
+The Cypress Chrome extension now has a static ID of caljajdfkjjjdehjdoimjkkakekklcck. This allows Cypress to be added to extension whitelists for those working under corporate policies that prohibit extensions. Addresses #​3673, #​1239 and #​2494.
+
+Bugfixes:
+
+Problems logging in through GitHub in the Test Runner have been fixed. The GitHub login window no longer shows the browser support banner and the "Authorize cypress-io" button is no longer disabled. Fixes #​1251.
+Fixed an issue when testing applications using older versions of jQuery. They now no longer throw item.first is not a function. Fixes #​2927.
+Cypress now detects more instances of browser installations. Fixes #​3183 and #​3218.
+Fixed issue with loading fixture files containing more than one . in their filename while not specifying the file extension. We are also displaying a clearer warning when a fixture file cannot be found. Fixes #​1402.
+All third party @types have been moved from Cypress dependencies into devDependencies. This should fix situations where user's type dependencies were conflicting with Cypress's third party type definitions. Fixes #​3371 and #​1227.
+Cypress.config('baseUrl') has been updated to no longer strip singular / at the end of urls and instead only strip instances of multiple /. Fixes #​3540.
+The prompt to "Restore pages?" is no longer displayed within Chrome upon restarting a crashed Chrome window. Addresses #​2048.
+cy.wrap() no longer throws an error when a non-jQuery wrapped DOM element is passed in as an argument. Fixes #​3549.
+Fixed issue where all arguments passed to setTimeout or setInterval were not properly passed on to the target function. Fixes #​3592.
+.filter() has been updated so that when called with a function, the options are now properly read. Fixes #​3315.
+Cypress's recognition of websites attempting framebusting has been updated to include framebusting code wrapped within (). #​3267
+When .its() returns undefined it no longer errors. It will now follow the same logic as all other commands and only fail when directly by a .should() command with an assertion that is not met. Fixes #​1531.
+When cy.wrap() is followed directly by a .should() command, cy.wrap() will now retry when its argument evaluates to undefined until it meets the requirements of the assertion or the cy.wrap() command times out. Fixes #​3241.
+
+Misc:
+
+We now display a warning when passing an argument to --spec that is not surrounded by quotes "" recommending that the argument instead be surrounded by quotes. In some cases, not providing quotes can cause the arguments to be read in a way that is likely not its intended use. Addresses #​3318 and #​2298.
+The number of logs printed when installing Cypress in docker has been reduced. Partially addresses #​1243.
+The seeded Kitchen Sink examples have some new examples showing how to add a message to assertions, how to compare the text content of two elements, and how to make assertions about data attributes. The examples also have some small typo fixes. Fixes #​502. Addressed in #​3272, #​3287, and #​3700.
+We now only mount internal servers on loopback. Addresses #​3712.
+The instructions in Cypress's update window now include yarn update instructions alongside npm. Addresses #​2871.
+The spec file's font weight has been increased within the Test Runner for better readability. Addressed in #​3065.
+We improved the error message displayed when a record key is unrecognized during cypress run. Addresses #​1449.
+We improved the typings when using Cypress.on to listen for window.alert events to allow for Sinon.stub. Fixes #​3451.
+Fixed typo in typing for .trigger options. Addressed in #​3588.
+
+Documentation Changes:
+
+New Retryability doc #​1278
+Updated --browser and browser args to accept path #​1419
+cypress-io/cypress-documentation#​1474 %}
+Updated docs on explain how to run Chrome and Chromium browsers #​1339
+Added {home} and {end} character sequences to {% url "cy.type()" type } doc. Also wrote better description of what {downarrow} and {uparrow} character sequences actually do. #​1347
+Added all newly supported HTTP methods to cy.request() doc.
+Add new section to Debugging doc explaining whitelisting the Cypress Chrome extension.
+Fixed code example for google analytics stubbing #​1454
+
+Dependency Updates
+
+Upgraded @cypress/commit-info from 2.1.1 to 2.1.2. #​3327.
+Upgraded @cypress/xvfb from 1.2.3 to 1.2.4. #​3328.
+Upgraded @ffmpeg-installer/ffmpeg from 1.0.15 to 1.0.17. #​3329.
+Upgraded cachedir from 1.3.0 to 2.1.0. #​3660.
+Upgraded chalk from 2.4.1 to 2.4.2. #​3362.
+Upgraded chokidar from 1.6.0 to 1.7.0. #​3363.
+Upgraded coffee-script from 1.12.5 to 1.12.7. #​3365.
+Upgraded commander from 2.11.0 to 2.19.0. #​3366.
+Upgraded common-tags from 1.4.0 to 1.8.0. #​3368.
+Upgraded compression from 1.7.2 to 1.7.3. #​3379.
+Upgraded cookie from 0.2.4 to 0.3.1. #​3380.
+Upgraded cookie-parser from 1.4.3 to 1.4.4. #​3443.
+Upgraded dependency-tree from 6.4.0 to 6.5.0. #​3381.
+Upgraded electron-context-menu from 0.8.0 to 0.11.0. #​3383.
+Upgraded electron-packager from 9.0.1 to 9.1.0. #​3384.
+Upgraded electron-positioner from 3.0.0 to 3.0.1. #​3385.
+Upgraded errorhandler from 1.1.1 to 1.5.0. #​3386.
+Upgraded express from 4.16.2 to 4.16.4. #​3409.
+Upgraded extract-zip from 1.6.6 to 1.6.7. #​3410.
+Upgraded glob from 7.1.2 to 7.1.3. #​3412.
+Upgraded image-size from 0.5.5 to 0.7.2. #​3413 and #​3500.
+Upgraded is-ci from 1.0.10 to 1.2.1. #​3414.
+Upgraded lodash from 4.17.4 to 4.17.11. #​3344.
+Upgraded mocha-junit-reporter from 1.17.0 to 1.18.0. #​3417.
+Upgraded moment from 2.23.0 to 2.24.0. #​3433.
+Upgraded morgan from 1.3.0 to 1.9.1. #​3434.
+Upgraded node-uuid from 1.4.1 to 1.4.8. #​3436.
+Upgraded parse-domain from 2.0.0 to 2.1.7. #​3437.
+Upgraded request from 2.87.0 to 2.88.0. #​3444.
+Upgraded request-progress from 0.3.1 to 0.4.0. #​3445.
+Upgraded request-promise from 4.1.1 to 4.2.4. #​3446 and #​3476.
+Upgraded return-deep-diff from 0.2.9 to 0.3.0. #​3447.
+Upgraded send from 0.14.2 to 0.16.2. #​3448.
+Upgraded ssl-root-cas from 1.2.5 to 1.3.1. #​3449.
+Upgraded supports-color from 5.1.0 to 5.5.0. #​3464.
+Upgraded through from 2.3.6 to 2.3.8. #​3465.
+Upgraded tmp from 0.0.31 to 0.0.33. #​3466.
+Upgraded tough-cookie from 2.4.3 to 3.0.1. #​3477 and #​3659.
+Upgraded trash from 4.0.0 to 4.3.0. #​3478.
+Upgraded underscore.string from 3.3.4 to 3.3.5. #​3480.
+Upgraded yauzl from 2.8.0 to 2.10.0. #​3481. Potentially fixes #​3515.
+We also updated many dependencies used for development and removed some unused dependencies.
+
+
+
+npm/cli
+v6.9.0
+Compare Source
+FEATURES
+
+2ba3a0f67 #​90 Time traveling installs using the --before flag. (@​zkat)
+b7b54f2d1 #​3 Add support for package aliases. This allows packages to be installed under a different directory than the package name listed in package.json, and adds a new dependency type to allow this to be done for registry dependencies. (@​zkat)
+684bccf06 #​146 Always save package-lock.json when using --package-lock-only. (@​aeschright)
+b8b8afd40 #​139 Make empty-string run-scripts run successfully as a no-op. (@​vlasy)
+8047b19b1 npm.community#​3784 Match git semver ranges when flattening the tree. (@​larsgw)
+e135c2bb3 npm.community#​1725 Re-enable updating local packages. (@​larsgw)
+
+BUGFIXES
+
+cf09fbaed #​153 Set modified to undefined in npm view when time is not available. This fixes a bug where npm view would crash on certain third-party registries. (@​simonua)
+774fc26ee #​154 Print out tar version in install.sh only when the flag is supported not all the tar implementations support --version flag. This allows the install script to work in OpenBSD, for example. (@​agudulin)
+863baff11 #​158 Fix typo in error message for npm stars. (@​phihag)
+a805a95ad npm.community#​4227 Strip version info from pkg on E404. This improves the error messaging format. (@​larsgw)
+
+DOCS
+
+5d7633833 #​160 Add npm add as alias to npm install in docs. (@​ahasall)
+489c2211c #​162 Fix link to RFC #​10 in the changelog. (@​mansona)
+433020ead #​135 Describe exit codes in npm-audit docs. (@​emilis-tm)
+
+DEPENDENCIES
+
+ee6b6746b zkat/make-fetch-happen#​29 agent-base@4.2.1 (@​TooTallNate)
+2ce23baf5 lock-verify@2.1.0: Adds support for package aliases (@​zkat)
+baaedbc6e pacote@9.5.0: Adds opts.before support (@​zkat)
+57e771a03 #​164 licensee@6.1.0 (@​kemitchell)
+2b78288d4 add core to default inclusion tests in pack (@​zkat)
+9b8b6513f npm.community#​5382 npm-packlist@1.4.1: Fixes bug where core/ directories were being suddenly excluded. (@​zkat)
+
+
+
+facebook/react
+v16.8.4
+Compare Source
+React DOM and other renderers
+
+Fix a bug where DevTools caused a runtime error when inspecting a component that used a useContext hook. (@​bvaughn in #​14940)
+
+
+
+reactjs/react-docgen
+v4.1.0
+Compare Source
+New Features
+
+Support all the config resolving related babel options (#​334)
+This allows the new options envName, babelrc, root, rootMode, configFile and babelrcRoots in the programatic API. To see what this options do head over to the babel documentation
+
+Thanks @​jquense.
+
+
+palantir/tslint
+v5.14.0
+Compare Source
+
+[bugfix] backtick option for quotemark rule no longer incorrectly flags string literals that must use single/double quotes (#​4535)
+[bugfix] Fixed regression in CheckstyleFormatter backwards compatibility (#​4561)
+[bugfix]whitespace rule now lints export statements (#​4554)
+[bugfix]no-trailing-whitespace no longer flags files starting with a byte order mark (#​4543)
+[enhancement]promise-function-async now allows single statement lamda functions that delegate to another promise-returning function (#​4553)
+[enhancement] Add note to docs about zero-indexing for machine formatters (#​4544)
+[enhancement] Fix metadata of the whitespace rule (#​4551)
+[enhancement] Add junit output for files which are successfully linted (#​4566)
+[new-rule-option] underscore option for no-shadowed-variable rule to ignore shadowed underscores (#​4546)
+[new-rule-option] require-const-for-all-caps option for variable-name rule (#​2936)
+[new-rule-option] overloads option for completed-docs rule to enforce documentation of each overload signature (#​4563)
+[new-rule-option] allow-namespace-imports option for no-duplicate-imports rule (#​4524)
+[new-rule-option] allow-arguments option for no-object-literal-type-assertion rule to allow type assertions on object literals used inside call expressions (#​4521)
+[new-rule-option] allow-delete option for no-unbound-method rule (#​4548)
+[new-rule]no-tautology-expression (#​4470)
+[new-rule]static-this (#​4475)
+[new-rule]unnecessary-else (#​4502)
+
+Thanks to our contributors!
+
+Roman Rogowski
+Max Belsky
+Edward Drapkin
+Dominik Palo
+Matthew McCune
+Debsmita
+Lucas Charles
+Piotr Gajowniczek
+Darren Anderson
+Noam Yogev
+Josh Goldberg
+Karol Majewski
+
+v5.13.1
+Compare Source
+
+[bugfix] Fix regression in CheckstyleFormatter backwards compatibility (#​4561)
+
+
+
+webpack/webpack
+v4.29.6
+Compare Source
+Bugfixes
+
+typeof __webpack_require__ and require.onError is no longer evaluated to undefined and evaluation is done at runtime instead.
+this value in module.hot.accept with imported dependency is correctly preserved.
+webassemblyjs updated to latest version
+
+Contributing
+
+added a linting step to ensure all dependencies resolve to npm modules
+
+
+
+webpack/webpack-cli
+v3.3.0
+Compare Source
+Full Changelog
+New Features
+
+use webpack.config as default name in dev scaffold (385a672)
+only display once a week (b6199e5)
+add util to run-and-get watch proc (1d2ccd5)
+add test-util to append data to file (e9e1dcb)
+log: clean single line logs (5d2284b)
+log: add gitignore (7c830b5)
+log: make log package (df7c224)
+log: add clrscr function (11b3bff)
+log: few changes (bc32727)
+log: add newline for title (4047213)
+log: remove unwanted commits (c088f3e)
+log: task based custom loggers (2c43a41)
+
+Chore
+
+revise typo (a14908e)
+deps: @​std/esm -> esm (a8b46bf)
+remove commit lint from travis (ccec130)
+revise contributing location (13a3a87)
+deps: fix vulnerabilities (c632d1a)
+tests: skipping broken test (f7b6b3a)
+rewrite changelog (62ab32d)
+v.3.2.3 (70138b7)
+v.3.2.2 (24b6387)
+update tests (70bfbd9)
+one liner (0f55d5a)
+one liner after log (6d8fb67)
+watch: remove console log (0952317)
+v.3.2.1 (54805ae)
+dependency: add node-ts as devDependency (#​724)
+
+Docs
+
+scaffolding: lowercase Webpack (d19c1f7)
+scaffolding: fix typos (b94b0de)
+scaffolding: improve grammar (6b79072)
+add lerna badge in README (#​786)
+contributing: refactor & formatting (1042cb2)
+contributing: improve formatting (47fcd7f)
+contributing: : at the end of paragraphs (48d65fd)
+contributing: update instructions to run individual tests (b7cca58)
+contributing: update instructions to run individual tests (bc0297a)
+contributing: add yarn before running jest (126cf55)
+contributing: commands to install jest globally (18b7c2e)
+contributing: fixes typo (c458380)
+contributing: improves formatting (abac823)
+contributing: adds prebuild instructions (81cb46a)
+readme: add downloads badge (dc2423c)
+scaffold: add link option for local (f8424be)
+scaffold: Add installation guide for packages/webpack-scaffold (#​727)
+scaffolding: fix typo (98818a1)
+scaffolding: improve description & formatting (0f657d0)
+scaffolding: fix links (e11c524)
+scaffolding: add yarn example (d47eea0)
+scaffolding: fix typo (87ba169)
+scaffolding: improved structure, formatting, typos (8949f82)
+init documentaion (4b130bb)
+rename Webpack to webpack (900c13e)
+init documentaion (14d2b47)
+
+Fix
+
+bin: use compiler.close API correctly for stats (568161d)
+bin: extension detection (#​724)
+init: lint code (20aab48)
+init: support global installation (1cb0166)
+init: revert to local installation (48b3b23)
+init: update prompt command (c1c0739)
+init: update prompt command (1cab3cb)
+readme: remove old dependency status link (4df0000)
+readme: add fallback badge for dependency status (0e3753b)
+tests: remove snapshot for static compilation (54a3ac4)
+tests: remove snapshot for static compilation (3af0948)
+tests: update jest (d195774)
+close compiler, own sh script and output clearing (6ded275)
+failing test (88888bb)
+failing test (986472a)
+test: fix travis ts build (22d3acc)
+
+Tests
+
+azure pipelines (c9c3fea)
+bin: add webpack.config.ts related test (#​724)
+bin: add webpack.config.babel.js related test (#​724)
+module: use extractSummary (7bde073)
+watch: use copyFile functionality (c61fe92)
+add copyFile function in test-utils (1b21e81)
+config-file: use extractSummary (7554fe7)
+config-name: use extractSummary (3e30a57)
+env: use extractSummary (aa0cf25)
+fix: fix failing tests (5669311)
+fix: fix failing tests (f1f7db1)
+help: use extractSummary (0ba72c4)
+watch: use switch pattern for verbosity off (c00386b)
+watch: hash assertion for single-config-opt (55632d6)
+watch: hash assertion for single-config (48f34d1)
+watch: hash assertion for multi-config-watch-opt (6dd2327)
+watch: hash assertion multi-config (6b4d339)
+watch: hash assertion info-verbosity-verbose (42e5ee8)
+watch: remove test.only for info-verbosity-off (675d5c0)
+improve appendFile test-case (18bde78)
+remove eslint comment for requireReturn (be7b259)
+watch: test failure using done(error) (46d2e37)
+watch: use native require first (20e8579)
+watch: use better comments (b6efe2d)
+add type to appendDataIfFileExists util (f853302)
+make comment clear about fs.copyFileSync (d1d3d02)
+use 10E6 instead of 10e6 (c9c5832)
+bin: add .babelrc to webpack-babel-config test (#​724)
+bin-cases: expose extractSummary as function (73714f5)
+config-type: use extractSummary (ed36260)
+entry: use extractSummary (745a369)
+errors: use extractSummary (3c8628c)
+fix: fix failing tests (7cb531b)
+fix: fix failing tests (a967485)
+mode: use extractSummary (3277d41)
+output: use extractSummary (cb60b15)
+plugins: use extractSummary (02e08dc)
+silent: use extractSummary (ea89a82)
+stats: use extractSummary (7f4e504)
+watch: hash assertion for info-verbosity-off (e0a0d97)
+watch: use extractSummary (8357dbc)
+
+Misc
+
+Correction of the webpack-merge configuration (2ed8c60)
+replace opencollective with light vers (848bf4b)
+
+
+
+Renovate configuration
+📅 Schedule: "before 2am" (UTC).
+🚦 Automerge: Disabled by config. Please merge this manually once you are satisfied.
+♻️ Rebasing: Whenever PR becomes conflicted, or if you modify the PR title to begin with "rebase!".
+👻 Immortal: This PR will be recreated if closed unmerged. Get config help if that's undesired.
+
+
+ If you want to rebase/retry this PR, check this box
+
+
+This PR has been generated by Renovate Bot. View repository job log here.

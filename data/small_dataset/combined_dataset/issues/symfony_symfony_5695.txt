@@ -1,0 +1,42 @@
+[2.1][Security] Check_path and logout fails on non latin path
+
+
+RuntimeException: You must activate the logout in your security firewall configuration
+In example:
+# app/config/security.yml
+security:
+    firewalls:
+        main:
+            form_login:
+
+                # this is ok
+                login_path:  /вход 
+
+                # check_path fails
+                check_path:  /авторизация
+            logout:
+                # logout path fails
+                path:   /выход 
+All this happens because of Symfony\Component\Security\Http\HttpUtils::checkRequestPath request query string not url decoded
+    public function checkRequestPath(Request $request, $path)
+    {
+        if ('/' !== $path[0]) {
+            try {
+                $parameters = $this->urlMatcher->match($request->getPathInfo());
+
+                return $path === $parameters['_route'];
+            } catch (MethodNotAllowedException $e) {
+                return false;
+            } catch (ResourceNotFoundException $e) {
+                return false;
+            }
+        }
+
+        /**
+        * var_dump($request->getPathInfo()) ;
+        * var_dump($path);
+        * ("/%d0%b2%d1%8b%d1%85%d0%be%d0%b4" === $request->getPathInfo()) true
+        * ($path === urldecode($request->getPathInfo())) true
+        */
+        return $path === $request->getPathInfo();
+    }

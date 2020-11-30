@@ -1,0 +1,7 @@
+'Possibility to manage relations between issues
+
+Issue x is:
+- duplicate of / duplicated by issue y
+- sub-issue / parent of issue y
+- blocked by / blocker of issue y
+- just related to issue y

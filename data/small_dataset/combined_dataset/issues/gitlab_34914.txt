@@ -1,0 +1,1 @@
+Found some information in !12109, there are security vulnerabilities on nokogiri (1.6.8.1) with libxslt, but #29992/#33597 are still not disclosed to public. Why?

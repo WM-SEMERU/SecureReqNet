@@ -1,0 +1,28 @@
+feat($sce): handle URLs through the $sce service, plus allow concatenation in that $sce contexts.
+
+
+What kind of change does this PR introduce? (Bug fix, feature, docs update, ...)
+This is an improvement to  uniformize the secure context code, by making the $sce handle URL-context in roughly the same way it handles HTML-context. That also required a more silent change, to have $sce-contexts where concatenation of values is allowed (described below).
+What is the current behavior? (You can also link to an open issue here)
+Currently, the whole $sce.URL context is unused. Dynamically-set URLs that are sanitized through various codepaths (mostly in compile.js, $set function).
+Usually, if one wants to force a value through Angular's security mechanisms, the $sce.trustAs function should be used. There's no straightforward way to do it in a single place for URLs, as <a href="{{sce.trustAsUrl(foo)}}"> sanitizes silently its link.
+Also, an attribute being a $sce context means that concatenations are blocked: <iframe src="generate.php?{{params}}"> would throw for instance. However, since it's not a $sce context, <img src="generate.php?{{params}}"/> is fine.
+What is the new behavior (if this is a feature change)?
+The new behavior makes Angular handle URLs with the $sce service, similarly to HTML context. $sce.trustAsUrl is now useful, as it allows bypassing the sanitization. If one uses plain strings in URL-context attributes, they will be sanitized through the existing $$sanitizeUri service.
+I also have tweaked $interpolate to work as expected with concatenated values in select secure contexts. In the listed contexts (URL only for now, though that could be expanded to anything), trustAs'd values with no concatenations are not sanitized (eg "{{trustedVar}}" works as you'd expect), and anything else is downgraded to string, concatenated if needed, and then passed to $sce.getTrusted that handles the sanitization as usual. For instance, "java{{trustAsUrl('script:evil();')}}" is sanitized as it should.
+Does this PR introduce a breaking change?
+Yes: I've merged both URL sanitization methods in $$sanitizeUri (since there's a single $sce.URL context). This will break the applications that edit one of these whitelists, but I believe there's security benefits in doing so, as they will be able to use trustAsUrl in specific parts of their application instead of having to blanket-approve the special scheme they rely on. Otherwise, I believe the changes are backwards-compatible unless you're really hooking into Angular internals.
+Please check if the PR fulfills these requirements
+
+ The commit message follows our guidelines: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit-message-format
+ Tests for the changes have been added (for bug fixes / features)
+ Docs have been added / updated (for bug fixes / features)
+
+Other information:
+I'm from Google security, but I'm not right all the time, so please ask about anything: I might have missed something, or this might not be something you want. I had to modifiy components I'm not that familiar with. Things to check:
+
+If you had special reasons to split the URL sanitization in two parts, I haven't been able to find it. I just merged the whitelists.
+I'm not entirely sure of the $interpolate change. I've had several issues with infinite digests with arrays while developping, the latest changes seem to pass, but there might still be dragons hidden in there.
+I'm not sure either I got all the doc modified.
+Finally, $sce.HTML / $sce.RESOURCE_URL could also be concatenated. At least for HTML it works, and you could have something like the commented-out test in sceSpecs.js, but I'm not sure it brings much value here, so I've left it disabled for now. RESOURCE_URL could follow the same path with either completely-trusted URLs, or concatenated-then-treated-as-string URLs that would be checked against the whitelist/blacklist mechanism.
+

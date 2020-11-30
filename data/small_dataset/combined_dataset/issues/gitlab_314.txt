@@ -1,0 +1,7 @@
+'GitLab Flavored Markdown aren't parsed when there are other character.
+
+
+Examples:
+
+- (_italic_)
+- isn'_t_ (this is an example in English, but for Italian I need to use single quote and format word after it)

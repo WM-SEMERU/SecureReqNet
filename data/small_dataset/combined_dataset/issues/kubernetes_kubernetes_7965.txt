@@ -1,0 +1,9 @@
+Secure kubelet port 10250
+
+
+The kubelet exposes an unauthenticated endpoint on port 10250. The issues with this:
+
+there are the debug handlers /exec/ and /run/ that run code in any container on the host
+these debug handlers are enabled by default
+the code run in the container runs with full root capabilities (compared to docker's root with a capability bounding set)
+

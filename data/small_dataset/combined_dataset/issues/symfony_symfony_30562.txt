@@ -1,0 +1,66 @@
+[PropertyInfo][RFC] Return properties without need to declare getters for property first.
+
+
+I am not sure what is the intended functionality for this so I'm asking here before I start "fixing" this.
+So, as now I write this, the current functionality is,
+<?php
+declare(strict_types=1);
+
+
+// Create instance of a propertyInfoExtractor.
+$phpDocExtractor = new \Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor();
+$reflectionExtractor = new \Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor();
+$listExtractors = [$reflectionExtractor];
+$typeExtractors = [$phpDocExtractor, $reflectionExtractor];
+$descriptionExtractors = [$phpDocExtractor];
+$accessExtractors = [$reflectionExtractor];
+$propertyInitializeExtractors = [$reflectionExtractor];
+
+$extractor = new \Symfony\Component\PropertyInfo\PropertyInfoExtractor(
+    $listExtractors,
+    $typeExtractors,
+    $descriptionExtractors,
+    $accessExtractors,
+    $propertyInitializeExtractors
+);
+
+// Declare example class here.
+final class Example
+{
+    /**
+     * @var string
+     */
+    private $foo;
+    /**
+     * @var int
+     */
+    private $bar;
+    /**
+     * @var array
+     */
+    private $context;
+
+    public function __construct(string $foo, int $bar, array $context)
+    {
+        $this->foo = $foo;
+        $this->bar = $bar;
+        $this->context = $context;
+    }
+
+    public function toArray(): array
+    {
+        return 
+        [
+            'foo' => $this->foo,
+            'bar' => $this->bar,
+            'con' => $this->context,
+        ];
+    }
+}
+
+$properties = $extractor->getProperties(Example::class);
+var_dump($properties); // NULL
+// However when I declare getters, this will work. 
+
+For example in my case I have use case where I am parsing just the types and properties from the class to know what properties set via reflection. However sometimes class might not even have any getters. It might be implementing \JsonSeriziable or just have toArray method.
+I think it should be possible to get the types without having to declare the getters for the entity. I might have time to "fix" this, but I need to ask first, so I don't waste my labor.

@@ -1,0 +1,4 @@
+Symfony logout under HHVM does not work.
+
+
+I am unable to logout using the default symfony 2.6 (+Security Bundle) user authentification under HHVM but works perfectly under PHP5-FPM 5.5.9

@@ -1,0 +1,7 @@
+Documentation inconsistency
+
+
+Original issue 1888 created by ToonTalk on 2014-02-10T09:02:22.000Z:
+In https://developers.google.com/caja/docs/controllingnetwork/
+the code samples refer to a.png but the text refers to a.jpg.
+E.g. "... you will notice that a.jpg is displayed ..."

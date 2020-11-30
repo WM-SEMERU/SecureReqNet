@@ -1,0 +1,8 @@
+Update Contributing Guidelines for "Building" Section
+
+
+Under the Building section of CONTRIBUTING.md :
+There should be a new link to replace "See ./vagrant/README.md for a quick workflow to build and test your own kubeadm binaries"
+Since all the /vagrant files have been removed in commit: 90a02d7
+As far as I can tell, based on the statement in /vagrant/README.md
+and and PR #1446  , I suggest pointing to https://github.com/kubernetes/kubeadm/tree/master/kinder in the Building section of CONTRIBUTING.md.

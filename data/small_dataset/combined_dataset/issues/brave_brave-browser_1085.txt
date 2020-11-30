@@ -1,0 +1,15 @@
+no options are passed to webtorrent torrent.createServer()
+
+
+in extension/background/webtorrent.ts, torrent.createServer() is called without any arguments.
+the equivalent code for browser-laptop is here: https://github.com/dcposch/webtorrent-remote/blob/master/server.js#L202
+opts is set in js/webtorrent/entry.js in browser-laptop:
+  server = torrent.createServer({
+    // Only allow requests from this origin ('chrome-extension://...) so websites
+    // cannot violate same-origin policy by reading contents of active torrents.
+    origin: window.location.origin,
+    // Use hostname option to mitigate DNS rebinding (#12616)
+    hostname: webtorrentServerHostname
+  })
+
+As noted in the comments, both the origin and hostname options are security critical. It appears they are not set in brave-core, but I could be missing something.

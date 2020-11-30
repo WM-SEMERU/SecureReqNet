@@ -1,0 +1,13 @@
+Failed to install phpcas through pear
+
+
+hi,
+i try to install cas through pair but give install failed output.
+downloading 1.3.6 ...
+Starting to download 1.3.6 (Unknown size)
+.....done: 68,029 bytes
+could not extract the package.xml file from "/tmp/pear/download/1.3.6"
+Download of "https://github.com/apereo/phpCAS/archive/1.3.6.tar.gz" succeeded, but it is not a valid package archive
+Invalid or missing remote package file
+install failed
+any guide? i also try to install older version if it will successfully install but output with same error

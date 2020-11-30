@@ -1,0 +1,5 @@
+fix(bazel): use //:tsconfig.json as the default for ng_module (#29670)
+
+
+This matches the behavior of ts_library
+cherry-pick of #29670

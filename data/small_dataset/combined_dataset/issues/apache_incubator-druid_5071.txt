@@ -1,0 +1,8 @@
+Automatically insert authenticator/authorizer names into config properties
+
+
+This PR automatically inserts the following properties into the Properties object provided to Authenticator and Authorizer implementations:
+druid.auth.authenticator.<authenticator-name>.name=<authenticator-name>
+druid.auth.authorizer.<authorizer-name>.name=<authorizer-name>
+
+Providing the name which is not easily accessible without this PR can be useful when there are multiple authenticator/authorizer instances of the same type.

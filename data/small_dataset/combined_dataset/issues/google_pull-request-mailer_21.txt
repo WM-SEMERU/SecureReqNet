@@ -1,5 +1,0 @@
-Update URL of the Ganeti project
-
-
-The newly-added http://www.ganeti.org/ page is
-currently the most-maintained overview of Ganeti.

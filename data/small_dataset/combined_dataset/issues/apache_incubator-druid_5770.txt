@@ -1,4 +1,0 @@
-[Backport] Fix KerberosAuthenticator serverPrincipal host replacement (#5766)
-
-
-Backport of #5766 to 0.12.1

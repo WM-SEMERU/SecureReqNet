@@ -1,9 +1,0 @@
-Make external CA support more generic
-
-
-The existing external CA support implies the use of the CFSSL protocol.
-This change makes ExternalCAs a list of structs instead of strings. Each
-struct specifies the type of the external CA (currently, only CFSSL is
-supported). In the future we may add other items to this struct such as
-options.
-cc @jlhawn @diogomonica @jefferai @stevvooe

@@ -1,4 +1,0 @@
-sha256 when generating certificates
-
-
-Small detail, but when generating certificates using sha256 is recommended. See for example http://googleonlinesecurity.blogspot.se/2014/09/gradually-sunsetting-sha-1.html.

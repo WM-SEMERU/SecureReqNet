@@ -1,4 +1,0 @@
-Update Alpine version to 3.8.1
-
-
-Fix for #355

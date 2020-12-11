@@ -1,4 +1,0 @@
-Document the disallow_search_engine_index option
-
-
-This documents symfony/symfony#30325.

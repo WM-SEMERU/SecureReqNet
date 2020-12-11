@@ -1,4 +1,0 @@
-Replace static function names to have _ instead of _oe_
-
-
-Fixes Issue #1189 - static functions/globals that have oe prefix modified to only have the underscore (_) as prefix. Also clarified DevelopmentGuide.md

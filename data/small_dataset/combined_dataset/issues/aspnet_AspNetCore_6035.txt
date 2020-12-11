@@ -1,5 +1,0 @@
-Remove JwtBearer and OIDC authentication from the shared framework
-
-
-These are being pulled out of the shared framework and will ship as NuGet packages. These assemblies have a dependency on the IdentityModel APIs which do no yet fit the guidelines the shared framework.
-cref #3755

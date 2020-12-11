@@ -1,6 +1,0 @@
-Clarify waypoint limit
-
-
-PROFILE_DRIVING_TRAFFIC has a much lower limit of only three waypoints, per the API documentation.
-/ref mapbox/MapboxDirections.swift#142
-/cc @cammace @danswick

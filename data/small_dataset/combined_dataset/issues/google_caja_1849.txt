@@ -1,5 +1,0 @@
-Prune old documentation
-
-
-Original issue 1851 created by kpreid.switchb.org on 2013-09-03T21:49:29.000Z:
-There's a good bit of stuff in /trunk/doc/ which has nothing to do with modern Caja. We should sort through all these docs and delete anything that isn't worth keeping with a historical note or updating.

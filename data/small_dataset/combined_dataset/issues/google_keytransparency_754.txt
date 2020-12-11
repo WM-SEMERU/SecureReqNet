@@ -1,5 +1,0 @@
-Client: save STH
-
-
-Strengthen consistency proofs by storing the latest verified SignedTreeRoot in persistent storage.
-Future requests ask for consistency proofs to, and update this STH

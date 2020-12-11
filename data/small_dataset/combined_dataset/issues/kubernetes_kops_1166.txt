@@ -1,8 +1,0 @@
-Feature request: Option to use existing IAM Role in AWS
-
-
-Use case
-Possibly relating to kube2iam ( #921 ) and other AWS IAM Role related tickets (like #379 , #223 ), it may be a useful thing to be able to have a pre-configured IAM Role (with the trust relationships required by kube2iam already defined) and give this to kops to use, rather than kops generating its own, and then needing to add to this and set up trust relationships with potentially hundreds of kube2iam "instance roles".
-This way, one could spin up new clusters with kops, and have kube2iam work immediately.
-It would probably require that the pre-configured Role either be manually set up with the access kops needs, or that kops edits it as needed.
-Something like --worker-iam-role=$ROLENAMEHERE and --master-iam-role=$OTHERROLEHERE ?

@@ -1,1 +1,0 @@
-After running a bundle exec rake gitlab:backup:restore, the hooks links are not set to git's home if $HOME is other than /home/git.  This means bundle exec rake gitlab:check will error out helpfully.  It would be best if the restore would either divine the home from the user's home path or the parameters in config/gitlab.yml, gitlab-shell/config.yml or /etc/default/gitlab.

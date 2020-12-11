@@ -1,4 +1,0 @@
-Bring back `Find in page` via url bar
-
-
-We had this feature in Brave 1.6 and removed it by accident while moving onto 1.7 codebase.

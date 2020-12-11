@@ -1,4 +1,0 @@
-SQL Injection from API?
-
-
-If you go here: /api/resource/Item?fields=["name","group"] on any erpnext install you get an SQL syntax error which has me worried of what else can be done with some escaping...field names should probably be enclosed in ` either which way if this is not a security issue :)

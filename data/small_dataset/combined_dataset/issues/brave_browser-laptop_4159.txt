@@ -1,4 +1,0 @@
-un-ignore cert transparency errors
-
-
-see #4150

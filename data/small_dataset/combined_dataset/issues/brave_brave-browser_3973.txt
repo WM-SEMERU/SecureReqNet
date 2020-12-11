@@ -1,6 +1,0 @@
-Upgrade from Chromium 73.0.3683.75 to Chromium 74.0.3729.40
-
-
-Fixes #3502, #3894, #3965, #3915
-Related: brave/brave-core#2148
-Uplift request from: #3931

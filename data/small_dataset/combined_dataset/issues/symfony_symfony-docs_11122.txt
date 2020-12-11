@@ -1,5 +1,0 @@
-moved XSD to HTTPS
-
-
-as @fabpot did this in the code base, I think we should reflect the changes in the docs, too.
-Refs symfony/symfony#30434

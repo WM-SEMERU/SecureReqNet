@@ -1,5 +1,0 @@
-We recently received a HackerOne report stating that our [health check white-list](https://gitlab.com/help/user/admin_area/monitoring/health_check) can be bypassed by specifying a custom HTTP header along with the token. The researcher was confused by the documentation of the white-list which implies that this endpoint is no longer available via token alone and that all source IPs must be white-listed.
-
-I'd like to verify that this _is_ the intended functionality first (being available with the token regardless of white-list). If so, we should update the documentation to be more clear that the white-list only applies to requests that do not include a token.
-
-If these tokens were supposed to have been deprecated then we should move forward with removing them completely.

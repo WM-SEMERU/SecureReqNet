@@ -1,4 +1,0 @@
-Document AUTHENTICATION_SUCCESS_SENSITIVE event
-
-
-Docs for symfony/symfony#30955

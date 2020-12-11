@@ -1,5 +1,0 @@
-User switching not possible with any TokenInterface implementation other than UsernamePasswordToken
-
-
-Would it not be a good idea to make the SwitchUserListener agnostic of what token class is being used?
-Sure, you can override the SwitchUserListener with your own listener class, but to do that properly you would have to have more than a basic understanding of Symfony's security internals...

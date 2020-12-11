@@ -1,5 +1,0 @@
-update to https everywhere 5.2.4
-
-
-https://www.eff.org/files/Changelog.txt
-cc: @diracdeltas

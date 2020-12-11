@@ -1,9 +1,0 @@
-Take a look at
-![screenshot](http://i.imgur.com/AdiIFoi.png)
-
-
-It truncates text before markdown is rendered and also incorrectly cuts links, that link now points to https://gitlab.c/ literally.
-
-To correctly implement this, it should first render all markdown, count all non HTML characters and truncate there and add all HTML end tags to close markup properly.
-
-So basically `[google](http://www.google.com/)` would become `<a class="some" href="http://www.google.com/">google</a>` now counting only actual length it would be just 6 and thus not truncated, but if max allowed length would be 3, then it would become `<a class="some" href="http://www.google.com/">goo` and now we add `...</a>` to close all opened tags.

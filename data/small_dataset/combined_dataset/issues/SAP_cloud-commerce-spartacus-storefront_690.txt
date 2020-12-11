@@ -1,4 +1,0 @@
-Secure oauth token
-
-
-Currently oauth token is stored in session storage. We must evaluate if we can further secure the token in order to increase security.

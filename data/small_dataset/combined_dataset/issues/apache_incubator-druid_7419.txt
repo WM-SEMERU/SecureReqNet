@@ -1,4 +1,0 @@
-Update console packages and enforce tslint quotes
-
-
-Standardize on single quotes. Easier to do this change now than after the project is bigger.

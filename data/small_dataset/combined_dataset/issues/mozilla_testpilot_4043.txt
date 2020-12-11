@@ -1,5 +1,0 @@
-Update availableLanguages with missing locales
-
-
-Adds es-CL,ka,sq
-Fixes #4032

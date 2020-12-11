@@ -1,4 +1,0 @@
-Migrating from OpenShift to EKS
-
-
-Outlines different approaches for migrating from OpenShift to EKS

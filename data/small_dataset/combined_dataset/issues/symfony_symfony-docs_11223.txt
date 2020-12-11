@@ -1,5 +1,0 @@
-Update groups.rst
-
-
-Integrating the findings of EasyCorp/EasyAdminBundle#2673 (comment)
-Please fix the link to [guess your form types] - I don't know how to link to an anchor in the docs!

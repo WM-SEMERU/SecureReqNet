@@ -1,6 +1,0 @@
-proposal: crypto/cipher: allow short tags in NewGCMWithNonceAndTagSize
-
-
-With the new API for customizing GCM tag size, it's finally possible to reduce the GCM tag overhead for some applications.  However, the new API comes with a hard limit on the minimal tag size, 12 bytes, which is just a 4 bytes saving compare to the default value.
-For our use case, we use AES128-GCM to perform EtA on an IP packet flow. The data to encrypt has a bounded max size, and we call the authenticated decryption function for a limited times.  As we meets the circumstances described in Appendix C of the NIST 800-38D, using an 8-byte tag would be an overkill (<1400B payload and <2^31 invocations).
-For the above reason, I'm proposing to relax the limit on the minimal tag size, and add a longer doc string for this function.  It's understandable that a crypto library should be safe to use with it's default parameters without further mangling, but for an API designed to customize the behavior should provide more flexibility.

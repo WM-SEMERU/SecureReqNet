@@ -1,4 +1,0 @@
-[FrameworkBundle][Routing] Added doc for new "template", "redirect" shortcuts
-
-
-Added documentation for symfony/symfony#30501.

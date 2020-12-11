@@ -1,4 +1,0 @@
-Set-AuthenticodeSignature (Unkown Error)
-
-
-Set-AuthenticodeSignature is giving me UnkownError. This looks serious.

@@ -1,5 +1,0 @@
-security.interactive_login event marked as not called
-
-
-When I login into my sf application, I have some code executed on the security.interactive_login event listener and it works, however in the toolbar, under the events not called section, I can see the "security.interactive_login" marked as a not called listener. Is that normal? I am using 2.3.20
-

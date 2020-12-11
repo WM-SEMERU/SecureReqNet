@@ -1,8 +1,0 @@
-Review recent vulnerabilities in SpiderMonkey and Firefox for relevance to Caja
-
-
-Original issue 977 created by davidsarah.hopwood on 2009-01-20T00:48:57.000Z:
-http://www.cve.mitre.org/cgi-bin/cvekey.cgi?keyword=firefox
-Besides blocking the specific bugs listed there, assess to what extent
-Caja's design is likely to prevent any similar future bugs, and whether it
-can be improved in that respect.

@@ -1,5 +1,0 @@
-Deleting the project via API does not actually delete the repository on disk.  It appears to only delete all of the project metadata (issues, wiki, etc.) but the repo will still exist in the filesystem.
-
-This affects deleting projects via API and then moving a project of the same name across namespaces to the destination where the project was previously deleted.  A non-useful error is returned via HTTP (405 Method not allowed).  More information about this bug as well as logs can be found in [`gitlab-mirrors` issue 42](https://github.com/samrocketman/gitlab-mirrors/issues/42) on github.
-
-An `archive` bool option should be added to the `DELETE` project API so that the API caller can choose to simply archive the project or completely delete the repository.

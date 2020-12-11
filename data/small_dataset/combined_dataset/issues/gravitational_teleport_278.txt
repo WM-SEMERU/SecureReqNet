@@ -1,4 +1,0 @@
-2nd factor token UI
-
-
-2nd factor token form should not be visible and token should not be remembered with browser auto complete

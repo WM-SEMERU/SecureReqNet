@@ -1,5 +1,0 @@
-Use a package manager for client side libraries
-
-
-This is to allow us to be warned when client side libraries become out of date or have vulnerabilities reported against them.
-This is part of the security checklist #31 so see that for more details of the recommended approaches.

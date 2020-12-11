@@ -1,7 +1,0 @@
-Implement native "open tab in background"
-
-
-In Firefox, "open tab in background" can be enabled by edit "browser.tabs.loadDivertedInBackground" in about:config.
-For brave/chrome, "open tab in background" can only be enabled by extensions (e.g. tabsplus/ForceInBackground), which is non-native and usually buggy. For example, for tabsplus/ForceInBackground, there will be a splash when the link is clicked and opened in background tab.
-Highly appreciated if brave would implement a built-in "open tab in background" option.
-P.s. Wish brave can be more customizable just like Firefox.

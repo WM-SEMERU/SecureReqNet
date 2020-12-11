@@ -1,7 +1,0 @@
-Automated cherry pick of #54013
-
-
-Cherry pick of #54013 on release-1.8.
-#54013: ScaleIO - API source code update
-ScaleIO persistent volumes now support referencing a secret in a namespace other than the bound persistent volume claim's namespace; this is controlled during provisioning with the `secretNamespace` storage class parameter; StoragePool and ProtectionDomain attributes no longer defaults to the value `default`
-

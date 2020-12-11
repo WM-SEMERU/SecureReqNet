@@ -1,5 +1,0 @@
-[Feature][Security] Add a TraceableFirewall
-
-
-In my current application I have some performance issues. The profiler showed me that Symfony spends a lot of time in one of the configured firewalls but I need more informations to debug. We could wrap security listeners as regular listeners are in debug mode to collect time spend inside.
-What do you think? I can work on it.

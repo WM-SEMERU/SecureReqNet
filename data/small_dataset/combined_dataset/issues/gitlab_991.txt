@@ -1,8 +1,0 @@
-I've read the permissions docs and they don't seem to jive with reality.
-
-I'm running 7.6.2 CE and there are no public projects in my instance. I created a test user with no memberships in any projects or groups. This user can download and clone any repo in the system, even private ones!
-
-With CE is there no way to enforce a strict level of privacy for certain projects? If I want to invite developers in to my instance how can I prevent them from 
-
-* finding all of my private projects via search 
-* browsing/downloading/cloning their source?

@@ -1,9 +1,0 @@
-kinder
-
-
-after #1446 merged, this PR adds the actual kinder code
-/kind feature
-/priority important-longterm
-/assign @timothysc
-/assign @neolit123
-/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

@@ -1,7 +1,0 @@
-Adding warning about layer7 config
-
-
-Adding warning about layer7 config not being included in the backup
-Proposed changes
-Unreleased project version (optional)
-Related issues (optional)

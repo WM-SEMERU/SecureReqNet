@@ -1,4 +1,0 @@
-OIDC MW: EndSession iss check
-
-
-The OIDC front-channel signout spec was updated to include the iss param, so the MW should check for it: https://openid.net/specs/openid-connect-frontchannel-1_0-01.html#OPLogout

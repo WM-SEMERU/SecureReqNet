@@ -1,5 +1,0 @@
-breakup the certificates controller
-
-
-The signer and approver should be distinct controllers.
-@pipejakob @jcbsmpsn

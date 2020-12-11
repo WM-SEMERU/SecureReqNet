@@ -1,6 +1,0 @@
-Updates package 'Microsoft.Azure.DocumentDB.Core' to version '2.1.3'
-
-
-
-
-

@@ -1,7 +1,0 @@
-csslexer.js optimization
-
-
-Original issue 1856 created by Yonatan.Offek on 2013-09-08T20:14:01.000Z:
-Hello caja devs,
-I borrowed your CSS parser for something, and I noticed that lexCss() spends most of its time in decodeCss(), creating many identical RegExp objects.
-This patch makes it go 3.5 times faster :)

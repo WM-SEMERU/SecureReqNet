@@ -1,7 +1,0 @@
-security,unix: audit use of process.env in lib/ for setuid binary
-
-
-Functions like os.tmpdir() and Module._initPaths() use file paths from environment variables.
-This is unsafe when the node binary has the setuid bit set - i.e., when it runs with the privileges of a different user (usually root) than the user executing it - because it can be used to read or write files that otherwise wouldn't be accessible.
-On the C++ side we have secure_getenv() which checks that the real uid and gid match the effective uid and gid before accessing an environment variable.  Perhaps we need something similar for JS land.
-Caveat emptor: our implementation of secure_getenv() does not take Linux process capabilities into consideration but neither does glibc's, as far as I can tell. - edit 20171221: it does now and it's been renamed to SafeGetenv().

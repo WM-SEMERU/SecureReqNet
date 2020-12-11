@@ -1,5 +1,0 @@
-### Look at integrating a tool like clair to do scanning of docker images in the registry and storing/presenting the results.
-
-Working with our security folks on doing docker in our environment we need some audit ability in our registry.  Gitlab seems like a good place.  We have worked some with clair by the CoreOS folks and it is an acceptable solution.  While this could be implemented as part of a pipeline it would be nice to just have it part of the registry.
-
-It also would bring it in par with other registry offerings by Docker and CoreOS.

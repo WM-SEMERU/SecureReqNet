@@ -1,7 +1,0 @@
-refactor js/lib/urlutil.js for safer url parsing
-
-
-Test plan
-#10346 (comment)
-
-it should try to use Chromium's URL parser whenever possible.

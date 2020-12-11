@@ -1,4 +1,0 @@
-[CONSOLE] Update doc interact
-
-
-Minor changes on the documentation of the Command::interact method.

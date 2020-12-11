@@ -1,7 +1,0 @@
-new security rule: insecure-buffer-usage
-
-
-detect-new-buffer
-// Detects instances of new Buffer(argument)
-// where argument is any non literal value.
-https://github.com/nodesecurity/eslint-plugin-security/blob/master/rules/detect-new-buffer.js

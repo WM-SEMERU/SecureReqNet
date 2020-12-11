@@ -1,8 +1,0 @@
-Security: jak vytvorit permission
-
-
-zminit dve moznosti,
-
-ciste v neonu se setup
-factory
-

@@ -1,6 +1,0 @@
-Move WeakMap tests
-
-
-Original issue 1886 created by kpreid.switchb.org on 2014-02-07T01:03:21.000Z:
-There are tests for WeakMap in at least two places: test-language-guest and test-ses-parts (more recently introduced). We should have them in only one place.
-Once ES5/3 is no longer maintained, meaning that testing its WeakMap implementation is not interesting, I propose moving all these tests to test-ses-parts. If we want to fix this sooner, we should move them to test-language-guest.

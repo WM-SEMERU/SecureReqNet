@@ -1,5 +1,0 @@
-{List,Create,Change}InputLogs Admin APIs
-
-
-Support admin control of input log horizontal scaling.
-Fixes #1063

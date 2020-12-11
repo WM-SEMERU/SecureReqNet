@@ -1,4 +1,0 @@
-Changed GettingStarted.md to be focus on building the OE SDK.
-
-
-Fixes #1633.

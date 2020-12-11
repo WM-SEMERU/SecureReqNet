@@ -1,6 +1,0 @@
-Update Weave Net for Kubernetes 1.6
-
-
-Pretty sure you need to update the toleration from an annotation to a field.
-You may want the plugin to obey CNI spec 0.3.0, which is in the Weave Net 1.9.4 release.
-Does Kops turn on RBAC?

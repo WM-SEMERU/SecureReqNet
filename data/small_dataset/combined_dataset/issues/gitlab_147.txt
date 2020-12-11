@@ -1,2 +1,0 @@
-As exhibited here: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/markdown/markdown.md#inline-html the description list is not rendering correctly.  
-Applies to both the Wiki and file browser.

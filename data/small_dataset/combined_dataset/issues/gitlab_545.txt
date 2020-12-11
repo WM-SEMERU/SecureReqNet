@@ -1,7 +1,0 @@
-When someone forks a repo, the forked repo gets the same amount of stars as the original repo has at that point.
-
-Stars should be a representation of how good/popular(?) a repo is.
-When people see a repo with a high amount of stars, they would think it is a good repo/the original repo. but when someone forks the repo, and gets the same amount of stars, this would mean it is also a good repo, which would not always be true.
-
-
-For short: forked repos should start with 0 stars.

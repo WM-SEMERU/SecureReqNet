@@ -1,6 +1,0 @@
-Add alpha API support for AppArmor
-
-
-Adds alpha API support for AppArmor, as described in the AppArmor proposal.
-This PR draws on the conventions used by seccomp, E.g. in #27036 and #28300
-/cc @pweil- @sttts @kubernetes/api-review-team @jfrazelle

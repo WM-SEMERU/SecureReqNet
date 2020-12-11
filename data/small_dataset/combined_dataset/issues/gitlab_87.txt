@@ -1,5 +1,0 @@
-The upgrade script itself runs without any errors, but when checking the environment using
-
-    sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
-
-it says that the init script is not up-to-date. Same error on two servers.

@@ -1,6 +1,0 @@
-Block localhost service/endpoint addresses in apiserver proxy
-
-
-In #8989 we blocked proxying to 169.254.0.0/16 but not to localhost addresses.
-The first part can be bypassed by creating a proxy to localhost:4001 and talking to the etcd server directly. You can then insert a new endpoint that points to 169.254.169.254.
-I could only verify this behaviour with the latest git version, but not on GKE since the minion - master communication has changed in the meantime. Though if this is not reproducible on GKE this might not be an issue at all since only admins should be able to add new endpoints. @thockin wdyt?

@@ -1,6 +1,0 @@
-Check headers to ensure API calls refer to allowed institutions
-
-
-The CFPB-HMDA-Institutions header will contain a comma-separated list of institution IDs (probably integers, see #437). We will check for its existence on all resources rooted from /institutions. Think of it as a whitelist of institutions authorized to a given user.
-Return a 403 error if an attempt is made to access an institution-specific resource (/institutions/<institution_id>/*) not in the user's whitelist.
-(Splitting this issue off from #441, since it requires more groundwork.)

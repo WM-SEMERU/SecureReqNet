@@ -1,1 +1,0 @@
-This seems to be because of a too rigid non-adapting site layout.

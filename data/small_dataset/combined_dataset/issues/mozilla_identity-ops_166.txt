@@ -1,4 +1,0 @@
-merge monitor (opsview) and graphite server tiers
-
-
-opsview and graphite don't really need to be on different servers. I plan to put them on a single server.

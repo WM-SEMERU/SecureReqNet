@@ -1,5 +1,0 @@
-fix($sanitize): sanitize `xml:base` attributes
-
-
-On Firefox there is a XSS vulnerability if a malicious attacker
-can write into the xml:base attribute on an SVG anchor.

@@ -1,9 +1,0 @@
-Respondent IDs are appearing as Institution IDs for 2017 Data Publication Search
-
-
-Upon searching for an institution in the 2017 mLAR and disclosure report search, the results show "Respondent ID: " but the following number is the institution ID, not the respondent ID.
-Example:
-First State Bank's Respondent ID is 18301 and their institution ID is 524766
-
-However, when searching for the bank in the disclosure report search for 2017, 524766 shows up as the respondent ID. 18301 is what should show.
-

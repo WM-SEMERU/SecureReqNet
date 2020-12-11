@@ -1,6 +1,0 @@
-SES has no detailed tests
-
-
-Original issue 1759 created by kpreid.switchb.org on 2013-06-07T21:00:47.000Z:
-The logic for what repairs SES should apply and whether it is successful has no tests, which is dangerous. In order to give it tests, it needs to be refactored so that we can stub out the list of problems/repairs to give known results rather than real browser-dependent ones.
-Besides repairES5 repairs, we should also test that the whitelist system correctly deletes properties, and that simple misconfigurations do not fail insecure (see e.g. issue 1758), and so on.

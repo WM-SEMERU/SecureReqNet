@@ -1,4 +1,0 @@
-[security] Expression voter
-
-
-Adding missing documentation of expression voter

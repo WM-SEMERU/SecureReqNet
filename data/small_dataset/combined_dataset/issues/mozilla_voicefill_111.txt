@@ -1,6 +1,0 @@
-Escape remote data
-
-
-from ace-team:  In https://github.com/mozilla/speaktome/blob/master/extension/content.js#L170
-you are injecting HTML that contains remote data, please make sure to
-escape the remote data

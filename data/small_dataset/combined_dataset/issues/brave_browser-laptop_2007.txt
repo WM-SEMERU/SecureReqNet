@@ -1,9 +1,0 @@
-Tweak build settings to be more secure
-
-
-Possibly with these (maybe the values need to change though)
-'RandomizedBaseAddress': 2, # enable ASLR
-'DataExecutionPrevention': 2, # enable DEP
-'AllowIsolation': 'true',
-
-PIE and NX also

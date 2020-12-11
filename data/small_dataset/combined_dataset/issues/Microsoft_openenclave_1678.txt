@@ -1,6 +1,0 @@
-[Ansible] Add missing APT packages to be installed
-
-
-These packages used to be dependencies for the libsgx-enclave-common APT package. But the latest 2.5 Intel SGX deb package does not have any dependencies set, even though these are still needed.
-Signed-off-by: Ionut Balutoiu ibalutoiu@cloudbasesolutions.com
-Fixes #1677

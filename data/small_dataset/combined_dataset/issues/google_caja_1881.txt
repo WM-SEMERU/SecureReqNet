@@ -1,6 +1,0 @@
-Invariant violation needs a problem-test record in SES startup
-
-
-Original issue 1883 created by erights on 2014-01-30T19:40:26.000Z:
-https://bugs.ecmascript.org/show_bug.cgi?id=2488
-Needs at least a test. I doubt a repair is practical, so probably just a test. Severity level should probably be UNSAFE_SPEC_VIOLATION. Could probably also be listed in acceptableProblems.

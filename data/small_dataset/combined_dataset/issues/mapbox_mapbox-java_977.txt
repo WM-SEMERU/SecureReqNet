@@ -1,4 +1,0 @@
-Added automatic choosing of POST method when a method is not specified and the url for a get call is longer than 1024*8
-
-
-This PR adds the ability to the MapboxDirections API to choose the appropriate http method (get vs. post) based on the length of the url. If the get url is longer than 8 * 1024 characters, then it uses post. The developer can still specify a specific method to use if they would like, and that will override this behavior.

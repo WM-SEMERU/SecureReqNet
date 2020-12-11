@@ -1,5 +1,0 @@
-tell Brave publishers to uninstall this plugin as soon as their site is verified
-
-
-that would greatly limit the security risks associated with installing this (or any) wordpress plugin.
-we should warn publishers to uninstall this plugin ASAP wherever this plugin is advertised (in the README, on the publishers site?, etc.)

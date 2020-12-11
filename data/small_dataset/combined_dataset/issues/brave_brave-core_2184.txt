@@ -1,5 +1,0 @@
-Foreground/Background notifications aren't implemented on Linux for Brave Ads 0.63.x
-
-
-Uplift for #1482
-Fixes brave/brave-browser#2511

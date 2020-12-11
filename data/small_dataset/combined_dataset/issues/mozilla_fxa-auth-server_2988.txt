@@ -1,6 +1,0 @@
-chore(docs): disable the auto-generated api docs script
-
-
-As discussed in #2932 (comment), the script that generates API docs has proved to be more brittle than it's worth. It's usually broken in some respect and we can rarely be bothered to fix it.
-So, farewell automatically-generated API docs. You will be missed. ☠️😞
-@mozilla/fxa-devs r?

@@ -1,6 +1,0 @@
-Use docs.couchdb.org instead of broken links to wiki
-
-
-
-
-

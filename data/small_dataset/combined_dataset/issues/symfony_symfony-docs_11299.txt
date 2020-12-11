@@ -1,4 +1,0 @@
-[Flex] Tell that `var/logs/` directory was renamed
-
-
-Ref: symfony/symfony#28810 (comment)

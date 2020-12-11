@@ -1,7 +1,0 @@
-Install upstream runc into /usr/bin/docker-runc
-
-
-This links runc to docker-runc is so that Docker inside of the guest VM can get the latest runc security update.
-Docker's runc doesn't have it yet, and even if it did, the latest Docker versions are not compatible with all supported Kubernetes versions. This allows us to update runc without being beholden to docker-ce release schedules and Kubernetes->docker version incompatibilities.
-This will keep the actual docker-runc installed into /usr/bin/docker-runc.orig just as a reminder that strange things are afoot.
-Once we move to Docker 18.09, we can drop this hack as it prefers the upstream runc binary.

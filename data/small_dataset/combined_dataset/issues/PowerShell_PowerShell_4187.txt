@@ -1,4 +1,0 @@
-PowerShell Snapin Overrides JEA VisibleCmdlets
-
-
-When loading a snapin via Add-PSSnapin, the cmdlets provided by the snapin override those allowed specified via VisibleCmdlets. Is this intended behavior? Ideally, only cmdlets assigned via VisibleCmdlets would be allowed after loading a snapin.

@@ -1,5 +1,0 @@
-lock `merge`@1.2.1 pkg in package-lock.json
-
-
-lock merge@1.2.1 pkg in package-lock.json
-related to #259

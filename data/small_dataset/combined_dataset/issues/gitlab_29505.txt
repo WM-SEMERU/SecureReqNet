@@ -1,3 +1,0 @@
-'In order to delete content (snippets/issues/comments) via the API an admin must `SUDO` to the account that owns the content. This presents problems as you cannot `SUDO` to a blocked account. Admins should be able to delete content without using `SUDO`.
-
-@stanhu @DouweM @ernstvn

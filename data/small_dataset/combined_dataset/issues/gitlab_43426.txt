@@ -1,5 +1,0 @@
-Currently we can specify a job timeout on a project level. This ensures that a job will not be running indefinitely. However, this value can be set to any big number, which may introduce an abusing mechanism in environments where Shared Runners are available.
-
-The idea is to allow Runner owner to specify a maximum timeout that can be set for a job handled by this Runner. If timeout configured for a project is smaller than timeout configured for a Runner, then it should be used without changing. But when project timeout would be greater than Runner timeout, then job should use the value specified at Runner level.
-
-This change should introduce a new field in Runner's edit form. But it would be also good, to allow to set the value during Runner's registration - then we could add support for this on GitLab Runner side.

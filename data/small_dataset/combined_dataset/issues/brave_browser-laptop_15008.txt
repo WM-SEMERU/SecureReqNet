@@ -1,4 +1,0 @@
-Replace `var` with ES6 syntax let and const
-
-
-Would be awesome if we could remove as many instances of var as possible from the brave library and move over to the ES6 syntax let and const

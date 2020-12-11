@@ -1,5 +1,0 @@
-Revert "added widevine steps to pipeline"
-
-
-Reverts #3981
-Reason: Windows PR builder fails with binary signing.

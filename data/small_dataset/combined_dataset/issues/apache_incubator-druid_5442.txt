@@ -1,4 +1,0 @@
-[Backport] Skip normal authentication for JDBC requests in Router (#5435)
-
-
-Backport of #5435 to 0.12.0

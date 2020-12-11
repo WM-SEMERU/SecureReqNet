@@ -1,4 +1,0 @@
-Use system user password for sign in?
-
-
-How about we allow using the running user's password to sign in instead of a generated one.

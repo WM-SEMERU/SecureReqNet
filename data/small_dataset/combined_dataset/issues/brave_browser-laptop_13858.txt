@@ -1,5 +1,0 @@
-'www.' URL normalization code is not correct
-
-
-there are a bunch of places in the code that call something like host = host.replace('www.', ''), presumably for the purpose of considering 'www.example.com' and 'example.com' to be equal.
-this doesn't work on URLs like wowww.com (which turns into wocom).

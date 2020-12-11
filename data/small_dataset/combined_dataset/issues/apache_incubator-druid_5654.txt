@@ -1,4 +1,0 @@
-[Backport] Fix HTTP OPTIONS request auth handling (#5638)
-
-
-Backport of #5638 to 0.12.1

@@ -1,4 +1,0 @@
-Fixed the RST syntax of a serializer article
-
-
-Fixes the issue I introduced while merging #11281.

@@ -1,8 +1,0 @@
-Guard Multiple Guard Authenticators entry_point config
-
-
-I am confused by this portion of the docs. Why do I need to specify the entry_point if I have multiple authenticators?
-http://symfony.com/doc/current/security/multiple_guard_authenticators.html#multiple-authenticators-with-shared-entry-point
-Also, I think the Guard docs could be helped by making it very clear that Guard does not have anything to do with your controllers. An authenticator simply listens to every request on its own and decides if authentication should take place. The getCredentials method is the starting block for this process.
-If I am new to Guard this is the most important concept that I need to understand. Looking through a project that already uses Guard this is not obvious and the docs don't help to make it clear.
-Thanks.

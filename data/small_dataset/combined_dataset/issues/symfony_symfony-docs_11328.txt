@@ -1,6 +1,0 @@
-Adds documentation for monolog processors.
-
-
-Adds both a short description for existing processors as well as a note for the newly added TokenProcessor added in 3.4. I tried not to interfere with #10244 as this introduces documentation for more processors added in 4.3, so that PR hopefully can build on this one.
-Replaces #8156
-EUFOSSA

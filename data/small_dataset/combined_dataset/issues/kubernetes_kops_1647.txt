@@ -1,6 +1,0 @@
-Improve ELB healthchecks for API
-
-
-So after the presentation at the Deis office, we had some great feedback regarding making improvements to the AWS ELB healthchecks.
-We have the API infrastructure in place in kops already to add health checks.. we just need some feedback from the community on what seems relevant here.
-The biggest use case we heard about was pointing the ELB healhcheck to the healthz endpoint on the Kubernetes API server. Does anyone have anything else?

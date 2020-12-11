@@ -1,9 +1,0 @@
-Don't bless result of getInnerHtml()
-
-
-Original issue 574 created by google@web.dwdw.me on 2008-06-13T00:08:38.000Z:
-Domita must not bless the result of getInnerHtml().  It's tempting to bless
-its output so that you can call setInnerHtml() on that without validating
-it.  Don't do that.  It introduces crazy vulnerabilities: it'll copy script
-from one gadget to another (which means that the plugin_event_dispatcher
-will refer to the wrong gadget), and it may copy mangled named.

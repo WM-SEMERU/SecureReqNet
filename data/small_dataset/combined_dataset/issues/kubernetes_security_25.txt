@@ -1,5 +1,0 @@
-Change distributor applications from email to issues
-
-
-git reflog FTW
-/assign @philips

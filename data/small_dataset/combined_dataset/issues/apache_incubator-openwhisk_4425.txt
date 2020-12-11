@@ -1,5 +1,0 @@
-Fix readme typo
-
-
-Remove first 'a':
-"The value is a typically a string describing the language" --> "The value is typically a string describing the language"

@@ -1,7 +1,0 @@
-Remove drand48() usage
-
-
-Per Coverity:
-
-"drand48()" should not be used for security related applications, as linear congruential algorithms are too easy to break.
-

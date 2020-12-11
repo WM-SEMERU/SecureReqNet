@@ -1,6 +1,0 @@
-Be able to manually set the external protocol handlers (overriding system settings)
-
-
-Carried over from brave/browser-laptop#1381
-The user should be able to configure a handler for mailto: and other handlers which would (in-browser) have a higher president than the default app for the OS
-There are some security implications for being able to override handlers though and I'm not entirely sure this would be a good idea

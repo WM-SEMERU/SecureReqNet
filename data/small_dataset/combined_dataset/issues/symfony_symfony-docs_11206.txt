@@ -1,5 +1,0 @@
-Add missing security guard sub-component
-
-
-Introduction says "The Security component is divided into four smaller sub-components" while only three are listed.
-Added security-guard.

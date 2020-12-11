@@ -1,5 +1,0 @@
-[Routing] Route loader service tag
-
-
-#eufossa
-doc for symfony/symfony#30926

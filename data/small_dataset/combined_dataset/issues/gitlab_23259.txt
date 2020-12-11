@@ -1,9 +1,0 @@
-### Description
-
-As ad admin I would like to be able to browse my site without admin privileges without impersonating a non-admin user. This would allow me to have a non-admin experience for day-to-day usage, which helps me when trouble-shooting user issues, but still perform admin tasks when I need to and have the audit logs reflect that I'm the one who performed those tasks (rather than logging in as a shared admin account and not knowing which of us made a particular change)
-
-### Proposal
-
-In the user combobox at top-right, add an entry to switch between admin and user mode. When in admin mode overlay an icon on the user and/or add a banner (similar to the "Now impersonating" banner). 
-
-### Links / references

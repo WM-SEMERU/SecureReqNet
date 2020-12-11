@@ -1,4 +1,0 @@
-Missing top level README
-
-
-I notice that https://github.com/google/caja does have a home page. Should this have been automatically converted to a top-level README by the code.google -> github conversion tool?

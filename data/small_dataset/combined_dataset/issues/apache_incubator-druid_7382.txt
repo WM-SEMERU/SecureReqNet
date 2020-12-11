@@ -1,6 +1,0 @@
-BroadcastDistributionRules to load segments on whole tiers rather than making server-by-server decisions
-
-
-Broadcast rules which load segments on servers with colocated data sources (server-by-server decision) are very hard or impossible to implement correctly. I think the problems of non-atomic moves during balancing are underestimated.
-When rules are loaded from the metadata store, Coordinator can figure out load rules for data sources and maps them to "colocated data sources", obtaining a list of tiers on which broadcasted segments should be effectively loaded. Then it loads broadcasted segments on all servers in the needed tiers, as described here: #4077 (comment)
-FYI @jihoonson @gianm

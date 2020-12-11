@@ -1,5 +1,0 @@
-Added directions support for languages
-
-
-Closes #474
-Adds support for the language param in the directions API. Also updated the fixtures for directions to ensure everything's still working properly.

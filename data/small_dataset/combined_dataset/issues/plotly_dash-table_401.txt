@@ -1,7 +1,0 @@
-loading_state
-
-
-Hi,
-Is loading_state implemented with dash_table?
-I couldn't find any reference to it.
-Thanks for the amazing table btw :)

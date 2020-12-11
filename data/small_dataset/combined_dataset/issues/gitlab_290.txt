@@ -1,6 +1,0 @@
-When a users adds a deploy key to a project that I have no access to and I later need to add this deploy key to one of my repos I get
-
-    Key has already been taken
-    Fingerprint has already been taken
-
-However, I can't select the existing deploy key. We tried to resolve this by deleting the original repo, but the error persists.

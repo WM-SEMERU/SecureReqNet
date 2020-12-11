@@ -1,5 +1,0 @@
-code review u8g9 - fixes bugs 69 and 71
-
-
-Original issue 73 created by erights on 2008-02-18T05:18:29.000Z:
-Could you guys review the following CL? Thanks.

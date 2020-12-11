@@ -1,6 +1,0 @@
-Rewards should exclude *.local URLs from auto-contribute
-
-
-I noticed that my printer (holmavik.local) shows up in my Auto-Contribute data:
-
-We should probably exclude all of the *.local URLs.

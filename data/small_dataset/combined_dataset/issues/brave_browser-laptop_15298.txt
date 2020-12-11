@@ -1,4 +1,0 @@
-Instalation is Incorrect/Obsolete
-
-
-The Github and Wiki/brave.com install instructions are very diffrent. The Website appears to be obsolete and install an older version.

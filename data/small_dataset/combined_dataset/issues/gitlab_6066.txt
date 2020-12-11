@@ -1,7 +1,0 @@
-'While trying to reproduce #6058 I discovered this issue:
-- I mentioned https://gitlab.com/gitlab-org/gitlab-ce/issues/6058 in a **private MR** rymai/dotfiles!1 (from a private project of mine, fortunately this is not the plan for colonizing Mars);
-- A reference to this private issue was created in #6058.
-  - This reference leaks the name of the project as well as the issue title.
-  - The reference is not linked when user doesn't have the right to navigate to it and even if he visits the issue URL, he gets redirected to the sign-in screen.
-
-To demonstrate the problem, I will mention this Issue in my private MR.

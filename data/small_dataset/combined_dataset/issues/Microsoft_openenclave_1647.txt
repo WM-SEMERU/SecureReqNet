@@ -1,6 +1,0 @@
-Added/changed simulation mode documentation.
-
-
-
-
-

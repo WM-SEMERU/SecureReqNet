@@ -1,9 +1,0 @@
-Quote Revocation: Enforce TCBInfo
-
-
-This item tracks implementing revocation of a quote in oe_verify_report() based on the TCBInfo published and signed by Intel. This includes:
-
- Add json parsing logic to extract SVNs from TCBInfo
- Validate TCBInfo signature
- Validate TCBInfo SVNs against QE and target enclaved reported values in Quote
-

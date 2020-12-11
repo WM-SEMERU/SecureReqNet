@@ -1,8 +1,0 @@
-Deprecated ACL
-
-
-This fixes #8433. I've left some mentions to ACLs because they are deprecated, not removed:
-
-Best Practices mentions them: https://symfony.com/doc/current/best_practices/security.html#authorization-i-e-denying-access
-Security config reference includes the acl: section: https://symfony.com/doc/current/reference/configuration/security.html
-

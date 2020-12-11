@@ -1,7 +1,0 @@
-An exception is thrown when the firewall matches a inexistent url and try to redirect to a route using the locale
-
-
-When using a login route with the pattern /{_locale}/login, the redirection works well when accessing an existing url secured by the firewall. But when accessing a inexistent url that matches the access control rule (easy when the rule secures ^/admin), the redirection to the login url fails with this exception:
-The "fos_user_security_login" route has some missing mandatory parameters ("_locale").
-500 Internal Server Error - MissingMandatoryParametersException 
-

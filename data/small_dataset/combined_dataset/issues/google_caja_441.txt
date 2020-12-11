@@ -1,5 +1,0 @@
-!= used in fastpath* functions
-
-
-Original issue 441 created by zestyping on 2008-06-09T23:30:59.000Z:
-See lines 604, 610, 625, 640, 659 in caja.js.

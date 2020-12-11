@@ -1,5 +1,0 @@
-[Kubernetes] Added ingress resource to dashboard
-
-
-Allows to opt-in for an ingress on top of the dashboard service.
-This is very important in production-grade deployments where you want to expose the Pulsar dashboard through an easy to remember URL.

@@ -1,9 +1,0 @@
-Disable SharedArrayBuffer
-
-
-Details here: brave/browser-laptop#12570
-STR:
-
-Go to https://xlab.tencent.com/special/spectre/spectre_check.html
-Click the button to check your browser. It should report as not vulnerable.
-

@@ -1,8 +1,0 @@
-SecureRandom security
-
-
-The SecureRandom class (from Symfony\Component\Security\Core\Util) falls back to a home made crypto construction if openssl_random_pseudo_bytes() is not available.
-This should not be the case, but instead we should try to gather secure random bytes from the OS (via reading from /dev/urandom or using mcrypt_create_iv() with MCRYPT_DEV_URANDOM).
-The current implementation tries to use secure random bytes from OpenSSL (before falling back to the home made construction), but this is also questionable, because of the added complexity that the OpenSSL extension has (and OpenSSL has had its share of security issues).
-We should follow "the standard" and gather the random bytes straight from the OS (no need to use OpenSSL as a middleman). This way there is no added surface for implementation errors and bugs, and we can benefit from the security audits that the OS level random number generatos has had.
-With that said, I suggest we update the current nextBytes() method to try first mcrypt_create_iv and then /dev/urandom. If both attempts fail, exit immediately with an error (otherwise it is probably just a false sense of security).

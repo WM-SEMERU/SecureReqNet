@@ -1,5 +1,0 @@
-Component item template
-
-
-Fixes #6357.
-CC @danroth27.

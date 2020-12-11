@@ -1,7 +1,0 @@
-Simplify formatting of "WWW-Authenticate" header's content
-
-
-Summary of the changes (Less than 80 chars)
-
-Replace usage of StringBuilder to string#Join
-

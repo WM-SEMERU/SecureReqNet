@@ -1,5 +1,0 @@
-Mentioned the new FirewallConfig class
-
-
-This fixes #7164.
-@chalasr it'd be great to add some example ... but I don't know how to do that. Could you please help me? Thanks!

@@ -1,5 +1,0 @@
-Remove dependency to util/runtime from APIS package
-
-
-pkg/apis has an unnecessary dependency to pkg/util/runtime.
-Removed the dependency to avoid needing to pull runtime imports just to reference apis package externally.

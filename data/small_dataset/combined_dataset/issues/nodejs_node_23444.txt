@@ -1,8 +1,0 @@
-Warn on potentially insecure inspector options (--inspect=0.0.0.0)
-
-
-Extracted from #21774.
-Inspector by default is bound to 127.0.0.1, but suggestion to launch it with --inspect=0.0.0.0 is highly copy-pasted without proper understanding what it does.  I've observed that personally in chats, also see google.
-Binding inspector to 0.0.0.0 (in fact, to anything but the loopback interface ip) allows RCE, which could be catastrophic in cases where the IP is public. The users should be informed of that.
-A warning printed to the console (with corresponding documentation change) should at least somewhat mitigate this.
-Note: the doc change and the c++ change can come separately.

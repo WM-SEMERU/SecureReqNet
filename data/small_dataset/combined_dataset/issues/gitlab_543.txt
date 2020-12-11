@@ -1,8 +1,0 @@
-### Current Behaviour
-
-When an administrator edits a project and uses the "Remove Project" button at the very bottom of the page, the resulting call to destroy the project returns a redirect to the root_path / dashboard.
-
-### Expected Behaviour
-
-Gitlab should redirect the user to somewhere more logical, such as the admin_projects_path, and show a flash alert confirming that the project has been removed.
-

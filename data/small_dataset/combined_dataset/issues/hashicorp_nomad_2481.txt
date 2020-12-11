@@ -1,9 +1,0 @@
-Configure size of secrets directory with exec driver
-
-
-Nomad version
-0.5.4
-Operating system and Environment details
-CentOS 7
-Issue
-When isolated exec driver is used, size of the secrets dir is limited to 1 mb. It'd be nice if it was configurable at least on the level of the agent configuration. In our case all secret data do not fit into 1 mb (we'd need about 50 mb) so sensitive data are lying on plain fs and are available via fs cli or http api.

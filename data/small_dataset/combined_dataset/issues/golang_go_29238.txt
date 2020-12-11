@@ -1,4 +1,0 @@
-crypto/x509: CPU denial of service [Go 1.10]
-
-
-This is a tracking issue for #29233, a security vulnerability fixed in Go 1.10.6.

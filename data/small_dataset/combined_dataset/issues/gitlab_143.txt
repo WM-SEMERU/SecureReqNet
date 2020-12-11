@@ -1,5 +1,0 @@
-Currently there is not a way to configure all logs to go to a custom directory outside the gitlab install path.
-
-In our environment, we have a custom logs directory that is automatically watched/rolledover.
-
-Thanks

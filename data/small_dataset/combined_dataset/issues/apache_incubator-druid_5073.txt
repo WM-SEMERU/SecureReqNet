@@ -1,6 +1,0 @@
-Split internal client escalation from Authenticator interface
-
-
-While developing an extension for basic HTTP authentication, I encountered the following problem:
-The Authenticator implementation needed to communicate with the coordinator during initialization, grabbing data from an HTTP endpoint, using a DruidLeaderClient. This led to circular dependency issues as the DruidLeaderClient needs an escalated HTTP client created by an Authenticator to successfully authenticate with the coordinator.
-This PR splits the "send requests with privileged internal system user credentials" functionality out of the Authenticator interface into a new Escalator interface, to help avoid circular dependency issues when Authenticator extension implementations need to communicate with Druid cluster nodes.

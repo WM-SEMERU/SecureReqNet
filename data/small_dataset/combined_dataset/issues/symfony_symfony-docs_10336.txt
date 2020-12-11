@@ -1,4 +1,0 @@
-[Security] Allow passing null as $filter in LdapUserProvider to get the default filter
-
-
-symfony/symfony#27850

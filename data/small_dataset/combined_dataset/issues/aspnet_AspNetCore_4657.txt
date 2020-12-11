@@ -1,7 +1,0 @@
-Q: Is WebAuthn planned to be implemented by aspnet.security?
-
-
-Hello,
-The API should be available in Chrome and Firefox May release.
-Starting to look at it and be ready for it could be a good idea?
-webauthn specs

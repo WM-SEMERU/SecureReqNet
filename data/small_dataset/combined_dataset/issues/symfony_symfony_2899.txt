@@ -1,5 +1,0 @@
-Cant switch user to non eglish login
-
-
-In my application users have localized usernames.
-So user switch functionality doesn't work for russian usernames (maybe because browser change urls to something like http://domain.com/?_switch_user=%CF%F3%F5

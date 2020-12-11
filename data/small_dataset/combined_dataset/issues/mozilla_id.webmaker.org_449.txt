@@ -1,4 +1,0 @@
-Set a reCAPTCHA failure threshold
-
-
-This PR updates the reCAPTCHA check server side to look at the score. the threshold for failure is configurable, and will default to 0.5.

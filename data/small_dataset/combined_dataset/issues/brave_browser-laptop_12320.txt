@@ -1,5 +1,0 @@
-Investigate if heroku can fetch geo location logs for laptop-updates/download.brave.com
-
-
-For enabling PKP for requests for Brave artifacts, see: brave/muon#401.
-We need to update *_UPDATE_HOSTS to have granular control.

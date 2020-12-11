@@ -1,5 +1,0 @@
-[Debug] Actively discourage using Serializable by triggering a deprecation notice
-
-
-When DebugClassLoader is registered, we could make it unconditionally trigger a deprecation notice when it loads a class that directly implements Serializable.
-We should wait for https://wiki.php.net/rfc/custom_object_serialization to be resolved before.

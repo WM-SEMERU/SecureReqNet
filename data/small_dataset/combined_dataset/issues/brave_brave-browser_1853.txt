@@ -1,4 +1,0 @@
-npm audit should recurse through vendor directories
-
-
-some of them have a lot of node dependencies and those should be audited regularly, at least before every release.

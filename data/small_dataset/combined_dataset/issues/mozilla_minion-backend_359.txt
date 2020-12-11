@@ -1,7 +1,0 @@
-Make scanning work again
-
-
-Hey there!
-Since Celery ~4.0.0 runtime warnings about retrieving task result inside another task became errors.
-This PR downgrades celery version and is not the best option of course, but I hope somebody will find it useful.
-Cheers

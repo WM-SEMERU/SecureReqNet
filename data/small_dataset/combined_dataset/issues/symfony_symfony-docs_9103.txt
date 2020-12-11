@@ -1,4 +1,0 @@
-Mentioned the target_path session variable
-
-
-This fixes #6335.

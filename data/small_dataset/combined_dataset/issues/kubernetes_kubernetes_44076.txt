@@ -1,8 +1,0 @@
-Include system:authenticated group when impersonating
-
-
-Fixes #43227
-An authorized impersonation request solely for a specific username previously resulted in a user.Info that did not include either the system:authenticated or system:unauthenticated groups. That meant that permissions intended to be granted to all users, like discovery, would be denied the impersonated user.
-This allows kubectl get pods --as=<username> to work as expected
-API requests using impersonation now include the `system:authenticated` group in the impersonated user automatically.
-

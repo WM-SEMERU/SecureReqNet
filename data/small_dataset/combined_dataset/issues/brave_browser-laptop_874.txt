@@ -1,5 +1,0 @@
-Added Linux sandbox
-
-
-The sandbox is currently disabled on linux
-see #715

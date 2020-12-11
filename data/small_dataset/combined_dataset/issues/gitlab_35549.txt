@@ -1,7 +1,0 @@
-As discussed in the backend weekly team call.
-
-The introduction of `Gitlab::UntrustedRegexp` highlights the lack of anywhere to document specific backend security practices like this. Frontend have a security guide in `doc/development/fe_guide/security.md`.
-
-Let's put something together and populate it with backend best practices.
-
-/cc @smcgivern @briann

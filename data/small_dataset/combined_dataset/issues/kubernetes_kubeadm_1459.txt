@@ -1,7 +1,0 @@
-move testing-pre-releases.md into docs folder
-
-
-This PR move testing-pre-releases.md into docs folder (instead of root)
-/kind cleanup
-/priority backlog
-/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

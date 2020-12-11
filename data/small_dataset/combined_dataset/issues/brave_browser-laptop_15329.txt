@@ -1,7 +1,0 @@
-brave wont start centos
-
-
-Brave wont start on centos 7.5
-try to launch it on terminal result
-[25896:25896:1208/091621.639239:FATAL:zygote_host_impl_linux.cc(116)] No usable sandbox! Update your kernel or see https://chromium.googlesource.com/chromium/src/+/master/docs/linux_suid_sandbox_development.md for more information on developing with the SUID sandbox. If you want to live dangerously and need an immediate workaround, you can try using --no-sandbox. Trace/breakpoint trap (core dumped) 
-Brave version is the one available on the repo today

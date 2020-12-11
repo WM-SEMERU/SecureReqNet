@@ -1,5 +1,0 @@
-Need to autogenerate html4-defs from the lang/html
-
-
-Original issue 581 created by metaweta on 2008-06-13T00:33:24.000Z:
-This is currently done by hand.

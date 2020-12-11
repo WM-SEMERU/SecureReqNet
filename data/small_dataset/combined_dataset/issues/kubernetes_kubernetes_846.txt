@@ -1,6 +1,0 @@
-Allow Kubelet to watch for changes to pods scheduled on it
-
-
-This replaces Kubelet config loading a watch call on /watch/pods.  It depends on Watch to inform of new changes.
-This is one step towards allowing the kubelet to be isolated from direct access to etcd which provides better security, and allows us to version the API and schema from the apiserver using schema conversions.  In the future we can add more restrictive minion authorization (minion X is scoped to retrieve only information it needs).
-Implements part of #860

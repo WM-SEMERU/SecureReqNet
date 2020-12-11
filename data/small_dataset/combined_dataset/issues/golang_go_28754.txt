@@ -1,6 +1,0 @@
-proposal: crypto/tls: make server name extension optional
-
-
-The current tls stack will always send the server name extension to the server. And the config.ServerName filed is also used to verify the certificate domain name of server.
-It is well know that the server name extension is transfer in plaintext. So we should only transfer them if we do need them. As we can put multiple domain name into one certificate, the SNI Extension should not be needed widely, and make sending them as a default behavior seems not a good choice.
-I propose to introduce an option like config.SkipSNI bool to let tls client not send this field.

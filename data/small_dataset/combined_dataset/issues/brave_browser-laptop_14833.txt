@@ -1,4 +1,0 @@
-[hackerone] DLL Hijacking
-
-
-https://hackerone.com/bugs?report_id=384923

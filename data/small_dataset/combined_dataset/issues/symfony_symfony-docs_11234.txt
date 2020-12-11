@@ -1,4 +1,0 @@
-Minor tweak for the debug:router output
-
-
-Just a minor mention of the change made in symfony/symfony#29254

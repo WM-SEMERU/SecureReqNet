@@ -1,6 +1,0 @@
-Add unsecured /health endpoint, remove auth checks from isLeader
-
-
-This PR adds a new /health endpoint on all services, intended for external health checks issued to Druid services.
-This endpoint is unsecured, as external health checks do not necessarily support attaching authentication credentials (e.g., those issued by Amazon ELB).
-This PR also removes auth checks from the "/isLeader" endpoints on coordinators and overlords, for similar external compatibility reasons.

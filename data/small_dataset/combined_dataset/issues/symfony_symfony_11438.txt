@@ -1,7 +1,0 @@
-SimplePreAuthenticatorInterface doesn't conform to docs
-
-
-Using the latest release, using the SimplePreAuthenticatorInterface as per the docs, results in errors.
-Issuing a return null, rather than a return new PreAuthenticatedToken, in createToken() results in a Fatal Error since the AuthenticationProviderManager::authenticate() is expecting a TokenInterface instance. The docs say we can return (filtering URL section) when authentication is not required. Throwing an exception is the only means to exit the method, but, I don't know what others think, using an Exception for this conveys the wrong intention. Also, when used in conjunction with AuthenticationFailureHandlerInterface, throwing an Exception causes the onAuthenticationFailure() method to be called.
-In my instance, I'm using it to validate a captch (among other things) on the login screen. I was previously extending UsernamePasswordFormAuthenticationListener to do this, which will cause problems if any other bundle tries to extend the same class. I obviously don't want the captcha to be validated on every page.
-What would be the correct Exception to throw from createToken() when we simply don't want to authorize?

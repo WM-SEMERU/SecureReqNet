@@ -1,6 +1,0 @@
-Fix log message in RemoteRenderer
-
-
-Previously it would always log the string with error, because without the parens, the expression was evaluated as:
-var message = ($"Completing batch {entry.BatchId} " + errorMessageOrNull) == null
-    ? "without error." : "with error.";

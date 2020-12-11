@@ -1,6 +1,0 @@
-Add ability to load all required project data in one go
-
-
-At the moment opening multiple tabs in the project will cause the same data to be reloaded over and over again
-
-This has UI implications as can be seen with Find solution for data table flickering between Observed views #204

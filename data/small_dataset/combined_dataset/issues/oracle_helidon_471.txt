@@ -1,4 +1,0 @@
-Jersey client: propagate SecurityContext automatically (in synchronous jersey calls)
-
-
-When the jersey client is used inside a request scope (i.e. in synchronous REST call to jersey server), the SecurityContext should be automatically propagated to Jersey clients, instead of using ClientSecurityFeature.PROPERTY_CONTEXT property.

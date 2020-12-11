@@ -1,5 +1,0 @@
-allow subject access review to non-existent namespace
-
-
-A localsubjectaccessreview is a special kind of resource which can be created even when the namespace doesn't exist.  Since permissions can be granted at different scopes, you can reasonably check if someone could do something at a lower scope that isn't there yet.  In addition, the permission to do an access check is separate from the permission to list all namespaces, so we're leaking information.
-@liggitt @kubernetes/sig-auth-pr-reviews

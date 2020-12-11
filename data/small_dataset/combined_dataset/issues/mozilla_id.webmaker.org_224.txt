@@ -1,4 +1,0 @@
-CSRF Protection
-
-
-Fixes #213

@@ -1,4 +1,0 @@
-Documented the "auto" mode of "cookie_secure"
-
-
-This fixes #10283.

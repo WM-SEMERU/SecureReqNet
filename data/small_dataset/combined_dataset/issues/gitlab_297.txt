@@ -1,7 +1,0 @@
-The commit in !79 broke the LDAP user filter because GitLab's LDAP user filters are not compatible with the format expected by omniauth-ldap: omniauth-ldap expects you to include the username into the filter using a format string.
-
-Example GitLab LDAP user filter: `(memberOf=cn=foo,dc=bar)`
-
-Example omniauth-ldap user filter: `(&(uid=%{username})(memberOf=cn=foo,dc=bar))`.
-
-We are working on a fix.

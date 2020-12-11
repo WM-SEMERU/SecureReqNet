@@ -1,9 +1,0 @@
-Server doesn't start without http port
-
-
-nicolas@… originally submitted this as ticket:342
-
-Keywords: https
-
-
-On debian lenny disabling http (port set to 0) but with a valid https port (default 8443) the server doesn't start. Https only should be a valid option.

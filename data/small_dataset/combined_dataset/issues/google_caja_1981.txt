@@ -1,4 +1,0 @@
-fixes closure compiler errors as reported by john lenz.
-
-
-This involves fixing the Linter to allow @typedefs through since the tag policy function types become unwieldy otherwise.

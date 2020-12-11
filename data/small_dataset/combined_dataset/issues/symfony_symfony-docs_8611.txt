@@ -1,5 +1,0 @@
-Document security pitfall when using multiple user providers and user specific authenticators
-
-
-When creating your own authenticator (probably by using Guard) and you have more than one user provider, one needs to take extra caution when it comes to different authentication based on the way users are loaded.
-For example, if you combine https://symfony.com/doc/current/security/multiple_user_providers.html and http://symfony.com/doc/current/security/guard_authentication.html you will probably want to check that you only use the API token authenticator with appropriate users.

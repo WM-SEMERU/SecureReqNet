@@ -1,5 +1,0 @@
-Automated cherry pick of #75781: kube-aggregator: bump openapi aggregation log level
-
-
-Cherry pick of #75781 on release-1.14.
-#75781: kube-aggregator: bump openapi aggregation log level

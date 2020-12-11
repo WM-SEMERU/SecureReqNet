@@ -1,8 +1,0 @@
-Upgrade to Muon 8.0.8
-
-
-Test plan
-
-Visit about:brave
-Ensure Muon version is set to 8.0.8
-

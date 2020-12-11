@@ -1,5 +1,0 @@
-[2.4] Restrict Routes based on Security Context.
-
-
-For some applications it would be nice to have a homepage route that displays marketing stuff for signing up like GitHub does, and then have a homepage_authenticated Route other wise.
-With the new ExpressionLanguage and conditionals can this be done?

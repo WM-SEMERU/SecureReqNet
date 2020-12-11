@@ -1,7 +1,0 @@
-Split Voter in "Creating the customer Voter"
-
-
-https://symfony.com/doc/current/security/voters.html#creating-the-custom-voter
-My opinion here would be that this should be 2 separate voters, one for the view and one for the edit.
-I would like to create a PR for this if you think it is a good idea?
-Or even a better idea would be to show just edit or view, and drop the other one.

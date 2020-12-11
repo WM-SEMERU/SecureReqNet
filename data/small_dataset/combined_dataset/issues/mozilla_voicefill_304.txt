@@ -1,7 +1,0 @@
-Consider adjusting Voice Fill button on new Google Search page
-
-
-I recently received a new Google search page design which now features a floating toolbar when the user scrolls down the page. However, the search field size is smaller in the floating toolbar, making the Voice Fill button to be misaligned.
-
-
-I can reproduce this new design on Private Browsing in Firefox and Chrome, so it is less likely to be an A/B testing process.

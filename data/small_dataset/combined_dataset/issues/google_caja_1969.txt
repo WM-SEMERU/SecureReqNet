@@ -1,4 +1,0 @@
-Whitelist the "optimum" attribute for <meter>
-
-
-It doesn't look like the optimum attribute for <meter> is whitelisted

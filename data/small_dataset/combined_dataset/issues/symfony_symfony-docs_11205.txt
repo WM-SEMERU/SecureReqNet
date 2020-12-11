@@ -1,7 +1,0 @@
-use e.g. instead of i.e.
-
-
-Refs #11078 (comment)
-Before this change there were ~550 occurences of e.g. and only ~150 occurences of i.e. in the docs.
-@javiereguiluz told me (and his feeling seems to be correct), that e.g. is used most of the time.
-This PR brings consistency about this.

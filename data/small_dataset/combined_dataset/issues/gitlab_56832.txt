@@ -1,5 +1,0 @@
-'The following discussion from !24284 should be addressed:
-
-- [ ] @tkuah started a [discussion](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/24284#note_131159499):  (+2 comments)
-
-    > How can we ensure all Kubeclient::Client use `http_max_redirects: 0` ?

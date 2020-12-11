@@ -1,9 +1,0 @@
-BC break in MarkingStoreInterface
-
-
-Symfony version(s) affected: 4.3.0-dev
-With the PR #29146 the MarkingStoreInterface has been changed. This is a BC break according to https://symfony.com/doc/current/contributing/code/bc.html#using-our-interfaces
-How to reproduce
-The issue can be seen here https://3v4l.org/ch3JX
-Possible Solution
-A possible fix is to introduce a new MarkingStoreInterface extending the old one with the newly added parameter. See https://3v4l.org/8C8Gc

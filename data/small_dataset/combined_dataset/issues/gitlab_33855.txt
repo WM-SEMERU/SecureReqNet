@@ -1,8 +1,0 @@
-ZD: https://gitlab.zendesk.com/agent/tickets/78998
-
-On this page, https://about.gitlab.com/security/ we describe GitLab corporation's security governance policy for passwords:
-
-> Do application, system, and device passwords (including routers, firewalls, databases, and external social spaces) require passwords to have the following characteristics: 1. minimum length of 8 characters, 2. chosen from any acceptable character sets available on the target system, 3. includes at least one alphabetic and one numeric character.)
-YES
-
-Should GitLab _the product_ enforce those rules as well? Currently you can make a password with 8 `aaaaaaaa`.

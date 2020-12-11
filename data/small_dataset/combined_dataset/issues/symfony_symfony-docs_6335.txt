@@ -1,4 +1,0 @@
-Add docs for TargetPathTrait
-
-
-See symfony/symfony#17714

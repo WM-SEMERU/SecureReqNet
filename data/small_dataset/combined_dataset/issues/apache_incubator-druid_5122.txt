@@ -1,5 +1,0 @@
-Support for encryption of MySQL connections
-
-
-With the MySQL versions  5.5.45+, 5.6.26+ and 5.7.6+,  it is required that SSL connection must be explicitly enabled or disabled by default. Since this cannot be done with our existing code, MySQL would keep spewing warning messages everytime about explicitly enabling/disabling SSL on the connection.
-This PR includes changes to support SSL/TLS encryption on MySQL connections. By default SSL is explicitly disabled on the connection so that existing users would not receive the SSL warning. Once useSSL is enabled, it would verify the server certificate by default and thus the trust store information would have to be provided along with the client keystore information for the TLS/SSL configuration.

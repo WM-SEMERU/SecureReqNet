@@ -1,5 +1,0 @@
-Prevent ACL permission checks on publicly accessible AMO instances
-
-
-Our ACL permissions give us great power, that is only kept from being unleashed on the world by an Firefox Accounts cookie check.  We can limit who has those permissions, and make them as fine-grained as possible, but we're still exposing dangerous functionality on the web.
-It would be best to move that functionality behind a VPN, and making such permission checks fail is an easy way of securing the entire site with minimal changes.

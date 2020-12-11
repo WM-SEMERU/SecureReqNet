@@ -1,5 +1,0 @@
-[WCM] [Cookbook] [Security] Change the interface which needs to be implemented by a user repository
-
-
-The symfony ticket: symfony/symfony#12733
-If the code is merged, in this artice http://symfony.com/doc/current/cookbook/security/entity_provider.html#authenticating-someone-with-a-custom-entity-provider the interface used by the repository should be changed to the new interface and the supportsClass function can be deleted from the implementation.

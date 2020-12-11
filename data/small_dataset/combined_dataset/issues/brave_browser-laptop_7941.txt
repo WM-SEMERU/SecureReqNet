@@ -1,9 +1,0 @@
-Limit traffic to sites with strong ciphers, TLS 1.2
-
-
-Feature Request:
-
-Steve Springett‏: ...HTTPS Everywhere is a start, but still permits HTTP usage. I want to block all sites that do not use strong ciphers and TLS1.2.  Possible?
-
-Source: https://twitter.com/stevespringett/status/846907753318748160
-cc @diracdeltas

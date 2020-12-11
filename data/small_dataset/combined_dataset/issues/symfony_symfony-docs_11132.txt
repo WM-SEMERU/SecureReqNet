@@ -1,4 +1,0 @@
-[Validator][Doctrine] Add docs for automatic validation
-
-
-See symfony/symfony#27735

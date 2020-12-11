@@ -1,4 +1,0 @@
-please deploy train-2014.07.19 to prod
-
-
-this is the same code (dev + mozilla/persona#4154) that QA verified last week, let's spin up some production stacks and get primaries fixed on fxos :-)

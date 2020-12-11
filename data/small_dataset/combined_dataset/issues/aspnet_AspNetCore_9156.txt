@@ -1,5 +1,0 @@
-NavLink always active if href="/"
-
-
-If you use the NavLink component in a blazor application and point to the base url href="/" it will always be marked as active.
-We have a navigation item called Home that points to "/". This navigation item will always have the class active on it even if you navigate to a different page.

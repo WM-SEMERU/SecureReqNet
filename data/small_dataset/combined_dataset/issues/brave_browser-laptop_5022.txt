@@ -1,5 +1,0 @@
-Add invalid certificate exception
-
-
-from support https://linkbubble.zendesk.com/agent/tickets/6171
-Can you please tell me how to import (install) a local certificate required by US Gov? (This cert essentially breaks SSL security for user, but is nevertheless required.) Thank you.

@@ -1,5 +1,0 @@
-remember me cookie cannot be set from the Action Controller
-
-
-This is common pattern when user clicks confirmation token.
-I'm unable to set remember me in clean way.

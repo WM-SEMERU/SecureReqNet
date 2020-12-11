@@ -1,5 +1,0 @@
-Right now we have Rack Attack that rate limits certain requests. This helps with some things, but to prevent abusers from crawling the database, we should add rate limiting by users to specific API endpoints (e.g. user list). This is a fairly common practice.
-
-Grape Attack might be useful here:
-
-https://github.com/gottfrois/grape-attack

@@ -1,5 +1,0 @@
-Implement MEDIA_QUERY sanitization for HTML attributes and whitelist
-
-
-Note: I can't find references to <a media>. Is that really a thing?
-Refs #1860

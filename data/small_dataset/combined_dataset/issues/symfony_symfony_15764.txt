@@ -1,4 +1,0 @@
-Login via "Remember me" does not regenerate session ID
-
-
-Is it possible to configure "Remember me" to regenerate session ID, like the normal login does? It seems, by default, it keeps the old ID.

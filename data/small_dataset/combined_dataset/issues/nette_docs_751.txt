@@ -1,4 +1,0 @@
-Latte: added missing translation
-
-
-Missing translation. For English speaker it is confusing name of variable.

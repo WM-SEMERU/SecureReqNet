@@ -1,4 +1,0 @@
-Added php opening tag to sample controller
-
-
-It took me a while to figure out why the sample didn't seem to work, despite being experimented in php ; i checked many times namespace, uses and class declaration before finding that i just missed the opening tag. Think it would help others (even more if unexperimented) discovering symfony by copy/pasting sample code from the doc !

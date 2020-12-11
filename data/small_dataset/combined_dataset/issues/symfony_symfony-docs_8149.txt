@@ -1,4 +1,0 @@
-[Security] Custom access decision manager services
-
-
-see symfony/symfony#19034

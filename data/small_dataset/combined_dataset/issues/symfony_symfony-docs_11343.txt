@@ -1,5 +1,0 @@
-Made ChoiceType callback parameters consistent
-
-
-Renamed the parameters in the callback functions of ChoiceType to make them more consistent with each other and the code.
-Closes #6144.

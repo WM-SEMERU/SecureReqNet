@@ -1,4 +1,0 @@
-[hackerone] Authentication Link Origin Confusion
-
-
-https://hackerone.com/reports/361390

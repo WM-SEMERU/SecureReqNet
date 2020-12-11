@@ -1,5 +1,0 @@
-add option to disable webrtc
-
-
-was reminded by electron/electron#4200
-webrtc leaks private IP addresses, so tor browser disables it

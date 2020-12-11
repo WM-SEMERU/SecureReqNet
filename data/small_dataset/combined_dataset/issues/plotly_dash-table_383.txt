@@ -1,5 +1,0 @@
-DataTable cell image display?
-
-
-How to show the picture in DataTable's cell?
-I try to use html.Img that get is a blank table.

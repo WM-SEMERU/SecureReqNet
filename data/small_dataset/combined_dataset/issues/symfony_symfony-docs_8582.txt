@@ -1,7 +1,0 @@
-How to Use multiple User Providers
-
-
-On my symfony project i have setup 2 multiple user providers
-i need to know how the user logged in ? trough what provider so i can  use it in a controller
-for instance, i have a single login page, depending on what provider is used i wanted to redirect him to a different route
-i didn't find anything in the documentation on how to achieve this ( https://symfony.com/doc/current/security/multiple_user_providers.html )

@@ -1,5 +1,0 @@
-Project tokens are project-specific and currently have no access to any other projects. There's even an issue that deploy keys don't even have access to public projects (#1217).
-
-Project tokens and deploy keys should have read-only access to public and internal projects, including for git submodules and container registry images.
-
-This will have security implications, but my gut feeling is that read-only access to internal projects makes sense.

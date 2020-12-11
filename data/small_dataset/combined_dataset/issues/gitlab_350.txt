@@ -1,1 +1,0 @@
-If you change the username of an account, the user activity links in the party are not updated and refers to the old username which generates a 404 error

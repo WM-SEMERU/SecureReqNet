@@ -1,5 +1,0 @@
-Fix #9089 don't log mundane stuff at info level
-
-
-This is a quick fix to reduce the noise of some logging that's really
-only useful for troubleshooting/debugging.

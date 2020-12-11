@@ -1,9 +1,0 @@
-Being able to check currently live/unfinished requests
-
-
-Hi,
-I think it would be nicer if I use an example scenario.
-Assume that I run a command that checks if there is currently a live request being processed in the app (obviously the response hasn't been returned yet). If the app is free from requests then run some logic. Otherwise wait for all existing requests to be finished first.
-Same time the command should prevent new requests coming in otherwise the logic will probably never run in very busy apps.
-Does this make sense?
-Thanks

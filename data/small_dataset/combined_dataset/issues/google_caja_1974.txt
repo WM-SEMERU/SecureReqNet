@@ -1,4 +1,0 @@
-SES rejects the latest FF Nightly because FF Nightly now conforms to the spec
-
-
-See https://github.com/domenic/window-proxy-spec/issues/3

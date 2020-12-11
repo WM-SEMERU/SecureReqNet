@@ -1,4 +1,0 @@
-Fixing minor error
-
-
-It's not the form's class option, but the class option of the current field. Also removed the unnecessary self-referencing link.

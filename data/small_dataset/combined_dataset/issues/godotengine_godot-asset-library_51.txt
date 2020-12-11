@@ -1,5 +1,0 @@
-Add possibility to change password
-
-
-Related to #37.
-Might be made obsolete if we decide to implement third party login providers (GitHub, OpenID, Facebook, etc.) and drop our own registration form.

@@ -1,5 +1,0 @@
-Brave freezes when watching Videos
-
-
-Hi, when I was looking this site http://www.tvseriesdk.com/reto-4-elementos-2-capitulo-34/
-the browser let me to see all the Video, but when I want to close it, don't let me do it with the "X" at the Upper Right of the window, else the browser Frezzed becouse none of it's features works, so I have to close from the Operating System. Other thing is that if I Want to see the Larger image of the Video the Browser bar don't desappear as the others browsers.

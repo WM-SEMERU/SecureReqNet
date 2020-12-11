@@ -1,6 +1,0 @@
-Replaced as many var as possible using ES6 let and const
-
-
-It would be great if we can kill a lot of the old var syntax and use the ES6 let and const where applicable.
-I have ran through the entire library and replaced every instance which i could with ES6 syntax variables. All tests work and i have ran through all the scripts, nothing has been broken.
-If someone can take a look at this PR it be brilliant to get rid of so many instances of the horrible var #theendofvar

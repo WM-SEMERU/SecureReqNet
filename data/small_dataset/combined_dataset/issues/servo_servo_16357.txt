@@ -1,5 +1,0 @@
-Consider whether we should add deprecated ciphers to our list of accepted ciphers
-
-
-AFAIK we currently only have ciphers considered modern in net::connector::DEFAULT_CIPHERS, so no response ever have their HTTPS state to HttpsState::Deprecated. More importantly, that also probably means we only support sites that could get a green padlock in Firefox.
-Cc @avadacatavra

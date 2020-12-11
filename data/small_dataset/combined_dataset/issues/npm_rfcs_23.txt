@@ -1,5 +1,0 @@
-Add Singleton Packages RFC.
-
-
-Suggested feature for support of a singleton property in package.json to guard against installation of multiple versions/instances of a package the package tree.
-Anticipates, but does not define course for resolving version conflicts among singleton packages. (That would be a separate RFC.)

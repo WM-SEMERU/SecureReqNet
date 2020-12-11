@@ -1,4 +1,0 @@
-Add activity description to schema and 'Observed by item' view
-
-
-(and links to more resources)

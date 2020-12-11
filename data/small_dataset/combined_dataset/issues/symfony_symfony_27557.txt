@@ -1,7 +1,0 @@
-"A Token was not found in the TokenStorage." after upgrade to symfony/security 4.1.0
-
-
-Symfony version affected: symfony/security 4.1.0
-Description
-An ajax request to a (by the firewall) protected route fails even though authentication (a sesssion cookie) is send.
-It works with symfony/security 4.0.8 though.

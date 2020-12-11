@@ -1,6 +1,0 @@
-Add exit field in LegStep
-
-
-Add exit field in LegStep class
-Test added:
-testLegStepExit() in MapboxDirectionsTest.java

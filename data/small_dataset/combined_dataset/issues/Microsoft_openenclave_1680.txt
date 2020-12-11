@@ -1,5 +1,0 @@
-Add missing APT packages to be installed.
-
-
-This takes #1678 and fixes a bug with it. Specifically the "apt_packages" variable should be "intel_sgx_packages". Also, I can't add a commit to that branch because it's in Ionut's repo! So I'm going to close his PR after this one gets merged.
-Fixes #1677

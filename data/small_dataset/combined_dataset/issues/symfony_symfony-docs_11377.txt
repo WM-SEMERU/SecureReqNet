@@ -1,4 +1,0 @@
-Switch the prefered local web server to the Symfony one
-
-
-I'm targeting 4.2 instead of 3.4 as the Symfony web server PR (#11207) was merged into 4.2 for a reason I don't understand.

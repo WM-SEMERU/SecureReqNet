@@ -1,9 +1,0 @@
-AMBARI-25206 HDFS NameSpace Widget Threshold Values Are Not Updated after Change
-
-
-Jira:  AMBARI-25206
-What changes were proposed in this pull request?
-Fix the issue that hdfs namespace widget threshold values are not updated after change
-How was this patch tested?
-Tested in a real cluster
-Please review Ambari Contributing Guide before opening a pull request.

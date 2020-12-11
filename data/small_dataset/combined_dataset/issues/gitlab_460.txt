@@ -1,3 +1,0 @@
-Currently, when the search box is given focus, the annoying browser outline is also added, which looks out of place (at best) in the GitLab design. A simple addition of `outline:none;` on `input#search.search-input.ui-autocomplete-input` solves this and tests out okay using the dev tools of Safari 8.0 and Chrome. Firefox does not seem to apply the outline in the first place.
-
-I'll attempt to find the files that need to be edited, but I'm not terribly familiar with the codebase at the moment.

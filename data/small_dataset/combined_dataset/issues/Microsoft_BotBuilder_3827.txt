@@ -1,4 +1,0 @@
-[Question] Does Microsoft store chat logs?
-
-
-The security guys within my company are asking if Microsoft store chat data before it's forwarded on from a channel to my API. Is there any way to get assurance from Microsoft that they are not storing user's chat logs on their servers?

@@ -1,6 +1,0 @@
-Change locally required Python version to 2.7.12
-
-
-Since we're shipping a .python-version, we really should strive to keep it updated, at least with respect to CVE/security. Right now it's wildly out of date — and Python 2.7.6 has some very serious security holes (and bugs).
-I've tested this locally on macOS 10.12 running pyenv 1.0.2-44-g1dee022, and have successfully built both the master and tj-upgrade-electron branches.
-/cc @atom/maintainers

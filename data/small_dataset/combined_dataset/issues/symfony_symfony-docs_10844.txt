@@ -1,9 +1,0 @@
-Minor error in authentication-guard-methods.svg
-
-
-In authentication-guard-methods.svg on https://symfony.com/doc/current/security/guard_authentication.html#the-guard-authenticator-methods there is a minor error:
-supportsRememberMe is not called in any case (as the picture suggests), but only if remember_me is configured for the firewall in security.yaml.
-I'd suggest to add a note in parentheses, e.g.:
-
-(if remember_me is configured)
-

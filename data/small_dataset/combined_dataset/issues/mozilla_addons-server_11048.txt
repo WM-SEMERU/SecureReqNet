@@ -1,7 +1,0 @@
-Add CORS headers to `validation.json` URLs
-
-
-The code-manager client fetches the linter data using the validation.json endpoints:
-https://addons-dev.allizom.org/en-US/developers/addon/androidadbplus2/file/252861/validation.json
-
-Because we are not on the same domain (code.a.m.o vs a.m.o) and CORS are not configured, we cannot retrieve the data in -dev (and therefore stage and prod). We don't have this problem in local dev because we're using an insecure proxy.

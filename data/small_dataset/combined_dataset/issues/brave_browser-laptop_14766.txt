@@ -1,4 +1,0 @@
-Decide about strict site isolation by default
-
-
-C68 enables strict site isolation by default.  We should consider following suit, but proceed carefully because it apparently breaks a lot of sites, e.g. the Cloudflare captcha as in #14765.

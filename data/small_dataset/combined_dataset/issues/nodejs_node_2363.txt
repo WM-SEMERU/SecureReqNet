@@ -1,8 +1,0 @@
-Optionally log master secrets for TLS connections
-
-
-Sometimes it's necessary to decrypt your own TLS connections to debug their contents. Wireshark supports this quite nicely with its decryption feature. For non-DH key agreement, you simply provide the private key of the server. However, for DH key agreement, or when you are acting only as a client, that doesn't work. Firefox and Chrome support the environment variable SSLKEYLOGFILE to write the master secrets used to a file, for decryption by Wireshark. It would be great to support this or a similar mechanism for logging master secrets in Node.
-Key log format: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/Key_Log_Format
-Helpful Stack Exchange howto: https://security.stackexchange.com/questions/35639/decrypting-tls-in-wireshark-when-using-dhe-rsa-ciphersuites/42350#42350
-Wireshark decryption docs: https://wiki.wireshark.org/SSL
-(reposted from nodejs/node-convergence-archive#59).

@@ -1,4 +1,0 @@
-After discussion in https://gitlab.com/gitlab-org/gitlab-ce/commit/7d46bd6128309e6ef1f3f4785889f5a0fef4de8f#note_22870117
-
-> JV: I understand that this is untrusted input but I don't understand how shell-escaping it makes it any better. For example, a shell-escaped string with spaces in it still has spaces in it.
-The only time when shell-escaping makes sense is when you are generating shell script on the fly with arbitrary inputs. And we should never be doing that!

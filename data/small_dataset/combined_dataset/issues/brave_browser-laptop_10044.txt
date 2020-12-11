@@ -1,8 +1,0 @@
-Encrypt Cookies
-
-
-Test plan
-#10044 (comment)
-
-We need to encrypt our cookie value in User Dir/Cookies
-so that we will see encrypted_value instead of plain value

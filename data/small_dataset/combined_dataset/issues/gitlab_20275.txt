@@ -1,1 +1,0 @@
-Currently 2FA can just be disabled without a code confirmation. Common security practice dictates a requirement of at least one code (sometimes two consequential codes) to disable 2FA.

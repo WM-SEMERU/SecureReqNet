@@ -1,4 +1,0 @@
-Add a default sign target to the samples' CMake builds
-
-
-This will ensure that the building the samples always signs the samples. As it is right now, the run target depends on the signed enclaves, and so signing is being delayed to runtime.

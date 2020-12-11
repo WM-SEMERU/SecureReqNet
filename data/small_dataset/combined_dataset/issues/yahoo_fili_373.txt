@@ -1,4 +1,0 @@
-Make Slices endpoint URL building safe instead of stringy
-
-
-We can build links using the URL Builder (or however the Dimension endpoint does it), which is much safer that doing it with string manipulations.

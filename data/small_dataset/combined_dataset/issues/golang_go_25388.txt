@@ -1,6 +1,0 @@
-x/crypto/openpgp: remove support for unauthenticated messages
-
-
-Messages without authentication tags (called MDC by OpenPGP) can be modified by an attacker. Malleable plaintexts lead to all sorts of attacks, the latest example being EFail.
-The spec is hopelessly broken in therms of downgrade protection, so a message originating with a MDC can be stripped to look like a normal message without MDC. So the only fix is to disable support for MDC-less messages entirely.
-Also, MDC were added in 2001, and it's 2018.

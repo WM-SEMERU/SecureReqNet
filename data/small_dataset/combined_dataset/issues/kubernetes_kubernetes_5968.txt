@@ -1,4 +1,0 @@
-cluster dns should be reachable securely
-
-
-Forked from #129.

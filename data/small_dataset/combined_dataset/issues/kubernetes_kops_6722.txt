@@ -1,4 +1,0 @@
-add antiaffinity rules to coredns pod
-
-
-fixes #6721

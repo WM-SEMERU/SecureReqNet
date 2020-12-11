@@ -1,6 +1,0 @@
-Sync published with master
-
-
-Proposed changes
-Unreleased project version (optional)
-Related issues (optional)

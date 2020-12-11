@@ -1,5 +1,0 @@
-Add metadata which says whether or not the type of authentication was persistent
-
-
-For Antiforgery by default in MVC - we need a way to know that the type of authentication used was a persistent auth.
-This should be implemented such that the non-persistent auth schemes (bearer) make a declaration that they are not persistent. The antiforgery infrastructure in MVC will look for confirmation that the scheme is not persistent.

@@ -1,8 +1,0 @@
-Reassigning "this" in global scope
-
-
-Original issue 38 created by metaweta on 2008-01-17T01:28:17.000Z:
-this=function(){}
-this();
-You can replace your global scope; I don't know if that causes problems,
-but it's weird.

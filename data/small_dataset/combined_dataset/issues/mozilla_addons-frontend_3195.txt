@@ -1,8 +1,0 @@
-yarn nsp-check is failing re: tough-cookie ReDOS
-
-
-This is due to https://nodesecurity.io/advisories/525
-Running locally to get the extended tree shows tough-cookie is coming in via:
-mozilla-addons-frontend@0.0.1 > jsdom@11.2.0 > request-promise-native@1.0.4 > tough-cookie@2.3.2
-I think this being a dep of jsdom would mean this should only impacts tests if at all. This needs to be confirmed.
-The upstream issue is: salesforce/tough-cookie#92

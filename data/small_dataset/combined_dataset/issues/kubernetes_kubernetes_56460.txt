@@ -1,7 +1,0 @@
-Allow FlexVolume PV secret namespaces
-
-
-Completes the secret namespace PV refactor, so all PV volume sources that specify secrets can reference them outside the PVC namespace.
-Finished the secret-related aspect of #32131
-PersistentVolume flexVolume sources can now reference secrets in a namespace other than the PersistentVolumeClaim's namespace.
-

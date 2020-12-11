@@ -1,9 +1,0 @@
-Fatal Privilege Escalation introduced by erights/no-xo4a
-
-
-Original issue 844 created by erights on 2008-10-18T01:29:51.000Z:
-When a method is tamed as a generic method and then reified, it is
-extracted as a malfunction -- a record with call, bind, and apply members.
-However, if these call, bind, or apply members are called with null or
-undefined for its first (this-value) argument, the original tamed method
-will run with its this-value bound to the real global object.

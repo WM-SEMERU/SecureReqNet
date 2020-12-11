@@ -1,5 +1,0 @@
-Long translation titles overflow in Rewards Settings Boxes
-
-
-It should stay on the same line if it can and not clip in to the text below.
-

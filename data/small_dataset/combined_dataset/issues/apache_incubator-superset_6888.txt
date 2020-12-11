@@ -1,4 +1,0 @@
-User variables
-
-
-Hi. I'm interested to know if there is possibility to set user variables, such as company_id and then retrieve this in the SQL statement in order to segment data amongst several users. Also if there is an API to create users and set this variables. Thanks!

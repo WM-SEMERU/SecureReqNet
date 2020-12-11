@@ -1,9 +1,0 @@
-A GitLab.com user reported that they saw a strange user in the 'Assignee' dropdown in their projects. This user is no one they recognize and was never a member of their groups/projects. Upon further investigation, I noticed the user actually has access to the projects in question (found out via impersonation). I also confirmed the user is *not* a member of the projects or groups, though. 
-
-Refreshing project authorizations for the users yields the same result - the invalid authorizations are still present. Why did this happen and why is a refresh not fixing it.
-
-Zendesk: https://gitlab.zendesk.com/agent/tickets/78198
-
-cc/ @stanhu @briann 
-
-I'm keeping this confidential for now in case we find it's a larger security issue

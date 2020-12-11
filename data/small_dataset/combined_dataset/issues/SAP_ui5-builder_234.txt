@@ -1,4 +1,0 @@
-[FIX] Generate sap-ui-custom-dbg.js for self-contained build
-
-
-Fixes #161

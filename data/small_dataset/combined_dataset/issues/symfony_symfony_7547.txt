@@ -1,9 +1,0 @@
-target_path not set after a AccessDeniedException
-
-
-Hi !
-I'm throwing manually a AccessDeniedException in one of my controller action. I'm then correctly redirected to the firewall's login page however, the _security.my_firewall.target_path session variable is not set...
-Why that?
-By the way, the Symfony2 Google group seems to be not accessible (it says I'm not allowed to see it error #418).
-Thanks
-Thomas

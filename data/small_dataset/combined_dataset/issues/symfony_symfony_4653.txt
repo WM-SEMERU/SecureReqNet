@@ -1,8 +1,0 @@
-[SecurityBundle] BadCredentialsException when bad password provided
-
-
-Helo
-I think it will be good to add User object as extraInforamtion to this exception when bad pasword was sent, like it is in other exceptions thrown by Authentication system.
-It is usefull when you want save login falure reason in AuthenticationFailureHandler
-Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider line 67
-And option of hiding this exception for user (like it is with UserNotFoundException) is good idea because we don't give information about user existence - simple text "bad username or password" is enough in both cases

@@ -1,8 +1,0 @@
-Integrated Windows Authentication Library
-
-
-Is your feature request related to a problem? Please describe.
-I've been doing app development on closed government networks for a while now, and these environments all run Windows domains. The issue that I initially encountered in this environment was how to appropriately extend the current user into my database and extend the available properties.
-Namely, this is for things like app-based RBAC, user preferences, things of that nature. I've put together a workflow that I use internally for extending Windows Authentication's IIdentity from HttpContext when running on IIS. It would be nice to see a workflow for this purpose standardized for Windows Authentication. Additionally, a proper mock library for getting things built on a dev machine that's not connected to an AD domain would be outstanding.
-Describe the solution you'd like
-I've documented my process in both Active Directory Authentication, as well as Active Directory Authorization. I've also confirmed that this approach works with AWS Directory Services, and with some tweaks, with Azure Active Directory.

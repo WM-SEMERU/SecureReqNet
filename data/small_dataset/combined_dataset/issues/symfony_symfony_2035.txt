@@ -1,9 +1,0 @@
-[Security] [ACL] Allows ObjectIdentity and UserSecurityIdentity to work with proxies
-
-
-Right now, ACL doesn't really work with Doctrine (either ORM, ODM, etc.) because it tries to retrieve the actual class of the objects. We can still create new ObjectIdentity and UserSecurityIdentity with the constructors but most people just use the static methods, which are easier to use.
-This PR is far from perfect but it is IMO the only thing we can do in the 2.0 branch without too many modifications.
-For 2.1, I suggest creating a new service able to retrieve an ObjectIdentityInterface from a given object.
-This service would be given a list of other services (with a given DIC tag), and would iterate on this list until one gives a valid Identity. At last, we would call a default one (the actual implementation).
-Bundles like Doctrine ORM, ODM, etc. would then each have to create a new service correctly tagged which would check if the given object is supported, etc.
-This would maybe also allows for instance Doctrine to retrieve an object identity even if the primary key is not retrieved through getId() (since the EntityManager knows what identifier identifies which object).

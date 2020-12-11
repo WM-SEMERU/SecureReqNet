@@ -1,5 +1,0 @@
-widevine resourceId is missing
-
-
-in js/constants/appConfig.js, there is no resourceId for widevine. thus it seems that https://github.com/brave/browser-laptop/blob/master/js/state/contentSettings.js#L320 wouldn't actually work.
-seems likely that either this is not enabling widevine at all (which i assume people would notice unless it only recently regressed) or it’s actually enabling all plugins (which would be a security issue)

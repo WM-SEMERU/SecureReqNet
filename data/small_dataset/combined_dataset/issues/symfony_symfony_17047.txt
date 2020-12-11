@@ -1,4 +1,0 @@
-BCryptPasswordEncoder should check for max 72 length password
-
-
-BCryptPasswordEncoder should check for max 72 length password, because passwords that are more than 72 chars truncated by bcrypt.

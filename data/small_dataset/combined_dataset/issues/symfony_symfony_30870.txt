@@ -1,4 +1,0 @@
-NotPwnedValidator should convert passwords to UTF-8
-
-
-Before computing the hashes, we must ensure the passwords are encoded/converted in UTF-8, as expected by the remote DB/API.

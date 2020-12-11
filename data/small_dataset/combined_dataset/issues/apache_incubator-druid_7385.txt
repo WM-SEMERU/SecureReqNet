@@ -1,4 +1,0 @@
-Update scan benchmark for time ordering
-
-
-This PR updates ScanBenchmark to support the time ordering added in #7133.

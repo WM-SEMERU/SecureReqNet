@@ -1,7 +1,0 @@
-Freeze properties of the caja API
-
-
-Original issue 469 created by collin.jackson on 2008-06-10T19:11:33.000Z:
-It might be possible to exploit the fact that properties of the
-module-accessible "caja" API are not frozen, for example using caja.def. It
-seems safer to freeze them.

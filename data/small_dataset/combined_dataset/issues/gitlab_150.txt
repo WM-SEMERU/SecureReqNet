@@ -1,4 +1,0 @@
-I followed the instructions here: https://gitlab.com/gitlab-org/cookbook-gitlab/blob/master/doc/development.md. All tests are passing except for this one: http://pastebin.com/N4WRvN9H
-Wasn't sure if I should post this issue here, or at the cookbook-gitlab repo.
-
-Any ideas?

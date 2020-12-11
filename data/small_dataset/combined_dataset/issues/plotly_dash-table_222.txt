@@ -1,4 +1,0 @@
-Allow HyperLinks in cells via either dash_html_components.A or plain HTML string
-
-
-Right now, the cells can only be plain text.  It will be great to support either HTML String or dash_html_components.A

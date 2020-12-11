@@ -1,7 +1,0 @@
-Fix via waypoints APIs naming
-
-
-
-Follow up from #959
-
-We found in mapbox/mapbox-navigation-android#1733 (comment) that naming could be confusing and should be more explicit in order to make clients' life easier.

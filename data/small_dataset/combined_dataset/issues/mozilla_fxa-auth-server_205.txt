@@ -1,6 +1,0 @@
-CEF logging for security-related events
-
-
-We'll need some integration with mozilla CEF logging infra before we go live, similar to what's described in this persona-related bug:
-https://bugzilla.mozilla.org/show_bug.cgi?id=735785
-This is basically some structured logging for security-related events e.g. failed logins, password resets, etc.  Mabye we can offload some of the heavy-lifting onto Heka but will still require some support in the server code itself.

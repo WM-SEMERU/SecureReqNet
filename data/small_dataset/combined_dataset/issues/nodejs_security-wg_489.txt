@@ -1,7 +1,0 @@
-Add indices and tooling for indices
-
-
-This PR introduces tooling to generate index.json files for core vulnerabilities and npm vulnerabilities, providing a simple way to consume the vulnerability data from a single source.
-It also introduces the current first pass at those indices.
-Ideally, whenever a new vulnerability is added or a past vulnerability is updated, npm run create-core-index or npm run create-npm-index should be run. This will generate the appropriate index.json in the appropriate directory, with the contents of all vulnerabilities within the respective directory funneled into a single JSON file.
-Resolves #486.

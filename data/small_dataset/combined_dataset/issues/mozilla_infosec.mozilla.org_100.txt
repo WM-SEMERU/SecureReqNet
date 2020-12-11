@@ -1,4 +1,0 @@
-Additional information about SPAs
-
-
-including relaxing the "do not use them" since they're used anyway. Instead strongly discourage them and indicate how to use them as safely as possible if you cannot follow that recommendation

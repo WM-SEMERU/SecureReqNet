@@ -1,3 +1,0 @@
-When viewing diffs, it would be good if the text is displayed on 100% of the window width. Not everyone uses 80 column-width standard and viewing diffs is painful.
-
-This is extra painful in the side-by-side diff view since it does not support horizontal scrolling.

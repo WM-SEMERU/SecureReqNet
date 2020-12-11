@@ -1,6 +1,0 @@
-Allow a configurable default visibility for metrics
-
-
-
-
-

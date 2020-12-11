@@ -1,4 +1,0 @@
-Moved contributor documents to contributors folder.
-
-
-Part of #1543

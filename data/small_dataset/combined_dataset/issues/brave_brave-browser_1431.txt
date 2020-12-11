@@ -1,4 +1,0 @@
-make sure we have necessary fixes from Ungoogled Chromium
-
-
-People often ask how Brave compares to https://github.com/Eloston/ungoogled-chromium. This is a tracking issue to go through all the patches and options set in https://github.com/Eloston/ungoogled-chromium and make sure we have any that should be applied to Brave.

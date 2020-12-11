@@ -1,2 +1,0 @@
-The branch finder in a project should be extended with a function to create directly a new branch similar to GitHub.  
-At the moment I have to go over commits -> branches to create a new branch.

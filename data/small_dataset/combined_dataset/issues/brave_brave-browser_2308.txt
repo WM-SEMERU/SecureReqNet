@@ -1,7 +1,0 @@
-Disintermediate requests for common web assets
-
-
-The Decentraleyes extension intercepts requests for commonly-CDN'd web resources like jquery and serves from a local cache instead, removing the need for a network transaction. This improves privacy since there's no outbound request to log, security since there's no way to tamper with a request which isn't made, and performance since reading from disk is faster than a network request.
-We could implement an extended variant of this with two broad approaches.
-We could curate a list (like Decentraleyes') of content that is consistently loaded from CDNs. When a request is made for these assets, instead return the local version. This list and these assets are distributed and updated just like our other blocklists.
-Any time we see a reference to a resource with an SRI hash, we cache that resource indefinitely. Any future requests for a resource with the same hash are loaded from disk, regardless of URI. We could drop resources from the cache after an extended duration (months?) or when we start seeing consistent references to a resource at the same URI with a different hash.

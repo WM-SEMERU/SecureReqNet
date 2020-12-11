@@ -1,6 +1,0 @@
-bugbug/*: Update dependencies and use releng-svc-compute for bugbug/data
-
-
-
-
-

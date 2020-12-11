@@ -1,2 +1,0 @@
-It misses a close quote in the middle of the file, then it shows many mistaken "strings".
-https://gitlab.com/aurium/ink-bash/blob/master/examples/exemplo-pt.sh

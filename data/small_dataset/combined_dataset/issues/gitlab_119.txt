@@ -1,1 +1,0 @@
-Using the search box on an empty repository causes a 500 error. Naively, it looked like a bug in gitlab-git to me, but I wasn't sure so I attempted a workaround in GitLab itself: https://gist.github.com/anonymous/9406817

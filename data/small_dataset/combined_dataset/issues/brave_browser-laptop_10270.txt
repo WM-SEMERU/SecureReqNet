@@ -1,7 +1,0 @@
-[hackerone] https://hackerone.com/reports/255991
-
-
-Test plan
-#10346 (comment)
-
-https://hackerone.com/reports/255991

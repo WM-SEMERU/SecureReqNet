@@ -1,4 +1,0 @@
-deps: cordova-simulate@0.6.0
-
-
-This PR must fix the rest of security vulnerabilities caused by send-transform.

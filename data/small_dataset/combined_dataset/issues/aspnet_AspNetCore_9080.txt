@@ -1,7 +1,0 @@
-Standarize E2E test asserts and increase wait time
-
-
-
-Converts the templating asserts to use the shared infrastructure asserts.
-Increases the timeout for templating tests from 10 seconds to 30 to help with reliability.
-

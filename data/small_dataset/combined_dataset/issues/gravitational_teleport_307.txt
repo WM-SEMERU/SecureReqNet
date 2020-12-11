@@ -1,9 +1,0 @@
-Should be able to specify a token timeout for nodes add
-
-
-Currently if I want to add a new node to teleport, I run the following:
-tctl nodes add
-
-This generates a token which is valid for 900 seconds.
-If I want to add nodes using configuration management like Puppet, the join might take longer than 900 seconds, which isn't very fun.
-With this in mind, can we have an option to set the token validity?

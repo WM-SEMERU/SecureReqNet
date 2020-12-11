@@ -1,9 +1,0 @@
-ConfigProperty injection does not work on resource methods
-
-
-When a resource method is annotated with ConfigProperty, the injected value is an empty String instead of the configuration value.
-Environment Details
-
-Helidon Version: 1.0.2
-Helidon MP
-

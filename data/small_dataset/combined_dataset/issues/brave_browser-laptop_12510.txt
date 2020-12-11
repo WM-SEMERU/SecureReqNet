@@ -1,4 +1,0 @@
-revoked SSL cert not showing cert error for some users
-
-
-https://revoked.badssl.com/ does not show a cert error for me on 0.19.x or master, but it does show an error (expected) for @jumde. I am on El Cap.

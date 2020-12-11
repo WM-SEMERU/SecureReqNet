@@ -1,4 +1,0 @@
-Add setters for Directions API
-
-
-Currently we offer an empty constructor but don't expose setters for the user to build off of.

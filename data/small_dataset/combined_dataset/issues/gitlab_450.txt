@@ -1,5 +1,0 @@
-I tried to add a user to a group via the API and by mistake sent the user's username instead of the id. This meant the admin page for the group no longer loaded (gave an error 500 back), but listing the users in the group via the API didn't show any problems.
-
-Looking into the database, I could see an entry had been added to the `users_groups` table with the correct group id but a user id of 0. When I removed that entry the group admin page would load correctly again.
-
-This is with using Postgres as the database and GitLab version 6.9.2.

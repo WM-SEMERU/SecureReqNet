@@ -1,5 +1,0 @@
-Move positive matches from S3 to cold storage
-
-
-In order to better secure positive matches awaiting review, we could move them from S3 into some form of cold storage - i.e. storage that is not accessible online, maybe even air-gapped.
-I'm not sure how we'd do that. Download images and metadata periodically to a thumb drive in a safe? Some further thoughts on ideas would be handy here - or we could also consider encryption (#112) to be sufficient.

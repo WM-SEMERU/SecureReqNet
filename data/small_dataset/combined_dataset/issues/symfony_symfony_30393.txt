@@ -1,4 +1,0 @@
-[PhpUnitBridge] ClockMock does not mock gmdate()
-
-
-We would need this feature, and I can create a pull request to add it.

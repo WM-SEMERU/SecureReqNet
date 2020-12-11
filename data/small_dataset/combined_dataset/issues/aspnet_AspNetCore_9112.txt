@@ -1,6 +1,0 @@
-Put favicon.ico back for Blazor Server-Side template. Fixes #9096
-
-
-
-No description provided.
-

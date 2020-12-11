@@ -1,5 +1,0 @@
-Add docs for the `yaml` env var processor
-
-
-For symfony/symfony#30910. Based on the file/json examples.
-#FOSSHackathon

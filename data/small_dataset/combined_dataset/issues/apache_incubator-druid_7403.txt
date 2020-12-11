@@ -1,5 +1,0 @@
-how to use  MaterializedView ，I didn't find the relevant submit task command.
-
-
-My is curl -XPOST -H'Content-Type: application/json' -d @view.json http://10.244.68.107:8090/druid/indexer/v1/MaterializedViewSupervisor This command task does not respond?
-Is my task command wrong? I didn't find the relevant submit task command.

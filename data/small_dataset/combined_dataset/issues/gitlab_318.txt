@@ -1,3 +1,0 @@
-Although I wrote a reference to Redmine issue, it does not become a link.
-
-In commit 69577b5, setting of redmine is no longer in use.

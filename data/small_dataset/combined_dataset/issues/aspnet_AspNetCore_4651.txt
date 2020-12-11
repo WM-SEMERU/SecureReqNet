@@ -1,4 +1,0 @@
-Log decryption failures
-
-
-"Correlation failed" is one of the most common failures in OIDC or OAuth flows. Many of the things that can go wrong here happen on the client and can't be traced from the server. However there's one scenario where everything does flow back to the server and the server fails to decrypt the values. This can happen in a multi-node environment with misconfigured dataprotection (RE: aspnet/Security#1755). We can highlight this by logging decryption failures in OAuth, OIDC, and CookieAuth.

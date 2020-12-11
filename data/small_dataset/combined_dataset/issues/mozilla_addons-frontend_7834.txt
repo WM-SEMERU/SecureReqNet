@@ -1,6 +1,0 @@
-Capitalization fixes #7825
-
-
-Fixes #7825
-I can't add screenshots since my laptop isn't powerful enough to run staging and I'm travelling. The changes are so simple I doubt it really matters.
-cc @willdurand

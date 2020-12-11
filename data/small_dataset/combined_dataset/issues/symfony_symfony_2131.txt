@@ -1,4 +1,0 @@
-make it easier to control the order in which auth sources are accessed
-
-
-we have an application that uses http basic and cas for authentication in a single firewall. since the bulk of the requests are handled via the in_memory auth source set in the http basic provider its important that its checked first in order to not overload the cas and to reduce the network overhead.

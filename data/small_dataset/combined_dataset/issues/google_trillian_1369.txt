@@ -1,5 +1,0 @@
-See if there's a better mechanism for the SQL building in MySQL/PGSQL storage implementations.
-
-
-The string building and replacements are kinda scary from an SQL injection PoV, see comments in #1343.
-Can this be replaced with something safer?

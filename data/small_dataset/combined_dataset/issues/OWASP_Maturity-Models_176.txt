@@ -1,5 +1,0 @@
-Add support for clearing the api cache
-
-
-useful when making changes directly to the backend
-this feature will have security implications (Should do threat model before implementation)

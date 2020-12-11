@@ -1,8 +1,0 @@
-Rewrite firewall introduction
-
-
-Quoting @wouterj from here:
-
-Imo, the introduction no longer makes sense. This chapter explains the global flow of the Security component. It was nice to start with the security context, because it was a class that was used everywhere in the component (which also was the downside of the class...). Now, the authorization checker is really specific for the authorization process and not for the rest of the security system.
-I think it is nice to have an example of what's needed for a working security system based on the component, but I would prefer to rewrite the introduction text to not emphasize the authorization checker.
-

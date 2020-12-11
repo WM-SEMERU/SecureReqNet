@@ -1,8 +1,0 @@
-I upgraded my GitLab installation from 6.5 to 6.9, then to 7.0 and 7.1, today.
-I also upgrade ruby from 2.1.0 to 2.1.2 while upgrading gitlab from 6.9 to 7.0.
-
-Now whatever rake task I run, the warning message below shows up:
-
-    Instance method "lock!" is already defined in ActiveRecord::Base, use generic helper instead or set StateMachine::Machine.ignore_method_conflicts = true.
-
-How can I get rid of it? Does it affect anything in a harmful way?

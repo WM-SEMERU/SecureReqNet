@@ -1,9 +1,0 @@
-Remove check which causes crash seen in https://github.com/brave/brow…
-
-
-…ser-laptop/issues/15025
-Should fix brave/browser-laptop#15025
-I tested this for ~30 minutes on Windows 10 x64 doing resizing / minimizing / maximizing
-content (including video playing) and did not notice any video tearing
-or stetching
-Auditors: @bridiver

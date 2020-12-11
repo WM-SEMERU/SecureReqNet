@@ -1,8 +1,0 @@
-'Block phishing' shields setting is actually blocking 3rd party cookies?
-
-
-Test Plan
-#476 (comment)
-
-If so, it needs to say 'block 3rd party cookies' since phishing has nothing to do with 3rd party cookies. (The 'block phishing' setting on laptop controls safebrowsing.)
-cc @jhreis if this is an issue also on iOS

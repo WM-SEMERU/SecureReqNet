@@ -1,6 +1,0 @@
-Filtering doesn't work if column name has space [Sponsored: Due March 1]
-
-
-Filtering on columns that contain a space in their name results in the filter string being considered as invalid.
-After looking at the docs, it most likely is that the filter parser is being confused when turning the filter string into <column name> <operator> <value>
-Temporary fix is, of course, removing spaces from column names.

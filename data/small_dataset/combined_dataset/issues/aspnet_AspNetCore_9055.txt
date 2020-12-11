@@ -1,6 +1,0 @@
-Remove hacked manifest workaround for dotnet/core-setup#5665
-
-
-Remove the hacked manifest from the src/Framework/src/Microsoft.AspNetCore.App.Runtime.csproj project.
-https://github.com/aspnet/AspNetCore/pull/8877/files/57afb6f3041a85d2efb547bfe5d5c7e78d32451c..63dae95a515b2db49c76e420abafd6121cc74878#diff-8f52d42d2d7d5ee604c83806a1049e84R125
-Blocked by dotnet/core-setup#5665

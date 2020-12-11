@@ -1,8 +1,0 @@
-If `issues_access_level` is set to `ProjectFeature::PRIVATE` this leads to information disclosures in the issues API and search results. This is being fixed in those cases by replacing `Issue#visible_to_user` with `IssuesFinder` in https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2031/,  but might still be a problem elsewhere.
-
-Additionally this method only checks project access if already chained as `project.issues.visible_to_user` and doesn't if used as `Issue.all.visible_to_user`. 
-
-To fix this and avoid future problems @DouweM suggested moving this method to `IssuesFinder` so it can't be used directly.
-
-### Related issues and MRs
-#23867, https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2024, https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/2031

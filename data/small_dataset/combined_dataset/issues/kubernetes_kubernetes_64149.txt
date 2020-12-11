@@ -1,8 +1,0 @@
-kube-ctrl-mgr: enable secure port 10257
-
-
-This PR enables authn+authz (delegated to the kube-apiserver) and the secure port 10257 for the kube-controller-manager. In addition, the insecure port is disabled.
-Moreover, it adds integration test coverage for the --port and --secure-port flags, plus the testserver infrastructure to tests flags in general inside integration tests.
-Enable secure serving on port 10257 to kube-controller-manager (configurable via `--secure-port`). Delegated authentication and authorization are to be configured using the same flags as for aggregated API servers. Without configuration, the secure port will only allow access to `/healthz`.
-
-

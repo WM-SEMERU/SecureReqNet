@@ -1,4 +1,0 @@
-x/blog: Obsolete link to Google+ on the Go blog "Links" section
-
-
-The front page of the Go blog has, in the Links section, a dead link to the now-defunct Google+, as Go+ Community targeting https://plus.google.com/communities/114112804251407510571.

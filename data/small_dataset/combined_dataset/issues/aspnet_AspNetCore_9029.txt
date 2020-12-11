@@ -1,5 +1,0 @@
-Why is x86 and not AnyCPU the default platform target for ASP.NET Core projects?
-
-
-Why is x86 and not AnyCPU the default platform target for ASP.NET Core projects?
-We are targeting the full .NET framework and are wondering if we run into any problems if we switch to AnyCPU as the platform target.

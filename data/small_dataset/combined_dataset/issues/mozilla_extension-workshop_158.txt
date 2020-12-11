@@ -1,9 +1,0 @@
-Add unit tests for all JavaScript
-
-
-Any JavaScript that is applied to the site should have unit tests.
-
-If functionality is broken by changes we will catch the regression.
-It is also important to know when a  dependency update breaks existing functionality.
-
-Once we have some tests these can be run by CI on every commit.

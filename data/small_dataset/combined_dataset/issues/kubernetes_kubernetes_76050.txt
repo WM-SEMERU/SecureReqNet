@@ -1,8 +1,0 @@
-Fix kubelet start in local-up-cluster.sh
-
-
-Fixes #76048
-Otherwise the empty "${priv_arg}" is interpreted as a non-flag argument and causes kubelet to fail to start.
-/sig cluster-lifecycle
-/assign @BenTheElder
-cc @roycaihw @janetkuo

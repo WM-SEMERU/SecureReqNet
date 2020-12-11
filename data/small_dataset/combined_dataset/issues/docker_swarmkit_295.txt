@@ -1,4 +1,0 @@
-Store & fetch security data into/from Raft
-
-
-@diogomonica

@@ -1,4 +1,0 @@
-Add precision on the concerned fields in the Default validation group
-
-
-Explicitly tells which field's constraint is in the Default validation group.

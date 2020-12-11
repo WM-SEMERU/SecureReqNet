@@ -1,6 +1,0 @@
-A central place explaining and linking to different types of segments and tasks
-
-
-The documentation mentions "pending segments" and "pending tasks" here and it seems to me that there is no place where this concept is clearly described and other "segments states" or "segment types" are listed.
-Such central doc would be useful not only on the users' side (in users' docs) but in the codebase too. A central place can link to different classes "implementing" or "most relevant" to different types of segments.
-FYI @jihoonson

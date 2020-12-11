@@ -1,4 +1,0 @@
-Calico would really like separate ETCD cluster
-
-
-For performance and access reason, calico would like its own etcd cluster.

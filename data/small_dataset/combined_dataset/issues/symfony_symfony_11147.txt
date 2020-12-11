@@ -1,8 +1,0 @@
-Improving the controller associated with a login form
-
-
-(this issue is part of the "DX" ("Developer eXperience") initiative introduced by Symfony project)
-The problem
-
-The solution
-I can't think of any solution, but I'm sure that someone in the Symfony community can help us improving the previous code of the controllers associated with login forms.

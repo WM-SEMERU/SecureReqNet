@@ -1,4 +1,0 @@
-Design generic mechanism for proxy forwarding
-
-
-@diogomonica

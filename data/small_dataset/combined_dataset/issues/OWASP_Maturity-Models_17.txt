@@ -1,4 +1,0 @@
-There is no data classification of assets used
-
-
-This needs to be a wiki page that list all data types that we have and what is their current security status (namely if they need to protected or not)

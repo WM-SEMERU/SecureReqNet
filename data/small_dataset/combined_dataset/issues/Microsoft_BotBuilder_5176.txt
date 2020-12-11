@@ -1,7 +1,0 @@
-Announcement: Azure Bot Service Enforcing Transport Layer Security (TLS) 1.2
-
-
-Just wanted to make sure everyone saw this announcement for TLS 1.2 enforcement coming on 4.Dec.2018.
-https://blog.botframework.com/2018/11/06/announcement-azure-bot-service-enforcing-transport-layer-security-tls-1-2/
-The short story is that this will have no effect on the vast majority of your bots or clients. But those running on outdated operating systems or browsers may need to upgrade. This move to a more secure protocol is all about keeping your data safe and is the direction the entire Internet community is going.
-More details are in the blog post, including a nice whitepaper about what operating systems will be impacted and what to do about them.

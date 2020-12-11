@@ -1,5 +1,0 @@
-Not sure if this is a bug or feature request, but i think it should have high priority (since Gitlab is leaving Github for main project hosting).
-
-It is not possible to mention people (with autocomplete) that are not part of the Gitlab project. But since this is a public project, I think i should be able to at least mention people that are already participating in a discussion.
-
-If you need more information about what I mean, please let me know :smile: 

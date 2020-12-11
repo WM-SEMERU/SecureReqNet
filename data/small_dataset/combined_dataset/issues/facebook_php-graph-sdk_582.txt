@@ -1,7 +1,0 @@
-Avoids using unserialize to prevent Object Injection security issue.
-
-
-Rewrites the serialization methods to use json_encode / json_decode to prevent Object Injection attacks.
-See more: https://www.owasp.org/index.php/PHP_Object_Injection
-This is also a request from WordPress to allow the SDK to be used in plugins on WordPress.com and WordPress VIP:
-https://vip.wordpress.com/documentation/code-review-what-we-look-for/#serializing-data

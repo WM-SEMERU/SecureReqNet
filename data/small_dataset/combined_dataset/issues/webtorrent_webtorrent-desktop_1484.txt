@@ -1,4 +1,0 @@
-fix: replace dependency `open` with `opn`
-
-
-This won't change anything, just replaced a devDependency. While installing, npm reported a critical vulnerability warning with open and which is no longer maintained hence replaced with opn

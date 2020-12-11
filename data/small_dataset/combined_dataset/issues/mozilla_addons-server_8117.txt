@@ -1,8 +1,0 @@
-Support SameSite cookie attribute on sessionid
-
-
-Describe the problem and steps to reproduce it:
-Firefox 60 introduces support for the SameSite cookie attribute: https://blog.mozilla.org/security/2018/04/24/same-site-cookies-in-firefox-60/
-This provides significant protection against CSRF vulnerabilities and so it should be applied to the sessionid cookie.
-It looks like its been added to Django https://code.djangoproject.com/ticket/27863 but the fix doesnt appear the be in the latest release.
-I'm guessing we'll need to wait until theres a new Django release and then migrate to it before we can add SameSite support?

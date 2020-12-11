@@ -1,4 +1,0 @@
-Added Crankier docs
-
-
-Docs describing usage of Crankier

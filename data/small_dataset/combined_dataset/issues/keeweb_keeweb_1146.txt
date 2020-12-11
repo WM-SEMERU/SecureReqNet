@@ -1,6 +1,0 @@
-Share menu/actions for entries
-
-
-In combination to the issue #464 and #154 It would be a great (and maybe easy) way to have (basic) multi user support and share credentials support by adding a unique link for every entry in a database. When clicking the link user can either type the database password in and the whole db will be encrypted an the user will automatically jump to the link. Or (if it was set since the shareing process) the user cann type in a link-password and will see only the shared entry with noe write permission.
-For link-password it would also be possible to set a standard group password, which will be set for all entries in a group. With this, it is (basically) possible to grant different user groups access to credentials.
-This project is very great! Thanks for your work.

@@ -1,4 +1,0 @@
-fall back to MSR crypto IFF window.crypto.getRandomValues is undefined
-
-
-MSR crypto seems to be using their own PRNG regardless of whether window.crypto.getRandomValues is available. Since random number generation is important and easy to backdoor, i think we should only fallback to MSR crypto for getRandomValues when window.crypto.getRandomValues is undefined.

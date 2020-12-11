@@ -1,5 +1,0 @@
-randomize certificate generation names
-
-
-Some of the data used while generating the api.rest module certificate is static, this could be used to identify bettercap-ng nodes on a network.
-They should be randomized or spoofed.

@@ -1,8 +1,0 @@
-Add RBAC roles for bootstrap controllers
-
-
-Supercedes #42221
-When locking down controllers to individual RBAC roles we need to make sure that the bootstrap controllers have the right permissions.
-This adds the roles and bindings at the correct namespace scopes for the bootstrap-signer and token-cleaner controllers.
-@liggitt ptal
-@jbeda @luxas you got a good way to test this?  It must not be covered in normal e2e or we'd've seen the issue before.

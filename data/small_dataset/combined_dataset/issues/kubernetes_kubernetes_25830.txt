@@ -1,5 +1,0 @@
-Add init containers to PSP admission
-
-
-Treat them just like regular containers.
-@pweil-

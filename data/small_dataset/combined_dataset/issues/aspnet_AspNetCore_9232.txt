@@ -1,6 +1,0 @@
-Update branding to 2.2.5
-
-
-
-no ArchiveBaseline.*.txt additions necessary
-

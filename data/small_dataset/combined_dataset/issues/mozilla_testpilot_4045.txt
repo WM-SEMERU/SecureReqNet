@@ -1,4 +1,0 @@
-Rename Price Wise to Price Tracker
-
-
-We need to rename Price Wise to Price Tracker: mozilla/price-tracker#308

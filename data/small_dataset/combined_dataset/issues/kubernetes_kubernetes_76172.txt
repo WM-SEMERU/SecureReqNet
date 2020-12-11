@@ -1,6 +1,0 @@
-Remove FIFO scheduling queue from the scheduler codebase
-
-
-After the introduction of Pod Priority and Preemption, we added a new scheduling queue which is Priority aware and has various features to provide fairness and to ensure that a high priority unschedulable pod does not block the head of the queue. This new queue has been enabled by default since Kubernetes 1.11 and is tested extensively in production and non-production scenarios. Given the maturity of the new queue, we can now remove the old FIFO scheduling queue and the old pod backoff mechanism from the scheduler code base.
-/kind cleanup
-/sig scheduling

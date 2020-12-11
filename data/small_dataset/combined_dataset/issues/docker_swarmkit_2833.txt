@@ -1,9 +1,0 @@
-[Feature-request] Allow cap_add and cap_drop when deploying stacks from yaml files
-
-
-With docker-compose I can for example do:
-cap_add:
-  - NET_ADMIN
-
-But in swarm I get: Ignoring unsupported options: cap_add.
-Can you please add it?

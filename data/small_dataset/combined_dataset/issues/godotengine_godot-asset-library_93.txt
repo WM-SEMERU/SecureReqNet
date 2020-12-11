@@ -1,6 +1,0 @@
-Proposal - Reverse submission work-flow
-
-
-Instead of creating a bottleneck with moderators/approvers, what if when an asset was submitted it was automatically available.
-At that point it could show as "community" supported, and then the testing support can be added once a moderator/approver tests out the asset.
-You could possibly ping github to validate/verify the repo as required (some kind of spam protection?).

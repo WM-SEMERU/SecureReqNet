@@ -1,4 +1,0 @@
-vuln(NSWG-ECO-493): lodash
-
-
-/cc @Elexy

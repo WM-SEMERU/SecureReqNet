@@ -1,4 +1,0 @@
-need to create new responsible disclosure process
-
-
-@jsocol just passed off bleach to us. We need to create a new responsible disclosure process and document it in the docs/, the README and anywhere else it makes sense to have.

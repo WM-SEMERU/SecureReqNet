@@ -1,6 +1,0 @@
-vuln(NSWG-ECO-496): jquery
-
-
-
-
-

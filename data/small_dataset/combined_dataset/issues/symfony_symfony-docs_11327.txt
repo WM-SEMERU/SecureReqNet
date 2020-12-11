@@ -1,9 +1,0 @@
-[Validator] Document disable_not_compromised_password option
-
-
-Refs : symfony/symfony#30932
-Usage:
-framework:
-    validation:
-        disable_not_compromised_password: true
-EUFOSSA

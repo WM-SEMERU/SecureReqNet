@@ -1,6 +1,0 @@
-Use the entry settings object in CanvasRenderingContext2d::is_origin_clean
-
-
-We recently gained support for GlobalScope::entry, so we can use it to fix the TODO in this method.
-Code: components/script/dom/canvasrenderingcontext2d.rs
-Test: Try running ./mach test-wpt tests/wpt/web-platform-tests/2dcontext/ and see if any unexpected results appear.

@@ -1,5 +1,0 @@
-When do we get IdentityServer4 working with Razor Components?
-
-
-Hello Team;
-When is Razor Component going to be integrated with IdentityServer4, that we can build our app with authenticating user via Razor Component page, where the server side gets token and we can then authorize different parts of our app?

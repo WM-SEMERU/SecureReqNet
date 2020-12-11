@@ -1,8 +1,0 @@
-[Azure][Fixes #6669] Access denied path is wrong
-
-
-
-Includes the change from the customer in the first commit.
-Adds additional sample code to make these things easier to test in the future
-Addresses #6669
-

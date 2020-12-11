@@ -1,9 +1,0 @@
-doc: buffer, prints go under the code
-
-
-Buffer, the comment of prints go under the code
-Checklist
-
- documentation is changed or added
- commit message follows commit guidelines
-

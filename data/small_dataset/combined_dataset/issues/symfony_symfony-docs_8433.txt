@@ -1,4 +1,0 @@
-ACL has been moved from SecurityBundle to AclBundle
-
-
-See symfony/symfony#24147

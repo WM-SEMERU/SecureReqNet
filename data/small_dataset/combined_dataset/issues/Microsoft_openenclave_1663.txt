@@ -1,7 +1,0 @@
-little bit clarification!
-
-
-recently i come across both openenclave and sandboxed-api.
-how is openenclave different from sandboxed-api.
-my understanding of openenclave is unclear.
-Thanks.

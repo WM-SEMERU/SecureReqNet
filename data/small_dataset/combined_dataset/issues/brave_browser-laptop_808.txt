@@ -1,4 +1,0 @@
-bookmarklets should not be able to run on `about:` pages
-
-
-a4f6d0b introduced support for bookmarklets (bookmarked javascript: URLs). these should probably be prevented from running on about: pages, otherwise a user can be tricked into installing a bookmarklet that messes with their browser settings or does other privileged actions.

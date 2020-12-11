@@ -1,5 +1,0 @@
-Update a few more PSC member references
-
-
-/assign @philips
-I removed the individual PSC member emails from the distributors list. Membership is already captured by security@kubernetes.io.

@@ -1,4 +1,0 @@
-Checkout orchestrator component + checkout guard
-
-
-Closes #1889

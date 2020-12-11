@@ -1,4 +1,0 @@
-[Security] Remove acl
-
-
-The security-acl component has been removed of security component since 4.0

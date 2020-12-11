@@ -1,5 +1,0 @@
-It often happens that stack traces, etc include numbers formatted as #xxx. If those are put into gitlab it shouldn't generate a mention in that issue:
-
-```
-Test #1
-```

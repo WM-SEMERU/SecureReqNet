@@ -1,4 +1,0 @@
-Implement ControlAPI secrets add, list, remove and update
-
-
-This API will allow us to actually interact with secrets, adding, listing, updating and removing them.

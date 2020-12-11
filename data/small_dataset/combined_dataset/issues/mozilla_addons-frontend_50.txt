@@ -1,4 +1,0 @@
-CSP is reporting use of new Function in development.
-
-
-This is to investigate if the CSP violation is going to cause a future problem. If so we might need to modify the policy.

@@ -1,4 +1,0 @@
-We may be able to drop cc-shim privileges to the user that has started the container
-
-
-It doesn't seem entirely trivial, but the shim doesn't have to run as root. In theory, it could drop privileges to the identity that has issued the docker run.

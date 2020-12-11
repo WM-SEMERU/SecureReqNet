@@ -1,8 +1,0 @@
-[hackerone] 181686
-
-
-Test plan
-
-Login to hackerone.com
-open https://hackerone.com/reports/181686 and see steps to reproduce
-

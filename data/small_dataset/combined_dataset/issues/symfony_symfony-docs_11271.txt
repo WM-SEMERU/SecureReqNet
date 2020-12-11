@@ -1,4 +1,0 @@
-[Testing] Add docs for new WebTestCase assertions
-
-
-Fixes #11266 , as of symfony/symfony#30813

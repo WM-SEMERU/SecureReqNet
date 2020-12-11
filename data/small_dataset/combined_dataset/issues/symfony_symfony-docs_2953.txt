@@ -1,4 +1,0 @@
-Document new 'host' option
-
-
-Firewalls now also match hosts: see symfony/symfony#8905

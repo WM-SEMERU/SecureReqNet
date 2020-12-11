@@ -1,5 +1,0 @@
-Drop reverse proxy workaround once upgraded to go1.12.2
-
-
-The workaround in #75887 should be removed (but the test kept to prevent regressions) once we upgrade to go 1.12.2 and pick up golang/go@ec06e9b
-/assign

@@ -1,4 +1,0 @@
-Set-HPOVNetworkSet Replaces networks. How do I add
-
-
-When I use the Set-HPOVNetworkSet command, I can not find a good way to add new networks. I can get the networks uri from an exsisting network but I can’t find a way to get exsisting and add new networks with the way get-hpovnetworkset outputs data. When I try to run set-hpovnetworkset with just new networks defined it over writes the exsisting config.

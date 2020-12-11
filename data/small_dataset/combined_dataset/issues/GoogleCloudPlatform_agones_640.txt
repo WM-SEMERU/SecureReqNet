@@ -1,6 +1,0 @@
-Remove serviceaccount for game server container
-
-
-This mounts an emptydir over the service account token that is automatically mounted in the container that runs the game server binary.
-Since this is exposed to the outside world, removing the serviceaccount token removes authentication against the rest of the Kubernetes cluster if it ever gets compromised.
-Closes #150

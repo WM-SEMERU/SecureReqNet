@@ -1,5 +1,0 @@
-Refactor logic in Observed-Controller into separate service
-
-
-This will allow the easy fix of Observed controller modifies project objects #209 (and better testing)
-Made possible by Add ability to load all required project data in one go #207

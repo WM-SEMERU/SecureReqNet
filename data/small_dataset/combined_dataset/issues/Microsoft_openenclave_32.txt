@@ -1,4 +1,0 @@
-Port mbedTLS test suite to OpenEnclave for enclave tests
-
-
-Using the work done in #17 as a model, port the mbedTLS test suite to OpenEnclave and ensure all supported tests pass.

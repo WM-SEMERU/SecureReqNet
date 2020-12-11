@@ -1,5 +1,0 @@
-Firewall onCoreRequest not early enough to prevent exposing 404's
-
-
-Due to the onCoreRequest ordering, you'll hit a 404 page before thefirewall forces authentication. The authentication listeners rely on being  after the onCoreRequest listener of the framework (for the session).
-Conversation on the dev board here: http://groups.google.com/group/symfony-devs/browse_thread/thread/e614e9583b151221#8e1477af567dd310

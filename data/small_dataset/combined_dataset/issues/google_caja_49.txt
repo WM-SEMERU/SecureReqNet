@@ -1,5 +1,0 @@
-catch blocks do not sanitize the exception
-
-
-Original issue 49 created by ihab.awad on 2008-01-28T23:18:03.000Z:
-Catch blocks do not sanitize the exception thrown.

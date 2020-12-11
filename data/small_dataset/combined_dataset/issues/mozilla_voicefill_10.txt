@@ -1,4 +1,0 @@
-Ensure Opus processing is sandboxed
-
-
-@oremj is working on a solution to this

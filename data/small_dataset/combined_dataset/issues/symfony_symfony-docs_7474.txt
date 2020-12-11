@@ -1,4 +1,0 @@
-Request matchers in FirewallMap are lazy loaded
-
-
-Irrelevant for most people, but maybe we can add a small note about this. See symfony/symfony#21451

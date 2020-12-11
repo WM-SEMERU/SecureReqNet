@@ -1,6 +1,0 @@
-fix deps vulnerabilities
-
-
-security audit fails build for brave-core@0.59.x and blocks devops due to bad deps. see https://bravesoftware.slack.com/archives/CA5FPHWLF/p1544434896204800 for more info.
-test plan:
-npm run audit should pass

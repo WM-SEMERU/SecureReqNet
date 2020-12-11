@@ -1,5 +1,0 @@
-Use non-root user for GR
-
-
-Instead of using the root user for GR we should create a group replication user.
-See: https://dev.mysql.com/doc/refman/8.0/en/mysql-innodb-cluster-production-deployment.html#mysql-innodb-cluster-user-privileges

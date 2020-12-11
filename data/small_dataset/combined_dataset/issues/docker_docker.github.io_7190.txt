@@ -1,7 +1,0 @@
-note about sha512WithRSAEncryption
-
-
-Added note about support for sha512WithRSAEncryption per docker/escalation#745 (comment)
-Proposed changes
-Unreleased project version (optional)
-Related issues (optional)

@@ -1,1 +1,0 @@
-The `/help` page no longer requires authentication. It should be protected to avoid showing version number and 'up to date (or not)' to unauthenticated users. 

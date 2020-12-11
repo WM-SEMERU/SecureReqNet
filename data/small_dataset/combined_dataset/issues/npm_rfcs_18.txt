@@ -1,6 +1,0 @@
-Interactive audit resolver
-
-
-Other places where this was discussed:
-npm/cli#10
-https://npm.community/t/interactive-tool-to-manage-audit-findings-npm-audit-resolve/197

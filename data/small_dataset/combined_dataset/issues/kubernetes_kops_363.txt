@@ -1,4 +1,0 @@
-Stop pods from accessing the state store
-
-
-The pods have access to IAM and to the S3 bucket.  We should implement an IAM proxy or otherwise prevent them reading the secrets!

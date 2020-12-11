@@ -1,4 +1,0 @@
-Stop loggin credentials
-
-
-Redis credentials are logged for now.

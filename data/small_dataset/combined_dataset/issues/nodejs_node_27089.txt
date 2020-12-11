@@ -1,9 +1,0 @@
-crypto: simplify missing passphrase detection
-
-
-This commit removes the PasswordCallbackInfo class introduced in #25208 and uses existing OpenSSL error handling APIs to detect missing passphrases instead. This should not cause any observable differences for users, but slightly simplifies and shortens our code.
-Checklist
-
- make -j4 test (UNIX), or vcbuild test (Windows) passes
- commit message follows commit guidelines
-

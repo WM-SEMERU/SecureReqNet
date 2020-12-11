@@ -1,4 +1,0 @@
-Dynamically Determine AAD B2C Policy to use
-
-
-I have an ASP.NET Core 2.1 web app. I have two AAD B2C Custom Policies set up (a default and one that will send one of my client's users to their SSO portal). I need to dynamically determine which AAD B2C Policy to call based on the calling URL. Before integrating this package into my application, I had this working by intercepting the OnRedirectToIdentityProvider OpenID event, interrogating the URL and then setting the Default Policy based on the calling URL. I am not sure how to do something similar to this while using this package. I can't figure out what events are available to me BEFORE the call to AAD B2C is made.

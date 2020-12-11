@@ -1,4 +1,0 @@
-Use a longer HSTS max-age for keeweb.info
-
-
-Currently, HSTS max-age for keeweb.info is 2592000 seconds but the minimum should be 10886400 seconds (18 weeks) to be able to be in the HSTS-preload list (https://www.chromium.org/hsts). Please consider increasing this value.

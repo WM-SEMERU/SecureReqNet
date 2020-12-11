@@ -1,4 +1,0 @@
-Update util.c
-
-
-Allow for usage of minutes in timespans

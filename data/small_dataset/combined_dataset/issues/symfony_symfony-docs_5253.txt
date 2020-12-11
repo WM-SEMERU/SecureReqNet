@@ -1,8 +1,0 @@
-Consider removing WSSE and adding token-redirect cookbook article
-
-
-Hi guys!
-On twitter (https://twitter.com/nesl247/status/597838638521679873) a friend of mine read the WSSE article about authentication, which meant his job was VERY hard to accomplish a fairly simple thing (he redirects to external system - like OAuth - which then redirects back with a token that's used for authentication). In our conversation, we identified a few problems:
-A) The WSSE article should be very difficult to find or maybe should be removed. We have a warning on top, but it was clearly not enough
-B) We should add an article about creating a token auth system that redirects externally, like OAuth. It's not clear at first that the redirect to the external system should be done by a simple route/controller with RedirectResponse. Once you understand that redirecting to the external service doesn't involve security, it becomes much more obvious that http://symfony.com/doc/current/cookbook/security/api_key_authentication.html can be used for this very easily
-Thanks!

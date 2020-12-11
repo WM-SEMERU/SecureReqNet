@@ -1,9 +1,0 @@
-Title should be default file name when saving page
-
-
-From support:
-
-When saving webpages, Brave prefers the .html file name and sometimes defaults to just the domain name. For instance, with this page: http://www.breitbart.com/jerusalem/2016/06/17/israeli-judge-approves-400-million-class-action-facebook-violating-privacy/
-Saving it defaults to "www.breitbart.com," but this becomes a nuisance if you have more than one page from this site saved, as you have to manually adjust the name.
-
-+1 from me too

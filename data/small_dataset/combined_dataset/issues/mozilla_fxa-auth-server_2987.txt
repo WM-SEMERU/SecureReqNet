@@ -1,5 +1,0 @@
-fix(api): remove redundant query params from /recovery_email/verify_code
-
-
-As discussed in #2939 (comment), the query params on POST /recovery_email/verify_code are redundant and misleading. Let's remove them to prevent future confusion.
-@mozilla/fxa-devs r?

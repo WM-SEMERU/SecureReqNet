@@ -1,1 +1,0 @@
-I am doing a PUT against a given user. All field changes are reflected in a followup GET except the change to email. One cannot appear to change the email address with this API at first glance.... see followup comment below

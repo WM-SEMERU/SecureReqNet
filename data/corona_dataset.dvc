@@ -1,0 +1,5 @@
+outs:
+- md5: edfde95d9e65d5f811871f0f0d8da147.dir
+  size: 46739
+  nfiles: 3
+  path: corona_dataset

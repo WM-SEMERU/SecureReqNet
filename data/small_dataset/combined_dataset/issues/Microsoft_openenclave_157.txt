@@ -1,5 +1,0 @@
-Double-check OE_IsOutsideEnclave()
-
-
-Please double-check OE_IsOutsideEnclave() for correctness. The logic is a bit inside-out, though it appears it incorrectly returns true for a range starting before and ending beyond the enclave.
-Consider an overflow-test on p/n, and then an (end <= base) ||  (start >= base+size) test.

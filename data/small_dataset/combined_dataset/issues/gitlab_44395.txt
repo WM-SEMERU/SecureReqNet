@@ -1,5 +1,0 @@
-Currently the only time where brakeman is run is if developer runs it manually in development.
-
-I ran brakeman and it returned several warnings ranged from possible XSS, sql injections to RCEs
-
-I propose including a brakeman run in the project's `gitlab-ci.yml`

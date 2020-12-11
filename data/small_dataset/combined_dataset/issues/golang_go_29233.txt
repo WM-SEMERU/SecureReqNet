@@ -1,7 +1,0 @@
-crypto/x509: CPU denial of service in chain validation
-
-
-Package crypto/x509 parses and validates X.509-encoded keys and certificates. It's supposed to handle certificate chains provided by an attacker with reasonable resource use.
-The crypto/x509 package does not limit the amount of work performed for each chain verification, which might allow attackers to craft pathological inputs leading to a CPU denial of service. Go TLS servers accepting client certificates and TLS clients verifying certificates are affected.
-Thanks to Netflix for discovering and reporting this issue.
-This issue is CVE-2018-16875.

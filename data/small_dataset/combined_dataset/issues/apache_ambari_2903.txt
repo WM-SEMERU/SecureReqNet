@@ -1,9 +1,0 @@
-[AMBARI-25219] : Yum to complete transactions internally and Ambari t…
-
-
-…o not fail installation
-What changes were proposed in this pull request?
-Ambari should not fail installation for incomplete transaction of yum. Since yum itself takes care of completing incomplete transactions and also installing ongoing packages, we should not prevent yum's own way of dealing with this behavior.
-How was this patch tested?
-This patch was tested manually
-Please review @aonishuk @jayush

@@ -1,4 +1,0 @@
-[Security] Use "impersonator user" instead of "impersonating user"
-
-
-Feels better to me, it's also consistent with the profiler's security panel (and a log being introduced in symfony/symfony#24026).

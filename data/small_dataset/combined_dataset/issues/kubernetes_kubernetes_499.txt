@@ -1,6 +1,0 @@
-Document Private Registry Authentication
-
-
-How do we set up kubernetes to works with private registries?
-Currently we can put a remote registry into the image tag for the pod but there appears to be nowhere to enter the login details if these images are private.
-Ideally I guess we should be able to set these in the global config script, as the login details for a single registry would be the same for each pod, rather than repeating them in each pod's spec.

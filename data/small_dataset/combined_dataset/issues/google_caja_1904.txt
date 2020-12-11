@@ -1,5 +1,0 @@
-Better error if onFailure is not supplied to caja.initialize.
-
-
-Original issue 1906 created by kpreid@google.com on 2014-03-18T14:47:24.000Z:
-caja.initialize blindly calls onFailure if initialization fails, resulting in an "undefined is not a function" uncaught error. In order to help out new Caja users who might often see this error, we should explicitly check if the failure callback was not provided and log an appropriate error instead.

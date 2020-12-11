@@ -1,4 +1,0 @@
-Filter result of eth.accounts even for batch IPC calls
-
-
-This fixes a security issue raised earlier. Although eth.accounts are filtered according to what's visible to the active Mist tab it was still possible to retrieve all accounts by making the same call as part of a batch IPC request. This PR fixes that.

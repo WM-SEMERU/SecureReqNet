@@ -1,6 +1,0 @@
-Copy docs from sig-release, rename PST to PSC
-
-
-The first commit is strictly a copy of the old docs from sig-release.
-The second commit contains the renames and URL updates.
-See kubernetes/steering#89

@@ -1,5 +1,0 @@
-InvalidOperationException: Cannot resolve scoped service 'Microsoft.AspNetCore.Authentication.Cookies.ITicketStore' from root provider.
-
-
-Is it possible to resolve a scoped service for use with ITicketStore? For example, if I want to use a DbContext to load the ticket data upon renew.
-If not, does that mean I need a singleton DbContext?

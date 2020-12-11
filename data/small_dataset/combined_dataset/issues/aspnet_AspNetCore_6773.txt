@@ -1,6 +1,0 @@
-AzureADB2C(Note: case-sensitive)
-
-
-Noticed default changed from "AzureAdB2C" to "AzureADB2C". Could you add a Note somewhere in the document. This caused a big trouble not realizing two are different.
-Note: configuration keys are case-sensitive (only in appsettings.json ?)
-if you have configured "AzureAdB2C" for some applications before, be ware that the new default scheme name is "AzureADB2C".

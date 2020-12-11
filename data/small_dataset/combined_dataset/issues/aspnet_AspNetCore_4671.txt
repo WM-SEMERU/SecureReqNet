@@ -1,4 +1,0 @@
-Clarify behavior of CookieAuthenticationOptions.Cookie.Expiration
-
-
-aspnet/Security#1285 added CookieAuthenticationOptions.Cookie.Expiration, a nullable TimeSpan, but we still have CookieAuthenticationOptions.ExpireTimeSpan. Cookie.Expiration is ignored. We should clarify what Cookie.Expiration is meant to do and how it interacts with ExpireTimeSpan

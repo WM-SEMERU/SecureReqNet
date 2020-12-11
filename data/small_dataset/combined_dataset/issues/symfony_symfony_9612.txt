@@ -1,6 +1,0 @@
-[Security] Option to trim password
-
-
-Why PasswordType has option to trim value, but UsernamePasswordFormAuthenticationListener doesn't?
-Example: We create sign-up form with password input, which has option trim => true (We decided to trim password), customer is entering (space)my very secure password(space), so as result he will get my very secure password (encoded of course) in database.
-So why we don't have same ability to trim password for logic_check?

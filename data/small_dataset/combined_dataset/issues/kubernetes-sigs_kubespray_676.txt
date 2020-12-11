@@ -1,4 +1,0 @@
-Create unique cert for each host
-
-
-This will allow an administrator to revoke the certificate of a given host that is misbehaving. This applies to both etcd and k8s apiserver certs.

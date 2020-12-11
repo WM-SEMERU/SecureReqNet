@@ -1,4 +1,0 @@
-Crankier: Log connection exceptions
-
-
-Sends exception messages back to the worker for agent logging so you can see why faulted connections are failing.

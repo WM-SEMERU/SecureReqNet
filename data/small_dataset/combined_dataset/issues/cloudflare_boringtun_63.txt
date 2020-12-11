@@ -1,7 +1,0 @@
-Relation to Wireguard upstream
-
-
-Reading this post from one of the Wireguard maintainers: https://lists.zx2c4.com/pipermail/wireguard/2019-March/004048.html
-Are there any specific reasons for not sharing changes upstream?
-It's great that a company like Cloudflare uses an opensource project to work with, but refusing to join in on the project seems counterproductive.
-Is there an official stance on this?

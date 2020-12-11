@@ -1,5 +1,0 @@
-add NSP check to travis job that blocks merge
-
-
-merge should be blocked by Travis if NSP check doesn't pass.
-cc @NejcZdovc

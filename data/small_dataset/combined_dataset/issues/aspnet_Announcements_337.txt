@@ -1,5 +1,0 @@
-Removed deprecated Authentication property from HttpContext (including all of 1.x auth stack)
-
-
-As part of aspnet/AspNetCore#6504 we've removed the deprecated Authentication property. The Authentication property has been deprecated since 2.0 and a migration guide was published to migrate code using this deprecated property to the new replacement APIs.
-Please discussion this on aspnet/AspNetCore#6533

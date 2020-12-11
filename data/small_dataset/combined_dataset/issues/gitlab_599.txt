@@ -1,7 +1,0 @@
-Hi,
-
-It would be great to add mozilla's persona auth on Gitlab.
-
-I've seen that there is an omniauth plugin that handles it: https://github.com/intridea/omniauth-browserid
-
-It would be a nice-to-have feature :) 

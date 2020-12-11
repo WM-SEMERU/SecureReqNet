@@ -1,4 +1,0 @@
-Publish issues that are outside the revision files as generic comments
-
-
-Since they can't be published as comments linked to a revision file.

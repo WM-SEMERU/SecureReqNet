@@ -1,4 +1,0 @@
-Add CVE-2019-5786: Electron FileReader vulnerability
-
-
-This vulnerability has already been disclosed and patched (see references) so I didn't report it through HackerOne.

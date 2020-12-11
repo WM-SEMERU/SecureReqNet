@@ -1,5 +1,0 @@
-Upgrade API Key Model
-
-
-Currently Minion allows the use of API keys between minion-frontend and minion-backend by provisioning an access key in both components.
-We need to refactor this so that unauthenticated API requests from the front-end use the system API key, and API calls made on behalf of an authenticated user do so using that users API key.  This will allow more accurate logging of which users are performing activities.

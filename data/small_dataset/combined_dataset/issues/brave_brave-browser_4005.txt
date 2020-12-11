@@ -1,4 +1,0 @@
-Simplify bat_get_media in native ledger
-
-
-Current bat_get_media.cc is really  all around and it's hard to add any new platform. Because of this we need to simplify it. This file will now only contain shared functionalities and every platform will have their own file with their own functionalities

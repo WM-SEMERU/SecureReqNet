@@ -1,7 +1,0 @@
-Sandbox is being disabled at least on Windows
-
-
-Squirrel installer is setting us up as not having a sandbox.
-
-https://twitter.com/ericlaw/status/692951020348010497?lang=en
-This makes us as secure as Firefox but obviously we should be enabling the sanbox.

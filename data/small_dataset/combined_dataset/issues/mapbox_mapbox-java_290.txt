@@ -1,4 +1,0 @@
-Add `mapbox/driving-traffic` support to the list of directions profiles
-
-
-Documentation is here: https://www.mapbox.com/api-documentation/#directions.

@@ -1,4 +1,0 @@
-Allow reviewers to change their reviewer name when editing their profile
-
-
-Fixes #7806

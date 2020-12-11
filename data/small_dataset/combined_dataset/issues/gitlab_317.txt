@@ -1,3 +1,0 @@
-Hy is it possible to link mutliple merge requests or make a merge request for multiple packages in one step?
-
-So only if all parties of the different packages etc. agree with the merge request the changes will get merged.

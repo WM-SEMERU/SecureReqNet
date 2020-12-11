@@ -1,4 +1,0 @@
-Debian/GCE deploy scripts should have auto update turned on
-
-
-Details: https://wiki.debian.org/UnattendedUpgrades

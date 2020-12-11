@@ -1,7 +1,0 @@
-Consider making default browser prompt show on first startup instead of second
-
-
-We currently only show this bar as of the 2nd startup and beyond:
-
-But some users that install only open the browser once.
-This issue is to track showing the bar even on the first startup.

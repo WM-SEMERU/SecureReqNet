@@ -1,5 +1,0 @@
-brave-core release build should fail if `npm run test-security` fails
-
-
-this is to track brave/devops#343
-if it cannot be done automatically in time for 0.56.x, it should be run manually on at least one platform before the build is officially released (but preferably on all platforms)

@@ -1,9 +1,0 @@
-[DX][Security] make it easy to throw Exceptions with User visible error messages
-
-
-In my AJAX controller I just want to throw an Exception if something goes wrong that the user can handle and I want to include a message that should be shown to the user, e.g.:
-  throw new UserMessageException('Report can not be deleted. There are still members related to this report.');
-The json response built by the TwigBundle however just includes the error message from the 500 HTTP Code and I'd need to go into exception.message to display the exception message to the user.
-On the other hand there might be exception messages that are not save to be displayed to the user. So there should be an interface to tag Exceptions which error messages for the user.
-On the other hand it's a security issue that all exceptions are included in the json response. There might be Exception messages with sensitive information.
-I know that I could easily write the necessary Interface, ExceptionController and json serializer in my own app. But I think this is general enough to be provided by symfony or some extension bundle.

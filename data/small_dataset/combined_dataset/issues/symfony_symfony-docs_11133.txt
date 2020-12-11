@@ -1,5 +1,0 @@
-Making sentence not show up in code block
-
-
-See the last code block here: https://symfony.com/doc/current/configuration/dot-env-changes.html
-The last sentence is being included in the code block. I'm not sure if this will fix it, but I believe it will - it changes the indentation from 4 spaces (which apparently was enough to be included in the code block) to 3, which lines it up with how we usually "continue bullet points".

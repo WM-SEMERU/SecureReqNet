@@ -1,4 +1,0 @@
-removed dependency of Turf library on services-core
-
-
-closes #924

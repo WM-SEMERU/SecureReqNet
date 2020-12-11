@@ -1,4 +1,0 @@
-Symfony Security Cookbook documentation
-
-
-In the Cookbook documentation for 'Using a Custom Query to Load the User' (http://symfony.com/doc/master/cookbook/security/entity_provider.html#using-a-custom-query-to-load-the-user), the example uses "implements UserProviderInterface". In the current version of Symfony the file should implement UserLoaderInterface instead. This can be seen in Symfony\Bridge\Doctrine\Security\User\EntityUserProvider where the loadUserByUsername method checks to ensure that the repository implements Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface. Can we update the document?

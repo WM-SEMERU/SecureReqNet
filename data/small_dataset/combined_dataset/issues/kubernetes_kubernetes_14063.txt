@@ -1,7 +1,0 @@
-enable system CAs
-
-
-Currently, if I specify a client certificate and do not specify the server's CA, the system trusted CAs are not used.
-This change falls back to the system trusted CAs if no certificate authority data is available for the server.  I can't create the a pool with the union of the system CAs and specified CA because the system CA cert pool is not exposed.
-@liggitt @erictune ptal
-@sdodson fyi

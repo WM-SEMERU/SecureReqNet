@@ -1,7 +1,0 @@
-Fixup Blazor template names
-
-
-Here's what the Blazor template names should be both on the CLI (template.json) and in VS (vs-2017.3.host.json):
-Blazor (client-side)
-Blazor (ASP.NET Core hosted)
-Blazor (server-side)

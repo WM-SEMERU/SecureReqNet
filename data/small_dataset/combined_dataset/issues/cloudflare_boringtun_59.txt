@@ -1,4 +1,0 @@
-Avoid clearing sequential bits in a loop
-
-
-Fixes #54

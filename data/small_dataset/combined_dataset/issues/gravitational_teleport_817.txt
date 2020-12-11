@@ -1,8 +1,0 @@
-Add initial saml support
-
-
-as (briefly) described in #797 this pr implement initial saml support with the help of github.com/crewjam/saml library.
-it's tested with Microsoft ADFS and seems to work quite well with a few tests from different users, including tsh logins from osx and linux.
-There is no real big design choices, it's mainly a duplicate and rename of oidc to saml.
-tell me if you could merge it or if it needs more work.
-Thanks!

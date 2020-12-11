@@ -1,4 +1,0 @@
-Check the magic number of opus files before processing them
-
-
-according to the rfc, it's 0x4F70757348656164 ("OpusHead")

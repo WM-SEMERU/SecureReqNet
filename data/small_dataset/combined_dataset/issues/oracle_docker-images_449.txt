@@ -1,4 +1,0 @@
-Fix 12.2.1.2-domain sample so it doesn't set a password during build
-
-
-It was pointed out in PR #435 that the 12212-domain sample sets the admin password during build, which is against Oracle Global Security policy. This needs to be removed and replaced by code that either accepts a password during container startup or randomly generates one.

@@ -1,6 +1,0 @@
-[HttpClient] Add tests - update code style nits.
-
-
-Description
-Add an extra test for HttpClientTrait::normalizePeerFingerprint().
-Also update small code style here and there.

@@ -1,7 +1,0 @@
-Heapster is not able to communicate to node because of SG
-
-
-
-heapster is not able to make an http call into kubelet running on the node that heapster is deployed to
-
-Heapster is not able to run on one of your clusters, we have not attempted to recreate with 1.4.4 and kops master

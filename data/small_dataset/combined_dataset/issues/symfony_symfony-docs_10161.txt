@@ -1,4 +1,0 @@
-Fix mismatched list items
-
-
-Item one was displaying with a "1)" while item two shows up as "2."

@@ -1,1 +1,0 @@
-After 2-step merge request creation was introduced, where is no way to change source/target branch of a merge request after it was created.

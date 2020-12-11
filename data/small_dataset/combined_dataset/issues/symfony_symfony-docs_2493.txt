@@ -1,5 +1,0 @@
-Implementation of supportsAttribute and supportsClass in VoterInterface
-
-
-The current cookbook entry http://symfony.com/doc/master/cookbook/security/voters.html does not describe, that in case you implement the both above mentioned methodes, they are not being called automatically. You have to call and use them within your vote() function.
-@weaverryan I will work on a PR and submit in the next days

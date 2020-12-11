@@ -1,5 +1,0 @@
-First round of security audit question and answers
-
-
-Adding in the first round of question and answers received during the security audit RFP period.
-cc @joelsmith @aasmall

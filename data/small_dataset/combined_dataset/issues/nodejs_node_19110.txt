@@ -1,5 +1,0 @@
-tls: update root certs in v4.x
-
-
-v4.x is nearing its end-of-life.  We should probably update the root certificates one more time.
-I'm assigning this to myself but if a collaborator wants to take it up, you are more than welcome to.

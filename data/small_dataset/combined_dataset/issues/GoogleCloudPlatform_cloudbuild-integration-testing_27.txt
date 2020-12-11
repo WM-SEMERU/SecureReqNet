@@ -1,6 +1,0 @@
-Review scopes of GCE VM; remove any that aren't needed
-
-
-
-No description provided.
-

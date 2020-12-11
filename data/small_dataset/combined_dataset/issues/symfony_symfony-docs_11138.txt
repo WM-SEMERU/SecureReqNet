@@ -1,4 +1,0 @@
-removed blank lines after filepath
-
-
-in xml code blocks to be consistent throughout the docs

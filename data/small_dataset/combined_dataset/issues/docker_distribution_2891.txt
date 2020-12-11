@@ -1,6 +1,0 @@
-New option to allow unauthenticathed pulls with htpasswd auth method
-
-
-New, new required option to allow htpasswd authentication to be skipped if the user pulls.
-This allow small shops to let all users download from the repository but have a better control on who is allowed to upload.
-Fixes #1028 and #1135

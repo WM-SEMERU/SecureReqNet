@@ -1,7 +1,0 @@
-Incorrect BoundingBox String formatting
-
-
-A client has reached out that the bounding box in his request url to route-tiles is being formatted as decimals with comma (instead of a point). The source of this is that String.format uses the device locale.
-To fix this issue we need to explitcly need to state a Locale in
-https://github.com/mapbox/mapbox-java/blob/master/services-route-tiles/src/main/java/com/mapbox/api/routetiles/v1/MapboxRouteTiles.java#L42
-cc @osana, fyi @devotaaabel

@@ -1,4 +1,0 @@
-Remove form onsubmit restriction.
-
-
-The previous policy, of prohibiting any 'normal' form submit, was both stricter than the cajoler (ES5/3 mode) and silly, since it could be worked around in guest code with onsubmit='this.submit();'.

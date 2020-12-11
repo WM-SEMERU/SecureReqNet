@@ -1,2 +1,0 @@
-Hello,
-when using screen resolution 1024x768, icons on the left are half behind the edge. Just few pixels are missing to fit.

@@ -1,4 +1,0 @@
-Implement incumbent, entry, current settings objects / globals / realms
-
-
-Incumbent in particular is needed for security checks (iframe.contentDocument, for example).

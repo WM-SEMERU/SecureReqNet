@@ -1,5 +1,0 @@
-Automated cherry pick of #75411: disable HTTP2 ingress test
-
-
-Cherry pick of #75411 on release-1.13.
-#75411: disable HTTP2 ingress test

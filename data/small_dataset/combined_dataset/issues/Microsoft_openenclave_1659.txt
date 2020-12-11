@@ -1,5 +1,0 @@
-Issues with container in Jenkins CI
-
-
-We've hit a few issues with the container stages in Jenkins CI in the last week or so. We're not sure what's going on, but here is example output:
-https://oe-jenkins.eastus.cloudapp.azure.com/job/Bors/job/staging/741/display/redirect

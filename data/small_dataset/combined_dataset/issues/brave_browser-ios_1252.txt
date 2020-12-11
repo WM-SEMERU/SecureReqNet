@@ -1,5 +1,0 @@
-Add option to use browser pin code with 6 numbers
-
-
-Description:
-Add an option to use 6 didgit codes instead of 4 since they are more secure.

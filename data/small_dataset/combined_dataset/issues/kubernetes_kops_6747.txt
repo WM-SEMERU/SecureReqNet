@@ -1,9 +1,0 @@
-WIP: Speed up rolling-update - longer timeout on validation, less scheduled holds
-
-
-We reduce the amount of time we wait on a purely scheduled basis
-during a rolling-update, and instead increase the timeout on the
-validation.
-This will be a behavioural change - particularly for --cloudonly
-mode, but that mode seems more useful when things are going wrong
-anyway, when people will likely set even lower timeouts.

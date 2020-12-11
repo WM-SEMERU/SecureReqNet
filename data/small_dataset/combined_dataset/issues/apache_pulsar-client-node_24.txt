@@ -1,5 +1,0 @@
-[Issue 3] Support authentication
-
-
-Enable the Node.js client to use TLS, Athenz and Token authentication.
-This fixes #3

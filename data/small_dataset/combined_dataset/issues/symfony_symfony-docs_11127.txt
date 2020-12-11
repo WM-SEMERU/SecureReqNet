@@ -1,5 +1,0 @@
-Document Default env processor with null fallback
-
-
-Document the fallback to null
-PR: symfony/symfony#30504

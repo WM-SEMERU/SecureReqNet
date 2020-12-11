@@ -1,7 +1,0 @@
-Reset CDS Profile fetch counters + Introduce generic PeriodTaskExecutor
-
-
-Currently CDS Profiler fetcher retries instantly 3 times. If the retry fails, it never retries for the entire application lifecycle. This leads to broken app-map experience as correlation needs ikey-appId resolution.
-This PR fixes this by resetting the retry counter in CdsProfileFetcher.java every 4 hours by default. This configuration can be over-riden.
-This PR also introduces a Generic Abstraction for creating, managing and running PeriodicTask called PeriodicTaskManager
-In upcoming PR I will make this configurable via XML and Springboot starter.

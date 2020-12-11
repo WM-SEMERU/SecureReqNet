@@ -1,4 +1,0 @@
-Add support for parsing e2email recovery codes
-
-
-Depends on #377

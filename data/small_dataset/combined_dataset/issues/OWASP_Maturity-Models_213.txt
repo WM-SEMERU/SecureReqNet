@@ -1,6 +1,0 @@
-Race condition on multiple calls to Team_Data load
-
-
-After refactoring for #206  there is an issue when multiple calls are made to load_Data: (callback)=>
-
-This looks like a good solution (and similar problem) http://stackoverflow.com/questions/32958046/preventing-multiple-http-requests-in-angular-is-there-a-better-way

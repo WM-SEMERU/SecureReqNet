@@ -1,6 +1,0 @@
-How to do access control
-
-
-my web host allows me to use .htaccess to do access control by defining a list of user or a collection of user.
-But I cannot user .htaccess with phpCAS as it will redirect so many times.
-How do I do access control with phpCAS?

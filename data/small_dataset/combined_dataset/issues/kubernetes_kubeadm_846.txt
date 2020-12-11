@@ -1,8 +1,0 @@
-Set the kubelet `--hostname-override` flag conditionally at kubeadm init time
-
-
-When kubernetes/kubernetes#63887 merges, we should set the kubelet's --hostname-override flag to what's passed to kubeadm via the --node-name flag conditionally if cfg.NodeName != nodeutil.GetHostname("") (if the flag differs from the default) at kubeadm init time, in cmd/kubeadm/app/phases/kubelet/flags.go.
-This will automagically fix #584
-xref related issue: #822
-/assign @liztio
-as you're assigned to #584. LMK if you don't have time to do this.

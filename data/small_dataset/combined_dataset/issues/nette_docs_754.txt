@@ -1,7 +1,0 @@
-Tester: fixed exception method description
-
-
-Checkout code of Nette Tester: https://github.com/nette/tester/blob/master/src/Framework/Assert.php.
-Method header is:
-public static function exception(callable $function, string $class, string $message = null, $code = null): ?\Throwable.
-In description of method features there is $code parameter mentioned but it is missing in the documentation method header.

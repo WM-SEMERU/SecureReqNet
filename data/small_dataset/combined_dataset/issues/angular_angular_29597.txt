@@ -1,4 +1,0 @@
-refactor(compiler): Update allowed tag|attr documentation
-
-
-Related to #28529

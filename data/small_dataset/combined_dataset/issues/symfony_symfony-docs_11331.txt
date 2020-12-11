@@ -1,4 +1,0 @@
-Add a documentation about Messenger's transports
-
-
-Closes #9756

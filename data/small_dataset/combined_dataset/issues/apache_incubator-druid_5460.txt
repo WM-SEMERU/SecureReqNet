@@ -1,4 +1,0 @@
-Fix authorization check in supervisor history API
-
-
-Fixes the issue reported here: #4818 (review), where the unfiltered history results were returned instead of the auth-filtered results.

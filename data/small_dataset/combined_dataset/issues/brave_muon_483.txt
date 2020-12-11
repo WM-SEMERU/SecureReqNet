@@ -1,4 +1,0 @@
-Indicate flash updates if installed
-
-
-Needed specially when there are ITW exploits: https://www.theinquirer.net/inquirer/news/3026214/adobe-patches-flash-zero-day-being-exploited-by-north-korean-hackers

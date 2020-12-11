@@ -1,7 +1,0 @@
-Secrets/service accounts in static pods
-
-
-Are secrets or service accounts supported in static pods? It's quite conceivable that static pods will require talking to the API server & providing credentials to do so via secrets or service accounts is the best way to do this.
-A particular use case that I'm working on is logging. This requires a per-node pod to capture the container logs, enrich with Kubernetes metadata (labels, etc) which is only available from the API server, before storing via a standard Kubernetes service. See #8001 for more details.
-I've discussed this with @pmorie & he has some other use cases for this, one being the ability to run the kubelet itself in a pod.
-/cc @satnam6502

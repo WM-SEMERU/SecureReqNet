@@ -1,7 +1,0 @@
-[hackerone] file open in new tab issue
-
-
-Test plan
-See #14973
-Original issue description
-https://hackerone.com/bugs?report_id=369218

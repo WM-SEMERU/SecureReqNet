@@ -1,5 +1,0 @@
-admission: fold create+update validation funcs into update ObjectInfo
-
-
-Follow-up of #54484.
-Pure simplification of the func signatures. We expanded them with two admission validation closures. This PR takes that back partly, addressing what @lavalamp suggested #54484 (comment). There is no functional change here at all.

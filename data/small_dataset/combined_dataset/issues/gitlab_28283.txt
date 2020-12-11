@@ -1,7 +1,0 @@
-The simplest way to do this is by using an UUID for the folder name instead of using the current namespace/name.
-
-There are multiple benefits of doing this, but I'll just mention 2 that I think are major:
-1. Security: in order to identify a repo that you may want to get out of the disk you need to also compromise the database. This makes it harder to extract data from GitLab in case of a security breach.
-2. Reusing group and project names after deletion stops being a problem - it's virtually impossible to get the same UUID.
-
-This shouldn't be so much of a change to the application. But I think that the main issue will be to migrate all the projects around in the filesystem (a simple `mv` command would suffice) simply because it will take long.

@@ -1,8 +1,0 @@
-[Security] InsuficientAuthenticationException should not always be thrown?
-
-
-I have the following test url /account/details.json in our API. This URL is protected by a firewall that asks for the ROLE_API. ROLE_API is given to those users who have a valid token.
-If the token is not present, the firewall will throw an AccessDeniedException and the firewall ExceptionListener will catch it. Then it checks whether the token isFullFledged or not. In my case there is only the AnonymousToken so it's not full fledged and will try to authenticate. As this is an API, i have no AuthenticationEntryPoint available and the ExceptionListener throws a new InsufficientAuthenticationException, wich is not cached by anyone and an error 500 is issued, which is not desirable, a 403 Forbidden would be much appropiate.
-In another case, if the token were fully fledget but hadn't the required roles (ROLE_ADMIN for example) the ExceptionFirewall would not try to reauthenticate the user and throw an AccessDeniedHttpException which results in a 403 error, this is the expected thing!
-So, I would like to know if we can throw that AccessDeniedHttpException also in the cases where the token is not fully fledged AND no authentication entry point is present.
-Thanks!

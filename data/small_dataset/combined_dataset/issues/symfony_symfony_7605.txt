@@ -1,8 +1,0 @@
-Authentication credentials not found for 404 page
-
-
-Hello everyone,
-I have encountered a weird behavior with the security component. I have a firewall on the entire application with a pattern .*, and anonymous set to true. When I hit an unmatched route, instead of getting the usual 404, the error is overwritten into an http 500:
-[2013-04-08 17:13:10] request.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException: No route found for "GET /route-does-not-exist/" (uncaught exception) at /var/www/my-app/app/cache/dev/classes.php line 5140 [] []
-[2013-04-08 17:13:10] request.ERROR: Exception thrown when handling an exception (Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException: The security context contains no authentication token. One possible reason may be that there is no firewall configured for this URL.) [] []
-Not sure if expected behavior or not, just need a little bit of closure on this one. For the time being, I can catch the last 500 in the exception event.

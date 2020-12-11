@@ -1,9 +1,0 @@
-form input doesn't show correctly in IE 10
-
-
-Original issue 1850 created by hidden.puddle on 2013-09-03T03:37:43.000Z:
-In IE 10, the "Add" button doesn't show as a "submit" button but as text input.
-In my own app, I have radio buttons and those also appear as text inputs.
-It seems to me that HTMLService doesn't fully work on IE10.
-Source code at:
-https://github.com/google/google-apps-script-samples/tree/master/simple_tasks

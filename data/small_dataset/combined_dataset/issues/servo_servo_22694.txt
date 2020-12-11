@@ -1,4 +1,0 @@
-Support cross-origin font loads
-
-
-The font cache implementation makes a single network request for a font URL without considering the origin, referrer policy, and other constraints that exist in https://drafts.csswg.org/css-fonts/#font-fetching-requirements. We should determine the how this results in content-visible effects and ensure that the cache implements a keying system that supports this.

@@ -1,4 +1,0 @@
-Add auth sample for multiple remote auths without Identity
-
-
-This is an expanded version of the single remote provider scenario (https://github.com/aspnet/AuthSamples/issues/16) that includes a login page where you select which provider you want to login with. No Identity is required.

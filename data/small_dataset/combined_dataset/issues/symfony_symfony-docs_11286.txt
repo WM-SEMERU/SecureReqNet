@@ -1,4 +1,0 @@
-Update project directory method override
-
-
-This follows up symfony/recipes#564 (not yet merged), and updates the documentation according to the actual code provided in the recipe.

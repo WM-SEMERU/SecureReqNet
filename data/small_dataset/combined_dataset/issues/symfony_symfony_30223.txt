@@ -1,4 +1,0 @@
-Updated validators.eu.xlf
-
-
-with missing translations

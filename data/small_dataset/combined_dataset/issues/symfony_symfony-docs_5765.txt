@@ -1,8 +1,0 @@
-The child node “secret” at path “security.firewalls.main.remember_me” must be configured -> from code example
-
-
-I was trying to implement the remember me feature using the documentation (http://symfony.com/doc/current/cookbook/security/remember_me.html), but I got the following error message:
-The child node “secret” at path “security.firewalls.main.remember_me” must be configured
-
-I opened a StackOverflow question at: http://stackoverflow.com/questions/32993824/the-child-node-secret-at-path-security-firewalls-main-remember-me-must-be-co/32998125.
-Someone says key has been replaced with secret. I have updated my config and indeed the error is gone, but a new one appears. The documentation needs to be updated.

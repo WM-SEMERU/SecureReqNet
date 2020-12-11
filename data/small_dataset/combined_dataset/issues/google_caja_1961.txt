@@ -1,6 +1,0 @@
-Need to rewire Error inheritance to keep UnsafeError hidden
-
-
-Original issue 1963 created by erights on 2015-04-12T00:33:33.000Z:
-For each of the builtin "subclasses" of Error, such as EvalError, ES6 changes them the constructors themselves to inherit directly from the Error constructor, in order to be analogous to ES6's handling of user defined classes. Chrome 44 Canary now implements this.
-However, debug.js hides the original Error constructor for its own use as UnsafeError, replacing it with FakeError. However, it still would have been accessible via, for example, Object.getPrototypeOf(EvalError) or EvalError.proto. Fortunately, the new error checking we added to startSES caught this, so no unsafety results. Unfortunately, this results in SES (and therefore Caja in ES5 mode) reporting that it cannot initialize safely on Chrome 44 Canary.

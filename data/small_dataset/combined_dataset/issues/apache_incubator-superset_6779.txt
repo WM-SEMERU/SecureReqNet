@@ -1,4 +1,0 @@
-add kerberos configure for Druid
-
-
-add kerberos configure for Druid at  config.py

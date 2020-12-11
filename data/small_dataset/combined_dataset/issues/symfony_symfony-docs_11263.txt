@@ -1,4 +1,0 @@
-Add an example to the invokable controllers section
-
-
-Fixes #7549. Invokable controllers were already explained, but we can expand the explanation a bit with an actual example.

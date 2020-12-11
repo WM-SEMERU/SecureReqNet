@@ -1,8 +1,0 @@
-Support install powershell core via chocolately
-
-
-Summary of the new feature/enhancement
-Similar to https://chocolatey.org/packages/powershell-core but maintained by the PowerShell team.
-On behalf of https://devblogs.microsoft.com/powershell/powershell-core-release-improvements/#comments-52
-Proposed technical implementation details (optional)
-No implementation detail were given in the comment, other than it should be part of our release process.

@@ -1,9 +1,0 @@
-'Mysql2::Error: Column 'admin' cannot be null: UPDATE `users` SET `admin` = NULL, `updated_at` = '2014-02-07 09:02:39', `unconfirmed_email` = 'secure@*.net', `confirmation_token` = 'Confidential', `confirmation_sent_at` = '2014-02-07 09:02:39' WHERE `users`.`id` = 1
-
-
-
-I can't edit any Admin username on my Admin Zone because of this error.
-
--
-
-I've created another username, then added it as 'admin', now everything works correctly.. But still if i do something with 'root' user i get the same error in the logs. [I use the latest revision from this branch]

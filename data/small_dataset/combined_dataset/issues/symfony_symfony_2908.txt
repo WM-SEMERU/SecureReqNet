@@ -1,8 +1,0 @@
-[Security] Fix SwitchUser functionality to work with non-latin usernames
-
-
-Bug fix: yes
-Feature addition: no
-Backwards compatibility break: no
-Symfony2 tests pass: yes
-Fixes the following tickets: #2899

@@ -1,8 +1,0 @@
-[AMBARI-25195] Add option to graceful rolling restart for HBase RegionServers
-
-
-What changes were proposed in this pull request?
-An option to graceful rolling restart for RegionServers is added.
-How was this patch tested?
-Graceful rolling restart is tested manually.
-And some unit tests are added, but I'm not sure whether those are sufficient. If not, please let me know what I need to do more.

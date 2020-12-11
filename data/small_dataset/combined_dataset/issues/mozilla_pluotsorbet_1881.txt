@@ -1,4 +1,0 @@
-KaiOS support
-
-
-Has anyone looked into this? This platform might become quite important, and there is a lot of useful J2ME software out there...

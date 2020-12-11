@@ -1,4 +1,0 @@
-[hackerone] Address bar spoofing issues
-
-
-brave/internal#419

@@ -1,5 +1,0 @@
-document the input option of the NumberType
-
-
-see symfony/symfony#30893
-#FOSSHackathons #EUFOSSA

@@ -1,4 +1,0 @@
-ACL Documentation
-
-
-The documentation for ACL's is very poor. I think there should be some more in depth documentation on how to apply permissions to classes and how to edit permissions via Forms. This is a common real world use for the ACL's.

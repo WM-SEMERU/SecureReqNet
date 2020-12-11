@@ -1,6 +1,0 @@
-Security: database host & credentials stored in clear-text via "Error Snapshot"
-
-
-Should be sanitized and deployed the soonest.
-usernames, passwords must never be stored in any logs or sql-fields.
-

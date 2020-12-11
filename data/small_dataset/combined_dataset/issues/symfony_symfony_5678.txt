@@ -1,6 +1,0 @@
-UserProviderInterface loadByUsername method has a misleading name
-
-
-From what i've seen in some custom user providers, this method is used also to load user by email, facebookId and other kind of identifier, so IMHO it has a somewhat misleading name.
-I know this would create a backward compatibility break but i think it would be more appropriate to rename it to a more generic loadByIdentifier or something like that.
-Directly from the doc: http://symfony.com/doc/current/cookbook/security/entity_provider.html#authenticating-someone-with-a-custom-entity-provider . Here this method is used to load the user by username or by email.

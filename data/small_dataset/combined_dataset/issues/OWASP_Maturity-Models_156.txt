@@ -1,6 +1,0 @@
-Application is able to write to App root
-
-
-There is no business reason for the node code to able to modify it self
-This is something that can be done at the Docker build level
-Root cause of the issues reported on #19, #20, #23

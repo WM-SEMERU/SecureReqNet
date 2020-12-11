@@ -1,5 +1,0 @@
-Add details to the JwtBearer error messages
-
-
-#4679 Bearer allows you to include error details in the WwwAuthenticate response header. We didn't want to expose raw exception messages but we did want to provide some hint at what went wrong. Previously we used generic messages based on the exception type because no details were available. Now that the exceptions have some detailed properties we can include those in a well structured format.
-@blowdart

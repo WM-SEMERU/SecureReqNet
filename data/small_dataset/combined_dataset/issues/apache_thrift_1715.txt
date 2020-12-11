@@ -1,4 +1,0 @@
-THRIFT-4757: fix npm identified security vulnerability in transient dependency on sync-exec
-
-
-The direct dependency grunt-shell-spawn was updated to no longer need sync-exec.  Also fixed version and package meta for lib/ts.

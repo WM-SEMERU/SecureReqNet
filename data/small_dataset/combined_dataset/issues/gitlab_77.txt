@@ -1,4 +1,0 @@
-When a user changed his username but didn't change his email, i think the statistics in graph should treat him as one people. 
-However, it shows two different graph now.
-Is it a designed feature?
-Thanks.

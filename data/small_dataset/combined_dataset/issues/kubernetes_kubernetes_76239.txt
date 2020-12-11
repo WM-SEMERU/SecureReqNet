@@ -1,6 +1,0 @@
-delivery event non blocking firstly
-
-
-Ref #76196 #75547
-Fix the but and add a test case for sure.
-@wojtek-t

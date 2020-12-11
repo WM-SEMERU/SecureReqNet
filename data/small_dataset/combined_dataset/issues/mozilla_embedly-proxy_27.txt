@@ -1,4 +1,0 @@
-Embedly Proxy should be using HTTPS for production server
-
-
-Adding this to track this issue for production server HTTPS / certs

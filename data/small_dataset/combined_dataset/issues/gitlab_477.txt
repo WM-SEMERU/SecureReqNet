@@ -1,8 +1,0 @@
-# The Issue
-
-Currently when viewing linked social accounts on a gitlab CE user profile page (ex: https://gitlab.com/profile/account ) there is no way of unlinking an account once linked.
-
-
-# The Suggestion
-
-Once a given omniauth account has been linked, display an 'unlink <servicename>' button. so for example if I've linked my google account, I should see an 'Unlink Google Account' button.

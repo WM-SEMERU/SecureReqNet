@@ -1,4 +1,0 @@
-[hackerone] chrome:// new tab issue
-
-
-https://hackerone.com/reports/395737

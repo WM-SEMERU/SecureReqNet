@@ -1,5 +1,0 @@
-better way to prevent main window navigation
-
-
-https://github.com/brave/browser-laptop/blob/master/js/stores/appStore.js#L297 listens for the will-navigate event to block navigations of the main window, but there are ways to change the main window location without firing will-navigate (ex: #1891).
-at minimum, there should be a drop handler in the main window area to prevent drag-and-drop navigation.

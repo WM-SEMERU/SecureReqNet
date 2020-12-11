@@ -1,5 +1,0 @@
-Also include namespace in encoding for --append-hash?
-
-
-In a comment on Generated Names for Generated Data yesterday, @anguslees suggested including the name and namespace in the hashes. While the current implementation includes the name, it does not include the namespace. We should consider including the namespace as well, because it makes dictionary attacks less portable. The tradeoff is that this will be a backwards-incompatible change to kubectl (new encoding backing the hash).
-/cc @anguslees @liggitt @mikedanese @bgrant0607

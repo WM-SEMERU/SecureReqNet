@@ -1,6 +1,0 @@
-fix(platform-browser): prevent clobbered elements from freezing the browser
-
-
-/cc @petebacondarwin @gkalpak @IgorMinar @mprobst
-Pete, George could one of you review the change ?
-Thanks

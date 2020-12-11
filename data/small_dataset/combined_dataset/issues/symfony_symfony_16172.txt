@@ -1,4 +1,0 @@
-is there a easy way to add a event listener for a  specific firewall?
-
-
-I have several firewalls , such as admin, main,  I wanna add a event listener to the admin firewall ,not main,  because some checks can only be doing for admin firewall,  I know that we can do this like this post said How to Create a custom Authentication Provider,but  I think this is a little complex for such need, anyone has a easy way to do this please?

@@ -1,1 +1,0 @@
-I have two users with compromised user auth tokens. Even as an admin there does not seem to be any way to reset these. I can admin the SSH keys but not the private tokens. This is silly as an admin can _see_ what the token is (go to any user's profile page and check the RSS link) but not reset it in the event of known compromised accounts.

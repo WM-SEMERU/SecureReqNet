@@ -1,4 +1,0 @@
-Setup a Rapid Risk Assessment ahead of this going into production.
-
-
-New services should have a rapid risk assessment (RRA) carried out before they enter production. This can probably be organized earlier rather than later.

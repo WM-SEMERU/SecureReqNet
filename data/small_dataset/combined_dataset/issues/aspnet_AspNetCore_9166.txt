@@ -1,5 +1,0 @@
-Fixed the demo video link in the Blazor readme
-
-
-Fixed the demo video link in the Blazor readme.
-9147#issue-430080241

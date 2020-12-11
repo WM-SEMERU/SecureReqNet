@@ -1,5 +1,0 @@
-Enable PodSecurityPolicy for deployments
-
-
-See for details and docs
-Let's allow k8s users to create and use PodSecurityPolicy templates

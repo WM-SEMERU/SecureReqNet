@@ -1,6 +1,0 @@
-Added 'apt update' command to install_oe_sdk-Ubuntu* docs.
-
-
-
-
-

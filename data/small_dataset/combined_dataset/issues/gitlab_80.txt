@@ -1,5 +1,0 @@
-After upgrading to 6.5 it the web interface is displaying incorrectly. It almost seems like the CSS is broken or that it's trying to display a ultra-simplified version fo the interface.
-
-I am also seeing a "Toggle Navigation" button now that I haven't seen before.
-
-Any help would be greatly appreciated.

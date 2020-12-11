@@ -1,6 +1,0 @@
-fix typo in log name for the scanscheduler
-
-
-
-
-

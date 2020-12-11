@@ -1,5 +1,0 @@
-Resolve potential conflicts between CORS and HTTP method metadata
-
-
-See here: #9099 (comment)
-MVC is smart enough to figure this out, but it's not incredibly obvious. The HttpMethod metadata contains a setting that says whether the endpoint is CORS aware or not. It's not clear how you could use a convention to correctly enable CORS for a random endpoint.

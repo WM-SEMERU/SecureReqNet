@@ -1,8 +1,0 @@
-Authentication with the same context through two different authentication types
-
-
-I want to authenticate two firewals through the same context, but that does not seem to work when one uses different authentication types like one with http_basic and one with form login.
-As excample see this post on stackoverflow:
-http://stackoverflow.com/questions/11801622/how-to-authenticate-on-2-different-symfony2-firewalls-at-the-same-time
-Cheers
-Christian

@@ -1,4 +1,0 @@
-use .. instead of .. code-block:: php
-
-
-cc @javiereguiluz

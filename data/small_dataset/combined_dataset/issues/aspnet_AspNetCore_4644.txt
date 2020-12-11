@@ -1,7 +1,0 @@
-Provide MSAL token cache implementations
-
-
-If you are authenticating your .NET Core app against Azure AD the suggested path is to use the MSAL library.  This requires code to load/serialise the TokenCache before/after every access and sample code is provided here
-The code is not great as it uses the Session to hold the token cache and there are some issues with MSAL as the Load/Persist methods are not asynchronous.
-Given that every application would need to include such code, is it in scope to provide this in an official library along with implementations that use IMemoryCache/IDistributedCache?
-There's also the next step of constructing a ConfidentialClientApplication to acquire a token but this might be a bit more open to interpretation

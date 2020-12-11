@@ -1,9 +1,0 @@
-Don't remove the subject of the `system:nodes` ClusterRoleBinding in v1.9
-
-
-See: https://groups.google.com/forum/#!topic/kubernetes-sig-cluster-lifecycle/1OIjHX-A3sI
-In v1.7, the API server automatically created a ClusterRoleBinding between the system:node ClusterRole and the system:nodes Group (virtually any kubelet)
-That had several downsides, and the Node Authorizer was introduced as the alternative.
-But for the Node Authorizer to work, we had to remove the system:node group subject of the ClusterRoleBinding, otherwise the Node Authorizer wouldn't have had any effect as authz responses are ORed.
-Since we can drop support for v1.7 when the v1.9 cycle starts we can remove this special functionality in kubeadm. Technically we could do this already in v1.8, but myself and @liggitt agreed that it's good to have an overlap for one cycle here to be really safe.
-Cleanup task for v1.9

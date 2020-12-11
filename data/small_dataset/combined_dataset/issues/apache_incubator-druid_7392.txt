@@ -1,5 +1,0 @@
-Split MetadataSegmentView in two implementations: caching and direct RPC call
-
-
-Currently, MetadataSegmentView violates the Single Responsibility Principle. There should be two separate implementations of the API, one is caching and another making direct RPC, and the choice between them should be done during Dependency Injection binding.
-FYI @surekhasaharan

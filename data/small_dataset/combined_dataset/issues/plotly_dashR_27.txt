@@ -1,5 +1,0 @@
-Blacklist unsafe ports
-
-
-Similar to rstudio/shiny@4fa2af7
-Perhaps, this could be handled on the fiery-level, @thomasp85?

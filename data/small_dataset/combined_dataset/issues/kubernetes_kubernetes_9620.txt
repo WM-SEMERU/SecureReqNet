@@ -1,7 +1,0 @@
-Image access control is not multi-tenant.
-
-
-Docker does a credential check when pulling images, but not when using them. It will let you run an image that is already pulled even if you don't present credentials.
-That is reasonable behavior from the standpoint of the docker tool since it is not trying to be multi-user.
-However, it makes it hard to make Kubernetes multi-user. If an image is already pulled, (e.g. using imagePullSecrets, then anyone else can use that image by setting pull policy to IfNotPresent, even if they lack proper credentials.
-We could try to fix this by disallowing IfNotPresent pull policy on all pods, thus forcing a docker pull before each docker run, and failing the pod if the docker pull failed.  We would need to implement and e2e test that.

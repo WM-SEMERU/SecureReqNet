@@ -1,7 +1,0 @@
-refine rate limits
-
-
-Our rate limits should be more intelligent:
-
- Limit amount of auth attempts per user separately from other requests
-

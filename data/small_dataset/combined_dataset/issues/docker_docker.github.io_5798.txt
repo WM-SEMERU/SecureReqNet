@@ -1,8 +1,0 @@
-document Docker Registry SSL CA cert location on windows
-
-
-Moved from moby/moby#21189
-
-I am trying to follow this guide https://docs.docker.com/engine/security/certificates/, but the paths are for linux. What would be the equivalent for Windows?
-
-/cc @JimGalasyn

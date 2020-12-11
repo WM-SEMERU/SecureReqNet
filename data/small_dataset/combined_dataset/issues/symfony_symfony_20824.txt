@@ -1,4 +1,0 @@
-Deprecate the use of objects as security roles
-
-
-As discussed in #20801 (comment) we're ready to deprecate the use of objects as security roles and start using simple strings as roles.

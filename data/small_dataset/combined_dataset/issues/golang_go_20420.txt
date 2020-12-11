@@ -1,8 +1,0 @@
-crypto/tls: customisable max TLS record size
-
-
-Hi,
-The default TLS record/chunk size is 16kB - and this is what golang uses (maxPlaintext in crypto/tls/common.go I think).
-It would be useful if the max TLS record size was customisable via Config.
-Use-case is we have memory restricted embedded devices (running mbed TLS) talking TLS to a golang server. The client TLS (receive) buffer needs - in our case - to be less than 16kB to fit in memory - and the server and the client has to agree on this max size.
-For mbed TLS this is customisable using MBEDTLS_SSL_MAX_CONTENT_LEN.

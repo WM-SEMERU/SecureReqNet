@@ -1,7 +1,0 @@
-Why not to create a symfony framework updater software from command line
-
-
-Hello to Fabien Potencier and to all the symfony team. I am working with sf since a couple of years now. And i have to say that the framework helped me to be very productive on several project.
-One of my greatest issue with the framework is how hard it is to update an existing project to a major version i.e 2.8->3 or 2.8->4
-And in my humble opinion one of the greatest issues with that is that the community bundles are most of the time not compatible with the latest versions of symfony.
-Is it possible to make the latests versions of symfony compatible with all legacy bundle or to create a software with dynamically solves depreciation issues within each bundle?

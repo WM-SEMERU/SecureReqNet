@@ -1,3 +1,10 @@
 /data.csv
 /word_embeddings-embed_size_100-epochs_100.csv
 /word_embeddings-embed_size_20-epochs_60.csv
+/augmented_dataset
+/augmented_dataset_csv
+/wiki_dataset
+/combined_dataset
+/corona_dataset
+/github_datasets
+/gitlab

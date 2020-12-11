@@ -1,1 +1,0 @@
-We are using git notes heavily in our workflow to annotate commits with various metadata.  Gitlab seems to be treating theses as regular commits and shows them in the dashboard and in the network tab.  Is there a straightforward way of filtering certain refs from appearing?  Or, maybe, filter out refs/notes by default.

@@ -1,4 +1,0 @@
-Debug button says "Select Startup Item..."
-
-
-May need to file a bug on workspace team

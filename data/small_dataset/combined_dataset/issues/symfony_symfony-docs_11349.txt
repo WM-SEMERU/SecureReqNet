@@ -1,4 +1,0 @@
-Add description of autocompleter callback
-
-
-Documented feature added by symfony/symfony#30997.

@@ -1,9 +1,0 @@
-Client site MM_API errors are not handled
-
-
-For example:
-
-This is an interesting case since by definition something went wrong in the http request, so it might be that network access is not available (so we can't send that error message to a server side log aggregator).
-For now the pattern is to call the callback with null
-Any error that might occur will be picked by tests since they will pollute the console log (which should be clean in most cases)
-Marking is as Risk Accepted

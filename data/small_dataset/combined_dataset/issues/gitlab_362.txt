@@ -1,9 +1,0 @@
-Hi,
-
-in the release announcement for Gitlab 7.0 the usage of Ruby 2.1 is recommended.
-But the manual install guide still says to download ruby-2.0.0-p481.
-
-I think this should be updated to ruby 2.1.2.
-
-kind regards,
-Haynes

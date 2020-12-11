@@ -1,6 +1,0 @@
-/api/scan/<minion_scan_id>/issue/<minion_issue_id> does not check ownership
-
-
-
-
-

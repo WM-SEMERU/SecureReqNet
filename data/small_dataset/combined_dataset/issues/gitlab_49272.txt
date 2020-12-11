@@ -1,3 +1,0 @@
-Credentials used for repository import are visible in plain text inside the Sidekiq log. They should be censored instead.
-
-![sidekiq](/uploads/5be84ff84a6b119691c80660537f414b/sidekiq.png)

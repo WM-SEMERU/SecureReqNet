@@ -1,4 +1,0 @@
-Update security_checker.rst
-
-
-Adding a minor addition to the Tip note about integrating security checker with continuous integration workflow.

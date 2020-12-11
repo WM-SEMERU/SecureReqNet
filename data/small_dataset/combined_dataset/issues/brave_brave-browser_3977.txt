@@ -1,6 +1,0 @@
-Make it possible to block Trackers only
-
-
-Now on windows you only have option to either enable or disabled ads/tracking blocking.
-A lot of people of us want to use ublock orgin for blocking adds because superior speed but still want to rely on brave anti-tracking, to avoid the need using apps like Ghostery.
-In the Brave android app it is possible to disabled adblocking but enable anti-trackers.

@@ -1,4 +1,0 @@
-servo does not validate that an X.509 certificate belongs to the host that is being accessed
-
-
-See for example https://wrong.host.badssl.com/, this should be disallowed, but servo allows it.

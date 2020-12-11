@@ -1,8 +1,0 @@
-Prune directxman12 from metrics/autoscaling OWNERS
-
-
-Since I'm not really working on metrics or autoscaling stuff any more, I
-figured it was time to remove myself from the approvers list.
-/kind cleanup
-NONE
-

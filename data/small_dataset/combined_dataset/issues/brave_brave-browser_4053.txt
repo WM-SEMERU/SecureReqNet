@@ -1,7 +1,0 @@
-Cast Component is Positioned Poorly
-
-
-After enabling "#load-media-router-component-extension", I noticed the Chromecast dialog opens on the left side of the browser window, rather than in the middle.
-As a result, when the browser window is full-screen, it seems like nothing happens after selecting "Cast..."
-
-Originally posted by @glowacky in #209 (comment)

@@ -1,4 +1,0 @@
-[hackerone.com] #439818 - Buffer overflow
-
-
-https://hackerone.com/bugs?subject=brave&report_id=439818

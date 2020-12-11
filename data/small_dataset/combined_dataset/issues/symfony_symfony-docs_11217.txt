@@ -1,6 +1,0 @@
-Remove CustomUserMessageAuthenticationException
-
-
-Remove the use of CustomUserMessageAuthenticationException, as this is not compatible with the @throws tag of the interface.
-Since AccountDeletedException is implemented by the user here, they could let it take a custom message.
-This statement is only in the 4.2 docs, not the 3.4

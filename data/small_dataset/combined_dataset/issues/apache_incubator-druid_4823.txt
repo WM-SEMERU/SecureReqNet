@@ -1,8 +1,0 @@
-Basic auth extension
-
-
-This PR adds an extension that provides implementations of the auth interfaces introduced in #4271 :
-
-an Authenticator which supports HTTP Basic authentication
-an Authorizer which implements basic role-based access control
-

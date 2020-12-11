@@ -1,4 +1,0 @@
-Asp.Net Core Bug
-
-
-Hi, Asp.Net Core Team, I am currently using Hangfire framework in Asp.Net Core Application. I encountered a problem，HangfireIO/Hangfire#1394 (comment)

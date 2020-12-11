@@ -1,4 +1,0 @@
-If you look at https://gitlab.com/help/markdown#emoji, many of the Emoji examples don't work:
-
-Sometimes you want to be :cool: and add some :sparkles: to your :speech_balloon:. Well we have a :gift: for you:
-:exclamation: You can use emoji anywhere GFM is supported. :sunglasses:

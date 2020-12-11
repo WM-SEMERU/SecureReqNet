@@ -1,8 +1,0 @@
-Samples do not work due to IIS InProcess
-
-
-Since InProcess became the default mode many of the samples in this repo have stopped working with 500.0 - ANCM In-Process Handler Load Failure. Adding <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel> to their csproj makes them work again.
-Some of these projects don't have a reference to Microsoft.AspNetCore.Server.IIS nor call UseIIS(), but adding those is not enough.
-The NativeIISSample is the only one I've seen that still works and that's because it heavily customized the launch settings.
-Ideally any customizations needed to make InProcess work in this repo would be consolidated to some shared source dependency we could reference from all of the samples.
-@pakrym @jkotalik

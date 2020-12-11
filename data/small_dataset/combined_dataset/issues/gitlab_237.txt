@@ -1,2 +1,0 @@
-Hi,
-Why the version 6.7.5 is not merged with the current version ?

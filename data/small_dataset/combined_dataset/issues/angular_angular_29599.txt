@@ -1,5 +1,0 @@
-refactor(compiler): Update allowed tag|attr documentation
-
-
-Related to #28529
-Retrying from #29597 on a forked branch.

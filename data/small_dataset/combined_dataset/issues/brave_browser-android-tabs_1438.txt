@@ -1,6 +1,0 @@
-Video codec issue
-
-
-Issue reported by @AlexeyBarabash
-Unable to play video on
-https://gif.d3.ru/kogda-ty-vegan-za-stolom-1766754/?sorting=rating

@@ -1,8 +1,0 @@
-Session lost after multiple refresh
-
-
-Hello,
-I'm using Symfony 3.4 with PHP 7 and I wonder if the symfony session doesn't quite work. Everything works well except one thing. When I'm entering correct credentials, the profiler first shows that I am correctly logged in. However, on the next page, zap! (e.g. if I refresh the page, or after being redirected) I become anonymous again, my page contains many ajax calls
-I have made a dummy action that simply dumps the $this->get('session');, after refreshing, let say two times in a row, all the session is cleared, and the session file is deleted even if the session id is always the same, I've also made another script that displays the global variable $_SESSION, here everything goes fine, and the session lives correctly.
-I wonder if it is a problem on my server, or I just missed something, even if in php.ini I put the directive session.auto_start to false
-Thank you in advance

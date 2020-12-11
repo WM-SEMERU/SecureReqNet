@@ -1,4 +1,0 @@
-[Workflow] Added support for many inital places
-
-
-symfony/symfony#30468

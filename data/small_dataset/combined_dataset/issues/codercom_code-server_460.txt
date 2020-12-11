@@ -1,7 +1,0 @@
-How is the custom marketplace API set up?
-
-
-Description
-Basically I'm looking into building a custom version of VSCode (not with code-server, that serves a different purpose) and I'd just like to know how Coder deals with the marketplace issue. I think @coadler told me you guys have a custom marketplace API in place, so I'd like to know how that's set out. Thanks in advance!
-Related Issues
-None

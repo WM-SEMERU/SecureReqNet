@@ -1,4 +1,0 @@
-[hackerone] #439813 Memory corruption issue
-
-
-https://hackerone.com/bugs?report_id=439813

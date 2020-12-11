@@ -1,4 +1,0 @@
-There is no Threat Model for this application
-
-
-which means that there is no mapping of it's security requirements, exposure and capabilities

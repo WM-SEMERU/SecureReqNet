@@ -1,6 +1,0 @@
-Add Interceptor support for MapboxRouteTiles
-
-
-Closes #974
-This is needed to unblock calculating the progress of tile downloads in the Navigation SDK.
-cc @akitchen

@@ -1,8 +1,0 @@
-Wrong description of normalized data in FormEvents::SUBMIT
-
-
-There seems to be an error in the documentation about form events. Given our limited testing we see the following behaviour in Symfony 4.2:
-FormEvents::SUBMIT / Normalized data
-This contains the same data as in FormEvents::POST_SET_DATA (so it is yet not updated) - whereas the docs say "Data from the request reverse-transformed from the request using a view transformer" (which indicates that this contains the new value from the request).
-FormEvents::POST_SUBMIT / Normalized data
-As a subsequent error the description of FormEvents::POST_SUBMIT ("Same as in FormEvents::SUBMIT") is wrong, as it contains the data from the request.

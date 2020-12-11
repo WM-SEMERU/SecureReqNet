@@ -1,4 +1,0 @@
-Update Code of Conduct (fixes #7795)
-
-
-Fixes #7795

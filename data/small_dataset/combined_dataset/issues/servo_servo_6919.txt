@@ -1,4 +1,0 @@
-HTTPS tests break in WPT with certification validation error
-
-
-I assume we need to set up Servo to load certificates from a different location than usual; @jgraham ?

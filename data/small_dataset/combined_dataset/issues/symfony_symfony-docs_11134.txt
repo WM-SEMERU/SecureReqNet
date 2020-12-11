@@ -1,4 +1,0 @@
-Replace config file paths in order to be consistent with the nodes that they are concerned to
-
-
-See symfony/recipes#396, symfony/recipes#547.

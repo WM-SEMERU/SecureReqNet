@@ -1,6 +1,0 @@
-inTestFrame() prevents SES initialization in non-browser environments
-
-
-Original issue 1917 created by andrebargull on 2014-05-15T12:45:28.000Z:
-https://code.google.com/p/google-caja/source/browse/trunk/src/com/google/caja/ses/repairES5.js#&nbsp;684
-inTestFrame() prevents SES initialization in non-browser environments. Feature detection of document should use the typeof operator. For example like in https://code.google.com/p/google-caja/source/browse/trunk/src/com/google/caja/ses/repairES5.js#&nbsp;1262 .

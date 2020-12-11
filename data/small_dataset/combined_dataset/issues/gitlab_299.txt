@@ -1,1 +1,0 @@
-In the project home, the number of commits are relative to the master branch, and not to the default one.

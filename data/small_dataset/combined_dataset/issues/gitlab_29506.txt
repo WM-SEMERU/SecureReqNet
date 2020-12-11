@@ -1,3 +1,0 @@
-'Admins cannot currently search for users by creation IP. This function would be helpful when fighting abuse, as accounts are often created in bulk from a single IP address.
-
-@stanhu @DouweM @ernstvn

@@ -1,1 +1,0 @@
-It would be good if there was a way to further filter the commits _by author_, other than _by branch_.

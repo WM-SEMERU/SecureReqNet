@@ -1,7 +1,0 @@
-Before logout handler
-
-
-Description
-Handler or event which gets called before the logout and before the session is lost.
-Example
-We had a problem in which we should call our API that the user is logged out. We used the LogoutHandlerInterface, but at this state we couldn't do it because we lost the session to know which user was logged in.

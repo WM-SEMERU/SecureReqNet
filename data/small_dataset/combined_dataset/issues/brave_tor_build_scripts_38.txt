@@ -1,7 +1,0 @@
-Fix tor builds for Jenkins
-
-
-
-Libevents test can be flaky if run on multi-cores.
-Without make install darwin uses the system openssl
-

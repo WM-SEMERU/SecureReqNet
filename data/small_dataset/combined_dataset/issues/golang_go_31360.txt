@@ -1,4 +1,0 @@
-x/sys/windows: add WSAECONNREFUSED
-
-
-The title says it all the current value I am getting is 10061 for the errno.

@@ -1,9 +1,0 @@
-For GitLab 10.0, we should deprecate but not remove the support of private tokens in GitLab. While private tokens are not an immediate security vulnerability, personal access tokens are preferred from a security point of view.
-
-Things we need to do:
-
-1. Announce this deprecation in 10.0.
-2. Remove any internal GitLab use of private tokens (e.g. in EE, there may be one last holdout in the API for LDAP groups: https://gitlab.com/gitlab-org/gitlab-ee/blob/master/app/assets/javascripts/api.js#L189).
-3. Target full removal of external support in 10.2.
-
-/cc: @JobV, @DouweM, @mydigitalself, @timzallmann, @jschatz1, @briann 

@@ -1,4 +1,0 @@
-Do not use class parameter in "How to Change the default Target Path Behavior"
-
-
-We should decorate the ExceptionListener class instead of extending it in "How to Change the default Target Path Behavior", because (a) it's nicer and (b) class parameters are deprecated and removed from Symfony 3.

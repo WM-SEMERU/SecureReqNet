@@ -1,5 +1,0 @@
-SecureRandom documentation does not cover a common use case
-
-
-As I understand it, if you're trying to generate a token for something which you plan to store in the database then you need to hash the result of nextBytes. It would be handy if the docs mentioned this in:
-http://symfony.com/doc/master/book/security.html#generating-a-secure-random-number

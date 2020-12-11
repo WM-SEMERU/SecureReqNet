@@ -1,9 +1,0 @@
-Add ability to connect to bookkeeper using tls
-
-
-Is your feature request related to a problem? Please describe.
-I have a bookkeeper cluster that has TLS enabled and need pulsar clients to communicate to my cluster using tls
-Describe the solution you'd like
-The ability to specify tls settings for my broker to connect to bookkeeper
-Describe alternatives you've considered
-Using stunnel + iptables to redirect

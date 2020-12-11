@@ -1,8 +1,0 @@
-Shaded Guava 20.0 dependency vulnerable to CVE-2018-10237
-
-
-Expected behavior
-Bundled (shaded) dependencies should not have any known security defects.  Specifically, the shaded Guava library should be at least version 24.1.1 or 25.0, or newer.
-Actual behavior
-Guava 11.0 through 24.1 (inclusive) contain two classes that, if exploited via Java and/or GWT Serialization, can lead to unbounded memory allocation.  This vulnerability is covered by CVE-2018-10237.
-The master branch of ApplicationInsights Java library still depends on Guava 20.0 and shades within the published applicationinsights-core JAR.  (I have not checked other JARs from this library.)  This version of Guava has been included since at least version 2.1.2 of this library, and likely earlier versions.

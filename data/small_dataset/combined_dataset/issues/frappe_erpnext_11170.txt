@@ -1,4 +1,0 @@
-Security bug in erpnext application
-
-
-Reported a security bug in the erpnext application at info@erpnext.com but not received any reply, please give me the right contact to report it.

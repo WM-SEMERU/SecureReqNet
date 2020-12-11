@@ -1,5 +1,0 @@
-Make sig-scalability meetings on-demand
-
-
-As discussed on the slack channel.
-/cc @wojtek-t

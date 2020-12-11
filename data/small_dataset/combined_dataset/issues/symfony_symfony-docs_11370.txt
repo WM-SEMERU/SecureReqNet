@@ -1,5 +1,0 @@
-[Cache] Updated invalid service names
-
-
-This will fix #8406
-See https://github.com/symfony/symfony/blob/3.4/src/Symfony/Bundle/FrameworkBundle/DependencyInjection/FrameworkExtension.php#L1682

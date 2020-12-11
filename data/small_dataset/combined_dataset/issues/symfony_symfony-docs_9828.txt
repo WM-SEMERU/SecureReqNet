@@ -1,4 +1,0 @@
-Update the security reference because user providers are no longer mandatory
-
-
-This fixes #9660.

@@ -1,5 +1,0 @@
-Need a whitelist for the "block script" option
-
-
-The option is useless without a real whitelist compared to the real extension in Firefox for example. For now we can just "Allow this time" or "Allow until restart" some specific scripts. Please add an option "For ever!!".
-Thanks

@@ -1,5 +1,0 @@
-```
-gitlab-ee master % gp dev 10-5-stable-ee-patch-3 10-4-stable-ee-patch-5 10-3-stable-ee-patch-8
-hint: The '.git/hooks/pre-push' hook was ignored because it's not set as executable.
-hint: You can disable this warning with `git config advice.ignoredHook false`.
-```

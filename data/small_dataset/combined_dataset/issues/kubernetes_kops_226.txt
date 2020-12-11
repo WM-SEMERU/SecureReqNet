@@ -1,5 +1,0 @@
-Support assuming an AWS role with MFA
-
-
-We are moving/have moved entirely toward requiring MFA to assume admin-like roles on our AWS accounts. This ensures access keys can't go missing that would allow programable access to widely destructive actions.
-It would be great if kops could support authenticating to AWS with an OTP before assuming a role via STS. Currently we have a bash wrapper that provides this for use with terraform and kops; aws-cli supports this natively.

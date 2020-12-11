@@ -1,7 +1,0 @@
-CIS Benchmark Compliance - /var/lib/etcd permissions
-
-
-this was mentioned in the k8s slack and I was asked to file an issue, so here it is :) As a little background I'm one of the authors of the CIS benchmark and I'm looking at changes we may need to make for the next version.  Our reference installation mechanism is kubeadm.
-At the moment a default kubeadm installation will get a failing mark on item 1.4.11 of the CIS Kubernetes Benchmark version 1.3 as the permissions on /var/lib/etcd are 755 rather than the recommended 700. Looking at a sample install it looked like that directory just had a single entry which was set to 700.
-What I wanted to check is, is there a requirement for the permissions to be 755 on that directory for operation of the cluster or could they be changed to 700?
-If there's an operational requirement for those permissions, then we could look at whether it would be possible to modify the standard, but if not, it would be good to see those changed on a default install to 700.

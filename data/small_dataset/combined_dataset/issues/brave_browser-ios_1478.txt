@@ -1,5 +1,0 @@
-Request confirmation from user before opening apps using custom urls
-
-
-See here: https://hackerone.com/reports/321896
-fix #1477

@@ -1,4 +1,0 @@
-cdk doctor potentially exposes secrets
-
-
-cdk doctor emits all environment variables that begin with AWS_, including AWS credentials.

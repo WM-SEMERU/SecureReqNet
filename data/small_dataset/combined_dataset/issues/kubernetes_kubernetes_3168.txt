@@ -1,4 +1,0 @@
-Secure node -> master communication
-
-
-In some hosting environments/configurations, the network traffic between node and master may traverse the public Internet. As a result, we'd like to secure the communication between the node components (e.g. kubelet and proxy) and master. To avoid the complexity of securing the kubelet API, we'd like to secure the node -> master communication, but not the reverse. This simplification has a downside; it means all communication between kubelet and master would have to be initiated by the kubelet. For example, we'd have to change health checks to be initiated by the kubelet, which in turn raises a question of how to do flow control (master apply backpressure when it becomes overloaded).

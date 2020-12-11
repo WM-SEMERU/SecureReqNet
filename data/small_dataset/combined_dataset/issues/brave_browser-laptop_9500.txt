@@ -1,9 +1,0 @@
-incorrect hostname shown in titlemode when host is very long
-
-
-issue exists in 0.17.x but is fixed in 0.18.x by #9154
-
-go to https://longextendedsubdomainnamewithoutdashesinordertotestwordwrapping.badssl.com/
-mouse away from the urlbar to enter title mode
-the origin is shown as 'longextendedsubdomainnamewithoutdashesinordertotestwordwrapping' instead of 'longextendedsubdomainnamewithoutdashesinordertotestwordwrapping.badssl.com'
-

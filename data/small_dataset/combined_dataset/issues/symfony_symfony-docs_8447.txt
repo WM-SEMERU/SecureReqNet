@@ -1,7 +1,0 @@
-[Security] Add impersonation support for stateless authentication
-
-
-This adds a new stateless option to the switch_user listener, if set to true then no redirection is triggered during user switching.
-See symfony/symfony#24260
-
-switch_user.stateless config node was deprecated in symfony/symfony#26334

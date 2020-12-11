@@ -1,7 +1,0 @@
-Need ability to force a user to reset their password
-
-
-Random use case:
-Something like HeartBleed 2.0 comes out in the wild. We patch our certs and make sure everything is clean, but we want to proactively make users change their passwords (versus passively sending an email to everybody and ASK them to change them).
-Not sure if we can force the user's account into a state where they need to reset their password after their next successful login, or if we halt syncing and everything else and throw up a doorhanger saying "Please reset your password to continue synching".
-Discuss.

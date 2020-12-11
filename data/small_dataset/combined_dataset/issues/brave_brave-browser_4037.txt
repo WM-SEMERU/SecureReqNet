@@ -1,4 +1,0 @@
-BraveDarkModeObserverTest fail on linux
-
-
-Regression of brave/brave-core#2126

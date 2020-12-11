@@ -1,5 +1,0 @@
-I'm getting a Mixed Content warning for some issues where third party embeds are being used for images. Ideally those should be rehosted by us, but I'd also settle for just not allowing them to be embedded.
-
-[For example in this issue](https://gitlab.com/gitlab-org/gitlab-ce/issues/14298) there's an imgur image linked and Chrome doesn't display the "Magic Green Lock" on the page.
-
-Also, imgur has been cracking down on allowing embeds of their hosted images, so we may want to block them before we end up with a bunch of broken images throughout the Issues.

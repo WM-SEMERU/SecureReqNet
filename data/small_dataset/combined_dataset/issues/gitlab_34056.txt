@@ -1,5 +1,0 @@
-'While cleaning up the symlinks that kept the files available during the deploy, [we missed cleaning up the appearance folder because of a typo.](https://gitlab.com/gitlab-org/gitlab-ce/blob/70d7ded5b38376809365cadd7e542254003f8210/db/post_migrate/20170406111121_clean_upload_symlinks.rb#L9). The folder still needs to be cleaned up because if someone would create a group with full patch `appearance/logo` or `appearance/header_logo` the images stored in those locations could get lost.
-
-This was started in #33359 but needs to be backported (to 9.0, 9.1 & 9.2) because the symlink is causing issues with backups.
-
-@dblessing @briann @jarka

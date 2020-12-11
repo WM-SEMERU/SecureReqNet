@@ -1,8 +1,0 @@
-Youtube wasted space recover
-
-
-hi there im also highly active on Better discord, i recently joined Brave wich is real great.
-I wish an Plugin like Styles wich could easy used to fix a few things and create themes easy.
-apply this CSS should fix the empty space in youtube created on absence of the ads.
-#container.ytd-iframe-companion-renderer > *.ytd-iframe-companion-renderer:last-child:not(#google_companion_ad_div) {margin-bottom: 0px !Important;Display: none !Important}
-version 0.24

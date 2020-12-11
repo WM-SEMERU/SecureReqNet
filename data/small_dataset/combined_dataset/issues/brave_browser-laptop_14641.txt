@@ -1,6 +1,0 @@
-[hackerone] favicon issue
-
-
-Test Plan
-#14654
-https://hackerone.com/bugs?subject=brave&report_id=375965

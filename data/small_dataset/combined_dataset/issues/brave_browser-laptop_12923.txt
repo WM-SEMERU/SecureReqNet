@@ -1,5 +1,0 @@
-Use Tor for ledger proxy instead of PIA
-
-
-Once we have Tor working, we should consider using it for the ledger proxy, rather than PIA.
-If Brave is connecting to a ledger service over Tor, we should probably configure that as an onion service on our end. Should we use a single onion service rather than a full hidden service? We should consider using something like Alec Muffett's Enterprise Onion Toolkit on the infrastructure side.

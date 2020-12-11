@@ -1,5 +1,0 @@
-Browser crash when updated to 1.9(19.3.29.16)
-
-
-Description:
-While testing the release build 1.9(19.03.29.16), QA found a lot of random crashes when opening backgrounded tabs/opening new tabs. Needs to be investigated

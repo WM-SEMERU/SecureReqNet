@@ -1,5 +1,0 @@
-[Security] Class Does Not Exist
-
-
-https://github.com/symfony/symfony/blob/master/src%2FSymfony%2FBundle%2FSecurityBundle%2FTemplating%2FHelper%2FSecurityHelper.php#L14
-I check the FieldVote class is not exist

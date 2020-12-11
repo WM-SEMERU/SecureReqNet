@@ -1,7 +1,0 @@
-/signin-wsfed slow under load
-
-
-Hi, we are load testing our application and the call to https://domain/signin-wsfed is a bit slow coming in at  2.7 sec avg with 100 concurrent users.
-As I understand this requests is a virtual request and there is no actual resource with that name. What code executes on this request? Is there any custom user code that gets executed as part of this code that we can look at optimizing?
-Thanks
-Wayne

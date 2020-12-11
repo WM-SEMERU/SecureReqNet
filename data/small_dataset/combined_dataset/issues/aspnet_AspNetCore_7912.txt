@@ -1,8 +1,0 @@
-Fixed two misspelling of 'tenant' in properties' inline XML documentation
-
-
-In two files, just a misspell in the documentation
-
-Azure/AzureAD/Authentication.AzureAD.UI/src/AzureADOptions.cs
-AzureAD/Authentication.AzureADB2C.UI/src/AzureAdB2COptions.cs
-

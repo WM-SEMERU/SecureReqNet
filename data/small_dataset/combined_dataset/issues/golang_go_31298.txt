@@ -1,6 +1,0 @@
-cmd/dist: add BOOT_GO_LDFLAGS - counterpart of BOOT_GO_GCFLAGS
-
-
-This allows passing custom LDFLAGS while building the bootstrapping
-tool.
-Afterwards, GO_LDFLAGS will be used as usual.

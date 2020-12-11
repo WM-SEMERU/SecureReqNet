@@ -1,4 +1,0 @@
-SwitchUserRole gets lost while reloading user
-
-
-When, after switching to another user, the user is reloaded, the SwitchUserRole gets lost and it's not possible to switch back to the originating user.

@@ -1,4 +1,0 @@
-Report JUnit test results for SignalR TS tests
-
-
-Fixes #8438

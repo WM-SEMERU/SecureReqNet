@@ -1,4 +1,0 @@
-vulnerable dependency warning for Hoek
-
-
-same issue as brave/crypto#9

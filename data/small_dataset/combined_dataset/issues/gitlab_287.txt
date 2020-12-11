@@ -1,1 +1,0 @@
-When I clone a repository, I get cloned into the first branch in the alphabetically sorted list. I don't know if this is a bug or by design, but it would be more convenient if clones defaulted to the "Default Branch" as well.

@@ -1,5 +1,0 @@
-Sanitize svg attributes (e.g. xlink:href)
-
-
-Angular's security schema currently defines no security contexts for SVG attributes. Some SVG attributes are security sensitive though, for example XLink hrefs in e.g. <svg:circle xlink:href="...">.
-As I read the DOM schema, we might currently just not allow binding to those at all, but I haven't tested it.

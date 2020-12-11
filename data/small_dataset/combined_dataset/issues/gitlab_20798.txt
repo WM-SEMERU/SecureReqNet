@@ -1,9 +1,0 @@
-Zendesk: https://gitlab.zendesk.com/agent/tickets/33444
-
-A common use-case is to use SAML and LDAP together. SAML is for web authentication, while LDAP is for group sync and authentication for Git over HTTP(S). In this scenario is may be undesirable for users to sign in using LDAP - they should use SAML, instead. It would be helpful to allow LDAP to be removed from the sign in page, in this case. 
-
-Can we add some config option for this? 
-
-#### Customers
-https://na34.salesforce.com/0016100001F2Gsw  
-https://na34.salesforce.com/00161000004zrF8  

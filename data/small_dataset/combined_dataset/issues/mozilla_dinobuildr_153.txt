@@ -1,6 +1,0 @@
-Remove Moz bookmarks due to conflicts with Firefox accounts
-
-
-The contents of /Applications/Firefox.app/Contents/Resources/distribution (which we're writing in  	firefox-bookmarks.sh are leading to user frustration as those bookmarks aren't removable -- if you remove them and reopen Firefox they automatically repopulate.
-I feel like there are better ways of presenting this data, like having a Welcome to Mozilla! folder that has digital assets like desktop backgrounds, and either a PDF or HTML file that contains the links we're currently populating into the distribution folder and a brief cheat sheet on who to contact for common issue types.
-@luciusbono thoughts/concerns?

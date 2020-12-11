@@ -1,4 +1,0 @@
-[sqllab] allow gamma users to access their SQLLab views
-
-
-closes #2798

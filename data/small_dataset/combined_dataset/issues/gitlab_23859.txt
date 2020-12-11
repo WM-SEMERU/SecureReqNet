@@ -1,7 +1,0 @@
-### Description
-
-Developers are concerned about the security of putting production deployment variables into project variables that are then accessible by all developers. Restricting the variables in the web UI isn't enough because any project variables could be printed in a CI script. One option is to put these variables in Services such that they're not sent to CI scripts, but are somehow accessible by CI plugins. Perhaps the plugin would be executed in the context of the main GitLab server, or we somehow secure the runner so plugins running on the runner have access, but generic scripts do not.
-
-### Proposal
-
-### Links / references

@@ -1,5 +1,0 @@
-Automated cherry pick of #76216: ensuring that logic is checking for differences in listener
-
-
-Cherry pick of #76216 on release-1.14.
-#76216: ensuring that logic is checking for differences in listener

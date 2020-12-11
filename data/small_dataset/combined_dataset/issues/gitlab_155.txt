@@ -1,3 +1,0 @@
-After trying to activate the slack service I got a error 500 when testing its functionality. The errorlog can be found here: http://pastebin.com/HAaWSi2P
-
-It would be a great help, if someone give a explanation, how its been used.

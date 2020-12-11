@@ -1,8 +1,0 @@
-Security improvements
-
-
-There are two nice improvements to consider:
-
-New version notification without automatic update.
-Automatic memory cleanup after few seconds (very nice feature from KeePass).
-

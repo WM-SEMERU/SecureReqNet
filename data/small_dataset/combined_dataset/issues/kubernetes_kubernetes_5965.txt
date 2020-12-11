@@ -1,5 +1,0 @@
-elastic search logging controller should be reachable securely
-
-
-Forked from #129.
-Right now it listens on an HTTP port.

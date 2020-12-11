@@ -1,5 +1,0 @@
-build(docs-infra): do not include `announcements.json` in sitemap
-
-
-The announcements.json file should not be included in the sitemap and including it causes an error in Google Search Console (because the generated URL does not exist).
-(This is a follow-up to fbef94a.)

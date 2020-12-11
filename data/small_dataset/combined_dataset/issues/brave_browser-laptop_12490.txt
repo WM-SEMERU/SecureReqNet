@@ -1,6 +1,0 @@
-add setting to enable site isolation
-
-
-Test Plan: #12491
-context: https://www.chromium.org/Home/chromium-security/ssca
-We should have a setting to enable site isolation on all sites: https://www.chromium.org/Home/chromium-security/site-isolation. The memory footprint could be a concern, but the other known issues seem like relatively minor edge cases.

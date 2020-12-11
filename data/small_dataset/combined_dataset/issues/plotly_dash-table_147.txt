@@ -1,5 +1,0 @@
-Add derived properties `derived_virtual_selected_rows` and `derived_viewport_selected_rows`
-
-
-selected_rows doesn't update on sort or filter
-See this example: https://github.com/plotly/dash-docs/pull/232/files#diff-61a5d030fd2c372f3abe94110f039e85

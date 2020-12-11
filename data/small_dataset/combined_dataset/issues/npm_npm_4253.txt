@@ -1,4 +1,0 @@
-mask basic auth creds
-
-
-npm seems to do this for some requests but not all, I'll see if I can patch later today

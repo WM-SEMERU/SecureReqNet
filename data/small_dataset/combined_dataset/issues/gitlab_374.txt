@@ -1,2 +1,0 @@
-Sometimes issues are reported on the wrong project, especially when there are multiple interconnected projects.
-It would be nice to be able to move the issue to the correct project. The old issue could be removed if it has no history, or when it does, by making it clear that it was moved.

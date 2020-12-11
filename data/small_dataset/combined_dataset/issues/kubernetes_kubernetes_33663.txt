@@ -1,7 +1,0 @@
-SELinux Overhaul
-
-
-Overhauls handling of SELinux in Kubernetes.  TLDR: Kubelet dir no longer has to be labeled svirt_sandbox_file_t.
-Fixes #33351 and #33510.  Implements #33951.
-
-This change is 

@@ -1,4 +1,0 @@
-[Security] Fix stateless mention
-
-
-According to https://github.com/symfony/symfony/blob/5aa0967f9f0ab803ededefb040d48a0ebc7a27a6/src/Symfony/Component/Security/Guard/GuardAuthenticatorHandler.php#L43 Firewall of pure API should have stateless to true  in fact

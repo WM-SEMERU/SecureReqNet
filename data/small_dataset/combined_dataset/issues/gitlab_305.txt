@@ -1,1 +1,0 @@
-On the dashboard atom feed, issues and pushes have summaries, but notes and merge requests do not. This is inconsistent, and showing summaries for notes and MRs would be at least as useful as summaries for issues and pushes.

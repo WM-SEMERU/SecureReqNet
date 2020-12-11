@@ -1,1 +1,0 @@
-"Add manual language detection for highlight.js" introduced in gitlab-ce 7.0 but undocumented. How to use it?

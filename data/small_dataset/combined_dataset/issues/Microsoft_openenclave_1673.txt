@@ -1,4 +1,0 @@
-Optimize docker images build
-
-
-Optimize building of the docker images

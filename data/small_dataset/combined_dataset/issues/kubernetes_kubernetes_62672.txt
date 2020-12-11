@@ -1,7 +1,0 @@
-Link to vulnerabilitiy disclosure process from the issue template
-
-
-Inspired by BSidesSF talk where the presenter told a story of not knowing about the disclosure process when they opened a (public) issue.
-/cc @philips @liggitt @jessfraz @cjcullen
-NONE
-

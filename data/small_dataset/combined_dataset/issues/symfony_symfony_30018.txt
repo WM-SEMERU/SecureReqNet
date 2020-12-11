@@ -1,6 +1,0 @@
-FormTypeInterface wrong doc-block on method getBlockPrefix
-
-
-Symfony version(s) affected: 3.4 and later.
-Description
-Based on the doc-block getBlockPrefix method of FormTypeInterface returns string. On the AbstractType on the other hand, the result of StringUtil::fqcnToBlockPrefix can also return null. We should change the interface doc-block to return null as well.

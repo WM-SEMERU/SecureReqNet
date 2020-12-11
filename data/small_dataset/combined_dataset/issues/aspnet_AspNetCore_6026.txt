@@ -1,5 +1,0 @@
-Microsoft.AspNetCore.Authentication.AzureAD.UI is not support v2.0 endpoint?
-
-
-I want to use 'AddAzureADBearer' method with v2.0 endpoint (from Application Registration Portal), but it seems to be not supported.
-Do I have to use this sample? https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2/blob/master/TodoListService/Extensions/AzureAdAuthenticationBuilderExtensions.cs

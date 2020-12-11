@@ -1,6 +1,0 @@
-[Routing] Invokable route loader services
-
-
-#eufossa
-doc for symfony/symfony#30933
-Also the notation with one column has been deprecated so I updated this part as well.

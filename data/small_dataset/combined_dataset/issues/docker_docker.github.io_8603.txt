@@ -1,6 +1,0 @@
-An example of self-built registry
-
-
-Proposed changes
-Unreleased project version (optional)
-Related issues (optional)

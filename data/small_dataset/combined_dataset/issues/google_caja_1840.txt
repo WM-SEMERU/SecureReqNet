@@ -1,5 +1,0 @@
-Safari 5 es5/3 using platform accessors in array-likes badly
-
-
-Original issue 1842 created by erights on 2013-08-17T19:08:34.000Z:
-The domadoInertConstructor.prototype is apparently inheriting from an array-like. On Safari 5, this array-like is implemented using platform getters. However, this assignment to O[P] in the attached screenshot is attempting to initialize domadoInertConstructor.prototype.length, which fails because of http://wiki.ecmascript.org/doku.php?id=strawman:fixing_override_mistake

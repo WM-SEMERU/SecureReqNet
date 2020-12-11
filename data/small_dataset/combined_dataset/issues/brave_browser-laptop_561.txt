@@ -1,5 +1,0 @@
-Change webview to use postMessage instead of nodeintegration
-
-
-Security wise it's safer to just never allow about: tabs to have privileges.
-This task is to remove nodeIntegration from those about: pages.

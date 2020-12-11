@@ -1,7 +1,0 @@
-Changed email address via profile, and got validation link.  Clicked link, all was changed.
-
-All notifications are still going to old email address, even though profile and admin console show new email address.
-
-Tried to restart gitlab, and server to see if it was a persistence issue.  Same result.
-
-Not sure where the email addresses are stored for notifications.

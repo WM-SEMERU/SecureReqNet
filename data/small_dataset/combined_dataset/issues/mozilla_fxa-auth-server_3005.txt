@@ -1,4 +1,0 @@
-fix(devices): return isCurrentDevice for refreshToken device endpoint
-
-
-Fixes #3003

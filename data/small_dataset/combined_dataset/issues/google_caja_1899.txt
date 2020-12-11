@@ -1,5 +1,0 @@
-Markdown editor example doesn't update
-
-
-Original issue 1901 created by metaweta on 2014-03-13T17:09:27.000Z:
-In the Markdown editor example in the playground, the content gets rendered once but not after that.

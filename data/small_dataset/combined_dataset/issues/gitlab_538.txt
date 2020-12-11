@@ -1,4 +1,0 @@
-In labels page we can see each label how many issues it has,
-it'll be realy helpful to have the same feather in browse issues page.
-
-![image](http://i.imgur.com/XP9ymE7.png)

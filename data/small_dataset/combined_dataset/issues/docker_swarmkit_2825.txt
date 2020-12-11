@@ -1,4 +1,0 @@
-[WIP][18.09 backport] fix crash when there are attachments with null network
-
-
-backport of #2819 for the 18.09 branch; cherry-pick was clean, no conflicts

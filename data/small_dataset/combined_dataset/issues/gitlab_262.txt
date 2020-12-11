@@ -1,5 +1,0 @@
-The line count for diffs on the merge request page includes the number of lines for diffs that actually have a `-diff` section in the .gitattributes file.
-
-In practice, this means that if (for example) a PDF is included in a commit with a decent number of changes, the merge request page ALWAYS says it's too big to view since the number of lines of the diff surpasses the hard-coded limit of 10000 lines. This happens even if the user adds a .gitattributes file trying to treat PDFs as binary files (e.g. disabling diffs). Then when the user clicks the "download" link for the diff, they see one that's only a few lines long, since THAT part seems to listen to the .gitattributes file.
-
-This behavior isn't consistent. My experience in particular is with a doxygen-generated source code reference. Every MR puts the diff beyond 10000 lines. GitLab shouldn't count the lines that differ in files where diffs were explicitly disabled.

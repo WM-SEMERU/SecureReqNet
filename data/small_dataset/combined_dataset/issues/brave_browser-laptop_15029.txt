@@ -1,7 +1,0 @@
-Harden use of geth
-
-
-
-catch “unlikely” but possible errors
-handle SIGHUP an dSIGINT
-

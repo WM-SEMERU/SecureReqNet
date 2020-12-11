@@ -1,9 +1,0 @@
-Hi,
-I write all docs of my project in .rst file.
-
-but  cannot display image if i want see this docs in gitlab .(if use .md it's ok) bur all files  is .rst
-
-i use  .. figure:: path_of_image
-
-Thanks.
-

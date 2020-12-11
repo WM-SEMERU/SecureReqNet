@@ -1,5 +1,0 @@
-Added a small note about dynamic role hierarchies
-
-
-This fixes #9745.
-@dmaicher would this pull request be in line with your comments here: symfony/symfony#21853 (comment) ? Thanks!

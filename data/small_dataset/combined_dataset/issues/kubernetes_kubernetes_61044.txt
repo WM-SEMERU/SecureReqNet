@@ -1,6 +1,0 @@
-subpath fixes
-
-
-fixes #60813 for master / 1.10
-Fixes CVE-2017-1002101 - See https://issue.k8s.io/60813 for details
-

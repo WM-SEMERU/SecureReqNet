@@ -1,4 +1,0 @@
-Installation problem on ubuntu 32 bit system
-
-
-When trying to download node js from official website shows 404 not found the url was https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x86.tar.xz

@@ -1,9 +1,0 @@
-'It would be very handy to make the API Javascript accessible from other domains, by adding Cross-Origin Resouce Sharing (CORS) headers to the API responses.
-
-For more info on CORS, see:
-- http://www.html5rocks.com/en/tutorials/cors/
-- http://enable-cors.org/server_nginx.html
-
-I'm not entirely sure of the security implications so I'm tagging this with the security label too.
-
-Also, this is something that Github [doesn't currently support](https://github.com/creationix/js-git/issues/106), so bring it on!

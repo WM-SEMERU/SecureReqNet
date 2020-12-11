@@ -1,4 +1,0 @@
-Rename JwtBearerOptionsConfiguration to (AzureAD|AzureADB2C)JwtBearerOptionsConfiguration
-
-
-Currently as it stands, these two helpers cannot be used together because (so far as I can figure) one will overwrite the other, since they both have the same logical namespace path: Microsoft.AspNetCore.Authentication.JwtBearerOptionsConfiguration

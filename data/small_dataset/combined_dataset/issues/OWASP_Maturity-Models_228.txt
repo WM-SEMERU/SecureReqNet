@@ -1,4 +1,0 @@
-Show indication of unanswered questions quantity
-
-
-Add quick link or shortcuts to show and jump to the remaining unanswered (pending) activities questions.

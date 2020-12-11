@@ -1,4 +1,0 @@
-Don't recommend base64 encoding of random_bytes result
-
-
-This fixes #9348. base64 is not safe for URLs, so let's recommend hashing the values.

@@ -1,5 +1,0 @@
-Currently we can disable 2FA and enable it again to change a authentication device.
-
-It would be nice to provide a shortcut, like "Change your authentication device", that basically does the same, but without confusing disable-enable procedure. Something similar that you do on Slack when you change your device.
-
-cc @JobV 

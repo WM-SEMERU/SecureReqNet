@@ -1,8 +1,0 @@
-[Security] Templates Not Extended Properly when Access Denied template defined.
-
-
-There seems to be some path problems when specifying a custom Access Denied template and extending a layout. It seems this has been reported here...
-http://trac.symfony-project.org/ticket/9502
-More details can be seen in the comments of this blog article...
-http://www.michelsalib.com/2011/03/advance-customization-of-the-403-error-page-in-symfony2/
-Has there been any resolution to this issue?

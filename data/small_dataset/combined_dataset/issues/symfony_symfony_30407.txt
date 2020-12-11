@@ -1,7 +1,0 @@
-[Serializer] Deprecate PropertyNormalizer::isAllowedAttribute
-
-
-I would like to deprecate PropertyNormalizer::isAllowedAttribute as this method should not be override the AbstractNormalizer::isAllowedAttribute.
-The extra $reflectionProperty->isStatic() check could easily introduced in PropertyNormalizer::extractAttributes (like in other normalizers).
-I tried to implement this but don't know how to deprecate the PropertyNormalizer::isAllowedAttribute method.
-How can I deprecate a protected method which override it's parent?

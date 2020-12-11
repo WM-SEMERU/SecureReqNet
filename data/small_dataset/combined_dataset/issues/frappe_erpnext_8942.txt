@@ -1,4 +1,0 @@
-Manufacturing/HR permissions (Sidebar)
-
-
-A user with unrelated roles and no module access is still able to see Manufacturing (BOM, Bill of Materials) and HR (Job Opening) in the sidebar

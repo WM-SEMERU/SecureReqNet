@@ -1,5 +1,0 @@
-Update serializer.rst
-
-
-shows the new way to define a circular_reference_handler on the normalizer
-symfony/symfony#30998

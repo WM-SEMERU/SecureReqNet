@@ -1,4 +1,0 @@
-Answered additional RFP questions.
-
-
-This PR represents the last set of questions, and associated answers, from vendors.

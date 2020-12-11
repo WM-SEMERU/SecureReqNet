@@ -1,6 +1,0 @@
-Verify external providers are using latest APIs
-
-
-RTM milestone.
-External login providers routinely update their APIs and deprecate the old ones. Before we ship RTM we need to verify that each of our implementations is targeting the latest provider API versions to ensure our packages have the longest useful lifespan.
-Example: #85

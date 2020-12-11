@@ -1,4 +1,0 @@
-Handle multiple authentication providers
-
-
-Should the AuthenticationProviderManager::authenticate(TokenInterface $token) function don't return ProviderNotFoundException but return null so that we can have multiple authentcation providers?

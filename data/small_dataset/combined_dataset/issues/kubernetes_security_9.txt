@@ -1,7 +1,0 @@
-Clarify how distributors should communicate during embargoed issues
-
-
-From CVE-2018-1002105 post-mortem
-"Is there a channel for discussion between members of the distributors list?"
-Many of the members are secresponse aliases, so not all recipients of the distributors announcement emails will be members of the mailing list.
-/assign @philips

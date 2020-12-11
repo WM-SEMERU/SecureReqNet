@@ -1,4 +1,0 @@
-Update the multiple user providers article
-
-
-In Symfony 4.0 we can finally remove any reference to: "if you don't define a provider, the first one will be used".

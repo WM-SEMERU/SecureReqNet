@@ -1,4 +1,0 @@
-Reduce default logging in ethWallet-geth.js
-
-
-Currently, we have a lot of logging going on related to Geth's process management inside app/ethWallet-geth.js. Some of it is rather noisy (not referring to console.error calls). Before release, we should clean this up and check for GETH_LOG=1 before calling console.log and console.warn

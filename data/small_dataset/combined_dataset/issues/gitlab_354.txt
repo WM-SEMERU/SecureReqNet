@@ -1,2 +1,0 @@
-When u have a user in Ldap and u change your password in Ldap
-then you can login with both passwords

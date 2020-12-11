@@ -1,6 +1,0 @@
-Change server TLS config to tighten security
-
-
-Change the minimum TLS version to TLS 1.0, and add a custom list of
-ciphersuites which are thought to be the most secure options.
-Signed-off-by: Aaron Lehmann aaron.lehmann@docker.com

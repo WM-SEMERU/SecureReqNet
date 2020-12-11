@@ -1,7 +1,0 @@
-Add validation to CredentialSpec configs
-
-
-- What I did
-Adds validation assuring that if a service uses a Config as a CredentialSpec, then the Config is included in the ConfigRefs with a RuntimeTarget.
-- How to test it
-Includes a test case, which I verified fails before this change and passes after.

@@ -1,4 +1,0 @@
-Authorization for referring to Secrets
-
-
-When a pod is created/updated and has a volumeSource of type "secret", then we should validate whether the user creating the pod has permission to use that secret.

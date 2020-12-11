@@ -1,7 +1,0 @@
-API tools security level document
-
-
-
- Document not-fully trusted functions (time functions, certification verification etc.)  in enclave
- Mark OE_GEN as experimental feature.
-

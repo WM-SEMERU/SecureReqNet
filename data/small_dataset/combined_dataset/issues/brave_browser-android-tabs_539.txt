@@ -1,5 +1,0 @@
-Enable Proguard | DexGuard for android
-
-
-https://www.guardsquare.com/en/dexguard
-https://www.guardsquare.com/en/proguard

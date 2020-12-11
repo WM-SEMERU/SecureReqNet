@@ -1,8 +1,0 @@
-Consider adding OIDC event to handle identity token validation for hybrid flow
-
-
-I am trying to handle JWE identity tokens returned from an OpenID Provider. Since OpenIdConnectProtocolValidator is meant for JWS, I must ensure that the token sent for validation is the inner token of the decrypted JWE.
-A JWE identity token returned from the authorization endpoint (implicit flow) or token endpoint (authorization code flow) can be handled using the token validated event.
-However, when using the hybrid flow and receiving a JWE identity token from both the authorization endpoint and token endpoint (e.g. response type of code id_token), I am not given the opportunity to handle the identity token: https://github.com/aspnet/AspNetCore/blob/v2.2.3/src/Security/Authentication/OpenIdConnect/src/OpenIdConnectHandler.cs#L614.
-My current workaround is to override the protocol validator to handle JWS extraction, however according to this issue, the protocol validator is not the place to do this.
-Please consider adding an event that would allow the identity token to be modified in this scenario.

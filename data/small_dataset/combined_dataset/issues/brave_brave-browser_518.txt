@@ -1,5 +1,0 @@
-enable certificate revocation
-
-
-https://revoked.badssl.com should show up as revoked on all platforms. this is the same issue as brave/browser-laptop#12510 but for brave-browser.
-the underlying problem is that we don't use chrome's crlsets

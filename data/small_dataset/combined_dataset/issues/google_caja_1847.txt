@@ -1,6 +1,0 @@
-compileModule does not coerce to string
-
-
-Original issue 1849 created by kpreid.switchb.org on 2013-08-27T21:16:07.000Z:
-cajaVM.compileModule does not coerce its argument to a string before using it in multiple places, notably in a call to .replace() inside limitSrcCharset. This could be used to confuse limitSrcCharset's answer.
-The problem appears to have been introduced in r5468.

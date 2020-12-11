@@ -1,8 +1,0 @@
-NsenterWriter is an arbitrary shell-execution / path traversal attack waiting to happen
-
-
-EDIT: This is not a vulnerability right now, but it is a potential one.
-While fixing #16969 we noticed that NsenterWriter has the potential for arbitrary shell-execution if a caller doesn't validate their paths.  We need to ensure that is impossible by invoking filepath.Clean on the passed input, and then using %q to verify that the shell we generate cannot be escaped.  However, we may need to go even further (since bash + escaping == epic disaster).
-Docker 1.10 should have a mount propagation setting which allows --shared mount, at which point this code should die and be totally removed.  We should leave the containerized code in experimental and put big security warnings around it until we have that.
-I'd also like to figure out how we can have much stronger review policies around places where we execute bash code in the node, by requiring it go through a strict review process, and having specific helpers.  I'd also like to put some automation in place to ensure we do not execute shell except through whitelisted paths.
-@kubernetes/rh-platform-management @kubernetes/goog-node @liggitt

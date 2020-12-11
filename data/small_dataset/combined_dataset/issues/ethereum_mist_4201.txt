@@ -1,6 +1,0 @@
-DEPRECATION NOTICE
-
-
-Mist and Ethereum Wallet are no longer supported applications.
-Please see this post for the context around this decision and this post for how to migrate to alternative tools.
-Thank you for using Mist & Ethereum Wallet!

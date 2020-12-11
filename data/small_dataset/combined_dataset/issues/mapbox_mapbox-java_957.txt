@@ -1,4 +1,0 @@
-Add Directions API HTTP POST support
-
-
-This issue is similar to #947 - the Directions API will soon have support for HTTP POST, this method should get exposed in the core services library.

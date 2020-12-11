@@ -1,4 +1,0 @@
-TelemetryConfiguration.CreateFromConfiguration()
-
-
-Can the following method be ported from the .net SDK into the java SDK to allow a user to set the path to the configuration file instead of deferring to ./ApplicationInsights.xml.

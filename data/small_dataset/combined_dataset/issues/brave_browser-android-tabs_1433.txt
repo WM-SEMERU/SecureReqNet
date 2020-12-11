@@ -1,4 +1,0 @@
-Display menu reset
-
-
-Closes #1204

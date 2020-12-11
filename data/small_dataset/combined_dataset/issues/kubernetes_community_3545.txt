@@ -1,9 +1,0 @@
-API conventions should offer guidance on embedding types
-
-
-There are a number of places within the kubernetes APIs where an API type is embedded within another type that may alter some semantics of that type. As an example, ReplicaSet embeds the PodTemplateSpec type in its spec, but alters the semantics of certain fields, for example:
-
-You may not set the activeDeadlineSeconds field on a PodTemplateSpec within a ReplicaSet
-You must always use RestartPolicyAlways in a PodTemplateSpec within a ReplicaSet
-
-It would be very useful to have some guidance within the API conventions on the best way to approach decision making around additional or altered semantics when designing APIs that embed types, especially types like PodTemplateSpec that are pervasively used.

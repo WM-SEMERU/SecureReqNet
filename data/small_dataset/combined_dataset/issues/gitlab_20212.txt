@@ -1,1 +1,0 @@
-Right now it is really easy for an 'evil maid' (unauthorized person with brief access to your computer) to do things like disabling 2FA. Compared with e.g. Google this feels too easy.

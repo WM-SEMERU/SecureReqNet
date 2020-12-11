@@ -1,9 +1,0 @@
-Safari 5 causing unexpected SES repair symptoms
-
-
-Original issue 1839 created by erights on 2013-08-15T16:38:10.000Z:
-See attached screenshots. Taken on a friend's computer, since I don't have one running Safari 5.
-It may very well be that SES should be judged unsafe on Safari 5. But these problems, whatever they are, should at least be expected problems and so classified correctly.
-Also, as the htmlservice screenshot shows, after falling back to es53 mode, we then encounter another problem,
-TypeError: setting a property that has only a getter.
-which it reports as coming from es53-taming-frame.opt.js:193, which is unfortunately minimized. Is there a way to run this test on unminimized sources?

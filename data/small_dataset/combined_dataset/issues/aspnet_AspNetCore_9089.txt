@@ -1,9 +1,0 @@
-Server-Side Blazor logging should be at Debug
-
-
-info: Microsoft.AspNetCore.Components.Server.Circuits.RemoteUriHelper[0]
-      RemoteUriHelper initialized.
-info: Microsoft.AspNetCore.Components.Server.ComponentHub[0]
-      Received confirmation for batch 2.
-
-This kind of info should be logged at the debug level instead of info. There's a high bar for justification for logging that takes place at info.

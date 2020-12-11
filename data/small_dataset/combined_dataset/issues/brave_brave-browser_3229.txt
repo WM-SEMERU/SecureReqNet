@@ -1,4 +1,0 @@
-Sign Tor binary
-
-
-We may be able to reduce anti-malware false-positives by specifically signing the Tor binary we distribute. Perhaps we should sign every file we install with the executable attribute.

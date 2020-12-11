@@ -1,7 +1,0 @@
-trust delegation doc should mention remote UCP doc
-
-
-File: engine/security/trust/trust_delegation.md
-The trust delegation document should definitely refer to [ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp.md]
-Something along the lines of this:
-If you would like to use UCP Signing Policy on UCP instances with a foreign DTR instance, you must tell UCP about that DTR instance specifically. See <page/section> for details.

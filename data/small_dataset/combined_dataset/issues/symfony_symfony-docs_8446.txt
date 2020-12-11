@@ -1,4 +1,0 @@
-[SecurityBundle] Deprecated auto picking the first provider
-
-
-Review if we rely on this behavior in the docs. See symfony/symfony#24378

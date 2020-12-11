@@ -1,5 +1,0 @@
-Add unlock for raft encryption key
-
-
-Given the requirement to have an in-memory-only key that is used to encrypt/decrypt all of the raft snapshots, we're going to need an unlock mechanism for turning on the first manager of a swarm that has been completely shutdown.
-This unlock mechanism would receive a call on a control API RPC method, load the key to memory, ensure the raft data is successfully decrypted, and then call the same RPC on every other currently registered manager, ensuring that all of the managers are unlocked.

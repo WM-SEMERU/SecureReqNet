@@ -1,4 +1,0 @@
-kubenetes-godeps publishing bot is broken
-
-
-This issue is auto-updated by the k8s-publishing-bot when the (nightly) publishing process for godeps based versions fails. Only the last log output is available.

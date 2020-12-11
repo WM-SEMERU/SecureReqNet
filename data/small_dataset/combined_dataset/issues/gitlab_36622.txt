@@ -1,7 +1,0 @@
-'The project sidebar shows the number of issues and MRs on every page. This means that on every page we run 2 COUNT queries that take up roughly 60 milliseconds in total.
-
-An easy way of solving this would be to cache the two numbers on a per project basis and refresh them whenever necessary. For issues however there is one thing to take into account: confidential issues. If we want to make sure the count is accurate we'd have to count two types of issues: all issues (displayed when you can see confidential issues), and public issues (displayed if you can't see confidential issues). While this would produce accurate results it's more complex to implement and it means that refreshing requires 3 COUNT queries, meaning it will an additional 30 milliseconds or so to refresh the data.
-
-My proposal would be to _just_ cache the total open issues count, ignoring their visibility. This does mean that the number will be greater than the issues you can see, but I don't see this as being that big of a deal.
-
-@briann What is your take on this? Is it important to hide the number of confidential issues if you can't see them? If so we can take the approach of counting things separately, though it is a bit annoying to implement.

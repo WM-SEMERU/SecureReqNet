@@ -1,6 +1,0 @@
-'Ideally, we should be able to close multiple issues with one commit message.
-
-Either of these would be acceptable.
-
-- `closes #1, #2, and #5`
-- `closes #1, closes #2, closes #5`

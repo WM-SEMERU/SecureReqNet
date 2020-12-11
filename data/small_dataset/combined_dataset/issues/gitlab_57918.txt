@@ -1,5 +1,0 @@
-We should in general avoid storing tokens unencrypted. The impact would be that it would allow someone malicious to set a feature flag on a project that is using the https://ops.gitlab.net/help/user/project/operations/feature_flags feature of GitLab if there is a database leak, sql injection, etc.
-
-This is still an alpha feature so it would be good to get these tokens encrypted in the db sooner rather than later I think.
-
-Note that this has nothing to do with feature flags that are enabled on GitLab.com, this is for feature flags that are set by users, for projects that they manage.

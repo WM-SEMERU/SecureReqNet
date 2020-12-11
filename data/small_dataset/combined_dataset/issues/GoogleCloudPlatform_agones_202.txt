@@ -1,4 +1,0 @@
-RBAC: controller doesn't need fleet create
-
-
-The controller only needs "get", "list", "update", "watch" for fleets.

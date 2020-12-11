@@ -1,7 +1,0 @@
-Add Turf buffer method
-
-
-Turf.js has a Turf#buffer method that would be useful for defining offline map regions.  An example use case in navigation would be defining a buffer around a route geometry for an offline download:
-
-@zugaldia mentioned that this may not be a straightforward port to java, possibly necessitating bringing in a third party library to get the job done.  We need to look into this a bit further / discuss if that makes sense.
-cc @osana @kevinkreiser

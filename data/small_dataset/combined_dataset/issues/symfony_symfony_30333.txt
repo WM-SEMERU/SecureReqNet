@@ -1,7 +1,0 @@
-[RFC][Monolog] Consider adding a hard limit on log buffered in dev
-
-
-Description
-When running consumer / worker in dev env, they leaks a lot. Symfony buffer all logs (mainly for the profiler). In CLI I'm not sure it makes sens.
-So IMHO we could disable this feature in CLI or at least add an hard limit.
-WDYT ?

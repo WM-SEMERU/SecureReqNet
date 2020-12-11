@@ -1,5 +1,0 @@
-Hardware-backed mobile WebAuthn soft token
-
-
-Wouldn't it be wonderful to have a web authentication token for reliable phishing resistant second-factor authentication?
-If Brave is synced with a mobile device, we could generate the keys in that device's secure enclave. When a site uses WebAuthn, we could prompt the user on their mobile device. Hardware-backed true 2FA, no extra hardware needed.

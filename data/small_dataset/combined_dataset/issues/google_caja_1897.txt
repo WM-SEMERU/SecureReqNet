@@ -1,6 +1,0 @@
-Google API taming usage not documented
-
-
-Original issue 1899 created by kpreid.switchb.org on 2014-03-10T17:34:44.000Z:
-There is no documentation which explains how to create a host page which enables the Google APIs taming.
-We should also consider making it simpler to accomplish.

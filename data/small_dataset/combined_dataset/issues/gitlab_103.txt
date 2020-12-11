@@ -1,1 +1,0 @@
-Don't know if it is deliberate or just a bug but it was a gotcha for me. The progress summary and progress bar in a milestone seems to also count in merge requests, which is unexpected. If I create 10 issues and close 5 of them, I expect the progress to be 50%, but instead it's 66% (10/15) because of 5 closed merge requests too.

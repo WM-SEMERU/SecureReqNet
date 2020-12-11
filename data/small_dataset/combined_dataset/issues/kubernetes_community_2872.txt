@@ -1,5 +1,0 @@
-Add Craig to wg-security-audit
-
-
-Updating the wg-security-audit lead information.
-cc: @aasmall @joelsmith

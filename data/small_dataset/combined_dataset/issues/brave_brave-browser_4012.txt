@@ -1,5 +1,0 @@
-Change "earn BAT" to "earn grants" throughout Rewards/Ads UI
-
-
-Elements of the browser UI combined with our public statements &c. would probably lead a reasonable person to conclude that they can earn BAT in exchange for seeing ads (and doing some confirmation actions, proving that they're human). This is not the case. People earn grants which are more limited: they can be used to support sites, but cannot actually be converted into user-controlled BAT.
-We need to update the UI, website, &c, to make it clear that the thing earned by seeing ads is a grant, not BAT.

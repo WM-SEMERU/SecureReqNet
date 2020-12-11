@@ -1,5 +1,0 @@
-Segmentation fault with -O3 and -flto with GCC 8.3.0 and newer
-
-
-As analyzed in GCC bug report, I suspect nodejs violates aliasing rules:
-https://github.com/nodejs/node/blob/master/src/node_platform.cc#L397

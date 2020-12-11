@@ -1,4 +1,0 @@
-Allow bindings to be applied to service instances rather than at a project level
-
-
-E.g. a BigQuery viewer can view all datasets in the project, but when applied to the dataset itself, can only view that one.

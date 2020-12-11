@@ -1,6 +1,0 @@
-Encrypt cluster traffic to limit access through certificate data
-
-
-This is somewhat related to #227 but not sure it's the same. Before production use makes sense there's gotta be control into who can join the cluster and under what role.
-The consul MO https://www.consul.io/docs/agent/encryption.html seems like a nice beginning but I don't know if we could also limit client/server and admin roles using data on the certificates. This is something used in OpenVPN servers for instance where I can ask my client to confirm that the server's presented certificate is indeed that one of a server and not any other signed by the CA.
-Finally it would be great if certificate information is distributed on the cluster as a safe way to make client claims. For instance, any machine can claim a datacenter name in the config but how do we know it's true? Evidence of a source of validation to a claim made by a node would be radically useful for high security controls. Also this could be used with custom drivers for highly audited executions where node introspection would enable a distributed, verifiable source of truth to determine if something should be performed or not.

@@ -1,8 +1,0 @@
-Private wallet data (in ledger/publisher state files) should be encrypted
-
-
-Description
-Carried over from brave/browser-laptop#10705
-
-The wallet private key and passphrase are as sensitive as most passwords, so we should use the Brave password manager encryption key to encrypt them before saving to disk.
-

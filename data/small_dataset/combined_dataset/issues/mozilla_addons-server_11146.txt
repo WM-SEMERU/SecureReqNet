@@ -1,4 +1,0 @@
-drop 'home' (/) as a django view
-
-
-We already removed (almost) all of the legacy frontend, including the browse and disco carousels, so the homepage ('home') is empty.  We should remove it entirely, fixing tests as needed.

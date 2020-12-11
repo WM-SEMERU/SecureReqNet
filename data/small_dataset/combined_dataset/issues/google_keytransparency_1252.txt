@@ -1,8 +1,0 @@
-Add latency metrics to ApplyRevisions in Sequencer
-
-
--Add an additional histogram metric to measure latency of ApplyRevision function
---Overall ApplyRevisionLatency
---ReadBatch
---GetAndVerifyMapLeavesByRevision
---SetLeavesAtRevision

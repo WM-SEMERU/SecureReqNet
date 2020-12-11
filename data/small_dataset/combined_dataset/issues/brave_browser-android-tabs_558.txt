@@ -1,4 +1,0 @@
-update to HTTPS Everywhere 6.0
-
-
-see brave/browser-ios#1460 for details

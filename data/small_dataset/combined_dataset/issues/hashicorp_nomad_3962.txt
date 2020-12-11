@@ -1,4 +1,0 @@
-Audit Logs
-
-
-Currently, we have a requirement for auditing all the events executed by nomad clients, all allocations, de-allocations and any other command (including alloc-id, job name). I tried to look at the code to see if there is an audit logging option in Nomad, but it seems that there isn't? Is this part of your roadmap?

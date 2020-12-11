@@ -1,4 +1,0 @@
-loop to get all the stacks (limited to 120 on each pass)
-
-
-Yo @gene1wood, can you r=?

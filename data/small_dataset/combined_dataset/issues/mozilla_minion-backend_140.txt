@@ -1,6 +1,0 @@
-GET /scan/<scan_id> does not check ownership
-
-
-This relates to mozilla/minion-frontend#46  and mozilla/minion-frontend#51
-We should also query user's existence in the scan's associated group.
-Furture: we might want to have privilege level:  user has read-only, execute, or admin (all) privilege.

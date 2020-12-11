@@ -1,4 +1,0 @@
-Use the SAL v.2 annotations for C/C++ function prototypes and function declarations
-
-
-For static analysis tools like PREfast to detect dangling pointers.

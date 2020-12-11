@@ -1,7 +1,0 @@
-OIDC should verify response_mode
-
-
-"Only if supported_response_modes is present in the discovery doc and form_post is listed there, should the RP ever try to use it.  If our RP code is sending response_mode=form_post when the IdP doesn’t support that, that’s a bug in our RP code, and needs to be fixed." ~Mike Jones, OIDC spec master
-Warn or fail if the OIDCOptions.ResponseMode value isn't listed in the discovery doc. Note we default to 'form_post' which isn't required to be supported in the spec. The spec default is 'query'.
-https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#ResponseModes
-@blowdart

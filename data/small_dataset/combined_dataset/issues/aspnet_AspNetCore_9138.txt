@@ -1,5 +1,0 @@
-New Razor components project shows warning about not found `components.server.js` file
-
-
-Create Razor Components project, open index.cshtml file then meet a warning:
-File 'C:/Users/.../Pages/_framework/components.server.js' not found.

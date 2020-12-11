@@ -1,4 +1,0 @@
-Make sure fastfetch.dll is copied to the correct location to run tests
-
-
-FastFetch is now a dotnet core app and needs to be copied from and to the right location in order for the tests to run locally.

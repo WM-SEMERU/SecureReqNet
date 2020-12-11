@@ -1,9 +1,0 @@
-Version: Gitlab 6.5.1
-
-Steps to reproduce:
-
-* open merge request page
-* select same branches on left hand side and right hand side selections
-* try to create 
-* It shows an error (good)
-* After error is shown target branches on right hand side are empty.

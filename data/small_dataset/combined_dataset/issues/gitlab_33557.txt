@@ -1,7 +1,0 @@
-**Description**
-
-Curently there is security vulnerability because you can get access to any user's project if you have a token. An attacker can compromise server with project that uses users's token and it can get access to all user' project. Tokens are used in composer config in such case (config - gitlab token) for updating of private project sources during deploying on the server.
-
-**Proposal**
-
-Add some token rules to restrict access for particular projects and groups.

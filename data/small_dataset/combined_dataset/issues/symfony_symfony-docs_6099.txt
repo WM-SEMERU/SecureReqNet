@@ -1,8 +1,0 @@
-[Security-Acl] Missing docs (about updateUserSecurityIdentity() method) in 2.7, 2.8, 3.x series
-
-
-Browsing on Symfony ACL related issues, I found this PR: #8650  ([Security][Acl] Add MutableAclProvider::updateUserSecurityIdentity) and its related documentation for new method: PR #3319
-However, this doc update entry appears only in the doc pages of symfony 2.6 but not in 2.7, 2.8, 3.x doc pages. Look:
-
-
-As this entry is an important note, why it was removed from documentation? Maybe a mistake? I've noticed "2.5 versionadded" has removed since this commit:  Removed 2.5 versionadded as its deprecated

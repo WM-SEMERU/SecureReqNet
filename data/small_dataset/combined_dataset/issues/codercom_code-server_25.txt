@@ -1,5 +1,0 @@
-more secure default setup
-
-
-The default usage for code-server should be a command to ssh into a server and setup the code-server and open a reverse ssh tunnel from code-server to a local host port that the user can access code-server through.
-This way no password.

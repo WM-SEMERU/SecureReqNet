@@ -1,4 +1,0 @@
-Kubelet TLS bootstrap
-
-
-kubernetes/kubernetes#20439

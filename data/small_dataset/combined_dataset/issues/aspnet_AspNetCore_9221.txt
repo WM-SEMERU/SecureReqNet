@@ -1,4 +1,0 @@
-Add retries to helix failures and re-enable helix as a required workload
-
-
-Trying to see if max retries works correctly and if we can start making helix a required check. Still prototyping.

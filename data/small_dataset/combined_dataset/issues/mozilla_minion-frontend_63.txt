@@ -1,7 +1,0 @@
-User is capable of accessing api after logout
-
-
-Problem
-When a user logs out of the system by clicking "logout", the user can still make contact with the frontend api, requesting all the information the user has access to.
-This is because we don't call /api/logout when we called the logout function.
-Currently, flask stores the session information in the cookie file. So we should at least clear the session record in the frontend. We can address the cookie issue later.

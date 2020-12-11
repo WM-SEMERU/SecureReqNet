@@ -1,5 +1,0 @@
-SOURCE::SRC and SOURCE::MEDIA should be whitelisted
-
-
-Original issue 1862 created by kpreid.switchb.org on 2013-10-03T17:02:05.000Z:
-SOURCE::SRC has the exact same consequences as VIDEO::SRC and therefore should be whitelisted (tamed as a URI). SOURCE::MEDIA affects only the choice of source and should be whitelisted (tamed as a media query, if possible).

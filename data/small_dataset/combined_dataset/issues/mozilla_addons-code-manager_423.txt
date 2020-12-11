@@ -1,5 +1,0 @@
-Ensure CSP report endpoint is setup to consume reports
-
-
-There's a no-op CSP report endpoint configured on the app, this should be superseded by a real CSP report endpoint setup by ops that feeds the actual security logs.
-Endpoint is /__cspreport__

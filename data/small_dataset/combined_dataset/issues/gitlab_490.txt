@@ -1,1 +1,0 @@
-When pushing to a new branch, the resulting webhook delivers a payload with 0 commits.

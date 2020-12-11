@@ -1,5 +1,0 @@
-is it safe to add `//go:noescape` for function `Sprintf(format string, a ...interface{}) string` please
-
-
-when a package fmt's function was called, such as func Sprintf(format string, a ...interface{}) string, it will result in input variables escape to heap. But the fmt function actually is
-synchronization semantic, I think it's safe despite its input variables allocated in stack. So if we try to add //go:noescape for function Sprintf, which avoid input variables escape, is there any correctness issue or safe risk please？

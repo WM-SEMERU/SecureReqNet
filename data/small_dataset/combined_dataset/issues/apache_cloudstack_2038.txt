@@ -1,8 +1,0 @@
-ipv6: Allow all ICMPv6 traffic if -1 is provided as a ICMP type
-
-
-ip6tables no longer takes '--icmpv6-type any' as a argument.
-To allow all ICMPv6 traffic with ip6tables it has to be invoked this way:
-$ ip6tables -I i-2-14-VM -p icmpv6 -s ::/0 -j ACCEPT
-All ICMPv6 traffic is now allow into the Instance.
-Signed-off-by: Wido den Hollander wido@widodh.nl

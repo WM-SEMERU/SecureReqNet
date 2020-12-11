@@ -1,4 +1,0 @@
-zookeeper GetW function seems has a atomic error
-
-
-in this function, author calls client.GetW after Get, but there maybe some modifications to this key between this two operations, it is not atomic

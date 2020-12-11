@@ -1,9 +1,0 @@
-Update CookieOptionsConfiguration.cs
-
-
-Summary of the changes
-
-similar to issue #6669 in AzureADB2C
-(change #6790)
-
-Addresses #6021

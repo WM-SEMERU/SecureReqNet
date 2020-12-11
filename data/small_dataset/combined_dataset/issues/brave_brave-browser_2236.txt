@@ -1,4 +1,0 @@
-[hackerone] #449763 Address bar spoofing
-
-
-https://hackerone.com/bugs?report_id=449763

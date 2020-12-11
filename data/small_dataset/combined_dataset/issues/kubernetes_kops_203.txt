@@ -1,4 +1,0 @@
-Support for specifying parameters to the api server
-
-
-In order to specify the authorization mode for a Kubernetes master, the --authorization-mode command line parameter needs to be able to be set via kops edit cluster or some similar method.

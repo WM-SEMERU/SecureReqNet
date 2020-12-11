@@ -1,6 +1,0 @@
-crypto/rsa: allow hash.Hash for OAEP and MGF1 to be specified independently
-
-
-rsa.EncryptOAEP and rsa.DecryptOAEP both take a hash.Hash as input, and this hash function is used as the hash function for both OAEP and the MGF1 XOR. However, an option should be provided to specify the hash function for OAEP and MGF1 separately, as it is permissible for the hash functions for these two operations to be different.
-This is pertinent for compatibility with other languages and RSA implementations, as the Sun JDK's implementation of the RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING provider uses SHA-256 for OAEP but SHA-1 for MGF1. As it currently stands, the rsa package in Go is not compatible with this encryption mode in Java.
-For reference, the OpenSSL API also allows for the hash functions for OAEP and MGF1 to be specified separately: https://github.com/openssl/openssl/blob/master/crypto/rsa/rsa_oaep.c#L44, const EVP_MD *md, const EVP_MD *mgf1md.

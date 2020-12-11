@@ -1,5 +1,0 @@
-Merge pull request #290 from brave/status_400_staging
-
-
-Check text on bad request status
-This is an uplift of #290 into master branch.

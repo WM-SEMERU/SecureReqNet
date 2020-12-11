@@ -1,5 +1,0 @@
-feat(security): expose the safe value types.
-
-
-This allows users to properly type their SafeHtml, SafeStyle, etc values.
-Fixes #8568.

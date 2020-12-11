@@ -1,5 +1,0 @@
-[Security] Warn for implementing `eraseCredentials`
-
-
-... as implementing eraseCredentials on a Doctrine entity will be flushed. Setting password to null will actually be saved at every login attempt.
-This might also could be a warning with the UserInterface docblock directly (?)

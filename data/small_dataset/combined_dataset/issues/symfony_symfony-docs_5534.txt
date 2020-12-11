@@ -1,5 +1,0 @@
-Document how to refresh the user *not* on every request
-
-
-See symfony/symfony#1338
-I think a short section in the custom user provider section should be enough, with the warning that doing this with, for example, Doctrine carries the risks outlined in that issue.

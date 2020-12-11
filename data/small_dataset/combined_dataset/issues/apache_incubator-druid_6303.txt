@@ -1,4 +1,0 @@
-Use PasswordProvider, fix info on initial passwords in basic security extension docs
-
-
-Use PasswordProvider for the initial passwords and adds a missing "not" to the docs for the initial password properties.

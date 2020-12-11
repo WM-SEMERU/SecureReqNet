@@ -1,6 +1,0 @@
-Anonymous users
-
-
-Is there a reason why Symfony\Component\Security\Core\Authentication\Token\AnonymousToken::getUser returns a string rather than an AnonymousUser object?
-I would like to propose that we add an AnonymousUser class and return it for this token. This make working with the Symfony\Component\Security\Core\Authentication\Token\TokenInterface a lot more easy/transparent.
-If there are no objections, I'll gladly open a PR.

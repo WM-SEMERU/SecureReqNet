@@ -1,7 +1,0 @@
-[js deps] fix dependencies vulnerabilities
-
-
-found 68 vulnerabilities (63 low, 4 moderate, 1 high) in 41818 scanned packages
-  run `npm audit fix` to fix 4 of them.
-  64 vulnerabilities require semver-major dependency updates.
-

@@ -1,6 +1,0 @@
-Missing typeof operator in test_TYPED_ARRAYS_THROW_DOMEXCEPTION
-
-
-Original issue 1918 created by andrebargull on 2014-05-15T12:47:28.000Z:
-https://code.google.com/p/google-caja/source/browse/trunk/src/com/google/caja/ses/repairES5.js#&nbsp;2568
-Both if-statements in test_TYPED_ARRAYS_THROW_DOMEXCEPTION() should probably use the typeof operator instead of using simple string comparison.

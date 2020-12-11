@@ -1,6 +1,0 @@
-Slowloris vulnerability
-
-
-Traffic server is "likely vulnerable" to slowloris (see https://nmap.org/nsedoc/scripts/http-slowloris-check.html) in both reverse and forward proxy mode.
-Has anyone investigated this yet? Is there any plan to do anything about it? I appreciate the nature of the vulnerability means fully fixing it is likely impossible, I'm just trying to find out if there's an official position on the issue.
-Thanks.

@@ -1,6 +1,0 @@
-Application not authorized to use CAS
-
-
-Hello,
-I am trying to integrate this client with CAS version 6.0, and im getting this error "The application that you have tried to authenticate is not authorized to use CAS". It's possible to do this integration? How I could resolve this problem?
-Thank you

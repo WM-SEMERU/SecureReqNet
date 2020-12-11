@@ -1,4 +1,0 @@
-ITicketStore from DI
-
-
-Wouldn't it make sense to resolve the ITicketStore for the cookie handler from DI in the future?

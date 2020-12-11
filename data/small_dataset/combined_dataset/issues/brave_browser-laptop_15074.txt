@@ -1,5 +1,0 @@
-block loading of chrome://brave URLs
-
-
-talking to @bridiver and @darkdh it seems easiest to block chrome://brave loads in browser-laptop vs in muon. i believe navigation to chrome://brave is already blocked so we just need to block user-initiated loads.
-this is a follow-up to #15045

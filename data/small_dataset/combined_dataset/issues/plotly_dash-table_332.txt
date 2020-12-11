@@ -1,6 +1,0 @@
-Make `numeric` columns return a number instead of a string when possible
-
-
-Relates to #166 and to #297 specifically.
-As currently implemented the table's numeric columns return a string when edited instead of a number. When capable of doing so the numeric type should return a number instead of expecting the on_change layer to handle the coercion.
-As is, it is not possible to use on_change: { action: 'validate' } for these columns as the value is always a string.

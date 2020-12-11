@@ -1,7 +1,0 @@
-[Serializer] AnnotationReader usage is not registered
-
-
-As per @nicolas-grekas request,
-If using the Serializer as component the annotation loader is not registred.
-see symfony/symfony#26083 for a disccusion about it.
-Documentation - https://symfony.com/doc/current/components/serializer.html#deserializing-an-object

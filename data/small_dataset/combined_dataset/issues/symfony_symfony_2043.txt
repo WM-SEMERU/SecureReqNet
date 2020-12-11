@@ -1,4 +1,0 @@
-Loopback with "use_forward" option when account is disabled
-
-
-If a user is authenticated and his account becomes disabled, there is a loopback (in  FormAuthenticationEntryPoint.php:56) if "use_forward" option is enabled (in the firewall).

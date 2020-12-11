@@ -1,4 +1,0 @@
-Added documentation on newly added CMake support for samples
-
-
-Fixes #1632.

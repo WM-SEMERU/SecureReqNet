@@ -1,5 +1,0 @@
-Implement Mozilla's Github security standard
-
-
-Detailed here: https://github.com/mozilla-services/GitHub-Audit/blob/master/docs/checklist.md and part of #31
-@hwine can you advice on where its currently lacking based on your checks?

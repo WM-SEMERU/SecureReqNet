@@ -1,4 +1,0 @@
-need CSRF protection for actions authenticated by cookie?
-
-
-AFAICT, the vault doesn't do any CSRF checks for actions that require cookie-based auth (devops only?). Reuven used https://github.com/hapijs/crumb for the website.

@@ -1,5 +1,0 @@
-Reduce usage of SHELL command
-
-
-Using the SHELL command adds a layer to the image, so we should reduce the usage to only those that are necessary.  This is done by using the default shell, cmd, throughout the Dockerfile until we only have Powershell commands to execute (we want the image to use Powershell as the default shell) at which point we use SHELL to switch to Powershell.
-Fixed #251.

@@ -1,5 +1,0 @@
-Events API returns raw etcd errors in some cases
-
-
-The events REST storage object is not using generic.Etcd, and it's not wrapping the returned errors from etcd with the appropriate pkg/api/errors/etcd handles.  As a result, we return raw etcd errors to clients which leaks server information (security) and is also ugly.
-Spawned from openshift/origin#3196

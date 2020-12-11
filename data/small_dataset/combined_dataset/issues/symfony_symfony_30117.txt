@@ -1,8 +1,0 @@
-router:debug not found
-
-
-Symfony version(s) affected:  4.2.3
-Description
-The command router:debug not found
-How to reproduce
-php bin/console

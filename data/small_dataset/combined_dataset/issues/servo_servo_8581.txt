@@ -1,9 +1,0 @@
-TLS connections should disallow handshakes which use small DH groups
-
-
-See for example:
-
-https://dh480.badssl.com/
-https://dh512.badssl.com/
-
-which should be blocked. (https://dh1024.badssl.com/ should also be blocked eventually IMO, but is not yet in many major browsers)

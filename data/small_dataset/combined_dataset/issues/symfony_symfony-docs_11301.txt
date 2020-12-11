@@ -1,4 +1,0 @@
-Alias Monolog\Formatter\JsonFormatter instead of creating a new one
-
-
-Let me know if I am wrong but I thought it would be more reliable to use MonologBundle service instead of creating a new one.

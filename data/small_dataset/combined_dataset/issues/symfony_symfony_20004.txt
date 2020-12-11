@@ -1,6 +1,0 @@
-[DependencyInjection] - AddSecurityVotersPass - setVoters
-
-
-There are legacy bundles that have dependence definition "security.access.decision_manager " even using the debug mode. Example: JMSSecurityExtraBundle.
-Affected class : Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddSecurityVotersPass
-Solution: conditionally call 'setVoters' of class 'debug.security.access.decision_manager', but always call 'setVoters' of class 'security.access.decision_manager'

@@ -1,4 +1,0 @@
-Increase the default passphrase iteration count to 150
-
-
-See #139

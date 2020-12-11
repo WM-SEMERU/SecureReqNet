@@ -1,7 +1,0 @@
-Update kube-proxy to debian-iptables:v5
-
-
-Update kube-proxy to be based off the more recent debian-iptables:v5, which includes lots of CVE fixes.
-This is based off #39760, but creating a manual patch seemed cleaner than grabbing those cherry-picks.
-@thockin - Are aware of any issues that could be caused by updating iptables (or any other dependencies) with an old kube-proxy?
-/cc @ixdy @bprashanth

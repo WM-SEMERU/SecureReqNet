@@ -1,6 +1,0 @@
-Add overview constants
-
-
-The geometry of the route has three options when using .setOverview(), full (the most detailed geometry available),  simplified (a simplified version of the full geometry), or  false (no overview geometry). By default, the simplified geometry is returned. The constants file currently doesn't have these options.
-The directions v5 example should use the full overview since we are drawing the route on the map.
-cc: @zugaldia

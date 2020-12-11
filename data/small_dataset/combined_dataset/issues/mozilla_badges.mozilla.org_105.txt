@@ -1,4 +1,0 @@
-Re-enable CSP
-
-
-CSP is disabled. Look at re-enabling it.

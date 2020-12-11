@@ -1,4 +1,0 @@
-Support scrypt and use it by default
-
-
-On Trusty and above we have libscrypt (https://github.com/technion/libscrypt) in the default repos.

@@ -1,9 +1,0 @@
-https://gitlab.com/gitlab-org/gitlab-ce/commit/1f84518ab7128e302f44085b4ecd8686f3f2ea2d
-
-presents a completely different diff than
-
-https://gitlab.com/gitlab-org/gitlab-ce/commit/1f84518ab7128e302f44085b4ecd8686f3f2ea2d.diff
-and
-https://gitlab.com/gitlab-org/gitlab-ce/commit/1f84518ab7128e302f44085b4ecd8686f3f2ea2d.patch
-
-Which are the paths on the "plain diff" and "email patches" links, respectively, for the former.

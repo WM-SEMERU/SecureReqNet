@@ -1,9 +1,0 @@
-http://www.openwall.com/lists/oss-security/2016/06/24/3
-
->Ruby-saml prior to version 1.3.0 is vulnerable to an XML signature wrapping
-attack. Ruby-saml users must update to 1.3.0 version which implements 3
-extra validations to mitigate this kind of attack.
-
-https://github.com/onelogin/ruby-saml
-
-We use ruby-saml 1.1.2 on master.

@@ -1,4 +1,0 @@
-OE SDK Enhanced Logging Feature needs to be documented
-
-
-The OE SDK enhanced Logging feature is documented in issue #1118 . It needs to be available as a document for SDK users to reference.

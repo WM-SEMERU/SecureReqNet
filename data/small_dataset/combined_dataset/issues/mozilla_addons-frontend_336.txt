@@ -1,4 +1,0 @@
-Enhance the CSP config with more CSP 2.0 goodness
-
-
-We should lock down as many rules as possible and pay special attention to those that don't have a fall-back and are therefore wide open.

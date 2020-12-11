@@ -1,7 +1,0 @@
-Propose an alternative ssh command
-
-
-I didn't get it to work with the ip address, it took me a while to find the alternative way.
-Proposed changes
-Unreleased project version (optional)
-Related issues (optional)

@@ -1,7 +1,0 @@
-Update part2.md
-
-
-Proposed changes
-I fixed a typo.
-Unreleased project version (optional)
-Related issues (optional)

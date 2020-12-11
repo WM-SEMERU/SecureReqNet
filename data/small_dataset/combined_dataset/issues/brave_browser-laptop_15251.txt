@@ -1,6 +1,0 @@
-Merge pull request #14715 from brave/riastradh-tor-blocktorlessonion
-
-
-Block loading .onion sites in non-Tor tabs.
-Was previously merged with #14715 into what is now 0.24.x-legacy
-Uplifting after talking with @riastradh-brave

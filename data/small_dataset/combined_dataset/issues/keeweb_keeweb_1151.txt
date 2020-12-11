@@ -1,8 +1,0 @@
-Improve reliability of emptying trash
-
-
-
-Makes the list of entries to delete immutable to ensure all are moved to the null group
-Resets model items to ensure view shows that groups and their contents have been deleted
-
-Tested in Kee Vault on Firefox and Chrome

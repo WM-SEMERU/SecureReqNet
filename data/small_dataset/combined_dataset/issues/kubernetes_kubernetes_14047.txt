@@ -1,6 +1,0 @@
-Docker image reported by status is not the image digest
-
-
-The image digest from an image is much more useful to be reported with a container than just the image id.  We should return the digest as well, which would allow policy tie back to 3rd party engines as well as understanding the exact image in use.  I believe the gap today is the local graph driver doesn't preserve the digest, but that work is going on upstream in Docker to make that more generally available.
-@vbatts correct me if I missed anything about the state of Docker on this (links to issues would be helpful)
-@ncdc @pweil- policy around managing what images can be used on a Kubelet is a next big area of exploration - knowing exactly what is in use is a part of that

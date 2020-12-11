@@ -1,7 +1,0 @@
-Security: namespace - vic info
-
-
-
-ze je nutno nastavit ve vsech presenterech, ktery ns pouzivaji
-pokud se v presenteru pouziva checkRequirements, je nutno nastavit NS tam, nestaci ve startupu
-

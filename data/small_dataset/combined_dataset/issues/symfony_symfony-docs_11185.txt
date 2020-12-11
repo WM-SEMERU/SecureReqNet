@@ -1,5 +1,0 @@
-logging/processors.rst: no mentions of built-in processors
-
-
-Page logging/processors.rst used to mention built-in processors (like WebProcessor) - for instance, here is a version that mentioned them: https://github.com/symfony/symfony-docs/blob/dc2bda4f7a38bf7c3baccb6d331e145d1105aeeb/logging/processors.rst
-Was this information removed deliberately? Recently my PR with new processors was merged symfony/symfony#28330, and I wonder if I should mention them somewhere in documentation.

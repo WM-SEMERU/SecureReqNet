@@ -1,4 +1,0 @@
-change Dockerfile maintainers email to dev mailing list
-
-
-This was missed in #6896.

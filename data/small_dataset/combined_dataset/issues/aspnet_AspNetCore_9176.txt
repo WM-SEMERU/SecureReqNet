@@ -1,9 +1,0 @@
-Add 'private' access modifier to RC/Blazor templates
-
-
-
-Templates only.
-Not test assets or MVC. (Can add if you wish.)
-
-Sister PR in docs 👉 aspnet/AspNetCore.Docs#11897
-cc: @danroth27 @SteveSandersonMS

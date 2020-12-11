@@ -1,6 +1,0 @@
-INTERNAL COMPILER ERROR
-
-
-Original issue 1957 created by ingeniero.ieci@servired.es on 2015-03-10T10:18:59.000Z:
-Today the apps we have developed in Google Caja are not working any more, we have a big issue with the referenced scripts and plugins.
-<== http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.css:302+3 - 29: unknown css property -webkit-overflow-scrolling HtmlOutput:481+32 - 37: css property display has bad value: ==>clear<== HtmlOutput:4289+45 - 50: css property position has bad value: ==>fixed<== HtmlOutput:1032+25 - 35: INTERNAL COMPILER ERROR. Node did not match any rules at: Declaration Identifier : checkField. Please report this error at: http://code.google.com/p/google-caja/issues/ HtmlOutput:2333+25 - 35: INTERNAL COMPILER ERROR. Node did not match any rules at: Declaration Identifier : checkField. Please report this error at: http://code.google.com/p/google-caja/issues/

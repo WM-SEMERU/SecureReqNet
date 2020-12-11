@@ -1,8 +1,0 @@
-js/lib/request.js should use non-persistent session by default
-
-
-Test plan
-#12694 (comment)
-
-currently it uses the default session, which may write data (cache, etc.) to disk. it is better to use a non-persistent session to prevent leaks from private browsing.
-no-qa-needed except to test for regressions

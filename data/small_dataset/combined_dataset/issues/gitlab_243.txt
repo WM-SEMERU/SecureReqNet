@@ -1,9 +1,0 @@
-There's a nasty trap when closing an issue:
-
-1. Enter some comment into the comment input of an issue.
-2. Click the "Close Issue" button.
-3. The issue is closed, but the comment is definitely lost.
-
-Suggestion:
-
-The "Close Issue" button should switch to "Comment and Close Issue" as soon as the comment input contains text. And hitting it should submit the comment and then close the issue.

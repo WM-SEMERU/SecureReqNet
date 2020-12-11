@@ -1,8 +1,0 @@
-`make verify WHAT=bogus` succeeds
-
-
-Found while working on #74877
-As part of switching from godep to go modules, I renamed the verify-godeps.sh script to verify-vendor.sh
-CI was green, so I assumed all was well, until I realized that CI was actually calling make verify WHAT=godeps, and make verify passes if the WHAT target cannot be located.
-make verify should fail if an unknown target is specified, or jobs that think they are testing things could have typos or be testing nonexistent verify scripts.
-/sig testing

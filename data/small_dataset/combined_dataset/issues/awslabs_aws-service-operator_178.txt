@@ -1,8 +1,0 @@
-Fixes #174 Singular/Plural
-
-
-Issue #, if available:
-Fixes #174
-Description of changes:
-Fixes the bug where the plural name was being used for the singular name in the aws-service-operator.yaml
-By submitting this pull request, I confirm that my contribution is made under the terms of the Apache 2.0 license.

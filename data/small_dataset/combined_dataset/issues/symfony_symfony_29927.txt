@@ -1,6 +1,0 @@
-[Messenger] Add custom headers without STAMP_HEADER_PREFIX
-
-
-Hi,
-How can i add header value without STAMP_HEADER_PREFIX ?
-I can use rabbitmq and i want to add x-delay header key.

@@ -1,5 +1,0 @@
-Bad severity name to ses.ok() is silently ignored
-
-
-Original issue 1758 created by kpreid.switchb.org on 2013-06-06T20:34:16.000Z:
-ses.ok(string not found in ses.severities) is treated as if the argument was not supplied, which is potentially dangerous. repairES5 already has validateSeverityName and we should use that.

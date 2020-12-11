@@ -1,4 +1,0 @@
-Add sample_id and use it for monitoring topics
-
-
-We should add sample_id as an attribute as part of the Decoder. Once this is in place, we can update the Republisher to produce monitoring topics based on sample_id rather than random numbers.

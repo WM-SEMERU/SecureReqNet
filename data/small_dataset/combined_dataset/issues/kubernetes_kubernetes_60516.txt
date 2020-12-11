@@ -1,9 +1,0 @@
-[1.7] Automated cherry pick of #58720 #60342
-
-
-Cherry pick of #58720 #60342 on release-1.7.
-#58720: Ensure that the runtime mounts RO volumes read-only
-#60342: Fix nested volume mounts for read-only API data volumes
-Fixes #60814 for 1.7
-Changes secret, configMap, downwardAPI and projected volumes to mount read-only, instead of allowing applications to write data and then reverting it automatically. Until version 1.11, setting the feature gate ReadOnlyAPIDataVolumes=false will preserve the old behavior.
-

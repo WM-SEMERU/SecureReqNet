@@ -1,5 +1,0 @@
-Updating logic for x_forwarded_host
-
-
-@SammyK @yguedidi If you can review/comment/improve that would be great.
-We got a report that x_forwarded_host could be used maliciously (in non-reverse-proxy situations)

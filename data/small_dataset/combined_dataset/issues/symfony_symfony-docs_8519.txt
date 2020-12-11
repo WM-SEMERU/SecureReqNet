@@ -1,4 +1,0 @@
-Improved the first example of the Guard authenticator
-
-
-I don't like the changes I made to this example in #8497. I consider that the new version of the example makes more sense and it's more correct.

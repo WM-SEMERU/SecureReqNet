@@ -1,7 +1,0 @@
-Misleading information in the security docs
-
-
-The first header of Using the form_login Authentication Provider is named “form_login Setup”;
-At the same time, there is another page named How to Build a Login Form with the url .../form_login_setup, which uses MakerBundle and Guard to make the same thing, having nothing to do with the form_login provider.
-This is highly misleading.
-There is an information box on top of that page speaking about the form_login provider, but that's only helpful for those who know what an authentication provider is, which is not the case for beginners.

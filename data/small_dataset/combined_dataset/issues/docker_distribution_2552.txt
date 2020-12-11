@@ -1,6 +1,0 @@
-The vendored Azure autorest may present security issues
-
-
-A race condition was discovered in the Azure Active Directory client of github.com/Azure/go-autorest/ when refreshing auth tokens, requiring an API change to fix and the bump of the autorest major version from 9 to 10.
-docker-distribution is still built against an ancient 7.3.0 pre-10 autorest version. It would be awfully nice if it could be switched to the latest autorest 10 release and the matching azure 14.x release (which is out of beta unlike the currently vendored version)
-I've no idea if the race is exploitable but in such cases it's better not to try to be smarter than attackers and just apply security fixes.

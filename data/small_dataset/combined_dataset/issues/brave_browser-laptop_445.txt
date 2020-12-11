@@ -1,4 +1,0 @@
-Draging a url link to the address bar closes all tabs and opens link in un escable full screen
-
-
-If you left click on a link and drag it to the url address bar Brave closes all tabs and opens that link in an unescable single full screen window forcing you to close Brave, found this by accident the other day. I think this should would be better if it resulted inopening a new tab with the link, or nothing at all for now.

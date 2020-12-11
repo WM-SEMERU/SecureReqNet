@@ -1,7 +1,0 @@
-This happens with recent versions of firefox. I'm currently using firefox 30.
-
-When viewing a large merge request (say a few hundred commits), like when the branch needs to be rebased or just a very large merge, firefox becomes unresponsive and eats all of my CPU.
-
-If I disable javascript, it is fine - although that apparently does not fix things for some people.
-
-Does anyone else have this issue?

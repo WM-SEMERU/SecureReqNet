@@ -1,8 +1,0 @@
-Investigate fingerprinting/security risk of HR timers 2
-
-
-Description
-HR-Timers have been implemented in various browsers to provide higher precision timing information for various tasks like script execution and resource fetches. Opening the issue to investigate the fingerprinting risk associated with this API.
-https://w3c.github.io/hr-time/#sec-privacy-security
-https://www.w3.org/TR/navigation-timing-2/#security
-cc: @snyderp

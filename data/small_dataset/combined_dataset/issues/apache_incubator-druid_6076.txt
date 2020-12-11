@@ -1,8 +1,0 @@
-Mutual TLS support
-
-
-This PR adds support for mutual TLS (https://en.wikipedia.org/wiki/Mutual_authentication).
-This adds a new "requireClientAuth" property and truststore properties on the server-side TLS config.
-If "requireClientAuth"  is true, Druid will require clients to identify themselves by providing a TLS certificate.
-The server-side truststore needs to be configured with the certificates needed to validate the client certificates.
-On the client side for internal communications (simple-client-sslcontext extension), new keystore properties are added, specifying the client certificate that a Druid service will use when communicating with other Druid services.

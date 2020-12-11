@@ -1,4 +1,0 @@
-Upgrade to Go 1.9.4
-
-
-Security issue with go get in 1.9.3

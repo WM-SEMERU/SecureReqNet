@@ -1,9 +1,0 @@
-Fix s3 driver for supporting ceph radosgw
-
-
-Radosgw does not support S3 GET Bucket API v2 API but v1.
-This API has backward compatibility, so most of this API is working
-correctly but we can not get KeyCount in v1 API and which is only
-for v2 API.
-Signed-off-by: Eohyung Lee liquidnuker@gmail.com
-Fixes: #2553

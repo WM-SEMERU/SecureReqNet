@@ -1,8 +1,0 @@
-I use gitlab 7.1.0 on Ubuntu 12.04.
-Date of my server is correct.
-But in gitlab, no...
-
-My time zone : Brussels (gmt+2)
-
-![Capture d’écran 2014-07-23 à 16.27.02](https://gitlab.com/uploads/gitlab-org/gitlab-ce/8cfb1e62a5/Capture_d_%C3%A9cran_2014-07-23_%C3%A0_16.27.02.png)
-![Capture d’écran 2014-07-23 à 16.27.14](https://gitlab.com/uploads/gitlab-org/gitlab-ce/a53623523b/Capture_d_%C3%A9cran_2014-07-23_%C3%A0_16.27.14.png)

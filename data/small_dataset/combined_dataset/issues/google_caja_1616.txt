@@ -1,8 +1,0 @@
-Does Bug 2470 from V8 affect Caja?
-
-
-Original issue 1616 created by andrebargull on 2013-01-05T17:06:09.000Z:
-http://code.google.com/p/v8/issues/detail?id=2470
-The Function constructor can be tricked to run arbitrary code (instead of just compiling a function). I haven't yet tested this out, but it may affect Caja/SES...
-d8> (function(){  Function("}), print('this=' + (this)), (function(){");  })()
-this=[object global]

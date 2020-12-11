@@ -1,1 +1,0 @@
-You can see it here: https://gitlab.com/glyph/metasetup/blob/master/README.rst

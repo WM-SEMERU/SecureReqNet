@@ -1,4 +1,0 @@
-Fix dependency graph link
-
-
-The path to the dependency graph was relative, and wasn't updated in the move of the Getting Started documents. Also update the date it was last generated.

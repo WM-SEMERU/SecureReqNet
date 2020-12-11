@@ -1,4 +1,0 @@
-all: Go 1.12.2 release status
-
-
-Issue tracking the go1.12.2 release by releasebot.

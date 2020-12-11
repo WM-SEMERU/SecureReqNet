@@ -1,9 +1,0 @@
-pathname property of anchor elements is missing
-
-
-Original issue 1898 created by metaweta on 2014-03-06T19:59:22.000Z:
-var a = document.createElement('a');
-a.href = "http://www.google.com/search?q=blah";
-a.pathname
-Get undefined, should be "/search".
-http://www.aptana.com/reference/html/api/HTMLAnchorElement.html#HTMLAnchorElement.pathname

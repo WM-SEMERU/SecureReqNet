@@ -1,7 +1,0 @@
-Errors show original HTML unsanitized
-
-
-Original issue 1011 created by ben@links.org on 2009-03-26T16:30:56.000Z:
-When a gadget has compile-time errors, the errors shown in shindig include
-unsanitised HTML.
-Presumably this can lead to an attack.

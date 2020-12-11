@@ -1,4 +1,0 @@
-CSP policy prevents using Polymer in Atom plugins
-
-
-I'm trying to use Polymer in an Atom plugin, but the CSP policy blocks inline scripts in HTML imports, which is core to how Polymer works. I'm not sure that this actually protects against any actual security boundary in Atom/Electron's security model (which isn't equivalent to the web)

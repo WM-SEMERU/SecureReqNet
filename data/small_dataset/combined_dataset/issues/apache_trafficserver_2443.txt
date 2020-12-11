@@ -1,8 +1,0 @@
-AWS auth v4: fixed query param value URI-encoding
-
-
-It seems AWS servers do not validate the signature according the published spec: "Signature Calculations for the Authorization Header: Transferring Payload in a Single Chunk (AWS Signature Version 4)"  : "Task 1: Create a Canonical Request”
-When AWS servers validate the signature (CanonicalQueryString inside the CanonicalRequest)
-they seem to check if a query parameter value is already encoded and don’t encode if it is,
-which is nowhere mentioned neither in the spec nor in its examples.
-Added a check to be consistent with AWS behavior while still waiting for response/confirmation from AWS.

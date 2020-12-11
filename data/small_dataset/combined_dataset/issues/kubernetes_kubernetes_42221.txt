@@ -1,6 +1,0 @@
-Add RBAC roles for bootstrap controllers
-
-
-When locking down controllers to individual RBAC roles we need to make sure that the bootstrap controllers have the right permissions.
-@luxas -- I'm not set up to totally test this with the right options.  Would love for you to validate.
-

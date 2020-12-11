@@ -1,3 +1,0 @@
-To use ECDHE, you are strongly recommended to generate a dhparam file with openssl dhparam <rsa keysize>
-
-But you have no ssl_dhparam option in nginx config file. Please add one?

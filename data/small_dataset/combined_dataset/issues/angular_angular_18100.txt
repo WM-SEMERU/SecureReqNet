@@ -1,8 +1,0 @@
-New HTTP package has no XSRF support
-
-
-The new common/http package does not support XSRF out of the box.
-Current behavior
-Doesn't handle XSRF out of the box :-(
-Expected behavior
-Like the previous package - when the server sets a cookie called XSRF-TOKEN, the client should send back an X-XSRF-TOKEN header with its value on every request.

@@ -1,7 +1,0 @@
-hi there, i first want to say i love gitlab :+1:
-
-after webhooks are created the test results in nothing (it just stays on the webhook settings). while navigating to the target of the webhook button returns a 500.
-
-my gitlab is running on a ubuntu 14.04 (omnibus package) gitlab (port: 1337) is running in coexistence of apache2 (port: 80).
-
-by the way: on the webhook documentation the example webhook receiver is using WEBrick. After creating and run the script it says "constant webrick is not defined"

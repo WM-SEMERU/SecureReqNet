@@ -1,7 +1,0 @@
-proposal: crypto/tls: TLS 1.3 API to disable middlebox compatibility mode
-
-
-OpenSSL has a way to disable the middlebox compat mode in TLS 1.3.
-SSL_OP_ENABLE_MIDDLEBOX_COMPAT
-If set then dummy Change Cipher Spec (CCS) messages are sent in TLSv1.3. This has the effect of making TLSv1.3 look more like TLSv1.2 so that middleboxes that do not understand TLSv1.3 will not drop the connection. Regardless of whether this option is set or not CCS messages received from the peer will always be ignored in TLSv1.3. This option is set by default. To switch it off use SSL_clear_options().
-Such an API would be useful in golang. I've been working on a patch.

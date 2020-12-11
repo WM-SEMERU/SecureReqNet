@@ -1,4 +1,0 @@
-Added bearing query parameter
-
-
-We were missing this parameter in our builder.

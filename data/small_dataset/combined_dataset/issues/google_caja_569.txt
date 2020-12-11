@@ -1,8 +1,0 @@
-Consider writing domita.js in Caja/Cajita
-
-
-Original issue 569 created by google@web.dwdw.me on 2008-06-12T23:42:53.000Z:
-Several of the bugs we found in domita.js would have been prevented if it
-had been written in Caja or Cajita.  Would it be possible to write it in
-Caja or Cajita, and just pass in the authorities it needs when it is
-instantiated?

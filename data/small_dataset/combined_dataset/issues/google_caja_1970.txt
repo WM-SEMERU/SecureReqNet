@@ -1,4 +1,0 @@
-How do I contribute a CL?
-
-
-https://github.com/google/caja/wiki/ContributingCode is obsolete. It still speaks in terms of myvn which is no longer relevant since the switch to github.

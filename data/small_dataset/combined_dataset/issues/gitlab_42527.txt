@@ -1,5 +1,0 @@
-We have a custom RuboCop cop to disallow the use of `public_send`. This also checks specs, even though specs aren't included in Omnibus at all. Using `public_send` is often useful in specs to parameterise testing several methods with the same conditions. Of course, it's not a huge deal to add a line comment disabling the cop, but maybe we could just disable it in specs completely?
-
-Original discussion: https://gitlab.com/gitlab-org/gitlab-ee/merge_requests/4102#note_55808205
-
-/cc @rymai @rspeicher

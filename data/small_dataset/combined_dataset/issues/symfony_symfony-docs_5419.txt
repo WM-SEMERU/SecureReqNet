@@ -1,7 +1,0 @@
-What happens when user object is serialized, unserialized and implements EquatableInterface needs clarification or a rewrite.
-
-
-http://symfony.com/doc/current/cookbook/security/entity_provider.html#understanding-serialize-and-how-a-user-is-saved-in-the-session
-Related issue: [Security] Change of username / password does not cause logout
-I think that "bug" is really a documentation issue. People read the documentation and expect to be redirected to the login page if isEqualTo() returns false.  If I understand correctly, what really happens is that the authentication token is invalidated but you are not logged out as the docs suggest. A new token is created the next time AuthorizationCheckerInterface::isGranted() is called.
-It's a confusing subject. I could have a go at rewriting it but I think it would be best to come from someone with a deep understanding of Symfony security.

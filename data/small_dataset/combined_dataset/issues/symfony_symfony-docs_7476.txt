@@ -1,5 +1,0 @@
-Mention that requests matchers are now lazy loaded in FirewallMap
-
-
-This fixes #7474.
-This is the only place where we mention FirewallMap, so maybe we could add this note. If you don't agree, let's close it as "won't fix". Thanks!

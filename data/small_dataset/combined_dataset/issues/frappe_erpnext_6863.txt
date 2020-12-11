@@ -1,6 +1,0 @@
-Need To include ability to make credit sales as a  right
-
-
-There is a need to add "make credit sales" as an optional right for users.
-Users who do not have this right will not be able to submit an invoice unless full payment is made.
-Users who have this right will be able to submit  invoices even if full payment is not made.

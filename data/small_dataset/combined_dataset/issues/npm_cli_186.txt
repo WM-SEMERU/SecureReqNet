@@ -1,5 +1,0 @@
-Do not pretty-print package-lock.json to prevent corrupting git lines count history
-
-
-Because package-lock.json is not a human readable file, there is no need to pretty-print it.
-Since this file created automatically and required by guidelines to include into git history it is severely corrupting git commitment statistics due to a terrific count of lines added by it.

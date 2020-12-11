@@ -1,4 +1,0 @@
-Remove the dependency on openssl
-
-
-Seems like we only use it for SSL through hyper. I feel like it should be possible to do better here. Maybe @briansmith has ideas.

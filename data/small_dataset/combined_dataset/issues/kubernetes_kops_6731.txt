@@ -1,5 +1,0 @@
-Automated cherry pick of #6719: Add DNS Resource Settings
-
-
-Cherry pick of #6719 on release-1.12.
-#6719: Add DNS Resource Settings

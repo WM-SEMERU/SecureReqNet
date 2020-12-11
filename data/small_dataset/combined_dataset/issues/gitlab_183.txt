@@ -1,9 +1,0 @@
-It is possible to register multiple emails in an account profile but when committing using the two emails the commits are shown as if they were from two different users.
-
-The avatar is shown only for the primary email (including in the 'Network' view), repository stats do not merge the commits made by the same user using different emails.
-
-It looks like the multiple emails are taken into account in the 'Graphs' view only.
-
-It would be nice if we could get consistent behaviour regarding this accross all Gitlab views.
-
-Cheers

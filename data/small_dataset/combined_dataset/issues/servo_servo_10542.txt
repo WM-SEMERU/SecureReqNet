@@ -1,6 +1,0 @@
-Use unguessable UUID pipeline ids to prevent spoofing
-
-
-See also: http://logs.glob.uno/?c=mozilla%23servo#c404439
-A compromised iframe process can pretend to be any iframe/pipeline when talking to the constellation, since the constellation channels are shared. This could be used to escalate access out of the sandboxed iframe.
-This can either be fixed by separating out the constellation channels (would require selecting over a ton of channels and probably is inefficient), or by making the pipeline id unguessable (currently a u64 counter). A 128-bit uuid should be enough.

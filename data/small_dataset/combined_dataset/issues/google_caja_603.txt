@@ -1,8 +1,0 @@
-Specify what the html4.eflags mean
-
-
-Original issue 603 created by zestyping on 2008-06-13T18:12:16.000Z:
-The flags OPTIONAL_ENDTAG, BREAKS_FLOW, EMPTY, NAVIGATES, CDATA, RCDATA,
-and UNSAFE in html4-defs.js have security-critical effects, but their
-meaning isn't specified or documented.  Please specify them so reviewers
-can determine whether the html4.ELEMENTS table is correct.

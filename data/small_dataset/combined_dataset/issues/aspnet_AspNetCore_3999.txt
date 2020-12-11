@@ -1,5 +1,0 @@
-Remove AuthenticationManager in 3.0?
-
-
-Microsoft.AspNetCore.Http.Authentication.AuthenticationManager has been marked obsolete in 2.0.
-Perhaps you should consider removing it (and related classes) in 3.0.

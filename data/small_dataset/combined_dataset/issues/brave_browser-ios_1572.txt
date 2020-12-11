@@ -1,5 +1,0 @@
-Using 2 rounds for generating the PBKDF2 key is insecure.
-
-
-Fixes: #1573
-CCCalibratePBKDF() helps calibrate the number of rounds required for key generation.

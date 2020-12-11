@@ -1,4 +1,0 @@
-I'm able to create an account despite my password not having a number
-
-
-Migrated from mozilla/thimble.mozilla.org#2144

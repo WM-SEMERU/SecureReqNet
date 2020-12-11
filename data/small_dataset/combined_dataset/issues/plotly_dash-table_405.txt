@@ -1,4 +1,0 @@
-add prop types check for dash-table
-
-
-this is needed for dash renderer #100

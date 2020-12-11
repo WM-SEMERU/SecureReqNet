@@ -1,4 +1,0 @@
-[hackerone] #369086
-
-
-https://hackerone.com/bugs?report_id=369086

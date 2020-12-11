@@ -1,4 +1,0 @@
-Add explicit US locale to String.Format of bouding box
-
-
-Closes #972

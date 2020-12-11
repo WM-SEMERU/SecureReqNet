@@ -1,9 +1,0 @@
-Do not enable permissive building of fork pull requests in CircleCI
-
-
-Hi everyone,
-This isn't an issue as much as a notification. We tested some elements of circleci/docker security yesterday and noticed the "permissive build" option was set to "on". That option allowed every fork of the testpilot repo to access environment variables that contain secrets, like the DOCKER_PASS.
-We changed that setting to "off". Please make sure it remains that way.
-Thanks,
-Julien
-cc @mostlygeek @claudijd

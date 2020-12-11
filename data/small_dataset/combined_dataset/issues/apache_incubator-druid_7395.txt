@@ -1,6 +1,0 @@
-Published segments cache in Brokers shouldn't use Interners
-
-
-Regarding #6901 (proposal: #6834)
-Published segments cache in Brokers shouldn't use Interners. Instead, MetadataSegmentView should probe into BrokerServerView's data and vice versa, similar to was is done in Coordinator's memory: #6357.
-FYI @surekhasaharan

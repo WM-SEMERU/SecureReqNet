@@ -1,5 +1,0 @@
-[Security] Ability to customize how token is serialized
-
-
-Even if developer provides custom authentication listener, default ContextListener is the one responsible for serializing tokens.
-I want to serialize tokens to json. Currently it could be achieved by configuring custom authentication provider as stateless and then manually register listener on "onKernelResponse", same as ContextListener does it. Is this official way to go or I'm missing something?!

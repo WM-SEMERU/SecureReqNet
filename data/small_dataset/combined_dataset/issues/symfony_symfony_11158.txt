@@ -1,6 +1,0 @@
-Ability to authentication a User directly
-
-
-(this issue is part of the "DX" ("Developer eXperience") initiative introduced by Symfony project)
-Normally, we don't authenticate a user directly, the firewall handles all of that. But sometimes, we do! I realize that security is super-customizable (e.g. different token classes, etc), but it's always been a bit crazy that you can't simply - if you want to - login a user right from a controller (for example). People do this anyways all the time anyways, for example, after registration FOSUserBundle.
-Is it possible to support this? It would also allow people to handle security a bit more themselves if they wanted to, which for simple cases (e.g. traditional username+password login), I don't see an issue (I see authentication as needing to happen via a listener before the controller only for things like API token authentication).

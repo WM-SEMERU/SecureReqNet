@@ -1,4 +1,0 @@
-[hackerone] #439819 - Integer overflow
-
-
-https://hackerone.com/bugs?report_id=439819

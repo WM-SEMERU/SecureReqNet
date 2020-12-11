@@ -1,4 +1,0 @@
-[Backport] Support for encryption of MySQL connections (#5122)
-
-
-Backport of #5122 to 0.12.0

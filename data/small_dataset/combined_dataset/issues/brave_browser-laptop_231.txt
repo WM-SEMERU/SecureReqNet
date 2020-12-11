@@ -1,4 +1,0 @@
-add NoScript-like feature
-
-
-some power users have asked for the ability to block js from running except on whitelisted sites. Chrome has a feature to whitelist/blacklist scripts by hostname pattern, which may be sufficient.

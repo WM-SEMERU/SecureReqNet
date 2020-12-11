@@ -1,4 +1,0 @@
-Ensure etcd is encrypted in HA mode
-
-
-When running in HA mode, etcd peer-to-peer traffic should use TLS

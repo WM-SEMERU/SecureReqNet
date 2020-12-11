@@ -1,8 +1,0 @@
-CLOUDSTACK-10283: Sudo to setup agent keystore, fail on host add failure
-
-
-This would make keystore utility scripts being executed as sudoer
-in case the process uid/owner is not root but still a sudoer user.
-Also fails addHost while securing a KVM host and if keystore fails to be
-setup for any reason.
-@blueorangutan package

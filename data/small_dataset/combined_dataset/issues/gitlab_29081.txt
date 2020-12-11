@@ -1,7 +1,0 @@
-A user reported via HackerOne that GitLab project environments tabs can contain external links opened with `target=_blank` yet they do not include the standard `noopener noreferrer` to prevent tabnabbing.
-
-https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
-
-We need to add these options to all external links opened with `target=_blank`.
-
-The attack surface is very low here as environments can only be viewed by members of a project that have developer or greater access and environments can only be created by members of that same project who also have developer or greater access.

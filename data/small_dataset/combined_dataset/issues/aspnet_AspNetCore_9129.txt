@@ -1,5 +1,0 @@
-Change default LanguageVersion to Latest prior to 3.0 RTM
-
-
-In runtime compilation, we need to assume LangVersion.Preview during 3.0-preview releases when no value is specified in the deps file.
-Prior to RTM, this needs to be changed to LangVersion.Latest. This matches Roslyn's versioning strategy.

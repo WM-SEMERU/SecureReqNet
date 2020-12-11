@@ -1,4 +1,0 @@
-npm test-security is failing due to vulnerable deps
-
-
-it shows some vulnerable deps in src/brave

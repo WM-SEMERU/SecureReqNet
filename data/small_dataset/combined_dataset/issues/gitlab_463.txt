@@ -1,1 +1,0 @@
-Can you add the ability to write wiki content in asciidoc format?

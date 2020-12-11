@@ -1,4 +1,0 @@
-Updated "Checking for Roles inside a Voter" for 2.8
-
-
-As mentioned in symfony/symfony#21701  this issue was fixed in 3.1 ... so 2.8 still has this issue.

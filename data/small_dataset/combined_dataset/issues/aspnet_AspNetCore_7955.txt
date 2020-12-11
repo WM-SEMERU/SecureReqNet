@@ -1,7 +1,0 @@
-WsFederation SaveTokens is not working
-
-
-Hello,
-I have tried setting WsFederationOptions.SaveTokens = true to get token in AuthenticationProperties but it is not being set in Asp.Net Core 2.0 or 2.1.
-According to the documentation (WsFederationOptions documentation)  it should work, but it looks like this functionality is not implemented. In other Authentication models (OpenIdConnect, Oauth, JwtBearer) there is functionality to save tokens if SaveTokens is set to true.
-I can create pull request to implement it if you will be willing to review it. Or is there a reason why WsFederation does not have it?

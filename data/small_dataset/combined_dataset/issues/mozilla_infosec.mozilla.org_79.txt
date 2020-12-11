@@ -1,5 +1,0 @@
-Principles : Consider splitting out Fraud Detection and Forensics
-
-
-Fraud Detection and Forensics are currently grouped into a single principle.
-We should probably split these out since the principle of detecting fraud is distinct from facilitating access for infosec to perform forensics after an incident has begun (for example by installing mig)

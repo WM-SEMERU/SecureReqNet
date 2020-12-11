@@ -1,6 +1,0 @@
-Audit Security Groups for kops
-
-
-
-we need to determine if the SG for kops are sufficient, pretty good, let's make them awesome
-

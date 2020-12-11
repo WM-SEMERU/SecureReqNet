@@ -1,4 +1,0 @@
-fix npm audit errors in sync deps
-
-
-brave-crypto and brave-sync DEPS need to be updated to fix for npm audit errors

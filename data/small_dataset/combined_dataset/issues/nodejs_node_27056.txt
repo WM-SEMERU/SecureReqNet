@@ -1,5 +1,0 @@
-test: test vm.runInNewContext() filename option
-
-
-The 'filename as a string' case was already being tested. This commit
-also exercises the 'filename as an option' case.

@@ -1,4 +1,0 @@
-All API calls should use 'current' instead of user ID?
-
-
-Should we be using 'current' with bearer token instead of using user id?

@@ -1,6 +1,0 @@
-verify our metascraper-based client code is not vulnerable
-
-
-the BAT client code in browser-laptop copy/pasted some code from metascraper, which has an unfixed vuln: https://hackerone.com/reports/309367. we need to check whether it is vulnerable as well.
-related: #14065
-UPDATE: no test plan is needed since we aren't vulnerable to the issue in the first place AFAICT, but it would be good for QA to go through the test plan in #13114 (comment) to make sure it hasn't regressed.

@@ -1,8 +1,0 @@
-PIP-30: interface and mutual change authentication
-
-
-Motivation
-This is to implement the mutual auth api discussed in PIP-30: change authentication provider API to support mutual authentication
-Modifications
-Describe the modifications you've done.
-Verifying this change

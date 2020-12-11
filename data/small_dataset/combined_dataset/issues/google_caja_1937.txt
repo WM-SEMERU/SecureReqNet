@@ -1,6 +1,0 @@
-test-scan-guest is slow under webdriver
-
-
-Original issue 1939 created by kpreid.switchb.org on 2014-09-16T17:26:24.000Z:
-As of right now (r5694) on a Mac on Firefox (32.0), test-scan-guest is immensely slow (many minutes) when run with 'ant runtests', but only 20 seconds when running in a normal Firefox instance.
-This suggests that something about our use of webdriver, or webdriver itself, is slowing things down.

@@ -1,4 +1,0 @@
-implement loadPolicyFile
-
-
-http://livedocs.adobe.com/flashlite/3.0/docs/help.html?content=00005452.html

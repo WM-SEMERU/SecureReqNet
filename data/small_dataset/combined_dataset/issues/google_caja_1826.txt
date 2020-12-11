@@ -1,6 +1,0 @@
-Support CustomEvent event class
-
-
-Original issue 1828 created by kpreid.switchb.org on 2013-08-02T21:51:02.000Z:
-I see no reason not to add this to the eventTypeWhitelist in Domado.
-https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent

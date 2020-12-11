@@ -1,5 +1,0 @@
-When a file is edited in web interface, all lines are considered like modified.
-
-I use gitlab 7.1.0 on Ubuntu server 12.04
-
-![Capture d’écran 2014-08-13 à 14.18.24](https://gitlab.com/uploads/gitlab-org/gitlab-ce/db547370a7/Capture_d_%C3%A9cran_2014-08-13_%C3%A0_14.18.24.png)

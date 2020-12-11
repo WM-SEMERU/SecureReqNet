@@ -1,4 +1,0 @@
-Add ability to control the score formula settings from a config file
-
-
-Namely the decision to use Maybe values as a YES (on both score and observed)

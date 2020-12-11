@@ -1,8 +1,0 @@
-fix($sanitize): use appropriate inert document strategy for Firefox and Safari
-
-
-Both Firefox and Safari are vulnerable to XSS if we use an inert document
-created via document.implementation.createHTMLDocument().
-Now we check for those vulnerabilities and then use a DOMParser or XHR
-strategy if needed.
-Thanks to @cure53 for the heads up on this issue.

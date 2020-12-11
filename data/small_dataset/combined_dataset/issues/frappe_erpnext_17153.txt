@@ -1,6 +1,0 @@
-Contact Form Email Validation Version 11.1.19
-
-
-When you use Contact Form,
-İf user mistype email address its not checking it correctly. Below image show the problem.A Customer send me a contact form message via that contact form but i am not able to answer it because of email validation issue.
-

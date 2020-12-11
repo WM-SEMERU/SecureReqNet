@@ -1,5 +1,0 @@
-VS shows documentation for attributes when writing the component tag
-
-
-
-Reproduced using 3.0.0-preview4 SDK and d16.1stg

@@ -1,5 +1,0 @@
-implement webhook CSR signer for the certificates controller
-
-
-We need a webhook based signer that implements the Signer interface in order to integrate with external CAs.
-cc @liggitt @cjcullen @jcbsmpsn

@@ -1,4 +1,0 @@
-Address HashWick
-
-
-See https://darksi.de/12.hashwick-v8-vulnerability/

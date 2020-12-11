@@ -1,7 +1,0 @@
-Filter/restrict access to http://metadata from containers
-
-
-On GCE, the metadata server gives access to tokens/certs for the master apiserver as well as auth tokens belonging to the project's service account.
-We could use an iptable rule to block all connections coming in from a container that doesn't share the host's network interface.
-While this is not a perfect solution from a security point of view, it could at least keep users from relying on auth scopes and data from the metadata server that might be removed in the future.
-@roberthbailey already noted that some services might rely on the logging scope, so maybe this would need a way to disable the filter in that case?

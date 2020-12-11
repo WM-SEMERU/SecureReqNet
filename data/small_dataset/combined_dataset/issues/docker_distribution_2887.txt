@@ -1,5 +1,0 @@
-Entrypoint uses cached image
-
-
-Bug described here:
-https://stackoverflow.com/questions/54863350/docker-entrypoint-uses-cached-image

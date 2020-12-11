@@ -1,5 +1,0 @@
-Where to put acl-bundle documentation
-
-
-In #8433 we removed the acl part of the security bundle documentation, which makes acl fully undocumented.
-Could we add an acl reference alongside the security one, as for monolog-bundle and others?

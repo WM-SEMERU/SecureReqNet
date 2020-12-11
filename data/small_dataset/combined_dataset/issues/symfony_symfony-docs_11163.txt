@@ -1,4 +1,0 @@
-Config error on controller/error_pages.html
-
-
-This appears to be a typo, as showException gives an error on Symfony 4.2 that reports confusion between showAction and showException.  Setting the twig config to showAction fixes the problem and displays the correct result.

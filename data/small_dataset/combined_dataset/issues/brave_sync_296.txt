@@ -1,5 +1,0 @@
-Merge pull request #293 from jumde/npm_audit_fix
-
-
-Fix #292
-Issue 292: Updating js-yaml to fix audit errors

@@ -1,7 +1,0 @@
-[3.0] Form component documentation says to use classes SessionCsrfProvider and DefaultCsrfProvider, which were removed in 3.0
-
-
-In documentation of form component for 3.0 version the whole CSRF Protection is wrong:
-http://symfony.com/doc/current/components/form/introduction.html#csrf-protection
-Classes SessionCsrfProvider and DefaultCsrfProvider were removed from Form Component in 3.0
-https://github.com/symfony/form/blob/2.8/Extension/Csrf/CsrfProvider/DefaultCsrfProvider.php#L14

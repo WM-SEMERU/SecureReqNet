@@ -1,5 +1,0 @@
-SELinux: DTRT when no SecurityContext is specified
-
-
-This issue is a sibling to #33351.  Currently (for the Docker runtime), the bind-mount option that relabels volumes with a context usable from a container is currently applied only if an SELinux context is explicitly specified in the pod spec.  This means that customers who want SELinux isolation must manage their own MCS labels, which is an undue burden.  Instead, we should always apply the :Z flag to bind-mounts if SELinux is enabled (and maybe just always, since the option is ignored if SELinux is not enabled).
-I am gradually working through a PR for this; wanted to call it out as a separate issue.  I may open a PR with a proposal first to make it explicit in the design docs directory.

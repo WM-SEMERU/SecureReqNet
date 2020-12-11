@@ -1,5 +1,0 @@
-API throttling
-
-
-Rate limit the number of API calls (by IP address?)
-Probably some absolute number of calls per interval, possibly more fine grained by endpoint. Maybe start with no inter-process synchronization then something like memcached if need be.

@@ -1,5 +1,0 @@
-Steps to reproduce:
-
-When an administrator adds a user, an email is sent to the new user asking him to change his password. So when the new user logs in with his temporary password, he is shown the page to change the password. On successfully changing the password, he is logged out and forced to login again. When the user logs in after that, again the "change password" page is shown though other pages are accessible via links on the top of the page. 
-
-This behaviour is very confusing and is present due to the Issue #495

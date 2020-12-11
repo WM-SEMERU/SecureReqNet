@@ -1,7 +1,0 @@
-Server-side localized directions instructions
-
-
-The Directions API has a new language query parameter (documentation forthcoming) that localizes the instruction property using OSRM Text Instructions. Developers who aren’t using real-time, turn-by-turn guidance instructions would be able to use this instruction property directly without having to pull in libandroid-navigation.
-The language query parameter doesn’t currently fall back to a similar language when an unsupported language code is provided, so we should omit the parameter by default for now. In the future, though, it would be really nice if we could default it to the system’s current locale.
-mapbox/MapboxDirections.swift#133 is the equivalent issue for Apple platforms.
-/cc @freenerd @cammace

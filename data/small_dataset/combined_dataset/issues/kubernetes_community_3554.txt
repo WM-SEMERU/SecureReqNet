@@ -1,7 +1,0 @@
-Broken links of sig storage contributor guide
-
-
-Below link is broken;
-https://github.com/kubernetes/community/blob/master/sig-storage/CONTRIBUTING.md
-/kind cleanup
-/sig storage

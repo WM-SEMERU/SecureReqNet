@@ -1,3 +1,0 @@
-When an unordered list is created inside of a note in an issue or MR, the bullets are displayed at level-2 depth to start (i.e. the white/hollow bullets instead of the expected black bullets).  This looks to be because the notes are themselves ``li class="note"`` tags, which makes any child unordered lists rendered as nested lists.  See the 1st note below as an example of the issue.
-
-This was observed as early as version 6.7.3 (f88d30f) and in the current version 6.8.1 (fbae5eb).

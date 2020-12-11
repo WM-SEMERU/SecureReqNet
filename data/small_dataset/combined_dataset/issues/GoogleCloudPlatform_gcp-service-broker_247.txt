@@ -1,4 +1,0 @@
-IAM Service Account/Credentials Integration with Credhub
-
-
-As a platform operator, I need IAM account and credential information that is created on "bind" service commands from the service broker to be stored inside of of credhub. PAS applications should then be able to broker to credhub and inject those credentials for that IAM role inside the app in a secure way. This will be ideal when trying to prevent credential exposure when doing a "cf env"

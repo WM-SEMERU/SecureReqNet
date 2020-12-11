@@ -1,4 +1,0 @@
-Hello!
-
-When I click "New Issue" in "hamburger menu" (green icon in home tab, in project) it redirects me to Jira's "create issue" form.
-It will be awesome if it will automatically select "project" property to project associated with Gitlab Project (currently it selects my last used project from Jira).

@@ -1,5 +1,0 @@
-Update BAT-Client to 2.3.1
-
-
-See brave-intl/bat-client#69
-cc @diracdeltas @NejcZdovc @bsclifton

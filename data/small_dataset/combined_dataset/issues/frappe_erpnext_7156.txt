@@ -1,5 +1,0 @@
-[Feature] Customize Form - Reset to Default should required additional confirmation
-
-
-In the Customize Form, Reset to Default option removes all the customization in the Doctype at once.
-Since this is a critical action, it should do additional confirmation, something like we do when deleting transactions from the Company master.

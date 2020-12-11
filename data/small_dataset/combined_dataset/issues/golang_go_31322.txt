@@ -1,7 +1,0 @@
-proposal: database/sql: add ConnetcionID()
-
-
-When I create a connection, I want to get the connection ID, which may have been multiple times.
-Is it possible to implement ConnectionID()?
-Poor efficiency when using select connection_id() multiple times.
-Go version go1.12.1 linux/amd64

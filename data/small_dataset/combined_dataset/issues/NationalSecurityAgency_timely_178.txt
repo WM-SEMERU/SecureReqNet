@@ -1,5 +1,0 @@
-Allow proxying of http and ws requests
-
-
-Allow the load balancer to proxy for authenticated users with the Timely servers authenticating and getting credentials for each entity in the proxy chain
-It appears that client certificates get sent from Grafana with each AJAX request such that we could skip the /login endpoint in these cases and just keep a cache of authorizations based on the certificate.

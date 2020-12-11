@@ -1,5 +1,0 @@
-updated PropertyAccess docs for PR 30536
-
-
-PR: symfony/symfony#30545
-Issue: symfony/symfony#30536

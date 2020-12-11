@@ -1,4 +1,0 @@
-Convert all file names to snake case
-
-
-per the Contributing.md file -- let's switch to using kebab case for branch names, and snake case for file names.

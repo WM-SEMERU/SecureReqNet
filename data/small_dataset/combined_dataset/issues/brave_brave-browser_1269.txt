@@ -1,7 +1,0 @@
-downloads bar should show the origin of the download
-
-
-Test plan
-See brave/brave-core#597
-Description
-For parity with browser-laptop, when a file is downloaded it should show the origin of the download in the URL bar, preferably marking HTTP as insecure. brave/browser-laptop#7468

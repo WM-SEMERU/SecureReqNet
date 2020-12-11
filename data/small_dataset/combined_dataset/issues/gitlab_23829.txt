@@ -1,3 +1,0 @@
-Despite the feature "Restricted visibility levels" to disable user's profile exploration, users can still be checked for existence for everyone.  
-gitlabexample.com/u/someusername - returns 404 if user exists, but redirects to login page if it doesn't.  
-It should always do redirection to either login page or 404 page.

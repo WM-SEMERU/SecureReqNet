@@ -1,8 +1,0 @@
-cloud-ctrl-mgr: enable secure port 10258
-
-
-This PR enables authn+authz (delegated to the kube-apiserver) and the secure port 10258 for the cloud-controller-manager. In addition, the insecure port is disabled.
-This is the counterpart PR to #64149.
-Moreover, it adds integration test coverage for the --port and --secure-port flags, plus the testserver infrastructure to tests flags in general inside integration tests.
-Enable secure serving on port 10258 to cloud-controller-manager (configurable via `--secure-port`). Delegated authentication and authorization are to be configured using the same flags as for aggregated API servers. Without configuration, the secure port will only allow access to `/healthz`.
-

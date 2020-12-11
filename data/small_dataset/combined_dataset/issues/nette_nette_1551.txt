@@ -1,8 +1,0 @@
-MSSQL update query problem
-
-
-Nette 2.4 and MSSQL update query is generated with following problem:
-UPDATE [app_users] SET (...columns...) WHERE ([id] = '1')
-right is:
-UPDATE [app_users] SET ...columns... WHERE ([id] = '1') //Without parenthesis
-Thanks a lot!

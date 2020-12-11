@@ -1,4 +1,0 @@
-Determine if overlap in bank contacts with other CFPB systems
-
-
-Compare the bank contacts and login information for CR financial institutions, SES contacts, Extranet users with HMDA contacts to see if the same population of bank users for determination if we need to contemplate single sign on.

@@ -1,5 +1,0 @@
-Image for Regression test for #74839
-
-
-Followup for #74840
-

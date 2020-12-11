@@ -1,3 +1,0 @@
-Customers occasionally have scans or audits and they say we should be setting `autocomplete='off'` on the password form. Past discussions led to us feeling this was low risk, in general, and it could break password managers. I think LastPass respects autocomplete, by default, but can be overridden. Some short research shows that others on the web generally feel it's not really necessary, too. I might be showing some bias, though :wink: I also notice that `<insert large web retailers>` don't appear to set this option, either. 
-
-Whatever the outcome, it'd be great if we had an 'official' stance, and then document it in `doc/security`. When it comes up we can refer customers and users there.

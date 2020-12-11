@@ -1,8 +1,0 @@
-Try using native HTML parsing instead of html-sanitizer.js
-
-
-Original issue 1823 created by kpreid.switchb.org on 2013-07-23T21:06:59.000Z:
-In order to have faster and smaller Caja, it would be nice if we could skip having a HTML parser. There are allegedly tools to create and/or parse an “inert” HTML document which would not execute script or render, which we could then use as the data source for HtmlEmitter. Take a look at:
-document.implementation.createHTMLDocument
-window.DOMParser
-

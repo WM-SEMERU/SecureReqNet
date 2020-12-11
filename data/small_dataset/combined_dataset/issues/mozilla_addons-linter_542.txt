@@ -1,4 +1,0 @@
-Test for handling of XML bombs
-
-
-We have some bugs with test-cases so lets use them to see how the chosen parser lib handles such cases.

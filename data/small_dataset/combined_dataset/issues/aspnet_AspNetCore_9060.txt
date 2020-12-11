@@ -1,9 +1,0 @@
-[Components] Better circuit ids
-
-
-
-We should use 128 bits of entropy for the ids.
-We should data protect the bits and put them in an http only cookie.
-We should hash the bits, protect them and use that protected hash as the id for the circuit.
-Upon connection/re-connection we should grab the circuitid cookie, we should unprotect it, hash it and compare it to the unprotected bits when starting the circuit.
-

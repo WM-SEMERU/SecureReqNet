@@ -1,4 +1,0 @@
-cmd/go: directory traversal in "go get" via curly braces in import paths [Go 1.11]
-
-
-This is a tracking issue for #29231, a security vulnerability fixed in Go 1.11.3.

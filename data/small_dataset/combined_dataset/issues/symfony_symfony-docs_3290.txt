@@ -1,6 +1,0 @@
-[Security] Docs unclear on roles property of access_control  - Clarification
-
-
-maybe making a note about this issue moved to docs from symfony/symfony
-[Security] Docs unclear on roles property of access_control
-symfony/symfony#6555

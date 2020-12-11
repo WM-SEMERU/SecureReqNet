@@ -1,6 +1,0 @@
-(nobug) - Remove global coverage threshold and move to per file only
-
-
-
-
-

@@ -1,9 +1,0 @@
-Split Noise from WireGuard handshake processing
-
-
-Cryptographic calculations for the Noise-based handshake should probably be separated from WireGuard-specific additions, like Type, Receiver/Sender ID, MAC1, MAC2. Advantages would be:
-
-Able to verify the Noise-specific implementation without distraction from "unimportant parts" (MAC1, etc.)
-Able to verify the WireGuard-specific parts with the ability to abstract away the Noise computations.
-
-Ideally the Noise protocol state/computations are put in a separate structure/impl (say, "NoiseState") which could then be embedded in the "Handshake" structure.

@@ -1,4 +1,0 @@
-[Backport] Remove Escalator jetty http client escalation method (#5322)
-
-
-Backport of #5322 to 0.12.0

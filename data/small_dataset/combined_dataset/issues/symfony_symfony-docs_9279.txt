@@ -1,4 +1,0 @@
-Deprecated the AdvancedUserInterface
-
-
-This fixes #9251.

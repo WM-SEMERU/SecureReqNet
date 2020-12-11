@@ -1,6 +1,0 @@
-doc: remove invalid padding from crypto.publicDecrypt
-
-
-#9609 and #9611 should also apply to publicDecrypt.
-Original issues:
-#9588 and #1093

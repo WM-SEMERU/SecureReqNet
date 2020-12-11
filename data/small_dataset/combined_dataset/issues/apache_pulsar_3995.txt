@@ -1,8 +1,0 @@
-Improve error handling for triggering function when there is a schema mismatch
-
-
-Motivation
-When a user is triggering a function with data that doesn't conform with the schema of the function's input topic, the error returned is not very helpful i.e.:
-Reason: HTTP 500 Internal Server Error
-
-Improve the error handling and return message for this situation

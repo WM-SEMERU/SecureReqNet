@@ -1,7 +1,0 @@
-Specify AddRazorSupportForMvc in Blazor templates
-
-
-VS 16.1 tooling does not support RazorConfigurations with no extensions
-Working around this by treating Blazor templates as using MVC configuration
-until we can resolve the issue in tooling
-Workaround for #9119

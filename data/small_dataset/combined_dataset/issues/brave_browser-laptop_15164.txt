@@ -1,4 +1,0 @@
-command injection security issue in growl module
-
-
-https://nodesecurity.io/advisories/146 < should be fixed by updating growl which is a dep of mocha

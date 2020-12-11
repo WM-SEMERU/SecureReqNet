@@ -1,4 +1,0 @@
-cmd/go: remote command execution during "go get -u" [Go 1.11]
-
-
-This is a tracking issue for #29230, a security vulnerability fixed in Go 1.11.3.

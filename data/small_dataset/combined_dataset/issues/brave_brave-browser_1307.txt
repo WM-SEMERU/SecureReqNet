@@ -1,4 +1,0 @@
-[MacOS] Create a sandbox profile for the tor-binary
-
-
-From: #556 (comment)

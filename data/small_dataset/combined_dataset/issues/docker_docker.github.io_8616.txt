@@ -1,6 +1,0 @@
-misleading information
-
-
-File: network/proxy.md
-This page is ranked high in google for "Docker proxy", but 99% people are actually searching for following page which is not in google's list.
-https://docs.docker.com/config/daemon/systemd/

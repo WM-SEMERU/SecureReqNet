@@ -1,9 +1,0 @@
-'I use milestone without an expiring date.
-
-My milestone are named with a software version (like 1.0.0, 1.0.1).
-
-I would order milestone list by name, because if I create for example the milestone 1.0.2 after 2.0.0, the milestone list is:
-- 1.0.0
-- 1.0.1
-- 2.0.0
-- 1.0.2

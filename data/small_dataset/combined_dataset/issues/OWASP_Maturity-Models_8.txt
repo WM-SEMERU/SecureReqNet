@@ -1,4 +1,0 @@
-Add support for SSL
-
-
-both local servers and Prod servers should be running in SSL

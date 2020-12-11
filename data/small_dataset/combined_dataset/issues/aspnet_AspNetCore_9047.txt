@@ -1,6 +1,0 @@
-Update Grpc Package versions
-
-
-Addresses #8693. These are the latest Grpc package versions.
-I'd like to do some manual verification first before merging.
-cc @Eilon for OSS

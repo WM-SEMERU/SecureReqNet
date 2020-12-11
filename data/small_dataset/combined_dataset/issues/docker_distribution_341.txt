@@ -1,5 +1,0 @@
-Make the use of resumable digest optional
-
-
-There are concerns about the use of a forked version of sha (see #295 for context).
-Possible solution: have a configuration variable making it possible to toggle it on/off.

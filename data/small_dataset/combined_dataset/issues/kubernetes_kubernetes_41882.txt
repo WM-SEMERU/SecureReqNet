@@ -1,6 +1,0 @@
-apiserver: self-signed in-memory cert for loopback
-
-
-We had complicated logic before to find a matching (SNI- or server-) cert for the loopback device. In the worst case, bootstrapping failed because the provided certs didn't have the binding IP or localhost.
-We now pass an artifical ServerName "apiserver-loopback-client" with the loopback client and install a self-signed in-memory cert+key into the server for that hostname. The client accepts the corresponding cert.
-Fixing #41081

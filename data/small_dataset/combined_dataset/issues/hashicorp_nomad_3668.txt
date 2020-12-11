@@ -1,4 +1,0 @@
-[improvement] Please provide option to tune container's pids limit
-
-
-Is it possible to please include an option to include --pids-limit option with docker driver? This is to prevent  fork bomb inside the docker container. Wuold be good to please include key security options like --cap-drop=ALL and --pids-limit.

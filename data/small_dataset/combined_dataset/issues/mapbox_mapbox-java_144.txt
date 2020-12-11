@@ -1,5 +1,0 @@
-Deprecate direction v4
-
-
-Closes #140.
-cc: @zugaldia

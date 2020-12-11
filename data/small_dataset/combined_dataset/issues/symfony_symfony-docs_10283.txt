@@ -1,4 +1,0 @@
-[FrameworkBundle] Added new "auto" mode for framework.session.cookie_secure
-
-
-symfony/symfony#28244

@@ -1,9 +1,0 @@
-Add support for custom configs passed to --runtime-config
-
-
-I need to enable NetworkPolicy right now. My understanding is that I need to pass some options to --runtime-config for kube-apiserver to do so.
-It's currently not possible with kops right now.
-Having the ability to pass custom configs to k8s components would be great. As right now, although kops is awesome, it's a bit limiting in some cases.
-An example of what I'm looking for:
---runtime-config=extensions/v1beta1/networkpolicies=true
-

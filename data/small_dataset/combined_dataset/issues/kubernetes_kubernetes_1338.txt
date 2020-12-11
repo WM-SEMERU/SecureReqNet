@@ -1,5 +1,0 @@
-Add support for using client certificates with etcd
-
-
-Etcd recommends using client certificates for authentication (https://github.com/coreos/etcd/blob/master/Documentation/security.md). It looks like I could integrate that pretty easily with k8s by adding command line options for the relevant certificates to any processes that need to communicate with etcd, and then passing them directly into the etcd client library.
-Does that sound like a reasonable plan?

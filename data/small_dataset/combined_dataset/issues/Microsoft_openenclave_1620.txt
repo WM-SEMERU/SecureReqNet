@@ -1,7 +1,0 @@
-Doxygen documentation needs to be fixed for v0.5
-
-
-
-Oe_free_seal_key missing documentation
-https://microsoft.github.io/openenclave/api/types_8h.html individual oe_enclave_type enumeration values not in table
-

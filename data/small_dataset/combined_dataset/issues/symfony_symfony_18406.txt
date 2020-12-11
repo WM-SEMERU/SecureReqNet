@@ -1,8 +1,0 @@
-Impersonate an user when using REMOTE_USER
-
-
-When switching user when you're using the REMOTE_USER setup, it will switch you back every time within a couple of seconds. It's not possible to swich user this way.
-Tried to overwrite the security token etc. but that also ends in the same result.
-The "impersonated" user does get an updated last login time (FOSUserBundle) in both situations, but the REMOTE_USER is still leading and I am still myself :-)
-Anyone facing this issue?
-Would be great to use Symfony's switch feature.

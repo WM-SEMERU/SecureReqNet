@@ -1,7 +1,0 @@
-Alex Knol (@Elexy) into the third party triage team (and security working group)
-
-
-Hi,
-I propose Alex Knol (@Elexy) to become a member of the security working group and the third party triage team. He is a colleague of mine and has expressed his interest in helping with the triage of third
-party modules.
-I can totally back him up from the professional (and personal) point of view.

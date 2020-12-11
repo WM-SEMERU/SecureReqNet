@@ -1,4 +1,0 @@
-Update to Muon 8.0.8
-
-
-Required to fix #14967

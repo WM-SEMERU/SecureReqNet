@@ -1,6 +1,0 @@
-AzureAD options should always register their configurations
-
-
-Unlike other services that should be TryAdded, options configurations must always be registered, since they already have logic that targets only the specific instance.  This fixes the weird behavior you get where configuring (or adding any other bearer auth) will basically prevent the AzureAD options from being properly configured
-Fixes #6033
-@Tratcher @javiercn

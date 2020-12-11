@@ -1,5 +1,0 @@
-drivers/docker: fix image name handleing when prefixed with https://
-
-
-In 0.8, https:// was striped from the image name during config parsing. This logic was missed during the migration to driver plugins which resulted in images prefixed with https:// to fail.
-fixes #5517

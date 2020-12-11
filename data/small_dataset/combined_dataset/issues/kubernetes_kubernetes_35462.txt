@@ -1,6 +1,0 @@
-Tracking: Kubernetes Product Security Response Plan
-
-
-This is a tracking issue for creating, documenting, and exercising a Kubernetes Product Security Response Plan. The overall goal is to ensure that when a security vulnerability becomes known the entire Kubernetes community has processes, infrastructure, and communication channels to make an organized and responsible response for users.
-The document describing the initial implementation of this plan is here.
-Special thanks to the many folks who helped to review and make additions to this document: Kees Cook, Jess Frazelle, Matthew Garrett, Jordan Liggitt, Kurt Seifried, Davanum Srinivas, and many many more.

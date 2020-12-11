@@ -1,5 +1,0 @@
-switch AboutRedirector to URI_SAFE_FOR_UNTRUSTED_CONTENT for about:newtab
-
-
-Also see https://bugzilla.mozilla.org/show_bug.cgi?id=1021667
-This came up at the security review, and will drop any unnecessary privs we have.  We may need to punch a few smaller holes back in, the way about:home currently does.

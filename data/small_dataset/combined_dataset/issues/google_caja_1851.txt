@@ -1,5 +1,0 @@
-Tools/workflow: myvn submit should not commit private patches
-
-
-Original issue 1853 created by kpreid.switchb.org on 2013-09-04T17:30:14.000Z:
-To avoid disclosure mistakes, "myvn submit" should refuse to commit to SVN if the Private flag is set. The user would then explicitly clear the Private flag before submitting.

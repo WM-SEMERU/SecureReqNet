@@ -1,8 +1,0 @@
-ConstraintValidatorTestCase not compatible with PHPUnit 8
-
-
-Symfony version(s) affected: 4.2.4
-Description
-Class Symfony\Component\Validator\Test\ConstraintValidatorTestCase  is not compatble with PHPUnit8 because setup and teardown methods have no return type hint
-Possible Solution
-Just add void return type hint on these methods

@@ -1,5 +1,0 @@
-[Security] Firewall context stateless tip
-
-
-I recently faced this situation.
-Only took me a few minutes to find out why but IMO it's worth adding a note ;)

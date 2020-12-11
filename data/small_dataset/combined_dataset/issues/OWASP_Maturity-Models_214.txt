@@ -1,5 +1,0 @@
-pass $injector into services
-
-
-will make it more robust and less dependent on the order of params
-

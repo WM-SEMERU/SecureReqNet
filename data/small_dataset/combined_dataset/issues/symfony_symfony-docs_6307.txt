@@ -1,4 +1,0 @@
-[DX] Fix documentation for login firewall
-
-
-As explained in this issue, the documentation for login form is not correct concerning common pitfalls number 2, login firewall.

@@ -1,4 +1,0 @@
-Update advanced-config.rst to contain more information about multi encore-builds
-
-
-It took me some time to find symfony/webpack-encore#477 , so I guess it would be better to add it to the official documentation.

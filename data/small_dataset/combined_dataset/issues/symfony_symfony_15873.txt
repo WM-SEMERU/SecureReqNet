@@ -1,4 +1,0 @@
-Deprecate SimpleFormAuthenticationListener and SimplePreAuthenticationListener
-
-
-Should be done in 3.1 to allow people to have more time to upgrade (see #14673 (comment))

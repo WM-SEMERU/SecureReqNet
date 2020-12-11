@@ -1,6 +1,0 @@
-Why use the Statefulset to deploy CSI plugins ?
-
-
-
-
-

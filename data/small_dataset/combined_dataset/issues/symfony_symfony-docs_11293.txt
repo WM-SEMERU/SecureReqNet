@@ -1,4 +1,0 @@
-[Setup] Defer the removal of bundle directory
-
-
-Currently, the bundle directory is still referenced after the step where the removal instruction is placed.

@@ -1,4 +1,0 @@
-Enabling a own extension
-
-
-I created my own extension and I load it while start up and when i enable extension via enableExtension(extensionId) the extension background script does not get executed

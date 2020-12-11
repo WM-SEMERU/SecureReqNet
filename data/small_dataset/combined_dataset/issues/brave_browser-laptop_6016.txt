@@ -1,7 +1,0 @@
-https://apple.com shows cert error for some users in Brave
-
-
-Navigating to apple.com in the navigation bar expands the address to https://apple.com, which fails certificate validation:
-
-Navigating to www.apple.com expands the address to https://www.apple.com, which passes certificate validation.
-Navigating to https://apple.com in Chrome works, so it appears that Crome follows the redirect before validating the cert.

@@ -1,4 +1,0 @@
-Don't allow User and other DocTypes to be shared
-
-
-Make explicit setting "Shareable"

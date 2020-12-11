@@ -1,5 +1,0 @@
-Add 'maybe' count to the 'observed' total
-
-
-So that the total observed value is made of the sum of the YES and MAYBE values.
-The idea is that MAYBE should be used for activities that should be YES, but there is not enough proof (at the moment)

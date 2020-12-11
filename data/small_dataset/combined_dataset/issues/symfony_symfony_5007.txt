@@ -1,5 +1,0 @@
-[ Security][Core][User][UserProviderInterface] Find user method
-
-
-Core not realy should depend on username as unique value, more clear way is just loadUser() and Symfony\Component\Security\Core\User\UserInterface needs additional method like getUniqueProperty() for idetntify user.
-Also username used in other structures by core so getUsername() method may be used for debuging purposes providing human readable values depending on apps.

@@ -1,0 +1,5 @@
+outs:
+- md5: b05df425e7cb266b461137b5069016ef.dir
+  size: 57417845
+  nfiles: 4
+  path: augmented_dataset

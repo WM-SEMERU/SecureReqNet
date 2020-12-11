@@ -1,7 +1,0 @@
-[AMBARI-24742] Implementing a new util class to be used in case we want to encrypt/decrypt sensitive information using custom/environment master key (also injected into Guice)
-
-
-What changes were proposed in this pull request?
-As discussed a new utility class is to be created to avoid code duplication when someone needs to encrypt/decrypt ay sensitive data (i.e. a password).
-How was this patch tested?
-Unit testing and enabled password encryption in Ambari server

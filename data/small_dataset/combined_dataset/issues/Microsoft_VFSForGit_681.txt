@@ -1,7 +1,0 @@
-Verify Installer signature before launching
-
-
-Goal
-Verify code signature of downloaded upgrade installer exes before launching it.
-Implementation
-Signature verification: At a high level, the upgrader reads the certificate contained in the signed installer. It then tries to build the certificate chain. If it succeeds, then the exe is considered valid and upgrader goes on to verify that the certificate CN name matches expected values ("Microsoft Corporation" for VFSForGit and "Johannes Schindelin" for Git). Installer is launched only when signature verification succeeds. To prevent an attacker from modifying installer exe while signature verification is going on, upgrader holds an open reference to the exe that is later released.

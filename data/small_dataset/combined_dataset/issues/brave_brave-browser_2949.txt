@@ -1,5 +1,0 @@
-expand static HPKP list
-
-
-currently we only pin a small set of brave domains (the rationale being that Chrome advised us against pinning sites for which we don't have a point of contact): https://github.com/brave/brave-core/blob/74fb2a164cdd780a8f074597aabae3eecaf45a24/chromium_src/net/tools/transport_security_state_generator/input_file_parsers.cc#L311
-there are more brave domains that should be added to this list, such as go-updater and the various proxy services.

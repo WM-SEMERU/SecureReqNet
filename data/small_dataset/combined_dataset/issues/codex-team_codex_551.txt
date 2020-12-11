@@ -1,6 +1,0 @@
-Grammatical Changes to API is the feature section.
-
-
-Grammatical Changes to API is the feature section on editor.js website.
-As discussed on issue codex-team/editor.js#677
-fixes codex-team/editor.js#677

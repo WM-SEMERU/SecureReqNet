@@ -1,3 +1,0 @@
-I have a repo hosted on gitlab.com.  It originally had a master branch and two others: branch 1.x and branch 2.x.  I removed the master branch, and set branch 1.x as default.
-
-Now, I want branch 2.x to be default, but when I use the 'default branch' option in the settings menu and save the changes, it always reverts back to 1.x.  There are no error messages or any other indicator that something is wrong.

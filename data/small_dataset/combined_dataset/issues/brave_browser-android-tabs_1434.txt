@@ -1,6 +1,0 @@
-changed notification icon for api 19
-
-
-
-No description provided.
-

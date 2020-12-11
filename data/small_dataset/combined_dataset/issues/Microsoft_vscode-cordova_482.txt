@@ -1,4 +1,0 @@
-Remove crypto module as it's not needed anymore
-
-
-AB#346

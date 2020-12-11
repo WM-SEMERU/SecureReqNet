@@ -1,6 +1,0 @@
-Ethereum Wallet not work No Sync option after today Geth update
-
-
-I always use No Sync options.
-Today after auto update geth to 1.8.23 Wallet no more connect to remote node.
-I Got error. Checksum mismatch in downloaded node. Please install the Geth node version 1.8.23 manually.

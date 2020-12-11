@@ -1,4 +1,0 @@
-Audit and update Python dependencies
-
-
-The project is using very old Python dependencies, some or many of which probably contain security issues. Audit the dependencies, update them.

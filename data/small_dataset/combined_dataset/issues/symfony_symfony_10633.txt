@@ -1,5 +1,0 @@
-Throwing AccessDeniedException outside firewall returns incorrect response code
-
-
-If you throw \Symfony\Component\Security\Core\Exception\AccessDeniedException when you aren't within a firewall it returns a 500 response code rather than 403.
-Shouldn't this always return a 403? I have a secret variable in my url. If that doesn't match I am throwing the exception above.

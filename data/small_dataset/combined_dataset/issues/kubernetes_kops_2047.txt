@@ -1,6 +1,0 @@
-Document RBAC Setup
-
-
-From @sethpollack's / @shadoi's research and elbow grease comes:
-https://gist.github.com/chrislovecnm/813d841cc93043f6c5311bf7a6fc2fae
-Let's document it better for 1.5 and 1.6.  Take the above git and convert it into a document under docs directory.  My take is to have this information live in a new document, since RBAC is going to get more fun in 1.6.

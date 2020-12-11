@@ -1,7 +1,0 @@
-We have a very large merge request of ~5000 lines which when trying to view in side by side diff mode simply fails and falls back to the standard diff view.
-
-GitLab 7.0.0
-GitLab Shell 1.9.6
-GitLab API v3
-Ruby 2.1.1p76
-Rails 4.1.1

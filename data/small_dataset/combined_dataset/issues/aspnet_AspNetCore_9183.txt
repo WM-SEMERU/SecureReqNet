@@ -1,4 +1,0 @@
-Duplicate AddRazorSupportForMvc in RCL templates
-
-
-The AddRazorSupportForMvc property appears twice in the RCL (non-Blazor) templates. One of these should be removed as part of #9126 in preview5. This issue tracks fixing the template in preview4

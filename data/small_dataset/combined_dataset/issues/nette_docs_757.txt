@@ -1,4 +1,0 @@
-Quickstart: removed Czech error message
-
-
-Replacing Czech error message with English one.

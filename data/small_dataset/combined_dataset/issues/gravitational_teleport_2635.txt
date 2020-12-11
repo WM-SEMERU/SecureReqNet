@@ -1,7 +1,0 @@
-Trusted Cluster Documentation Improvements
-
-
-User feedback:
-I'd say by far the most importantly needed addition to your documentation is a full section under Trusted Clusters about how naming works, where names show up in output and commands, and how they work together.
-The choice to use a Kubernetes cluster name (which is usually a long domain name) as a Teleport cluster name is natural, but is a really bad choice for someone that has to type it in to tsh as in tsh login us-west-1.teleport.example.com.us-west-2.teleport-example.com.
-Since you cannot change the name of a Teleport cluster, it is very important that people carefully pre-plan their naming strategy, and they need to know that and have the information they need to make good decisions.

@@ -1,4 +1,0 @@
-Entity user provider: document how to use a non-default entity manager
-
-
-The documentation is not clear on how you would define an entity user provider with another than the default entity manager (see this question in the Symfony2 Google Group).

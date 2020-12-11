@@ -1,5 +1,0 @@
-A vulnerability in the impersonation feature introduced in GitLab 8.2 (https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/1702) would allow any signed in user to sign in as any other user (including admins).
-
-I think this is the worst vulnerability we've had to date. We should release patch releases going back to 8.2.
-
-Fix is on dev: https://dev.gitlab.org/gitlab/gitlabhq/merge_requests/1956

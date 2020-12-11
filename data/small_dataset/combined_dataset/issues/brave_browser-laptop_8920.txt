@@ -1,7 +1,0 @@
-CSP referrer errors
-
-
-Test plan
-#8921 (comment)
-
-various extension pages still use the 'referrer' CSP directive, which is deprecated

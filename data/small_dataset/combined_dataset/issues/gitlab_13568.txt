@@ -1,9 +1,0 @@
-Zendesk issue: https://gitlab.zendesk.com/agent/tickets/15751
-
-Moving from https://dev.gitlab.org/gitlab/gitlabhq/issues/2656
-
-Related to https://gitlab.com/gitlab-org/gitlab-ce/issues/2979 (2FA not enforced via API)
-
-2FA should be enforced for Git over HTTPS. In the other issue we discussed having app-specific/personal tokens for use when 2FA is enabled.
-
-cc/ @DouweM @JobV Please schedule

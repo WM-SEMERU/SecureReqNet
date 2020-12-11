@@ -1,4 +1,0 @@
-BAT client should send user-agent to grant server
-
-
-This is useful for UGP fraud detection. Currently js/lib/request.js by default does not send any UA.

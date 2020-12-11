@@ -1,6 +1,0 @@
-Start erroring out when CA pinning isn't used and not explicitely opted out of
-
-
-@mattmoyer added the CA pinning feature of the Bootstrap Token in the discovery phase of kubeadm join in v1.8
-In v1.9, the plan is to start erroring out when kubeadm join --token <token> is used without the CA hash, unless cfg.DiscoveryTokenUnsafeSkipCAVerification is set.
-cc @jbeda

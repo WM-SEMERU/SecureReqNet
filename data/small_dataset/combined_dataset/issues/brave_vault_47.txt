@@ -1,5 +1,0 @@
-Travis build status is private
-
-
-The README links to the Travis page https://travis-ci.com/brave/vault which requires authentication.
-Since the project is open-source, shouldn't the Travis page also be open?

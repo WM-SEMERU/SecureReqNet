@@ -1,4 +1,0 @@
-Allow reviewer_name to be blank
-
-
-Fixes #11002

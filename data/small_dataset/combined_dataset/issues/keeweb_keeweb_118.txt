@@ -1,4 +1,0 @@
-keeweb desktop executable blocked by Symantec Endpoint Protection
-
-
-When i tried to execute keeweb desktop installer, it was blocked and immediately deleted by Symantec Endpoint protection antivirus.

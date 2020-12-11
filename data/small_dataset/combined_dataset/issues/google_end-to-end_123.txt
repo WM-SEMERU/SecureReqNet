@@ -1,6 +1,0 @@
-Remove all usage of e2e.async.Result.getValue
-
-
-From evn@google.com on June 21, 2014 20:25:05
-Blocking migration to WebCrypto.
-Original issue: http://code.google.com/p/end-to-end/issues/detail?id=86

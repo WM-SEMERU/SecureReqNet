@@ -1,1 +1,3 @@
 /data.csv
+/word_embeddings-embed_size_100-epochs_100.csv
+/word_embeddings-embed_size_20-epochs_60.csv

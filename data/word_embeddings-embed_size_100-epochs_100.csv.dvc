@@ -1,0 +1,4 @@
+outs:
+- md5: e047ebb3d3a2c163afd548dbea6518e1
+  size: 20683541
+  path: word_embeddings-embed_size_100-epochs_100.csv

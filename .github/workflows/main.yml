@@ -17,12 +17,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Read all notebooks
-      run: |
-        nbdev_read_nbs
     - name: Pull data from DVC
       run: |
         dvc import https://github.com/WM-SEMERU/SecureReqNet
+    - name: Read all notebooks
+      run: |
+        nbdev_read_nbs
     - name: Check if all notebooks are cleaned
       run: |
         echo "Check we are starting with clean git checkout"

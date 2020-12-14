@@ -8,6 +8,7 @@ cryptography==2.3
 cycler==0.10.0
 decorator==4.4.0
 defusedxml==0.6.0
+dvc==1.11.3
 entrypoints==0.3
 enum34==1.1.6
 fastscript==0.1.2

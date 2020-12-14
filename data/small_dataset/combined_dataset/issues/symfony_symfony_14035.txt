@@ -1,7 +1,0 @@
-Regression : LogoutUrlHelper : Call to a member function has() on a non-object
-
-
-Actually the LogoutUrlHelper gives the following fatal error : Call to a member function has() on a non-object in symfony/src/Symfony/Bundle/SecurityBundle/Templating/Helper/LogoutUrlHelper.php on line 47.
-The following line is involved:
-if ($container->has('security.logout_url_generator'))
-where $container is undefined

@@ -1,9 +1,0 @@
-Go to group settings or profile
-
-Add a image
-
-Now you cannot remove it what so ever!
-
-I propose to create a remove image button.
-
-Cheers.

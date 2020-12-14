@@ -1,8 +1,0 @@
-support dom interfaces to css3 animation
-
-
-Original issue 1825 created by felix8a on 2013-07-26T00:34:19.000Z:
-in particular, animation events
-http://dev.w3.org/csswg/css-animations/#animation-events
-and enhancements to CSSRule
-http://dev.w3.org/csswg/css-animations/#dom-interfaces

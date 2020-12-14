@@ -1,1 +1,0 @@
-I am able to view gitlab-com/operations$13170, a private snippet (referenced here: https://gitlab.com/gitlab-com/operations/issues/23#note_4420085) even though I am not a project member.

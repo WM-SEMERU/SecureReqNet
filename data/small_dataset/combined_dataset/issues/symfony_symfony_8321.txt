@@ -1,5 +1,0 @@
-Exiting the user switching does not reload the old user
-
-
-when exiting the user switching, the listener set the original token in the security context without reloading the user from the user provider. This leads to some nasty bugs if your application relies on the user being managed by Doctrine for instance.
-I generally don't serialize the whole object graph of the user (there is no need to store relations in the session as the user will be reloaded anyway). but this means that the page displayed when exiting the user switching will break because relations would not be available.

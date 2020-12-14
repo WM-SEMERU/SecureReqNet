@@ -1,6 +1,0 @@
-[Form] Improve the group_by option for choices
-
-
-Description
-In Symfony 2.7 (with choices_as_values set to false) it was possible to have choices in different choice groups that shared the same labels, this is not possible anymore.
-Instead of this hack proposed in Symfony Docs, @Tobion wondered in this comment if this use-case be better solved by allowing group_by option to return an array of groups? This way people would just add the choices once and then could add them to multiple groups if needed.

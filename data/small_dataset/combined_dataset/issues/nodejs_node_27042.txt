@@ -1,7 +1,0 @@
-Add maxStringLength option for util.inspect
-
-
-Problem
-When using util.inspect(), it would be nice to have the ability to truncate string values over a certain length wherever they exist in the object under inspection. This would allow us to avoid logging out entire strings in situations where they can be potentially huge and they add too much space in the logs.
-Proposed solution
-Add a maxStringLength option to util.inspect, similar to maxArrayLength option that currently exists.

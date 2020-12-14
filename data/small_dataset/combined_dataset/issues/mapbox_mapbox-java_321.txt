@@ -1,5 +1,0 @@
-setGeometry method returns builder not type
-
-
-When creating the directions builder object we are now returning a abstract type object but the setGeometry method still returns the builder object.
-https://github.com/mapbox/mapbox-java/blob/master/mapbox/libjava-services/src/main/java/com/mapbox/services/api/directions/v5/MapboxDirections.java#L164-L167

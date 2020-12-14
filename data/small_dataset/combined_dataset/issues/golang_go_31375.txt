@@ -1,5 +1,0 @@
-x/tools/lsp: "// Code generated" in generated files eg  tsprotocol.go
-
-
-Much of the code in protocol is unidiomatic. Starts making more sense in the context of generated code.
-Please decorate generated code with the standard comment.

@@ -1,5 +1,0 @@
-Keep track of user's table field choises
-
-
-At the moment when opening multiple teams in different tabs we lose the current settings (for example keeping the 'Proof edit' open
-

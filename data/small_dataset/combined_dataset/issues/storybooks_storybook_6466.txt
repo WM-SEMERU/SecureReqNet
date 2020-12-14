@@ -1,7 +1,0 @@
-Update index.md
-
-
-Issue:
-What I did
-a npm script > an npm script
-How to test

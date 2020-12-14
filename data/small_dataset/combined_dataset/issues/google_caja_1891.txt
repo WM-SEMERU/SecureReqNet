@@ -1,6 +1,0 @@
-uriPolicy.mitigate() does not actually prevent mitigation
-
-
-Original issue 1893 created by james.keane@wishabi.com on 2014-02-20T21:04:04.000Z:
-Using uriPolicy.mitigate, and returning a valid pre-mitigated version of the requested resource does not prevent further mitigation.
-I believe the issue is 'rewriteFunctionCalls' is defaulted to true when not defined (startSES:resolveOptions), and html-emitter:evaluateUntrustedExternalScript does not set a value.

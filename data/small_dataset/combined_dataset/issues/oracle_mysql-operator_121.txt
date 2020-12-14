@@ -1,9 +1,0 @@
-Independent mysql-agent ClusterRole and RBAC
-
-
-Separates the mysql-operator and mysql-agent ClusterRoles and scopes the RBAC to the minimal permissions required by each.
-Changelog
-- Independent ServiceAccounts for the operator and agents.
-- Scope RBAC to the minimum required permissions.
-- Drop support for Kubernetes 1.7.
-

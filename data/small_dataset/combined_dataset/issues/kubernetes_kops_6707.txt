@@ -1,4 +1,0 @@
-Deep-copy proto state to prevent concurrent modification
-
-
-Fix #6635

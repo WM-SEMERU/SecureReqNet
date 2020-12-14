@@ -1,8 +1,0 @@
-Inaccurate statement about Panopticlick
-
-
-In https://github.com/brave/browser-laptop/wiki/Fingerprinting-Protection-Mode, there is an inaccurate statement about Panopticlick:
-
-Panopticlick also compares you against old browsers. For instance, if the plurality of Panopticlick visits were from people using Firefox 3 many years ago, then a person using Firefox 3 could appear as not-very-identifiable even though there are extremely few Firefox 3 users on the web in 2017 (or at least one would hope).
-
-Panopticlick results are epoched.  We only measure your browser against other browsers we've observed in the last 45 days.  This has been true since 2015.

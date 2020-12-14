@@ -1,5 +1,0 @@
-fix(security): Update to use the fixed version of the call library
-
-
-Is it suffice to update the call library version of the current hapijs library in shrinkwrap to get around https://nodesecurity.io/advisories/121?
-@vladikoff @jbuck @jrgm

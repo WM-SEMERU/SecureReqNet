@@ -1,6 +1,0 @@
-[Question] Where to find source code of Microsoft.AspNetCore.Authentication.AuthenticationOptions?
-
-
-Sorry if this is a very basic question but I am still learning how to browse the source code on github and I spent few hours trying to look for the source of the AuthenticationOptions class.
-Cannot find it in AspNetCore/src/Security/Authentication/Core/src/ where I was expecting it to be.
-Thanks in advance!

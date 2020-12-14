@@ -1,4 +1,0 @@
-Update blazor VSIX icon
-
-
-Update blazor VSIX icon

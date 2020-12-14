@@ -1,5 +1,0 @@
-[WIP] travis reorganisation
-
-
-Description
-Due to tests randomly failing with timeout....

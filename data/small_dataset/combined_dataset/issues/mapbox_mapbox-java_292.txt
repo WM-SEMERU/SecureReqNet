@@ -1,4 +1,0 @@
-mapbox/driving-traffic support added to the list of directions profil…
-
-
-…es, and checks added for maximum number of coordinates that can be provided, as discussed with @zugaldia

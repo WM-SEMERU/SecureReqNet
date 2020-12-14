@@ -1,5 +1,0 @@
-Will the RTVS plugin be updated to work with VS2019?
-
-
-I see that RTVS has been removed from the Data Science Workload in VS 2019. But I assume there's nothing stopping the RTVS plugin to keep being developed and updated for VS 2019 anyway.
-What are the plans for the RTVS plugin for VS2019?

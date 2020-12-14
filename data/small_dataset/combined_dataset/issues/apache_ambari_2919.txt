@@ -1,7 +1,0 @@
-AMBARI-25207 The Ubuntu repository id for the cached apt package list is generated wrong in case if were used URL with https protocol (dgrinenko)
-
-
-What changes were proposed in this pull request?
-Port of #2888 to tunk
-How was this patch tested?
-On cluster.

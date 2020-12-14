@@ -1,6 +1,0 @@
-[WIP] Use an isomorphic lib for FormData
-
-
-Fixes #7843
-
-This patch fixes an issue with FormData being not defined on the server. The fact that it still works without having to change any test case is a good sign.

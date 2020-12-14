@@ -1,5 +1,0 @@
-fix expressions docs operator table
-
-
-Fixes markdown table to use code for | instead of escaping:
-

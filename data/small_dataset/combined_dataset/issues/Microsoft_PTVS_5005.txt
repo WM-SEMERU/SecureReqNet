@@ -1,4 +1,0 @@
-Resolve Roslyn Analyzer issues
-
-
-Internal issue: 776514/

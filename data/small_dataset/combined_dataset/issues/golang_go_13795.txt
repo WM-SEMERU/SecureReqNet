@@ -1,5 +1,0 @@
-crypto/aes: S-box cache timing leak
-
-
-The crypto/aes package uses S-boxes and thus leaks cache timing information.  Techniques to avoid this are known and should be used on all platforms Go supports.
-If Go does not support the needed vector intrinsics, then support for them should be added.

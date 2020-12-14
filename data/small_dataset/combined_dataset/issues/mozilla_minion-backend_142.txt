@@ -1,4 +1,0 @@
-PUT /scans/<Scan_id>/control does not check ownership
-
-
-Relates to mozilla/minion-frontend#48 and mozilla/minion-frontend#49

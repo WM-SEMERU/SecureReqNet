@@ -1,4 +1,0 @@
-verify lack of favicon leaks that exist in browser-laptop
-
-
-currently there are a bunch of places in browser-laptop UI where favicons are loaded remotely: for instance in about:bookmarks, the bookmarks toolbar, and in the back button context menu. This is a big privacy issue because a network attacker can get a partial view of someone's browsing history whenever they open Brave (without them navigating to the site). we should make sure these leaks are fixed here.

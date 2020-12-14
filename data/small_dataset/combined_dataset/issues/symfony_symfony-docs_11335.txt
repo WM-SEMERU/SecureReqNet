@@ -1,6 +1,0 @@
-Small improvements for the Data Mappers docs
-
-
-I just had a brief chat with @webmozart at the #EUFOSSA #FOSSHackathons event regarding the documentation of data mappers. I was unaware that they had finally made it into the docs 🎉.
-A valueable hint that Bernhard gave me was that based on his experience, in 80% percent of the cases data mappers are stateless. In that case, you can implement the data mapping in the form type itself – just make the FormType implement DataMapperInterface and use setDataMapper($this) in the buildForm() method. That may simplify your code, as you do not need to keep a second class around that is used in one place only. Yet, you can still test the code in the same way as before as the methods are available through the interface.
-When the Data Mapper is stateful and needs access to services and/or form data, you should also be able to create the instance from within the FormType. Honestly, I'd have to experiment with this a little to sketch out the code (or do you have an example ready somewhere on slides or talks, Bernhard?).

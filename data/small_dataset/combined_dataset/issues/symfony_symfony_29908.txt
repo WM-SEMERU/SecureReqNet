@@ -1,9 +1,0 @@
-[Messenger] Providing support for heartbeat & AMQP 0-9-1 ?
-
-
-Description
-AMQP 0-9-1 came (a few years ago now) with a great feature to handle dead TCP connections which is called heartbeat : https://www.rabbitmq.com/heartbeats.html
-As I understand it, Messenger uses \AMQPConnection which is only 0-8 AMQP compatible so heartbeat is not natively available on Messenger.
-Is there any reason why Messenger relies on a outdated version of AMQP protocol ?
-Is an upgrade to 0-9-1 is currently planned, maybe using https://github.com/php-amqplib/php-amqplib in place of AMQPConnection ?
-Regards

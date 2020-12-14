@@ -1,6 +1,0 @@
-[Security] Remember me and multiple firewalls
-
-
-It appears if you have multiple firewalls with the remember me functionality enabled, they override each other.
-Should the remember me key be stored with the firewall name appended? As we are dealing with security, may be best to hide the firewall name though and do substr(sha1('firewall name here'), 0, 10)
-What do you think?

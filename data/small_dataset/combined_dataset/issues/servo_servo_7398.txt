@@ -1,4 +1,0 @@
-Don't renegotiate SSL sessions on every resource load
-
-
-Go to http://en.wikipedia.org/wiki/Servo and notice that SSL is dominating the CPU usage. We really need to reuse SSL sessions!

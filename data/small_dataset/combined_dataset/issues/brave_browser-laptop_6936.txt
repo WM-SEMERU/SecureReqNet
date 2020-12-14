@@ -1,6 +1,0 @@
-getSiteKey needs field separators
-
-
-
-marked as a security issue since it allows untrusted data (the site URL) to modify trusted data (the partition number)
-i think it would be best for this to land before the site refactor code is released, otherwise you would have to do a siteKey migration from the old format.

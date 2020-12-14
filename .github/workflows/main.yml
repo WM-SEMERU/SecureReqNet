@@ -11,6 +11,7 @@ jobs:
         architecture: 'x64'
     - name: Install dependencies
       run: |
+        sudo apt-get update
         sudo apt-get install python-apt
         sudo apt install libgirepository1.0-dev
         python -m pip install --upgrade pip

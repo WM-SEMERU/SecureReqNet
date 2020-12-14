@@ -1,7 +1,0 @@
-fix issue #6669 in release/2.2
-
-
-
-fix wrong scheme name in B2C and AD
-
-Addresses #6669

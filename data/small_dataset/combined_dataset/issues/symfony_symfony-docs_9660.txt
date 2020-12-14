@@ -1,9 +1,0 @@
-[Security] Make security.providers optional
-
-
-symfony/symfony#26787
-It's useful in cases like symfony/symfony#21998:
-
-I use custom authentication which stands on tokens without users. Therefore, I don't use UserProvider. But configuration loader requires me to provide at least one user provider.
-Please make user provider optional. When some component asks for user from user provider, it should crash, so I know there is something wrong.
-

@@ -1,5 +1,0 @@
-Remove setters
-
-
-Part of #2184
-Remove setters from support duo module

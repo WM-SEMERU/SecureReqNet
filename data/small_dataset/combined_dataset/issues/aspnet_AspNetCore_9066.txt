@@ -1,5 +1,0 @@
-Issue 6919
-
-
-DefaultApplicationModelProvider was split into several parts accessible via newly created IPageApplicationModelPartsProvider.
-Addresses #6919

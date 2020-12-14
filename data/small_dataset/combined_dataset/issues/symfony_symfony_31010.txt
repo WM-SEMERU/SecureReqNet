@@ -1,8 +1,0 @@
-[Process] Missing extra dir when open_basedir returns
-
-
-Symfony version(s) affected: 4.2.5
-Description
-Parameter $extraDirs ignored if ini_get('open_basedir') returns content
-Possible Solution
-see PR

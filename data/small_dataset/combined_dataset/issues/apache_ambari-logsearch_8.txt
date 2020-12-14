@@ -1,8 +1,0 @@
-AMBARI-24765. Fix CVE issues for Log Search
-
-
-What changes were proposed in this pull request?
-Fix CVE issues (only for fasterxml jackson)
-How was this patch tested?
-UT,FT in progress..
-Please review @kasakrisz @swagle @g-boros

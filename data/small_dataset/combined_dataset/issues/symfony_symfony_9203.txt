@@ -1,6 +1,0 @@
-Infinite redirect for authenticated users when RememberMe key is changed
-
-
-If a user is authenticated with RememberMeToken and has an active session, when secret key used in RememberMeAuthenticationProvider is changed, an infinite redirect loop occurs. (It's a very rare case, but I just faced this when migrating a site to a different server, which was configured with a different secret)
-When secret keys don't match, RememberMeAuthenticationProvider throws BadCredentialsException, however firewall's ExceptionListener does not remove the token from the session on this exception. It does, though, on AccountStatusException.
-Not sure if it's the correct fix, but I'd change the exception thrown in RememberMeAuthenticationProvider to CredentialsExpiredException.

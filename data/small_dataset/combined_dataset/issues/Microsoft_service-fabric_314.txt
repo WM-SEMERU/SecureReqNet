@@ -1,5 +1,0 @@
-How does SF communicate with a standalone services process written by a developer?
-
-
-When I read SF's documentation, I found that it was mentioned that every app written by a developer was independent of the SF's own process. That is, SF processes and application processes need to rely on IPC to communicate.
-I want to know the IPC way SF uses on Windows and Linux. Or is SF not managing the app in a way that I understand?

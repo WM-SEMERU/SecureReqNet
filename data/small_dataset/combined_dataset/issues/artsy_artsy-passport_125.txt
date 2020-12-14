@@ -1,4 +1,0 @@
-@mzikherman => Bump passport version and update docs
-
-
-I accidentally published 1.0.9 to npm without compiling first -- didn't realize this was part of the step! This bumps the version again so we can actually use it and adds some documentation around how to publish.

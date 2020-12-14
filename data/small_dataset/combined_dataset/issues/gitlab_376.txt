@@ -1,5 +1,0 @@
-When the master branch is protected on a project, developers cannot push to this branch in the project. This is a *good thing*.
-
-But, developers cannot push either to the master branch of the wiki for this project. And that is a *bad thing*.
-
-Is it possible to allow developers to push to master on the wiki but not on the project if the master branch is protected?

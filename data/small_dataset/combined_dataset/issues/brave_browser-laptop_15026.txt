@@ -1,4 +1,0 @@
-use bcrypt native bindings instead of the JS-only implementation
-
-
-Instead of using a possibly outdated bcryptjs module, switch to bcrypt (native bindings).

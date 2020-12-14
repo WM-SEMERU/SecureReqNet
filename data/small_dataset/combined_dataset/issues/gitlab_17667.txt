@@ -1,3 +1,0 @@
-More often, customers are sending us vulnerability scan results and asking us to validate and fix or explain why they're false positives. As part of each release, or even as part of CI, can we start running a vulnerability scan suite? This way we can fix XSS, or explain false positives up front and avoid rushed work when customers contact us. I suspect these types of requests will only increase with time. 
-
-cc/ @DouweM @JobV @balameb @stanhu 

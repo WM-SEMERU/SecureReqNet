@@ -1,4 +1,0 @@
-use application(s) instead of app(s)
-
-
-Follow up of #11218 against 4.2 branch

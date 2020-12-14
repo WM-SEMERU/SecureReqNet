@@ -1,6 +1,0 @@
-Allow custom TLS cert checks
-
-
-This PR adds an extension point, TLSCertificateChecker, for custom TLS certificate checking (both client and server side).
-The hook provided allows an extension to replace the default X509ExtendedTrustManager's checkClientTrusted and checkServerTrusted methods (the default trust manager is provided as a parameter, so the standard checks can still be used by an extension if desired).
-This PR also adds an option to the simple-client-sslcontext extension to disable the standard hostname validation check.

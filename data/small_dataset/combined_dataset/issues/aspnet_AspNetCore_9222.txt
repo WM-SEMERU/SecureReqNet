@@ -1,4 +1,0 @@
-Fix stale references
-
-
-Attempted fix for aspnet/AspNetCore-Internal#2136. I wasn't able to get this to re-produce, but seeing as the FindElement is on the same line as the .Text here it seems likely that the problem here is that Browsers are getting re-used.

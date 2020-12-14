@@ -1,3 +1,0 @@
-GitLab does not require confirmation of secondary email addresses. This could allow a user to claim multiple email addresses as their own that do not belong to them. They can then assign notifications to these addresses to send unsolicited emails, or prevent the owners of these email addresses from signing up for their own GitLab accounts.
-
-We had a support request recently where a user was being told they could not sign up because their email address already existed. Because it was listed as a secondary on another account they could not use a password reset link to reclaim it and were effectively blocked from logging in.

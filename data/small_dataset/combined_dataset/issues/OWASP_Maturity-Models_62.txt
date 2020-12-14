@@ -1,6 +1,0 @@
-Move security issues to JIRA
-
-
-Since that is a place where the jira workflow can be implemented
-http://blog.diniscruz.com/2016/03/updated-jira-risk-workflow-now-with.html
-https://github.com/DinisCruz/Maturity-Models/issues?q=is%3Aissue+label%3Asecurity+is%3Aclosed

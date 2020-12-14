@@ -1,7 +1,0 @@
-[Cache] Show how to configure the cache
-
-
-This will fix #10989, fix #8711 and resolve many of my previous headaches.
-I want to have a page that explain how you configure the cache with the framework bundle. I added a first draft, some things are just notes to myself.
-This is clearly a work in progress, I will continue on this tomorrow.
-#eu-fossa

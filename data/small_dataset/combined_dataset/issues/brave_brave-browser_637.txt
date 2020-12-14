@@ -1,5 +1,0 @@
-Brave should block extensions from being able to modify extensions.brave.com
-
-
-or whatever the hostname for https://github.com/AilinLiao/brave-extension-store is
-chrome blocks chrome extensions from being able to modify/intercept content/requests on the chrome web store so that extensions cannot mess with installation of other extensions. we should do the same for the Brave extensions store.

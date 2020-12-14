@@ -1,6 +1,0 @@
-[Proposal] Set-AuthenticodeSignature add timestamp hash algorithm parameter
-
-
-Now cmdlet Set-AuthenticodeSignature always produce time stamp request with obsolete SHA-1 algorithm. Please add the parameter TimestampHashAlgorithm what will specify a desired tsp hash algorithm. Same functionality presents in signtool.exe tool with /td parameter
-Thanks
-Anton

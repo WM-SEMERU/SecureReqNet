@@ -1,7 +1,0 @@
-Good day,
-We've our slack integration with almost every repository that's in our Gitlab server, but one repository when something is pushed it doesn't send the message to Slack, the only difference is that it has active the Gitlab CI support.
-
-Does the Gitlab CI service interrupt the Slack service?
-
-
-Greetings!

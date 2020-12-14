@@ -1,4 +1,0 @@
-Agents should be able to connect and re-connect from any manager
-
-
-High-level issue to track the underlying work which would allow an agent to connect to any manager in the cluster, reconnect in case of failure, and maintain a list of managers for recovery.

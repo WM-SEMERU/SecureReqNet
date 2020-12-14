@@ -1,7 +1,0 @@
-Fixed access-control-allow-origin: * set on about: pages
-
-
-Test plan
-#7484 (comment)
-
-reported along with #4885

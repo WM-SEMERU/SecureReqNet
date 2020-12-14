@@ -1,6 +1,0 @@
-Nodes need to be able to talk to apiserver
-
-
-Right now, there's no way for proxy or kubelet to send traffic to apiserver (e.g., watches, lists, gets, or creating events). This is because we don't distribute username & password to nodes, for good reason.
-(Master components don't have this problem because they are colocated and talk on localhost.)
-This is blocking event generation from kubelet, and removing etcd reading from proxy (and kubelet, though that's further off.)

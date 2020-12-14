@@ -1,5 +1,0 @@
-Render groups to static token file
-
-
-kops renders the static token file (/srv/kubernetes/known_tokens.csv) by looking at secrets of type Secret, treating the text of the secret as the token and the name of the secret as the user name/ID. However, this file supports a fourth column that controls group membership.
-I'd like to be able to keep this per-user group information in the state store somewhere and have kops render them to the file, because groups are convenient in RBAC policies.

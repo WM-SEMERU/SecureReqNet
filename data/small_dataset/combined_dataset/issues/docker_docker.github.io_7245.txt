@@ -1,5 +1,0 @@
-Update ssh-add-keys-to-agent.md
-
-
-Proposed changes
-Changed the keys for the ssh-add command on Windows and Linux

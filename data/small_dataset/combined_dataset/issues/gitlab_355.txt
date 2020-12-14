@@ -1,9 +1,0 @@
-In the 7.0RC the theme the user is using is lost. I've selected the green theme, but my interface has the default color scheme.
-
-**Expected result**
-My interface would have the color scheme i've selected in my user profile
-
-**Noticed result**
-The interface has the default color, see screenshot
-
-![Screenshot 2014-06-21 17.15.31](https://gitlab.com/uploads/gitlab-org/gitlab-ce/7481e85362/Screenshot_2014-06-21_17.15.31.png)

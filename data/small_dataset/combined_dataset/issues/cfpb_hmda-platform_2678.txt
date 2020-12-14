@@ -1,4 +1,0 @@
-API Endpoint to return all MSAMDs for states
-
-
-an API endpoint should return list of MSAMDs for each state and all states

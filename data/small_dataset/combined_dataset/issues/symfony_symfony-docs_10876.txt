@@ -1,7 +1,0 @@
-Documentation is too coupled to the MakerBundle
-
-
-I just got feedback from someone trying to follow Symfony docs, but they didn't want to use the maker bundle. Now, myself I haven't read the docs since 2.0 was released, so I can't judge for myself, but their feedback was it was impossible to learn from 4.x docs. He started getting somewhere only after they switched to 3.x branch.
-Specifically, they were trying to set up and configure authentication, but this might be an issue in other places too.
-Other people on slack seem to have had similar issues:
-

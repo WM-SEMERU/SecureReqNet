@@ -1,8 +1,0 @@
-token TTLs
-
-
-Make sure that:
-
- users signup token TTL is <= 1 hour. Clients can reduce this value, not increase it via API
- nodes signup token TTL is 15 minutes. Clients can reduce this value, not increas it via API
-

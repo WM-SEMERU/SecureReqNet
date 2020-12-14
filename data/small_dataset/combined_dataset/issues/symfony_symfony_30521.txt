@@ -1,6 +1,0 @@
-Suggest packages on missing autowiring aliases
-
-
-When I use a type-hint for an interface that is not installed, autowiring fails with a generic message, e.g.: Cannot autowire argument $client of "App\Controller\HelloController::index()": argument "$responseFactory" of method "Symfony\Component\HttpClient\Psr18Client::__construct()" has type "Psr\Http\Message\ResponseFactoryInterface" but this class was not found.
-But in this example, we could suggest a solution: compose require nyholm/psr7 will install recipes for the interface. Maybe we could display this as a suggestion when we detect that flex is installed? We would do this for packages with official recipes only to reduce the scope.
-Another example is  Cannot determine controller argument for "App\Controller\HelloController::index()": the $client argument is type-hinted with the non-existent class or interface: "Psr\Http\Client\ClientInterface". when psr/http-client is missing.

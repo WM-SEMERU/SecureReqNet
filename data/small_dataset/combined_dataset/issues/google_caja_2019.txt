@@ -1,8 +1,0 @@
-Uncaught TypeError: Cannot read property 'get' of undefined
-
-
-After Google Chrome was updated  to v56 we started getting this error
-    at getAnonIntrinsics (ses-single-frame.opt.js?debug=1:93)
-    at repairES5Module (ses-single-frame.opt.js?debug=1:103)
-    at ses-single-frame.opt.js?debug=1:462```
-

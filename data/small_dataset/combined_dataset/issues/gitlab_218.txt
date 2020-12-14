@@ -1,1 +1,0 @@
-currently you can not create an issue, until you have atleast one file pushed into version control - otherwise you get an error 500

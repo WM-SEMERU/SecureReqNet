@@ -1,8 +1,0 @@
-Domado TameNodeList allowing undefined values for keys > length.
-
-
-Original issue 1892 created by james.keane@wishabi.com on 2014-02-19T01:57:16.000Z:
-This is causing a bug in zepto.js: madrobby/zepto#927
-Attached is a screen shot of what I am talking about, if you notice the native browser behaviour is to never have a property/index that points to undefined but Domado (ArrayLike?) does.
-Looks like it is a simple case of setting undefined vs using delete.
-In the screenshot everything except the first two nodes are undefined.

@@ -1,6 +1,0 @@
-How do I change client_id & client_secret in Middleware
-
-
-As before,I have config Google OAuth Client_ID & Client_Secret in Startup.cs.
-Then, I want change google oauth Client_ID  & Client_Secret at my custom Middleware.
-How can I do that?

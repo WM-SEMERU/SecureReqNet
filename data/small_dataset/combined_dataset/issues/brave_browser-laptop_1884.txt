@@ -1,9 +1,0 @@
-AudioContext Fingerprints
-
-
-Fingerprint Test Page
-https://audiofingerprint.openwpm.com/
-AudioContext Fingerprints
-Canvas font detection
-JS/CSS font detection
-Flash font detection

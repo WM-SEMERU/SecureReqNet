@@ -1,4 +1,0 @@
-x509 support for docker-registry with fine grain control.
-
-
-We have a need for x509 (cert) support for authenticating docker daemons. We can achieve this now with an apache(nginx) proxy for the tls termination. However we can't apply fine grain controls to the namespaces preventing images from being overwritten. We are essentially looking for the same "level" of control with "docker login" but using x509 certs. DHE may ultimately provide the solution for this.

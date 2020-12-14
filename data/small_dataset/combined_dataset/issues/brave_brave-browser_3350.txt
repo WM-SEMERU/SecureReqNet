@@ -1,4 +1,0 @@
-npm audit showing errors
-
-
-ex: https://travis-ci.org/brave/brave-core/jobs/492992454

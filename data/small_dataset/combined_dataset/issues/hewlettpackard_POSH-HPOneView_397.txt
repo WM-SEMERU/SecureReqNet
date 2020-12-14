@@ -1,5 +1,0 @@
-Enhancement - Add support for New-HPOVServer to return a number of servers with redundancy.
-
-
-Extend New-HPOVServer to return number of server resources, and identify if redundancy can be maintained.
-New-HPOVServer -NoProfile -InputObject $SPT -Redundancy -Count 6

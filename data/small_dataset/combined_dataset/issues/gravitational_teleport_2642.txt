@@ -1,7 +1,0 @@
-fix package not found error due to apt-update not being run
-
-
-
-fix same issue as in #2376.
-also consolidates the install into one layer to make it a little more efficient. each RUN creates a new tar file later in docker which has some overhead.
-

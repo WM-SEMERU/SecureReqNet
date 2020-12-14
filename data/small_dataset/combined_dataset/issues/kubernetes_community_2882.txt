@@ -1,6 +1,0 @@
-Fix typo in RFP date
-
-
-We don't, in fact, want to keep the RFP open for a year and a month.
-cc: @cji
-/assign joelsmith

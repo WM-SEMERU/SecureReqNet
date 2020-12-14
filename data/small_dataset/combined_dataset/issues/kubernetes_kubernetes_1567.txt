@@ -1,5 +1,0 @@
-Control direct access to Docker
-
-
-Direct access to Docker circumvents auth. We may need to allow it, but that should be specified as part of cluster configuration.
-IRC discussion

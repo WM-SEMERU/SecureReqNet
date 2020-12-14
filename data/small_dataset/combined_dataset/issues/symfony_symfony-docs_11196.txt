@@ -1,4 +1,0 @@
-use "behavior" instead of "behaviour"
-
-
-We use behavior many more then behaviour throughout the documentation.

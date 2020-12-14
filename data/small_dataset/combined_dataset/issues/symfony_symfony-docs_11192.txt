@@ -1,4 +1,0 @@
-Clarify target path functionality
-
-
-Explain that target_path is set from Symfony only when the user visits a secured route which will redirect him to the login. This example is for when the user visits some public routes, then the login page. After it logs in successfully, it will be redirected to that public route.

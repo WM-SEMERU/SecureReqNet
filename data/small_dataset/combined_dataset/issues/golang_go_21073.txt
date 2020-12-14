@@ -1,6 +1,0 @@
-x/tools/cmd/godoc: {tip,beta}.golang.org should redirect to https
-
-
-http://golang.org redirects to https://golang.org (as do blog, tour, etc., subdomains), but http://beta.golang.org and http://tip.golang.org do not redirect to their https equivalent.
-Is this an oversight? Or is it intentional (e.g., because it's needed for testing, or because it's too hard to redirect those domains)?
-Unless there's a good reason for it, they should redirect to https. It's inconvenient and uses up people's time having to manually modify URLs to https form when visiting or sharing/pasting URLs.

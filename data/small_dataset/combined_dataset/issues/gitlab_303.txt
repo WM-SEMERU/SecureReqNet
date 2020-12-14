@@ -1,1 +1,0 @@
-The IDs for merge requests and issues on the dashboard atom feed are using the global IDs from within the database instead of project-specific IDs (e.g. "commented on issue #103123" even though it was only issue 3 on that specific project).

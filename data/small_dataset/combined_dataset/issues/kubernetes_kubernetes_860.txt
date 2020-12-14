@@ -1,7 +1,0 @@
-Proposal: Isolate kubelet from etcd
-
-
-Discusses the current security risks posed by the kubelet->etcd pattern
-and discusses some options.
-Triggered by #846 and referenced in #859
-Does not have to be merged, for discussion and review

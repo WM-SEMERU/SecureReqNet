@@ -1,6 +1,0 @@
-num issues with filter?
-
-
-I recently started using the new 'DataTable' function. I am trying to implement a simple conditional formatting applied to a column. My issue is with the 'style_data_conditional' under the 'filter': option. It looks like the num() function rounds to the nearest integer not allowing us to applied <> to decimal numbers in the column. Is this correct? Any help is very much appreciated.
-Many thanks
-Originally posted by @rbolado in #169 (comment)

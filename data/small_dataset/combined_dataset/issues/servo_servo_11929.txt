@@ -1,8 +1,0 @@
-Certificate errors on five of the twelve blessed links
-
-
-When I click on any of these:
-
-I get a certificate error:
-
-Incidentally, telling someone they should feel bad for helping to test your product is... an odd choice.  Perhaps a more helpful message would be appropriate?

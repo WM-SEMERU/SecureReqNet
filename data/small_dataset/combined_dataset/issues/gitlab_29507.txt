@@ -1,5 +1,0 @@
-'Admins cannot currently search for users by creation time using the API. This feature would be useful for fighting abuse, as accounts are often created in bulk around the same time.
-
-The API would have to accept a time window for searching. Limiting to a specific day would be a nice start with further refinement down to the minute of account creation.
-
-@stanhu @DouweM @ernstvn

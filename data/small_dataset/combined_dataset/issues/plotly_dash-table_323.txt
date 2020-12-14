@@ -1,5 +1,0 @@
-Issues with `selected_rows` - getting deselected and persisting across component updates
-
-
-As reported in the community forum: https://community.plot.ly/t/bug-when-one-datatable-is-used-to-generate-another-datatable/17625
-I haven't tested this myself but the repro example looks sound

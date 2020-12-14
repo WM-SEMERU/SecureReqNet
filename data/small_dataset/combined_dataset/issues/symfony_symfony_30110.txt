@@ -1,7 +1,0 @@
-[Messenger] Add a way to only call the handler assigned to a queue
-
-
-Description
-With RabbitMQ you can set up a topic in a pub/sub configuration by binding multiple queues to one exchange. You can configure messenger transports to those different queues. The message is sent to the exchange and the same message is posted to both queues. A worker on one queue performs one type of operation (like sending an email) and another worker on the other queue performs a different operation (like sending an SMS).
-Here is the problem:
-You can set up workers to each of the queues through the transport with “bin/console messenger:consume-messages [transport]”, that works great. The problem is that both workers call both handlers because the message class in both handlers is the same. What is needed is a way to specify the handlers for each worker.

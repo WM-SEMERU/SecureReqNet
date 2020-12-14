@@ -1,9 +1,0 @@
-Build is broken because of CVE-2018-7489
-
-
-
-Framework version: 1.0.1
-Implementations: Jersey / Spring / Spring Boot / Spark
-
-Scenario
-A Jackson critical vulnerability, CVE-2018-7489, is blocking the build. We are waiting for Jackson 2.9.5 that should address the issue.

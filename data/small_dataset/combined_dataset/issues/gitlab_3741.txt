@@ -1,9 +1,0 @@
-'Example:
-- Developer with AD username "dev-user" has email "dev-user@company.com" and has profile in GitLab Server.
-- AD User administrator create in AD user "test-user" with some password and set mail attribute to "dev-user@company.com"
-
-Result: 
-AD User administartor can use login "test-user" for full access to developer account "dev-user"
-
-Suggest:
-During GitLab Login lookup profile use both e-mail and username!!!

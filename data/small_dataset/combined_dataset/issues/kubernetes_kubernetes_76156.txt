@@ -1,7 +1,0 @@
-Recreate nodes e2e test
-
-
-/kind cleanup
-This adds an e2e test to ensure that the node recreation lifecycle is correct.
-NONE
-

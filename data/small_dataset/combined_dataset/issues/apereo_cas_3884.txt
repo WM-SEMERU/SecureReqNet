@@ -1,5 +1,0 @@
-MFA bypass: Groovy/Rest bypass providers evaluated along with the default
-
-
-This PR ensures that for Bypass the Groovy and Rest bypass providers are evaluated along with the Default bypass provider.
-Ensures that for every RequestedAuthentication the MFA bypass is evaluated.

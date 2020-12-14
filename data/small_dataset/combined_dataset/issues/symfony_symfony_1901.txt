@@ -1,5 +1,0 @@
-AbstractToken can't properly serialize if a subclass overrides getRoles
-
-
-I have a token where I don't know the roles at the time the token is created. I need to override getRoles to extract the roles from the UserInterface, but if I do that serialize, unserialize, __toString all get empty roles.
-I think the two solutions are to create a setRoles method, or to change everything in AbstractToken that is using $this->roles to retrieve roles to $this->getRoles().

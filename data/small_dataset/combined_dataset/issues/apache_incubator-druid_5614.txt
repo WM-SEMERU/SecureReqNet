@@ -1,4 +1,0 @@
-Add config to allow setting up custom unsecured paths for druid nodes.
-
-
-This PR adds a new config druid.auth.unsecuredPaths which allows users to set custom unsecured paths.

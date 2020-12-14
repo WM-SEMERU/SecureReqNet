@@ -1,5 +1,0 @@
-[Security] Add the isEqualTo method implementation
-
-
-Hi,
-With the logout_on_user_change key addition in the security.yaml, every User entity must implement the isEqualTo method from the UserInterface .

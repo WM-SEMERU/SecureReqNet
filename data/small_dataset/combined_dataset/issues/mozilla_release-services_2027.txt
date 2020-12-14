@@ -1,7 +1,0 @@
-Update Harbormaster status when using direct Taskcluster tasks
-
-
-
-Send Taskcluster link to Phabricator 😿 🇮🇹
-Provides the Harbormaster Target PHID to the SA task to avoid looking for it (and potentially missing it)
-

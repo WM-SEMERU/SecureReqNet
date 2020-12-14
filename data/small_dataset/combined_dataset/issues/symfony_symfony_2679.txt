@@ -1,4 +1,0 @@
-Regression in Security/Router Integration
-
-
-The locale refactoring lead to a regression in the Security/Router integration. It's now again possible to detect the routes for secured parts of the website.

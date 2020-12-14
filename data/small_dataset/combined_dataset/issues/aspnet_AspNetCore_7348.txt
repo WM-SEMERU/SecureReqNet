@@ -1,9 +1,0 @@
-OnRedirectToLogin Event Not Firing
-
-
-Whenever unauthorized. it returns 302 redirects perfectly. But .net core OnRedirectToLogin event is not firing (I want to change response status).
-Is any other setup required? I have posted question on stackoverflow as well. Not sure if .net core has issue or identity server or my code.
-https://stackoverflow.com/questions/54560707/net-core-2-2-not-updating-status-code-for-302-to-401-onredirecttologin-event-n
-My startup file is similar to below sample repo file. In addition to below, I have added global authorize filter and vueclimiddleware and code for 302 to 401 ajax response status convert. other than that it is same as below.
-https://github.com/IdentityServer/IdentityServer4.Samples/blob/master/Clients/src/MvcHybridAutomaticRefresh/Startup.cs
-IdentityServer/IdentityServer4#3010

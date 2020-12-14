@@ -1,5 +1,0 @@
-sigs.yaml: remove Jess Frazelle from Security Committee
-
-
-Jess helped to kick off the Security Committee over two years ago.
-And has decided to step down. Thanks for everything!

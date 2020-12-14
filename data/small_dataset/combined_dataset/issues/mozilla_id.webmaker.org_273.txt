@@ -1,5 +1,0 @@
-The same message should be returned to the user regardless of whether the username is valid or not
-
-
-
-We do not want to provide any information that would allow an attacker to determine if an entered username/email address is valid or invalid. Otherwise an attacker could enumerate valid accounts for phishing attacks or brute force attack.

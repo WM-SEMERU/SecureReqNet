@@ -1,5 +1,0 @@
-Current behavior of manual actions is that they can be triggered only by users that have merge permissions on that branch. But what if you've push permissions? It's probably uncommon that you have merge permissions but no push permissions, but technically it is possible.
-
-We should then check if you have merge permissions **or** push permissions, and allow you to trigger manual actions on that.
-
-The same approach should be used for retry/cancel a job (#30634).

@@ -1,4 +1,0 @@
-[hackerone] local files
-
-
-https://hackerone.com/bugs?subject=brave&report_id=375329

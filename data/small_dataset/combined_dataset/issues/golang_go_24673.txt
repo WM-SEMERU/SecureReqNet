@@ -1,6 +1,0 @@
-proposal: crypto/tls: provide a way to access local certificate used to set up a connection
-
-
-While TLS provides ConnectionState() to share some connection security info, like remote certificate (PeerCertificates),  it lacks the info about local certificate used to set up a connection. And it's not always possible to predict local certificate used as the selection depends on the remote end requirements.
-Exposing the local certificate would be very helpful for debugging connection issues, for example, user may find certificate getter returns suboptimal certificate, which may be expiring soon or having a long verification chain. Moreover, it will also enable collecting certificate usage statistics, which could be valuable for service owners.
-@FiloSottile Thanks!

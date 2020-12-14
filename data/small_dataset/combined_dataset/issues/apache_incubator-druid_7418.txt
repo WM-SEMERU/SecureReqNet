@@ -1,5 +1,0 @@
-add travis check to make sure distribution packaging exits successfully
-
-
-Follow up to #7358, this adds a travis check that adds mvn ... clean install -Pdist run to ensure that creating a release package will exit successfully, which would have caught the issue.
-I don't know if this is better to be a standalone check like in this PR, or if we could hijack an existing check and add -Pdist to it, so I just added it by itself for now.

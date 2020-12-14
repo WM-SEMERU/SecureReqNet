@@ -1,1 +1,0 @@
-Would be grate to be able to disable using ssh protocol and adding ssh keys, or at least hide "ssh uri" in project  settings and information.

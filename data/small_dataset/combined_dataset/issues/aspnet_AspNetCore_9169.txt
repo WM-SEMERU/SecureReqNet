@@ -1,4 +1,0 @@
-Remove reference to Microsoft.AspNetCore.Components.Server
-
-
-Microsoft.AspNetCore.Components.Server no longer exists and is subsumed by Microsoft.AspNetCore.Blazor.Server

@@ -1,5 +1,0 @@
-Use : as seccomp security option operator for Docker 1.10
-
-
-Compare https://docs.docker.com/v1.11/engine/reference/run/ and https://docs.docker.com/v1.10/engine/reference/run/
-Fixes #28107

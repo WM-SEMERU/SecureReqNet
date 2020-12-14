@@ -1,2 +1,0 @@
-Hi,
-I am using gitlab version 6.7 with LDAP authentication. I have found, that when I create private project and assign LDAP user to be able to view its contents it works as expected. But when I log in as another LDAP user who does not have access to that project I can see project contents.

@@ -1,9 +1,0 @@
-Release notes for 0.23.x Hotfix 3 (Release Channel)
-
-
-Release Notes:
-
-Update to Muon 8.0.9. (#15119)
-Crash type 3 in 0.23.79. (#15025)
-Fix Cross-Origin Read Blocking (CORB) for extensions. (#14841)
-

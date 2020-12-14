@@ -1,4 +1,0 @@
-Update MessagePack-CSharp commit
-
-
-Makes more things internal

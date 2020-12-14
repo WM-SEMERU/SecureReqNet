@@ -1,4 +1,0 @@
-[SecurityBundle] Renamed FirewallContext#getContext()
-
-
-See symfony/symfony#20417

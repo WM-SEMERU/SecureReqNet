@@ -1,7 +1,0 @@
-Release notes for 0.23.x Release 6 (Release Channel)
-
-
-Release Notes
-
-Update to Muon 8.0.10.(#15177)
-

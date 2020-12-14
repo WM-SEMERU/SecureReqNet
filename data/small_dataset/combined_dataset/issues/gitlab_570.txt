@@ -1,7 +1,0 @@
-If I write a git commit ending with:
-
-Fixes #123456
-
-Fixes #123457
-
-The first issue is closed by gitlab but the second is only mentioned.

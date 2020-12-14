@@ -1,6 +1,0 @@
-Password on E-Mail not correctly escaped
-
-
-Don't know where the issue exactly is, but I have an E-Mail password with a ? and a { character. When you enter this password it parses the Password wrong and I get an Error message, that my password is wrong. So eventually also ' is not escaped correctly.
-Now I have changed the Password of this Employee and E-Mail is now working.
-But this is eventually a security issue, so please can you have an Eye on it?

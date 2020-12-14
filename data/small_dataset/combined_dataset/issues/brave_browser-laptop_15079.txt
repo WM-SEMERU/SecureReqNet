@@ -1,5 +1,0 @@
-Installation Error on Windows 10
-
-
-I download BraveSetup-x64.exe on the website and when I try to install it I got this error.
-SquirrelSetup.log

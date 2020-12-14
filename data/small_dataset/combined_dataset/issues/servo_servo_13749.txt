@@ -1,4 +1,0 @@
-Switch to mozilla-ca-certs crate instead of manually extracting certs from mozilla-central
-
-
-This was created by @jld and looks like it might be a nice improvement if we can integrate it with openssl: https://crates.io/crates/mozilla-ca-certs

@@ -1,8 +1,0 @@
-Table triggers render on mouse move
-
-
-Since the tooltip feature addition, the table is re-rendering on each mouse move. While it's mostly cached an unexpensive vs. an actual full re-render, this still takes ~15ms and happens extremely often.
-
-there's no need to re-render the table when moving inside a cell, a normal debounce for activating the tooltip will do
-there's no need to do this if the table doesn't have tooltips (or better yet, if the cells involved do not have tooltips)
-

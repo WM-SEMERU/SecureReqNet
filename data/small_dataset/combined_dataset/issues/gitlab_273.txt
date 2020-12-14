@@ -1,1 +1,0 @@
-It would be nice to have an option for storing the local backups on a remote server.

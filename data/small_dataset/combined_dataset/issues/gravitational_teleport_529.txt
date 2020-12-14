@@ -1,6 +1,0 @@
-TTL of signed certificate far too long
-
-
-Hi,
-I was just reading through the code and noticed that the ValidBefore field of the ssh.Certificate is being set to time.Now()...UnixNano(), which is the time period expressed in nanoseconds (https://github.com/gravitational/teleport/blob/master/lib/auth/native/native.go#L145).
-According to the documentation I've found, http://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL.certkeys?annotate=HEAD, ValidBefore and ValidAfter should be time in seconds since 1970-01-01 00:00:00 which means that the valid period of the certificates being generated is 1,000,000,000 times greater than what is being asked for.

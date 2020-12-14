@@ -1,4 +1,0 @@
-Implement safe CRT functions.
-
-
-Out of Simon's list, the only ones left are memcmp and memset. I'm not sure what the safe versions are supposed to do for these aside from parameter validation. Should they call oe_constant_time_memequal for memcmp_s and call a more general version of  oe_secure_zero_fill for memset_s?

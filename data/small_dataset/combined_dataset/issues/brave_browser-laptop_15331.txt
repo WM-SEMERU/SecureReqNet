@@ -1,5 +1,0 @@
-Return statement exiting early from usage ping call
-
-
-The return statement at https://github.com/brave/browser-laptop/blob/master/app/updater.js#L254 is potentially causing the usage ping to not fire when the referral code confirmation happens.
-This requires further investigation, but may be as simple as removing the return statement.

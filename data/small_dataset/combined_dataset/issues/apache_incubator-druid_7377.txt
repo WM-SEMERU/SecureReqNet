@@ -1,8 +1,0 @@
-Unified web console cuts off long strings
-
-
-Description
-When a long string is returned by a SQL query, the unified web console will cut off part of the string.  Afaik, the only way to view the entire string is to inspect the html of the webpage (which is highly inconvenient and not very user-friendly).  It would be nice if there was a way to view the whole string (maybe a popup box that contains the entire contents of the cell when clicked on?).
-
-Motivation
-This change would be beneficial as it would allow the results of EXPLAIN PLAN queries to be viewed.  Also, it would allow users to view long strings in their query results.

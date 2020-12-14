@@ -1,6 +1,0 @@
-Currently we do not check permissions in `ForkService`. 
-
-It is possible to fork project (for example using API) if only user has a `read_project` ability (guests do).
-User can easily bypass restrictions on downloading code (accessing code is available to reporter role and greater).
-
-This can be considered as a security issue. /cc @DouweM 

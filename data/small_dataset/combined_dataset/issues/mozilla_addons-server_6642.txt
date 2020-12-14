@@ -1,5 +1,0 @@
-Celery 4: remove pickle serialization
-
-
-In #6625 we added and defaulted to json serialization but kept accepting pickle for backwards compatibility.
-Let's remove pickle serialization once the upgrade is done and seems stable.

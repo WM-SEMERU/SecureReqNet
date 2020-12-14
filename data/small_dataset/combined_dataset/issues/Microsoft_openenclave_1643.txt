@@ -1,4 +1,0 @@
-OESIGN Tool needs a README.md file
-
-
-README.md file missing for oesign tool.

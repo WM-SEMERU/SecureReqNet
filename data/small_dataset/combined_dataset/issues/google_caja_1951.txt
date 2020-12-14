@@ -1,7 +1,0 @@
-More reachable objects not cleaned
-
-
-Original issue 1953 created by erights on 2015-02-15T05:15:42.000Z:
-https://people.mozilla.org/~jorendorff/es6-draft.html#sec-well-known-intrinsic-objects lists the intrinsic objects of ES6, not all of which are reachable by own property traversal from roots. We've already encountered and fixed the issue with %ThrowTypeError% (nee [[ThrowTypeError]]) escaping the whitelist cleaning. Since it was also (in violation of the spec) not frozen, this caused a loss of isolation. In ES5, this was the only object that could cause this problem.
-Now that we are whitelisting some ES6-only objects, we need to be more vigilant about providing access to other intrinsics that we may not have cleaned. The specific case I just found is that the named typed array constructors, such as Float32Array, are speced to inherit from the %TypedArray% intrinsic, which is not otherwise reachable. It was thus escaping our whitelist-based cleaning. At the time of this writing, Chrome and Safari do not yet implement this part of the spec, and no breach seems to occur there. Unfortunately, FF35 and FF Nightly 38 do, so we LOSE ISOLATION there due to this hole.
-Thus, this is high priority / security / private -- needing to go through the responsible disclosure process.

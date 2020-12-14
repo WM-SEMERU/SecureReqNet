@@ -1,5 +1,0 @@
-Switching into a user you are already in throws exception
-
-
-Currently if you switch into the user you are currently in you get an exception.
-Ignoring this state and doing nothing would be a better result imho, as the action "switch to user X" was not necessary and the user still gets the expected result "being user X".

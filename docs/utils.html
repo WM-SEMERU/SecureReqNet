@@ -40,7 +40,7 @@ nb_path: "nbs/03_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dynamic_Dataset" class="doc_header"><code>class</code> <code>Dynamic_Dataset</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/utils.py#L15" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dynamic_Dataset</code>(<strong><code>ground_truth</code></strong>, <strong><code>path</code></strong>, <strong><code>isZip</code></strong>)</p>
+<h2 id="Dynamic_Dataset" class="doc_header"><code>class</code> <code>Dynamic_Dataset</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/utils.py#L15" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dynamic_Dataset</code>(<strong><code>ground_truth</code></strong>, <strong><code>path</code></strong>, <strong><code>isZip</code></strong>)</p>
 </blockquote>
 <p>This class efficiently 'stores' a dataset. Only a list of filenames and
 mappings to their ground truth values are stored in memory. The file
@@ -157,7 +157,7 @@ for x in dataset[2:4]:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Processing_Dataset" class="doc_header"><code>class</code> <code>Processing_Dataset</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/utils.py#L115" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Processing_Dataset</code>(<strong><code>path</code></strong>)</p>
+<h2 id="Processing_Dataset" class="doc_header"><code>class</code> <code>Processing_Dataset</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/utils.py#L115" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Processing_Dataset</code>(<strong><code>path</code></strong>)</p>
 </blockquote>
 <p>This class wraps up processing and will match issue our data corpus with it's ground truth.
 This class also creates our test train split.</p>
@@ -183,7 +183,7 @@ This class also creates our test train split.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Processing_Dataset.get_issue" class="doc_header"><code>Processing_Dataset.get_issue</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/utils.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Processing_Dataset.get_issue</code>(<strong><code>filename</code></strong>)</p>
+<h4 id="Processing_Dataset.get_issue" class="doc_header"><code>Processing_Dataset.get_issue</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/utils.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Processing_Dataset.get_issue</code>(<strong><code>filename</code></strong>)</p>
 </blockquote>
 <p>Give the contents of the specified file</p>
 
@@ -208,7 +208,7 @@ This class also creates our test train split.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Processing_Dataset.get_ground_truth" class="doc_header"><code>Processing_Dataset.get_ground_truth</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/utils.py#L132" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Processing_Dataset.get_ground_truth</code>()</p>
+<h4 id="Processing_Dataset.get_ground_truth" class="doc_header"><code>Processing_Dataset.get_ground_truth</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/utils.py#L132" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Processing_Dataset.get_ground_truth</code>()</p>
 </blockquote>
 <p>Returns a dictionary representing the ground truth mapping
 to filenames in the path this class was initialized with</p>
@@ -234,7 +234,7 @@ to filenames in the path this class was initialized with</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Processing_Dataset.get_test_and_training" class="doc_header"><code>Processing_Dataset.get_test_and_training</code><a href="https://github.com/rmclanton/SecureReqNet/blob/master/securereqnet/utils.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Processing_Dataset.get_test_and_training</code>(<strong><code>ground_truth</code></strong>, <strong><code>test_ratio</code></strong>=<em><code>0.1</code></em>, <strong><code>isZip</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Processing_Dataset.get_test_and_training" class="doc_header"><code>Processing_Dataset.get_test_and_training</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/utils.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Processing_Dataset.get_test_and_training</code>(<strong><code>ground_truth</code></strong>, <strong><code>test_ratio</code></strong>=<em><code>0.1</code></em>, <strong><code>isZip</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Given the input ground truth dictionary, generate a train test split with the given ratio: default 0.1.
 If isZip is true, then we will attempt to read the data as a zip archive.  If not, we will try to read them normally.

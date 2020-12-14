@@ -1,6 +1,0 @@
-Link Extension Workshop dev and stage environments to AMO
-
-
-Fixes #7812
-
-There is no EW -dev environment yet, so I use the stage URL for -dev and local dev.

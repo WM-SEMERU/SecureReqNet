@@ -1,8 +1,0 @@
-Possible risk of privilege escalation using embedded templates
-
-
-I haven't tested this and so don't know if it is a real bug but came across the potential issue while browsing the code trying to diagnose an unrelated issue in our environment.
-Nomad jobs can include a template stanza that is executed by consul-template to create files populated with secrets, for example.
-My concern is whether there is any protection of the execution environment used by consul-template. I can see that consul-template provides the opportunity to read arbitrary files, for example. In addition, bugs in Go or consul-template may be able to be invoked via malicious template designs.
-Should the consul-template segment be executed within a controlled sandboxed process?
-A mitigating factor is that both consul-template and Go provide a very limited number of functions that can be used within a template definition.

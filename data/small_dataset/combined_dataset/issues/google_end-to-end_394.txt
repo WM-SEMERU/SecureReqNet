@@ -1,7 +1,0 @@
-Support for Inbox by Google
-
-
-Hey
-So this is a question and depending on the answer, a feature request too.
-Is this usable with "Inbox by Google"? if not, could it support it or are the
-two products too different?

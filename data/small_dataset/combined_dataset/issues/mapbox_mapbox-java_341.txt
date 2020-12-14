@@ -1,6 +1,0 @@
-radius query parameter doesn't allow for unlimited radius and no test exist
-
-
-
-
-

@@ -1,6 +1,0 @@
-BCryptPasswordEncoder's encodePassword throws BadCredentialsException
-
-
-Is it correct to throw an AuthenticationException? It is thrown when the password to encode is too long.
-Case: The user is trying to register a new username/password and the service is trying to encode the password for the user.
-If the password is too long, the service will get an (unexpected) "AuthenticationException". Should it not be something like an InvalidArgumentException ?

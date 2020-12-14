@@ -1,8 +1,0 @@
-Replace Blazor CLI tool with new DevServer package
-
-
-Fixes #8243 and #8999
-We weren't planning to do this so soon, but it seems like the .NET Core SDK has now dropped support for post-2.2 DotNetCliToolReference packages. Even if that's not the case and some other workaround was possible, we did want to make this change for the long term anyway.
-The end-user difference is that the Blazor client-side (standalone) template will no longer have a <DotNetCliToolReference>, but instead changes as follows: https://github.com/aspnet/AspNetCore/compare/stevesa/replace-cli-tool-with-devserver-package?expand=1#diff-fd13fca5328c4838e54de65fdad455d2
-We no longer need the hack that generated the *.runtimeconfig.json file, because it's now just a regular published ASP.NET Core application.
-The only drawback I can think of is that DevServer is a 5MB package, whereas Cli was just a few tens of KB. But it doesn't affect people's app sizes, since it's not sent to the browser nor even included in publish output. AFAIK this is the only correct and supported way to do what we want, though.

@@ -1,6 +1,0 @@
-Add Etcd TLS client auth
-
-
-This PR adds support for TLS Client Auth in the etcd backend.  It addresses Issue #43.
-It adds an additional structure to store.Config, ClientTLS, which is a pointer to a new struct type, ClientTLSConfig, which contains paths to TLS cert, key, and CA Cert.  CA Certs perhaps should be a list of CA cert files, but the etcd client only adds the first one anyway.  This may have to be revised when ZK and Consul support gets added, which is on our roadmap; however, the etcd client scratches our immediate itch.
-The way it works is that when we create a new etcd client, if the ClientTLS field in Config is not nil, instead of using etcd.NewClient() we use etcd.NewTLSClient() to get the etcd client.  This has the side effect of creating its own http.Transport object, so we skip the bit in the libkv method that does that if TLS is set.  This may need to be more sophisticated, if there's some use case where the actual TLS Config needs to get through to a TLS-Client-Auth backend.  As it is I pretty much did the simplest thing that would work for my use-case, which is that etcd is requiring client certificates to connect to it.

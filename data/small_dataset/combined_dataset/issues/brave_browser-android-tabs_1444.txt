@@ -1,6 +1,0 @@
-Changing bottom bar position shouldn't reuqire a restart
-
-
-Description 
-Changing bottom bar position shouldn't reuqire a restart. Opera also has a similar option to switch from bottom bar to top navigation bar but doesn't require the browser to restart. We should have a similar approach. This could probably extend to hiding Rewards button as well.
-cc: @anthonypkeane @SergeyZhukovsky

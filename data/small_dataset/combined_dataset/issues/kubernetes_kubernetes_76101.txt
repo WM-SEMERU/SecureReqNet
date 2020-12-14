@@ -1,7 +1,0 @@
-Automated cherry pick of #76039: Finish saving test results on failure
-
-
-Cherry pick of #76039 on release-1.14.
-#76039: Finish saving test results on failure
-Ensures the conformance test image saves results before exiting when ginkgo returns non-zero value.
-

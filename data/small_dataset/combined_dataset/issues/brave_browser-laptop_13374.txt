@@ -1,9 +1,0 @@
-disable webusb API
-
-
-Test plan
-See #13375
-Original issue description
-webusb can be used to bypass yubikey phishing protection at the moment: https://www.wired.com/story/chrome-yubikey-phishing-webusb/ -> we should disable navigator.usb
-@flamsmark also suggested disabling navigator.bluetooth
-maybe also https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon ?

@@ -1,6 +1,0 @@
-Revert "Actually starting to use the deallocator to clean up services"
-
-
-This reverts commit 2ba1cd9.
-Reverting temporarily to unblock Swarmkit updates in the light
-of changes requested on moby/moby#38525

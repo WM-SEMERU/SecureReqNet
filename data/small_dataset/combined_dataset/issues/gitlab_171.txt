@@ -1,4 +1,0 @@
-Following links are broken:
-
-https://gitlab.com/gitlab-org/gitlab-ce/blob/masterconfig/unicorn.rb.example 
-https://gitlab.com/gitlab-org/gitlab-ce/blob/masterconfig/gitlab.yml.example

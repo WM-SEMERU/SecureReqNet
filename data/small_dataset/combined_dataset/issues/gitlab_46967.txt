@@ -1,9 +1,0 @@
-### Summary
-
-Credentials outputted as plain text in the sidekiq log file.
-
-### Steps to reproduce
-
-As part of importing a project into Gitlab community edition (using the via https://<URL >option), I provided my credentials using the suggested format (https://<username>:<password>@gitlabinstance.xyz.com/repo). The import failed (for some reason) but the surprising part was when I visited the sidekiq logs I saw my credentials printed in plain text. It doesn't matter that these logs might not be accessible to all - I would rate this as a serious bug. 
-
-The software should mask the credentials or not print them in the logs. Error messages indicating incorrect credentials should suffice. I'm using Gitlab CE v10.8

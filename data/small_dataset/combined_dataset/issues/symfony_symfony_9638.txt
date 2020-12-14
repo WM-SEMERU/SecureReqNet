@@ -1,9 +1,0 @@
-[Security] failure_forward
-
-
-In the security bundle there is a option for "failure_forward". I think this option is misleading. It relies on "failure_path" being set and just forwards to that path.
-I think if "failure_path" is not set it should go to the original route requested.
-Take the following for example:
-Note: I have "use_forward" enabled.
-I go to /secure-area (route is intercepted and login forward is display on the same url).
-If I try to login with the wrong password it now takes me to /login instead of my original url of /secure-area. I think there needs to be a way to ALWAYS stay on the url that was requested.

@@ -1,4 +1,0 @@
-Fixes CIM deserialization bug
-
-
-This fix is ported from our internal branch and is related to TFS bug 11736179.

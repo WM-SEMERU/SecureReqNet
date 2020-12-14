@@ -1,6 +1,0 @@
-Instructions for setting up a caja server
-
-
-I'm currently looking to see if it might be possible to integrate the services provided by Caja into a project that I am working on that will allow instructors and course authors (who are not professional, trusted developers) to provide client-side code that will be used as part of an online learning experience. I'm using the XBlock API in a client-side-authoring XBlock into which I am hoping to integrate Caja.
-Unfortunately, the API that Caja currently provides does not integrate well with this particular XBlock because Caja currently assumes that the client-side code of interest is being hosted on an external website (like an iframe) rather than being served as an untrusted component of a webpage as it is being rendered. I would like to see if I can harvest the guts of Caja in a way that will allow this XBlock to continue to receive updates as Caja matures, but I can only do that if I know how to mess with Caja code and run it locally. Halp?
-(As an aside, another feature of interest would be to cache cajoled versions of client-provided client-side code, but I'm mentioning it only as a point of interest rather than the main question.)

@@ -1,4 +1,0 @@
-lock `merge`@1.2.1 pkg in package-lock.json
-
-
-this is a temp fix while substack/browser-launcher#43 isn't merged

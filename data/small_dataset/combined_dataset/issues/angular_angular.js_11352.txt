@@ -1,6 +1,0 @@
-$http's JSONP should require trusted resource URLs
-
-
-$http does not perform any security checks on the URLs that it receives.  It should require URLs that pass checks for $sce.RESOURCE_URL.
-This should generally not have a huge impact in terms of breaking backwards compatibility.  The cases that break, are where folks are performing JSONP requests to 3rd party servers.  In such cases, it would be a good idea for the apps that do break to configure the $sce whitelist to include that specific trusted 3rd party server to unbreak themselves.
-It might be a good idea to backport this to earlier versions if we can feel confident that we won't actually be breaking most applications.

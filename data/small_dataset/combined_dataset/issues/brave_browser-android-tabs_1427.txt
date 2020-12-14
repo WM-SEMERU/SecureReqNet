@@ -1,5 +1,0 @@
-Refactored code after code review
-
-
-Closes #1303
-Closes #1263

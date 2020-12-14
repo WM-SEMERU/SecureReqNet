@@ -1,4 +1,0 @@
-Readme corrections for INI-File syntax and pam_escalate restrictions
-
-
-#21

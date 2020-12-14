@@ -1,3 +1,0 @@
-OmniAuth 1.3.1 improperly stores POST data in callback params. 1.3.2 was released and includes this patch.
-
-https://github.com/omniauth/omniauth/pull/867

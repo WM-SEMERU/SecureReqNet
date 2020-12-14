@@ -1,4 +1,0 @@
-Added cmake package to package docs.
-
-
-Fixes #1583.

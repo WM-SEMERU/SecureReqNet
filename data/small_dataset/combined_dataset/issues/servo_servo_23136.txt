@@ -1,4 +1,0 @@
-Add android stack walking
-
-
-The android NDK does not include libunwind. We probably need to create an android-specific unwind-sys crate that vendors https://github.com/ivanarh/libunwind-ndk and builds it, then use that instead of unwind-sys on android.

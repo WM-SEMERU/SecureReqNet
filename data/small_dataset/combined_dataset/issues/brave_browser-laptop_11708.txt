@@ -1,6 +1,0 @@
-block access to fingerprinting methods pulled from child frames issue #11683
-
-
-@diracdeltas
-This PR fixes #11683.  The fix is a little funky, since it requires injecting JS into child pages (the chrome.webFrame.setGlobal method wont work here, since we need to call to Object.definePropery) but it should be good.
-Added a blocking access to fingerprinting methods on iframe.contentWindow test to test that things are actually getting blocked

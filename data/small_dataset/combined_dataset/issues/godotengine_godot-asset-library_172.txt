@@ -1,6 +1,0 @@
-Update current year in footer
-
-
-Can either keep it as a hard coded string, and update it like commit 102619e, or can update it with the PHP snippet below (as from updateyourfooter.com)
-Copyright © <?php echo date("Y"); ?> The Godot Engine community - MIT licensed
-

@@ -1,8 +1,0 @@
-Fixed UI for passive (display) mixed content
-
-
-Test plan
-#7571 (comment)
-
-Describe the issue you encountered: I tried to add a class to urlbarIcon on mixed content pages, and noticed that isMixedContent did not seem to be ready yet though it was mentioned here: https://github.com/brave/browser-laptop/blob/master/js/components/siteInfo.js#L18
-Because of it the siteInfo panel on https://mixed-script.badssl.com/ says that the site is secure where it should not, though the script is blocked.

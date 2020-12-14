@@ -1,6 +1,0 @@
-just updated to 7 stable
-ubuntu 12.04, nginx 1.6
-still have on graphs on Background jobs page
-image in attachment
-
-![Screenshot from 2014-06-23 16:08:27](https://gitlab.com/uploads/gitlab-org/gitlab-ce/acc541663f/Screenshot_from_2014-06-23_16_08_27.png)

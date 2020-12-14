@@ -1,4 +1,0 @@
-Integrate with the IP reputation service
-
-
-@jvehent can you give us more details on how to do this?  (links to docs?)

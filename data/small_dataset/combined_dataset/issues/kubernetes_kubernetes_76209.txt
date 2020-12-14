@@ -1,7 +1,0 @@
-Use Node-Problem-Detector v0.6.3 on GCI
-
-
-Node-Problem-Detector recently has a new release v0.6.3. This release fixed a bug in NPD v0.6.0 (fix PR: kubernetes/node-problem-detector#265). We need to use the new NPD version and cherry pick to release-1.10, release-1.11, release-1.12, release-1.13, and release-1.14 branches.
-/sig node
-/sig gcp
-/cc @Random-Liu

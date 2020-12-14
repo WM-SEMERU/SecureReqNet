@@ -1,6 +1,0 @@
-Make feral window configurable
-
-
-Original issue 1887 created by james.keane@wishabi.com on 2014-02-07T18:03:21.000Z:
-Right now caja.js uses window as the feral window, it would be useful to make this a configurable parameter.
-If for example I would like to load caja.js dynamically using an iframe to protect global namespace then Caja loads itself with the feral window of the iframe (which is not what is intended).

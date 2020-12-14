@@ -1,5 +1,0 @@
-Fixed the code of the custom password authenticator example
-
-
-Fixes #4579.
-I used the same code given by @wouterj in #4579 (comment)

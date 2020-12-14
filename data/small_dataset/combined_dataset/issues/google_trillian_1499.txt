@@ -1,6 +1,0 @@
-Increase Test Coverage of sparse_merkle_tree_test.go
-
-
-The inclusion proof tests in sparse_merkle_tree_test.go do not exercise any validation logic.
-Ideally, we could instantiate these tests with an in-memory tree implementation and verify with the verifiers in client.
-Since mocks are not recommended in Go, this would also bring the tests better in-line with best practice.

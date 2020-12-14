@@ -1,4 +1,0 @@
-Change Certificate Renewal to reasonable interval
-
-
-Currently at 30 seconds

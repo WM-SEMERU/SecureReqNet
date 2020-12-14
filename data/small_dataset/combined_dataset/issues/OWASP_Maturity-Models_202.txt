@@ -1,4 +1,0 @@
-Extend team raw view to show activities mappings
-
-
-This should help with #185 (make it easier to integrate with confluence)

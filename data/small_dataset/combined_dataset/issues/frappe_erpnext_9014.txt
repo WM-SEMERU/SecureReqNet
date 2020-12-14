@@ -1,5 +1,0 @@
-Files Handling Security Issue
-
-
-From here - https://discuss.erpnext.com/t/files-handling-security-issue/24055
-I propose moving all files into the database and then finding a way to encrypt the database itself to prevent tampering/hacking. Encryption keys should not be in plain text configuration/json type files either. MD5 hash is easily cracked, so that won't work either.

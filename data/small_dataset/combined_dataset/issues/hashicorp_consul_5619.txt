@@ -1,4 +1,0 @@
-Share Fastly and Netlify redirects
-
-
-This PR will allow us to share one common redirects file for both the Netlify deploy previews and for Fastly. It will also allow us to manage all our redirects in this file and have it automatically update the Fastly dictionary via the Fastly API on site deploys.

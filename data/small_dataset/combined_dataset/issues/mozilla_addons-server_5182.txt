@@ -1,5 +1,0 @@
-Upgrade bleach to version 3.x
-
-
-See #4883 for a few more details.
-blocked by mozilla/bleach#271

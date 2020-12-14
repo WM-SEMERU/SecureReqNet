@@ -1,6 +1,0 @@
-fix: POS search items not works properly if item group filter has applied
-
-
-
-
-

@@ -1,5 +1,0 @@
-[AppArmor] Profiles are not checked when containers are restarted
-
-
-AppArmor is only validated when a Pod is first admitted to a node. This means that if an AppArmor profile is unloaded after a Pod is started, containers in the pod will be restarted without the profile.
-/cc @dchen1107

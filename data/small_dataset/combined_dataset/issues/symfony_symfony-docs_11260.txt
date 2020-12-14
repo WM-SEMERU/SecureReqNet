@@ -1,5 +1,0 @@
-[HttpFoundation] Added the getArray documentation
-
-
-This PR adds the Symfony\Component\HttpFoundation\ParameterBag::getArray method documentation
-PR in progress : symfony/symfony#30812

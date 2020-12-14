@@ -1,6 +1,0 @@
-Supported algorithms
-
-
-This might sound stupid, but I just spent more than an hour figuring out why my custom entity provider wasn't working, although I (thought I) followed the entity provider tutorial.
-The tutorial references the "Encoding the User's password" document, which uses a sha512 instead of the sha1 of the tutorial. Appearantly, I mixed up the two docs and ended up with the sha512 base64 encoded version instead of the sha1 non-base64 version. This doesn't fit the 40 bytes that is used for the password field so it get's truncated (which isn't logged anywhere), making the password mismatch when logging in. The solution was easy enough, but getting to it was the hard part.
-I've searched the docs, but can't seem to find any reference to what algorithms are supported other than 'serveral built-in "encoders" ' or the plaintext, sha1 and sha512 used in the examples (and recently added pbkdf2 and bcrypt).If you're not a security expert (like me), it would be nice to have a human-readable summary (the Wikipedia page of most of these algorithms doesn't really make the average user happy) of the supported algorithms listing the key characteristics of the algorithms like strenght, tradeoffs, output format and -length. I'm quite sure the latter would have probably saved me quite some time ;)

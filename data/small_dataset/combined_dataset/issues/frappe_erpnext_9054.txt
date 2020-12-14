@@ -1,4 +1,0 @@
-Show account balance on Customer/Supplier dashboard based on Permissions
-
-
-We can consider the permissions of GL Entry to show the balances.

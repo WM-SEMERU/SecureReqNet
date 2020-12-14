@@ -1,9 +1,0 @@
-A dot in the name of an environment causes problems
-
-
-Symfony version(s) affected: 4.2.5
-Description
-A dot in the name of an environment causes problems with cache loading.
-PHP Fatal error:  Uncaught Symfony\Component\Debug\Exception\FatalThrowableError: Undefined constant 'Container7x1NQ4E\srcApp_KernelTest' in /symfony-project/var/cache/test.dev/srcApp_KernelTest.devDebugContainer.php:5
-How to reproduce
-Set the APP_ENV to the test.env for example... or run console with --env=test.dev.

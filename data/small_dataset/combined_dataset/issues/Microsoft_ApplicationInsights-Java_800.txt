@@ -1,4 +1,0 @@
-Remove dependency on Guava
-
-
-Guava, has been vulenrable to breaking changes and many CVE vulnerabilities. It is good to remove guava dependency from core and web sdks.

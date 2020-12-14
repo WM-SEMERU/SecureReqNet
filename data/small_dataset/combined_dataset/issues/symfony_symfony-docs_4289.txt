@@ -1,4 +1,0 @@
-[2.6] Document extensibility of ExpressionLanguage
-
-
-Symfony got some new features based on the ExpressionLanguage with 2.6 (see symfony/symfony#12006).

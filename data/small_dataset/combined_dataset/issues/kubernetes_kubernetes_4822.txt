@@ -1,4 +1,0 @@
-Improve user experience for creating / updating secrets
-
-
-The serialized form of secret data is a base64 encoded string.  Currently this means that in order to create a secret, a user has to craft a json or yaml field containing their encoded secret data.  There should be a way for a user to create a secret from a set of cleartext files, binary files, or cleartext values specified from the command line.

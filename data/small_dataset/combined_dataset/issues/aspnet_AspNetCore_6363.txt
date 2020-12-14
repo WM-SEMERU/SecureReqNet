@@ -1,4 +1,0 @@
-Port new options auth sample
-
-
-Port of aspnet/AuthSamples#44

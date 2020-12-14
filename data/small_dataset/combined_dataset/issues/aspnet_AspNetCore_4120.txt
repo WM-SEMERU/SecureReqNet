@@ -1,9 +1,0 @@
-Add WindowsAuth samples
-
-
-Windows Auth only (IIS Express vs httpsys)
-Windows Auth + impersonation
-Windows Auth + anonymous
-Windows Auth + anonymous + cors
-Windows Auth + bearer for different endpoints or the same endpoint
-Windows Auth + remote/cookie auth with selection page or automatic selection

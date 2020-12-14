@@ -1,2 +1,0 @@
-The branch selector within the "Compare View" differs from the rest of the dropdowns: You cannot select a branch, you have to start typing.
-A nice thing would be to reuse the dropdown from the "New Merge Request" also for the "Compare View" to have it more easy to select.

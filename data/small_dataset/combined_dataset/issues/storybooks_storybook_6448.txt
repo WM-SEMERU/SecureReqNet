@@ -1,6 +1,0 @@
-Migrate app/react-native to typescript
-
-
-Issue: #5030
-What I did
-Migrate app/react-native to typescript. Most types have been annotated properly except for the data we get from client-api.

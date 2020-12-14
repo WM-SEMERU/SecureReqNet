@@ -1,4 +1,0 @@
-Form Validation Error for Array input
-
-
-After upgrading symfony/form to v4.2.2 from v4.2.1, I'm having form validation error. Actually, I think it's correct behavior now, because an input data is an Array while form element is of TextType. Not sure why it was working before though :) To solve the issue, I tried to use Data Transformers, however both transform callable arguments are empty for some reason. How can I resolve it?

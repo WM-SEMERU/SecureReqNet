@@ -1,4 +1,0 @@
-Kubernetes examples probably should not rely on containers owned by other people
-
-
-No offense to the other people, but if we can't rebuild a container, we get stuck sometimes. :)

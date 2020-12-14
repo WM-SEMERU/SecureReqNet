@@ -1,4 +1,0 @@
-Disabled Rewards notification when Rewards are on
-
-
-Closes #1436

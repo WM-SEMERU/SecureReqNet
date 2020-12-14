@@ -1,6 +1,0 @@
-Add mandatory method and attribute
-
-
-For the page "Implement a Simple Registration Form"
-Without $roles, construct(), getRoles() and eraseCredentials(), this entity doesn't work because of his interface
-It may be nice to add these methods so that you do not have any errors when you copy paste

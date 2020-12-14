@@ -1,6 +1,0 @@
-Kustomize in kubectl should be marked experimental, CLI process gap
-
-
-There seems to be some major gap in the adoption process of CLI features.  I do not follow SIGs or kubernetes PRs closely, which puts me in the same category as 99.9% of your users. One of the nice outcomes of the k8s alpha/beta/GA graduation is that users have the ability to try and comment on features before they become GA and they don't need to track the development of k8s or be a member of SIGs.
-I've seen some references that kustomize had some disagreements or discusses around why it was merged.  I don't know what that was and really don't care.  What I don't particularly like in this case is that k8s developers have graduated a component and integrated it in k8s without any proper way for users to give feedback before being declared GA.
-Features shouldn't just land in CLI without going through some graduation.

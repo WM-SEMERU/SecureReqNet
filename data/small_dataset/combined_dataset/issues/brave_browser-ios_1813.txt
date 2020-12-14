@@ -1,8 +1,0 @@
-German Translation not complete
-
-
-Hey,
-I noticed, that the german Translation in the new tabs is not complete.
-xx s Est. Time Saved --> Geschätzte Zeit gespart
-Anzeigen und Trackers --> Anzeigen und Tracker (does not need the s in the end for plural in german)
-

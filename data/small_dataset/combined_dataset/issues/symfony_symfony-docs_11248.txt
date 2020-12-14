@@ -1,6 +1,0 @@
-[Console] uncomment the "Before" code part
-
-
-for better syntax highlighting
-The current version:
-

@@ -1,4 +1,0 @@
-Experimental: Don't use django FileResponse (streaming).
-
-
-Refs #11147

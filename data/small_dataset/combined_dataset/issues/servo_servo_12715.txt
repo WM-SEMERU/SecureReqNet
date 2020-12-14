@@ -1,4 +1,0 @@
-Use incumbent settings object for Window::postMessage.
-
-
-Depends on #10963.

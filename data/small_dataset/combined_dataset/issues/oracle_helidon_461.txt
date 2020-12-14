@@ -1,8 +1,0 @@
-Security - tracing support refactoring
-
-
-
- when tracing is enabled, security traces usernames logged in - this should be optional (may leak information to wrong audience)
- tracing propagation has issues when security is in place - traces are disconnected probably due to wrong parent SpanContext being used
- security client extension should auto-register similar to Tracing extension
-

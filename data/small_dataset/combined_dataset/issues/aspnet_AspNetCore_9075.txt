@@ -1,8 +1,0 @@
-Blazor option to not optimize assemblies
-
-
-Is your feature request related to a problem? Please describe.
-I'd like to be able to use reflection in the browser to access types and methods from my dependencies that are not explicitly used in my C# code.
-Describe the solution you'd like
-I'd like to be able to easily deploy full versions of my Blazor app's dependencies to the browser.  It would be nice to have a per-project setting somewhere to say "don't optimize for size" so building and deploying through the usual means skip the assembly-trimming step.
-Sorry if this has already been requested; I couldn't find an existing issue.

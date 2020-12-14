@@ -1,4 +1,0 @@
-scripts for upgrade testing
-
-
-Some helper scripts for testing upgrades, ive been using them to manually test upgrades. They could turn into automated tests in the future.

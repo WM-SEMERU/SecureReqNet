@@ -1,6 +1,0 @@
-Make sure "pre auth" article mentions that you need an anonymous firewall
-
-
-Hi guys!
-See symfony/symfony#13751 - if you're going to return null from createToken(), you must have anonymous on in your firewall so that you at least get the AnonymousToken.
-Thanks!

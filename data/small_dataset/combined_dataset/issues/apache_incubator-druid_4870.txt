@@ -1,5 +1,0 @@
-Add context map to AuthenticationResult
-
-
-Adds a String->Object map to AuthenticationResult, for Authenticator/Authorizer combinations that require storing more information about the request than just an identity string.
-This PR also removes the JSON property annotations from AuthenticationResult, since it shouldn't need to be serialized/deserialized.

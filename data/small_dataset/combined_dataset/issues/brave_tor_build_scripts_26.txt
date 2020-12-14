@@ -1,4 +1,0 @@
-Upgrade OpenSSL to 1.1.0
-
-
-In my static linking scripts, I have found issues with OpenSSL 1.1.0 and Tor's configure scripts, namely that the -lssl and -lcrypto are in the wrong order on some of the gcc calls to check OpenSSL. I opened this ticket but curious what is needed in these scripts to upgrade OpenSSL.

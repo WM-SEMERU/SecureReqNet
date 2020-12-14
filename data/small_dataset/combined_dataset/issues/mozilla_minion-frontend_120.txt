@@ -1,5 +1,0 @@
-Refactor the classify_issue filter
-
-
-The classify_issue filter emits a full <a> tag with data taken from the plugin, which is then included using ng-bind-html-unsafe. It is better to split this up into two filters. One for the link and one for the title. Then the <a> can be setup in the template using proper escaping.
-Or, turn this into an Angular.JS Directive?

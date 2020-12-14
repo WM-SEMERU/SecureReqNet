@@ -1,6 +1,0 @@
-Only first attribute is considered in the ACL Voter
-
-
-I am not sure if this is a bug or if I am misunderstanding how the ACL Voter works, but it looks like the ACL voter only considers the first attribute that returns a valid mask.
-The reason is that the vote function is wrapped in a large foreach statement, and inside the loop, the function can return granted, abstained, or denied. These votes are straight returns, and so potentially the remaining attributes will not be processed by the loop.
-Class: Symfony/Component/Security/Acl/Voter/AclVoter

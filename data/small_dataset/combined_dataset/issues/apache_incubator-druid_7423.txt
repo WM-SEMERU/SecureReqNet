@@ -1,5 +1,0 @@
-Unused parameter in ParallelIndexTuningConfig
-
-
-@JsonProperty("chatHandlerTimeout") @Nullable Duration chatHandlerTimeout is unused.
-FYI @jihoonson

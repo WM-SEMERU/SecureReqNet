@@ -1,8 +1,0 @@
-Windows: Add -mllvm -x86-speculative-load-hardening flags to clang
-
-
-When maybe_build_using_clangw is used to build enclaves on Windows, the spectre mitigation flags:
--mllvm -x86-speculative-load-hardening
-must be applied if the compiler supports it.
-(Clang-7 and above support it).
-CC: @andschwa @dragoshsch

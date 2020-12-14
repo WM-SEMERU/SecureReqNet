@@ -1,4 +1,0 @@
-[Security] ip constraint in access_control section
-
-
-When client's ip address matches the one that is specified in configuration, system acts as expected: it continues to check other criterias like requires_channel. But when the match fails it acts like i don't have access_control section at all, no checks are forced, every user can access secured area. Is it really the way how it is supposed to be?

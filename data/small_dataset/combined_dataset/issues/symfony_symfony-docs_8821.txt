@@ -1,4 +1,0 @@
-The security component must be installed to use csrf_token()
-
-
-This fixes #8816.

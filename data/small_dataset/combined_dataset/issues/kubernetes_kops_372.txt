@@ -1,4 +1,0 @@
-Support encrypted EBS volumes
-
-
-http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html

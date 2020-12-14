@@ -1,5 +1,0 @@
-proposal: x/crypto/hkdf: Allow skipping the extract stage
-
-
-RFC5869 suggests that the extract stage of HKDF's extract-and-expand process can be skipped if there is sufficient entropy in the input key material. Would it be worth providing a separate function for initializing the hkdf struct directly?
-func NewNoExtract(hash func() hash.Hash, secret, info []byte) io.Reader

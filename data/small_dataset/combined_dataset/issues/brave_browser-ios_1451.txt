@@ -1,4 +1,0 @@
-Block First Party Domains
-
-
-iOS currently does not run first party domains through the Adblock lib. This is unintentional and needs to be fixed. Most noticeable complaint is #1415

@@ -1,7 +1,0 @@
-Authentication is not clearly explained
-
-
-I think that Authentication part is not very well explained.
-For example I am not clear what is login_check doing or what to do with the login listener since there is already an abstract authentication listener.
-In general the security part is very hard to understand or the explanations are incomplete in the documentation and sometimes FOSUserBundle is not enough.
-http://symfony.com/doc/current/components/security/authentication.html

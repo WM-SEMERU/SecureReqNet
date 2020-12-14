@@ -1,8 +1,0 @@
-[feature] Reload TLSConfig.CAFile on SIGHUP
-
-
-A very much appreciated feature was recently delivered to support graceful reloads of the TLS configuration.
-https://github.com/hashicorp/nomad/pull/3479/files
-I think this needs to be extended to also refresh the CA file (if defined). I run very short TTLs on both server certificates and root CAs. As it's currently implemented, this is still a huge pain point for me.
-I might be able to take a stab at this myself, but want to get a conversation going first. Thoughts or concerns?
-Thanks!

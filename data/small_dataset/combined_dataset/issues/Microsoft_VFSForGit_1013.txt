@@ -1,5 +1,0 @@
-WIP: Make ProductUpgradeTimer testable
-
-
-This is an early iteration on making the ProductUpgradeTimer testable. The focus of this series is to get ProductUpgradeTimer into a test harness. It does not actually make any assertions yet, but rather just attempts to get the logic running in a test harness. There is still a bit of work to add the tests.
-This class has several layers of dependencies, and several options for where to introduce test objects.

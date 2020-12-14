@@ -1,6 +1,0 @@
-VMware vSphere Driver Doesn't Accept a Datastore Cluster as the Datastore
-
-
-In a vSphere environment that uses a datastore cluster, the datastores are not directly accessible.  The datastore cluster name must be used instead, but it cannot be used as a datastore object.  The result is the inability to deploy to an environment that has no standalone datastores.
-When using this inside of Rancher trying to deploy a cluster node, I get the following error:
-2019/03/21 18:22:06 [ERROR] NodeController c-nj5hw/m-cs7xv [node-controller] failed with : Error with pre-create check: "datastore 'MyDatastoreCluster' not found"

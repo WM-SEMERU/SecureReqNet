@@ -1,4 +1,0 @@
-remove space before self closing xml tag
-
-
-to be consistent throughout the docs

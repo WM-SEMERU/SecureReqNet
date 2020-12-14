@@ -1,4 +1,0 @@
-Creating a npm audit xml report
-
-
-Added RFC for generating an xml report via npm audit --xml.

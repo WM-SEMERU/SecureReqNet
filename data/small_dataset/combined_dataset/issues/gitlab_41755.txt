@@ -1,9 +1,0 @@
-'If I wanted to inject CORS headers and handle preflight OPTIONS requests to the three endpoints:
-
-- `/:project/:repo.git/info/refs`
-- `/:project/:repo.git/git-upload-pack`
-- `/:project/:repo.git/git-receive-pack`
-
-is this the right repo to do that? (E.g. not the Rails app or the Gitaly app?) Or should I do it in Nginx? I read the blog post about gitlab-workhorse and how more of the core functions are being moved out of Nginx into gitlab-workhorse.
-
-I'm the author of https://npm.im/isomorphic-git and am trying to make cloning/pushing in the browser a "totally normal thing" in 2018, which is why CORS is coming up now.

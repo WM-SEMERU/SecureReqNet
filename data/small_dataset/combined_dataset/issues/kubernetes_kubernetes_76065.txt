@@ -1,5 +1,0 @@
-add timeout support for watch
-
-
-Ref: #75835
-Retry the e2e tests here

@@ -1,8 +1,0 @@
-[RFC][Security] Better usage of "encoding" and "hashing" terms
-
-
-Matt Brunt mentioned in this Twitter discussion:
-
-"even if you already have some passwords encoded using a different cost" - Dear Symfony documentation: encoding !== hashing
-
-Although we use encoder term extensively (because of the security.yml configuration) we may review the explanations to see if we could use instead the hashing term in some cases, which is more common when talking about passwords.

@@ -1,7 +1,0 @@
-Simplify/ease the User serialization requirement
-
-
-(this issue is part of the "DX" ("Developer eXperience") initiative introduced by Symfony project)
-In most cases, your User object needs to implement Serializable - we cover it in the docs: http://symfony.com/doc/current/cookbook/security/entity_provider.html#the-data-model (search What is the importance of serialize and unserialize?). If you don't do this, you may get odd errors if you're using Doctrine.
-Could we make this more automatic? The fields that are serialized are important for AbstractToken::hasUserChanged, and unless the developer chooses to explicitly implement EquatableInterface, we know exactly what fields need to be serialized.
-In short, the problem is well-defined and is really an ugly implementation detail. So I want to see if we can do this for them, perhaps with an optional AbstractUser.

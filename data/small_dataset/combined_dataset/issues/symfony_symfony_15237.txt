@@ -1,5 +1,0 @@
-[Security] Using 0 as username
-
-
-UserAuthenticationProvider not allow username "0"
-https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/UserAuthenticationProvider.php#L65

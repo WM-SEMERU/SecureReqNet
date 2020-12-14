@@ -1,4 +1,0 @@
-the HSTS preload list includes entries that are not considered HSTS
-
-
-transport_security_state_static.json includes entries that are not considered by Google to be HSTS. The ones that are will have the property "mode" with the value "force-https". Only these entries should be included.

@@ -1,5 +1,0 @@
-Refactor allocator to attempt to reduce complexity
-
-
-This one is built on top of #2821
-see individual commits for a description of the changes 🤗

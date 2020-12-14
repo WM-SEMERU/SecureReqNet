@@ -1,5 +1,0 @@
-Allow client and kubelet configs to hold cert/key/ca data directly
-
-
-When building client configs, it is useful to be able to provide the ca/cert/key data as file references or as inline data. This is especially true when building clients for various system components using certificates minted by the server which may never be persisted to disk.
-@jbeda PTAL

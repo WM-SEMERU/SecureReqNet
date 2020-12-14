@@ -1,4 +1,0 @@
-target=_blank now should default to rel=noopener
-
-
-https://webkit.org/blog/8475/release-notes-for-safari-technology-preview-68/

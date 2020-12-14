@@ -1,4 +1,0 @@
-Remove obsolete UseIdentity/Auth/Google APIs
-
-
-Was obsoleted as part of the 2.0 auth changes

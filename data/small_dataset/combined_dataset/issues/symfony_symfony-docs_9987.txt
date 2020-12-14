@@ -1,4 +1,0 @@
-json-login-ldap
-
-
-symfony/symfony#27650

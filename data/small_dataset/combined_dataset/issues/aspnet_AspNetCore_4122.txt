@@ -1,4 +1,0 @@
-Add sample for single remote auth
-
-
-This is a simplified version of the org auth template using any single remote provider as the sole auth mechanism.

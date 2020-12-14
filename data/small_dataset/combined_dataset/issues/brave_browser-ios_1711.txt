@@ -1,4 +1,0 @@
-Security indicators for mixed passive content [hackerone]
-
-
-https://hackerone.com/bugs?report_id=397271

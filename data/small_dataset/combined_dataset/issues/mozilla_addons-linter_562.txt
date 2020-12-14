@@ -1,6 +1,0 @@
-Check for CSP changes in the manifest and flag them for reviewers
-
-
-We should warn for all CSP changes made to the manifest so reviewers know to check and make sure there are appropriate.
-Certain CSP changes should be straight-up not allowed; others should warn developers and reviewers.
-This will solve a lot of security issues.

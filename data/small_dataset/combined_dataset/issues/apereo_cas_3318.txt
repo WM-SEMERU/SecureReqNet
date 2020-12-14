@@ -1,7 +1,0 @@
-Fix Duo iFrame on mobile devices
-
-
-This implements the iFrame as documented on https://duo.com/docs/duoweb.  This fixes issue with iFrame not displaying properly on mobile devices.  This also adds a tag for IE Edge that Duo recommends.
-To configure/test, set up CAS with Duo enabled.  Use a mobile phone to authenticate, and confirm the Duo iFrame doesn't look really messed up.
-Don't believe there are any limitations or side effects.
-Not aware of any other merge requests that are related.

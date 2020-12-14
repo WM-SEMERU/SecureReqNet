@@ -1,4 +1,0 @@
-Updated the Guard diagram to add the new supports() method
-
-
-This fixes #8903.

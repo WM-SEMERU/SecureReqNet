@@ -1,5 +1,0 @@
-Tag client-go 5.0.1
-
-
-With 5.0.0 based on 1.8.0 instead of 1.8.1 we missed security critical fixes: #53443.
-/cc @liggitt

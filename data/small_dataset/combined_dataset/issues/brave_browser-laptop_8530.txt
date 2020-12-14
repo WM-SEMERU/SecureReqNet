@@ -1,9 +1,0 @@
-View Certificate on mixed content site
-
-
-Test plan
-#8531 (comment)
-
-We should be able to view certificate on
-https://mixed-script.badssl.com/
-CC @diracdeltas

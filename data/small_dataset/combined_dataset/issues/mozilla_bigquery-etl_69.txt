@@ -1,6 +1,0 @@
-core_clients_last_seen init use WHERE FALSE pattern
-
-
-
-
-

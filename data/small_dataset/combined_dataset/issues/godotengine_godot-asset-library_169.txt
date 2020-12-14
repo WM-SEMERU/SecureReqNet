@@ -1,5 +1,0 @@
-Module category in asset library?
-
-
-Godot has several ways to extend its default functionality - GDScript, GDNative libraries, and also modules that are compiled directly into the engine.  The first two have a home here in the asset library, but there is no official collection of modules (although there are a couple unofficial ones).
-It's understood that modules are not as easy for the user and the download/install functionality would not apply here, but adding a modules category might be a nice way to improve the visibility of the ones that are out there.

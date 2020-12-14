@@ -1,4 +1,0 @@
-Better explain the use of multiple roles in access_control
-
-
-This fixes #8355.

@@ -1,6 +1,0 @@
-AuthenticationFailureEvent not triggered for AccountStatusException
-
-
-I have a subscriber to AuthenticationFailureEvent but it isn't triggered for AccountStatusException's.
-Ref: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/AuthenticationProviderManager.php#L85
-Is there a reason for this?

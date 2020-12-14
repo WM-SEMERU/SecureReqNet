@@ -1,5 +1,0 @@
-Add sentry endpoints to CSP
-
-
-Once sentry endpoints are known the CSP will need to be updated to include them. It will need to be added to connect-src so that XHRs to the sentry endpoint aren't blocked.
-Use the most complete path possible if you can rather than just adding an origin.

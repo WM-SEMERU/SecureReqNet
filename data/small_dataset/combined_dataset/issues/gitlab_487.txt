@@ -1,5 +1,0 @@
-It's currently very hard to bring something to someone's attention. Even with mentioning (unless I am missing something).
-
-It would be nice to at least sync merge request comments to Slack. It would be better still to alert users on slack when they are mentioned on GitLab.
-
-Is there anything in the works to allow the notifications system to use something other than email?

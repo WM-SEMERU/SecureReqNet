@@ -1,4 +1,0 @@
-Make pkg-config relocatable
-
-
-In #1649 it was (re-)discovered that the pkg-config files are incompatible with make DESTDIR types of relocatable installations. While we have a work-around in place for the tests, this needs to be fixed.

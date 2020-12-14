@@ -1,4 +1,0 @@
-verify sanitizated output for regression tests
-
-
-In pull #241, I added regression tests for bleach.clean. We should verify the output for those regression tests.

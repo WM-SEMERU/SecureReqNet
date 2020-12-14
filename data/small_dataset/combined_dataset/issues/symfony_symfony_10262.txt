@@ -1,7 +1,0 @@
-[Security] Use Form component for form authentication
-
-
-I've decided to use a model and a FormType for my Login form. This works great and is in my opinion a lot neater than the default approach in the docs (with the manually typed inputs etc...).
-However, it seems to me that it's impossible to validate the form. By validating the form, I mean adding constraints on the Login model and having them validated with $form->handleRequest($request); if ($form->isValid()) .... This could be powerful as it would allow you firstly to make sure no empty credentials are checked and also because you could validate a username (e.g. it must be a valid email).
-I'm going through the code and as far as I can tell Symfony/Component/Security/Http/Firewall/UsernamePasswordFormAuthenticationListener would have to be coupled with the form component. I understand why this is not the case at the moment.
-Is it possible to create a different Listener, one that is coupled with the Form component?

@@ -1,6 +1,0 @@
-Use environment variables for passing credentials, instead of command line arguments
-
-
-
-
-

@@ -1,5 +1,0 @@
-Feature request: Adding currency symbols and percent sign to numeric columns
-
-
-Currently, adding currency symbols and percent signs to numeric columns requires transforming them to string columns, which is not a big deal in itself but messes up filtering and sorting. One solution could be to have specific column types to handle these cases. Another could be to add some styling property that could be used within style_***_conditional and would prepend or append characters to  the values of a column.
-This is probably related to #189.

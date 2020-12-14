@@ -1,9 +1,0 @@
-Always set (empty) UpdateStatus
-
-
-When deploying a service the UpdateStatus.State field is not present
-during docker service create. This complicates creating scripts that
-check for UpdateStatus.State to reach a certain state, as they have to take
-into account that the UpdateStatus as a whole is missing.
-This patch always sets the UpdateStatus.State to make it easier to consume.
-addresses moby/moby#28012

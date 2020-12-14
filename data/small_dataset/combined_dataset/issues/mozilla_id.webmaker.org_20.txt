@@ -1,4 +1,0 @@
-Conduct security review
-
-
-Need to make sure there is less code, more tests, and tests specific to security issues.

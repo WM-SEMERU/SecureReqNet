@@ -1,5 +1,0 @@
-x/crypto: add implementation of Diffie-Hellman x448
-
-
-Feature request: implementation of X25519 and X448.
-The X25519 function is provided by x/crypto/curve25519 package, but not for X448.

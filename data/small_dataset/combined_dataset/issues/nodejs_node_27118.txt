@@ -1,8 +1,0 @@
-lib: refactor tls options handle in https.js
-
-
-Checklist
-
- make -j4 test (UNIX), or vcbuild test (Windows) passes
- commit message follows commit guidelines
-

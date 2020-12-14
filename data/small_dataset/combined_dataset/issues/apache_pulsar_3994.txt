@@ -1,5 +1,0 @@
-fix bug when updating function running in effectively-once
-
-
-Motivation
-Master issue: #3993

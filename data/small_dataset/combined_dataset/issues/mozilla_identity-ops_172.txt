@@ -1,8 +1,0 @@
-Enabled `get_hosts` to output
-
-
-Originally reported in https://bugzilla.mozilla.org/show_bug.cgi?id=938398
-@edmoz has requested :
-have get_hosts output dnshook format like this : https://github.com/jrgm/dnshook/blob/master/config.json-dist
-Here's the file in question
-https://github.com/mozilla/identity-ops/blob/master/chef/cookbooks/persona-admin/files/default/usr/local/bin/get_hosts

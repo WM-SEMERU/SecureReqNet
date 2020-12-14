@@ -1,4 +1,0 @@
-Fix authorization check in supervisor history api.
-
-
-History was not being filtered properly.

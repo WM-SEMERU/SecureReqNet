@@ -1,5 +1,0 @@
-Origin handling in HTMLIFrameElement::contentDocument is broken.
-
-
-Depends on #10963.
-We should compare the origins of the Document and the incumbent settings object. We're doing something with URLs instead.

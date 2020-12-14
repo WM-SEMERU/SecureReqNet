@@ -1,8 +1,0 @@
-Pulling a private image without logging in returns a 404 instead of a 401
-
-
-If a user attempts to pull a private image when the user is either not logged in or does not have credentials the user is returned
-Pulling repository foo/bar
-2014/08/21 11:30:39 HTTP code: 404
-
-It may be a security concern to return a 401 but in general that's how HTTP conveys permission denied errors.

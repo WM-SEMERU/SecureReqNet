@@ -1,5 +1,0 @@
-'Update moment from 2.19.2 (as of %11.4) to 2.19.3 or higher (actually 2.22.2) to address a ReDOS vulnerability existing in the library.
-
-The version can be confirmed in the `gitlab-ce`-`11.4.0-ce.0` deb package at:
-
-- `/opt/gitlab/embedded/service/gitlabrails/public/assets/webpack/vendors~mermaid.a48baa14.chunk.js.map`

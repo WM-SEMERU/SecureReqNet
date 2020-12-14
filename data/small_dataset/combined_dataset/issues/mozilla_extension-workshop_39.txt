@@ -1,6 +1,0 @@
-Script isn't built from source as a build step
-
-
-Ideally a script should be handling bundling of script but right now it seems like codekit is being used - which looks to be a desktop app. https://codekitapp.com/
-Script should be bundled at build time by a script and not committed built.
-If it's committed built then no package updates will have any effect and it will look like we have updated versions of dependencies when we don't which is obviously not a situation we want to be in.

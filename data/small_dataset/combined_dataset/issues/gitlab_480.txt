@@ -1,9 +1,0 @@
-input:
-  a markdown format text in the description part of an issue, as below:
-  
-  ## XXXXXX
-  1. XXX
-  2. XXX
-
-result:
-  returned a error 500 web page

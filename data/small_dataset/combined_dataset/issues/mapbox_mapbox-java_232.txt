@@ -1,6 +1,0 @@
-Deprecated direction v4
-
-
-Closes: #140
-Deprecates directions v4 in favor of v5.
-cc: @ivovandongen

@@ -1,7 +1,0 @@
-embedded YouTube videos no longer work
-
-
-Description
-This regressed in 0.63.x.
-There is such a video at the bottom of this page:
-https://www.dailywire.com/news/45415/tucker-carlson-unloads-ocasio-cortez-moron-nasty-ryan-saavedra

@@ -1,9 +1,0 @@
-Resource controlapi Implemetation
-
-
-- What I did
-Finishes the controlapi implementation of Resources, which allows external users to store arbitrary data in swarmkit's store.
-Additionally, alters some protobufs for a better API. Typically, such changes would be unacceptable and breaking, but as this API was never made available, there is no harm in changing it.
-Subsumes my last PR, #2834
-- How to test it
-Includes automated tests

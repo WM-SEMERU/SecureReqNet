@@ -1,7 +1,0 @@
-vulnerable dependency warning for Hoek
-
-
-Known moderate severity security vulnerability detected in hoek < 5.0.3 defined in package-lock.json.
---
-package-lock.json update suggested: hoek ~> 5.0.3.
-

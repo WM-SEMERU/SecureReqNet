@@ -1,5 +1,0 @@
-repairES5 overgeneralized from observing absent .caller
-
-
-The BUILTIN_LEAKS_CALLER test uses Array.prototype.map as an example of a builtin, to see whether builtins have a .caller on this platform. On Chrome, Array.prototype.map does not, leading the test to assume that none do. In turns out that there are two flavors of builtin in the implementation. The Array constructor, for example, is of the other flavor and does have a .caller.
-Fortunately, these remaining .caller properties on Chrome are indeed safe -- they always return null -- so SES does not need to change. See https://code.google.com/p/chromium/issues/detail?id=516666

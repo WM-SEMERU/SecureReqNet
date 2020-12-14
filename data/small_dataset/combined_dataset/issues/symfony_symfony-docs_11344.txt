@@ -1,4 +1,0 @@
-[serializer] document DEEP_OBJECT_TO_POPULATE
-
-
-Document the new feature added in symfony/symfony#30607

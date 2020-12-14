@@ -1,8 +1,0 @@
-[Issue] FatalErrorException in RoleHierarchy.php line 43:
-
-
-I created table role and user_roles in my database and I insert for role table is (1, 'ROLE_USER'), (2,'ROLE_ADMIN') and insert for role_user with role_id and user_id.
-I login with user has data in role_user , it has error
-FatalErrorException in RoleHierarchy.php line 43:
-Error: Call to a member function getRole() on a non-object
-Pls help me

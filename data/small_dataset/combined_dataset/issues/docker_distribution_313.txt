@@ -1,7 +1,0 @@
-registry/storage/driver/inmemory: avoid crash on invalid Move arguments
-
-
-This chnage prevents a crash when moving from a non-existent directory that has
-a file as a parent. To prevent this, we simply check that the node is a
-directory and throws an error if it is not.
-Signed-off-by: Stephen J Day stephen.day@docker.com

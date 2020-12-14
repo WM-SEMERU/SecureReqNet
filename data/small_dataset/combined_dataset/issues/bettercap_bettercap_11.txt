@@ -1,8 +1,0 @@
-improve api.rest authentication mechanism
-
-
-Right now the only authentication mechanism for the api.rest module is HTTP basic auth on HTTPS, what needs to be done:
-
- Switch from basic http component to the gin framework.
- Use stricter security policy headers ( ref ).
-

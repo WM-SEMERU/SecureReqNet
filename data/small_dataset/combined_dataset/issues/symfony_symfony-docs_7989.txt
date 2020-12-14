@@ -1,9 +1,0 @@
-[Security] Document how to wire up a custom authentication success handler
-
-
-From symfony/symfony#20912:
-
-I was trying to implement a custom authentication success handler, and it took me quite a bit to identify how to inject the options, the fact that it's based on the existence of a setOptions method is rather opaque.
-Can we have an interface that is implemented by official handlers exposing setOptions?
-
-This feature was introduced in Symfony 2.6 (see symfony/symfony#11993).

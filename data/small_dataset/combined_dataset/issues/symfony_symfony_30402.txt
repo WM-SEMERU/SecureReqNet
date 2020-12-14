@@ -1,8 +1,0 @@
-[Routing][ServiceRouterLoader] Use a private service
-
-
-When using a service router loader (type: service), the service has to be public. It would be nice if it was not mandatory (to follow Symfony good practices).
-The implementation I thought of would be to tag custom router loader services with a new tag, to be able to inject them in the ServiceRouterLoader service in a second "private" service locator. Creating another loader for private services would be bad for DX.
-The proposed implementation might be bad for DX actually since it forces developers to add a tag. However, that would works great if there was a concrete interface to implement for service router loader because it could be autoconfigured.
-I also thought that we could parse all routes config files before compilation to get the referenced services, but I think that would involve a lot of code and probably be overkill.
-Is the whole thing overkill ? Does anyone have a better / easier implementation idea ? @Tobion @nicolas-grekas @stof

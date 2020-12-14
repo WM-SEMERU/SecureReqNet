@@ -1,7 +1,0 @@
-bump fernet/fernet-go 9eac43b88a5efb8651d24de9b68e87567e029736
-
-
-full diff: fernet/fernet-go@1b2437b...9eac43b
-
-fernet/fernet-go#14 verify should only check ttl if > 0
-

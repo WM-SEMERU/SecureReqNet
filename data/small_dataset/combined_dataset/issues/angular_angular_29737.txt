@@ -1,4 +1,0 @@
-docs: typo fix, change "insure" to "ensure"
-
-
-Fix minor typo in the docs about creating libraries

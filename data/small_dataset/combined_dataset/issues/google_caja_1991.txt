@@ -1,4 +1,0 @@
-Why "target" attributes are not allowed for anchor "A" elements?
-
-
-I can't seem to find any reason documented for this. Is there some reason "a::target" is blacklisted?

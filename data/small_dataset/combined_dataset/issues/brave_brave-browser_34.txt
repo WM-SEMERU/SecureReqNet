@@ -1,4 +1,0 @@
-Session windows
-
-
-Repurpose multi user support for session windows.

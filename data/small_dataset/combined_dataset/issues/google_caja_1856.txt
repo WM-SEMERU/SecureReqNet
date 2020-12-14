@@ -1,6 +1,0 @@
-Try scanner in non-Caja environments
-
-
-Original issue 1858 created by kpreid.switchb.org on 2013-09-09T23:34:30.000Z:
-test-scan-guest.js has turned up a couple minor browser bugs. It might be interesting to apply it directly to the API of the browser (outside of the Domado and/or Caja sandbox) to see if it can find some more, and be useful beyond Caja itself.
-However, it would be difficult to find appropriate checks to run, as the non-Caja environment is much more irregular.

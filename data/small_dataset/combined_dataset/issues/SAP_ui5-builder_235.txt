@@ -1,5 +1,0 @@
-[FIX] Add bundling sap-ui-core-noJQuery.js and sap-ui-core-noJQuery-dbg.js
-
-
-Fixes #192
-Replacement for #227

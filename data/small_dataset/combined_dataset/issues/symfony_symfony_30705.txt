@@ -1,4 +1,0 @@
-config custom dir of `Datafixtures`
-
-
-can change the dir of Datafixtures now? because,when use api platform，app will has many dir like dto,dataprovider...,I want to move that all to src/Data path.have any configure to DataFixtureBundle?

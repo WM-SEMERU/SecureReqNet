@@ -1,6 +1,0 @@
-[Form] Add warning about Collection items removal with PATCH request
-
-
-I struggled hard with understanding why my last Collection item isn't removed by the form component until I find this "low visibility" question on StackOverflow:
-https://stackoverflow.com/questions/29391438/clearing-form-collection-entirely
-Shouldn't we add a warning about that in the "allow_delete" or "delete_empty" sections?

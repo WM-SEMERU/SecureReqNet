@@ -1,7 +1,0 @@
-dash-table: for the table shown on the dash website, can we drag a cell value to overwrite values in other cells horizontally or vertically?
-
-
-For the current version of data_table,
-after the table shown on the dash website, could we drag the value in a certain cell to overwrite the values in other cells horizontally or vertically?
-(I only know that for the version of 'dash_table_experiments', the value in some cell can be dragged vertically to overwrite the values of cells in the same column)
-Could anyone help me with this question? Thank you in advance!

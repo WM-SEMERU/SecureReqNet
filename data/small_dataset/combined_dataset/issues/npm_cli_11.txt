@@ -1,4 +1,0 @@
-Add support for requiring 2fa to publish specific packages.
-
-
-The nrc PR was: npm/npm-registry-client#175

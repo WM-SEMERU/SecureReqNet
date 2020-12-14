@@ -1,5 +1,0 @@
-I think there is no option to disable the HSTS Header which is send.
-
-In this commit (https://gitlab.com/puiterwijk/omnibus-gitlab/commit/57c4d84dfc1d54faaa7c7c94a6cff2e6d8392c21) was an option for nginx added but the header is now set in rails in this file: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/controllers/application_controller.rb#L181
-
-I think it would be nice to have a config option for this.

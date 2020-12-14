@@ -1,8 +1,0 @@
-Information disclosure in client output when erroring
-
-
-Log messages may contain sensitive information from the backend:
-DEBU[0264] Unexpected response from server: "{\"errors\":[{\"code\":\"UNKNOWN\",\"message\":\"unknown error\",\"detail\":\"Put https://s3.amazonaws.com/docker-images-prod/registry-v2/docker/registry/v2/repositories/lyst/sortinghat/_uploads/fafc5d11-0c70-4887-9c1b-24cb01d04f02/startedat: dial tcp 54.231.9.56:443: connection timed out\"}]}\n" http.Header{"Docker-Distribution-Api-Version":[]string{"registry/2.0"}, "Date":[]string{"Tue, 28 Jul 2015 14:05:10 GMT"}, "Content-Length":[]string{"281"}, "Content-Type":[]string{"text/plain; charset=utf-8"}, "Strict-Transport-Security":[]string{"max-age=31536000"}}
-
-This gives away the bucket name and discloses path.
-They should be redacted before being bubbled-up to the end-user.

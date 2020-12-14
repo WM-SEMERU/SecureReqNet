@@ -1,8 +1,0 @@
-Use greenkeeper to automatically keep npm deps up to date
-
-
-Carried over from brave/browser-laptop#1701
-
-https://greenkeeper.io/
-
-As discussed previously, we'd need to have good unit + system tests (to verify dep updates work as expected) before we can use this

@@ -1,4 +1,0 @@
-staging/publishing: split rules for godeps and go.mod bot
-
-
-We will run two bots in the forseeable future: one for Godeps bases releases and one for go.mod (starting with master branch).

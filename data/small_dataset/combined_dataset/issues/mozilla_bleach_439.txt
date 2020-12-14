@@ -1,5 +1,0 @@
-switch to circleci
-
-
-Bleach currently uses Travis CI for thing, but it seems like Travis CI is going to go away. We should switch to something else.
-A lot of Mozilla projects use Circle CI, so I think that's probably the best option for now.

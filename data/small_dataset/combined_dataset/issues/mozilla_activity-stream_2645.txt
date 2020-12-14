@@ -1,4 +1,0 @@
-add <meta> CSP tag to the system-addon HTML
-
-
-Since resource: URIs are framable, it come up at the security review that we should add a CSP  tag.   dveditz suggested that at the very least we want no inline scripts and no ancestor framing.  We may be able to use the CSP from the SDK add-on as a starting point.

@@ -1,4 +1,0 @@
-Hi all!
-Is it possible to make different host in SSH and HTTP project links?
-As I see gitlab use "host" configuration from gitlab.yml for these links, but I need to change host in HTTP link only, but for ssh link keep it as is.
-Thanks for any advise!

@@ -1,4 +1,0 @@
-Use headless context instead of OsMesa
-
-
-Glutin's context builder supports a build_headless API. We should see if we can use that, since it will get us headless support on all platforms rather than the current OsMesa solution.

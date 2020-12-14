@@ -1,8 +1,0 @@
-Introduce "Lock Account" Route for Remember Me
-
-
-Currently, the "logout" firewall destroys the remember me cookie if it is configured.
-There are situations where sites may want their users to stay in a "remembered" state after signing out. An example could be displaying a header message that reads, "Welcome back, @jeremylivingston". The site could require that the majority of routes required IS_AUTHENTICATED_FULLY, but still open some to the IS_AUTHENTICATED_REMEMBERED state.
-I propose the creation of a new logout route type that will "lock" the account and put it into this state. The route could have its own handlers, similar to the logout firewall, but it would run the same LogoutHandler classes as the actual logout route. Developers could still use the existing logout route if they'd like to destroy the remember me cookie.
-I am open to suggestions for how to build this, whether it's a separate firewall type, a configuration within the remember_me firewall, or a configuration option within the logout firewall. I feel that the latter would be the least scaleable.
-I'm happy to do the required work for this feature. I'd just like to make sure that it's something that the group would like to see added to the core. Thanks!

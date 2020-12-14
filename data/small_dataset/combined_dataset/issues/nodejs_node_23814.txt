@@ -1,7 +1,0 @@
-tls: disable TLS v1.0 and v1.1 by default
-
-
-Refs: https://blog.mozilla.org/security/2018/10/15/removing-old-versions-of-tls/
-Firefox will drop support for TLS < 1.2 in March 2020. Given the usage numbers, I'd say that makes sense. This PR is a discussion starter about when to disable it in Node.js.
-v12 will be released in April 2019. That might be too early. But v12 is supported until April 2022. That's too late. So what is a good time?
-Users can programmatically re-enable TLS 1.0 and 1.1 with this PR. To what extent does that alleviate backwards compatibility concerns? Would a command line flag be better?

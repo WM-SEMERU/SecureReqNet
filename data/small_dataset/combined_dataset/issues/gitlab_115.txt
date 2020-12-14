@@ -1,1 +1,0 @@
-If you push a branch, then delete it, the "Recent Activity" stream will link to the branch, but the link is a 404. I've patched our install so this appears as a strikethrough instead, but you could argue the event should be culled from the stream.

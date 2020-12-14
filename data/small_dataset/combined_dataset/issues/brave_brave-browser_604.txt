@@ -1,6 +1,0 @@
-Consider a whitelist of PWAs instead of allowing all PWAs
-
-
-
-No description provided.
-

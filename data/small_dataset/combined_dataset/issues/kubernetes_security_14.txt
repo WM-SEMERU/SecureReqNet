@@ -1,6 +1,0 @@
-Update checklist for pre-disclosure review process
-
-
-Update security release process and disclosure checklist to include fix team, release team, and PST in review of pre-disclosure announcement draft
-From CVE-2018-1002105 post-mortem
-/assign

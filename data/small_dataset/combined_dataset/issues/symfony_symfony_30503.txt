@@ -1,8 +1,0 @@
-Use APP_ENV when running yarn encore
-
-
-Would it be possible to utilize APP_ENV variable when running yarn encore?
-So instead of yarn encore dev or yarn encore production I would do yarn encore.
-More explicit option would be yarn encore env that selects dev or production based on APP_ENV.
-This would avoid duplication of install/deploy configurations between production and development.
-Rest of Symfony is doing that already.

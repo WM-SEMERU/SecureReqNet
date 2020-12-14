@@ -1,6 +1,0 @@
-Upgrade insecure Django dependency
-
-
-This says our Django dependency is insecure:
-https://requires.io/github/mozilla/testpilot/requirements/?branch=master
-We should upgrade ASAP.

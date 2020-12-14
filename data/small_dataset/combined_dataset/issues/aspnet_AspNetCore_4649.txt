@@ -1,4 +1,0 @@
-Consider resolving IAuthenticationSchemeProvider from DI in Invoke in AuthenticationMiddleware
-
-
-In short, accepting the IAuthenticationSchemeProvider as a ctor to the AuthenticationMiddleware forces it to be a singleton. I know the default is deigned that way and put in DI that way, but if someone wants to replace it (say with something that hits a DB) then it's difficult.

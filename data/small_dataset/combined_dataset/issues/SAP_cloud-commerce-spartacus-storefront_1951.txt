@@ -1,4 +1,0 @@
-Fetch details data to checkout state
-
-
-Instead of expand list of parameters for cart details (#1770), lets fetch deliveryAddres, deliveryMode and paymentInfo data directly to checkout state. Additionaly we need success/error/loading states (#1922 (review))

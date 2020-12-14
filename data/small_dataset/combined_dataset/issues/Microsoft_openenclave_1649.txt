@@ -1,4 +1,0 @@
-CMake samples cleanup
-
-
-Re-opening #1638 manually (which replaced #1618) because I force-pushed the branch.

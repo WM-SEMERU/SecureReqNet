@@ -1,4 +1,0 @@
-Openenclave.groovy shouldn't clean/checkout
-
-
-Forcing a clean/checkout before the build prevents Jenkinsfiles that include this Openenclave.groovy library from modifying the build (for example, with a "git apply PATCHFILE") before the build begins. This issue is a recommendation to remove the clean/checkout commands from the Openenclave.groovy library and put those into individual Jenkinsfiles instead.

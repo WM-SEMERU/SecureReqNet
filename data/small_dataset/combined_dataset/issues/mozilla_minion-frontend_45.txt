@@ -1,6 +1,0 @@
-/api/invites/<invite_id> does not check owner
-
-
-
-
-

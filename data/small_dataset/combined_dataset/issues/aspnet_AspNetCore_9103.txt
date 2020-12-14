@@ -1,4 +1,0 @@
-Question: When will there be a 1.0 (Non-experimental) release of Blazor?
-
-
-We are planning to use Blazor in some project(s) but are waiting for a 1.0 release. Is there a roadmap when it will (probably) come? Can we expect it to be available in Q3 of 2019?

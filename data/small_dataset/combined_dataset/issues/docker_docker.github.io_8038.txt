@@ -1,8 +1,0 @@
-Re-frame the "secure out of the box" phrase regarding swarm overlay networking
-
-
-File: engine/userguide/networking/overlay-security-model.md
-"Docker swarm mode overlay network security model: Overlay networking for Docker Engine swarm mode comes secure out of the box ... // You can also encrypt data exchanged between containers on different nodes on the overlay network."
-I would like to see this often-repeated (and summarised) phrase "secure out of the box" re-framed so that it is completely clear that it only applies to the activity of swarm nodes exchanging control plane information (use of the secure Gossip protocol) rather than to the general swarm overlay network's data plane, for which encryption must be enabled explicitly.
-For example, it is more correct and informative to say "The control plane coordinating overlay networking for Docker Engine swarm mode comes secure out of the box."
-It would be better to not have any bold statements from the official documentation that could be read/spoken in isolation (i.e. without wider context) that unintentionally mislead those who read/hear them, especially for security-related matters.

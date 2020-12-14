@@ -1,4 +1,0 @@
-Complain if auth hasn't been set up correctly
-
-
-Fixes #9041

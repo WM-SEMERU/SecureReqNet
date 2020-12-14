@@ -1,2 +1,0 @@
-In the user panel if one's name is something like: `Blue "Orange" Yellow` then things start breaking down.
-

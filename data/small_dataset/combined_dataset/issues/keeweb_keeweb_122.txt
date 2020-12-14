@@ -1,7 +1,0 @@
-[Question] Is the web version secure?
-
-
-I checked some opened and closed issues and seems this question wasn't asked before. It seems related with #111 but the solutions showed there are not sufficient:
-The old problem with web applications with handle crypto is that browsers check signatures only from the server, not from the code (more info). Trying to implement some JavaScript based verification, like MEGA did, don't solve the problem as can be tampered if the servers which host it get attacked.
-I imagined some solutions for this problem like applying a sign verification script, allowing users to read the source code of this verification script, audit it and/or verify this authenticity, also disabling auto-updates on this script (implemented here, but discontinued) or on the whole application (implemented here). Those examples were too simplistic and because that I think those don't apply well to real applications like this one.
-I don't want you to create other Cryptocat, which started as a web application then turned into a browser extension (IIRC) following the solutions from the linked article. I think is good to have a web version, even with those risks. Maybe a warning like the one from TweetNaCl could alert users about the limitations of the web version (it is subject to attacks) and the application itself (if it was reviewed or not).

@@ -1,1 +1,0 @@
-Since 9.3.6 the "Sign-Up" gets re enabled randomly.

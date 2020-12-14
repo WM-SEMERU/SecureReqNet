@@ -1,4 +1,0 @@
-fix: update nodemon
-
-
-This PR updates the nodemon dev dependency to the latest version to ensure we're not affected by a vulnerability in older versions of flatmap-stream and event-stream. The new nodemon version no longer depends on any version of the affected packages. See remy/nodemon#1470

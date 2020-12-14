@@ -1,6 +1,0 @@
-Check that we are not using features deprecated in PHP 8
-
-
-Description
-PHP 8 won't be released anytime soon, but it has already removed a lot of features, functions, settings, etc. that were deprecated in PHP 7.2 and 7.3.
-We probably don't use many (any?) of these, but to make our code future-proof we should check this comprehensive list: php/php-src#3770

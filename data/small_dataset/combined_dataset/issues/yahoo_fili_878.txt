@@ -1,4 +1,0 @@
-DruidDimensionsLoaderHealthCheck should be null safe
-
-
-In DruidDimensionsLoaderHealthCheck  make lastRunDate null safe

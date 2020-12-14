@@ -1,4 +1,0 @@
-Fix to check whether the ArgIn taken by _HandleInitEnclave is outside enclave
-
-
-As part of #8 a fix for _HandleInitEnclave interface function for the host enclave interface.

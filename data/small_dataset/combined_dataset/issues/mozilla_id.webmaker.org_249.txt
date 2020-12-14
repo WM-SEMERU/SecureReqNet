@@ -1,6 +1,0 @@
-no csrf for access_token
-
-
-
-
-

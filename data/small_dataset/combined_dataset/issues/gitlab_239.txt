@@ -1,1 +1,0 @@
-Provide a way to star/favorite/subscribe an issue that I didn't open it or was not involved.

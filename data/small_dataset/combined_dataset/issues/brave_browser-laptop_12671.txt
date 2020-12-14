@@ -1,6 +1,0 @@
-Create "firewall"-like shield to protect against DNS rebinding attacks
-
-
-Description
-NoScript has a component called the Application Boundaries Enforcer which in it's default configuration protects against DNS rebinding attacks that target intranet resources. We should consider adding something similar.
-https://en.wikipedia.org/wiki/Noscript#Application_Boundaries_Enforcer_.28ABE.29

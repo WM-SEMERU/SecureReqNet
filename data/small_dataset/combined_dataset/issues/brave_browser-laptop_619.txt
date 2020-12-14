@@ -1,6 +1,0 @@
-Block 3rd party cookies and refer(r)er(r)
-
-
-Note that the cookies/referer still appear in network devtools with a "provisional headers" warning. however, running wireshark on slashdot.org shows that cookies/referer to slashdot are sent and cookies/referer to other origins are not.
-TODO: add pref to turn this off/on
-Auditors: @bbondy

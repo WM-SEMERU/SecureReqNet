@@ -1,6 +1,0 @@
-deprecated info window
-
-
-Hello,
-I have some troubles implementing an info window for markers.
-Markers and info window adapter are deprecated and use of annotations are encouraged. Using  this tutorial I have managed to add the info window, which opens on marker click. This approach renders the view on a canvas, then adds the bitmap as an image to layer, which then displays or hides the image based on feature property. There is a problem however: in my case info window has buttons several buttons. Now if the window had only one button, I could handle the click on the window itself, but as there are multiple buttons I don't know how to handle each button click.

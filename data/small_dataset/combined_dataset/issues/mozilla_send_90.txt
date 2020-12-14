@@ -1,6 +1,0 @@
-When does the Firefox built-in safebrowing checks run?
-
-
-@groovecoder showed us a flow chart of Firefox's safebrowsing checks when downloading a file, but we wanted to confirm when it runs.  Currently a user clicks our download link, we download the file to the browser in the background, decrypt it on the client side, and then trigger the save dialog for the user, which the user can then choose to open/save like normal.
-Does this flow give us the safebrowsing protection?  We're hoping Francois can answer this. :)
-/cc @fmarier

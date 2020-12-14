@@ -1,5 +1,0 @@
-"Always use Private Browsing" setting
-
-
-A user should be able to decide that they always want to use Brave in private browsing mode.
-Replaces brave/browser-laptop#5132

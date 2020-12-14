@@ -1,7 +1,0 @@
-[Cookbook] Security: How to create a custom Authentication Provider
-
-
-Hi there,
-I've used http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html to create an authentication provider for facebook and helped someone doing it for another 3rd party API. Both times I didn't get it working without making the authentication.listener abstract with security.authentication.listener.abstract as the parent and extending Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory instead of implementing Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface.
-My question: Is the described way still the best way to do it or should the tutorial be updated?
-What's your opinion @schmittjoh?

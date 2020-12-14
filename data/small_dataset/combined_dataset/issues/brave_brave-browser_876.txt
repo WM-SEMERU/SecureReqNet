@@ -1,6 +1,0 @@
-Security/Privacy Slider UI paradigm
-
-
-We have — conservatively — a metric heckton of different privacy settings and switches. We also have a whole bunch powerful features which come with some privacy tradeoffs — reasonable ones, but tradeoffs nonetheless. Expecting users to learn and understand this constellation of functionality and privacy is a big ask. What if we reduced it to a single-dimensional choice: on one end is "more privacy" and on the other, there's "more functionality".
-Behold: the concept of the Privacy Slider.
-What functionality is available where on the slider? How do users discover the slider? How are the notches along the slider labeled? These are questions for another day. All that matters here and now is: a slider.

@@ -1,4 +1,0 @@
-Update instances types
-
-
-adds m5ad's and r5ad's

@@ -1,1 +1,0 @@
-With upgrade to GitLab 6.9, I no longer can open images from attachments in new tab (previous behaviour), instead they are being downloaded.

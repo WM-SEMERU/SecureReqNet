@@ -1,8 +1,0 @@
-Update module with severity vulnerabilities
-
-
-When running npm install, the following warning is displayed:
-found 2 moderate severity vulnerabilities
-  run `npm audit fix` to fix them, or `npm audit` for details
-
-So I ran npm audit fix to update dependent modules.

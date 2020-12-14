@@ -1,3 +1,0 @@
-http://puu.sh/6wI84.png
-
-When viewing the site on a mobile the 'dropdown'/hamburger menu has bizarre formatting

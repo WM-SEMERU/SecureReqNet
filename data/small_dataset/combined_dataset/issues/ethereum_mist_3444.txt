@@ -1,4 +1,0 @@
-Windows Installer is unsigned
-
-
-0.9.3 and 0.9.2 installer exe's are unsigned.  It is not reasonable to expect someone to run an unsigned wallet installer as administrator.

@@ -1,6 +1,0 @@
-Update unit_testing.rst
-
-
-While following the tutorial changing the property from $controllerResolver to $resolver generated a bug because in previous example from httpkernel in the file the property was called like this
-$controller = $this->controllerResolver->getController($request);
-It is not a fix but it could help the people that follow the tutorial not get stuck 👍

@@ -1,6 +1,0 @@
-CVE-2017-1002100: Azure PV should be Private scope not Container scope
-
-
-
-
-

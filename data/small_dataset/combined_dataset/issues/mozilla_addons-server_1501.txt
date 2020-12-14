@@ -1,5 +1,0 @@
-Protect against JWT replay attacks for API requests
-
-
-API JWTs must send a jti (ID/nonce), as documented, but currently the server is not using this to prevent replay attacks. Let's do it.
-Originally filed as https://bugzilla.mozilla.org/show_bug.cgi?id=1213354

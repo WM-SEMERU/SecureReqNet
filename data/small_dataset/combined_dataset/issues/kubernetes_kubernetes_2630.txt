@@ -1,8 +1,0 @@
-Volumes are created in container with root ownership and strict permissions
-
-
-The emptyDir volumeMount is owned by root:root and permissions set to 750
-hostDir is the same but with 755 permissions
-Containers running with a non-root USER can't access the volumes
-Related discussion at https://groups.google.com/forum/#!topic/google-containers/D5NdjKFs6Cc
-and Docker issue moby/moby#9360

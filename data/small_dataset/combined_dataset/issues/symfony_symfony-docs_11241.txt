@@ -1,5 +1,0 @@
-Update link to rack website
-
-
-Previous link to rubyforge.org is broken, because this project was closed at May 2014.
-New link contains information about Rack, a modular Ruby webserver interface.

@@ -1,6 +1,0 @@
-update migration.md with vue changes introduced in sb5
-
-
-Issue:
-What I did
-Update migration guide for Vue usage in SB5

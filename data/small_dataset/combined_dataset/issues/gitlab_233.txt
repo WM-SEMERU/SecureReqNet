@@ -1,1 +1,0 @@
-When viewing a repository through a mobile browser, the side bar (fork, download zip, compare code, readme) do not appear.

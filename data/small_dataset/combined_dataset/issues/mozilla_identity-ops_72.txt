@@ -1,6 +1,0 @@
-Solve sl-security yum autoupdate problem and possibly enable automatic yum updating of security issues
-
-
-
-
-

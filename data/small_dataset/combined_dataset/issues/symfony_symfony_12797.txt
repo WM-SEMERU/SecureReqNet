@@ -1,8 +1,0 @@
-[DX] Impersonating users continuously without having to log out
-
-
-The problem
-Impersonating users is a great Symfony feature used by lots of companies providing customer support. When you provide support, is common to have to impersonate a lot of different users continuously.
-The problem is that to impersonate different users, you have first to log out and then log in with the other user.
-The solution
-To improve DX and make end users more productive, Symfony could allow to impersonate different users without having to log out between them.

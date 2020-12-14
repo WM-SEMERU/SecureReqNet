@@ -1,3 +1,0 @@
-In the merge request view, that would be nice if with a quick view we could differ commits reviewed from not reviewed one.
-
-Simply add a "flag as reviewed" would do the trick.

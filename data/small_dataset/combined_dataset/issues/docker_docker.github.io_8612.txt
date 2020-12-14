@@ -1,6 +1,0 @@
-Revert "Updated the UCP 3.1.4 release notes to include Centos 7.6 support"
-
-
-
-No description provided.
-

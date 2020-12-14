@@ -1,6 +1,0 @@
-`./mach run -d https://servo.org/` results in cert error
-
-
-
-
-

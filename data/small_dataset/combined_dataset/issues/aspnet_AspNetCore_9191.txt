@@ -1,8 +1,0 @@
-Stop calling StateHasChanged automatically after every event handling:
-
-
-Is your feature request related to a problem? Please describe.
-currently, all event handling is followed implicitly by a StateHasChanged calling. It surely avoids many duplications of manual calling. But it should not. It must be the developers' responsiblity to determine when the UI is changed and then manualling call StateHasChanged. Many event handlings just do async operations. Rerenderings before completion of these async operations are just waste of CPU.
-Just like many button click events, we will do some async operations to load data and then update list UI, it will render twice! while the first rendering is unnecessary.
-Describe the solution you'd like
-Remove the automatic calling. let the developer determines.

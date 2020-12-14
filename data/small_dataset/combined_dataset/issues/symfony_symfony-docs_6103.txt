@@ -1,6 +1,0 @@
-Security docs recommend usage of deprecated class
-
-
-http://symfony.com/doc/current/components/security/secure_tools.html
-In the 3.0+ version of the docs, use of the deprecated Symfony\Component\Security\Core\Util\SecureRandom class is still recommended.
-This needs to be updated to talk about the random_bytes() function and the paragonie/random_compat package, the recommended replacement.

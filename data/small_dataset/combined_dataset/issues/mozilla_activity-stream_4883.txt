@@ -1,7 +1,0 @@
-Bug 1541359 - Chore: Increase our frontend code coverage
-
-
-After:
-
-Added unit tests to bump our coverage to where the report is mostly green/gray making it easier to spot issues when trying to land new code.
-ASRouterAdmin has a threshold set to 0 so adding new code there won't require any tests (that's the only one showing up in red).

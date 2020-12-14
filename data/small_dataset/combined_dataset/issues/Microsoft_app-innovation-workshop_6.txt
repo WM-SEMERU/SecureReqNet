@@ -1,6 +1,0 @@
-Auto-generated Swagger.json from the Backend does not work with API Management
-
-
-The ASP.NET Core Backend is generating a Swagger.json file using Swashbuckle.AspNetCore.
-
-When importing this Swagger File into Azure API Management, it is throwing errors! As a workaround, we currently have provided fixed JSON files as Assets, but it would be nice, if participants could just import that Swagger.json URL.

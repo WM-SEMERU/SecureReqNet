@@ -1,8 +1,0 @@
-Search by color functionality
-
-
-As demoed a while ago during an Add-ons Show & Tell.
-@willdurand suggested that I open this PR instead of leaving the branch to die on my local machine 😄
-If anyone wants to pick it up or discuss it... It needs tests and something to hide the feature while it's a bit experimental, and some refactoring...
-Here is what it looks like:
-

@@ -1,4 +1,0 @@
-Ads should not be scheduled between certain hours on mobile
-
-
-Ads should not be scheduled between 9 PM and 6 AM local time unless the App is being used actively during those hours, see https://docs.google.com/document/d/1QynlNXswjNfhxGeilooS9TjQsIPkYvgpZH8y9FJdRy4/edit# for further information

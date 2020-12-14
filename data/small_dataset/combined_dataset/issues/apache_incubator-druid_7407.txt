@@ -1,8 +1,0 @@
-Update theta/hll sketch doc comparison
-
-
-Adds some clarification to the Theta/HLL section in the main aggregators page based on discussion in #7337.
-
-Clarifies HLL/Theta sketch tradeoffs
-Describe path for migrating from multicolumn cardinality agg use cases
-

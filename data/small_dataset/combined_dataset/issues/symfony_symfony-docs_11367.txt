@@ -1,5 +1,0 @@
-[Cache] Document cache tags
-
-
-I think we can close issue #7006 after this is merged.
-This PR will fix #10343

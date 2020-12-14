@@ -1,4 +1,0 @@
-oelibc custom arc4random implementation should be consolidated in oecore
-
-
-enclave/core/entropy.c current defines an rdrand implementation that is used to seed entropy for mbedtls, but not for libc/arc4random.c. We should consolidate these implementations to use the same rdrand implementation to have a single point for updating fixes to entropy in the enclave runtime.

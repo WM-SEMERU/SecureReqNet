@@ -1,4 +1,0 @@
-test_password_strength must use POST type request
-
-
-GET type requests show up in logs!

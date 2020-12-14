@@ -1,4 +1,0 @@
-Issue 387 - Fix filtering with float condition
-
-
-Fixes #387

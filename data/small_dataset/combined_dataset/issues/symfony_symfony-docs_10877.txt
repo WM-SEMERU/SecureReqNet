@@ -1,4 +1,0 @@
-Simplified the docs about caching pages with CSRF forms
-
-
-The http_cache/form_csrf_caching article is one of those micro-articles that we want to remove (the little they explain can be embedded in other articles to avoid breaking reading flow too much).

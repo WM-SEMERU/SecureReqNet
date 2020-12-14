@@ -1,7 +1,0 @@
-Add the ability to allow user to increase the font size of a webpage
-
-
-Description:
-I see a lot users pitching to zoom to make the text on the screen bigger.
-Independently from the iPhone settings we should have a setting to make the text in the browser bigger.
-@jamesmudgett can you help figure out this one?

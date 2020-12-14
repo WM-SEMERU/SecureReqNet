@@ -1,4 +1,0 @@
-how can I use iis and kestrel same time?
-
-
-My website delpoy in iis 7.5,,but I need to use WebSocket,so I want to use IIS and kestrel same time,,,normal http request use IIS 80 port,,and WebSocket use kestrel......so,,I want to get kestrel runtime port from iis, it like , when my websocket client application start, send a http request to iis website to get the kestrel port,and use WebSocket Client to connect kestrel to use WebSocket

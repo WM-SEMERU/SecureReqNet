@@ -1,3 +1,0 @@
-When Alice makes a merge request for her white rabbit app and asks Bob to do this and Bob executes the request, both Alice and Bob receive two emails of the merge being done.
-Also, when there is a third party named Danny, who is merger by profession and is nor reporter or asignee, when he merges a merge request from Bob or Alice, both will receive 2 emails and Danny will not receive any mail.
-Expected behaviour : only 1 email to merge requester and executer and perhaps an email to Danny in the second scenario.

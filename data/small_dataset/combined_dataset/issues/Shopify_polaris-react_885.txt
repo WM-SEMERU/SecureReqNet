@@ -1,9 +1,0 @@
-[Navigation Item] Render inline svg in an image tag
-
-
-Problem
-In the Item component svg strings are rendered inline with dangerouslySetInnerHTML. This can lead to an XSS vulnerability where if an svg with scripts is rendered on a page, they will be executed.
-Solution
-We can convert the svg string to a data URI and display it in an img tag where it doesn’t execute scripts when rendered.
-I propose that the logic that implements this lives within the Icon component. This way other users that render svg strings can do so safely. The Icon component would have a color prop to recolour the image when the item’s state changes (hover/focus/selected).
-Doing this also decouples Navigation Item from Icon as Item relies on the implementation Icon returning an svg tag to re-style. By passing in the fill colour instead of having these states in Navigation.scss, the icon that Item is rendering doesn’t break if it’s not an svg tag.

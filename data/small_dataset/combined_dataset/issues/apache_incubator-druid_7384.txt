@@ -1,4 +1,0 @@
-Prohibit @author tags in Javadocs
-
-
-Once this is done, the corresponding note should be removed from CONTRIBUTING.md to reduce the amount of noise.

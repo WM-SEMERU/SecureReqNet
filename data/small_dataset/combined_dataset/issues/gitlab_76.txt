@@ -1,3 +1,0 @@
-Hello!
-Then I look on commit list when I see that long commit message is crop with "...".
-It will be very usefull for me if I can expand long message right in commit list to view full commit message.

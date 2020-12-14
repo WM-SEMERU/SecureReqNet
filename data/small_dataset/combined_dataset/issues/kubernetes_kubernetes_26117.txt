@@ -1,5 +1,0 @@
-rktnetes should use `--user-config` to point to a tmp dir per pod run to store the docker auth config
-
-
-Today, the docker auth config is written to the --user-config (or --local-config if the former doesn't exist) directory. However we don't create a tmp dir for each pod, which causes different users share the same auth configs. Thus is bad.
-cc @kubernetes/sig-node @philips

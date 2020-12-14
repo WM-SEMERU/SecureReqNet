@@ -1,1 +1,0 @@
-When deleting a user, existing issues that were assigned to that user should not be deleted.  Same goes for closed issues.  We lost a significant amount of history trying to cleanup our users in Gitlab.

@@ -1,8 +1,0 @@
-`--join-cluster` feels like hanging when new nodes are joining
-
-
-Just a detail for now but adding new nodes feels like hanging with the new acceptance process. We should probably log something when adding a new node:
-[INFO] Waiting for cluster membership to be approved to proceed with further action...
-
-Or something like that...
-/cc @aaronlehmann @diogomonica @nishanttotla

@@ -1,6 +1,0 @@
-Razor Components project template doesn't have a favicon.ico
-
-
-All our other web app templates have a favicon.ico in the wwwroot folder. We should probably have the same one in the Razor Components project template too. Without it, Chrome makes a request anyway then shows an error in the dev console which is less than pleasant.
-
-@danroth27

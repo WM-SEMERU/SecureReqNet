@@ -1,6 +1,0 @@
-Session always started by Security Firewall component
-
-
-I can not avoid session start for anonymous users as described in http://symfony.com/doc/current/session/avoid_session_start.html
-because session always started by
-https://github.com/symfony/symfony/blob/v3.1.4/src/Symfony/Component/Security/Http/Firewall/ContextListener.php#L83

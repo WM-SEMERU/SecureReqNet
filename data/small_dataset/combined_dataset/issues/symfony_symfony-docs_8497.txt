@@ -1,4 +1,0 @@
-Updated Guard article for the GuardAuthenticatorInterface deprecation
-
-
-This fixes #8485.

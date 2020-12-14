@@ -1,4 +1,0 @@
-Allow CSS mix-blend-mode
-
-
-From CSS Compositing and Blending Level 1

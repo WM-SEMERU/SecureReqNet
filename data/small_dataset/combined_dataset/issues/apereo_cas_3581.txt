@@ -1,4 +1,0 @@
-Fix MFA provider registration url check
-
-
-Corrected check for presence of provider registration url in configuration

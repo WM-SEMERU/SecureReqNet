@@ -1,5 +1,0 @@
-[SECURITY] Update Go to 1.11.5
-
-
-Updating Go tooling, because of security issue in crypto/elliptic.
-Details: https://groups.google.com/forum/m/#!msg/golang-announce/mVeX35iXuSw/Flp8FX7QEAAJ

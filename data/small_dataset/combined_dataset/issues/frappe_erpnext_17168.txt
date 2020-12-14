@@ -1,4 +1,0 @@
-Revert "fix: Raise exception if apps are on incompatible branches"
-
-
-Reverts #17086

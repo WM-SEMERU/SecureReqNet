@@ -1,5 +1,0 @@
-We have DAST functionalities that can test review apps.
-
-Now that GitLab codebase has review apps configured, we could consider to implement DAST checks on them. It could be both as part of the pipeline, but it may take a lot of time.
-
-We can create a pipeline schedule that runs DAST checks. We want results will be shown in the Security Dashboard.

@@ -1,8 +1,0 @@
-Prevent blowing up on audit malformed response
-
-
-npm is failing our builds with:
-npm ERR! Cannot read property 'totalDependencies' of undefined
-
-which it's coming out of auditing
-There must be something wrong in whatever code is generating the response - this only prevents blowing up a valid installation because of this.

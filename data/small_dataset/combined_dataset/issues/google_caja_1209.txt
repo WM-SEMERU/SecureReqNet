@@ -1,6 +1,0 @@
-IDs not prefixed in html_sanitize
-
-
-Original issue 1209 created by mikesamuel on 2010-04-28T21:12:09.000Z:
-One of the backwards compatibility methods in html_sanitizer.js broke.
-Patch attached.

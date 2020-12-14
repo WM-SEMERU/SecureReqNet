@@ -1,6 +1,0 @@
-GLBC controller is accessing the API through the insecure port
-
-
-The GLBC controller is accessing the insecure port on the master, which means it skips authentication. This is an issue for audit logging, as it shows up as user="system:insecured" rather than a proper service account identity.
-To fix this, the pod should be configured with a service account identity, and the --running-in-cluster flag should be set to true so that the kubernetes client is configured to use the service account.
-/cc @kubernetes/sig-auth-bugs

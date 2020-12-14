@@ -1,4 +1,0 @@
-Remove useless $request
-
-
-AFAICS the Request class doesn't needs to be injected in the login action, in the example we don't use it.

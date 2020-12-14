@@ -1,4 +1,0 @@
-Use greenkeeper to automatically keep npm deps up to date
-
-
-https://greenkeeper.io/

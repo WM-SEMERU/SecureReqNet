@@ -1,6 +1,0 @@
-Feature Request: Client-side cell formulating
-
-
-It recently occurred to me that while you can accomplish a lot as a developer on the Python backend for cell computation in the Data-table, your user base may not be as capable. Thus I thought it would be a fascinating idea to implement client-side cell formulating much like excel. Thus as a developer, you feed users the data that would be hard to come by naturally and let them do with as they please with their basic knowledge of Excel and spreadsheet software.
-I understand this would likely be a big undertaking. I picture a single option that enables this:
-client_formulas=True

@@ -1,5 +1,0 @@
-Broken navigation on http://caja-samples.appspot.com/
-
-
-Original issue 1889 created by ToonTalk on 2014-02-11T06:23:06.000Z:
-All the side links (except for the bottom 3) link to http://caja-samples.appspot.com/# rather than what they should link to.

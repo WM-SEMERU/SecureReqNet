@@ -1,7 +1,0 @@
-2 days ago I updated my gitlab omnibus to the 7.0 version.
-
-But I can't understand why there's no Wall feature! :(
-
-In my case the most convenient feature in gitlab is Wall.
-
-so, I need to downgrade my gitlab. How can I downgrade gitlab?

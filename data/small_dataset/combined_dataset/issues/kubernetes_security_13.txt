@@ -1,7 +1,0 @@
-Update security announcement template
-
-
-From CVE-2018-1002105 post-mortem
-Update announcement template to include placeholders for concrete steps to determine if a cluster has a vulnerable version/configuration
-/assign
-moved from kubernetes/sig-release#419

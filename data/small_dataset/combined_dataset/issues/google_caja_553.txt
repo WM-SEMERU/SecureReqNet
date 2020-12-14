@@ -1,6 +1,0 @@
-Container writers' document should make recommendations about visual containment
-
-
-Original issue 553 created by davidsarah.hopwood on 2008-06-12T18:14:35.000Z:
-There are many subtle visual design issues relating to how to securely
-indicate containment of gadgets. Need to do user studies of what works.

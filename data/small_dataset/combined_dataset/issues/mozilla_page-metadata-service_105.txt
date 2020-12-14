@@ -1,5 +1,0 @@
-Security Review
-
-
-Go through the ops security checklist:
-https://wiki.mozilla.org/Security/CloudSec#Security_Checklist

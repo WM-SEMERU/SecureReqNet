@@ -1,5 +1,0 @@
-Secure master -> node communication
-
-
-Forked from #3168. The only remaining communication from the master to the node is the proxying functionality built into the master.
-Moving that functionality out of the master (see #10209 and #3481) is a reasonable alternative to securing the communication.

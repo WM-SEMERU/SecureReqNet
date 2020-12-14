@@ -1,9 +1,0 @@
-404 error reported on inter-UI fonts.
-
-
-On loading the website both locally and through the link,both the console and the terminal reports a 404 error on a couple of fonts.
-the exact errors are listed on the screenshots below.
-terminal:
-
-browser console:
-

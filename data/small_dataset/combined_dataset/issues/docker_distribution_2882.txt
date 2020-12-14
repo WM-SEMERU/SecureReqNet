@@ -1,7 +1,0 @@
-Environment variable ending with '!' fails in docker run
-
-
-Declaring an environment variable ending with ! (exclamation mark) causes an error when running docker
-docker run -e "secretKey=mykey!"  -v /volume/shopizer:/out purgeBatch
--bash: !": event not found
-if i change mykey! with mykey it works correctly

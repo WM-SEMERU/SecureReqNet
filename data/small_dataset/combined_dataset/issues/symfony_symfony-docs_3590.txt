@@ -1,9 +1,0 @@
-Document how to grant a role to a user (Security)
-
-
-Although the Security section dives deep into a few minor details, it does not mention at all how to grant a role to a user: https://github.com/symfony/symfony-docs/blob/2.4/book/security.rst
-It mentions several lots of times how important the ROLES are. Suddenly, the section "Access Control" begins, stating:
-Now that you have a User and Roles, you can go further than URL-pattern based authorization.
-
-And the topic moves on advanced protection of resources.
-Yes: we have Users in one side. We have Roles in the other side. Nothing was mentioned about attaching Users to Roles! While much more advanced stuff is discussed.

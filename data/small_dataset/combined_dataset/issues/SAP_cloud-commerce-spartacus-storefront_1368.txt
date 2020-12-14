@@ -1,6 +1,0 @@
-Whitesource/Checkmarx scanning of our code
-
-
-
-
-

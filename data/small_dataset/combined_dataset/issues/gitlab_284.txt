@@ -1,1 +1,0 @@
-GitLab currently offers a way to filter issues that the logged in user created ("Created by me"). But what if someone wants to find issues created by John Doe?

@@ -1,8 +1,0 @@
-Remove closing audit log file and add error check when writing to audit
-
-
-This is a manual cherry-pick of #33170 due to recent refactoring in pkg/genericapiserver.
-@sttts fyi
-@pwittrock ptal
-
-This change is 

@@ -1,5 +1,0 @@
-Revamped the main security reference article
-
-
-This documents the missing global security options and cleans up the existing reference. There are still a ton of missing config options ... but I'll fix that in a future PR.
-Fixes #11102.

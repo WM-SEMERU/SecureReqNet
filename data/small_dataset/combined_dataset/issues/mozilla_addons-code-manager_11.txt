@@ -1,4 +1,0 @@
-Setup Snyk
-
-
-We want to use Snyk to get security reports (related to our code dependencies).

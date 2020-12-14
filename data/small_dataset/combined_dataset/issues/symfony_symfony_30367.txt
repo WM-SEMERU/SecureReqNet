@@ -1,6 +1,0 @@
-[RFC] add middleware to pass the request context through a Messenger transport
-
-
-When a message is sent to a worker via a Messenger transport, we provide no easy way to serialize the context provided by the request. By context, I can think of e.g host, locale, or even user session/token, maybe also request stack.
-What about providing a middleware that would do so, eg by appending a stamp on messages that need that context? (another stamp could be used as a flag to ask for the context maybe? - or we could always serialize that context by default?)
-It could also be implemented as a transport, with the sender doing the serialization and the receiver restoring the context for the message?

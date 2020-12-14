@@ -1,9 +1,0 @@
-Form::EMAIL not accept valid email address
-
-
-Hi,
-I have a problem with validation email address, when address contains dot before at - char.
-tonda.@domain.com - this address will not be validate, although it is correct and functional.
-I use Form::EMAIL validation rule on  Nette\Forms\Controls\TextInput object. Last version of nette.
-I don't know why somebody use this email address, but he is use it. I solve this problem with pattern, but it is not practical.
-Thanks for solve.

@@ -1,9 +1,0 @@
-PartialDateTime should not allow Hour and Minute without Seconds
-
-
-Describe the bug
-According to the spec (http://hl7.org/fhir/STU3/datatypes.html#datetime):
-
-A date, date-time or partial date (e.g. just year or year + month) as used in human communication. If hours and minutes are specified, a time zone SHALL be populated. Seconds must be provided due to schema type constraints but may be zero-filled and may be ignored. Dates SHALL be valid dates. The time "24:00" is not allowed.
-
-Current implementation allows hour and minute without seconds so that should be changed.

@@ -1,7 +1,0 @@
-Time between promotion checks should be semi-randomized
-
-
-Test plan
-See #12657
-Original issue description
-Currently the promotion check happens exactly every 24 hours. We should introduce a random component.

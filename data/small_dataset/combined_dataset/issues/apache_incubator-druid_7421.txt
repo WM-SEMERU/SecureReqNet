@@ -1,7 +1,0 @@
-Add time taken by last query in SQL view
-
-
-
-Showing time taken by last query in SQL view
-
-

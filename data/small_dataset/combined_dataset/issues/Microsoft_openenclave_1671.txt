@@ -1,9 +1,0 @@
-[CI/CD] Added VHD_URL parameter for deployment templates.
-
-
-This PR adds a VHD_URL parameter for the libcxx and Nightly packaging jobs.
-These are the sandbox runs for validating that impacted jobs still work:
-
-OpenEnclave-sandbox#990 - validates that OpenEnclave-libcxx_tests job has no regressions
-OpenEnclave-sandbox#1009 - validates that OpenEnclave-packages-testing job has no regression
-

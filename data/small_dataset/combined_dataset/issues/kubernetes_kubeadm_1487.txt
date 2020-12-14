@@ -1,9 +1,0 @@
-Automatically add roles to non-controlplane nodes
-
-
-FEATURE REQUEST
-Automatically add node-labels: "node-role.kubernetes.io/node=" to kubeletExtraArgs for non-controlplane nodes. So it would show role node instead of <none>
-What happened?
-kubernetes-sigs/cluster-api-provider-aws#681
-kubernetes-sigs/cluster-api-provider-azure#170
-cc @detiber

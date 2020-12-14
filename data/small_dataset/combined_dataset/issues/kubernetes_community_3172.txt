@@ -1,6 +1,0 @@
-Updated OWNERS files to include link to docs
-
-
-Added link to OWNERS docs in OWNERS file
-/assign @cblecker
-/assign @nikhita

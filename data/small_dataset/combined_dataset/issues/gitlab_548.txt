@@ -1,3 +1,0 @@
-It would be nice if we annotated commit short descriptions to include associated tags/branches, files effected, and the +/- summary of the diff (similar to cgit)
-
-![Cursor_and_tools_git_-_Convenient_tools_to_access_the_R_D_docker_repository](https://gitlab.com/uploads/gitlab-org/gitlab-ce/4ab234949a/Cursor_and_tools_git_-_Convenient_tools_to_access_the_R_D_docker_repository.jpg)

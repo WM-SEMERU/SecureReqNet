@@ -1,4 +1,0 @@
-New Devices: isCurrentDevice is false for every device I get back, including my current one
-
-
-From mozilla/application-services#676 (comment)

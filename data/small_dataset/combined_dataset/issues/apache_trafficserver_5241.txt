@@ -1,6 +1,0 @@
-Changed how current age is determined to age out documents
-
-
-Guaranteed freshness was being used inappropriately when the docs age was already beyond that value. I.e. if you have a max_lifetime ats setting of 1 second, but you set a document max-age of 2 seconds, the current code will take the min(max_lifetime, current_age) so if you do a request later of an old document and the max_lifetime setting is below the max-age of the document it will never be revalidated because max_lifetime becomes the document's age in this calculation and tests.
-This code changes it so that if the current document age is below max_lifetime then it takes the min, so in the above scenario if you do 2 quick requests you should get an age of 0. If current_age is greater than the max_lifetime we take the max of the 2 values. In the above scenario if you do one request, then wait, then you will get the actual document age as its current_age, ensuring later when we do a check of current_age(some value greater than 2) > max-age(2), it will pass and be revalidated.
-This addresses issue #5238

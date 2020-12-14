@@ -1,9 +1,0 @@
-Aggregator: prevent upgrade on known paths that do not serve upgrade requests (like discovery, healthz, etc)
-
-
-From CVE-2018-1002105 post-mortem
-/area security
-/area apiserver
-/priority important-longterm
-/kind cleanup
-/sig api-machinery

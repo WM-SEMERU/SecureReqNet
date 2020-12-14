@@ -1,6 +1,0 @@
-Test for namespace delete with TLS authorization
-
-
-Add a test for deleting namespaces when TLS authorization is
-enabled. This is effectly testing brokerClient* configuration also.
-Issue: #2880

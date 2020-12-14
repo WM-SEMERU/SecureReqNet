@@ -1,8 +1,0 @@
-Broken link in Blazor README
-
-
-https://github.com/aspnet/AspNetCore/tree/master/src/Components#blazor
-
-To see Blazor in action, check out Steve Sanderson's demo at NDC London. You can also try out a simple live Blazor app.
-
-Directs to https://www.youtube.com/watch?v=Qe8UW5543-s which states "This video has been removed by the user"

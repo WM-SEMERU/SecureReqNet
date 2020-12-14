@@ -1,4 +1,0 @@
-Merged and improved the articles about testing + authentication
-
-
-This fixes #6741.

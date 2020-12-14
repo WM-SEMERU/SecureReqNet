@@ -1,5 +1,0 @@
-[2.3][SECURITY] cancelCookie in RememberMeService does not take option in to account
-
-
-The cancelCookie method in the AbstractRememberMeService uses the default values for secure and httpOnly to clear the cookie.
-From a logical standpoint, a cookie is being deleted and it makes sense to not take into account the options, but from a technical standpoint, you are just settings a cookie with a certain value and expiration date so here as well the settings from config.yml should be used.

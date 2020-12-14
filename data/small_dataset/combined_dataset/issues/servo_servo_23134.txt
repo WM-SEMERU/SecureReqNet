@@ -1,4 +1,0 @@
-Implement DocumentFragment XML serialization
-
-
-This branch does nothing if a DocumentFragment is encountered during XML serialization, but we should be running the appropriate XML serialization algorithm. Like in #23130, we will want to check for a DocumentFragment in the SerializationIterator constructor and push all of the immediate child nodes.

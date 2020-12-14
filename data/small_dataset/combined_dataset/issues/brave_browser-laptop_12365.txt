@@ -1,4 +1,0 @@
-add security review checklist item to PR checklist
-
-
-planning on adding a checkbox for Requested a security and privacy review if applicable. it could link to https://github.com/brave/handbook/blob/master/development/security.md#how-to-request-a-security-review, though that is only visible to Brave employees.

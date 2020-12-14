@@ -1,5 +1,0 @@
-Object scanner missing defs for ArrayBuffer.isView (Firefox 29)
-
-
-Original issue 1914 created by erights on 2014-05-11T17:11:36.000Z:
-See attached screenshot

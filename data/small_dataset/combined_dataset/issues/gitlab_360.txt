@@ -1,1 +1,0 @@
-There is no Ruby 2.1 on stable debian version. How is there idea to use debian with 7 versions?

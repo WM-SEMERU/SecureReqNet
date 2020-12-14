@@ -1,5 +1,0 @@
-Improve AclVoter to check if it supports passed class before voting
-
-
-This allows you to easily extend AclVoter, if you only need to override one method --- supportsClass.
-#865 (comment)

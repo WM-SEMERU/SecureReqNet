@@ -1,7 +1,0 @@
-[Debug] throw deprecation when `@return void` is found
-
-
-The DebugClassLoader does lightweight static analysis at autoload time already and triggers deprecations when some annotations in a docblock hint it to do so.
-When this class finds a method that doesn't have void as return type but whose parent has the @return void annotation, we should trigger a deprecation - unless it also has the same annotation.
-The should hint ppl to add the void return type immediately in their code and be ready for next-major of the parent class, which will be able to smoothly turn the annotation to a real void declaration.
-ping @fancyweb @GuilhemN since you contributed similar rules in the past.

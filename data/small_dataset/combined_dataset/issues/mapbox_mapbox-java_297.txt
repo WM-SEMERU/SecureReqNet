@@ -1,6 +1,0 @@
-Change ArrayList to List in directions API
-
-
-The coordinates list in directions api should be a generic List and not ArrayList.
-https://github.com/mapbox/mapbox-java/blob/master/mapbox/libjava-services/src/main/java/com/mapbox/services/api/directions/v5/MapboxDirections.java#L133
-cc: @zugaldia

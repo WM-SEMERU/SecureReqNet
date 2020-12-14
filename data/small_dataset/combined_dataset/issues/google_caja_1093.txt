@@ -1,6 +1,0 @@
-Negative indices on many Firefox host objects expose static properties
-
-
-Original issue 1093 created by metaweta on 2009-07-30T17:45:41.000Z:
-http://www.thespanner.co.uk/2009/07/14/hidden-firefox-properties-revisited/
-The numeric whitelisting needs to be revisited in light of this.

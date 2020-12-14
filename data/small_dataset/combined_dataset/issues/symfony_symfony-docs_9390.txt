@@ -1,5 +1,0 @@
-[SecurityBundle] Document switch_user.stateless firewall option
-
-
-Fixes #8447.
-Note for mergers: this should be removed in 4.0, the switch_user.stateless is set according to the firewall stateless option value there so it just works naturally and the config option is useless.

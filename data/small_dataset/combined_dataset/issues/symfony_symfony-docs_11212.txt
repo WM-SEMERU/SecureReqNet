@@ -1,5 +1,0 @@
-Document Transition Blockers
-
-
-The explanation needs expanding; the example is full-fledged.
-Question: do the second and third parameters to new TransitionBlocker() need to be demonstrated in the example?

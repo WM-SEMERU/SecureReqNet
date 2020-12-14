@@ -1,7 +1,0 @@
-Var-dumper; easily copy text shown on hover
-
-
-When I use dump() to display a class, the full class name can be shown when hovering the first element. Copying this part isn't possible in a browser. Could an method be added so one can copy this text shown in the hover?
-In the screenshot, it's the marked text.
-
-NB This request holds for all the data that's shown in a hover.

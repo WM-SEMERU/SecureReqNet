@@ -1,9 +1,0 @@
-Add support (and document it) for private data projects
-
-
-We need to support private projects, since there are projects (i.e. git repos) that contain specific company data, which can't be publish publicly.
-Originally this was done using a recursive search to find a folder that was inside the 'data/other' folder (added to .gitignore), but that was the root cause of the "DoS on Data-Project technique to map projects and project's teams" #108 issue
-That issue massive test execution delay, was caused by the recursive search technique, which was transversing the .git folder, which resulted in 88 folders being checked for the maturity-model.json file (instead of the expected 5 folders)
-The current solution for #108 removed that recursive search, which means that at the moment only the public projects are being shown (which is a bug).
-I'm thinking that a better solution is to split the data folders into two sub folders: public and private (with the private folder path being added to .gitignore)
-Once this is in place, a test is needed to confirm that those repos are private and not committed to GitHub

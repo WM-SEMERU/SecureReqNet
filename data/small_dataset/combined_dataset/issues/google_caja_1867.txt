@@ -1,5 +1,0 @@
-Remove redundant parent stack from mitigateSrcGotchas
-
-
-Original issue 1869 created by kpreid.switchb.org on 2013-10-29T23:47:47.000Z:
-mitigateSrcGotchas's rewrite() is maintaining a redundant stack of parent nodes; estraverse already provides the parent node as the second argument to the visitor. Verify that they operate identically, then eliminate ours.

@@ -1,9 +1,0 @@
-Support override of ALLOWED_URI_SCHEMES with html4.allowedUriSchemes
-
-
-This indirectly addresses Issue 1558.
-That issue is about data: and javascript: not being allowed protocols for URIs.  This change allows the HTML sanitizer to be configured to allow any URI protocol by using a new html4 attribute, allowedUriSchemes.  This custom attribute, if defined, will be used instead of the hardcoded RegEx ALLOWED_URI_SCHEMES.
-For instance, to allow both data: and javascript: URIs:
-html4.allowedUriSchemes = /^(?:https?|geo|mailto|sms|tel|data|javascript)$/i;
-var newHTML = html_sanitize(oldHTML);
-

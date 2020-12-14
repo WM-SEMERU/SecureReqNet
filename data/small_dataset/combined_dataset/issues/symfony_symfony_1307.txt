@@ -1,4 +1,0 @@
-[2.1][Security] Implementation of a "failed login" event.
-
-
-I've implemented an event that is dispatched when authentication fails. This is basically the counterpart of the "InteractiveLoginEvent" that is dispatched on a successful authentication.

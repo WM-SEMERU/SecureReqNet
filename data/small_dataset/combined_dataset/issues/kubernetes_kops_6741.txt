@@ -1,4 +1,0 @@
-kube-dns: Update to 1.14.13
-
-
-Following updates to k8s 1.12 in k/k

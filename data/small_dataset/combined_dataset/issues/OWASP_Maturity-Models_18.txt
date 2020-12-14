@@ -1,6 +1,0 @@
-Api-Controller - filename is a string and it is not validated
-
-
-see https://github.com/DinisCruz/BSIMM-Graphs/blob/2405949d501f82b12460efe39879ace495adaf6c/src/controllers/Api-File.coffee#L17-L18
-
-variable schema: [A-Z] - .

@@ -1,8 +1,0 @@
-Fix CalciteQueryTest
-
-
-Fixes the following compilation error on CalciteQueryTest:
-[ERROR] /home/travis/build/apache/incubator-druid/sql/src/test/java/org/apache/druid/sql/calcite/CalciteQueryTest.java:[7687,40] cannot find symbol
-  symbol:   variable RESULT_FORMAT_COMPACTED_LIST
-  location: class org.apache.druid.query.scan.ScanQuery
-

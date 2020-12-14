@@ -1,6 +1,0 @@
-Remove dependency on 3rd party RSS feed
-
-
-https://github.com/mozilla/extension-workshop/blob/master/_layouts/home.html#L58
-This is outside of Mozilla's control and if therefore a security risk.
-Can we not get this data from a Mozilla site?

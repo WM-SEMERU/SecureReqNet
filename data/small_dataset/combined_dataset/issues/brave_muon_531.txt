@@ -1,4 +1,0 @@
-Add Pins for Amazon CAs
-
-
-Fixes: #526

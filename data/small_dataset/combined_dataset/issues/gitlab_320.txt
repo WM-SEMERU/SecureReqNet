@@ -1,2 +1,0 @@
-Currently if you create a merge request it is possible to accept it directly by the creator.
-It would be very good to have an option to force the acceptance by someone else.

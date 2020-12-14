@@ -1,5 +1,0 @@
-Store a list of ordered file paths in the fileTree reducer
-
-
-Fixes #538
-This builds a list of file paths that can then be used for keyboard navigation. Note that the FileTree component does not currently use the treePathList prop, but it does need it to know whether to request that the path list be built by the reducer.

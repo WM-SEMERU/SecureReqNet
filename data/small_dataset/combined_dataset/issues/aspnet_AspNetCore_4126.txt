@@ -1,4 +1,0 @@
-Add a multitenant auth options sample
-
-
-See aspnet/Security#1718 for more context

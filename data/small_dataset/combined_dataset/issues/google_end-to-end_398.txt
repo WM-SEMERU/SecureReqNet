@@ -1,6 +1,0 @@
-Move deprecated ciphers to a new file
-
-
-This should avoid depending on these unless explicitly requested.
-Some clients might prefer to include the ciphers they want to depend on explicitly.
-Sending this to Travis to see what tests break.

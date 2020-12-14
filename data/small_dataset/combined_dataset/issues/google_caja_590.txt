@@ -1,7 +1,0 @@
-canDeletePub() should disallow if ending with single "_", not double
-
-
-Original issue 590 created by erights on 2008-06-13T01:22:28.000Z:
-Reported by David Wagner
-Currently, it looks like canDeletePub() will allow clients of an object to
-delete its deletable protected properties.

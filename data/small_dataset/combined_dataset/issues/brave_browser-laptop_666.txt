@@ -1,9 +1,0 @@
-about:preferences checkboxes broken in 0.7.13
-
-
-
-open new tab
-enter about:preferences in URL bar
-checkbox items are not clickable
-
-works fine if opened via cmd+, shortcut

@@ -1,6 +1,0 @@
-[Symfony/Finder] Add support for mercurial version controls in ignoreVCSIgnored
-
-
-in Symfony/Finder component , ignoreVCSIgnored uses .gitignore
-It will be nice to have support for mercurial .hgignore file
-#30448 (comment)

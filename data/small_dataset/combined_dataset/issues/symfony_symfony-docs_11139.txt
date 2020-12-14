@@ -1,4 +1,0 @@
-Update security_checker.rst
-
-
-Adding a small note advising users to always use the latest version of the command, as old versions will now break existing build plans because change of composer.lock checking tool.

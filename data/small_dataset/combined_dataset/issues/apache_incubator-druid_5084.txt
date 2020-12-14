@@ -1,4 +1,0 @@
-Split internal client escalation from Authenticator interface (#5073)
-
-
-Backport of #5073 to 0.11.0

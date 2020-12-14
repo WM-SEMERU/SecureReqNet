@@ -1,9 +1,0 @@
-This morning I upgraded to 6.9, but got 502 error when I click 'compare branches' in the first step of "Two step Merge Request process".(502 page shows about 10 seconds after clicking the button)
-
-I think this only happens when the repo and MR are large(over 100MB for this one), since this error does not appear in my small repos.
-
-My Gitlab CE is installed in an 8 GB memory computer.
-
-I already downgraded to 6.8 to make MR work, I'm waiting for solving this issue before I upgrade my Gitlab again.
-
-Thanks!

@@ -1,4 +1,0 @@
-[Routing][DX] Exposed "utf8" options, and defaults "locale" and "format"
-
-
-Documentation for symfony/symfony#30508

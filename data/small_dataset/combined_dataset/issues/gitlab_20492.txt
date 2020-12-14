@@ -1,9 +1,0 @@
-When signing into a third-party application via GitLab oauth you end up granting the third party application full read/write API access, even if all they wanted to do was read your username and password. This is not good security design.
-
-GitLab can be used as an oauth provider http://docs.gitlab.com/ce/integration/oauth_provider.html . A very common use case for oauth providers is to use them as authentication providers. However, oauth is an _authorization_ mechanism.
-
-This is how authentication via oauth usually works: suppose I sign into gitlab.com using Google oauth. Gitlab.com then asks Google: can I ask you something about this person. Google then asks me: is gitlab.com allowed to ask stuff about you. I say yes to Google. Gitlab.com then hears from Google it's OK and queries a Google API to get my email address. Gitlab.com looks up my user record using the email address.
-
-In the example above Google was the oauth provider. But now suppose you sign into some other app, Foobar, using GitLab as the oauth provider. The difference now is that GitLab asks me, the user, not "is Foobar allowed to ask stuff about you" (authorization for read access to account details) but "is Foobar allowed to impersonate you in each and every way possible through the GitLab API" (authorization for full GitLab API access). And then I have to click "Yes".
-
-This is bad because if there is a security vulnerability in Foobar, an attacker can take over my GitLab account the next time I sign in via GitLab. We should have a restricted scope in the GitLab oauth provider that offers read-only access for authentication purposes only (so also no personal project listing via the API).

@@ -1,6 +1,0 @@
-'Slack support is currently missing:
-
-- Notifications for issue creation
-- Notifications for comments
-
-It would be nice also if you could click checkboxes to choose which notifications you want sent.

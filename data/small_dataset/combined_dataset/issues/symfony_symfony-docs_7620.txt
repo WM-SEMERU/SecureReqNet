@@ -1,6 +1,0 @@
-Add the `_failure_path` hidden field in template
-
-
-Today I learnt about this feature so I guess it was time to document it.
-Basically, what we can do with the _target_path form field is also possible for failure via the _failure_path field. It's very useful when you want multiple login forms for the same firewall (a general login, and a login during e-commerce checkout for example).
-I also moved the sections to me more logic, as the last section was about Redirecting on Login Failure via the option - because it was not explained yet in the page. This section is now just before the updated Control the Redirect URL from inside the Form.

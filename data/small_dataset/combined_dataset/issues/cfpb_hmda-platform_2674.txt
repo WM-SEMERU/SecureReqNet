@@ -1,4 +1,0 @@
-Add Bank Filter Test
-
-
-Closes #2673

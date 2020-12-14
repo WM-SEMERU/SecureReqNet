@@ -1,4 +1,0 @@
-Add security tests for lack of SSL
-
-
-Starting with a check for '#8 Add support for SSL'

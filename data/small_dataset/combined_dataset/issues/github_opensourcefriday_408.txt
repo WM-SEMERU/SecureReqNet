@@ -1,6 +1,0 @@
-Remove deprecated Travis CI option
-
-
-
-
-

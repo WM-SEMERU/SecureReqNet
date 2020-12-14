@@ -1,7 +1,0 @@
-As per https://gitlab.com/gitlab-com/security/issues/123 and in the wake of https://gitlab.com/gitlab-com/infrastructure/issues/4417, we need to have far better observability into successful and failed login attempts.
-
-The best approach would be to emit structured logs around failed login attempts. These could be collated by IP, username, etc. Reports and alerts could then be setup to notify of sustained login attempts from certain hosts.
-
-Using prometheus counters would be insufficient as the data cannot be broken down by username, IP etc. This is a good case for using the ELK infrastructure.
-
-cc @asaba @kathyw

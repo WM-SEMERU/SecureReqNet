@@ -1,4 +1,0 @@
-Update custom_password_authenticator.rst
-
-
-In the example there's no encoder factory defined, only encoder itself.

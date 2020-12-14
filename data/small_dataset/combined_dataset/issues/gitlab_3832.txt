@@ -1,9 +1,0 @@
-Hey there,
-
-Did some searching and couldn't find this reported anywhere, so here goes. I updated to 8.2.1 the other day (http://cl.ly/image/232c3t420x0j) and everything seemed fine. I got an email from a client this morning that previously had access to one project's issues. Since the upgrade she can click on the all tab and now see any issue in my install of gitlab across all projects. I looked around and didn't find any new settings for this, and didn't see anything that mentioned issues in the release notes. I can replicate this by impersonating her user and removing any filters, and then clicking on the all tab.
-
-Here's some more info:
-
-
-* Client screenshot: http://cl.ly/image/232c3t420x0j
-* She doesn't belong to any groups, and is only a member of that one project

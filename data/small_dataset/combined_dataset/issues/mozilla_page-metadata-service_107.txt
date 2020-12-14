@@ -1,4 +1,0 @@
-Announce process start with statsd message
-
-
-Add a statsd message to announce a request handler starting.

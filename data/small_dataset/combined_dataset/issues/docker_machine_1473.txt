@@ -1,4 +1,0 @@
-Add support for password-protected SSH keys
-
-
-Right now Machine has no such support for this.  It would be great for security to enable SSH keys protected by passwords for the users who want it.

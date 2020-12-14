@@ -1,6 +1,0 @@
-repairES5 inTestFrame() assumes document.body exists
-
-
-Original issue 1830 created by kpreid.switchb.org on 2013-08-05T23:29:49.000Z:
-inTestFrame uses document.body, which does not exist if SES is loaded from the <head>, causing an unexpected error.
-(The test in question is already protected against having no DOM at all.)

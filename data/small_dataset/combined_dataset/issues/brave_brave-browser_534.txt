@@ -1,7 +1,0 @@
-Prevent Social Buttons from Tracking by replacing them with placeholders
-
-
-Social buttons on websites can track the user. We should replace them with inert placeholders which don't make outbound requests until a user interacts with them.
-Replaces brave/browser-laptop#312
-Edit bbondy: I'm landing this in 0.63.x which allows users to turn off social buttons and embedded tweets:
-brave/brave-core#1818

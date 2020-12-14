@@ -1,7 +1,0 @@
-Bump v18.09
-
-
-- What I did
-- How I did it
-- How to test it
-- Description for the changelog

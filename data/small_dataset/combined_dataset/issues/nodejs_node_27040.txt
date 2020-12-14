@@ -1,5 +1,0 @@
-Why is propertyIsEnumerable exposed as a global
-
-
-Version: 8+
-propertyIsEnumerable

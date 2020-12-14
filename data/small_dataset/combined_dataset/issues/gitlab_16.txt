@@ -1,3 +1,0 @@
-Sometimes instead of adding few team members, you want to add everybody to the notification (CC) list of an issue. There should be a better way of adding everyone to notification list other than mentioning everybody with @ tags by their names at the end of an comment.
-
-I'm thinking that maybe the name of the Group or project can be used for that purpose. e.g. @ProjectName or @GroupName would have gotten everybody notified...?

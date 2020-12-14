@@ -1,7 +1,0 @@
-feat(email): reinstate account verification reminder emails
-
-
-Fixes #2939.
-Adds logic for creating, deleting and processing account verification reminders, which was removed because of MySQL-related complications in #2283. The implementation here depends on Redis sorted sets instead of MySQL, which were added to fxa-shared in mozilla/fxa-shared#65.
-The code here works and has tests, but it's still marked WIP because I haven't written the script for the fxa-admin node yet. Opening in case anyone wants to cast an eye over it or offer feedback while I finish that off.
-Also note there is an unresolved question about the copy for the emails, since they still mention "a few days ago..." and "a week ago..." but the actual intervals are now 1 day and 5 days. Presumably we're going to fix the copy rather than the intervals.

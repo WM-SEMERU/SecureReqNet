@@ -1,7 +1,0 @@
-Allow separate truststore conf for HttpEmitter
-
-
-This PR allows the HttpEmitter and ParametrizedUriEmitter to use a different SSLContext from the one injected by the logic introduced in #4270.
-The HttpEmitter can use the default Java SSLContext or a truststore specified through configuration.
-This can be useful in situations where it's inconvenient or forbidden by policy to keep all certificates in the same truststore.
-For example, suppose the server certificate used by Druid nodes for internal communications is signed by a root cert that is not present in the default Java truststore, but the metrics receiver uses a certificate signed by a major CA, which is present in the default Java truststore, and the user wishes to keep the non-major CA signed cert in a separate truststore.

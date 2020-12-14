@@ -1,5 +1,0 @@
-CVE-2018-1000006
-
-
-may affect Brave on windows. it is pretty severe.
-UPDATE: It does not affect Brave, but may be an issue for other apps using Muon.

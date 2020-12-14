@@ -1,5 +1,0 @@
-Switch to RBAC
-
-
-At some point in the next few released of Kubernetes, the default support for allowing all level access to the entire cluster for all Pods will go away, so we should switch to RBAC at some point in the near future.
-Also, this is better for security.

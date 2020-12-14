@@ -1,7 +1,0 @@
-CSI topology doesn't handle non-prefixed keys correctly
-
-
-What happened:
-The CSI spec allows topology keys to be non-prefixed.  In that case, we should be prepending our own prefix to the key, but right now it just directly applies that non-prefixed label to the Node object.
-What you expected to happen:
-We should prefix the Node label with the csi driver name

@@ -1,6 +1,0 @@
-/api/plan/<minion_plan_name>" does not check ownership
-
-
-
-
-

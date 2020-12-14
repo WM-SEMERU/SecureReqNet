@@ -1,5 +1,0 @@
-HTML 5 video events not supported
-
-
-Original issue 1907 created by james.keane@wishabi.com on 2014-03-18T16:06:33.000Z:
-See: http://www.whatwg.org/specs/web-apps/current-work/multipage/the-video-element.html#handler-mediacontroller-onemptied

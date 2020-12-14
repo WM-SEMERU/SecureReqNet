@@ -1,4 +1,0 @@
-Whitelist origins accessed from main processes
-
-
-We should limit what the main app, renderer, &c, processes can connect to. We should do this by whitelist so that we don't accidentally add arbitrary domain connections from the main process like brave/browser-laptop#11727 . We should also only ever connect to secure origins from the main process — no plain HTTP. The sooner we do this, the easier it is, and the less cleanup might be needed. See brave/browser-laptop#11889 .

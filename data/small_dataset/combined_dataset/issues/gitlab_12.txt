@@ -1,3 +1,0 @@
-When closing an issue while having typed a message... the message is not posted.
-
-It would be nice if the close issue button could include a message..

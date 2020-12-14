@@ -1,5 +1,0 @@
-Port of `osrm-text-instructions` to Java
-
-
-For easier iterations, let's include it in the navigation package. Once it's stable, let's spin it off as its own package / repo possibly like https://github.com/Project-OSRM/osrm-text-instructions.swift.
-cc: @freenerd @frederoni @bsudekum @1ec5 @cammace

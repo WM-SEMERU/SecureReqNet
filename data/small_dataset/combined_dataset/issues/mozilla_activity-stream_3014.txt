@@ -1,5 +1,0 @@
-FirstPartyDomain should be properly set for about:newtab
-
-
-Also see https://bugzilla.mozilla.org/show_bug.cgi?id=1385308
-"We should figure out how to properly set the firstPartyDomain for about:newtab, or at least figure why the test is failing when we set the URI_SAFE_FOR_UNTRUSTED_CONTENT flag in the first place."

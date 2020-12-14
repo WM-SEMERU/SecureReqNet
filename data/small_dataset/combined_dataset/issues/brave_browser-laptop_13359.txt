@@ -1,4 +1,0 @@
-sync should clear clipboard data after 30s
-
-
-passphrase should be cleared after 30s. See discussion in https://bravesoftware.slack.com/archives/C8MP8ME4C/p1519839799000553 for more info.

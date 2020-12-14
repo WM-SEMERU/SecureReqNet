@@ -1,4 +1,0 @@
-[Security] switch into a disabled user account
-
-
-I'm looking for a way to disable a user account while still being able to switch into it as an admin. If that is just not possible currently, this can be considered to be a feature request.

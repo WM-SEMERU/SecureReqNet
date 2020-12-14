@@ -1,9 +1,0 @@
-Fix tab content displaying
-
-
-Apparently the double : leads to displaying .. configuration-block:: instead of interprating it.
-I tested in local with docker :
-Before
-
-After
-

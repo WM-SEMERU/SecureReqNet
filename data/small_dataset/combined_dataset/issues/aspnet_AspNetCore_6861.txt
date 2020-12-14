@@ -1,8 +1,0 @@
-fix issue aspnet#6669 in release/2.1 branch
-
-
-Summary of the changes (Less than 80 chars)
-
-fix wrong scheme name in B2C and AD
-
-Addresses #6669

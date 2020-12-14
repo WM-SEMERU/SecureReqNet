@@ -1,1 +1,0 @@
-The 6.8-6.9 update guide is missing the migrations and cache clear step.

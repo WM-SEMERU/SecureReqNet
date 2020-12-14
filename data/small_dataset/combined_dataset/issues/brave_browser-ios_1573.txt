@@ -1,4 +1,0 @@
-Low Number of Iterations for Password-based key Derivation
-
-
-sqlite3_profile uses 2 PBKDF rounds

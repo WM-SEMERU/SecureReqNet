@@ -1,4 +1,0 @@
-Make script-based checks opt-in, like consul exec support
-
-
-As pointed out in http://www.kernelpicnic.net/2017/05/29/Pivoting-from-blind-SSRF-to-RCE-with-Hashicorp-Consul.html, and the resulting thread https://twitter.com/armon/status/869247551232385024, we should make enabling script checks opt-in given the power that's available there. With documentation we can tie enabling these into also enabling ACLs, which are already set up to prevent abuse if they are properly configured.

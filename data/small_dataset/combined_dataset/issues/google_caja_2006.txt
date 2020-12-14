@@ -1,4 +1,0 @@
-Allow <video autoplay muted> in sanitizer
-
-
-In the spirit of WICG/interventions#23, and to vanish GIF from the world.

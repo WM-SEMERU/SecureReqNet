@@ -1,4 +1,0 @@
-Remove workarounds for https://github.com/aspnet/AspNetCore/issues/9119
-
-
-We're adding to a workaround to Blazor.Build to workaround #9119. This needs to be removed for preview5 once tooling is updated

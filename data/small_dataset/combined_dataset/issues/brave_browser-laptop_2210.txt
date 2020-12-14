@@ -1,4 +1,0 @@
-Show URL in autocomplete results
-
-
-It's a phishing security risk to not show the location in case someone sets the title of their site to a different site URL.

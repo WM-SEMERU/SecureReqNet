@@ -1,8 +1,0 @@
-SecurityBundle debug.security.access.decision_manager missing in collectors.xml when kernel.debug false
-
-
-Service "debug.security.access.decision_manager" is defined in file security_debug.xml (in SecurityBundle) which is only loaded when kernel.debug is true. However, this service is also used in collectors.xml, which is always loaded.
-In env=prod this will give the following error:
-[Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException]
-The service "profiler" has a dependency on a non-existent service "debug.security.access.decision_manager".
-This issue was introduced in Symfony 3.1. I temp fixed it by overriding the service and removing the argument.

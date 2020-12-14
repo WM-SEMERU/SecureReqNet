@@ -1,6 +1,0 @@
-Allow to explicitly choose argon2id variant - Argon2idPasswordEncoder?
-
-
-Background: argon2id has become the default since libsodium 1.0.15: https://github.com/jedisct1/libsodium/blob/7cdf3f0e8419aa1be306effd11a20d980c118e04/ChangeLog#L27-L28
-and will also be available (without the sodium extension) in PHP 7.3: https://wiki.php.net/rfc/argon2_password_hash_enhancements
-It might be a good idea to allow the user to explicitly specify the desired variant. Especially since it is the recommended variant: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-03#section-9.4

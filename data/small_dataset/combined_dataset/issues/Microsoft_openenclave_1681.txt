@@ -1,4 +1,0 @@
-Documentation fixes
-
-
-Fixes for some issues in the documentation.

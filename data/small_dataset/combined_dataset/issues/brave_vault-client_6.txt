@@ -1,9 +1,0 @@
-Add nsp security check
-
-
-Should not be merged until the following issues are resolved
-Tracking issues:
-BitGo #20
-chain-node #27
-request #2020
-cc @mrose17

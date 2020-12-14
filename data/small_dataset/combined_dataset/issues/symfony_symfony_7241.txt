@@ -1,4 +1,0 @@
-Custom error pages and app.security
-
-
-In the documentation, it is stated that since the router runs before the firewall, is_granted can be used safely by saying {% if app.security and is_granted('...') %} in custom error pages template. However, I realized that app.security is still not null in those pages. Rather than that, app.security.token is null. I therefore had to change app.security to app.security.token to make everything work as expected. Am I doing something wrong or the documentation needs to be updated? I am currently using the master branch.

@@ -1,4 +1,0 @@
-add crlset exceptions to network audit script
-
-
-follow-up to #2160 - the proxied requests should be whitelisted for 0.58.x; otherwise the build will continue to fail  npm run test-security

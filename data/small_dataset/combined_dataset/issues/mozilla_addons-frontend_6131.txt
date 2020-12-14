@@ -1,6 +1,0 @@
-Resolve ReDOS Snyk issues
-
-
-We have some Snyk errors https://travis-ci.org/mozilla/addons-frontend/jobs/423693669
-We either need to ignore them or upgrade the packages.
-Instructions: https://github.com/mozilla/addons-frontend/#snyk

@@ -1,6 +1,0 @@
-Avoid nil user special-casing in unsecured endpoint
-
-
-The unsecured handler currently adds no user.Info to the request context.  That means that anything that tries to authorize actions in the API server currently has to special case nil users to ensure the unsecured localhost endpoint remains capable of performing all actions.
-This PR changes the unsecured localhost endpoint to be treated as a privileged user internally, so that no special casing is required by code inside the authentication layer
-I'm not particularly attached to the username. It doesn't bother me for it to have a slightly uncomfortable sounding name.

@@ -1,1 +1,0 @@
-There is no notification shown to the admin user in dashboard when a new user sign up. Admin user need to explicitly go trough the user list and have to verify the user Approved status and need to approve if its is no . This is quite complex in point of usability perspective and very difficult to track for the admin user.  

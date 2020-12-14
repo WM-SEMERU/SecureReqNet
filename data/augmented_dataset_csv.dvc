@@ -1,0 +1,5 @@
+outs:
+- md5: 5ca1f0ef7bfe2ad4a90164c257018499.dir
+  size: 54619838
+  nfiles: 3
+  path: augmented_dataset_csv

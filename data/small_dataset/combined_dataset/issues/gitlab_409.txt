@@ -1,3 +1,0 @@
-In Markdown files, such as the `README.md` file of a repository, the characters comprising an HTML comment get encoded before being sent to output meaning that the contents of an HTML comment (including the start and end tags) render as text on the page.
-
-Present in `7-0-stable` branch.

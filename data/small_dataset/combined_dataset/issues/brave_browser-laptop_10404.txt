@@ -1,6 +1,0 @@
-Extension API: chrome.permissions.onAdded
-
-
-https://developer.chrome.com/extensions/permissions#event-onAdded
-Fired when the extension acquires new permissions.
-Blocks #9531

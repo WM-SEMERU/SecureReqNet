@@ -1,6 +1,0 @@
-Disable unsecured localhost in all testing
-
-
-We should eventually disable unsecured localhost for all of our tests. This should turn up instances where unsecured localhost is used. Then we should write a test that tries to use unsecured localhost and is expected to fail, so we get a signal if it is ever re-enabled.
-wrt #40050 (comment)
-also #43931

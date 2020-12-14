@@ -1,7 +1,0 @@
-Add distributors pre-announcement template
-
-
-From CVE-2018-1002105 post-mortem
-Add distributor pre-announcement template that has placeholders for explicit “you may do X with the embargoed patch or information” statements, add instructions for how to ask for clarification (who to contact), and inclusion of tests for cluster vulnerability
-/assign
-moved from kubernetes/sig-release#418

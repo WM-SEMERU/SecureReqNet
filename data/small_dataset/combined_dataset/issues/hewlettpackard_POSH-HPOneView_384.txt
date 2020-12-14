@@ -1,6 +1,0 @@
-Security Questions
-
-
-As part of pen testing the following came back, is it possible to address these?
-Username Enumeration - it was found to respond differently to existing and non-existing users which made it possible to enumerate legitimate users
-Security Response Headers - the host did utilise common security headers as those recommended by OWASP secure headers project

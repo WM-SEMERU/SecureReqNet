@@ -1,5 +1,0 @@
-Update 3rd Party Deps
-
-
-Carthage and NPM dependencies should be updated to latest versions.
-We should stop using "master" for versioning dependencies where possible.

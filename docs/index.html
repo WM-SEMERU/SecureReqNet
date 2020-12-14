@@ -44,14 +44,15 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="SecureReqNet-Documenation-website-at:">SecureReqNet Documenation website at:<a class="anchor-link" href="#SecureReqNet-Documenation-website-at:"> </a></h3><p><a href="https://rmclanton.github.io/SecureReqNet/">https://rmclanton.github.io/SecureReqNet/</a></p>
+<h3 id="SecureReqNet-Documenation-website-at:">SecureReqNet Documenation website at:<a class="anchor-link" href="#SecureReqNet-Documenation-website-at:"> </a></h3><p><a href="https://wm-semeru.github.io/SecureReqNet/">https://wm-semeru.github.io/SecureReqNet/</a></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:">Want to try out &#945;-SecureReqNet? Checkout this example in google colab:<a class="anchor-link" href="#Want-to-try-out-&#945;-SecureReqNet?-Checkout-this-example-in-google-colab:"> </a></h3><p><a href="https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq">https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq</a></p>
+<h3 id="Want-to-try-out-SecureReqNet?-Checkout-these-examples-in-google-colab:">Want to try out SecureReqNet? Checkout these examples in google colab:<a class="anchor-link" href="#Want-to-try-out-SecureReqNet?-Checkout-these-examples-in-google-colab:"> </a></h3><h4 id="&#945;-SecureReqNet:">&#945;-SecureReqNet:<a class="anchor-link" href="#&#945;-SecureReqNet:"> </a></h4><p><a href="https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq">https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq</a></p>
+<h4 id="&#915;-SecureReqNet:">&#915;-SecureReqNet:<a class="anchor-link" href="#&#915;-SecureReqNet:"> </a></h4><p><a href="https://colab.research.google.com/github/wm-semeru/SecureReqNet/blob/master/Gamma_SecureReqNet.ipynb">https://colab.research.google.com/github/wm-semeru/SecureReqNet/blob/master/Gamma_SecureReqNet.ipynb</a></p>
 
 </div>
 </div>
@@ -327,29 +328,8 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Project-Description-for-CSCI-435/535">Project Description for CSCI 435/535<a class="anchor-link" href="#Project-Description-for-CSCI-435/535"> </a></h2><blockquote><blockquote><p>Project Leads:@danaderp&gt; The goal of the project is to migrate the components into nbdev architecture, implement interpretability components to test the neural net, leverage security datasets, and document.</p>
-</blockquote>
-</blockquote>
-<h3 id="The-goals-of-this-project:">The goals of this project:<a class="anchor-link" href="#The-goals-of-this-project:"> </a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>[ ] Migrate SecureReqNet into nbdev</li>
-<li>[ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)</li>
-<li>[ ] Implement some interpretability techniques to test SecureReqNet</li>
-<li>[ ] Leverage Security Datasets</li>
-</ul>
-<h3 id="Project-Requirements:">Project Requirements:<a class="anchor-link" href="#Project-Requirements:"> </a></h3><ul>
-<li>Required Knowledge: Python, Git, Linear Algebra, and Statistics</li>
-<li>Preferred Knowledge: Machine Learning, TensorFlow, and Probabilistic Computation</li>
-</ul>
-<h3 id="Recommended-Readings:">Recommended Readings:<a class="anchor-link" href="#Recommended-Readings:"> </a></h3><ul>
-<li>Exploratory Programming with Nbdev <a href="https://www.fast.ai/2019/12/02/nbdev/">link</a></li>
-<li>Interpretability Analysis Book <a href="https://christophm.github.io/interpretable-ml-book/">link</a></li>
-</ul>
+<h2 id="Interpretability">Interpretability<a class="anchor-link" href="#Interpretability"> </a></h2><p><img src="https://raw.githubusercontent.com/rmclanton/SecureReqNet/master/images/shap_200_issues_alpha.png" alt="interpretability"></p>
+<p>We used <a href="https://github.com/slundberg/shap">this library</a> to generate shap values for alpha securereqnet.  In the above generated graph, shap values were calcualted for 200 issues over a background of 400 issues randomly selected from our training dataset.  The larger the value (more red, to the right) the more it contributes to the end prediction.  The size of each dot represents its location along the normal distribution (larger around clusters).  Tokens such as 'attack', 'vulner', and 'secur' appeared to have the largest effect on a positive classification.  On the other hand, tokens such as 'acrobat' or 'reader' contributed more to a negative classification.</p>
 
 </div>
 </div>

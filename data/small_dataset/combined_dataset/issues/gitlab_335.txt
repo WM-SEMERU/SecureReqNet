@@ -1,4 +1,0 @@
-A ssh key should contain under the best circumstances a mail address like in the help explained.
-
-If you just generate a key and want to add the mail address in the web interface the content is instantly copied after typing **@** and another character.  
-There is no focus lost or similar waiting till the user finished his input.

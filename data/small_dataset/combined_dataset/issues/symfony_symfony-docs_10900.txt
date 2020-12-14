@@ -1,5 +1,0 @@
-Added some missing steps in the main form login article
-
-
-This fixes #10876.
-@xabbuh could you please review the XML config? I literally made it up, so it will be wrong. Thanks.

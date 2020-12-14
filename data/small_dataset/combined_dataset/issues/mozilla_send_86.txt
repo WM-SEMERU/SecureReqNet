@@ -1,5 +1,0 @@
-Update encryption format to use gcm
-
-
-We should be using GCM.  Details are at  https://www.w3.org/TR/WebCryptoAPI/#aes-gcm .  Use a 256 bits key + additional data (aad) + IV, all random and unique to each file.  Put the aad and iv in the file metadata, keep the key secret in the fragment.
-Ping @jvehent for review

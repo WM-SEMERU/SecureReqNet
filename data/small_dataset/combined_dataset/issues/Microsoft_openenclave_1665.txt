@@ -1,6 +1,0 @@
-Intermittent issue with deploy-docs in CI
-
-
-Currently, the deploy-docs script gets invoked during one of the stages in the nightly build process. We discussed this earlier, and it appears this stage can fail sometimes if a change gets merged into the master branch during the execution of this stage.
-The suggested fix is to factor out this deploy-docs stage from the nightly build and instead initiate that deploy-docs process after a bors "staging" branch finishes merging to the master branch.
-Here's an example of the error: https://oe-jenkins.eastus.cloudapp.azure.com/blue/organizations/jenkins/OpenEnclave-nightly_packages/detail/OpenEnclave-nightly_packages/246/pipeline

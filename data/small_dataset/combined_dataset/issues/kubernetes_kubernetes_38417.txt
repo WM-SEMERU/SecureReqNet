@@ -1,5 +1,0 @@
-Add support for "no new privileges"
-
-
-Support for setting NO_NEW_PRIVS was added in docker 1.11 (moby/moby#20329). This feature will be much more useful once user namespace support is added (#34569), but I believe it is also relevant when paired with seccomp or LSM (SELinux or AppArmor).
-/cc @mrunalp @kubernetes/sig-node

@@ -1,6 +1,0 @@
-crypto: check parameters to avoid potential remote denial-of-service attack
-
-
-Go's crypto libraries passed certain parameters unchecked to math/big.Int.Exp (https://golang.org/pkg/math/big/#Int.Exp), possibly leading to extremely long-running computations, which in turn makes Go programs vulnerable to remote denial of service attacks. Programs using HTTPS client certificates (a non-zero tls.Config.ClientAuth value of https://golang.org/pkg/crypto/tls/#ClientAuthType) or the Go SSH server libraries are both exposed to this vulnerability.
-This is CVE-2016-3959 and was addressed by https://golang.org/cl/21533 for crypto/dsa (the reported problem) and https://golang.org/cl/21560 (similar change to crypto/rsa and crypto/ecdsa, despite no known path to make those go into the slow path).
-Thanks to David Wong for identifying this issue.

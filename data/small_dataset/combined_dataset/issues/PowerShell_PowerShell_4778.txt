@@ -1,5 +1,0 @@
-Windows system lockdown APIs are currently stubbed out
-
-
-This means that PowerShell Core running on Windows will not detect system lockdown such as when DeviceGuard or AppLocker application allow policies are applied, and so won't automatically transition into constrained language mode.
-This is a work item to re-implement these APIs for Windows platform and to finish porting the corresponding tests.

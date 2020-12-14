@@ -1,8 +1,0 @@
-Add HTTP Basic Auth for Druid (Issue #4776)
-
-
-This should resolve Issue #4776
-Add HTTP Basic Auth to the Druid Broker.
-Screenshot of change:
-
-Signed-off-by: Don Bowman don@agilicus.com

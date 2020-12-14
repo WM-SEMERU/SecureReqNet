@@ -1,5 +1,0 @@
-Support concurrent sessions
-
-
-see #786 for an old implementation.
-The biggest issue being to determine where it belongs to as there is a need to persist information to make the feature work. More details in the old PR.

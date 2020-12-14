@@ -1,4 +1,0 @@
-Add info about Preventing Escalations to Respectful Review Comments
-
-
-At FOSSHackathons the diversity group have discussed topics which we can cover in the documentation about Code Review Process.

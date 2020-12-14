@@ -1,8 +1,0 @@
-remember me services are unable to be used by FOSUserBundle since they are private.
-
-
-Just bringing attention to this particular issue since all the @ mentions are getting no response there. See FriendsOfSymfony/FOSUserBundle#747. If there is a better way to bring stuff like this to attention, then it would be good to know.
-Quoting @stof:
-
-The remember me services are private so they are removed from the container when optimizing it. This means that the has checks in the LoginManager will return false even when the remember me is activated for the firewall.
-

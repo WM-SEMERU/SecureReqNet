@@ -1,7 +1,0 @@
-Suggest by @jacobvosmaer:
-
-> Changes in the identities table can be an indicator of an account compromise (e.g. evil maid adds a throwaway Twitter account to your GitLab account) or of a GitLab admin abusing their privileges.
->
-> Because of this I think we should log all changes in the identities table, for example to application.log.
-
-Original: https://dev.gitlab.org/gitlab/gitlabhq/issues/2225

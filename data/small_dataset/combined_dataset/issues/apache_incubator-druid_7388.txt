@@ -1,6 +1,0 @@
-Support LPAD and RPAD sql function
-
-
-LPAD and RPAD are sql functions supported by oracle and hive etc. This PR tries to add them in druid.
-The syntax is LPAD(base, len, pad).
-It adds padding characters to the left or right side of a base string up to a given length. The default padding character is a space. If the string's length is greater than the required length, it will be trimmed (excess characters will be removed).

@@ -1,5 +1,0 @@
-Fix resolve example
-
-
-The resolve processor can only resolve parameters whereas the documentation give the feeling that we could resolve env variables too. Wich is not the case (see symfony/symfony#31000).
-This PR change the example in order to be unambiguous.

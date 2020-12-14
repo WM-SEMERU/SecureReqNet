@@ -1,6 +1,0 @@
-File System Security Issue in Custom Auth Article
-
-
-https://github.com/symfony/symfony-docs/blob/master/cookbook/security/custom_authentication_provider.rst#the-listener
-Security concern: If $token->nonce is set to [ANY USER INPUT] and later we run file_put_contents($token->nonce, time()) are we allowing hackers to destroy any www-writable file in the system?
-I did notice that $nonce is run through base64_decode($nonce). Could this Regex be updated to only accept a Base64 string [a-zA-Z+/]+={0,2} for the nonce?

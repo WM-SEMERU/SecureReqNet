@@ -1,6 +1,0 @@
-[Security] getUsername in UserInterface is confusing
-
-
-Symfony Security component's UserInterface defines a method getUsername. The purpose of this method is to provide an identifier for the user. In some cases however, a username is not used as the identifier for a user (i.e. in Facebook you create a username only after registration, the email is used instead to identify the user; e-commerce solutions, in order to simplify user registration, also use the email to identify).
-IMO, the user interface should not define a getUsername method, but rather a getIdentifier. I believe that this was the original intention of the getUsername method, but the naming turned out to be somewhat confusing.
-If there would be interest and +1s from the community and the maintainers, I would gladly submit a PR respecting BC.

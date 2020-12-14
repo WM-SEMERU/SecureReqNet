@@ -1,5 +1,0 @@
-[Security] Missing documentation regarding AccessDeniedHandlerInterface
-
-
-I've seen a few occasion where custom access denied handling is required. It's not rocket science to implement, you put access_denied_handler: service.id on your firewall configuration and implement the AccessDeniedHandlerInterface in this service.
-I think this could be a simple explanation but add some real value to the docs.

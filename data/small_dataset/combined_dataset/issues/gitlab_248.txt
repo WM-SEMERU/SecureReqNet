@@ -1,1 +1,0 @@
-I've run into this situation while creating a new project: when selecting colleagues to grant access to the project I selected myself by mistake and since I granted "developer" access level that was granted to myself too overwriting the master access level.

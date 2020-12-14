@@ -1,8 +1,0 @@
-CLOUDSTACK-10242: Properly parse incoming rules to Sec Group
-
-
-With merge of PR #2028 the separator for lines to the Security Group
-Python script changed from : to ; to support IPv6 addresses.
-This broke certain situations where rules were parsed improperly.
-This commit fixes that
-Signed-off-by: Wido den Hollander wido@widodh.nl

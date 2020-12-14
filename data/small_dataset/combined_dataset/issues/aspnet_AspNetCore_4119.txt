@@ -1,8 +1,0 @@
-Add links to external auth samples
-
-
-AzureAd:
-https://github.com/azure-samples?utf8=%E2%9C%93&q=active-directory+core&type=&language=
-https://github.com/Azure-Samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore
-IdentityServer: https://github.com/IdentityServer/IdentityServer4.Samples
-OpenIdDict: https://github.com/openiddict/openiddict-samples

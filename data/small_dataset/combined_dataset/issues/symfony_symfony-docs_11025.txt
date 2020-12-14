@@ -1,4 +1,0 @@
-Documented the logout CSRF options
-
-
-Fixes #8594.

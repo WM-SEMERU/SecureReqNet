@@ -1,4 +1,0 @@
-Add link to globals.html in to index of doxygen docs
-
-
-Fix #1637.

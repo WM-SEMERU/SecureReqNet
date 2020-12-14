@@ -1,4 +1,0 @@
-Fix doxygen generated documentation for oe_free_seal_key and oe_enclave_type
-
-
-Fix #1620

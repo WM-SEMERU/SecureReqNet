@@ -1,5 +1,0 @@
-[Security] Session target_path not set when the incoming request has no session
-
-
-Symfony\Component\Security\Http\Firewall\ExceptionListener only sets the target path when $request->hasSession() is true. This is the wrong behavior IMO as it checks if there is a previous session instead of checking if the session is activated in the project (which would be done by checking null !== $request->getSession().
-I open the issue as @schmittjoh asked it on IRC saying he needs to check further about this.

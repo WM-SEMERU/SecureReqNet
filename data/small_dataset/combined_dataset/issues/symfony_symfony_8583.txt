@@ -1,8 +1,0 @@
-Convert all uses of md5 to sha-256 or sha-512
-
-
-both md5 and sha-1 are not considered sufficiently collision-resistant to be used any longer.  This has been true for several years (more than a decade for md5).
-Given that it's often difficult for a developer to tell if a particular application of a hash function is vulnerable to collisions or plays a role in security, we took the step over three years ago of converting all of Drupal 7 core to use sha-256 and sha-512 for any hashes it generates.
-I propose symfony adopt this approach as well.
-https://drupal.org/node/845876
-http://csrc.nist.gov/groups/ST/hash/policy.html

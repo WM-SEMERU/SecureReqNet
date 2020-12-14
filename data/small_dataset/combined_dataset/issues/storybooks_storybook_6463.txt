@@ -1,8 +1,0 @@
-Update merging webpack loaders example
-
-
-Issue: none
-What I did
-Fix example to actual structure webpack's config
-How to test
-Create a storybook with custom webpack config like at example

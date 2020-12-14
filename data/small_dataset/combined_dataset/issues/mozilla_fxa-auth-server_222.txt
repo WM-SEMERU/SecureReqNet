@@ -1,6 +1,0 @@
-Security and abuse monitoring/detection/prevention
-
-
-We need some security and abuse monitoring and detection logic, and there doesn't seem to be a standard solution for this in our existing services ecosystem.  So we'll have to figure it out as we go.
-The first step is to log all the things: any interesting app-level events, whether expected or unexpected, should be pushed out as events where heka can find them.  We can then layer additional logic on top of this event stream without having to change the application code.
-Related: issue #218 and issue #205

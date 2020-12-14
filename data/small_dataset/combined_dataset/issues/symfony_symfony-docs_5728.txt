@@ -1,5 +1,0 @@
-Update voter documentation for supportsAttribute and supportsClass deprecation
-
-
-See symfony/symfony#15151
-This may only be components/security/authorization.rst

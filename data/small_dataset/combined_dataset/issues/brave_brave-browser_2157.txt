@@ -1,4 +1,0 @@
-Implement Storage Access API
-
-
-whatwg/html#3338

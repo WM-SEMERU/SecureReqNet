@@ -1,7 +1,0 @@
-Example: https://sentry.gitlap.com/gitlab/gitlabcom/issues/11904/ , scroll down to 'Headers', 'Show more', look for 'Private-Token'.
-
-~~We also send 'Authorization' headers but I think Sentry filters those on the server side. That is still not good because it means we hand over unencrypted user passwords to Sentry.~~ Edit: it looks like the Ruby Sentry client scrubs 'Authorization' client-side, before sending it to Sentry.
-
-In the case of gitlab.com this is bad but at least we 'own' the Sentry server (we run an 'on premises' version). For other GitLab installations that integrate with Sentry.io the problem is worse because they have been sending passwords and API tokens equivalent to passwords to a third-party SaaS.
-
-cc @stanhu @DouweM

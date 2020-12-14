@@ -1,5 +1,0 @@
-os x: re-enable PIE (ASLR)
-
-
-Commit a5012a0 disables PIE (and therefore ASLR) on OS X because it breaks profiling of C++ code.  Ideally, we'd figure out a way to keep it turned on except when -prof is specified on the command line.
-I believe the only way to do that (except for having two separate binaries, which I don't think we want) is to re-exec the process with the _POSIX_SPAWN_DISABLE_ASLR (256) flag set.  The flag is ignored for setuid/setgid binaries so in that respect -Wl,-no_pie is superior.

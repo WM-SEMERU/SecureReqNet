@@ -1,5 +1,0 @@
-Knobs: add escapeHTML option; use it by default in Vue, Angular, and Polymer
-
-
-Issue: #3471
-Those frameworks allow rendering of plain HTML, so user input should be escaped

@@ -1,5 +1,0 @@
-Fix #1783, fix #1784, disable sync initialization if no internet connection.
-
-
-We should disable users option to join sync group if they are not connected to network.
-There's still one more unhandled egde case when the internet connection breaks during joining a sync group.

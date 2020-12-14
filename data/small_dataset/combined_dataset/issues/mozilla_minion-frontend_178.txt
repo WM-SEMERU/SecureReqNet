@@ -1,6 +1,0 @@
-New site should add option to add to a group
-
-
-I added a site via the admin page but it didnt appear in the main screen.
-It was only when guillaumeL told me on irc that I needed to add it to the group that it became visible.
-Not very usable - an option on the 'Add Site' screen would be a simple fix I'd have thought, but maybe there are better solutions?

@@ -1,8 +1,0 @@
-[Security] Add article showing an overview of the internals
-
-
-The Security component has a very different public API and internal API. While we're doing a good job at documenting the usage in the Security chapter of the book, we don't document the internals that great.
-The Security component documentation of course has internals, but it is very strongly related to the standalone usage and less to the extension usage. All other cookbook articles are related to fixing specific things with the Security component.
-However, there is no document giving you an overview of what's happening inside and were you can extend/customize it easily. @kriswallsmith has given a great presentation about the overview at Symfony Live 2013: http://www.slideshare.net/kriswallsmith/love-and-loss-a-symfony-security-play I think we should transform something like this into a documentation chapter ( @kriswallsmith can we maybe use your very nice graphs?)
-One thing that is lacking from Kris' presentation is the Simple* classes that are in the Security component, we should explain them as well in this article.
-I would love to hear some opinions about this, @xabbuh @weaverryan @Iltar.

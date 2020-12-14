@@ -1,6 +1,0 @@
-Create README.md
-
-
-This adds a README.md file with introduction text copied from
-https://developers.google.com/caja/
-Fixes #1973 and related to #1987

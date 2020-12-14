@@ -1,5 +1,0 @@
-[Symfony/Finder] ignoreVCSIgnored to look for .gitignore in parent directory
-
-
-in Symfony/Finder component , ignoreVCSIgnored search for .gitignored file in the directory passed to in(). But that file may be present in a parent folder (a Symfony project often has all gitignore rules defined at the project root, even when ignoring nested files/folders) or in subdirectories (with rules applying only in the given subdirectory).
-#30448 (comment)

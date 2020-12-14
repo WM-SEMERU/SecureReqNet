@@ -1,5 +1,0 @@
-Share shields configurations
-
-
-For most sites, Shields works out of the box. But some sites are broken in this configuration, and some sites work fine in more restrictive configurations. Right now, everyone has to find those sweet spots on their own. We should be better about learning what works for which sites, and shipping intelligent defaults. Until that's a thing, it'd be neat to let people share their shields configurations with each other, and get a privacy/webcompat jump start with only one person having to do the work.
-Credit to @snyderp for the idea.

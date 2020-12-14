@@ -1,4 +1,0 @@
-I have created an asp.net web application with ADFS on premisis authentication this was done by .net framework . we have microservices needs to be consumed in .net framework application we want to provide adfs authentication for .net core web services when trying to create api with asp .net core it is not showing on premisis option
-
-
-I have created an asp .net framework web application with ADFS on-premises authentication. we have microservices needs to be consumed in .net framework application we want to provide adfs authentication for .net core web services when trying to create api with asp .net core it is not showing on premisis option

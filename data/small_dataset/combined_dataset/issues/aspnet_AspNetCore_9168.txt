@@ -1,9 +1,0 @@
-Remove unnecessary LangVersion in Blazor templates
-
-
-
-Remove from server template
-If client templates target netstandard2.1, we can remove it entirely
-If client templates target netstandard2.0, we should update it to Preview.
-
-This would match Rolsyn's versioning scheme.

@@ -1,5 +1,0 @@
-Fix KerberosAuthenticator serverPrincipal host replacement
-
-
-The Kerberos authenticator has a feature to replace the "_HOST" placeholder string (if present) in the serverPrincipal with the value of druid.host.
-This transformation wasn't applied in getPrincipalFromRequestNew(), this patch changes serverPrincipal such that the host replacement is applied in the constructor and saved.

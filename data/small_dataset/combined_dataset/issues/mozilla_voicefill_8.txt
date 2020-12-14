@@ -1,5 +1,0 @@
-Ensure POSTs have a size limit and a request rate limit
-
-
-I think these can be set in nginx, so I'm ccing @jasonthomas
-I don't have recommendations for values here.

@@ -1,4 +1,0 @@
-[hackerone] #450099 DNS Leaks
-
-
-https://hackerone.com/reports/450099

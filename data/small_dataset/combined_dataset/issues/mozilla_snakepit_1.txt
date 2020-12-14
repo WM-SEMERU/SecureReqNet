@@ -1,5 +1,0 @@
-Security review code before release
-
-
-Before we start using this on our cluster we should have the code reviewed for security issues.
-@cr suggested that @jvehent is a good choice for a reviewer.

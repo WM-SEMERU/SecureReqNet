@@ -1,6 +1,0 @@
-Use constant time compare for bootstrap tokens
-
-
-This is a subtle security issue that should go in for 1.6 on a new feature (bootstrap tokens).
-NONE
-

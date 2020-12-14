@@ -1,4 +1,0 @@
-Update README.md before archiving the repo
-
-
-As a part of unifying repos, this repo has been merged with aspnet/AspNetCore. After merging this, the repo will be made read only.

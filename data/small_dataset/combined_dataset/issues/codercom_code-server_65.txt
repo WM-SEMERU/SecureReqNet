@@ -1,4 +1,0 @@
-sudo in Dockerfile?
-
-
-See #57 (comment)

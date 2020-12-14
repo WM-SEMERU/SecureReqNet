@@ -1,4 +1,0 @@
-Update SQL query execution doc
-
-
-#7373 changed SQL planning to eliminate the use of select queries for time-ordered SQL SELECTs.  I should have updated the SQL docs to reflect this.

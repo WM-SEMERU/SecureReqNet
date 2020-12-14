@@ -1,2 +1,0 @@
-Sometimes when trying to write a comment, I see that the comment box has a blue border as if it were badly rendered. 
-I've experienced this issue in Gitlab 6.6 and 6.7

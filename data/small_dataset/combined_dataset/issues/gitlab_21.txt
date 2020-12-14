@@ -1,4 +1,0 @@
-After performing the automated upgrade to GitLab 6.5, it appears there is a UI bug... The projects sidebar for example is on the bottom of the page instead of the right (And since the page infinitely scrolls down, you can't really access it.)
-
-Here is a screenshot as an example.
-http://imgur.com/9v4mFWd

@@ -1,6 +1,0 @@
-Non-referral downloads should use generic refcode - iOS
-
-
-Description 
-All Brave browsers should add a universal "default" Brave refcode into the user profile at first run time (if not already present from a referral download/installation process) and act from that moment forward exactly as any referred download would act.
-Desktop Link: brave/brave-browser#2547

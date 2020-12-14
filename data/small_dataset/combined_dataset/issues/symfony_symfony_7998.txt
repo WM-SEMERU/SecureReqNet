@@ -1,7 +1,0 @@
-[UploadedFile] Vulnerability introduced by #7990 ?
-
-
-#7990 changes guessClientExtension() to return the extension of the file based on the transferred mime type rather than the actual content of the file.
-I think this was done on purpose to avoid using the mime type which is very easy to forge.
-I flag this issue as security & critical as this could be a vulnerability.
-/cc @alexpods

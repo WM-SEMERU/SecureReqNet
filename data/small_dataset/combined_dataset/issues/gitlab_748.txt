@@ -1,9 +1,0 @@
-Hello,
-
-We could really use some more granular permissions on protected branches.
-
-Particularly being able to grant a group the ability to "Push to THIS protected branch".
-
-For example all of the application development team can push changes into the development branch but they cannot push into the production branch.  Only application development leads and the manager can merge into the production branch.
-
-To do that we need to allow "Developers" the ability to push into a specific protected branch.  A simple checkbox in the protected branch screen that said "Allow Developers to push to this protected branch" would be perfect.

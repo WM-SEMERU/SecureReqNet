@@ -1,5 +1,0 @@
-Are we vulnerable to NoSQL injection?
-
-
-Are we? Is there any issue with the way we handle our request? Since we don't escape anything, someone might be really smart enough to construct SQL injection (actual, NoSQL injection).
-We need to build test cases. I wonder if zap is capable of doing this? Should visit this question later today.

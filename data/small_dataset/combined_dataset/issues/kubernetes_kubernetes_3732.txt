@@ -1,5 +1,0 @@
-propose ResourceAccessReview: which users can perform this action
-
-
-Existing authorization does not provide a way to know which users and groups have rights to perform an action.  ResourceAccessReview is a  way to determine the full list of of all users and groups who can do something.  This capability is useful when trying to answer questions like: which users have rights to my namespace.
-cc @derekwaynecarr @smarterclayton @liggitt

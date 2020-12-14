@@ -1,4 +1,0 @@
-Implement Subresource Integrity for our JS & CSS assets
-
-
-Subresource Integrity allows us to require that linked assets match a crypto hash in markup, thus mitigating risks that the assets may have been tampered with. We should implement SRI for all our assets.

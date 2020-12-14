@@ -1,3 +1,0 @@
-It's wrong if the commits were reordered during a rebase. In this case, parent commits might be shown after its children (depending on the original commit date).
-
-The problem is that the commits are ordered by author date and not by the commit graph direction.

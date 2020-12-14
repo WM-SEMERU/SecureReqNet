@@ -1,4 +1,0 @@
-Document the logout_on_user_change option
-
-
-see symfony/symfony#23882

@@ -1,4 +1,0 @@
-Enable AuthSamples.FunctionalTests on helix
-
-
-Publish additional files needed to be able to run tests from publish directory

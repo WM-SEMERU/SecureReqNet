@@ -1,5 +1,0 @@
-Fixing error at Class Constraint Validator
-
-
-The correct annotation is @AcmeAssert\ProtocolClass, not @AcmeAssert\ProtocolClassValidator.
-The other changes are just minor rewordings.

@@ -1,5 +1,0 @@
-I'm trying to use gitlab along with docker/dokku on the same server.  Dokku uses nginx to redirect newly deployed applications based on subdomain.  Unfortunately, gitlab embedded (using .deb file) installs nginx in a non-default manner which leaves dokku no way to redirect using nginx.
-
-Is there a reason nginx is installed in a non-default manner?  I think this is the root cause of the issue.  Wouldn't it be better to use the default location of nginx and just make modifications so the selected subdomain directives are added to nginx?
-
-Comments/thoughts welcome.

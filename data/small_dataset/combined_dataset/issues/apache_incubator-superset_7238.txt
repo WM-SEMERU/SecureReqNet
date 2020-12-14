@@ -1,4 +1,0 @@
-FYI: Using pysqlite3 as datasource
-
-
-I wanted to try out Superset with an sqlite3 database as data source, but I need a newer version of sqlite3 than the system library that Python uses by default. Using the pysqlite3 module I already had statically linked to a newer version, but there was no good way to use that through SQLAlchemy in Superset. So I made https://pypi.org/project/sqlalchemy-pysqlite3/ / https://github.com/hoehrmann/sqlalchemy-pysqlite3 which makes pysqlite3 available via a connection string like sqlite+pysqlite3://.

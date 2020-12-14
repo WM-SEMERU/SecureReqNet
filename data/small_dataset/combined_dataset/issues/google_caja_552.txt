@@ -1,8 +1,0 @@
-makeSealerUnsealerPair() should document plan interference hazard
-
-
-Original issue 552 created by google@web.dwdw.me on 2008-06-12T18:12:45.000Z:
-makeSealerUnsealerPair() should probably document that calling unseal(box)
-on a box you got from an untrusted source can potentially expose you to
-plan interference hazard -- i.e., it can cause the execution of code
-provided by the provider of box.

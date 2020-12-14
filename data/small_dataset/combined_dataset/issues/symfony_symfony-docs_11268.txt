@@ -1,4 +1,0 @@
-[Workflow] remove unknown Twig function
-
-
-documented Twig function "workflow_build_transition_blocker_list" is neither implemented in the 4.2 nor the master branch of symfony/symfony and should therefore not be mentioned in the documentation example

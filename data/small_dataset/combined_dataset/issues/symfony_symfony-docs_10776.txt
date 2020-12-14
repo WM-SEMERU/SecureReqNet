@@ -1,4 +1,0 @@
-Update user_provider.rst
-
-
-Fixed a small typo

@@ -1,4 +1,0 @@
-Security: kde nastavit autentikátor
-
-
-doplnění informace, že v případě více nezávislých přihlášení se autentikátor nastavuje v checkRequirements()

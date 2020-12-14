@@ -1,7 +1,0 @@
-Fix older bash failing on unbound array variables
-
-
-Fixes #75929
-Older bash versions fail when trying to expand array variables
-when the array is empty.
-Signed-off-by: Mrunal Patel mpatel@redhat.com

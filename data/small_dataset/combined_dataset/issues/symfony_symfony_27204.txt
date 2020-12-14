@@ -1,8 +1,0 @@
-@Security annotations with the possibility to add the template option
-
-
-Description
-My request is about the possibility of adding in the security annotations an option to request a certain template.
-Since many times we will need a different security template than the typical one that lets us customize Symfony by default for everything.
-Example
-@Security("user.getEmail() == post.getAuthorEmail()", "template" = "CustomErrors/CustomTemplate.twig.html")

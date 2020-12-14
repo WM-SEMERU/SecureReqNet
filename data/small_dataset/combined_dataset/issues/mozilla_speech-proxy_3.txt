@@ -1,6 +1,0 @@
-Validate if the file received is an opus file
-
-
-
-
-

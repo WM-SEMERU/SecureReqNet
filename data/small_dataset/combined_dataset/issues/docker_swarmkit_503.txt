@@ -1,6 +1,0 @@
-Manager acceptance
-
-
-There should be a way for an operator to accept a manager into the cluster, such as:
-$ swarmctl manager accept <id>
-

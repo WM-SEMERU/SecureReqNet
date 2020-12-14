@@ -1,5 +1,0 @@
-Revise mentions of "taming frame"
-
-
-Original issue 1870 created by kpreid.switchb.org on 2013-11-06T22:22:12.000Z:
-Post ES5/3, there is always exactly one secured frame. Mentions of “the taming frame” as opposed to “guest frames” should be revised to reflect the new situation.

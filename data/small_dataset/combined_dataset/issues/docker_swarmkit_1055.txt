@@ -1,9 +1,0 @@
-ca: Fix restarts of the CA server
-
-
-We start the CA server when we become the leader. We stop the CA server
-when we're no longer the leader.
-The Run function has protection against being called multiple times,
-which is good. But if we shut down the CA, we need to be able to start
-it again later, so Stop needs to reset this channel.
-cc @tonistiigi @diogomonica

@@ -1,7 +1,0 @@
-'As discussed in https://gitlab.com/gitlab-org/gitlab-ce/issues/22657 and documented in https://gitlab.com/help/security/user_file_uploads.md, "Images attached to issues, merge requests or comments do not require authentication to be viewed if someone knows the direct URL." The chances of this direct URL being leaked or guessed are small, and the associated risk of an uploaded image leaking is usually acceptable, but this is not the case in all organizations, especially those dealing with more sensitive information.
-
-In https://gitlab.com/gitlab-org/gitlab-ce/issues/22657#note_141155125, @johnpvajda suggested adding an option to the admin area to require authentication on uploaded images. Since these images could then no longer be embedded in email notifications, we could replace the image tags in email notifications with a standard image saying the user needs to click it to view it in their browser.
-
-I think a setting like this would be useful on both the admin and project level, to enable it for an entire instance in one go (as on-premises users may want to) or for specific projects (as GitLab.com users may want to).
-
-@jeremy @lmcandrew What do you think?

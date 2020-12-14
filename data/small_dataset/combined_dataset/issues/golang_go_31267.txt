@@ -1,6 +1,0 @@
-proposal: bits.ConstantTimeAdd, bits.ConstantTimeMul
-
-
-I'm a heavy non-crypto user of bits.* and I'm afraid changes like #31229 will effect my performance. One way of keeping crypto people happy and users like me would be to have separate functions for both non-constant time and constant time addition, multiplication, ...
-In the issue above I was reminded that the change affects only the fallbacks. I'm afraid promising that the fallbacks are constant time will later lead to constant time native implementations which could very well be slower than their non-constant time alternatives. For example, platforms which don't support carry flag are RISC-V and WebAssembly and it could happened that "a branch works out better" [1].
-[1] https://gmplib.org/manual/Assembly-Carry-Propagation.html

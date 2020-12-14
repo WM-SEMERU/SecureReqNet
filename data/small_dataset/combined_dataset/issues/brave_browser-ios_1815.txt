@@ -1,8 +1,0 @@
-Update deprecation note
-
-
-Part of #1812
-
-Now that Brave for iOS version 1.7 (WKWebView) has been released, all future changes and releases will use the new codebase at https://github.com/brave/brave-ios.
-Mark this repository as officially deprecated. Update the read me to reflect this.
-

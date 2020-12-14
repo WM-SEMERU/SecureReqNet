@@ -1,5 +1,0 @@
-Upgrade Envoy to 1.10.0 CVE-2019-9900/9901
-
-
-The current App Mesh Envoy is effected by CVE-2019-9900 an CVE-2019-9901.
-https://www.envoyproxy.io/docs/envoy/v1.10.0/intro/version_history

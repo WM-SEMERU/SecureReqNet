@@ -1,8 +1,0 @@
-Change IsAjaxRequest in IsApiRequest in CookieAuthenticationEvents
-
-
-It would be ideal to have a way of overwriting the IsAjaxRequest method in order to cover API only implementations
-Describe the solution you'd like
-I would propose renaming IsAjaxRequest into IsApiRequest and use the same function body as we currently have.
-Describe alternatives you've considered
-Overwriting each event individually.

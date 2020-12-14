@@ -1,7 +1,0 @@
-Support for CloudSQL Private IP for the GCP Service Broker.
-
-
-Joint Pivotal-Google Cloud Customers are keen to access GCP serices privately.
-CloudSQL has added access for Private IP, the ask is to make this available via the GCP service broker.
-https://cloud.google.com/sql/docs/mysql/configure-private-ip
-Many thanks!

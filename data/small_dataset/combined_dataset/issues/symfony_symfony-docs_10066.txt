@@ -1,4 +1,0 @@
-Refactor a security code example to make it easier to understand
-
-
-This replaces #10064 and extracts the common code into a new method.

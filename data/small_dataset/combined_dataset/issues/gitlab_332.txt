@@ -1,3 +1,0 @@
-I have a user whose profile email is all in lower case, but commits with an upper-case letter in their email. Gitlab doesn't match the commit message to the user's profile, and he is unable to add the different casing as an alias because the address is "already in use."
-
-I believe that the fallback name-matching for commits is case-sensitive as well, and probably should not be.

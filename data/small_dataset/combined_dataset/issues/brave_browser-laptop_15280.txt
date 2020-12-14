@@ -1,7 +1,0 @@
-How can i create .exe file from this code
-
-
-i am new to react js and i want to create .exe from this code.
-i have tried solutions like pkg and nexe but it seems no result.
-Please help on how to create .exe file.
-Thanks.

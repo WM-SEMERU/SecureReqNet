@@ -1,4 +1,0 @@
-docs(DEVELOPERS): remove git revert misleading information
-
-
-I removed this line "A commit with this format is automatically created by the [git revert][git-revert] command." as it isn't right since the default commit message if you do git revert will be Revert "MESSAGE ON REVERTED COMMIT"

@@ -1,9 +1,0 @@
-Add tooltips to the Extension Workshop and DevHub header links
-
-
-To better explain what Extension Workshop and Developer Hub are, and how they are different, @MeridelW suggested we add tooltip text to both links. This is only for the header links in the frontend.
-
-Extension Workshop: "Learn how to create extensions and themes"
-Developer Hub: "Submit and manage extensions and themes"
-
-/cc @caitmuenster

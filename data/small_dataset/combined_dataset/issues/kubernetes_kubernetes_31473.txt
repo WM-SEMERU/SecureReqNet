@@ -1,8 +1,0 @@
-Add AppArmor feature gate
-
-
-Add option to disable AppArmor via a feature gate. This PR treats AppArmor as Beta, and thus depends on #31471 (I will remove do-not-merge once that merges).
-Note that disabling AppArmor means that pods with AppArmor annotations will be rejected in validation. It does not mean that the components act as though AppArmor was never implemented. This is by design, because we want to make it difficult to accidentally run a Pod with an AppArmor annotation without AppArmor protection.
-/cc @dchen1107
-
-This change is 

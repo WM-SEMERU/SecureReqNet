@@ -1,9 +1,0 @@
-Add rate limiting to the following routes
-
-
-/login/oauth/access_token
-/request-reset
-/reset-password
-/create-user
-
-When a rate limit is set, an alert should be sent to emergency@mozillafoundation.org

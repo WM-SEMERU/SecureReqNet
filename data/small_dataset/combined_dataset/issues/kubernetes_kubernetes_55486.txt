@@ -1,7 +1,0 @@
-admission: don't update psp annotation on update
-
-
-Follow-up of #54689.
-Related to #55435 as istio-like initializer-based container injection cannot contribute to SC mutations.
-The PodSecurityPolicy annotation `kubernetes.io/psp` on pods is only set once on create.
-

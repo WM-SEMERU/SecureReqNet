@@ -1,4 +1,0 @@
-Alter resource control API
-
-
-While building out the control API implementation, I realized this would be a better API. Typically, altering protocol buffers like this would be unsafe, but as we have not yet shipped any feature for this, it is safe to do so.

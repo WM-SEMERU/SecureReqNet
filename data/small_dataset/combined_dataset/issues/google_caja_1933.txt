@@ -1,7 +1,0 @@
-SES initialization fails on the latest FF Nightly.
-
-
-Original issue 1935 created by erights on 2014-08-28T23:45:50.000Z:
-Ironically it seems, because FF Nightly just implemented an ES6 change I suggested.
-See https://bugs.ecmascript.org/show_bug.cgi?id=3113
-and the attached screenshots

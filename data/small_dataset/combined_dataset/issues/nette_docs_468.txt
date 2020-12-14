@@ -1,6 +1,0 @@
-Tracy requires 'self' in CSP since 2.4
-
-
-Required since nette/tracy@13f854d
-Content Security Policy nonce (see nette/tracy#136) is the future but now this doc update should do.
-Thanks!

@@ -1,5 +1,0 @@
-"useDefaultValueForNull" needs documentation
-
-
-see NullValueHandlingConfig
-Found during investigation of #7108

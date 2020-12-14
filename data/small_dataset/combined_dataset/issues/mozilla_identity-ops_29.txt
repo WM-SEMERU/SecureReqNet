@@ -1,4 +1,0 @@
-Install RSBAC kernel and test/update policy to enable enforcing
-
-
-https://mana.mozilla.org/wiki/display/SECURITY/RSBAC

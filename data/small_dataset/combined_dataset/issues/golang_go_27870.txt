@@ -1,6 +1,0 @@
-x/build/cmd/coordinator: http://farmer.golang.org should redirect to https
-
-
-Unless there's a good reason why it doesn't/cannot, or it's extremely time-consuming.
-build.golang.org, dev.golang.org, tip.golang.org, etc., already do it.
-I'd also like to learn how to do this (so I can apply the knowledge in similar situations in the future). /cc @bradfitz

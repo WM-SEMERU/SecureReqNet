@@ -1,5 +1,0 @@
-use :: instead of .. code-block:: php
-
-
-Follow up of #11125
-cc @javiereguiluz

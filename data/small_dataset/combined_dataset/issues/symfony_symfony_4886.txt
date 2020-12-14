@@ -1,4 +1,0 @@
-Authenticated user can visit login screen
-
-
-Maybe its not a bug. Im sure the login operation under symfony security rules, but visiting login page after successful login its not very good idea. I see you have the same at sensiolabs, login and visit login page again https://connect.sensiolabs.com/login. The only thing I can do its check in my security controller if user already logged in than redirect him.

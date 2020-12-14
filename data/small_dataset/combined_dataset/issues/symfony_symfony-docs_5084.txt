@@ -1,4 +1,0 @@
-Rewrite Blacklist Entry without Voters
-
-
-This article http://symfony.com/doc/current/cookbook/security/voters.html needs to be rewritten using a simple event listener. Using a voter is awkward - see #4304 for the conversation.

@@ -1,8 +1,0 @@
-s3_auth:fixed uncaught exception on invalid input
-
-
-Instead of fixing the URI decoding functionality to handle the exception
-(re)implemented a check for percent encoding which was what was needed.
-During signature calculation AWS avoids URI encoding of already encoded
-query parameters (rfc3986#section-2.4 says "implementations must not
-percent-encode or decode the same string more than once ...")

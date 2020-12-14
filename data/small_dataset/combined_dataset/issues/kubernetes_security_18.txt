@@ -1,4 +1,0 @@
-security-release-process: update philips's email
-
-
-Use redhat.com email over coreos.com email due to losing filters

@@ -1,6 +1,0 @@
-Symantec Endpoint Protection reported Atom as trying to edit the hosts file
-
-
-Windows 7
-Atom Version 0.188.0
-When I opened atom, My endpoint protection popped up a threat detection alert saying that atom was attempting to edit my hosts file. then stopped the app from running.

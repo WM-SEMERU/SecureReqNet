@@ -1,4 +1,0 @@
-Added docs for the NotCompromisedPassword constraint
-
-
-Documents symfony/symfony#27738.

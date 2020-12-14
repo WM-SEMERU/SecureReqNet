@@ -1,6 +1,0 @@
-c.g.c.util.Abbreviator infinitely recurses sometimes
-
-
-For me, AbbreviatorTest.testSetContainsSuffixOfOtherMember fails with a StackOverflowError when running unit tests.
-It is basically untouched since it was written, but the test provides a HashSet of items to Abbreviator's constructor, and Abbreviator has a bug that depends on whether the shorter or longer of two items is inserted first. So the test depends on hashing order, and there's a bug that wasn't covered by the test.
-I'm currently looking at what's wrong with Abbreviator. (And yes, this is not dead code — it's still used in the parsing code that's used in our build and test systems.)

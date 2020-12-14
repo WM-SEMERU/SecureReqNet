@@ -1,6 +1,0 @@
-Sometimes, local users are created and used for a time before LDAP is implemented. Once LDAP is implemented, users should not be able to sign in using their local password - LDAP credentials only. This is the case for users that are created initially with an LDAP identity - we set a randomly generated password and they aren't allowed to set it manually. 
-
-cc/ @jacobvosmaer-gitlab @DouweM Any thoughts on how we should do this? It looks like new LDAP users get the randomly generated password. The trick is that this should happen for LDAP only - not SAML or other omni providers, which still allow the user to set a local password for Git over HTTP/S
-
-
-I added the security label, because it's related to security, although not a critical security issue.

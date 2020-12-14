@@ -1,7 +1,0 @@
-Check unmentionables are synthetic
-
-
-Original issue 166 created by ihab.awad on 2008-04-03T04:38:20.000Z:
-Add an extra check after JS rewriting to make sure that any mention of
-references not available to Caja code (e.g., things ending with double
-underscores) are marked synthetic.

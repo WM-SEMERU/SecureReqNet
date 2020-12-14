@@ -1,7 +1,0 @@
-make more links HTTPS
-
-
-Test plan
-#7298 (comment)
-
-ex: https://dksfoto.smugmug.com/ for the background image link supports HTTPS

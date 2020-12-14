@@ -1,7 +1,0 @@
-client: simplify kill logic
-
-
-Remove runLaunched tracking as Run is always called for killable
-TaskRunners. TaskRunners which fail before Run can be called (during
-NewTaskRunner or Restore) are not killable as they're never added to the
-client's alloc map.

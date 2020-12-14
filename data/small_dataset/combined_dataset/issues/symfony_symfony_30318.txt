@@ -1,6 +1,0 @@
-Add X-Robots-Tag in header of response in dev mode
-
-
-Description
-For security, you can automatically add the X-Robots-Tag: noindex header in developer mode. Sometimes it happens that someone will make such a website available on the Internet. I think it would be better for search engines to not index such websites.
-Robots meta tag and X-Robots-Tag HTTP header specifications

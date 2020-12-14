@@ -1,5 +1,0 @@
-Document how CSRF is mitigated
-
-
-It would be good to summarise how the use of the APIs on AMO mitigates CSRF.
-It's important to clarify the understanding of this so we can ensure we're not missing any CSRF protection before we put the mobile pages live.

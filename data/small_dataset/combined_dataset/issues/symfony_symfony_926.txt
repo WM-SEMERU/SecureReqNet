@@ -1,4 +1,0 @@
-Security config validation
-
-
-We should explore in how far a stronger validation of the security configuration is feasible especially with respect to common pain points (see also PR #895).

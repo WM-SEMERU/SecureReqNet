@@ -1,4 +1,0 @@
-Audit ImageData code
-
-
-Things such as let len = width * height * 4; without any explicit overflow checking scares me.

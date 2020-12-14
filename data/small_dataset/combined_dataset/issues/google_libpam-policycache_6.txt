@@ -1,4 +1,0 @@
-Restrict permissions on cache files
-
-
-We rely on the cache storage directory's permissions to ensure that the cache entries are only readable by root. Instead, we should explicitly chmod the entry files to 0600 when they are written.

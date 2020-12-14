@@ -1,7 +1,0 @@
-Update AbstractGuardAuthenticator implementation code to pass curl test according to documentation
-
-
-Make the test curl http://localhost:8000/ return this value:
-{"message":"Authentication Required"}
-instead of
-{"message":"Username could not be found."}

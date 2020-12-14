@@ -1,3 +1,0 @@
-Maybe you want to add a comment, that one has to ```AllowUsers git``` in sshd config if one has permitted ssh only for some users. Otherwise you cant commit using ssh.
-
-(It took some time, that I found the problem, so maybe other users can fix it faster ;) )

@@ -1,5 +1,0 @@
-Should we remove the GitHub repository reference in Components?
-
-
-In this comment Fabien wonders if we could get rid of that phrase in all component docs:
-

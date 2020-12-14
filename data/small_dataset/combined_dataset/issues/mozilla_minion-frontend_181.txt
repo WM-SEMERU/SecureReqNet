@@ -1,6 +1,0 @@
-Adds OAuth support for FxA, Facebook, Google, and Github
-
-
-
-
-

@@ -1,6 +1,0 @@
-Add auto-signing to the samples
-
-
-Adds a default sign target to all enclaves so they automatically get signed.
-Also adds dependency on oeedger8r for *_args.h so make clean deletes them.
-Fixes #1631

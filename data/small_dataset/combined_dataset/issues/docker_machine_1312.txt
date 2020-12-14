@@ -1,4 +1,0 @@
-config.json stores passwords in plaintext
-
-
-Storing them at a minimum as an encoding would be an improvement, but realistically, they should be encrypted.

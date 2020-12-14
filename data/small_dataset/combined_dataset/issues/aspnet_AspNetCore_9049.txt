@@ -1,5 +1,0 @@
-[release/2.2] update SignalR Java client signing cert
-
-
-Update the Java signing cert in 2.2. See #9048
-Part of aspnet/AspNetCore-Internal#2109

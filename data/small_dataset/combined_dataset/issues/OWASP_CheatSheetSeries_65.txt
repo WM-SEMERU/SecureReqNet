@@ -1,5 +1,0 @@
-Cheat sheet update/refactor proposal: Credential Stuffing Prevention Cheat Sheet
-
-
-I want to add some additional mitigations against Credential Stuffing like: CAPTCHA, Pwned Passwords(https://haveibeenpwned.com/Passwords)
-In addition I think that Credential_Stuffing_Prevention_Cheat_Sheet should be refreshed, for example I want to add some examples how several mitigations can be combined together, different mitigations for different account privileges (admin, user, etc), example reference implementations or tools that can help etc.

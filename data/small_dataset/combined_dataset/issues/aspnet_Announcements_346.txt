@@ -1,6 +1,0 @@
-ResourceManagerWithCultureStringLocalizer class and WithCulture interface member marked Obsolete and will be removed
-
-
-The ResourceManagerWithCultureStringLocalizer class and WithCulture interface member are often sources of confusion for users of Localization, especially if they want to create their own IStringLocalizer implementation. These items give the user the impression that we expect an IStringLocalizer instance to be "per-language, per-resource", when actually they should only be "per-resource", with the language searched for determined by the CultureInfo.CurrentUICulture at execution time. To remove this source of confusion and to avoid APIs which we don't want users to use we will be obsoleting these in 3.0.0-preview3, and they will be removed in a future release (4.0 or above).
-For context, see here.
-See aspnet/AspNetCore#7756 for discussion.

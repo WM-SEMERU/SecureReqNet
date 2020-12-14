@@ -1,5 +1,0 @@
-Prepare security checklist
-
-
-For #59 make a security checklist that shows the requirements that a site needs to have completed before they can use the payments flow.
-This would be things like turn CSP with these settings etc....

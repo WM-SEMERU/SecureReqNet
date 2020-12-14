@@ -1,4 +1,0 @@
-Symfony login wrong credentials, please try again.
-
-
-I am trying out the SymfonyCloud but first I must log in. Before I was able to log, but now I can't log in it says: "Wrong credentials, please try again." and i have entered the right email or username and password. I have tried logging in on the website with the same email and password and it worked but it doesn't in the console. Changing the password did not help.

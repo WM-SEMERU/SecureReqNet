@@ -1,4 +1,0 @@
-Add support for direction annotations
-
-
-closes #334

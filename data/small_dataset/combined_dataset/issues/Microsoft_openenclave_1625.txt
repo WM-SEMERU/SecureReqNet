@@ -1,6 +1,0 @@
-Build and sign documentation should include a link to CMake instructions
-
-
-https://github.com/Microsoft/openenclave/blob/master/docs/GettingStartedDocs/buildandsign.md
-should include a link to
-https://github.com/Microsoft/openenclave/blob/master/cmake/sdk_cmake_targets_readme.md

@@ -1,3 +1,0 @@
-Hovering the last item in tree view moves the content of `README.md` down by 1 pixel, if displayed.
-
-Merge request !134 fixes the issue.

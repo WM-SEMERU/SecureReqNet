@@ -1,4 +1,0 @@
-Make microk8s VM private to Cloud Build
-
-
-This will probably require using Custom Workers and VPN. Or perhaps lock down via certificate?

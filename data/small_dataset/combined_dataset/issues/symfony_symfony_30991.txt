@@ -1,6 +1,0 @@
-[FrameworkBundle] Fix for controller.php deprecated when using composer --optimized
-
-
-
-No description provided.
-

@@ -1,4 +1,0 @@
-Hook up recurring donations
-
-
-This was needed for mozilla/payments-ui#368 and reverts some parts of #148

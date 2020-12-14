@@ -1,6 +1,0 @@
-Store a list of ordered file paths in the fileTree reducer
-
-
-Supports #522
-Depends on #533
-Store a list of file paths, in the same order as they appear in the FileTree, in the fileTree reducer.

@@ -1,7 +1,0 @@
-Updating UPDATE_HOST to point to brave.com cname
-
-
-Test plan
-TBD
-Original issue description
-UPDATE_HOSTs are set to *.fastly.net. Update these entries to point to brave.com cnames

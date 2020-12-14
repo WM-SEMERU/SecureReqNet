@@ -1,6 +1,0 @@
-For contributors: moved ASP.NET 4.x docs to new GitHub repo
-
-
-In an effort to reduce the GitHub repo size and to reduce docset build times, the ASP.NET 4.x product documentation has migrated from the aspnet/Docs repo to the aspnet/AspNetDocs repo.
-To continue making contributions to ASP.NET 4.x documentation, create a local clone of the aspnet/AspNetDocs repo. To continue making contributions to ASP.NET Core documentation, please refresh your local clone.
-In the near future, the team plans to rewrite the commit history in aspnet/Docs. We realize this is an extreme step, but we feel it's worth doing to reduce the repo size by ~70%. At that point, contributors will need to reclone aspnet/Docs. Look for another announcement when that change occurs.

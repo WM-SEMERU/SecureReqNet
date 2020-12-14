@@ -1,6 +1,0 @@
-docs(ivy): add /migration/lazy-routes to AIO
-
-
-
-
-

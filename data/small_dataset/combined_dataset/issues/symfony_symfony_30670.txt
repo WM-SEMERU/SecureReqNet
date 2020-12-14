@@ -1,5 +1,0 @@
-The default message bus name should start with `messenger.`
-
-
-Currently, the default bus name in the container is message_bus. It should probably be messenger.message_bus.
-WDYT @sroze @weaverryan

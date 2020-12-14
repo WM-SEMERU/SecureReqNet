@@ -1,4 +1,0 @@
-Implement a maximum duration between epochs
-
-
-Help clients know whether they have a recent epoch revision by creating a new epoch every x hours/minutes/seconds, even if no mutations have been received.

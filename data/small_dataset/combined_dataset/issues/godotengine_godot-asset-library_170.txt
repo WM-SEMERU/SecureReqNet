@@ -1,4 +1,0 @@
-LGPL missing in licence list
-
-
-It should be added for GDNative libraries that have to use LGPL.

@@ -1,5 +1,0 @@
-Provide a secure way of authenticating to a SQL Backend
-
-
-Right now, we're passing in the username and password as config parameters which is fine for playing around but not for a production environment.
-See DefaultSqlBackedClient

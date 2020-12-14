@@ -1,9 +1,0 @@
-Firewall and router execution order & custom exception handling
-
-
-I'm having a very hard time trying to push Symfony to display custom 404 pages being aware of the current security context. Let me explain what I mean.
-Since the release of the 2.1 version the order of firewall and router execution has been altered and now I can't create a custom 404 page which uses security role checking.
-It is a very important issue for me (and I think I might not be the only one who considers this being a bug), because I really need security context in that situation. Why? I am writing an app in which I wanted the 404 page to show different content depending on whether the user is authorized or not. Moreover, different roles can alter the content being shown as well.
-After many hours of frustration and hopeless tries to pass the exceptions to controllers, registering event subscribers which handle them etc. I have found no way to overcome that problem.
-Is there any solution to that? I am not satisfied with the answer "404 error page and security checks do not work together" (see #5320) and "don't use security checks on error pages and you'll be fine" - I think it is a bad design to not allow to use that.
-If you have any idea what can be made to fix that I will be happy to contribute code, but honestly I don't know all the motives behind the decision - so I'd like to know why is it done like that, how could I address that issue and if anyone has any idea on how to modify the Symfony code if necessary. If anything in my description is unclear, I can provide a working (or rather - not working) example illustrating that problem, in form of a Symfony standard edition fork or exemplary code.

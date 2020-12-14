@@ -1,7 +1,0 @@
-Document the postconditions for each Cajoler transformation stage
-
-
-Original issue 473 created by zestyping on 2008-06-10T21:43:44.000Z:
-For each stage in java/com/google/caja/plugin/stages, please document the
-postconditions that transformation stage is supposed to provide (e.g. XYZ
-should not be present in the output, etc.)

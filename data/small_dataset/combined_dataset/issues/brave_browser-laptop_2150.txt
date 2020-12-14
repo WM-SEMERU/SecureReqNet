@@ -1,4 +1,0 @@
-update to https everywhere 5.1.10
-
-
-i will probably just upload the new rulesets to the 5.1.9 AWS folder from now on so we don't have to keep changing paths unless there is an incompatible ruleset format update.

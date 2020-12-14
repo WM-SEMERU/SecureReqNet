@@ -1,4 +1,0 @@
-Document the yaml_file usage
-
-
-See: symfony/symfony#30446

@@ -1,5 +1,0 @@
-Bound conainerized services with cpu/mem limits
-
-
-Kargo launches unbound containers which are k8s workloads or systemd units. Those must be bouned with CPU/RAM limits. F.e. I noticed that weave restart takes LA 5 on the 1 single CPU instance running for CI checks. Unbound containers/pods may drive OS to fail in strange, unpredictable intermittent and hard to reproduce and debug ways.
-Inspired by this blog post

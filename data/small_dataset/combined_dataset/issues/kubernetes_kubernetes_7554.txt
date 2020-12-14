@@ -1,4 +1,0 @@
-Secrets should be read-only by root
-
-
-Well designed applications run as non-root, so having secrets only readable by root would improve the levels of defense in depth.

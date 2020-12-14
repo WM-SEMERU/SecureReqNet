@@ -1,4 +1,0 @@
-Address security vulnerabilities in package dependencies
-
-
-applicationinsights-core-2.3.0.jar/META-INF/maven/io.netty/netty-tcnative-boringssl-static/pom.xml (cpe:/a:netty_project:netty:2.0.17, io.netty:netty-tcnative-boringssl-static:2.0.17.Final) : CVE-2015-2156, CVE-2014-3488

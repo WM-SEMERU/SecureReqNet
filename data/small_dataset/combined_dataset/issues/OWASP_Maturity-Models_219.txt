@@ -1,5 +1,0 @@
-Create better proofs view
-
-
-At the moment the data is shown here
-

@@ -1,5 +1,0 @@
-node.attributes[] allows arbitrary script execution
-
-
-Original issue 1043 created by felix8a on 2009-06-12T18:44:10.000Z:
-placeholder

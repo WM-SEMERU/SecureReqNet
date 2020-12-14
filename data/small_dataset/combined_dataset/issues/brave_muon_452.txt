@@ -1,6 +1,0 @@
-Enable AppArmor profiles for Brave
-
-
-
-Operating system: linux
-

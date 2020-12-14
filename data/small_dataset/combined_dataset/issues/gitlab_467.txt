@@ -1,1 +1,0 @@
-In the issues section, When I have a comment entered in the Comment field and hit close I would expect that comment to be saved with the close. However you have to hit both Save Comment and then Close Issue. Perhaps there could be a button that both Saves and Closes, or just make the default of close to save any comments. 

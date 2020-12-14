@@ -1,6 +1,0 @@
-ant all fails
-
-
-Original issue 1902 created by metaweta on 2014-03-13T17:40:42.000Z:
-ant clean all
-Looks like demos no longer build; either demos should be removed from all or they should be updated to work.

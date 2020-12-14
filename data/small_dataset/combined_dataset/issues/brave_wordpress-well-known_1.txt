@@ -1,5 +1,0 @@
-Status Code, 200
-
-
-I would like to ask if there is any chance to send a 200 instead of 404 status code. Thanks in advance.
-Background: I am working on Apple pay with wordpress and stripe, which i have to verify my domain. After spending 9 hours working on htaccess, i have came to your plugin. and got no luck with another hour trying to force it to send back 200.

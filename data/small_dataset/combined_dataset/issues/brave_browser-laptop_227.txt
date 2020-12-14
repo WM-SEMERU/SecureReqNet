@@ -1,4 +1,0 @@
-Add cert warning page
-
-
-Currently a site with an invalid cert, like https://lenovo.com, simply just shows blank.

@@ -1,3 +1,0 @@
-From Gitlab-CI, there is a valid integration with Gitlab, but not from Gitlab's perspective.
-
-Please let me know what you want like me to run to better report this.

@@ -1,7 +1,0 @@
-Brave notification don't show the real address
-
-
-Brave notification don't show the real address “127.0.0.1”,The following picture is result in contrast with chrome
-
-
-I think this may lead to some security issues happen in the future.

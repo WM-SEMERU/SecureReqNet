@@ -1,6 +1,0 @@
-Harden kubectl proxy
-
-
-The current default behavior of kubectl proxy is to listen on all addresses on port 8001. Thus anyone on the same network gets full access to the apiserver of my cluster.
-It would be good to default to listen on localhost and maybe add a flag to override this behavior.
-The second issue is that the proxy is vulnerable to dns rebinding. I.e. if I'm running a kubectl proxy and browse the web at the same time, a malicious website can interact with the local apiserver. The recommended way to protect against dns rebinding is to check the Host header for expected values if present.

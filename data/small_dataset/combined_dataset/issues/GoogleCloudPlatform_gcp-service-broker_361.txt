@@ -1,5 +1,0 @@
-CVE-2018-15759
-
-
-Our broker uses the library mentioned in: https://pivotal.io/security/cve-2018-15759
-The solution is to upgrade the library to version 3.0.2 of the affected library. Because this is a major version bump (currently we're using 2.0.4) and the fix was not back-ported the recommended solution for now is to not run the service broker on a publicly accessible network.

@@ -1,5 +1,0 @@
-Follow up of https://github.com/kubernetes/kubernetes/pull/76050#discussion_r271540758
-
-
-/sig cluster-lifecycle
-/assign @BenTheElder

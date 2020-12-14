@@ -1,4 +1,0 @@
-Fix npm vulnerabilities
-
-
-brave/sync dependency needs to be updated

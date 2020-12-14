@@ -1,4 +1,0 @@
-Add RPC endpoints for config entry operations
-
-
-This PR adds RPC endpoints for config entries to be used in upcoming Connect work around centralized service config.

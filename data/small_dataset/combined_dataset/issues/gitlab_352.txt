@@ -1,3 +1,0 @@
-I'm working on getting GitLab running on a TorqueBox install that we use and hitting some walls.  Wanted to see if you have worked through getting it working on a `jruby` server before.
-
-I've gotten through a couple minor hiccups and am now hitting an issue with `charlock_holmes`.  I see a jruby version of this gem, but it's quite dated.  Any suggestions off the top there before I start digging around to resolve this?

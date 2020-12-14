@@ -1,6 +1,0 @@
-Add wg-security-audit slack
-
-
-The Security Audit Working Group now has a Slack channel available, #wg-security-audit.
-This PR updates the wg docs to include our new channel.
-cc @joelsmith @aasmall

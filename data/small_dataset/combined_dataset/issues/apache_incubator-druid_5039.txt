@@ -1,5 +1,0 @@
-Fix coordinator->overlord proxy auth failure
-
-
-Fixes #5038
-This sets "authorization checked=true"  on the original client request for coordinator->overlord proxied requests.

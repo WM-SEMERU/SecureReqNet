@@ -1,6 +1,0 @@
-Replace Argon2idPasswordEncoder by SodiumPasswordEncoder
-
-
-#31014 makes no sense to me: we added a class for which we cannot guarantee that it will work depending on a default that is under control of libsodium only.
-To me this is the sign that we should adopt the approach of libsodium instead: we should replace Argon2idPasswordEncoder by SodiumPasswordEncoder and align to its recommendation: trust them to always select the best default in the future. It's not like we have the choice: there is no other ways permitted by the extension (and I trust them on that it's the best).
-Similarly, I would add a new NativePasswordEncoder that would always use PASSWORD_DEFAULT, and deprecate Argon2iPasswordEncoder and BCryptPasswordEncoder.

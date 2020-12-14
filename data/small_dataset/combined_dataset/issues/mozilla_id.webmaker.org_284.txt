@@ -1,4 +1,0 @@
-Should log/spawn event when user/IP is rate limited
-
-
-We don't receive a signal when rate limiting kicks in at the moment. Someone could be trying to login from an IP/account many times, and would be stopped, but we'd never know.

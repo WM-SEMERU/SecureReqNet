@@ -1,4 +1,0 @@
-Reworded the CSRF article to better explain how to install and enable/disable it
-
-
-This finishes #8955.

@@ -1,4 +1,0 @@
-Why there's no Authentication.Windows package?
-
-
-There's a  Microsoft.Windows.Compatibility nuget package now, Can we build a asp.net core native Microsoft.AspNetCore.Authentication.Windows now ? or that's some thing must impelement in the Server (eg.IIS,Kestrel,HttpSys) ?

@@ -1,7 +1,0 @@
-[Serializer][RFC] Provide DateTimeZoneNormalizer
-
-
-Description
-The Symfony Serializer contains support for DateTimeInterface objects which some projects rely on (e.g. API Platform - api-platform/core#2509). However object being very close to the DateTime - DateTimeZone does not provide any serialization options out of the box.
-RFC
-If there was a reason to provide normalization for DateTime why not include DateTimeZone which is also a part of the DateTime?

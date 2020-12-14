@@ -1,4 +1,0 @@
-[datatheorem] #007755 - URI Scheme issue
-
-
-https://www.securetheorem.com/app/1/issues/007755

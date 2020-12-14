@@ -1,6 +1,0 @@
-Automated cherry pick of #73326: Update to go1.11.5
-
-
-Cherry pick of #73326 on release-1.13.
-xref: #73238
-#73326: Update to go1.11.5

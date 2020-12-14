@@ -1,4 +1,0 @@
-WIP Upgrade to SpiderMonkey 66
-
-
-This change is 

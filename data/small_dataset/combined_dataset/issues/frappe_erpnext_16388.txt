@@ -1,4 +1,0 @@
-[Permissions] Check field level "read" permissions for "fields" in list / report queries
-
-
-See user janecek.mato's report here https://discuss.erpnext.com/t/rest-api-security-problem/44354

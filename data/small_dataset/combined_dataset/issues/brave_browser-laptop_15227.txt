@@ -1,6 +1,0 @@
-blocking file called miner.js
-
-
-I experiencing that a js file called miner.js is just never loaded with your browser, but works perfectly with Chrome and Firefox.
-I have software for monitoring of miner rigs, nothing to do with malware, it contains only custom elements code. I guess you block it solely based on filename and not content.
-If so - please stop.

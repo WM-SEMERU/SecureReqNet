@@ -1,3 +1,0 @@
-In light of the security issue with `public_send`, should we add a Rubocop rule to prevent this from ever being used?
-
-/cc: @rspeicher

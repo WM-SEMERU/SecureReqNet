@@ -1,5 +1,0 @@
-Reserved
-
-
-This issue has been reserved for a potential future security announcement.
-This does not mean a security advisory is coming soon, it simply gives us the ability to predict the issue number that will be used in the future.

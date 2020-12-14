@@ -1,7 +1,0 @@
-Can we remove :: android:permission="android.permission.INSTALL_PACKAGES
-
-
-In line 146, it looks like we are limiting the application to receive the referrer broadcast event only from apps that have the permission INSTALL_PACKAGES granted.
-Can this requirement be removed?
-Link to Code: https://github.com/brave/browser-android-tabs/blob/8e965e627acf097396ae7e7e270fdbb08b8c56f3/chrome/android/java/AndroidManifest.xml
-

@@ -7,10 +7,15 @@ We present a machine learning approach, named SecureReqNet, to automatically ide
 ## Install with `pip install securereqnet`
 
 ### SecureReqNet Documenation website at:
-https://rmclanton.github.io/SecureReqNet/
+https://wm-semeru.github.io/SecureReqNet/
 
-### Want to try out α-SecureReqNet? Checkout this example in google colab:
+### Want to try out SecureReqNet? Checkout these examples in google colab:
+
+#### α-SecureReqNet:
 https://colab.research.google.com/drive/1mOXvgvkqCEgrAahyUH9Bw0ZO_nLglNFq
+
+#### Γ-SecureReqNet:
+https://colab.research.google.com/github/wm-semeru/SecureReqNet/blob/master/Gamma_SecureReqNet.ipynb
 
 ### Or serve your own version:
 https://colab.research.google.com/drive/1pb_QQOm0jA0SwejgqxBXKBhkuM42al4k 
@@ -164,25 +169,11 @@ Wikipedia | 10000 | - | - | - |
 - *Wikipedia Articles*: If we trained our neural embeddings on *only* highly specialized software text extracted from issues, we risk our model not learning more generalized word contexts that could help differentiate between SR and non-SR issues. Thus, we randomly crawled and extracted the text from 10,000 Wikipedia articles in order to bolster the generalizablility of our learned neural word embeddings.
 
 
-## Project Description for CSCI 435/535
-> > Project Leads:@danaderp> The goal of the project is to migrate the components into nbdev architecture, implement interpretability components to test the neural net, leverage security datasets, and document. 
+## Interpretability
 
-### The goals of this project:
+![interpretability](https://raw.githubusercontent.com/rmclanton/SecureReqNet/master/images/shap_200_issues_alpha.png)
 
-- [ ] Migrate SecureReqNet into nbdev
-- [ ] Expose SecureReqNet components to an API (Team of Project#1 should consume your services)
-- [ ] Implement some interpretability techniques to test SecureReqNet
-- [ ] Leverage Security Datasets
-
-### Project Requirements:
-
-- Required Knowledge: Python, Git, Linear Algebra, and Statistics
-- Preferred Knowledge: Machine Learning, TensorFlow, and Probabilistic Computation
-
-### Recommended Readings:
-
-- Exploratory Programming with Nbdev [link](https://www.fast.ai/2019/12/02/nbdev/)
-- Interpretability Analysis Book [link](https://christophm.github.io/interpretable-ml-book/)
+We used [this library](https://github.com/slundberg/shap) to generate shap values for alpha securereqnet.  In the above generated graph, shap values were calcualted for 200 issues over a background of 400 issues randomly selected from our training dataset.  The larger the value (more red, to the right) the more it contributes to the end prediction.  The size of each dot represents its location along the normal distribution (larger around clusters).  Tokens such as 'attack', 'vulner', and 'secur' appeared to have the largest effect on a positive classification.  On the other hand, tokens such as 'acrobat' or 'reader' contributed more to a negative classification.
 
 ## Serving
 For more detail, check out the deployment documentation and the deployment colab.

@@ -1,4 +1,0 @@
-refactor(core): Update allowed protocols documentation
-
-
-Related to #28529

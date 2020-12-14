@@ -1,6 +1,0 @@
-"Privacy Assistant" experience
-
-
-Not all privacy-enhancing features can be on by default. Some (like #804) require consent. Some (like Private Windows) require a person to actually use them. It's possible that we might have more of these sort of features than it makes sense to discuss in the general onboarding experience, since onboarding stands between someone starting Brave, and actually using it as their browser.
-Instead, our onboarding experience could point towards a "Privacy Assistant" — essentially, another onboarding experience which introduces all our privacy features and switches which can't be defaulted to "on". That would let someone address these settings in their own time, rather than getting in their way.
-When a user activates such an experience, they might be interested in general privacy help beyond the browser. We could learn from tools like securityplanner.org and provide a mixture of Brave-specific and general-purpose advice, like using two-factor authentication and password managers — things that're tough for us to do as a browser.

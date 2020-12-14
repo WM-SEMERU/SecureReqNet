@@ -1,5 +1,0 @@
-Use nyholm/psr17 instead of deprecated Zend Diactoros
-
-
-The DiactorosFactory is deprecated. We should update our docs to use a "pure" PSR-17 factory.
-Related to: sensiolabs/SensioFrameworkExtraBundle#608

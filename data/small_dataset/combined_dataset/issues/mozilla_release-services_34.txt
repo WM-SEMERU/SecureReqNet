@@ -1,8 +1,0 @@
-check continuosly (nightly/weekly) for security vulnerabilities
-
-
-there are multiple options:
-
-setup vulnix
-talk to infosec team if we could hook into their tools
-

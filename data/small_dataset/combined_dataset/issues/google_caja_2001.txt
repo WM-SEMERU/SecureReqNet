@@ -1,7 +1,0 @@
-ses.funcLike fails on bound functions on Chrome
-
-
-ses.funcLike(function() {}, function x() {}.bind(null))
-⇒ SyntaxError: Unexpected identifier
-
-Works on Firefox, fails on Chrome 50.0.2661.102

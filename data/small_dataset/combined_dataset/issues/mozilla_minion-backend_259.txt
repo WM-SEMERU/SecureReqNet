@@ -1,5 +1,0 @@
-Accepting an invitation with an existing email leads to duplicate accounts
-
-
-I sent an invitation to stefan@foo.com but accepted with stefan@bar.com, which was already in Minion. Now there are two accounts with email stefan@bar.com.
-Marking this as critical because this could lead to really odd data corruption.

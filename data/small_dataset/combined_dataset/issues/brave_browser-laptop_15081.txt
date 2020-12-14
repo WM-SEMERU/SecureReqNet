@@ -1,8 +1,0 @@
-Youtube "dark theme" and "Theater mode" reseting to default randomly
-
-
-Hi,
-Since using Brave on macOS, youtube.com doesn't always remember the option to keep "dark mode" as well and "Theater mode" on and reverts to default sometimes after a simple page refresh, or restart, and sometimes remembers the settings even after a restart. note the account stays logged in.
-I have not been able to replicate the issue on Safari.
-Any idea what could be causing this ?
-duckduckgo remembers the dark mode setting (only disabled once over the past month) compared to approximately once a day with youtube.com

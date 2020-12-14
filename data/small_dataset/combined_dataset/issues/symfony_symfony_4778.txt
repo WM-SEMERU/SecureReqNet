@@ -1,5 +1,0 @@
-[2.2] make refreshUser try all providers fixes #4498
-
-
-Make refreshUser try all user providers instead stopping at the first
-UserNotFound exception.

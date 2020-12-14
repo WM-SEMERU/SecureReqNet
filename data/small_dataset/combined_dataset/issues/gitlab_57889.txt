@@ -1,5 +1,0 @@
-We have Container Scanning functionalities that can test review apps.
-
-Now that GitLab codebase has review apps and QA images available, we could consider to implement Container Scanning checks on them. It could be both as part of the pipeline, but it may take a lot of time.
-
-We can create a pipeline schedule that runs Container Scanning checks. We want results will be shown in the Security Dashboard.

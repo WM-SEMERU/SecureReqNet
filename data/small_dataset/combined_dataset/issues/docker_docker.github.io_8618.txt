@@ -1,5 +1,0 @@
-Docker only completion for zsh not described
-
-
-File: compose/completion.md
-For zsh without oh-my-zsh, only a url for docker-compose completion is provided, and not one for docker.

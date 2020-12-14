@@ -1,1 +1,0 @@
-Unfortunately I cannot remove the system ruby version on my gitlab-ce host.  I've tried installing rbenv for the 'git' user (both global and local to gitlab) but the admin interface still reports 1.9.1.  Supporting rbenv would help a lot of people who are in the same boat as me.

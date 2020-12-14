@@ -1,4 +1,0 @@
-No option for "Unlicense" in license options
-
-
-The choices in the asset library do not include the Unlicense which appears to be the best choice for assets that were already in the public domain and then adapted to Godot.

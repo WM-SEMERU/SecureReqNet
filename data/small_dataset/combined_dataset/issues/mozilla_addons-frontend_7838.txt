@@ -1,9 +1,0 @@
-Add info about AMO API to /about page
-
-
-On https://addons.mozilla.org/about, let's add some info about the AMO API.
-Under Get  Involved, let's add:
-
-Want to interact with addons.mozilla.org (AMO) programmatically?  Check out the documentation for the Add-ons Servers documentation for details about the AMO APIs, the APIs used by the Add-ons Manager.
-
-Related note: can we also add a '.' next to 'wiki' at the end of To see more ways you can contribute to the add-on community, please visit our wiki?

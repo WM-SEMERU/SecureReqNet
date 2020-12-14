@@ -1,7 +1,0 @@
-Snap package support
-
-
-I was thinking the install and setup could be improved for Ubuntu and other Linux distros by having a snap package version. If it's not a priority would you mind if I made the snap as a contribution?
-Crafting your first snap
-Build and test snap
-Getting Started snap template

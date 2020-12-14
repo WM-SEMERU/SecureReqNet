@@ -1,6 +1,0 @@
-Support @async for script-inserted scripts
-
-
-Original issue 1855 created by bruant.d on 2013-09-05T14:56:45.000Z:
-This obviously changes the semantics. I haven't looked at the @async attribute, but I fear the same thing happens.
-For @defer and @async, you can look at the HTML5 spec (for the bravest) or look at this page: http://hsivonen.iki.fi/script-execution/

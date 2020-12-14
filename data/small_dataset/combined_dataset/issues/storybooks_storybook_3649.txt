@@ -1,8 +1,0 @@
-XSS possibility in withInfo('')
-
-
-XSS entered in the withInfo() function as text will be rendered as html when clicked on show info of a story.
-'<IFRAME SRC=# onmouseover="alert(123)"></IFRAME>' is possible.
-"storybook/addon-info": "3.2.19",
-"storybook/addon-knobs": "3.2.19",
-"storybook/react": "3.4.5",

@@ -1,5 +1,0 @@
-HTML5 Battery Status API
-
-
-The API does not require user permission to read the battery information, any website or third-party scripts included on them, can use the API. The API also does not require browsers to notify users when the battery information is accessed. That allows website and third-party scripts to access the battery information transparently – without users’ awareness.
-http://techcrunch.com/2015/08/04/battery-attributes-can-be-used-to-track-web-users/

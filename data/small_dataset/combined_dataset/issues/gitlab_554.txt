@@ -1,5 +1,0 @@
-I just noticed that when I edit a markdown file from the main git repository, the editor highlights the markdown syntax: headers, lists, emphasis, etc.
-
-I also use a lot the wiki pages to produce markdown, but in that case, the editor does not provide any language support.
-
-It would be nice to provide also in the wiki page editor support for markdown syntax.

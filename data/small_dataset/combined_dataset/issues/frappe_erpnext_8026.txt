@@ -1,7 +1,0 @@
-Two Factor Authentication
-
-
-Hi ,
-I would like to suggest the addition of an optional Two Factor Authentication feature to ERPNext. Considering the sensitive nature of data in an ERP, I think having this feature will go a long way to assure existing and potential users about the security of their data
-Thanks
-Kind regards,

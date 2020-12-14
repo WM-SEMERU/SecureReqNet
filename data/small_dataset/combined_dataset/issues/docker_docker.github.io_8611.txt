@@ -1,8 +1,0 @@
-Update the "role-based access control" link
-
-
-Proposed changes
-On page "https://docs.docker.com/ee/ucp/user-access/", updated the hyperlink "role-based access control" to point to "https://docs.docker.com/ee/ucp/authorization/" instead of "https://docs.docker.com/ee/access-control", because the old page does not exist anymore.
-The new page seems like the most appropriate spot to find information regarding RBAC.
-Related issues (optional)
-Fixes #8602

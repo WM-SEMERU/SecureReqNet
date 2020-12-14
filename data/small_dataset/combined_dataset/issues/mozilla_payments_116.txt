@@ -1,5 +1,0 @@
-Hide/disable expired cards
-
-
-If a credit card has expired, there's no need to present it as a default payment method and we may want to flag it in the management UI to urge the user to update it.
-Can we do this? We may or may not be able to store actual expiration dates due to PCI. Perhaps there is a braintree hook to be notified of expiration? Otherwise we could maybe do something sneaky like HMAC the date and continuously check if today's date matches the hash :)

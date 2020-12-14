@@ -1,6 +1,0 @@
-Check that direction response contains a route
-
-
-We are checking if the response is null and make the assumption that if the response isn't null we have at least 1 route which isn't accurate. We should add a check that makes sure the list is greater then 0.
-https://github.com/mapbox/mapbox-java/blob/master/libandroid/app/src/main/java/com/mapbox/services/android/testapp/directions/DirectionsV5Activity.java#L121
-cc: @zugaldia

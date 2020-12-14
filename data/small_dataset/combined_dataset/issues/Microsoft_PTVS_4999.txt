@@ -1,5 +1,0 @@
-C++ static analysis warnings
-
-
-Fix warnings reported by prefast tool.
-Internal bug 773848

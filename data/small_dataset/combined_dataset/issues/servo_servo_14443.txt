@@ -1,8 +1,0 @@
-script: Ban `FnBox<()>` and lock down the dangerous generic `no_jsmanaged_fields!` implementations.
-
-
-Closes #14416.
-The basic cause for that UAF was the unsafe use of FnBox<()> in the rooting protocol for the JS engine integration. This patch fixes that bug and removes all generics and existentials from the no-op tracing, as they were all dangerous. There should be no more ways to get UAF from DOM heap rooting without writing custom trace hooks.
-r? @nox
-
-This change is 

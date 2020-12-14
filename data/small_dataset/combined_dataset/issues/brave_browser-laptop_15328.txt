@@ -1,7 +1,0 @@
-Update failure on linux
-
-
-Description
-I receive the following message after updating the system and therefor Brave won't update:
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://brave-browser-apt-release.s3.brave.com bionic InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 0B31DBA06A8A26F9
-W: Failed to fetch https://brave-browser-apt-release.s3.brave.com/dists/bionic/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 0B31DBA06A8A26F9

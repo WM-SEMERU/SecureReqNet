@@ -1,7 +1,0 @@
-pod IP is not a private IPv4 address
-
-
-BUG REPORT
-I0404 19:22:20.653553       1 cluster_manager.go:309] Creating InnoDB cluster E0404 19:22:20.653586       1 cluster_manager.go:135] Error bootstrapping cluster: getting CIDR to whitelist for  GR: pod IP "100.103.192.6" is not a private IPv4 address
-https://whatismyipaddress.com/ip/100.103.192.6
-Please fix it

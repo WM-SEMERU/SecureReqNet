@@ -1,7 +1,0 @@
-Update default template location for PHP engine
-
-
-See into symfony/symfony#30088
-The change will be for twig template but not for php.
-Currently a deprecated is raised.
-EU-FOSSA

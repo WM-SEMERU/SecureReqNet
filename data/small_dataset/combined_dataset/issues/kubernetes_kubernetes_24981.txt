@@ -1,4 +1,0 @@
-Apiserver, there's no option to completly disable insecure access
-
-
-Currently it's not possible to set --insecure-bind-address for the apiserver to a value that completely disables insecure access to the apiserver. The most secure option is to have it listen on localhost, but that means blocking access to localhost if you want to have other software running on the same host.

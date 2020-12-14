@@ -1,9 +1,0 @@
-Establish centralized syslog logging
-
-
-Possibly push syslog logs to ArcSight : https://mana.mozilla.org/wiki/display/SECURITY/ArcSight+Connector+Installation+and+Config+Guide
-Here are existing ArcSight connectors, none in AWS though :
-https://mana.mozilla.org/wiki/display/SECURITY/ArcSight+Inventory
-Here's a related issue mozilla/persona#2131
-And a related bugzilla ticket https://bugzilla.mozilla.org/show_bug.cgi?id=671996
-Not sure how to do this

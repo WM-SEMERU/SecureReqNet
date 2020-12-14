@@ -1,6 +1,0 @@
-Throw exception when origin and destination positions are the same
-
-
-mirror ticket in navigation SDK repo: mapbox/mapbox-navigation-android#40
-If destination and origin are identical, directions API and turf methods might fail (test need to be added to confirm this).
-cc: @zugaldia

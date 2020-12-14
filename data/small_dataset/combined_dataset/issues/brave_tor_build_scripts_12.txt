@@ -1,4 +1,0 @@
-use HKPS keyserver pool
-
-
-follow-up comment from https://github.com/brave/tor_build_scripts/pull/11/files#r191955072

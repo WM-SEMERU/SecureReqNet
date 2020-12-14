@@ -1,5 +1,0 @@
-Improved release process docs
-
-
-Even if we didn't pull over SSH (for example if we're running in CI),
-we need to push the branch with over ssh.

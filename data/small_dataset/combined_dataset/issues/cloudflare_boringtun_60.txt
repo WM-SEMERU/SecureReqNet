@@ -1,4 +1,0 @@
-Fix musl build by letting Rust infer the correct type for SIOCGIFMTU
-
-
-Fixes #47

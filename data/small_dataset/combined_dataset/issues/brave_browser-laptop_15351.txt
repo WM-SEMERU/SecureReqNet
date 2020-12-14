@@ -1,4 +1,0 @@
-Not sure if this is by design, issue with device recognition setting
-
-
-I've tried searching for this issue, haven't found any mention of it. I'm not sure if this was done by design. When I clear my history the device recognition setting resets. It's not a critical issue, but it is very inconvenient. I apologize for the lack of structure, I am new to Github.

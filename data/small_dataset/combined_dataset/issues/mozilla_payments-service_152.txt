@@ -1,4 +1,0 @@
-User can only subscribe with their own pay method (fixes #147)
-
-
-Fixes #147

@@ -1,6 +1,0 @@
-Add a sample that shows Azure AD multi-tenant-ish support
-
-
-Original issue: aspnet/Security#102
-E.g. using virtual schemes and adding tenants dynamically.
-@blowdart can you fill in the details?

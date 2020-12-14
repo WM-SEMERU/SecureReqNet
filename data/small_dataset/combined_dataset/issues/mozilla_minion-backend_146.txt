@@ -1,5 +1,0 @@
-Add user query string to apis to perform owernship/permission checks
-
-
-After discussed with Stefan, the best way to handle #140, #141 and #142 is add a user query string to the apis and perform checks.
-For example, for scans, we should get the user name from the query string, and then query whether user has specific permission in the scan. We can check this by checking whether user is in the group and/or websites with permission.

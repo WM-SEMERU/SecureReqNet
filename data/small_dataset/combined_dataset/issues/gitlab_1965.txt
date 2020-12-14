@@ -1,3 +1,0 @@
-I'm not sure why the gitlab yum repo configs have GPG enabled and there is a GPG pubkey installed for these repos when these packages don't get signed.  If I want to install these updates I have to do so with the --nogpgcheck option which seems silly.
-
-I've seen this a few times now.  When I install this, I'd like to know it's coming from the right place.  Is there a reason why they've not been GPG signed lately?

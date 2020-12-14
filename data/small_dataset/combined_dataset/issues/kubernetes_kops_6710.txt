@@ -1,4 +1,0 @@
-Add Ability to customize CoreDNS
-
-
-We have seen a need to increase the resources for coredns.  Would be nice to be able to specify resource request and limits for coredns.

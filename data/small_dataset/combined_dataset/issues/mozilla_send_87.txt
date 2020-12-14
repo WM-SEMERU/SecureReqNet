@@ -1,5 +1,0 @@
-Remove bit.ly integration
-
-
-There was some concern about sending users to a 3rd party for executable/data files (vs the normal webpages we usually use mzl.la for).
-We could CNAME f.mzl.la to our s3 bucket and use URLs from there.  Whether or not we shorten the URL, the fragments are still long, so it probably doesn't matter much.

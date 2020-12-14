@@ -1,9 +1,0 @@
-JEA role capabilities cannot reference cmdlets in versioned modules
-
-
-
-Note: Ported from bug 11787772
-
-JEA role capability and session configuration files do not support adding cmdlets or functions from versioned modules to VisibleCmdlets or VisibleFunctions. This specifically applies to modules where each version is in a subfolder, e.g. C:\Program Files\WindowsPowerShell\Modules\MyModuleName\1.0.0\MyModuleName.psd1
-Such modules are supported by the PowerShell module importing system, but JEA will not find those modules and, therefore, not make those cmdlets or functions visible in a JEA session.
-The current workaround is to move those modules out of versioned folders into top level module folders.

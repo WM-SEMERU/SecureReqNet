@@ -1,5 +1,0 @@
-Updated footer to automatically set the copyright year
-
-
-The footer should now set the copyright year to the current year. Fixes #172
-PHP snippet from: updateyourfooter.com

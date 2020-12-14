@@ -1,5 +1,0 @@
-Security review of RBAC
-
-
-Before we turn on RBAC in kops, we'd like to know that it is secure.
-Are there any plans to perform an in-depth security-review of the RBAC code?

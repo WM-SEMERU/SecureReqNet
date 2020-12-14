@@ -1,5 +1,0 @@
-Save Commitment after CheckMutation
-
-
-In UpdateEntry, we're currently saving the commitment after we verify the request validity but before we verify the mutation. We might want to save it after both verification operations pass.
-@gdbelvin what do you think?

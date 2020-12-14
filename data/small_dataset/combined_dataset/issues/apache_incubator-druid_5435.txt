@@ -1,7 +1,0 @@
-Skip normal authentication for JDBC requests in Router
-
-
-Authentication for JDBC requests should use credentials stored in the JDBC connection context instead of the HTTP headers.
-On the broker, DruidAvaticaHandler handles JDBC requests separately from the normal authentication checking filters.
-On the router, JDBC requests currently go through the normal authentication checking filter which is extraneous/incorrect.
-This PR sets the Avatica path as "unsecured" on the Router, deferring the authentication check to the broker where authentication will occur using the JDBC connection context.

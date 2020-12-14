@@ -1,6 +1,0 @@
-AutoValue
-
-
-Looking into the AutoValue suggestion in #450, I successfully converted two model classes to see how this would work. There are going to be significant API breaking changes if we want to fully implement this. I also didn't mess around with adding Builders for each class since you can call create() passing in all the params and receive a built object.
-Using AutoValues also enforces classes to be immutable which makes sense for these models, you can currently call setRoute at any time after constructed.
-Would love to hear your thoughts on this @zugaldia

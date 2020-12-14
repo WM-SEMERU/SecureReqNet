@@ -1,6 +1,0 @@
-Google OAuth Security Update
-
-
-
-The Google OAuth process now sets a CSRF token.
-

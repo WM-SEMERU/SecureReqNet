@@ -1,6 +1,0 @@
-Kubernetes is ''always'' starting in Docker Desktop for Windows 18.09.2 stable
-
-
-File: docker-for-windows/index.md
-My Kubernetes is ''always'' starting in Docker Desktop for Windows 18.09.2 stable. What's wrong with my Docker?  In one page, I found that Kubernetes is only available in Edge channel.
-But in another page, the document says ''From Docker Desktop for Windows 18.02 CE Edge and 18.06 CE Stable a standalone Kubernetes server is included that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes''.

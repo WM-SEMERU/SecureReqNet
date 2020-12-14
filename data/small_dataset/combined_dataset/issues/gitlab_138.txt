@@ -1,4 +1,0 @@
-when i click GitLab.org / GitLab Community Edition
-
-
-https://gitlab.com/groups/gitlab-org

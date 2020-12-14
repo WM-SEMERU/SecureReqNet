@@ -1,4 +1,0 @@
-add kerberos for druid
-
-
-add kerberos configure for Druid

@@ -1,4 +1,0 @@
-[hackerone] brave:// issues
-
-
-https://hackerone.com/bugs?report_id=464458&subject=brave

@@ -1,4 +1,0 @@
-hex2ab should validate that Buffer input is a string
-
-
-Similar to brave/vault#42, hex2ab can be potentially exploited for remote memory disclosure of the client. It should validate that the input is a string.

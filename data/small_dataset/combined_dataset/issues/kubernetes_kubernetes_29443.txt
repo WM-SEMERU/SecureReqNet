@@ -1,6 +1,0 @@
-WIP: advanced audit proposal
-
-
-WORK-IN-PROGRESS
-
-This change is 

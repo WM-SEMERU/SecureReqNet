@@ -1,5 +1,0 @@
-Croniter 0.3.26 does not exist
-
-
-Hello @codingCoffee
-Right now, 'init'ing a brand new bench from v10.x.x fails because croniter 0.3.26 does not exist. It was introduced in this commit. Thsi commit fixed it in v11+ but it is yet to be backported to v10.

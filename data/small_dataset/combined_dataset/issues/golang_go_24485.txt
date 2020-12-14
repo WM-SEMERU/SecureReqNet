@@ -1,5 +1,0 @@
-x/crypto: add chacha20, xchacha20
-
-
-Package chacha20 currently lives at x/crypto/internal/chacha20 which is not importable by users outside of x/crypto. Please move it to x/crypto/chacha20. Additionally, please make the API similar to x/crypto/salsa20 (along with its subpackage x/crypto/salsa20/salsa) as the two are extremely similar.
-Background: x/crypto/internal/chacha20 was previously located at x/crypto/chacha20poly1305/internal/chacha20. It was moved up one level to be imported by x/crypto/ssh.

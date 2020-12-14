@@ -1,0 +1,5 @@
+outs:
+- md5: 7acac8ed731cd13b134b9332638c9cc1.dir
+  size: 5743388
+  nfiles: 1
+  path: wiki_dataset

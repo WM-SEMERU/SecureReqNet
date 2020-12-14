@@ -1,7 +1,0 @@
-The bundled version of highlight.js used by GitLab supports a fairly small subset of the available languages, and it'd be nice if GitLab supported more of the languages supported by highlight.js.
-
-The information on the [highlight.js download page](http://highlightjs.org/download/) indicates that the pre-built version linked there only includes "common" languages, which seems to be the one used by GitLab. I use Clojure in several projects, and it isn't included. Neither is Erlang, Haskell, Scala, Lua, or OCaml, which are all fairly popular languages.
-
-[cdnjs](https://cdnjs.cloudflare.com/) contains a fully-featured, minified copy of [highlight.js](http://cdnjs.com/libraries/highlight.js/): http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js
-
-The downside is that it's quite a bit bigger than the currently used version.

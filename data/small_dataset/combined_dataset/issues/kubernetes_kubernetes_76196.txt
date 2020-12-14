@@ -1,5 +1,0 @@
-Revert "delivery event non blocking firstly"
-
-
-Reverts #75547
-Reverting to see if this will help with #76183 - it seems to be the only suspicious PR and we have too many regressions in flight now.

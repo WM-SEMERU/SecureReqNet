@@ -1,6 +1,0 @@
-Proposal: crypto/tls: Support RFC 6961 Multiple Certificate Status Request Extension
-
-
-Go's TLS library supports RFC 6066's status_request TLS extension. The status_request extension allows servers to send status information to the client directly, rather than the client having to contact the certificate's OCSP responder separately.
-A new extension, status_request_v2 has been defined in RFC 6961 that allows servers to send multiple OCSP responses so that the server can send status information for intermediate CAs as well.
-I say we add support for RFC 6961's status_request_v2 extension.

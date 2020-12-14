@@ -1,6 +1,0 @@
-test-domado-dom-guest fails on Firefox 44.0.2
-
-
-New in Firefox 44.0.2. Did not fail in 43.0.
-Cause as far as I've traced is "TypeError: can't convert symbol to string" when stringifying tame document.body.childNodes for sampleObjects.
-There's some funny behavior involved; in the debugger, record.sample.toString() returns a value but '' + record.sample does not.

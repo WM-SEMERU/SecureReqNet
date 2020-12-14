@@ -1,7 +1,0 @@
-Add heka client to persona stack
-
-
-Pentaho is gone and kpiggybank and kpi-dashboard were special snowflakes that were never hosted properly. The new plan: use heka to send metrics/logging data to the standard infrastructure (shared heka/es/kibana stack).
-Here's the bug for modifying persona's logging so that it can be consumed by heka: mozilla/persona#4171. The plan is to do this coding in a sprint when @shane-tomlinson is in SF in late Aug.
-This bug is for setting up heka & configuring it to watch stderr & send to shared stack.
-@relud, @gene1wood, @jrgm, @whd : let me know if this raises any flags.

@@ -1,9 +1,0 @@
-Don't use Math.random to generate passwords
-
-
-Math.random() is unsafe for cryptographic purposes, it should definitely not be used to generate passwords!  It seems that the library function in your kdbx library combines it with some Salsa20 but that's not enough.
-From MDN:
-
-Note: Math.random() does not provide cryptographically secure random numbers. Do not use them for anything related to security. Use the Web Crypto API instead, and more precisely the window.crypto.getRandomValues() method.
-
-You should fix this immediately.

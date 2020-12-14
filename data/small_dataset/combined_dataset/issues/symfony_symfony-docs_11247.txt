@@ -1,4 +1,0 @@
-Documented the new Unique constraint
-
-
-Documents symfony/symfony#26555

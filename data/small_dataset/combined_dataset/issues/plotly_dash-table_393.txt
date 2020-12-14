@@ -1,4 +1,0 @@
-[Feature Request] Text link to html A in Cells
-
-
-Is it possibile to transform text url in cells as html <a/> tags?

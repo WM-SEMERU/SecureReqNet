@@ -1,4 +1,0 @@
-added requirements for {_format}
-
-
-I added requirements for the {_format} parameter: in this example _format should be xml or html

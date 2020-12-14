@@ -1,6 +1,0 @@
-Remove secrets from Docker Images
-
-
-Private keys should not be part of the docker images.
-This was an old hack that predated docker's secrets feature.
-TODO / Help wanted: add a kubernetes configmap that does the same thing.

@@ -1,8 +1,0 @@
-Hello!
-
-1. Create repository in gitlab 7.1.1 with name "project-1";
-2. Push to "project-1";
-3. Rename repository "project-1" to "project-2" (in Dangerous settings);
-4. Archive it;
-5. Create new repo with name "project-1" using a "Import existing repository?"
-6. It's not work. He doesn't want to import a repository =(

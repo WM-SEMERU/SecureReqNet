@@ -1,7 +1,0 @@
-fix sidebar for install
-
-
-Before:
-
-After:
-

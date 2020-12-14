@@ -1,4 +1,0 @@
-fix: Show standalone credit note in Accounts receivable report
-
-
-https://frappe.erpnext.com/desk#Form/Issue/WN-SUP41410

@@ -1,6 +1,0 @@
-Document changes in the deprecation error handler
-
-
-See symfony/symfony#29211
-See symfony/symfony#28048
-Closes #10701

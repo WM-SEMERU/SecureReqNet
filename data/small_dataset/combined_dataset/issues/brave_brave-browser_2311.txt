@@ -1,6 +1,0 @@
-Consider disabling FTP
-
-
-Relating muon issue brave/browser-laptop#14712
-Chrome want to disable it as well as per report.
-@diracdeltas @tomlowenthal @jumde does the upstream changes good enough or do we need to have the same fix from muon onto bc?

@@ -1,7 +1,0 @@
-Confirm caja.def statically checks type of 1st argument, not second
-
-
-Original issue 332 created by ihab.awad on 2008-05-30T18:51:14.000Z:
-Pls confirm that, given 1st class ctors, caja.def(...) now no longer needs
-to check the type (function, declared function, ...) of either of its
-function args (representing the subclass and superclass).

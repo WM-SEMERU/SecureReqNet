@@ -1,4 +1,0 @@
-Create IAM User
-
-
-Request for a new good feature to have kops auto create a user for a cluster.

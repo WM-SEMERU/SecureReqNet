@@ -1,9 +1,0 @@
-feat(security): fail more detectably when using a safe value in interpolation
-
-
-If a user ends up with a safe value in an interpolation context, that's probably
-a bug. Returning "SafeValue must use [property]= binding" will make it easier
-to detect and correct the situation. Detecting the situation and throwing an
-error for it could cause performance issues, so we're not doing this at this
-point (but might revisit later).
-Part of #8511 and #9253.

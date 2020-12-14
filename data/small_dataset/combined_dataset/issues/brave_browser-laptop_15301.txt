@@ -1,4 +1,0 @@
-Cross Compiling
-
-
-Can anyone guide me through the process of cross-compiling for Windows on Deb based Linux?

@@ -1,4 +1,0 @@
-[Forward-port 3.2] Add "search events" web API method.
-
-
-Forward-port of #2632 to 3.2.

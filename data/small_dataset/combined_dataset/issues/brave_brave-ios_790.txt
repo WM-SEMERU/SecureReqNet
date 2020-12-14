@@ -1,4 +1,0 @@
-[datatheorem] #009516 - GCDWebServer on 0.0.0.0
-
-
-https://www.securetheorem.com/app/1/issues/009516

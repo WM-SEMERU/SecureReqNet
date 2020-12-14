@@ -1,7 +1,0 @@
-Attach an existing managed policy to node.<cluster> IAM role.
-
-
-It would be ideal to add an existing managed policy to instance groups.
-With that said would additionalPolicies be better as a managed policy?
-Also relates to #1644
-@yissachar @chrislovecnm

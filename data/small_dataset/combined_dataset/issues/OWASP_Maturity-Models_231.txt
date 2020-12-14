@@ -1,6 +1,0 @@
-Use https for git submodules
-
-
-
-No description provided.
-

@@ -1,7 +1,0 @@
-Support for coffee file to create dynamic data sets allow RCE
-
-
-Related to #24, this is the feature that is currently used to create random data sets (for example on http://localhost:3000/view/team-random )
-This means that if an attacker is able to edit an data-set (for example on the GitHub repo), he will have RCE on the server (when the team data is loaded)
-Note that at the moment only json files are supported for remote editing (see #25)
-Accepting risk since this is by design (and a feature of the current app)

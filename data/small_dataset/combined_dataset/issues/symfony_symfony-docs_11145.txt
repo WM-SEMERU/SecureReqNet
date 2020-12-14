@@ -1,5 +1,0 @@
-[4.3] LoggingMiddleware is deprecated
-
-
-See symfony/symfony#30539
-It's small, but we mention this in the messenger component, and I think maybe also on the main messenger page, when we're talking about how to add your custom middleware.

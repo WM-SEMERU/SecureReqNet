@@ -1,4 +1,0 @@
-Remove extra newline
-
-
-Fixes #8352.

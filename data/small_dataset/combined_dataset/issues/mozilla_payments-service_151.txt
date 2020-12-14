@@ -1,5 +1,0 @@
-Prevent duplicate buyer email addresses from recurring donations
-
-
-As of #150 we will accept recurring donations with only an email, no authentication. This implementation will not prevent someone from re-using an email that might already be attached to a Firefox Account buyer. This is because the email field on the buyer model is encrypted so we can't do a lookup on email. What do we do? Maybe it's ok? This bug is to figure out the best way to fix it.
-Supports mozilla/payments#117

@@ -1,4 +1,0 @@
-Upgrading mbdetls library to 2.7.6
-
-
-Upgrading the mbedtls library available in 3rdparty folder from 2.7.5 to 2.7.6

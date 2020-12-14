@@ -1,1 +1,0 @@
-I'd like to be able to update the labels for an existing issue, but either there's no way to do it, or I'm just not seeing it.

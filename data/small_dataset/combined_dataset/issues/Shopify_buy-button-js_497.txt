@@ -1,6 +1,0 @@
-Cross-site scripting in Buy Button
-
-
-
-
-

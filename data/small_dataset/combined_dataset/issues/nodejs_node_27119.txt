@@ -1,4 +1,0 @@
-A new label "review wanted"?
-
-
-I think it would be useful to have a "review wanted" label for PRs that are still looking for reviews.  "author ready" is not an exact complement to this, since it can also be applied when there is only one review, but sometimes a PR may want more eyeballs before it lands. This may also be helpful for PRs that have gone in and out of progress due to technical issues or PRs that have been stalled for a while if they want some fresh reviews.

@@ -1,8 +1,0 @@
-Blazor component should start rendering only after OnInitAsync is completed
-
-
-Describe the bug
-Currently, when we override component's OnInitAsync, blazor will render components immediately after sync part of [OnInitAsync] completes, and then wait for its async part completion and rerender component.
-While the name [OnInitAsync] means that the component is still initializing and not ready, then it should also not be rendered.
-Expected behavior
-Component should wait for [OnInitAsync] to complete and then start its first rendering. If we put async code in this lifecyle, it would means that component needs some more data to be ready.

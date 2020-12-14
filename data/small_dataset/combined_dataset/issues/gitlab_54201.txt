@@ -1,5 +1,0 @@
-'Update rack to 2.0.6 to resolve a security vulnerability CVE-2018-16471.
-
-## ref.
-
-- https://groups.google.com/forum/#!topic/rubyonrails-security/GKsAFT924Ag

@@ -1,6 +1,0 @@
-This is a meta issue to discuss possible regressions in this monthly release and any patch versions.
-Please do not raise issues directly in this issue but link to issues that might warrant a patch release.
-The decision to create a patch release or not is with the release manager who is assigned to this issue.
-The release manager will comment here about the plans for patch releases.
-
-/cc @dblessing @jeroenvanbaarsen

@@ -1,7 +1,0 @@
-nginx container vulnerable to CVE's
-
-
-The container gcr.io/google_containers/nginx has not been updated for a long time and is vulnerable to multiple SSL CVE's.
-# docker images|grep "gcr.io/google_containers/nginx "
-gcr.io/google_containers/nginx             latest              9f4cd86c1aec        11 months ago       425.6 MB
-

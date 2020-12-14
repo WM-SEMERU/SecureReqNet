@@ -1,7 +1,0 @@
-add SECURITY_CONTACTS to repo template
-
-
-This adds a list of contacts for the repo that the Product Security Team can
-reach out to for triaging and handling of incoming issues, please try to keep
-this list small as the contact can then further decide who "needs to know" to
-complete the fix.

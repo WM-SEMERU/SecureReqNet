@@ -1,4 +1,0 @@
-[security] Missing foreign key relation in acl_object_identities to acl_classes
-
-
-The acl_object_identities table has a field named class_id, which points to an entry in the acl_classes table, however, there seems to be a foreign key relation missing here. The same class_id field can also be found in the acl_entries table, where a foreign key relation is set.

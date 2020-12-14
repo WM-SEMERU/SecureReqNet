@@ -1,7 +1,0 @@
-charset attribute is whitelisted
-
-
-Original issue 585 created by tyler.close on 2008-06-13T00:55:55.000Z:
-The charset attribute is whitelisted and is valid for the A element. Only
-bad things can come of this. I don't know if browsers actually use this
-attribute, but we shouldn't give 'em the opportunity.

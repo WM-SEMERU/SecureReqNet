@@ -1,7 +1,0 @@
-ci: restrict CircleCI access to angular/angular
-
-
-Per CircleCI support, we could restrict the write access CircleCI has to our repo via OAuth App Access Restrictions.
-See https://github.com/orgs/angular/policies/applications/68021
-We currently don't have this option enabled on our repo, but we should turn it on. This will unfortunately mean that we'll need to re-authorize all the other integrations we have for all of our repos, so it will take some coordination work.
-// @jelbourn has been interested in resolving this as well.

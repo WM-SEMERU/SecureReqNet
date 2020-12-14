@@ -1,5 +1,0 @@
-src: use sizeof(var) instead of sizeof(type)
-
-
-Change memset(&s, 0, sizeof(type)) to memset(&s, 0, sizeof(s)).
-The former is dangerous when the type of s changes.

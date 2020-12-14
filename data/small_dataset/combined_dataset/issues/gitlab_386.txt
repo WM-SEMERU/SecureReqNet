@@ -1,9 +1,0 @@
-Since the update to Gitlab 7.0.0 the edit issues view is broken in two places.
-
-The head is not displayed correctly anymore:
-
-![Screen Shot 2014-06-28 at 16.59.00](https://gitlab.com/uploads/gitlab-org/gitlab-ce/fb565f0100/Screen_Shot_2014-06-28_at_16.59.00.png)
-
-And the comment form is broken as well, the preview does not work neither:
-
-![Screen Shot 2014-06-28 at 16.59.27](https://gitlab.com/uploads/gitlab-org/gitlab-ce/fb5500f464/Screen_Shot_2014-06-28_at_16.59.27.png)

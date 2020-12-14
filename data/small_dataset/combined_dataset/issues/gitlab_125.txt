@@ -1,2 +1,0 @@
-At the moment it only works vice-versa.
-You mention a merge request in an issue and the merge request gets a "this request has been mentioned in issue ..." message.

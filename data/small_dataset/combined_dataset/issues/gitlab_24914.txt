@@ -1,9 +1,0 @@
-### Description
-
-If we want to  increasing security policy, there is only way to  configure password length limit and add to factor authentication. But some users never change their password which is setting on first log in Gitlab. That kind of users are very  vulnerable to security.
-
-### Proposal
-
-If we can configure password expiration date, we can enforce users to change their Gitlab password regularly. That means we can increase our Gitlab security policy.
-
-### Links / references

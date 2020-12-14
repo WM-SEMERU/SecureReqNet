@@ -1,5 +1,0 @@
-Logout Page - Heading should not be "Not Permitted"
-
-
-After logout, user this redirected to page with heading "Not Permitted". This has confused user if they were logged out due to permission issue. Also, it's not the best message to leave a user with.
-

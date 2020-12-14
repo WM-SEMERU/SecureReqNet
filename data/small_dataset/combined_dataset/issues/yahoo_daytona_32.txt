@@ -1,4 +1,0 @@
-More explicit installation instructions would be helpful
-
-
-While I appreciate the do-everything scripts that are provided, they are rarely appropriate except for a bare machine that is going to be provisioned purely for daytona.  It would be extremely helpful to have the necessary daytona-specific install/config steps listed, with prereqs (but no need for prereq install instructions).  For example, where to configure the db name, set up the default schema; what directories should be exposed via php, where the config is for the php files, etc.

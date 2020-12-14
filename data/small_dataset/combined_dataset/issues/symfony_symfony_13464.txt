@@ -1,4 +1,0 @@
-CSRF Protection without starting session
-
-
-It would be nice add cookies csrf token storage. Use case: we are having form which available for anonymous users (and bots like googlebot). Session starts on each time when this page open. And too much files was generated with session data.

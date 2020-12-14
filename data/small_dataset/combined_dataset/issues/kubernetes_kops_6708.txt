@@ -1,5 +1,0 @@
-Addon for Citrix Ingress
-
-
-Addon for Citrix Ingress Controller
-Support for Citrix Ingress Controller to be deployed as an Ingress using KOPS addon.

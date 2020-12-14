@@ -1,9 +1,0 @@
-I'm not 100% sure, but as far as I can tell this 'New Issue' form in GitLab CE has no 'Preview' option.
-
-Especially when writing up long issue reports it would be really nice to be able to quickly preview the entered markdown.
-
-For example, github already has this functionality in its 'New Issue' form, and I use it regularly:
-
-![screenshot_2014-08-07_19.27.01](https://gitlab.com/uploads/gitlab-org/gitlab-ce/53ce79f6ad/screenshot_2014-08-07_19.27.01.png)
-
-GitLab already has Markdown previews for comments; Why not the 'New Issue' form?

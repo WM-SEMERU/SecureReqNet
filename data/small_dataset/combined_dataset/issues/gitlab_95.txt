@@ -1,9 +1,0 @@
-constructor for Notes class in app/assets/javascripts/notes.js.coffee makes @notes_url as the following:
-  constructor: (notes_url, note_ids) ->
-    @notes_url = notes_url
-    @notes_url = gon.relative_url_root + @notes_url if gon.relative_url_root?
-
-However, it is called with a argument of notes_url "with" relative_url_root in app/views/projects/notes/_notes_with_form.html.haml as the following:
- new Notes("#{project_notes_path(target_id: @noteable.id, target_type: @noteable.class.name.underscore)}", #{@notes.map(&:id).to_json})
-
-Consequently, relative_url_root is duplicated in the @notes_url.

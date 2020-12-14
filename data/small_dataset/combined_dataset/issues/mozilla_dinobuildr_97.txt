@@ -1,4 +1,0 @@
-Feature: Change default screensaver to be less personally identifiable
-
-
-This is an optional feature that I'm logging as a discussion point. Currently, the screensaver displays the username of the logged in user that dinobuildr was run on (as well as a portion of the serial number). While no mention of the company associated with the account is visible, it may make sense to not display a form of the user's name on a screen that might be visible in a public place.

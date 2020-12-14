@@ -1,5 +1,0 @@
-Echoserver:1.4 triggers XSS warnings
-
-
-The ingress tests use an echoserver version that echoes URLs directly, so requesting /<script>alert('oops')</script> will put a script tag in the output. The output is Content-Type text/plain, but some browsers (IE) perform content-sniffing that may cause the script to execute.
-This means test runs can get flagged by automated XSS scanners, despite an XSS against echoserver being useless.

@@ -1,4 +1,0 @@
-[hackerone] #439825 - Reference count leak
-
-
-https://hackerone.com/bugs?report_id=439825

@@ -1,3 +1,0 @@
-The manual installation guide assume you start from a blank system, asking to install nginx.
-
-But the default install, at least on ubuntu 13.10, have an enabled "default" site and gitlab doesn't show up until this default site is removed from the site-enabled directory. 

@@ -1,6 +1,0 @@
-Enable Control Flow Guard on Windows
-
-
-
-Operating system: Windows
-

@@ -1,4 +1,0 @@
-Move `apt update` step before first `apt install`
-
-
-Found this when testing.

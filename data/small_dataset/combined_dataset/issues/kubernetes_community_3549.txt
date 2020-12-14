@@ -1,6 +1,0 @@
-Add two new subprojects to SIG-AWS
-
-
-Add two new subprojects to sigs.yaml
-Modify cochair company details
-Run make generate locally to update docs

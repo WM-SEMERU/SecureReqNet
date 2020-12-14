@@ -1,4 +1,0 @@
-establish internal ntp yum and git
-
-
-and block instances ability to initiate connections to the internet through anything other than the squid proxies

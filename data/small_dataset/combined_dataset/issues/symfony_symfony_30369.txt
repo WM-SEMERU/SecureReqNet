@@ -1,4 +1,0 @@
-Disable security for routes using annotation
-
-
-I have some urls in my API that doesnt need to be secure but they are under a secure firewall because of the patern, so instead of having to add each route to the security file and use security: false, I think it will be helpfull if I can just use an annotation inside my controller in order to disable the security for the route like this : @Security(enable="false").

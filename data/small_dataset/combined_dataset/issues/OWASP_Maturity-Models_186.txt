@@ -1,6 +1,0 @@
-Remove coffee-script support for team data
-
-
-This was a good feature in the beginning, but with the recent ability to create (#87), rename (#161) and delete (#130) teams; and the addition to metadata fields (#148), this feature is not really needed any more
-
-This is also the root cause of the most dangerous security issue that we current have (#69 - RCE via coffeeScript team file)

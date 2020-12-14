@@ -1,5 +1,0 @@
-DropLab's templating is currently vuln to XSS. Luckily the places we're using it are likely to have their responses scrubbed, but we should make sure we fix the templating.
-
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/app/assets/javascripts/droplab/drop_down.js#L95-104
-
-Now droplab is part of gitlab, we can just use underscore templating for this.

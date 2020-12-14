@@ -1,4 +1,0 @@
-There is no Authentication and Authorization
-
-
-all data is exposed to everybody

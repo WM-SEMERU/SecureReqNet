@@ -1,6 +1,0 @@
-Use random_bytes() in Symfony
-
-
-As of PHP 7.0, random_bytes "generates cryptographically secure pseudo-random bytes". We are doing something similar in Symfony\Core\Component\Security\Util\SecureRandom::nextBytes() as we should probably use the build-in function for PHP7.
-Also, @paragonie-scott maintains paragonie/random_compat, a compat lib for PHP 5.x, which we can use for non-PHP7 installations.
-ping @symfony/deciders

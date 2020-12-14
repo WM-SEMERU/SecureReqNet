@@ -1,6 +1,0 @@
-Automated cherry pick of #76109: Removed cleanup for non-current kube-proxy modes in
-
-
-Cherry pick of #76109 on release-1.14.
-KEP: https://github.com/kubernetes/enhancements/blob/master/keps/sig-network/20190324-remove-kube-proxy-autocleanup.md
-#76109: Removed cleanup for non-current kube-proxy modes in

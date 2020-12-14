@@ -1,6 +1,0 @@
-THRIFT-3060: clear the offline queue when written
-
-
-This PR addresses an issue in the NodeJS module where data would be sent multiple times when the socket reconnects multiple times because the offline_queue would never be emptied.
-This fix clears the offline_queue when the socket reconnects and the queued data is written.
-Fixes THRIFT-3060.

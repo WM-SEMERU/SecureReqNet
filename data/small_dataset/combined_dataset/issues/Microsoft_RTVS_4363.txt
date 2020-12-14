@@ -1,5 +1,0 @@
-Publish Stored Procedure from RTVS
-
-
-When i try to publish stored procedure from RTVS i got the error below.
-

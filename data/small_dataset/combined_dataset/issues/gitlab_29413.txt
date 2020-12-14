@@ -1,3 +1,0 @@
-We received a [HackerOne report](https://hackerone.com/reports/213114) that external links contained in AsciiDoc files are assigned `target=_blank` but are not also receiving the `rel: noopener noreferrer` tags to prevent tabnabbing. It looks like this will also be true of RDoc, textile, and other markup files.
-
-We should only have to edit the `lib/gitlab/asciidoc.rb` and `lib/gitlab/other_markup.rb` files to add `ExternalLinkFilter` to the pipeline that employs `SanitizationFilter` already.

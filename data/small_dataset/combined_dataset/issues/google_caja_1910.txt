@@ -1,5 +1,0 @@
-Need documentation for setting up the proxy server
-
-
-Original issue 1912 created by metaweta on 2014-04-30T16:32:33.000Z:
-Even client-side Caja needs a server to proxy scripts and style tags.  There's no information on the developer page about how to set up such a proxy.

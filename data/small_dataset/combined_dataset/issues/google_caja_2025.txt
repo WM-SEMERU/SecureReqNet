@@ -1,5 +1,0 @@
-Allow src attribute for source element
-
-
-Q: Should the mime types be */* instead?
-Refs #1860

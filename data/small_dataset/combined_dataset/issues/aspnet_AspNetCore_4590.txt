@@ -1,4 +1,0 @@
-Move the AuthSamples to aspnet/samples
-
-
-The directory src/AuthSamples/ contains samples that should be in the https://github.com/aspnet/samples repository

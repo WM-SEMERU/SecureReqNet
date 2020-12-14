@@ -1,4 +1,0 @@
-[docs] Reference Architecture Update
-
-
-Updating network connectivity section based on feedback from Pavani.

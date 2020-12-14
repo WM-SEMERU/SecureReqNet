@@ -1,5 +1,0 @@
-Hey!
-I can't see any graphs on Admin->Background jobs page after upgrade to 7.0.0rc1 version?
-sidekiq is started ok, one process i running...
-Could you please help me with it?
-Thanks.

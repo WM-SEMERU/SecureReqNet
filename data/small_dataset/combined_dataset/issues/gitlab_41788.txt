@@ -1,7 +1,0 @@
-'In addition to logging commits, notes, etc. as activities attached to one's profile.  I think it would be useful to log activities for important changes to settings, such as:
-
-- Added `John Doe` as a Master for project `Foo` (with expiration 10/12/2018)
-- Created tag `~test` in group `Bar`
-- Protected branch `my-important-branch` in project `Foo`
-
-In response to actions within the settings of a project.  This might be useful to reference if anyone ever need to determine when and by whom a tag was created or a branch was protected.  It may also be useful in a security audit if one needs to find out exactly how somebody ended up gaining their role/permissions within a group or project.

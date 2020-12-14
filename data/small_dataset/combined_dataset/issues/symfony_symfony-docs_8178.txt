@@ -1,5 +1,0 @@
-[Security] remove support for defining voters that don't implement VoterInterface
-
-
-Support for defining voters that don't implement the VoterInterface has been removed.
-See symfony/symfony#23324.

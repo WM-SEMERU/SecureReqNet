@@ -1,4 +1,0 @@
-Issue 292: Updating js-yaml to fix audit errors
-
-
-fix #292

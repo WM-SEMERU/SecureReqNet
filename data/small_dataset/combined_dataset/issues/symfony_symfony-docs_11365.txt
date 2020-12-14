@@ -1,4 +1,0 @@
-[Cache] Show how to configure lifetime for app.cache
-
-
-This will fix #10988

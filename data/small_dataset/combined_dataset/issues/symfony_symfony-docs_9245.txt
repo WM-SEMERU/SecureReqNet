@@ -1,4 +1,0 @@
-Added a note about the dangers of dumping $_SERVER and $_ENV
-
-
-This fixes #9237.

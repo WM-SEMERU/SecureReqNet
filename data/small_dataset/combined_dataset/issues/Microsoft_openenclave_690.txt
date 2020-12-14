@@ -1,4 +1,0 @@
-Fixed integer overflow bugs in dynamic memory calls.
-
-
-This covers the SDL work for integer overflows for dynamic memory allocation. Note that there are overflow bugs that will need to be fixed later that aren't directly related to dynamic memory like bounds checking, etc.

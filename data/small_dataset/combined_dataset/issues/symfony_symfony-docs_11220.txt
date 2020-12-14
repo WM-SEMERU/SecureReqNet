@@ -1,4 +1,0 @@
-Updated the main article about env vars
-
-
-Some parts of this article felt legacy, even its title. Let's modernize it a bit.

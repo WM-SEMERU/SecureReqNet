@@ -1,4 +1,0 @@
-TLS CA Certs
-
-
-I've added the ability to present the CA cert with the server certificates, this allow for greater trust between the server and client.

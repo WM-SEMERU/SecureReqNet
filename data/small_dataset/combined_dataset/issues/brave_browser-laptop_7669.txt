@@ -1,7 +1,0 @@
-Show Certificate detail on padlock and devtools on linux
-
-
-Follow-up of
-#7319
-and
-brave/muon#162

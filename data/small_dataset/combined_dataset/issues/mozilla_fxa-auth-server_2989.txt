@@ -1,5 +1,0 @@
-refactor(config): cache repetitive calls to conf.get
-
-
-This is just a tiny little improvement I noticed we could make while reviewing #2986. Instead of calling conf.get('contentServer.url') inline 12 times inside these template literals, it reads a bit nicer if we assign the result to a variable name instead.
-@mozilla/fxa-devs r?

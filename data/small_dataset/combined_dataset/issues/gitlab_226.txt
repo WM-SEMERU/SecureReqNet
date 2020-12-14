@@ -1,1 +1,0 @@
-We just had an admin accidentally push to a branch that is protected and they are listed as a developer in.  If they are not explicitly listed as an owner/master, an admin should not be able to push to a protected branch. If they need to, an administrator could easily add themselves to any project. This prevents accidental commits to locked branches.

@@ -1,7 +1,0 @@
-Add API function/reducer code/saga code for unsubscribing a user from a notification
-
-
-Supports #7656
-
-API endpoint is available here: https://addons-server.readthedocs.io/en/latest/topics/api/accounts.html#post--api-v4-accounts-unsubscribe-
-Once #7840 lands, we can implement the logic to actually perform the unsubscribe action when the page loads.

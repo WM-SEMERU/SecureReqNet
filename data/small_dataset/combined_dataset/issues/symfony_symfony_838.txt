@@ -1,8 +1,0 @@
-[2.1] Refactor redirection logic after successful authentication
-
-
-There are several problems with the current way:
-
-default logic is hard-coded in AbstractAuthenticationListener (can not be modified without copy/paste)
-there are problems with XHR/automatic background requests that might change the redirect path (this is hard to customize at the moment)
-

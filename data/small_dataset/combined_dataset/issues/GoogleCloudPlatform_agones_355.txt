@@ -1,5 +1,0 @@
-[Vuln] Update to Alpine 3.8.1
-
-
-A security vulnerability was just released for Alpine's apk system. We should update our Docker images that use Alpine for the next release.
-https://alpinelinux.org/posts/Alpine-3.8.1-released.html

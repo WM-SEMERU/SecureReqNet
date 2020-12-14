@@ -1,8 +1,0 @@
-A logical operator does not match the spec (cors-preflight-fetch)
-
-
-It seems like a logical operator does not match the spec.
-https://github.com/servo/servo/blob/master/components/script/cors.rs#L238
-https://fetch.spec.whatwg.org/#cors-preflight-fetch
-Please review the Substep 4,
-thanks!

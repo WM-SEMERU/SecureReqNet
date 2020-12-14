@@ -1,8 +1,0 @@
-Document Monolog log formats
-
-
-I've been asked to contribute to this here symfony/recipes#552 (comment) , I think it could be interesting to set this issue as an easy-pick.
-The goal is to retrieve the log formats:
-https://github.com/symfony/symfony/blob/18cd3420a44abbeacf96758daeb3ac7b8cf87f10/src/Symfony/Bridge/Monolog/Formatter/ConsoleFormatter.php#L50-L54
-And add a small block in the "Channel handlers" documentation file explaining the possible ones.
-WDYT?

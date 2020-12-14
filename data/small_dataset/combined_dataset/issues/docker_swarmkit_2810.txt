@@ -1,5 +1,0 @@
-Avoid logging bogus error
-
-
-When starting everything up, we try creating a cluster object. If this fails, we log an error, unless it fails because the cluster object already exists. However, we're checking for store.ErrExist, which is based on an ID conflict, when the real error returned in this case would be store.ErrNameConflict, because we check the name first.
-Fixes one of the errors mentioned in moby/moby#38189

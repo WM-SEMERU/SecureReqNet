@@ -1,4 +1,0 @@
-feat: Add the update password feature in 'my account'. (GH-1576)
-
-
-closes GH-1576

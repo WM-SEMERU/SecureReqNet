@@ -1,7 +1,0 @@
-We are doing some housekeeping in our tickets and noticed, that after editing closed ticket, which belongs to closed milestone, milestone will get removed from that ticket. 
-
-There is a message about removing milestone in the ticket notes.
-
-Expected behaviour: 
-
-Milestone remains even if it was closed. 

@@ -1,8 +1,0 @@
-When building the directions API call we add trailing zeros to digits
-
-
-This request
-directions/v5/mapbox/driving/13.430100,52.510900;13.426500,52.508000;13.431600,52.502100?access_token=pk.XXX&geometries=polyline&bearings=60.000000,45.000000;;45.000000,45.000000
-
-shows that we are forcing 6 digits and causing trailing zeros.
-cc: @zugaldia

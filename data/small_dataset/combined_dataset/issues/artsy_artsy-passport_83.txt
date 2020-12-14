@@ -1,5 +1,0 @@
-CSRF needed at /users/auth/twitter/email
-
-
-Details are here: https://trello.com/c/7DsdVXf8/116-csrf-required-on-users-auth-twitter-email
-Briefly, an attacker can submit requests to this endpoint on behalf of a logged in user that update the user's email to one of the attacker's choosing. This in turn gives them control over the account.

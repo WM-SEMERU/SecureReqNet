@@ -1,6 +1,0 @@
-fix translations bugs (french)
-
-
-
-
-

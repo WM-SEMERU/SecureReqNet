@@ -1,5 +1,0 @@
-[SecurityBundle] Ability to send request to '/login_check' from our Controller in login form
-
-
-Hi, i'm creating login form for my site with validation and got a problem, if i redirecting form request to /login_check, i can't validate form fields. And if i validating form data first, i don't know method to send this data to '/login_check' in my code. Please give me such feature.
-P.S. sorry for bad English

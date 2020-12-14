@@ -1,9 +1,0 @@
-Cannot drain node with pod with more than one Pod Disruption Budget
-
-
-What would you like to be added:
-When attempting to drain a node that has a pod scheduled on it with more than one PodDisruptionBudget the drain fails with the following message:
-"Err: This pod has more than one PodDisruptionBudget, which the eviction subresource does not support."
-It would be great if this was actually supported.
-Why is this needed:
-It is not possible to upgrade clusters that have any pods with more than one PodDisruptionBudget since they fail on drain.

@@ -1,9 +1,0 @@
-[AMBARI-25088] Enable Kerberos fails when Ambari server is not on a registered host
-
-
-What changes were proposed in this pull request?
-backport of #2753
-How was this patch tested?
-
-enable/disable kerberos
-

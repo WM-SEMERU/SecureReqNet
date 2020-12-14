@@ -1,5 +1,0 @@
-[Security] User enabled status is checked before authentication
-
-
-This means anybody can find out whether another user's account is enabled or not. Seems like a (minor) privacy leak to me.
-I would it expect to only check after the authentication, so that the error message stays "wrong credentials" until the correct password is provided, versus the current state where "Account is disabled" is thrown with any password.

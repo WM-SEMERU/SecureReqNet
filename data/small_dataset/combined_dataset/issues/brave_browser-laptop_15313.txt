@@ -1,7 +1,0 @@
-The install encountered error 1073741845
-
-
-Operating System: Windows 8.1 Pro
-System Specs: i3 Processor, 4GB Ram, 64 Bit Processor
-While trying to install Brave browser, it is saying "Downloading...installing..." and after half completion it is saying "The install encountered error 1073741845" . The screenshot is:
-

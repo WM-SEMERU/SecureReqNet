@@ -1,6 +1,0 @@
-AMBARI-25157. Cover Overridden Row View
-
-
-What changes were proposed in this pull request?
-Cover Overridden Row View
-Please review Ambari Contributing Guide before opening a pull request.

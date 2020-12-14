@@ -1,7 +1,0 @@
-Salt Minions should be authenticated
-
-
-Before kube-up-ping a cluster, generate keys for nodes.
-Turn off auto_accept on the master so master verifies the minions that want to join.
-That way someone cannot spoof being a kubernetes master to the salt master and then get the master's keys (or, pretend to be a minion, though this will be less impactful when the master has policies installed to limit what actions minions are authorized to do.)
-This could be obsoleted if @jbeda proposal #2303 is implemented first.

@@ -1,4 +1,0 @@
-Host grpc service in iis or as an app service?
-
-
-Is it possible to do this? If so how?

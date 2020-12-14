@@ -1,4 +1,0 @@
-DCHECK allowed URL patterns from system network context
-
-
-brave/brave-core#406 added a log only message when there are unknown URL patterns accessed. This task is to make it more strict.

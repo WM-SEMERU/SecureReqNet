@@ -1,5 +1,0 @@
-x/crypto/ssh: implement zlib@openssh.com compression
-
-
-this is an internal google request for implementation of zlib compression in the x/crypto/ssh library, as specified at
-https://tools.ietf.org/html/draft-miller-secsh-compression-delayed-00

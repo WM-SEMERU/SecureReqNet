@@ -1,9 +1,0 @@
-Fix search plugin support in reviewer api.
-
-
-I fixed search plugin support completely wrong unfortunately.
-Fixes
-
-https://sentry.prod.mozaws.net/operations/olympia-dev/issues/5344937/
-#11085 (comment)
-

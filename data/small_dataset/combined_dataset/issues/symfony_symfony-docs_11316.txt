@@ -1,4 +1,0 @@
-Minor improvement in the DomCrawler + HTML5 explanation
-
-
-Minor improvement according to @tgalopin comments in symfony/symfony#30892.

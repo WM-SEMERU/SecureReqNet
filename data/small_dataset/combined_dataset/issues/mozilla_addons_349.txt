@@ -1,4 +1,0 @@
-Investigate reducing session length
-
-
-To improve security, it would be interesting if we could make API tokens valid for a shorter period of time. To do that we need to investigate if we can get the client to keep the fxa assertion and re-send it as needed so that the user would not need to re-enter their password to re-authenticate and re-generate a new API token.

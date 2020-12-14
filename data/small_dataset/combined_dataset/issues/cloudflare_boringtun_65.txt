@@ -1,4 +1,0 @@
-Fix typo in command-line arg
-
-
-Change "disable-drop-priviliges" to correct spelling as used elsewhere in the file.

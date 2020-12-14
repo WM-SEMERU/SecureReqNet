@@ -1,5 +1,0 @@
-Fix "Prevent inventory.py from configuring an even number of nodes in…
-
-
-… etcd" #4399
-by making clusters with fewer than 3 nodes have only 1 etcd node

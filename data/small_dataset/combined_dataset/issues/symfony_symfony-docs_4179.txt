@@ -1,5 +1,0 @@
-Add note how to get previous on impersonation
-
-
-http://symfony.com/doc/master/cookbook/security/impersonating_user.html
-http://stackoverflow.com/questions/6371712/how-to-identify-if-a-user-is-being-impersonated-in-symfony2

@@ -1,4 +1,0 @@
-DCR: As a developer, I would like to see a transcript of my tests so I can analyze how the bot responded.
-
-
-Test transcripts should be logged as .transcript files so they can be analyzed in Bot Emulator and executed using "transcript tests" at a later time if needed.

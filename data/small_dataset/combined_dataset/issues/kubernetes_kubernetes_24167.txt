@@ -1,9 +1,0 @@
-Should serviceAccountLookup be set to true in kubernetes apiserver
-
-
-Forked from #23959 (comment).
-Setting serviceAccountLookup to true ensures that we verify that the service account tokens mentioned in the request are actually present in etcd.
-Without it we just verify that the token is valid. That check breaks if a service account is used after it is deleted.
-@liggitt mentioned that we should set it to true in kubernetes apiserver (we dont currently). Openshift sets it to true. He also mentioned that @erictune had some performance concerns for setting it to true.
-What do others think?
-cc @liggitt @erictune @lavalamp @kubernetes/sig-auth

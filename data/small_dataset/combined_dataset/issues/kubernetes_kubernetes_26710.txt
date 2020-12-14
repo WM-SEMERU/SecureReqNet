@@ -1,5 +1,0 @@
-Move /seccomp/ into domain prefix in seccomp annotations
-
-
-Fixes #26610.
-/cc @mdshuai @ncdc @jfrazelle

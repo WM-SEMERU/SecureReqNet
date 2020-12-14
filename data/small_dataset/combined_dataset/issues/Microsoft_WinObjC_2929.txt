@@ -1,7 +1,0 @@
-WrongThreadException when debugging app
-
-
-When starting the app via the debugger in VS2017 it exits almost immediately with the following unhandled exception:
-Exception thrown at 0x76FF07F2 (KernelBase.dll) in vfl-ipad-01.exe: WinRT originate error - 0x8001010E : 'The Application Object must initially be accessed from the multi-thread apartment.'.
-Exception thrown at 0x76FF07F2 in vfl-ipad-01.exe: Microsoft C++ exception: Platform::WrongThreadException ^ at memory location 0x0657E8C8. HRESULT:0x8001010E The application called an interface that was marshalled for a different thread.
-WinRT information: The Application Object must initially be accessed from the multi-thread apartment.

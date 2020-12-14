@@ -1,5 +1,0 @@
-Within our company, we have certain conventions regarding the email hostname, which allows us to quickly determine from which computer a certain change was commited.
-
-To achieve this, we use unqualified hostnames with our git emails, which are both valid (as per the RFCs) and resolve within our infrastructure, e.g. usera@server1, or userb@server2.
-
-Unfortunately, gitlab does not want to add these unqualified email addresses to our accounts.

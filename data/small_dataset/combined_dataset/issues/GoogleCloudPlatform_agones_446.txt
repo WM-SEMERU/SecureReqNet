@@ -1,5 +1,0 @@
-[Security] Upgrade Go to 1.11.4
-
-
-Fixes 3 security issues in previous Go releases.
-Details: https://groups.google.com/forum/m/#!topic/golang-nuts/Gz_KNmdXbn0

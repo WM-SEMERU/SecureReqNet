@@ -1,4 +1,0 @@
-Add unauthorized errorCode to query docs.
-
-
-This code was added to QueryInterruptedException at some point, but not to the docs.

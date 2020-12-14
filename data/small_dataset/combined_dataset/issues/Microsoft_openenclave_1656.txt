@@ -1,4 +1,0 @@
-Fix samples test script for SGX non-FLC machines
-
-
-We need to skip the two attestation samples on machines that are SGX but non-FLC. This means that the build environment has USE_LIBSGX=OFF, but is NOT running in simulation. Also make samples tests more verbose.

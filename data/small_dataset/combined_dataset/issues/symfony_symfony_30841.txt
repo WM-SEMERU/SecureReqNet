@@ -1,7 +1,0 @@
-Access denied even after new role added
-
-
-Symfony version(s) affected: 4.2
-Description
-I am building an affiliation system in my app. After user registered as an affiliate a new ROLE_AFFILIATE is added to the user. But user is denied access to route even after updating the isEqualeTo method. I have to logout first then login again in order to get things work.
-Thanks you !

@@ -1,4 +1,0 @@
-Add flag to disable Basic Auth.
-
-
-This is an excerpt from @valdisrigdon's PR #4799, Since the source branch was removed and the work in the PR appears to be stopped. It adds a flag to remove the basic authentication as requested on #290.

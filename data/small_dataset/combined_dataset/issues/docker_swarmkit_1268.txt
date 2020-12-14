@@ -1,6 +1,0 @@
-Add NodeID as a SAN in Node Certs
-
-
-Discussion moved from #1264
-The Node certs currently have the NodeID as a CN, but not as a SAN.
-\cc @diogomonica (can't assign issues)

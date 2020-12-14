@@ -1,6 +1,0 @@
-Missing deprecation+bc-layer for renaming intention to csrf_token_id in SecurityBundle
-
-
-"intention" is renamed to "csrf_token_id", but not in SecurityBunde.
-This went unoticed because the related deprecation triggered by the Form component is hidden for insulated http tests...
-See #16692 where intention is removed altogether.

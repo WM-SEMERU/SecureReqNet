@@ -1,5 +1,0 @@
-SAMM project is showing the wrong legend in radar graph
-
-
-At the moment it is showing the BSIMM practices
-

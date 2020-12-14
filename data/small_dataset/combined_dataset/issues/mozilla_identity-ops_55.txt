@@ -1,4 +1,0 @@
-Block internal VPC communication
-
-
-remove outbound access from security groups to the internal VPC network to further constrain access

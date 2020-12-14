@@ -1,4 +1,0 @@
-[Security] Add docs about success handlers for login and logout
-
-
-Johannes says it's not recommended to use security.interactive_login for redirections and such because they should not apply to all firewalls, and not all auth types. In any case, if you ignore that and do it anyway, there is no event for logout, so you get stuck eventually if you try to cover that as well.

@@ -1,7 +1,0 @@
-As seen on OS X 10.10 Safari 8 & checked also with Gitlab 7.1.2 local instal:
-
-Short commits:
-![Screen Shot 2014-09-10 at 12.47.26 AM](https://gitlab.com/uploads/gitlab-org/gitlab-ce/605f0dab57/Screen_Shot_2014-09-10_at_12.47.26_AM.png)
-
-New Issue Button:
-![Screen Shot 2014-09-09 at 10.31.20 PM](https://gitlab.com/uploads/gitlab-org/gitlab-ce/6874e03409/Screen_Shot_2014-09-09_at_10.31.20_PM.png)

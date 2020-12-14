@@ -1,8 +1,0 @@
-[security] make it easier to redefine Alpha/Gamma
-
-
-While talking about some security aspect and as to how you'd alter Alpha
-or Gamma role in a specific environment, I realized that these
-module-scoped constants would be much more useful as class attributes.
-This way, someone can override these sets in their security manager
-to alter base roles.

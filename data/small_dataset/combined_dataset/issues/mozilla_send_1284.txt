@@ -1,7 +1,0 @@
-NS_ERROR_UNEXPECTED: Page not loading
-
-
-This was reported to us by an anonymous user @ webcompat/web-bugs#28428.
-There's a stack in their console errors that might be useful:
-"NS_ERROR_UNEXPECTED: " {file: "https://send.firefox.com/app.6f02e5d5.js" line: 8}]\nloadFiles@https://send.firefox.com/app.6f02e5d5.js:8:29090\n@https://send.firefox.com/app.6f02e5d5.js:8:29038\n@https://send.firefox.com/app.6f02e5d5.js:8:28934\ni@https://send.firefox.com/app.6f02e5d5.js:1:318\n@https://send.firefox.com/app.6f02e5d5.js:8:21438\ni@https://send.firefox.com/app.6f02e5d5.js:1:318\n@https://send.firefox.com/app.6f02e5d5.js:8:82339\ni@https://send.firefox.com/app.6f02e5d5.js:1:318\n@https://send.firefox.com/app.6f02e5d5.js:8:243726\ni@https://send.firefox.com/app.6f02e5d5.js:1:318\n@https://send.firefox.com/app.6f02e5d5.js:8:193958\ni@https://send.firefox.com/app.6f02e5d5.js:1:318\n@https://send.firefox.com/app.6f02e5d5.js:1:2875\n@https://send.firefox.com/app.6f02e5d5.js:1:2886\n']
-

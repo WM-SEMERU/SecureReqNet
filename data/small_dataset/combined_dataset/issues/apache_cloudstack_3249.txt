@@ -1,9 +1,0 @@
-[CLOUDSTACK-10406] fix bugs that may cause program crash, change mkdir to mkdirs
-
-
-Description
-Fixes: #CLOUDSTACK-10406
-Types of changes
-
-[x ] Bug fix (non-breaking change which fixes an issue)
-

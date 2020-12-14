@@ -1,4 +1,0 @@
-Vault integration
-
-
-Are there any plans to integrate Vault with Nomad? It seems it would be very useful to be able to query secrets and pass them as ENV variables to the different tasks.

@@ -1,4 +1,0 @@
-Update registration_form.rst
-
-
-Just a little Spelling mistake.

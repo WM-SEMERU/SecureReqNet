@@ -1,5 +1,0 @@
-Use the new Security helper in some code examples
-
-
-This fixes #8437 replacing use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface; by use Symfony\Component\Security\Core\Security; when possible.
-Also, replace use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface; by use Symfony\Component\Security\Core\Security; when possible.

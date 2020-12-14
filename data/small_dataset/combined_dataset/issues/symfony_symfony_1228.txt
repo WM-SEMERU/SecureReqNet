@@ -1,4 +1,0 @@
-Added the support of the locale in the login path and the check path
-
-
-This adds the support of the locale in the login path and the check path. The current implementation allows it only in the target path

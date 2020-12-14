@@ -1,5 +1,0 @@
-Currently, an API user reporting commit statuses needs to have at least the "Developer" role (see [relevant code](https://gitlab.com/gitlab-org/gitlab-ce/blob/1ff17b6bba801138ae260425381d13e6ce427396/app/models/ability.rb#L191-192)).
-
-I think this should be possible for the "Reporter" role as well – most people will probably use this API from Jenkins or another CI tool and those accounts should probably be only reporting on code, but not be allowed to change it.
-
-/cc @ayufan 

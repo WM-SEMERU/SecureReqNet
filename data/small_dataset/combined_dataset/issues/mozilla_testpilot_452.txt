@@ -1,7 +1,0 @@
-Update *insecure* python dependencies
-
-
-Just noticed this: 
-Django==1.8.4 should get upgraded to 1.8.11. Bonus point would be to upgrade all the way up to 1.9, but not sure what the changes are - best to get to a secure point release and follow up in another issue.
-Pillow==2.9.0 should probably advance to 3.1.1, as long as no breaking API changes have happened.
-Further bonus points would also be to upgrade all the other outdated dependencies listed. Though, not if it delays the insecure dependencies. I know that can sometimes turn into a rabbit hole of insanity.

@@ -1,5 +1,0 @@
-Unable to edit wordpress backend
-
-
-Got this error of "Failed to load resource: the server responded with a status of 418 (reauthentication required)
-How we solve that>?

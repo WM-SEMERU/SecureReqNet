@@ -1,7 +1,0 @@
-proposal: crypto/rc4: remove assembly implementations
-
-
-@bradfitz investigated doing this in CL 102255. He found that on some CPUs the assembly was considerably faster and so abandoned the change.
-At this point we are very unlikely to accept new RC4 assembly (e.g. CL 101916). This begs the question of whether we should have any assembly in this package at all. For reference, BoringSSL has removed all assembly for RC4: https://boringssl-review.googlesource.com/c/boringssl/+/10720. Removing all the assembly from crypto/rc4 would simplify the package significantly.
-Is the performance of RC4 still important enough to warrant having assembly in this package?
-/cc @FiloSottile @agl

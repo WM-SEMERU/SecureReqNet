@@ -1,4 +1,0 @@
-Make all JS "use strict";
-
-
-Once upon a time, strict mode does not exist. Later, we could not rely on browsers supporting strict mode. Today we can. Therefore, there is no longer any reason whatsoever for any of our JavaScript, host-side or not, not to request strict mode.

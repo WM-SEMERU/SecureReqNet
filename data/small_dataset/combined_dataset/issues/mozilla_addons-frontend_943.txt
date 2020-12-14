@@ -1,5 +1,0 @@
-Use linting to prevent server code from leaking into the client
-
-
-After #931 we can use the no-restricted-paths rule to prevent client code from importing any sensitive server modules. To make this effective we'll probably also need to restructure the folder layout so that the restricted module zone is well defined.
-For example, we could probably use this to prevent server config modules from being imported into the client code accidentally.

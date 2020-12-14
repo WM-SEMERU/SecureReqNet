@@ -1,5 +1,0 @@
-Add a way for policies to control access to /proxy handler
-
-
-Then you can have specific internal services which some users can access and others cannot.
-I'm thinking of grafana server and logstash server.

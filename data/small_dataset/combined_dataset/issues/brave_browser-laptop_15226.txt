@@ -1,5 +1,0 @@
-Mac OS Trackpad Zoom not working anymore
-
-
-Issue on the mac OS trackpad zoom function, since the upgrade the zoom with two fingers is not working anymore.
-It was working fine before.

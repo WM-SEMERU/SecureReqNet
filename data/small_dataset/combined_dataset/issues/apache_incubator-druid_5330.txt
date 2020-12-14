@@ -1,9 +1,0 @@
-Properly set "identity" in query metrics.
-
-
-This patch adds an "identity" field to QueryPlus and sets it in
-QueryLifecycle when the query starts executing. This is important
-because it allows it to be used for future QueryMetrics created
-by that QueryPlus object.
-We also add "identity" to the request-level QueryMetrics object
-created in emitLogsAndMetrics.

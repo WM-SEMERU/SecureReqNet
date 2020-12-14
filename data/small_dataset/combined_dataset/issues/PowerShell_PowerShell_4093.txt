@@ -1,9 +1,0 @@
-PowerShell transcripts should include configuration names in the transcript header
-
-
-
-Note: Ported from bug 9318323
-
-PowerShell transcripts currently do not log the configuration name the user used to connect to and manage the machine. For JEA scenarios, this means an auditor trying to understand how someone was able to do a certain command will not know through which endpoint the user entered and was assigned those privileges.
-Suggestion is to add a new line to the transcript header similar to the following:
-ConfigurationName: MyJEAEndpoint

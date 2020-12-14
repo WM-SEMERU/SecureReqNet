@@ -1,9 +1,0 @@
-security_group: Use execute() function instead of non-existing bash()
-
-
-In 6233a77 as a part of PR #2432 the
-bash() function was replaced by the execute() function.
-Somehow this last calling of the bash() function was not caught by testing
-and is still in there.
-This causes Exceptions to be thrown by the Security Group script.
-Signed-off-by: Wido den Hollander wido@widodh.nl

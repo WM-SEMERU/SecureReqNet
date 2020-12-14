@@ -1,4 +1,0 @@
-Rewrite GettingStarted.md
-
-
-GettingStarted.md currently assumes a user will build the Open Enclave SDK from its source. Consider rewriting this file to be more appropriate for a user to read when they are "Getting Started" with Open Enclave.

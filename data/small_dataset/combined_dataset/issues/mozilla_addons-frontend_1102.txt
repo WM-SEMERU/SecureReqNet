@@ -1,9 +1,0 @@
-Run the node security platform tool in CI to check dependencies
-
-
-It would be helpful to run the nsp command as part of our continuous integration checks so that we can be sure we're never shipping any known vulnerabilities in the new AMO frontend.
-This should be as simple as adding npm check to our .travis.yml.
-So far so good:
-$ nsp check
-(+) No known vulnerabilities found
-

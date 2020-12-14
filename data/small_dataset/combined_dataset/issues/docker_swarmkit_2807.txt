@@ -1,6 +1,0 @@
-Run coverage tests once
-
-
-For some weird reason, make coverage runs the exact same command twice in a row. I can't find any reason why this would be needed. Removes the duplicate line, so tests only run once.
-Should result in a 2x speedup of CI jobs lol
-/cc @kolyshkin, who was the last person to touch this line when he removed the -i flag from the first of the two lines.

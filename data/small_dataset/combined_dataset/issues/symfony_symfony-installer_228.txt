@@ -1,4 +1,0 @@
-Use padraic/humbug_get_contents in self-update command
-
-
-Now that the installer can be downloaded using HTTPS, we should consider provide more secure ways to perform updates. One change I would like to see is to use the humbug_get_contents() method from the padraic/humbug_get_contents package as a replacement for file_get_contents() to get update archives from the symfony.com server.

@@ -1,4 +1,0 @@
-[hackerone] #505764 - Tor NTLM leak
-
-
-https://hackerone.com/bugs?report_id=505764

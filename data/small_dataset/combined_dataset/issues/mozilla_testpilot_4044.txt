@@ -1,6 +1,0 @@
-Action required: Add a Renovate config
-
-
-Hi,
-You will need to add a config to this repository if you want Renovate  to continue creating PRs. Renovate will soon begin skipping all repositories that don't have a valid config found, even if you've received PRs before.
-To keep functionality exactly the same, you can add an empty JSON config ({}) to your repo in any of the following files: renovate.json, .github/renovate.json, .renovaterc, .renovaterc.json

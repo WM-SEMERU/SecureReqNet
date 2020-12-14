@@ -1,6 +1,0 @@
-Unqualified host:port pairs are valid Docker auth fields
-
-
-The dockercfg and .docker/config.json files can contain host:path
-combos, which are not correctly parsed by the keyring.
-Fixes #20667

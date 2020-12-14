@@ -1,7 +1,0 @@
-Explicitly turn off authentication response caching
-
-
-Is your feature request related to a problem? Please describe.
-We have a custom made batch-request middleware and need the ability to authenticate every sub request separately. Currently the aspnet authentication middleware authenticates the request only once per scope and all the subsequent calls return the same authentication result, which causes all of the sub-requests to have the same authentication result as the first sub-request.
-Describe the solution you'd like
-Currently the authentication result caching happens in AuthenticationHandler's HandleAuthenticateOnceAsync() method. It would be nice to have an exposed method to disable this behavior explicitly, so that authentication could be handled on all sub-requests separately.

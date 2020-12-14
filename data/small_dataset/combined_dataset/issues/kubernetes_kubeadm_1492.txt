@@ -1,8 +1,0 @@
-Update kinder docs for e2e support
-
-
-This PR updates kinder docs with changes in #1491
-/kind documentation
-/priority important-longterm
-/assign @neolit123
-/cc @kubernetes/sig-cluster-lifecycle-pr-reviews

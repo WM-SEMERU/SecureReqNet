@@ -1,6 +1,0 @@
-Documentation Issue
-
-
-Documentation Issue
-Please open documentation issues that are not specifically for documentation within the
-PowerShell/PowerShell repository in the PowerShell Docs repository.

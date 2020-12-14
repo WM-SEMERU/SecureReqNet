@@ -1,4 +1,0 @@
-Fibers and Helidon
-
-
-Investigate Fibers in Java and see what could be done with Helidon SE and Helidon MP in that area.

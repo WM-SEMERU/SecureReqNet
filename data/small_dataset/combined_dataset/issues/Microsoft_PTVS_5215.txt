@@ -1,4 +1,0 @@
-Correctly highlight matching brackets
-
-
-Fix #4072

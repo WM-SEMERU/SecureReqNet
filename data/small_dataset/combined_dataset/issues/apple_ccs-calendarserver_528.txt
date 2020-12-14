@@ -1,8 +1,0 @@
-Deployment instructions
-
-
-Much the same issue as #490 but now more urgent.
-Apple gutted its calendar server in Mojave. They published a list of recommended replacements. This package is number 1 on the list.
-People who need to replace their calendar servers are going to be coming here for a package they can deploy, not one they have to fork and develop.
-I know you didn't paint this target on your own back, but it's there now. Can you at least put together a document telling people who aren't programmers how to get this package up and running? Preferably using their existing calendar data?
-Thanks.

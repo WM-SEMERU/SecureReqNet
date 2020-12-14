@@ -1,4 +1,0 @@
-Move piping to devDependencies
-
-
-We only use piping to do hot reloads so it should be a dev dep only. Plus we should update it to a release candidate if that passes the tests and works locally, because it's out-of-date and using an insecure version of qs.

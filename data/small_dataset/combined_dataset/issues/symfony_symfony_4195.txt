@@ -1,6 +1,0 @@
-standart User toString convert
-
-
-1d5538f#diff-61
-why remove toString() ?
-it get error for example in sonata admin if you login using in_memory admin

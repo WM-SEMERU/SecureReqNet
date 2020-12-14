@@ -1,5 +1,0 @@
-Do not use Google DNS for IPv6 probes
-
-
-Currently, the browser pings Google's IPv6 DNS servers to do probing. Note that, relatedly, ungoogled-chromium has a command line flag to disable the probing altogether [1], but changing the DNS server is another less intrusive solution.
-[1] https://github.com/Eloston/ungoogled-chromium/blob/master/patches/ungoogled-chromium/add-ipv6-probing-option.patch

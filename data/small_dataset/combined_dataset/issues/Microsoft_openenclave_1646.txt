@@ -1,4 +1,0 @@
-Fixes to AdvancedBuildInfo.md
-
-
-As part of #1543 - Made fixes to AdvancedBuildInfo.md

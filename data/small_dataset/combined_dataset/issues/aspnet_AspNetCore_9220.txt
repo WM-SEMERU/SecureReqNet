@@ -1,6 +1,0 @@
-What does the term "async local" mean ?
-
-
-User1: In that sample, you are registering it as a singleton. Shouldn't it be a scoped instance?
-User2: It's fine being a singleton because the backing store is async local.
-Thanks...

@@ -1,9 +1,0 @@
-[Hyperv] Docker machine does not change default password from "tcuser"
-
-
-I've been playing around with docker machine I've noticed that when you provision a machine on hyperv it will generate ssh keys but it does not disable password login or change the password of the docker user leaving it wide open.
-Steps to reproduce.
-docker-machine create -d hyperv test
-docker-machine ip test
-ssh docker@192.168.10.xx
-Then you can login in with the password "tcuser" and sudo to your hearts content

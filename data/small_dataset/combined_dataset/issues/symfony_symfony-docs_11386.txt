@@ -1,4 +1,0 @@
-Update cache.rst
-
-
-Correct language typos

@@ -1,0 +1,4 @@
+[core]
+    remote = repo_storage
+['remote "repo_storage"']
+    url = ../data/dvc_data

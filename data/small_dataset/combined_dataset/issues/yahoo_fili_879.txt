@@ -1,6 +1,0 @@
-PartialData feature flag turns off partial data query planning
-
-
-Currently the PartialData feature flag controls both whether PartialData is filtered or not, as well s whether or not it's used to make decisions about the better table.
-Even when PartialData protection isn't wanted, PartialData being used to support table selection is potentially desirable.
-Create separate Flags for PartialDataProtection and PartialDataQueryPlanning

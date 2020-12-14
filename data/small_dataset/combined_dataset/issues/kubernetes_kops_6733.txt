@@ -1,5 +1,0 @@
-Automated cherry pick of #6724: Update instances types
-
-
-Cherry pick of #6724 on release-1.12.
-#6724: Update instances types

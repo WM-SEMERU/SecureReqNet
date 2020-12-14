@@ -1,4 +1,0 @@
-Updated the documentation for v3.2
-
-
-Closes #2613

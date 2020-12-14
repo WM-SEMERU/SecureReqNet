@@ -1,4 +1,0 @@
-[FrameworkBundle][SecurityBundle] Moved security expression providers pass logic to SecurityBundle
-
-
-We may need to update the class imports of some examples: symfony/symfony#27611

@@ -1,5 +1,0 @@
-Add convenience methods for rotary properties
-
-
-rotary_name and rotary_pronunciation are potentially given to use with the maneuver type is a rotary.
-cc: @zugaldia

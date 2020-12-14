@@ -1,3 +1,0 @@
-I just created this account at gitlab.com, and had some trouble doing so as I kept getting "Error 500" messages.
-
-It turns out that gitlab doesn't like if I have uper-case letters in the username: If I use "Ralf" as Name and Username, I get the error 500. Once I used "Ralf" as name and "ralf" and username, registration worked fine.

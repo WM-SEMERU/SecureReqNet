@@ -1,1 +1,0 @@
-The list of labels on the left side of the issue overview should contain only labels used by the issues currently shown.

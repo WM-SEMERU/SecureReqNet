@@ -1,9 +1,0 @@
-Add a submit button in login form for mobile screens
-
-
-Is your feature request related to a problem? Please describe.
-When I access the app from Safari on my iPhone and use the fingerprint-enabled password autofill, the keyboard hides and leaves me with the login form with the password filled in. To submit the password, I have to reopen the keyboard by clicking on the password input field and then press enter (see screen below).
-This is a bit frustrating because the keyboard takes a second to reopen. It is not a big deal, but I think that the solution is very simple.
-Describe the solution you'd like
-Add an "Access" or "OK" or "Open" button below the password field, at least when in mobile screens.
-

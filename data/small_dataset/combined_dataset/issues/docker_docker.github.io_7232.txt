@@ -1,9 +1,0 @@
-Clarification regarding `dockremap` subuid/subguid addition
-
-
-File: engine/security/userns-remap.md
-Consider this warning:
-
-Warning: Some distributions, such as RHEL and CentOS 7.3, do not automatically add the new group to the /etc/subuid and /etc/subgid files. You are responsible for editing these files and assigning non-overlapping ranges, in this case. This step is covered in Prerequisites.
-
-Since dockremap is a system user (original commit) , it is the behavior of adduser to not add entries to /etc/subuid and /etc/subgid. Hence, the warning regarding the behavior being an issue on CentOS/RHEL seems incorrect? It is really a documented/expected behavior i think?

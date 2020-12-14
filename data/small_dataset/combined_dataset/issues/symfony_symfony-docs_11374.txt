@@ -1,4 +1,0 @@
-use code-block twig instead of html+twig
-
-
-Refs #11357

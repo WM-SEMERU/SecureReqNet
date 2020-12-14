@@ -1,4 +1,0 @@
-core(docs): Update README to point to monorepo
-
-
-@mozilla/fxa-devs - r?

@@ -1,5 +1,0 @@
-proposal: x/crypto: add support for AES Key Wrap
-
-
-AES Key Wrap is defined in RFC 3394 (plain) and RFC 5649 (with padding).
-The implementation is straightforward and the relevant RFCs come with test vectors.  I have an implementation complete that I'd be happy to submit.  I'd suggest adding it to a package named x/crypto/aeswrap to avoid confusion with the AES data encryption functionality in crypto/aes.

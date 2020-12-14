@@ -1,5 +1,0 @@
-Update CONTRIBUTING doc link to kinder README
-
-
-This links the "Building" section of CONTRIBUTING.md to /kinder/README.md .
-Related issue: #1466

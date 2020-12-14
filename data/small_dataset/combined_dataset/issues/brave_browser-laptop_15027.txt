@@ -1,9 +1,0 @@
-eth-wallet: password flow based on the hash stored on the fs
-
-
-Versioning of the eth-wallet app is difficult so this update includes:
-
-new password flow based on hashing with bcrypt
-"Generating..." ui for the wallets that are generated but not yet available (due to geth connectivity, or otherwise) #14991 #14989 #14961
-retry flow in case of geth not listening (retry every 2s until geth is available) #14826
-

@@ -1,6 +1,0 @@
-Create authentication proxy for grafana that uses the same security plugins
-
-
-Grafana has an AuthProxy setting that allows an application running on a trusted IP to provide authentication and then relay the username in an Http header.  This will allow a new grafana-auth application to accepy x509 certificates, authenticate, check access, and then relay the username to grafana which will auto-create and login the provided user.
-This along with Grafana's new permission model will allow dashboards to be maintained by admins and viewed by viewers while using the same user authentication as Timely.
-The initial implementation will be for x509.  Using the /login and cookie methods will require some more work if that feature is wanted.

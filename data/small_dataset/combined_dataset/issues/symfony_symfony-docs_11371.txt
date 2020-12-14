@@ -1,6 +1,0 @@
-[Cache] Updated invalid pdo service name
-
-
-This will fix #8406
-This is similar to #11370. I made two PRs because PDO was not introduced in 3.4. I think this will be easier to merge.
-See https://github.com/symfony/symfony/blob/4.2/src/Symfony/Bundle/FrameworkBundle/DependencyInjection/FrameworkExtension.php#L1640

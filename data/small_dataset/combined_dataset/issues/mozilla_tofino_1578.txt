@@ -1,4 +1,0 @@
-Delete auto-updates.md
-
-
-We're killing the heroku instance, so remove this markdown file. It's not linked to by anything that I can see.

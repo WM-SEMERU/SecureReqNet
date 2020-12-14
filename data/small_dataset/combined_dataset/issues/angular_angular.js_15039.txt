@@ -1,4 +1,0 @@
-Fix sce context
-
-
-rebased and slightly tweaked #14019

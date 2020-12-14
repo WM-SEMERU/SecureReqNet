@@ -1,4 +1,0 @@
-Update buildandsign.md to include a link to CMake documentation
-
-
-Fix #1625.

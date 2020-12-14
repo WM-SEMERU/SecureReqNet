@@ -1,4 +1,0 @@
-Database: removed Czech word from English text
-
-
-I think it's misstake from copying Czech text and translating it into English.

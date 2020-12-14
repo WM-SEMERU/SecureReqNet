@@ -1,9 +1,0 @@
-I miss a feature to  have better protection on branches.
-
-We have release branches, testing branches and production branches. I would like to have something to allow user group A to accept merge requests for release branches, user group B only to accept merge requests on testing branches and user group C only to accept merge requests on production branches.
-
-The branches could be recognized by simple rules:
-Release branches start with /release
-Testing branches end with _T
-Production branches end with _P
-

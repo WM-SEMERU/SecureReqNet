@@ -1,4 +1,0 @@
-crypto/aes: add dedicated asm version of AES-GCM for Power/ARM64
-
-
-Add a complimentary dedicated asm version of AES-GCM for Power/ARM64 where accelerators for those algorithms exist in a similar form to amd64,

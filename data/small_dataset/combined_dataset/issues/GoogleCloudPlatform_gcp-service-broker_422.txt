@@ -1,5 +1,0 @@
-updated deps for CVE-2019-15759
-
-
-Fixes #361 by updating the berokerapi dependency.
-This dependency requires us to be compatible with an upgraded version of the broker interface. New functionality was introduced in the 2.14 version of the OSB spec, but we can leave it unimplemented because the features are enabled via flags which we don't set.

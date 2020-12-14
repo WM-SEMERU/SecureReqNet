@@ -1,4 +1,0 @@
-Revert "Make build step sign binaries and generate widevine sig files on Windows"
-
-
-Reverts #3903

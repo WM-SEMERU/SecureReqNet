@@ -1,5 +1,0 @@
-AppArmor design proposal
-
-
-For kubernetes/enhancements#24
-/cc @kubernetes/sig-node @erictune @matchstick

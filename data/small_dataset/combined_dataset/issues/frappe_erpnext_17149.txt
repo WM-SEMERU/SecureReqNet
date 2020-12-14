@@ -1,4 +1,0 @@
-fix(India): run patch for GST custom fields
-
-
-run patch for newly added GST custom fields

@@ -1,8 +1,0 @@
-Add user accounts (Token/Certificate)
-
-
-I would like to give access to developers to the dashboard in ReadOnly mode, i know that for RBAC i'll have to wait until 1.6 release but actually i can't even find a way to add user accounts using Token or Certificate.
-Maybe i'm missing something but reading through the documentation didn't help me.
-It's not clear how you should add users to the cluster with kops, kops create secret lets you create only a sshkey user to access the host machine.
-In a desperate attempt i addedd manually created certs to the pki folder in the bucket but it didn't work.
-So it's possible to explain how we are supposed to add users?

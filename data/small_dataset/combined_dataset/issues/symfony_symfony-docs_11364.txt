@@ -1,6 +1,0 @@
-[Cache] Show how to configure redis provider
-
-
-This will properly fix #10989
-Im not 100% confident on the xml configuration.
-@nicolas-grekas is this a good description of the Provider?

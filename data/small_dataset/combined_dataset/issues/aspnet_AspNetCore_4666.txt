@@ -1,9 +1,0 @@
-IAuthenticationSchemeProvider needs a TryAddScheme()
-
-
-Looking at this example/test to dynamically add authentication schemes at runtime:
-https://github.com/aspnet/Security/blob/0959c941b40086b131b1e01d304fc23bb887fdc8/test/Microsoft.AspNetCore.Authentication.Test/DynamicSchemeTests.cs#L137-L143
-If the endpoint is invoked twice, it will result in an InvalidOperationException:
-https://github.com/aspnet/HttpAbstractions/blob/dev/src/Microsoft.AspNetCore.Authentication.Core/AuthenticationSchemeProvider.cs#L121
-Instead perhaps this method should be bool TryAddScheme(AuthenticationScheme scheme) so users don't have to wrap it in a try-catch.
-Also it appears that the underlying _map should be a ConcurrentDictionary?

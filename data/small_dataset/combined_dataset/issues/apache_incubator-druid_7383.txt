@@ -1,5 +1,0 @@
-Segments governed by BroadcastDistributionRules shouldn't be moved away from decommissioning servers until all non-broadcasted segments are moved away
-
-
-Broadcasted segments not only should not be moved away from decommissioning servers until they hold none non-broadcasted segments. Coordinator may actually need to continue loading broadcasted segments on decommissioning servers while it moves non-broadcasted segments away from them.
-Similar to #7354.

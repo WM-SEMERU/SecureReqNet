@@ -20,6 +20,9 @@ jobs:
     - name: Read all notebooks
       run: |
         nbdev_read_nbs
+    - name: Pull data from DVC
+      run: |
+        dvc import https://github.com/WM-SEMERU/SecureReqNet
     - name: Check if all notebooks are cleaned
       run: |
         echo "Check we are starting with clean git checkout"

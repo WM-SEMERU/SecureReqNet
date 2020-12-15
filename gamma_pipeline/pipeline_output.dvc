@@ -1,0 +1,5 @@
+outs:
+- md5: c89a2fd979e02982447eaa7f86842694.dir
+  size: 31468231
+  nfiles: 160
+  path: pipeline_output

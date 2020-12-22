@@ -1,3 +1,6 @@
-docker run -p 8502:8501 --mount type=bind,\
-source=/home/semeru/securereqnet/serving/saved_model_alpha,\
-target=/models/alpha -e MODEL_NAME=alpha -t tensorflow/serving &
+docker run --name=SecureReqNet -p 8501:8501 \
+--mount type=bind,source=/home/roger/serving/securereqnet/gamma,target=/models/gamma \
+--mount type=bind,source=/home/roger/serving/securereqnet/alpha,target=/models/alpha \
+--mount type=bind,source=/home/roger/serving/securereqnet/model_config.config,target=/models/model_config.config \
+-t tensorflow/serving \
+--model_config_file=/models/model_config.config

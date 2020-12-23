@@ -17,6 +17,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install --use-deprecated=legacy-resolver -r requirements.txt; fi
+    - name: Check git lfs and puu
+      run: |
+        git lfs status
+        git lfs pull
     - name: Pull data from DVC
       run: |
         dvc pull

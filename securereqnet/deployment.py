@@ -41,6 +41,30 @@ def __get_predictions(sentences, endpoint_uri):
 
 
 # Internal Cell
+# takes a list of sentences and sends them to the uri of the TFX serving endpoint
+def __get_gamma_predictions(sentences, endpoint_uri):
+    payload = {
+            "instances": sentences.tolist()
+        }
+
+    r = requests.post(endpoint_uri, json = payload)
+    model_preds = json.loads(r.content.decode('utf-8'))
+
+
+    preds = []
+
+    # decode predictions
+    for pred in model_preds['predictions']:
+        # May need to add decoding
+        preds.append(pred)
+
+    output = {
+        "predictions": preds
+    }
+
+    return output
+
+# Internal Cell
 # decodes the tensor output from the TFX endpoint to True/False values
 def __decode(input):
     return float(input[0])>float(input[1])
@@ -71,6 +95,13 @@ def create_app(test_config=None):
         content = request.get_json()
         sentences = content['instances']
         return __get_predictions(sentences, app.config['TFX_ENDPOINT'])
+
+    # gamma model
+    @app.route('/models/gamma', methods=['POST'])
+    def gamma():
+        content = request.get_json()
+        sentences = content['instances']
+        return __get_gamma_predictions(sentences, app.config['TFX_ENDPOINT'])
 
     return app
 

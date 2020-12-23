@@ -14,10 +14,12 @@ index = {"Dynamic_Dataset": "03_utils.ipynb",
          "vectorize_sentences": "04_preprocessing.ipynb",
          "show_loss_accurracy_plots": "06_model_evaluation.ipynb",
          "evaluate_model": "06_model_evaluation.ipynb",
+         "load_serving_dir": "08_models.ipynb",
          "load_securereqnet_model": "08_models.ipynb",
          "create_alpha": "08_models.ipynb",
          "fit_model": "08_models.ipynb",
          "__get_predictions": "10_deployment.ipynb",
+         "__get_gamma_predictions": "10_deployment.ipynb",
          "__decode": "10_deployment.ipynb",
          "create_app": "10_deployment.ipynb",
          "serve": "10_deployment.ipynb"}
@@ -28,8 +30,8 @@ modules = ["utils.py",
            "models.py",
            "deployment.py"]
 
-doc_url = "https://rmclanton.github.io/SecureReqNet/"
+doc_url = "https://wm-semeru.github.io/SecureReqNet/"
 
-git_url = "https://github.com/rmclanton/SecureReqNet/blob/master/"
+git_url = "https://github.com/WM-SEMERU/SecureReqNet/blob/master/"
 
 def custom_doc_links(name): return None

@@ -1,2 +1,6 @@
 include securereqnet/data/*.csv
 include securereqnet/pretrained_models/*.*
+include securereqnet/pretrained_models/alpha/*
+include securereqnet/pretrained_models/gamma/*
+graft securereqnet/pretrained_models/
+recursive-include securereqnet/pretrained_models/

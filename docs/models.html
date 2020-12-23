@@ -31,6 +31,62 @@ nb_path: "nbs/08_models.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Load-a-TFX-servable-version-of-the-model">Load a TFX servable version of the model<a class="anchor-link" href="#Load-a-TFX-servable-version-of-the-model"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="load_serving_dir" class="doc_header"><code>load_serving_dir</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/models.py#L8" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_serving_dir</code>(<strong><code>path</code></strong>)</p>
+</blockquote>
+<p>Copys the directory necessary to serve SecureReqNet models with TFX to the input path.
+Creates a folder called models in the given directory.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">load_serving_dir</span><span class="p">(</span><span class="vm">__file__</span><span class="o">+</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Load-SecureReqNet-Model">Load SecureReqNet Model<a class="anchor-link" href="#Load-SecureReqNet-Model"> </a></h2><p>Currently only alpha is available</p>
 
 </div>
@@ -47,7 +103,7 @@ nb_path: "nbs/08_models.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_securereqnet_model" class="doc_header"><code>load_securereqnet_model</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/models.py#L8" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_securereqnet_model</code>(<strong><code>model</code></strong>)</p>
+<h4 id="load_securereqnet_model" class="doc_header"><code>load_securereqnet_model</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/models.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_securereqnet_model</code>(<strong><code>model</code></strong>)</p>
 </blockquote>
 <p>Returns a pretrained version of the selected model</p>
 <p>Users can select: alpha</p>
@@ -80,7 +136,7 @@ nb_path: "nbs/08_models.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_alpha" class="doc_header"><code>create_alpha</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/models.py#L27" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_alpha</code>()</p>
+<h4 id="create_alpha" class="doc_header"><code>create_alpha</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/models.py#L38" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_alpha</code>()</p>
 </blockquote>
 <p>Creates a securereqnet alpha model and compiles it</p>
 
@@ -112,7 +168,7 @@ nb_path: "nbs/08_models.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fit_model" class="doc_header"><code>fit_model</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/models.py#L114" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit_model</code>(<strong><code>corpora_train_x</code></strong>, <strong><code>target_train_y</code></strong>, <strong><code>criticality_network</code></strong>, <strong><code>save_model</code></strong>=<em><code>True</code></em>, <strong><code>save_history</code></strong>=<em><code>True</code></em>, <strong><code>file_path</code></strong>=<em><code>''</code></em>, <strong><code>model_name</code></strong>=<em><code>''</code></em>)</p>
+<h4 id="fit_model" class="doc_header"><code>fit_model</code><a href="https://github.com/WM-SEMERU/SecureReqNet/blob/master/securereqnet/models.py#L125" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit_model</code>(<strong><code>corpora_train_x</code></strong>, <strong><code>target_train_y</code></strong>, <strong><code>criticality_network</code></strong>, <strong><code>save_model</code></strong>=<em><code>True</code></em>, <strong><code>save_history</code></strong>=<em><code>True</code></em>, <strong><code>file_path</code></strong>=<em><code>''</code></em>, <strong><code>model_name</code></strong>=<em><code>''</code></em>)</p>
 </blockquote>
 <p>Fits a securereqnet model to the data</p>
 <p>Returns model, history</p>
